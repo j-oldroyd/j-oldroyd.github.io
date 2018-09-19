@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="inverse-functions" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Inverse Functions</title>
+    <introduction>
+        <p>
+            Recall that a function <m>f(x)</m> is <term>invertible</term> if it's one-to-one.
+            In this case, there's an inverse function <m>f^{-1}(x)</m> that undoes <m>f(x)</m>.
+            In symbols, <m>f^{-1}(f(x)) = x</m> and <m>f(f^{-1}(y)) = y</m>.
+        </p>
+    </introduction>
+    <section xml:id="section-exponential-functions">
+        <title>Exponential Functions</title>
+        <p>
+            Many changing quantities can be modeled by using <term>exponential functions</term>, which are functions of the form <m>f(x) = a^{x}</m> where <m>a &gt; 0</m>.
+            Exponential functions have several important properties which we list below.
+        </p>
+        <theorem xml:id="theorem-properties-of-exponential-functions">
+            <title>Properties of Exponential Functions</title>
+            <idx><h>exponential functions</h><h>properties</h></idx>
+            <statement>
+                <p>
+                    Let <m>a &gt; 0</m> and <m>x,y</m> be real numbers.
+                    Then
+                    <ul>
+                        <li><m>a^{0} = 1</m> and <m>a^{1} = a</m>.</li>
+                        <li><m>a^{-x} = \frac{1}{a^{x}}</m>.</li>
+                        <li><m>a^{x+y} = a^{x}a^{y}</m> and <m>a^{x-y} = \frac{a^{x}}{a^{y}}</m>.</li>
+                        <li><m>a^{x/y} = \sqrt[y]{a^{x}}</m> is <m>y &gt; 0</m>.</li>
+                        <li><m>(a^{x})^{y} = a^{xy}</m>.</li>
+                    </ul>
+                    Finally, if <m>b &gt; 0</m> as well, then <m>(ab)^{x} = a^{x}b^{x}</m>.
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-limit-of-an-exponential-function">
+            <title>Limit of an exponential function</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = 2^{-x}</m>.
+                    Find <m>\lim_{x\to\infty}f(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, note that
+                    <me>f(x) = \frac{1}{2^{x}}.</me>
+                    So as <m>x\to\infty</m>, the denominator <m>2^{x}\to\infty</m> as well.
+                    Hence the fraction as a whole should decrease to <m>0</m>, and so
+                    <me>\lim_{x\to\infty}2^{-x} = 0.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            In general, we have the following:
+            <md>
+                <mrow>a &gt; 1 &amp; \Rightarrow \lim_{x\to\infty}a^{x} = \infty\quad\text{and}\lim_{x\to-\infty}\quad a^{x} = 0 </mrow>
+                <mrow>a &lt; 0 &amp; \Rightarrow \lim_{x\to\infty}a^{x} = 0\quad\text{and}\quad\lim_{x\to-\infty}\quad a^{x} = \infty </mrow>
+            </md>
+        </p>
+        <p>
+            Every exponential function <m>f(x) = a^{x}</m> is continuous everywhere.
+            In fact, they are differentiable everywhere, though we'll see more about that later.
+            We can also say the following: if <m>a &gt; 1</m> then <m>a^{x}</m> is an increasing function, and if <m>0 &lt; a &lt; 1</m> then <m>a^{x}</m> is a decreasing function.
+            In neither case will <m>a^{x}</m> have any local maxima or minima.
+        </p>
+        <p>
+            Of all the different exponential functions, the most important one is the so-called <term>natural exponential function</term>, denoted <m>e^{x}</m> where
+            <me>e = 2.71828...</me>
+            This is the unique exponential function by the property that its derivative at <m>0</m> is <m>1</m>.
+            In fact, as we will see later <m>e^{x}</m> is its own derivative.
+        </p>
+        <example xml:id="example-exponential-derivative">
+            <title>Exponential derivative</title>
+            <statement>
+                <p>
+                    Using the fact that <m>\dv{}{x}e^{x} = e^{x}</m>, compute <m>\dv{}{x}e^{5x - x^{4} + \cos x}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We'll have to use the chain rule.
+                    If we do so, we get
+                    <me>\dv{}{x}e^{5x - x^{4} + \cos x} = (5 - 4x^{3} - \sin x)e^{5x - x^{4} + \cos x}.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Since <m>e^{x}</m> is its own derivative, this makes computing derivatives of functions of the form <m>e^{f(x)}</m> relatively straightforward:
+            <me>\dv{}{x}e^{f(x)} = f'(x)e^{f(x)}.</me>
+        </p>
+        <p>
+            Technically, we have worked with the natural exponential function before in this class.
+            Recall from <xref ref="example-a-differential-equation" text="type-global" /> that if <m>P(t)</m> represents the population of the USA (in millions) <m>t</m> years after 1990, then we said that <m>P</m> satisfied the differential equation
+            <me>\dv{P}{t} = \frac{1}{23500}P(532 - P).</me>
+            If we say the population of the US in 1990 was 250 million (i.e. <m>P(0) = 250</m>), then 
+            <me>P(t) = \frac{133000}{250 + 282e^{-.023t}}.</me>
+            Now, in <xref ref="example-estimating-the-population-of-the-united-states-in-2020" text="type-global" /> we used linear approximation to estimate the population of the US using this model in the year 2020, where we got 331.8 million people.
+            If we use the above formula for <m>P(t)</m>, we get that the population of the US in 2020 should be about
+            <me>P(30) = 339.8,</me>
+            or 339.8 million people.
+        </p>
+        <aside>
+            <p>
+                The Census Bureau predicted in 2014 that the population in 2020 would be 334.5 million.
+                So our simple predictions before actually aren't too far off from what the Census Bureau is expecting.
+                This suggests that the differential equation <m>P' - \frac{1}{23500}P(532-P)</m> is a reasonable model for the growth of the US.
+            </p>
+        </aside>
+    </section>
+    <section xml:id="section-logarithms">
+        <title>Logarithms</title>
+        <subsection xml:id="subsection-inverse-function-review">
+            <title>Inverse Function Review</title>
+            <p>
+                Suppose we want to solve the equation <m>y = f(x)</m> for <m>x</m>.
+                Then we can only do so unambiguously if <m>f</m> is an <term>invertible function</term>.
+            </p>
+            <definition xml:id="definition-invertible-functions">
+                <title>Invertible Functions</title>
+                <idx><h>functions</h><h>invertible functions</h></idx>
+                <statement>
+                    <p>
+                        A function <m>f(x)</m> is invertible if and only if it is a one-to-one function.
+                        That is, <m>f(x_{1}) = f(x_{2})</m> forces <m>x_{1} = x_{2}</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                Since a function is one-to-one if and only if its graph passes the horizontal line test, the horizontal line test also gives us a useful way to check if a function is invertible.
+            </p>
+            <example xml:id="example-exponential-inverse">
+                <p>
+                    Let <m>f(x) = e^{x}</m>, the natural exponential function introduced in <xref ref="section-exponential-functions" text="type-global" />.
+                    Then <m>f(x)</m> is an invertible function, since its graph passes the horizontal line test.
+                </p>
+            </example>
+            <p>
+                If a function <m>f</m> is invertible, then there exists an <term>inverse function</term> <m>f^{1}</m> satisfying the following equations:
+                <md>
+                    <mrow>f(f^{-1}(y)) &amp; = y </mrow>
+                    <mrow>f^{-1}(f(x)) &amp; = x. </mrow>
+                </md>
+                Essentially, <m>f^{-1}</m> is the rule that undoes the transformation that <m>f</m> applies to <m>x</m>.
+                The domain of <m>f^{-1}</m> is the range of <m>f</m> and the range of <m>f^{-1}</m> is the domain of <m>f</m>.
+                Note that <m>f^{-1}\neq\frac{1}{f}</m>!.
+            </p>
+            <p>
+                The graph of an inverse function is related to the graph of the original function in a very nice way.
+                To get the graph of <m>f^{-1}</m> from <m>f</m>, just reflect the graph of <m>f</m> across the line <m>y=x</m>.
+            </p>
+            <example xml:id="example-graphing-the-inverse-of-the-natural-exponential">
+                <title>Graphing the inverse of the natural exponential</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = e^{x}</m>.
+                        Graph <m>f^{-1}(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we graph <m>e^{x}</m> and then rotate the graph across the line <m>y=x</m>, we get
+                    </p>
+                    <figure xml:id="figure-exponential">
+                        <image xml:id="image-exponential" width="50%">
+                            <latex-image-code><![CDATA[
+                                \begin{tikzpicture}
+                                    \begin{axis}[mystyle,
+                                        xmin=-1,xmax=3.5,
+                                        ymin=-1,ymax=5.5,
+                                        legend style={at={(axis cs:3,4)}, anchor=west}]
+                                        \addplot[smooth, blue, thick] {exp(x)};
+                                        \addlegendentry{$f(x) = e^{x}$};
+                                        \addplot[smooth, red, thick, domain = 0.1:3.5] {ln(x)};
+                                        \addlegendentry{$f^{-1}(x)$};
+                                        \addplot[dashed, thick] {x};
+                                        \addlegendentry{$y=x$};
+                                    \end{axis}
+                                \end{tikzpicture}]]>
+                            </latex-image-code>
+                        </image>
+                    </figure>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-calculus-with-inverse-functions">
+            <title>Calculus with Inverse Functions</title>
+            <p>
+                There are two important things to notice about the graph of the inverse function in <xref ref="example-exponential-inverse" text="type-global" />: it's continuous and differentiable.
+                This is because the same was true of the original graph, and if we think about it this should be true in general as well since graphing the inverse doesn't add any new gaps or cusps to the graph.
+            </p>
+            <theorem xml:id="theorem-continuity-and-differentiability-of-inverses">
+                <title>Continuity and Differentiability of Inverses</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a continuous (respectively, differentiable) function.
+                        Suppose that <m>f(x)</m> is invertible, and has inverse <m>f^{-1}(x)</m>.
+                        Then <m>f^{-1}(x)</m> is continuous (respectively, differentiable).
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-finding-the-derivative-of-an-inverse-function">
+                <title>Finding the derivative of an inverse function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \sqrt{x-1}</m> and note that <m>f</m> is invertible.
+                        Find the derivative of <m>f^{-1}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        One way to do this is just start by finding <m>f^{-1}</m>.
+                        So we'll set <m>y = \sqrt{x-1}</m>, solve for <m>x</m> and then switch <m>x</m> and <m>y</m>.
+                        If we do this, we get
+                        <me>y = x^{2} + 1</me>
+                        so <m>f^{-1}(x) = x^{2} + 1</m> (and note that the domain of <m>f^{-1}</m> is <m>[0,\infty)</m> since this is the range of <m>f</m>!).
+                        Hence
+                        <me>\dv{}{x}f^{-1}(x) = 2x.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                The method used in <xref ref="example-finding-the-derivative-of-an-inverse-function" text="type-global" /> will certainly work in simple cases.
+                But what do we do if we can't (or don't want to) find an explicit formula for the inverse function?
+                The following formula will help us to do this.
+            </p>
+            <theorem xml:id="theorem-derivative-of-an-inverse-function">
+                <title>Derivative of an Inverse Function</title>
+                <idx><h>functions</h><h>inverse functions</h><h>derivatives</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a differentiable function with inverse <m>f^{-1}(x)</m>.
+                        Assume that <m>f^{-1}</m> is itself differentiable.
+                        Then 
+                        <me>(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}.</me>
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        First, let <m>y = f^{-1}(x)</m>, so that we need to find <m>y'</m>.
+                        Then we can say that <m>f(y) = x</m>.
+                        Now differentiate this equation implicitly to get
+                        <me>f'(y)y' = 1</me>
+                        or just
+                        <me>y' = \frac{1}{f'(y)} = \frac{1}{f'(f^{-1}(x))}.</me>
+                    </p>
+                </proof>
+            </theorem>
+            <example xml:id="example-exponential-inverse-revisited">
+                <title>Exponential inverse revisited</title>
+                <statement>
+                    <p>
+                        Using the fact that the derivative of <m>e^{x}</m> is itself, find the derivative of its inverse.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Let <m>f(x) = e^{x}</m>.
+                        Then by <xref ref="theorem-derivative-of-an-inverse-function" text="type-global" /> we have
+                        <me>(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))} = \frac{1}{f(f^{-1}(x))} = \frac{1}{x}.</me>
+                        So the derivative of the inverse of <m>e^{x}</m> is <m>\frac{1}{x}</m>.
+                    </p>
+                </solution>
+            </example>
+            <example xml:id="example-derivative-at-a-point">
+                <title>Derivative at a point</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = x^{3} + 3\sin x + 2\cos x</m>.
+                        Find <m>(f^{-1})'(2)</m>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        By <xref ref="theorem-derivative-of-an-inverse-function" text="type-global" />, we know that
+                        <me>(f^{-1})'(2) = \frac{1}{f'(f^{-1}(2))}.</me>
+                        By inspection, <m>f(0) = 2</m> which means <m>f^{-1}(2) = 0</m>.
+                        Since 
+                        <me>f'(x) = 3x^{2} + 3\cos x - 2\sin x,</me>
+                        this gives
+                        <me>(f^{-1})'(2) = \frac{1}{f'(f^{-1}(2))} = \frac{1}{f'(0)} = \frac{1}{3}.</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-logarithms">
+            <title>Logarithms</title>
+            <p>
+                Since exponential functions are important in mathematics and its applications, their inverses are important as well.
+                Each exponential function <m>f(x) = a^{x}</m> (<m>a&gt; 0</m>) has an inverse function that we call the <term>logarithm with base <m>a</m></term>, and denote by <m>f^{-1}(x) = \log_{a}x</m>.
+                The domain of each logarithm is <m>(0,\infty)</m> and the range is <m>(-\infty,\infty)</m>.
+                The defining properties of the logarithm function are as follows:
+                <md>
+                    <mrow>\log_{a}a^{x} &amp; = x </mrow>
+                    <mrow>a^{\log_{a}x} &amp; = x. </mrow>
+                </md>
+                Essentially, logarithms and exponentials cancel each other out.
+                To put this another way, <m>\log_{a}x</m> is the <em>exponent</em> needed to turn <m>a</m> into <m>x</m>.
+            </p>
+            <p>
+                We can say a few things about logarithms just from looking at graphs of exponentials.
+                Suppose that <m>a&gt;1</m>.
+                Then <m>\log_{a}x</m> is both continuous and differentiable for all <m>x&gt;0</m>,
+                <md>
+                    <mrow>\log_{a}1 &amp; = 0 </mrow>
+                    <mrow>\lim_{x\to0^{+}}\log_{a}x &amp; = -\infty </mrow>
+                    <mrow>\lim_{x\to\infty}\log_{a}x &amp; = \infty </mrow>
+                </md>
+                and the derivative of <m>\log_{a}x</m> approaches <m>0</m> as <m>x\to\infty</m>.
+            </p>
+            <p>
+                The properties of the exponential listed in <xref ref="theorem-properties-of-exponential-functions" text="type-global" /> have corresponding properties for logarithms.
+            </p>
+            <theorem xml:id="theorem-properties-of-logarithm-functions">
+                <title>Properties of Logarithm Functions</title>
+                <idx><h>logarithm functions</h><h>properties</h></idx>
+                <statement>
+                    <p>
+                        Let <m>a&gt;0</m> with <m>a\neq1</m>.
+                        Let <m>x,y</m> be positive real numbers, and let <m>r</m> be any real number.
+                        Then
+                        <ul>
+                            <li><m>\log_{a}1 = 0</m> and <m>\log_{a}a = 1</m>.</li>
+                            <li><m>\log_{a}(xy) = \log_{a}x + \log_{a}y</m>.</li>
+                            <li><m>\log_{a}\frac{x}{y} = \log_{a}x - \log_{a}y</m>.</li>
+                            <li><m>\log_{a}x^{r} = r\log_{a}x</m>.</li>
+                        </ul>
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                An important takeaway from <xref ref="theorem-properties-of-logarithm-functions" text="type-global" /> is that logarithms turn the complicated operations of multiplication and division into the simpler operations of addition and subtraction.
+            </p>
+            <p>
+                Since every exponential function has a corresponding logarithm, the natural exponential function <m>e^{x}</m> has a logarithm as well.
+                We call this inverse the <term>natural logarithm</term> and denote it by <m>\ln x</m>.
+                Note that <m>\dv{}{x}\ln x = \frac{1}{x}</m> by <xref ref="example-exponential-inverse-revisited" text="type-global" />.
+            </p>
+            <example xml:id="example-simplifying-an-exponential">
+                <title>Simplifying an exponential</title>
+                <statement>
+                    <p>
+                        Simplify <m>e^{-4\ln x}</m> and <m>e^{x\ln3}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We'll simplify by using the cancellation property <m>e^{\ln y} = y</m>.
+                        First, we need to put the entire exponent inside of the natural log:
+                        <me>e^{-4\ln x} = e^{\ln x^{-4}} = x^{-4}</me>
+                        and 
+                        <me>e^{x\ln3} = 3^{x}.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                <xref ref="example-simplifying-an-exponential" text="type-global" /> shows us that <em>every</em> exponential function can be written in terms of the natural exponential: <m>a^{x} = e^{x\ln a}</m>.
+                Similarly, every logarithm can be written in terms of the natural logarithm by using the change of base formula:
+                <me>\log_{a}x = \frac{\ln x}{\ln a}.</me>
+            </p>
+        </subsection>
+    </section>
+    <section xml:id="section-derivatives-of-exponential-and-logarithmic-functions">
+        <title>Derivatives of Exponential and Logarithmic Functions</title>
+        <subsection xml:id="subsection-derivatives-of-exponentials">
+            <title>Derivatives of Exponentials</title>
+            <p>
+                We've already mentioned that <m>\dv{}{x}e^{x} = e^{x}</m>, but we've said nothing about differentiating functions such as <m>3^{x}</m> or <m>(\frac{1}{\pi})^{-x}</m>.
+                However, it turns out that we can get these derivatives from the derivative of <m>e^{x}</m> without too much trouble.
+            </p>
+            <theorem xml:id="theorem-derivatives-of-exponential-functions">
+                <title>Derivatives of Exponential Functions</title>
+                <idx><h>exponential functions</h><h>derivatives</h></idx>
+                <statement>
+                    <p>
+                        Let <m>a &gt; 0</m> and set <m>f(x) = a^{x}</m>.
+                        Then <m>f'(x) = a^{x}\ln a</m>.
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        To prove this, we need to use what's available to us: the derivative of <m>e^{x}</m>.
+                        From <xref ref="example-simplifying-an-exponential" text="type-global" /> we say that <m>e^{x\ln 3} = 3^{x}</m>.
+                        More generally, we can also say that <m>e^{x\ln a} = a^{x}</m>.
+                        Hence
+                        <md>
+                            <mrow>\dv{}{x}a^{x} &amp; = \dv{}{x}e^{x\ln a} </mrow>
+                            <mrow> &amp; = (\ln a)e^{x\ln a} </mrow>
+                            <mrow> &amp; = (\ln a)a^{x}. </mrow>
+                        </md>
+                    </p>
+                </proof>
+            </theorem>
+            <example xml:id="example-differentiating-an-exponential">
+                <title>Differentiating an exponential</title>
+                <statement>
+                    <p>
+                        Let <m>g(t) = 2.6^{3t - \sin t}</m>.
+                        Find <m>g'(t)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we set <m>u = 3t - \sin t</m>, then <m>g(t) = g(u) = 2.6^{u}</m>.
+                        By the chain rule,
+                        <m>g'(t) = g'(u)\dv{u}{t} = (\ln2.6)2.6^{u}(3-\cos t) = (\ln2.6)2.6^{3t-\sin t}(3-\cos t).</m>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Although we certainly want to know the derivative of <m>a^{x}</m>, or at least how to find it, most applications involving exponential functions use the natural exponential function <m>e^{x}</m> instead.
+                The derivative of <m>e^{x}</m> is probably the most important derivative in this course.
+            </p>
+            <example xml:id="example-solutions-of-a-differential-equation">
+                <title>Solutions of a differential equation</title>
+                <statement>
+                    <p>
+                        Show that <m>x(t) = Ae^{-t} + Bte^{-t}</m> satisfies the differential equation <m>x'' + 2x' + x = 0</m>, where <m>A,B</m> are arbitrary constants.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need to show that if we compute <m>x'</m> and <m>x''</m> and plug these expressions into the differential equation, this will simplify out to <m>0</m>.
+                        Since
+                        <md>
+                            <mrow>x' &amp; = -Ae^{-t} +Be^{-t} - Bte^{-t} </mrow>
+                            <mrow>x'' &amp; = Ae^{-t} - Be^{-t} - (Be^{-t} - Bte^{-t}) </mrow>
+                            <mrow> &amp; = Ae^{-t} - 2Be^{-t} + Bte^{-t}, </mrow>
+                        </md>
+                        it follows that
+                        <md>
+                            <mrow>x'' + 2x' + x &amp; = (Ae^{-t} - 2Be^{-t} + Bte^{-t}) + 2(-Ae^{-t} + Be^{-t} - Bte^{-r}) + Ae^{-t} + Bte^{-t} </mrow>
+                            <mrow> &amp; = 0. </mrow>
+                        </md>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Exponential functions often appear in the solutions of differential equations, which are themselves often viewed as mathematical models of physical systems.
+                Hence exponential functions play a significant role in predicting physical quantities, which goes a long way towards justifying their importance.
+            </p>
+        </subsection>
+        <subsection xml:id="subsection-derivatives-of-logarithms">
+            <title>Derivatives of Logarithms</title>
+            <p>
+                Just as we can get the derivative of every exponential function <m>a^{x}</m> just by knowing the derivative of <m>e^{x}</m>, we can get the derivative of every logarithmic function <m>\log_{a}x</m> just by knowing that <m>\dv{}{x}\ln x = \frac{1}{x}</m>.
+            </p>
+            <theorem xml:id="theorem-derivatives-of-logarithmic-functions">
+                <title>Derivatives of Logarithmic Functions</title>
+                <idx><h>logarithm functions</h><h>derivatives</h></idx>
+                <statement>
+                    <p>
+                        Let <m>a &gt; 0, a\neq 1</m> and set <m>f(x) = \log_{a}x</m>.
+                        Then
+                        <me>f'(x) = \frac{1}{x\ln a}.</me>
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-differentiating-nested-logarithms">
+                <title>Differentiating nested logarithms</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \log_{2}(\log_{5} x)</m>.
+                        Find <m>f'(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        By the chain rule, we have
+                        <me>f'(x) = \frac{1}{(\log_{5}x)\ln 2}\dv{}{x}\log_{5}x = \frac{1}{(\log_{5} x)\ln 2}\frac{1}{x\ln 5},</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Logarithms can be used to greatly simplify derivatives involving products, division or exponentiation using a technique known as <term>logarithmic differentiation</term>.
+            </p>
+            <example xml:id="example-a-simple-fraction">
+                <title>A simple fraction</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \frac{e^{-x}\cos x}{x^{2} + 4x + 4}</m>.
+                        Find <m>f'(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We can find <m>f'(x)</m> without resorting to logarithms, but this would require using the product, quotient and chain rules.
+                        The algebra would be awful.
+                        So we'll using logarithms instead!
+                        Set <m>y = f(x)</m>.
+                        Then
+                        <me>\ln y = \ln e^{-x} + \ln\cos x - \ln (x^{2} + 4x + 4) = -x + \ln\cos x - 2\ln(x+2).</me>
+                        Now we differentiate both sides implicitly to obtain
+                        <me>\frac{y'}{y} = -1 - \frac{\sin x}{\cos x} - \frac{2}{x+2}.</me>
+                    </p>
+                    <p>
+                        Hence
+                        <me>y' = y\left(-1 - \tan x - \frac{2}{x+2}\right) = \frac{e^{-x}\cos x}{x^{2} + 4x + 4}\left(-1 - \tan x - \frac{2}{x+2}\right).</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Logarithmic differentiation is useful for finding derivatives of expressions containing complicated quotients, products or powers.
+            </p>
+            <example xml:id="example-a-simple-exponent">
+                <title>A simple exponent</title>
+                <statement>
+                    <p>
+                        Let <m>h(z) = z^{z}</m>.
+                        Find <m>h'(z)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We'll use logarithmic differentiation again to simplify <m>h</m> and remove the exponent.
+                        Set <m>y = h(z)</m>, which gives
+                        <me>\ln y = z\ln z.</me>
+                        So
+                        <me>\frac{y'}{y} = \ln z + 1,</me>
+                        which means that
+                        <me>y' = y(\ln z + 1) = z^{z}(\ln z + 1).</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-exponential-models">
+        <title>Exponential Models</title>
+        <subsection xml:id="subsection-exponential-growth">
+            <title>Exponential Growth</title>
+            <p>
+                Suppose we want to predict the spread of some infectious disease through a city.
+                A reasonable, though simplistic, assumption is that the disease will spread quicker if more people are infected.
+                In other words, we'll assume that the rate at which people are infected is proportional to the number of people infected.
+                If we let <m>N(t)</m> denote the number of people infected at time <m>t</m>, then we're basically saying that 
+                <me>\dv{N}{t} = kN(t)</me>
+                for some constant <m>k &gt; 0</m>.
+            </p>
+            <p>
+                This differential equation is a <term>mathematical model</term> that allows us to predict the growth of <m>N(t)</m>.
+                We can actually use it to get an expression for <m>N(t)</m>.
+                This differential equation is saying that <m>N(t)</m> is a function whose derivative looks quite a bit like <m>N(t)</m>.
+                In fact, the solution of this differential equation is <m>N(t) = Ce^{kt}</m>, where <m>C = N(0)</m> is a constant that represents the number of people infected at time <m>t=0</m>.
+                This is an example of <term>exponential growth</term>, and the proportionality constant <m>k</m> is called the <term>relative growth rate</term>.
+            </p>
+            <example xml:id="example-modeling-an-outbreak">
+                <title>Modeling an Outbreak</title>
+                <statement>
+                    <p>
+                        A game of Humans vs. Zombies breaks out at WVWC.
+                        When the game starts, there is just one zombie.
+                        After one hour, there are <m>3</m> zombies.
+                        How many zombies will there be after three hours assuming that the relative growth rate is constant?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Let <m>N(t)</m> denote the number of zombies <m>t</m> hours after the game starts.
+                        Then we're given that <m>N(0) = 1</m> and <m>N(1) = 3</m>.
+                        We need to find <m>N(3)</m>.
+                    </p>
+                    <p>
+                        Since the relative growth rate is assumed to be constant, we can say that <m>N' = kN</m> for some constant <m>k</m>.
+                        As we saw before, the solution of this differential equation is given by <m>N(t) = N(0)e^{kt} = e^{kt}</m>.
+                        So if we want to find <m>N(3)</m>, then we need to figure out what <m>k</m> is.
+                    </p>
+                    <p>
+                        We can do this by using the fact that <m>N(1) = 3</m>.
+                        If we plug this into <m>N(t) = e^{kt}</m>, we get
+                        <me>3 = e^{k} \Rightarrow k = \ln3.</me>
+                        So
+                        <me>N(t) = e^{(\ln 3)t} = 3^{t}.</me>
+                        Hence there will be <m>N(3) = 3^{3} = 27</m> zombies after three hours.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-exponential-decay">
+            <title>Exponential Decay</title>
+            <p>
+                Closely related to the concept of exponential growth is that of <term>exponential decay</term>.
+                A quantity <m>M(t)</m> undergoes exponential decay if it satisfies the differential equation
+                <me>\dv{M}{t} = kM,</me>
+                where <m>k &lt; 0</m>.
+                Every solution of this differential equation looks like <m>M(t) = Ce^{kt} = M(0)e^{kt}</m>.
+            </p>
+            <aside>
+                <p>
+                    We often write the decay constant <m>k</m> as positive, and then rewrite the ODE for <m>M(t)</m> as <m>\dv{M}{t} = -kM</m>.
+                    The solution becomes <m>M(t) = M(0)e^{-kt}</m>.
+                    This has the effect of highlighting the negative growth rate inherent to this system.
+                </p>
+            </aside>
+            <p>
+                Perhaps the most important example of exponential decay is that of radioactive decay.
+                If <m>m(t)</m> represents the mass of some radioactive substance, then experiments show that substance decays at a rate proportional to the amount of the substance remaining.
+                In symbols, <m>\dv{m}{t} = km</m> where <m>k &lt; 0</m>.
+                If we let <m>m_{0} = m(0)</m> denote the initial mass of the substance, then we can say that <m>m(t) = m_{0}e^{kt}</m>.
+                The rate of decay is often expressed in terms of <term>half-life</term>: the amount of time it will take for precisely half of the mass to decay.
+            </p>
+            <example xml:id="example-decay-from-half-life">
+                <title>Decay from Half-Life</title>
+                <statement>
+                    <p>
+                        A radioactive substance has a half-life of <m>28</m> days.
+                        If we start with a <quantity><mag>50</mag><unit base="gram" prefix="milli"/></quantity> sample, how much of the mass will remain after <m>t</m> days?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we let <m>m(t)</m> denote the mass of the sample at time <m>t</m>, and let <m>t=0</m> denote the first day we have the sample, then
+                        <me>m(t) = m_{0}e^{kt} = 50e^{kt}.</me>
+                        We still need to find <m>k</m>, but we can do this using the fact that the half-life is <m>28</m> days.
+                        This means that 
+                        <me>m(28) = \frac{m(0)}{2} = 25.</me>
+                        So
+                        <me>25 = 50e^{28k}\Rightarrow \ln\frac{1}{2} = 28k\Rightarrow k = -\frac{\ln2}{28}.</me>
+                        Hence
+                        <me>m(t) = 50e^{-\frac{\ln2}{28}t} = 50\cdot2^{-\frac{t}{28}}.</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-inverse-trigonometric-functions">
+        <title>Inverse Trigonometric Functions</title>
+        <p>
+            Recall that <m>\sin x</m> is not a one-to-one function since it fails the horizontal line test.
+            Hence it has no inverse function.
+            However, we can <em>restrict</em> the domain of <m>\sin x</m> so that what's left over passes the horizontal line test.
+            For example, if we define <m>f(x) = \sin x</m> but restrict the domain to the interval <m>[-\frac{\pi}{2},\frac{\pi}{2}]</m>, then <m>f(x)</m> <em>is</em> one-to-one and so has an inverse function.
+            We call this function <term>inverse sine</term> or <term>arcsine</term>.
+        </p>
+        <definition xml:id="definition-inverse-sine">
+            <title>Inverse Sine</title>
+            <idx><h>inverse trigonometric functions</h><h>inverse sine</h></idx>
+            <statement>
+                <p>
+                    Let <m>f(x) = \sin x</m> and have domain <m>[-\frac{\pi}{2},\frac{\pi}{2}]</m>.
+                    Then <m>f^{-1}(x)</m> is called the inverse sine or arcsine of <m>x</m>, and is denoted by <m>\sin^{-1}x</m> or <m>\arcsin x</m>.
+                    The domain is the interval <m>[-1,1]</m> and the range is <m>[-\frac{\pi}{2},\frac{\pi}{2}]</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            We can think of <m>\sin^{-1}x = \arcsin x</m> as the angle required to turn sine into <m>x</m>.
+            <aside>
+                <p>
+                    Note that <m>\sin^{-1}x</m> does <em>not</em> mean <m>\frac{1}{\sin x}</m>, which is <m>\csc x</m>.
+                    It's an unfortunate, though standard, choice of notation.
+                </p>
+            </aside>
+        </p>
+        <example xml:id="example-finding-inverse-sine">
+            <title>Finding inverse sine</title>
+            <statement>
+                <p>
+                    Find <m>\sin^{-1}(\frac{\sqrt{3}}{2})</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This is the angle between <m>-\frac{\pi}{2}</m> and <m>\frac{\pi}{2}</m> that turns sine into <m>\frac{\sqrt{3}}{2}</m>.
+                    So <m>\sin^{-1}(\frac{\sqrt{3}}{2}) = \frac{\pi}{3}</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-simplifying-cosine-and-inverse-sine">
+            <title>Simplifying cosine and inverse sine</title>
+            <statement>
+                <p>
+                    Simplify <m>\cos(\arcsin x)</m>, where <m>-1\leq x\leq 1</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    By definition, <m>\sin(\arcsin x) = x</m> as long as <m>-1\leq x\leq 1</m>.
+                    So we want to try to rewrite <m>\cos(\arcsin x)</m> to make use of this cancellation property.
+                    We can do this using the Pythagorean identity <m>\cos \theta = \pm\sqrt{1-\sin^{2}\theta}</m>.
+                    Hence
+                    <me>\cos(\arcsin x) = \sqrt{1-(\sin(\arcsin x))^{2}} = \sqrt{1 - x^{2}}</me>
+                    whenever <m>-1\leq x\leq 1</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            Since <m>\sin x</m> is differentiable, this means <m>\arcsin x</m> is also differentiable.
+        </p>
+        <theorem xml:id="theorem-derivative-of-inverse-sine">
+            <title>Derivative of Inverse Sine</title>
+            <statement>
+                <p>
+                    Let <m>-1 &lt; x &lt; 1</m>.
+                    Then <m>\dv{}{x}\sin^{-1}x = \frac{1}{\sqrt{1-x^{2}}}</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    If we set <m>y = \sin^{-1}x</m>, then we get <m>\sin y = x</m>.
+                    Differentiating this gives <m>y'\cos y = 1</m> or just
+                    <me>y' = \frac{1}{\cos y} = \frac{1}{\sqrt{1-x^{2}}}.</me>
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            We can also define the <term>inverse cosine function</term> in much the same way as the inverse sine function.
+            The idea once again is to restrict the domain of <m>\cos x</m> to <m>[0,\pi]</m> to get an invertible function.
+            We call the inverse of this function the inverse cosine, or arccosine, function.
+            We denote this function by <m>\cos^{-1}x</m> or <m>\arccos x</m>.
+        </p>
+        <example xml:id="example-inverse-cosine-value">
+            <title>Inverse cosine value</title>
+            <statement>
+                <p>
+                    Find <m>\csc(\cos^{-1}(-\frac{1}{2})</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, note that <m>\cos^{-1}(-\frac{1}{2}) = \frac{4\pi}{3}</m>.
+                    So
+                    <me>\csc(\cos^{-1}(-\frac{1}{2})) = \csc(\frac{4\pi}{3}) = \frac{2}{\sqrt{3}}.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Inverse cosine behaves in much the same way as inverse sine.
+            However, this function won't be as useful to us as the inverse sine function or the next function we will look at: the inverse tangent.
+        </p>
+        <p>
+            If we restrict the domain of <m>\tan x</m> to <m>(-\frac{\pi}{2}, \frac{\pi}{2})</m>, then we get an  invertible function.
+            We call the inverse of this function the <term>inverse tangent</term> or <term>arctangent</term>, and denote it by <m>\tan^{-1}x</m> or <m>\arctan x</m>.
+            The domain of <m>\arctan x</m> is <m>(-\infty,\infty)</m> and the range is <m>(-\frac{\pi}{2},\frac{\pi}{2})</m>.
+            <m>\tan^{-1}x</m> can be thought of as the angle between <m>-\frac{\pi}{2}</m> and <m>\frac{\pi}{2}</m> that makes tangent equal to <m>x</m>.
+            It satisfies the following cancellation properties: <m>\tan(\tan^{-1}x) = x</m> for all <m>x</m> and <m>\tan^{-1}(\tan y) = y</m> for all <m>y</m> in <m>(-\frac{\pi}{2},\frac{\pi}{2})</m>.
+        </p>
+        <example xml:id="example-simplifying-an-inverse-tangent">
+            <title>Simplifying an inverse tangent</title>
+            <statement>
+                <p>
+                    Simplify <m>\sin(2\arctan x)</m> using the formula <m>\sin2x = 2\sin x\cos x</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we use the double-angle formula given, we get
+                    <me>\sin(2\arctan x) = 2\sin(\arctan x)\cos(\arctan x).</me>
+                    So we just need to find <m>\sin(\arctan x)</m> and <m>\cos(\arctan x)</m>.
+                </p>
+                <p>
+                    Set <m>\theta = \arctan x</m>, so that <m>\tan\theta = x</m>.
+                    Then we can find <m>\sin\theta</m> and <m>\cos\theta</m> using triangles, which gives
+                    <md>
+                        <mrow>\sin\theta &amp; = \frac{x}{\sqrt{1+x^{2}}} </mrow>
+                        <mrow>\cos\theta &amp; = \frac{1}{\sqrt{1+x^{2}}} </mrow>
+                    </md>
+                    Hence
+                    <md>
+                        <mrow>\sin(2\arctan x) &amp; = \sin2\theta </mrow>
+                        <mrow> &amp; = 2\sin\theta\cos\theta </mrow>
+                        <mrow> &amp; = \frac{2x}{1+x^{2}}. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-limit-of-inverse-tangent">
+            <title>Limit of inverse tangent</title>
+            <statement>
+                <p>
+                    Determine <m>\lim_{x\to\infty}\tan^{-1}x</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Recall that <m>\tan^{-1}x</m> is the angle between <m>-\frac{\pi}{2}</m> and <m>\frac{\pi}{2}</m> for which tangent is equal to <m>x</m>.
+                    So finding <m>\lim_{x\to\infty}\tan^{-1}x</m> is equivalent to finding what angle between <m>-\frac{\pi}{2}</m> and <m>\frac{\pi}{2}</m> we have to approach in order for tangent to blow up to <m>\infty</m>.
+                    Either from looking at a graph or by using the definition of tangent, we see that the angle we need to approach is exactly <m>\frac{\pi}{2}</m>.
+                    Hence <m>\lim_{x\to\infty}\tan^{-1}x = \frac{\pi}{2}</m>.
+                </p>
+            </solution>
+        </example>
+        <theorem xml:id="theorem-derivative-of-inverse-tangent">
+            <title>Derivative of Inverse Tangent</title>
+            <statement>
+                <p>
+                    The derivative of <m>\tan^{-1}x</m> is <m>\frac{1}{1+x^{2}}</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    We can prove this the same way we proved that <m>\dv{}{x}\arcsin x = \frac{1}{\sqrt{1+x^{2}}}</m>.
+                    All we need to do is to set <m>y = \tan^{-1}x</m>, and then find <m>y'</m> by implicit differentiation.
+                </p>
+            </proof>
+        </theorem>
+        <example xml:id="example-tangent-half-angle-substitution">
+            <title>Tangent half-angle substitution</title>
+            <statement>
+                <p>
+                    An important substitution in integral calculus is the <term>tangent half-angle substitution</term> defined by <m>t = \tan\frac{x}{2}</m>.
+                    Use this equation to find <m>\dv{x}{t}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can find <m>x'</m> implicitly, but we can also solve for <m>x</m> to get 
+                    <me>x = 2\tan^{-1}t.</me>
+                    Therefore
+                    <me>\dv{x}{t} = 2\dv{}{t}\tan^{-1}t = \frac{2}{1+t^{2}}.</me>
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-l-hospital-s-rule">
+        <title>L'Hospital's Rule</title>
+        <p>
+            Consider the important limit <m>\lim_{x\to0}\frac{\sin x}{x}</m>.
+            If we try to plug in <m>x=0</m>, we get <m>\frac{0}{0}</m>, which is undefined.
+            However, we can prove using geometry that the limit is <m>1</m>.
+            As another example, consider <m>\lim_{x\to\infty}\frac{1-x^{3}}{4x^{3}}</m>.
+            Once again, if we try to plug the limit in we get an expression of the form <m>\frac{-\infty}{\infty}</m>.
+            However, the limit is just <m>-\frac{1}{4}</m>, which we can find using algebra.
+        </p>
+        <p>
+            Limits of the form <m>\frac{0}{0}</m> or <m>\frac{\infty}{\infty}</m> are known as <term>indeterminate forms</term>.
+            There is no restriction whatsoever on what value a limit involving an indeterminate form may take, or even that it has to exist at all.
+        </p>
+        <example xml:id="example-different-indeterminate-forms">
+            <title>Different indeterminate forms</title>
+            <statement>
+                <p>
+                    Find <m>\frac{\infty}{\infty}</m> indeterminate forms that, respectively, evaluate to <m>1, 0</m> and do not exist.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Let <m>f(x) = \frac{1-x}{3-x}</m>, <m>g(x) = \frac{1+x^{4}}{1+x^{3}}</m> and <m>h(x) = \frac{\ln x}{\cot x}</m>.
+                    Then <m>\lim_{x\to\infty}f(x), \lim_{x\to\infty}g(x)</m> and <m>\lim_{x\to0^{+}}h(x)</m> are all <m>\frac{\infty}{\infty}</m> indeterminate forms.
+                    The first evaluates to <m>1</m>, the second does not exist (it's <m>\infty</m>) while the third appears to be equal to <m>0</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            The goal of this section is to determine a method that can help us evaluate limits involving indeterminate forms.
+            This method is called <term>L'Hospital's Rule</term>.
+        </p>
+        <theorem xml:id="theorem-l-hospital-s-rule">
+            <title>L'Hospital's Rule</title>
+            <idx>L'Hospital's Rule</idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> and <m>g(x)</m> be differentiable functions.
+                    If <m>\lim_{x\to a}\frac{f(x)}{g(x)}</m> is either one of the indeterminate forms <m>\frac{0}{0}</m> or <m>\frac{\infty}{\infty}</m>, then 
+                    <me>\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}</me>
+                    if the limit on the right exists or is <m>\pm\infty</m>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            It's important to note that L'Hospital's Rule does not necessarily ask you to use the quotient rule!
+        </p>
+        <example xml:id="example-using-l-hospital-s-rule">
+            <title>Using L'Hospital's Rule</title>
+            <statement>
+                <p>
+                    Let <m>h(x) = \frac{\ln x}{\cot x}</m>.
+                    Find <m>\lim_{x\to0^{+}}h(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We saw in <xref ref="example-different-indeterminate-forms" text="type-global" /> that this limit gives us the indeterminate form <m>\frac{\infty}{\infty}</m>, so L'Hospital's Rule applies.
+                    Hence
+                    <md>
+                        <mrow>\lim_{x\to0^{+}}\frac{\ln x}{\cot x} &amp; = \lim_{x\to0^{+}}\frac{1/x}{-\csc^{2}x} </mrow>
+                        <mrow> &amp; = \lim_{x\to0^{+}}\left(-\frac{\sin x}{x}\sin x\right) </mrow>
+                        <mrow> &amp; = 1\cdot0 </mrow>
+                    </md>
+                    and so the limit is indeed <m>0</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            L'Hospital's Rule also applies for limits approaching <m>\pm\infty</m>.
+        </p>
+        <example xml:id="example-exponential-and-polynomial-growth">
+            <title>Exponential and polynomial growth</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = ax^{2} + bx + c</m> and let <m>g(x) = e^{x}</m>, where <m>a,b,c</m> are arbitrary constants.
+                    Find <m>\lim_{x\to\infty}\frac{ax^{2} + bx + c}{e^{x}}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This is another example of a <m>\frac{\infty}{\infty}</m> indeterminate form, and so L'Hospital's Rule applies.
+                    If we use it, we get
+                    <md>
+                        <mrow>\lim_{x\to\infty}\frac{ax^{2} + bx + c}{e^{x}} &amp; = \lim_{x\to\infty}\frac{2ax+b}{e^{x}} </mrow>
+                        <mrow> &amp; = \lim_{x\to\infty}\frac{2a}{e^{x}} </mrow>
+                        <mrow> &amp; = 0. </mrow>
+                    </md>
+                    In other words, the exponential function grows faster than <em>any</em> quadratic function.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-another-limit-involving-exponentials">
+            <title>Another limit involving exponentials</title>
+            <statement>
+                <p>
+                    Find <m>\lim_{t\to1^{+}}\frac{9^{t-1} - 4^{t-1}}{t-1}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This is a <m>\frac{0}{0}</m> indeterminate form, so L'Hospital's Rule applies.
+                    We get
+                    <md>
+                        <mrow>\lim_{t\to1^{+}}\frac{9^{t-1} - 4^{t-1}}{t-1} &amp; = \lim_{t\to1^{+}}\frac{9^{t-1}\ln9 - 4^{t-1}\ln4}{1} </mrow>
+                        <mrow> &amp; = \ln\frac{9}{4}. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            L'Hospital's Rule only applies <em>directly</em> to the indeterminate forms <m>\frac{0}{0}</m> and <m>\frac{\infty}{\infty}</m>, but these are not the only problems when L'Hospital's Rule proves useful.
+        </p>
+        <example xml:id="example-a-different-indeterminate-form">
+            <title>A different indeterminate form</title>
+            <statement>
+                <p>
+                    Find <m>\lim_{x\to\infty}xe^{-3x - x^{2}}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we try to evaluate the limit, we get the expression <m>\infty\cdot0</m>.
+                    This is another indeterminate form, but is not one that we can apply L'Hospital's Rule to without doing some algebra first.
+                    We can write
+                    <me>\lim_{x\to\infty}xe^{-3x-x^{2}} = \lim_{x\to\infty}\frac{x}{e^{3x+x^{2}}}</me>
+                    which is a <m>\frac{\infty}{\infty}</m> indeterminate form.
+                    We <em>can</em> use L'Hospital's on this expression!
+                </p>
+                <p>
+                    If we do so, we get
+                    <md>
+                        <mrow>\lim_{x\to\infty}\frac{x}{e^{3x+x^{2}}} &amp; = \lim_{x\to\infty}\frac{1}{(3+2x)e^{3x+x^{2}}} </mrow>
+                        <mrow> &amp; = 0. </mrow>
+                    </md>
+                    So <m>\lim_{x\to\infty}xe^{-3x-x^{2}} = 0</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            <xref ref="example-a-different-indeterminate-form" text="type-global" /> shows that <m>0\cdot\infty</m> indeterminate forms can be dealt with by rewriting them in the form <m>\frac{0}{0}</m> or <m>\frac{\infty}{\infty}</m> and then applying L'Hospital's Rule.
+            It's trickier, but we can also deal with <m>\infty-\infty</m> indeterminate forms by rewriting them in this way.
+        </p>
+        <example xml:id="example---infty-infty--indeterminate-form">
+            <title><m>\infty-\infty</m> indeterminate form</title>
+            <statement>
+                <p>
+                    Find <m>\lim_{x\to\frac{\pi}{2}^{-1}}(\sec x-\tan x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    As <m>x\to\frac{\pi}{2}^{-}</m>, <m>\sec x\to\infty</m> and <m>\tan x\to\infty</m>.
+                    So this limit is the indeterminate form <m>\infty-\infty</m>.
+                    We can't sue L'Hospital's Rule yet, but we can try to rewrite this limit as a <m>\frac{0}{0}</m> or <m>\frac{\infty}{\infty}</m> indeterminate form.
+                    We'll try to do this by replacing <m>\sec x,\tan x</m> with <m>\sin x,\cos x</m> to get
+                    <md>
+                        <mrow>\lim_{x\to\frac{\pi}{2}^{-}}(\sec x - \tan x) &amp; =\lim_{x\to\frac{\pi}{2}^{-}}\frac{1-\sin x}{\cos x} </mrow>
+                        <mrow> &amp; = \lim_{x\to\frac{\pi}{2}^{-}}\frac{-\cos x}{-\sin x} </mrow>
+                        <mrow> &amp; = 0. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-limit-involving-radicals">
+            <title>Limit involving radicals</title>
+            <statement>
+                <p>
+                    Find <m>\lim_{x\to\infty}(\sqrt{2x^{2} - x} - \sqrt{2x^{2}+1})</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This is another <m>\infty-\infty</m> form, so we'll try to rewrite it into a form we can use L'Hospital's Rule on.
+                    The trick here is to factor an <m>x</m> out so we can get a <m>0\cdot\infty</m> form, which we've already seen how to handle:
+                    <md>
+                        <mrow>\lim_{x\to\infty}(\sqrt{2x^{2} - x} - \sqrt{2x^{2} + 1}) &amp; = \lim_{x\to\infty}(x\sqrt{2 - x^{-1}} - x\sqrt{2+x^{-2}}) </mrow>
+                        <mrow> &amp; = \lim_{x\to\infty}\frac{\sqrt{2 - x^{-1}} - \sqrt{2+x^{-2}}}{\frac{1}{x}} </mrow>
+                        <mrow> &amp; = \lim_{x\to\infty}\frac{\frac{1}{2}(2-x^{-1})^{-1/2}(x^{-2}) - \frac{1}{2}(2+x^{-2})^{-1/2}(-2x^{-3})}{-x^{-2}} </mrow>
+                        <mrow> &amp; = \lim_{x\to\infty}\frac{\frac{1}{2}(2 - x^{-1})^{-1/2} - \frac{1}{2}(2+x^{-2})^{-1/2}(-2x^{-1})}{-1} </mrow>
+                        <mrow> &amp; = -\frac{1}{2\sqrt{2}}.</mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            There are three other indeterminate forms that L'Hospital's Rule can help us with (after some algebra): <m>1^{\infty}, \infty^{0}</m> and <m>0^{0}</m>.
+            All of these can be found by first using logarithms.
+        </p>
+        <example xml:id="example-a-natural-limit">
+            <title>A natural limit</title>
+            <statement>
+                <p>
+                    Find <m>\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This limit is a <m>1^{\infty}</m> indeterminate form.
+                    We'll try taking logarithms to rewrite it as a <m>0\cdot\infty</m> form, so set <m>y = \lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}</m>.
+                    Then 
+                    <me>\ln y = \lim_{x\to\infty}x\ln\left(1+\frac{1}{x}\right)</me>
+                    is a <m>0\cdot\infty</m> form.
+                    We can use L'Hospital's by rewriting this limit at a <m>\frac{0}{0}</m> form or <m>\frac{\infty}{\infty}</m>.
+                    Either way, we get <m>\ln y = 1</m> and so the original limit is <m>y = e</m>.
+                </p>
+            </solution>
+        </example>
+    </section>
+</chapter>

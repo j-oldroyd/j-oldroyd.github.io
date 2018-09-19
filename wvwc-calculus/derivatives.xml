@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="derivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Derivatives</title>
+    <introduction>
+        <p>
+            There are two problems that inspired the creation of calculus.
+            The first is the tangent line problem, or rate of change problem.
+            This problem is concerned with determining how a quantity <m>f(x)</m> changes as <m>x</m> varies.
+            We will focus on this problem and its solution, derivatives, for the next two chapters.
+            Afterwards, we will focus on the area problem, the second problem that inspired the creation of calculus.
+        </p>
+    </introduction>
+    <section xml:id="section-the-definition-of-the-derivative">
+        <title>The Definition of the Derivative</title>
+        <subsection xml:id="subsection-tangent-lines">
+            <title>Tangent Lines</title>
+            <p>
+                Consider <m>f(x) = x^{2}</m>.
+                If we graph this, we get a parabola.
+                What we'd like to do is to find a way to describe how quickly this parabola is changing at a point, i.e. find the "slope" of the parabola.
+                One way to try to deal with this is to use <term>secant lines</term>.
+                Recall that the secant line through the points <m>(a,f(a))</m> and <m>(b,f(b))</m> has slope <m>\frac{f(b) - f(a)}{b-a}</m>, which is just the average rate of change of <m>f</m> from <m>x=a</m> to <m>x=b</m>.
+                If <m>b</m> is very close to <m>a</m>, then the slope of the secant line through these points should be a good approximation to the "slope" of <m>f(x) = x^{2}</m> at the point <m>x=a</m>.
+            </p>
+            <example xml:id="example-secant-lines-on-a-parabola">
+                <title>Secant lines on a parabola</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = x^{2}</m>.
+                        Find the slope of the secant line through <m>(2,f(2))</m> and <m>(x,f(x))</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Since the slope of the secant line is the average rate of change, we get that the slope must be equal to
+                        <me>\frac{f(x) - f(2)}{x-2} = \frac{x^{2} - 4}{x-2} = x+2.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                What <xref ref="example-secant-lines-on-a-parabola" text="type-global" /> is telling us is that if <m>x\approx2</m>, then the slope of <m>f(x) = x^{2}</m> at <m>x=2</m> should be very close to <m>x+2</m>, the slope of the secant line.
+                Now we'll do a trick that shows up everywhere in calculus, and is the entire reason we introduced limits in the first place. 
+                We'll make this approximation exact by taking a limit.
+                In particular, we'll say that the slope of <m>f(x) = x^{2}</m> should be equal to
+                <me>\lim_{x\to2}\frac{f(x)-f(2)}{x-2} = \lim_{x\to2}(x+2) = 4.</me>
+                This is the slope of the <term>tangent line</term> to <m>f(x) = x^{2}</m> at <m>x=2</m>.
+                Instead of an average rate of change over an interval <m>[2,x]</m>, we now have an <term>instantaneous rate of change</term> at a point <m>x=2</m>.
+            </p>
+            <definition xml:id="definition-tangent-lines">
+                <title>Tangent Lines</title>
+                <statement>
+                    <p>
+                        The tangent line to a curve <m>y=f(x)</m> through a point <m>(a,f(a))</m> is the line passing through <m>(a,f(a))</m> with slope given by
+                        <me>\lim_{x\to a}\frac{f(x)-f(a)}{x-a},</me>
+                        assuming this limit exists.
+                        The slope of the tangent line represents the slope of the graph of <m>f(x)</m> at <m>a</m> and gives the instantaneous rate of change of <m>f(x)</m> at <m>x=a</m>.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-tangent-line-to-a-root">
+                <title>Tangent line to a root</title>
+                <statement>
+                    <p>
+                        Find the equation of the tangent line to <m>y=\sqrt{x}</m> through the point <m>(4,2)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need two things to find the equation of a line: the slope of the line and a point on the line.
+                        Since we know the tangent line has to pass through <m>(4,2)</m>, we just need to find the slope.
+                        The slope is given by
+                        <me>\lim_{x\to 4}\frac{\sqrt{x}-2}{x-4} = \lim_{x\to4}\frac{x-4}{(x-4)(\sqrt{x}+2)} = \frac{1}{4}.</me>
+                        Hence the equation of the tangent line through <m>(4,2)</m> is
+                        <me>y-2 = \frac{1}{4}(x-4).</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                As a reminder, the slope of the tangent line represents the slope, or instantaneous rate of change, of the function.
+            </p>
+            <example xml:id="example-velocity-from-position">
+                <title>Velocity from position</title>
+                <statement>
+                    <p>
+                        The displacement (i.e. position) of a particle moving in a straight line is described by the function <m>s(t) = 3t^{2} - 5t</m>, where <m>t</m> is in seconds and <m>s</m> is in meters.
+                        Find the velocity, or instantaneous rate of change, of the particle at <m>t=3</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The velocity is just the slope of the tangent line to <m>s(t)</m> at <m>t=3</m>, which we can find as follows:
+                    </p>
+                    <md>
+                        <mrow>\lim_{t\to3}\frac{s(t) - s(3)}{t-3} &amp; = \lim_{t\to3}\frac{(3t^{2} - 5t) - 12}{t-3} </mrow>
+                        <mrow> &amp; = \lim_{t\to3}\frac{3t^{2} - 5t - 12}{t-3} </mrow>
+                    </md>
+                    <p>
+                        At this step it's a little unclear where to go next, so we'll try long division.
+                        If we do so, we get
+                        <me>\frac{3t^{2} - 5t - 12}{t-3} = 3t+4.</me>
+                        Hence the velocity must be
+                        <me>\lim_{t\to3}(3t+4) = 13</me>
+                        meters per second.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                <xref ref="example-velocity-from-position" text="type-global" /> was a little tricky because we needed to compute <m>\lim_{t\to3}\frac{3t^{2}-5t-12}{t-3}</m>, and it was unclear how to simplify this at first.
+                This stemmed in large part from how we computed the velocity in the first place, using the formula
+                <me>\lim_{t\to3}\frac{s(t)-s(3)}{t-3}</me>
+                or more generally
+                <me>\lim_{x\to a}\frac{f(x) - f(a)}{x-a}</me>.
+            </p>
+            <p>
+                We want to rewrite this formula to make it a little easier to work with in certain cases.
+                We'll do this by making the denominator easier to handle.
+                In particular, set <m>x-a = h</m>.
+                Then
+                <me>\lim_{x\to a}\frac{f(x) - f(a)}{x-a} = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}.</me>
+                Either formula can be used to compute the slope of the tangent line.
+            </p>
+            <example xml:id="example-velocity-revisited">
+                <title>Velocity revisited</title>
+                <statement>
+                    <p>
+                        Let <m>s(t)</m> be given as in <xref ref="example-velocity-from-position" text="type-global" />.
+                        Find the velocity at <m>t=3</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We know that the velocity should be <m>13</m>, but we'll try to find it again using our new formula.
+                        So the velocity should also be
+                    </p>
+                    <md>
+                        <mrow>\lim_{h\to0}\frac{s(3+h)-s(3)}{h} &amp; = \lim_{h\to0}\frac{3(9+6h+h^{2})-5(3+h)-12}{h} </mrow>
+                        <mrow> &amp; = \lim_{h\to0}\frac{13h+3h^{2}}{h} </mrow>
+                        <mrow> &amp; = \lim_{h\to0}(13+3h) </mrow>
+                        <mrow> &amp; = 13. </mrow>
+                    </md>
+                </solution>
+            </example>
+            <p>
+                Typically, if <m>f(x)-f(a)</m> is easy to factor in terms of <m>x-a</m> we'll want to use the first formula we had for computing rates of change.
+                Otherwise, we'll stick with the new formula involving <m>h</m>.
+            </p>
+        </subsection>
+        <subsection xml:id="subsection-the-derivative">
+            <title>The Derivative</title>
+            <p>
+                Suppose we go back to <xref ref="example-velocity-from-position" text="type-global" /> one more time, but now we want to find the velocity of <m>s(t)</m> at an arbitrary number <m>a</m>.
+                Then we could still use our limit formulas, which would give us 
+            </p>
+            <md>
+                <mrow>\lim_{h\to0}\frac{s(a+h)-s(a)}{h} &amp; = \lim_{h\to0}\frac{3(a^{2}+2ah+h^{2})-5(a+h) - 3a^{2} + 5a}{h} </mrow>
+                <mrow> &amp; = \lim_{h\to0}\frac{6ah+3h^{2} - 5h}{h} </mrow>
+                <mrow> &amp; = \lim_{h\to0}(6a+3h-5) </mrow>
+                <mrow> &amp; = 6a-5. </mrow>
+            </md>
+            <p>
+                So the velocity at <m>t=a</m> of the particle modeled by <m>s(t)</m> is given by <m>6a-5</m>.
+                So we can represent the velocity, or rate of change or slope of the tangent line, by a function.
+                We call this the <term>derivative</term>.
+            </p>
+            <definition xml:id="definition-definition-of-the-derivative">
+                <title>Definition of the Derivative</title>
+                <idx><h>derivative</h><h>definition</h></idx>
+                <idx><h>functions</h><h>differentiable</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function.
+                        Then its derivative at <m>x=a</m> is the number <m>f'(a)</m> given by
+                        <me>f'(a) = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}</me>
+                        assuming the limit exists.
+                        If this limit exists, we say that the function <m>f(x)</m> is <term>differentiable</term> at <m>a</m>.
+                    </p>
+                </statement>
+            </definition>
+            <aside>
+                <p>
+                    We could also define the derivative by 
+                    <me>\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.</me>
+                    These two limits are equivalent.
+                </p>
+            </aside>
+            <p>
+                The derivative of a function <m>f(x)</m> at a point <m>a</m> represents two things: the slope of the tangent line to <m>f(x)</m> at <m>a</m> and the instantaneous rate of change of <m>f(x)</m> at <m>a</m>.
+            </p>
+            <example xml:id="example-slope-of-the-sine-function">
+                <title>Slope of the sine function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \sin x</m>.
+                        Find its slope at <m>0</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The slope at <m>0</m> is exactly <m>f'(0)</m>, which is
+                        <me>\lim_{h\to0}\frac{\sin(0+h)-\sin(0)}{h} = \lim_{h\to0}\frac{\sin h}{h} = 1.</me>
+                    </p>
+                </solution>
+            </example>
+            <example xml:id="example-tangent-line-of-the-sine-function">
+                <title>Tangent line of the sine function</title>
+                <statement>
+                    <p>
+                        Find the equation of the tangent line to <m>f(x) = \sin x</m> at <m>0</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The tangent line must pass through <m>(0,0)</m> and must have slope <m>f'(0) = 1</m>, so its equation is
+                        <me>y-0 = 1(x-0)</me>
+                        or just <m>y=x</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-the-derivative-as-a-function">
+        <title>The Derivative as a Function</title>
+        <subsection xml:id="subsection-the-derivative-function">
+            <title>The Derivative Function</title>
+            <p>
+                There's no reason we can't look at an arbitrary value for <m>a</m> in the definition of <m>f'(a)</m> given in <xref ref="definition-definition-of-the-derivative" text="type-global" />.
+                If we do this, we can define the <em>derivative function</em>.
+            </p>
+            <definition xml:id="definition-the-derivative-function">
+                <title>The Derivative Function</title>
+                <idx><h>derivative</h><h>derivative function</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function.
+                        The <term>derivative function</term>, or more simply <term>derivative</term>, of <m>f(x)</m> is the function <m>f'(x)</m> defined by
+                        <me>f'(x) = \lim_{h\to0}\frac{f(x+h) - f(x)}{h}</me>
+                        assuming this limit exists.
+                        This is also often denoted by <m>\dv{}{x}(f)</m> or <m>\dv{f}{x}</m>.
+                        If this limit exists for all <m>x</m> in some interval <m>I</m>, we say that <m>f</m> is <term>differentiable on <m>I</m></term>, or more simply <term>differentiable</term> if we do not wish to specify the interval.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-computing-a-derivative">
+                <title>Computing a derivative</title>
+                <statement>
+                    <p>
+                        Compute the derivative of <m>f(x) = x - 3x^{2}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Using <xref ref="definition-the-derivative-function" text="type-global" />, we have
+                        <md>
+                            <mrow>f'(x) &amp; = \lim_{h\to0}\frac{[(x+h)-3(x+h)^{2}] - x + 3x^{2}}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{[x+h-3x^{2}-6xh-3h^{2}] - x + 3x^{2}}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{h-6xh-3h^{2}}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}(1-6x-3h) </mrow>
+                            <mrow> &amp; = 1-6x. </mrow>
+                        </md>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                If <m>f(x)</m> is a function, then its derivative <m>f'(x)</m> (assuming it exists!) is a function that gives the rate of change of <m>f</m> at <m>x</m>, or equivalently the slope of the tangent line to <m>f</m> at <m>x</m>.
+            </p>
+            <example xml:id="example-sketching-a-derivative">
+                <title>Sketching a derivative</title>
+                <statement>
+                    <p>
+                        A function <m>g(t)</m> is given by the following graph:
+                        <figure xml:id="figure-derivative-graph-1">
+                            <image width="50%">
+                                <latex-image-code><![CDATA[
+                                    \begin{tikzpicture}
+                                        \begin{axis}[%
+                                            axis x line = center,
+                                            axis y line = center,
+                                            xtick={-3,...,3},
+                                            ytick={-10,-5,...,10},
+                                            xmin = -4,
+                                            xmax = 4,
+                                            ymin = -10,
+                                            ymax = 10,
+                                            xlabel={$t$},
+                                            ylabel={$y$},
+                                            grid=both
+                                            ]
+                                            \addplot[blue, samples=50, smooth, ultra thick] {.25*x^4 - x^2};
+                                            \addlegendentry{$y = g(t)$};
+                                        \end{axis}
+                                    \end{tikzpicture}]]>
+                                </latex-image-code>
+                            </image>
+                        </figure>
+                    </p>
+                    <p>
+                        Sketch <m>\dv{g}{t}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Remember that <m>\dv{g}{t}</m> represents the slope of <m>g(t)</m>, so sketching <m>\dv{g}{t}</m> amounts to sketching the different values that the slopes of <m>g(t)</m> can take.
+                        We can eyeball these values from <xref ref="figure-derivative-graph-1" text="type-global" />.
+                        A rough sketch of <m>\dv{g}{t}</m>, added to the original graph, may look like the following:
+                        <figure xml:id="figure-derivative-graph-2">
+                            <image width="50%">
+                                <latex-image-code><![CDATA[
+                                    \begin{tikzpicture}
+                                        \begin{axis}[%
+                                            axis x line = center,
+                                            axis y line = center,
+                                            xtick={-3,...,3},
+                                            ytick={-10,-5,...,10},
+                                            xmin = -4,
+                                            xmax = 4,
+                                            ymin = -10,
+                                            ymax = 10,
+                                            xlabel={$t$},
+                                            ylabel={$y$},
+                                            grid=both
+                                            ]
+                                            \addplot[blue, samples=50, smooth, ultra thick] {0.25*x^4 - x^2};
+                                            \addplot[red, samples=50, smooth, dashed, ultra thick] {x^3 - 2*x};
+                                            \addlegendentry{$y = g(t)$};
+                                            \addlegendentry{$y = \dv{g}{t}$};
+                                        \end{axis}
+                                    \end{tikzpicture}]]>
+                                </latex-image-code>
+                            </image>
+                        </figure>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                We've mentioned before that continuous functions are functions whose graphs can be drawn without lifting your pencil off of the page.
+                Likewise, differentiable functions are functions whose graphs can be drawn "smoothly", without any sudden movements or cusps, and without drawing a vertical tangent line.
+                If we think about these two concepts, we may suspect that a differentiable function is also continuous.
+                If we can draw a graph smoothly, we certainly can't lift our pencil off the page to draw it.
+                The next theorem makes this precise.
+            </p>
+            <theorem xml:id="theorem-differentiable-functions-are-continuous">
+                <title>Differentiable Functions Are Continuous</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function that is differentiable at <m>x=a</m>.
+                        Then <m>f(x)</m> is continuous at <m>x=a</m>.
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        We need to show that <m>\lim_{x\to a}f(x)</m> exists and is equal to <m>f(a)</m>.
+                        To do this, we'll start by considering (somewhat counterintuitively) <m>\lim_{x\to a}[f(x)-f(a)]</m>:
+                        <md>
+                            <mrow>\lim_{x\to a}[f(x)-f(a)] &amp; = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}(x-a) </mrow>
+                            <mrow> &amp; = \lim_{x\to a}f'(a)(x-a) </mrow>
+                            <mrow> &amp; = 0. </mrow>
+                        </md>
+                        Note that we are using our alternate definition of the derivative here.
+                    </p>
+                    <p>
+                        Now we can prove that <m>\lim_{x\to a}f(x) = f(a)</m> as follows:
+                        <md>
+                            <mrow>\lim_{x\to a}f(x) &amp; = \lim_{x\to a}[f(x) - f(a) + f(a)] </mrow>
+                            <mrow> &amp; = \lim_{x\to a}[f(x)-f(a)] + \lim_{x\to a}f(a) </mrow>
+                            <mrow> &amp; = 0 + f(a). </mrow>
+                        </md>
+                        So <m>\lim_{x\to a}f(x) = f(a)</m>, which means that <m>f(x)</m> is continuous at <m>a</m>.
+                    </p>
+                </proof>
+            </theorem>
+            <p>
+                At this point we might think that a continuous function should also be differentiable, but this is not the case.
+            </p>
+            <example xml:id="example-a-continuous-function-that-is-not-differentiable-at-a-point">
+                <title>A continuous function that is not differentiable at a point</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = |x|</m>.
+                        Show that <m>f</m> is <em>not</em> differentiable at <m>0</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we graph <m>f(x)</m> it looks like it shouldn't be differentiable at <m>0</m> because of the cusp.
+                        We'll try to prove this mathematically by showing that the limit in <xref ref="definition-the-derivative-function" text="type-global" /> doesn't exist if <m>x=0</m>.
+                        First, we'll compute the left hand limit:
+                        <me>\lim_{h\to0^{-}}\frac{f(0+h)-f(0)}{h} = \lim_{h\to0^{-}}\frac{-h}{h} = -1.</me>
+                        Now, the right hand limit:
+                        <me>\lim_{h\to0^{+}}\frac{f(0+h)-f(0)}{h} = \lim_{h\to0^{+}}\frac{h}{h} = 1.</me>
+                        Since these limits are different, <m>\lim_{h\to0}\frac{f(0+h)-f(0)}{h}</m> does not exist.
+                        Hence <m>f</m> is not differentiable at <m>0</m>.
+                    </p>
+                </solution>
+            </example>
+            <aside>
+                <p>
+                    You may think that a continuous function must at least be differentiable "almost everywhere" at this point.
+                    After all, how could it be possible to draw a graph without lifting your pencil off the paper that still has a cusp or a vertical tangent line <em>everywhere</em>?
+                    Most mathematicians before the <m>19^{\text{th}}</m> century thought this as well, until Weierstrass came up with a function, the <url href="https://en.wikipedia.org/wiki/Weierstrass_function">Weierstrass function</url>, that is continuous everywhere but differentiable <em>nowhere</em>.
+                </p>
+            </aside>
+        </subsection>
+        <subsection xml:id="subsection-higher-order-derivatives">
+            <title>Higher Order Derivatives</title>
+            <example xml:id="example-acceleration-from-position">
+                <title>Acceleration from position</title>
+                <statement>
+                    <p>
+                        The position of some particle moving in a line is given by <m>s(t) = 3t-5t^{3}</m>, where <m>t</m> is in seconds and <m>s</m> is in meters.
+                        Find <m>a(t)</m>, the acceleration of the particle at time <m>t</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Acceleration is the rate of change of velocity, and velocity is the rate of change of position.
+                        So we should probably find the velocity first!
+                        Let's call it <m>v(t)</m>.
+                        We have
+                        <md>
+                            <mrow>v(t) &amp; = \lim_{h\to0}\frac{s(t+h) - s(t)}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{3(t+h) - 5(t+h)^{3} - 3t + 5t^{3}}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{3h + 5[t^{3} - (t+h)^{3}]}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{3h + 5[(-h)(t^{2} + t(t+h) + (t+h)^{2})]}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}(3 - 5[t^{2} + t(t+h) + (t+h)^{2}]) </mrow>
+                            <mrow> &amp; = 3 - 15t^{2} </mrow>
+                        </md>
+                        Now we can get the acceleration as well:
+                        <me>a(t) = \lim_{h\to0}\frac{v(t+h) - v(t)}{h} = -30t.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                In <xref ref="example-acceleration-from-position" text="type-global" />, we had to take two derivatives of the original function <m>s(t)</m> in order to get the acceleration <m>a(t)</m>.
+                In other words, <em>acceleration is the second derivative of position</em>.
+                So <m>a(t) = \dv{}{t}\dv{s}{t}</m>, which we also write as <m>\dv[2]{s}{t}</m> or <m>s''(t)</m>.
+                This is an example of a <term>second-order derivative</term>.
+                In general, we have the following definition.
+            </p>
+            <definition xml:id="definition-nth-order-derivatives">
+                <title><m>n^{\text{th}}</m>-order Derivatives</title>
+                <idx><h>derivative</h><h><m>n^{\text{th}}</m>-order derivative</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function.
+                        The <term><m>n^{\text{th}}</m>-order derivative</term> of <m>f(x)</m> is the function obtained by differentiating <m>f(x)</m> <m>n</m> times.
+                        This function is denoted by
+                        <me>f^{(n)}(x)\quad\text{or}\quad\dv[n]{f}{x}.</me>
+                        If <m>n=1, 2</m> or <m>3</m>, we typically write <m>f'(x), f''(x)</m>, and <m>f'''(x)</m> instead of <m>f^{(1)}(x), f^{(2)}(x)</m> or <m>f^{(3)}(x)</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                Although it gets more difficult to assign a physical or geometric significance to higher order derivatives, we can still derive meaning from the second derivative.
+                One interpretation of the second derivative is as acceleration, as shown in <xref ref="example-acceleration-from-position" text="type-global" />, and it turns out there's a nice geometric interpretation as well.
+                Recall that if <m>f(x)</m> is a function then <m>f'(x)</m> represents the slope, or rate of change, of the graph of <m>f(x)</m> at <m>x</m>.
+                Therefore <m>f''(x)</m> represents the rate of change of the slope, i.e. how quickly the slope is increasing or decreasing.
+                If <m>f''(x) &gt;0</m> then the slope of <m>f(x)</m> should be increasing, leading to a u-shaped graph.
+                Conversely, if <m>f''(x) &lt;0</m> then the slope of <m>f(x)</m> should be decreasing, leading to an upside down u-shaped graph.
+                This leads to the following definition.
+            </p>
+            <definition xml:id="definition-concavity">
+                <title>Concavity</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function with second derivative <m>f''(x)</m>.
+                        We say that <m>f(x)</m> is <term>concave up</term> (respectively, <term>concave down</term>) on an interval if <m>f''(x)&gt;0</m> (respectively, <m>f''(x) &lt;0</m>) on that interval.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                So functions that are concave up on an interval tend to be u-shaped on that interval, and functions that are concave down tend to be upside down u-shaped.
+                See <xref ref="figure-concavity-graphs" text="type-global" />.
+            </p>
+            <figure xml:id="figure-concavity-graphs">
+                <caption>Concavity</caption>
+                <sidebyside widths="50% 50%" margins="auto">
+                    <figure xml:id="subfigure-concave-up">
+                        <caption><m>f''(x) &gt; 0</m></caption>
+                        <image>
+                            <latex-image-code><![CDATA[
+                                \begin{tikzpicture}
+                                    \begin{axis}[%
+                                        axis x line = center,
+                                        axis y line = center,
+                                        xtick={-3,...,3},
+                                        ytick={-10,-5,...,10},
+                                        xmin = -4,
+                                        xmax = 4,
+                                        ymin = -10,
+                                        ymax = 10,
+                                        xlabel={$x$},
+                                        ylabel={$y$},
+                                        grid=both
+                                        ]
+                                        \addplot[blue, samples=50, smooth, ultra thick] {x^2};
+                                        \addlegendentry{$y = f(x)$};
+                                    \end{axis}
+                                \end{tikzpicture}]]>
+                            </latex-image-code>
+                        </image>
+                    </figure>
+                    <figure xml:id="subfigure-concave-down">
+                        <caption><m>f''(x) &lt; 0</m></caption>
+                        <image>
+                            <latex-image-code><![CDATA[
+                                \begin{tikzpicture}
+                                    \begin{axis}[%
+                                        axis x line = center,
+                                        axis y line = center,
+                                        xtick={-3,...,3},
+                                        ytick={-10,-5,...,10},
+                                        xmin = -4,
+                                        xmax = 4,
+                                        ymin = -10,
+                                        ymax = 10,
+                                        xlabel={$x$},
+                                        ylabel={$y$},
+                                        grid=both
+                                        ]
+                                        \addplot[blue, samples=50, smooth, ultra thick] {-x^2};
+                                        \addlegendentry{$y = f(x)$};
+                                    \end{axis}
+                                \end{tikzpicture}]]>
+                            </latex-image-code>
+                        </image>
+                    </figure>
+                </sidebyside>
+            </figure>
+        </subsection>
+    </section>
+    <section xml:id="section-differentiation-formulas">
+        <title>Differentiation Formulas</title>
+        <introduction>
+            <p>
+                Now we start to find methods that allow us to compute derivatives without going back to <xref ref="definition-the-derivative-function" text="type-global" />.
+                Perhaps the easiest rule is the <term>constant rule</term>, which just says that the derivative of a constant is <m>0</m>.
+                We'll derive more complicated rules in this section and the next two.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-the-power-rule-and-trigonometric-derivatives">
+            <title>The Power Rule and Trigonometric Derivatives</title>
+            <p>
+                Our first goal will be to determine a general formula for the derivative of <m>x^{n}</m> for some power <m>n</m>.
+                If <m>n\geq0</m> is a whole number, then we can find the derivative of <m>x^{n}</m> without too much trouble.
+                In fact, from the <xref ref="definition-the-derivative-function" text="type-global" /> it's not too hard to show that the derivative of <m>x</m> is <m>1</m>, the derivative of <m>x^{2}</m> is <m>2x</m>, the derivative of <m>x^{3}</m> is <m>3x^{2}</m>, and so on.
+                This suggests our first derivative rule, the <term>power rule</term>.
+            </p>
+            <theorem xml:id="theorem-the-power-rule">
+                <title>The Power Rule</title>
+                <idx><h>derivative</h><h>differentiation formulas</h><h>power rule</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x) = x^{n}</m> where <m>n</m> is some real number.
+                        Then <m>f'(x) = nx^{n-1}</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                Note that <xref ref="theorem-the-power-rule" text="type-global" /> is actually quite general: it works for all powers of <m>x</m>!
+                This includes negative powers and fractional powers.
+            </p>
+            <example xml:id="example-derivatives-using-the-power-rule">
+                <title>Derivatives using the power rule</title>
+                <statement>
+                    <p>
+                        Find the derivatives of the following functions:
+                        <ol>
+                            <li><m>f(x) = x^{7}</m>.</li>
+                            <li><m>g(x) = \frac{1}{\sqrt[5]{x^{11}}}</m>.</li>
+                            <li><m>h(x) = x^{\pi}</m>.</li>
+                        </ol>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The derivative of <m>f(x)</m> isn't too hard to find using the power rule, and we quickly get <m>f'(x) = 7x^{6}</m>.
+                        For <m>g(x)</m>, first rewrite it as <m>g(x) = x^{-\frac{11}{5}}</m>.
+                        Then <m>g'(x) = -\frac{11}{5}x^{-16}{5}</m>.
+                        Finally, <m>h'(x) = \pi x^{\pi-1}</m>.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                With a little bit of geometry and the squeeze theorem, we can get the derivatives of the basic trigonometric functions <m>\sin x</m> and <m>\cos x</m>.
+            </p>
+            <theorem xml:id="theorem-derivatives-of-sine-and-cosine">
+                <title>Derivatives of Sine and Cosine</title>
+                <idx><h>derivatives</h><h>differentiation formulas</h><h>sine and cosine</h></idx>
+                <statement>
+                    <p>
+                        Let <m>x</m> be in radians.
+                        Then
+                        <me>\dv{}{x}\sin x = \cos x\quad\text{ and }\quad\dv{}{x}\cos x = -\sin x.</me>
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                Note that if <m>x</m> is in degrees instead of radians these formulas don't work.
+                Instead, they become
+                <me>\dv{}{x}\sin x = \frac{\pi}{180}\cos x\quad\text{ and }\quad\dv{}{x}\cos x = -\frac{\pi}{180}\sin x.</me>
+            </p>
+            <example xml:id="example-concavity-of-the-sine-function">
+                <title>Concavity of the sine function</title>
+                <statement>
+                    <p>
+                        On which intervals is <m>f(x) = \sin x</m> concave up?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need to find where <m>f''(x)</m> is positive.
+                        Since <m>f''(x) = -\sin x</m>, this means we need to figure out where <m>\sin x</m> is <em>negative</em>.
+                        If we go back to the unit circle definition of sine, then we can see that <m>\sin x &lt; 0</m> on the following intervals:
+                        <me>\ldots, (-3\pi,-2\pi), (-\pi,0),(\pi,2\pi), (3\pi,4\pi),\ldots</me>
+                        So <m>\sin x</m> is concave up on every open interval of the form <m>((2k-1)\pi, 2k\pi)</m> where <m>k</m> is some integer.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-derivatives-of-sums-and-constant-multiples">
+            <title>Derivatives of Sums and Constant Multiples</title>
+            <p>
+                Now that we have derivative formulas for some basic functions, we want to extend these to more complicated functions.
+                For this section we'll look at what happens when we multiply a function by a constant or add it to another function.
+                In the next two sections we'll consider more advanced rules.
+            </p>
+            <theorem xml:id="theorem-constant-multiple-rule">
+                <title>Constant Multiple Rule</title>
+                <idx><h>derivative</h><h>differentiation formulas</h><h>constant multiple rule</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be differentiable function and let <m>c</m> be some constant.
+                        Then <m>\dv{}{x}[cf(x)] = cf'(x)</m>.
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        To prove this, we go back to <xref ref="definition-the-derivative-function" text="type-global" />:
+                        <md>
+                            <mrow>\dv{}{x}[cf(x)] &amp; = \lim_{h\to0}\frac{cf(x+h) - cf(x)}{h} </mrow>
+                            <mrow> &amp; = c\lim_{h\to0}\frac{f(x+h) - f(x)}{h} </mrow>
+                            <mrow> &amp; = cf'(x). </mrow>
+                        </md>
+                        Hence the derivative of <m>cf(x)</m> is <m>cf'(x)</m>.
+                    </p>
+                </proof>
+            </theorem>
+            <p>
+                We can find the derivative of the sum of two functions just as easily.
+            </p>
+            <theorem xml:id="theorem-sum-rule">
+                <title>Sum Rule</title>
+                <idx><h>derivative</h><h>differentiation formulas</h><h>sum rule</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> and <m>g(x)</m> be two differentiable functions.
+                        Then <m>[f(x)+g(x)]' = f'(x) + g'(x)</m>.
+                    </p>
+                </statement>
+            </theorem>
+        </subsection>
+    </section>
+    <section xml:id="section-product-and-quotient-rules">
+        <title>Product and Quotient Rules</title>
+        <subsection xml:id="subsection-product-rule">
+            <title>Product Rule</title>
+            <p>
+                Many functions can be written in the form <m>f(x)g(x)</m>, where <m>f(x),g(x)</m> may each have previously known derivatives.
+                What we want to do now is to find a way to get the derivative of <m>f(x)g(x)</m> from the derivatives of <m>f(x)</m> and <m>g(x)</m>.
+                We do this using the <term>product rule</term>.
+            </p>
+            <theorem xml:id="theorem-the-product-rule">
+                <title>The Product Rule</title>
+                <idx><h>derivative</h><h>differentiation formulas</h><h>product rule</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> and <m>g(x)</m> be differentiable functions.
+                        Then 
+                        <me>\dv{}{x}[f(x)g(x)] = f(x)g'(x) + f'(x)g(x).</me>
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        We prove this using the definition of the derivative:
+                        <md>
+                            <mrow>\dv{}{x}[f(x)g(x)] &amp; = \lim_{h\to0}\frac{f(x+h)g(x+h) - f(x)g(x)}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}\frac{f(x+h)[g(x+h) - g(x)] + g(x)[f(x+h) - f(x)]}{h} </mrow>
+                            <mrow> &amp; = \lim_{h\to0}f(x+h)\lim_{h\to0}\frac{g(x+h) - g(x)}{h} + g(x)\lim_{h\to0}\frac{f(x+h) - f(x)}{h} </mrow>
+                            <mrow> &amp; = f(x)g'(x) + g(x)f'(x). </mrow>
+                        </md>
+                    </p>
+                </proof>
+            </theorem>
+            <example xml:id="example-using-the-product-rule">
+                <title>Using the product rule</title>
+                <statement>
+                    <p>
+                        Let <m>J(v) = (v^{10} - 2\sin v)(\cos v + \frac{1}{\sqrt[3]{x^{4}}})</m>.
+                        Find <m>J'(v)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We could foil this out and take derivatives, but it will be easier to use the product rule.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-the-quotient-rule">
+            <title>The Quotient Rule</title>
+            <p>
+                Now that we know how to differentiate products, we move on to quotients.
+            </p>
+            <theorem xml:id="theorem-the-quotient-rule">
+                <title>The Quotient Rule</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> and <m>g(x)</m> be differentiable functions. 
+                        Then
+                        <me>\dv{}{x}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}</me>
+                        wherever <m>g(x)\neq0</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-derivative-of-tangent">
+                <title>Derivative of tangent</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \tan x</m>.
+                        Find <m>f'(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Since <m>\tan x = \frac{\sin x}{\cos x}</m>, then we can apply the quotient rule to get the derivative of <m>\tan x</m>:
+                        <me>\dv{}{x}\tan x = \frac{\cos^{2}x + \sin^{2}x}{\cos^{2}x} = \sec^{2}x.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                The derivatives for <m>\sec x, \csc x</m> and <m>\cot x</m> may also be computed using the quotient rule and the facts that <m>\dv{}{x}\sin x = \cos x</m> and <m>\dv{}{x}\cos x = -\sin x</m>.
+            </p>
+        </subsection>
+    </section>
+    <section xml:id="section-the-chain-rule">
+        <title>The Chain Rule</title>
+        <p>
+            At this point, we can take derivatives of sums, differences, products and quotients of functions.
+            However, these rules aren't very useful for differentiating functions like <m>f(x) = (3x^{2} + \sin x)^{50}</m>.
+            We could technically evaluate <m>f'(x)</m> using these rules but it would be an awful way to spend your weekend.
+            But if we make the substitution <m>u = 3x^{2} + \sin x</m>, then we can rewrite <m>f(x)</m> as <m>f(u) = u^{50}</m>, which is <em>much</em> easier to differentiate: <m>\dv{f}{u} = 50u^{49}</m>.
+            At this step we might be tempted to say that <m>f'(x) = 50u^{49} = 50(3x^{2} + \sin x)^{49}</m>, but this isn't quite right.
+            To get the actual derivative we need to consider how the new variable <m>u</m> depends on <m>x</m> as well.
+            The <term>Chain Rule</term> is what we need.
+        </p>
+        <theorem xml:id="theorem-the-chain-rule">
+            <title>The Chain Rule</title>
+            <idx><h>derivative</h><h>differentiation formulas</h><h>chain rule</h></idx>
+            <statement>
+                <p>
+                    Let <m>y = f(u)</m> and <m>u = g(x)</m> be differentiable functions.
+                    Then
+                    <me>\dv{y}{x} = \dv{y}{u}\dv{u}{x}.</me>
+                    Equivalently, if we set <m>F(x) = f(g(x))</m> we have
+                    <me>F'(x) = f'(g(x))g'(x).</me>
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-using-the-chain-rule">
+            <title>Using the chain rule</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = (3x^{2} + \sin x)^{50}</m>.
+                    Find <m>f'(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We'll try the same trick we used before and we'll set <m>u = 3x^{2} + \sin x</m>.
+                    Then the chain rule says that
+                    <md>
+                        <mrow>f'(x) &amp; =\dv{f}{u}\dv{u}{x} </mrow>
+                        <mrow> &amp; = (50u^{49})(6x+\cos x) </mrow>
+                        <mrow> &amp; = 50(3x^{2} + \sin x)^{49}(6x + \cos x). </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            As the last example highlighted, we can use the chain rule in combination with any of the other derivative rules we know if the function we're differentiating is complicated.
+        </p>
+        <example xml:id="example-combining-rules">
+            <title>Combining rules</title>
+            <statement>
+                <p>
+                    Let <m>f(s) = \sqrt{\frac{s^{2} - 1}{s^{2} + 1}}</m>.
+                    Find <m>f'(s)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We'll let <m>u = \frac{s^{2}-1}{s^{2}+1}</m> stand in for the "inside function."
+                    Then we have <m>f(u) = \sqrt{u}</m> and so
+                    <md>
+                        <mrow>\dv{f}{s} &amp; = \dv{f}{u}\dv{u}{s} </mrow>
+                        <mrow> &amp; = \frac{1}{2}u^{-\frac{1}{2}}\frac{2s(s^{2}+1) - 2s(s^{2}-1)}{(s^{2}+1)^{2}} </mrow>
+                        <mrow> &amp; = \frac{1}{2}\left(\frac{s^{2}-1}{s^{2}+1}\right)^{-\frac{1}{2}}\frac{2s(s^{2}+1) - 2s(s^{2}-1)}{(s^{2}+1)^{2}} </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-chain-rule-within-a-chain-rule">
+            <title>Chain rule within a chain rule</title>
+            <statement>
+                <p>
+                    Find the slope of <m>g(x) = \sin^{4}(\cos^{3}x)</m> at <m>x=\pi</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to compute <m>g'(\pi)</m>.
+                    First, note that <m>g(x) = [\sin(\cos^{3}x)]^{4}</m>, so let <m>u = \sin(\cos^{3}x)</m>.
+                    Now we could try to use the chain rule right here but this would require finding <m>\dv{u}{x}</m>, and <m>u</m> is itself a complicated function of <m>x</m>.
+                    So let <m>v = [\cos x]^{3}</m>, and finally let <m>w = \cos x</m>.
+                    Then we can say that
+                    <md>
+                        <mrow>g'(x) &amp; = \dv{g}{u}\dv{u}{v}\dv{v}{w}\dv{w}{x} </mrow>
+                        <mrow> &amp; = \left(\dv{}{u}u^{4}\right)\left(\dv{}{v}\sin v\right)\left(\dv{}{w}w^{3}\right)\dv{}{x}\cos x </mrow>
+                        <mrow> &amp; = (4u^{3})(\cos v)(3w^{2})(-\sin x). </mrow>
+                    </md>
+                    We could plug in what <m>u,v,w</m> are in terms of <m>x</m> and then plug in <m>x=\pi</m>, but it's easier to just find <m>u,v,w</m> at <m>x=\pi</m> and enter these values into the above.
+                    At <m>x=\pi</m> we have <m>u = \sin(-1), v = -1</m> and <m>w = -1</m>, so
+                    <me>g'(\pi) = 4(\sin(-1))^{3}\cos(-1)(3)\cdot0 = 0.</me>
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-implicit-differentiation">
+        <title>Implicit Differentiation</title>
+        <example xml:id="example-derivative-of-an-implicit-function">
+            <title>Derivative of an implicit function</title>
+            <statement>
+                <p>
+                    Consider the curve given by the equation <m>x^{3} - y^{2} + \sin y = 3</m>.
+                    Find the slope of this curve at the point <m>(\sqrt[3]{3},0)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We could try to solve for <m>y</m> and then differentiate that to find the slope, but we have a slight problem: it's impossible, at least in terms of "elementary functions".
+                    However, we can still use the chain rule to find <m>y'</m>, at least in terms of <m>x</m> and <m>y</m>.
+                    We just need to remember that <m>y</m> is a function of <m>x</m>.
+                    If we differentiate <m>x^{3} - y^{2} + \sin y = 3</m> with respect to <m>x</m>, we get
+                    <me>3x^{2} - 2y\dv{y}{x} + \cos y \dv{y}{x} = 0</me>
+                    and so
+                    <me>\dv{y}{x} = -\frac{3x^{2}}{\cos y - 2y}.</me>
+                    So the slope of the curve at <m>(\sqrt[3]{3},0)</m> is just <m>-3\sqrt[3]{3}^{2}</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            The method we used to get <m>\dv{y}{x}</m> in <xref ref="example-derivative-of-an-implicit-function" text="type-global" /> is called <term>implicit differentiation</term>.
+            It's extremely useful if we want to solve for <m>\dv{y}{x}</m> without first solving for <m>y</m>.
+            Even if we can solve for <m>y</m> without too much trouble, it's often easier to find <m>\dv{y}{x}</m> implicitly as the next example shows.
+        </p>
+        <example xml:id="example-implicit-differentiation-to-save-algebra">
+            <title>Implicit differentiation to save algebra</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = \sqrt{1-x^{2}}</m>.
+                    Find <m>f'(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we let <m>y=f(x)</m>, then <m>x^{2} + y^{2} = 1</m>.
+                    Then
+                    <me>2x + 2yy' = 0</me>
+                    which means that
+                    <me>y' = -\frac{x}{y} = -\frac{x}{\sqrt{1-x^{2}}}.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            We must also be aware of when to use appropriate derivative rules when doing implicit differentiation.
+        </p>
+        <example xml:id="example-chain-and-quotient-rule">
+            <title>Chain and quotient rule</title>
+            <statement>
+                <p>
+                    Suppose <m>y</m> is defined implicitly by <m>\tan(x-y) = \frac{y}{1+x^{2}}</m>.
+                    Find <m>y'</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We start by taking the derivative with respect to <m>x</m> of each side of the equation:
+                    <md>
+                        <mrow>\dv{}{x}\tan(x-y) &amp; = (1-y')\sec^{2}(x-y) </mrow>
+                        <mrow>\dv{}{x}\frac{y}{1+x^{2}} &amp; = \frac{y'(1+x^{2}) - 2xy}{(1+x^{2})^{2}}. </mrow>
+                    </md>
+                </p>
+                <p>
+                    Therefore
+                    <me>(1-y')\sec^{2}(x-y) = \frac{y'(1+x^{2}) - 2xy}{(1+x^{2})^{2}},</me>
+                    and we can solve this for <m>y'</m>:
+                    <me>(1+x^{2})^{2}\sec^{2}(x-y) + 2xy = y'(1+x^{2}) + (1+x^{2})^{2}y'\sec^{2}(x-y)</me>
+                    or just
+                    <me>y' = \frac{(1+x^{2})^{2}\sec^{2}(x-y) + 2xy}{(1+x^{2})+(1+x^{2})^{2}\sec^{2}(x-y)}</me>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-a-differential-equation">
+            <title>A differential equation</title>
+            <statement>
+                <p>
+                    Let <m>P(t)</m> denote the population of the United States, where <m>P</m> is in millions and <m>t</m> is the number of years after 1990.
+                    Then the growth of <m>P(t)</m> can be modeled by the <term>differential equation</term>
+                    <me>P' = \frac{1}{23500}P(532-P).</me>
+                    According to this model, it's not too hard to see that <m>P'</m> should be positive given the current population of the US, so the model predicts the population to increase.
+                    Is this rate of growth increasing or decreasing?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to find <m>P''</m>, which is the rate of change of <m>P'</m>.
+                    This means we need to differentiate both sides of the differential equation <m>P' = \frac{1}{23500}P(532-P)</m> with respect to <m>t</m>:
+                    <me>P'' = \frac{1}{23500}P'(532-P) - \frac{1}{23500}P(P').</me>
+                    The current population is about 323.1 million, so we can take <m>P=323.1</m>, which also gives
+                    <me>P' = \frac{1}{23500}(323.1)(532-323.1) = 2.9,</me>
+                    and so 
+                    <me>P'' = \frac{1}{23500}(2.9)(532-323.1) - \frac{1}{23500}(323.1)(2.9) &lt; 0.</me>
+                    Hence it appears that the rate of population increase is itself decreasing, which implies that the population growth of the US is slowing down.
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-related-rates">
+        <title>Related Rates</title>
+        <example xml:id="example-changing-volume-on-a-sphere">
+            <title>Changing volume on a sphere</title>
+            <statement>
+                <p>
+                    The radius of a sphere is increasing at a rate of <quantity><mag>4</mag><unit base="meter" prefix="milli"/><per base="second"/></quantity>.
+                    How fast is the volume increasing when the radius is <quantity><mag>13</mag><unit base="meter" prefix="milli"/></quantity>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, let's assign names to all of the changing quantities in this problem:
+                    <md>
+                        <mrow>V &amp; = \text{volume} </mrow>
+                        <mrow>r &amp; = \text{radius} </mrow>
+                    </md>
+                    Note that we're considering <m>V</m> and <m>r</m> to be functions of time, i.e. <m>V = V(t)</m> and <m>r=r(t)</m>, where <m>t</m> is in seconds.
+                    Then we're given that <m>r' = 4</m> and we need to find <m>V'</m> when <m>r=13</m>.
+                    To do this, we had better find some relationship between <m>V</m> and <m>r</m>.
+                    We can find this by looking at the volume formula for a sphere:
+                    <me>V = \frac{4}{3}\pi r^{3}.</me>
+                    This equation relates <m>r</m> and <m>V</m>, and if we take the derivatives of both sides with respect to time <m>t</m> (using implicit differentiation) then we get an equation relating <m>V'</m> and <m>r'</m>.
+                    So let's do that:
+                    <me>V' = 4\pi r^{2}r'</me>
+                    Now we can plug in our given information to get
+                    <me>V' = 4\pi(13^{2})(4) = 2704\pi.</me>
+                    So the volume is increasing at a rate of <quantity><mag>2704\pi</mag><unit base="meter" prefix="milli" exp="3"/><per base="second"/></quantity>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            Note that we <em>never</em> found what <m>V(t)</m> and <m>r(t)</m> were in <xref ref="example-changing-volume-on-a-sphere" text="type-global" />, but we didn't need to.
+            All we needed to find was a relationship between the two changing quantities, i.e. the two derivatives, to answer the question.
+        </p>
+        <example xml:id="example-a-tank-problem">
+            <title>A tank problem</title>
+            <statement>
+                <p>
+                    Water is leaking out of a conical tank at a rate of <quantity><mag>10000</mag><unit base="meter" prefix="centi"/><per base="minute"/></quantity> while water is being pumped into the tank at some (unknown) constant rate.
+                    The tank has a height of <quantity><mag>6</mag><unit base="meter"/></quantity> and the diameter of the top is <quantity><mag>4</mag><unit base="meter"/></quantity>.
+                    If the water level is rising at a rate of <quantity><mag>20</mag><unit base="meter" prefix="centi"/><per base="minute"/></quantity> when the height of the water is <quantity><mag>2</mag><unit base="meter"/></quantity>, what is the rate at which water is being poured into the tank?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We have a <em>lot</em> of information to process here, so we'll take things a step at a time.
+                    The changing quantities are
+                    <md>
+                        <mrow>h(t) &amp; = \text{height of water} </mrow>
+                        <mrow>r(t) &amp; = \text{radius of water} </mrow>
+                        <mrow>V(t) &amp; = \text{volume of water} </mrow>
+                    </md>
+                    where <m>t</m> is in minutes.
+                    We need to find the rate at which water is entering the tank, so let's call this mystery number <m>C</m>.
+                    Then all we know about <m>C</m> is that it's related to the rate that the volume is changing.
+                    In particular, we should have <m>V' = C - 10000</m>.
+                    So to find <m>C</m> we need to find <m>V'</m>, which means we need to set up a relationship between <m>V</m> and the other changing quantities to determine how exactly <m>V</m> is changing, using the fact that <m>h' = 20</m> when <m>h=200</m> (after converting to centimeters).
+                </p>
+                <p>
+                    Using the fact that the water is in a conical tank, we can use the formula for the volume of a cone to say that <m>V = \frac{1}{3}\pi r^{2}h</m>.
+                    If we differentiate both sides with respect to <m>t</m>, then we get
+                    <me>V' = \frac{1}{3}\pi (2rr'h + r^{2}h').</me>
+                    Unfortunately, we don't have any information on <m>r</m> or <m>r'</m> that we can use, just information on <m>h</m> and <m>h'</m>.
+                    So we need to get <m>r</m> in terms of <m>h</m>.
+                    By similar triangles, we can say that <m>\frac{r}{h} = \frac{200}{600} = \frac{1}{3}</m>, and so <m>r = \frac{h}{3}</m> and likewise <m>r' = \frac{h'}{3}</m>.
+                    Hence
+                    <me>V' = \frac{1}{3}\pi (2rr'h + r^{2}h') = \frac{1}{3}\pi \left(2\frac{h^{2}h'}{9} + \frac{h^{2}h'}{9}\right)</me>
+                    which boils down to
+                    <me>V' = \frac{h^{2}h'}{9}\pi = \frac{800000\pi}{9}.</me>
+                </p>
+                <p>
+                    Now, <em>finally</em>, we can answer the original question.
+                    The rate that water is flowing into the tank is 
+                    <me>C = V' + 10000 = \frac{800000\pi}{9} + 10000,</me>
+                    or just <quantity><mag>289252.68</mag><unit base="meter" prefix="centi" exp="3"/><per base="minute"/></quantity>.
+                    In terms of meters this is <quantity><mag>.29</mag><unit base="meter" exp="3"/><per base="minute"/></quantity>, which perhaps looks a bit more reasonable.
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-linear-approximations">
+        <title>Linear Approximations</title>
+        <p>
+            Suppose we graph the tangent line to <m>y=\sqrt{x}</m> at <m>x=4</m>.
+            The equation of this line will be
+            <me>y-2 = \frac{x-4}{4}\quad\text{or}\quad y= 2 + \frac{x-4}{4}.</me>
+            If we look at the tangent line next to the graph, we'll see that the line is very close to the graph of <m>y=\sqrt{x}</m> if <m>x</m> is very close to <m>4</m>.
+            So we can use the equation of the tangent line to approximate <m>y=\sqrt{x}</m> when <m>x</m> is near <m>4</m>.
+            For example, we can say that
+            <me>\sqrt{4.2} \approx 2 + \frac{4.2 - 4}{4} = 2.05.</me>
+            We call this the <term>linear approximation</term> of <m>\sqrt{x}</m> at <m>4</m>.
+        </p>
+        <definition xml:id="definition-linear-approximation">
+            <title>Linear Approximation</title>
+            <idx><h>derivative</h><h>linear approximation</h></idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function that is differentiable at <m>x=a</m>.
+                    The linear approximation (or <term>linearization</term>) of <m>f</m> at <m>a</m> is the function <m>L(x)</m> given by
+                    <me>L(x) = f(a) + f'(a)(x-a).</me>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            The formula of the linear approximation to a function <m>f</m> at <m>a</m> is nothing more than the equation of the tangent line to <m>f</m> at <m>a</m>.
+        </p>
+        <example xml:id="example-linear-approximation-of-sine">
+            <title>Linear approximation of sine</title>
+            <statement>
+                <p>
+                    Find the linear approximation of <m>f(\theta) = \sin\theta</m> at <m>\theta=0</m> and use this to estimate <m>\sin(-.02)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The linear approximation is given by
+                    <me>L(\theta) = f(0) + f'(0)(\theta - 0) = \sin0 + \cos0 (\theta - 0),</me>
+                    so <m>L(\theta) = \theta</m>.
+                    Therefore
+                    <me>\sin(-.02)\approx-.02</me>
+                    since <m>-.02</m> is very close to <m>0</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-estimating-a-tangent">
+            <title>Estimating a tangent</title>
+            <statement>
+                <p>
+                    Estimate <m>\tan(\pi+\frac{3}{49})</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We want to estimate this using a linear approximation, and we want to make sure the linear approximation is easy to set up.
+                    This means we want to base the linear approximation at a value of <m>a</m> that both tangent and its derivative are relatively easy to compute at, and is also close to <m>\pi+\frac{3}{49}</m>.
+                    So we'll pick <m>a=\pi</m> and find the linear approximation to <m>\tan x</m> at <m>a = \pi</m>:
+                    Set <m>f(x) = \tan x</m>.
+                    Then
+                    <md>
+                        <mrow>L(x) &amp; = f(a) + f'(a)(x-a)</mrow>
+                        <mrow> &amp; = \tan\pi + \sec^{2}(\pi)(x-\pi) </mrow>
+                        <mrow> &amp; = x-\pi. </mrow>
+                    </md>
+                    So
+                    <me>\tan(\pi+\frac{3}{49}) \approx (\pi+\frac{3}{49}) - \pi = \frac{3}{49}.</me>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-estimating-the-population-of-the-united-states-in-2020">
+            <title>Estimating the population of the United States in 2020</title>
+            <statement>
+                <p>
+                    Use the differential equation from <xref ref="example-a-differential-equation" text="type-global" /> and the fact that the current population of the US is about 323.1 million to estimate the population of the US in 2020.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Recall that <m>P(t)</m> in <xref ref="example-a-differential-equation" text="type-global" /> represented the population of the US (in millions) <m>t</m> years after 1990.
+                    To estimate the population in 2020, we want to find the linearization of <m>P</m> at <m>t = 27</m>.
+                    This is given by
+                    <me>L(t) = P(27) + P'(27)(t - 27).</me>
+                    Since <m>P(27) = 323.1</m> and 
+                    <me>P'(27) = \frac{1}{23500}P(532-P) = \frac{1}{23500}(323.1)(532-323.1) = 2.9,</me>
+                    we have
+                    <me>L(t) = 323.1 + 2.9(t-27).</me>
+                    Hence the population of the US in 2020 should be
+                    <me>L(30) = 323.1 + 2.9\cdot3 = 331.8,</me>
+                    or about 331.8 million people.
+                </p>
+            </solution>
+        </example>
+    </section>
+</chapter>

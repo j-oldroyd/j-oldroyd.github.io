@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="applications-differentiation" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Applications of Differentiation</title>
+    <introduction>
+        <p>
+            If a function is differentiable, then its derivative gives us information about how that function is changing.
+            This information is important in many different applications of calculus.
+        </p>
+    </introduction>
+    <section xml:id="section-extreme-values-of-functions">
+        <title>Extreme Values of Functions</title>
+        <p>
+            It's often of interest to determine how large or small some quantity can get.
+        </p>
+        <definition xml:id="definition-absolute-extrema">
+            <title>Absolute Extrema</title>
+            <idx><h>functions</h><h>absolute extrema</h></idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function defined on some domain <m>D</m>.
+                    Let <m>c</m> be in <m>D</m>.
+                    Then
+                    <ul>
+                        <li><m>f(c)</m> is an <term>absolute maximum</term> of <m>f</m> on <m>D</m> if <m>f(c)\geq f(x)</m> for all <m>x</m> in <m>D</m>.</li>
+                        <li><m>f(c)</m> is an <term>absolute minimum</term> of <m>f</m> on <m>D</m> if <m>f(c)\leq f(x)</m> for all <m>x</m> in <m>D</m>.</li>
+                    </ul>
+                    These values, if they exist, are <term>extreme values</term>.
+                </p>
+            </statement>
+        </definition>
+        <example>
+            <statement>
+                <p>
+                    List the extreme values, if any, of the following functions:
+                    <ol>
+                        <li><m>f(x) = e^{-x}</m>.</li>
+                        <li><m>g(x) = x^{2}</m>.</li>
+                        <li><m>h(x) = \sin x</m>.</li>
+                    </ol>
+                </p>
+            </statement>
+        </example>
+        <p>
+            Some functions may not have extreme values, but they could have values that are smaller or larger than all other values of the function "nearby".
+        </p>
+        <definition xml:id="definition-local-extrema">
+            <title>Local extrema</title>
+            <idx><h>functions</h><h>local extrema</h></idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function and let <m>c</m> be in the domain of <m>f</m>.
+                    Then
+                    <ul>
+                        <li><m>f(c)</m> is a <term>local maximum</term> if <m>f(c)\geq f(x)</m> for all <m>x</m> near <m>c</m>.</li>
+                        <li><m>f(c)</m> is a <term>local minimum</term> if <m>f(c)\leq f(x)</m> for all <m>x</m> near <m>c</m>.</li>
+                    </ul>
+                    Roughly, local maxima correspond to "hilltops" whereas local minima correspond to "valleys" in the graph of <m>f(x)</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            In general, local extrema and absolute extrema can be different.
+            However, the following theorem does provide a relationship between the two on <em>closed, bounded</em> intervals.
+        </p>
+        <theorem xml:id="theorem-extreme-value-theorem">
+            <title>Extreme Value Theorem</title>
+            <idx>Extreme Value Theorem</idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a continuous function defined on the interval <m>[a,b]</m>
+                    Then <m>f(x)</m> has both an absolute maximum and absolute minimum on <m>[a,b]</m>.
+                    Furthermore, these values occur at either an endpoint or a local extrema.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            What <xref ref="theorem-extreme-value-theorem" text="type-global" /> tells us is that we can find the extreme values of any continuous function defined on a closed, bounded interval by just checking the function at the endpoint and at its local extrema.
+        </p>
+        <example xml:id="example-finding-extreme-values">
+            <title>Finding extreme values</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = (x^{2}-1)^{2}</m>.
+                    Given that <m>f</m> has local extrema at <m>x=-1,0,1</m>, find the extreme values of <m>f</m> on the interval <m>[\frac{1}{2},6]</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    <xref ref="theorem-extreme-value-theorem" text="type-global" /> tells us that we can find the extreme values by checking local extrema and the endpoints of our interval.
+                    Since <m>x=1</m> is the only local extreme value inside of our interval, that's the only one we need to check.
+                    We have
+                    <me>f(\frac{1}{2}) = \frac{9}{16}, f(1) = 0\quad\text{and}\quad f(6) = 35^{2}.</me>
+                    So the absolute minimum of <m>f</m> on <m>[\frac{1}{2},6]</m> is <m>0</m> and the absolute maximum is <m>35^{2}.</m>
+                </p>
+            </solution>
+        </example>
+        <p>
+            So if we can find where a function has local extrema, then finding absolute extrema won't be too much more difficult.
+            Thankfully, this is relatively straightforward if the function is differentiable.
+        </p>
+        <theorem xml:id="theorem-fermat-s-theorem">
+            <title>Fermat's Theorem</title>
+            <idx>Fermat's Theorem</idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function and let <m>c</m> be a local extreme value of <m>f</m>.
+                    If <m>f'(c)</m> exists, then <m>f'(c) = 0</m>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            So finding local extrema of <m>f(x)</m> often amounts to finding where <m>f'(x) = 0</m>, i.e., where it has a root.
+            However, we also need to worry about where <m>f'(x)</m> doesn't exist (just think about <m>y = |x|</m>).
+            This leads to the following definition.
+        </p>
+        <definition xml:id="definition-critical-points">
+            <title>Critical Points</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a differentiable function.
+                    The <term>critical points</term> of <m>f(x)</m> are the points where <m>f'(x) = 0</m> or <m>f'(x)</m> does not exist.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Our method for finding extreme values on a closed interval will proceed as follows: find all the critical points, and then compare the values of our function at the critical points and the endpoints of the interval.
+        </p>
+        <example xml:id="example-extreme-values-of-tangent">
+            <title>Extreme values of tangent</title>
+            <statement>
+                <p>
+                    Let <m>f(\theta) = \frac{4}{3}\theta - \tan\theta</m>.
+                    Find the extreme values of <m>f</m> on the interval <m>[-\frac{\pi}{3},\frac{\pi}{3}]</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to find the critical points first.
+                    We have
+                    <me>f'(\theta) = \frac{4}{3} - \sec^{2}\theta.</me>
+                    This is <m>0</m> if <m>\cos\theta = \frac{\sqrt{3}}{2}</m>, which occurs in our interval only if <m>\theta = \pm\frac{\pi}{6}</m>.
+                    So we need to check <m>f</m> at <m>\pm\frac{\pi}{3},\pm\frac{\pi}{6}</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-dealing-with-a-cusp">
+            <title>Dealing with a cusp</title>
+            <statement>
+                <p>
+                    Let <m>g(x) = x^{1/3} - x^{4/3}</m>.
+                    Find the absolute extrema of <m>g</m> on <m>[-1,1]</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, find the critical points of <m>g</m>:
+                    <me>g'(x) = \frac{1}{3}x^{-\frac{2}{3}} - \frac{4}{3}x^{\frac{1}{3}} = \frac{1}{3}x^{-\frac{2}{3}}(1 - 4x).</me>
+                    This is <m>0</m> at <m>x = \frac{1}{4}</m> and undefined at <m>0</m>, so our critical points are <m>x=0,\frac{1}{4}</m>.
+                    So to find the absolute extrema we need to check <m>g</m> at <m>x=-1,0,\frac{1}{4},1</m>.
+                    Doing so, we see that the absolute minimum value is <m>-2</m> at <m>x=-1</m> and the absolute maximum is <m>(\frac{1}{4})^{1/3} - (\frac{1}{4})^{4/3}</m> at <m>x = \frac{1}{4}</m>.
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-the-mean-value-theorem">
+        <title>The Mean Value Theorem</title>
+        <introduction>
+            <p>
+                The linear approximations we came up with in <xref ref="section-linear-approximations" text="type-global" /> are useful for estimating complicated functions with simpler, linear models.
+                In essence, we use the derivative of a function to tell us how much to change a given value of the function in order to estimate that function.
+                There is one problem with this approach, at least currently. 
+                We have good reason to suspect that our approximations are close to the exact values in certain circumstances, but we don't know how close.
+                The goal of this section is to derive an estimate for the derivative that can help us to find more precise approximations.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-rolle-s-theorem">
+            <title>Rolle's Theorem</title>
+            <p>
+                We start with a theorem that is very reasonable, at least geometrically.
+                Let <m>f(x)</m> be a differentiable function on some interval <m>[a,b]</m>, and suppose <m>f(a) = f(b)</m>.
+                Then this means the graph of <m>f</m> must "turn around" at some point in <m>[a,b]</m>, i.e., there is a local maximum or minimum contained within the interval.
+                Combining this observation with <xref ref="theorem-fermat-s-theorem" text="type-global" /> gives us <term>Rolle's Theorem.</term>
+            </p>
+            <theorem xml:id="theorem-rolle-s-theorem">
+                <title>Rolle's Theorem</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a differentiable function on <m>[a,b]</m> and suppose <m>f(a) = f(b)</m>.
+                        Then there exists some number <m>c</m> in <m>(a,b)</m> such that <m>f'(c) = 0</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                <xref ref="theorem-rolle-s-theorem" text="type-global" /> is an example of an <term>existence theorem</term>.
+                It tells us nothing about how to find the number <m>c</m>, or how many such <m>c</m> can exist.
+                It only tells us that there is at least one number <m>c</m> in <m>(a,b)</m> for which <m>f'(c) = 0</m>.
+                This may not seem very useful, but existence theorems can be quite powerful in mathematics.
+            </p>
+            <example xml:id="example-rolle-s-theorem-and-traffic">
+                <title>Rolle's Theorem and Traffic</title>
+                <statement>
+                    <p>
+                        A car enters a highway going at <quantity><mag>45</mag><unit base="mile"/><per base="hour"/></quantity> and leaves the highway going at the same speed.
+                        Was the car's acceleration ever <m>0</m>?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The speed of the car can be represented by a velocity function <m>v(t)</m>.
+                        If we assume that the car entered the highway at time <m>t_{\text{in}}</m> and left at some future time <m>t_{\text{out}}</m>, then we know that
+                        <me>v(t_{\text{in}}) = v(t_{\text{out}}) = 45.</me>
+                        By <xref ref="theorem-rolle-s-theorem" text="type-global" />, there must be some time <m>t_{1}</m> between <m>t_{\text{in}}</m> and <m>t_{\text{out}}</m> for which <m>v'(t_{1}) = 0</m>.
+                        Since <m>v'</m> is exactly the acceleration, we know that the car had to stop accelerating somewhere on the highway.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-the-mean-value-theorem">
+            <title>The Mean Value Theorem</title>
+            <p>
+                <xref ref="theorem-rolle-s-theorem" text="title" /> is powerful because it has very general conditions for its use.
+                However, it does require the function in question to take on the same values at the endpoints of <m>[a,b]</m>, and this is a condition we'd like to try to relax.
+                However, we'll try to be clever about this and use <xref ref="theorem-rolle-s-theorem" text="title" />
+                to do most of the heavy lifting for us.
+            </p>
+            <p>
+                If we imagine graphing some differentiable function <m>f(x)</m> on some interval <m>[a,b]</m>, but <m>f(a)\neq f(b)</m>, then we can't apply <xref ref="theorem-rolle-s-theorem" text="title" />.
+                But maybe we can adjust it just a little bit so that we can?
+                In particular, the only reason we can't use <xref ref="theorem-rolle-s-theorem" text="type-global" /> is that <m>f(a)\neq f(b)</m>.
+                But if we subtract the line through these points from <m>f(x)</m>, we should get a new function for which <xref ref="theorem-rolle-s-theorem" text="type-global" /> applies.
+            </p>
+            <p>
+                The line through these points has equation
+                <me>y = f(a) + \frac{f(b) - f(a)}{b-a}(x-a).</me>
+                So define 
+                <me>g(x) = f(x) - y = f(x) - f(a) - \frac{f(b) - f(a)}{b-a}(x-a).</me>
+                Then 
+                <me>g(a) = g(b) = 0,</me>
+                So <xref ref="theorem-rolle-s-theorem" text="type-global" /> <em>does</em> apply to this function.
+                Hence there exists some number <m>c</m> between <m>a</m> and <m>b</m> for which <m>g'(c) = 0</m>.
+            </p>
+            <p>
+                But 
+                <me>g'(c) = f'(c) - \frac{f(b) - f(a)}{b-a},</me>
+                and if this is <m>0</m> then we can solve <m>g'(c) = 0</m> for <m>f'(c)</m> to get
+                <me>f'(c) = \frac{f(b) - f(a)}{b-a}.</me>
+                This gives us the <term>Mean Value Theorem</term>.
+            </p>
+            <theorem xml:id="theorem-mean-value-theorem">
+                <title>Mean Value Theorem</title>
+                <idx>Mean Value Theorem</idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be differentiable on some interval <m>[a,b]</m>.
+                        Then there exists a number <m>c</m> in <m>(a,b)</m> such that
+                        <me>f'(c) = \frac{f(b) - f(a)}{b-a},</me>
+                        or equivalently
+                        <me>f(b) - f(a) = f'(c)(b-a).</me>
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                The <xref ref="theorem-mean-value-theorem" text="title" /> essentially says that there is at least one point inside of <m>(a,b)</m> for which the slope <m>f'(c)</m> at that point matches the "average slope" <m>\frac{f(b) - f(a)}{b-a}.</m>
+                Like <xref ref="theorem-rolle-s-theorem" text="title" />, this is an existence theorem.
+                However, it's slightly more general, and so is applicable in more situations.
+                It's also useful in deriving error estimates.
+            </p>
+            <example xml:id="example-estimating-error-in-a-linear-approximation">
+                <title>Estimating error in a linear approximation</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \sqrt{x}</m> and let <m>L(x)</m> denote the linear approximation to <m>f(x)</m> at <m>a=9</m>.
+                        Find the largest possible error between <m>f(x)</m> and <m>L(x)</m> on the interval <m>[9,16]</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First, we should find <m>L(x)</m>, which from <xref ref="section-linear-approximations" text="type-global" /> is just
+                        <me>L(x) = 3 + \frac{1}{6}(x-9).</me>
+                        The error we need to estimate is <m>|f(x) - L(x)|</m>, for <m>x</m> in <m>[9,16]</m>.
+                        So we'll set <m>g(x) = f(x) - L(x)</m> and let <m>x</m> be some number in <m>[9,16]</m>.
+                        By <xref ref="theorem-mean-value-theorem" text="type-global" />, there exists some number <m>c</m> in <m>(9,x)</m> such that 
+                        <me>g(x) - g(9) = g'(c)(x-9).</me>
+                        Now, <m>g(9) = 0</m> and <m>g'(c) = \frac{1}{2\sqrt{c}} - \frac{1}{6}</m>.
+                        So the above equation becomes
+                        <me>f(x) - L(x) = \left(\frac{1}{2\sqrt{c}} - \frac{1}{6}\right)(x-9).</me>
+                    </p>
+                    <p>
+                        Now, we don't know anything about <m>c</m> aside from the fact that it lives in <m>(9,16)</m>.
+                        However, we do have an expression for <m>|f(x) - L(x)|</m> now:
+                        <md>
+                            <mrow>|f(x) - L(x)| &amp; = \left|\left(\frac{1}{2\sqrt{c}} - \frac{1}{6}\right)(x-9)\right|</mrow>
+                            <mrow> &amp; \leq \left(\frac{1}{6} - \frac{1}{8}\right)7. </mrow>
+                        </md>
+                        So if <m>x</m> is in <m>[9,16]</m>, then the error <m>|f(x) - L(x)|</m> is <em>at most</em> <m>\frac{7}{24}</m>.
+                        In other words,
+                        <me>L(x) - \frac{7}{24} \leq f(x) \leq L(x) + \frac{7}{24}.</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Perhaps the most important example of <xref ref="theorem-mean-value-theorem" text="type-global" /> in this course will be the following theorem.
+            </p>
+            <theorem xml:id="theorem-zero-derivative-theorem">
+                <title>Zero Derivative Theorem</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be differentiable on <m>(a,b)</m>.
+                        If <m>f'(x) = 0</m> for all <m>x</m> in <m>(a,b)</m>, then <m>f(x)</m> has to be a constant.
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        The idea of the proof is to use <xref ref="theorem-mean-value-theorem" text="type-global" /> to show that <m>f(x_{2}) - f(x_{1}) = 0</m> for any points <m>x_{1},x_{2}</m> in <m>(a,b)</m>.
+                        Now, by <xref ref="theorem-mean-value-theorem" text="type-global" /> we have
+                        <me>f(x_{2}) - f(x_{1}) = f'(c)(x_{2}-x_{1})</me>
+                        for some <m>c</m> in <m>(a,b)</m>.
+                        However, <m>f'(c) = 0</m> by assumption, and so <m>f(x_{2}) - f(x_{1}) = 0</m>.
+                        In other words, <m>f(x_{2}) = f(x_{1})</m>.
+                        Hence <m>f</m> must be constant.
+                    </p>
+                </proof>
+            </theorem>
+        </subsection>
+    </section>
+    <section xml:id="section-derivatives-and-graphs">
+        <title>Derivatives and Graphs</title>
+        <p>
+            Recall that if <m>f(x)</m> is a function and <m>f'(x)</m> exists, then <m>f'(c) &gt; 0</m> for some <m>c</m> means that <m>f</m> is increasing at <m>c</m>, while <m>f'(c) &lt; 0</m> means that <m>f</m> is decreasing at <m>c</m>.
+            Now, suppose that <m>c</m> is a critical point of <m>f(x)</m>.
+            Then <m>f'(c) = 0</m>.
+            If <m>f'</m> changes sign from negative to positive, then <m>f'(c)</m> is a local minimum.
+            Conversely, if <m>f'</m> changes sign from positive to negative, then <m>f'(c)</m> is a local maximum.
+            This is the <term>first derivative test</term>.
+        </p>
+        <example xml:id="example-local-maxima-and-minima-using-the-first-derivative-test">
+            <title>Local maxima and minima using the first derivative test</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = x^{4}e^{-x}</m>.
+                    Find where <m>f</m> is increasing, decreasing, and any local maxima or minima.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can answer all of these questions by setting up a sign chart for 
+                    <me>f'(x) = x^{3}e^{-x}(4-x)</me>.
+                    The critical points are <m>x=0,4</m>, and <m>f' &lt; 0</m> on <m>(-\infty,0)\cup(4,\infty)</m> and <m>f' &gt; 0</m> on <m>(0,4)</m>.
+                    So <m>f</m> is decreasing on the first set of intervals, increasing on <m>(0,4)</m>, <m>f</m> has a local maximum at <m>x=4</m> and a local minimum at <m>x=0</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-first-derivative-test-and-a-discontinuous-function">
+            <title>First derivative test and a discontinuous function</title>
+            <statement>
+                <p>
+                    Find any local maxima or minima of <m>G(x) = \frac{x^{2}}{x-1}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to find the critical points, which means we need to find <m>G'(x)</m>:
+                    <me>G'(x) = \frac{(x-1)(2x) - x^{2}}{(x-1)^{2}} = \frac{x(x-2)}{(x-1)^{2}}.</me>
+                    So the critical points are <m>x=0,1,2</m>.
+                    Note that <m>x=1</m> <em>cannot</em> be a local extreme value of <m>G</m> since it's not in the domain of <m>G</m>.
+                    However, we still need to include it in our sign chart.
+                    If we do so, we find that <m>G</m> has a local minimum at <m>x=2</m> and a local maximum at <m>x=0</m> by the first derivative test.
+                </p>
+            </solution>
+        </example>
+        <p>
+            One benefit of the first derivative test is that we only need to compute first derivatives to use it.
+            However, if a function has a second derivative, then it's often easier to use the concavity of the graph at a critical point to determine whether a critical point is a local maximum or minimum.
+            In particular, if <m>f(x)</m> is a function and <m>f''(x)</m> is continuous near the critical point <m>c</m> (so <m>f'(c) = 0</m>), then <m>f(c)</m> is a local minimum if <m>f''(c) &gt; 0</m> and <m>f(c)</m> is a local maximum if <m>f''(c) &lt; 0</m>.
+            This is the <term>second derivative test</term>.
+        </p>
+        <example xml:id="example-using-the-second-derivative-test">
+            <title>Using the second derivative test</title>
+            <statement>
+                <p>
+                    Find any local extrema of <m>h(x) = 5x^{3} - 3x^{5}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, we find the critical points:
+                    <me>h'(x) = 15x^{2} - 15x^{4} = 0</me>
+                    forces <m>x=0,\pm1</m>.
+                    Now we check these critical points in <m>h''(x) = 30x - 60x^{3}:</m>
+                    <md>
+                        <mrow>h''(0) &amp; = 0 </mrow>
+                        <mrow>h''(-1) &amp; = 30 </mrow>
+                        <mrow>h''(1) &amp; = -30. </mrow>
+                    </md>
+                    So <m>h</m> has a local minimum at <m>-1</m> and a local maximum at <m>1</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            The point <m>x=0</m> in <xref ref="example-using-the-second-derivative-test" text="type-global" /> is an example of an <term>inflection point</term> of <m>h(x)</m>: a place where the concavity of <m>h</m> changes, or equivalently a point where the second derivative changes sign.
+        </p>
+    </section>
+    <section xml:id="section-optimization-problems">
+        <title>Optimization Problems</title>
+        <p>
+            Now that we can use derivatives to find local maxima and minima, we can solve <term>optimization problems</term>.
+        </p>
+        <example xml:id="example-minimizing-a-product">
+            <title>Minimizing a product</title>
+            <statement>
+                <p>
+                    Find two numbers that differ by <m>100</m> and whose product is a minimum.  
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Call our numbers <m>x,y</m> and suppose <m>x &gt; y</m>.
+                    Then <m>x-y = 100</m> and we need to choose <m>x,y</m> in such a way that <m>xy</m> is as small as possible.
+                    If we replace <m>x</m> with <m>100+y</m>, then this means we need to minimize 
+                    <me>f(y) = 100y + y^{2}.</me>
+                    The critical point of <m>f(y)</m> is <m>y = -50</m>, and since <m>f</m> is a parabola we know that this must be the location of the absolute minimum value on the graph.
+                    So the numbers we need are <m>50,-50</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-minimizing-material-costs">
+            <title>Minimizing material costs</title>
+            <statement>
+                <p>
+                    A box with an open top and a square base is to be built using material that costs \$5 per square meter.
+                    The box must have a volume of <quantity><mag>32000</mag><unit base="meter" prefix="centi" exp="3"/></quantity>.
+                    Find the dimensions of the box that will be cheapest to build to these specifications.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    There are two things we need to do here:
+                    <ol>
+                        <li>Find the quantity to be optimize.</li>
+                        <li>Solve the resulting optimization problem.</li>
+                    </ol>
+                    We need to minimize costs, which means we need to minimize how much material is used to construct this box.
+                    Hence we must minimize the surface area of the box.
+                    If we let <m>x</m> denote the length of the base of the box and <m>h</m> the height of the box, then the surface area is given by
+                    <me>x^{2} + 4xh.</me>
+                    Now, we can't minimize this yet because we have too many variables.
+                    However, we can solve for <m>h</m> in terms of <m>x</m> by using the volume constraint.
+                    Since the volume of the box is <m>x^{2}h = 32000,</m> this gives <m>h = \frac{32000}{x^{2}}.</m>
+                    So the quantity we need to minimize is
+                    <me>f(x) = x^{2} + 4xh = x^{2} + \frac{128000}{x}.</me>
+                </p>
+                <p>
+                    To minimize this, we find the critical points by solving <m>f'(x) = 0</m>.
+                    This gives, after some algebra, <m>x = 40</m>.
+                    Now we need to be careful here! We only have a critical point at this step. 
+                    We need to make an argument now as to why this critical point should be an absolute minimum of <m>f(x)</m>.
+                    One way to do this is by setting up a sign chart for <m>f'(x)</m>.
+                    If we do this, then we see that <m>f' &lt; 0</m> for <m>x</m> in <m>(0,40)</m>, while <m>f' &gt; 0</m> for <m>x</m> in <m>(40,\infty)</m>.
+                    If we think about what this tells us of the graph of <m>f(x)</m>, we see that <m>x=40</m> must minimize <m>f(x)</m>, at least for <m>x &gt; 0</m>.
+                    So the dimensions that minimize the cost of building this box are <m>40\times40\times20</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-distance-on-an-ellipse">
+            <title>Distance on an ellipse</title>
+            <statement>
+                <p>
+                    Find the point(s) on the ellipse <m>4x^{2} + y^{2} = 4</m> that are farthest from the point <m>(1,0)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This is an optimization problem since we're trying to maximize distance.
+                    There are two things we need to do:
+                    <ol>
+                        <li>Find the function we need to optimize.</li>
+                        <li>Find the extrema.</li>
+                    </ol>
+                    The function we need to optimize is just the distance function.
+                    In particular, if <m>(x,y)</m> is a point on the ellipse then we need to maximize 
+                    <me>d = \sqrt{(x-1)^{2} + (y-0)^{2}}.</me>
+                </p>
+                <p>
+                    Now, we have a constraint that <m>(x,y)</m> must satisfy; namely, this must lie on the ellipse <m>4x^{2} + y^{2} = 4</m>.
+                    This means that <m>y^{2} = 4 - 4x^{2}</m>, and if we plug this into our distance function we get
+                    <me>d = \sqrt{(x-1)^{2} + (y-0)^{2}} = \sqrt{(x-1)^{2} + 4 - 4x^{2}}.</me>
+                    Now here's a trick we can use: maximizing <m>d</m> is the same thing as maximizing <m>d^{2}</m>, but <m>d^{2}</m> is <em>much</em> nicer to work with algebraically.
+                    So instead of maximizing <m>d</m>, we'll maximize the function 
+                    <me>f(x) = d^{2} = (x-1)^{2} + 4 - 4x^{2}.</me>
+                </p>
+                <p>
+                    We'll start by finding it's local extrema, which means we need to find the critical points.
+                    These are the solutions of <m>f'(x) = 0</m>.
+                    Since
+                    <me>f'(x) = 2x - 2 - 8x = -6x - 2,</me>
+                    we see that the only critical point is <m>x = -\frac{1}{3}</m>.
+                    Since <m>f''(x) = -6 &lt; 0</m>, this means that <m>x = -\frac{1}{3}</m> gives us a local maximum of <m>f(x)</m> by the second derivative test.
+                    In fact, we can go further: this must be an absolute maximum of <m>f(x)</m>, since <m>f(x)</m> is always concave down (it's actually a parabola).
+                </p>
+                <p>
+                    So the point on the ellipse <m>4x^{2} + y^{2} = 4</m> farthest from <m>(1,0)</m> has <m>x</m>-coordinate equal to <m>-\frac{1}{3}</m>.
+                    This means that the corresponding <m>y</m>-coordinate is <m>y = \pm\frac{2\sqrt{5}}{3},</m> so the points on the ellipse that are the farthest from <m>(1,0)</m> are the points <m>(-\frac{1}{3}, -\frac{2\sqrt{5}}{3}), (-\frac{1}{3}, \frac{2\sqrt{5}}{3}).</m>
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-newton-s-method">
+        <title>Newton's Method</title>
+        <p>
+            Consider a differentiable function <m>f(x)</m>, and suppose we want to find a root of <m>f(x)</m>, which is a number <m>x_{0}</m> such that <m>f(x_{0}) = 0</m>.
+            In some cases this is very easy (like <m>f(x) = x^{2} + 2x + 1</m>), but in others this may be more complicated (such as <m>f(x) = x^{5} - x  - 1</m>).
+            So we'd like to find a way to <em>approximate</em> the root <m>x_{0}</m>.
+        </p>
+        <p>
+            <term>Newton's Method</term> begins as follows: pick some starting point, or guess, <m>x_{1}</m>.
+            Then draw the tangent line <m>L</m> to the graph of <m>f(x)</m> at <m>x_{1}</m>.
+            Now, the <m>x</m>-intercept of this line may not be a root, but hopefully it'll be closer to the root.
+            So call this point <m>x_{2}</m>.
+            We can solve for <m>x_{2}</m> (if <m>f'(x_{1})\neq0</m>) to get
+            <me>x_{2} = x_{1} - \frac{f(x_{1})}{f'(x_{1})}.</me>
+            Now, at this point <m>x_{2}</m> is (hopefully!) a better approximation to the root <m>x_{0}</m> than <m>x_{1}</m>, and we can run through the same procedure to get a new point <m>x_{3}</m>.
+        </p>
+        <p>
+            In general, we can get a <term>sequence</term> of approximations <m>x_{1},x_{2},\ldots,x_{n}</m> to the root <m>x_{0}</m> by using the formula
+            <me>x_{n+1} = x_{n} - \frac{f(x_{n})}{f'(x_{n})},</me>
+            as long as <m>f'(x_{n}) \neq0</m>.
+        </p>
+        <example xml:id="example-approximating-a-root">
+            <title>Approximating a root</title>
+            <statement>
+                <p>
+                    Find the third approximation given by Newton's Method for the root of <m>f(x) = x^{5} - x - 1</m>, using <m>x_{1} = -1</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, note that <m>f'(x) = 5x^{4} - 1</m>.
+                    Then
+                    <md>
+                        <mrow>x_{2} &amp; = x_{1} - \frac{f(x_{1})}{f'(x_{1})} </mrow>
+                        <mrow> &amp; = -1 - \frac{-1}{4} </mrow>
+                        <mrow> &amp; = 3, </mrow>
+                    </md>
+                    so <m>x_{2} = 3</m>.
+                    Now we run through this method again to get <m>x_{3}</m>:
+                    <md>
+                        <mrow>x_{3} &amp; = x_{2} - \frac{f(x_{2})}{f'(x_{2})} </mrow>
+                        <mrow> &amp; = 3 - \frac{239}{404} </mrow>
+                        <mrow> &amp; = \frac{973}{404}. </mrow>
+                    </md>
+                    So <m>x_{3} = \frac{973}{404}.</m>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-approximating-pi">
+            <title>Approximating <m>\pi</m></title>
+            <statement>
+                <p>
+                    Approximate <m>\pi</m> using Newton's method.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to find a function <m>f(x)</m> for which <m>f(\pi) = 0</m>.
+                    Perhaps the easiest is <m>f(x) = \sin x</m>.
+                    Now, to use Newton's method we also need a starting guess.
+                    We'll pick <m>x_{1} = 3</m> since this is close to <m>\pi</m>.
+                    Then
+                    <me>x_{2} = x_{1} - \frac{\sin x_{1}}{\cos x_{1}} = 3 - \tan 3</me>
+                    so <m>x_{2} \approx 3.142546543</m>.
+                    Similarly,
+                    <md>
+                        <mrow>x_{3} &amp; = x_{2} - \tan x_{2} \approx 3.141592653 </mrow>
+                        <mrow>x_{4} &amp; \approx 3.141592654 </mrow>
+                    </md>
+                    Since these approximations are so close, we estimate that <m>\pi\approx 3.14159265</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-a-babylonian-problem">
+            <title>A Babylonian problem</title>
+            <statement>
+                <p>
+                    Use Newton's method to find an algorithm for computing <m>\sqrt{a}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    To use Newton's method, we need to come up with a function <m>f(x)</m> whose root is <m>\sqrt{a}</m>.
+                    A simple choice for this is <m>f(x) = x^{2} - a</m>, since <m>f(\sqrt{a}) = 0</m>.
+                    Now, if we're getting some sequence <m>x_{1},\ldots,x_{n}</m> from Newton's method then the next term in the sequence is 
+                    <me>x_{n+1} = x_{n} - \frac{f(x_{n})}{f'(x_{n})} = x_{n} - \frac{x_{n}^{2} - a}{2x_{n}}.</me>
+                    After some algebra, we can rewrite this as 
+                    <me>x_{n+1} = \frac{1}{2}\left(x_{n} + \frac{a}{x_{n}}\right).</me>
+                </p>
+                <p>
+                    We can actually test this algorithm out.
+                    Say we want to approximate <m>\sqrt{5}</m>.
+                    A reasonable guess would be <m>x_{1} = 2</m>, since this should be close to <m>\sqrt{5}</m>.
+                    Then we get
+                    <md>
+                        <mrow>x_{2} &amp; = \frac{1}{2}\left(2 + \frac{5}{2}\right) = 2.25 </mrow>
+                        <mrow>x_{3} &amp; = \frac{1}{2}\left(2.25 + \frac{5}{2.25}\right) \approx 2.236111111 </mrow>
+                        <mrow>x_{4} &amp; \approx 2.236067978 </mrow>
+                        <mrow>x_{5} &amp; \approx 2.236067977 </mrow>
+                    </md>
+                    So it looks like <m>\sqrt{5}\approx 2.23606797</m>, and indeed this is quite close to the actual value of <m>\sqrt{5} = 2.236067977\ldots</m>.
+                </p>
+                <p>
+                    We can go one step further for this algorithm.
+                    If <m>x_{1},x_{2},\ldots,x_{n},\ldots</m> is the sequence we obtain using Newton's method for approximating <m>\sqrt{a}</m>, then as we saw earlier
+                    <me>x_{n+1} = \frac{1}{2}\left(x_{n} + \frac{a}{x_{n}}\right).</me>
+                    Now, assume that <m>\lim_{n\to\infty}x_{n}</m> exists and is nonzero, and call it <m>s</m>.
+                    Then
+                    <me>\lim_{n\to\infty}x_{n+1} = \frac{1}{2}\left(\lim_{n\to\infty}x_{n} + \frac{a}{\lim_{n\to\infty}x_{n}}\right)</me>
+                    becomes
+                    <me>s = \frac{1}{2}\left(s + \frac{a}{s}\right)</me>
+                    which we can rearrange to get
+                    <me>s^{2} = \frac{1}{2}(s^{2} + a),</me>
+                    or just <m>s^{2} = a</m>.
+                    Hence <m>s = \pm\sqrt{a}</m>.
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-antiderivatives">
+        <title>Antiderivatives</title>
+        <p>
+            Suppose we're tracking a moving object, and through experimentation we know its acceleration to be equal to <quantity><mag>3</mag><unit base="meter"/><per base="second" exp="2"/></quantity> to the right.
+            Say we want to find the velocity of the mass at time <m>t</m>.
+            Then if we set <m>v(t)</m> equal to the velocity and <m>a(t)</m> equal to the acceleration, we know that
+            <me>v'(t) = a(t) = 3.</me>
+            Therefore <m>v(t)</m> is a function whose derivative is <m>3</m>.
+            So one possible choice for <m>v(t)</m> is <m>v(t) = 3t</m>.
+            This leads us to the definition of an <term>antiderivative</term>.
+        </p>
+        <definition xml:id="definition-antiderivatives">
+            <title>Antiderivatives</title>
+            <index><h>Antiderivatives</h></index>
+            <statement>
+                <p>
+                    A function <m>F(x)</m> is called an antiderivative of the function <m>f(x)</m> if <m>F'(x) = f(x)</m> for all <m>x</m> in an interval <m>I</m>.
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="example-multiple-antiderivatives">
+            <title>Multiple antiderivatives</title>
+            <statement>
+                <p>
+                    Find three different antiderivatives for <m>f(x) = \cos x</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    An antiderivative of <m>\cos x</m> is any function whose derivative is <m>\cos x</m>.
+                    So three antiderivatives could be 
+                    <me>F_{1}(x) = \sin x, F_{2}(x) = \sin x + 4, F_{3}(x) = \sin x - 100.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            From <xref ref="example-multiple-antiderivatives" text="type-global" /> we see that any function of the form <m>\sin x +C</m> is an antiderivative of <m>\cos x</m>.
+            In fact, this describes all possible antiderivatives of <m>\cos x</m>.
+            This suggests the following theorem.
+        </p>
+        <theorem xml:id="theorem-general-antiderivatives">
+            <title>General Antiderivatives</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be some function with antiderivative <m>F(x)</m> on some interval <m>I</m>.
+                    Then the most general antiderivative of <m>f(x)</m> is
+                    <me>F(x) + C</me>
+                    where <m>C</m> is an arbitrary constant.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    It might not seem like this statement requires a proof, but it does!
+                    We can check very easily that every function of the form <m>F(x)+C</m> is an antiderivative of <m>f(x)</m>, but how do we know every antiderivative takes this form?
+                    To prove this, let <m>G(x)</m> be an arbitrary antiderivative of <m>f(x)</m>.
+                    Then we need to show that <m>G(x) = F(x) + C</m>, or equivalently that <m>G(x) - F(x) = C</m>.
+                    We can do this by taking the derivative of <m>G(x) - F(x)</m> to get 
+                    <me>G'(x) - F'(x) = f(x) - f(x) = 0,</me>
+                    and so by <xref ref="theorem-zero-derivative-theorem" text="type-global" /> we know that <m>G(x) - F(x)</m> must be constant on <m>I</m>.
+                    Hence <m>G(x) - F(x) = C</m> for some constant <m>C</m>, or equivalently <m>G(x) = F(x)+C</m>.
+                    Therefore <em>every</em> antiderivative of <m>f(x)</m> can be written as <m>F(x) + C</m>.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            It might seem superfluous, but typically when dealing with models requiring us to find antiderivatives we'll want to find the most general antiderivative somewhere along the way.
+            Moral of the story: <em>don't forget to add <m>C</m>.</em>
+        </p>
+        <example xml:id="example-finding-antiderivatives">
+            <title>Finding antiderivatives</title>
+            <statement>
+                <p>
+                    Find the most general antiderivatives of the following functions:
+                    <ol>
+                        <li><m>x^{3}.</m></li>
+                        <li><m>-\frac{1}{2}x^{\frac{5}{3}}.</m></li>
+                        <li><m>\sqrt{x} - 3x^{3} + x^{-2}.</m></li>
+                        <li><m>\sin x + \cos (5x) + e^{4x}.</m></li>
+                    </ol>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We have the following:
+                    <ol>
+                        <li>The general antiderivative of <m>x^{3}</m> is <m>\frac{1}{4}x^{4}+C.</m></li>
+                        <li>The general antiderivative of <m>-\frac{1}{2}x^{\frac{5}{3}}</m> is <m>-\frac{1}{2}\frac{3}{8}x^{\frac{8}{3}}+C.</m></li>
+                        <li>The general antiderivative of <m>\sqrt{x} - 3x^{3} + x^{-2}</m> is <m>\frac{2}{3}x^{\frac{3}{2}} - \frac{3}{4}x^{4} - \frac{1}{x} + C</m>.</li>
+                        <li>The general antiderivative of <m>\sin x + \cos (5x) + e^{4x}</m> is <m>-\cos x + \frac{1}{5}\sin(5x) + \frac{1}{4}e^{4x} + C.</m></li>
+                    </ol>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-the-antiderivative-of--frac-1-x-m-">
+            <title>The antiderivative of <m>\frac{1}{x}</m></title>
+            <statement>
+                <p>
+                    Find the general antiderivative of <m>f(x) = \frac{1}{x}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We have two cases we need to consider, since the domain of <m>f(x)</m> consists of two intervals.
+                    First, suppose that <m>x</m> is in <m>(0,\infty)</m>.
+                    Then we know that <m>\dv{}{x}\ln x = \frac{1}{x}</m>, so on this interval the most general antiderivative of <m>\frac{1}{x}</m> is <m>\ln x + C_{1}</m>.
+                </p>
+                <p>
+                    Now let <m>x</m> be in <m>(-\infty,0)</m>.
+                    Then <m>\ln x</m> isn't defined here.
+                    However, we can write
+                    <me>\frac{1}{x} = -\frac{1}{-x},</me>
+                    and if <m>x &lt; 0</m> then <m>-x &gt; 0</m> and <m>\ln(-x)</m> is defined, and in fact
+                    <me>\dv{}{x}\ln(-x) = -\frac{1}{(-x)} = \frac{1}{x}.</me>
+                    So the most general antiderivative of <m>\frac{1}{x}</m> on <m>(-\infty,0)</m> is <m>\ln(-x) + C_{2}</m>.
+                    Putting this all together, we can say that the most general antiderivative of <m>f(x) = \frac{1}{x}</m> is given by
+                    <me>F(x) = \begin{cases} \ln x + C_{1} &amp; x &gt; 0 \\ \ln(-x) + C_{2} &amp; x &lt; 0\end{cases}.</me>
+                    If we know that we're only selecting values of <m>x</m> with the same sign, then we can just say that the antiderivative of <m>\frac{1}{x}</m> is <m>\ln|x| + C</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-antiderivatives-involving-secant">
+            <title>Antiderivatives involving secant</title>
+            <statement>
+                <p>
+                    Find the general antiderivatives of <m>\sec^{2}t</m> and <m>-2\sec3t\tan3t</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The first antiderivative isn't too hard; it's just <m>\tan t+C</m>.
+                    The second is a little more complicated but still not too bad.
+                    Since <m>\dv{}{t}\sec t = \sec t\tan t</m>, a good guess for an antiderivative of <m>-2\sec3t\tan3t</m> would be <m>-2\sec3t.</m>
+                    However, the derivative of this is <m>-6\sec3t\tan3t</m>, so we're off by a factor of <m>3</m>.
+                    So we just need to divide our guess by <m>3</m> to correct for this.
+                    Hence the general antiderivative of <m>-2\sec3t\tan3t</m> is <m>-\frac{2}{3}\sec3t</m>.
+                </p>
+            </solution>
+        </example>
+        <theorem xml:id="theorem-antidifferentiation-formulas">
+            <title>Antidifferentiation Formulas</title>
+            <statement>
+                <p>
+                    Let <m>F(x)</m> and <m>G(x)</m> denote antiderivatives of <m>f(x)</m> and <m>g(x)</m>, and let <m>c</m> be a constant.
+                    Then we have the following:
+                    <table xml:id="table-antiderivatives">
+                        <caption>Particular antiderivatives of functions</caption>
+                        <tabular halign="center" top="major">
+                            <row top="major" bottom="minor">
+                                <cell>Function</cell>
+                                <cell>Antiderivative</cell>
+                            </row>
+                            <row>
+                                <cell><m>cf(x)</m></cell>
+                                <cell><m>cF(x)</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>f(x) + g(x)</m></cell>
+                                <cell><m>F(x) + G(x)</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>x^{n}, n\neq1</m></cell>
+                                <cell><m>\frac{x^{n+1}}{n+1}</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>\frac{1}{x}</m></cell>
+                                <cell><m>\ln|x|</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>e^{cx}, c\neq0</m></cell>
+                                <cell><m>\frac{1}{c}e^{cx}</m></cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>\sin cx, \cos cx, c\neq 0</m></cell>
+                                <cell><m>-\frac{1}{c}\cos cx, \frac{1}{c}\sin cx</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    These are by no means the only antiderivatives that you will need to deal with, but they are probably the most common.
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-falling-objects">
+            <title>Falling objects</title>
+            <statement>
+                <p>
+                    An object is dropped from a height of <quantity><mag>100</mag><unit base="meter"/></quantity> above sea level and falls with downward acceleration equal to <quantity><mag>9.8</mag><unit base="meter"/><per base="second" exp="2"/></quantity>.
+                    Find the height <m>h(t)</m> of the object <m>t</m> seconds after it's dropped.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Take downward to be the negative direction and sea level to be <m>h=0</m>.
+                    Since acceleration is the second derivative of position, then the position (i.e. height) of the object should be the second <em>antiderivative</em> of acceleration.
+                    At this step, it's tempting to say that since <m>h''(t) = -9.8</m>, we have
+                    <me>h'(t) = -9.8t\quad\text{and}\quad h(t) = -4.9 t^{2}</me>.
+                    And indeed, <m>-4.9t^{2}</m> is a function whose second derivative is <m>-9.8</m>.
+                    However, we have a slight problem here.
+                    We know that <m>h(0) = 100</m> and <m>h'(0) = 0</m>.
+                    If <m>h(t) = -4.9t^{2}</m>, then it's impossible for <m>h(0)</m> to equal <m>100</m>.
+                    The problem here is we forgot about the arbitrary constants.
+                </p>
+                <p>
+                    To get an accurate expression for <m>h(t)</m>, we go back to <m>h''(t) = -9.8</m>.
+                    Then <m>h'(t) = -9.8t+C_{1}</m> for some constant <m>C_{1}</m>.
+                    Since <m>h'(0) = 0</m>, this forces <m>C_{1} = 0</m>.
+                    So we have <m>h'(t) = -9.8t</m>.
+                    Now we antidifferentiate one more time to get <m>h(t) = -4.9t^{2} + C_{2}</m>.
+                    Since <m>h(0) = 100</m>, this forces <m>C_{2} = 100</m>.
+                    So <me>h(t) = -4.9t^{2} + 100</me>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            Some functions that do not have an obvious antiderivative can be simplified through algebra into a form that is perhaps more helpful.
+        </p>
+        <example xml:id="example-a-tricky-antiderivative">
+            <title>A tricky antiderivative</title>
+            <statement>
+                <p>
+                    Find the most general antiderivative of 
+                    <me>f(x) = \frac{2+x^{2}}{1+x^{2}}.</me>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    It's tough to think of a function whose derivative is <m>f(x)</m>, though since the denominator is <m>1+x^{2}</m> it seems likely that this antiderivative will involve <m>\tan^{-1}x</m> in some way.
+                    In order to actually find the antiderivative, we'll rewrite <m>f(x)</m> into a more convenient form.
+                    First, note that the numerator is very close to the denominator, which means we can almost cancel it out. 
+                    So we'll split up the numerator as follows:
+                    <me>\frac{2+x^{2}}{1+x^{2}} = \frac{1+(1+x^{2})}{1+x^{2}} = \frac{1}{1+x^{2}} + 1.</me>
+                </p>
+                <p>
+                    We can find the antiderivative of this term by term, so the most general antiderivative of <m>f(x)</m> is
+                    <me>F(x) = \tan^{-1}x + x + C.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            At this point, it's natural to think about what an antiderivative means geometrically since the derivative of a function has such a nice interpretation.
+            One approach to this is to think about <term>net change</term> of the antiderivative.
+            Let <m>F(x)</m> be an antiderivative of <m>f(x)</m> on some interval containing <m>a,b</m>.
+            The net change of <m>F(x)</m> from <m>x=a</m> to <m>x=b</m> is given by 
+            <me>F(b) - F(a).</me>
+            Now, <m>F'(x) = f(x)</m> represents instantaneous rate of change, not net change.
+            However, if we can somehow add these instantaneous changes from <m>x=a</m> to <m>x=b</m>, they should accumulate until they give the net change of <m>F</m> from <m>a</m> to <m>b</m>.
+            Graphically, adding these instantaneous rates of change looks like it's giving us the <em>area</em> under <m>f(x)</m>, which suggests the following geometric interpretation: <em>the area under of <m>f(x)</m> from <m>x=a</m> to <m>x=b</m> is just the net change of an antiderivative <m>F(x)</m> from <m>x=a</m> to <m>x=b</m>.</em>
+            Much of the next chapter is devoted to making this idea precise.
+        </p>
+    </section>
+</chapter>

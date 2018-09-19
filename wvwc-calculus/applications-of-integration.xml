@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="applications-of-integration" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Applications of Integration</title>
+  <section xml:id="section-areas-between-curves">
+    <title>Areas Between Curves</title>
+    <p>
+      We already know that <m>\int_{a}^{b}f(x)\,dx</m> geometrically represents the area under <m>f(x)</m> from <m>x = a</m> to <m>x = b</m>.
+      Now we'd like to try to extend the integral to other geometrical concepts such as surface areas and volumes.
+      An easy generalization we can make right now is that of <em>areas between curves</em>, as in <xref ref="figure-area-between-curves" text="type-global" />.
+    </p>
+    <figure xml:id="figure-area-between-curves">
+      <image width="75%">
+        <latex-image><![CDATA[
+          \begin{tikzpicture}
+              \begin{axis}[%
+              axis lines=middle,
+              xlabel=$x$,
+              ylabel=$y$,
+              enlargelimits,
+              ytick=\empty,
+              xtick={-2.19,2.19},
+              xticklabels={$a$,$b$}]
+              \addplot[name path=F,blue,thick,domain={-4:4}] {-(1/6)*x^2+2} node[pos=1, left]{$f(x)$};
+
+              \addplot[name path=G,red,thick,domain={-4:4}] {0.25*x^2}node[pos=1, left]{$g(x)$};
+
+              \addplot[blue!30, opacity=0.5]fill between[of=F and G, soft clip={domain=-2.19:2.19}]
+              ;
+              \node at (axis cs:0.5,1) {$S$};
+              \end{axis}
+              \end{tikzpicture}]]>
+            </latex-image>
+          </image>
+          <caption>Area between curves. Adapted from <url href="https://tex.stackexchange.com/questions/164773/graphics-area-between-curves">here</url>.</caption>
+        </figure>
+        <p>
+          It may not be too much of a stretch to say that the area <m>S</m> should be given by <m>\int_{a}^{b}[f(x) - g(x)]\,dx</m>, and indeed it is, but we will prove this using Riemann sums for the reason that Riemann sums appear <em>a lot</em> in applications.
+          Furthermore, Riemann sums provide us with the formula we need to evaluate integrals numerically using libraries such as NumPy.
+          So let's start by partitioning the interval <m>[a,b]</m> into <m>n</m> <em>subintervals</em>
+          <me>[x_{i-1},x_{i}]\quad\text{for}\quad 0\leq i\leq n,</me>
+          where <m>x_{0} = a, x_{n} = b</m> and
+          <me>x_{i} - x_{i-1} = \Delta x = \frac{b-a}{n}.</me>
+        </p>
+        <p>
+          Now we'll use the subintervals to break the region <m>S</m> up into rectangles to approximate the area.
+          So choose a point <m>x_{i}^{*}</m> from each subinterval <m>[x_{i-1}, x_{i}]</m> and use it to determine the height of the corresponding rectangle: <m>f(x_{i}^{*}) - g(x_{i}^{*})</m>.
+          Then the area is <m>f(x_{i}^{*}) - g(x_{i}^{*})\Delta x</m>, and adding up the areas of all of the rectangles lets us approximate the area of <m>S</m>:
+          <men xml:id="equation-area-between-curves-approximation">\text{area of }S \approx \sum_{i=1}^{n}[f(x_{i}^{*}) - g(x_{i}^{*})]\Delta x</men>
+        </p>
+        <p>
+          Now send <m>n\to\infty</m> (equivalently, send <m>\Delta x\to 0</m>) to make the approximation exact:
+          <m>\text{area of }S = \lim_{\Delta x\to0}\sum_{i=1}^{n}f(x_{i}^{*}) - g(x_{i}^{*})\Delta x = \int_{a}^{b}[f(x) - g(x)]\,dx.</m>
+        </p>
+        <example xml:id="example-area-between-parabolas">
+          <title>Area Between Parabolas</title>
+          <statement>
+            <p>
+              Find the area between <m>f(x) = x^{2} + 1</m> and <m>g(x) = 2x^{2}</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              If we graph <m>f</m> and <m>g</m>, we see that the area will be given by <m>\int_{a}^{b}[(x^{2} + 1) - 2x^{2}]\,dx</m>, where <m>a</m> and <m>b</m> are the values of <m>x</m> where <m>f(x) = g(x)</m>.
+              Using a bit of algebra, we get <m>a = -1</m> and <m>b = 1</m>.
+              Therefore the area between the parabolas is
+              <md>
+                <mrow>\int_{-1}^{1}(1 - x^{2})\,dx &amp; = 2\int_{0}^{1}(1-x^{2})\,dx </mrow>
+                <mrow> &amp; = \frac{4}{3}. </mrow>
+              </md>
+            </p>
+          </solution>
+        </example>
+        <p>
+          Although we found an exact solution in <xref ref="example-area-between-parabolas" text="type-global" />, we can also use this to test our NumPy skills.
+          <xref ref="equation-area-between-curves-approximation" text="type-global" /> shows us how we can use NumPy to find this quantity.
+        </p>
+        <sage>
+          <input language="python">
+            import numpy as np
+
+            # Endpoints of interval and number of subintervals
+            a = -1
+            b = 1
+            n = 10
+
+            # Quick way to define f(x) and g(x)
+            f = lambda x: x**2 + 1
+            g = lambda x: 2 * x**2
+
+            # Partition interval
+            X = np.linspace(a, b, n)
+
+            # Area of each rectangle
+            deltaX = (b - a) / n
+            area = (f(X) - g(X)) * deltaX
+
+            # Add areas together to get approximation
+            print(np.sum(area))
+          </input>
+          <output>
+            1.1851851851851853
+          </output>
+        </sage>
+        <example xml:id="example-area-with-changing-limits">
+          <title>Area with Changing Limits</title>
+          <statement>
+            <p>
+              Find the area of the region bounded by <m>x = y^{4}</m> and <m>y^{2} + x = 2</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              If we solve both equations for <m>y</m>, we get <m>y = \pm\sqrt[4]{x}</m> and <m>y = \pm\sqrt{2 - x}</m>.
+              We can then graph the region below:
+              <figure xml:id="figure-graph-between-x-curves">
+                <image>
+                  <latex-image><![CDATA[
+                  \begin{tikzpicture}
+                  \begin{axis}[mystyle, xmin = -1, xmax = 3, ymin = -2, ymax = 2, legend style={at={(axis cs: 3, 1.5)}, anchor=south}]
+                  \addplot[name path = F1, smooth, blue, thick, samples = 500, domain = 0:5]{x^(.25)};
+                  \addlegendentry{$x = y^{4}$};
+                  \addplot[name path = G1, smooth, red, thick,samples = 100, domain = -1:2]{sqrt(2 - x)};
+                  \addlegendentry{$y^{2} + x = 2$};
+                  \addplot[name path = F2, smooth, blue, thick, samples = 500, domain = 0:5]{-x^(.25)};
+                  \addplot[name path = G2, smooth, red, thick,samples = 100, domain = -1:2]{-sqrt(2 - x)};
+
+                  \addplot[name path = xaxis]{0};
+                  \addplot[blue!30, opacity=0.5] fill between[of=F1 and xaxis, soft clip={(0,0) rectangle (1,1)}];
+                  \addplot[blue!30, opacity=0.5] fill between[of=F2 and xaxis, soft clip={(0,0) rectangle (1,-1)}];
+                  \addplot[blue!30, opacity=0.5] fill between[of=G1 and xaxis, soft clip={(1,0) rectangle (2,2)}];
+                  \addplot[blue!30, opacity=0.5] fill between[of=G2 and xaxis, soft clip={(1,0) rectangle (2,-2)}];
+                  \end{axis}
+                  \end{tikzpicture}]]>
+                </latex-image>
+              </image>
+              <caption>The region bounded by <m>x = y^{4}</m> and <m>y^{2} + x = 2</m>.</caption>
+            </figure>
+          </p>
+          <p>
+            To find the area between these curves, we'll need to compute <em>two</em> integrals: one for <m>0\leq x\leq 1</m> and another for <m>1\leq x\leq 2</m>.
+            In particular, the area will be given by
+            <m>\int_{0}^{1}[x^{\frac{1}{4}} - (-x^{\frac{1}{4}})]\,dx + \int_{1}^{2}[\sqrt{2 - x} - (-\sqrt{2 - x})]\,dx</m>.
+            Doing so, we get
+            <m>\frac{44}{15}</m>
+            for the area between the curves.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Part of the reason why finding the area in <xref ref="example-area-with-changing-limits" text="type-global" /> was more complicated was because the curves did not represent functions of <m>x</m>.
+        However, we can view each curve as representing a function of <m>y</m>, namely,
+        <m>x(y) = y^{4} \quad\text{and}\quad x(y) = 2 - y^{2}.</m>
+        Then the area can be found as
+        <m>\int_{-1}^{1}[(2 - y^{2}) - y^{4}]\,dy = \frac{44}{15}.</m>
+        So it can be much easier if we find the area by integrating with respect to <m>y</m> as opposed to <m>x</m>.
+      </p>
+      <example>
+        <statement>
+          <p>
+            Find the area contained by the curves <m>x = y^{2} - 4y</m> and <m>x = 2y - y^{2}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we graph the region, we get <xref ref="figure-region-between-y-parabolas" text="type-global" />.
+          </p>
+          <figure xml:id="figure-region-between-y-parabolas">
+            <image>
+              <latex-image><![CDATA[
+              \begin{tikzpicture}
+              \begin{axis}[mystyle, xmin = -5, xmax = 3, ymin = -3, ymax = 5, legend style={at={(axis cs: 3, 1.5)}, anchor=south}]
+              \addplot[name path = F, blue, smooth, thick] (x*x - 4*x, x);
+              \addlegendentry{$x = y^{2} - 4y$};
+              \addplot[name path = G, red, smooth, thick] (2*x - x*x, x);
+              \addlegendentry{$x = 2y - y^{2}$};
+              \addplot[blue!30, opacity=0.5] fill between[of=F and G, soft clip={(-4, 3) rectangle (2,0)}];
+              \end{axis}
+              \end{tikzpicture}]]>
+            </latex-image>
+          </image>
+        </figure>
+        <p>
+          Finding the area by using integrals with respect to <m>x</m> would require setting up and solving three different integrals!
+          So, not terrific.
+          However, we can integrate with respect to <m>y</m> fairly easily.
+          By finding where the curves intersect, we see that <m>0\leq y\leq 3</m>.
+          Hence the area should be
+          <md>
+            <mrow>\int_{0}^{3}[(2y - y^{2}) - (y^{2} - 4y)]\,dy &amp; = \int_{0}^{3}[6y - 2y^{2}]\,dy </mrow>
+            <mrow> &amp; = 3y^{2} - \frac{2}{3}y^{3}\Bigg]_{0}^{3} </mrow>
+            <mrow> &amp; = 27 - 18 </mrow>
+          </md>
+          and so the area is just <m>9</m> units.
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-volumes">
+    <title>Volumes</title>
+    <p>
+      Just as we can with areas, we can attempt to find volumes using integrals as well.
+      At the moment we can't find volumes of general regions without first describing integrals in higher dimensions, which is the content of <xref ref="multiple-integrals" text="type-global" />.
+      Until then, we'll need to restrict ourselves to so-called <term>solids of revolution</term>.
+    </p>
+    <p>
+      As an example, consider <xref ref="figure-solid-revolution-1" text="type-global" />.
+      To generate the solid of revolution on the right, we take the graph of <m>y = f(x)</m> and rotate it about the <m>x</m>-axis, creating a three-dimensional region.
+    </p>
+    <figure xml:id="figure-solid-revolution-1">
+      <sidebyside>
+        <image>
+          <latex-image><![CDATA[ 
+          \begin{tikzpicture}
+            \begin{axis}[%
+            mystyle,
+            xmin = -1,
+            xmax = 10.1,
+            ymin = -1,
+            ymax = 4.1,
+            xtick = {2, 4, 6, 8, 10}]
+            \addplot[smooth, samples = 50, blue, thick, domain = 0:9]{sqrt(x)};
+            \addlegendentry{$y = f(x)$};
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+        <image>
+          <latex-image><![CDATA[
+          \begin{tikzpicture}
+            \begin{axis}[%
+            width=2*175pt,
+            tick label style={font=\scriptsize},
+            colormap/cool,
+            axis on top,
+            axis lines=center,
+                % y dir=reverse,
+                name=myplot,
+                enlargelimits=.1,
+                ymin=-4, ymax=4, xmin=-1, xmax=10, zmin=-4, zmax=4,
+                xtick = {1, 2, ..., 10},
+                xlabel=$x$, ylabel=$y$, zlabel=$z$]
+                % [view={60}{30}]
+                \addplot3[surf,
+                samples=50,
+                domain=0:9,y domain=0:2*pi,
+                z buffer=sort]
+                %({(2 + tan(deg(y)))*cos((deg(x)))}, {(2 + cos(x)) * sin(x)}, {x});
+                (x, {(sqrt(x)) * cos(deg(y))}, {(sqrt(x)) * sin(deg(y))});
+                \addlegendentry{Solid of revolution};
+                \addplot3[samples = 50, samples y = 0, domain = 0:9.5, smooth, thick, blue, z buffer = sort] (x, {sqrt(x)}, 0);
+                \addlegendentry{$y = f(x)$};
+                % \addplot3[samples = 500, domain = 0:3, y domain = 0:2*pi, blue!30, opacity = 0.5, z buffer = sort] (9, {x * cos(deg(y))}, {x * sin(deg(y))});
+                \end{axis}
+                \end{tikzpicture}]]>
+              </latex-image>
+            </image>
+          </sidebyside>
+          <caption>Generating a solid of revolution.</caption>
+        </figure>
+        <p>
+          To find the volume of such a region, the idea is to find the <em>area</em> of a general cross-section of the region, which by design should be a function of <m>x</m> alone, say <m>A(x)</m>.
+          Then, roughly, <m>A(x)\Delta x</m> should represent the volume of a small cross-section of the solid, and so the integral <m>\int_{a}^{b}A(x)\,dx</m> should give us the volume of the region.
+          This entire argument can be made precise using Riemann sums as in the previous section, and so we get the following: the solid <m>S</m> from <m>x = a</m> to <m>x = b</m> whose cross-sections (with respect to the <m>x</m>-axis) have area <m>A(x)</m> has volume given by
+          <men xml:id="equation-solid-revolution-volume">V = \int_{a}^{b}A(x)\,dx.</men>
+        </p>
+        <example xml:id="example-finding-the-volume-of-a-sphere">
+          <title>Finding the Volume of a Sphere</title>
+          <statement>
+            <p>
+              Find the volume of a sphere of radius <m>r</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              To begin, let's assume that the sphere is centered at the origin.
+              Then each cross section perpendicular to the <m>x</m>-axis is just a circle with radius <m>\sqrt{r^{2} - x^{2}}</m>.
+              Hence each cross-sectional area is given by <m>A(x) = \pi(r^{2} - x^{2})</m>, which means the volume of the sphere should be
+              <md>
+                <mrow>\int_{-r}^{r}\pi(r^{2} - x^{2})\,dx \amp= 2\int_{0}^{r}\pi(r^{2} - x^{2})\,dx</mrow>
+                <mrow> \amp= 2\left[\pi r^{2}x - \frac{\pi x^{3}}{3}\right]_{0}^{r}</mrow>
+                <mrow> \amp= 2\left[\pi r^{3} - \frac{\pi r^{3}}{3}\right]</mrow>
+                <mrow> \amp= \frac{4}{3}\pi r^{3}.</mrow>
+              </md>
+            </p>
+          </solution>
+        </example>
+        <p>
+          Again, the idea for finding the volumes of these regions is to determine the cross-sectional areas perpendicular to the <m>x</m>-axis (or whatever the axis of rotation happens to be) and then integrate.
+        </p>
+        <example>
+          <statement>
+            <p>
+              Find the volume of the region obtained by rotating the graph of <m>y = \sqrt{x}</m> from <m>x = 1</m> to <m>x = 4</m> about the line <m>y = 2</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              As is almost always the case, a good way to start is by graphing the region to get a rough idea of what it looks like.
+              Doing so, we see that each of the cross-sections are circles.
+              But this is to be expected, since the region is a solid of revolution.
+              Given <m>x</m> between <m>1</m> and <m>4</m>, the area of the corresponding cross-section is given by
+              <me>A(x) = \pi(2 - \sqrt{x})^{2}.</me>
+              Hence the volume of this region should be
+              <md>
+                <mrow>\int_{1}^{4}\pi(2 - \sqrt{x})^{2}\,dx \amp= \pi\int_{1}^{4}(2 - 4\sqrt{x} + x)\,dx</mrow>
+                <mrow> \amp= \pi\left[2x - \frac{8}{3}x^{\frac{3}{2}} + \frac{x^{2}}{2}\right]_{1}^{4}</mrow>
+                <mrow> \amp= \pi\left[\left(8 - \frac{64}{3} + 8\right) - \left(2 - \frac{8}{3} + \frac{1}{2}\right)\right]</mrow>
+              </md>
+            </p>
+          </solution>
+        </example>
+        <p>
+          The previous problems involved finding volumes by using disks since disks were natural cross-sections.
+          The next example instead uses washers as cross-sections instead.
+          Although the formula we get for the volume is slightly different, it's still essentially integrating the areas of the cross-sections.
+        </p>
+        <example xml:id="example-solid-rev-4">
+            <statement>
+              <p>
+                Find the volume of the solid obtained by rotating the region bounded by <m>y = x</m>, <m>y = \sqrt{x}</m> and <m>y = 1</m> about the line <m>x = 2</m>.
+              </p> 
+            </statement>
+            <solution>
+              <p>
+                Since the axis of rotation is <m>x = 2</m>, we want to look at cross-sections perpendicular to this line, i.e., parallel to the <m>x</m>-axis.
+                Each such cross-section will look like a washer, and hence its area will involve the inner radius and outer radius of the washer.
+                Since the radii are measured in terms of horizontal distance, we'll need to find <m>x</m> in terms of <m>y</m>.
+                Doing so, we see that the inner radius is given by <m>2 - y</m> while the outer radius is given by <m>2 - y^{2}</m>.
+                Therefore the volume of the region is given by
+                <md>
+                  <mrow>\int_{0}^{1}\left[\pi(2 - y^{2})^{2} - \pi(2 - y)^{2}\right]\,dy \amp= \pi\int_{0}^{1}\left[(4 - 4y^{2} + y^{4}) - (4 - 2y + y^{2})\right]\,dy</mrow>
+                  <mrow>\amp= \pi\int_{0}^{1}\left[y^{4} - 5y^{2} + 2y\right]\,dy</mrow>
+                </md>
+              </p>
+            </solution>
+        </example>
+      </section>
+      <section xml:id="section-volumes-by-cylindrical-shells">
+          <title>Volumes by Cylindrical Shells</title>
+          <p>
+            The method we used to find volumes in <xref ref="section-volumes" text="type-global" /> applies to solids that have cross-sections depending on <m>x</m> or <m>y</m> alone.
+            Once we had a formula for this area, we could then integrate it to get the volume.
+            However, not all shapes have such simple cross-sections, and so this method doesn't apply in general.
+            In this section, we'll look at using cylindrical shells instead.
+          </p>
+          <p>
+            Therefore, the following fact will prove useful: the volume of a cylindrical shell of height <m>h</m>, inner radius <m>r_{1}</m> and outer radius <m>r_{2}</m> is given by
+            <men xml:id="equation-volume-cylindrical-shell"> V = 2\pi\frac{r_{1} + r_{2}}{2}h(r_{2} - r_{1}) = 2\pi rh\Delta r</men>
+            where <m>r</m> is the "average radius" and <m>\Delta r</m> is the thickness of the shell.
+            If we can break a solid up into these cylindrical "cross-sections," then integrating these areas should again give us the volume of the solid.
+            For shells that are perpendicular to the <m>x</m>-axis, we can typically replace <m>r</m> with <m>x</m> and <m>h</m> with <m>f(x)</m>, leading to an integral of the form
+            <me>\int_{a}^{b}2\pi xf(x)\,dx.</me>
+            <aside>
+              <p>
+                Finding areas using disks and washers usually involves finding disks/washers that are perpendicular to the axis of rotation.
+                When finding volumes using shells, we'll typically use shells that are <em>parallel</em> to the axis of rotation.
+              </p>
+            </aside>
+          </p>
+          <p>
+            One final note: this method, as in <xref ref="section-volumes" text="type-global" />, applies only to solids with a certain degree of symmetry.
+            If you continue on to Calculus 3, the techniques you'll learn in <xref ref="multiple-integrals" text="type-global" /> will replace this method as they do the disk and washer methods from <xref ref="section-volumes" text="type-global" />.
+            In particular, this method is a special case of the transformation to <em>cylindrical coordinates</em> presented in <xref ref="section-cylindrical-coordinates" text="type-global" />.
+          </p>
+          <example xml:id="example-finding-volumes-using-cylindrical-shells">
+              <title>Finding Volumes Using Cylindrical Shells</title>
+              <statement>
+                <p>
+                  Find the volume of the solid obtained by rotating the region bounded by <m>y = x^{2}</m>, <m>y = 0</m> and <m>x = 1</m> about the <m>y</m>-axis.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  The axis of rotation is the <m>y</m>-axis, so each shell should be perpendicular to this axis as well.
+                  Drawing a typical shell, we see that the radius at <m>x</m> should be <m>x</m> while the height is <m>f(x) = x^{2}</m>.
+                  So the volume of this region should be
+                  <me>\int_{0}^{1}2\pi x(x^{2})\,dx = \frac{\pi}{2}.</me>
+                </p>
+              </solution>
+          </example>
+          <p>
+            It should be noted that the volume in <xref ref="example-finding-volumes-using-cylindrical-shells" text="type-global" /> could also have been found using washers instead of shells.
+            If you can, you should use disks or washers before using shells, since integrals derived from using shells are typically more complicated.
+          </p>
+          <example xml:id="example-cylindrical-shells-2">
+            <statement>
+              <p>
+                Find the volume of the solid obtained by rotating the region bounded by <m>x = 0</m>, <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> about the line <m>x = -2</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                A good first step, as always, is to plot the region.
+                Since <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> give downward opening parabolas, we can quickly sketch a rough graph by finding the <m>x</m>-coordinates of the vertices, which occur at <m>x = 2</m>.
+                Finding the corresponding <m>y</m> values, and noticing that each parabola intersects the <m>x</m>-axis at <m>x = 0, 4</m>, gives a pretty good picture of the graph.
+              </p>
+              <p>
+                If we tried to find the volume using disks/washers, we'd need to solve <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> for <m>x</m> since each cross-section would be parallel to the <m>x</m>-axis.
+                This is doable using the quadratic formula, but the algebra would get very bad very quickly once we start integrating.
+                So we'll try shells instead.
+              </p>
+              <p>
+                A typical shell for this region has radius <m>x - (-2) = x + 2</m> and height <m>(8x - 2x^{2}) - (4x - x^{2}) = 4x - x^{2}</m>.
+                Hence the volume is given by
+                <md>
+                  <mrow>\int_{0}^{4}2\pi(x + 2)(4x - x^{2})\,dx \amp= 4\pi\int_{0}^{2}(x + 2)(2x - x^{2})\,dx</mrow>
+                  <mrow> \amp= 4\pi\int_{0}^{2}\left[4x - x^{3}\right]\,dx</mrow>
+                  <mrow> \amp= 4\pi\left[2x^{2} - \frac{x^{4}}{4}\right]_{0}^{2}</mrow>
+                  <mrow> \amp= 16\pi</mrow>
+                </md>
+              </p>
+            </solution>
+          </example>
+      </section>
+      <exercises>
+        <title>MyOpenMath problems</title>
+        <introduction>
+          <p>
+            These problems are only intended for practice.
+            They are <em>not</em> required.
+          </p>
+        </introduction>
+        <exercisegroup>
+          <title>Exercises for <xref ref="section-areas-between-curves" text="type-global" /></title>
+          <introduction>
+            <p>
+              These exercises deal with finding areas between curves.
+            </p>
+          </introduction>
+          <exercise>
+            <myopenmath problem="5613" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="5599"/>
+          </exercise>
+          <exercise>
+            <myopenmath problem="5609" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="15189" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="5600" />
+          </exercise>
+        </exercisegroup>
+        <exercisegroup>
+          <title>Exercises for <xref ref="section-volumes" text="type-global" /></title>
+          <exercise>
+            <myopenmath problem="5615" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="5618" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="5627" />
+          </exercise>
+          <exercise>
+            <myopenmath problem="75661" />
+          </exercise>
+        </exercisegroup>
+      </exercises>
+    </chapter>

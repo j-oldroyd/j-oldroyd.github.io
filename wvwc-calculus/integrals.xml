@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Integrals</title>
+    <introduction>
+        <p>
+            If a function is continuous, then we can always find its antiderivative via integration.
+            The goal of this chapter is to introduce and refine this concept.
+        </p>
+    </introduction>
+    <section xml:id="section-areas-under-curves">
+        <title>Areas Under Curves</title>
+        <p>
+            We know how to find areas of simple shapes, such as rectangles, triangles and circles.
+            But how can we find the area of a more complicated shape?
+            Say, for example, the area under <m>y=x^{3}</m> from <m>x=0</m> to <m>x=1</m>?
+            Well, if we don't know it exactly then we can at least approximate it using a shape we do know.
+            For example, using rectangles.
+        </p>
+        <p>
+            A simple way to divide the graph of <m>y=x^{3}</m> using rectangles is to pick several equally spaced points in the interval <m>[0,1]</m>, say 
+            <me>x_{0} = 1, x_{1} = \frac{1}{3}, x_{2} = \frac{2}{3}, \quad\text{and}\quad x_{3} = 1,</me>
+            and then draw rectangles using these points to determine the base of each rectangle and the height of the graph above the points to determine the height of each rectangle.
+            In particular, we will have three rectangles; the first with base <m>[0,\frac{1}{3}]</m>, the second with base <m>[\frac{1}{3},\frac{2}{3}]</m> and the third with base <m>[\frac{2}{3},1]</m>.
+            Now, the height of each rectangle comes from a point on the graph above the corresponding interval.
+            To make these specific (and relatively straightforward), we'll use <term>right endpoints</term> to determine the height of each rectangle.
+            So the height of each respective rectangle is given by <m>(\frac{1}{3})^{3}</m>, <m>(\frac{2}{3})^{3}</m> and by <m>1^{3}</m>.
+        </p>
+        <p>
+            Now, if we add up the areas of these rectangles we get an approximation for the area under the graph.
+            Call these areas <m>A_{1},A_{2},A_{3}</m>.
+            So the area under the graph of <m>y = x^{3}</m> from <m>x=0</m> to <m>x=1</m> is about 
+            <me>A_{1} + A_{2} + A_{3} = \frac{4}{9}.</me>
+        </p>
+        <p>
+            There's nothing stopping us from going further here.
+            For example, we pick <m>n</m> rectangles, each with base length <m>\frac{1}{n}</m> and heights determined by right endpoints as above, then the area <m>R_{n}</m> of all of the rectangles will be an approximation (in fact, an overestimate) of the area of <m>y = x^{3}</m>.
+            The bases of these rectangles are given by 
+            <me>[0,\frac{1}{n}], [\frac{1}{n},\frac{2}{n}],\ldots,[\frac{n-1}{n},\frac{n}{n}].</me>
+            So the areas of these rectangles are
+            <me>\frac{1}{n}\left(\frac{1}{n}\right)^{3}, \frac{1}{n}\left(\frac{2}{n}\right)^{3},\ldots,\frac{1}{n}\left(\frac{n-1}{n}\right)^{3}, \frac{1}{n}\left(\frac{n}{n}\right)^{3}.</me>
+            Adding these up, we get
+            <me>R_{n} = \frac{1}{n}\frac{1^{3}+2^{3} + 3^{3} + \cdots + n^{3}}{n^{3}}</me>
+            or just
+            <me>R_{n} = \frac{1^{3} + 2^{3} + \cdots + n^{3}}{n^{4}}.</me>
+            So if we sent <m>n</m> to <m>\infty</m>, we should get the exact area.
+            In other words, the area under <m>y=x^{3}</m> from <m>x=0</m> to <m>x=1</m> is given by
+            <me>\lim_{n\to\infty}R_{n} = \lim_{n\to\infty}\frac{1^{3} + 2^{3} + \cdots + n^{3}}{n^{4}}.</me>
+        </p>
+        <p>
+            Actually finding this limit requires some trickery.
+            It's not at all obvious, but we can write 
+            <me>1^{3} + 2^{3} + \cdots + n^{3} = \left[\frac{n(n+1)}{2}\right]^{2}.</me>
+            Hence
+            <md>
+                <mrow>\lim_{n\to\infty}R_{n} &amp; = \lim_{n\to\infty}\frac{1}{n^{4}}\left[\frac{n(n+1)}{2}\right]^{2} </mrow>
+                <mrow> &amp; = \lim_{n\to\infty}\frac{1}{4}\frac{n^{2}(n^{2}+2n+1)}{n^{4}} </mrow>
+                <mrow> &amp; = \lim_{n\to\infty}\frac{1}{4}\frac{n^{4} + 2n^{3} + n^{2}}{n^{4}} </mrow>
+                <mrow> &amp; = \frac{1}{4}. </mrow>
+            </md>
+            So the exact area under <m>y = x^{3}</m> from <m>x=0</m> to <m>x=1</m> is <m>\frac{1}{4}</m>.
+            Note that this matches up with our intuition from the last chapter: the area should be equal to the net change of an antiderivative.
+            In this case, an antiderivative of <m>x^{3}</m> is <m>\frac{1}{4}x^{4}</m>, and the net change of <m>\frac{1}{4}x^{4}</m> from <m>x=0</m> to <m>x=1</m> is exactly <m>\frac{1}{4}</m>.
+        </p>
+        <p>
+            The process we used above for <m>y = x^{3}</m> can be carried out for any continuous function.
+            If we have a function defined on the interval <m>[a,b]</m>, we can approximate the area under the graph by using rectangles.
+            First, we split <m>[a,b]</m> into <m>n</m> different subintervals <m>[x_{0},x_{1}],\ldots,[x_{n-1},x_{n}]</m>, each of width <m>\Delta x = \frac{b-a}{n}</m> and where
+            <md>
+                <mrow>x_{0} &amp; = a </mrow>
+                <mrow>x_{1} &amp; = a + \Delta x = a+\frac{b-a}{n} </mrow>
+                <mrow>x_{2} &amp; = a + 2\Delta x = a + 2\frac{b-a}{n}</mrow>
+                <mrow> &amp; \vdots </mrow>
+                <mrow>x_{n} &amp; a+n\Delta x = b</mrow>
+            </md>
+            The approximate area under the graph of <m>y=f(x)</m> from <m>x=a</m> to <m>x=b</m> is then
+            <me>R_{n} = f(x_{1})\Delta x + f(x_{2})\Delta x + \cdots + f(x_{n})\Delta x.</me>
+            We can now define the area under a graph of a continuous function.
+            Again, the idea is to approximate the graph with more and more rectangles.
+        </p>
+        <definition xml:id="definition-area">
+            <title>Area</title>
+            <statement>
+                <p>
+                    The <term>area</term> under the graph of a continuous function <m>y=f(x)</m>
+                    is the limit of the sum of the areas of the approximating rectangles:
+                    <me>A = \lim_{n\to\infty}R_{n} = \lim_{n\to\infty}[f(x_{1})\Delta x + \cdots + f(x_{n})\Delta x].</me>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Although the previous definition used right endpoints to find the height of each rectangle, this doesn't have to be the case. 
+            We can use left endpoints, midpoints or any other <term>sample points</term> <m>x_{1}^{*}, x_{2}^{*},\ldots,x_{n}^{*}</m>, where each <m>x_{i}^{*}</m> is a point in the interval <m>[x_{i-1},x_{i}].</m>
+        </p>
+        <p>
+            Since finding areas in this way requires writing complicated sums, it seems like a good idea at this point to introduce notation for writing large summations.
+            We call this <term>sigma notation</term>.
+            Sigma notation takes the following form:
+            <me>\sum_{i=\text{start}}^{\text{finish}}(\text{terms involving }i).</me>
+            To evaluate such an expression, just plug in the different values for <m>i</m> from start to finish and add up what you get.
+        </p>
+        <example xml:id="example-evaluating-a-sum">
+            <title>Evaluating a sum</title>
+            <statement>
+                <p>
+                    Determine <m>\sum_{i=-2}^{3}(4-3i).</m>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We start at <m>i=-2</m> and finish at <m>i=3</m>.
+                    Plugging all of these values in for <m>i</m>, we get the following table:
+                    <table>
+                        <tabular halign="center" top="major">
+                            <row top="major" bottom="minor">
+                                <cell><m>i</m></cell>
+                                <cell><m>4-3i</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>-2</m></cell>
+                                <cell><m>10</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>-1</m></cell>
+                                <cell><m>7</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>0</m></cell>
+                                <cell><m>4</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>1</m></cell>
+                                <cell><m>1</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>2</m></cell>
+                                <cell><m>-2</m></cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>3</m></cell>
+                                <cell><m>-5</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    So we can say that
+                    <md>
+                        <mrow>\sum_{i=-2}^{3}(4-3i) &amp; =  10 + 7 + 4 + 1 - 2 - 5</mrow>
+                        <mrow> &amp; = 15. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-using-sigma-notation">
+            <title>Using sigma notation</title>
+            <statement>
+                <p>
+                    Use sigma notation to write the sum of all squares from <m>31</m> to <m>245</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to start at <m>i=31</m> and stop at <m>i=245</m>.
+                    So the first component of this sum using sigma notation looks like <m>\sum_{i=31}^{245}</m>.
+                    Now we just need to figure out what goes inside of it.
+                    Since we're adding squares of numbers, we'll just put <m>i^{2}</m> inside of this sum.
+                    Hence the sum of all squares from <m>31</m> to <m>245</m> can be denoted
+                    <me>\sum_{i=31}^{245}i^{2}.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Sigma notation has some useful properties, since it's just another way to write sums.
+        </p>
+        <theorem xml:id="theorem-properties-of-sigma-notation">
+            <title>Properties of Sigma Notation</title>
+            <statement>
+                <p>
+                    Let <m>X = \sum_{i=a}^{b}x_{i}</m> and let <m>Y = \sum_{i=a}^{b}y_{i}</m>.
+                    Let <m>c</m> be a constant.
+                    Then the following are true:
+                    <md>
+                        <mrow>\sum_{i=a}^{b}c &amp; = c+\cdots+c = (b-a+1)c </mrow>
+                        <mrow>\sum_{i=a}^{b}cx_{i} &amp; = c\sum_{i=a}^{b}x_{i} = cX </mrow>
+                        <mrow>\sum_{i=a}^{b}(x_{i}+y_{i}) &amp; = \sum_{i=a}^{b}x_{i} + \sum_{i=a}^{b}y_{i} = X + Y </mrow>
+                        <mrow>\sum_{i=a}^{b}(x_{i} - y_{i}) &amp; = \sum_{i=a}^{b}x_{i} - \sum_{i=a}^{b}y_{i} = X - Y </mrow>
+                        <mrow>\sum_{i=a}^{k}a_{i} + \sum_{i=k+1}^{b}a_{i} &amp; = \sum_{i=a}^{b}a_{i}. </mrow>
+                    </md>
+                    In other words, we can break sigma notation up over addition and subtraction, and we can move constants outside of it.
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-areas-using-sigma-notation">
+            <title>Areas using sigma notation</title>
+            <statement>
+                <p>
+                    Write down a limit that gives the area under <m>f(x) = \sin x</m> from <m>x=1</m> to <m>x = 3</m> using sigma notation.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, note that we can rewrite <xref ref="definition-area" text="type-global" /> using sigma notation as
+                    <me>A = \lim_{n\to\infty}\sum_{i=1}^{n}f(x_{i})\Delta x.</me>
+                    We know what <m>f(x)</m> is, so we just need to identify <m>x_{i}</m> and <m>\Delta x</m>.
+                    <m>\Delta x</m> isn't too bad here, it's just
+                    <me>\Delta x = \frac{3-1}{n} = \frac{2}{n}.</me>
+                    The <m>x_{i}</m> are a little more complicated, but we'll still use right endpoints to find them.
+                    So we have
+                    <md>
+                        <mrow>x_{0} &amp; = 1 </mrow>
+                        <mrow>x_{1} &amp; = 1 + \frac{2}{n} = \frac{n+2}{n} </mrow>
+                        <mrow>x_{2} &amp; = 1 + 2\frac{2}{n} = \frac{n+4}{n} </mrow>
+                        <mrow>x_{3} &amp; = 1 + 3\frac{2}{n} = \frac{n+6}{n} </mrow>
+                        <mrow> &amp; \vdots </mrow>
+                        <mrow>x_{n} &amp; = 3 </mrow>
+                    </md>
+                    In general,
+                    <me>x_{i} = 1 + i\frac{2}{n} = \frac{n+2i}{n}</me>
+                    for <m>1\leq i\leq n</m>.
+                </p>
+                <p>
+                    Now we have everything we need to write our limit.
+                    Hence the area under <m>\sin x</m> from <m>1</m> to <m>3</m> is given by
+                    <me>\lim_{n\to\infty}\sum_{i=1}^{n}\sin\left(\frac{n+2i}{n}\right)\frac{2}{n}.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Just as the problem of finding the slope of a tangent line can be viewed as a rate of change problem, the problem of finding areas can be viewed as an <em>accumulation problem</em>.
+        </p>
+        <example xml:id="example-finding-work-done">
+            <title>Finding work done</title>
+            <statement>
+                <p>
+                    In physics, the work done by a constant force <m>F</m> on some particle that moves a displacement <m>d</m> is given by the formula
+                    <me>W = Fd.</me>
+                    How should we define the work done by a variable force?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The main idea here is to treat the variable force as the combination of several constant forces.
+                    To be specific, let <m>F(x)</m> denote our force (which depends on position <m>x</m>) and suppose it acts on a particle moving from <m>x=a</m> to <m>x=b</m>.
+                    <m>F(x)</m> itself may not be constant, but if we break <m>[a,b]</m> up into <m>n</m> subintervals of the form <m>[x_{i-1},x_{i}]</m> each of length <m>\Delta x = \frac{b-a}{n}</m>, then <m>F(x)</m> should be nearly constant on each subinterval.
+                    So we can pick points <m>x_{i}^{*}</m> from each subinterval and say that <m>F(x)\approx F(x_{i}^{*})</m> for all <m>x</m> in <m>[x_{i-1},x_{i}]</m>.
+                </p>
+                <p>
+                    Now we can approximate the work done by <m>F</m> as the particle moves through the subinterval <m>[x_{i-1},x_{i}]</m>.
+                    The work done should be about equal to <me>F(x_{i}^{*})\Delta x</me>.
+                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by 
+                    <me>\sum_{i=1}^{n}F(x_{i}^{*})\Delta x,</me>
+                    which suggests that we should define the exact work done to be 
+                    <me>W = \lim_{n\to\infty}\sum_{i=1}^{n}F(x_{i}^{*})\Delta x.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Note that <xref ref="example-finding-work-done" text="type-global" /> was not written in terms of finding areas, but still involved the limit from <xref ref="definition-area" text="type-global" />.
+            This tells us that the ideas in this section have a wider use than in just finding areas under curves.
+        </p>
+    </section>
+    <section xml:id="section-the-definite-integral">
+        <title>The Definite Integral</title>
+        <p>
+            The process used in <xref ref="section-areas-under-curves" text="type-global" /> can be generalized quite a bit.
+            Start with a function <m>f(x)</m> defined on some interval <m>[a,b]</m>, and divide <m>[a,b]</m> into <m>n</m> subintervals 
+            <me>[x_{0},x_{1}], [x_{1},x_{2}],\ldots,[x_{n-1},x_{n}]</me>
+            where <m>x_{0} = a, x_{n} = b</m> and each subinterval has length <m>\Delta x_{i}</m> (i.e. <me>\Delta x_{i} = x_{i} - x_{i-1}</me>).
+            This is known as a <term>partition</term> of <m>[a,b]</m>.
+            Then we can choose sample points <m>x_{1}^{*}</m> from <m>[x_{0},x_{1}]</m>, <m>x_{2}^{*}</m> from <m>[x_{1},x_{2}]</m>, all the way up to <m>x_{n}^{*}</m> from <m>[x_{n-1},x_{n}]</m>.
+            Note that the only restriction we're placing on the sample point <m>x_{i}^{*}</m> is that is must come from the interval <m>[x_{i-1},x_{i}]</m>, but it may be <em>any</em> point in this interval.
+        </p>
+        <p>
+            Using all of this, we can define the <term>Riemann sum</term> associated to <m>f</m> on this partition:
+            <me>\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i}.</me>
+            Although this can be more complicated than our definition in <xref ref="definition-area" text="type-global" />, it still approximates the area under <m>f(x)</m> from <m>x=a</m> to <m>x=b</m>.
+            And as each subinterval in this partition gets smaller (i.e. as <m>\Delta x_{i}\to0</m> or equivalently as <m>n\to\infty</m>), then this approximation should become exact, at least if <m>f(x)</m> is nice enough.
+        </p>
+        <definition xml:id="definition-the-definite-integral">
+            <title>The Definite Integral</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function defined on <m>[a,b]</m>.
+                    Then the <term>definite integral of <m>f(x)</m> from <m>a</m> to <m>b</m></term> is the number
+                    <me>\int_{a}^{b}f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i},</me>
+                    provided that the limit exists (and that <m>\Delta x_{i}\to0</m>).
+                    If this limit exists, we say that <m>f(x)</m> is <term>integrable</term> on <m>[a,b]</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            We can use <xref ref="definition-the-definite-integral" text="type-global" /> to rewrite our area definition: the area under <m>y=f(x)</m> from <m>x=a</m> to <m>x=b</m> is defined to be the definite integral of <m>f</m> on <m>[a,b]</m>, assuming it exists.
+            For a function to be integrable, the particular partition of <m>[a,b]</m> that we use <em>cannot affect the limit</em> in <xref ref="definition-the-definite-integral" text="type-global" />.
+            This gives us a great deal of freedom in approximating the definite integral/area under a curve: when choosing sample points, we can use left endpoints; right endpoints; midpoints and more.
+            However, if <m>f</m> is integrable then we lose nothing by just using right endpoints and subintervals of equal length, as in <xref ref="definition-area" text="type-global" />.
+        </p>
+        <theorem xml:id="theorem-integrability-of-piecewise-continuous-functions">
+            <title>Integrability of Piecewise Continuous Functions</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a piecewise function on <m>[a,b]</m> with finitely many jump discontinuities.
+                    Then <m>f</m> is integrable on <m>[a,b]</m>.
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-expressing-work-done">
+            <title>Expressing work done</title>
+            <statement>
+                <p>
+                    A particle moving from <m>x=-1</m> to <m>x=3</m> is acted upon by the force <m>F(x) = 3x</m>.
+                    Find the work done by the force on this particle.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Using <xref ref="example-finding-work-done" text="type-global" />, we see that the work done should be
+                    <me>W = \lim_{n\to\infty}\sum_{i=1}^{n}3x_{i}^{*}\cdot\frac{4}{n}</me>
+                    which we can rewrite as 
+                    <me>W = \int_{-1}^{3}3x\,dx.</me>
+                    So work is a definite integral.
+                </p>
+                <p>
+                    In this case, we can also find the work done.
+                    Since the definite integral represents area, and the definite integral of <m>3x</m> exists (since this is continuous), then we can say that
+                    <me>W = \int_{-1}^{3}3x\,dx = \frac{1}{2}(1)(-3) + \frac{1}{2}(3)(9) = 12.</me>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-a-radical-integral">
+            <title>A radical integral</title>
+            <statement>
+                <p>
+                    Determine <m>\int_{0}^{2}\sqrt{4-x^{2}}\,dx</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We won't be able to solve this integral algebraically until Calculus 2, but we can solve it geometrically instead.
+                    If we graph <m>y = \sqrt{4-x^{2}}</m>, we get the upper half of the circle of radius <m>2</m> centered at the origin.
+                    So the integral given must be exactly one-fourth the area of this circle, so
+                    <me>\int_{0}^{2}\sqrt{4-x^{2}}\,dx = \frac{1}{4}\pi(2^{2}) = \pi.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Since the definite integral is defined as a limit of sums, it shares many properties with sums.
+            In particular, we have the following version of <xref ref="theorem-properties-of-sigma-notation" text="type-global" />
+        </p>
+        <theorem xml:id="theorem-properties-of-the-definite-integral">
+            <title>Properties of the Definite Integral</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> and <m>g(x)</m> be integrable on <m>[a,b]</m> and let <m>c</m> be a constant.
+                    Let <m>t</m> be any number in <m>[a,b]</m>.
+                    Then the following are true:
+                    <md>
+                        <mrow>\int_{a}^{b}c\,dx &amp; = c(b-a) </mrow>
+                        <mrow>\int_{a}^{b}cf(x)\,dx &amp; = c\int_{a}^{b}f(x)\,dx </mrow>
+                        <mrow>\int_{a}^{b}(f(x)+g(x))\,dx &amp; = \int_{a}^{b}f(x)\,dx + \int_{a}^{b}g(x)\,dx</mrow>
+                        <mrow>\int_{a}^{b}(f(x) - g(x))\,dx &amp; = \int_{a}^{b}f(x)\,dx - \int_{a}^{b}g(x)\,dx </mrow>
+                        <mrow>\int_{a}^{t}f(x)\,dx + \int_{t}^{b}f(x)\,dx &amp; = \int_{a}^{b}f(x)\,dx. </mrow>
+                    </md>
+                    In other words, we can break definite integrals up over addition and subtraction, and we can move constants outside of it.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            Computing integrals in practice often involves setting up and approximating Riemann sums, i.e. sums of the form <m>\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i}</m>.
+            These sums depend on how we choose the sample points <m>x_{i}^{*}</m> from each interval <m>[x_{i-1},x_{i}]</m>.
+            We've mostly worked with <m>x_{i}^{*} = x_{i}</m>, or right endpoints.
+            We could also choose <m>x_{i}^{*} = x_{i-1}</m>, using left endpoints.
+            However, it's often more accurate to use <em>midpoints</em>: <m>x_{i}^{*} = \frac{x_{i-1}+x_{i}}{2}</m>.
+            The reason for this is that if we choose midpoints of intervals as our sample points, these tend to be less affected than either endpoint if the function is increasing or decreasing.
+            In particular, we have the <term>midpoint rule</term>.
+        </p>
+        <definition xml:id="definition-midpoint-rule">
+            <title>Midpoint Rule</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a continuous function.
+                    Then
+                    <me>\int_{a}^{b}f(x)\,dx \approx M_{n} = \sum_{i=1}^{n}f(x_{i}^{*})\Delta x</me>
+                    where
+                    <md>
+                        <mrow>x_{i}^{*} &amp; = \frac{x_{i-1}+x_{i}}{2} </mrow>
+                        <mrow>\Delta x &amp; = \frac{b-a}{n}. </mrow>
+                    </md>
+                    Note that this rule calls for evenly dividing <m>[a,b]</m> into a partition <m>[x_{i-1},x_{i}]</m> where each subinterval has equal length <m>\Delta x</m>.
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="example-approximating-an-integral">
+            <title>Approximating an integral</title>
+            <statement>
+                <p>
+                    Approximate <m>\int_{1}^{3}\frac{1}{x}\,dx</m> using Riemann sums with <m>n=4</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    For this integral, we have
+                    <md>
+                        <mrow>\Delta n &amp; = \frac{3-1}{4} = \frac{1}{2} </mrow>
+                        <mrow>x_{0} &amp; = 1 </mrow>
+                        <mrow>x_{1} &amp; = \frac{3}{2} </mrow>
+                        <mrow>x_{2} &amp; = 2 </mrow>
+                        <mrow>x_{3} &amp; = \frac{5}{2} </mrow>
+                        <mrow>x_{4} &amp; = 3 </mrow>
+                    </md>
+                    We will have different estimates using left endpoints, right endpoints and midpoints.
+                    Using left endpoints, we have
+                    <me>\int_{1}^{3}\frac{1}{x}\,dx \approx L_{4} = \frac{1}{2}\left(1 + \frac{2}{3} + \frac{1}{2} + \frac{2}{5}\right) = 1.283....</me>
+                    Using midpoints, we have
+                    <me>\int_{1}^{3}\frac{1}{x}\,dx \approx M_{4} = \frac{1}{2}\left(\frac{4}{5} + \frac{4}{7} + \frac{4}{9} + \frac{4}{11}\right) \approx1.09.</me>
+                    Using right endpoints, we have
+                    <me>\int_{1}^{3}\frac{1}{x}\,dx \approx R_{4} = \frac{1}{2}\left(\frac{2}{3} + \frac{1}{2} + \frac{2}{5} + \frac{1}{3}\right) = 0.95.</me>
+                </p>
+                <p>
+                    Geometrically, we see that
+                    <me>0.95 = R_{4} &lt; \int_{1}^{3}\frac{1}{x}\,dx &lt; L_{4} = 1.283...</me>
+                    The exact value of this integral is actually <m>\ln 3</m>, and we see that <m>M_{4}</m>, the midpoint estimate, is clearly the best approximation to the integral in this case.
+                </p>
+            </solution>
+        </example>
+        <theorem xml:id="theorem-more-properties-of-the-definite-integral">
+            <title>More Properties of the Definite Integral</title>
+            <statement>
+                <p>
+                    Let <m>f(x),g(x)</m> be integrable functions on <m>[a,b]</m>.
+                    Then
+                    <ol>
+                        <li><m>\int_{a}^{b}f(x)\,dx = - \int_{b}^{a}f(x)\,dx</m></li>
+                        <li><m>\int_{a}^{a}f(x)\,dx = 0</m></li>
+                        <li>If <m>f(x)\geq g(x)</m> on <m>[a,b]</m>, then <m>\int_{a}^{b}f(x)\,dx \geq \int_{a}^{b}g(x)\,dx</m>.</li>
+                        <li>If <m>m\leq f(x)\leq M</m> on <m>[a,b]</m>, then <m>m(b-a)\leq \int_{a}^{b}f(x)\,dx\leq M(b-a)</m>.</li>
+                    </ol>
+                </p>
+            </statement>
+        </theorem>
+    </section>
+    <section xml:id="section-evaluating-integrals">
+        <title>Evaluating Integrals</title>
+        <p>
+            Just as we did with derivatives, we want to find a way to calculate integrals without having to compute limits every time.
+        </p>
+        <theorem xml:id="theorem-evaluation-theorem">
+            <title>Evaluation Theorem</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be continuous on <m>[a,b]</m> and let <m>F(x)</m> be a single antiderivative of <m>f(x)</m> on this interval.
+                    Then 
+                    <me>\int_{a}^{b}f(x)\,dx = F(a) - F(b).</me>
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    First, partition <m>[a,b]</m> into <m>[x_{0},x_{1}],\ldots,[x_{n-1},x_{n}]</m>.
+                    Then we can say that
+                    <md>
+                        <mrow>F(b) - F(a) &amp; = F(x_{n}) - F(x_{0}) </mrow>
+                        <mrow> &amp; = F(x_{n}) - F(x_{n-1}) + F(x_{n-1}) - F(x_{n-2}) + \cdots + F(x_{1}) - F(x_{0}) </mrow>
+                        <mrow> &amp; = \sum_{i=1}^{n}[F(x_{i}) - F(x_{i-1})]. </mrow>
+                    </md>
+                    By the Mean Value Theorem, we can rewrite each term in the sum using <m>F'</m>:
+                    <me>F(x_{i}) - F(x_{i-1}) = F'(x_{i}^{*})(x_{i} - x_{i-1})</me>
+                    where <m>x_{i}^{*}</m> is just some point in <m>[x_{i-1},x_{i}]</m>.
+                    So we have
+                    <md>
+                        <mrow>F(b) - F(a) &amp; = \sum_{i=1}^{n}F'(x_{i}^{*})(x_{i} - x_{i-1}) </mrow>
+                        <mrow> &amp; = \sum_{i=1}^{n}f(x_{i}^{*})\Delta x. </mrow>
+                    </md>
+                    If we now send <m>n\to\infty</m> (i.e,, <m>\Delta x\to 0</m>), then the above becomes
+                    <me>F(b) - F(a) = \int_{a}^{b}f(x)\,dx.</me>
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            <xref ref="theorem-evaluation-theorem" text="type-global" /> tells us that if we want to evaluate the definite integral of a continuous function, we need to first find an antiderivative.
+            We can also think of this result as follows: the definite integral of a rate of change is just the net change of the antiderivative.
+        </p>
+        <example xml:id="example-modeling-a-population">
+            <title>Modeling a population</title>
+            <statement>
+                <p>
+                    A honeybee population starts with <m>100</m> members and grows at a rate of <m>n'(t)</m> per week.
+                    Find the total population after <m>15</m> weeks in terms of <m>n'(t)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The total population after <m>15 weeks</m> should be given by
+                    <md>
+                        <mrow>(\text{total population}) &amp; = (\text{initial population}) + (\text{net change}) </mrow>
+                        <mrow> &amp; = 100 + \int_{0}^{15}n'(t)\,dt </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            As a useful shorthand, we introduce the notation <m>F(b) - F(a) = F(x)\big]_{a}^{b}.</m>
+            So if <m>F</m> is an antiderivative of <m>f</m>, we can say that
+            <me>\int_{a}^{b}f(x)\,dx = F(x)\big]_{a}^{b}.</me>
+        </p>
+        <example xml:id="example-area-under-a-rational-function">
+            <title>Area under a rational function</title>
+            <statement>
+                <p>
+                    Find the area under <m>f(t) = \frac{t^{2}-1}{t^{4}-1}\,dt</m> from <m>t=0</m> to <m>t=\frac{1}{\sqrt{3}}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The area is just the definite integral, which is
+                    <md>
+                        <mrow>\int_{0}^{\frac{1}{\sqrt{3}}}f(t)\,dt &amp; = \int_{0}^{\frac{1}{\sqrt{3}}}\frac{t^{2}-1}{t^{4}-1}\,dt </mrow>
+                        <mrow> &amp; = \int_{0}^{\frac{1}{\sqrt{3}}}\frac{1}{t^{2}+1}\,dt </mrow>
+                        <mrow> &amp; = \tan^{-1}t\big]_{0}^{\frac{1}{\sqrt{3}}} </mrow>
+                        <mrow> &amp; = \tan^{-1}\left(\frac{1}{\sqrt{3}}) - \tan^{-1}(0)\right) </mrow>
+                        <mrow> &amp; = \frac{\pi}{6}. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            The <term>average value</term> of a continuous function <m>f(x)</m> on an interval <m>[a,b]</m> is defined to be
+            <me>\frac{1}{b-a}\int_{a}^{b}f(x)\,dx.</me>
+        </p>
+        <example xml:id="example-average-force">
+            <title>Average force</title>
+            <statement>
+                <p>
+                    An object of mass <quantity><mag>3</mag><unit base="gram" prefix="kilo"/></quantity> is acted upon by several forces that combine to give it an acceleration of <m>a(t) = 4e^{-t} + \sin t</m>, where <m>a(t)</m> is in units of <quantity><unit base="meter"/><per base="second" exp="2"/></quantity> and <m>t</m> is in seconds.
+                    Find the average force acting on the mass from <m>t=1</m> to <m>t=3</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We first need to find the net force acting on the particle.
+                    By Newton's Second Law, this is <m>F_{\text{net}} = ma = 12e^{-t} + 4\sin t</m>.
+                    So the average force should be
+                    <md>
+                        <mrow>\frac{1}{2}\int_{1}^{3}(12e^{-t} + 4\sin t)\,dt &amp; =  \frac{1}{2}\big[-12e^{-t} - 4\cos t\big]_{1}^{3}</mrow>
+                        <mrow> &amp; = \frac{-12e^{-3} - 4\cos 3 + 12e^{-1} + 4\cos1}{2}. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Because of the relationship between definite integrals and antiderivatives, we introduce a notation for antiderivatives that reinforces this connect.
+        </p>
+        <definition xml:id="definition-indefinite-integral">
+            <title>Indefinite Integral</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a continuous function.
+                    The <term>indefinite integral</term> of <m>f(x)</m>, denoted <m>\int f(x)\,dx</m>, is the general antiderivative of <m>f(x)</m>.
+                    In symbols, if <m>F(x)</m> is an antiderivative of <m>f(x)</m> then
+                    <me>\int f(x)\,dx = F(x) + C.</me>
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="example-finding-an-indefinite-integral">
+            <title>Finding an indefinite integral</title>
+            <statement>
+                <p>
+                    Given that 
+                    <me>\dv{}{x}[xe^{x} - e^{x}] = xe^{x},</me>
+                    find <m>\int [xe^{x}+\sec^{2}x]\,dx</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can find this integral by splitting it up, since the antiderivative of a sum is just the sum of the antiderivatives.
+                    So
+                    <md>
+                        <mrow>\int[xe^{x} + \sec^{2}x]\,dx &amp; = \int xe^{x}\,dx + \int\sec^{2}x\,dx </mrow>
+                        <mrow> &amp; = xe^{x}-e^{x} + \tan x + C. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Note that using <xref ref="theorem-evaluation-theorem" text="type-global" /> to find definite integrals relies on having a particular antiderivative of a function <m>f(x)</m>, but we've said nothing about whether or not such an antiderivative can exist.
+            In the next section, we'll see how to use integrals to construct antiderivatives.
+        </p>
+    </section>
+    <section xml:id="section-the-fundamental-theorem-of-calculus">
+        <title>The Fundamental Theorem of Calculus</title>
+        <p>
+            The previous section used antiderivatives to find definite integrals.
+            Now we'll go the other direction and use integrals to define antiderivatives.
+            We can do this as follows.
+        </p>
+        <p>
+            Let <m>f</m> be some function continuous on <m>[a,b]</m>.
+            Then we can say that <m>f</m> must be continuous on every interval of the form <m>[a,x]</m> for <m>x</m> in <m>[a,b]</m>.
+            This means that the definite integrals <m>\int_{a}^{x}f(t)\,dt</m> exist, and so we can use these to define a function, say <m>g(x)</m>.
+        </p>
+        <example xml:id="example-functions-from-integrals">
+            <title>Functions from integrals</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = 2 - x^{2}</m> and define <m>g(x) = \int_{1}^{x}f(t)\,dt</m>.
+                    Find <m>g(x)</m>.
+                    Where is <m>g(x)</m> the largest?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, note that we can compute <m>\int_{1}^{x}f(t)\,dt</m> by finding an antiderivative of <m>f(t) = 2 - t^{2}</m>.
+                    So
+                    <me>g(x) = \int_{1}^{x}(2-t^{2})\,dt = \left[2t-\frac{1}{3}t^{3}\right]_{t=1}^{x}</me>
+                    or just
+                    <me>g(x) = 2x - \frac{1}{3}x^{3} - \frac{5}{3}.</me>
+                </p>
+                <p>
+                    We can find where <m>g</m> is largest by using a derivative test or just geometry.
+                    Since <m>g</m> represents the area under <m>f</m> from <m>1</m> to <m>x</m>, it follows that this area will be largest at <m>x=\sqrt{2}</m>, since this is where <m>f</m> crosses the axis.
+                </p>
+            </solution>
+        </example>
+        <p>
+            There's one important thing to take away from the previous example.
+            The function <m>g(x) = \int_{1}^{x}f(t)\,dt</m> turned out to be an antiderivative of <m>f(x)</m>, so in particular <m>g'(x) = f(x)</m>.
+            This is not a coincidence.
+        </p>
+        <theorem xml:id="theorem-fundamental-theorem-of-calculus">
+            <title>Fundamental Theorem of Calculus</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a continuous function defined on <m>[a,b]</m>.
+                </p>
+                <ol>
+                    <li>Define <m>g(x) = \int_{a}^{x}f(t)\,dt</m> for <m>x</m> in <m>[a,x]</m>.
+                    Then <m>g'(x) = f(x)</m>, i.e., <m>g</m> is an antiderivative of <m>f</m>.</li>
+                    <li>Let <m>F</m> be a particular antiderivative of <m>f</m>.
+                    Then <m>\int_{a}^{b}f(x)\,dx = F(b) - F(a).</m></li>
+                </ol>
+            </statement>
+            <proof>
+                <p>
+                    We'll sketch the proof of the first part.
+                    First, assume that <m>g(x) = \int_{a}^{x}f(t)\,dt</m>.
+                    Then
+                    <me>\frac{g(x+h)-g(x)}{h} = \frac{1}{h}\int_{x}^{x+h}f(t)\,dt.</me>
+                    Now, if <m>h</m> is small and if <m>x\leq t\leq x+h</m>, then <m>\int_{x}^{x+h}f(t)\,dt</m> should be approximately equal to <m>f(x)h</m> since <m>f</m> is continuous.
+                    Therefore
+                    <me>\lim_{h\to0}\frac{g(x+h)-g(x)}{h} = \lim_{h\to0}\frac{f(x)h}{h} = f(x),</me>
+                    and so <m>g'(x) = f(x)</m>.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            The second part of <xref ref="theorem-fundamental-theorem-of-calculus" text="type-global" /> is something we've seen before in <xref ref="theorem-evaluation-theorem" text="type-global" />, but the first part is new.
+            Essentially, this result says that integration and differentiation are <em>inverses</em> of each other.
+        </p>
+        <example xml:id="example-error-function">
+            <title>Error function</title>
+            <statement>
+                <p>
+                    The <term>error function</term>, defined by
+                    <me>erf(x) = \frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}\,dt,</me>
+                    is one of the most important functions in statistics and other applications of mathematics (such as modeling the spread of a virus or the spread of heat).
+                    Find the derivative of <m>\erf(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    By the Fundamental Theorem of Calculus, we have
+                    <me>erf'(x) = \frac{2}{\sqrt{\pi}}e^{-x^{2}}.</me>
+                    Note that <m>\erf'(x)\to0</m> as <m>x\to\infty</m>, which suggests that the error function "levels out" as <m>x</m> increases, which is in fact true.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-computing-derivatives">
+            <title>Computing derivatives</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = \int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt.</m>
+                    Find <m>f'(x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We have
+                    <md>
+                        <mrow>f'(x) &amp; = \dv{}{x}\int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt </mrow>
+                        <mrow> &amp; = -\dv{}{x}\int_{1}^{\sin x}\sqrt{t^{2} + e^{-t}}\,dt </mrow>
+                        <mrow> &amp; = -\sqrt{\sin^{2}x+e^{-\sin x}}\cos x. </mrow>
+                    </md>
+                    Here, <m>\sin x</m> acts like an inside function so we must use the chain rule in addition to the Fundamental Theorem of Calculus to find this derivative.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-a-business-problem">
+            <title>A business problem</title>
+            <statement>
+                <p>
+                    A company purchases equipment that depreciates at a rate <m>f(t)</m> and accumulates maintenance costs at a rate <m>g(t)</m>, where <m>t</m> denotes the number of months after purchase.
+                    The company wants to minimize the cost per month of the equipment due to depreciation and maintenance. 
+                    After how much time should the company replace the equipment?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, we need to figure out the cost per month due to depreciation and maintenance, call it <m>C(t)</m>.
+                    Then
+                    <me>C(t) = \frac{\text{total depreciation} - \text{total maintenance}}{t}.</me>
+                    Now, the total depreciation after <m>t</m> months is <m>\int_{0}^{t}f(s)\,ds</m>, and the total maintenance cost after <m>t</m> months is <m>\int_{0}^{t}g(s)\,ds</m>.
+                    So
+                    <me>C(t) = \frac{1}{t}\int_{0}^{t}[f(s) + g(s)]\,ds.</me>
+                    This is the function we need to minimize.
+                </p>
+                <p>
+                    To minimize <m>C(t)</m>, we'll start by finding its critical points.
+                    Assuming that each of these functions is differentiable, we have
+                    <me>C'(t) = -\frac{1}{t^{2}}\int_{0}^{t}[f(s)+g(s)]\,ds + \frac{f(t) + g(t)}{t}</me>
+                    which reduces to
+                    <me>C'(t) = -\frac{1}{t}C(t) + \frac{f(t) + g(t)}{t}.</me>
+                    So the critical points occur at any value <m>t = T</m> for which <m>C(T) = f(T) + g(T)</m>, i.e., the cost per month due to depreciation and maintenance equals the rate of depreciation plus the rate of maintenance costs.
+                </p>
+                <p>
+                    Now we need to see if we have a minimum or a maximum.
+                    To do so, we can use the second derivative test.
+                    After some algebra, we get that
+                    <me>C''(t) = 2\frac{C(t) - (f(t) + g(t))}{t^{2}} + \frac{f'(t) + g'(t)}{t^{2}},</me>
+                    and so
+                    <me>C''(T) = \frac{f'(T) + g'(T)}{T^{2}} &gt;0.</me>
+                    Therefore <m>T</m> gives a local minimum.
+                    If we assume that <m>C(t)</m> is differentiable everywhere, then this local minimum should also be an absolute minimum since it's the only critical point.
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-substitution">
+        <title>Substitution</title>
+        <p>
+            By <xref ref="theorem-fundamental-theorem-of-calculus" text="type-global" />, we know that integration and differentiation are inverse operations.
+            This means that differentiation rules, such as the chain rule and product rule, have corresponding <em>integration</em> rules.
+            In this section we look at the integration rule corresponding to the chain rule, known as <m>u</m>-substitution, and in Calculus 2 you'll see the integration rule corresponding to the product rule.
+        </p>
+        <p>
+            To see how the chain rule leads to an integration rule, suppose we have an expression <m>F(g(x))</m> where <m>F,g</m> are differentiable.
+            Then the chain rule says that
+            <m>\dv{}{x}F(g(x)) = F'(g(x))g'(x).</m>
+            Now, write <m>F' = f</m> and make the substitution <m>u = g(x)</m>.
+            Then we get
+            <me>f(g(x))g'(x) = f(u)\dv{u}{x}.</me>
+            Now we can integrate both sides of this equation with respect to <m>x</m> to get
+            <me>\int f(g(x))g'(x)\,dx = \int f(u)\dv{u}{x}\,dx = \int f(u)\,du.</me>
+            This method is known as <term><m>u</m>-substitution</term>.
+        </p>
+        <theorem xml:id="theorem--u--substitution">
+            <title><m>u</m>-Substitution</title>
+            <statement>
+                <p>
+                    Let <m>u = g(x)</m> be a differentiable function whose range is an interval <m>I</m>.
+                    Let <m>f(x)</m> be a continuous function on <m>I</m>.
+                    Then 
+                    <me>\int f(g(x))g'(x)\,dx = \int f(u)\,du.</me>
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            Solving an integral <m>\int f(x)\,dx</m> by <m>u</m>-substitution typically proceeds as follows:
+            <ol>
+                <li>Choose some substitution <m>u</m> to simplify your integral. Your choice for <m>u</m> will most likely be an "inside function".</li>
+                <li>Rewrite your integral in terms of <m>u</m> and <m>du</m> instead of <m>x</m> and <m>dx</m>.</li>
+                <li>Solve the resulting integral in terms of <m>u</m> if possible, and then rewrite your answer in terms of the original variable <m>x</m>.</li>
+            </ol>
+        </p>
+        <example xml:id="example-a-simple-substitution">
+            <title>A simple substitution</title>
+            <statement>
+                <p>
+                    Determine <m>\int e^{3x - 2}\,dx</m> by using the substitution <m>u = 3x - 2</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to rewrite the integral in terms of <m>u</m>.
+                    An easy way to start is to replace <m>3x-2</m> with <m>u</m>:
+                    <me>\int e^{3x-2}\,dx = \int e^{u}\,dx.</me>
+                    However, <em>we can't integrate yet</em>.
+                    This is because the integral needs to be written entirely in terms of <m>u</m> and <m>du</m>; no terms involving <m>x</m>, including <m>dx</m>, can remain.
+                    to rewrite <m>dx</m> in terms of <m>du</m>, we'll find <m>\dv{u}{x}</m> and then "solve" for <m>dx</m>:
+                    <me>\dv{u}{x} = 3 \Rightarrow du = 3\,dx \Rightarrow dx = \frac{du}{3}.</me>
+                    So our integral turns into
+                    <md>
+                        <mrow>\int e^{3x-2}\,dx &amp; = \int e^{u}\left(\frac{du}{3}\right) </mrow>
+                        <mrow> &amp; = \frac{1}{3}\int e^{u}\,du </mrow>
+                        <mrow> &amp; = \frac{1}{3}e^{u} + C. </mrow>
+                    </md>
+                    The last step is to replace <m>u</m> with <m>3x-2</m>, and so
+                    <me>\int e^{3x-2}\,dx = \frac{1}{3}e^{3x-2} + C.</me>
+                    We can also check this by differentiating.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-simplifying-an-integral-with-substitution">
+            <title>Simplifying an integral with substitution</title>
+            <statement>
+                <p>
+                    Determine <m>\int(2 - 5t)^{-\frac{3}{2}}\,dt</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can find <m>\int u^{-\frac{3}{2}}\,du</m> without too much trouble, but this integral is more complicated.
+                    However, we can use <m>u</m>-substitution to get our integral into this form.
+                    So we'll let <m>u = 2 - 5t</m>.
+                    Then <m>du = -5\,dt</m>, which means <m>dt = -\frac{du}{5}</m> and so
+                    <md>
+                        <mrow>\int(2-5t)^{-\frac{3}{2}}\,dt &amp; = \int u^{-\frac{3}{2}}\left(-\frac{1}{5}\,du\right) </mrow>
+                        <mrow> &amp; = -\frac{1}{5}\int u^{-\frac{3}{2}}\,du </mrow>
+                        <mrow> &amp; = \frac{1}{5}\frac{2}{1}u^{-\frac{1}{2}} + C </mrow>
+                        <mrow> &amp; = \frac{2}{5}(2 - 5t)^{-\frac{1}{2}} + C. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            <m>u</m>-substitution is often useful if one part of an integral can be written as the derivative of another part of the integral.
+        </p>
+        <example xml:id="example-integral-of-tangent">
+            <title>Integral of tangent</title>
+            <statement>
+                <p>
+                    Find the general antiderivative of <m>\tan x</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to find <m>\int\tan x\,dx</m>.
+                    If we rewrite <m>\tan x</m> in terms of sine and cosine, we get
+                    <me>\int\tan x = \int\frac{\sin x}{\cos x}\,dx.</me>
+                    It's not obvious, but we can solve this using <m>u</m>-substitution since <m>\sin x</m> looks a lot like the derivative of <m>\cos x</m>.
+                    So we'll let <m>u = \cos x</m>, giving <m>du = -\sin x\,dx</m> or just <m>dx = -\frac{du}{\sin x}</m>.
+                    This simplifies our integral to
+                    <me>\int\tan x\,dx = \int-\frac{du}{u} = -\ln|u| + C = -\ln|\cos x|+C.</me>
+                    Since <m>-\ln|\cos x| = \ln|\cos x|^{-1} = \ln|\sec x|</m>, this shows that the general antiderivative of <m>\tan x</m> is
+                    <me>\int \tan x\,dx = \ln|\sec x| + C.</me>
+                    Note that <m>u = \sin x</m> <em>would not work</em> in this example, at least not without some nasty algebra.
+                </p>
+            </solution>
+        </example>
+        <p>
+            We can also use <m>u</m>-substitution to find definite integrals.
+        </p>
+        <example xml:id="example-integrating-with-a-natural-log">
+            <title>Integrating with a natural log</title>
+            <statement>
+                <p>
+                    Determine <m>\int_{e^{2}}^{e^{4}}\frac{dx}{x\sqrt{\ln x}}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    This integral looks awful, but the integrand contains <m>\ln x</m> and its derivative <m>\frac{1}{x}</m>, which suggests that the substitution <m>u = \ln x</m> might simplify things.
+                    So let <m>u = \ln x</m>.
+                    Then <m>du = \frac{1}{x}\,dx</m>, or <m>dx = x\,du</m>, and the integral becomes
+                    <md>
+                        <mrow>\int_{e^{2}}^{e^{4}}\frac{dx}{x\sqrt{\ln x}} &amp; \int_{x=e^{2}}^{x=e^{4}}\frac{x\,du}{x\sqrt{u}} </mrow>
+                        <mrow> &amp; = \int_{x=e^{2}}^{x=e^{4}}\frac{du}{\sqrt{u}} </mrow>
+                        <mrow> &amp; = \Big[u\Big]_{x=e^{2}}^{x=e^{4}} </mrow>
+                        <mrow> &amp; = \Big[\ln x\Big]_{e^{2}}^{e^{4}} </mrow>
+                        <mrow> &amp; = 2. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            In the last example we had to be careful about our limits of integration since they applied to <m>x</m> but not <m>u</m>.
+            We can simplify the process a little by converting the <m>x</m> limits to <m>u</m> limits, as shown in the next example.
+        </p>
+        <example xml:id="example-area-under-sine">
+            <title>Area under <m>x\sin x^{2}</m></title>
+            <statement>
+                <p>
+                    Find the area under the graph of <m>y = x\sin x^{2}</m> from <m>x=0</m> to <m>x = \sqrt{\pi}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    The area is given by <m>\int_{0}^{\sqrt{\pi}}x\sin x^{2}\,dx</m>.
+                    We can solve this by <m>u</m>-substitution.
+                    Let <m>u = x^{2}</m>, our inside function.
+                    Then <m>du = 2x\,dx</m>, so <m>dx = \frac{du}{2x}</m> and our integral turns into
+                    <me>\int_{x=0}^{x=\sqrt{\pi}}\frac{1}{2}\sin u\,du.</me>
+                    Now we change the limits to be in terms of <m>u</m>, giving us <m>u = 0</m> and <m>u = \pi</m>.
+                    So the area is just
+                    <md>
+                        <mrow>\int_{0}^{\sqrt{\pi}}x\sin x^{2}\,dx &amp; = \int_{0}^{\pi}\frac{1}{2}\sin u\,du </mrow>
+                        <mrow> &amp; = \frac{1}{2}[-\cos u]_{0}^{\pi} </mrow>
+                        <mrow> &amp; = \frac{1}{2}(\cos0 - \cos\pi) </mrow>
+                        <mrow> &amp; = 1. </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+    </section>
+</chapter>

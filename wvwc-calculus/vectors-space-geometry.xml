@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="vectors-space-geometry" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Vectors and Euclidean Space</title>
+
+    <introduction>
+        <p>Our main goal now is to extend the concepts of calculus into multiple dimensions. We start by considering the three-dimensional space <m>\RR^{3}</m>.</p>
+    </introduction>
+    <section xml:id="section-coordinates-in-3-space">
+        <title>Coordinates in 3-Space</title>
+        <subsection xml:id="xyz-coordinates">
+            <title><m>xyz</m>-coordinates</title>
+            <p>
+                We're used to Cartesian coordinates in the plane: each point in the plane can be represented by an <m>x</m>-coordinate and a <m>y</m>-coordinate.
+                This representation is determined by the <term>coordinate axes</term> (the <m>x</m>- and <m>y</m>-axes).
+                There's nothing preventing us from doing the same for three dimensions.
+                We'll just need three coordinate axes: the <m>x</m>-, <m>y</m>- and <m>z</m>-axes.
+                We typically view the <m>xy</m>-plane as horizontal, and the <m>z</m>-axis as vertical, but there's no mathematical preference either way.
+            </p>
+            <p>
+                Just as the <m>x</m>- and <m>y</m>-axes determined the <m>xy</m>-plane, we can also get the <m>xz</m>- and <m>yz</m>-planes. 
+                These planes divide space into eight <term>octants</term>. 
+                And just as any point in the <m>xy</m>-plane can be represented by measuring along the <m>x</m>-axis and <m>y</m>-axis to get a point <m>(x,y)</m>, we can do the same in space to get a point <m>(x,y,z)</m>. 
+                The set of all points like this is denoted by <m>\RR^{3}</m>, and is the <term>three-dimensional coordinate system</term>.
+            </p>
+            <p>
+                Given any point <m>(a,b,c)</m> in <m>\RR^{3}</m>, we can find its <term>projections</term> onto any of the coordinate axes or coordinate planes without too much trouble. 
+                The projection onto a line or plane is the point on that line or plane that is closest to the original point <m>(a,b,c)</m>.
+            </p>
+            <example xml:id="example-projection">
+                <title>Projection</title>
+                <statement>
+                    <p>
+                        Find the projection of the point <m>(-1,3,4)</m> onto the <m>yz</m>-plane.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Here's how we can find the projection of the point <m>(-1,3,4)</m> onto the <m>yz</m>-plane. 
+                        Note that the <m>yz</m>-plane is just the set of all points with <m>x</m>-coordinate equation to <m>0</m>, so the projection of <m>(-1,3,4)</m> onto the <m>yz</m>-plane is the point <m>(0,3,4)</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <example xml:id="example-equations-in-space">
+                <title>Equations in space</title>
+                <statement>
+                    <p>
+                        Sketch <m>y=1</m> in <m>\RR^{3}</m>. 
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        This is just the set of all points in <m>\RR^{3}</m> of the form <m>(x,1,z)</m>. 
+                        This forms a <term>plane</term> in <m>\RR^{3}</m>.
+                    </p>
+                </solution>
+            </example>
+            <sage>
+                <input>
+                    x,z = var('x,z')
+                    parametric_plot3d((x,1,z), (x,-4,4), (z,-4,4))
+                </input>
+            </sage>
+
+            <example xml:id="example-more-equations-in-space">
+                <title>More equations in space</title>
+                <statement>
+                    <p>
+                        Sketch <m>x+y=2</m> in <m>\RR^{3}</m>.
+                    </p>
+                </statement> 
+                <solution>
+                    <p>
+                        We can do so as follows. 
+                        First, sketch <m>x+y=2</m> in the <m>xy</m>-plane, which will just be the line <m>y = 2-x</m>. 
+                        Then the surface in <m>\RR^{3}</m> represented by <m>x+y=2</m> is actually the surface consisting of all points directly above and directly below the line <m>y=2-x</m> in the <m>xy</m>-plane.
+                    </p>
+                </solution>
+            </example>
+
+            <example xml:id="example-intersection-of-a-sphere-and-a-plane">
+                <title>Intersection of a sphere and a plane</title>
+                <statement>
+                    <p>
+                        Describe the intersection of the sphere given by the equation <m>(x+2)^{2} + (y-3)^{2} + z^{2} = 9</m> with the <m>xz</m>-plane. 
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We can do this without too much trouble if we remember that the <m>xz</m>-plane is just the set of all points with <m>y</m>-coordinate equal to <m>0</m>. 
+                        So the intersection of this sphere with the <m>xz</m>-plane traces out the curve <m>(x+2)^{2} + (0-3)^{2} + z^{2} = 9</m> in the <m>xz</m>-plane, which is a circle of radius <m>\sqrt{18}</m> centered at the point <m>(-2,0,0)</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-the-distance-formula">
+            <title>The Distance Formula</title>
+            <p>Recall that the distance between two points <m>P_{1}(x_{1},y_{1})</m> and <m>P_{2}(x_{2},y_{2})</m> in <m>\RR^{2}</m> (the <m>xy</m>-plane) is given by</p>
+            <me>|P_{1}P_{2}| = d(P_{1},P_{2}) = \sqrt{(x_{1}-x_{2})^{2}+(y_{1}-y_{2})^{2}}.</me>
+            <p>This is proved using the Pythagorean theorem. We can do the same exact thing in <m>\RR^{3}</m>!</p>
+            <theorem xml:id="theorem-distances-in-space">
+                <title>Distances in Space</title>
+                <index><main>distance formula</main><sub>three dimensions</sub></index>
+                <statement>
+                    <p>
+                        Let <m>P_{1}(x_{1},y_{1},z_{1})</m> and <m>P_{2}(x_{2},y_{2},z_{2})</m> be two points in <m>\RR^{3}</m>. 
+                        Then the distance between these two points, <m>|P_{1}P_{2}| = d(P_{1},P_{2})</m>, is given by
+                        <me>|P_{1}P_{2}| = d(P_{1},P_{2}) = \sqrt{(x_{1}-x_{2})^{2}+(y_{1}-y_{2})^{2} + (z_{1}-z_{2})^{2}}.</me>
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-computing-distances">
+                <title>Computing distances</title>
+                <p><xref ref="theorem-distances-in-space" text="type-global" /> lets us find the distance between the points <m>P(1,4,-2)</m> and <m>Q(-1,0,2)</m> as follows:</p>
+                <me>d(P,Q) = \sqrt{4+16+16} = 6.</me>
+            </example>
+            <p>
+                One important use of the distance formula in <m>\RR^{3}</m> is that it lets us find equations of spheres. 
+                The equation of a sphere of radius <m>r</m> and center <m>C(h,k,l)</m> is given by
+                <me>\sqrt{(x-h)^{2}+(y-k)^{2}+(z-l)^{2}} = r,</me>
+                which is more commonly written as
+                <me>(x-h)^{2}+(y-k)^{2}+(z-l)^{2} = r^{2}.</me>
+            </p>
+            <example xml:id="example-equation-of-a-sphere">
+                <title>Equation of a sphere</title>
+                <p>The equation <m>2x^{2}+2y^{2}+2z^{2} = 8x - 24z + 4</m> represents a sphere in <m>\RR^{3}</m>. To see how, we can rearrange the equation and complete the square to get</p>
+                <md>
+                    <mrow>2x^{2}+2y^{2}+2z^{2} - 8x + 24z = 4 &amp; \Rightarrow x^{2}+y^{2}+z^{2} - 4x + 12z = 2 </mrow>
+                    <mrow> &amp; \Rightarrow (x-2)^{2} + y^{2} + (z-6)^{2} = 2 + 4 + 36</mrow>
+                    <mrow> &amp; \Rightarrow (x-2)^{2} + y^{2} + (z-6)^{2} = 42.</mrow>
+                </md>
+                <p>So this equation describes a sphere of radius <m>\sqrt{42}</m> centered at <m>(2,0,6)</m>.</p>
+            </example>
+
+            <example xml:id="example-spherical-shells">
+                <title>Spherical shells</title>
+                <p>We can also use inequalities to describe regions in addition to equalities. For example, <m>3\leq x^{2}+y^{2}+z^{2}\leq 16</m> describes the region contained between the sphere of radius <m>\sqrt{3}</m> and the sphere of radius <m>4</m>, both centered at the origin.</p>
+            </example>
+            <p>SUGGESTED PROBLEMS: 1, 3, 11, 13</p>
+        </subsection>
+    </section>
+    <section xml:id="section-vectors">
+        <title>Vectors</title>
+        <introduction>
+            <p>
+                One of our goals in this chapter is to adequately describe motion in space. 
+                A useful way to do this uses the concept of <term>vector</term>, which we think of as a quantity that has both direction and magnitude/length. 
+                A simple example would be velocity: velocity in space has a direction and also a magnitude (speed). 
+                We will typically denote vectors by using boldface letters such as <m>\vv{x}</m> or letters with a bar overhead such as <m>\bar{x}</m>. 
+                We represent vectors as arrows with an <term>initial point</term> and a <term>terminal point</term>:
+            </p>
+            <figure xml:id="figure-vector-representation">
+                <image xml:id="image-vector-representation" width="20%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture}
+                            \draw[->] (0,0) node[below left]{$A$} -- (3,2) node[right]{$B$};
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+                <caption>A vector.</caption>
+            </figure>
+            <p>
+                We say that two vectors <m>\vv{x},\vv{y}</m> are <term>equivalent</term>, or <term>equal</term>, if they have the same magnitude and direction. We write this as <m>\vv{x} = \vv{y}</m>.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-addition-and-scalar-multiplication">
+            <title>Addition and Scalar Multiplication</title>
+            <p>Given two vectors <m>\vv{x} = \overrightarrow{AB},\vv{y}=\overrightarrow{BC}</m>, we can add them to get the new vector</p>
+            <me>\vv{x}+\vv{y} = \overrightarrow{AC}.</me>
+            <p>So the vector <m>\vv{x}+\vv{y}</m> is obtained by moving the tail of <m>\vv{y}</m> to the tip of <m>\vv{x}</m> and then drawing a vector from the tail of <m>\vv{x}</m> to the tip of <m>\vv{y}</m>.</p>
+            <figure xml:id="figure-vector-addition">
+                <image xml:id="image-vector-addition" width="40%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture}
+                            \begin{axis}[xmin=-7,ymin=-7,xmax=7,ymax=10, hide axis]
+                            \coordinate (O) at (0,0);
+                            \coordinate (x) at (axis direction cs:1,4);
+                            \coordinate (y) at (axis direction cs:-2,1);
+
+                            \draw[->] (4,2)--($(4,2)+(x)$) node[midway, right]{$\vv{x}$};
+                            \draw[->] (4,1)--($(4,1)+(y)$) node[above]{$\vv{y}$};
+                            \draw[dashed, ->] (O)--($(O)+(x)$) node[midway, right]{$\vv{x}$};
+                            \draw[dashed, ->] ($(O)+(x)$) -- ($(O)+(x)+(y)$) node[midway,above]{$\vv{y}$};
+                            \draw[->] (O)--($(O)+(x)+(y)$) node[midway,left]{$\vv{x}+\vv{y}$};
+                            \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+                <caption>Vector addition.</caption>
+            </figure>
+            <p>
+                The sum <m>\vv{x}+\vv{y}</m> of vectors <m>\vv{x},\vv{y}</m> can be computed using either the <term>triangle law</term>, illustrated above in <xref ref="figure-vector-addition" text="type-global" />, or the similar <term>parallelogram law</term>. 
+                We can also scale vectors using <term>scalar multiplication</term>: if <m>\alpha</m> is a scalar<fn>In other words, a number.
+                </fn> then <m>\alpha\vv{x}</m> is defined to be the vector that has the same direction as <m>\vv{x}</m> if <m>\alpha&gt;0</m> and the opposite direction if <m>\alpha&lt;0</m>, but the magnitude is rescaled by the factor <m>\alpha</m>.
+            </p>
+            <example xml:id="example-vector-subtraction">
+                <title>Vector subtraction</title>
+                <p>Using the previous graph, we can compute <m>2\vv{x}-\vv{y}</m>. We just need to scale the vectors properly and then add <m>2\vv{x}</m> to <m>-\vv{y}</m>.</p>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-vector-components">
+            <title>Vector Components</title>
+            <p>
+                Although it isn't too hard to add and scale vectors visually, it'll be beneficial to do the same algebraically. 
+                We can do so by breaking a vector down into its <term>components</term>. Consider a vector in <m>\vv{x}</m> in <m>\RR^{2}</m>, and suppose if we move it to the origin then the tip of the vector is at the point <m>(3,-1)</m>. 
+                Then the components of <m>\vv{x}</m> are <m>3</m> and <m>-1</m>, and we write
+                <me>\vv{x} = \dotprod{3,-1}.</me>
+            </p>
+            <p>
+                Note the use of brackets here, since technically we are saying that the vector <m>\vv{x}</m> is distinct from the point <m>(3,-1)</m>, even though they are closely related. 
+                We say that the <term>position vector</term> of a point is the vector whose components are the same as the coordinates of the point. 
+                Geometrically, the position vector of a point <m>P</m> is the vector with its tail at the origin and its tip at <m>P</m>.
+            </p>
+            <p>
+                So any vector in <m>\RR^{2}</m> can be represented using components by <m>\vv{x} = \dotprod{x_{1},x_{2}}</m>. 
+                Similarly, any vector in <m>\RR^{3}</m> can be represented as <m>\vv{x} = \dotprod{x_{1},x_{2},x_{3}}</m>. 
+                Once you represent a vector in component form, addition and scalar multiplication is straightforward.
+            </p>
+            <example xml:id="example-vector-addition-with-components">
+                <title>Vector addition with components</title>
+                <p>Let <m>\vv{a} = \dotprod{-2,1,3}</m> and <m>\vv{b} = \dotprod{0,2,1}</m>. Then </p>
+                <me>\vv{b}-3\vv{a} = \dotprod{6,-1,-8}.</me>
+            </example>
+            <p>
+                Finding magnitudes of vectors can also be done by applying the distance formula from <xref ref="section-coordinates-in-3-space" text="type-global" /> to the components of the vectors. 
+                The magnitude of a vector <m>\vv{x}</m> is denoted by <m>|\vv{x}|</m> or <m>\|\vv{x}\|</m>. 
+                For example, the magnitude of <m>\vv{b}-3\vv{a}</m> from the previous example is
+                <me>\|\vv{b}-3\vv{a}\| = \sqrt{36+1+64} = \sqrt{101}.</me>
+            </p>
+            <p>
+                Given a vector <m>\vv{x} = \dotprod{x_{1},x_{2},x_{3}},</m>
+                <me>\|\vv{x}\| = \sqrt{x_{1}^{2}+x_{2}^{2}+x_{3}^{2}}.</me>
+            </p>
+            <example xml:id="example-a-vector-equation">
+                <title>A vector equation</title>
+                <p>We can use vectors to describe curves and surfaces. For example, let <m>\vv{r} = \dotprod{x,y,z}</m> and <m>\vv{r}_{0} = \dotprod{a,b,c}</m>. Let <m>r\geq0</m>. Then the set of all points <m>(x,y,z)</m> that satisfy the equation</p>
+                <me>\|\vv{r}-\vv{r}_{0}\| = r</me>
+                <p>has a very nice description: it's just the sphere of radius <m>r</m> centered at <m>(a,b,c)</m>.</p>
+            </example>
+            <example xml:id="example-finding-position-vectors">
+                <title>Finding components of vectors</title>
+                <p>Consider the points <m>A(4,0,-2)</m> and <m>B(4,2,1)</m>. We want to find the components of the vector <m>\overrightarrow{AB}</m>. We can do this by translating <m>\overrightarrow{AB}</m> to the origin, which is done by subtracting from each coordinate of <m>B</m> the corresponding coordinate of <m>A</m>. So the vector <m>\overrightarrow{AB}</m> is given by</p>
+                <me>\overrightarrow{AB} = \dotprod{4-4,2-0,1+2} = \dotprod{0,2,3}.</me>
+            </example>
+
+            <p>In general, given <m>A(x_{1},y_{1},z_{1})</m> and <m>B(x_{2},y_{2},z_{2}),</m> the vector <m>\vv{x} = \overrightarrow{AB}</m> is given by</p>
+            <me>\vv{x} = \dotprod{x_{2}-x_{1},y_{2}-y_{1},z_{2}-z_{1}}.</me>
+            <theorem xml:id="theorem-properties-of-vector-addition-and-scalar-multiplication">
+                <title>Properties of Vector Addition and Scalar Multiplication</title>
+                <index><main>vectors</main><sub>properties of vector addition and scalar multiplication</sub></index>
+                <statement>
+                    <p>Let <m>\vv{x},\vv{y},\vv{z}</m> be vectors and let <m>\alpha,\beta</m> be scalars. Then the following are true:</p>
+                    <ol cols="2">
+                        <li><p><m>\vv{x}+\vv{y} = \vv{y}+\vv{x}</m>.</p></li>
+                        <li><p><m>\vv{x}+(\vv{y}+\vv{z}) = (\vv{x}+\vv{y})+\vv{z}.</m></p></li>
+                        <li><p><m>\vv{x}+\vv{0} = \vv{x}.</m></p></li>
+                        <li><p><m>\vv{x}+(-\vv{x}) = \vv{0}.</m></p></li>
+                        <li><p><m>\alpha(\vv{x}+\vv{y}) = \alpha\vv{x}+\alpha\vv{y}.</m></p></li>
+                        <li><p><m>(\alpha+\beta)\vv{x} = \alpha\vv{x}+\beta\vv{y}</m></p></li>.
+                        <li><p><m>(\alpha\beta)\vv{x} = \alpha(\beta)\vv{x}.</m></p></li>
+                        <li><p><m>1\vv{x} = \vv{x}.</m></p></li>
+                    </ol>
+                </statement>
+            </theorem>
+        </subsection>
+        <subsection xml:id="subsection-basis-vectors-and-unit-vectors">
+            <title>Basis Vectors and Unit Vectors</title>
+            <p>Every vector in <m>\RR^{3}</m> can be written using three components: <m>\vv{x} = \dotprod{x_{1},x_{2},x_{3}}.</m> Each component corresponds to a coordinate axis, and we can rewrite <m>\vv{x}</m> as a <term>linear combination</term> of three different vectors, with each vector corresponding to a coordinate axis:</p>
+            <me>\vv{x} = x_{1}\dotprod{1,0,0}+x_{2}\dotprod{0,1,0}+x_{3}\dotprod{0,0,1}.</me>
+            These vectors are important enough that we'll give them a name: the <term>standard basis vectors</term>.
+            <definition xml:id="definition-standard-basis-vectors">
+                <title>Standard Basis Vectors</title>
+                <index><main>vectors</main><sub>standard basis</sub></index>
+                <statement>
+                    <p>The standard basis for <m>\RR^{3}</m> is the set <m>\{\vv{i},\vv{j},\vv{k}\}</m>, where</p>
+                    <me>\vv{i} = \dotprod{1,0,0},\quad\vv{j} = \dotprod{0,1,0}\quad\text{and}\quad\vv{k} = \dotprod{0,0,1}.</me>
+                </statement>
+            </definition>
+            <p>As we've seen, every vector <m>\vv{x}</m> in <m>\RR^{3}</m> can be expressed using only these three vectors. The standard basis has two important properties: it is perpendicular (also called <term>orthogonal</term>) and every vector in the collection has magnitude <m>1</m>. In other words,</p>
+            <me>\|\vv{i}\| = \|\vv{j}\| = \|\vv{k}\| = 1.</me>
+            <p>These vectors are essentially designed to capture the "coordinate directions", and are plotted below.</p>
+            <figure xml:id="figure-standard-basis">
+                <image xml:id="image-standard-basis" width="60%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture} [axis/.style={->,blue,thick}, 
+                            vector/.style={-stealth,red,very thick}, 
+                            vector guide/.style={dashed,red,thick}]
+                            \begin{axis}[
+                              view={120}{30},
+                              axis lines=center,
+                              width=15cm,height=15cm,
+                              xtick={-2,-1,1,2},ytick={-2,-1,1,2},ztick={-2,-1,1,2},
+                              % minor tick={-12,-11,...,12},
+                              xmin=-3,xmax=3,ymin=-3,ymax=3,zmin=-3,zmax=3,
+                              xlabel={$x$},ylabel={$y$},zlabel={$z$},
+                            ]
+
+                            %standard tikz coordinate definition using x, y, z coords
+                            \coordinate (O) at (0,0,0);
+
+                            %tikz-3dplot coordinate definition using x, y, z coords
+
+                            \pgfmathsetmacro{\ax}{0.8}
+                            \pgfmathsetmacro{\ay}{0.8}
+                            \pgfmathsetmacro{\az}{0.8}
+
+                            % \coordinate (P) at (\ax,\ay,\az);
+
+                            % %draw axes
+                            \draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{$\vv{i}$};
+                            \draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{$\vv{j}$};
+                            \draw[axis] (0,0,0) -- (0,0,1) node[anchor=west]{$\vv{k}$};
+
+                            %draw a vector from O to P
+                            % \draw[vector] (O) -- (P);
+
+                            %draw guide lines to components
+                            % \draw[vector guide]         (O) -- (\ax,\ay,0);
+                            % \draw[vector guide] (\ax,\ay,0) -- (P);
+                            % \draw[vector guide]         (P) -- (0,0,\az);
+                            % \draw[vector guide] (\ax,\ay,0) -- (0,\ay,0);
+                            % \draw[vector guide] (\ax,\ay,0) -- (0,\ay,0);
+                            % \draw[vector guide] (\ax,\ay,0) -- (\ax,0,0);
+                            % \node[anchor=east]
+                            % at (\ax,0,0){(\ax, 0, 0)};
+                            % \node[anchor=west]
+                            % at (0,\ay,0){(0, \ay, 0)};
+                            % \node[anchor=south]
+                            % at (0,0,\az){(0, 0, \az)};
+                            \end{axis}
+                            \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+                <caption>The standard basis.</caption>
+            </figure>
+            <p>This also leads us to our next definition.</p>
+            <definition xml:id="definition-unit-vectors">
+                <title>Unit Vectors</title>
+                <index><main>vectors</main><sub>unit vectors</sub></index>
+                <statement>
+                    <p>A vector <m>\vv{x}</m> is a unit vector if <m>\|\vv{x}\| = 1</m>.</p>
+                </statement>
+            </definition>
+            <p>Unit vectors are useful if we just need to indicate a direction, and we don't care about magnitude. Every nonzero vector can be rescaled to a unit vector: just divide the vector by its norm.</p>
+            <example xml:id="example-direction-from-one-point-to-another">
+                <title>Direction from one point to another</title>
+                <p>Consider the points <m>A(1,2,-1)</m> and <m>B(0,-3,2)</m>. Then we can find the unit vector indicating the direction from <m>A</m> to <m>B</m>. First, set</p>
+                <me>\vv{x} = \overrightarrow{AB} = \dotprod{-1,-5,3}.</me>
+                <p>Then the unit vector that gives the direction from <m>A</m> to <m>B</m> is given by</p>
+                <md>
+                    <mrow>\vv{u} &amp; = \frac{\vv{x}}{\|\vv{x}\|} </mrow>
+                    <mrow> &amp; = \frac{\dotprod{-1,-5,3}}{\sqrt{1+25+9}} </mrow>
+                    <mrow> &amp; = \dotprod{-\frac{1}{\sqrt{37}}, -\frac{5}{\sqrt{37}}, \frac{3}{\sqrt{37}}}. </mrow>
+                </md>
+            </example>
+            <example xml:id="example-a-vector-equation-for-the-unit-sphere">
+                <title>A vector equation for the unit sphere</title>
+                <p>Using the concept of a unit vector, we can very easily describe the unit sphere<fn>The sphere of radius <m>1</m> centered at the origin.</fn> using a vector equation. If we set <m>\vv{r} = (x,y,z)</m>, then the unit sphere is just the set of all solutions of</p>
+                <me>\|\vv{r}\| = 1.</me>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-applications">
+            <title>Applications</title>
+            <p>Many physical quantities have both a direction and a magnitude, like velocity, acceleration and forces. Vectors are ideally suited to measure these quantities.</p>
+            <example xml:id="example-weight-of-a-chain">
+                <title>Weight of a chain</title>
+                <p>A still chain is fixed to two ends of a level divide. The tension of the chain at each fixed end can be represented by vectors pointing away from the chain. Call these tension forces <m>\vv{T}_{1}</m> and <m>\vv{T}_{2}</m>. Suppose we know that each force vector makes an angle of <m>45^{\circ}</m> with the ground on either side of the chain's fixed ends, and that the magnitude of each tension is <quantity><mag>43</mag><unit base="newton"/></quantity>. Then we can use vector addition to find the weight of the chain.</p>
+                <p>Let <m>\vv{w}</m> denote the weight of the chain considered as a vector (so that it's pointing down). Since the chain is still, its <term>resultant</term><fn>The sum of all forces acting on the chain.</fn> must be <m>\vv{0}</m>. So we can say that</p>
+                <me>\vv{T}_{1}+\vv{T}_{2} + \vv{w} = \vv{0}</me>
+                <p>or in other words</p>
+                <me>\vv{w} = -\vv{T}_{1}-\vv{T}_{2}.</me>
+                <p>What we need to find is <m>\|\vv{w}\|</m>, which we can do without too much trouble if we can rewrite the tension vectors in component form. In fact, we have</p>
+                <md>
+                    <mrow>\vv{T}_{1} &amp; = \dotprod{-\|\vv{T}_{1}\|\cos45^{\circ},\|\vv{T}_{1}\|\sin45^{\circ}} </mrow>
+                    <mrow>\vv{T}_{2} &amp; = \dotprod{\|\vv{T}_{2}\|\cos45^{\circ},\|\vv{T}_{2}\|\sin45^{\circ}} </mrow>
+                </md>
+                <p>So it follows that</p>
+                <md>
+                    <mrow>\|\vv{w}\| &amp; = \|-\vv{T}_{1}-\vv{T}_{2}\| </mrow>
+                    <mrow> &amp; = \left\|\dotprod{0,-2\cdot43\frac{\sqrt{2}}{2}}\right\|</mrow>
+                    <mrow> &amp; = 43\sqrt{2} </mrow>
+                </md>
+                <p>Therefore the chain weighs <m>43\sqrt{2}</m><quantity><unit base="newton"/></quantity>.</p>
+            </example>
+            <p>
+                SUGGESTED PROBLEMS: 1--17 odd, 23, 25, 27
+            </p>
+        </subsection>
+    </section>
+    <section xml:id="section-the-dot-product">
+        <title>The Dot Product</title>
+        <subsection xml:id="subsection-definition-and-properties-of-the-dot-product">
+            <title>Definition and Properties of the Dot Product</title>
+            <p>
+                Suppose we're given two vectors. What we'd like to do is to come up with a measure of how much these vectors overlap.
+                Such a measure may be useful for determining if forces are too close together, for example.
+                So consider two vectors <m>\vv{x} = \dotprod{x_{1},y_{1},z_{1}}</m> and <m>\vv{y} = \dotprod{x_{2},y_{2},z_{2}}</m> as in the following diagram.
+            </p>
+            <figure xml:id="figure-vector-dot-product">
+                <image xml:id="image-vector-dot-product" width="40%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture}
+                            \begin{axis}[xmin=-7,ymin=-7,xmax=7,ymax=7, hide axis]
+                            \coordinate (O) at (0,0);
+                            \coordinate (x) at (axis direction cs:1,4);
+                            \coordinate (y) at (axis direction cs:-2,1);
+
+                            \draw[->] (2,2)--($(2,2)+(x)$) node[midway, right]{$\vv{x}$};
+                            \draw[->] (1,1)--($(1,1)+(y)$) node[above]{$\vv{y}$};
+                            \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>One way we can measure how much <m>\vv{x}</m> and <m>\vv{y}</m> overlap is to find <m>|\vv{x}+\vv{y}|</m>, or equivalently <m>|\vv{x}+\vv{y}|^{2},</m> since this is larger if <m>\vv{x}</m> and <m>\vv{y}</m> are more closely aligned.<fn>We are carefully ignoring the case where <m>\vv{x}</m> and <m>\vv{y}</m> point in opposite directions...</fn> From <xref ref="subsection-vector-components" text="type-global" />, we know that</p>
+            <me>|\vv{x}+\vv{y}|^{2} = (x_{1}+x_{2})^{2} + (y_{1}+y_{2})^{2} + (z_{1}+z_{2})^{2}.</me>
+            <p>This simplifies out to</p>
+            <md>
+                <mrow>|\vv{x}+\vv{y}|^{2} &amp; = (x_{1}+x_{2})^{2} + (y_{1}+y_{2})^{2} + (z_{1}+z_{2})^{2} </mrow>
+                <mrow> &amp; = (x_{1}^{2}+y_{1}^{2}+z_{1}^{2}) + 2(x_{1}x_{2} + y_{1}y_{2} + z_{1}z_{2}) + (x_{2}^{2} + y_{2}^{2} + z_{2}^{2}) </mrow>
+                <mrow> &amp; = |\vv{x}|^{2} + 2(x_{1}x_{2} + y_{1}y_{2} + z_{1}z_{2}) + |\vv{y}|^{2}. </mrow>
+            </md>
+            <p>The only part of this that could possibly depend on how closely <m>\vv{x}</m> and <m>\vv{y}</m> overlap is the middle term <m>2(x_{1}x_{2}+y_{1}y_{2}+z_{1}z_{2})</m>. So we'll (optimistically... for now) take what's inside the parentheses and use it as the measure we're looking for.</p>
+            <definition xml:id="definition-the-dot-product">
+                <title>The Dot Product</title>
+                <index><main>dot product</main><sub>definition</sub></index>
+                <statement>
+                    <p>Let <m>\vv{x} = \dotprod{x_{1},y_{1},z_{1}}</m> and <m>\vv{y} = \dotprod{x_{2},y_{2},z_{2}}</m>. The <term>dot product</term> of <m>\vv{x}</m> with <m>\vv{y}</m>, denoted <m>\vv{x}\cdot\vv{y},</m> is given by</p>
+                    <me>\vv{x}\cdot\vv{y} = x_{1}x_{2}+y_{1}y_{2}+z_{1}z_{2}.</me>
+                </statement>
+            </definition>
+            <p>The dot product is also sometimes called the <term>scalar product</term> (since it always produces a scalar) or the <term>inner product</term> in other settings.</p>
+            <example xml:id="example-computing-dot-products">
+                <title>Computing dot products</title>
+                <p>Let <m>\vv{x} = \dotprod{1,3,-1},\vv{y} = \dotprod{-3,1,0}</m> and <m>\vv{z} = \dotprod{1,1,1}</m>. Then</p>
+                <me>\vv{x}\cdot\vv{z} = 1+3-1 = 3\quad\text{and}\quad\vv{x}\cdot\vv{y} = -3+3+0 = 0.</me>
+                <p>It also doesn't matter what order we take the vectors in for the dot product: we get the same answer regardless. However, it does matter that we only use two vectors. The dot product takes two vectors and gives a scalar. In other words, <em>it is impossible to take the dot product of more than two vectors at a time!</em> So quantities such as <m>\vv{x}\cdot\vv{y}\cdot\vv{z}</m> are not meaningful.</p>
+            </example>
+            <theorem xml:id="theorem-properties-of-the-dot-product">
+                <title>Properties of the Dot Product</title>
+                <index><main>dot product</main><sub>properties</sub></index>
+                <statement>
+                    <p>Let <m>\vv{x},\vv{y}</m> and <m>\vv{z}</m> be vectors, and let <m>\alpha</m> be a scalar. Then the following properties hold:</p>
+                    <ol cols="2">
+                        <li><p><m>\vv{x}\cdot\vv{x} = |\vv{x}|^{2}.</m></p></li>
+                        <li><p><m>\vv{x}\cdot\vv{y} = \vv{y}\cdot\vv{x}.</m></p></li>
+                        <li><p><m>\vv{x}\cdot(\vv{y}+\vv{z}) = \vv{x}\cdot\vv{y}+\vv{x}\cdot\vv{z}.</m></p></li>
+                        <li><p><m>(\alpha\vv{x})\cdot\vv{y} = \alpha(\vv{x}\cdot\vv{y}) = \vv{x}\cdot(\alpha\vv{y}).</m></p></li>
+                        <li><p><m>\vv{0}\cdot\vv{x} = 0.</m></p></li>
+                    </ol>
+                </statement>
+            </theorem>
+            <p>Our goal was to define a measure for how much two given vectors align, or are correlated. The following result tells us that the dot product is actually a reasonable measure of this.</p>
+            <theorem xml:id="theorem-geometry-of-the-dot-product">
+                <title>Geometry of the Dot Product</title>
+                <index><main>dot product</main><sub>geometry</sub></index>
+                <statement>
+                    <p>Let <m>\vv{a}</m> and <m>\vv{b}</m> denote vectors, and let <m>0\leq\theta\leq\pi</m> denote the angle between these vectors if the tails of both are moved to the origin. Then</p>
+                    <me>\vv{a}\cdot\vv{b} = |\vv{a}||\vv{b}|\cos\theta.</me>
+                </statement>
+            </theorem>
+            <proof>
+                <p>Place both vectors <m>\vv{a}</m> and <m>\vv{b}</m> at the origin, and then draw the vector <m>\vv{a}-\vv{b}</m> from the tip of <m>\vv{b}</m> to the tip of <m>\vv{a}</m>, like so:</p>
+                <figure xml:id="figure-dot-product-geometry">
+                    <image xml:id="image-dot-product-geometry" width="60%">
+                        <latex-image><![CDATA[
+                            \begin{tikzpicture} [axis/.style={->,blue,thick}, 
+                                vector/.style={-stealth,red,very thick}, 
+                                vector guide/.style={dashed,red,thick}]
+                                \begin{axis}[
+                                  view={120}{30},
+                                  axis lines=center,
+                                  width=15cm,height=15cm,
+                                  xtick=\empty,ytick=\empty,ztick=\empty,
+                                  % minor tick={-12,-11,...,12},
+                                  xmin=-3,xmax=3,ymin=-3,ymax=3,zmin=-3,zmax=3,
+                                  xlabel={$x$},ylabel={$y$},zlabel={$z$},
+                                ]
+
+                                %standard tikz coordinate definition using x, y, z coords
+                                \coordinate (O) at (0,0,0);
+                                \coordinate (a) at (0,2,2);
+                                \coordinate (b) at (-1,2,-1);
+
+                                % Label origin
+                                \draw (O) node[above left]{$O$};
+
+                                % Draw a,b
+                                \draw[vector] (O)--(a) node[pos=1.1]{$\vv{a}$};
+                                \draw[vector] (O)--(b) node[pos=1.1]{$\vv{b}$};
+                                \draw[vector] (b)--(a) node[midway, above right]{$\vv{a}-\vv{b}$};
+
+                                % Draw angle between a,b
+                                \begin{scope}
+                                  \clip (a)--(O)--(b) -- cycle;
+                                  \draw[<->, dashed] (O) circle (.8cm) node[right,xshift=6pt,yshift=2.5pt]{$\theta$};
+                                \end{scope}
+                                
+                                \end{axis}
+                                \end{tikzpicture}
+                            ]]>
+                        </latex-image>
+                    </image>
+                </figure>
+                <p>Then <m>\vv{a},\vv{b}</m> and <m>\vv{a}-\vv{b}</m> form a triangle. We want to relate the dot product <m>\vv{a}\cdot\vv{b}</m> with the angle <m>\theta</m>, so we'll start by using the Law of Cosines to get an equation involving <m>\theta</m>. The Law of Cosines states that</p>
+                <men xml:id="equation-law-of-cosines">|\vv{a}-\vv{b}|^{2} = |\vv{a}|^{2}+|\vv{b}|^{2} -2|\vv{a}||\vv{b}|\cos\theta.</men>
+                <p>Here's where the dot product comes in. Each squared magnitude can be rewritten as a dot product using <xref ref="theorem-properties-of-the-dot-product" text="type-global" />, so in particular we have</p>
+                <me>|\vv{a}-\vv{b}|^{2} = (\vv{a}-\vv{b})\cdot(\vv{a}-\vv{b}) = |\vv{a}|^{2}-2(\vv{a}\cdot\vv{b}) + |\vv{b}|^{2}.</me>
+                <p>Plugging this into <xref ref="equation-law-of-cosines" /> gives us the following:</p>
+                <me>|\vv{a}|^{2}-2(\vv{a}\cdot\vv{b})+|\vv{b}|^{2} = |\vv{a}|^{2}+|\vv{b}|^{2} - 2|\vv{a}||\vv{b}|\cos\theta</me>
+                <p>Which finally simplifies down to</p>
+                <me>\vv{a}\cdot\vv{b} = |\vv{a}||\vv{b}|\cos\theta.</me>
+            </proof>
+            <remark>
+                <p>It's usually easier to use <xref ref="definition-the-dot-product" text="type-global" /> to compute dot products. However, <xref ref="theorem-geometry-of-the-dot-product" text="type-global" /> gives us extremely useful geometric information about the dot product. For example, we get the following result very quickly: two vectors <m>\vv{a}</m> and <m>\vv{b}</m> are perpendicular if and only if <m>\vv{a}\cdot\vv{b} = 0</m>.</p>
+            </remark>
+            <example xml:id="example-checking-orthogonality-using-the-dot-product">
+                <title>Checking orthogonality using the dot product</title>
+                <p>Let <m>\vv{a} = \dotprod{0,1,-3}</m> and <m>\vv{b} = \dotprod{1,1,2}.</m> Then we can say right away that these vectors are <em>not</em> orthogonal to each other since <m>\vv{a}\cdot\vv{b} = -5 \neq 0</m>. </p>
+            </example>
+            <example xml:id="example-finding-angles-between-lines">
+                <title>Finding angles between lines</title>
+                <p>Consider the lines <m>x+2y = 7</m> and <m>5x-y = 2</m> in <m>\RR^{2}</m>, plotted below:</p>
+                <figure xml:id="figure-angle-between-lines">
+                    <image xml:id="image-angle-between-lines" width="80%">
+                        <latex-image><![CDATA[
+                            \begin{tikzpicture}
+                            \begin{axis}[mystyle, xmin = -6, xmax = 6, ymin = -6, ymax = 6, legend pos = south east]
+                                \addplot[blue]{(7-x)/2};
+                                \addlegendentry{$x+2y=7$};
+                                \addplot[green!60!blue!40]{5*x+2};
+                                \addlegendentry{$5x-y=2$};
+
+                                % Intersection and related points
+                                \coordinate (intersect) at (1,3);
+                                \coordinate (p1) at (5,1);
+                                \coordinate (p2) at (2,8);
+
+                                % Draw angle between lines
+                                \begin{scope}
+                                  \clip (p1)--(intersect)--(p2) -- cycle;
+                                  \draw[<->, dashed] (intersect) circle (4cm) node[right,xshift=-2pt,yshift=7.5pt]{$\theta$};
+                                \end{scope}
+                            \end{axis}
+                            \end{tikzpicture}
+                            ]]>
+                        </latex-image>
+                    </image>
+                </figure>
+                <p>Suppose we want to find the acute angle <m>\theta</m> these lines make with each other. We can do so by finding vectors <m>\vv{a}</m> and <m>\vv{b}</m> that point in the same directions as these lines. We'll start by finding the vector <m>\vv{a}</m> which points in the same direction as the line <m>x+2y=7</m>. To do so, we need two points on this line: <m>A_{1} = (7,0)</m> and <m>A_{2} = (5,1)</m>. So we can take <m>\vv{a}</m> to be</p>
+                <me>\vv{a} = \overrightarrow{A_{1}A_{2}} = \dotprod{-2,1}.</me>
+                <p>Similarly, since <m>B_{1} = (0,-2)</m> and <m>B_{2} = (1,3)</m> both lie on <m>5x-y = 2</m>, we can take</p>
+                <me>\vv{b} = \overrightarrow{B_{1}B_{2}} = \dotprod{1,5}.</me>
+                <p>Then by <xref ref="theorem-geometry-of-the-dot-product" text="type-global" /> we know that</p>
+                <me>\cos\theta = \frac{\vv{a}\cdot\vv{b}}{|\vv{a}||\vv{b}|} = \frac{3}{\sqrt{5}\sqrt{26}} = \frac{3}{\sqrt{130}}.</me>
+                <p>So the acute angle between these two lines is given by</p>
+                <me>\theta = \cos^{-1}\frac{3}{\sqrt{130}}.</me>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-projections">
+            <title>Projections</title>
+            <p>Consider two vectors <m>\vv{a}</m> and <m>\vv{b}</m> arranged as follows:</p>
+            <figure xml:id="figure-orthogonal-projection-1">
+                <image xml:id="image-orthogonal-projection-1" width="60%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture}[vector/.style={-stealth,blue,very thick}]
+                        \begin{axis}[xmin = -6, xmax = 6, ymin = -6, ymax = 6, hide axis]
+                            
+                            \coordinate (p1) at (3,4);
+                            \coordinate (p2) at (5,0);
+                            \coordinate (O) at (0,0);
+
+                            \draw[vector] (O)--(p1) node[pos=1.1]{$\vv{a}$};
+                            \draw[vector] (O)--(p2) node[pos=1.1]{$\vv{b}$};
+                        \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>Now draw a line from the tip of <m>\vv{a}</m> to the point on <m>\vv{b}</m> that is closest to the tip of <m>\vv{a}</m>; such a line must be orthogonal to <m>\vv{b}</m>. This point on <m>\vv{b}</m> defines a new vector that we call the <term>projection of <m>\vv{a}</m> onto <m>\vv{b}</m></term>; we denote this vector by <m>\proj{\vv{b}}{\vv{a}}</m>.</p>
+            <figure xml:id="figure-orthogonal-projection-2">
+                <image xml:id="image-orthogonal-projection-2" width="60%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture}[vector/.style={-stealth,blue,very thick}]
+                        \begin{axis}[xmin = -6, xmax = 6, ymin = -6, ymax = 6, hide axis]
+                            
+                            \coordinate (p1) at (3,4);
+                            \coordinate (p2) at (5,0);
+                            \coordinate (O) at (0,0);
+                            \coordinate (proj) at ($(O)!(p1)!(p2)$);
+
+                            \draw[vector] (O)--(p1) node[pos=1.1]{$\vv{a}$};
+                            \draw[vector] (O)--(p2) node[pos=1.1]{$\vv{b}$};
+
+                            % Drop projection
+                            \draw[dashed] (proj)--(p1);
+                            \draw[vector,green!60!blue!40] (O)--(proj) node[below]{$\proj{\vv{b}}{\vv{a}}$};
+
+                        \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>The projection <m>\proj{\vv{b}}{\vv{a}}</m> can be thought of as the vector parallel to <m>\vv{b}</m> that best approximates <m>\vv{a}</m>. What we'd like to do now is to actually find a formula for this projection. If we let <m>\theta</m> denote the acute angle between the vectors <m>\vv{a}</m> and <m>\vv{b}</m>, then</p>
+            <me>|\proj{\vv{b}}{\vv{a}}| = |\vv{a}|\cos\theta.</me>
+            <p>Since the projection must also be parallel to <m>\vv{b}</m>, then this is enough information to state exactly what <m>\proj{\vv{b}}{\vv{a}}</m> should be: <m>\proj{\vv{b}}{\vv{a}} = (|\vv{a}|\cos\theta)\frac{\vv{b}}{|\vv{b}|}.</m> We can simplify this formula somewhat by making use of <xref ref="theorem-geometry-of-the-dot-product" text="type-global" />.</p>
+            <theorem xml:id="theorem-vector-projection-formulas">
+                <title>Vector Projection Formulas</title>
+                <index><main>vectors</main><sub>vector projection</sub></index>
+                <statement>
+                    <p>Let <m>\vv{a}</m> and <m>\vv{b}</m> denote vectors in <m>\RR^{2}</m> or <m>\RR^{3}</m>. Then the projection of <m>\vv{a}</m> onto <m>\vv{b}</m> is given by</p>
+                    <me>\proj{\vv{b}}{\vv{a}} = \frac{\vv{a}\cdot\vv{b}}{\vv{b}\cdot\vv{b}}\vv{b}.</me>
+                </statement>
+            </theorem>
+            <example xml:id="example-finding-vector-projections">
+                <title>Finding vector projections</title>
+                <p>Let <m>\vv{a} = \dotprod{1,4}</m> and <m>\vv{b} = \dotprod{2,3}</m>. Then by <xref ref="theorem-vector-projection-formulas" text="type-global" /> the projection of <m>\vv{a}</m> onto <m>\vv{b}</m> is given by</p>
+                <me>\proj{\vv{b}}{\vv{a}} = \frac{\vv{a}\cdot\vv{b}}{\vv{b}\cdot\vv{b}}\vv{b} = \frac{14}{13}\dotprod{2,3}.</me>
+            </example>
+            <p>Another example of vector projection is computing work done by a force. In particular, suppose we have a force <m>\vv{F}</m> and some displacement vector <m>\vv{D}</m>. We define the work done by <m>\vv{F}</m> along <m>\vv{D}</m> to be the product of the component of <m>\vv{F}</m> along <m>\vv{D}</m> times the distance moved. If we let <m>\theta</m> denote the acute angle between <m>\vv{F}</m> and <m>\vv{D}</m>, then the work <m>W</m> done is given by</p>
+            <me>W = (|\vv{F}|\cos\theta)|\vv{D}|,</me>
+            <p>which is exactly equal to <m>\vv{F}\cdot\vv{D}</m> by <xref ref="theorem-geometry-of-the-dot-product" text="type-global" />.</p>
+            <example xml:id="example-finding-work-done-by-a-force">
+                <title>Finding work done by a force</title>
+                <p>Suppose a force <m>\vv{F} = 2\vv{i}-3\vv{j}+\vv{k}</m> moves a particle from the point <m>(2,3,-1)</m> to the point <m>(1,0,-3)</m>, where the force is measured in newtons and the distance in meters. We want to find the work done by this force on the particle. To do so, we need the displacement <m>\vv{D}</m>:</p>
+                <me>\vv{D} = \dotprod{1-2,0-3,-3-(-1)} = \dotprod{-1,-3,-2}.</me>
+                <p>So the work done is</p>
+                <me>W = \vv{F}\cdot\vv{D} = -2+9-2 = 5</me>
+                <p>joules.</p>
+            </example>
+            <p>SUGGESTED PROBLEMS: 1--19 odd, 35, 39</p>
+        </subsection>
+    </section>
+    <section xml:id="section-the-cross-product">
+        <title>The Cross Product</title>
+        <introduction>
+            <p>
+                The dot product, and in particular <xref ref="theorem-geometry-of-the-dot-product" text="type-global" />, gives us a good way to tell if two vectors are perpendicular. 
+                However, it says nothing about how to <em>construct</em> perpendicular vectors. 
+                The next vector operation, the <term>cross product</term>, is the tool we'll use for that goal.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-definition-and-properties-of-the-cross-product">
+            <title>Definition and Properties of the Cross Product</title>
+            <definition xml:id="definition-the-cross-product">
+                <index><main>cross product</main><sub>definition</sub></index>
+                <title>The Cross Product</title>
+                <statement>
+                    <p>Let <m>\vv{x} = \dotprod{x_{1},y_{1},z_{1}}</m> and <m>\vv{y} = \dotprod{x_{2},y_{2},z_{2}}</m>. Then the cross product of <m>\vv{x}</m> with <m>\vv{y}</m> is the new vector <m>\vv{x}\times\vv{y}</m> given by</p>
+                    <me>\vv{x}\times\vv{y} = \dotprod{y_{1}z_{2}-z_{1}y_{2}, z_{1}x_{2}-x_{1}z_{2}, x_{1}y_{2} - y_{1}x_{2}}.</me>
+                </statement>
+            </definition>
+            <example xml:id="example-cross-product-of-basis-vectors">
+                <title>Cross product of basis vectors</title>
+                <p>Let's start by computing <m>\vv{i}\times\vv{k}</m> using the definition. If we do so, we have</p>
+                <me>\vv{i}\times\vv{k} = \dotprod{0,-1,0} = -\vv{j}.</me>
+                <p>On the other hand, we also have <m>\vv{k}\times\vv{i} = \vv{j}</m>. This points out the very important fact that <em>order matters for cross products</em>.</p>
+            </example>
+            <p>This formula is a lot to remember, so it's beneficial to find another way to express it. One way is by using <term>determinants</term>. In particular, if <m>\vv{x} = \dotprod{x_{1},y_{1},z_{1}}</m> and <m>\vv{y} = \dotprod{x_{2},y_{2},z_{2}}</m>, then</p>
+            <men xml:id="equation-cross-product-determinant">\vv{x}\times\vv{y} = \left|\begin{array}{ccc}
+                \vv{i} &amp; \vv{j} &amp; \vv{k} \\ x_{1} &amp; y_{1} &amp; z_{1} \\ x_{2} &amp; y_{2} &amp; z_{2} \end{array}\right|</men>
+            <example xml:id="example-another-cross-product">
+                <title>Another cross product</title>
+                <p><xref ref="equation-cross-product-determinant" text="type-global" /> is useful to use if you're dealing with vectors that aren't as simple as the basis vectors <m>\vv{i},\vv{j},\vv{k}</m>. For example, let <m>\vv{a} = \dotprod{-1,2,0}</m> and <m>\vv{b} = \dotprod{2,4,1}</m>. Then</p>
+                <md>
+                    <mrow>\vv{a}\times\vv{b} &amp; = \left|\begin{array}{ccc}
+                    \vv{i} &amp; \vv{j} &amp; \vv{k} \\
+                    -1 &amp; 2 &amp; 0 \\
+                    2 &amp; 4 &amp; 1 \end{array}\right| </mrow>
+                    <mrow> &amp; = \vv{i}\left|\begin{array}{cc} 2 &amp; 0 \\ 4 &amp; 1\end{array}\right| - \vv{j}\left|\begin{array}{cc} -1 &amp; 0 \\ 2 &amp; 1\end{array}\right| + \vv{k}\left|\begin{array}{cc} -1 &amp; 2 \\ 2 &amp; 4\end{array}\right|</mrow>
+                    <mrow> &amp; = 2\vv{i}+\vv{j}-8\vv{k}</mrow>
+                    <mrow> &amp; = \dotprod{2,1,-8}. </mrow>
+                </md>
+            </example>
+            <p>Remember that we said the cross product is our tool for finding perpendicular vectors. So it might be nice if we made sure it actually did that. As a quick check, we'll compute <m>\vv{a}\cdot(\vv{a}\times\vv{b})</m> and <m>\vv{b}\cdot(\vv{a}\times\vv{b})</m>, with these vectors coming from <xref ref="equation-cross-product-determinant" text="type-global" />. If we do so, we obtain</p>
+            <md>
+                <mrow>\vv{a}\cdot(\vv{a}\times\vv{b}) &amp; = -2 + 2 = 0 </mrow>
+                <mrow>\vv{b}\cdot(\vv{a}\times\vv{b}) &amp; = 4 + 4 - 8 = 0 </mrow>
+            </md>
+            <p>Since these dot products are zero, this means that both <m>\vv{a}</m> and <m>\vv{b}</m> are perpendicular to the cross product <m>\vv{a}\times\vv{b}</m>. This is also true in general.</p>
+            <theorem xml:id="theorem-orthogonality-of-the-cross-product">
+                <title>Orthogonality of the Cross Product</title>
+                <index><main>cross product</main><sub>orthogonality</sub></index>
+                <statement>
+                    <p><m>\vv{a}\times\vv{b}</m> is always orthogonal to both <m>\vv{a}</m> and <m>\vv{b}</m>.</p>
+                </statement>
+            </theorem>
+            <p>So the cross product always produces orthogonal vectors. To determine the direction of the cross product <m>\vv{a}\times\vv{b}</m>, we use the <term>right-hand rule</term>: sweep your right hand from <m>\vv{a}</m> to <m>\vv{b}</m> and stick your thumb up. Then <m>\vv{a}\times\vv{b}</m> is parallel to your thumb.</p>
+            <p>We would also like to know the magnitude of the cross product. We can just compute it using <xref ref="definition-the-cross-product" text="type-global" /> and find the magnitude using our usual formula. If we do so, we obtain (after a lot of simplifying!)</p>
+            <me>|\vv{a}\times\vv{b}|^{2} = |\vv{a}|^{2}|\vv{b}|^{2}\sin^{2}\theta,</me>
+            <p>which reduces to the following result.</p>
+            <theorem xml:id="theorem-magnitude-of-the-cross-product">
+                <title>Magnitude of the Cross Product</title>
+                <index><main>cross product</main><sub>magnitude</sub></index>
+                <statement>
+                    <p>Let <m>\theta</m> denote the acute angle between the vectors <m>\vv{a}</m> and <m>\vv{b}</m>, so that <m>0\leq\theta\leq\pi</m>. Then</p>
+                    <me>|\vv{a}\times\vv{b}| = |\vv{a}||\vv{b}|\sin\theta.</me>
+                </statement>
+            </theorem>
+            <p>So in particular, two nonzero vectors <m>\vv{x}</m> and <m>\vv{y}</m> are parallel (i.e. have <m>\theta=0</m>) if and only if <m>\vv{a}\times\vv{b} = \vv{0}</m>.</p>
+
+            <example xml:id="example-testing-collinearity">
+                <title>Testing collinearity</title>
+                <p>We say that three points <m>P,Q</m> and <m>R</m> are <term>collinear</term> if they all lie on the same line. Suppose we want to check if the points <m>P(-2,0,1), Q(-1,2,4)</m> and <m>R(1,6,10)</m> are collinear or not. How can we do so? If we start by defining</p>
+                <me>\vv{u} = \vec{PQ} = \dotprod{1,2,3}\quad\text{and}\quad \vv{v} = \vec{QR} = \dotprod{2,4,6},</me>
+                <p>then we can say that all three points lie on the same line if and only if <m>\vv{u}</m> and <m>\vv{v}</m> are parallel to each other. So we'll compute their cross product to get <m>\vv{u}\times\vv{v} = \vv{0}</m>. Since these vectors are parallel, then the three given points must lie on the same line.</p>
+            </example>
+
+            <p>Another important property of the magnitude of the cross product is the following: <m>|\vv{a}\times\vv{b}|</m> is exactly equal to the area of the parallelogram determined by <m>\vv{a}</m> and <m>\vv{b}</m>.</p>
+
+            <example xml:id="example-areas-of-triangles">
+                <title>Area of a triangle</title>
+                <p>Suppose that we want the area of the triangle with vertices <m>P(1,2,-1), Q(2,0,0)</m> and <m>R(1,-1,-2)</m>. To start, we need to find vectors that determine the triangle. We can use</p>
+                <me>\vv{u} = \vec{PQ} = \dotprod{1,-2,1}\quad\text{and}\quad\vv{v} = \vec{PR} = \dotprod{0,-3,-1}.</me>
+                <p>Now, the triangle determined by <m>\vv{u}</m> and <m>\vv{v}</m> is precisely half of the parallelogram determined by these same vectors, so the area of this triangle is equal to <m>\frac{1}{2}|\vv{u}\times\vv{v}|</m>. We can use Sage as in the cell below to find the cross product of these vectors. Doing so, we get <m>\vv{u}\times\vv{v} = \dotprod{5,1,-3}.</m> So the area of the triangle with vertices <m>P,Q</m> and <m>R</m> is</p>
+                <md>
+                    <mrow>\operatorname{area} \triangle PQR &amp; = \frac{1}{2}|\vv{u}\times\vv{v}| </mrow>
+                    <mrow> &amp; = \frac{1}{2}|\dotprod{5,1,-3}| </mrow>
+                    <mrow> &amp; = \frac{1}{2}\sqrt{35}. </mrow>
+                </md>
+            </example>
+            <sage>
+                <input>
+                    u = vector([1,-2,1])
+                    v = vector([0,-3,-1])
+                    u.cross_product(v)
+                </input>
+                <output>
+                    (5, 1, -3)
+                </output>
+            </sage>
+            <theorem xml:id="theorem-properties-of-the-cross-product">
+                <title>Properties of the Cross Product</title>
+                <index><main>cross product</main><sub>properties</sub></index>
+                <statement>
+                    <p>Let <m>\vv{a},\vv{b},\vv{c}</m> be vectors and <m>c</m> a scalar. Then the following properties are true:</p>
+                    <ol cols="2">
+                        <li><m>\vv{a}\times\vv{b} = -\vv{b}\times\vv{a}</m></li>
+                        <li><m>(c\vv{a})\times\vv{b} = c(\vv{a}\times\vv{b}) = \vv{a}\times(c\vv{b})</m></li>
+                        <li><m>\vv{a}\times(\vv{b}+\vv{c}) = \vv{a}\times\vv{b}+\vv{a}\times\vv{c}</m></li>
+                        <li><m>(\vv{a}+\vv{b})\times\vv{c} = \vv{a}\times\vv{c}+\vv{b}\times\vv{c}</m></li>
+                        <li><m>\vv{a}\cdot(\vv{b}\times\vv{c}) = (\vv{a}\times\vv{b})\cdot\vv{c}</m></li>
+                    </ol>
+                </statement>
+            </theorem>
+            <p>The last item above is an important relationship between the cross product and dot product called the <term>scalar triple product</term>. There is an important geometric significance to this new product.</p>
+            <theorem xml:id="theorem-geometry-of-the-scalar-triple-product">
+                <index>scalar triple product</index>
+                <title>Geometry of the Scalar Triple Product</title>
+                <statement>
+                    <p>Let <m>\vv{a},\vv{b}</m> and <m>\vv{c}</m> be vectors in <m>\RR^{3}</m>. Then <m>|\vv{a}\cdot(\vv{b}\times\vv{c})|</m> is equal to the volume of the parallelepiped determined by <m>\vv{a},\vv{b}</m> and <m>\vv{c}</m>.</p>
+                </statement>
+            </theorem>
+            <example xml:id="example-testing-if-vectors-are-coplanar">
+                <title>Testing if vectors are coplanar</title>
+                <p>We say that three vectors <m>\vv{u},\vv{v}</m> and <m>\vv{w}</m> are <term>coplanar</term> if they can all lie in a single plane. For example, <m>\vv{i},\vv{k}</m> and <m>\dotprod{-4,0,56}</m> are coplanar since they lie in the <m>xz</m>-plane, but <m>\vv{i},\vv{j}</m> and <m>\vv{k}</m> are not coplanar. Suppose we're given <m>\vv{u} = \dotprod{-3,2,1},\vv{v} = \dotprod{1,2,0}</m> and <m>\vv{w} = \dotprod{1,1,1}</m>. These vectors are coplanar if and only if the parallelepiped determined by these vectors has zero volume (i.e. is flat). Since</p>
+                <me>\vv{u}\cdot(\vv{v}\times\vv{w}) = -9,</me>
+                <p>these vectors are <em>not</em> coplanar.</p>
+            </example>
+
+            <example xml:id="example-another-way-to-compute-cross-products">
+                <title>Another way to compute cross products</title>
+                <p>Using <xref ref="theorem-properties-of-the-cross-product" text="type-global" /> and the facts that</p>
+                <md>
+                    <mrow>\vv{i}\times\vv{j} &amp; = \vv{k} </mrow>
+                    <mrow>\vv{j}\times\vv{k} &amp; = \vv{i} </mrow>
+                    <mrow>\vv{k}\times\vv{i} &amp; = \vv{j} </mrow>
+                    <mrow>\vv{a}\times\vv{a} &amp; = \vv{0} </mrow>
+                </md>
+                <p>gives us another way to compute cross products that doesn't involve determinants. As an example, let <m>\vv{u} = \dotprod{1,4,-3}</m> and <m>\vv{v} = \dotprod{0,2,1}.</m> Then</p>
+                <md>
+                    <mrow>\vv{u}\times\vv{v} &amp; = (\vv{i}+4\vv{j}-3\vv{k})\times(2\vv{j}+\vv{k}) </mrow>
+                    <mrow> &amp; = 2\vv{i}\times\vv{j} + \vv{i}\times\vv{k} +8\vv{j}\times\vv{j} + 4\vv{j}\times\vv{k} - 6\vv{k}\times\vv{j} -3\vv{k}\times\vv{k} </mrow>
+                    <mrow> &amp; = 2\vv{k}-\vv{j}+4\vv{i}-6\vv{i} </mrow>
+                    <mrow> &amp; = \dotprod{-2,-1,2}. </mrow>
+                </md>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-torque">
+            <title>Torque</title>
+            <p>Consider a force <m>\vv{F}</m> acting on a rigid body at some position <m>\vv{r}</m>. This force applies a turning affect to the body, that we measure by <term>torque</term>.</p>
+            <definition xml:id="definition-torque">
+                <title>Torque</title>
+                <index>torque</index>
+                <statement>
+                    <p>The torque <m>\boldsymbol{\tau}</m> of a force <m>\vv{F}</m> acting at a position <m>\vv{r}</m> is defined to be the vector </p>
+                    <me>\boldsymbol{\tau} = \vv{r}\times\vv{F}.</me>
+                </statement>
+            </definition>
+            <p>As one example of torque, consider a wrench applied to a bolt. The force is exerted at the end of the wrench, and the torque is a vector that's parallel to the axis of rotation of the bolt. The torque is greater if the force is applied at a direction perpendicular (or nearly so) to that of the wrench, and smaller if the force is nearly parallel to the direction of the wrench. As a quick check, the torque is <m>\vv{0}</m> if the force is exactly parallel to the direction of the wrench, which makes sense: if we're pushing or pulling the wrench, the bolt won't rotate at all.</p>
+
+            <example xml:id="example-torque-and-hex-keys">
+                <title>Torque and hex keys</title>
+                <p>A hex key (Allen wrench) with a short arm of length <quantity><mag>27</mag><unit base="meter" prefix="milli"/></quantity> and a long arm length of <quantity><mag>154</mag><unit base="meter" prefix="milli"/></quantity> is applied to a screw, with the short arm attached to the screw. To turn the screw, a force of <quantity><mag>0.5</mag><unit base="newton"/></quantity> is applied to the long arm of the hex key turning the screw clockwise, and is exactly perpendicular to both the short arm and long arm of the hex key. We want to find the torque of this force on the screw.</p>
+                <p>One way we can do this is to imagine the screw sitting at the origin, and the hex key is (initially) in the <m>xy</m>-plane. Note that once the force is applied, it will begin to rotate the hex key out of the <m>xy</m>-plane. Now, the torque is defined by</p>
+                <me>\boldsymbol{\tau} = \vv{r}\times\vv{F}</me>
+                <p>where <m>\vv{r}</m> is the vector from the screw to the point where the force <m>\vv{F}</m> is applied. We can find <m>\vv{r}</m> without too much trouble: it's <m>\vv{r} = \dotprod{.027,.154,0}</m>. To find the force <m>\vv{F}</m>, note that it's perpendicular to both the long arm and short arm of the screw. So a starting guess would be</p>
+                <me>\vv{F} = \dotprod{.027,0,0}\times\dotprod{0,.154,0} = \dotprod{0,0,.042}.</me>
+                <p>Such a force would turn the screw clockwise, but it has the wrong magnitude. So we need to adjust it a bit: <m>\vv{F} = \dotprod{0,0,.5}</m>. So the torque is given by</p>
+                <md>
+                    <mrow>\mathbf{\tau} &amp;= \vv{r}\times\vv{F} </mrow>
+                    <mrow> &amp; = \dotprod{.027,.154,0}\times\dotprod{0,0,.5} </mrow>
+                    <mrow> &amp; = \dotprod{.154,-.027,0}. </mrow>
+                </md>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1-19 odd, 29, 41
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-equations-of-lines-and-planes">
+        <title>Equations of Lines and Planes</title>
+        <introduction>
+            <p>
+                Recall that the equation of a line in <m>\RR^{2}</m> has the general form <m>ax+by + c = 0</m>. 
+                However, this equation does not give a line in <m>\RR^{3}</m>. 
+                In fact, it actually gives a plane, as we'll see! What we want to do now is find exactly how to describe a given line or plane.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-equations-of-lines">
+            <title>Equations of Lines</title>
+            <p>First, suppose we have a line <m>L</m> in <m>\RR^{3}</m> as follows:</p>
+            <figure xml:id="figure-line-in-space">
+                <image xml:id="image-line-in-space" width="90%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture} [axis/.style={->,blue,thick}, 
+                            vector/.style={-stealth,red,very thick}, 
+                            vector guide/.style={dashed,red,thick}]
+                            \begin{axis}[
+                              view={120}{30},
+                              axis lines=center,
+                              width=15cm,height=15cm,
+                              xtick=\empty,ytick=\empty,ztick=\empty,
+                              % minor tick={-12,-11,...,12},
+                              xmin=-10,xmax=10,ymin=-5,ymax=5,zmin=-5,zmax=5,
+                              xlabel={$x$},ylabel={$y$},zlabel={$z$},
+                              grid=major
+                            ]
+
+                            %standard tikz coordinate definition using x, y, z coords
+                            \coordinate (O) at (0,0,0);
+                            \coordinate (a) at (5,2,2);
+                            \coordinate (b) at (3,1,-1);
+
+                            % Label origin and points on line
+                            \draw (O) node[above left]{$O$};
+                            \node at (a) {\textbullet};
+                            \node at (b) {\textbullet};
+                            \draw (a) node[above left]{$A$};
+                            \draw (b) node[left]{$B$};
+
+                            % Draw a,b
+                            \draw[thick, blue] (7,3,5)--(1,0,-4) node[pos=1.1]{$L$};
+                            \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>Our goal is to find an equation that describes this line. Imagine that we have a vector <m>\vv{r}_{0}</m> pointing from the origin to the point <m>A</m>, like so:</p>
+            <figure xml:id="figure-line-in-space-1">
+                <image xml:id="image-line-in-space-1" width="90%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture} [axis/.style={->,blue,thick}, 
+                            vector/.style={-stealth,red,very thick}, 
+                            vector guide/.style={dashed,red,thick}]
+                            \begin{axis}[
+                              view={120}{30},
+                              axis lines=center,
+                              width=15cm,height=15cm,
+                              xtick=\empty,ytick=\empty,ztick=\empty,
+                              % minor tick={-12,-11,...,12},
+                              xmin=-10,xmax=10,ymin=-5,ymax=5,zmin=-5,zmax=5,
+                              xlabel={$x$},ylabel={$y$},zlabel={$z$},
+                              grid=major
+                            ]
+
+                            %standard tikz coordinate definition using x, y, z coords
+                            \coordinate (O) at (0,0,0);
+                            \coordinate (a) at (5,2,2);
+                            \coordinate (b) at (3,1,-1);
+
+                            % Label origin and points on line
+                            \draw (O) node[above left]{$O$};
+                            \node at (a) {\textbullet};
+                            \node at (b) {\textbullet};
+                            \draw (a) node[above left]{$A$};
+                            \draw (b) node[left]{$B$};
+
+                            % Draw a,b
+                            \draw[thick, blue] (7,3,5)--(1,0,-4) node[pos=1.1]{$L$};
+
+                            % Draw initial vector
+                            \draw[vector] (O)--(a) node[pos=1.7]{$\vv{r}_{0}$};
+                            \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>Then we can get to every other point on the line by starting from <m>\vv{r}_{0}</m>. In particular, if <m>\vv{u}</m> is any vector parallel to <m>\vec{AB}</m>, then <m>\vv{r} = \vv{r}_{0}+\vv{u}</m> must also be on the line <m>L</m>:</p>
+            <figure xml:id="figure-line-in-space-2">
+                <image xml:id="image-line-in-space-2" width="90%">
+                    <latex-image><![CDATA[
+                        \begin{tikzpicture} [axis/.style={->,blue,thick}, 
+                            vector/.style={-stealth,red,very thick}, 
+                            vector guide/.style={dashed,red,thick}]
+                            \begin{axis}[
+                              view={120}{30},
+                              axis lines=center,
+                              width=15cm,height=15cm,
+                              xtick=\empty,ytick=\empty,ztick=\empty,
+                              % minor tick={-12,-11,...,12},
+                              xmin=-10,xmax=10,ymin=-5,ymax=5,zmin=-5,zmax=5,
+                              xlabel={$x$},ylabel={$y$},zlabel={$z$},
+                              grid=major
+                            ]
+
+                            %standard tikz coordinate definition using x, y, z coords
+                            \coordinate (O) at (0,0,0);
+                            \coordinate (a) at (5,2,2);
+                            \coordinate (b) at (3,1,-1);
+
+                            % Label origin and points on line
+                            \draw (O) node[above left]{$O$};
+                            \node at (a) {\textbullet};
+                            \node at (b) {\textbullet};
+                            \draw (a) node[above left]{$A$};
+                            \draw (b) node[left]{$B$};
+
+                            % Draw a,b
+                            \draw[thick, blue] (7,3,5)--(1,0,-4) node[pos=1.1]{$L$};
+
+                            % Draw initial vector, direction vector, vector on line
+                            \draw[vector] (O)--(a) node[pos=1.7]{$\vv{r}_{0}$};
+                            \draw[vector guide] (a)--(4,1.5,.5) node[midway, right]{$\vv{u}$};
+                            \draw[vector] (O)--(4,1.5,.5) node[pos=1.2]{$\vv{r} = \vv{r}_{0}+\vv{u}$};
+                            \end{axis}
+                        \end{tikzpicture}
+                        ]]>
+                    </latex-image>
+                </image>
+            </figure>
+            <p>So to get all possible points on <m>L</m>, we just need to look at all possible vectors <m>\vv{r} = \vv{r}_{0}+\vv{u}</m>, where <m>\vv{u}</m> is any vector parallel to <m>\vec{AB}</m>. If we set <m>\vv{v} = \vec{AB}</m>,<fn>We don't actually have to pick <m>\vv{v} = \vec{AB}</m>, we just need <m>\vv{v}</m> to be parallel to <m>\vec{AB}</m>.</fn> then</p>
+            <me>\vv{r} = \vv{r}_{0}+t\vv{v}</me>
+            <p>will trace out all points on <m>L</m> as <m>t</m> varies from <m>-\infty</m> to <m>\infty</m>.</p>
+            <theorem xml:id="theorem-parametric-equations-of-a-line">
+                <title>Parametric Equations of a Line</title>
+                <index><main>lines</main><sub>parametric equations in <m>\RR^{3}</m></sub></index>
+                <statement>
+                    <p>If <m>P_{0}(x_{0},y_{0},z_{0})</m> is a point on a line <m>L</m>, and if <m>\vv{v} = \dotprod{a,b,c}</m> is parallel to <m>L</m>, then</p>
+                    <me>\vv{r} = \vv{r}_{0}+t\vv{v}</me>
+                    <p>traces out <m>L</m>, where </p>
+                    <me>\vv{r} = \dotprod{x,y,z},\quad\vv{r}_{0} = \dotprod{x_{0},y_{0},z_{0}}.</me>
+                    <p>We can also write this as the system of equations</p>
+                    <me>x = x_{0}+ta,\quad y=y_{0}+tb\quad\text{and}\quad z = z_{0}+tc.</me>
+                </statement>
+            </theorem>
+            <example xml:id="example-equation-of-a-line-with-a-given-direction-and-point">
+                <title>Equation of a line with a given direction and point</title>
+                <p>Suppose we want to find the equation of a line <m>L</m> that passes through <m>(2,5,-3)</m> and is perpendicular to <m>\vv{u} = \dotprod{2,1,2}</m>. <xref ref="theorem-parametric-equations-of-a-line" text="type-global" /> says that we only need to find the right choices for <m>\vv{r}_{0}</m> and <m>\vv{v}</m> in order to get the equation of such a line, and we can write down one of these right away:</p>
+                <me>\vv{r}_{0} = \dotprod{2,5,-3}.</me>
+                <p>So we just need to find <m>\vv{v}</m>. Since <m>L</m> is orthogonal to <m>\vv{u} = \dotprod{2,1,2}</m>, this means we want <m>\vv{v}</m> to be orthogonal to <m>\vv{u}</m> as well. A great way to find such a <m>\vv{v}</m> is to use the cross product. If <m>\vv{w}</m> is any nonzero vector, then <m>\vv{u}\times\vv{w}</m> must be orthogonal to both <m>\vv{u}</m> and <m>\vv{w}</m>, and in particular it must be orthogonal to <m>\vv{u}</m>. So we can take</p>
+                <me>\vv{v} = \dotprod{2,1,2}\times\vv{i} = \dotprod{0,2,-1}.</me>
+                <p>So the equation of this line is</p>
+                <me>\vv{r} = \dotprod{2,1+2t,2-t}</me>
+                <p>As <m>t</m> varies, this will trace out our line.</p>
+            </example>
+            <p>When we begin working with line integrals, we'll need to know how to parameterize a line segment, so we'll discuss that now. Suppose we have a line segment between two points <m>P_{0}</m> and <m>P_{1}</m>. Let <m>\vv{r}_{0}</m> and <m>\vv{r}_{1}</m> denote the corresponding position vectors of these points (i.e. the vectors whose components are given by the coordinates of these points). Then the equation of the <em>line</em> between <m>P_{0}</m> and <m>P_{1}</m> is given by</p>
+            <me>\vv{r}] = \vv{r}_{0}+t(\vv{r}_{1}-\vv{r}_{0}) = (1-t)\vv{r}_{0}+t\vv{r}_{1}.</me>
+            <p>To get the line segment we're actually looking for, we just need to restrict <m>t</m> to the interval <m>0\leq t\leq 1</m>. So we can say that </p>
+            <me>\vv{r} = (1-t)\vv{r}_{0}+t\vv{r}_{1} \quad\text{with}\quad0\leq t\leq 1</me>
+            <p>traces out the line segment between <m>P_{0}</m> and <m>P_{1}</m>.</p>
+        </subsection>
+        <subsection xml:id="subsection-equations-of-planes">
+            <title>Equations of Planes</title>
+            <p>Now we move on to finding the equation of a plane. We'll try a vector approach to this like we did for lines, and this won't be too bad to do. We just need to keep the following in mind:</p>
+            <observation xml:id="observation-vectors-and-planes">
+                <p>A plane in <m>\RR^{3}</m> is uniquely determined by specifying a single point for it to pass through and a direction for it to face.</p>
+            </observation>
+            <p>So in particular, vectors will provide a nice way to specify the direction of a plane, and any vector that does so must be orthogonal to the plane. If a (nonzero) vector <m>\vv{n}</m> is orthogonal to a given plane, then we call <m>\vv{n}</m> a <term>normal vector</term> to the plane. Now we can build up an equation of a given plane.</p>
+            <p>Let <m>P_{0}(x_{0},y_{0},z_{0})</m> denote a point on the plane, and let <m>\vv{n} = \dotprod{a,b,c}</m> be a normal vector to the plane. If <m>\vv{r}=\dotprod{x,y,z}</m> is the position vector of any other point on the plane, then it must be true that <m>\vv{n}\cdot(\vv{r}-\vv{r}_{0}) = 0</m>, where <m>\vv{r}_{0}</m> is the position vector of <m>P_{0}</m>. We can summarize this in the following theorem.</p>
+            <theorem xml:id="theorem-vector-and-scalar-equations-of-a-plane">
+                <title>Vector and Scalar Equations of a Plane</title>
+                <index><main>planes</main><sub>vector and scalar equations</sub></index>
+                <statement>
+                    <p>If <m>\vv{r}_{0} = \dotprod{x_{0},y_{0},z_{0}}</m> is the position vector for some point on a plane with normal vector <m>\vv{n} = \dotprod{a,b,c}</m>, then the position vector <m>\vv{r} = \dotprod{x,y,z}</m> of any other point on the plane must satisfy the <term>vector equation of the plane</term>:</p>
+                    <me>\vv{n}\cdot(\vv{r}-\vv{r}_{0}) = 0.</me>
+                    <p>Equivalently, any point <m>(x,y,z)</m> must also satisfy the equivalent <term>scalar equation of the plane</term>:</p>
+                    <me>a(x-x_{0})+b(y-y_{0})+c(z-z_{0}) = 0.</me>
+                </statement>
+            </theorem>
+            <example xml:id="example-equation-of-a-plane-ortho">
+                <title>Equation of a plane orthogonal to a line</title>
+                <p>Consider the two lines in <m>\RR^{3}</m> determined by the equations</p>
+                <md>
+                    <mrow>\vv{r}_{1} &amp; = \dotprod{1,1,0} + t\dotprod{1,-1,2} </mrow>
+                    <mrow>\vv{r}_{2} &amp; = \dotprod{2,0,2} + s\dotprod{-1,1,0} </mrow>
+                </md>
+                <p>We want to find the equation of the plane that contains the intersection of these two lines and is orthogonal to the first line. By <xref ref="theorem-vector-and-scalar-equations-of-a-plane" text="type-global" />, we need a point on the plane and a normal vector. Since the plane must contain the intersection of these two lines, that's our point. To find it, we'll set <m>\vv{r}_{1} = \vv{r}_{2}</m> and go from there:</p>
+                <md>
+                    <mrow>\vv{r}_{1}=\vv{r}_{2} &amp; \Rightarrow \dotprod{-1,1,-2} + \dotprod{t+s,s-t,2t} = \vv{0} </mrow>
+                    <mrow> &amp; \Rightarrow t+s-1 = s-t+1 = 2t-2 = 0 </mrow>
+                    <mrow> &amp; \Rightarrow t = 1\quad\text{and}\quad s=0 </mrow>
+                </md>
+                <p>So the position vector <m>\vv{r}_{0}</m> of the point where these lines intersect is given by <m>\vv{r}_{0} = \dotprod{2,0,2}</m>. We also need a normal vector to the plane, but this is easy to find: since the plane needs to be orthogonal to the first line, we can just take <m>\vv{n} = \dotprod{1,-1,2}</m>. So the equation of our plane is</p>
+                <me>\dotprod{1,-1,2}\cdot\dotprod{x-2,y,z-2} = 0</me>
+                <p>or equivalently</p>
+                <me>x-y+2z -6 = 0.</me>
+                <p>This plane is plotted below using the Sage cell immediately after this example.</p>
+            </example>
+            <sage>
+                <input>
+                    from sage.manifolds.utilities import set_axes_labels
+                    var('x y')
+                    P = plot3d((y-x)/2+3, (x,-3,3), (y,-3,3)) 
+                    set_axes_labels(P,'x','y','z')
+                </input>
+            </sage>
+            <p>We can rewrite the equation of a plane in the form</p>
+            <me>ax+by+cz+d = 0.</me>
+            <p>A normal vector to this plane is given by <m>\vv{n} = \dotprod{a,b,c}</m>.</p>
+            <example xml:id="example-equation-of-a-line-orthogonal-to-a-plane">
+                <title>Equation of a line orthogonal to a plane</title>
+                <p>Suppose we're given the plane <m>3x-5z+2 = 0</m>, and we want to find the equation of the line orthogonal to this plane and passing through the point <m>(3,-1,2)</m>. Then the equation of this line is</p>
+                <me>\vv{r} = \vv{r}_{0}+t\vv{v}</me>
+                <p>where <m>\vv{r}_{0} = \dotprod{3,-1,2}</m> and <m>\vv{v}</m> is a vector parallel to the line. Since the line must be orthogonal to the plane, we can take <m>\vv{v} = \dotprod{3,0,-5}</m>. So the equation of this line is</p>
+                <me>\vv{r} = \dotprod{3,-1,2}+\dotprod{3t,0,-5t}.</me>
+            </example>
+            <example xml:id="example-equation-of-a-line-of-intersection-between-two-planes">
+                <title>Equation of a plane containing a line and a point</title>
+                <p>Suppose we're trying to find a plane containing the point <m>(1,2,0)</m> and containing the line <m>\vv{r} = \dotprod{3-t,2,5+2t}</m>. To get the equation of this plane, we also need a normal vector to the plane. We can find the normal vector by computing the cross product of two vectors parallel to the plane.</p>
+                <p>First, since the plane contains the line <m>\dotprod{3-t,2,5+2t},</m> the direction of this line must be parallel to the plane. So we know that <m>\vv{v} = \dotprod{-1,0,2}</m> is parallel to the plane. To get another vector parallel to this plane, we can use the given point and a second point in the plane, say <m>(3,2,5)</m>, which comes from the line (just set <m>t=0</m>). So the vector <m>\vv{u} = \dotprod{3-1,2-2,5-0} = \dotprod{2,0,5}</m> must also be parallel to the plane. Hence a normal vector to this plane is</p>
+                <me>\vv{n} = \vv{u}\times\vv{v} = \dotprod{0,9,0}.</me>
+                <p>So an equation of this plane is given by</p>
+                <me>9(y-2) = 0.</me>
+            </example>
+            <p>SUGGESTED PROBLEMS: 1, 3, 5, 11, 17, 21, 27, 31</p>
+        </subsection>
+    </section>
+    <section xml:id="section-cylinders-and-quadric-surfaces">
+        <title>Cylinders and Quadric Surfaces</title>
+        <introduction>
+            <p>
+                Before we move on to doing calculus with vectors, we'll briefly take a look at more graphs in <m>\RR^{3}</m>. 
+                In particular, we'll look at <term>cylinders</term> and <term>quadric surfaces</term>.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-cylinders">
+            <title>Cylinders</title>
+            <definition xml:id="definition-cylinders">
+                <index><main>cylinders</main><sub>definition</sub></index>
+                <title>Cylinders</title>
+                <statement>
+                    <p>A cylinder is the collection of all lines parallel to a given line and passing through some plane curve.</p>
+                </statement>
+            </definition>
+            <p>A basic example of a cylinder is the set of all lines passing through the unit circle in the <m>xy</m>-plane and parallel to the <m>z</m>-axis. In <m>\RR^{3}</m>, this is just the graph of <m>x^{2}+y^{2}=1</m>. The graph of this cylinder is provided below.</p>
+            <sage>
+                <input>
+                    # Code shamelessly stolen from this stackoverflow post: http://stackoverflow.com/questions/26989131/add-cylinder-to-plot
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    from mpl_toolkits.mplot3d import Axes3D
+
+                    plt.rc('text', usetex=True)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111, projection='3d')
+
+                    # Cylinder
+                    x=np.linspace(-1, 1, 100)
+                    z=np.linspace(-2, 2, 100)
+                    Xc, Zc=np.meshgrid(x, z)
+                    Yc = np.sqrt(1-Xc**2)
+
+                    # Draw parameters
+                    rstride = 20
+                    cstride = 10
+                    ax.plot_surface(Xc, Yc, Zc, alpha=0.2, rstride=rstride, cstride=cstride)
+                    ax.plot_surface(Xc, -Yc, Zc, alpha=0.2, rstride=rstride, cstride=cstride)
+
+                    ax.set_xlabel(r'$x$')
+                    ax.set_ylabel(r'$y$')
+                    ax.set_zlabel(r'$z$')
+                    plt.show()
+                </input>
+            </sage>
+            <p>For our purposes, equations that give a cylinder will often be missing a variable.</p>
+            <example xml:id="example-a-sinusoidal-cylinder">
+                <title>A sinusoidal cylinder</title>
+                <p>Consider the equation <m>z = \sin y</m> in <m>\RR^{3}</m>. This equation is missing the variable <m>x</m>, which suggests that the graph of this equation should be a cylinder. However, it's not going to look like the cylinders we may be used to at this point. In fact, this is just the set of all lines passing through the curve <m>z=\sin y</m> in the <m>yz</m>-plane and parallel to the <m>x</m>-axis. It's graph is given below.</p>
+            </example>
+            <sage>
+                <input>
+                    # Code shamelessly adapted from this stackoverflow post: http://stackoverflow.com/questions/26989131/add-cylinder-to-plot
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    from mpl_toolkits.mplot3d import Axes3D
+
+                    plt.rc('text', usetex=True)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111, projection='3d')
+
+                    # Cylinder
+                    x=np.linspace(-1, 1, 100)
+                    y=np.linspace(-2, 2, 100)
+                    Xc, Yc=np.meshgrid(x, y)
+                    Zc = np.sin(Yc)
+
+                    # Draw parameters
+                    rstride = 20
+                    cstride = 10
+                    ax.plot_surface(Xc, Yc, Zc, alpha=0.2, rstride=rstride, cstride=cstride)
+
+                    ax.set_xlabel(r'$x$')
+                    ax.set_ylabel(r'$y$')
+                    ax.set_zlabel(r'$z$')
+                    plt.show()
+                </input>
+            </sage>
+            <example xml:id="example-another-cylinder">
+                <title>Another cylinder</title>
+                <p>Consider the cylinder given by the set of all lines passing through the plane curve <m>y = 3x-1</m> in the <m>xy</m>-plane and parallel to the line in <m>\RR^{3}</m> defined by the equation</p>
+                <me>\vv{r} = \dotprod{3-t,t,3}.</me>
+                <p>What does this cylinder look like? Well, we can view it as essentially a "sheet" of lines cutting through the <m>xy</m>-plane at the line <m>y = 3x-1</m>. If we try to imagine this, then this suggests that this cylinder should probably be a plane! In fact, this cylinder is exactly the plane containing the point <m>(0,-1,0)</m> and parallel to the line <m>\vv{r}</m> given above.</p>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-quadric-surfaces">
+            <title>Quadric Surfaces</title>
+            <p>A <term>quadric surface</term> is any surface that is the graph of an equation of the form</p>
+            <me>Ax^{2}+By^{2}+Cz^{2}+Dxy+Exz+Fyz+Gx+Hy+Iz+0 = 0.</me>
+            <p>A useful tool for graphing quadric surfaces (and others in <m>\RR^{3}</m>) is the concept of a <term>trace</term>, which is what the curve looks like in a plane parallel to the one the coordinate planes. This amounts to setting either, <m>x,y</m> or <m>z</m> equal to a constant and graphing the resulting equation.</p>
+            <example xml:id="example-an-ellipsoid">
+                <title>An ellipsoid</title>
+                <p>Consider the equation</p>
+                <me>4x^{2}+\frac{y^{2}}{9}+\frac{z^{2}}{25} = 1.</me>
+                <p>If we want to graph this, we can graph a few of it's traces to get an idea of what it looks like. Let's graph traces parallel the <m>xz</m>-plane to start. This means we'll set <m>y</m> equal to different constants. For <m>y=0</m>, we get the equation</p>
+                <me>4x^{2}+\frac{z^{2}}{25} = 1</me>
+                <p>which we rewrite as</p>
+                <me>\frac{x^{2}}{(\frac{1}{2})^{2}}+\frac{z^{2}}{25} = 1.</me>
+                <p>This is an ellipse in the <m>xz</m>-plane, with minor axis <m>\frac{1}{2}</m> and major axis <m>5</m>. We can graph another trace, say in the <m>xy</m>-plane, we get</p>
+                <me>\frac{x^{2}}{(\frac{1}{2})^{2}}+\frac{y^{2}}{9} = 1,</me>
+                <p>which is an ellipse with minor axis <m>\frac{1}{2}</m> and major axis <m>3</m>. Similarly, in the <m>yz</m>-plane we have an ellipse with minor axis <m>3</m> and major axis <m>5</m>. Putting these together gives us a rough idea of the shape of this surface, which we call an <term>ellipsoid</term>.</p>
+            </example>
+            <example xml:id="example-region-between-surfaces">
+                <title>Region between surfaces</title>
+                <p>Suppose we want to sketch the region between the surface <m>z=\sqrt{x^{2}+y^{2}}</m> and <m>x^{2}+y^{2}=1</m> for <m>1\leq z\leq 2</m>. First, we can graph <m>z=\sqrt{x^{2}+y^{2}}</m>. If we look at the horizontal traces of this surface, we get circles of varying radii. As <m>z</m> increases, the radii of these circles increase as well. This surface is just a cone! So we're describing the region of this cone bounded between <m>z=1</m> and <m>z=2</m>, and contained inside the cylinder <m>x^{2}+y^{2}=1</m>.</p>
+            </example>
+            <p>SUGGESTED PROBLEMS: 1-7 odd, 11, 29</p>
+        </subsection>
+    </section>
+    <section xml:id="section-vector-functions">
+        <title>Vector Functions</title>
+        <introduction>
+            <p>
+                Recall from <xref ref="subsection-equations-of-lines" text="type-global" /> that the equation of a line can be written as
+                <me>\vv{r} = \vv{r}_{0}+t\vv{v} = \dotprod{x_{0}+at, y_{0}+bt, z_{0}+ct}.</me>
+                This is our first example of a <term>vector function</term>. Vector functions are functions of the form
+                <me>\vv{r}(t) = \dotprod{f(t),g(t),h(t)},</me>
+                and graphs of vector functions are called <term>space curves</term>.
+                We call <m>f,g,h</m> the <term>component functions</term> of <m>\vv{r}</m>.
+                We're interested in how these curves change, which means we're interested in how to do calculus on space curves.
+                Although these curves live in <m>\RR^{3}</m>, there's still only one independent variable: <m>t</m>.
+                So much of what we learned in Calculus I applies to space curves.
+            </p>
+        </introduction>
+        <subsection xml:id="limits-with-space-curves">
+            <title>Limits with Space Curves</title>
+            <p>We can take limits with vector functions just as we can with regular functions.</p>
+            <p>Let <m>\vv{r}(t) = \dotprod{f(t),g(t),h(t)}</m>. Then</p>
+            <men xml:id="limits-vector-functions">\lim_{t\to a}\vv{r}(t) = \dotprod{\lim_{t\to a}f(t),\lim_{t\to a}g(t),\lim_{t\to a}h(t)}.</men>
+            <p>In other words, if you want to take the limit of a vector function you can just take the limits of the component functions.</p>
+            <example xml:id="example-limit-of-a-vector-function">
+                <title>Limit of a vector function</title>
+                <p>Let</p>
+                <me>\vv{r}(t) = \frac{t^{2}-t}{t-1}\vv{i} + \sqrt{t+8}\vv{j} - \frac{\sin\pi t}{\ln t}\vv{k}.</me>
+                <p>Suppose we want to find <m>\lim_{t\to 1}\vv{r}(t)</m>. Then we just need to take the limit of each component. So</p>
+                <me>\lim_{t\to1}\vv{r}(t) = 2\vv{i}+3\vv{j} -\pi\vv{k}.</me>
+            </example>
+            <p>Just as in Calculus I, we say that a vector function <m>\vv{r}(t)</m> is <term>continuous</term> at <m>t=a</m> if <m>\lim_{t\to a}\vv{r}(t) = \vv{r}(a)</m>. In general, a vector function is continuous wherever <em>all</em> of its components functions are continuous.</p>
+            <example xml:id="example-a-horiztonal-helix">
+                <title>A horiztonal helix</title>
+                <p>Let <m>\vv{r}(t) = \dotprod{\sin\pi t, t, \cos\pi t}</m>, and suppose we want to sketch this function. One way to do so is to plug in values for <m>t</m> and connect the resulting points with a curve, but we can also do the following to get an idea of what this looks like. First, note that we have <m>x = \sin\pi t</m> and <m>z=\cos\pi t</m>. So <m>x^{2}+z^{2} = 1</m>, which means that this looks like the unit circle in the <m>xz</m>-plane, traced <em>clockwise</em>. Since we also have <m>y=t</m>, this curve moves farther along the <m>y</m>-axis as <m>t</m> increases. If we trace this out, we get a helix (see the below plot). We can also see from the graph that it has no jumps or gaps, so <m>\vv{r}(t)</m> is continuous everywhere.</p>
+            </example>
+            <sage>
+                <input>
+                    # Code shamelessly adapted from this stackoverflow post: http://stackoverflow.com/questions/26989131/add-cylinder-to-plot
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    from mpl_toolkits.mplot3d import Axes3D
+
+                    plt.rc('text', usetex=True)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111, projection='3d')
+
+                    # Define variables/components
+                    t = np.linspace(-5,5,500)
+                    x = np.sin(np.pi*t)
+                    y = t
+                    z = np.cos(np.pi*t)
+
+                    # Draw helix
+                    ax.plot(x, y, z, label=r'$\mathbf{r}(t)$')
+                    ax.legend()
+
+                    ax.set_xlabel(r'$x$')
+                    ax.set_ylabel(r'$y$')
+                    ax.set_zlabel(r'$z$')
+                    plt.show()
+                </input>
+            </sage>
+            <example xml:id="example-finding-vector-functions">
+                <title>Finding vector functions</title>
+                <p>Consider the cylinder <m>x^{2}+y^{2}=4</m> and the surface <m>z=xy</m>, and suppose we want to trace out there intersection with a vector function. Here's how we can do this. First, we'll come up with the <m>x</m> and <m>y</m> components of <m>\vv{r}(t)</m>. Since <m>x^{2}+y^{2} = 4</m>, this suggests that we should take</p>
+                <md>
+                    <mrow>x &amp; = 2\cos t </mrow>
+                    <mrow>y &amp; = 2\sin t </mrow>
+                </md>
+                <p>So that's two down, one to go. To get <m>z</m>, we just need to use the equation <m>z=xy</m>. So</p>
+                <me>z = xy = 4\cos t\sin t.</me>
+                <p>So our vector function is </p>
+                <me>\vv{r}(t) = \dotprod{2\cos t, 2\sin t, 2\sin 2t}.</me>
+                <p>This is also plotted below.</p>
+            </example>
+            <sage>
+                <input>
+                    # Code shamelessly adapted from this stackoverflow post: http://stackoverflow.com/questions/26989131/add-cylinder-to-plot
+                    # If I change it enough it becomes MY code
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    from mpl_toolkits.mplot3d import Axes3D
+
+                    plt.rc('text', usetex=True)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111, projection='3d')
+
+                    # Define variables/components
+                    t = np.linspace(-5,5,500)
+                    x = 2*np.cos(t)
+                    y = 2*np.sin(t)
+                    z = x*y
+
+                    # Draw curve
+                    ax.plot(x, y, z, label=r'$\mathbf{r}(t)$')
+                    ax.legend()
+
+                    ax.set_xlabel(r'$x$')
+                    ax.set_ylabel(r'$y$')
+                    ax.set_zlabel(r'$z$')
+                    plt.show()
+                </input>
+            </sage>
+        </subsection>
+        <subsection xml:id="subsection-derivatives-with-space-curves">
+            <title>Derivatives with Space Curves</title>
+            <p>Now that we know how to take limits with vector functions, we can take derivatives as well.</p>
+            <definition xml:id="definition-derivatives-of-vector-functions">
+                <title>Derivatives of Vector Functions</title>
+                <index><main>vector functions</main><sub>derivatives</sub></index>
+                <statement>
+                    <p>Let <m>\vv{r}(t)</m> denote a vector function. The <term>derivative</term> of <m>\vv{r}</m> is the new vector function <m>\vv{r}'</m> given by</p>
+                    <me>\vv{r}'(t) = \frac{d\vv{r}}{dt} = \lim_{h\to0}\frac{\vv{r}(t+h)-\vv{r}(t)}{h},</me>
+                    <p>assuming that the limit exists. If this limit exists, we say that <m>\vv{r}</m> is <term>differentiable</term>.</p>
+                </statement>
+            </definition>
+            <p>If <m>\vv{r}(t) = \dotprod{f(t),g(t),h(t)},</m> then <m>\vv{r}</m> is differentiable if and only if <m>f,g,h</m> are, and <m>\vv{r}'(t) = \dotprod{f'(t),g'(t),h'(t)}.</m> Just as in Calculus I, the derivative represents how quickly a space curve is changing at some value of <m>t</m>. However, derivatives of vector functions also carry information about the <em>direction</em> a curve is moving. We call <m>\vv{r}'(t)</m> the <term>tangent vector</term> to <m>\vv{r}(t)</m>. In particular, <m>\vv{r}'(t)</m> is parallel to the space curve <m>\vv{r}</m> at <m>t</m>, and its magnitude <m>|\vv{r}'(t)|</m> represents how quickly the curve is changing at <m>t</m>. If we only care about direction, then we can define the <term>unit tangent</term> <m>\vv{T}(t)</m>, which is given by</p>
+            <me>\vv{T}(t) = \frac{\vv{r}'(t)}{|\vv{r}'(t)|}.</me>
+            <p>We also have the usual ideas from Calculus I and physics regarding motion: velocity is the derivative of position and acceleration is the derivative of velocity.</p>
+            <example xml:id="example-velocity-on-a-saddle">
+                <title>Velocity on a saddle</title>
+                <p>A particle moves counterclockwise along the "saddle" <m>\vv{r}(t) = \dotprod{2\cos t, 2\sin t, 2\sin 2t}</m>. We want its velocity at <m>t=\frac{\pi}{2}</m>. First, find <m>\vv{r}'</m> to get</p>
+                <me>\vv{r}'(t) = \dotprod{-2\sin t,2\cos t,4\cos2t}.</me>
+                <p>At <m>t=\frac{\pi}{2}</m>, we have the velocity vector</p>
+                <me>\vv{r}'\left(\frac{\pi}{2}\right) = \dotprod{-2,0,-4}.</me>
+                <p>So at the point <m>t=\frac{\pi}{2}</m>, the space curve is parallel to the vector <m>\dotprod{-2,0,4}</m>. In other words, the particle is moving in this direction at <m>t=\frac{\pi}{2}</m>.</p>
+            </example>
+            <example xml:id="example-tangents-on-a-circle">
+                <title>Tangents on a circle</title>
+                <p>A particle moves along the circle <m>y^{2}+z^{2}=5</m> in the <m>yz</m>-plane, counterclockwise and with an angular frequency of <quantity><mag>5\pi</mag><unit base="radian"/><per base="second"/></quantity>. Then we can assume that its position is described by</p>
+                <me>\vv{r}(t) = \dotprod{0,\sqrt{5}\cos5\pi t, \sqrt{5}\sin5\pi t}.</me>
+                <p>Suppose we want to find the direction this particle is going at any given moment. Then we can just find the unit tangent vector <m>\vv{T}</m>:</p>
+                <me>\vv{T}(t) = \frac{\dotprod{0,-5\sqrt{5}\sin5\pi t, 5\sqrt{5}\cos5\pi t}}{\sqrt{125}}.</me>
+            </example>
+            <p>We also have derivative rules for vector functions, based off of the familiar formulas from Calculus I.</p>
+            <theorem xml:id="theorem-vector-derivative-rules">
+                <title>Vector Derivative Rules</title>
+                <index><main>vector functions</main><sub>derivative rules</sub></index>
+                <statement>
+                    <p>Let <m>\vv{u}</m> and <m>\vv{v}</m> be differentiable vector functions, <m>c</m> be a scalar and let <m>f(t)</m> be a differentiable (scalar) function. Then the following formulas hold:</p>
+                    <ol>
+                        <li><m>\dv{}{t}[\vv{u}(t)+\vv{v}(t)] = \vv{u}'(t)+\vv{v}'(t)</m></li>
+                        <li><m>\dv{}{t}[c\vv{u}(t)] = c\vv{u}'(t)</m></li>
+                        <li><m>\dv{}{t}[f(t)\vv{u}(t)] = f'(t)\vv{u}(t)+f(t)\vv{u}'(t)</m></li>
+                        <li><m>\dv{}{t}[\vv{u}(t)\cdot\vv{v}(t)] = \vv{u}'(t)\cdot\vv{v}(t)+\vv{u}(t)\cdot\vv{v}'(t)</m></li>
+                        <li><m>\dv{}{t}[\vv{u}(t)\times\vv{v}(t)] = \vv{u}'(t)\times\vv{v}(t)+\vv{u}(t)\times\vv{v}'(t)</m></li>
+                        <li><m>\dv{}{t}\vv{u}(f(t)) = f'(t)\vv{u}'(f(t))</m></li>
+                    </ol>
+                </statement>
+            </theorem>
+        </subsection>
+        <subsection xml:id="subsection-integrals-with-space-curves">
+            <title>Integrals with Space Curves</title>
+            <p>We can also integrate vector functions without too much trouble. Just as taking the derivative of a vector function reduces down to differentiating each component, integrating a vector function reduces down to integrating each component. If <m>\vv{r}(t) = \dotprod{f(t),g(t),h(t)},</m> then</p>
+            <men xml:id="equation-vector-function-integration">\int_{a}^{b}\vv{r}(t)\,dt = \dotprod{\int_{a}^{b}f(t)\,dt,\int_{a}^{b}g(t)\,dt,\int_{a}^{b}h(t)\,dt}.</men>
+            <p>SUGGESTED PROBLEMS: 1, 3, 5, 7, 17, 21, 23, 37, 41, 45, 59, 61</p>
+        </subsection>
+    </section>
+    <section xml:id="section-arc-length-and-curvature">
+        <title>Arc Length and Curvature</title>
+        <subsection xml:id="subsection-arc-length">
+            <title>Arc Length</title>
+            <p>Suppose some particle travels along the space curve given by <m>\vv{r}(t)</m> for <m>a\leq t\leq b</m>. What we'd like to do is determine how far the particle travels over this time interval. Recall that distance is just speed multiplied by time, and the speed of this particle is given by <m>|\vv{r}'(t)|</m>. So we can imagine that the distance traveled by this particle over some infinitesimal time interval <m>dt</m> to be given by <m>|\vv{r}'(t)|\,dt</m>. So adding up all of these distances from <m>t=a</m> to <m>t=b</m> should give us the arc length. This suggests (but does not prove!) the following formula for arc length:</p>
+            <men xml:id="equation-arc-length-formula">L = \int_{a}^{b}|\vv{r}'(t)|\,dt.</men>
+            <p><xref ref="equation-arc-length-formula" text="type-global" /> gives the length <m>L</m> of the space curve <m>\vv{r}(t)</m> from <m>t=a</m> to <m>t=b</m>, assuming that the integral exists.</p>
+            <example xml:id="example-arc-length-of-a-helix">
+                <title>Arc length of a helix</title>
+                <p>Suppose we want to find the arc length of the helix <m>\vv{r}(t) = \dotprod{\cos 3t,\sin 3t, t}</m> from <m>t=0</m> to <m>t=1</m>. Then this is given by</p>
+                <me>L = \int_{0}^{1}|\dotprod{-3\sin3t, 3\cos3t, 1}|\,dt = \int_{0}^{1}\sqrt{10}\,dt = \sqrt{10}.</me>
+            </example>
+            <p>One thing we'd like to do now is to parametrize a space curve <m>\vv{r}(t)</m> with respect to arc length. Here's what we mean by this: given some <m>\vv{r}(t)</m> with <m>a\leq t\leq b</m>, we define its <term>arc length function</term> <m>s(t)</m> by</p>
+            <me>s(t) = \int_{a}^{t}|\vv{r}'(u)|\,du.</me>
+            <p>If we can then solve for <m>t</m> in terms of <m>s</m>, this parametrizes the curve <m>\vv{r}(t)</m> in terms of the arc length variable <m>s</m>.</p>
+            <example xml:id="example-reparametrizing-a-space-curve">
+                <title>Reparametrizing a space curve</title>
+                <p>Suppose we're given the space curve</p>
+                <me>\vv{r}(t) = \left(\frac{2}{t^{2}+1}-1\right)\vv{i}+\frac{2t}{t^{2}+1}\vv{j}</me>
+                <p>which starts at <m>(1,0)</m>, (so <m>t</m> starts at <m>0</m>) and we want to find the point that is <m>\frac{\pi}{2}</m> units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function <m>s(t)</m>:</p>
+                <md>
+                    <mrow>s(t) &amp; = \int_{0}^{t}|\vv{r}'(u)|\,du </mrow>
+                    <mrow> &amp; = \int_{0}^{t} \sqrt{\frac{4u^{2}+4(u^{2}+1)^{2}-16u^{2}(u^{2}+1)+16u^{4}}{(u^{2}+1)^{4}}}\,du </mrow>
+                    <mrow> &amp; = \int_{0}^{t} \frac{2}{u^{2}+1}\,du </mrow>
+                    <mrow> &amp; = 2\tan^{-1}t </mrow>
+                </md>
+                <p>Since <m>s = 2\tan^{-1}t</m>, we get <m>t = t(s) = \tan\frac{s}{2}</m>. So </p>
+                <me>\vv{r}(t(s)) = \left(\frac{2}{\tan^{2}\frac{s}{2}+1}-1\right)\vv{i}+\frac{2\tan\frac{s}{2}}{\tan^{2}\frac{s}{2}+1}\vv{j}</me>
+                <p>reparametrizes the space curve <m>\vv{r}</m> in terms of arc length. So the point on the curve that is <m>\frac{\pi}{2}</m> units along in the positive direction is given by</p>
+                <me>\vv{r}(t(\pi/2)) = \dotprod{0,1}.</me>
+            </example>
+            <sage>
+                <input>
+                    # Code shamelessly adapted from this stackoverflow post: http://stackoverflow.com/questions/26989131/add-cylinder-to-plot
+                    # If I change it enough it becomes MY code
+                    import matplotlib.pyplot as plt
+                    import numpy as np
+                    from mpl_toolkits.mplot3d import Axes3D
+
+                    plt.rc('text', usetex=True)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111)
+
+                    # Define variables/components
+                    t = np.linspace(-5,5,500)
+                    x = 2/(t^2+1) - 1
+                    y = 2*t/(t^2+1)
+
+                    # Draw curve
+                    ax.plot(x, y, label=r'$\mathbf{r}(t)$')
+                    ax.legend()
+
+                    ax.set_xlabel(r'$x$')
+                    ax.set_ylabel(r'$y$')
+                    plt.show()
+                </input>
+            </sage>
+        </subsection>
+        <subsection xml:id="subsection-curvature">
+            <title>Curvature</title>
+            <p>What we want to do now is measure how much a curve "turns" at some point. First, we call a space curve <m>\vv{r}(t)</m> <term>smooth</term> on some interval <m>I</m> if <m>\vv{r}'(t)\neq0</m> for any <m>t</m> in <m>I</m>. Now, if we want to measure how quickly a curve is changing direction then we can use the unit tangent vector <m>\vv{T}(t)</m> to measure this. In particular, the derivative of the unit tangent should provide a good measure of how quickly a curve turns. However, we don't want to let the specific parametrization of the curve affect this; in other words, the rate at which a curve is turning should not depend on the speed at which the curve is traveled. This leads to the following definition.</p>
+            <definition xml:id="definition-curvature">
+                <index><main>vector functions</main><sub>curvature</sub></index>
+                <title>Curvature</title>
+                <statement>
+                    <p>Let <m>\vv{r}(t)</m> denote a smooth curve on some interval <m>I</m>. The <term>curvature</term> of <m>\vv{r}(t)</m> on <m>I</m> is defined to be the function <m>\kappa(t)</m> given by</p>
+                    <me>\kappa(t) = \frac{|\vv{T}'(t)|}{|\vv{r}'(t)|},</me>
+                    <p>where <m>\vv{T}(t) = \frac{\vv{r}'(t)}{|\vv{r}'(t)|}</m> is the unit tangent to the curve.</p>
+                </statement>
+            </definition>
+            <example xml:id="example-computing-a-curvature">
+                <title>Computing a curvature</title>
+                <p>Consider the curve <m>\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}.</m> We'll try to find the curvature by making use of <xref ref="definition-curvature" text="type-global" />. First, we need to find <m>\vv{T}</m> so we can take its derivative:</p>
+                <me>\vv{T}(t) = \frac{\dotprod{1,t,2t}}{\sqrt{1+t^{2}+4t^{2}}}.</me>
+                <p>Therefore</p>
+                <md>
+                    <mrow>\vv{T}'(t) &amp; = -\frac{1}{2}(1+5t^{2})^{-3/2}(10t)\dotprod{1,t,2t} + (1+5t^{2})^{-1/2}\dotprod{0,1,2} </mrow>
+                    <mrow> &amp; = -5t(1+5t^{2})^{-3/2}\dotprod{1,t,2t} + (1 + 5t^{2})^{-1/2}\dotprod{0,1,2}. </mrow>
+                    <mrow> &amp; = (1+5t^{2})^{-3/2}\dotprod{-5t,1,2} </mrow>
+                </md>
+                <p>So the curvature is given by</p>
+                <md>
+                    <mrow>\kappa(t) &amp; = \frac{(1+5t^{2})^{-3/2}\sqrt{25t^{2}+5}}{(1+5t^{2})^{1/2}} </mrow>
+                    <mrow> &amp; = \sqrt{5}(1+5t^{2})^{-3/2} </mrow>
+                </md>
+            </example>
+            <example xml:id="example-using-curvature">
+                <title>Using curvature</title>
+                <p>Consider the curve <m>\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}</m> once again. We'll try to find where this curve turns the fastest. To do this, we look at the curvature <m>\kappa(t)</m> we found from <xref ref="example-computing-a-curvature" text="type-global" />:</p>
+                <me>\kappa(t) = \sqrt{\frac{5}{(1+5t^{2})^{3}}}.</me>
+                <p>This curve is turning the fastest precisely where the curvature is largest, and this happens at <m>t=0</m>.</p>
+            </example>
+            <p>We can use <xref ref="definition-curvature" text="type-global" /> to compute curvatures, but we've seen that it can be pretty awful. So we'd like to use another formula if we can; thankfully, there is another option.</p>
+            <theorem xml:id="theorem-alternative-curvature-formula">
+                <index><main>vector functions</main><sub>curvature</sub><sub>alternative formula</sub></index>
+                <title>Alternative Curvature Formula</title>
+                <statement>
+                    <p>The curvature of <m>\vv{r}(t)</m> in <m>\RR^{3}</m> is given by</p>
+                    <me>\kappa(t) = \frac{|\vv{r}'(t)\times\vv{r}''(t)|}{|\vv{r}'(t)|^{3}}.</me>
+                </statement>
+            </theorem>
+            <p>The formula in <xref ref="theorem-alternative-curvature-formula" text="type-global" /> may look worse than the formula given in <xref ref="definition-curvature" text="type-global" />, but it has one significant advantage: we don't need to differentiate any magnitudes, which is required in the previous formula to compute <m>\vv{T}'(t)</m>.</p>
+            <example xml:id="example-using-the-alternative-formula">
+                <title>Using the alternative formula</title>
+                <statement>
+                    <p>Let <m>\vv{r}(t) = t\vv{i}+t^{2}\vv{j}+e^{t}\vv{k}</m>. We'll make use of <xref ref="theorem-alternative-curvature-formula" text="type-global" /> to find <m>\kappa(t).</m> We have</p>
+                    <md>
+                        <mrow>\vv{r}'(t) &amp; = \dotprod{1,2t,e^{t}} </mrow>
+                        <mrow>\vv{r}''(t) &amp; = \dotprod{0,2,e^{t}} </mrow>
+                    </md>
+                    <p>and so</p>
+                    <me>\kappa(t) = \frac{|\dotprod{2e^{t}(t-1),-e^{t},2}|}{|\dotprod{1,2t,e^{t}}|^{3}} = \frac{\sqrt{4e^{2t}(t-1)^{2}+e^{2t}+4}}{(1+4t^{2}+e^{2t})^{3/2}}.</me>
+                </statement>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-normal-and-binormal-vectors">
+            <title>Normal and Binormal Vectors</title>
+            <p>Consider a curve <m>\vv{r}(t)</m>. Then the direction of the curve is given by the unit tangent vector <m>\vv{T}(t) = \frac{\vv{r}'(t)}{|\vv{r}'(t)|}</m>. If we differentiate <m>\vv{T}(t)</m> to get <m>\vv{T}'(t)</m>, we can view this vector as telling us the direction the curve is turning. This leads us to the concept of <term>unit normal vectors</term> to a space curve.</p>
+            <definition xml:id="definition-unit-normal-vectors">
+                <index><main>vector functions</main><sub>unit normal vector</sub></index>
+                <title>Unit Normal Vectors</title>
+                <statement>
+                    <p>Consider a space curve given by <m>\vv{r}(t)</m>. The unit normal vector is the vector <m>\vv{N}(t)</m> given by</p>
+                    <me>\vv{N}(t) = \frac{\vv{T}'(t)}{|\vv{T}'(t)|},</me>
+                    <p>where <m>\vv{T}'</m> is the derivative of the unit tangent vector.</p>
+                </statement>
+            </definition>
+
+            <example xml:id="example-unit-normal-on-a-circle">
+                <title>Unit normal on a circle</title>
+                <statement>
+                    <p>Find the unit normal vector of the curve given by <m>\vv{r}(t) = \dotprod{\cos t,\sin t}</m>.</p>
+                </statement>
+                <solution>
+                    <p>If we think of a particle moving along <m>\vv{r}(t)</m>, then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, <m>\vv{N}(t)</m> should point towards the origin. To prove this, we'll use the formula above to find the unit normal:</p>
+                    <md>
+                        <mrow>\vv{N}(t) &amp; = \frac{\vv{T}'(t)}{|\vv{T}'(t)|} </mrow>
+                        <mrow> &amp; = \frac{\dotprod{-\cos t, -\sin t}}{1} </mrow>
+                    </md>
+                    <p>So <m>\vv{N}(t) = \dotprod{-\cos t, -\sin t} = -\vv{r}(t)</m>. So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.</p>
+                </solution>
+            </example>
+            <p>It's not clear from <xref ref="definition-unit-normal-vectors" text="type-global" />, but <m>\vv{N}(t)</m> is <em>always</em> orthogonal to <m>\vv{T}(t)</m> for any space curve/vector function <m>\vv{r}(t)</m>. We can use these two vectors to get another vector called the <term>binormal vector</term>.</p>
+            <definition xml:id="definition-binormal-vector">
+                <index><main>vector functions</main><sub>binormal vector</sub></index>
+                <title>Binormal Vector</title>
+                <statement>
+                    <p>Let <m>\vv{r}(t)</m> be a vector function with unit tangent <m>\vv{T}(t)</m> and unit normal <m>\vv{N}(t)</m>. Then the unit binormal vector is the vector <m>\vv{B}(t)</m> given by</p>
+                    <me>\vv{B}(t) = \vv{T}(t)\times\vv{N}(t).</me>
+                </statement>
+            </definition>
+            <p>SUGGESTED PROBLEMS: 1, 3, 11-19 odd, 39</p>
+        </subsection>
+    </section>
+    <section xml:id="section-motion-in-space">
+        <title>Motion in Space</title>
+        <p>We now move on to examining motion in <m>\RR^{3}</m>. First, recall that <m>\vv{r}(t)</m> represents the position vector of some particle moving along a curve in space, then its velocity <m>\vv{t}(t)</m> and acceleration <m>\vv{a}(t)</m> are given by</p>
+        <md>
+            <mrow>\vv{v}(t) &amp; = \vv{r}'(t) </mrow>
+            <mrow>\vv{a}(t) &amp; = \vv{v}'(t) = \vv{r}''(t) </mrow>
+        </md>
+        <p>The speed of the particle is just the magnitude of the velocity: <m>|\vv{v}(t)|</m>.</p>
+        <example xml:id="example-motion-of-a-projectile">
+            <title>Motion of a projectile</title>
+            <statement>
+                <p>A projectile is fired out of a cannon with an initial speed of <quantity><mag>200</mag><unit base="meter"/><per base="second"/></quantity> to the west and with an angle of elevation of <m>30^{\circ}</m>. If the particle was fired from a raised platform that is <quantity><mag>50</mag><unit base="meter"/></quantity> off level ground, where does the particle land?</p>
+            </statement>
+            <solution>
+                <p>First, we'll assume that <m>\vv{j}</m> points northward and <m>\vv{k}</m> points straight up. Let's assume that the platform is directly above the origin. If we let <m>\vv{r}(t)</m> denote the position (in meters) of the particle at time <m>t</m> (in seconds), then we can say that <m>\vv{r}_{0} = \vv{r}(0) = \dotprod{0,0,50}</m>. We also have</p>
+                <md>
+                    <mrow>\vv{v}(0) &amp; = -100\sqrt{3}\vv{i} + 100\vv{k} </mrow>
+                    <mrow>\vv{a} &amp; = -9.8\vv{k} </mrow>
+                </md>
+                <p>We can integrate up to find the position <m>\vv{r}(t)</m>:</p>
+                <me>\vv{v}(t) = -9.8t\vv{k}+\vv{C}</me>
+                <p>where <m>\vv{C}</m> is an arbitrary constant vector. To find it, we'll use our initial condition on <m>\vv{v}</m>:</p>
+                <me>\vv{v}(0) = \vv{C} = -100\sqrt{3}\vv{i}+100\vv{k}.</me>
+                <p>So <m>\vv{v}(t) = -9.8t\vv{k}-100\sqrt{3}\vv{i}+100\vv{k}</m>. Integrating once more to get the position, we have</p>
+                <me>\vv{r}(t) = -100\sqrt{3}t\vv{i}+(100t-4.9t^{2})\vv{k} + \vv{D} = -100\sqrt{3}t\vv{i} + (100t-4.9t^{2})\vv{k} + 50\vv{k}</me>.
+                <p>So <m>\vv{r}(t) = \dotprod{-100\sqrt{3}t, 0, 50 + 100t - 4.9t^{2}}</m>.</p>
+                <p>To find where the particle lands, we just set the third component equal to zero and solve for <m>t</m> to get</p>
+                <me>t = \frac{-100\pm\sqrt{10000+980}}{-9.8} = -.4883,20.896.</me>
+                <p>We need to choose the positive value for <m>t</m>, and if we do so we see that when the projectile hits ground it's at position <m>\vv{r}(20.896) = \dotprod{-3619.38,0,0}.</m> So the projectile is a little over <quantity><mag>3.5</mag><unit base="meter" prefix="kilo"/></quantity> to the west.</p>
+            </solution>
+        </example>
+        <p>To describe acceleration on a curve <m>\vv{r}(t)</m>, it can be useful to break it down into <term>tangential components</term> and <term>normal components</term>.</p>
+        <definition xml:id="definition-components-of-acceleration">
+            <index><main>vector function</main><sub>components of acceleration</sub></index>
+            <title>Components of Acceleration</title>
+            <statement>
+                <p>Let <m>\vv{r}(t)</m> denote a space curve with unit tangent <m>\vv{T}(t)</m>, unit normal <m>\vv{N}(t)</m> and acceleration <m>\vv{a}</m>. The tangential component of acceleration is the scalar <m>a_{T}</m> given by</p>
+                <me>a_{T} = \vv{a}\cdot\vv{T}.</me>
+                <p>The normal component is the scalar <m>a_{N}</m> given by</p>
+                <me>a_{N} = \vv{a}\cdot\vv{N}.</me>
+            </statement>
+        </definition>
+        <p><m>a_{T}</m> represents how much of the acceleration is directed tangent to the curve <m>\vv{r}(t)</m>, whereas <m>a_{N}</m> represents how much of the acceleration is directed perpendicular to the tangent.</p>
+        <example xml:id="example-components-of-acceleration-for-a-projectile">
+            <title>Components of acceleration for a projectile</title>
+            <statement>
+                <p>Consider the particle from <xref ref="example-motion-of-a-projectile" text="type-global" />. At what point is the tangential component of acceleration greatest?</p>
+            </statement>
+            <solution>
+                <p>Since <m>\vv{a} = -9.8\vv{k}</m>, the tangential component should be greatest when the projectile is fired or when it hits the ground, since these are the points where the direction of the trajectory most closely matches the direction of acceleration. To actually verify this, we'll find the tangential component using <xref ref="definition-components-of-acceleration" text="type-global" />. Since</p> 
+                <me>\vv{T}(t) = \dotprod{-\frac{100\sqrt{3}}{\sqrt{(100-9.8t)^{2}+30000}}, 0, \frac{100 - 9.8t}{\sqrt{(100-9.8t)^{2}+30000}}}</me>
+                <p>it follows that</p>
+                <md>
+                    <mrow>a_{T} &amp; = \vv{a}\cdot\vv{T} </mrow>
+                    <mrow> &amp; =  -9.8\frac{100 - 9.8t}{\sqrt{(100-9.8t)^{2}+30000}}</mrow>
+                </md>
+                <p>So</p>
+                <md>
+                    <mrow>|a_{T}| &amp; = 9.8\frac{|100 - 9.8t|}{\sqrt{(100-9.8t)^{2}+30000}} </mrow>
+                    <mrow> &amp; = \frac{9.8}{\sqrt{1+\frac{30000}{(100-9.8t)^{2}}}} </mrow>
+                </md>
+                <p>We can make this as large as possible by making <m>(100-9.8t)^{2}</m> as large as possible, and this reaches its largest value at <m>t = 20.896</m>, when the projectile hits the ground.</p>
+            </solution>
+        </example>
+        <sage>
+            <input>
+                t = var('t')
+                r = vector([-100*sqrt(3)*t, 0, 50 + 100*t - 4.9*t^2])
+                T = derivative(r,t).normalized()
+                show(T)
+            </input>
+        </sage>
+        <p>SUGGESTED PROBLEMS: 1-11 odd, 19, 31</p>
+    </section>
+<!-- I'm keeping these here for now in case I need to see how this is done later. -->
+<!--     <xi:include href="./sage/integers-sage.xml" />
+    <xi:include href="./sage/integers-sage-exercises.xml" /> -->
+
+</chapter>
