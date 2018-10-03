@@ -1,0 +1,222 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-09-28T16:56:12-04:00    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>The Heat Equation</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.1/pretext.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on2.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes</span><span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-d-alembert-s-solution-of-the-wave-equation.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="partial-differential-equations.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-d-alembert-s-solution-of-the-wave-equation.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="partial-differential-equations.html" title="Up">Up</a><a class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
+<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
+<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
+<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
+<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
+<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
+</ul>
+<h2 class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></h2>
+<ul>
+<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
+<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
+<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
+<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
+<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
+</ul>
+<h2 class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></h2>
+<ul>
+<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+</ul>
+<h2 class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
+<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
+</ul>
+<h2 class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">5</span> <span class="title">Fourier Analysis</span></a></h2>
+<ul>
+<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
+<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
+<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
+<li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
+</ul>
+<h2 class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">6</span> <span class="title">Partial Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
+<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
+<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
+<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation" class="active">The Heat Equation</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<h2 class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></h2>
+<h2 class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></h2>
+<h2 class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></h2></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-the-heat-equation"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.4</span> <span class="title">The Heat Equation</span>
+</h2>
+<a href="section-the-heat-equation.html" class="permalink">¶</a><section class="introduction" id="introduction-19"><p id="p-496">The last equation we will look at is the <dfn class="terminology">heat equation</dfn>, which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the \(x\)-axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the \(x\)-direction only. With these assumptions, the temperature \(u(x,t)\) of the bar at position \(x\) and time \(t\) satisfies the PDE</p>
+<div class="displaymath">
+\begin{align*}
+\pdv{u}{t} &amp; = c^{2}\pdv[2]{u}{x}. 
+\end{align*}
+</div>
+<p id="p-497">This is called the <dfn class="terminology">one-dimensional heat equation</dfn>.</p></section><section class="subsection" id="subsection-bar-with-ends-fixed-at-"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.1</span> <span class="title">Bar with ends fixed at \(0\)</span>
+</h3>
+<a href="section-the-heat-equation.html#subsection-bar-with-ends-fixed-at-" class="permalink">¶</a><p id="p-498">We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature \(0\text{.}\) If we're given an initial temperature distribution \(f(x)\text{,}\) then \(u(x,t)\) is the solution of the boundary value problem</p>
+<div class="displaymath">
+\begin{align}
+u_{t} &amp; = c^{2}u_{xx} \label{equation-one-dimensional-heat-equation}\tag{6.4.1}\\
+u(0,t) = u(L,t) &amp; = 0 \label{heat-equation-boundary-conditions-fixed-temperature}\tag{6.4.2}\\
+u(x,0) &amp; = f(x) \label{heat-equation-initial-condition}\tag{6.4.3}
+\end{align}
+</div>
+<p id="p-499">We can solve this boundary value problem using separation of variables, much as we did in <a href="section-wave-equation-and-separation-of-variables.html" class="xref" title="Section 6.2: The Wave Equation and Separation of Variables">Section 6.2</a>. So to start, we assume that \(u(x,t) = X(x)T(t)\text{.}\) If we plug this into the heat equation <a knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6.4.1">(6.4.1)</a>, then we get</p>
+<div class="displaymath">
+\begin{equation}
+\frac{T'}{c^{2}T} = \frac{X''}{X} = k.\label{equation-odes-from-heat-equation}\tag{6.4.4}
+\end{equation}
+</div>
+<p id="p-500">Now we have three separate cases to consider for \(k\text{:}\) \(k\gt0, k=0\) or \(k\lt0\text{.}\) Just as with the wave equation, the only case that doesn't lead to trivial solutions is \(k=-\mu^{2}\lt0\text{.}\) In this case <a knowl="./knowl/equation-odes-from-heat-equation.html" title="Equation 6.4.4">(6.4.4)</a> leads to the two ODEs given by</p>
+<div class="displaymath">
+\begin{align*}
+X''+\mu^{2}X &amp; = 0 \\
+T'+c^{2}\mu^{2}T &amp; = 0. 
+\end{align*}
+</div>
+<p id="p-501">The boundary conditions in <a knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 6.4.2">(6.4.2)</a> force \(X(0) = X(L) = 0\text{,}\) and the only nontrivial solutions of \(X''+\mu^{2}X = 0\) occur when \(\mu = \frac{n\pi}{L}\text{.}\) So we get the solutions \(X = X_{n} = \sin\frac{n\pi}{L}x\text{,}\) just as with the wave equation.</p>
+<p id="p-502">For the second ODE, we readily solve it to obtain \(T = T_{n} = b_{n}e^{-\lambda_{n}^{2}t}\) where \(\lambda_{n} = c\frac{n\pi}{L}\) as before. So every function</p>
+<div class="displaymath">
+\begin{equation*}
+u_{n}(x,t) = X_{n}T_{n} = b_{n}\sin\frac{n\pi}{L}xe^{-\lambda_{n}^{2}t}
+\end{equation*}
+</div>
+<p id="p-503">is a solution of <a knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6.4.1">(6.4.1)</a> that satisfies the boundary equations <a knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 6.4.2">(6.4.2)</a>. In order to satisfy the arbitrary initial condition \(f(x)\text{,}\) we take an infinite sum of the functions \(u_{n}(x,t)\) to get</p>
+<div class="displaymath">
+\begin{equation*}
+u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}.
+\end{equation*}
+</div>
+<p id="p-504">Finally, if we plug in \(t=0\) and use the initial condition \(u(x,0) = f(x)\text{,}\) we get \(f(x) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x\text{.}\) This is just the Fourier series of the odd extension of \(f(x)\text{,}\) which lets us find \(b_{n}\text{.}\) We summarize all of this in the following theorem.</p>
+<article class="theorem-like" id="theorem-solution-of-the-heat-equation-with-fixed-temperature"><h6 class="heading">
+<span class="type">Theorem</span> <span class="codenumber">6.4.1</span> <span class="title">Solution of the Heat Equation with Fixed Temperature</span>
+</h6>
+<p id="p-505">The solution of the heat equation <a knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6.4.1">(6.4.1)</a> satisfying the boundary conditions <a knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 6.4.2">(6.4.2)</a> and initial condition <a knowl="./knowl/heat-equation-initial-condition.html" title="Equation 6.4.3">(6.4.3)</a> is given by</p>
+<div class="displaymath">
+\begin{equation}
+u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}\label{heat-equation-fixed-ends-solution}\tag{6.4.5}
+\end{equation}
+</div>where<div class="displaymath">
+\begin{align}
+b_{n} &amp; = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}x\,dx \label{heat-equation-fixed-ends-solution-coeff}\tag{6.4.6}\\
+\lambda_{n} &amp; = c\frac{n\pi}{L}. \label{heat-equation-fixed-ends-solution-exponent}\tag{6.4.7}
+\end{align}
+</div></article><article class="example-like" id="example-sinusoidal-initial-temperature"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.2</span> <span class="title">Sinusoidal initial temperature</span>
+</h6>
+<p id="p-506">Consider a thin metal bar of length \(\pi\) placed on the \(x\)-axis, with one end at \(x=0\) and the other at \(x=\pi\text{.}\) Assuming that \(c=1\) and that the initial temperature is \(f(x) = 30\sin x\) for \(0\leq x\leq\pi\text{,}\) we can find the temperature distribution using <a knowl="./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" title="Theorem 6.4.1: Solution of the Heat Equation with Fixed Temperature">Theorem 6.4.1</a>:</p>
+<div class="displaymath">
+\begin{equation*}
+u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n x)e^{-n^{2}t},
+\end{equation*}
+</div>
+<p id="p-507">where \(b_{n}\) is the \(n^{\th}\) coefficient of the Fourier series of the odd extension of \(f(x)\text{.}\) The odd extension of \(f(x)\) is \(30\sin x\text{.}\) Furthermore, the Fourier series of \(30\sin x\) is clearly just \(30\sin x\text{.}\) So in other words,</p>
+<div class="displaymath">
+\begin{equation*}
+b_{n} = \begin{cases} 30 \amp n=1 \\ 0 \amp otherwise.\end{cases}
+\end{equation*}
+</div>
+<p id="p-508">Hence</p>
+<div class="displaymath">
+\begin{equation*}
+u(x,t) = 30e^{-t}\sin x.
+\end{equation*}
+</div></article></section></section></div></main>
+</div>
+</body>
+</html>

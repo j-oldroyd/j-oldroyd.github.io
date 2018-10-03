@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US">
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-09-28T16:56:16-04:00    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body><div class="solution">
+<p>To start, let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\) and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\text{,}\) where \(t\) is in minutes. Then from Section 4.1, we know that</p>
+<div class="displaymath">
+\begin{align*}
+x'_{1} \amp = -\frac{1}{2}x_{1}\\
+x'_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
+\end{align*}
+</div>
+<p>If we set</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \qq{and} A = \begin{bmatrix}-\frac{1}{2} \amp  0 \\ \frac{1}{2} \amp  -\frac{5}{7}\end{bmatrix}
+\end{equation*}
+</div>
+<p>then this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\text{.}\) To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation \(\det(A-\lambda I) = 0\) or use Maple, but it's easier to note that \(A\) is a triangular matrix. So the eigenvalues are just \(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</p>
+<p>Now we find eigenvectors. So let</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v} = \begin{bmatrix}\xmat*{v}{2}{1}\end{bmatrix}.
+\end{equation*}
+</div>
+<p>If \(\vec{v}\) is an eigenvector for \(\lambda\text{,}\) then we know \(A\vec{v} = \lambda\vec{v}\text{,}\) which gives the system</p>
+<div class="displaymath">
+\begin{align*}
+(-\frac{1}{2}-\lambda)v_{1} \amp = 0\\
+\frac{1}{2}v_{1} + (-\frac{5}{7}-\lambda)v_{2} \amp = 0
+\end{align*}
+</div>
+<p>If we set \(\lambda=-\frac{1}{2}\text{,}\) then we just get \(v_{1} = \frac{3}{14}v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{1} = -\frac{1}{2}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}.
+\end{equation*}
+</div>
+<p>Similarly, if we set \(\lambda=-\frac{5}{7}\) we get \(v_{1} = 0\text{,}\) but no restrictions on \(v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{2} = -\frac{5}{7}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<p>The general solution of our matrix ODE is then</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}
+\end{equation*}
+</div>
+<p>But we're not done yet, since we have the initial conditions \(x_{1}(0) = 5\) and \(x_{2}(0) = 2\text{,}\) or in terms of our matrix ODE</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<p>We can use this to find \(c_{1}\) and \(c_{2}\text{.}\) If we set \(t=0\text{,}\) then we get</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}
+\end{equation*}
+</div>
+<p>so \(c_{2} = \frac{5}{3}\) and \(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</p>
+<p>So the solution of the matrix ODE (and hence the original system) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}
+\end{equation*}
+</div>
+<p>The amount of salt in the first tank, \(x_{1}\text{,}\) is given by the top entry and the amount of salt in the second tank, \(x_{2}\text{,}\) is given by the bottom entry.</p>
+</div></body>
+</html>

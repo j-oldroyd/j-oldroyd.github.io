@@ -1,0 +1,559 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-09-28T16:56:11-04:00    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Constant Coefficient Systems and the Phase Plane</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.1/pretext.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on2.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes</span><span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-systems-of-odes-as-models.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="systems-of-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="fourier-analysis.html" title="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-systems-of-odes-as-models.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="systems-of-odes.html" title="Up">Up</a><a class="next-button button toolbar-item" href="fourier-analysis.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
+<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
+<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
+<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
+<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
+<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
+</ul>
+<h2 class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></h2>
+<ul>
+<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
+<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
+<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
+<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
+<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
+</ul>
+<h2 class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></h2>
+<ul>
+<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+</ul>
+<h2 class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
+<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane" class="active">Constant Coefficient Systems and the Phase Plane</a></li>
+</ul>
+<h2 class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">5</span> <span class="title">Fourier Analysis</span></a></h2>
+<ul>
+<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
+<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
+<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
+<li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
+</ul>
+<h2 class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">6</span> <span class="title">Partial Differential Equations</span></a></h2>
+<ul>
+<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
+<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
+<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
+<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<h2 class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></h2>
+<h2 class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></h2>
+<h2 class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></h2></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-constant-coefficient-systems-and-the-phase-plane"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.2</span> <span class="title">Constant Coefficient Systems and the Phase Plane</span>
+</h2>
+<a href="section-constant-coefficient-systems-and-the-phase-plane.html" class="permalink">¶</a><section class="introduction" id="introduction-13"><aside class="aside-like" id="aside-11"><p id="p-325">This section corresponds to Section 4.3 of the text.</p></aside></section><section class="subsection" id="subsection-solutions-of--vec-x-a-vec-x-m-"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.1</span> <span class="title">Solutions of \(\vec{x}' = A\vec{x}\)</span>
+</h3>
+<a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solutions-of--vec-x-a-vec-x-m-" class="permalink">¶</a><article class="theorem-like" id="theorem-solutions-of-systems"><h6 class="heading">
+<span class="type">Theorem</span> <span class="codenumber">4.2.1</span> <span class="title">Solutions of Systems</span>
+</h6>
+<p id="p-326">Let \(A\) be an \(n\times n\) constant matrix, and suppose that \(A\) has \(n\) linearly independent eigenvectors \(\vec{x}_{1},\dots,\vec{x}_{n}\) with corresponding eigenvalues \(\lambda_{1},\dots,\lambda_{1}\text{.}\) Then the general solution of \(\vec{x}'=A\vec{x}\) is given by</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \sum_{i=1}^{n}c_{i}e^{\lambda_{i}t}\vec{x}_{i}.
+\end{equation*}
+</div></article><article class="example-like" id="example-54"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.2</span>
+</h6>
+<p id="p-327">Find the general solution of the system</p>
+<div class="displaymath">
+\begin{align*}
+x_{1}'  \amp = x_{1}-\frac{1}{2}x_{2}-\frac{1}{2}x_{3}\\
+x'_{2}  \amp =  -\frac{1}{2}x_{1}+x_{2}-\frac{1}{2}x_{3}\\
+x'_{3}  \amp =  -\frac{1}{2}x_{1}-\frac{1}{2}x_{2}+x_{3}
+\end{align*}
+</div>
+<p>given that</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x}_{1} = \begin{bmatrix}1\\1\\1\end{bmatrix},\vec{x}_{2} = \begin{bmatrix}-1\\1\\0\end{bmatrix}\quad\text{and}\quad\vec{x}_{3} = \begin{bmatrix}-\frac{1}{2}\\-\frac{1}{2}\\1\end{bmatrix}
+\end{equation*}
+</div>
+<p>are eigenvectors of the matrix</p>
+<div class="displaymath">
+\begin{equation*}
+G = \begin{bmatrix}1 \amp  -\frac{1}{2}  \amp  -\frac{1}{2}\\-\frac{1}{2}  \amp  1 \amp  -\frac{1}{2} \\ -\frac{1}{2}  \amp  -\frac{1}{2}  \amp    1\end{bmatrix}
+\end{equation*}
+</div>
+<p>with corresponding eigenvalues \(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\text{.}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-51" id="solution-51"><span class="type">Solution</span></a><div id="hk-solution-51" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-328">First, note that the system we need to solve is equivalent to the matrix ODE \(\vec{x}' = G\vec{x}\text{.}\) If we can show that \(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\) are linearly independent, then we can use \cref{theorem:solutions-of-systems} to find the general solution of the system. So we'll compute their Wronskian:</p>
+<div class="displaymath">
+\begin{align*}
+W(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}) \amp = \begin{vmatrix} 1  \amp  -1  \amp  -\frac{1}{2} \\ 1 \amp  1 \amp  -\frac{1}{2} \\ 1 \amp  0 \amp  1\end{vmatrix}\\
+\amp = 1+\frac{3}{2}+\frac{1}{2}\\
+\amp = 3
+\end{align*}
+</div>
+<p id="p-329">Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by</p>
+<div class="displaymath">
+\begin{align*}
+\vec{x} \amp = c_{1}e^{0t}\vec{x}_{1}+c_{2}e^{3t/2}\vec{x}_{2}+c_{3}e^{3t/2}\vec{x}_{3}\\
+\amp = \begin{bmatrix}c_{1}-c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{3}e^{3t/2}\end{bmatrix}
+\end{align*}
+</div>
+<p>or just</p>
+<div class="displaymath">
+\begin{align*}
+x_{1} \amp = c_{1}-\parens*{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
+x_{2} \amp = c_{1}+\parens*{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
+x_{3} \amp = c_{1}+c_{3}e^{3t/2}
+\end{align*}
+</div>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-finding-eigenvalues-and-eigenvectors"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.2</span> <span class="title">Finding Eigenvalues and Eigenvectors</span>
+</h3>
+<a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-finding-eigenvalues-and-eigenvectors" class="permalink">¶</a><p id="p-330"><a knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.</p>
+<p id="p-331">Let \(A\) be an \(n\times n\) matrix and suppose that \(\vec{v}\) is an eigenvector with corresponding eigenvalue \(\lambda\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+A\vec{v} = \lambda\vec{v}.
+\end{equation*}
+</div>
+<p>We can rearrange this to get</p>
+<div class="displaymath">
+\begin{equation*}
+A\vec{v}-\lambda\vec{v} = (A-\lambda I)\vec{v} = \vec{0}
+\end{equation*}
+</div>
+<p>where \(I\) is the identity matrix. Since \(\vec{v}\neq\vec{0}\) (since it's an eigenvector!), linear algebra tells us that \(\det(A-\lambda I) = 0\text{.}\) This gives us the following theorem.</p>
+<article class="theorem-like" id="theorem-theorem-eigenvalues-from-characteristic-equation"><h6 class="heading">
+<span class="type">Theorem</span> <span class="codenumber">4.2.3</span>
+</h6>
+<p id="p-332">The eigenvalues of a square matrix \(A\) are the solutions of the equation \(\det(A-\lambda I) = 0\text{.}\)</p></article><article class="definition-like" id="definition-characteristic-equation"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">4.2.4</span>
+</h6>
+<p id="p-333">\(\det(A-\lambda I)=0\) is called the <dfn class="terminology">characteristic equation</dfn> of the matrix \(A\text{.}\)</p></article><article class="example-like" id="example-55"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.5</span>
+</h6>
+<p id="p-334">Find the eigenvalues of the matrix \(A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}\text{.}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-52" id="solution-52"><span class="type">Solution</span></a><div id="hk-solution-52" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-335">First, we need to set up the characteristic equation of \(A\text{.}\) Since</p>
+<div class="displaymath">
+\begin{equation*}
+A-\lambda I = \begin{bmatrix}1-\lambda \amp  4 \\ 1 \amp  1-\lambda\end{bmatrix},
+\end{equation*}
+</div>
+<p>we get</p>
+<div class="displaymath">
+\begin{equation*}
+\det(A-\lambda I) = (1-\lambda)^{2} - 4 = \lambda^{2}-2\lambda+3
+\end{equation*}
+</div>
+<p>so the characteristic equation of \(A\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\lambda^{2}-2\lambda+3 = 0
+\end{equation*}
+</div>
+<p>which has solutions \(\lambda_{1} = -1,\lambda_{2} = 3\text{.}\) So the eigenvalues of \(A\) are \(-1,3\text{.}\)</p>
+</div></div>
+</div></article><p id="p-336">A useful fact to remember is that the eigenvalues of a ``triangular'' matrix are just the diagonal entries.</p>
+<article class="example-like" id="example-56"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.6</span>
+</h6>
+<p id="p-337">Let</p>
+<div class="displaymath">
+\begin{equation*}
+A = \begin{bmatrix}1 \amp  3 \amp  -4 \amp  5 \\ 0 \amp  3 \amp  -2 \amp  -2 \\ 0 \amp  0 \amp  1 \amp  10^{50\pi-300} \\ 0 \amp  0 \amp  0 \amp  0\end{bmatrix}.
+\end{equation*}
+</div>
+<p>Find the eigenvalues of \(A\text{.}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-53" id="solution-53"><span class="type">Solution</span></a><div id="hk-solution-53" class="hidden-content tex2jax_ignore"><div class="solution"><p id="p-338">\(A\) is a triangular matrix since everything below the main diagonal is \(0\text{.}\) So the eigenvalues of \(A\) are \(1,3,1,0\text{.}\)</p></div></div>
+</div></article><article class="example-like" id="example-57"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.7</span>
+</h6>
+<p id="p-339">Find eigenvectors of \(A = \smqty[1 \amp  4 \\ 1 \amp  1]\) corresponding to the eigenvalues \(\lambda_{1} = -1\) and \(\lambda_{2} = 3\text{.}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-54" id="solution-54"><span class="type">Solution</span></a><div id="hk-solution-54" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-340">Suppose that \(\vec{v} = \smqty[\xmat*{v}{2}{1}]\) is an eigenvector corresponding to \(\lambda\text{.}\) Then we know that</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\vec{v} = \lambda\vec{v} \Rightarrow \begin{bmatrix}v_{1}+4v_{2} \\ v_{1} + v_{2}\end{bmatrix} = \begin{bmatrix}\xmat*{\lambda v}{2}{1}\end{bmatrix}.
+\end{equation*}
+</div>
+<p>This tells us that if \(\vec{v} = \smqty[\xmat*{v}{2}{1}]\) is an eigenvector for \(\lambda\text{,}\) then its entries need to satisfy</p>
+<div class="displaymath">
+\begin{align}
+v_{1}+4v_{2}\amp =-v_{1}\notag\\
+v_{1}+v_{2} \amp = -v_{2}\notag
+\end{align}
+</div>
+<p>which boils down to</p>
+<div class="displaymath">
+\begin{align*}
+(1-\lambda)v_{1}+4v_{2} \amp = 0\\
+v_{1} + (1-\lambda)v_{2} \amp = 0.
+\end{align*}
+</div>
+<p id="p-341">Now set \(\lambda = -1\) to get the system</p>
+<div class="displaymath">
+\begin{align*}
+2v_{1} + 4v_{2} \amp = 0\\
+v_{1} + 2v_{2} \amp = 0
+\end{align*}
+</div>
+<p>and so \(v_{1} = -2v_{2}\text{.}\) We don't really care about what the entries of \(\vec{v}\) look like so long as \(\vec{v}\) is an eigenvector, so we can pick \(v_{1},v_{2}\) however we want, just so long as they satisfy this relation (and are not both \(0\text{!}\)). So pick \(v_{2} = 1\text{,}\) which forces \(v_{1} = -2\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v} = \begin{bmatrix}-2\\1\end{bmatrix}
+\end{equation*}
+</div>
+<p>is an eigenvector of \(A\) corresponding to the eigenvalue \(\lambda_{1} = -1\text{.}\)</p>
+<p id="p-342">To find an eigenvector for \(\lambda_{2} = 3\) we just set \(\lambda  = 3\) in \ref{eqn:eigenvector-relation} and run through the same process:</p>
+<div class="displaymath">
+\begin{align*}
+-2v_{1}+4v_{2} \amp = 0\\
+v_{1} - 2v_{2} \amp = 0
+\end{align*}
+</div>
+<p>The second equation simplifies to \(v_{1} = 2v_{2}\text{,}\) so one eigenvector for \(\lambda_{2}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v} = \begin{bmatrix}2 \\ 1\end{bmatrix}.
+\end{equation*}
+</div>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-solving-matrix-odes"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.3</span> <span class="title">Solving Matrix ODEs</span>
+</h3>
+<a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solving-matrix-odes" class="permalink">¶</a><p id="p-343">We now have the tools we need to begin solving matrix ODEs. Recall that if \(A\) is an \(n\times n\) matrix with constant entries, and if \(\vec{x}_{1},\vec{x}_{2},\ldots,\vec{x}_{n}\) are \(n\) linearly independent solutions of the matrix ODE \(\vec{x}'=A\vec{x}\text{,}\) then the general solution of the matrix ODE is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \sum_{k=1}^{n}c_{k}\vec{x}_{k}.
+\end{equation*}
+</div>
+<p>Furthermore, if \(\lambda\) is an eigenvalue of \(A\) with eigenvector \(\vec{v}\text{,}\) then \(e^{\lambda t}\vec{v}\) is a solution of \(\vec{x}'=A\vec{x}\text{.}\) So to solve the matrix ODE \(\vec{x}'=A\vec{x}\) requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:</p>
+<article class="theorem-like" id="theorem-linear-independence-distinct-eigenvalues"><h6 class="heading">
+<span class="type">Theorem</span> <span class="codenumber">4.2.8</span>
+</h6>\(A\)\(n\times n\)\(\lambda_{1},\ldots,\lambda_{n}\)\(A\)\(\vec{v}_{i}\)\(\lambda_{i}\)\(\vec{v}_{1},\ldots,\vec{v}_{n}\)</article><article class="example-like" id="example-58"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.9</span>
+</h6>
+<p id="p-344">Solve the matrix ODE given by \(\vec{x}' = A\vec{x}\) where</p>
+<div class="displaymath">
+\begin{equation*}
+A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}.
+\end{equation*}
+</div>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-55" id="solution-55"><span class="type">Solution</span></a><div id="hk-solution-55" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-345">We already have everything we need. We know that the eigenvalues of \(A\) are \(\lambda_{1}=-1\) and \(\lambda_{2}=3\) and some corresponding eigenvectors are</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{1} = \begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{v}_{2} = \begin{bmatrix}2\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<p>Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE:</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x}_{1} = e^{\lambda_{1}t}\vec{v}_{1} = e^{-t}\begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{x}_{2} = e^{\lambda_{2}t}\vec{v}_{2} = e^{3t}\begin{bmatrix}2\\1\end{bmatrix}
+\end{equation*}
+</div>
+<p>So the general solution of the matrix ODE is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = c_{1}\vec{x}_{1} + c_{2}\vec{x}_{2} = c_{1}e^{-t}\begin{bmatrix}-2\\1\end{bmatrix} + c_{2}e^{3t}\begin{bmatrix}2\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<p>Note that the choice of eigenvector <em class="emphasis">doesn't matter</em>. Just so long as we find some particular eigenvector for each distinct eigenvalue.</p>
+</div></div>
+</div></article><article class="example-like" id="example-59"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.10</span>
+</h6>
+<p id="p-346">Solve the first-order system given by</p>
+<div class="displaymath">
+\begin{align*}
+x_{1}' \amp = x_{1} - 5x_{2}\\
+x_{2}' \amp = x_{1} - x_{2}
+\end{align*}
+</div>
+<p>where \(x_{1}\) and \(x_{2}\) are functions of \(t\text{.}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-56" id="solution-56"><span class="type">Solution</span></a><div id="hk-solution-56" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-347">First, note that this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\) where</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 \amp  -5 \\ 1 \amp  -1\end{bmatrix}.
+\end{equation*}
+</div>
+<p>To solve this system we need to find the eigenvalues and eigenvectors of \(A\text{,}\) and then use these to build our general solution. </p>
+<ol class="decimal">
+<li id="li-20">
+<p id="p-348">Find the eigenvalues.</p>
+<p id="p-349">We find the eigenvalues of \(A\) by solving the characteristic equation \(\det(A - \lambda I) = 0\) for \(\lambda\text{.}\) Since \(\det(A - \lambda I) = \lambda^{2}+4\text{,}\) we see that the eigenvalues of \(A\) are \(\lambda_{1} = -2i\) and \(\lambda_{2} = 2i\text{.}\)\marginnote{The fact that these eigenvalues are complex is <em class="emphasis">not</em> a problem. They're still distinct, so our method will work.}</p>
+</li>
+<li id="li-21">
+<p id="p-350">Find corresponding eigenvectors.</p>
+<p id="p-351">Set \(\vec{v} = \begin{bmatrix}\xmat*{v}{2}{1}\end{bmatrix}\text{.}\) Then \(A\vec{v} = \lambda\vec{v}\) implies that</p>
+<div class="displaymath">
+\begin{align*}
+v_{1} - 5v_{2}  \amp =  \lambda v_{1}\\
+v_{1} -v_{2}  \amp =  \lambda v_{2}
+\end{align*}
+</div>
+<p>or just</p>
+<div class="displaymath">
+\begin{align*}
+(1-\lambda)v_{1} - 5v_{2} \amp =0\\
+v_{1} - (1+\lambda)v_{2} \amp = 0.
+\end{align*}
+</div>
+<p>Setting \(\lambda=-2i\) in the second equation gives \(v_{1} = (1-2i)v_{2}\text{,}\) so an eigenvector of \(A\) corresponding to \(\lambda_{1} = -2i\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v} = \begin{bmatrix}1-2i \\ 1\end{bmatrix}.
+\end{equation*}
+</div>
+<p>Similarly, an eigenvector corresponding to \(\lambda_{2}=2i\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{2} = \begin{bmatrix}1+2i\\1\end{bmatrix}.
+\end{equation*}
+</div>
+</li>
+<li id="li-22">
+<p id="p-352">Find the general solution.</p>
+<p id="p-353">At this step it is easy to construct the solution of the matrix ODE. It's just</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = c_{1}e^{\lambda_{1}t}\vec{v}_{1} + c_{2}e^{\lambda_{2}t}\vec{v}_{2} = \begin{bmatrix}c_{1}e^{-2it}(1-2i)+c_{2}e^{2it}(1+2i) \\ c_{1}e^{-2it}+c_{2}e^{2it}\end{bmatrix}.
+\end{equation*}
+</div>
+</li>
+</ol>
+</div></div>
+</div></article><article class="example-like" id="example-60"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.11</span>
+</h6>
+<p id="p-354">Solve the first-order system</p>
+<div class="displaymath">
+\begin{align*}
+\dv{x_{1}}{t} \amp = 3x_{1}+x_{3}\\
+\dv{x_{2}}{t} \amp = 9x_{1}-x_{2}+2x_{3}\\
+\dv{x_{3}}{t} \amp = -9x_{1} + 4x_{2} - x_{3}
+\end{align*}
+</div>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-57" id="solution-57"><span class="type">Solution</span></a><div id="hk-solution-57" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-355">As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x}' = \begin{bmatrix}3 \amp  0 \amp  1 \\ 9 \amp  -1 \amp  2 \\ -9 \amp  4 \amp  -1\end{bmatrix}\vec{x} = A\vec{x}.
+\end{equation*}
+</div>
+<p id="p-356">To find the eigenvalues we must solve the characteristic equation \(\det(A-\lambda I)=0\text{.}\) However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of \(A\) as well as the corresponding eigenvectors. So we see that the eigenvalues are given by</p>
+<div class="displaymath">
+\begin{equation*}
+\lambda_{1} = 3, \quad\lambda_{2} = -1 - i\quad\text{and}\quad\lambda_{3} = -1 + i,
+\end{equation*}
+</div>
+<p>while the corresponding eigenvectors are given by</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{1} = \begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix}, \quad\vec{v}_{2} = \begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix}\quad\text{and}\vec{v}_{3} = \begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}
+\end{equation*}
+</div>
+<p id="p-357">We now have everything we need for the general solution of the matrix ODE. It's just</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = c_{1}e^{3t}\begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix} + c_{2}e^{(-1 - i)t}\begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix} + c_{3}e^{(-1 + i)t}\begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}.
+\end{equation*}
+</div>
+</div></div>
+</div></article><div class="sagecell-sage" id="sage-3"><script type="text/x-sage"># Define our matrix
+M = matrix([ [3, 0, 1],
+             [9, -1, 2],
+             [-9, 4, -1]] )
+
+# Finds eigenvectors, corresponding eigenvalues and "algebraic multiplicty".
+pretty_print(M.eigenvectors_right())
+</script></div></section><section class="subsection" id="subsection-applications-of-matrix-odes"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.4</span> <span class="title">Applications of Matrix ODEs</span>
+</h3>
+<a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-applications-of-matrix-odes" class="permalink">¶</a><p id="p-358">Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.</p>
+<article class="example-like" id="example-61"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">4.2.12</span>
+</h6>
+<p id="p-359">Two brine tanks are set up as in <a knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of \(r_{1}\text{,}\) well-mixed solution flows from Tank 1 to Tank 2 at a rate of \(r_{2}\) and well-mixed solution flows out of Tank 2 at a rate of \(r_{3}\text{.}\) Suppose that \(r_{1}, r_{2}\) and  \(r_{3}\) are 5 <sup>gal</sup>⁄<sub>min</sub>, the volume of solution in Tank 1 is 10 gal and the volume of solution in Tank 2 is 7 gal. Suppose Tank 1 has 5 lb of salt at time \(t=0\) and Tank 2 has 2 lb of salt at time \(t=0\text{.}\) How much salt is in each tank at time \(t\text{?}\)</p>
+<div class="solutions">
+<a knowl="" class="id-ref" refid="hk-solution-58" id="solution-58"><span class="type">Solution</span></a><div id="hk-solution-58" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-360">To start, let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\) and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\text{,}\) where \(t\) is in minutes. Then from Section 4.1, we know that</p>
+<div class="displaymath">
+\begin{align*}
+x'_{1} \amp = -\frac{1}{2}x_{1}\\
+x'_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
+\end{align*}
+</div>
+<p>If we set</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \qq{and} A = \begin{bmatrix}-\frac{1}{2} \amp  0 \\ \frac{1}{2} \amp  -\frac{5}{7}\end{bmatrix}
+\end{equation*}
+</div>
+<p>then this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\text{.}\) To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation \(\det(A-\lambda I) = 0\) or use Maple, but it's easier to note that \(A\) is a triangular matrix. So the eigenvalues are just \(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</p>
+<p id="p-361">Now we find eigenvectors. So let</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v} = \begin{bmatrix}\xmat*{v}{2}{1}\end{bmatrix}.
+\end{equation*}
+</div>
+<p>If \(\vec{v}\) is an eigenvector for \(\lambda\text{,}\) then we know \(A\vec{v} = \lambda\vec{v}\text{,}\) which gives the system</p>
+<div class="displaymath">
+\begin{align*}
+(-\frac{1}{2}-\lambda)v_{1} \amp = 0\\
+\frac{1}{2}v_{1} + (-\frac{5}{7}-\lambda)v_{2} \amp = 0
+\end{align*}
+</div>
+<p>If we set \(\lambda=-\frac{1}{2}\text{,}\) then we just get \(v_{1} = \frac{3}{14}v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{1} = -\frac{1}{2}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}.
+\end{equation*}
+</div>
+<p id="p-362">Similarly, if we set \(\lambda=-\frac{5}{7}\) we get \(v_{1} = 0\text{,}\) but no restrictions on \(v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{2} = -\frac{5}{7}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}.
+\end{equation*}
+</div>
+<p id="p-363">The general solution of our matrix ODE is then</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}
+\end{equation*}
+</div>
+<p id="p-364">But we're not done yet, since we have the initial conditions \(x_{1}(0) = 5\) and \(x_{2}(0) = 2\text{,}\) or in terms of our matrix ODE</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}.
+\end{equation*}
+</div>
+<p>We can use this to find \(c_{1}\) and \(c_{2}\text{.}\) If we set \(t=0\text{,}\) then we get</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}
+\end{equation*}
+</div>
+<p>so \(c_{2} = \frac{5}{3}\) and \(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</p>
+<p id="p-365">So the solution of the matrix ODE (and hence the original system) is</p>
+<div class="displaymath">
+\begin{equation*}
+\vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}
+\end{equation*}
+</div>
+<p>The amount of salt in the first tank, \(x_{1}\text{,}\) is given by the top entry and the amount of salt in the second tank, \(x_{2}\text{,}\) is given by the bottom entry.</p>
+</div></div>
+</div></article></section></section></div></main>
+</div>
+</body>
+</html>
