@@ -1,0 +1,1791 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="applications-of-integration" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Applications of Integration</title>
+  <section xml:id="section-areas-between-curves">
+    <title>Areas Between Curves</title>
+    <p>
+      We already know that <m>\int_{a}^{b}f(x)\,dx</m> geometrically represents the area under <m>f(x)</m> from <m>x = a</m> to <m>x = b</m>.
+      Now we'd like to try to extend the integral to other geometrical concepts such as surface areas and volumes.
+      An easy generalization we can make right now is that of <em>areas between curves</em>, as in <xref ref="figure-area-between-curves" text="type-global" />.
+    </p>
+    <figure xml:id="figure-area-between-curves">
+      <image width="75%">
+        <latex-image><![CDATA[
+          \begin{tikzpicture}
+          \begin{axis}[%
+          axis lines=middle,
+          xlabel=$x$,
+          ylabel=$y$,
+          enlargelimits,
+          ytick=\empty,
+          xtick={-2.19,2.19},
+          xticklabels={$a$,$b$}]
+          \addplot[name path=F,blue,thick,domain={-4:4}] {-(1/6)*x^2+2} node[pos=1, left]{$f(x)$};
+
+          \addplot[name path=G,red,thick,domain={-4:4}] {0.25*x^2}node[pos=1, left]{$g(x)$};
+
+          \addplot[blue!30, opacity=0.5]fill between[of=F and G, soft clip={domain=-2.19:2.19}]
+          ;
+          \node at (axis cs:0.5,1) {$S$};
+          \end{axis}
+          \end{tikzpicture}]]>
+        </latex-image>
+      </image>
+      <caption>Area between curves. Adapted from <url href="https://tex.stackexchange.com/questions/164773/graphics-area-between-curves">here</url>.</caption>
+    </figure>
+    <p>
+      It may not be too much of a stretch to say that the area <m>S</m> should be given by <m>\int_{a}^{b}[f(x) - g(x)]\,dx</m>, and indeed it is, but we will prove this using Riemann sums for the reason that Riemann sums appear <em>a lot</em> in applications.
+      Furthermore, Riemann sums provide us with the formula we need to evaluate integrals numerically using libraries such as NumPy.
+      So let's start by partitioning the interval <m>[a,b]</m> into <m>n</m> <em>subintervals</em>
+      <me>[x_{i-1},x_{i}]\quad\text{for}\quad 0\leq i\leq n,</me>
+      where <m>x_{0} = a, x_{n} = b</m> and
+      <me>x_{i} - x_{i-1} = \Delta x = \frac{b-a}{n}.</me>
+    </p>
+    <p>
+      Now we'll use the subintervals to break the region <m>S</m> up into rectangles to approximate the area.
+      So choose a point <m>x_{i}^{*}</m> from each subinterval <m>[x_{i-1}, x_{i}]</m> and use it to determine the height of the corresponding rectangle: <m>f(x_{i}^{*}) - g(x_{i}^{*})</m>.
+      Then the area is <m>f(x_{i}^{*}) - g(x_{i}^{*})\Delta x</m>, and adding up the areas of all of the rectangles lets us approximate the area of <m>S</m>:
+      <men xml:id="equation-area-between-curves-approximation">\text{area of }S \approx \sum_{i=1}^{n}[f(x_{i}^{*}) - g(x_{i}^{*})]\Delta x</men>
+    </p>
+    <p>
+      Now send <m>n\to\infty</m> (equivalently, send <m>\Delta x\to 0</m>) to make the approximation exact:
+      <m>\text{area of }S = \lim_{\Delta x\to0}\sum_{i=1}^{n}f(x_{i}^{*}) - g(x_{i}^{*})\Delta x = \int_{a}^{b}[f(x) - g(x)]\,dx.</m>
+    </p>
+    <example xml:id="example-area-between-parabolas">
+      <title>Area Between Parabolas</title>
+      <statement>
+        <p>
+          Find the area between <m>f(x) = x^{2} + 1</m> and <m>g(x) = 2x^{2}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we graph <m>f</m> and <m>g</m>, we see that the area will be given by <m>\int_{a}^{b}[(x^{2} + 1) - 2x^{2}]\,dx</m>, where <m>a</m> and <m>b</m> are the values of <m>x</m> where <m>f(x) = g(x)</m>.
+          Using a bit of algebra, we get <m>a = -1</m> and <m>b = 1</m>.
+          Therefore the area between the parabolas is
+          <md>
+            <mrow>\int_{-1}^{1}(1 - x^{2})\,dx \amp = 2\int_{0}^{1}(1-x^{2})\,dx </mrow>
+            <mrow> \amp = \frac{4}{3}. </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Although we found an exact solution in <xref ref="example-area-between-parabolas" text="type-global" />, we can also use this to test our NumPy skills.
+      <xref ref="equation-area-between-curves-approximation" text="type-global" /> shows us how we can use NumPy to find this quantity.
+    </p>
+    <sage>
+      <input language="python">
+        import numpy as np
+
+        # Endpoints of interval and number of subintervals
+        a = -1
+        b = 1
+        n = 10
+
+        # Quick way to define f(x) and g(x)
+        f = lambda x: x**2 + 1
+        g = lambda x: 2 * x**2
+
+        # Partition interval
+        X = np.linspace(a, b, n)
+
+        # Area of each rectangle
+        deltaX = (b - a) / n
+        area = (f(X) - g(X)) * deltaX
+
+        # Add areas together to get approximation
+        print(np.sum(area))
+      </input>
+      <output>
+        1.1851851851851853
+      </output>
+    </sage>
+    <example xml:id="example-area-with-changing-limits">
+      <title>Area with Changing Limits</title>
+      <statement>
+        <p>
+          Find the area of the region bounded by <m>x = y^{4}</m> and <m>y^{2} + x = 2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we solve both equations for <m>y</m>, we get <m>y = \pm\sqrt[4]{x}</m> and <m>y = \pm\sqrt{2 - x}</m>.
+          We can then graph the region below:
+        </p>
+        <figure xml:id="figure-graph-between-x-curves">
+          <image>
+            <latex-image><![CDATA[
+              \begin{tikzpicture}
+              \begin{axis}[mystyle, xmin = -1, xmax = 3, ymin = -2, ymax = 2, legend style={at={(axis cs: 3, 1.5)}, anchor=south}]
+              \addplot[name path = F1, smooth, blue, thick, samples = 500, domain = 0:5]{x^(.25)};
+              \addlegendentry{$x = y^{4}$};
+              \addplot[name path = G1, smooth, red, thick,samples = 100, domain = -1:2]{sqrt(2 - x)};
+              \addlegendentry{$y^{2} + x = 2$};
+              \addplot[name path = F2, smooth, blue, thick, samples = 500, domain = 0:5]{-x^(.25)};
+              \addplot[name path = G2, smooth, red, thick,samples = 100, domain = -1:2]{-sqrt(2 - x)};
+
+              \addplot[name path = xaxis]{0};
+              \addplot[blue!30, opacity=0.5] fill between[of=F1 and xaxis, soft clip={(0,0) rectangle (1,1)}];
+              \addplot[blue!30, opacity=0.5] fill between[of=F2 and xaxis, soft clip={(0,0) rectangle (1,-1)}];
+              \addplot[blue!30, opacity=0.5] fill between[of=G1 and xaxis, soft clip={(1,0) rectangle (2,2)}];
+              \addplot[blue!30, opacity=0.5] fill between[of=G2 and xaxis, soft clip={(1,0) rectangle (2,-2)}];
+              \end{axis}
+              \end{tikzpicture}]]>
+            </latex-image>
+          </image>
+          <caption>The region bounded by <m>x = y^{4}</m> and <m>y^{2} + x = 2</m>.</caption>
+        </figure>
+        <p>
+          To find the area between these curves, we'll need to compute <em>two</em> integrals: one for <m>0\leq x\leq 1</m> and another for <m>1\leq x\leq 2</m>.
+          In particular, the area will be given by
+          <m>\int_{0}^{1}[x^{\frac{1}{4}} - (-x^{\frac{1}{4}})]\,dx + \int_{1}^{2}[\sqrt{2 - x} - (-\sqrt{2 - x})]\,dx</m>.
+          Doing so, we get
+          <m>\frac{44}{15}</m>
+          for the area between the curves.
+        </p>
+      </solution>
+    </example>
+    <p>
+      Part of the reason why finding the area in <xref ref="example-area-with-changing-limits" text="type-global" /> was more complicated was because the curves did not represent functions of <m>x</m>.
+      However, we can view each curve as representing a function of <m>y</m>, namely,
+      <m>x(y) = y^{4} \quad\text{and}\quad x(y) = 2 - y^{2}.</m>
+      Then the area can be found as
+      <m>\int_{-1}^{1}[(2 - y^{2}) - y^{4}]\,dy = \frac{44}{15}.</m>
+      So it can be much easier if we find the area by integrating with respect to <m>y</m> as opposed to <m>x</m>.
+    </p>
+    <example>
+      <statement>
+        <p>
+          Find the area contained by the curves <m>x = y^{2} - 4y</m> and <m>x = 2y - y^{2}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we graph the region, we get <xref ref="figure-region-between-y-parabolas" text="type-global" />.
+        </p>
+        <figure xml:id="figure-region-between-y-parabolas">
+          <image>
+            <latex-image><![CDATA[
+              \begin{tikzpicture}
+              \begin{axis}[mystyle, xmin = -5, xmax = 3, ymin = -3, ymax = 5, legend style={at={(axis cs: 3, 1.5)}, anchor=south}]
+              \addplot[name path = F, blue, smooth, thick] (x*x - 4*x, x);
+              \addlegendentry{$x = y^{2} - 4y$};
+              \addplot[name path = G, red, smooth, thick] (2*x - x*x, x);
+              \addlegendentry{$x = 2y - y^{2}$};
+              \addplot[blue!30, opacity=0.5] fill between[of=F and G, soft clip={(-4, 3) rectangle (2,0)}];
+              \end{axis}
+              \end{tikzpicture}]]>
+            </latex-image>
+          </image>
+        </figure>
+        <p>
+          Finding the area by using integrals with respect to <m>x</m> would require setting up and solving three different integrals!
+          So, not terrific.
+          However, we can integrate with respect to <m>y</m> fairly easily.
+          By finding where the curves intersect, we see that <m>0\leq y\leq 3</m>.
+          Hence the area should be
+          <md>
+            <mrow>\int_{0}^{3}[(2y - y^{2}) - (y^{2} - 4y)]\,dy \amp = \int_{0}^{3}[6y - 2y^{2}]\,dy </mrow>
+            <mrow> \amp = 3y^{2} - \frac{2}{3}y^{3}\Bigg]_{0}^{3} </mrow>
+            <mrow> \amp = 27 - 18 </mrow>
+          </md>
+          and so the area is just <m>9</m> units.
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-volumes">
+    <title>Volumes</title>
+    <p>
+      Just as we can with areas, we can attempt to find volumes using integrals as well.
+      At the moment we can't find volumes of general regions without first describing integrals in higher dimensions, which is the content of <xref ref="multiple-integrals" text="type-global" />.
+      Until then, we'll need to restrict ourselves to so-called <term>solids of revolution</term>.
+    </p>
+    <p>
+      As an example, consider <xref ref="figure-solid-revolution-1" text="type-global" />.
+      To generate the solid of revolution on the right, we take the graph of <m>y = f(x)</m> and rotate it about the <m>x</m>-axis, creating a three-dimensional region.
+    </p>
+    <figure xml:id="figure-solid-revolution-1">
+      <sidebyside>
+        <image>
+          <latex-image><![CDATA[ 
+            \begin{tikzpicture}
+            \begin{axis}[%
+            mystyle,
+            xmin = -1,
+            xmax = 10.1,
+            ymin = -1,
+            ymax = 4.1,
+            xtick = {2, 4, 6, 8, 10}]
+            \addplot[smooth, samples = 50, blue, thick, domain = 0:9]{sqrt(x)};
+            \addlegendentry{$y = f(x)$};
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[%
+            width=2*175pt,
+            tick label style={font=\scriptsize},
+            colormap/cool,
+            axis on top,
+            axis lines=center,
+            % y dir=reverse,
+            name=myplot,
+            enlargelimits=.1,
+            ymin=-4, ymax=4, xmin=-1, xmax=10, zmin=-4, zmax=4,
+            xtick = {1, 2, ..., 10},
+            xlabel=$x$, ylabel=$y$, zlabel=$z$]
+            % [view={60}{30}]
+            \addplot3[surf,
+            samples=50,
+            domain=0:9,y domain=0:2*pi,
+            z buffer=sort]
+            %({(2 + tan(deg(y)))*cos((deg(x)))}, {(2 + cos(x)) * sin(x)}, {x});
+            (x, {(sqrt(x)) * cos(deg(y))}, {(sqrt(x)) * sin(deg(y))});
+            \addlegendentry{Solid of revolution};
+            \addplot3[samples = 50, samples y = 0, domain = 0:9.5, smooth, thick, blue, z buffer = sort] (x, {sqrt(x)}, 0);
+            \addlegendentry{$y = f(x)$};
+            % \addplot3[samples = 500, domain = 0:3, y domain = 0:2*pi, blue!30, opacity = 0.5, z buffer = sort] (9, {x * cos(deg(y))}, {x * sin(deg(y))});
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </sidebyside>
+      <caption>Generating a solid of revolution.</caption>
+    </figure>
+    <p>
+      To find the volume of such a region, the idea is to find the <em>area</em> of a general cross-section of the region, which by design should be a function of <m>x</m> alone, say <m>A(x)</m>.
+      Then, roughly, <m>A(x)\Delta x</m> should represent the volume of a small cross-section of the solid, and so the integral <m>\int_{a}^{b}A(x)\,dx</m> should give us the volume of the region.
+      This entire argument can be made precise using Riemann sums as in the previous section, and so we get the following: the solid <m>S</m> from <m>x = a</m> to <m>x = b</m> whose cross-sections (with respect to the <m>x</m>-axis) have area <m>A(x)</m> has volume given by
+      <men xml:id="equation-solid-revolution-volume">V = \int_{a}^{b}A(x)\,dx.</men>
+    </p>
+    <example xml:id="example-finding-the-volume-of-a-sphere">
+      <title>Finding the Volume of a Sphere</title>
+      <statement>
+        <p>
+          Find the volume of a sphere of radius <m>r</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          To begin, let's assume that the sphere is centered at the origin.
+          Then each cross section perpendicular to the <m>x</m>-axis is just a circle with radius <m>\sqrt{r^{2} - x^{2}}</m>.
+          Hence each cross-sectional area is given by <m>A(x) = \pi(r^{2} - x^{2})</m>, which means the volume of the sphere should be
+          <md>
+            <mrow>\int_{-r}^{r}\pi(r^{2} - x^{2})\,dx \amp= 2\int_{0}^{r}\pi(r^{2} - x^{2})\,dx</mrow>
+            <mrow> \amp= 2\left[\pi r^{2}x - \frac{\pi x^{3}}{3}\right]_{0}^{r}</mrow>
+            <mrow> \amp= 2\left[\pi r^{3} - \frac{\pi r^{3}}{3}\right]</mrow>
+            <mrow> \amp= \frac{4}{3}\pi r^{3}.</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Again, the idea for finding the volumes of these regions is to determine the cross-sectional areas perpendicular to the <m>x</m>-axis (or whatever the axis of rotation happens to be) and then integrate.
+    </p>
+    <example>
+      <statement>
+        <p>
+          Find the volume of the region obtained by rotating the graph of <m>y = \sqrt{x}</m> from <m>x = 1</m> to <m>x = 4</m> about the line <m>y = 2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          As is almost always the case, a good way to start is by graphing the region to get a rough idea of what it looks like.
+          Doing so, we see that each of the cross-sections are circles.
+          But this is to be expected, since the region is a solid of revolution.
+          Given <m>x</m> between <m>1</m> and <m>4</m>, the area of the corresponding cross-section is given by
+          <me>A(x) = \pi(2 - \sqrt{x})^{2}.</me>
+          Hence the volume of this region should be
+          <md>
+            <mrow>\int_{1}^{4}\pi(2 - \sqrt{x})^{2}\,dx \amp= \pi\int_{1}^{4}(2 - 4\sqrt{x} + x)\,dx</mrow>
+            <mrow> \amp= \pi\left[2x - \frac{8}{3}x^{\frac{3}{2}} + \frac{x^{2}}{2}\right]_{1}^{4}</mrow>
+            <mrow> \amp= \pi\left[\left(8 - \frac{64}{3} + 8\right) - \left(2 - \frac{8}{3} + \frac{1}{2}\right)\right]</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      The previous problems involved finding volumes by using disks since disks were natural cross-sections.
+      The next example instead uses washers as cross-sections instead.
+      Although the formula we get for the volume is slightly different, it's still essentially integrating the areas of the cross-sections.
+    </p>
+    <example xml:id="example-solid-rev-4">
+      <statement>
+        <p>
+          Find the volume of the solid obtained by rotating the region bounded by <m>y = x</m>, <m>y = \sqrt{x}</m> and <m>y = 1</m> about the line <m>x = 2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Since the axis of rotation is <m>x = 2</m>, we want to look at cross-sections perpendicular to this line, i.e., parallel to the <m>x</m>-axis.
+          Each such cross-section will look like a washer, and hence its area will involve the inner radius and outer radius of the washer.
+          Since the radii are measured in terms of horizontal distance, we'll need to find <m>x</m> in terms of <m>y</m>.
+          Doing so, we see that the inner radius is given by <m>2 - y</m> while the outer radius is given by <m>2 - y^{2}</m>.
+          Therefore the volume of the region is given by
+          <md>
+            <mrow>\int_{0}^{1}\left[\pi(2 - y^{2})^{2} - \pi(2 - y)^{2}\right]\,dy \amp= \pi\int_{0}^{1}\left[(4 - 4y^{2} + y^{4}) - (4 - 2y + y^{2})\right]\,dy</mrow>
+            <mrow>\amp= \pi\int_{0}^{1}\left[y^{4} - 5y^{2} + 2y\right]\,dy</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-volumes-by-cylindrical-shells">
+    <title>Volumes by Cylindrical Shells</title>
+    <p>
+      The method we used to find volumes in <xref ref="section-volumes" text="type-global" /> applies to solids that have cross-sections depending on <m>x</m> or <m>y</m> alone.
+      Once we had a formula for this area, we could then integrate it to get the volume.
+      However, not all shapes have such simple cross-sections, and so this method doesn't apply in general.
+      In this section, we'll look at using cylindrical shells instead.
+    </p>
+    <p>
+      Therefore, the following fact will prove useful: the volume of a cylindrical shell of height <m>h</m>, inner radius <m>r_{1}</m> and outer radius <m>r_{2}</m> is given by
+      <men xml:id="equation-volume-cylindrical-shell"> V = 2\pi\frac{r_{1} + r_{2}}{2}h(r_{2} - r_{1}) = 2\pi rh\Delta r</men>
+      where <m>r</m> is the "average radius" and <m>\Delta r</m> is the thickness of the shell.
+      If we can break a solid up into these cylindrical "cross-sections," then integrating these areas should again give us the volume of the solid.
+      For shells that are perpendicular to the <m>x</m>-axis, we can typically replace <m>r</m> with <m>x</m> and <m>h</m> with <m>f(x)</m>, leading to an integral of the form
+      <me>\int_{a}^{b}2\pi xf(x)\,dx.</me>
+      <aside>
+        <p>
+          Finding areas using disks and washers usually involves finding disks/washers that are perpendicular to the axis of rotation.
+          When finding volumes using shells, we'll typically use shells that are <em>parallel</em> to the axis of rotation.
+        </p>
+      </aside>
+    </p>
+    <p>
+      One final note: this method, as in <xref ref="section-volumes" text="type-global" />, applies only to solids with a certain degree of symmetry.
+      If you continue on to Calculus 3, the techniques you'll learn in <xref ref="multiple-integrals" text="type-global" /> will replace this method as they do the disk and washer methods from <xref ref="section-volumes" text="type-global" />.
+      In particular, this method is a special case of the transformation to <em>cylindrical coordinates</em> presented in <xref ref="section-cylindrical-coordinates" text="type-global" />.
+    </p>
+    <example xml:id="example-finding-volumes-using-cylindrical-shells">
+      <title>Finding Volumes Using Cylindrical Shells</title>
+      <statement>
+        <p>
+          Find the volume of the solid obtained by rotating the region bounded by <m>y = x^{2}</m>, <m>y = 0</m> and <m>x = 1</m> about the <m>y</m>-axis.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The axis of rotation is the <m>y</m>-axis, so each shell should be perpendicular to this axis as well.
+          Drawing a typical shell, we see that the radius at <m>x</m> should be <m>x</m> while the height is <m>f(x) = x^{2}</m>.
+          So the volume of this region should be
+          <me>\int_{0}^{1}2\pi x(x^{2})\,dx = \frac{\pi}{2}.</me>
+        </p>
+      </solution>
+    </example>
+    <p>
+      It should be noted that the volume in <xref ref="example-finding-volumes-using-cylindrical-shells" text="type-global" /> could also have been found using washers instead of shells.
+      If you can, you should use disks or washers before using shells, since integrals derived from using shells are typically more complicated.
+    </p>
+    <example xml:id="example-cylindrical-shells-2">
+      <statement>
+        <p>
+          Find the volume of the solid obtained by rotating the region bounded by <m>x = 0</m>, <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> about the line <m>x = -2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A good first step, as always, is to plot the region.
+          Since <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> give downward opening parabolas, we can quickly sketch a rough graph by finding the <m>x</m>-coordinates of the vertices, which occur at <m>x = 2</m>.
+          Finding the corresponding <m>y</m> values, and noticing that each parabola intersects the <m>x</m>-axis at <m>x = 0, 4</m>, gives a pretty good picture of the graph.
+        </p>
+        <p>
+          If we tried to find the volume using disks/washers, we'd need to solve <m>y = 4x - x^{2}</m> and <m>y = 8x - 2x^{2}</m> for <m>x</m> since each cross-section would be parallel to the <m>x</m>-axis.
+          This is doable using the quadratic formula, but the algebra would get very bad very quickly once we start integrating.
+          So we'll try shells instead.
+        </p>
+        <p>
+          A typical shell for this region has radius <m>x - (-2) = x + 2</m> and height <m>(8x - 2x^{2}) - (4x - x^{2}) = 4x - x^{2}</m>.
+          Hence the volume is given by
+          <md>
+            <mrow>\int_{0}^{4}2\pi(x + 2)(4x - x^{2})\,dx \amp= 4\pi\int_{0}^{2}(x + 2)(2x - x^{2})\,dx</mrow>
+            <mrow> \amp= 4\pi\int_{0}^{2}\left[4x - x^{3}\right]\,dx</mrow>
+            <mrow> \amp= 4\pi\left[2x^{2} - \frac{x^{4}}{4}\right]_{0}^{2}</mrow>
+            <mrow> \amp= 16\pi</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-arc-length">
+    <title>Arc Length</title>
+    <p>
+      Say the motion of a particle is described by
+      <m>y = f(x) \text{ for } a \leq x \leq b.</m>
+      Then the path that the particle travels will look like a curve, say
+      <figure xml:id="figure-arc-length-basic-curve">
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}
+            % Draw grid.
+            \draw[step=1, thin, gray!40] (0,0) grid (5,6);
+
+            % Draw axes.
+            \draw[->] (-.1,0) -- (6,0) node[right]{$x$};
+            \draw[->] (0,-.1) -- (0,6) node[above]{$y$};
+
+            % Plot curve.
+            \draw [domain=1:5,yscale=.25] plot  (\x, {\x^2});
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </figure>
+    </p>
+    <p>
+      Our goal now is to determine how far the particle travels as <m>x</m> goes from <m>a</m> to <m>b</m>.
+      In other words, we want to find the length of this curve from <m>x=a</m> to <m>x=b</m>.
+    </p>
+    <p>
+      If the curve were just a line we could easily find its length by using the Pythagorean theorem, but for a more general curve like this we're stuck.
+      So we'll start by approximating the curve by using line segments, which we'll call <m>L_1</m>, <m>L_2</m>, and so on up to <m>L_{n}</m>, then we'll find the lengths of the line segments.
+      Say the first line segment goes from <m>x=x_0</m> to <m>x=x_1</m>, the second from <m>x=x_1</m> to <m>x=x_2</m> and so on.
+      To make life simpler, we'll assume that all these intervals have equal length <m>\Delta x</m>.
+      That is, <me>x_{i} - x_{i-1}  = \Delta x</me> for <m>0 \leq i\leq n</m>.
+      Also, we'll define <m>\Delta y_{i} = f(x_{i}) - f(x_{i-1})</m>.
+    </p>
+    <figure xml:id="figure-arc-length-breaking-into-line-segments">
+      <image>
+        <latex-image><![CDATA[
+          \begin{tikzpicture}
+          % Draw grid.
+          \draw[step=1, thin, gray!40] (0,0) grid (5,6);
+
+          % Draw axes.
+          \draw[->] (-.1,0) -- (5.1,0) node[right]{$x$};
+          \draw[->] (0,-.1) -- (0,6.1) node[above]{$y$};
+
+          % Plot curve.
+          \draw [domain=1:5,yscale=.25] plot  (\x, {\x^2});
+
+          % Plot line segments
+          \draw[thin,red] (1,0.25) -- (2,1) -- (3,2.25) -- (4,4) -- (5,6.25);
+          \draw[thin,blue] (1,0.25) -- (2,0.25) -- (2,1);
+          \draw[white] (1.2,0) -- (1.73,0);
+
+          % Draw triangle.
+          \draw [decorate,decoration={brace,amplitude=3pt}, xshift=0pt,yshift=0pt]
+          (1,0.25) -- (2,1) node [black,above,midway, xshift=-5pt, yshift=0pt] 
+          {\footnotesize $L_1$};
+
+          \draw [decorate,decoration={brace,amplitude=3pt}, xshift=0pt,yshift=0pt]
+          (2,0.25) -- (1,0.25) node [black,below,midway, xshift=0pt, yshift=1pt] 
+          {\footnotesize   $\Delta x_1$ };
+
+          \draw [decorate,decoration={brace,amplitude=3pt}, xshift=0pt,yshift=0pt]
+          (2,1) -- (2,0.25) node [black,right,midway, xshift=0pt,   yshift=0pt] 
+          {\footnotesize   $\Delta y_1$ };
+
+          % Draw lengths.
+          \draw [decorate,decoration={brace,amplitude=3pt}, xshift=0pt,yshift=0pt]
+          (2,1) -- (3,2.25) node [black,above,midway, xshift=-5pt, yshift=0pt] 
+          {\footnotesize $L_2$};
+
+          \draw [decorate,decoration={brace,amplitude=3pt}, xshift=0pt,yshift=0pt]
+          (3,2.25) -- (4,4) node [black,above,midway, xshift=-5pt, yshift=0pt] 
+          {\footnotesize $L_3$};
+          \end{tikzpicture}]]>
+        </latex-image>
+      </image>
+      <caption>Approximating arc length with line segments.</caption>
+    </figure>
+    <p>
+      If we look at <m>L_1</m>, then the line goes <m>\Delta x</m> in the <m>x</m>-direction and <m>\Delta y_1</m> in the <m>y</m>-direction, so by the Pythagorean theorem,
+      <me>\text{length of } L_1 = \sqrt{(\Delta x)^2 + (\Delta y_1)^2} = \sqrt{1 + \left(\frac{\Delta y_{i}}{\Delta x}\right)}\Delta x.</me>
+      Now if <m>\Delta x \approx 0</m>, then <m>\frac{\Delta y_{1}}{\Delta x} \approx f'(x_{1})</m>.
+      Hence
+      <me>\text{length of } L_{1} \approx \sqrt{1 + f'(x_{1})^{2}}\Delta x</me>
+      if <m>\Delta x\approx 0</m>.
+    </p>
+    <p>
+      We can extend this estimate to the other line segments as well, so we can say that the total length <m>L</m> of the curve is approximately
+      <me>\sum_{i=1}^{n}\sqrt{1 + f'(x_{i})^{2}}\Delta x.</me>
+      If the curve is nice enough, this approximation should become exact as <m>\Delta x\to 0</m>.
+      So we can take this as the definition of the arc length of the curve <m>y = f(x)</m>.
+    </p>
+    <definition xml:id="definition-arc-length-of-a-curve">
+      <idx><h>arc length</h><h>Cartesian coordinates</h></idx>
+      <title>Arc Length of a Curve</title>
+      <statement>
+        <p>
+          Let <m>y = f(x)</m> denote a continuous function defined on some interval <m>[a,b]</m>.
+          The <term>arc length</term> of <m>f(x)</m> over this interval is defined to be
+          <me>L = \lim_{\Delta x\to0}\sum_{i=1}^{n}\sqrt{1 + f'(x_{i})^{2}}\Delta x = \int_{a}^{b}\sqrt{1 + f'(x)^{2}}\,dx.</me>
+        </p>
+      </statement>
+    </definition>
+    <example xml:id="example-the-circumference-of-a-circle">
+      <title>The Circumference of a Circle</title>
+      <statement>
+        <p>
+          Find the circumference of a circle of radius <m>r</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          To find the circumference of this circle, we need to find an equation whose graph is the circle, or at least part of it.
+          One choice is <m>y = \sqrt{r^{2} - x^{2}}</m> for <m>-r\leq x\leq r</m>.
+          Since this gives the top half of a circle, the circumference is then
+          <md>
+            <mrow>2\int_{-r}^{r}\sqrt{1 + [y']^{2}}\,dx \amp = 2\int_{-r}^{r}\sqrt{1 + \frac{x^{2}}{r^{2} - x^{2}}}\,dx </mrow>
+            <mrow> \amp = 2r\int_{-r}^{r}\frac{1}{\sqrt{r^{2} - x^{2}}}\,dx </mrow>
+            <mrow> \amp = 2r\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\frac{r\cos\theta}{r\cos\theta}\,d\theta </mrow>
+            <mrow> \amp = 2\pi r. </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      We could try to use <xref ref="definition-arc-length-of-a-curve" text="type-global" /> to find the arc length of an ellipse, but it turns out the resulting integral is too complicated to have a "closed form" solution.
+    </p>
+    <p>
+      We can use <xref ref="definition-arc-length-of-a-curve" text="type-global" /> to define the <term>arc length function</term>:
+      <me>s(x) = \int_{a}^{x}\sqrt{1 + [f'(t)]^{2}}\,dt.</me>
+      This function can be useful to <em>parameterize</em> movement along a curve, which you'll see in Calculus 3.
+    </p>
+    <example>
+      <statement>
+        <p>
+          Find the arc length function for <m>y = x^{2}</m> assuming that <m>x = 0</m> is the starting point.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>s(x) = \int_{1}^{x}\sqrt{1 + 4t^{2}}\,dt.</me>
+          To find this, we'll use trigonometric substitution with <m>2t = \tan\theta</m> to get
+          <md>
+            <mrow>s(x) \amp = \frac{1}{2}\int_{0}^{\tan^{-1}(2x)}\sqrt{1 + \tan^{2}\theta}\sec^{2}\theta\,d\theta </mrow>
+            <mrow> \amp = \frac{1}{4}\left[\sec\theta\tan\theta + \ln(\sec\theta + \tan\theta)\right]_{0}^{\tan^{-1}(2x)} </mrow>
+            <mrow> \amp = \frac{x}{2}\sqrt{1 + 4x^{2}} + \frac{1}{4}\ln(\sqrt{1 + 4x^{2}} + 2x). </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-area-of-a-surface-of-revolution">
+    <title>Area of a Surface of Revolution</title>
+    <p>
+      Consider a function <m>y=f(x)</m>.
+      We generate a solid of revolution by rotating the graph of <m>f(x)</m> from <m>x=a</m> to <m>x=b</m> about the <m>x</m>-axis.
+      We want to find the surface area of this figure. We can't find it directly yet, but we can approximate it by using conical frustums.
+    </p>
+    <p>
+      The surface area of a conical frustum is given by the formula
+      <me>S_{F}=\pi(R_{1}+R_{2})\sqrt{(\Delta x)^{2}+(\Delta y)^{2}}=\pi(R_{1}+R_{2})\sqrt{1+\left(\frac{\Delta y}{\Delta x}\right)^{2}}\Delta x.</me>
+      If <m>\Delta x\approx0</m> then we can say
+      <me>S_{F}\approx2\pi f(x)\sqrt{1+f'(x)^{2}}\Delta x</me>
+      for some <m>f(x)</m> between <m>R_{1}</m> and <m>R_{2}</m>.
+    </p>
+    <p>
+      By using multiple frustums, we can approximate the surface area of the solid. Break <m>[a,b]</m> into <m>n</m> subintervals
+      <me>[x_{0},x_{1}],[x_{1},x_{2}],\ldots,[x_{n-1},x_{n}]</me>
+      with <m>x_{0}=a</m> and <m>x_{n}=b</m>, where each subinterval has length <m>\Delta x</m>.
+      Then if <m>S</m> is the surface area of the solid, we have
+      <md>
+        <mrow>S\amp\approx\text{sum of areas of frustums}</mrow>
+        <mrow>\amp\approx\sum_{k=1}^{n}2\pi f(x_{i})\sqrt{1+f'(x_{i})^{2}}\Delta x.</mrow>
+      </md>
+      This approximation should become more exact as <m>\Delta x \to 0</m>, so we have
+      <me>S=\lim_{\Delta x\to0}\sum_{k=1}^{n}2\pi f(x_{i})\sqrt{1+f'(x_{i})^{2}}\Delta x</me>
+      or
+      <me>S=\int_{a}^{b}2\pi f(x)\sqrt{1+f'(x)^{2}}\,dx.</me>
+    </p>
+    <p>
+      Similarly, if we generate a solid of revolution by rotating <m>x=g(y)</m> from <m>y=c</m> to <m>y=d</m> about the <m>y</m>-axis, the surface area of this solid is given by
+      <me>S=\int_{c}^{d}2\pi g(y)\sqrt{1+g'(y)^{2}}\,dy.</me>
+    </p>
+    <example xml:id="example-finding-surface-area-of-a-sphere">
+      <title>Finding Surface Area of a Sphere</title>
+      <statement>
+        <p>
+          Find the surface area of a sphere of radius <m>r</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can create a sphere of radius <m>r</m> by rotating the semicircle <m>y=\sqrt{r^{2}-x^{2}}</m> about the <m>x</m>-axis, from <m>x=-r</m> to <m>x=r</m>. So <m>f(x)=\sqrt{r^{2}-x^{2}}</m> and <m>f'(x)=\displaystyle\frac{-x}{\sqrt{r^{2}-x^{2}}}</m>. So the surface area is
+          <me>S=\int_{-r}^{r}2\pi\sqrt{r^{2}-x^{2}}\sqrt{1+\frac{x^{2}}{r^{2}-x^{2}}}\,dx</me>
+          or just
+          <me>S=\int_{-r}^{r}2\pi r \, dx.</me>
+        </p>
+      </solution>
+    </example>
+    <example>
+      <statement>
+        <p>Find the surface area of the solid generated by rotating the graph of <m>y=x^{2}</m> from <m>y=0</m> to <m>y=3</m> about the <m>y</m>-axis.</p>
+      </statement>
+      <solution>
+        <p>
+          Since we are rotating about the <m>y</m>-axis, we need to use the other formula. Since <m>y=x^{2}</m>, we can rewrite this as <m>x=sqrt{y}</m>. So the surface area is <me>\int_{0}^{3}2\pi\sqrt{y}\sqrt{1+\frac{1}{4y}}\,dy.</me>
+        </p>
+      </solution>
+    </example>
+    <example>
+      <statement>
+        <p>
+          Find the integral that gives the surface area of the solid generated by rotating the graph of <m>y=x^{2}</m> from <m>x=0</m> to <m>x=3</m> about the <m>x</m>-axis.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          By the surface area formula, the surface area is <me>\int_{0}^{3}2 \pi x^{2} \sqrt{1+4x^{2}}\,dx.</me>
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-gabriel-s-horn">
+      <title>Gabriel's Horn</title>
+      <statement>
+        <p>
+          Find the volume of the solid of revolution obtained by rotating the graph of <m>y = \frac{1}{x}</m> about the <m>x</m>-axis from <m>x = 1</m> onwards.
+          Estimate the surface area of this solid of revolution.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The volume is given by <me>\int_{1}^{\infty}\frac{\pi}{x^{2}}\,dx = \pi</me>.
+          The integral that gives the surface area is
+        </p>
+        <md>
+          <mrow>\int_{1}^{\infty}\frac{2\pi}{x}\sqrt{1 + \frac{1}{x^{2}}}\,dx \amp \gt \int_{1}^{\infty}\frac{2\pi}{x}\,dx </mrow>
+          <mrow> \amp = \infty </mrow>
+        </md>
+        <p>
+          Oddly enough, the volume of this region is finite, but the surface area is <em>infinite</em>.
+          A silly way to describe this situation: you can fill this region with a finite amount of paint, but it would take an infinite amount to paint the surface.
+        </p>
+      </solution>
+    </example>
+    <example>
+      <statement>
+        <p>Find the surface area of the solid generated by rotating the graph of <m>y=x^{3}</m> from <m>x=1</m> to <m>x=2</m> about the <m>x</m>-axis. </p>
+      </statement>
+      <solution>
+        <p>
+          Since <m>f(x)=x^{3}</m>, then <m>f'(x)=3x^{2}</m> and the surface area of the solid is <me>\int_{1}^{2}2\pi x^{3}\sqrt{1+9x^{4}},dx.</me>
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-applications-to-physics-and-engineering">
+    <title>Applications to Physics and Engineering</title>
+    <introduction>
+      <p>
+        The primary use of integrals in physics and engineering is to measure the accumulation of continuously varying quantities.
+        The running theme in this section:
+      </p>
+      <ol>
+        <li><p>Measure the accumulation of some quantity by approximating it as a (finite) sum of "small" values.</p></li>
+        <li><p>Improve the approximation by taking more and more values.</p></li>
+        <li><p>Introduce a limit to make the approximation exact, resulting in an integral.</p></li>
+      </ol>
+    </introduction>
+    <subsection xml:id="subsection-work">
+      <title>Work</title>
+      <p>
+        We introduced a formula for work in <xref ref="section-improper-integrals" text="type-global" />, and now we'll actually derive it.
+        First, recall that <term>work</term> (very roughly) represents the net effect of a <term>force</term> <m>F</m> acting on a mass over some displacement <m>d</m>.
+        If the force is constant (in both magnitude and direction), then we can simply define the work <m>W</m> accomplished by a force <m>F</m> as a particle is displaced by <m>d</m> units by the formula
+        <me>W = Fd.</me>
+      </p>
+      <p>
+        So with this definition, work is proportional to the magnitude of the force <m>F</m> as well as the displacement <m>d</m> over which the force acts.
+        If <m>F</m> is measured in units of
+        <quantity>
+          <unit base="meter" />
+          <per base="second" exp="2"/>
+        </quantity>
+        or more simply
+        <quantity>
+          <unit base="newton" />
+        </quantity>,
+        and <m>d</m> is measured in units of
+        <quantity>
+          <unit base="meter" />
+        </quantity>
+        the <m>W</m> takes on units of
+        <quantity>
+          <unit base="newton" />
+          <unit base="meter" />
+        </quantity>
+        or just
+        <quantity>
+          <unit base="joule" />
+        </quantity>.
+      </p>
+      <p>
+        Although there are important forces that are reasonably approximated by constants, such as the force due to gravity, this isn't reasonable for every force of interest.
+        For example, consider the force due to drag against an object moving through the atmosphere, which should increase as velocity increases.
+        Another basic example is the <term>Hooke's Law</term>, which states that the force a spring exerts on an attached mass is proportional to the displacement of the mass from the spring's equilibrium position.
+        For these non-constant forces, our old formula doesn't work so well.
+        To be precise, how can we measure the work done by a non-constant force <m>F(x)</m> on a particle as it moves from <m>x = a</m> to <m>x = b</m>?
+      </p>
+      <p>
+        As you might guess from this section's running theme, we'll start by <em>approximating</em> the work done by measuring work in small displacements as the particle moves from <m>a</m> to <m>b</m>.
+        Over small enough intervals, even variable forces will look almost constant, which makes <m>W = Fd</m> a reasonable estimate of the work done (on this small interval!).
+        So let's start by breaking up <m>[a,b]</m> into <m>n</m> smaller subintervals
+        <me>[x_{0}, x_{1}], [x_{1}, x_{2}], \ldots, [x_{n-1}, x_{n}],</me>
+        where <m>a = x_{0} \lt x_{1} \lt \ldots \lt x_{n} = b</m>, and let <m>\Delta x_{i} = x_{i} - x_{i-1}</m> be the width of each subinterval.
+        Now choose sample points <m>x_{i}^{*}</m> from each subinterval.
+        Once again, if <m>\Delta x_{i}</m> is small enough, then the work done by the force over <m>[x_{i-1}, x_{i}]</m> should be approximately
+        <me> F(x_{i}^{*})\Delta x_{i}.</me>
+      </p>
+      <p>
+        This is the approximate work for one subinterval, so adding in the approximations from the other subintervals also provides an estimate of the total work <m>W</m> done by <m>F(x)</m> over <m>[a,b]</m>.
+        That is,
+        <me>W \approx F(x_{1}^{*})\Delta x_{1} + \cdots + F(x_{n}^{*})\Delta x_{n} = \sum_{i=1}^{n}F(x_{i}^{*})\Delta x_{i}.</me>
+        As <m>\Delta x_{i}\to 0</m>, the approximation becomes exact.
+        Therefore
+        <men xml:id="equation-work-integral"> W = \lim_{\Delta x_{i}\to 0}\sum_{i=1}^{n}F(x_{i}^{*})\Delta x_{i} = \int_{a}^{b}F(x)\,dx.</men>
+      </p>
+      <example xml:id="example-a-mass-attached-to-a-spring">
+        <title>A mass attached to a spring</title>
+        <statement>
+          <p>
+            A mass attached to a spring is acted upon by a <term>spring force</term> given by <m>F(t) = -2x</m>, where <m>x</m> is the displacement of the mass from the equilibrium position of the spring.
+            Suppose that the mass is held
+            <quantity>
+              <mag>1</mag>
+              <unit base="meter" />
+            </quantity>
+            to the right of the spring's equilibrium position (so that the spring will try to pull the mass back towards its equilibrium which we'll say occurs at <m>x = 0</m>).
+            What is the work done by the spring on the mass in moving the mass from its current position back to equilibrium?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since equilibrium occurs at <m>x = 0</m>, the work done should be
+            <me>W = \int_{1}^{0}(-2x)\,dx = \int_{0}^{1}2x\,dx = 1.</me>
+          </p>
+        </solution>
+      </example>
+      <p>
+        In <xref ref="example-a-mass-attached-to-a-spring" text="type-global" />, the reason the work done was positive was because the force and the direction the mass was moving tended to align.
+        Once the mass moves past equilibrium and to the left, the force will begin acting against the motion of the mass resulting in negative work over that particular interval.
+        The spring force itself is an example of a <term>restoring force</term>, since it's always trying to pull the mass back to equilibrium.
+        To highlight this, we often write the spring force as <m>F_{S} = -kx</m> for some positive <m>k</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-moments-and-centers-of-mass">
+      <title>Moments and Centers of Mass</title>
+
+      <p>
+        Consider a system of two point masses <m>m_{1},m_{2}</m> connected by a rod of negligible mass (so we can assume that the mass of the system is just <m>m_{1}+m_{2}</m>).
+        These masses are located at the points <m>x_{1},x_{2}</m> on the <m>x</m>-axis.
+        The rod is then placed upon a fulcrum at the point <m>x=c</m>, as shown below:
+      </p>
+      <figure>
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}[%
+            triangle/.style = {fill=black!60, regular polygon, regular polygon sides=3 },
+            node rotated/.style = {rotate=180},
+            border rotated/.style = {shape border rotate=180}]
+            \draw[|-|] (-2,0) -- (4,0);
+            \node (m1) at (-1,0) {$\bullet$};
+            \node[below] at (m1) {$x = x_{1}$};
+            \node[above right] at (m1) {$m_{1}$};
+
+            \node (m2) at (2.5,0) {$\bullet$};
+            \node[below] at (m2) {$x = x_{2}$};
+            \node[above right] at (m2) {$m_{2}$};
+
+            \node (fulc) at (1.5,0) {$\bullet$};
+            \node[above] at (fulc) {$x=c$};
+            \node[triangle, below] at (fulc) {};
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </figure>
+      <p>
+        Our goal is to find the center of mass of the rod.
+      </p>
+      <p>
+        Suppose that the first mass is <m>d_{1}</m> units away from the fulcrum, and that the second mass is <m>d_{2}</m> units away.
+        Archimedes' Law of the Lever states that the rod will balance if <m>m_{1}d_{1} = m_{2}d_{2}</m>.
+        Since <m>d_{1} = c - x_{1}</m> and <m>d_{2} = x_{2} - c</m> (since <m>d_{1},d_{2}</m> are positive!), we can rewrite this as
+        <md>
+          <mrow>m_{1}d_{1} \amp= m_{2}d_{2}</mrow>
+          <mrow>\amp\Rightarrow</mrow>
+          <mrow>m_{1}(c-x_{1}) \amp= m_{2}(x_{2}-c)</mrow>
+          <mrow>\amp\Rightarrow</mrow>
+          <mrow>m_{1}c-m_{1}x_{1} \amp= m_{2}x_{2} - m_{2}c</mrow>
+          <mrow>\amp\Rightarrow</mrow>
+          <mrow>m_{1}c+m_{2}c \amp= m_{1}x_{1}+m_{2}x_{2}</mrow>
+        </md>
+        which simplifies down to
+        <me>c = \frac{m_{1}x_{1}+m_{2}x_{2}}{m_{1}+m_{2}}.</me>
+        Hence <m>c</m> is the location of the center of mass of the rod if this equation is true!
+      </p>
+      <p>
+        More generally, if <m>n</m> point masses <m>m_{i}</m> at position <m>x=x_{i}</m> are connected by a rod of negligible mass, then the center of mass <m>\overline{x}</m> of the resulting system is given by
+
+        <me>
+          \overline{x} = \frac{m_{1}x_{1}+m_{2}x_{2}+\cdots+m_{n}x_{n}}{m_{1}+m_{2}+\cdots+m_{n}} = \frac{\sum_{i=1}^{n}m_{i}x_{i}}{m},
+        </me>
+        where <m>m = \sum_{j=1}^{n}m_{j}</m> is the total mass of the system and
+        <me>
+          M = \sum_{i=1}^{n}m_{i}x_{i}
+        </me>
+        is called the <term>moment of the system about the origin</term>.
+      </p>
+
+      <example>
+        <statement>
+          <p>
+            Consider the following system of three point masses <m>m_{1},m_{2},m_{3}</m> at positions <m>x_{1},x_{2},x_{3}</m> given as follows:
+          </p>
+          <p>
+            Find the following:
+            <ol>
+              <li><p>The moment of the system about the origin.</p></li>
+              <li><p> The center of mass.</p></li>
+            </ol>
+          </p>
+        </statement>
+        <solution>
+          <ol>
+            <li><p>The moment of the system about the origin is defined to be
+              <md>
+                <mrow>M \amp= \sum_{i=1}^{3}m_{i}x_{i}</mrow>
+                <mrow>\amp= 25\cdot(-2)+20\cdot(3)+10\cdot(7)</mrow>
+                <mrow>\amp= 80.</mrow>
+              </md>
+              So the moment is <m>M = 80</m>.</p></li>
+
+              <li><p> The center of mass is just the moment divided by the total mass <m>m</m> of the system:
+              <md>
+                <mrow>\overline{x}\amp= \frac{M}{m}</mrow>
+                <mrow>\amp= \frac{80}{25+20+10}</mrow>
+                <mrow>\amp= \frac{80}{55}</mrow>
+                <mrow>\amp= \frac{16}{11}.</mrow>
+              </md>
+              So the center of mass of the rod is at the point <m>\overline{x} = \frac{16}{11}</m>.</p></li>
+            </ol>
+          </solution>
+        </example>
+        <figure>
+          <image>
+            <latex-image><![CDATA[
+              \begin{tikzpicture}[%
+              triangle/.style = {fill=black!60, regular polygon, regular polygon sides=3 },
+              node rotated/.style = {rotate=180},
+              border rotated/.style = {shape border rotate=180}]
+              \draw[|-|] (-4,0) -- (9,0);
+              \node (m1) at (-2,0) {$\bullet$};
+              \node[below] at (m1) {$x_{1} = -2$};
+              \node[above] at (m1) {$m_{1} = 25$};
+
+              \node (m2) at (3,0) {$\bullet$};
+              \node[below] at (m2) {$x_{2} = 3$};
+              \node[above] at (m2) {$m_{2} = 20$};
+
+              \node (m3) at (7,0) {$\bullet$};
+              \node[below] at (m3) {$x_{3} = 7$};
+              \node[above] at (m3) {$m_{3} = 10$};
+              \end{tikzpicture}]]>
+            </latex-image>
+          </image>
+        </figure>
+        <p>
+          We now move from one dimension to two.
+          Consider a system of point masses <m>m_{1},\ldots,m_{n}</m> at the points <m>(x_{1},y_{1}),\ldots,(x_{n},y_{n})</m>, and suppose that these masses are connected by a thin plate of negligible mass.
+          The <term>moment of the system about the <m>\boldsymbol{y}</m>-axis</term> is the number <m>M_{y}</m> given by
+        </p>
+        <me>M_{y} = \sum_{i=1}^{n}m_{i}x_{i}.</me>
+        <p>
+          This can be thought of as tendency of the system to rotate <em>about</em> the <m>y</m>-axis.
+          Increasing the mass or the distance from the <m>y</m>-axis increases this tendency.
+        </p>
+        <p>
+          The <term>moment of the system about the <m>\boldsymbol{x}</m>-axis</term> is the number <m>M_{x}</m> given by
+          <me>
+            M_{x} = \sum_{i=1}^{n}m_{i}y_{i}.
+          </me>
+          Just as in the one-dimensional case, the center of mass for this system will be determined by the total mass and the above moments.
+          In particular, the center of mass of this system is located at the point <m>(\overline{x},\overline{y})</m> with coordinates
+          <me>
+            \overline{x} = \frac{M_{y}}{m}\quad\text{and}\quad\overline{y} = \frac{M_{x}}{m},
+          </me>
+          where <m>m</m> is the total mass <m>m_{1}+\cdots+m_{n} = \sum_{i=1}^{n}m_{i}</m>.
+        </p>
+
+        <example>
+          <statement>
+            <p>
+              Four point masses <m>m_{1} = 6,m_{2} = 5,m_{3} = 1,m_{4} = 4</m> are located in the plane at the points <m>(1,-2),(3,4),(-3,-7)</m> and <m>(6,-1)</m>.
+
+              <ol>
+                <li><p>Find the moments of the system about the <m>y</m>-axis and the <m>x</m>-axis.</p></li>
+
+                <li><p>Find the center of mass of this system.</p></li>
+              </ol>
+            </p>
+          </statement>
+          <solution>
+            <ol>
+              <li><p>The moment about the <m>y</m>-axis is
+              <md>
+                <mrow>M_{y}\amp= \sum_{i=1}^{4}m_{i}x_{i}</mrow>
+                <mrow>\amp= 6\cdot1+5\cdot3+1\cdot(-3)+4\cdot6</mrow>
+                <mrow>\amp= 42.</mrow>
+              </md></p>
+              <p>Similarly, the moment about the <m>x</m>-axis is given by
+              <md>
+                <mrow>M_{x}\amp= \sum_{i=1}^{4}m_{i}y_{i}</mrow>
+                <mrow>\amp= 6\cdot(-2)+5\cdot4+1\cdot(-7)+4\cdot(-1)</mrow>
+                <mrow>\amp= -3.</mrow>
+              </md></p></li>
+
+              <li><p>The center of mass is the point <m>(\overline{x},\overline{y})</m> where
+              <me>
+                \overline{x} = \frac{M_{y}}{m} = \frac{42}{16}\quad\text{and}\quad\overline{y}=\frac{M_{x}}{m} = \frac{-3}{16}
+              </me>
+              and <m>m</m> is the total mass of the system.
+            </p></li>
+          </ol>
+        </solution>
+      </example>}
+
+      <p>
+        We now consider a more complicated situation than the above.
+        Suppose that we have a thin, flat plate (or <em>lamina</em>) <m>R</m> of uniform density in the plane.
+        Our goal now is to find the center of mass, or <term>centroid</term>, of the plate.
+        To do so, we will use the following fact: <em>the centroid of a rectangular lamina of uniform density is just the center of the rectangle.</em>
+        Now consider a lamina <m>R</m> with uniform density <m>\rho</m> in the <m>xy</m>-plane and bounded between <m>x=a,x=b</m> and the functions <m>f(x)</m> and <m>g(x)</m>:
+      </p>
+      <figure>
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}
+            % Tikz drawings from Gonzalo Medina on tex.stackexchange.
+            \begin{axis}[
+            axis lines=middle,
+            xmin=-0.5,
+            xmax=8,
+            ymin=-5,
+            ymax=7,
+            domain=0.5:7.5,
+            xtick={0.75,6.25},
+            xticklabels={$a$,$b$},
+            ytick={0},
+            axis on top
+            ]
+
+            \addplot[name path = A,thick,no marks,red!70!black,samples=200]   
+            {curvei(x)};
+            \addlegendentry{$f(x)$};
+            \addplot[name path = B,thick,no marks,cyan,samples=200] 
+            {curveii(x)};
+            \addlegendentry{$g(x)$};
+            \addplot[cyan!60,fill opacity=0.4] 
+            fill between[of=A and B,soft clip={domain=0.75:6.25}];
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </figure>
+      <p>
+        To find the centroid of this lamina we will break it up into (vertical) approximating rectangles <m>R_{0},R_{1},\ldots,R_{n}</m>, each of which has width <m>\Delta x</m> and centroid <m>(x_{i},y_{i})</m>:
+      </p>
+      <figure>
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[
+            axis lines=middle,
+            xmin=-0.5,
+            xmax=8,
+            ymin=-5,
+            ymax=7,
+            domain=0.5:7.5,
+            xtick={0.75,6.25},
+            xticklabels={$a$,$b$},
+            ytick={0},
+            axis on top
+            ]
+
+            \addplot[thick,no marks,red!70!black,samples=200]   
+            {curvei(x)};
+            \addlegendentry{$f(x)$};
+            \addplot[thick,no marks,cyan,samples=200] 
+            {curveii(x)};
+            \addlegendentry{$g(x)$};
+
+            \addplot[ybar, domain=1:6,samples=12, fill=blue!50!cyan,fill opacity=0.3,draw=cyan] 
+            {curvei(x)};
+            \addplot[ybar, domain=1:6,samples=12, fill=blue!50!cyan,fill opacity=0.3, draw=cyan] 
+            {curveii(x)};
+
+            \addplot[ycomb, domain=1:6,samples=12,densely dashed,draw=cyan!70!black] 
+            {curvei(x)};
+            \addplot[ycomb, domain=1:6,samples=12,densely dashed,draw=cyan!70!black] 
+            {curveii(x)};
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </figure>
+      <p>
+        Then the lamina may be approximated by a system of point masses <m>m_{0},\ldots,m_{n}</m>, with <m>m_{i}</m> located at the centroid rectangle <m>R_{i}</m> and having the mass of the corresponding rectangle.
+        To find the center of mass of the lamina, we will approximate it with the center of mass of the system of point masses.
+      </p>
+
+      <p>
+        To do so, we will need:
+        <md>
+          <mrow>m \amp= \sum_{i=0}^{n}m_{i}</mrow>
+          <mrow>M_{y} \amp= \sum_{i=0}^{n}m_{i}x_{i}</mrow>
+          <mrow>M_{x} \amp= \sum_{i=0}^{n}m_{i}y_{i}</mrow>
+        </md>
+      </p>
+      <p>
+        Consider a single rectangle <m>R_{i}</m>:
+      </p>
+      <figure>
+        <image>
+          <latex-image><![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[
+            axis lines=middle,
+            xmin=-0.5,
+            xmax=8,
+            ymin=-5.5,
+            ymax=7,
+            domain=0.5:7.5,
+            xtick={0.75,6.25},
+            xticklabels={$a$,$b$},
+            ytick={0},
+            ]
+
+            \addplot[thick,no marks,red!70!black,samples=200,name path=curveA]   
+            {curvei(x)};
+            \addlegendentry{$f(x)$};
+            \addplot[thick,no marks,cyan,samples=200,name path=curveB] 
+            {curveii(x)};
+            \addlegendentry{$g(x)$};
+            \addplot[cyan!60,fill opacity=0.4] 
+            fill between[of=curveA and curveB,soft clip={domain=0.75:6.25}];
+
+            \addplot[name path=line,draw=none,forget plot] 
+            coordinates {(3,-7) (3,7)};
+            \path[name intersections={of=curveA and line,by={top}}];  
+            \path[name intersections={of=curveB and line,by={bottom}}];
+
+            \filldraw[gray!100!cyan,opacity=0.5]
+            ([xshift=-10pt]top) rectangle ([xshift=10pt]bottom);  
+            \draw[decorate,decoration=brace]
+            ([xshift=12pt]top) -- node[right=4pt] {$h = \frac{f(x_{i})-g(x_{i})}{2}$} ([xshift=12pt]bottom);  
+            \draw[decorate,decoration={brace,raise=3pt}]
+            ([xshift=10pt]bottom) -- node[below=4pt] {$\Delta x$} ([xshift=-10pt]bottom);  
+            \node[above,red!70!black] at (1.5,4.8) {$y_{T}$};
+            \node[above,cyan] at (1.5,-4.8) {$y_{B}$};
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+      </figure>
+      <p>
+        Then we have
+        <md>
+          <mrow>m_{i} \amp= (\text{density})(\text{area of }R_{i}) = \rho\frac{f(x_{i})-g(x_{i})}{2}\Delta x</mrow>
+          <mrow>y_{i} \amp= \frac{f(x_{i})+g(x_{i})}{2}.</mrow>
+        </md>
+      </p>
+      <p>
+        We can now fill in the following table:
+      </p>
+      <table>
+        <tabular top="major">
+          <row bottom="major">
+            <cell></cell>
+            <cell>System of point masses</cell>
+            <cell>Lamina</cell>
+          </row>
+          <row>
+            <cell><m>m</m></cell>
+            <cell><m>\sum_{i=0}^{n}m_{i} = \sum_{i=0}^{n}\rho[f(x_{i})-g(x_{i})]\Delta x</m></cell>
+            <cell><m>\rho\int_{a}^{b}[f(x)-g(x)]\,dx</m></cell>
+          </row>
+          <row>
+            <cell><m>M_{y}</m></cell>
+            <cell><m>\sum_{i=0}^{n}m_{i}x_{i} = \sum_{i=0}^{n}\rho x_{i}[f(x_{i})-g(x_{i})]\Delta x</m></cell>
+            <cell><m>\rho\int_{a}^{b}x[f(x)-g(x)]\,dx</m></cell>
+          </row>
+          <row bottom="major">
+            <cell><m>M_{x}</m></cell>
+            <cell><m>\sum_{i=0}^{n}m_{i}y_{i} = \sum_{i=0}^{n}\rho[f(x_{i})-g(x_{i})]\frac{f(x_{i})+g(x_{i})}{2}\Delta x</m></cell>
+            <cell><m>\frac{\rho}{2}\int_{a}^{b}[f(x)^{2}-g(x)^{2}]\,dx</m></cell>
+          </row>
+        </tabular>
+      </table>
+      <p>
+        The center of mass for this lamina is then the point <m>(\overline{x},\overline{y})</m> where
+        <md>
+          <mrow>\overline{x} \amp= \frac{M_{y}}{m} = \frac{\int_{a}^{b}x[f(x)-g(x)]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
+          <mrow>\overline{y} \amp= \frac{M_{x}}{m} = \frac{1}{2}\frac{\int_{a}^{b}[f(x)^{2}-g(x)^{2}]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
+        </md>
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="section-differential-equations">
+    <title>Differential Equations</title>
+    <subsection xml:id="subsection-basic-concepts">
+      <title>Basic Concepts</title>
+      <definition xml:id="definition-differential-equations">
+        <title>Differential Equations</title>
+        <idx><h>differential equations</h><h>definition</h></idx>
+        <statement>
+          <p>
+            A <term>differential equation</term> is an equation relating some function with its derivatives.
+            A differential equation that involves a function of only one independent variable is called an <term>ordinary differential equation</term>, or ODE.
+            A differential equation that involves a function of more than one independent variable (which you see a lot of in Calculus 3) is called a <term>partial differential equation</term>, or PDE.
+            The <term>order</term> of a differential equation is the highest derivative that appears in the equation.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Examples of ODEs:
+        <ul>
+          <li><p> <m>\dv[2]{y}{x} + y = 0</m>; this is a second order ODE relating the unknown function <m>y</m> with its second derivative.</p></li>
+          <li><p> <m>5t^{2}x^{'''} - e^{x} = 3t</m>; this is a seventh order ODE involving the derivatives of the unknown function <m>x</m>.
+          Note that in this ODE <m>t</m> is the independent variable whereas <m>x</m> serves as the dependent variable.</p></li>
+        </ul>
+      </p>
+      <p>
+        Differential equations serve as useful <em>mathematical models</em> for quantities that change over time.
+        In particular, Newton's Second Law leads to a number of significant differential equations.
+      </p>
+      <example xml:id="example-the-spring-equation">
+        <title>The Spring Equation</title>
+        <statement>
+          <p>
+            Consider an object of mass <m>m</m> attached to a spring, and suppose that the spring force <m>F_{S}</m> is the only force acting on the mass.
+            Assuming that Hooke's Law describes the spring force, find a differential equation modeling the motion of the mass.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Recall that Hooke's Law says that <m>F_{S} = -kx</m>, where <m>k</m> is a positive constant and <m>x</m> is the displacement of the mass from equilibrium.
+            If this is the only force acting on the mass, then by Newton's Second Law
+            <me>
+              F_{\text{net}} = ma \Rightarrow F_{S} = mx''.
+            </me>
+            Therefore the displacement <m>x</m> satisfies the differential equation
+            <me>mx'' + kx = 0.</me>
+          </p>
+        </solution>
+      </example>
+      <definition xml:id="definition-solution-of-a-differential-equation">
+        <title>Solution of a Differential Equation</title>
+        <idx><h>differential equations</h><h>solution</h></idx>
+        <statement>
+          <p>
+            A function is a <term>solution</term> of a differential equation if it satisfies the differential equation.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        It is straightforward to check if a function is a solution of some given differential equation, but <em>finding</em> solutions involves a bit more work.
+      </p>
+      <example xml:id="example-verifying-solutions">
+        <title>Verifying solutions</title>
+        <statement>
+          <p>
+            Is <m>y = 5e^{x^{2}}</m> a solution of the ODE <m>y' = 2xy</m>?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            At this point we don't know how to solve differential equations, but that doesn't mean we can't <em>check</em> solutions of differential equations.
+            To do so, we just plug <m>5e^{x^{2}}</m> wherever <m>y</m> shows up in the ODE and see if the resulting equation is true.
+            So we have
+            <md>
+              <mrow>y' &amp; = 2xy </mrow>
+              <mrow>(5e^{x^{2}})' &amp; = 2x(5e^{x^{2}}) \text{ after substituting }y = 5e^{x^{2}}</mrow>
+              <mrow>10xe^{x^{2}} &amp; = 10xe^{x^{2}} \text{ after simplifying} </mrow>
+            </md>
+            This is a true statement, so <m>y = 5e^{x^{2}}</m> satisfies the ODE.
+            Hence <m>5e^{x^{2}}</m> is a solution of the ODE.
+          </p>
+        </solution>
+      </example>
+      <p>
+        In <xref ref="example-verifying-solutions" autoname="yes" />, <m>y = 5e^{x^{2}}</m> is not the only solution of <m>y' = 2xy</m>.
+        You can check that <m>y = 3e^{x^{2}}</m> and <m>y = -10e^{x^{2}}</m> are also solutions.
+        In fact, <em>any</em> function of the form <m>Ce^{x^{2}}</m> where <m>C</m> is a constant is a solution of <m>y' = 2xy</m>.
+      </p>
+      <p>
+        To specify a unique solution to a differential equation, we need to add another condition known as an <em>initial condition</em> or <em>initial value</em>, often of the form <m>y(x_{0}) = y_{0}</m>.
+      </p>
+      <definition xml:id="definition-ivp">
+        <statement>
+          <p>
+            An ODE together with an initial condition is known as an <term>initial value problem</term>, or IVP.
+          </p>
+        </statement>
+      </definition>
+    </subsection>
+    <subsection xml:id="subsection-separable-equations">
+      <title>Separable Equations</title>
+      <p>
+        Many ODEs are difficult, if not impossible, to solve exactly.
+        The simplest ODEs to solve are the first-order ODEs of the form <m>\dv{y}{x} = f(x)</m>.
+        The Fundamental Theorem of Calculus guarantees that the solution <m>y</m> is given by <m>y = \int f(x)\,dx</m>.
+      </p>
+      <p>
+        Another type of ODE that is relatively straightforward to solve is the <term>separable ODE</term>, which is a first-order ODE that can be written in the form
+      </p>
+      <me>\dv{y}{x} = f(x)g(y).</me>
+      <p>
+        These ODEs can be solved by integration as well, but only after some rearranging.
+      </p>
+      <example xml:id="example-solving-a-separable-ode">
+        <title>Solving a separable ODE</title>
+        <statement>
+          <p>
+            Solve the IVP given by <m>y' = x+4xy^{2}, y(0)=1</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The first step to solving this IVP is to solve the ODE <m>y' = x+4xy^{2}</m>.
+            It may not look like it at first, but this ODE is separable since we can rewrite it as <m>y' = x(1+4y^{2})</m>.
+            To solve this ODE, we need to move the <m>y</m> terms to the left hand side of the equation and the <m>x</m> terms to the right hand side.
+            We'll abuse notation a little bit to do so by rewriting <m>y' = \dv{y}{x}</m> and treating <m>\dv{y}{x}</m> as a fraction, but it won't get us into too much trouble here:
+          </p>
+          <md>
+            <mrow>\dv{y}{x} = x(1+4y^{2}) &amp;\Rightarrow \frac{dy}{1+4y^{2}} = x\,dx </mrow>
+            <mrow> &amp;\Rightarrow \int\frac{dy}{1+4y^{2}}  = \int x\,dx </mrow>
+            <mrow> &amp;\Rightarrow \frac{1}{2}\tan^{-1}(2y)  = \frac{1}{2}x^{2}+C </mrow>
+            <mrow> &amp;\Rightarrow \tan^{-1}(2y)  = x^{2}+C_{1} </mrow>
+          </md>
+          <p>
+            At this step we can either leave the solution as is (in <term>implicit form</term>) or solve for <m>y</m> to get an <term>explicit form</term>.
+            We'll leave this in implicit form and then plug in the initial condition to get
+            <me>\tan^{-1}(2) = C_{1}.</me>
+            So the implicit solution of this IVP is given by
+            <me>\tan^{-1}(2y) = x^{2}+\tan^{-1}(2).</me>
+          </p>
+        </solution>
+      </example>
+      <p>
+        In <xref ref="example-solving-a-separable-ode" text="type-global" />, we can also find an <em>explicit</em> form of the solution by solving for <m>y</m>:
+        <me>y = \frac{1}{2}\tan(x^{2} + \tan^{-1}2).</me>
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-population-equations">
+        <title>Population Equations</title>
+        <p>
+            Suppose we're monitoring the population of some species, and let's denote the population at time <m>t</m> by <m>P(t)</m>.
+            An obvious question to consider is how that population will change over time.
+            Mathematically, this means we want to obtain information on <m>\dv{P}{t}</m> and then use it to estimate <m>P(t)</m>.
+        </p>
+        <p>
+            A simple model for <m>\dv{P}{t}</m> is to assume it depends only on the birth rate <m>\beta</m> and death rate <m>\delta</m> of the species in question.
+            Then we can write
+            <men xml:id="equation-natural-growth">
+                \dv{P}{t} = (\beta - \delta)P.
+            </men>
+            If we assume that <m>\beta,\delta</m> are constants, then this equation is separable and we can solve it to obtain
+            <me>
+                P(t) = P_{0}e^{(\beta - \delta)t},
+            </me>
+            where <m>P_{0}</m> represents the "initial population", or population at time <m>t = 0</m>.
+            We call <xref ref="equation-natural-growth" text="type-global" /> the <term>natural growth equation</term>.
+        </p>
+        <p>
+            The natural growth equation is simple, but it's probably too simple to be useful expect in certain scenarios (such as measuring half-life).
+            To get a more flexible model, we can generalize <xref ref="equation-natural-growth" text="type-global" /> by assuming that the birth and death rates are actually functions of time.
+            This gives us the <term>general population equation</term>.
+        </p>
+        <definition xml:id="definition-general-population-equation">
+            <title>General Population Equation</title>
+            <statement>
+                <p>
+                    The general population equation for a population <m>P(t)</m> is given by
+                    <me>\dv{P}{t} = (\beta(t) - \delta(t))P.</me>
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="example-population-explosion">
+            <title>Population Explosion</title>
+            <statement>
+                <p>
+                    A population has <m>100</m> members at time <m>t = 0</m> years with a death rate of <m>.25P</m> and a birth rate of <m>.5P</m>, where <m>P(t)</m> denotes the population after <m>t</m> years.
+                    Find <m>P(t)</m> and determine if this is a reasonable population model.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we assume that the population obeys the general growth equation, then we get
+                    <me>P' = .25P^{2}, P(0) = 100.</me>
+                    This ODE is separable, and we can therefore solve it to get
+                    <me>P(t) = \frac{100}{1 - 25t}.</me>
+                </p>
+                <p>
+                    So we have a solution, and it can be shown that the solution is unique.
+                    But if you stare at this for a bit, you might see that it has a divide-by-zero problem.
+                    In particular, 
+                    <me>\lim_{t\to(\frac{1}{25})^{+}}P(t) = \infty.</me>
+                    In other words, the population becomes infinite in about two weeks!
+                </p>
+            </solution>
+        </example>
+    </subsection>
+    <subsection xml:id="subsection-the-logistic-equation">
+        <title>The Logistic Equation</title>
+        <p>
+            <xref ref="example-population-explosion" text="type-global" /> shows that we need to be more careful with our assumptions on population growth.
+            One relatively simple assumption we can make is to assume that the birth rate <m>\beta(t)</m> decreases as population <m>P</m> increases.
+            This makes sense in the physical world as well: as population increases, existing and finite resources (such as food) must be shared between more and more members of the population.
+            Since there's less to go around, we should expect growth to slow down.
+            In particular, let's assume that
+            <md>
+                <mrow>\beta(t) &amp; = \beta_{0} - \beta_{1}P </mrow>
+                <mrow>\delta(t) &amp; = \delta_{0} </mrow>
+            </md>
+            where <m>\beta_{0},\beta_{1}</m> and <m>\delta_{0}</m> are all positive constants.
+            Then the population equation for this scenario becomes
+            <me>\dv{P}{t} = (\beta_{0} - \beta_{1}P - \delta_{0})P.</me>
+        </p>
+        <p>
+            With a little algebra, we get the <term>logistic equation</term>:
+            <me>\dv{P}{t} = kP(M-P)</me>
+            for constants <m>k</m> and <m>M</m>.
+            This equation is separable, and can be solved using partial fractions to obtain
+            <me>P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},</me>
+            where <m>P_{0} = P(0)</m>.
+            In order to verify the reasonableness of our logistic model, let's see what happens to the population as time increases.
+        </p>
+        <example xml:id="example-long-term-behavior-of-logistic-growth">
+            <title>Long-Term Behavior of Logistic Growth</title>
+            <statement>
+                <p>
+                    What is the long-term population of a species that grows according to the logistic equation <m>\dv{P}{t} = kP(M-P)</m>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Using the fact that
+                    <me>P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},</me>
+                    we have
+                    <me>\lim_{t\to\infty}P(t) = M.</me>
+                    So the population should eventually level out at <m>M</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            In the logistic equation <m>P' = kP(M-P)</m>, the value <m>M</m> is the <term>carrying capacity</term>, and denotes the maximum sustainable population according to the model.
+        </p>
+        <example xml:id="example-population-growth-in-the-usa">
+            <title>Population Growth in the USA</title>
+            <statement>
+                <p>
+                    In millions, the population of the USA in 1990 was <m>250</m> and was growing at a rate of <m>3.1</m> per year.
+                    In 2012, the population was <m>314</m> and was growing at a rate of <m>2.3</m> per year.
+                    Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of <m>325.7</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Let <m>P(t)</m> denote the population of the USA (in millions), where <m>t</m> is the number of years after 1990.
+                    Then
+                    <me>\dv{P}{t} = kP(M-P)</me>
+                    and
+                    <me>P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}}.</me>
+                    So we need to find <m>k</m> and <m>M</m>.
+                </p>
+                <p>
+                    When <m>t = 0</m>, we have <m>P' = 3.1</m> and <m>P = 250</m>.
+                    Similarly, when <m>t = 22</m> we have <m>P' = 2.3</m> and <m>P = 314</m>.
+                    Therefore
+                    <md>
+                        <mrow>3.1 &amp; = 250k(M - 250) </mrow>
+                        <mrow>2.3 &amp; = 314k(M - 314) </mrow>
+                    </md>
+                    Solving this system gives us <m>k\approx.00008</m> and <m>M \approx 406.4</m>.
+                    Hence
+                    <me>P(t) = \frac{101600}{250 + 156.4e^{-.03t}}.</me>
+                </p>
+                <p>
+                    This model estimates the population in 2017 to be
+                    <me>P(27) = 317.9,</me>
+                    which is about a <m>2\%</m> error.
+                    Note also that this model predicts the carrying capacity of the USA to be <m>406.4</m>.
+                </p>
+            </solution>
+        </example>
+    </subsection>
+    <subsection xml:id="subsection-stability-of-solutions">
+        <title>Stability of Solutions</title>
+        <p>
+            The logistic equation
+            <me>\dv{P}{t} = kP(M-P)</me>
+            is a particularly nice separable ODE since the right hand side depends only on the unknown function <m>P</m>.
+            So we can write <m>P' = f(P)</m>, where <m>f(P) = kP(M-P)</m>.
+            ODEs like this (where the independent variable does not appear explicitly) are called <term>autonomous ODEs</term>.
+        </p>
+        <p>
+            Autonomous ODEs like <m>\dv{x}{t} = f(x)</m> are useful because the behavior of their solutions can be determined <em>qualitatively</em>, without actually solving the ODE.
+            This is done by looking for the constant solutions of the ODE, that is, solutions of the form <m>x = c</m>.
+            For any such solution, we must have <m>f(c) = 0</m> as well.
+            These solutions (i.e., the solutions of <m>f(x) = 0</m>) are called the <term>critical points</term> or <term>equilibrium solutions</term> of the ODE.
+            These solutions completely determine the long-term behavior of <em>every other solution</em>.
+        </p>
+        <example xml:id="example-finding-equilibrium-solutions">
+            <title>Finding Equilibrium Solutions</title>
+            <statement>
+                <p>
+                    Find the equilibrium solutions of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to solve the equation <m>-x^{2} + 7x - 10 = 0</m>.
+                    Thankfully, we can factor this to get <m>(2-x)(x-5) = 0</m>, and so the equilibrium solutions are <m>x = 2,5</m>.
+                </p>
+            </solution>
+        </example>
+        <definition xml:id="definition-stability-critial-points">
+            <title>Stability of Solutions</title>
+            <statement>
+                <p>
+                    A critical point is <term>stable</term> if solutions that start "near" the point stay near it.
+                    A critical point is <term>unstable</term> if solutions that start "near" the point can diverge away from it.
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="example-determining-the-stability-of-solutions">
+            <title>Determining the Stability of Solutions</title>
+            <statement>
+                <p>
+                    What are the stable critical points of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We already know that the critical points are <m>x = 2, 5</m>.
+                    We can determine their stability by making use of a <term>phase diagram</term>, which is essentially a sign chart for <m>f(x) = -x^{2} + 7x - 10</m>:
+                </p>
+                    <figure>
+                        <caption>The phase diagram for <m>x' = f(x).</m></caption>
+                        <image width="50%">
+                            <latex-image><![CDATA[
+                            \begin{tikzpicture}
+                                % draw the line
+                                \draw (-1,0) -- (7,0);
+
+                                % draw arrows on line 
+                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                                \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
+                                \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
+                                \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
+                            
+                                % draw the ticks at critical points
+                                \foreach \x in {2,5}
+                                    \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+
+                                % label the signs
+                                \node[yshift=.5cm] at (1,0){$f(x)<0$};
+                                \node[yshift=.5cm] at (3.5,0){$f(x)>0$};
+                                \node[yshift=.5cm] at (6,0){$f(x)<0$};
+                            \end{tikzpicture}]]>
+                        </latex-image>
+                    </image>
+                </figure>
+                <p>
+                    This shows us that solutions that begin near <m>x = 2</m> tend to move away from <m>x = 2</m>, which solutions near <m>x = 5</m> tend to move towards <m>x = 5</m>.
+                    So <m>x = 2</m> is unstable and <m>x = 5</m> is stable.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-determining-a-sustainable-population">
+            <title>Determining a Sustainable Population</title>
+            <statement>
+                <p>
+                    Consider a population of fish that obeys the logistic equation
+                    <me>\dv{P}{t} = 2P(30 - P)</me>
+                    where <m>P(t)</m> is the population of fish (in thousands) after <m>t</m> years.
+                    Suppose that the population is also harvested at some rate <m>h</m> (in thousands per year).
+                    What is the maximum sustainable rate of harvesting?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    To account for the harvesting, we need to modify the ODE:
+                    <me>\dv{P}{t} = 2P(30 - P) - h.</me>
+                    The harvesting will be sustainable as long as the population does not become extinct.
+                    To determine this long term behavior, we'll find the critical points and set up a phase diagram.
+                </p>
+                <p>
+                    The critical points are given by
+                    <me>P = 15 \pm \sqrt{3600 - 8h}</me>
+                    by the quadratic formula.
+                    We now have three cases to consider: <m>3600 - 8h \lt 0, 3600 - 8h = 0, 3600 - 8h \gt 0.</m>
+                    In terms of <m>h</m>, these reduce to <m>h \lt 450, h = 450, h \gt 450</m>.
+                </p>
+                <ol>
+                    <li>
+                    <p>
+                        In the first case, if <m>h \lt 450</m> then we have two positive, real critical points:
+                        <me>0 \lt c_{1} \lt 15 \lt c_{2} \lt 75.</me>
+                        The phase diagram for this situation is
+                    </p>
+                    <figure>
+                        <image width="50%">
+                            <latex-image><![CDATA[
+                            \begin{tikzpicture}
+                                % draw the line
+                                \draw (-1,0) -- (7,0);
+
+                                % draw arrows on line 
+                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                                \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
+                                \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
+                                \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
+                            
+                                % draw the ticks at critical points
+                                \draw[xshift=0 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=0$};
+                                \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{1}$};
+                                \draw[xshift=3.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+                                \draw[xshift=5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{2}$};
+                                \draw[xshift=6.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=75$};
+
+                                % label the signs
+                                \node[yshift=.5cm] at (0,0){$\dv{P}{t}<0$};
+                                \node[yshift=.5cm] at (3.5,0){$\dv{P}{t}>0$};
+                                \node[yshift=.5cm] at (6.5,0){$\dv{P}{t}<0$};
+                            \end{tikzpicture}]]>
+                        </latex-image>
+                    </image>
+                </figure>
+                <p>
+                    So we see that <m>c_{1}</m> is unstable while <m>c_{2}</m> is stable.
+                    In particular, as long as <m>P\geq c_{1} = 15 - \sqrt{3600 - 8h}</m>, then the rate of harvesting is sustainable.
+                </p>
+                </li>
+                <li>
+                    <p>
+                        Now assume that <m>h = 450</m>.
+                        Then we have only one equilibrium solution: <m>c = 15</m>.
+                        The corresponding phase diagram is
+                    </p>
+                        <figure>
+                            <image width="50%">
+                                <latex-image><![CDATA[
+                                \begin{tikzpicture}
+                                % draw the line
+                                \draw (0,0) -- (4,0);
+
+                                % draw arrows on line 
+                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                                \draw[ultra thick,color=blue,<-] (2,0) -- (3,0);
+                            
+                                % draw the ticks at critical points
+                                \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+
+                                % label the signs
+                                \node[yshift=.5cm] at (1,0){$\dv{P}{t}<0$};
+                                \node[yshift=.5cm] at (3,0){$\dv{P}{t}<0$};
+                                \end{tikzpicture}
+                                ]]>
+                            </latex-image>
+                        </image>
+                    </figure>
+                    <p>
+                        We interpret the phase diagram as follows: if <m>P</m> is less than <p>15,000</p> then the population will collapse to extinction.
+                        Otherwise, the population will stabilize at <m>15,000</m>.
+                        This type of critical point is often called <term>semi-stable.</term>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Finally, consider the case <m>h \gt 450</m>.
+                        Then we have no (real) critical points.
+                        Since imaginary populations don't make sense in this model, there is no sustainable population.
+                        No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than <m>450</m>.
+                    </p>
+                </li>
+            </ol>
+            <p>
+                By the above, the largest sustainable harvesting rate is <m>h = 450,</m> as long as <m>P_{0}\geq 15</m>.
+            </p>
+            </solution>
+        </example>
+    </subsection>
+    <subsection xml:id="subsection-linear-stability-analysis">
+        <title>Linear Stability Analysis</title>
+        <p>
+            Given the autonomous ODE <m>\dv{x}{t} = f(x)</m>, we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram.
+            We can go a step further and actually qualify the growth of solutions that are "near" equilibrium solutions.
+            In particular, we have the following theorem.
+        </p>
+        <theorem xml:id="theorem-linear-stability-analysis">
+            <title>Linear Stability Analysis</title>
+            <statement>
+                <p>
+                    Suppose <m>\dv{x}{t} = f(x)</m> where <m>f(x)</m> is continuously differentiable, and let <m>x^{*}</m> denote a critical point/equilibrium solution of the ODE.
+                    If <m>f'(x^{*}) \lt 0</m>, then <m>x^{*}</m> is stable and solutions near <m>x^{*}</m> will move exponentially towards <m>x^{*}</m>.
+                    If <m>f'(x^{*}) \gt 0</m>, then <m>x^{*}</m> is unstable and solutions near <m>x^{*}</m> will move exponentially away from <m>x^{*}</m>.
+                    If <m>f'(x^{*}) = 0</m>, then more advanced methods are required.
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-classifying-the-critical-points-of-the-logistic-equation">
+            <title>Classifying the Critical Points of the Logistic Equation</title>
+            <statement>
+                <p>
+                    Classify the critical points of the logistic equation as stable or unstable.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Recall that the logistic equation is given by <m>P' = kP(M-P) = f(P)</m> for (we'll assume) positive constants <m>k,M</m>.
+                    From here, we clearly see that the critical points are <m>P = 0</m> and <m>P = M</m> (which makes sense from a population standpoint!).
+                    We could set up a phase diagram to determine stability, but we'll use <xref ref="theorem-linear-stability-analysis" text="type-global" /> instead.
+                </p>
+                <p>
+                    Since <m>f'(P) = k(M-P) - kP</m>, we see that
+                    <md>
+                        <mrow>f'(0) &amp; = kM \gt 0</mrow>
+                        <mrow>f'(M) &amp; = -kM \lt 0 </mrow>
+                    </md>
+                    Hence <m>P = 0</m> is unstable, while <m>P = M</m> is stable.
+                </p>
+            </solution>
+        </example>
+    </subsection>
+  </section>
+  <exercises>
+    <title>MyOpenMath problems</title>
+    <introduction>
+      <p>
+        These problems are only intended for practice.
+        They are <em>not</em> required.
+      </p>
+    </introduction>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-areas-between-curves" text="type-global" /></title>
+      <introduction>
+        <p>
+          These exercises deal with finding areas between curves.
+        </p>
+      </introduction>
+      <exercise>
+        <myopenmath problem="5613" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5599"/>
+      </exercise>
+      <exercise>
+        <myopenmath problem="5609" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="15189" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5600" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-volumes" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5615" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5618" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5627" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="75661" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-volumes-by-cylindrical-shells" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5636" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5633" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5634" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="20257" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-arc-length" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5639" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5645" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="15207" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-area-of-a-surface-of-revolution" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5647" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5646" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="15198" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-applications-to-physics-and-engineering" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5656" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5665" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5666" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5669" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5680" />
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Exercises for <xref ref="section-differential-equations" text="type-global" /></title>
+      <exercise>
+        <myopenmath problem="5731" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5730" />
+      </exercise>
+      <exercise>
+        <myopenmath problem="5732" />
+      </exercise>
+    </exercisegroup>
+  </exercises>
+</chapter>
