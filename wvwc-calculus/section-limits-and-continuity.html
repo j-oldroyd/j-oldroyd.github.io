@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:25-04:00    *-->
+<!--*    on 2019-04-12T14:48:48-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -67,6 +67,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -88,6 +93,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -247,6 +254,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -258,23 +268,23 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-limits-and-continuity"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.2</span> <span class="title">Limits and Continuity</span>
 </h2>
-<a href="section-limits-and-continuity.html" class="permalink">¶</a><section class="introduction" id="introduction-30"><p id="p-1343">In this section we begin extending calculus concepts from one dimension to higher dimensions, starting with limits.</p></section><section class="subsection" id="subsection-limits"><h3 class="heading hide-type">
+<a href="section-limits-and-continuity.html" class="permalink">¶</a><section class="introduction" id="introduction-30"><p id="p-1342">In this section we begin extending calculus concepts from one dimension to higher dimensions, starting with limits.</p></section><section class="subsection" id="subsection-limits"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.2.1</span> <span class="title">Limits</span>
 </h3>
-<a href="section-limits-and-continuity.html#subsection-limits" class="permalink">¶</a><p id="p-1344">Just as functions of one variable have a notion of limit, the same can be said for functions of several variables. However, limits involving several variables tend to be more restrictive.</p>
+<a href="section-limits-and-continuity.html#subsection-limits" class="permalink">¶</a><p id="p-1343">Just as functions of one variable have a notion of limit, the same can be said for functions of several variables. However, limits involving several variables tend to be more restrictive.</p>
 <article class="definition-like" id="definition-limit-of-a-function-of-two-variables"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">11.2.1</span>. <span class="title">Limit of a Function of Two Variables.</span>
 </h6>
-<p id="p-1345">Let \(f(x,y)\) be some function and let \((a,b)\) be a point arbitrarily close to the domain of \(f\text{.}\) We say that</p>
+<p id="p-1344">Let \(f(x,y)\) be some function and let \((a,b)\) be a point arbitrarily close to the domain of \(f\text{.}\) We say that</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(a,b)}f(x,y) = L
 \end{equation*}
 </div>
-<p>if \(f(x,y)\) gets arbitrarily close to \(L\) as \((x,y)\) gets arbitrarily close to \((a,b)\text{.}\)</p></article><p id="p-1346">Here's why limits can be tricky in two dimensions: for the limit to exist, \(f(x,y)\) must approach the same value \(L\) no matter how \((x,y)\) approaches \((a,b)\text{!}\)</p>
+<p>if \(f(x,y)\) gets arbitrarily close to \(L\) as \((x,y)\) gets arbitrarily close to \((a,b)\text{.}\)</p></article><p id="p-1345">Here's why limits can be tricky in two dimensions: for the limit to exist, \(f(x,y)\) must approach the same value \(L\) no matter how \((x,y)\) approaches \((a,b)\text{!}\)</p>
 <article class="example-like" id="example-280"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.2.2</span>.</h6>
-<p id="p-1347">Find</p>
+<p id="p-1346">Find</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}}
@@ -283,7 +293,7 @@ var js_version = 0.11;
 <p>or show that it doesn't exist.</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-214" id="solution-214"><span class="type">Solution</span></a><div id="hk-solution-214" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1348">First, we'll start simple. If we set \(x = 0\) then the limit becomes</p>
+<p id="p-1347">First, we'll start simple. If we set \(x = 0\) then the limit becomes</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}} = \lim_{y\to0}\frac{0}{2y} = 0.
@@ -303,14 +313,14 @@ var js_version = 0.11;
 </div>
 <p>Since the value that \(\frac{x^{2}\sin y}{x^{3}+2y^{3}}\) approaches as \((x,y)\to(0,0)\) depends on how \((x,y)\) approaches \((0,0)\text{,}\) we can say that the limit does not exist.</p>
 </div></div>
-</div></article><p id="p-1349">In general, showing limits exist for functions of several variables can be tricky. However, occasionally we can use some tricks to make these problems more manageable.</p>
+</div></article><p id="p-1348">In general, showing limits exist for functions of several variables can be tricky. However, occasionally we can use some tricks to make these problems more manageable.</p>
 <article class="example-like" id="example-showing-a-limit-exists"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.2.3</span>. <span class="title">Showing a limit exists.</span>
 </h6>
-<p id="p-1350">Find \(\lim_{(x,y)\to(0,0)}(x^{2}+y^{2})\ln(x^{2}+y^{2})\text{.}\)</p>
+<p id="p-1349">Find \(\lim_{(x,y)\to(0,0)}(x^{2}+y^{2})\ln(x^{2}+y^{2})\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-215" id="solution-215"><span class="type">Solution</span></a><div id="hk-solution-215" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1351">Since the inside of the limit depends on \(x^{2}+y^{2}\text{,}\) this suggests that switching to polar coordinates might be beneficial. So let's try that!</p>
+<p id="p-1350">Since the inside of the limit depends on \(x^{2}+y^{2}\text{,}\) this suggests that switching to polar coordinates might be beneficial. So let's try that!</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(0,0)}(x^{2}+y^{2})\ln(x^{2}+y^{2}) = \lim_{(r,\theta)\to(0,0)}r^{2}\ln r^{2}.
@@ -328,17 +338,17 @@ var js_version = 0.11;
 </div></article></section><section class="subsection" id="subsection-continuous-functions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.2.2</span> <span class="title">Continuous Functions</span>
 </h3>
-<a href="section-limits-and-continuity.html#subsection-continuous-functions" class="permalink">¶</a><p id="p-1352">Now that we have the notion of limit, we can define continuous functions of two variables.</p>
+<a href="section-limits-and-continuity.html#subsection-continuous-functions" class="permalink">¶</a><p id="p-1351">Now that we have the notion of limit, we can define continuous functions of two variables.</p>
 <article class="definition-like" id="definition-continuous-function-of-two-variables"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">11.2.4</span>. <span class="title">Continuous Function of Two Variables.</span>
 </h6>
-<p id="p-1353">Let \(f(x,y)\) be a function of two variables. We say that \(f\) is <dfn class="terminology">continuous</dfn> at \((a,b)\) if</p>
+<p id="p-1352">Let \(f(x,y)\) be a function of two variables. We say that \(f\) is <dfn class="terminology">continuous</dfn> at \((a,b)\) if</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(a,b)}f(x,y) = f(a,b).
 \end{equation*}
 </div>
-<p>If \(f\) is continuous at all points in a set \(D\text{,}\) we say that \(f\) is continuous on \(D\text{.}\)</p></article><p id="p-1354">We won't typically use the definition of continuity in this course. We'll just make of several common types of continuous functions:</p>
+<p>If \(f\) is continuous at all points in a set \(D\text{,}\) we say that \(f\) is continuous on \(D\text{.}\)</p></article><p id="p-1353">We won't typically use the definition of continuity in this course. We'll just make of several common types of continuous functions:</p>
 <ol class="decimal">
 <li id="li-134">Polynomials in two variables, such as \(x-3x^{4}y^{5}\text{,}\) are continuous on \(\RR^{2}\text{.}\)</li>
 <li id="li-135">Ratios of polynomials (i.e. <dfn class="terminology">rational functions</dfn>), such as \(\frac{y^{3}-x}{1+x^{20}y^{5}}\text{,}\) are continuous on their domains.</li>
@@ -347,7 +357,7 @@ var js_version = 0.11;
 <article class="example-like" id="example-limit-of-a-continuous-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.2.5</span>. <span class="title">Limit of a continuous function.</span>
 </h6>
-<p id="p-1355">Let \(f(x,y) = \tan\frac{3x^{2}-5y}{1-xy}\text{.}\) Find</p>
+<p id="p-1354">Let \(f(x,y) = \tan\frac{3x^{2}-5y}{1-xy}\text{.}\) Find</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(3,4)}f(x,y).
@@ -355,14 +365,14 @@ var js_version = 0.11;
 </div>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-216" id="solution-216"><span class="type">Solution</span></a><div id="hk-solution-216" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1356">First, note that this is a composition of continuous functions, so \(f(x,y)\) should be continuous wherever it's defined. Since this is defined at \((3,4)\text{,}\) we can say that \(f\) is continuous there as well and that</p>
+<p id="p-1355">First, note that this is a composition of continuous functions, so \(f(x,y)\) should be continuous wherever it's defined. Since this is defined at \((3,4)\text{,}\) we can say that \(f\) is continuous there as well and that</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{(x,y)\to(3,4)}f(x,y) = f(3,4) = \frac{7}{-11}.
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-3"><p id="p-1357">SUGGESTED PROBLEMS: 3, 11, 19, 23, 31</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-3"><p id="p-1356">SUGGESTED PROBLEMS: 3, 11, 19, 23, 31</p></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>

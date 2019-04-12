@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:25-04:00    *-->
+<!--*    on 2019-04-12T14:48:47-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -67,6 +67,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -88,6 +93,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -247,6 +254,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -258,27 +268,27 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-functions-of-several-independent-variables"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.1</span> <span class="title">Functions of Several Independent Variables</span>
 </h2>
-<a href="section-functions-of-several-independent-variables.html" class="permalink">¶</a><section class="introduction" id="introduction-29"><p id="p-1330">Now we need to consider calculus with functions of more than one independent variable.</p></section><section class="subsection" id="subsection-functions-of-two-variables"><h3 class="heading hide-type">
+<a href="section-functions-of-several-independent-variables.html" class="permalink">¶</a><section class="introduction" id="introduction-29"><p id="p-1329">Now we need to consider calculus with functions of more than one independent variable.</p></section><section class="subsection" id="subsection-functions-of-two-variables"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.1.1</span> <span class="title">Functions of Two Variables</span>
 </h3>
-<a href="section-functions-of-several-independent-variables.html#subsection-functions-of-two-variables" class="permalink">¶</a><p id="p-1331">A function of several variables is a function that depends on more than one independent variable. One such example comes from differential equations, where quantities such as the temperature of a metal rod depend on both a position \(x\) and a time \(t\text{.}\)</p>
+<a href="section-functions-of-several-independent-variables.html#subsection-functions-of-two-variables" class="permalink">¶</a><p id="p-1330">A function of several variables is a function that depends on more than one independent variable. One such example comes from differential equations, where quantities such as the temperature of a metal rod depend on both a position \(x\) and a time \(t\text{.}\)</p>
 <article class="definition-like" id="definition-functions-of-two-variables"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">11.1.1</span>. <span class="title">Functions of Two Variables.</span>
 </h6>
-<p id="p-1332">A <dfn class="terminology">function of two variables</dfn> is a rule \(f\) or \(z = f(x,y)\) that assigns pairs \((x,y)\) of real numbers to real numbers. The <dfn class="terminology">domain</dfn> is the set \(D\) in \(\RR^{2}\) for which the rule is defined. The <dfn class="terminology">range</dfn> is the set \(R\) in \(\RR\) of all possible values of \(f\text{.}\) \(x,y\) are called independent variables and \(z\) is called the <dfn class="terminology">dependent variable</dfn>.</p></article><article class="example-like" id="example-domain-of-a-function"><h6 class="heading">
+<p id="p-1331">A <dfn class="terminology">function of two variables</dfn> is a rule \(f\) or \(z = f(x,y)\) that assigns pairs \((x,y)\) of real numbers to real numbers. The <dfn class="terminology">domain</dfn> is the set \(D\) in \(\RR^{2}\) for which the rule is defined. The <dfn class="terminology">range</dfn> is the set \(R\) in \(\RR\) of all possible values of \(f\text{.}\) \(x,y\) are called independent variables and \(z\) is called the <dfn class="terminology">dependent variable</dfn>.</p></article><article class="example-like" id="example-domain-of-a-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.1.2</span>. <span class="title">Domain of a function.</span>
 </h6>
-<p id="p-1333">Let \(f(x,y) = \frac{1}{\sqrt{4 - x^{2} - y^{2}}}\text{.}\) Find the domain of \(f\text{.}\)</p>
+<p id="p-1332">Let \(f(x,y) = \frac{1}{\sqrt{4 - x^{2} - y^{2}}}\text{.}\) Find the domain of \(f\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-211" id="solution-211"><span class="type">Solution</span></a><div id="hk-solution-211" class="hidden-content tex2jax_ignore"><div class="solution"><p id="p-1334">We'll break this down into pieces. First, since we're dealing with square roots in real numbers we need \(x^{2}+y^{2}\leq4\text{.}\) Second, we need to make sure that \(\sqrt{4 - x^{2} - y^{2}}\neq0\text{.}\) So the domain of \(f\) is the set of all points \((x,y)\) in \(\RR^{2}\) such that \(x^{2} + y^{2} &lt; 4\text{.}\) In other words, the domain is just the inside of the circle of radius \(2\) centered at the origin.</p></div></div>
-</div></article><p id="p-1335">We can also graph functions of two variables by viewing \(f(x,y)\) as representing the height of some surface over the point \((x,y)\) in the \(xy\)-plane. In other words, just as \(y = f(x)\) represents a curve in \(\RR^{2}\text{,}\) the equation \(z = f(x,y)\) represents a surface in \(\RR^{3}\text{.}\)</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-211" id="solution-211"><span class="type">Solution</span></a><div id="hk-solution-211" class="hidden-content tex2jax_ignore"><div class="solution"><p id="p-1333">We'll break this down into pieces. First, since we're dealing with square roots in real numbers we need \(x^{2}+y^{2}\leq4\text{.}\) Second, we need to make sure that \(\sqrt{4 - x^{2} - y^{2}}\neq0\text{.}\) So the domain of \(f\) is the set of all points \((x,y)\) in \(\RR^{2}\) such that \(x^{2} + y^{2} &lt; 4\text{.}\) In other words, the domain is just the inside of the circle of radius \(2\) centered at the origin.</p></div></div>
+</div></article><p id="p-1334">We can also graph functions of two variables by viewing \(f(x,y)\) as representing the height of some surface over the point \((x,y)\) in the \(xy\)-plane. In other words, just as \(y = f(x)\) represents a curve in \(\RR^{2}\text{,}\) the equation \(z = f(x,y)\) represents a surface in \(\RR^{3}\text{.}\)</p>
 <article class="example-like" id="example-sketching-a-cone"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.1.3</span>. <span class="title">Sketching a cone.</span>
 </h6>
-<p id="p-1336">Sketch the surface given by \(f(x,y) = \sqrt{4x^{2} + y^{2}}\text{.}\)</p>
+<p id="p-1335">Sketch the surface given by \(f(x,y) = \sqrt{4x^{2} + y^{2}}\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-212" id="solution-212"><span class="type">Solution</span></a><div id="hk-solution-212" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1337">We need to sketch \(z = \sqrt{4x^{2} + y^{2}}\text{.}\) We can start by squaring both sides to get \(z^{2} = 4x^{2} + y^{2}\text{.}\) If we look at the right hand side, it looks a lot like an ellipse, so we'll try to work with that. Assuming \(z\neq0\text{,}\) we can rewrite the equation to get</p>
+<p id="p-1336">We need to sketch \(z = \sqrt{4x^{2} + y^{2}}\text{.}\) We can start by squaring both sides to get \(z^{2} = 4x^{2} + y^{2}\text{.}\) If we look at the right hand side, it looks a lot like an ellipse, so we'll try to work with that. Assuming \(z\neq0\text{,}\) we can rewrite the equation to get</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{x^{2}}{z^{2}/4} + \frac{y^{2}}{z^{2}} = 1
@@ -292,14 +302,14 @@ var js_version = 0.11;
 <a href="section-functions-of-several-independent-variables.html#subsection-contour-plots" class="permalink">¶</a><article class="definition-like" id="definition-contour-plots"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">11.1.4</span>. <span class="title">Contour Plots.</span>
 </h6>
-<p id="p-1338">Given a function \(f(x,y)\text{,}\) a <dfn class="terminology">contour plot</dfn> is the plot of an equation of the form \(f(x,y) = k\) for some constant \(k\text{.}\)</p></article><p id="p-1339">A contour plot can be viewed as slicing a surface in \(\RR^{3}\) with a level plane. The contour plot is exactly where the plane intersects the surface.</p>
+<p id="p-1337">Given a function \(f(x,y)\text{,}\) a <dfn class="terminology">contour plot</dfn> is the plot of an equation of the form \(f(x,y) = k\) for some constant \(k\text{.}\)</p></article><p id="p-1338">A contour plot can be viewed as slicing a surface in \(\RR^{3}\) with a level plane. The contour plot is exactly where the plane intersects the surface.</p>
 <article class="example-like" id="example-contours-on-a-paraboloid"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">11.1.5</span>. <span class="title">Contours on a paraboloid.</span>
 </h6>
-<p id="p-1340">What do the contours of \(f(x,y) = x^{2} + \frac{y^{2}}{9}\) look like?</p>
+<p id="p-1339">What do the contours of \(f(x,y) = x^{2} + \frac{y^{2}}{9}\) look like?</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-213" id="solution-213"><span class="type">Solution</span></a><div id="hk-solution-213" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1341">If we pick different (nonnegative) values for \(k\text{,}\) then all of the contours of \(f(x,y)\) take the form</p>
+<p id="p-1340">If we pick different (nonnegative) values for \(k\text{,}\) then all of the contours of \(f(x,y)\) take the form</p>
 <div class="displaymath">
 \begin{equation*}
 x^{2} + \frac{y^{2}}{9} = k
@@ -313,7 +323,7 @@ x^{2} + \frac{y^{2}}{9} = k
 </div>
 <p>This is a family of ellipses.</p>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-2"><p id="p-1342">SUGGESTED PROBLEMS: 1, 5, 11, 13</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-2"><p id="p-1341">SUGGESTED PROBLEMS: 1, 5, 11, 13</p></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>

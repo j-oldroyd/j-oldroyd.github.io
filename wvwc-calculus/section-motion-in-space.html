@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:24-04:00    *-->
+<!--*    on 2019-04-12T14:48:47-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -75,6 +75,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -96,6 +101,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -255,6 +262,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -266,104 +276,104 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-motion-in-space"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">10.9</span> <span class="title">Motion in Space</span>
 </h2>
-<a href="section-motion-in-space.html" class="permalink">¶</a><p id="p-1309">We now move on to examining motion in \(\RR^{3}\text{.}\) First, recall that \(\vv{r}(t)\) represents the position vector of some particle moving along a curve in space, then its velocity \(\vv{t}(t)\) and acceleration \(\vv{a}(t)\) are given by</p>
+<a href="section-motion-in-space.html" class="permalink">¶</a><p id="p-1308">We now move on to examining motion in \(\RR^{3}\text{.}\) First, recall that \(\vv{r}(t)\) represents the position vector of some particle moving along a curve in space, then its velocity \(\vv{t}(t)\) and acceleration \(\vv{a}(t)\) are given by</p>
 <div class="displaymath">
 \begin{align*}
 \vv{v}(t) &amp; = \vv{r}'(t) \\
 \vv{a}(t) &amp; = \vv{v}'(t) = \vv{r}''(t) 
 \end{align*}
 </div>
-<p id="p-1310">The speed of the particle is just the magnitude of the velocity: \(|\vv{v}(t)|\text{.}\)</p>
+<p id="p-1309">The speed of the particle is just the magnitude of the velocity: \(\norm{\vv{v}(t)}\text{.}\)</p>
 <article class="example-like" id="example-motion-of-a-projectile"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.9.1</span>. <span class="title">Motion of a projectile.</span>
 </h6>
-<p id="p-1311">A projectile is fired out of a cannon with an initial speed of 200 <sup>m</sup>⁄<sub>s</sub> to the west and with an angle of elevation of \(30^{\circ}\text{.}\) If the particle was fired from a raised platform that is 50 m off level ground, where does the particle land?</p>
+<p id="p-1310">A projectile is fired out of a cannon with an initial speed of 200 <sup>m</sup>⁄<sub>s</sub> to the west and with an angle of elevation of \(30^{\circ}\text{.}\) If the particle was fired from a raised platform that is 50 m off level ground, where does the particle land?</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-209" id="solution-209"><span class="type">Solution</span></a><div id="hk-solution-209" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1312">First, we'll assume that \(\vv{j}\) points northward and \(\vv{k}\) points straight up. Let's assume that the platform is directly above the origin. If we let \(\vv{r}(t)\) denote the position (in meters) of the particle at time \(t\) (in seconds), then we can say that \(\vv{r}_{0} = \vv{r}(0) = \dotprod{0,0,50}\text{.}\) We also have</p>
+<p id="p-1311">First, we'll assume that \(\vv{j}\) points northward and \(\vv{k}\) points straight up. Let's assume that the platform is directly above the origin. If we let \(\vv{r}(t)\) denote the position (in meters) of the particle at time \(t\) (in seconds), then we can say that \(\vv{r}_{0} = \vv{r}(0) = \dotprod{0,0,50}\text{.}\) We also have</p>
 <div class="displaymath">
 \begin{align*}
 \vv{v}(0) &amp; = -100\sqrt{3}\vv{i} + 100\vv{k} \\
 \vv{a} &amp; = -9.8\vv{k} 
 \end{align*}
 </div>
-<p id="p-1313">We can integrate up to find the position \(\vv{r}(t)\text{:}\)</p>
+<p id="p-1312">We can integrate up to find the position \(\vv{r}(t)\text{:}\)</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{v}(t) = -9.8t\vv{k}+\vv{C}
 \end{equation*}
 </div>
-<p id="p-1314">where \(\vv{C}\) is an arbitrary constant vector. To find it, we'll use our initial condition on \(\vv{v}\text{:}\)</p>
+<p id="p-1313">where \(\vv{C}\) is an arbitrary constant vector. To find it, we'll use our initial condition on \(\vv{v}\text{:}\)</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{v}(0) = \vv{C} = -100\sqrt{3}\vv{i}+100\vv{k}.
 \end{equation*}
 </div>
-<p id="p-1315">So \(\vv{v}(t) = -9.8t\vv{k}-100\sqrt{3}\vv{i}+100\vv{k}\text{.}\) Integrating once more to get the position, we have</p>
+<p id="p-1314">So \(\vv{v}(t) = -9.8t\vv{k}-100\sqrt{3}\vv{i}+100\vv{k}\text{.}\) Integrating once more to get the position, we have</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{r}(t) = -100\sqrt{3}t\vv{i}+(100t-4.9t^{2})\vv{k} + \vv{D} = -100\sqrt{3}t\vv{i} + (100t-4.9t^{2})\vv{k} + 50\vv{k}\text{.}
 \end{equation*}
 </div>
-<p id="p-1316">So \(\vv{r}(t) = \dotprod{-100\sqrt{3}t, 0, 50 + 100t - 4.9t^{2}}\text{.}\)</p>
-<p id="p-1317">To find where the particle lands, we just set the third component equal to zero and solve for \(t\) to get</p>
+<p id="p-1315">So \(\vv{r}(t) = \dotprod{-100\sqrt{3}t, 0, 50 + 100t - 4.9t^{2}}\text{.}\)</p>
+<p id="p-1316">To find where the particle lands, we just set the third component equal to zero and solve for \(t\) to get</p>
 <div class="displaymath">
 \begin{equation*}
 t = \frac{-100\pm\sqrt{10000+980}}{-9.8} = -.4883,20.896.
 \end{equation*}
 </div>
-<p id="p-1318">We need to choose the positive value for \(t\text{,}\) and if we do so we see that when the projectile hits ground it's at position \(\vv{r}(20.896) = \dotprod{-3619.38,0,0}.\) So the projectile is a little over 3.5 km to the west.</p>
+<p id="p-1317">We need to choose the positive value for \(t\text{,}\) and if we do so we see that when the projectile hits ground it's at position \(\vv{r}(20.896) = \dotprod{-3619.38,0,0}.\) So the projectile is a little over 3.5 km to the west.</p>
 </div></div>
-</div></article><p id="p-1319">To describe acceleration on a curve \(\vv{r}(t)\text{,}\) it can be useful to break it down into <dfn class="terminology">tangential components</dfn> and <dfn class="terminology">normal components</dfn>.</p>
+</div></article><p id="p-1318">To describe acceleration on a curve \(\vv{r}(t)\text{,}\) it can be useful to break it down into <dfn class="terminology">tangential components</dfn> and <dfn class="terminology">normal components</dfn>.</p>
 <article class="definition-like" id="definition-components-of-acceleration"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">10.9.2</span>. <span class="title">Components of Acceleration.</span>
 </h6>
-<p id="p-1320">Let \(\vv{r}(t)\) denote a space curve with unit tangent \(\vv{T}(t)\text{,}\) unit normal \(\vv{N}(t)\) and acceleration \(\vv{a}\text{.}\) The tangential component of acceleration is the scalar \(a_{T}\) given by</p>
+<p id="p-1319">Let \(\vv{r}(t)\) denote a space curve with unit tangent \(\vv{T}(t)\text{,}\) unit normal \(\vv{N}(t)\) and acceleration \(\vv{a}\text{.}\) The tangential component of acceleration is the scalar \(a_{T}\) given by</p>
 <div class="displaymath">
 \begin{equation*}
 a_{T} = \vv{a}\cdot\vv{T}.
 \end{equation*}
 </div>
-<p id="p-1321">The normal component is the scalar \(a_{N}\) given by</p>
+<p id="p-1320">The normal component is the scalar \(a_{N}\) given by</p>
 <div class="displaymath">
 \begin{equation*}
 a_{N} = \vv{a}\cdot\vv{N}.
 \end{equation*}
-</div></article><p id="p-1322">\(a_{T}\) represents how much of the acceleration is directed tangent to the curve \(\vv{r}(t)\text{,}\) whereas \(a_{N}\) represents how much of the acceleration is directed perpendicular to the tangent.</p>
+</div></article><p id="p-1321">\(a_{T}\) represents how much of the acceleration is directed tangent to the curve \(\vv{r}(t)\text{,}\) whereas \(a_{N}\) represents how much of the acceleration is directed perpendicular to the tangent.</p>
 <article class="example-like" id="example-components-of-acceleration-for-a-projectile"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.9.3</span>. <span class="title">Components of acceleration for a projectile.</span>
 </h6>
-<p id="p-1323">Consider the particle from <a data-knowl="./knowl/example-motion-of-a-projectile.html" title="Example 10.9.1: Motion of a projectile">Example 10.9.1</a>. At what point is the tangential component of acceleration greatest?</p>
+<p id="p-1322">Consider the particle from <a data-knowl="./knowl/example-motion-of-a-projectile.html" title="Example 10.9.1: Motion of a projectile">Example 10.9.1</a>. At what point is the tangential component of acceleration greatest?</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-210" id="solution-210"><span class="type">Solution</span></a><div id="hk-solution-210" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1324">Since \(\vv{a} = -9.8\vv{k}\text{,}\) the tangential component should be greatest when the projectile is fired or when it hits the ground, since these are the points where the direction of the trajectory most closely matches the direction of acceleration. To actually verify this, we'll find the tangential component using <a data-knowl="./knowl/definition-components-of-acceleration.html" title="Definition 10.9.2: Components of Acceleration">Definition 10.9.2</a>. Since</p>
+<p id="p-1323">Since \(\vv{a} = -9.8\vv{k}\text{,}\) the tangential component should be greatest when the projectile is fired or when it hits the ground, since these are the points where the direction of the trajectory most closely matches the direction of acceleration. To actually verify this, we'll find the tangential component using <a data-knowl="./knowl/definition-components-of-acceleration.html" title="Definition 10.9.2: Components of Acceleration">Definition 10.9.2</a>. Since</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{T}(t) = \dotprod{-\frac{100\sqrt{3}}{\sqrt{(100-9.8t)^{2}+30000}}, 0, \frac{100 - 9.8t}{\sqrt{(100-9.8t)^{2}+30000}}}
 \end{equation*}
 </div>
-<p id="p-1325">it follows that</p>
+<p id="p-1324">it follows that</p>
 <div class="displaymath">
 \begin{align*}
 a_{T} &amp; = \vv{a}\cdot\vv{T} \\
 &amp; =  -9.8\frac{100 - 9.8t}{\sqrt{(100-9.8t)^{2}+30000}}
 \end{align*}
 </div>
-<p id="p-1326">So</p>
+<p id="p-1325">So</p>
 <div class="displaymath">
 \begin{align*}
 |a_{T}| &amp; = 9.8\frac{|100 - 9.8t|}{\sqrt{(100-9.8t)^{2}+30000}} \\
 &amp; = \frac{9.8}{\sqrt{1+\frac{30000}{(100-9.8t)^{2}}}} 
 \end{align*}
 </div>
-<p id="p-1327">We can make this as large as possible by making \((100-9.8t)^{2}\) as large as possible, and this reaches its largest value at \(t = 20.896\text{,}\) when the projectile hits the ground.</p>
+<p id="p-1326">We can make this as large as possible by making \((100-9.8t)^{2}\) as large as possible, and this reaches its largest value at \(t = 20.896\text{,}\) when the projectile hits the ground.</p>
 </div></div>
 </div></article><div class="sagecell-sage" id="sage-14"><script type="text/x-sage">t = var('t')
 r = vector([-100*sqrt(3)*t, 0, 50 + 100*t - 4.9*t^2])
 T = derivative(r,t).normalized()
 show(T)
 </script></div>
-<p id="p-1328">SUGGESTED PROBLEMS: 1-11 odd, 19, 31</p></section></div></main>
+<p id="p-1327">SUGGESTED PROBLEMS: 1-11 odd, 19, 31</p></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>

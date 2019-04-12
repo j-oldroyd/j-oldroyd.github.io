@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:30-04:00    *-->
+<!--*    on 2019-04-12T14:48:53-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -67,6 +67,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -88,6 +93,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -247,6 +254,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -261,7 +271,7 @@ var js_version = 0.11;
 <a href="section-applications-of-double-integrals.html" class="permalink">¶</a><section class="subsection" id="subsection-mass"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">12.4.1</span> <span class="title">Mass</span>
 </h3>
-<a href="section-applications-of-double-integrals.html#subsection-mass" class="permalink">¶</a><p id="p-1502">Consider a thin plate in the \(xy\)-plane, say the region \(R\text{.}\) If the density of the plate \(\rho(x,y)\) at \((x,y)\) is constant, say \(\rho(x,y) = C\text{,}\) then the mass of the plate is just the density times the area. On the other hand, if the density is varies then this becomes more complicated, and we must use double integrals. In particular, the mass of a plate contained in the region \(R\) in the \(xy\)-plane with density \(\rho(x,y)\) is given by</p>
+<a href="section-applications-of-double-integrals.html#subsection-mass" class="permalink">¶</a><p id="p-1501">Consider a thin plate in the \(xy\)-plane, say the region \(R\text{.}\) If the density of the plate \(\rho(x,y)\) at \((x,y)\) is constant, say \(\rho(x,y) = C\text{,}\) then the mass of the plate is just the density times the area. On the other hand, if the density is varies then this becomes more complicated, and we must use double integrals. In particular, the mass of a plate contained in the region \(R\) in the \(xy\)-plane with density \(\rho(x,y)\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 \iint_{R}\rho(x,y)\,dA
@@ -270,10 +280,10 @@ var js_version = 0.11;
 <article class="example-like" id="example-mass-of-a-triangular-plate"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">12.4.1</span>. <span class="title">Mass of a triangular plate.</span>
 </h6>
-<p id="p-1503">Find the mass of the plate contained in the triangular region \(D\) bounded by lines \(y=x, y = 6\) and \(2x+y = 6\text{,}\) given that the density is \(\rho(x,y) = x^{2}\text{.}\)</p>
+<p id="p-1502">Find the mass of the plate contained in the triangular region \(D\) bounded by lines \(y=x, y = 6\) and \(2x+y = 6\text{,}\) given that the density is \(\rho(x,y) = x^{2}\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-246" id="solution-246"><span class="type">Solution</span></a><div id="hk-solution-246" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1504">The mass is</p>
+<p id="p-1503">The mass is</p>
 <div class="displaymath">
 \begin{align*}
 \iint_{D}x^{2}\,A &amp; =  \int_{2}^{6}\int_{\frac{6-y}{2}}^{y}x^{2}\,dx\,dy\\
@@ -281,7 +291,7 @@ var js_version = 0.11;
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1505">The <dfn class="terminology">moments</dfn> of the mass contained in \(D\) and with density \(\rho(x,y)\) are defined as follows:</p>
+</div></article><p id="p-1504">The <dfn class="terminology">moments</dfn> of the mass contained in \(D\) and with density \(\rho(x,y)\) are defined as follows:</p>
 <div class="displaymath">
 \begin{align*}
 M_{x} &amp; = \iint_{D}y\rho(x,y)\,dA \\
@@ -298,10 +308,10 @@ M_{y} &amp; = \iint_{D}x\rho(x,y)\,dA
 <article class="example-like" id="example-center-of-mass-of-an-annulus"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">12.4.2</span>. <span class="title">Center of mass of an annulus.</span>
 </h6>
-<p id="p-1506">Find the center of mass of the plate \(D\) outside of the circle \(x^{2}+y^{2} = 1\) and inside the circle \(x^{2} + y^{2} = 4\text{,}\) with density \(\rho(x,y) = \frac{1}{\sqrt{x^{2} + y^{2}}}\text{.}\)</p>
+<p id="p-1505">Find the center of mass of the plate \(D\) outside of the circle \(x^{2}+y^{2} = 1\) and inside the circle \(x^{2} + y^{2} = 4\text{,}\) with density \(\rho(x,y) = \frac{1}{\sqrt{x^{2} + y^{2}}}\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-247" id="solution-247"><span class="type">Solution</span></a><div id="hk-solution-247" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1507">The mass is given by</p>
+<p id="p-1506">The mass is given by</p>
 <div class="displaymath">
 \begin{align*}
 \iint_{D} \frac{1}{\sqrt{x^{2}+y^{2}}}\,dA &amp; = \int_{0}^{2\pi}\int_{1}^{2}\frac{r}{r}\,dr\,d\theta \\
@@ -318,7 +328,7 @@ M_{x} &amp; = \iint_{D}\frac{y}{\sqrt{x^{2} + y^{2}}}\,dA \\
 </div>
 <p>and likewise \(M_{y} = 0\text{.}\) So the center of mass is \((0,0)\text{.}\)</p>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-11"><p id="p-1508">SUGGESTED PROBLEMS: 3, 5, 13</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-11"><p id="p-1507">SUGGESTED PROBLEMS: 3, 5, 13</p></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>

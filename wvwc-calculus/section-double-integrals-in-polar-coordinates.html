@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:30-04:00    *-->
+<!--*    on 2019-04-12T14:48:53-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -67,6 +67,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -88,6 +93,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -247,6 +254,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -258,10 +268,10 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-double-integrals-in-polar-coordinates"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.3</span> <span class="title">Double Integrals in Polar Coordinates</span>
 </h2>
-<a href="section-double-integrals-in-polar-coordinates.html" class="permalink">¶</a><p id="p-1490">Recall that the double integral was defined by first setting up a rectangular grid. The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense. If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward. However, polar coordinates from <a href="section-polar-coordinates.html" class="internal" title="Section 9.3: Polar Coordinates">Section 9.3</a> work very nicely with circular regions. So we want to find out how to set up double integrals using polar coordinates.</p>
-<p id="p-1491">If we're given a function \(f(x,y)\text{,}\) then it's not too hard to convert this to the polar form \(f(r,\theta)\text{.}\) Just replace \(x\) with \(r\cos\theta\) and \(y\) with \(r\sin\theta\text{.}\) The tricky part with setting up double integrals in polar coordinates is how to deal with the <dfn class="terminology">area element</dfn> \(dA\text{,}\) which in Cartesian coordinates is just \(dx\,dy\) or \(dy\,dx\text{.}\) To figure out what \(dA\) should be in polar coordinates, i.e. in terms of \(r\) and \(\theta\text{,}\) consider the following "polar rectangle": <figure class="figure-like" id="figure-polar-rectangle"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-polar-rectangle.svg" style="width: 100%; height: auto;" alt=""></div>
+<a href="section-double-integrals-in-polar-coordinates.html" class="permalink">¶</a><p id="p-1489">Recall that the double integral was defined by first setting up a rectangular grid. The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense. If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward. However, polar coordinates from <a href="section-polar-coordinates.html" class="internal" title="Section 9.3: Polar Coordinates">Section 9.3</a> work very nicely with circular regions. So we want to find out how to set up double integrals using polar coordinates.</p>
+<p id="p-1490">If we're given a function \(f(x,y)\text{,}\) then it's not too hard to convert this to the polar form \(f(r,\theta)\text{.}\) Just replace \(x\) with \(r\cos\theta\) and \(y\) with \(r\sin\theta\text{.}\) The tricky part with setting up double integrals in polar coordinates is how to deal with the <dfn class="terminology">area element</dfn> \(dA\text{,}\) which in Cartesian coordinates is just \(dx\,dy\) or \(dy\,dx\text{.}\) To figure out what \(dA\) should be in polar coordinates, i.e. in terms of \(r\) and \(\theta\text{,}\) consider the following "polar rectangle": <figure class="figure-like" id="figure-polar-rectangle"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-polar-rectangle.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">12.3.1.</span> A polar grid.</figcaption></figure></p>
-<p id="p-1492">Let \(\Delta A\) represent the area of one of these sectors. If we let \(r\) denote the distance from the origin to one sector, \(\Delta r\) the length of a sector and \(\Delta\theta\) the angle spanned by a sector, then we can say that</p>
+<p id="p-1491">Let \(\Delta A\) represent the area of one of these sectors. If we let \(r\) denote the distance from the origin to one sector, \(\Delta r\) the length of a sector and \(\Delta\theta\) the angle spanned by a sector, then we can say that</p>
 <div class="displaymath">
 \begin{align*}
 \Delta A &amp; \approx \frac{1}{2}[r\cos(\Delta\theta)][r\sin(\Delta\theta)] - \frac{1}{2}[(r-\Delta r)\cos(\Delta\theta)][(r-\Delta r)\sin(\Delta\theta)] \\
@@ -291,7 +301,7 @@ dA = r\,dr\,d\theta\text{.}
 <article class="theorem-like" id="theorem-double-integrals-in-polar-coordinates"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">12.3.2</span>. <span class="title">Double Integrals in Polar Coordinates.</span>
 </h6>
-<p id="p-1493">Let \(f(x,y)\) be a continuous function. Then</p>
+<p id="p-1492">Let \(f(x,y)\) be a continuous function. Then</p>
 <div class="displaymath">
 \begin{equation*}
 \iint_{D}f(x,y)\,dA = \iint_{D}f(r\cos\theta,r\sin\theta)r\,dr\,d\theta
@@ -300,7 +310,7 @@ dA = r\,dr\,d\theta\text{.}
 <p>and limits are chosen using polar coordinates.</p></article><article class="example-like" id="example-integrating-over-a-circular-sector"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">12.3.3</span>. <span class="title">Integrating over a circular sector.</span>
 </h6>
-<p id="p-1494">Find</p>
+<p id="p-1493">Find</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx
@@ -308,7 +318,7 @@ dA = r\,dr\,d\theta\text{.}
 </div>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-244" id="solution-244"><span class="type">Solution</span></a><div id="hk-solution-244" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1495">If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:</p>
+<p id="p-1494">If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:</p>
 <div class="displaymath">
 \begin{align*}
 \int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx &amp; = \int_{\pi}^{\frac{3\pi}{2}}\int_{0}^{1}\frac{2}{1+r}r\,dr\,d\theta \\
@@ -318,16 +328,16 @@ dA = r\,dr\,d\theta\text{.}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1496">Polar coordinates may also be used, surprisingly, to evaluate the <dfn class="terminology">Gaussian integral</dfn> \(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\)</p>
+</div></article><p id="p-1495">Polar coordinates may also be used, surprisingly, to evaluate the <dfn class="terminology">Gaussian integral</dfn> \(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\)</p>
 <article class="theorem-like" id="theorem-the-gaussian-integral"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">12.3.4</span>. <span class="title">The Gaussian Integral.</span>
 </h6>
-<p id="p-1497">We have</p>
+<p id="p-1496">We have</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{-\infty}^{\infty}e^{-x^{2}}\,dx = \sqrt{\pi}
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-17"><a data-knowl="" class="id-ref" data-refid="hk-proof-17"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-17" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-1498">First, let \(I = \int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\) We'll show that \(I^{2} = \pi\text{.}\) We have</p>
+</div></article><article class="hiddenproof" id="proof-17"><a data-knowl="" class="id-ref" data-refid="hk-proof-17"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-17" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-1497">First, let \(I = \int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\) We'll show that \(I^{2} = \pi\text{.}\) We have</p>
 <div class="displaymath">
 \begin{align*}
 I^{2} &amp; = \left(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-y^{2}}\,dy\right) \\
@@ -347,10 +357,10 @@ I^{2} &amp; = \left(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\right)\left(\int_{-\in
 <article class="example-like" id="example-volume-of-a-sphere"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">12.3.5</span>. <span class="title">Volume of a sphere.</span>
 </h6>
-<p id="p-1499">Find the volume of a sphere of radius \(\rho\text{.}\)</p>
+<p id="p-1498">Find the volume of a sphere of radius \(\rho\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-245" id="solution-245"><span class="type">Solution</span></a><div id="hk-solution-245" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1500">First, we can center the sphere at the origin without loss of generality. Such a sphere is given by \(x^{2} + y^{2} + z^{2} = \rho^{2}\text{.}\) If we solve for \(z\text{,}\) we get</p>
+<p id="p-1499">First, we can center the sphere at the origin without loss of generality. Such a sphere is given by \(x^{2} + y^{2} + z^{2} = \rho^{2}\text{.}\) If we solve for \(z\text{,}\) we get</p>
 <div class="displaymath">
 \begin{equation*}
 z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}
@@ -366,7 +376,7 @@ z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1501">SUGGESTED PROBLEMS: 5, 13, 23</p></section></div></main>
+</div></article><p id="p-1500">SUGGESTED PROBLEMS: 5, 13, 23</p></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>

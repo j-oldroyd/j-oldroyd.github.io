@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-03-29T11:41:24-04:00    *-->
+<!--*    on 2019-04-12T14:48:47-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -75,6 +75,11 @@ var js_version = 0.11;
 \newcommand{\vv}[1]{\mathbf{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -96,6 +101,8 @@ var js_version = 0.11;
 }
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
 \newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -255,6 +262,9 @@ var js_version = 0.11;
 <a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
 <li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
 <li><a href="section-line-integrals.html" data-scroll="section-line-integrals">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -269,53 +279,53 @@ var js_version = 0.11;
 <a href="section-arc-length-and-curvature.html" class="permalink">¶</a><section class="subsection" id="subsection-arc-length"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">10.8.1</span> <span class="title">Arc Length</span>
 </h3>
-<a href="section-arc-length-and-curvature.html#subsection-arc-length" class="permalink">¶</a><p id="p-1278">Suppose some particle travels along the space curve given by \(\vv{r}(t)\) for \(a\leq t\leq b\text{.}\) What we'd like to do is determine how far the particle travels over this time interval. Recall that distance is just speed multiplied by time, and the speed of this particle is given by \(|\vv{r}'(t)|\text{.}\) So we can imagine that the distance traveled by this particle over some infinitesimal time interval \(dt\) to be given by \(|\vv{r}'(t)|\,dt\text{.}\) So adding up all of these distances from \(t=a\) to \(t=b\) should give us the arc length. This suggests (but does not prove!) the following formula for arc length:</p>
+<a href="section-arc-length-and-curvature.html#subsection-arc-length" class="permalink">¶</a><p id="p-1277">Suppose some particle travels along the space curve given by \(\vv{r}(t)\) for \(a\leq t\leq b\text{.}\) What we'd like to do is determine how far the particle travels over this time interval. Recall that distance is just speed multiplied by time, and the speed of this particle is given by \(\norm{\vv{r}'(t)}\text{.}\) So we can imagine that the distance traveled by this particle over some infinitesimal time interval \(dt\) to be given by \(\norm{\vv{r}'(t)}\,dt\text{.}\) So adding up all of these distances from \(t=a\) to \(t=b\) should give us the arc length. This suggests (but does not prove!) the following formula for arc length:</p>
 <div class="displaymath">
 \begin{equation}
-L = \int_{a}^{b}|\vv{r}'(t)|\,dt.\label{equation-arc-length-formula}\tag{10.8.1}
+L = \int_{a}^{b}\norm{\vv{r}'(t)}\,dt.\label{equation-arc-length-formula}\tag{10.8.1}
 \end{equation}
 </div>
-<p id="p-1279"><a data-knowl="./knowl/equation-arc-length-formula.html" title="Equation 10.8.1">(10.8.1)</a> gives the length \(L\) of the space curve \(\vv{r}(t)\) from \(t=a\) to \(t=b\text{,}\) assuming that the integral exists.</p>
+<p id="p-1278"><a data-knowl="./knowl/equation-arc-length-formula.html" title="Equation 10.8.1">(10.8.1)</a> gives the length \(L\) of the space curve \(\vv{r}(t)\) from \(t=a\) to \(t=b\text{,}\) assuming that the integral exists.</p>
 <article class="example-like" id="example-arc-length-of-a-helix"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.1</span>. <span class="title">Arc length of a helix.</span>
 </h6>
-<p id="p-1280">Suppose we want to find the arc length of the helix \(\vv{r}(t) = \dotprod{\cos 3t,\sin 3t, t}\) from \(t=0\) to \(t=1\text{.}\) Then this is given by</p>
+<p id="p-1279">Suppose we want to find the arc length of the helix \(\vv{r}(t) = \dotprod{\cos 3t,\sin 3t, t}\) from \(t=0\) to \(t=1\text{.}\) Then this is given by</p>
 <div class="displaymath">
 \begin{equation*}
-L = \int_{0}^{1}|\dotprod{-3\sin3t, 3\cos3t, 1}|\,dt = \int_{0}^{1}\sqrt{10}\,dt = \sqrt{10}.
+L = \int_{0}^{1}\norm{\dotprod{-3\sin3t, 3\cos3t, 1}}\,dt = \int_{0}^{1}\sqrt{10}\,dt = \sqrt{10}.
 \end{equation*}
-</div></article><p id="p-1281">One thing we'd like to do now is to parametrize a space curve \(\vv{r}(t)\) with respect to arc length. Here's what we mean by this: given some \(\vv{r}(t)\) with \(a\leq t\leq b\text{,}\) we define its <dfn class="terminology">arc length function</dfn> \(s(t)\) by</p>
+</div></article><p id="p-1280">One thing we'd like to do now is to parametrize a space curve \(\vv{r}(t)\) with respect to arc length. Here's what we mean by this: given some \(\vv{r}(t)\) with \(a\leq t\leq b\text{,}\) we define its <dfn class="terminology">arc length function</dfn> \(s(t)\) by</p>
 <div class="displaymath">
 \begin{equation*}
-s(t) = \int_{a}^{t}|\vv{r}'(u)|\,du.
+s(t) = \int_{a}^{t}\norm{\vv{r}'(u)}\,du.
 \end{equation*}
 </div>
-<p id="p-1282">If we can then solve for \(t\) in terms of \(s\text{,}\) this parametrizes the curve \(\vv{r}(t)\) in terms of the arc length variable \(s\text{.}\)</p>
+<p id="p-1281">If we can then solve for \(t\) in terms of \(s\text{,}\) this parametrizes the curve \(\vv{r}(t)\) in terms of the arc length variable \(s\text{.}\)</p>
 <article class="example-like" id="example-reparametrizing-a-space-curve"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.2</span>. <span class="title">Reparametrizing a space curve.</span>
 </h6>
-<p id="p-1283">Suppose we're given the space curve</p>
+<p id="p-1282">Suppose we're given the space curve</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{r}(t) = \left(\frac{2}{t^{2}+1}-1\right)\vv{i}+\frac{2t}{t^{2}+1}\vv{j}
 \end{equation*}
 </div>
-<p id="p-1284">which starts at \((1,0)\text{,}\) (so \(t\) starts at \(0\)) and we want to find the point that is \(\frac{\pi}{2}\) units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function \(s(t)\text{:}\)</p>
+<p id="p-1283">which starts at \((1,0)\text{,}\) (so \(t\) starts at \(0\)) and we want to find the point that is \(\frac{\pi}{2}\) units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function \(s(t)\text{:}\)</p>
 <div class="displaymath">
 \begin{align*}
-s(t) &amp; = \int_{0}^{t}|\vv{r}'(u)|\,du \\
+s(t) &amp; = \int_{0}^{t}\norm{\vv{r}'(u)}\,du \\
 &amp; = \int_{0}^{t} \sqrt{\frac{4u^{2}+4(u^{2}+1)^{2}-16u^{2}(u^{2}+1)+16u^{4}}{(u^{2}+1)^{4}}}\,du \\
 &amp; = \int_{0}^{t} \frac{2}{u^{2}+1}\,du \\
 &amp; = 2\tan^{-1}t 
 \end{align*}
 </div>
-<p id="p-1285">Since \(s = 2\tan^{-1}t\text{,}\) we get \(t = t(s) = \tan\frac{s}{2}\text{.}\) So</p>
+<p id="p-1284">Since \(s = 2\tan^{-1}t\text{,}\) we get \(t = t(s) = \tan\frac{s}{2}\text{.}\) So</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{r}(t(s)) = \left(\frac{2}{\tan^{2}\frac{s}{2}+1}-1\right)\vv{i}+\frac{2\tan\frac{s}{2}}{\tan^{2}\frac{s}{2}+1}\vv{j}
 \end{equation*}
 </div>
-<p id="p-1286">reparametrizes the space curve \(\vv{r}\) in terms of arc length. So the point on the curve that is \(\frac{\pi}{2}\) units along in the positive direction is given by</p>
+<p id="p-1285">reparametrizes the space curve \(\vv{r}\) in terms of arc length. So the point on the curve that is \(\frac{\pi}{2}\) units along in the positive direction is given by</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{r}(t(\pi/2)) = \dotprod{0,1}.
@@ -346,26 +356,26 @@ plt.show()
 </script></div></section><section class="subsection" id="subsection-curvature"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">10.8.2</span> <span class="title">Curvature</span>
 </h3>
-<a href="section-arc-length-and-curvature.html#subsection-curvature" class="permalink">¶</a><p id="p-1287">What we want to do now is measure how much a curve "turns" at some point. First, we call a space curve \(\vv{r}(t)\) <dfn class="terminology">smooth</dfn> on some interval \(I\) if \(\vv{r}'(t)\neq0\) for any \(t\) in \(I\text{.}\) Now, if we want to measure how quickly a curve is changing direction then we can use the unit tangent vector \(\vv{T}(t)\) to measure this. In particular, the derivative of the unit tangent should provide a good measure of how quickly a curve turns. However, we don't want to let the specific parametrization of the curve affect this; in other words, the rate at which a curve is turning should not depend on the speed at which the curve is traveled. This leads to the following definition.</p>
+<a href="section-arc-length-and-curvature.html#subsection-curvature" class="permalink">¶</a><p id="p-1286">What we want to do now is measure how much a curve "turns" at some point. First, we call a space curve \(\vv{r}(t)\) <dfn class="terminology">smooth</dfn> on some interval \(I\) if \(\vv{r}'(t)\neq0\) for any \(t\) in \(I\text{.}\) Now, if we want to measure how quickly a curve is changing direction then we can use the unit tangent vector \(\vv{T}(t)\) to measure this. In particular, the derivative of the unit tangent should provide a good measure of how quickly a curve turns. However, we don't want to let the specific parametrization of the curve affect this; in other words, the rate at which a curve is turning should not depend on the speed at which the curve is traveled. This leads to the following definition.</p>
 <article class="definition-like" id="definition-curvature"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">10.8.3</span>. <span class="title">Curvature.</span>
 </h6>
-<p id="p-1288">Let \(\vv{r}(t)\) denote a smooth curve on some interval \(I\text{.}\) The <dfn class="terminology">curvature</dfn> of \(\vv{r}(t)\) on \(I\) is defined to be the function \(\kappa(t)\) given by</p>
+<p id="p-1287">Let \(\vv{r}(t)\) denote a smooth curve on some interval \(I\text{.}\) The <dfn class="terminology">curvature</dfn> of \(\vv{r}(t)\) on \(I\) is defined to be the function \(\kappa(t)\) given by</p>
 <div class="displaymath">
 \begin{equation*}
-\kappa(t) = \frac{|\vv{T}'(t)|}{|\vv{r}'(t)|},
+\kappa(t) = \frac{\norm{\vv{T}'(t)}}{\norm{\vv{r}'(t)}},
 \end{equation*}
 </div>
-<p id="p-1289">where \(\vv{T}(t) = \frac{\vv{r}'(t)}{|\vv{r}'(t)|}\) is the unit tangent to the curve.</p></article><article class="example-like" id="example-computing-a-curvature"><h6 class="heading">
+<p id="p-1288">where \(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\) is the unit tangent to the curve.</p></article><article class="example-like" id="example-computing-a-curvature"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.4</span>. <span class="title">Computing a curvature.</span>
 </h6>
-<p id="p-1290">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}.\) We'll try to find the curvature by making use of <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a>. First, we need to find \(\vv{T}\) so we can take its derivative:</p>
+<p id="p-1289">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}.\) We'll try to find the curvature by making use of <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a>. First, we need to find \(\vv{T}\) so we can take its derivative:</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{T}(t) = \frac{\dotprod{1,t,2t}}{\sqrt{1+t^{2}+4t^{2}}}.
 \end{equation*}
 </div>
-<p id="p-1291">Therefore</p>
+<p id="p-1290">Therefore</p>
 <div class="displaymath">
 \begin{align*}
 \vv{T}'(t) &amp; = -\frac{1}{2}(1+5t^{2})^{-3/2}(10t)\dotprod{1,t,2t} + (1+5t^{2})^{-1/2}\dotprod{0,1,2} \\
@@ -373,7 +383,7 @@ plt.show()
 &amp; = (1+5t^{2})^{-3/2}\dotprod{-5t,1,2} 
 \end{align*}
 </div>
-<p id="p-1292">So the curvature is given by</p>
+<p id="p-1291">So the curvature is given by</p>
 <div class="displaymath">
 \begin{align*}
 \kappa(t) &amp; = \frac{(1+5t^{2})^{-3/2}\sqrt{25t^{2}+5}}{(1+5t^{2})^{1/2}} \\
@@ -382,75 +392,75 @@ plt.show()
 </div></article><article class="example-like" id="example-using-curvature"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.5</span>. <span class="title">Using curvature.</span>
 </h6>
-<p id="p-1293">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}\) once again. We'll try to find where this curve turns the fastest. To do this, we look at the curvature \(\kappa(t)\) we found from <a data-knowl="./knowl/example-computing-a-curvature.html" title="Example 10.8.4: Computing a curvature">Example 10.8.4</a>:</p>
+<p id="p-1292">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}\) once again. We'll try to find where this curve turns the fastest. To do this, we look at the curvature \(\kappa(t)\) we found from <a data-knowl="./knowl/example-computing-a-curvature.html" title="Example 10.8.4: Computing a curvature">Example 10.8.4</a>:</p>
 <div class="displaymath">
 \begin{equation*}
 \kappa(t) = \sqrt{\frac{5}{(1+5t^{2})^{3}}}.
 \end{equation*}
 </div>
-<p id="p-1294">This curve is turning the fastest precisely where the curvature is largest, and this happens at \(t=0\text{.}\)</p></article><p id="p-1295">We can use <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a> to compute curvatures, but we've seen that it can be pretty awful. So we'd like to use another formula if we can; thankfully, there is another option.</p>
+<p id="p-1293">This curve is turning the fastest precisely where the curvature is largest, and this happens at \(t=0\text{.}\)</p></article><p id="p-1294">We can use <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a> to compute curvatures, but we've seen that it can be pretty awful. So we'd like to use another formula if we can; thankfully, there is another option.</p>
 <article class="theorem-like" id="theorem-alternative-curvature-formula"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">10.8.6</span>. <span class="title">Alternative Curvature Formula.</span>
 </h6>
-<p id="p-1296">The curvature of \(\vv{r}(t)\) in \(\RR^{3}\) is given by</p>
+<p id="p-1295">The curvature of \(\vv{r}(t)\) in \(\RR^{3}\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
-\kappa(t) = \frac{|\vv{r}'(t)\times\vv{r}''(t)|}{|\vv{r}'(t)|^{3}}.
+\kappa(t) = \frac{\norm{\vv{r}'(t)\times\vv{r}''(t)}}{\norm{\vv{r}'(t)}^{3}}.
 \end{equation*}
-</div></article><p id="p-1297">The formula in <a data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 10.8.6: Alternative Curvature Formula">Theorem 10.8.6</a> may look worse than the formula given in <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a>, but it has one significant advantage: we don't need to differentiate any magnitudes, which is required in the previous formula to compute \(\vv{T}'(t)\text{.}\)</p>
+</div></article><p id="p-1296">The formula in <a data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 10.8.6: Alternative Curvature Formula">Theorem 10.8.6</a> may look worse than the formula given in <a data-knowl="./knowl/definition-curvature.html" title="Definition 10.8.3: Curvature">Definition 10.8.3</a>, but it has one significant advantage: we don't need to differentiate any magnitudes, which is required in the previous formula to compute \(\vv{T}'(t)\text{.}\)</p>
 <article class="example-like" id="example-using-the-alternative-formula"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.7</span>. <span class="title">Using the alternative formula.</span>
 </h6>
-<p id="p-1298">Let \(\vv{r}(t) = t\vv{i}+t^{2}\vv{j}+e^{t}\vv{k}\text{.}\) We'll make use of <a data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 10.8.6: Alternative Curvature Formula">Theorem 10.8.6</a> to find \(\kappa(t).\) We have</p>
+<p id="p-1297">Let \(\vv{r}(t) = t\vv{i}+t^{2}\vv{j}+e^{t}\vv{k}\text{.}\) We'll make use of <a data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 10.8.6: Alternative Curvature Formula">Theorem 10.8.6</a> to find \(\kappa(t).\) We have</p>
 <div class="displaymath">
 \begin{align*}
 \vv{r}'(t) &amp; = \dotprod{1,2t,e^{t}} \\
 \vv{r}''(t) &amp; = \dotprod{0,2,e^{t}} 
 \end{align*}
 </div>
-<p id="p-1299">and so</p>
+<p id="p-1298">and so</p>
 <div class="displaymath">
 \begin{equation*}
-\kappa(t) = \frac{|\dotprod{2e^{t}(t-1),-e^{t},2}|}{|\dotprod{1,2t,e^{t}}|^{3}} = \frac{\sqrt{4e^{2t}(t-1)^{2}+e^{2t}+4}}{(1+4t^{2}+e^{2t})^{3/2}}.
+\kappa(t) = \frac{\norm{\dotprod{2e^{t}(t-1),-e^{t},2}}}{\norm{\dotprod{1,2t,e^{t}}}^{3}} = \frac{\sqrt{4e^{2t}(t-1)^{2}+e^{2t}+4}}{(1+4t^{2}+e^{2t})^{3/2}}.
 \end{equation*}
 </div></article></section><section class="subsection" id="subsection-normal-and-binormal-vectors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">10.8.3</span> <span class="title">Normal and Binormal Vectors</span>
 </h3>
-<a href="section-arc-length-and-curvature.html#subsection-normal-and-binormal-vectors" class="permalink">¶</a><p id="p-1300">Consider a curve \(\vv{r}(t)\text{.}\) Then the direction of the curve is given by the unit tangent vector \(\vv{T}(t) = \frac{\vv{r}'(t)}{|\vv{r}'(t)|}\text{.}\) If we differentiate \(\vv{T}(t)\) to get \(\vv{T}'(t)\text{,}\) we can view this vector as telling us the direction the curve is turning. This leads us to the concept of <dfn class="terminology">unit normal vectors</dfn> to a space curve.</p>
+<a href="section-arc-length-and-curvature.html#subsection-normal-and-binormal-vectors" class="permalink">¶</a><p id="p-1299">Consider a curve \(\vv{r}(t)\text{.}\) Then the direction of the curve is given by the unit tangent vector \(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\text{.}\) If we differentiate \(\vv{T}(t)\) to get \(\vv{T}'(t)\text{,}\) we can view this vector as telling us the direction the curve is turning. This leads us to the concept of <dfn class="terminology">unit normal vectors</dfn> to a space curve.</p>
 <article class="definition-like" id="definition-unit-normal-vectors"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">10.8.8</span>. <span class="title">Unit Normal Vectors.</span>
 </h6>
-<p id="p-1301">Consider a space curve given by \(\vv{r}(t)\text{.}\) The unit normal vector is the vector \(\vv{N}(t)\) given by</p>
+<p id="p-1300">Consider a space curve given by \(\vv{r}(t)\text{.}\) The unit normal vector is the vector \(\vv{N}(t)\) given by</p>
 <div class="displaymath">
 \begin{equation*}
-\vv{N}(t) = \frac{\vv{T}'(t)}{|\vv{T}'(t)|},
+\vv{N}(t) = \frac{\vv{T}'(t)}{\norm{\vv{T}'(t)}},
 \end{equation*}
 </div>
-<p id="p-1302">where \(\vv{T}'\) is the derivative of the unit tangent vector.</p></article><article class="example-like" id="example-unit-normal-on-a-circle"><h6 class="heading">
+<p id="p-1301">where \(\vv{T}'\) is the derivative of the unit tangent vector.</p></article><article class="example-like" id="example-unit-normal-on-a-circle"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">10.8.9</span>. <span class="title">Unit normal on a circle.</span>
 </h6>
-<p id="p-1303">Find the unit normal vector of the curve given by \(\vv{r}(t) = \dotprod{\cos t,\sin t}\text{.}\)</p>
+<p id="p-1302">Find the unit normal vector of the curve given by \(\vv{r}(t) = \dotprod{\cos t,\sin t}\text{.}\)</p>
 <div class="solutions">
 <a data-knowl="" class="id-ref" data-refid="hk-solution-208" id="solution-208"><span class="type">Solution</span></a><div id="hk-solution-208" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-1304">If we think of a particle moving along \(\vv{r}(t)\text{,}\) then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, \(\vv{N}(t)\) should point towards the origin. To prove this, we'll use the formula above to find the unit normal:</p>
+<p id="p-1303">If we think of a particle moving along \(\vv{r}(t)\text{,}\) then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, \(\vv{N}(t)\) should point towards the origin. To prove this, we'll use the formula above to find the unit normal:</p>
 <div class="displaymath">
 \begin{align*}
-\vv{N}(t) &amp; = \frac{\vv{T}'(t)}{|\vv{T}'(t)|} \\
+\vv{N}(t) &amp; = \frac{\vv{T}'(t)}{\norm{\vv{T}'(t)}} \\
 &amp; = \frac{\dotprod{-\cos t, -\sin t}}{1} 
 \end{align*}
 </div>
-<p id="p-1305">So \(\vv{N}(t) = \dotprod{-\cos t, -\sin t} = -\vv{r}(t)\text{.}\) So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.</p>
+<p id="p-1304">So \(\vv{N}(t) = \dotprod{-\cos t, -\sin t} = -\vv{r}(t)\text{.}\) So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.</p>
 </div></div>
-</div></article><p id="p-1306">It's not clear from <a data-knowl="./knowl/definition-unit-normal-vectors.html" title="Definition 10.8.8: Unit Normal Vectors">Definition 10.8.8</a>, but \(\vv{N}(t)\) is <em class="emphasis">always</em> orthogonal to \(\vv{T}(t)\) for any space curve/vector function \(\vv{r}(t)\text{.}\) We can use these two vectors to get another vector called the <dfn class="terminology">binormal vector</dfn>.</p>
+</div></article><p id="p-1305">It's not clear from <a data-knowl="./knowl/definition-unit-normal-vectors.html" title="Definition 10.8.8: Unit Normal Vectors">Definition 10.8.8</a>, but \(\vv{N}(t)\) is <em class="emphasis">always</em> orthogonal to \(\vv{T}(t)\) for any space curve/vector function \(\vv{r}(t)\text{.}\) We can use these two vectors to get another vector called the <dfn class="terminology">binormal vector</dfn>.</p>
 <article class="definition-like" id="definition-binormal-vector"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">10.8.10</span>. <span class="title">Binormal Vector.</span>
 </h6>
-<p id="p-1307">Let \(\vv{r}(t)\) be a vector function with unit tangent \(\vv{T}(t)\) and unit normal \(\vv{N}(t)\text{.}\) Then the unit binormal vector is the vector \(\vv{B}(t)\) given by</p>
+<p id="p-1306">Let \(\vv{r}(t)\) be a vector function with unit tangent \(\vv{T}(t)\) and unit normal \(\vv{N}(t)\text{.}\) Then the unit binormal vector is the vector \(\vv{B}(t)\) given by</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{B}(t) = \vv{T}(t)\times\vv{N}(t).
 \end{equation*}
-</div></article><p id="p-1308">SUGGESTED PROBLEMS: 1, 3, 11-19 odd, 39</p></section></section></div></main>
+</div></article><p id="p-1307">SUGGESTED PROBLEMS: 1, 3, 11-19 odd, 39</p></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
 <script src="https://pretextbook.org/js/0.11/login.js"></script>
