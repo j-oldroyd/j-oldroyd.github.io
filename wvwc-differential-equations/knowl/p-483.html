@@ -1,10 +1,10 @@
-<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!DOCTYPE html>
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2018-09-28T16:56:18-04:00    *-->
+<!--*    on 2019-08-29T10:30:21-04:00    *-->
 <!--*                                    *-->
-<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
 <!--**************************************-->
 <head>
@@ -13,7 +13,44 @@
 </head>
 <body>
 <h6 class="heading"><span class="type">Paragraph</span></h6>
-<p>A string of length \(L=1\) has initial deflection, or position, given by \(f(x) = \sin\pi x - \frac{1}{2}\sin2\pi x\) for \(0\leq x\leq 1\text{.}\) The string is released at time \(t=0\text{.}\) Suppose \(c=1\text{,}\) and we want to find \(u(x,t)\text{.}\) Then we can do so very easily with <a knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 6.3.1: d'Alembert's Solution without Initial Velocity">Theorem 6.3.1</a>, since the initial velocity of the string is \(0\text{.}\) So we have</p>
-<span class="incontext"><a href="section-d-alembert-s-solution-of-the-wave-equation.html#p-483">in-context</a></span>
+<p>The first step is to set up and solve the indicial equation, which in this case is given by</p>
+<div class="displaymath">
+\begin{equation*}
+r(r-1)+r-\frac{1}{4} = 0.
+\end{equation*}
+</div>
+<p>We solve this algebraically for \(r\) to get the roots \(r_{1}=\frac{1}{2}\) and \(r_{2}=-\frac{1}{2}\text{.}\) Since \(r_{1}-r_{2} = 1\) is an integer, the method of Frobenius does <em class="emphasis">not</em> guarantee two linearly independent solutions. However, we are guaranteed one solution using \(r_{1}\text{.}\) So we make the guess</p>
+<div class="displaymath">
+\begin{equation*}
+y = x^{\frac{1}{2}}\sum_{n\geq0}^{}c_{n}x^{n} = \sum_{n\geq0}^{}c_{n}x^{n+\frac{1}{2}}.
+\end{equation*}
+</div>
+<p>Now we plug this into the ODE to get</p>
+<div class="displaymath">
+\begin{equation*}
+\sum_{n\geq0}c_{n}(n+\frac{1}{2})(n-\frac{1}{2})x^{n+\frac{1}{2}} + \sum_{n\geq0}c_{n}(n+\frac{1}{2})x^{n+\frac{1}{2}} 
++ \sum_{n\geq0}c_{n}x^{n+\frac{5}{2}} - \sum_{n\geq0}\frac{1}{4}c_{n}x^{n+\frac{1}{2}}
+\end{equation*}
+</div>
+<p>or just</p>
+<div class="displaymath">
+\begin{equation*}
+\sum_{n\geq0}^{}\qty[(n+\frac{1}{2})(n-\frac{1}{2})+(n+\frac{1}{2})-\frac{1}{4}]c_{n}x^{n+\frac{1}{2}} 
++\sum_{n\geq2}^{}c_{n-2}x^{n+\frac{1}{2}}=0.
+\end{equation*}
+</div>
+<p>which simplifies to</p>
+<div class="displaymath">
+\begin{equation*}
+\sum_{n\geq0}\brackets{n(n+1)}c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
+\end{equation*}
+</div>
+<p>So the recurrence relation the coefficients \(c_{n}\) need to satisfy is</p>
+<div class="displaymath">
+\begin{equation*}
+c_{n} = -\frac{1}{n(n+1)}c_{n-2}\quad\text{for}\quad n\geq2.
+\end{equation*}
+</div>
+<span class="incontext"><a href="section-frobenius-method.html#p-483">in-context</a></span>
 </body>
 </html>

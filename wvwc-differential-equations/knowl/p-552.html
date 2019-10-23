@@ -1,10 +1,10 @@
-<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!DOCTYPE html>
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2018-09-28T16:56:18-04:00    *-->
+<!--*    on 2019-08-29T10:30:22-04:00    *-->
 <!--*                                    *-->
-<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
 <!--**************************************-->
 <head>
@@ -13,7 +13,36 @@
 </head>
 <body>
 <h6 class="heading"><span class="type">Paragraph</span></h6>
-<p>You may combine the Document with other documents released under this License, under the terms defined in section 4 above for modified versions, provided that you include in the combination all of the Invariant Sections of all of the original documents, unmodified, and list them all as Invariant Sections of your combined work in its license notice, and that you preserve all their Warranty Disclaimers.</p>
-<span class="incontext"><a href="appendix-gfdl.html#p-552">in-context</a></span>
+<p>The IVP we need to solve now is</p>
+<div class="displaymath">
+\begin{align*}
+x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
+\amp= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
+\end{align*}
+</div>
+<p>where \(x(0) = x'(0) = 0\text{.}\) So once more we take Laplace transforms to get</p>
+<div class="displaymath">
+\begin{equation*}
+s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
+\end{equation*}
+</div>
+<p>and so</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
+\end{equation*}
+</div>
+<p>The displacement is then given by</p>
+<div class="displaymath">
+\begin{align*}
+x(t) \amp= \iLaplace{X(s)}\\
+\amp= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
+\amp= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
+\end{align*}
+</div>
+<p>Each time the hammer strikes the mass, a factor of \(\sin3t\) is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.</p>
+<span class="incontext"><a href="section-dirac-delta-functions.html#p-552">in-context</a></span>
 </body>
 </html>

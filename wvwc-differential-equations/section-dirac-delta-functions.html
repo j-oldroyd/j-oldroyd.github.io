@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2019-08-29T10:30:11-04:00    *-->
+<!--*                                    *-->
+<!--*      https://pretextbook.org       *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Dirac Delta Functions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
+    },
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
+<script>var logged_in = false;
+var role = 'student';
+var guest_access = true;
+var login_required = false;
+var js_version = 0.11;
+</script>
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-unit-step-functions-and-time-shifting.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="laplace-transforms.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-convolution-products.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-unit-step-functions-and-time-shifting.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="laplace-transforms.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-convolution-products.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link">
+<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
+<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
+<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
+<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
+<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
+<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
+<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
+<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
+<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
+<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
+<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
+<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
+<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
+<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
+<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
+<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
+<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
+<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
+<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
+<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
+<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
+<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions" class="active">Dirac Delta Functions</a></li>
+<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
+<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
+<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
+<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
+<li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
+<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
+<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
+<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
+<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
+</ul>
+</li>
+<li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-dirac-delta-functions"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.4</span> <span class="title">Dirac Delta Functions</span>
+</h2>
+<a href="section-dirac-delta-functions.html" class="permalink">¶</a><section class="subsection" id="subsection-impulses"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.1</span> <span class="title">Impulses</span>
+</h3>
+<a href="section-dirac-delta-functions.html#subsection-impulses" class="permalink">¶</a><p id="p-530">Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.</p>
+<p id="p-531">To be specific, let \(f(t)\) be a force that acts only from \(t=a\) to \(t=b\) (and is otherwise \(0\)). Then the <dfn class="terminology">impulse</dfn> of the force \(f(t)\) over the interval \([a,b]\) is given by</p>
+<div class="displaymath">
+\begin{equation*}
+p = \Int{a}{b}f(t)\dd{t}.
+\end{equation*}
+</div>
+<p>We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous <em class="emphasis">unit impulse</em>; any other impulse we can get by multiplication by a constant.</p>
+<p id="p-532">So this is our goal: find some function \(d(t)\) that has an instantaneous unit impulse at the point \(t=0\text{.}\) In other words, we want to find a function \(d(t)\) such that</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{0}^{0}d(t)\,dt = 1
+\end{equation*}
+</div>
+<p>But this is impossible for any function, since</p>
+<div class="displaymath">
+\begin{equation*}
+\Int{0}{0}d(t)\dd{t} = 0.
+\end{equation*}
+</div>
+<p>However, we can approximate the <em class="emphasis">idea</em> of an instantaneous unit impulse by defining</p>
+<div class="displaymath">
+\begin{equation*}
+d_{\varepsilon}(t) = 
+\begin{cases}
+\frac{1}{\varepsilon} \amp\text{if }-\frac{\varepsilon}{2}\leq t\leq \frac{\varepsilon}{2} \\
+0 \amp\text{otherwise}  
+\end{cases}.
+\end{equation*}
+</div>
+<p><figure class="figure-like" id="figure-approximation-unit-impulse"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-17.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">6.4.1.</span> Approximating the instantaneous unit impulse.</figcaption></figure></p>
+<p id="p-533">Then for any \(\varepsilon\text{,}\) we have</p>
+<div class="displaymath">
+\begin{equation*}
+\Int{-\frac{\varepsilon}{2}}{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1.
+\end{equation*}
+</div>
+<p>\(d_{\varepsilon}(t)\) is a completely valid function, and if we send \(\varepsilon\to0\) then it becomes a better and better approximation to an instantaneous unit impulse. Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.</p>
+<article class="definition-like" id="definition-dirac-delta"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">6.4.2</span>. <span class="title">The Dirac Delta Function.</span>
+</h6>
+<p id="p-534">The <dfn class="terminology">Dirac delta function</dfn>, denoted by the symbol \(\delta(t)\text{,}\) is “defined” by the equation</p>
+<div class="displaymath">
+\begin{equation*}
+\delta(t) = \limit{\varepsilon}{0}d_{\varepsilon}(t).
+\end{equation*}
+</div></article><p id="p-535">The Dirac delta function is, of course, not an actual function. <aside class="aside-like" id="aside-19"><p id="p-536">The Dirac delta is actually an example of a <dfn class="terminology">generalized function</dfn>, or <dfn class="terminology">tempered distribution</dfn>.</p></aside> But it's still useful as a mathematical formulation of an instantaneous force with unit impulse at \(t=0\text{.}\)</p>
+<p id="p-537">We can also take translations of the Dirac delta, which we view as a “function” \(\delta(t-a)\) defined piecewise by</p>
+<div class="displaymath">
+\begin{equation*}
+\delta(t-a)=
+\begin{cases}
+\infty \amp\text{if }t=a\\
+0 \amp\text{if }t\neq a
+\end{cases}.
+\end{equation*}
+</div>
+<p>We represent this graphically as an arrow: <figure class="figure-like" id="figure-19"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-18.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">6.4.3.</span> A plot of the Dirac delta function.</figcaption></figure></p>
+<p id="p-538">The most important property of the Dirac delta is that</p>
+<div class="displaymath">
+\begin{equation*}
+\Int{\alpha}{\beta}\delta(t-a)\dd{t} = 
+\begin{cases}
+1 \amp\text{if }\alpha\leq a\leq\beta \\
+0 \amp\text{otherwise.}  
+\end{cases}
+\end{equation*}
+</div>
+<p id="p-539">We also have the important theorem formula for continuous functions.</p>
+<article class="theorem-like" id="theorem-sifting-property"><h6 class="heading">
+<span class="type">Theorem</span> <span class="codenumber">6.4.4</span>. <span class="title">Sifting Property.</span>
+</h6>
+<p id="p-540">Let \(g(t)\) be a continuous function and let \(\alpha\leq a\leq\beta\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+\Int{\alpha}{\beta}g(t)\delta(t-a)\dd{t} = g(a)
+\end{equation*}
+</div></article><article class="hiddenproof" id="proof-3"><a data-knowl="" class="id-ref" data-refid="hk-proof-3"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-3" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-541">We treat \(\delta(t)\) as a function and perform the above integration:</p>
+<div class="displaymath">
+\begin{align*}
+\end{align*}
+</div></article></div>
+<p id="p-542">The above theorem gives us another interpretation of the Dirac delta: it's a “sampling function”. When integrated against another function \(g(t)\) over an interval containing \(a\text{,}\) \(\delta(t-a)\) will pick out the value \(g(a)\text{.}\) We can use this to find the Laplace transform of the Dirac delta.</p>
+<article class="example-like" id="example-laplace-transform-of-the-dirac-delta-function"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.5</span>. <span class="title">Laplace Transform of the Dirac Delta Function.</span>
+</h6>
+<p id="p-543">Compute \(\Laplace{\delta(t-a)}\text{,}\) where \(a\geq0\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span></a><div id="hk-solution-86" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-544">We use the definition of the Laplace transform:</p>
+<div class="displaymath">
+\begin{align*}
+\Laplace{\delta(t-a)} \amp= \int_{0}^{\infty}\delta(t-a)e^{-st}\,dt\\
+\amp= e^{-as}\text{.}
+\end{align*}
+</div>
+<p>In particular, \(\Laplace{\delta(t)} = 1\text{.}\)</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-dirac-delta-models"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.2</span> <span class="title">Dirac Delta Models</span>
+</h3>
+<a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="permalink">¶</a><p id="p-545">We use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.</p>
+<article class="example-like" id="example-ivp-with-impulse"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.6</span>. <span class="title">IVP with Impulse.</span>
+</h6>
+<p id="p-546">An object of mass \(m=1\text{,}\) at rest, is attached to a spring with spring constant \(k=9\text{.}\) At time \(t=0\text{,}\) the a hammer strikes the mass providing an impulse of \(3\) and setting the mass in motion. What is the displacement \(x(t)\text{?}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution</span></a><div id="hk-solution-87" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-547">\(x(t)\) satisfies the ODE</p>
+<div class="displaymath">
+\begin{equation*}
+mx''+kx = f(t)
+\end{equation*}
+</div>
+<p>where \(f(t)\) is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form \(c\delta(t)\text{.}\) And since it provides an impulse of \(3\text{,}\) we can pick \(f(t) = 3\delta(t)\text{.}\) As the mass is initially at rest, \(x\) satisfies the IVP</p>
+<div class="displaymath">
+\begin{equation*}
+x''+9x = 3\delta(t)\qq{where}x(0) = x'(0) = 0.
+\end{equation*}
+</div>
+<p>To solve this, we take the Laplace transform of the IVP to get</p>
+<div class="displaymath">
+\begin{equation*}
+s^{2}X(s)+9X(s) = 3
+\end{equation*}
+</div>
+<p>or just</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{3}{s^{2}+9}.
+\end{equation*}
+</div>
+<p>So \(x(t) = \sin3t\text{.}\)</p>
+</div></div>
+</div></article><p id="p-548">Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time \(t=0\text{,}\) this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.</p>
+<article class="example-like" id="example-time-delay"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.7</span>. <span class="title">Time-delayed Strike.</span>
+</h6>
+<p id="p-549">Consider the spring-mass system above, but suppose now that the hammer hits the mass at time \(t=4\text{.}\) What is the displacement \(x(t)\text{?}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution</span></a><div id="hk-solution-88" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-550">This time, the IVP we must solve is</p>
+<div class="displaymath">
+\begin{equation*}
+x''+9x = 3\delta(t-4)\qq{where}x(0)=x'(0)=0.
+\end{equation*}
+</div>
+<p>If we take Laplace transforms and solve for \(X(s)\) we get</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{3e^{-4s}}{s^{2}+9}
+\end{equation*}
+</div>
+<p>and so, using our table, we see that</p>
+<div class="displaymath">
+\begin{equation*}
+x(t) = u(t-4)\sin[3(t-4)].
+\end{equation*}
+</div>
+</div></div>
+</div></article><figure class="figure-like" id="figure-time-delay"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-19.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">6.4.8.</span> </figcaption></figure><article class="example-like" id="example-resonance-with-an-impulse-train"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.9</span>. <span class="title">Resonance with an Impulse Train.</span>
+</h6>
+<p id="p-551">Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every \(\frac{2\pi}{3}\) seconds, starting at \(t=0\text{.}\) Find \(x(t)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-89" id="solution-89"><span class="type">Solution</span></a><div id="hk-solution-89" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-552">The IVP we need to solve now is</p>
+<div class="displaymath">
+\begin{align*}
+x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
+\amp= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
+\end{align*}
+</div>
+<p>where \(x(0) = x'(0) = 0\text{.}\) So once more we take Laplace transforms to get</p>
+<div class="displaymath">
+\begin{equation*}
+s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
+\end{equation*}
+</div>
+<p>and so</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
+\end{equation*}
+</div>
+<p>The displacement is then given by</p>
+<div class="displaymath">
+\begin{align*}
+x(t) \amp= \iLaplace{X(s)}\\
+\amp= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
+\amp= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
+\end{align*}
+</div>
+<p>Each time the hammer strikes the mass, a factor of \(\sin3t\) is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.</p>
+</div></div>
+</div></article><figure class="figure-like" id="figure-impulse-train-resonance"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-20.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">6.4.10.</span> </figcaption></figure></section><dfn class="terminology">SUGGESTED PROBLEMS:</dfn> 3, 7</section></div></main>
+</div>
+<div class="login-link"><span id="loginlogout" class="login">login</span></div>
+<script src="https://pretextbook.org/js/0.11/login.js"></script>
+</body>
+</html>

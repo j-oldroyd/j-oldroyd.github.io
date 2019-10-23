@@ -1,9 +1,9 @@
-<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2018-09-28T16:56:09-04:00    *-->
+<!--*    on 2019-08-29T10:30:06-04:00    *-->
 <!--*                                    *-->
-<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
 <!--**************************************-->
 <html lang="en-US">
@@ -12,13 +12,19 @@
 <title>Separable ODEs and Substitution</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<script src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
-        inlineMath: [['\\(','\\)']],
+        inlineMath: [['\\(','\\)']]
     },
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
     TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", ],
         // scrolling to fragment identifiers is controlled by other Javascript
         positionToHash: false,
         equationNumbers: { autoNumber: "none", useLabelIds: true, },
@@ -35,10 +41,20 @@ MathJax.Hub.Config({
         mtextFontInherit: true,
     },
 });
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.1/pretext.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
-<link href="https://aimath.org/mathbook/mathbook-add-on2.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
+<script>var logged_in = false;
+var role = 'student';
+var guest_access = true;
+var login_required = false;
+var js_version = 0.11;
+</script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
@@ -54,15 +70,17 @@ MathJax.Hub.Config({
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -74,7 +92,7 @@ MathJax.Hub.Config({
 \)</div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
-<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes</span><span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
 <p class="byline"></p>
 </div>
 </div></div>
@@ -83,15 +101,15 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-direction-fields.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-first-order-linear-odes.html" title="Next">Next</a></span>
 </div>
-<button class="sidebar-right-toggle-button button active">Annotations</button>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
 <button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-direction-fields.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-first-order-linear-odes.html" title="Next">Next</a>
 </div>
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
-<nav id="toc"><h2 class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></h2>
-<ul>
+<nav id="toc"><ul>
+<li class="link">
+<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
 <li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
 <li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
 <li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution" class="active">Separable ODEs and Substitution</a></li>
@@ -99,51 +117,75 @@ MathJax.Hub.Config({
 <li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
 <li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
 </ul>
-<h2 class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></h2>
-<ul>
+</li>
+<li class="link">
+<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
 <li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
 <li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
 <li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
 <li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
 <li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
 </ul>
-<h2 class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></h2>
-<ul>
+</li>
+<li class="link">
+<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
 <li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
 <li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
 </ul>
-<h2 class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></h2>
-<ul>
+</li>
+<li class="link">
+<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
 <li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
 <li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
+<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
+<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
 </ul>
-<h2 class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">5</span> <span class="title">Fourier Analysis</span></a></h2>
-<ul>
+</li>
+<li class="link">
+<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
+<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
+<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
+<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
+<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
+<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
+<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
 <li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
 <li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
 <li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
 <li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
 </ul>
-<h2 class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">6</span> <span class="title">Partial Differential Equations</span></a></h2>
-<ul>
+</li>
+<li class="link">
+<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
 <li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
 <li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
 <li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
 <li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
 </ul>
-<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
-<h2 class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></h2>
-<h2 class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></h2>
-<h2 class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></h2></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</li>
+<li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
-<main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-separable-odes-and-substitution"><h2 class="heading hide-type">
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-separable-odes-and-substitution"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.3</span> <span class="title">Separable ODEs and Substitution</span>
 </h2>
 <a href="section-separable-odes-and-substitution.html" class="permalink">¶</a><section class="introduction" id="introduction-4"><p id="p-50">This section corresponds to Section 1.3 from the text.</p></section><section class="subsection" id="subsection-separable-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">1.3.1</span> <span class="title">Separable ODEs</span>
 </h3>
 <a href="section-separable-odes-and-substitution.html#subsection-separable-odes" class="permalink">¶</a><p id="p-51">The simplest ODEs to solve are the first-order ODEs of the form \(\dv{y}{x} = f(x)\text{.}\) The Fundamental Theorem of Calculus guarantees that the solution \(y\) is given by \(y = \int f(x)\,dx\text{.}\)</p>
-<a knowl="" class="id-ref" refid="hk-fn-3" id="fn-3"><sup> 1 </sup></a><span id="hk-fn-3" class="hidden-content tex2jax_ignore"><span class="footnote">Rather, the Fundamental Theorem of Calculus guarantees that the solution will be \(y=\int f(x)\,dx\) as long as \(f\) is a continuous function.</span></span><p id="p-52">Another type of ODE that is relatively straightforward to solve is the <dfn class="terminology">separable ODE</dfn>, which is a first-order ODE that can be written in the form</p>
+<a data-knowl="" class="id-ref" data-refid="hk-fn-3" id="fn-3"><sup> 1 </sup></a><span id="hk-fn-3" class="hidden-content tex2jax_ignore"><span class="footnote">Rather, the Fundamental Theorem of Calculus guarantees that the solution will be \(y=\int f(x)\,dx\) as long as \(f\) is a continuous function.</span></span><p id="p-52">Another type of ODE that is relatively straightforward to solve is the <dfn class="terminology">separable ODE</dfn>, which is a first-order ODE that can be written in the form</p>
 <div class="displaymath">
 \begin{equation*}
 \dv{y}{x} = f(x)g(y).
@@ -151,11 +193,11 @@ MathJax.Hub.Config({
 </div>
 <p id="p-53">These ODEs can be solved by integration as well, but only after some rearranging.</p>
 <article class="example-like" id="example-solving-a-separable-ode"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">1.3.1</span> <span class="title">Solving a separable ODE</span>
+<span class="type">Example</span> <span class="codenumber">1.3.1</span>. <span class="title">Solving a separable ODE.</span>
 </h6>
 <p id="p-54">Solve the IVP given by \(y' = x+4xy^{2}, y(0)=1\text{.}\)</p>
 <div class="solutions">
-<a knowl="" class="id-ref" refid="hk-solution-9" id="solution-9"><span class="type">Solution</span></a><div id="hk-solution-9" class="hidden-content tex2jax_ignore"><div class="solution">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-9" id="solution-9"><span class="type">Solution</span></a><div id="hk-solution-9" class="hidden-content tex2jax_ignore"><div class="solution">
 <p id="p-55">The first step to solving this IVP is to solve the ODE \(y' = x+4xy^{2}\text{.}\) It may not look like it at first, but this ODE is separable since we can rewrite it as \(y' = x(1+4y^{2})\text{.}\) To solve this ODE, we need to move the \(y\) terms to the left hand side of the equation and the \(x\) terms to the right hand side. We'll abuse notation a little bit to do so by rewriting \(y' = \dv{y}{x}\) and treating \(\dv{y}{x}\) as a fraction, but it won't get us into too much trouble here:</p>
 <div class="displaymath">
 \begin{align*}
@@ -179,11 +221,11 @@ MathJax.Hub.Config({
 </div>
 </div></div>
 </div></article><article class="example-like" id="example-newton-s-law-of-cooling-again"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">1.3.2</span> <span class="title">Newton's Law of Cooling again</span>
+<span class="type">Example</span> <span class="codenumber">1.3.2</span>. <span class="title">Newton's Law of Cooling again.</span>
 </h6>
 <p id="p-57">A metal plate is removed from an oven and placed in a room. The temperature of the plate is \(100^{\circ}\) Celsius and the temperature of the room is fixed at \(15^{\circ}\) Celsius. After \(20\) minutes the temperature of the plate drops to \(90^{\circ}\) Celsius. How hot is the plate after five hours?</p>
 <div class="solutions">
-<a knowl="" class="id-ref" refid="hk-solution-10" id="solution-10"><span class="type">Solution</span></a><div id="hk-solution-10" class="hidden-content tex2jax_ignore"><div class="solution">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-10" id="solution-10"><span class="type">Solution</span></a><div id="hk-solution-10" class="hidden-content tex2jax_ignore"><div class="solution">
 <p id="p-58">Let \(T(t)\) denote the temperature of the plate \(t\) minutes after being removed from the oven and let \(A(t)\) denote the temperature of the room \(t\) minutes after the plate is removed from the oven. Then \(T(0) = 100\) and Newton's Law of Cooling says that</p>
 <div class="displaymath">
 \begin{equation*}
@@ -217,11 +259,11 @@ MathJax.Hub.Config({
 </h3>
 <a href="section-separable-odes-and-substitution.html#subsection-substitution-methods" class="permalink">¶</a><p id="p-62">At this point we can only solve a couple types of differential equations. An ODE that isn't of the form \(\dv{y}{x} = f(x)\) or separable may prove troublesome. However, there are certain cases where we can rewrite an ODE into one of these forms by using the right substitution.</p>
 <article class="example-like" id="example-substitution-to-solve-an-ode"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">1.3.3</span> <span class="title">Substitution to solve an ODE</span>
+<span class="type">Example</span> <span class="codenumber">1.3.3</span>. <span class="title">Substitution to solve an ODE.</span>
 </h6>
 <p id="p-63">Find the general solution of \(y' = (x+y+3)^{2}\text{.}\)</p>
 <div class="solutions">
-<a knowl="" class="id-ref" refid="hk-solution-11" id="solution-11"><span class="type">Solution</span></a><div id="hk-solution-11" class="hidden-content tex2jax_ignore"><div class="solution">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-11" id="solution-11"><span class="type">Solution</span></a><div id="hk-solution-11" class="hidden-content tex2jax_ignore"><div class="solution">
 <p id="p-64">This ODE is not separable and we can't just integrate it (since the right hand side depends on the dependent variable). However, the form of the right hand side suggests a substitution: \(u = x+y+3\text{.}\) This would simplify things quite a bit, leaving us with \(y'=u^{2}\text{.}\) The only problem with this is that \(y'\) depends on \(x\text{,}\) not \(u\text{.}\) We must rewrite \(y'\) in terms of the new variable \(u\text{,}\) which isn't too bad. Since \(u = x+y+3\text{,}\) we get \(y' = u'-1\text{.}\) Therefore the ODE becomes</p>
 <div class="displaymath">
 \begin{equation*}
@@ -231,11 +273,11 @@ u'-1 = u^{2}\text{ or just }\dv{u}{x} = 1+u^{2}.
 <p id="p-65">This new ODE <em class="emphasis">is</em> separable, and so we separate variables and integrate to get \(\tan^{-1}u = x+C\text{.}\) If we don't care about finding an explicit solution, then we can just replace \(u\) to get the equation back in terms of \(y\text{.}\) So our (implicit) general solution is \(\tan^{-1}(x+y+3) = x+C\text{.}\)</p>
 </div></div>
 </div></article><article class="example-like" id="example-a-less-obvious-substitution"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">1.3.4</span> <span class="title">A less obvious substitution</span>
+<span class="type">Example</span> <span class="codenumber">1.3.4</span>. <span class="title">A less obvious substitution.</span>
 </h6>
 <p id="p-66">Find an explicit solution of \(xy'=x+y\text{.}\)</p>
 <div class="solutions">
-<a knowl="" class="id-ref" refid="hk-solution-12" id="solution-12"><span class="type">Solution</span></a><div id="hk-solution-12" class="hidden-content tex2jax_ignore"><div class="solution">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-12" id="solution-12"><span class="type">Solution</span></a><div id="hk-solution-12" class="hidden-content tex2jax_ignore"><div class="solution">
 <p id="p-67">It's tough to see what to do right away, so we'll try simplifying the ODE first. In particular, we'll solve for \(y'\) to get</p>
 <div class="displaymath">
 \begin{equation*}
@@ -253,5 +295,7 @@ u+x\dv{u}{x} = 1+u\text{ or just } x\dv{u}{x} = 1\text{.}
 </div></div>
 </div></article></section><section class="conclusion" id="conclusion-3"><p id="p-70">SUGGESTED PROBLEMS: 3, 5, 9, 11, 15, 19, 25</p></section></section></div></main>
 </div>
+<div class="login-link"><span id="loginlogout" class="login">login</span></div>
+<script src="https://pretextbook.org/js/0.11/login.js"></script>
 </body>
 </html>
