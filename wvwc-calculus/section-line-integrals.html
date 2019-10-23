@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2019-04-12T14:48:56-04:00    *-->
+<!--*                                    *-->
+<!--*      https://pretextbook.org       *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Line Integrals</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
+    },
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
+<script>var logged_in = false;
+var role = 'student';
+var guest_access = true;
+var login_required = false;
+var js_version = 0.11;
+</script>
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-vector-fields.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="vector-calculus.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-the-fundamental-theorem-for-line-integrals.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-vector-fields.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="vector-calculus.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-the-fundamental-theorem-for-line-integrals.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link">
+<a href="index.html" data-scroll="index"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon">Colophon</a></li>
+<li><a href="author-bio-TWJ.html" data-scroll="author-bio-TWJ">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="limits.html" data-scroll="limits"><span class="codenumber">1</span> <span class="title">Limits of Functions</span></a><ul>
+<li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
+<li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
+<li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
+<li><a href="section-limits-involving-infinity.html" data-scroll="section-limits-involving-infinity">Limits Involving Infinity</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="derivatives.html" data-scroll="derivatives"><span class="codenumber">2</span> <span class="title">Derivatives</span></a><ul>
+<li><a href="section-the-definition-of-the-derivative.html" data-scroll="section-the-definition-of-the-derivative">The Definition of the Derivative</a></li>
+<li><a href="section-the-derivative-as-a-function.html" data-scroll="section-the-derivative-as-a-function">The Derivative as a Function</a></li>
+<li><a href="section-differentiation-formulas.html" data-scroll="section-differentiation-formulas">Differentiation Formulas</a></li>
+<li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
+<li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
+<li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="inverse-functions.html" data-scroll="inverse-functions"><span class="codenumber">3</span> <span class="title">Inverse Functions</span></a><ul>
+<li><a href="section-exponential-functions.html" data-scroll="section-exponential-functions">Exponential Functions</a></li>
+<li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
+<li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
+<li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
+<li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">4</span> <span class="title">Applications of Differentiation</span></a><ul>
+<li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
+<li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
+<li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
+<li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
+<li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
+<li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="integrals.html" data-scroll="integrals"><span class="codenumber">5</span> <span class="title">Integrals</span></a><ul>
+<li><a href="section-areas-under-curves.html" data-scroll="section-areas-under-curves">Areas Under Curves</a></li>
+<li><a href="section-the-definite-integral.html" data-scroll="section-the-definite-integral">The Definite Integral</a></li>
+<li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
+<li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="techniques-of-integration.html" data-scroll="techniques-of-integration"><span class="codenumber">6</span> <span class="title">Techniques of Integration</span></a><ul>
+<li><a href="section-integration-by-parts.html" data-scroll="section-integration-by-parts">Integration by Parts</a></li>
+<li><a href="section-trigonometric-integrals-and-substitution.html" data-scroll="section-trigonometric-integrals-and-substitution">Trigonometric Integrals and Substitution</a></li>
+<li><a href="section-partial-fractions.html" data-scroll="section-partial-fractions">Partial Fractions</a></li>
+<li><a href="section-improper-integrals.html" data-scroll="section-improper-integrals">Improper Integrals</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="applications-of-integration.html" data-scroll="applications-of-integration"><span class="codenumber">7</span> <span class="title">Applications of Integration</span></a><ul>
+<li><a href="section-areas-between-curves.html" data-scroll="section-areas-between-curves">Areas Between Curves</a></li>
+<li><a href="section-volumes.html" data-scroll="section-volumes">Volumes</a></li>
+<li><a href="section-volumes-by-cylindrical-shells.html" data-scroll="section-volumes-by-cylindrical-shells">Volumes by Cylindrical Shells</a></li>
+<li><a href="section-arc-length.html" data-scroll="section-arc-length">Arc Length</a></li>
+<li><a href="section-area-of-a-surface-of-revolution.html" data-scroll="section-area-of-a-surface-of-revolution">Area of a Surface of Revolution</a></li>
+<li><a href="section-applications-to-physics-and-engineering.html" data-scroll="section-applications-to-physics-and-engineering">Applications to Physics and Engineering</a></li>
+<li><a href="section-differential-equations.html" data-scroll="section-differential-equations">Differential Equations</a></li>
+<li><a href="exercises-1.html" data-scroll="exercises-1">MyOpenMath problems</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="series.html" data-scroll="series"><span class="codenumber">8</span> <span class="title">Series</span></a><ul>
+<li><a href="section-sequences.html" data-scroll="section-sequences">Sequences</a></li>
+<li><a href="section-series.html" data-scroll="section-series">Series</a></li>
+<li><a href="section-the-integral-and-comparison-tests.html" data-scroll="section-the-integral-and-comparison-tests">The Integral and Comparison Tests</a></li>
+<li><a href="section-other-convergence-tests.html" data-scroll="section-other-convergence-tests">Other Convergence Tests</a></li>
+<li><a href="section-power-series.html" data-scroll="section-power-series">Power Series</a></li>
+<li><a href="section-representing-functions-as-power-series.html" data-scroll="section-representing-functions-as-power-series">Representing Functions as Power Series</a></li>
+<li><a href="section-taylor-and-maclaurin-series.html" data-scroll="section-taylor-and-maclaurin-series">Taylor and Maclaurin Series</a></li>
+<li><a href="exercises-2.html" data-scroll="exercises-2">MyOpenMath Problems</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="parametric-equations-polar-coordinates.html" data-scroll="parametric-equations-polar-coordinates"><span class="codenumber">9</span> <span class="title">Parametric Equations and Polar Coordinates</span></a><ul>
+<li><a href="section-parametric-equations.html" data-scroll="section-parametric-equations">Parametric Equations</a></li>
+<li><a href="section-calculus-and-parametric-curves.html" data-scroll="section-calculus-and-parametric-curves">Calculus and Parametric Curves</a></li>
+<li><a href="section-polar-coordinates.html" data-scroll="section-polar-coordinates">Polar Coordinates</a></li>
+<li><a href="section-calculus-and-polar-coordinates.html" data-scroll="section-calculus-and-polar-coordinates">Calculus and Polar Coordinates</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="vectors-space-geometry.html" data-scroll="vectors-space-geometry"><span class="codenumber">10</span> <span class="title">Vectors and Euclidean Space</span></a><ul>
+<li><a href="section-coordinates-in-3-space.html" data-scroll="section-coordinates-in-3-space">Coordinates in 3-Space</a></li>
+<li><a href="section-vectors.html" data-scroll="section-vectors">Vectors</a></li>
+<li><a href="section-the-dot-product.html" data-scroll="section-the-dot-product">The Dot Product</a></li>
+<li><a href="section-the-cross-product.html" data-scroll="section-the-cross-product">The Cross Product</a></li>
+<li><a href="section-equations-of-lines-and-planes.html" data-scroll="section-equations-of-lines-and-planes">Equations of Lines and Planes</a></li>
+<li><a href="section-cylinders-and-quadric-surfaces.html" data-scroll="section-cylinders-and-quadric-surfaces">Cylinders and Quadric Surfaces</a></li>
+<li><a href="section-vector-functions.html" data-scroll="section-vector-functions">Vector Functions</a></li>
+<li><a href="section-arc-length-and-curvature.html" data-scroll="section-arc-length-and-curvature">Arc Length and Curvature</a></li>
+<li><a href="section-motion-in-space.html" data-scroll="section-motion-in-space">Motion in Space</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="partial-derivatives.html" data-scroll="partial-derivatives"><span class="codenumber">11</span> <span class="title">Partial Derivatives</span></a><ul>
+<li><a href="section-functions-of-several-independent-variables.html" data-scroll="section-functions-of-several-independent-variables">Functions of Several Independent Variables</a></li>
+<li><a href="section-limits-and-continuity.html" data-scroll="section-limits-and-continuity">Limits and Continuity</a></li>
+<li><a href="section-partial-derivatives.html" data-scroll="section-partial-derivatives">Partial Derivatives</a></li>
+<li><a href="section-tangent-planes-and-linear-approximations.html" data-scroll="section-tangent-planes-and-linear-approximations">Tangent Planes and Linear Approximations</a></li>
+<li><a href="section-the-chain-rule-in-several-variables.html" data-scroll="section-the-chain-rule-in-several-variables">The Chain Rule in Several Variables</a></li>
+<li><a href="section-directional-derivatives-and-gradients.html" data-scroll="section-directional-derivatives-and-gradients">Directional Derivatives and Gradients</a></li>
+<li><a href="section-extreme-values.html" data-scroll="section-extreme-values">Extreme Values</a></li>
+<li><a href="section-lagrange-multipliers.html" data-scroll="section-lagrange-multipliers">Lagrange Multipliers</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="multiple-integrals.html" data-scroll="multiple-integrals"><span class="codenumber">12</span> <span class="title">Multiple Integrals</span></a><ul>
+<li><a href="section-double-integrals-over-rectangles.html" data-scroll="section-double-integrals-over-rectangles">Double Integrals over Rectangles</a></li>
+<li><a href="section-double-integrals-over-general-regions.html" data-scroll="section-double-integrals-over-general-regions">Double Integrals over General Regions</a></li>
+<li><a href="section-double-integrals-in-polar-coordinates.html" data-scroll="section-double-integrals-in-polar-coordinates">Double Integrals in Polar Coordinates</a></li>
+<li><a href="section-applications-of-double-integrals.html" data-scroll="section-applications-of-double-integrals">Applications of Double Integrals</a></li>
+<li><a href="section-triple-integrals.html" data-scroll="section-triple-integrals">Triple Integrals</a></li>
+<li><a href="section-cylindrical-coordinates.html" data-scroll="section-cylindrical-coordinates">Triple Integrals in Cylindrical Coordinates</a></li>
+<li><a href="section-triple-integrals-in-spherical-coordinates.html" data-scroll="section-triple-integrals-in-spherical-coordinates">Triple Integrals in Spherical Coordinates</a></li>
+<li><a href="section-change-of-variables.html" data-scroll="section-change-of-variables">Change of Variables</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="vector-calculus.html" data-scroll="vector-calculus"><span class="codenumber">13</span> <span class="title">Vector Calculus</span></a><ul>
+<li><a href="section-vector-fields.html" data-scroll="section-vector-fields">Vector Fields</a></li>
+<li><a href="section-line-integrals.html" data-scroll="section-line-integrals" class="active">Line Integrals</a></li>
+<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
+<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
+</ul>
+</li>
+<li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-line-integrals"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">13.2</span> <span class="title">Line Integrals</span>
+</h2>
+<a href="section-line-integrals.html" class="permalink">¶</a><section class="introduction" id="introduction-39"><p id="p-1584">In this section we move on to computing integrals over curves in \(\RR^{2}\) and \(\RR^{3}\text{.}\)</p></section><section class="subsection" id="subsection-scalar-line-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">13.2.1</span> <span class="title">Scalar Line Integrals</span>
+</h3>
+<a href="section-line-integrals.html#subsection-scalar-line-integrals" class="permalink">¶</a><p id="p-1585">Suppose we wish to find the mass of a wire given by a curve \(C\) in the \(xy\)-plane. If the density is a constant \(\rho\) then this is simple: the mass is just \(\rho L\) where \(L\) denotes the length of the wire.</p>
+<p id="p-1586">Now suppose that the density varies, and is now a function \(\rho(x,y)\text{.}\) Then we can estimate the mass of the wire by chopping the wire into \(k\) smaller segments, each of length \(\Delta s\text{,}\) choosing points \((x_{i},y_{i})\) from each segment, and then computing</p>
+<div class="displaymath">
+\begin{equation*}
+\sum_{j=1}^{k}\rho(x_{j}, y_{j})\Delta s\text{.}
+\end{equation*}
+</div>
+<p>If we send \(\Delta s\to 0\)the approximation becomes exact, and defines the <dfn class="terminology">scalar line integral</dfn> of \(\rho\) along \(C\text{.}\)</p>
+<article class="definition-like" id="definition-scalar-line-integral"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">13.2.1</span>. <span class="title">Scalar Line Integral.</span>
+</h6>
+<p id="p-1587">Suppose that \(C\) is a smooth curve in \(\RR^{2}\) and that the function \(f(x,y)\) is continuous on \(C\text{.}\) The scalar line integral of \(f\) along \(C\) is the number \(\int_{C}f(x,y)\,ds\) defined to be</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{C}f(x,y)\,ds = \lim_{\Delta s\to 0}\sum_{j=1}^{k}f(x_{j},y_{j})\Delta s\text{.}
+\end{equation*}
+</div>
+<aside class="aside-like" id="aside-13"><p id="p-1588">An analogous definition holds for curves in \(\RR^{3}\text{.}\) We can also replace the assumption that \(C\) is smooth with the assumption that \(C\) is <em class="emphasis">rectifiable</em>, which (roughly) means it has a well-defined length.</p></aside></article><p id="p-1589">Geometrically, \(\int_{C}f(x,y)\,ds\) represents the area under \(z = f(x,y)\) and above \(C\text{.}\)</p>
+<p id="p-1590">If \(C\) is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral. Note that \(ds\) can be viewed as representing an <em class="emphasis">infinitesimal length</em> along the curve \(C\text{.}\) If \(C\) is traced out by the parametric equations</p>
+<div class="displaymath">
+\begin{align*}
+x \amp = x(t) \\
+y \amp = y(t) \\
+a \amp \leq t\leq b \text{,}
+\end{align*}
+</div>
+<p>then the length of \(C\) from \(a\) to \(t\) is given by the <em class="emphasis">arc length function</em></p>
+<div class="displaymath">
+\begin{equation*}
+s(t) = \int_{a}^{t}\sqrt{x'(u)^{2} + y'(u)^{2}}\,du\text{.}
+\end{equation*}
+</div>
+<p>See <a href="section-calculus-and-parametric-curves.html#subsection-arc-length-parametric-curves" class="internal" title="Subsection 9.2.3: Arc Length of Parametric Curves">Subsection 9.2.3</a> and <a href="section-arc-length-and-curvature.html#subsection-arc-length" class="internal" title="Subsection 10.8.1: Arc Length">Subsection 10.8.1</a>. Thus</p>
+<div class="displaymath">
+\begin{equation*}
+\dv{s}{t} = \sqrt{x'(t)^{2} + y'(t)^{2}}\text{,}
+\end{equation*}
+</div>
+<p>and we can write</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{C}f(x,y)\,ds = \int_{a}^{b}f(x(t),y(t))\sqrt{x'(t)^{2} + y'(t)^{2}}\,dt\text{.}
+\end{equation*}
+</div>
+<p id="p-1591">If we view \(C\) as being traced out by a vector function \(\vb{r}(t), a\leq t\leq b\text{,}\) then we can write this formula even more compactly:</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{C}f(x,y)\,ds = \int_{a}^{b}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt\text{.}
+\end{equation*}
+</div>
+<article class="example-like" id="example-computing-a-scalar-line-integral"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.2</span>. <span class="title">Computing a Scalar Line Integral.</span>
+</h6>
+<p id="p-1592">Compute \(\int_{C}(xy)^{1/3}\,ds\text{,}\) where \(C\) is the segment of the parabola \(y = x^{2}\) from \(x = 0\) to \(x = 1\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-267" id="solution-267"><span class="type">Solution</span></a><div id="hk-solution-267" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1593">The curve \(C\) is traced out by the vector function \(\vb{r}(t) = \dotprod{t,t^{2}}\) for \(0\leq t\leq 1\text{.}\) Therefore</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}(xy)^{1/3}\,ds \amp = \int_{0}^{1} t\sqrt{1 + 4t^{2}}\,dt \\
+\amp = \frac{1}{8}\int_{1}^{5}\sqrt{u}\,du \\
+\amp = \frac{5^{3/2} - 1}{12} 
+\end{align*}
+</div>
+</div></div>
+</div></article><p id="p-1594">Line integrals along piecewise smooth curves can be found without too much trouble.</p>
+<article class="example-like" id="example-integrating-along-line-segments"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.3</span>. <span class="title">Integrating Along Line Segments.</span>
+</h6>
+<p id="p-1595">Find \(\int_{C}(3x - 3y)\,ds\) where \(C\) denotes the line segment from \((-1,0)\) to \((0,1)\) followed by the segment from \((0,1)\) to \((1,0)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-268" id="solution-268"><span class="type">Solution</span></a><div id="hk-solution-268" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1596">We find this by breaking \(C\) down as the union of two smooth curves \(C_{1}\) and \(C_{2}\text{,}\) where</p>
+<div class="displaymath">
+\begin{align*}
+C_{1}:\vb{r}_{1}(t) \amp = (1-t)\dotprod{-1,0} + t\dotprod{0,1}, 0\leq t\leq 1 \\
+C_{2}:\vb{r}_{2}(t) \amp = (1-t)\dotprod{0,1} + t\dotprod{1,0} 
+\end{align*}
+</div>
+<p>Then</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}(2x - 3y)\,ds \amp = \int_{C_{1}}(2x - 3y)\,ds + \int_{C_{2}}(2x - 3y)\,ds \\
+\amp = \int_{0}^{1}\left[(2t - 2 - 3t) + (2t - 3 + 3t)\right]\sqrt{2}\,dt \text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article><p id="p-1597">We can also compute scalar line integrals in \(\RR^{3}\text{.}\)</p>
+<article class="example-like" id="example-average-value-on-a-circle"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.4</span>. <span class="title">Average Value on a Circle.</span>
+</h6>
+<p id="p-1598">Let \(f(x,y,z) = x^{2} + y^{2} - 2z^{2}\) and let</p>
+<div class="displaymath">
+\begin{equation*}
+C:\vb{r}(t) = \dotprod{5\sin t,3\cos t, 4\cos t}, 0\leq t\leq 2\pi\text{.}
+\end{equation*}
+</div>
+<p>Find the average value of \(f\) on \(C\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-269" id="solution-269"><span class="type">Solution</span></a><div id="hk-solution-269" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1599">The average value of \(f\) on \(C\) is given by</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{1}{\operatorname{length}(C)}\int_{C}f(x,y,z)\,ds
+\end{equation*}
+</div>
+<p>where</p>
+<div class="displaymath">
+\begin{align*}
+\operatorname{length}(C) \amp = \int_{C}\,ds \\
+\amp = 10\pi 
+\end{align*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}f(x,y,z)\,ds \amp = \int_{0}^{2\pi}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt \\
+\amp = 5\int_{0}^{2\pi}(25\sin^{2}t + 9\cos^{2}t - 32\cos^{2}t)\,dt \\
+\amp = 5\int_{0}^{2\pi}(25 - 48\cos^{2}t)\,dt\\
+\amp = 10\pi \text{.}
+\end{align*}
+</div>
+<p>Therefore \(f(x,y,z)\) has an average value of \(1\) on \(C\text{.}\)</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-vector-field-line-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">13.2.2</span> <span class="title">Vector Field Line Integrals</span>
+</h3>
+<a href="section-line-integrals.html#subsection-vector-field-line-integrals" class="permalink">¶</a><p id="p-1600">Suppose we have a <em class="emphasis">force field</em> \(\vb{F}\) in \(\RR^{2}\) and some particle that is acted upon by the force. The particle has a trajectory given by a curve \(C: \vb{r}(t), 0\leq t\leq 1\text{.}\) <figure class="figure-like" id="figure-trajectory-in-a-force-field"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-trajectory-in-a-force-field.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">13.2.5.</span> Trajectory in a force field.</figcaption></figure></p>
+<p id="p-1601">We want to determine how the trajectory of the particle aligns with the forcefield \(\vb{F}\text{.}\) We can do this by picking an arbitrary point along \(C\text{,}\) finding the unit tangent \(\vb{T}\) at this point, and then comparing the direction of \(\vb{T}\) and that of \(\vb{F}\) by computing the dot product \(\vb{F}\cdot\vb{T}\text{.}\) This is a measure of how \(\vb{F}\) and \(C\) align at a specific point, and integrating this along \(C\) should tell us how \(C\) and \(\vb{F}\) align overall.</p>
+<article class="definition-like" id="definition-line-integral-of-a-vector-field"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">13.2.6</span>. <span class="title">Line Integral of a Vector Field.</span>
+</h6>
+<p id="p-1602">Let \(C\) denote a smooth curve and let \(\vb{F}\) be a vector field continuous on \(C\text{.}\) Then we define the <dfn class="terminology">line integral of \(\vb{F}\) over \(C\)</dfn> to be \(\int_{C}\vb{F}\cdot\vb{T}\,ds\text{.}\)</p>
+<aside class="aside-like" id="aside-14"><p id="p-1603">This integral is also sometimes called the <dfn class="terminology">circulation integral</dfn> of \(\vb{F}\) along \(C\text{.}\)</p></aside></article><p id="p-1604">To find line integrals of vector fields, we proceed as follows. Suppose that \(C:\vb{r}(t), a\leq t\leq b\text{.}\) Then</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\frac{\vb{r}'(t)}{\norm{\vb{r}'(t)}}\norm{\vb{r}'(t)}\,dt \\
+\amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\vb{r}'(t)\,dt \text{.}
+\end{align*}
+</div>
+<p>We can also write this as</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{a}^{b}\vb{F}\cdot d\vb{r} \qq{or} \int_{a}^{b} P\,dx + Q\,dy\text{,}
+\end{equation*}
+</div>
+<p>assuming that \(\vb{F} = \dotprod{P,Q}\text{.}\)</p>
+<p id="p-1605">In addition to measuring how well \(C\) and \(\vb{F}\) align, vector field line integrals can also represent work done.</p>
+<article class="example-like" id="example-flow-along-a-circle"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.7</span>. <span class="title">Flow Along a Circle.</span>
+</h6>
+<p id="p-1606">Let \(C\) denote the segment of the parabola \(y = \cos x\) traversed once from \(x = -\frac{\pi}{2}\) to \(x = \frac{\pi}{2}\text{,}\) and let</p>
+<div class="displaymath">
+\begin{equation*}
+\vb{F} = \dotprod{y^{2}, -x}\text{.}
+\end{equation*}
+</div>
+<p>Does \(\vb{F}\) tend to flow with or against \(C\text{?}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-270" id="solution-270"><span class="type">Solution</span></a><div id="hk-solution-270" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1607">If we graph \(\vb{F}\) and \(C\text{,}\) we get the following: <figure class="figure-like" id="figure-flow-over-cosine-"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-flow-over-cosine-.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">13.2.8.</span> Flow over \(y = \cos x\text{.}\)</figcaption></figure></p>
+<p id="p-1608"><a data-knowl="./knowl/figure-flow-over-cosine-.html" title="Figure 13.2.8">Figure 13.2.8</a> suggests that \(\vb{F}\) flows with \(C\text{,}\) and we can verify this by computing \(\int_{C}\vb{F}\cdot d\vb{r}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}\vb{F}\cdot d\vb{r} \amp = \int_{-\pi/2}^{\pi/2} \dotprod{\cos^{2}t, -t}\cdot\dotprod{1,-\sin t}\,dt\\
+\amp = \int_{-\pi/2}^{\pi/2} \brackets{\cos^{2}t + t\sin t}\,dt\\
+\amp = \int_{-\pi/2}^{\pi/2} \brackets{ \frac{1}{2}\parens{1 + \cos 2t} + t\sin t}\,dt \\
+\amp = \brackets{\frac{1}{2}\parens{ t + \frac{1}{2}\sin 2t} - t\cos t + \sin t}_{-\pi/2}^{\pi/2} \\
+\amp = \frac{\pi}{2} + 2 \text{.}
+\end{align*}
+</div>
+<p>Since the result is positive, this tells us that \(\vb{F}\) tends to flow with \(C\text{.}\)</p>
+</div></div>
+</div></article><article class="example-like" id="example-a-nonconservative-force"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.9</span>. <span class="title">A Nonconservative Force.</span>
+</h6>
+<p id="p-1609">Let \(\vb{F} = \dotprod{-y, x}\) denote a force field. Is the force \(\vb{F}\) conservative?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-271" id="solution-271"><span class="type">Solution</span></a><div id="hk-solution-271" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1610">Here we are using the physical definition of a conservative force, namely that the work done must be <em class="emphasis">path independent</em>. So we'll choose two paths between two points and find the work done on each path. Let the first path, \(C_{1}\text{,}\) denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, \(C_{2}\text{,}\) denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.</p>
+<p id="p-1611">From <a data-knowl="./knowl/figure-a-rotating-force-field-.html" title="Figure 13.2.10">Figure 13.2.10</a>, it appears as though \(\int_{C_{2}}\vb{F}\cdot d\vb{r} \lt 0 \lt \int_{C_{1}}\vb{F}\cdot d\vb{r}\text{,}\) which suggests that the vector field is path dependent. <figure class="figure-like" id="figure-a-rotating-force-field-"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-a-rotating-force-field-.svg" style="width: 100%; height: auto;" alt=""></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">13.2.10.</span> A rotating force field.</figcaption></figure> To verify this, we'll compute the appropriate line integrals.</p>
+<p id="p-1612">For \(C_{1}:\vb{r}_{1}(t) = \dotprod{\cos t,\sin t}, 0\leq t\leq \pi\text{,}\) the total circulation is</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C_{1}}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{\pi}P\,dx + Q\,dy\\
+\amp = \int_{0}^{\pi}\,dt \\
+\amp = \pi \text{.}
+\end{align*}
+</div>
+<p>Likewise, the circulation of \(\vb{F}\) along \(C_{2}\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{C_{2}}\vb{F}\cdot\vb{T}\,ds = -\pi\text{.}
+\end{equation*}
+</div>
+<p id="p-1613">Since the work done by \(\vb{F}\) between the points \((1,0)\) and \((-1,0)\) clearly depends on the path taken between the points, this means that \(\vb{F}\) is path dependent and, therefore, not conservative.</p>
+</div></div>
+</div></article><p id="p-1614">We can also compute vector field line integrals in \(\RR^{3}\) with essentially the same formula.</p>
+<article class="example-like" id="example-circulation-in-R3"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.11</span>. <span class="title">Circulation in \(\RR^{3}\).</span>
+</h6>
+<p id="p-1615">Find the circulation of \(\vb{F} = x^{2}\vb{i} + \vb{k}\) along</p>
+<div class="displaymath">
+\begin{equation*}
+C:\vb{r}(t) = 3t\vb{i} + 4t\vb{j}, 0\leq t\leq 2\text{.}
+\end{equation*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-272" id="solution-272"><span class="type">Solution</span></a><div id="hk-solution-272" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1616">We have</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{2} P\,dx + Q\,dy + R\,dz \\
+\amp = \int_{0}^{2}\brackets{9t^{2}(3) + 0 + 0}\,dt \\
+\amp = 72 \text{.}
+\end{align*}
+</div>
+<p>Since the circulation is positive, this also shows that \(\vb{F}\) tends to flow with \(C\text{.}\)</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-flux-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">13.2.3</span> <span class="title">Flux Integrals</span>
+</h3>
+<a href="section-line-integrals.html#subsection-flux-integrals" class="permalink">¶</a><p id="p-1617">The circulation integral in <a data-knowl="./knowl/definition-line-integral-of-a-vector-field.html" title="Definition 13.2.6: Line Integral of a Vector Field">Definition 13.2.6</a> is useful for measuring how much a vector field flows along a given curve. Now, we want to measure how a vector field flows <em class="emphasis">across</em> a curve, at least in \(\RR^{2}\text{.}\)</p>
+<p id="p-1618">Given a smooth curve \(C\) with unit tangent \(\vb{T}\text{,}\) recall that \(\vb{F}\cdot\vb{T}\) measures how well a vector field \(\vb{F}\) and \(\vb{T}\) align at a point on \(C\text{.}\) By integrating this, we get a measure along the entire curve. So if we want to get a sense of how \(\vb{F}\) flows across \(C\text{,}\) we can do so by looking at a single point and then integrating along the curve again.</p>
+<p id="p-1619">To do this, let \(\vb{N}\) be the unit normal vector to \(C\text{,}\) given in <a data-knowl="./knowl/definition-unit-normal-vectors.html" title="Definition 10.8.8: Unit Normal Vectors">Definition 10.8.8</a>. Then \(\vb{F}\cdot\vb{N}\) determines how \(\vb{F}\) flows across \(C\) at a specific point, and integrating \(\vb{F}\cdot\vb{N}\) provides a measure along the entire curve. But there's one slight issue: if \(C\) is a closed curve then it's possible that \(\vb{N}\) points <em class="emphasis">into</em> the region enclosed by \(C\text{.}\) We would like to measure how \(\vb{F}\) flows out of \(C\) instead, so we'll replace \(\vb{N}\) with \(\vb{n}\text{,}\) the <dfn class="terminology">outward unit normal</dfn>. This leads us to the <dfn class="terminology">flux integral</dfn>.</p>
+<article class="definition-like" id="definition-line-integral-flux-integral"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">13.2.12</span>. <span class="title">Flux Integral.</span>
+</h6>
+<p id="p-1620">Let \(C\) denote a smooth curve and let \(\vb{F}\) be a vector field continuous on \(C\text{.}\) Then we define the <dfn class="terminology">flux integral of \(\vb{F}\) across \(C\)</dfn> to be \(\int_{C}\vb{F}\cdot\vb{n}\,ds\text{,}\) where \(\vb{n}\) is the outward unit normal vector to \(C\text{.}\)</p></article><p id="p-1621">At this point it may be helpful to introduce some new notation. If \(C\) is a closed curve, then we often denote line integrals involving \(C\) with \(\oint_{C}\) instead of \(\int_{C}\text{.}\)</p>
+<article class="example-like" id="example-flux-across-the-unit-circle"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.13</span>. <span class="title">Flux Across the Unit Circle.</span>
+</h6>
+<p id="p-1622">Let \(\vb{F} = \dotprod{-y, x}\) and let \(C\) denote the unit circle, traversed exactly once counterclockwise. What is \(\oint_{C}\vb{F}\cdot\vb{n}\,ds\text{?}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-273" id="solution-273"><span class="type">Solution</span></a><div id="hk-solution-273" class="hidden-content tex2jax_ignore"><div class="solution"><p id="p-1623">We should have \(\oint_{C}\vb{F}\cdot\vb{n}\,ds = 0\text{.}\)</p></div></div>
+</div></article><p id="p-1624">In order to actually compute flux integrals, we need to write \(\vb{n}\) using \(C\text{.}\) So suppose that \(C\) is traced out by the vector function \(\vb{r}(t) = \dotprod{x(t), y(t)}\text{.}\) Then \(\vb{n}\) must be perpendicular to the unit tangent</p>
+<div class="displaymath">
+\begin{equation*}
+\vb{T} = \frac{1}{\sqrt{x^{2} + y^{2}}}\dotprod{x', y'}
+\end{equation*}
+</div>
+<p>or equivalently \(\dotprod{x',y'}\text{.}\) Our primary tool for finding perpendicular vectors, the cross product, only applies in \(\RR^{3}\text{.}\) So to find \(\vb{n}\) we'll (temporarily) move everything into \(\RR^{3}\text{.}\) Now we need to find a vector orthogonal to \(\dotprod{x', y', 0}\) that also lies in the \(xy\)-plane. This can be done by computing</p>
+<div class="displaymath">
+\begin{equation*}
+\dotprod{x',y',0}\times\vb{k} \qq{or} \vb{k}\times \dotprod{x',y',0}\text{.}
+\end{equation*}
+</div>
+<p id="p-1625">At this point we need to decide which direction we want our normal vector to go. We'll usually choose the first option if \(C\) is traversed counterclockwise and the second option otherwise. Assuming counterclockwise orientation, we have</p>
+<div class="displaymath">
+\begin{equation*}
+\dotprod{x', y', 0}\times \vb{k} = \dotprod{y', -x', 0}\text{.}
+\end{equation*}
+</div>
+<p>Now moving back down to \(\RR^{3}\text{,}\) we can write the outward unit normal as</p>
+<div class="displaymath">
+\begin{equation*}
+\vb{n} = \frac{1}{\sqrt{(x')^{2} + (y')^{2}}}\dotprod{y', -x'} = \frac{1}{\norm{\vb{r}'(t)}}\dotprod{y', -x'}\text{.}
+\end{equation*}
+</div>
+<p id="p-1626">Therefore</p>
+<div class="displaymath">
+\begin{align*}
+\int_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{C}\vb{F}\cdot\dotprod{y', -x'}\,dt\\
+\amp = \int_{C} P\,dy - Q\,dx \text{.}
+\end{align*}
+</div>
+<article class="example-like" id="example-verifying-the-flux"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">13.2.14</span>. <span class="title">Verifying the Flux.</span>
+</h6>
+<p id="p-1627">Compute the flux integral in <a data-knowl="./knowl/example-flux-across-the-unit-circle.html" title="Example 13.2.13: Flux Across the Unit Circle">Example 13.2.13</a>.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-274" id="solution-274"><span class="type">Solution</span></a><div id="hk-solution-274" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-1628">We have</p>
+<div class="displaymath">
+\begin{align*}
+\oint_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{0}^{2\pi}P\,dy - Q\,dx \\
+\amp = \int_{0}^{2}\brackets{-\sin t\cos t - \cos t(-\sin t)}\,dt \\
+\amp = 0 \text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article></section><section class="conclusion" id="conclusion-13"><p id="p-1629">SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.</p></section></section></div></main>
+</div>
+<div class="login-link"><span id="loginlogout" class="login">login</span></div>
+<script src="https://pretextbook.org/js/0.11/login.js"></script>
+</body>
+</html>
