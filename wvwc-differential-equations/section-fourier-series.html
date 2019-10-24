@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:12-04:00    *-->
+<!--*    on 2019-10-24T14:42:40-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -49,7 +49,7 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -61,7 +61,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -88,7 +88,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -152,6 +152,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -189,13 +190,13 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-fourier-series"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.1</span> <span class="title">Fourier Series</span>
 </h2>
-<a href="section-fourier-series.html" class="permalink">¶</a><section class="introduction" id="introduction-16"><p id="p-570">The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of <em class="emphasis">orthonormal bases</em>. Knowing an orthonormal basis for a vector space \(V\) can greatly simplify linear algebra in that vector space. In this section, we'll do something similar with periodic functions.</p></section><section class="subsection" id="subsection-periodic-functions"><h3 class="heading hide-type">
+<a href="section-fourier-series.html" class="permalink">¶</a><section class="introduction" id="introduction-17"><p id="p-584">The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of <em class="emphasis">orthonormal bases</em>. Knowing an orthonormal basis for a vector space \(V\) can greatly simplify linear algebra in that vector space. In this section, we'll do something similar with periodic functions.</p></section><section class="subsection" id="subsection-periodic-functions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.1.1</span> <span class="title">Periodic Functions</span>
 </h3>
-<a href="section-fourier-series.html#subsection-periodic-functions" class="permalink">¶</a><p id="p-571">Consider the function \(f(x)\) given by the following graph:</p>
-<figure class="figure-like" id="figure-sageplot-periodic-function"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-sageplot-periodic-function.svg" style="width: 100%; height: auto;" alt="A periodic function." onerror="this.src='images/image-sageplot-periodic-function.png';this.onerror=null;"></div>
-<figcaption><span class="type">Figure</span> <span class="codenumber">7.1.1.</span> A periodic function.</figcaption></figure><p id="p-572">This function can be plotted using the following code:</p>
-<div class="sagecell-sage" id="sage-5"><script type="text/x-sage">reset
+<a href="section-fourier-series.html#subsection-periodic-functions" class="permalink">¶</a><p id="p-585">Consider the function \(f(x)\) given by the following graph:</p>
+<figure class="figure-like" id="figure-sageplot-periodic-function"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-sageplot-periodic-function.svg" style="width: 100%; height: auto;" alt="A periodic function." onerror="this.src='images/image-sageplot-periodic-function.png';this.onerror=null;"></div>
+<figcaption><span class="type">Figure</span> <span class="codenumber">7.1.1.</span> A periodic function.</figcaption></figure><p id="p-586">This function can be plotted using the following code:</p>
+<div class="sagecell-sage" id="sage-6"><script type="text/x-sage">reset
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -215,24 +216,24 @@ p = plt.plot(x,y1-5*y2,label=r'$f(x)$')
 plt.legend()
 plt.show()
 </script></div>
-<p id="p-573">If we look at the graph, we see that it repeats itself if we wait long enough. Functions that have this property are called <dfn class="terminology">periodic functions</dfn>.</p>
+<p id="p-587">If we look at the graph, we see that it repeats itself if we wait long enough. Functions that have this property are called <dfn class="terminology">periodic functions</dfn>.</p>
 <article class="definition-like" id="definition-periodic-functions"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">7.1.2</span>. <span class="title">Periodic Functions.</span>
 </h6>
-<p id="p-574">Let \(f(x)\) be a real function defined for all \(x\text{.}\) We say that \(f\) is a periodic function if there exists a positive number \(p\) such that</p>
+<p id="p-588">Let \(f(x)\) be a real function defined for all \(x\text{.}\) We say that \(f\) is a periodic function if there exists a positive number \(p\) such that</p>
 <div class="displaymath">
 \begin{equation*}
 f(x+p) = f(x)
 \end{equation*}
 </div>
-<p>for all \(x\text{.}\)</p></article> <p id="p-575">Let \(n\) be any integer. Then the functions \(\sin nx\) and \(\cos nx\) are both periodic and have period \(2\pi\) since</p>
+<p>for all \(x\text{.}\)</p></article> <p id="p-589">Let \(n\) be any integer. Then the functions \(\sin nx\) and \(\cos nx\) are both periodic and have period \(2\pi\) since</p>
 <div class="displaymath">
 \begin{align*}
 \sin[n(x+2\pi)] \amp = \sin nx\cos2\pi + \cos nx\sin2\pi = \sin nx \\
 \cos[n(x+2\pi)] \amp = \cos nx\cos2\pi - \sin nx\sin2\pi = \cos nx 
 \end{align*}
 </div>
-<p>The periodic nature of these functions can also be seen from their graphs:</p> <div class="sagecell-sage" id="sage-6"><script type="text/x-sage"># This is setting up our graph.
+<p>The periodic nature of these functions can also be seen from their graphs:</p> <div class="sagecell-sage" id="sage-7"><script type="text/x-sage"># This is setting up our graph.
 x = np.linspace(-3*np.pi,3*np.pi,200)
 y1 = np.cos(5*x)
 y2 = np.sin(2*x)
@@ -247,7 +248,7 @@ plt.plot(x,y2,label=r'$\sin2x$')
 plt.legend()
 plt.show()
 </script></div>
-<p id="p-576">If you go back to the first plot, you may notice from the code used to generate the function \(f(x)\) that \(f(x)\) is just the sum of two basic trigonometric functions:</p>
+<p id="p-590">If you go back to the first plot, you may notice from the code used to generate the function \(f(x)\) that \(f(x)\) is just the sum of two basic trigonometric functions:</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = \cos5x-5\sin3x.
@@ -259,13 +260,13 @@ f(x) = \cos5x-5\sin3x.
 <a href="section-fourier-series.html#subsection-trig-and-fourier-series" class="permalink">¶</a><article class="definition-like" id="definition-trigonometric-series"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">7.1.3</span>. <span class="title">Trigonometric Series.</span>
 </h6>
-<p id="p-577">A trigonometric series is a series of the form</p>
+<p id="p-591">A trigonometric series is a series of the form</p>
 <div class="displaymath">
 \begin{equation*}
 \sum_{k=0}^{\infty}(a_{k}\cos kx+b_{k}\sin kx) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx)
 \end{equation*}
 </div>
-<p>where \(a_{k},b_{k}\) are constants, called the <dfn class="terminology">coefficients</dfn> of the series.</p></article><p id="p-578">Our primary goal in this section is to take a function \(f(x)\) of period \(2\pi\) and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that</p>
+<p>where \(a_{k},b_{k}\) are constants, called the <dfn class="terminology">coefficients</dfn> of the series.</p></article><p id="p-592">Our primary goal in this section is to take a function \(f(x)\) of period \(2\pi\) and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx),
@@ -275,7 +276,7 @@ f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx),
 <article class="theorem-like" id="theorem-orthogonality-relations"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.1.4</span>. <span class="title">Orthogonality Relations.</span>
 </h6>
-<p id="p-579">Let \(m,n\) be whole numbers with \(m,n&gt;0\text{.}\) Then</p>
+<p id="p-593">Let \(m,n\) be whole numbers with \(m,n&gt;0\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{-\pi}^{\pi}\sin mx\cos nx\,dx = 0
@@ -286,8 +287,8 @@ f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx),
 \begin{equation*}
 \int_{-\pi}^{\pi}\sin mx\sin nx\,dx = \begin{cases} \pi \amp m=n \\ 0 \amp m\neq n\end{cases}\text{ and }\int_{-\pi}^{\pi}\cos mx\cos nx\,dx = \begin{cases} \pi \amp m=n \\ 0 \amp m\neq n\end{cases}\text{.}
 \end{equation*}
-</div></article><p id="p-580">We can verify <a data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> using a computer algebra system. Proving it is a little bit more work, but can be done using trigonometric identities or Euler's formula.</p>
-<div class="sagecell-sage" id="sage-7"><script type="text/x-sage"># Declare variables.
+</div></article><p id="p-594">We can verify <a data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> using a computer algebra system. Proving it is a little bit more work, but can be done using trigonometric identities or Euler's formula.</p>
+<div class="sagecell-sage" id="sage-8"><script type="text/x-sage"># Declare variables.
 var('x,m,n')
 assume(m,n,'integer')
 
@@ -301,7 +302,7 @@ I5 = integral(cos(n*x)*cos(n*x),x,-pi,pi)
 # List the results.
 I1,I2,I3,I4,I5
 </script></div>
-<p id="p-581"><a data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> will be our primary tool for expressing a function \(f(x)\) as a trigonometric series. To see how, suppose that we have</p>
+<p id="p-595"><a data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> will be our primary tool for expressing a function \(f(x)\) as a trigonometric series. To see how, suppose that we have</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx).
@@ -332,7 +333,7 @@ a_{0} \amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,dx
 <article class="theorem-like" id="theorem-fourier-series-coefficients"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.1.5</span>. <span class="title">Fourier Series Coefficients.</span>
 </h6>
-<p id="p-582">Let \(f(x)\) be a periodic function with period \(2\pi\text{.}\) Then the Fourier coefficients of \(f(x)\) are given by</p>
+<p id="p-596">Let \(f(x)\) be a periodic function with period \(2\pi\text{.}\) Then the Fourier coefficients of \(f(x)\) are given by</p>
 <div class="displaymath">
 \begin{align*}
 a_{0} \amp= \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,dx\\
@@ -342,7 +343,7 @@ b_{n} \amp= \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\,dx\text{ for $n\geq 1$.}
 </div></article><article class="example-like" id="example-fourier-series-of-x-cubed"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">7.1.6</span>. <span class="title">The Fourier series of \(x^{3}\).</span>
 </h6>
-<p id="p-583">Define \(f(x) = x^{3}\) for \(-\pi\leq x\leq \pi\text{.}\) To find its Fourier series, we can just use the previous formulas to find the values of the coefficients \(a_{0},a_{k},b_{k}\) for \(k\geq1\text{.}\) We know that</p>
+<p id="p-597">Define \(f(x) = x^{3}\) for \(-\pi\leq x\leq \pi\text{.}\) To find its Fourier series, we can just use the previous formulas to find the values of the coefficients \(a_{0},a_{k},b_{k}\) for \(k\geq1\text{.}\) We know that</p>
 <div class="displaymath">
 \begin{align*}
 a_{0} \amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}x^{3}\,dx\\
@@ -368,14 +369,14 @@ b_{k} = \frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{
 a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx) \amp= \sum_{k=1}^{\infty}b_{k}\sin kx \\
 \amp= \sum_{k=1}^{\infty}\frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}\sin kx. 
 \end{align*}
-</div></article><p id="p-584">A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function \(f(x)\text{?}\) Are they actually equal? If we use the following code (adapted from <a class="external" href="https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/" target="_blank">here</a>) to compare the partial sums</p>
+</div></article><p id="p-598">A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function \(f(x)\text{?}\) Are they actually equal? If we use the following code (adapted from <a class="external" href="https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/" target="_blank">here</a>) to compare the partial sums</p>
 <div class="displaymath">
 \begin{equation*}
 \sum_{k=1}^{n}\frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}\sin kx
 \end{equation*}
 </div>
 <p>of the Fourier series with \(f(x) = x^{3}\text{,}\) then it looks like the partial sums get closer and closer if we choose larger values of \(n\text{.}\)</p>
-<div class="sagecell-sage" id="sage-8"><script type="text/x-sage">var('x,k,i')
+<div class="sagecell-sage" id="sage-9"><script type="text/x-sage">var('x,k,i')
 
 # Defines the function to determine Fourier series of. Feel free to play around with this.
 f(x) = x**3
@@ -397,13 +398,13 @@ n = 3
 p = plot(FS(n),(x,-pi,pi), color='red') + plot(f(x),(x,-pi,pi))
 p
 </script></div>
-<p id="p-585">In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.<a data-knowl="" class="id-ref" data-refid="hk-footnote-convergence-of-fourier-series" id="footnote-convergence-of-fourier-series"><sup> 1 </sup></a><span id="hk-footnote-convergence-of-fourier-series" class="hidden-content tex2jax_ignore"><span class="footnote">In fact, the convergence of Fourier series for what one might consider to be the more "well-behaved" functions in mathematics was an open question until the 1960s. See <a class="external" href="https://en.wikipedia.org/wiki/Carleson%27s_theorem" target="_blank">Carleson's Theorem</a>.</span></span> However, for many of the functions we care about in this course we have the following theorem.</p>
+<p id="p-599">In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.<a data-knowl="" class="id-ref" data-refid="hk-footnote-convergence-of-fourier-series" id="footnote-convergence-of-fourier-series"><sup> 1 </sup></a><span id="hk-footnote-convergence-of-fourier-series" class="hidden-content tex2jax_ignore"><span class="footnote">In fact, the convergence of Fourier series for what one might consider to be the more "well-behaved" functions in mathematics was an open question until the 1960s. See <a class="external" href="https://en.wikipedia.org/wiki/Carleson%27s_theorem" target="_blank">Carleson's Theorem</a>.</span></span> However, for many of the functions we care about in this course we have the following theorem.</p>
 <article class="theorem-like" id="theorem-pointwise-convergence-of-fourier-series"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.1.7</span>. <span class="title">Fourier Series of Piecewise Continuous Functions.</span>
 </h6>
-<p id="p-586">Let \(f(x)\) be a piecewise continuous function on the interval \(-\pi\leq x\leq\pi\text{,}\) and suppose that it's also periodic with period \(2\pi\text{,}\) and is differentiable everywhere that it's continuous. Then the Fourier series of \(f(x)\) converges to \(f(x)\) except at the points where \(f(x)\) is discontinuous.</p></article></section></section></div></main>
+<p id="p-600">Let \(f(x)\) be a piecewise continuous function on the interval \(-\pi\leq x\leq\pi\text{,}\) and suppose that it's also periodic with period \(2\pi\text{,}\) and is differentiable everywhere that it's continuous. Then the Fourier series of \(f(x)\) converges to \(f(x)\) except at the points where \(f(x)\) is discontinuous.</p></article></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

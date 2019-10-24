@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:13-04:00    *-->
+<!--*    on 2019-10-24T14:42:42-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -41,7 +41,7 @@ MathJax.Hub.Config({
         mtextFontInherit: true,
     },
 });
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -80,7 +80,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -144,6 +144,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -181,7 +182,7 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-d-alembert-s-solution-of-the-wave-equation"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">8.3</span> <span class="title">d'Alembert's Solution of the Wave Equation</span>
 </h2>
-<a href="section-d-alembert-s-solution-of-the-wave-equation.html" class="permalink">¶</a><p id="p-669">Although <a data-knowl="./knowl/theorem-solution-of-the-wave-equation.html" title="Theorem 8.2.1: Solution of the Wave Equation">Theorem 8.2.1</a> solves the wave equation, it's a little complicated to work with. We'll try to express the solution in a simpler way. In particular, we'll start by trying to simplify the solution of the boundary value problem in <a data-knowl="./knowl/example-a-string-with-fixed-ends.html" title="Example 8.2.2: A string with fixed ends">Example 8.2.2</a>. In that example, we saw that the solution of</p>
+<a href="section-d-alembert-s-solution-of-the-wave-equation.html" class="permalink">¶</a><p id="p-683">Although <a data-knowl="./knowl/theorem-solution-of-the-wave-equation.html" title="Theorem 8.2.1: Solution of the Wave Equation">Theorem 8.2.1</a> solves the wave equation, it's a little complicated to work with. We'll try to express the solution in a simpler way. In particular, we'll start by trying to simplify the solution of the boundary value problem in <a data-knowl="./knowl/example-a-string-with-fixed-ends.html" title="Example 8.2.2: A string with fixed ends">Example 8.2.2</a>. In that example, we saw that the solution of</p>
 <div class="displaymath">
 \begin{equation*}
 u_{tt} = 16u_{xx}
@@ -200,13 +201,13 @@ u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n\pi x)\cos(4n\pi t),
 \end{equation*}
 </div>
 <p>where \(b_{n}\) was the \(n^{\th}\) Fourier coefficient of the odd extension of \(f(x)\text{.}\)</p>
-<p id="p-670">If we look at this, it looks kind of like a Fourier series except that we have a product of sine and cosine. We can make this look more like a Fourier series by using one of the product-to-sum formulas from trigonometry:</p>
+<p id="p-684">If we look at this, it looks kind of like a Fourier series except that we have a product of sine and cosine. We can make this look more like a Fourier series by using one of the product-to-sum formulas from trigonometry:</p>
 <div class="displaymath">
 \begin{equation*}
 \sin x\cos y = \frac{1}{2}[\sin(x+y)+\sin(x-y)].
 \end{equation*}
 </div>
-<p id="p-671">Using this formula, we get</p>
+<p id="p-685">Using this formula, we get</p>
 <div class="displaymath">
 \begin{equation*}
 \sin(n\pi x)\cos(4n\pi t) = \frac{1}{2}[\sin[n\pi(x+4t)]+\sin[n\pi(x-4t)],
@@ -218,17 +219,17 @@ u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n\pi x)\cos(4n\pi t),
 u(x,t) = \frac{1}{2}\left[\sum_{n=1}^{\infty}b_{n}\sin[n\pi(x+4t)] + \sum_{n=1}^{\infty}b_{n}\sin[n\pi(x-4t)]\right].
 \end{equation*}
 </div>
-<p id="p-672">Here's how this helps us. Since \(b_{n}\) is the \(n^{\th}\) Fourier coefficient of the odd extension of \(f(x)\text{,}\) each of these sums must be a Fourier series for the odd extension of \(f(x)\text{!}\) In particular, if we denote the odd extension by \(f^{*}(x)\) then we can simply say that</p>
+<p id="p-686">Here's how this helps us. Since \(b_{n}\) is the \(n^{\th}\) Fourier coefficient of the odd extension of \(f(x)\text{,}\) each of these sums must be a Fourier series for the odd extension of \(f(x)\text{!}\) In particular, if we denote the odd extension by \(f^{*}(x)\) then we can simply say that</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x+4t)+f^{*}(x-4t)].
 \end{equation*}
 </div>
-<p id="p-673">We can extend this to other boundary value problems without an initial velocity component.</p>
+<p id="p-687">We can extend this to other boundary value problems without an initial velocity component.</p>
 <article class="theorem-like" id="theorem-d-alembert-s-solution-without-initial-velocity"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">8.3.1</span>. <span class="title">d'Alembert's Solution without Initial Velocity.</span>
 </h6>
-<p id="p-674">Let \(c\gt0\text{,}\) and consider the boundary value problem</p>
+<p id="p-688">Let \(c\gt0\text{,}\) and consider the boundary value problem</p>
 <div class="displaymath">
 \begin{align*}
 u_{tt} \amp = c^{2}u_{xx} \\
@@ -238,7 +239,7 @@ u(x,0) \amp = f(x) \\
 u_{t}(x,0) \amp = 0 \text{.}
 \end{align*}
 </div>
-<p id="p-675">Assuming that \(f(x)\) is piecewise twice differentiable, then the solution of this boundary value problem is given by</p>
+<p id="p-689">Assuming that \(f(x)\) is piecewise twice differentiable, then the solution of this boundary value problem is given by</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)]
@@ -247,10 +248,10 @@ u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)]
 <p>where \(f^{*}\) denotes the odd extension of \(f(x)\text{.}\)</p></article><article class="example-like" id="example-boundary-value-problem-with-sinusoidal-deflection"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">8.3.2</span>. <span class="title">Boundary value problem with sinusoidal deflection.</span>
 </h6>
-<p id="p-676">A string of length \(L=1\) has initial deflection, or position, given by \(f(x) = \sin\pi x - \frac{1}{2}\sin2\pi x\) for \(0\leq x\leq 1\text{.}\) The string is released at time \(t=0\text{.}\) Suppose \(c=1\text{.}\) Find \(u(x,t)\text{.}\)</p>
+<p id="p-690">A string of length \(L=1\) has initial deflection, or position, given by \(f(x) = \sin\pi x - \frac{1}{2}\sin2\pi x\) for \(0\leq x\leq 1\text{.}\) The string is released at time \(t=0\text{.}\) Suppose \(c=1\text{.}\) Find \(u(x,t)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-95" id="solution-95"><span class="type">Solution</span></a><div id="hk-solution-95" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-677">We can do so very easily with <a data-knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 8.3.1: d'Alembert's Solution without Initial Velocity">Theorem 8.3.1</a>, since the initial velocity of the string is \(0\text{.}\) So we have</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-96" id="solution-96"><span class="type">Solution</span></a><div id="hk-solution-96" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-691">We can do so very easily with <a data-knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 8.3.1: d'Alembert's Solution without Initial Velocity">Theorem 8.3.1</a>, since the initial velocity of the string is \(0\text{.}\) So we have</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-t)+f^{*}(x+t)],
@@ -263,20 +264,20 @@ u(x,t) = \frac{1}{2}\left[\sin(\pi(x-t))-\frac{1}{2}\sin(2\pi(x-t)) + \sin(\pi(x
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-678">d'Alembert's solution is very useful if we want to model a vibrating string with zero initial velocity. But what can we do if the string has an initial velocity? d'Alembert's solution actually suggests a possible approach to take. If we look at <a data-knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 8.3.1: d'Alembert's Solution without Initial Velocity">Theorem 8.3.1</a>, it essentially states that the solution of the wave equation (assuming zero initial velocity) is the superposition of the rightward traveling wave \(f(x-ct)\) with the leftward traveling wave \(f(x+ct)\text{.}\) This suggests that superpositions of waves are fundamental to solutions of the wave equation.</p>
-<p id="p-679">We'll try something similar for the case \(u_{t}(x,0) = g(x)\text{.}\) We'll assume that adding in this initial velocity also adds in a new rightward traveling wave \(G(x-ct)\) and a new leftward traveling wave \(H(x+ct)\) into our solution \(u(x,t)\text{,}\) so that we have</p>
+</div></article><p id="p-692">d'Alembert's solution is very useful if we want to model a vibrating string with zero initial velocity. But what can we do if the string has an initial velocity? d'Alembert's solution actually suggests a possible approach to take. If we look at <a data-knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 8.3.1: d'Alembert's Solution without Initial Velocity">Theorem 8.3.1</a>, it essentially states that the solution of the wave equation (assuming zero initial velocity) is the superposition of the rightward traveling wave \(f(x-ct)\) with the leftward traveling wave \(f(x+ct)\text{.}\) This suggests that superpositions of waves are fundamental to solutions of the wave equation.</p>
+<p id="p-693">We'll try something similar for the case \(u_{t}(x,0) = g(x)\text{.}\) We'll assume that adding in this initial velocity also adds in a new rightward traveling wave \(G(x-ct)\) and a new leftward traveling wave \(H(x+ct)\) into our solution \(u(x,t)\text{,}\) so that we have</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + G(x-ct) + H(x+ct).
 \end{equation*}
 </div>
-<p id="p-680">Now we'll try to use the initial conditions to find \(G\) and \(H\text{.}\) Now, since we need \(u(x,0) = f(x)\) this forces</p>
+<p id="p-694">Now we'll try to use the initial conditions to find \(G\) and \(H\text{.}\) Now, since we need \(u(x,0) = f(x)\) this forces</p>
 <div class="displaymath">
 \begin{equation*}
 G(x) + H(x) = 0\Rightarrow H(x) = -G(x).
 \end{equation*}
 </div>
-<p id="p-681">Therefore our solution becomes</p>
+<p id="p-695">Therefore our solution becomes</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + G(x-ct) - G(x+ct).
@@ -288,7 +289,7 @@ u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + G(x-ct) - G(x+ct).
 g(x) = -cG'(x) - cG'(x) = -2cG'(x) \Rightarrow G'(x) = -\frac{1}{2c}g(x).
 \end{equation*}
 </div>
-<p id="p-682">Now we can integrate both sides to find \(G(x)\text{!}\) So there exists some \(x_{0}\) such that</p>
+<p id="p-696">Now we can integrate both sides to find \(G(x)\text{!}\) So there exists some \(x_{0}\) such that</p>
 <div class="displaymath">
 \begin{equation*}
 G(x) = -\frac{1}{2c}\int_{x_{0}}^{x}g(s)\,ds.
@@ -307,7 +308,7 @@ u(x,t) \amp = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + G(x-ct) + H(x+ct) \\
 <article class="theorem-like" id="theorem-d-alembert-s-solution-with-initial-velocity"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">8.3.3</span>. <span class="title">d'Alembert's Solution with Initial Velocity.</span>
 </h6>
-<p id="p-683">Let \(c\gt0\text{,}\) and consider the boundary value problem</p>
+<p id="p-697">Let \(c\gt0\text{,}\) and consider the boundary value problem</p>
 <div class="displaymath">
 \begin{align*}
 u_{tt} \amp = c^{2}u_{xx} \\
@@ -317,7 +318,7 @@ u(x,0) \amp = f(x) \\
 u_{t}(x,0) \amp = g(x). 
 \end{align*}
 </div>
-<p id="p-684">Assuming that \(f(x)\) is piecewise twice differentiable and that \(g(x)\) is piecewise continuous, then the solution of this boundary value problem is given by</p>
+<p id="p-698">Assuming that \(f(x)\) is piecewise twice differentiable and that \(g(x)\) is piecewise continuous, then the solution of this boundary value problem is given by</p>
 <div class="displaymath">
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct}g^{*}(s)\,ds.
@@ -326,10 +327,10 @@ u(x,t) = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct}g^
 <p>where \(f^{*}\) denotes the odd extension of \(f(x)\) and \(g^{*}\) the odd extension of \(g(x)\text{.}\)</p></article><article class="example-like" id="example-boundary-value-problem-with-sinusoidal-deflection-and-initial-velocity"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">8.3.4</span>. <span class="title">Boundary value problem with sinusoidal deflection and initial velocity.</span>
 </h6>
-<p id="p-685">Consider a string of length \(L=1\text{,}\) initial deflection \(f(x) = \sin\pi x\) and initial velocity \(\frac{1}{4}\sin2\pi x\text{.}\) Assume that \(c = 2\text{.}\) Find \(u(x,t)\text{,}\) the vertical displacement at \((x,t)\text{.}\)</p>
+<p id="p-699">Consider a string of length \(L=1\text{,}\) initial deflection \(f(x) = \sin\pi x\) and initial velocity \(\frac{1}{4}\sin2\pi x\text{.}\) Assume that \(c = 2\text{.}\) Find \(u(x,t)\text{,}\) the vertical displacement at \((x,t)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-96" id="solution-96"><span class="type">Solution</span></a><div id="hk-solution-96" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-686">The vertical displacement \(u(x,t)\) of the string is given by</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-97" id="solution-97"><span class="type">Solution</span></a><div id="hk-solution-97" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-700">The vertical displacement \(u(x,t)\) of the string is given by</p>
 <div class="displaymath">
 \begin{align*}
 u(x,t) \amp = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\,ds \\
@@ -342,6 +343,6 @@ u(x,t) \amp = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+
 </div></article></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

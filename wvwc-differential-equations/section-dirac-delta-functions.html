@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:11-04:00    *-->
+<!--*    on 2019-10-24T14:42:39-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -41,7 +41,7 @@ MathJax.Hub.Config({
         mtextFontInherit: true,
     },
 });
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -80,7 +80,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -144,6 +144,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -184,15 +185,15 @@ var js_version = 0.11;
 <a href="section-dirac-delta-functions.html" class="permalink">¶</a><section class="subsection" id="subsection-impulses"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.4.1</span> <span class="title">Impulses</span>
 </h3>
-<a href="section-dirac-delta-functions.html#subsection-impulses" class="permalink">¶</a><p id="p-530">Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.</p>
-<p id="p-531">To be specific, let \(f(t)\) be a force that acts only from \(t=a\) to \(t=b\) (and is otherwise \(0\)). Then the <dfn class="terminology">impulse</dfn> of the force \(f(t)\) over the interval \([a,b]\) is given by</p>
+<a href="section-dirac-delta-functions.html#subsection-impulses" class="permalink">¶</a><p id="p-544">Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.</p>
+<p id="p-545">To be specific, let \(f(t)\) be a force that acts only from \(t=a\) to \(t=b\) (and is otherwise \(0\)). Then the <dfn class="terminology">impulse</dfn> of the force \(f(t)\) over the interval \([a,b]\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 p = \Int{a}{b}f(t)\dd{t}.
 \end{equation*}
 </div>
 <p>We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous <em class="emphasis">unit impulse</em>; any other impulse we can get by multiplication by a constant.</p>
-<p id="p-532">So this is our goal: find some function \(d(t)\) that has an instantaneous unit impulse at the point \(t=0\text{.}\) In other words, we want to find a function \(d(t)\) such that</p>
+<p id="p-546">So this is our goal: find some function \(d(t)\) that has an instantaneous unit impulse at the point \(t=0\text{.}\) In other words, we want to find a function \(d(t)\) such that</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{0}^{0}d(t)\,dt = 1
@@ -214,9 +215,9 @@ d_{\varepsilon}(t) =
 \end{cases}.
 \end{equation*}
 </div>
-<p><figure class="figure-like" id="figure-approximation-unit-impulse"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-17.svg" style="width: 100%; height: auto;" alt=""></div>
+<p><figure class="figure-like" id="figure-approximation-unit-impulse"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-17.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">6.4.1.</span> Approximating the instantaneous unit impulse.</figcaption></figure></p>
-<p id="p-533">Then for any \(\varepsilon\text{,}\) we have</p>
+<p id="p-547">Then for any \(\varepsilon\text{,}\) we have</p>
 <div class="displaymath">
 \begin{equation*}
 \Int{-\frac{\varepsilon}{2}}{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1.
@@ -226,13 +227,13 @@ d_{\varepsilon}(t) =
 <article class="definition-like" id="definition-dirac-delta"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">6.4.2</span>. <span class="title">The Dirac Delta Function.</span>
 </h6>
-<p id="p-534">The <dfn class="terminology">Dirac delta function</dfn>, denoted by the symbol \(\delta(t)\text{,}\) is “defined” by the equation</p>
+<p id="p-548">The <dfn class="terminology">Dirac delta function</dfn>, denoted by the symbol \(\delta(t)\text{,}\) is “defined” by the equation</p>
 <div class="displaymath">
 \begin{equation*}
 \delta(t) = \limit{\varepsilon}{0}d_{\varepsilon}(t).
 \end{equation*}
-</div></article><p id="p-535">The Dirac delta function is, of course, not an actual function. <aside class="aside-like" id="aside-19"><p id="p-536">The Dirac delta is actually an example of a <dfn class="terminology">generalized function</dfn>, or <dfn class="terminology">tempered distribution</dfn>.</p></aside> But it's still useful as a mathematical formulation of an instantaneous force with unit impulse at \(t=0\text{.}\)</p>
-<p id="p-537">We can also take translations of the Dirac delta, which we view as a “function” \(\delta(t-a)\) defined piecewise by</p>
+</div></article><p id="p-549">The Dirac delta function is, of course, not an actual function. <aside class="aside-like" id="aside-19"><p id="p-550">The Dirac delta is actually an example of a <dfn class="terminology">generalized function</dfn>, or <dfn class="terminology">tempered distribution</dfn>.</p></aside> But it's still useful as a mathematical formulation of an instantaneous force with unit impulse at \(t=0\text{.}\)</p>
+<p id="p-551">We can also take translations of the Dirac delta, which we view as a “function” \(\delta(t-a)\) defined piecewise by</p>
 <div class="displaymath">
 \begin{equation*}
 \delta(t-a)=
@@ -242,9 +243,9 @@ d_{\varepsilon}(t) =
 \end{cases}.
 \end{equation*}
 </div>
-<p>We represent this graphically as an arrow: <figure class="figure-like" id="figure-19"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-18.svg" style="width: 100%; height: auto;" alt=""></div>
+<p>We represent this graphically as an arrow: <figure class="figure-like" id="figure-18"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-18.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">6.4.3.</span> A plot of the Dirac delta function.</figcaption></figure></p>
-<p id="p-538">The most important property of the Dirac delta is that</p>
+<p id="p-552">The most important property of the Dirac delta is that</p>
 <div class="displaymath">
 \begin{equation*}
 \Int{\alpha}{\beta}\delta(t-a)\dd{t} = 
@@ -254,28 +255,28 @@ d_{\varepsilon}(t) =
 \end{cases}
 \end{equation*}
 </div>
-<p id="p-539">We also have the important theorem formula for continuous functions.</p>
+<p id="p-553">We also have the important theorem formula for continuous functions.</p>
 <article class="theorem-like" id="theorem-sifting-property"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">6.4.4</span>. <span class="title">Sifting Property.</span>
 </h6>
-<p id="p-540">Let \(g(t)\) be a continuous function and let \(\alpha\leq a\leq\beta\text{.}\) Then</p>
+<p id="p-554">Let \(g(t)\) be a continuous function and let \(\alpha\leq a\leq\beta\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \Int{\alpha}{\beta}g(t)\delta(t-a)\dd{t} = g(a)
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-3"><a data-knowl="" class="id-ref" data-refid="hk-proof-3"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-3" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-541">We treat \(\delta(t)\) as a function and perform the above integration:</p>
+</div></article><article class="hiddenproof" id="proof-3"><a data-knowl="" class="id-ref" data-refid="hk-proof-3"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-3" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-555">We treat \(\delta(t)\) as a function and perform the above integration:</p>
 <div class="displaymath">
 \begin{align*}
 \end{align*}
 </div></article></div>
-<p id="p-542">The above theorem gives us another interpretation of the Dirac delta: it's a “sampling function”. When integrated against another function \(g(t)\) over an interval containing \(a\text{,}\) \(\delta(t-a)\) will pick out the value \(g(a)\text{.}\) We can use this to find the Laplace transform of the Dirac delta.</p>
+<p id="p-556">The above theorem gives us another interpretation of the Dirac delta: it's a “sampling function”. When integrated against another function \(g(t)\) over an interval containing \(a\text{,}\) \(\delta(t-a)\) will pick out the value \(g(a)\text{.}\) We can use this to find the Laplace transform of the Dirac delta.</p>
 <article class="example-like" id="example-laplace-transform-of-the-dirac-delta-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.4.5</span>. <span class="title">Laplace Transform of the Dirac Delta Function.</span>
 </h6>
-<p id="p-543">Compute \(\Laplace{\delta(t-a)}\text{,}\) where \(a\geq0\text{.}\)</p>
+<p id="p-557">Compute \(\Laplace{\delta(t-a)}\text{,}\) where \(a\geq0\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span></a><div id="hk-solution-86" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-544">We use the definition of the Laplace transform:</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution</span></a><div id="hk-solution-87" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-558">We use the definition of the Laplace transform:</p>
 <div class="displaymath">
 \begin{align*}
 \Laplace{\delta(t-a)} \amp= \int_{0}^{\infty}\delta(t-a)e^{-st}\,dt\\
@@ -287,14 +288,14 @@ d_{\varepsilon}(t) =
 </div></article></section><section class="subsection" id="subsection-dirac-delta-models"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.4.2</span> <span class="title">Dirac Delta Models</span>
 </h3>
-<a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="permalink">¶</a><p id="p-545">We use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.</p>
+<a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="permalink">¶</a><p id="p-559">We use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.</p>
 <article class="example-like" id="example-ivp-with-impulse"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.4.6</span>. <span class="title">IVP with Impulse.</span>
 </h6>
-<p id="p-546">An object of mass \(m=1\text{,}\) at rest, is attached to a spring with spring constant \(k=9\text{.}\) At time \(t=0\text{,}\) the a hammer strikes the mass providing an impulse of \(3\) and setting the mass in motion. What is the displacement \(x(t)\text{?}\)</p>
+<p id="p-560">An object of mass \(m=1\text{,}\) at rest, is attached to a spring with spring constant \(k=9\text{.}\) At time \(t=0\text{,}\) the a hammer strikes the mass providing an impulse of \(3\) and setting the mass in motion. What is the displacement \(x(t)\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution</span></a><div id="hk-solution-87" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-547">\(x(t)\) satisfies the ODE</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution</span></a><div id="hk-solution-88" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-561">\(x(t)\) satisfies the ODE</p>
 <div class="displaymath">
 \begin{equation*}
 mx''+kx = f(t)
@@ -320,14 +321,14 @@ X(s) = \frac{3}{s^{2}+9}.
 </div>
 <p>So \(x(t) = \sin3t\text{.}\)</p>
 </div></div>
-</div></article><p id="p-548">Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time \(t=0\text{,}\) this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.</p>
+</div></article><p id="p-562">Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time \(t=0\text{,}\) this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.</p>
 <article class="example-like" id="example-time-delay"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.4.7</span>. <span class="title">Time-delayed Strike.</span>
 </h6>
-<p id="p-549">Consider the spring-mass system above, but suppose now that the hammer hits the mass at time \(t=4\text{.}\) What is the displacement \(x(t)\text{?}\)</p>
+<p id="p-563">Consider the spring-mass system above, but suppose now that the hammer hits the mass at time \(t=4\text{.}\) What is the displacement \(x(t)\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution</span></a><div id="hk-solution-88" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-550">This time, the IVP we must solve is</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-89" id="solution-89"><span class="type">Solution</span></a><div id="hk-solution-89" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-564">This time, the IVP we must solve is</p>
 <div class="displaymath">
 \begin{equation*}
 x''+9x = 3\delta(t-4)\qq{where}x(0)=x'(0)=0.
@@ -346,14 +347,14 @@ x(t) = u(t-4)\sin[3(t-4)].
 \end{equation*}
 </div>
 </div></div>
-</div></article><figure class="figure-like" id="figure-time-delay"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-19.svg" style="width: 100%; height: auto;" alt=""></div>
+</div></article><figure class="figure-like" id="figure-time-delay"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-19.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">6.4.8.</span> </figcaption></figure><article class="example-like" id="example-resonance-with-an-impulse-train"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.4.9</span>. <span class="title">Resonance with an Impulse Train.</span>
 </h6>
-<p id="p-551">Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every \(\frac{2\pi}{3}\) seconds, starting at \(t=0\text{.}\) Find \(x(t)\text{.}\)</p>
+<p id="p-565">Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every \(\frac{2\pi}{3}\) seconds, starting at \(t=0\text{.}\) Find \(x(t)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-89" id="solution-89"><span class="type">Solution</span></a><div id="hk-solution-89" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-552">The IVP we need to solve now is</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-90" id="solution-90"><span class="type">Solution</span></a><div id="hk-solution-90" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-566">The IVP we need to solve now is</p>
 <div class="displaymath">
 \begin{align*}
 x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
@@ -384,10 +385,10 @@ x(t) \amp= \iLaplace{X(s)}\\
 </div>
 <p>Each time the hammer strikes the mass, a factor of \(\sin3t\) is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.</p>
 </div></div>
-</div></article><figure class="figure-like" id="figure-impulse-train-resonance"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-20.svg" style="width: 100%; height: auto;" alt=""></div>
+</div></article><figure class="figure-like" id="figure-impulse-train-resonance"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-20.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">6.4.10.</span> </figcaption></figure></section><dfn class="terminology">SUGGESTED PROBLEMS:</dfn> 3, 7</section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

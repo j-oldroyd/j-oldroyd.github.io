@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:07-04:00    *-->
+<!--*    on 2019-10-24T14:42:35-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -41,7 +41,7 @@ MathJax.Hub.Config({
         mtextFontInherit: true,
     },
 });
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -80,7 +80,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -144,6 +144,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -185,7 +186,7 @@ var js_version = 0.11;
 <span class="type">Subsection</span> <span class="codenumber">2.3.1</span> <span class="title">Free Undamped Motion</span>
 </h3>
 <a href="section-spring-mass-models.html#subsection-free-undamped-motion" class="permalink">¶</a><p id="p-199">Suppose we have a mass \(m\) attached to a spring as in the following diagram:</p>
-<figure class="figure-like" id="figure-spring-mass-system"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-10.svg" style="width: 100%; height: auto;" alt=""></div>
+<figure class="figure-like" id="figure-spring-mass-system"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-10.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">2.3.1.</span> A spring-mass system.</figcaption></figure><p id="p-200">If we let \(x(t)\) denote the displacement of the mass from the spring's equilibrium position and let \(F_{S} = -kx\) denote the force of the spring on the mass (see <a data-knowl="./knowl/theorem-hooke-s-law.html" title="Theorem 2.1.3: Hooke's Law">Theorem 2.1.3</a>, and assume that no other force is acting on the mass, then we know from <a data-knowl="./knowl/example-a-second-order-model.html" title="Example 2.1.4: A second-order model">Example 2.1.4</a> that \(x(t)\) satisfies the second-order ODE given by</p>
 <div class="displaymath">
 \begin{equation*}
@@ -255,7 +256,7 @@ x(t) = 5\cos(\sqrt{\frac{2}{5}}t-\pi).
 <span class="type">Subsection</span> <span class="codenumber">2.3.2</span> <span class="title">Free Damped Motion</span>
 </h3>
 <a href="section-spring-mass-models.html#subsection-free-damped-motion" class="permalink">¶</a><p id="p-209">Now we look at how the motion of a mass attached to a spring is altered if the motion is <em class="emphasis">damped</em>, say, by a dashpot. See <a data-knowl="./knowl/figure-damped-spring.html" title="Figure 2.3.3">Figure 2.3.3</a>.</p>
-<figure class="figure-like" id="figure-damped-spring"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-damped-spring.svg" style="width: 100%; height: auto;" alt=""></div>
+<figure class="figure-like" id="figure-damped-spring"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-damped-spring.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">2.3.3.</span> A damped spring-mass system.</figcaption></figure><p id="p-210">Now in addition to the spring force \(F_{S}\text{,}\) we must also worry about the force \(F_{R}\) of the dashpot on the mass. \(F_{R}\) is always going to act against the velocity of the mass, so for simplicity we assume that \(F_{R} = -cx'\) for some \(c &gt; 0\text{.}\) Using \(F_{S} = -kx\) as usual in conjunction with Newton's Second Law gives us the second-order ODE</p>
 <div class="displaymath">
 \begin{equation*}
@@ -345,10 +346,10 @@ x(t) = -e^{-\frac{t}{5}}\left(\cos3t + \frac{1}{15}\sin3t\right).
 </div>
 </div></div>
 </div></article><p id="p-221">As mentioned previously, the exponential term in \(x(t)\) from <a data-knowl="./knowl/example-a-spring-dashpot-system.html" title="Example 2.3.4: A Spring-Dashpot System">Example 2.3.4</a> serves to dampen the motion of the spring. This is illustrated in <a data-knowl="./knowl/figure-damped-motion.html" title="Figure 2.3.5">Figure 2.3.5</a>.</p>
-<figure class="figure-like" id="figure-damped-motion"><div style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-12.svg" style="width: 100%; height: auto;" alt=""></div>
+<figure class="figure-like" id="figure-damped-motion"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-12.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">2.3.5.</span> An exponential term damping motion.</figcaption></figure></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

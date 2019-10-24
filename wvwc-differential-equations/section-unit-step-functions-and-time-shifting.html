@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:11-04:00    *-->
+<!--*    on 2019-10-24T14:42:39-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -41,7 +41,7 @@ MathJax.Hub.Config({
         mtextFontInherit: true,
     },
 });
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -80,7 +80,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -144,6 +144,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -181,7 +182,7 @@ var js_version = 0.11;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-unit-step-functions-and-time-shifting"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.3</span> <span class="title">Unit Step Functions and Time Shifting</span>
 </h2>
-<a href="section-unit-step-functions-and-time-shifting.html" class="permalink">¶</a><p id="p-521">The <dfn class="terminology">unit step function</dfn> or <dfn class="terminology">Heaviside function</dfn> is the function \(u(t)\) defined by</p>
+<a href="section-unit-step-functions-and-time-shifting.html" class="permalink">¶</a><p id="p-535">The <dfn class="terminology">unit step function</dfn> or <dfn class="terminology">Heaviside function</dfn> is the function \(u(t)\) defined by</p>
 <div class="displaymath">
 \begin{equation*}
 u(t) = \begin{cases}
@@ -200,7 +201,7 @@ u(t-a) = \begin{cases}
 \end{equation*}
 </div>
 <p>for any \(a\text{.}\)</p>
-<p id="p-522">Recall that <a data-knowl="./knowl/theorem--s--shifting.html" title="Theorem 6.1.11: \(s\)-shifting">Theorem 6.1.11</a> tells us how to deal with translation in the frequency domain:</p>
+<p id="p-536">Recall that <a data-knowl="./knowl/theorem--s--shifting.html" title="Theorem 6.1.11: \(s\)-shifting">Theorem 6.1.11</a> tells us how to deal with translation in the frequency domain:</p>
 <div class="displaymath">
 \begin{equation*}
 \Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t).
@@ -210,7 +211,7 @@ u(t-a) = \begin{cases}
 <article class="theorem-like" id="theorem-time-shifting-of-laplace-transforms"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">6.3.1</span>. <span class="title">Time Shifting of Laplace Transforms.</span>
 </h6>
-<p id="p-523">Let \(f(t)\) denote a piecewise continuous function with Laplace transform \(F(s)\text{.}\) Let \(a\geq0\text{.}\) Then \(\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)\text{,}\) or equivalently \(\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)\text{.}\)</p></article><article class="hiddenproof" id="proof-2"><a data-knowl="" class="id-ref" data-refid="hk-proof-2"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-2" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-524">To compute this we need to rely on the definition of the Laplace transform:</p>
+<p id="p-537">Let \(f(t)\) denote a piecewise continuous function with Laplace transform \(F(s)\text{.}\) Let \(a\geq0\text{.}\) Then \(\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)\text{,}\) or equivalently \(\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)\text{.}\)</p></article><article class="hiddenproof" id="proof-2"><a data-knowl="" class="id-ref" data-refid="hk-proof-2"><h6 class="heading"><span class="type">Proof.</span></h6></a></article><div id="hk-proof-2" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-538">To compute this we need to rely on the definition of the Laplace transform:</p>
 <div class="displaymath">
 \begin{align*}
 \Laplace{u(t-a)f(t-a)} \amp= \int_{0}^{\infty}u(t-a)f(t-a)e^{-st}\,dt\\
@@ -220,14 +221,14 @@ u(t-a) = \begin{cases}
 \amp= e^{-as}F(s)\text{.}
 \end{align*}
 </div></article></div>
-<p id="p-525">The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in <a data-knowl="./knowl/example-motivating-laplace.html" title="Example 6.1.1: Motivating the Laplace Transform">Example 6.1.1</a>.</p>
+<p id="p-539">The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in <a data-knowl="./knowl/example-motivating-laplace.html" title="Example 6.1.1: Motivating the Laplace Transform">Example 6.1.1</a>.</p>
 <article class="example-like" id="example-ivp-with-discontinuous-forcing-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.3.2</span>. <span class="title">IVP with Discontinuous Forcing Function.</span>
 </h6>
-<p id="p-526">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time \(t=0\text{,}\) a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\text{.}\) What is an ODE that models the motion of the mass?</p>
+<p id="p-540">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time \(t=0\text{,}\) a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\text{.}\) What is an ODE that models the motion of the mass?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-85" id="solution-85"><span class="type">Solution</span></a><div id="hk-solution-85" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-527">By Hooke's Law and Newton's Second Law, we have</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span></a><div id="hk-solution-86" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-541">By Hooke's Law and Newton's Second Law, we have</p>
 <div class="displaymath">
 \begin{equation*}
 mx''+kx = F_{E}(t)
@@ -261,7 +262,7 @@ F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t.
 x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x'(0) = 0.
 \end{equation*}
 </div>
-<p id="p-528">If we take Laplace transforms, this becomes</p>
+<p id="p-542">If we take Laplace transforms, this becomes</p>
 <div class="displaymath">
 \begin{equation*}
 s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},
@@ -294,7 +295,7 @@ X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s
 X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\brackets{\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}}\parens{1-e^{-2\pi s}}.
 \end{equation*}
 </div>
-<p id="p-529">So the solution of the IVP is</p>
+<p id="p-543">So the solution of the IVP is</p>
 <div class="displaymath">
 \begin{align*}
 x(t) \amp= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\brackets{\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}}\parens{1-e^{-2\pi s}}}\\
@@ -305,6 +306,6 @@ x(t) \amp= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\brackets{\frac{s}{s^{2}+4} 
 </div></article><dfn class="terminology">SUGGESTED PROBLEMS:</dfn> 5, 9, 13, 17, 19, 21 odd</section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

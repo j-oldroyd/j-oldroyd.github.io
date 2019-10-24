@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2019-10-24T14:42:38-04:00    *-->
+<!--*                                    *-->
+<!--*      https://pretextbook.org       *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Legendre's Equation and Legendre Polynomials</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
+    },
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
+<script>var logged_in = false;
+var role = 'student';
+var guest_access = true;
+var login_required = false;
+var js_version = 0.12;
+</script>
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-power-series-method.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-frobenius-method.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-power-series-method.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-frobenius-method.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link">
+<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
+<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
+<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
+<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
+<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
+<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
+<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
+<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
+<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
+<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
+<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
+<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
+<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
+<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
+<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
+<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
+<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
+<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials" class="active">Legendre's Equation and Legendre Polynomials</a></li>
+<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
+<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
+<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
+<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
+<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
+<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
+<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
+<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
+<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
+<li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
+<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
+<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
+<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
+<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
+</ul>
+</li>
+<li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-legendre-s-equation-and-legendre-polynomials"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.2</span> <span class="title">Legendre's Equation and Legendre Polynomials</span>
+</h2>
+<a href="section-legendre-s-equation-and-legendre-polynomials.html" class="permalink">¶</a><section class="introduction" id="introduction-15"><p id="p-464">An important differential equation in applications is the <dfn class="terminology">Legendre equation</dfn> given by</p>
+<div class="displaymath">
+\begin{equation}
+(1 - x^{2})y'' - 2xy' + k(k + 1)y = 0\text{.}\label{equation-legendre-ode}\tag{5.2.1}
+\end{equation}
+</div>
+<p>Our first example of this equation (with \(n = 1\)) was examined in <a data-knowl="./knowl/example-a-legendre-equation.html" title="Example 5.1.9: A Legendre Equation">Example 5.1.9</a>. By this example, we see that <a data-knowl="./knowl/equation-legendre-ode.html" title="Equation 5.2.1">(5.2.1)</a> has a series solution centered at \(x = 0\) with radius of convergence at least \(1\text{.}\) Therefore the power series method is appropriate.</p></section><section class="subsection" id="subsection-solving-the-legendre-equation"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.1</span> <span class="title">Solving the Legendre Equation</span>
+</h3>
+<a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-solving-the-legendre-equation" class="permalink">¶</a><p id="p-465">We'll proceed as we did in <a data-knowl="./knowl/example-a-legendre-equation.html" title="Example 5.1.9: A Legendre Equation">Example 5.1.9</a>, altering the last sum as necessary to get</p>
+<div class="displaymath">
+\begin{equation*}
+\sum_{n\geq0}(n+2)(n+1)c_{n+2}x^{n} - \sum_{n\geq0}n(n-1)c_{n}x^{n} - \sum_{n\geq0}2nc_{n}x^{n} + \sum_{n\geq0}k(k+1)c_{n}x^{n} = 0
+\end{equation*}
+</div>
+<p>which gives (after a bit of algebra, once again)</p>
+<div class="displaymath">
+\begin{equation*}
+c_{n+2} = -\frac{(k - n)(k + n + 1)}{(n + 2)(n + 1)}c_{n}\text{.}
+\end{equation*}
+</div>
+<p id="p-466">This recurrence is valid for \(n \geq 0\text{,}\) and allows us to write out the solution \(y\) in terms of the parameter \(k\) and the arbitrary constants \(c_{0}\) and \(c_{1}\text{:}\)</p>
+<div class="displaymath">
+\begin{equation*}
+y = c_{0}y_{1}(x) + c_{1}y_{2}(x)
+\end{equation*}
+</div>
+<p>where</p>
+<div class="displaymath">
+\begin{align}
+y_{1}(x) \amp = 1 - \frac{k(k+1)}{2!}x^{2} + \frac{(k - 2)k(k+1)(k + 3)}{4!}x^{4} - \cdots\label{equation-legendre-soln-y1}\tag{5.2.2}\\
+y_{2}(x) \amp = x - \frac{(k-1)(k+2)}{3!}x^{3} + \frac{(k-3)(k-1)(k+2)(k+4)}{5!}x^{5} - \cdots \text{.}\label{equation-legendre-soln-y2}\tag{5.2.3}
+\end{align}
+</div>
+<p id="p-467">Note that \(y_{1}\) and \(y_{2}\) form a basis of solutions (<a data-knowl="./knowl/definition-basis-of-solutions.html" title="Definition 2.1.13: Basis of Solutions">Definition 2.1.13</a>) of the Legendre equation, which means that \(y = c_{0}y_{1} + c_{1}y_{2}\) must also be the general solution.</p></section><section class="subsection" id="subsection-legendre-polynomials"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.2</span> <span class="title">Legendre Polynomials</span>
+</h3>
+<a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-legendre-polynomials" class="permalink">¶</a><p id="p-468">Our solution of <a data-knowl="./knowl/equation-legendre-ode.html" title="Equation 5.2.1">(5.2.1)</a> simplifies greatly if \(k\) happens to be an integer. In particular, if \(k\) is a nonnegative integer then</p>
+<div class="displaymath">
+\begin{equation*}
+a_{k+2} = a_{k+4} = \cdots = 0\text{.}
+\end{equation*}
+</div>
+<p>If \(k\) is even then the solution \(y_{1}\) given in <a data-knowl="./knowl/equation-legendre-soln-y1.html" title="Equation 5.2.2">(5.2.2)</a> becomes a polynomial:</p>
+<div class="displaymath">
+\begin{equation*}
+y_{1} = 1 - \frac{k(k+1)}{2!}x^{2} + \cdots + (-1)^{k/2}\frac{[k - (k-2)][k - (k-4)]\cdots[k + (k-3)][k + (k-1)]}{k!}x^{k}\text{.}
+\end{equation*}
+</div>
+<p>Likewise, if \(k\) is odd then \(y_{2}\) given in <a data-knowl="./knowl/equation-legendre-soln-y2.html" title="Equation 5.2.3">(5.2.3)</a> becomes a polynomial instead:</p>
+<div class="displaymath">
+\begin{equation*}
+y_{2} = x - \frac{(k-1)(k+2)}{3!}x^{3} + \cdots + (-1)^{\frac{k-1}{2}}\frac{[k - (k - 2)][k - (k - 4)]\cdots[k + (k - 3)][k + (k - 1)]}{k!}x^{k}\text{.}
+\end{equation*}
+</div>
+<p id="p-469">By choosing \(c_{0}\) and \(c_{1}\) judiciously, we can guarantee that the polynomials \(c_{0}y_{1}\) (if \(k\) is even) or \(c_{1}y_{2}\) (if \(k\) is odd) are precisely equal to \(1\) at \(x = 1\text{.}\) Doing so gives us the <dfn class="terminology">Legendre polynomials</dfn> \(P_{n}(x)\text{,}\) defined more precisely in <a data-knowl="./knowl/equation-legendre-poly.html" title="Equation 5.2.4">(5.2.4)</a>:</p>
+<div class="displaymath">
+\begin{equation}
+P_{n}(x) = \begin{cases} \sum_{j = 0}^{n/2}(-1)^{j}\frac{(2n - 2j)!}{2^{n}j!(n - j)!(n - 2j)!}x^{n - 2j} \amp \text{ if }n\text{ is even} \\
+\sum_{j = 0}^{(n-1)/2}(-1)^{j}\frac{(2n - 2j)!}{2^{n}j!(n - j)!(n - 2j)!}x^{n - 2j} \amp \text{ if }n\text{ is odd} \\ \end{cases}\text{.}\label{equation-legendre-poly}\tag{5.2.4}
+\end{equation}
+</div>
+<p id="p-470">These polynomials satisfy several nice properties, but one of the most important characteristics they have is that \(\{P_{n}(x)\}\) forms an <em class="emphasis">orthogonal set</em> of polynomials on the interval \([-1,1]\text{.}\) This means that</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{-1}^{1}P_{m}(x)P_{n}(x)\,dx = 0
+\end{equation*}
+</div>
+<p>if \(m\neq n\text{.}\) It can also be shown that</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{-1}^{1}P_{m}(x)P_{n}(x)\,dx = \frac{2}{2n+1}
+\end{equation*}
+</div>
+<p>if \(m = n\text{.}\) This property allows us to express <em class="emphasis">any</em> polynomial as a finite sum of Legendre polynomials in a computationally efficient manner. Furthermore, if we allow infinite series then we can use Legendre polynomials to express and continuous function on \([-1,1]\text{.}\)</p>
+<p id="p-471">For actually computing Legendre polynomials, instead of using <a data-knowl="./knowl/equation-legendre-poly.html" title="Equation 5.2.4">(5.2.4)</a> we often use <em class="emphasis">Rodrigues' formula</em></p>
+<div class="displaymath">
+\begin{equation}
+P_{n}(x) = \frac{1}{2^{n}n!}\dv[n]{}{x}[(x^{2} - 1)^{n}]\label{equation-rodrigues}\tag{5.2.5}
+\end{equation}
+</div>
+<p>or <em class="emphasis">Bonnet's recurrence</em></p>
+<div class="displaymath">
+\begin{equation}
+(n + 1)P_{n + 1}(x) = (2n + 1)xP_{n}(x) - n P_{n-1}(x)\text{.}\label{equation-bonnet-recurrence}\tag{5.2.6}
+\end{equation}
+</div>
+<p>Either recurrence is simple to program into a CAS, as seen in the Sage cell below:</p>
+<div class="sagecell-sage" id="sage-5"><script type="text/x-sage">def rodrigues(n):
+    Cn = (1 / (2^n * factorial(n)))
+    pn = (x^2 - 1)^n
+
+    pretty_print( (Cn * diff(pn, n)).full_simplify() )
+
+def bonnet(n):
+    k = 1
+    P0 = 1
+    P1 = x
+    while k < n:
+        P0, P1 = P1, ((2*k + 1) / (k + 1)) * x * P1 - (k / (k + 1)) * P0
+        k += 1
+
+    pretty_print( P1.full_simplify() )
+
+rodrigues(9)
+bonnet(9)
+</script></div></section></section></div></main>
+</div>
+<div class="login-link"><span id="loginlogout" class="login">login</span></div>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
+</body>
+</html>

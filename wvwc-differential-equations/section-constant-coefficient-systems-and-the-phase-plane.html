@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:09-04:00    *-->
+<!--*    on 2019-10-24T14:42:37-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -49,7 +49,7 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
@@ -61,7 +61,7 @@ MathJax.Hub.Config({
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -88,7 +88,7 @@ var js_version = 0.11;
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
   \renewcommand{\arraystretch}{.8}
   \begin{bmatrix}#1\end{bmatrix}
@@ -152,6 +152,7 @@ var js_version = 0.11;
 <li class="link">
 <a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
 </ul>
 </li>
@@ -640,7 +641,7 @@ y'_{2}  \amp =  a_{21}y_{1}+  a_{22}y_{2}\notag
 </div>
 <p id="p-373">If \(\vec{y}\) lies on the line \(y_{2} = y_{1}\text{,}\) then \(c_{1}\) has to equal \(0\text{,}\) which follows from the fact that \(\begin{bmatrix}-3\\2\end{bmatrix}\) and \(\begin{bmatrix}1\\1\end{bmatrix}\) are linearly independent. So trajectories that lie on the line \(y_{2} = y_{1}\) must take the form \(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\) and every solution of this form goes to \(\vec{0}\) as \(t\to\infty\text{.}\) <em class="emphasis">Every other trajectory</em> will move away from the origin as \(t\to\infty\text{,}\) although the trajectories that lie on the line \(y_{2} = -\frac{2}{3}y_{1}\) will travel to the origin as \(t\to-\infty\) (i.e. ``backwards in time''):</p>
 </div></div>
-</div></article><figure class="figure-like" id="figure-sketch-phase-portrait"><div style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-15.svg" style="width: 100%; height: auto;" alt=""></div>
+</div></article><figure class="figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-15.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">4.2.14.</span> The phase portrait from <a data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><p id="p-374">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</p>
 <div class="sagecell-sage" id="sage-4"><script type="text/x-sage">var('y1 y2') # define from system variables
 VF=plot_vector_field([2*y1 - 3*y2,-2*y1 + y2],[y1,-2,2],[y2,-2,2]) # creates plot of phase portrait from system
@@ -701,7 +702,7 @@ show(VF) # shows the plot
 </div>
 <p id="p-380">The real part of the eigenvalues leads to the ``growth term'' of \(e^{3t}\) appearing in the solution, which causes the trajectories to diverge as \(t\to\infty\text{.}\) The imaginary part of the eigenvalues leads to the ``oscillating terms'' of \(\cos4t,\sin4t\) appearing in the solution, which gives the trajectories their spiral motion.</p>
 </div></div>
-</div></article><figure class="figure-like" id="figure-classify-stability-using-phase-portrait"><div style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-16.svg" style="width: 100%; height: auto;" alt=""></div>
+</div></article><figure class="figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-16.svg" style="width: 100%; height: auto;" alt=""></div>
 <figcaption><span class="type">Figure</span> <span class="codenumber">4.2.17.</span> The phase portrait for <a data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><p id="p-381">In general, the eigenvalues of the matrix \(A\) in the system \(\vec{y}' = A\vec{y}\) will determine the type of critical point that \(\vec{0}\) is for the system \(\vec{y}'=A\vec{y}\text{.}\)</p>
 <article class="example-like" id="example-64"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">4.2.18</span>.</h6>
@@ -732,6 +733,6 @@ y'_{2}  \amp =  4y_{1}
 </div></article></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>

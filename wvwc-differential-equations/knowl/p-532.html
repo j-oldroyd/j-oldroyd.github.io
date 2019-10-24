@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:22-04:00    *-->
+<!--*    on 2019-10-24T14:42:53-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -13,30 +13,44 @@
 </head>
 <body>
 <h6 class="heading"><span class="type">Paragraph</span></h6>
-<p>So this is our goal: find some function \(d(t)\) that has an instantaneous unit impulse at the point \(t=0\text{.}\) In other words, we want to find a function \(d(t)\) such that</p>
+<p>We will solve this by using Laplace transforms. If we set \(X(s) = \Laplace{x(t)}\text{,}\) then</p>
+<div class="displaymath">
+\begin{align*}
+\Laplace{x'(t)} \amp= sX(s) - 2\\
+\Laplace{x''(t)} \amp= s^{2}X(s) - 2s +3\text{.}
+\end{align*}
+</div>
+<p>So if we take the Laplace transform of the entire ODE, we get</p>
 <div class="displaymath">
 \begin{equation*}
-\int_{0}^{0}d(t)\,dt = 1
+\underbrace{s^{2}X(s) - 2s + 3}_{\Laplace{x''}} + \underbrace{8sX(s) - 16}_{\Laplace{8x'}} + 15X(s) = 0
 \end{equation*}
 </div>
-<p>But this is impossible for any function, since</p>
+<p>which simplifies to</p>
 <div class="displaymath">
 \begin{equation*}
-\Int{0}{0}d(t)\dd{t} = 0.
+s^{2}X(s)+8sX(s)+15X(s) = 2s+13.
 \end{equation*}
 </div>
-<p>However, we can approximate the <em class="emphasis">idea</em> of an instantaneous unit impulse by defining</p>
+<p>To solve the ODE we need to find \(x(t) = \mathcal{L}^{-1}\{X(s)\}\text{,}\) so we now solve the above for \(X(s)\) in order to find the inverse Laplace transform. If we do so, we get</p>
 <div class="displaymath">
 \begin{equation*}
-d_{\varepsilon}(t) = 
-\begin{cases}
-\frac{1}{\varepsilon} \amp\text{if }-\frac{\varepsilon}{2}\leq t\leq \frac{\varepsilon}{2} \\
-0 \amp\text{otherwise}  
-\end{cases}.
+X(s) = \frac{2s+13}{s^{2}+8s+15} = \frac{2s+13}{(s+3)(s+5)}.
 \end{equation*}
 </div>
-<p><figure class="figure-like"><div style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-17.svg" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span> <span class="codenumber">6.4.1.</span> Approximating the instantaneous unit impulse.</figcaption></figure></p>
-<span class="incontext"><a href="section-dirac-delta-functions.html#p-532">in-context</a></span>
+<p>This doesn't look like the Laplace transform of anything we know at the moment, but we can simplify the right hand side using partial fractions. If we do so, we get</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{\frac{7}{2}}{s+3} - \frac{\frac{3}{2}}{s+5}.
+\end{equation*}
+</div>
+<p>So</p>
+<div class="displaymath">
+\begin{align*}
+x(t) \amp= \frac{7}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} - \frac{3}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+5}\right\}\\
+\amp= \frac{7}{2}e^{-3t} - \frac{3}{2}e^{-5t}\text{.}
+\end{align*}
+</div>
+<span class="incontext"><a href="section-transformation-of-initial-value-problems.html#p-532">in-context</a></span>
 </body>
 </html>

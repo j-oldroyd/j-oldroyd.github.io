@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-08-29T10:30:23-04:00    *-->
+<!--*    on 2019-10-24T14:42:53-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -13,18 +13,36 @@
 </head>
 <body>
 <h6 class="heading"><span class="type">Paragraph</span></h6>
-<p>There are a couple of interesting things happening in the last example. In particular, we were able to write the solution \(x(t)\) in terms of \(f(t)\) as</p>
+<p>The IVP we need to solve now is</p>
+<div class="displaymath">
+\begin{align*}
+x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
+\amp= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
+\end{align*}
+</div>
+<p>where \(x(0) = x'(0) = 0\text{.}\) So once more we take Laplace transforms to get</p>
 <div class="displaymath">
 \begin{equation*}
-x(t) = g(t)\ast f(t)\text{.}
+s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
 \end{equation*}
 </div>
-<p>In these terms, we can view \(f(t)\) as the input into a particular system (whose behavior is determined by the ODE) and the solution \(x(t)\) is the corresponding output. This relationship is even easier to write in the frequency domain: the frequency input \(F(s)\) is turned into the frequency output \(X(s)\) by means of the <dfn class="terminology">transfer function</dfn> \(G(s)\text{:}\)</p>
+<p>and so</p>
 <div class="displaymath">
 \begin{equation*}
-X(s) = G(s)F(s)\text{.}
+X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
 \end{equation*}
 </div>
-<span class="incontext"><a href="section-convolution-products.html#p-566">in-context</a></span>
+<p>The displacement is then given by</p>
+<div class="displaymath">
+\begin{align*}
+x(t) \amp= \iLaplace{X(s)}\\
+\amp= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
+\amp= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
+\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
+\end{align*}
+</div>
+<p>Each time the hammer strikes the mass, a factor of \(\sin3t\) is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.</p>
+<span class="incontext"><a href="section-dirac-delta-functions.html#p-566">in-context</a></span>
 </body>
 </html>
