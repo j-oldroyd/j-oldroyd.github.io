@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-10-24T14:42:55-04:00    *-->
+<!--*    on 2019-10-30T11:45:02-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -12,16 +12,29 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body><div class="solution">
-<p>We can do so very easily with <a data-knowl="./knowl/theorem-d-alembert-s-solution-without-initial-velocity.html" title="Theorem 8.3.1: d'Alembert's Solution without Initial Velocity">Theorem 8.3.1</a>, since the initial velocity of the string is \(0\text{.}\) So we have</p>
+<p>We can model \(u(x,t)\) as the solution of the wave equation</p>
 <div class="displaymath">
 \begin{equation*}
-u(x,t) = \frac{1}{2}[f^{*}(x-t)+f^{*}(x+t)],
+\pdv[2]{u}{t} = 16\pdv[2]{u}{x}
 \end{equation*}
 </div>
-<p>where \(f^{*}\) is the odd extension of \(f(x)\text{.}\) However, since \(f(x)\) is itself an odd function, it follows that the odd extension is simply \(\sin\pi x-\frac{1}{2}\sin2\pi x\text{.}\) Therefore the solution is</p>
+<p>with boundary conditions \(u(0,t) = u(1,t) = 0\) and initial conditions</p>
 <div class="displaymath">
 \begin{equation*}
-u(x,t) = \frac{1}{2}\left[\sin(\pi(x-t))-\frac{1}{2}\sin(2\pi(x-t)) + \sin(\pi(x+t)) - \frac{1}{2}\sin(2\pi(x+t))\right].
+u(x,0) = f(x)\text{ and }u_{t}(x,0) = 0.
+\end{equation*}
+</div>
+<p>We can find \(u(x,t)\) from <a data-knowl="./knowl/theorem-solution-of-the-wave-equation.html" title="Theorem 8.2.1: Solution of the Wave Equation">Theorem 8.2.1</a>.</p>
+<p>Using the Sage cell below, we get</p>
+<div class="displaymath">
+\begin{equation*}
+b_{n} = \frac{8\sin\left(\frac{1}{2} \pi n\right)}{\pi^{2} n^{2}},
+\end{equation*}
+</div>
+<p>and since \(g(x) = 0\) this forces \(b^{*}_{n} = 0\) as well. Hence the solution is</p>
+<div class="displaymath">
+\begin{equation*}
+u(x,t) = \sum_{n=1}^{\infty}\frac{8\sin\left(\frac{1}{2} \pi n\right)}{\pi^{2} n^{2}}\sin(n\pi x)\cos(4n\pi t).
 \end{equation*}
 </div>
 </div></body>

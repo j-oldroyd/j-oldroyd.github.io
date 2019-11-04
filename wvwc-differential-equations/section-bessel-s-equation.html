@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2019-10-30T11:44:44-04:00    *-->
+<!--*                                    *-->
+<!--*      https://pretextbook.org       *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Bessel's Equation</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
+    },
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
+<script>var logged_in = false;
+var role = 'student';
+var guest_access = true;
+var login_required = false;
+var js_version = 0.12;
+</script>
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-frobenius-method.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="laplace-transforms.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-frobenius-method.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="laplace-transforms.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link">
+<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
+<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
+<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
+<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
+<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
+<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
+<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
+<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
+<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
+<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
+<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
+<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
+<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
+<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
+<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
+<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
+<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
+<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
+<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
+<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation" class="active">Bessel's Equation</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
+<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
+<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
+<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
+<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
+<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
+<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
+<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
+<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
+<li><a href="subsection-the-fourier-transform.html" data-scroll="subsection-the-fourier-transform">The Fourier Transform</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
+<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
+<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
+<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
+<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
+</ul>
+</li>
+<li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-bessel-s-equation"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.4</span> <span class="title">Bessel's Equation</span>
+</h2>
+<a href="section-bessel-s-equation.html" class="permalink">¶</a><section class="introduction" id="introduction-16"><p id="p-502">As with Legendre's Equation <a data-knowl="./knowl/equation-legendre-ode.html" title="Equation 5.2.1">(5.2.1)</a>, another important differential equation in applications is <dfn class="terminology">Bessel's equation</dfn>:</p>
+<div class="displaymath">
+\begin{equation}
+x^{2}y'' + xy' + (x^{2} - \nu^{2})y = 0\text{,}\label{equation-bessel}\tag{5.4.1}
+\end{equation}
+</div>
+<p>where \(\nu \geq 0\text{.}\) By <a data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a>, this equation has a series solution at \(x = 0\) of the form</p>
+<div class="displaymath">
+\begin{equation*}
+y = x^{r}\sum_{k\geq0}c_{k}x^{k}
+\end{equation*}
+</div>
+<p>where \(r\) is a solution of the indicial equation</p>
+<div class="displaymath">
+\begin{equation*}
+r(r - 1) + r - \nu^{2} = 0\text{,}
+\end{equation*}
+</div>
+<p>or just</p>
+<div class="displaymath">
+\begin{equation*}
+r = \pm\nu\text{.}
+\end{equation*}
+</div>
+<p>In particular, there we're guaranteed a series solution by setting \(r = \nu\text{,}\) since this is the larger root. Note that <a data-knowl="./knowl/example-using-method-of-frobenius.html" title="Example 5.3.7: Using the Method of Frobenius">Example 5.3.7</a> is actually a Bessel equation with parameter \(\nu = \frac{1}{2}\text{.}\)</p>
+<p id="p-503">Let</p>
+<div class="displaymath">
+\begin{equation*}
+y = x^{\nu}\sum_{k\geq0}c_{k}x^{k}\text{.}
+\end{equation*}
+</div>
+<p>Then we can plug this into <a data-knowl="./knowl/equation-bessel.html" title="Equation 5.4.1">(5.4.1)</a> to obtain</p>
+<div class="displaymath">
+\begin{equation}
+\sum_{k\geq0}(k+\nu)(k+\nu-1)c_{k}x^{k + \nu} + \sum_{k\geq0}(k+\nu)c_{k}x^{k + \nu} + \sum_{k\geq2}c_{k-2}x^{k + \nu} - \sum_{k\geq0}\nu^{2}c_{k}x^{k + \nu} = 0\text{,}\label{equation-bessel-plugged-in}\tag{5.4.2}
+\end{equation}
+</div>
+<p>which gives</p>
+<div class="displaymath">
+\begin{equation*}
+c_{k} = -\frac{c_{k-2}}{k(k+2\nu)}\qq{for}k\geq2\text{.}
+\end{equation*}
+</div>
+<p>Since this only gives us data about \(c_{k}, k\geq 2\text{,}\) we should go back to <a data-knowl="./knowl/equation-bessel-plugged-in.html" title="Equation 5.4.2">(5.4.2)</a> to see if we can say anything about \(c_{0}\) or \(c_{1}\text{.}\) In fact, we get</p>
+<div class="displaymath">
+\begin{equation*}
+(2\nu + 1)c_{1} = 0 \implies c_{1} = 0\text{.}
+\end{equation*}
+</div>
+<p>Hence our series solution only contains even-indexed coefficients. Rewriting the recurrence to reflect this, we get</p>
+<div class="displaymath">
+\begin{equation}
+c_{2k} = -\frac{c_{2k - 2}}{2^{2}k(k + \nu)} = \frac{(-1)^{k}c_{0}}{2^{2m}k!(\nu + 1)(\nu + 2)\cdots(\nu + k)}\qq{for} k\geq2.\label{equation-bessel-recurrence}\tag{5.4.3}
+\end{equation}
+</div></section><section class="subsection" id="subsection-bessel-functions-for-integer--nu-"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.4.1</span> <span class="title">Bessel Functions for Integer \(\nu\)</span>
+</h3>
+<a href="section-bessel-s-equation.html#subsection-bessel-functions-for-integer--nu-" class="permalink">¶</a><p id="p-504">Now we consider what happens to solutions given by <a data-knowl="./knowl/equation-bessel-recurrence.html" title="Equation 5.4.3">(5.4.3)</a> if \(\nu = n\) is a nonnegative integer. To simplify matters (somewhat...), we add the restriction that \(c_{0} = \frac{1}{2^{n}n!}\text{.}\) This allows us to write <a data-knowl="./knowl/equation-bessel-recurrence.html" title="Equation 5.4.3">(5.4.3)</a> more simply as</p>
+<div class="displaymath">
+\begin{equation}
+c_{2k} = \frac{(-1)^{k}}{2^{2k + n}(n + k)!}.\label{equation-bessel-function-nu-integer}\tag{5.4.4}
+\end{equation}
+</div>
+<p>The resulting series</p>
+<div class="displaymath">
+\begin{equation}
+J_{n}(x) = x^{n}\sum_{k\geq0}\frac{(-1)^{k}}{2^{2k + n}k!(n + k)!}x^{2k}\label{equation-bessel-function-first-kind}\tag{5.4.5}
+\end{equation}
+</div>
+<p>is known as the <dfn class="terminology">Bessel function of the first kind</dfn> of order \(n\text{.}\)</p>
+<article class="example-like" id="example-finding-j_-0-m-and-j_-1-m-"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">5.4.1</span>. <span class="title">Finding \(J_{0}\) and \(J_{1}\).</span>
+</h6>
+<p id="p-505">Find the zeroth order and first order Bessel functions of the first kind.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-77" id="solution-77"><span class="type">Solution</span></a><div id="hk-solution-77" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-506">Using <a data-knowl="./knowl/equation-bessel-function-first-kind.html" title="Equation 5.4.5">(5.4.5)</a>, we get</p>
+<div class="displaymath">
+\begin{align*}
+J_{0}(x) \amp = \sum_{k\geq0}\frac{(-1)^{k}}{2^{2k}(k!)^{2}}x^{2k} \amp= 1 - \frac{1}{4}x^{2} + \frac{1}{16(4)}x^{4} - \cdots\\
+J_{1}(x) \amp = x\sum_{k\geq0}\frac{(-1)^{k}}{2^{2k + 1}k!(1 + k)!}x^{2k} \amp= \frac{1}{2}x - \frac{1}{8(2)}x^{3} + \cdots\text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article><p id="p-507">These functions are important enough that they are built-in to most computer algebra systems. Using Sage, we get the following plots:</p>
+<div class="sagecell-sage" id="sage-6"><script type="text/x-sage">J0 = bessel_J(0, x)
+J1 = bessel_J(1, x)
+
+P = plot(J0, (x, -1, 50), legend_label = "$J_{0}(x)$")
+P += plot(J1, (x, -1, 50), color = 'green', legend_label = "$J_{1}(x)$")
+P.show()
+</script></div>
+<p id="p-508">As we can see, these functions oscillate and tend towards \(0\text{.}\) A useful (asymptotic) approximation is given by</p>
+<div class="displaymath">
+\begin{equation}
+\sqrt{\frac{2}{\pi x}}\cos\left(x - \frac{n\pi}{2} - \frac{\pi}{4}\right)\text{,}\label{equation-bessel-asymptotic}\tag{5.4.6}
+\end{equation}
+</div>
+<p>as shown below.</p>
+<figure class="figure-like" id="figure-bessel-approximation-first-kind"><figcaption><span class="type">Figure</span> <span class="codenumber">5.4.2.</span> Approximating a Bessel function.</figcaption></figure><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-bessel-approximation-first-kind.svg" style="width: 100%; height: auto;" alt="" onerror="this.src='images/image-bessel-approximation-first-kind.png';this.onerror=null;"></div></section><section class="subsection" id="subsection-bessel-functions-of-the-first-kind-for-nonnegative-order"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.4.2</span> <span class="title">Bessel Functions of the First Kind for Nonnegative Order</span>
+</h3>
+<a href="section-bessel-s-equation.html#subsection-bessel-functions-of-the-first-kind-for-nonnegative-order" class="permalink">¶</a><p id="p-509">Now we try to find a formula for \(J_{\nu}(x)\) assuming \(\nu\geq0\text{.}\) To do so, we need to make sense of expressions like \((\nu + k)!\text{.}\) Thankfully, we can do so using the <em class="emphasis">Gamma function</em>.</p>
+<article class="definition-like" id="definition-gamma-function"><h6 class="heading">
+<span class="type">Definition</span> <span class="codenumber">5.4.3</span>. <span class="title">Gamma Function.</span>
+</h6>
+<p id="p-510">The <dfn class="terminology">Gamma function</dfn> is the function \(\Gamma(x)\) given by</p>
+<div class="displaymath">
+\begin{equation*}
+\Gamma(x) = \int_{0}^{\infty}t^{x-1}e^{-t}\,dt\text{.}
+\end{equation*}
+</div></article><p id="p-511">An important property of the Gamma function is the following:</p>
+<div class="displaymath">
+\begin{equation*}
+\Gamma(x + 1) = x\Gamma(x)\text{.}
+\end{equation*}
+</div>
+<p>If we replace \(x\) with an integer \(n\geq0\text{,}\) we get</p>
+<div class="displaymath">
+\begin{equation*}
+\Gamma(n + 1) = n!\text{.}
+\end{equation*}
+</div>
+<p>It turns out that we can replace \((\nu + k)!\) in <a data-knowl="./knowl/equation-bessel-function-first-kind.html" title="Equation 5.4.5">(5.4.5)</a> with \(\Gamma(\nu + k + 1)\text{,}\) giving</p>
+<div class="displaymath">
+\begin{equation}
+J_{\nu}(x) = x^{\nu}\sum_{k\geq0}\frac{(-1)^{k}}{2^{2k + \nu}k!\Gamma(\nu + k + 1)}x^{2k} = \sum_{k\geq0} \frac{(-1)^{k}}{k!\Gamma(\nu + k + 1)}\left(\frac{x}{2}\right)^{2k + \nu}\text{.}\label{equation-bessel-first-kind-nonnegative-order}\tag{5.4.7}
+\end{equation}
+</div>
+<p>Note that the asymptotic expansion in <a data-knowl="./knowl/equation-bessel-asymptotic.html" title="Equation 5.4.6">(5.4.6)</a> holds for noninteger \(\nu\) as well.</p></section><section class="subsection" id="subsection-general-solution-of-bessel-s-equation"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.4.3</span> <span class="title">General Solution of Bessel's Equation</span>
+</h3>
+<a href="section-bessel-s-equation.html#subsection-general-solution-of-bessel-s-equation" class="permalink">¶</a><p id="p-512">Since <a data-knowl="./knowl/equation-bessel-plugged-in.html" title="Equation 5.4.2">(5.4.2)</a> is second-order, we need a second linearly independent solution to get the general solution. If \(\nu\) is not an integer then we can find the second solution very quickly: \(J_{-\nu}(x)\text{.}\) However, if \(\nu\) is an integer then it turns out that \(J_{-\nu}(x) = (-1)^{n}J_{\nu}(x)\text{,}\) and so fails to be linearly independent from \(J_{\nu}\text{.}\)</p>
+<p id="p-513">It turns out that a second, linearly independent solution \(Y_{\nu}\) is given as follows:</p>
+<div class="displaymath">
+\begin{align}
+Y_{\nu}(x) \amp = \frac{1}{\sin(\nu\pi)}[J_{\nu}(x)\cos(\nu\pi) - J_{-\nu}(x)]\label{equation-bessel-second-kind-noninteger}\tag{5.4.8}\\
+Y_{n}(x) \amp = \lim_{\nu\to n}Y_{\nu}(x)\text{.}\label{equation-bessel-second-kind-integer}\tag{5.4.9}
+\end{align}
+</div></section></section></div></main>
+</div>
+<div class="login-link"><span id="loginlogout" class="login">login</span></div>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
+</body>
+</html>

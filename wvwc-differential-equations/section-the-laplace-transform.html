@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-10-24T14:42:39-04:00    *-->
+<!--*    on 2019-10-30T11:44:45-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -48,6 +48,7 @@ MathJax.Hub.Config({
 <link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
 <script>var logged_in = false;
 var role = 'student';
@@ -146,6 +147,7 @@ var js_version = 0.12;
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
 <li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
 </ul>
 </li>
 <li class="link">
@@ -188,10 +190,10 @@ var js_version = 0.12;
 <a href="section-the-laplace-transform.html#subsection-definition-and-basic-properties" class="permalink">¶</a><article class="example-like" id="example-motivating-laplace"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.1</span>. <span class="title">Motivating the Laplace Transform.</span>
 </h6>
-<p id="p-500">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time \(t=0\text{,}\) a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\text{.}\) What is an ODE that models the motion of the mass?</p>
+<p id="p-514">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time \(t=0\text{,}\) a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\text{.}\) What is an ODE that models the motion of the mass?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-77" id="solution-77"><span class="type">Solution</span></a><div id="hk-solution-77" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-501">We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-78" id="solution-78"><span class="type">Solution</span></a><div id="hk-solution-78" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-515">We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have</p>
 <div class="displaymath">
 \begin{equation*}
 mx''+kx = F_{E}(t)
@@ -214,27 +216,27 @@ x''+4x = F_{E}(t).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-502">For the above example we could try to solve it as we did in Chapter 3: first by finding the complementary solution \(x_{c}\) (which isn't a problem) and then by finding the particular solution \(x_{p}\) corresponding to \(F_{E}\text{.}\) However, finding \(x_{p}\) will not be possible using our previous methods since the function \(F_{E}\) is not differentiable everywhere (nor continuous everywhere). We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.</p>
+</div></article><p id="p-516">For the above example we could try to solve it as we did in Chapter 3: first by finding the complementary solution \(x_{c}\) (which isn't a problem) and then by finding the particular solution \(x_{p}\) corresponding to \(F_{E}\text{.}\) However, finding \(x_{p}\) will not be possible using our previous methods since the function \(F_{E}\) is not differentiable everywhere (nor continuous everywhere). We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.</p>
 <article class="definition-like" id="definition-the-laplace-transform"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">6.1.2</span>. <span class="title">The Laplace Transform.</span>
 </h6>
-<p id="p-503">Let \(f(t)\) be defined for \(t\geq0\text{.}\) The <dfn class="terminology">Laplace transform</dfn> of \(f\) is a function \(F(s)\text{,}\) or \(\mathcal{L}\left\{ f(t) \right\}\text{,}\) defined by</p>
+<p id="p-517">Let \(f(t)\) be defined for \(t\geq0\text{.}\) The <dfn class="terminology">Laplace transform</dfn> of \(f\) is a function \(F(s)\text{,}\) or \(\mathcal{L}\left\{ f(t) \right\}\text{,}\) defined by</p>
 <div class="displaymath">
 \begin{equation*}
 F(s) = \mathcal{L}\left\{ f(t) \right\} = \Int{0}{\infty}f(t)e^{-st}\,dt
 \end{equation*}
 </div>
-<p>for all values of \(s\) such that \(F(s)\) exists. We often say that \(f(t)\) is in the <dfn class="terminology">time domain</dfn> while \(F(s)\) is in the <dfn class="terminology">frequency domain</dfn>.</p></article><p id="p-504">One reason we care about the Laplace transform is that it lets us deal with solving linear ODEs involving discontinuous functions. This is something we will begin to look at in the next section.</p>
+<p>for all values of \(s\) such that \(F(s)\) exists. We often say that \(f(t)\) is in the <dfn class="terminology">time domain</dfn> while \(F(s)\) is in the <dfn class="terminology">frequency domain</dfn>.</p></article><p id="p-518">One reason we care about the Laplace transform is that it lets us deal with solving linear ODEs involving discontinuous functions. This is something we will begin to look at in the next section.</p>
 <article class="example-like" id="example-computing-a-laplace-transform"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.3</span>. <span class="title">Computing a Laplace Transform.</span>
 </h6>
-<p id="p-505">Compute \(\mathcal{L}\left\{ 1 \right\}\text{.}\)</p></article><article class="example-like" id="example-computing-the-laplace-of-t-"><h6 class="heading">
+<p id="p-519">Compute \(\mathcal{L}\left\{ 1 \right\}\text{.}\)</p></article><article class="example-like" id="example-computing-the-laplace-of-t-"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.4</span>. <span class="title">Computing the Laplace of \(t\).</span>
 </h6>
-<p id="p-506">Compute the Laplace transform of \(f(t) = t\text{.}\)</p>
+<p id="p-520">Compute the Laplace transform of \(f(t) = t\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-78" id="solution-78"><span class="type">Solution</span></a><div id="hk-solution-78" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-507">We compute the Laplace transform \(F(s)\) using the definition:</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-79" id="solution-79"><span class="type">Solution</span></a><div id="hk-solution-79" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-521">We compute the Laplace transform \(F(s)\) using the definition:</p>
 <div class="displaymath">
 \begin{align*}
 F(s) \amp= \Int{0}{\infty}te^{-st}\,dt\\
@@ -244,18 +246,18 @@ F(s) \amp= \Int{0}{\infty}te^{-st}\,dt\\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-508">In general,</p>
+</div></article><p id="p-522">In general,</p>
 <div class="displaymath">
 \begin{equation*}
 \mathcal{L}\left\{t^{n}\right\} = \frac{n!}{s^{n+1}}
 \end{equation*}
 </div>
 <p>if \(n\geq0\) is a whole number.</p>
-<p id="p-509">The Laplace transform is also an example of a <dfn class="terminology">linear transformation</dfn>. In particular, we have the following theorem.</p>
+<p id="p-523">The Laplace transform is also an example of a <dfn class="terminology">linear transformation</dfn>. In particular, we have the following theorem.</p>
 <article class="theorem-like" id="theorem-linearity-of-the-laplace-transform"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">6.1.5</span>. <span class="title">Linearity of the Laplace Transform.</span>
 </h6>
-<p id="p-510">Let \(a\) and \(b\) be constants and suppose \(f(t)\) and \(g(t)\) are functions with respective Laplace transforms \(F(s)\) and \(G(s)\text{.}\) Then</p>
+<p id="p-524">Let \(a\) and \(b\) be constants and suppose \(f(t)\) and \(g(t)\) are functions with respective Laplace transforms \(F(s)\) and \(G(s)\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \Laplace{af+bg} = aF(s)+bG(s).
@@ -263,10 +265,10 @@ F(s) \amp= \Int{0}{\infty}te^{-st}\,dt\\
 </div></article><article class="example-like" id="example-computing-the-transform-of-a-polynomial"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.6</span>. <span class="title">Computing the Transform of a Polynomial.</span>
 </h6>
-<p id="p-511">Compute \(\Laplace{(t-1)^{3}}\text{.}\)</p>
+<p id="p-525">Compute \(\Laplace{(t-1)^{3}}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-79" id="solution-79"><span class="type">Solution</span></a><div id="hk-solution-79" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-512">We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-80" id="solution-80"><span class="type">Solution</span></a><div id="hk-solution-80" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-526">We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that</p>
 <div class="displaymath">
 \begin{equation*}
 (t-1)^{3} = t^{3} - 3t^{2} +3t - 1
@@ -282,11 +284,11 @@ F(s) \amp= \Int{0}{\infty}te^{-st}\,dt\\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-513">Another benefit is that the Laplace transform works well with some discontinuous functions.</p>
+</div></article><p id="p-527">Another benefit is that the Laplace transform works well with some discontinuous functions.</p>
 <article class="example-like" id="example-the-unit-step-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.7</span>. <span class="title">The Unit Step Function.</span>
 </h6>
-<p id="p-514">Let \(u(t)\) be the <dfn class="terminology">unit step function</dfn>, which is defined by</p>
+<p id="p-528">Let \(u(t)\) be the <dfn class="terminology">unit step function</dfn>, which is defined by</p>
 <div class="displaymath">
 \begin{equation*}
 u(t) = 
@@ -298,8 +300,8 @@ u(t) =
 </div>
 <p>Compute \(\Laplace{u(t-3)}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-80" id="solution-80"><span class="type">Solution</span></a><div id="hk-solution-80" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-515">Note that we are computing a <em class="emphasis">translation</em> of the usual unit step function. We still compute \(\Laplace{u(t-3)}\) using the definition of the Laplace transform:</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-81" id="solution-81"><span class="type">Solution</span></a><div id="hk-solution-81" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-529">Note that we are computing a <em class="emphasis">translation</em> of the usual unit step function. We still compute \(\Laplace{u(t-3)}\) using the definition of the Laplace transform:</p>
 <div class="displaymath">
 \begin{align*}
 \Laplace{u(t)} \amp= \Int{0}{\infty}u(t)e^{-st}\,dt\\
@@ -309,7 +311,7 @@ u(t) =
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-516">Some other important Laplace transforms are given below:</p>
+</div></article><p id="p-530">Some other important Laplace transforms are given below:</p>
 <div class="displaymath">
 \begin{align*}
 \Laplace{e^{at}} \amp= \frac{1}{s-a}\\
@@ -319,27 +321,27 @@ u(t) =
 </div></section><section class="subsection" id="subsection-the-inverse-laplace-transform-m-s--shifting"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.2</span> <span class="title">The Inverse Laplace Transform; \(s\)-shifting</span>
 </h3>
-<a href="section-the-laplace-transform.html#subsection-the-inverse-laplace-transform-m-s--shifting" class="permalink">¶</a><p id="p-517">An important theorem regarding Laplace transforms is the following:</p>
+<a href="section-the-laplace-transform.html#subsection-the-inverse-laplace-transform-m-s--shifting" class="permalink">¶</a><p id="p-531">An important theorem regarding Laplace transforms is the following:</p>
 <article class="theorem-like" id="theorem-uniqueness-of-inverse-laplace"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">6.1.8</span>. <span class="title">Uniqueness of Laplace Transforms.</span>
 </h6>
-<p id="p-518">Suppose \(f(t)\) and \(g(t)\) have respective Laplace transforms \(F(s)\) and \(G(s)\text{.}\) If \(F(s) = G(s)\) for all \(s\gt c\) (for some constant \(c\)) and \(f(t)\) and \(g(t)\) are piecewise continuous, then \(f(t) = g(t)\) on the interval \([0,\infty)\text{.}\)</p></article><p id="p-519">The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.</p>
+<p id="p-532">Suppose \(f(t)\) and \(g(t)\) have respective Laplace transforms \(F(s)\) and \(G(s)\text{.}\) If \(F(s) = G(s)\) for all \(s\gt c\) (for some constant \(c\)) and \(f(t)\) and \(g(t)\) are piecewise continuous, then \(f(t) = g(t)\) on the interval \([0,\infty)\text{.}\)</p></article><p id="p-533">The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.</p>
 <article class="definition-like" id="definition-inverse-laplace"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">6.1.9</span>. <span class="title">Inverse Laplace Transform.</span>
 </h6>
-<p id="p-520">The <dfn class="terminology">inverse Laplace transform</dfn> of a function \(F(s)\text{,}\) denoted \(\mathcal{L}^{-1}\left\{F(s)\right\}\text{,}\) is a function \(f(t)\) such that \(\Laplace{f(t)} = F(s)\text{.}\)</p></article><p id="p-521">Just like the Laplace transform, the inverse Laplace transform is <dfn class="terminology">linear</dfn>.</p>
+<p id="p-534">The <dfn class="terminology">inverse Laplace transform</dfn> of a function \(F(s)\text{,}\) denoted \(\mathcal{L}^{-1}\left\{F(s)\right\}\text{,}\) is a function \(f(t)\) such that \(\Laplace{f(t)} = F(s)\text{.}\)</p></article><p id="p-535">Just like the Laplace transform, the inverse Laplace transform is <dfn class="terminology">linear</dfn>.</p>
 <article class="example-like" id="example-finding-inverse-laplace"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.10</span>. <span class="title">Finding an Inverse Transform.</span>
 </h6>
-<p id="p-522">A continuous function \(f(t)\) has Laplace transform</p>
+<p id="p-536">A continuous function \(f(t)\) has Laplace transform</p>
 <div class="displaymath">
 \begin{equation*}
 F(s) = \frac{3s}{s^{2}+5} + \frac{7}{s^{3}}.
 \end{equation*}
 </div>
 <p>Find \(f(t)\text{.}\)</p>
-<a data-knowl="" class="id-ref" data-refid="hk-solution-81" id="solution-81"><span class="type">Solution</span></a><div id="hk-solution-81" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-523">We can find \(f(t)\) by taking the inverse Laplace transform of each term in \(F(s)\text{:}\)</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span></a><div id="hk-solution-82" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-537">We can find \(f(t)\) by taking the inverse Laplace transform of each term in \(F(s)\text{:}\)</p>
 <div class="displaymath">
 \begin{align*}
 \iLaplace{\frac{3s}{s^{2}+5}} \amp= 3\iLaplace{\frac{s}{s^{2}+5}} = 3\cos(\sqrt{5}t)\\
@@ -355,7 +357,7 @@ f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}.
 </div></div></article><article class="theorem-like" id="theorem--s--shifting"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">6.1.11</span>. <span class="title">\(s\)-shifting.</span>
 </h6>
-<p id="p-524">Suppose that \(f(t)\) has Laplace transform \(F(s)\text{,}\) defined for \(s\gt k\) for some \(k\text{.}\) Then</p>
+<p id="p-538">Suppose that \(f(t)\) has Laplace transform \(F(s)\text{,}\) defined for \(s\gt k\) for some \(k\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \Laplace{e^{at}f(t)} = F(s-a)\qq{or equivalently} \iLaplace{F(s-a)} = e^{at}f(t).
@@ -364,7 +366,7 @@ f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}.
 <p>In other words, multiplication by an exponential \(e^{at}\) in the \emph{time domain} corresponds to translation by \(a\) in the <em class="emphasis">frequency domain</em>.</p></article><article class="example-like" id="example-inverse-laplace-with-frequency-shifting"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">6.1.12</span>. <span class="title">Inverse Laplace with Frequency Shifting.</span>
 </h6>
-<p id="p-525">A function \(f(t)\) has Laplace transform</p>
+<p id="p-539">A function \(f(t)\) has Laplace transform</p>
 <div class="displaymath">
 \begin{equation*}
 F(s) = \frac{4}{s^{2}+2s+3}.
@@ -372,8 +374,8 @@ F(s) = \frac{4}{s^{2}+2s+3}.
 </div>
 <p>Find \(f(t)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span></a><div id="hk-solution-82" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-526">We'll start by completing the square on the denominator of \(F(s)\) to see if we can make it look like \((s-a)^{2}+\omega^{2}\) for some \(a,\omega\text{:}\)</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-83" id="solution-83"><span class="type">Solution</span></a><div id="hk-solution-83" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-540">We'll start by completing the square on the denominator of \(F(s)\) to see if we can make it look like \((s-a)^{2}+\omega^{2}\) for some \(a,\omega\text{:}\)</p>
 <div class="displaymath">
 \begin{equation*}
 F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}.

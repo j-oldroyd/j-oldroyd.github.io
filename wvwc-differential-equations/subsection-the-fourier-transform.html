@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-10-24T14:42:41-04:00    *-->
+<!--*    on 2019-10-30T11:44:47-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -48,6 +48,7 @@ MathJax.Hub.Config({
 <link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
 <script>var logged_in = false;
 var role = 'student';
@@ -146,6 +147,7 @@ var js_version = 0.12;
 <li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
 <li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
 <li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
+<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
 </ul>
 </li>
 <li class="link">
@@ -182,8 +184,8 @@ var js_version = 0.12;
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="subsection-the-fourier-transform"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.4</span> <span class="title">The Fourier Transform</span>
 </h2>
-<a href="subsection-the-fourier-transform.html" class="permalink">¶</a><p id="p-627">If \(f(x)\) is a periodic function with period \(p=2L\text{,}\) then we know how to find its Fourier series, both real and complex. But what do we do if our function \(f(x)\) is not periodic? Can we still get a similar representation?</p>
-<p id="p-628">Let \(f(x)\) be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of \(f(x)\text{,}\) and replace it with a periodic function that is equal to \(f(x)\) on some interval \((-L,L)\text{.}\) Then we can find the Fourier series of <em class="emphasis">this</em> function, which by <a data-knowl="./knowl/theorem-complex-fourier-series.html" title="Theorem 7.3.1: Complex Fourier Series">Theorem 7.3.1</a> is given by \(\sum_{k=-\infty}^{\infty}c_{k}e^{i\frac{k\pi}{L}x}\) where</p>
+<a href="subsection-the-fourier-transform.html" class="permalink">¶</a><p id="p-641">If \(f(x)\) is a periodic function with period \(p=2L\text{,}\) then we know how to find its Fourier series, both real and complex. But what do we do if our function \(f(x)\) is not periodic? Can we still get a similar representation?</p>
+<p id="p-642">Let \(f(x)\) be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of \(f(x)\text{,}\) and replace it with a periodic function that is equal to \(f(x)\) on some interval \((-L,L)\text{.}\) Then we can find the Fourier series of <em class="emphasis">this</em> function, which by <a data-knowl="./knowl/theorem-complex-fourier-series.html" title="Theorem 7.3.1: Complex Fourier Series">Theorem 7.3.1</a> is given by \(\sum_{k=-\infty}^{\infty}c_{k}e^{i\frac{k\pi}{L}x}\) where</p>
 <div class="displaymath">
 \begin{equation*}
 c_{k} = \frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx.
@@ -196,7 +198,7 @@ f(x) = \sum_{k=-\infty}^{\infty}\left(\frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\
 \end{equation*}
 </div>
 <p>wherever \(f(x)\) is continuous on \(-L \lt x \lt x\text{.}\)</p>
-<p id="p-629">The idea now is that the larger that \(T\) gets, this expression can be used to represent \(f(x)\) for more and more values of \(x\text{.}\) So we want to see what happens to this as \(T\to\infty\text{.}\) First, we'll clean this up a little bit by writing \(w_{k} = \frac{k\pi}{L}\) and \(\Delta w = w_{k+1} - w_{k}\text{,}\) so that \(\frac{1}{2L} = \frac{\Delta w}{2\pi}\text{.}\) Then if \(x\) is in \((-L,L)\) and \(f\) is continuous at \(x\text{,}\) then we can say</p>
+<p id="p-643">The idea now is that the larger that \(T\) gets, this expression can be used to represent \(f(x)\) for more and more values of \(x\text{.}\) So we want to see what happens to this as \(T\to\infty\text{.}\) First, we'll clean this up a little bit by writing \(w_{k} = \frac{k\pi}{L}\) and \(\Delta w = w_{k+1} - w_{k}\text{,}\) so that \(\frac{1}{2L} = \frac{\Delta w}{2\pi}\text{.}\) Then if \(x\) is in \((-L,L)\) and \(f\) is continuous at \(x\text{,}\) then we can say</p>
 <div class="displaymath">
 \begin{align*}
 f(x) \amp = \sum_{k=-\infty}^{\infty}\left(\frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx\right)e^{i\frac{k\pi}{L}x} \\
@@ -213,10 +215,10 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 <article class="definition-like" id="definition-absolutely-integrable-functions"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">7.4.1</span>. <span class="title">Absolutely Integrable Functions.</span>
 </h6>
-<p id="p-630">Let \(f(x)\) be a piecewise continuous function. Then \(f(x)\) is absolutely integrable if \(\int_{-\infty}^{\infty}|f(x)|\,dx \lt \infty.\)</p></article><article class="definition-like" id="definition-the-fourier-transform"><h6 class="heading">
+<p id="p-644">Let \(f(x)\) be a piecewise continuous function. Then \(f(x)\) is absolutely integrable if \(\int_{-\infty}^{\infty}|f(x)|\,dx \lt \infty.\)</p></article><article class="definition-like" id="definition-the-fourier-transform"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">7.4.2</span>. <span class="title">The Fourier Transform.</span>
 </h6>
-<p id="p-631">Let \(f(x)\) be an absolutely integrable piecewise continuous function. The Fourier transform of \(f(x)\) is the function \(\hat{f}(\omega)\) defined by</p>
+<p id="p-645">Let \(f(x)\) be an absolutely integrable piecewise continuous function. The Fourier transform of \(f(x)\) is the function \(\hat{f}(\omega)\) defined by</p>
 <div class="displaymath">
 \begin{equation*}
 \hat{f}(\omega) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx.
@@ -225,7 +227,7 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 <p>We often write \(\mathcal{F}(f)\) to denote the Fourier transform as well.</p></article><article class="example-like" id="example-fourier-transform-of-a-piecewise-exponential"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">7.4.3</span>. <span class="title">Fourier transform of a piecewise exponential.</span>
 </h6>
-<p id="p-632">Let \(f(x) = e^{-2x}\) for \(x&gt;-5\) and \(0\) otherwise. Then the Fourier transform of \(f(x)\) is</p>
+<p id="p-646">Let \(f(x) = e^{-2x}\) for \(x&gt;-5\) and \(0\) otherwise. Then the Fourier transform of \(f(x)\) is</p>
 <div class="displaymath">
 \begin{align*}
 \hat{f}(\omega) \amp = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx \\
@@ -234,11 +236,11 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 \amp = -\frac{1}{(2+i\omega)\sqrt{2\pi}}e^{-(2+i\omega)x}\Big]_{-5}^{\infty}\\
 \amp = \frac{e^{(2+i\omega)5}}{(2+i\omega)\sqrt{2\pi}}. 
 \end{align*}
-</div></article><p id="p-633">As with the Laplace transform, the Fourier transform of a function is said to be in the <dfn class="terminology">frequency domain</dfn>. In fact, the magnitude of \(\hat{f}(\omega)\) represents the <dfn class="terminology">frequency content</dfn> of the function \(f(x)\) (thought of as a signal) at the frequency \(\omega\text{.}\) It's also a quick jump to get the <dfn class="terminology">inverse Fourier transform</dfn>.</p>
+</div></article><p id="p-647">As with the Laplace transform, the Fourier transform of a function is said to be in the <dfn class="terminology">frequency domain</dfn>. In fact, the magnitude of \(\hat{f}(\omega)\) represents the <dfn class="terminology">frequency content</dfn> of the function \(f(x)\) (thought of as a signal) at the frequency \(\omega\text{.}\) It's also a quick jump to get the <dfn class="terminology">inverse Fourier transform</dfn>.</p>
 <article class="definition-like" id="definition-the-inverse-fourier-transform"><h6 class="heading">
 <span class="type">Definition</span> <span class="codenumber">7.4.4</span>. <span class="title">The Inverse Fourier Transform.</span>
 </h6>
-<p id="p-634">The inverse Fourier transform of \(\hat{f}(\omega)\) is</p>
+<p id="p-648">The inverse Fourier transform of \(\hat{f}(\omega)\) is</p>
 <div class="displaymath">
 \begin{equation*}
 \mathcal{F}^{-1}(\hat{f}) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\hat{f}(\omega)e^{i\omega x}\,d\omega.
@@ -246,10 +248,10 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 </div></article><article class="theorem-like" id="theorem-fourier-integral-representation"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.4.5</span>. <span class="title">Fourier Inversion Theorem.</span>
 </h6>
-<p id="p-635">Let \(f(x)\) be an absolutely integrable, piecewise differentiable function. Then \(f(x) = \mathcal{F}^{-1}(\hat{f})\) wherever \(f(x)\) is continuous.</p></article><article class="example-like" id="example-inverse-fourier-transform-of-a-step-function"><h6 class="heading">
+<p id="p-649">Let \(f(x)\) be an absolutely integrable, piecewise differentiable function. Then \(f(x) = \mathcal{F}^{-1}(\hat{f})\) wherever \(f(x)\) is continuous.</p></article><article class="example-like" id="example-inverse-fourier-transform-of-a-step-function"><h6 class="heading">
 <span class="type">Example</span> <span class="codenumber">7.4.6</span>. <span class="title">Inverse Fourier transform of a step function.</span>
 </h6>
-<p id="p-636">Define \(\hat{f}(\omega)\) by</p>
+<p id="p-650">Define \(\hat{f}(\omega)\) by</p>
 <div class="displaymath">
 \begin{equation*}
 \hat{f}(\omega) = \begin{cases} 1 \amp -1 &lt; x &lt; 1 \\ 0 \amp \text{otherwise.}\end{cases}
@@ -264,7 +266,7 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 \amp = \frac{1}{2\pi}\frac{e^{ix}-e^{-ix}}{ix} \\
 \amp = \frac{1}{\pi}\frac{\sin x}{x}. 
 \end{align*}
-</div></article><p id="p-637">The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if \(a,b\) are constants and \(f,g\) are functions, then</p>
+</div></article><p id="p-651">The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if \(a,b\) are constants and \(f,g\) are functions, then</p>
 <div class="displaymath">
 \begin{equation*}
 \mathcal{F}\{af+bg\} = a\hat{f}+b\hat{g}
@@ -280,16 +282,16 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 <article class="theorem-like" id="theorem-fourier-transforms-and-derivatives"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.4.7</span>. <span class="title">Fourier Transforms and Derivatives.</span>
 </h6>
-<p id="p-638">Let \(f(x)\) be differentiable with derivative \(f'(x)\text{.}\) Suppose that both \(f(x)\) and \(f'(x)\) are absolutely integrable. Then</p>
+<p id="p-652">Let \(f(x)\) be differentiable with derivative \(f'(x)\text{.}\) Suppose that both \(f(x)\) and \(f'(x)\) are absolutely integrable. Then</p>
 <div class="displaymath">
 \begin{equation*}
 \mathcal{F}(f') = i\omega\hat{f}(\omega).
 \end{equation*}
-</div></article><p id="p-639">Fourier transforms also behave well with another type of convolution.</p>
+</div></article><p id="p-653">Fourier transforms also behave well with another type of convolution.</p>
 <article class="theorem-like" id="theorem-convolution-theorem"><h6 class="heading">
 <span class="type">Theorem</span> <span class="codenumber">7.4.8</span>. <span class="title">Convolution Theorem.</span>
 </h6>
-<p id="p-640">Suppose that \(f(x),g(x)\) are piecewise continuous, bounded and absolutely integrable. Define \(f\ast g\) by</p>
+<p id="p-654">Suppose that \(f(x),g(x)\) are piecewise continuous, bounded and absolutely integrable. Define \(f\ast g\) by</p>
 <div class="displaymath">
 \begin{equation*}
 f\ast g = \int_{-\infty}^{\infty}f(\tau)g(x-\tau)\,d\tau.

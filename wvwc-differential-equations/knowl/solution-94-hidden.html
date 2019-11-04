@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-10-24T14:42:55-04:00    *-->
+<!--*    on 2019-10-30T11:44:59-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -12,14 +12,46 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body><div class="solution">
-<p>To do so, we need to compute the partial derivatives of \(u(x,t):\)</p>
+<p>We're trying to find the solution \(x(t)\) for arbitrary \(f(t)\text{,}\) which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and <a data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a>. So we start by taking the Laplace transform of the ODE to get</p>
+<div class="displaymath">
+\begin{equation*}
+s^{2}X(s) +4sX(s) + 13X(s) = F(s)
+\end{equation*}
+</div>
+<p>where \(X(s) = \Laplace{x(t)}\) and \(F(s) = \Laplace{f(t)}\text{.}\) Now we solve for \(X(s)\) to get</p>
+<div class="displaymath">
+\begin{equation*}
+X(s) = \frac{F(s)}{s^{2}+4s+13} = F(s)G(s)
+\end{equation*}
+</div>
+<p>where</p>
+<div class="displaymath">
+\begin{equation*}
+G(s) = \frac{1}{s^{2}+4s+13}
+\end{equation*}
+</div>
+<p><a data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> tells us then that</p>
+<div class="displaymath">
+\begin{equation*}
+x(t) = \iLaplace{F(s)G(s)} = f(t)*g(t)
+\end{equation*}
+</div>
+<p>where</p>
 <div class="displaymath">
 \begin{align*}
-u_{t}(x,t) \amp = \frac{\partial u}{\partial t} = -9e^{-9t}\sin3x \\
-u_{x}(x,t) \amp = \frac{\partial u}{\partial x} = 3e^{-9t}\cos3x \\
-u_{xx}(x,t) \amp = \frac{\partial}{\partial x}u_{x} = 9e^{-9t}\sin3x \text{.}
+g(t) \amp= \iLaplace{G(s)}\\
+\amp= \iLaplace{\frac{1}{s^{2}+4s+13}} \\
+\amp= \iLaplace{\frac{1}{(s+2)^{2}+9}} \amp \text{complete the square}\\
+\amp= \frac{1}{3}e^{-2t}\sin3t \amp \text{use a translation formula}
 \end{align*}
 </div>
-<p>So we see that \(u_{t} = u_{xx}\text{,}\) which means that \(u(x,t) = e^{-9t}\sin3x\) is a solution of \(u_{t} = u_{xx}\text{.}\) Now it remains to show that \(u(x,t)\) satisfies the boundary conditions, which we can do without too much trouble.</p>
+<p>Therefore the solution of the ODE in terms of the function \(f(t)\) is given by</p>
+<div class="displaymath">
+\begin{align*}
+x(t) \amp= f(t)\ast g(t)\\
+\amp= \Int{0}{t}f(\tau)g(t-\tau)\,d\tau\\
+\amp= \int_{0}^{t}f(\tau)\frac{e^{-2(t-\tau)}\sin[3(t-\tau)]}{3}\,d\tau\text{.}
+\end{align*}
+</div>
 </div></body>
 </html>
