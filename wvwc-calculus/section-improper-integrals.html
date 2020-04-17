@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2019-04-12T14:48:34-04:00    *-->
+<!--*    on 2020-04-17T17:10:09-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -49,19 +49,20 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.11/pretext.js"></script><script src="https://pretextbook.org/js/0.11/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.12/pretext.js"></script><script src="https://pretextbook.org/js/0.12/pretext_add_on.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/pretext_add_on.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/toc.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.2/features.css" rel="stylesheet" type="text/css">
 <script>var logged_in = false;
 var role = 'student';
 var guest_access = true;
 var login_required = false;
-var js_version = 0.11;
+var js_version = 0.12;
 </script>
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
@@ -265,6 +266,10 @@ var js_version = 0.11;
 <li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals">The Fundamental Theorem for Line Integrals</a></li>
 <li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem">Green's Theorem</a></li>
 <li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence">Curl and Divergence</a></li>
+<li><a href="section-parametric-surfaces-and-areas.html" data-scroll="section-parametric-surfaces-and-areas">Parametric Surfaces and Areas</a></li>
+<li><a href="section-surface-integrals.html" data-scroll="section-surface-integrals">Surface Integrals</a></li>
+<li><a href="section-stokes-theorem.html" data-scroll="section-stokes-theorem">Stokes' Theorem</a></li>
+<li><a href="section-the-divergence-theorem.html" data-scroll="section-the-divergence-theorem">The Divergence Theorem</a></li>
 </ul>
 </li>
 <li class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
@@ -431,40 +436,71 @@ k,t = symbols('k t', positive=True)
 m = k*t*exp(-k*t)
 
 m.integrate((t, 0, oo))
-</script></div></section><section class="subsection" id="subsection-improper-integrals-with-discontinuous-integrands"><h3 class="heading hide-type">
+</script></div></section><article class="example-like" id="example-a-probability-distribution"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.7</span>. <span class="title">A Probability Distribution.</span>
+</h6>
+<p id="p-596">In probability, a <dfn class="terminology">probability distribution</dfn> is a function \(f(x)\) satisfying</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{-\infty}^{\infty}f(x)\,dx = 1\text{.}
+\end{equation*}
+</div>
+<p>Is \(f(x) = \int_{-\infty}^{\infty}\frac{1}{1 + x^{2}}\,dx\) a probability distribution?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref" data-refid="hk-solution-129" id="solution-129"><span class="type">Solution</span></a><div id="hk-solution-129" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-597">We have</p>
+<div class="displaymath">
+\begin{align*}
+\int_{-\infty}^{\infty}\frac{1}{1 + x^{2}}\,dx \amp = \tan^{-1}x\big]_{-\infty}^{\infty} \\
+\amp = \lim_{b\to\infty}\tan^{-1}x\big]_{0}^{b} + \lim_{c\to-\infty}\tan^{-1}x\big]_{c}^{0} \\
+\amp = \pi \text{.}
+\end{align*}
+</div>
+<p>So this isn't a probability distribution.</p>
+</div></div>
+</div></article><article class="example-like" id="example-another-laplace-transform"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.8</span>. <span class="title">Another Laplace Transform.</span>
+</h6>
+<p id="p-598">The <dfn class="terminology">Laplace transform</dfn> of a function \(f(t)\) is defined to be</p>
+<div class="displaymath">
+\begin{equation*}
+\int_{0}^{\infty}f(t)e^{-st}\,st\text{,}
+\end{equation*}
+</div>
+<p>assuming \(s\) is chosen so that the integral converges. Find the Laplace transform of \(f(t) = t\text{.}\)</p></article><section class="subsection" id="subsection-improper-integrals-with-discontinuous-integrands"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.4.2</span> <span class="title">Improper Integrals with Discontinuous Integrands</span>
 </h3>
-<a href="section-improper-integrals.html#subsection-improper-integrals-with-discontinuous-integrands" class="permalink">¶</a><p id="p-596">The second type of improper integral we'll consider involves integrands with "divide-by-zero" problems.</p>
+<a href="section-improper-integrals.html#subsection-improper-integrals-with-discontinuous-integrands" class="permalink">¶</a><p id="p-599">The second type of improper integral we'll consider involves integrands with "divide-by-zero" problems.</p>
 <article class="definition-like" id="definition-type-2-improper-integral"><h6 class="heading">
-<span class="type">Definition</span> <span class="codenumber">6.4.7</span>. <span class="title">Type 2 Improper Integral.</span>
+<span class="type">Definition</span> <span class="codenumber">6.4.9</span>. <span class="title">Type 2 Improper Integral.</span>
 </h6>
-<p id="p-597">If \(f(x)\) is continuous on \([a,b)\) and is discontinuous at \(b\text{,}\) then</p>
+<p id="p-600">If \(f(x)\) is continuous on \([a,b)\) and is discontinuous at \(b\text{,}\) then</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \lim_{c\to b^{-}}\int_{a}^{c}f(x)\,dx
 \end{equation*}
 </div>
 <p>assuming this limit exists.</p>
-<p id="p-598">If \(f(x)\) is continuous on \((a,b]\) and is discontinuous at \(a\text{,}\) then</p>
+<p id="p-601">If \(f(x)\) is continuous on \((a,b]\) and is discontinuous at \(a\text{,}\) then</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \lim_{c\to a^{+}}\int_{c}^{b}f(x)\,dx
 \end{equation*}
 </div>
 <p>assuming this limit exists.</p>
-<p id="p-599">If \(f(x)\) is at \(c\) where \(a \lt c\lt b\text{,}\) then</p>
+<p id="p-602">If \(f(x)\) is at \(c\) where \(a \lt c\lt b\text{,}\) then</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx
 \end{equation*}
 </div>
 <p>assuming these integrals are convergent.</p></article><article class="example-like" id="example-logarithmic-discontinuity"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">6.4.8</span>. <span class="title">Logarithmic Discontinuity.</span>
+<span class="type">Example</span> <span class="codenumber">6.4.10</span>. <span class="title">Logarithmic Discontinuity.</span>
 </h6>
-<p id="p-600">Determine if \(\int_{0}^{1}\ln x\,dx\) is convergent.</p>
+<p id="p-603">Determine if \(\int_{0}^{1}\ln x\,dx\) is convergent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-129" id="solution-129"><span class="type">Solution</span></a><div id="hk-solution-129" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-601">This integral is improper since \(\ln x\) is discontinuous at \(x = 0\text{.}\) To evaluate it, we'll use limits:</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-130" id="solution-130"><span class="type">Solution</span></a><div id="hk-solution-130" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-604">This integral is improper since \(\ln x\) is discontinuous at \(x = 0\text{.}\) To evaluate it, we'll use limits:</p>
 <div class="displaymath">
 \begin{align*}
 \int_{0}^{1}\ln x\,dx &amp; = \lim_{c\to0^{+}}\int_{c}^{1}\ln x\,dx \\
@@ -476,12 +512,12 @@ m.integrate((t, 0, oo))
 <p>where we used the fact that \(c\ln c\to 0\) as \(c\to0\) by L'Hopital's Rule.</p>
 </div></div>
 </div></article><article class="example-like" id="example-another-integral-p-test"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">6.4.9</span>. <span class="title">Another Integral \(p\)-Test.</span>
+<span class="type">Example</span> <span class="codenumber">6.4.11</span>. <span class="title">Another Integral \(p\)-Test.</span>
 </h6>
-<p id="p-602">For what values of \(p\) is the integral \(\int_{0}^{1}\frac{1}{\sqrt[p]{x}}\,dx\) convergent?</p>
+<p id="p-605">For what values of \(p\) is the integral \(\int_{0}^{1}\frac{1}{\sqrt[p]{x}}\,dx\) convergent?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-130" id="solution-130"><span class="type">Solution</span></a><div id="hk-solution-130" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-603">We could try to compute this as is, but we can save ourselves some work by making use of <a data-knowl="./knowl/theorem-integral-p-test.html" title="Theorem 6.4.4: Integral \(p\)-test">Theorem 6.4.4</a>. First, we'll use the substitution \(u = x^{-\frac{1}{p}}\text{.}\) Then \(du = -\frac{1}{p}x^{-\frac{1}{p} - 1}\) and</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-131" id="solution-131"><span class="type">Solution</span></a><div id="hk-solution-131" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-606">We could try to compute this as is, but we can save ourselves some work by making use of <a data-knowl="./knowl/theorem-integral-p-test.html" title="Theorem 6.4.4: Integral \(p\)-test">Theorem 6.4.4</a>. First, we'll use the substitution \(u = x^{-\frac{1}{p}}\text{.}\) Then \(du = -\frac{1}{p}x^{-\frac{1}{p} - 1}\) and</p>
 <div class="displaymath">
 \begin{align*}
 u\to\infty &amp; \quad\text{as}\quad x\to0^{+}\\
@@ -500,22 +536,22 @@ u = 1 &amp; \quad\text{if}\quad x = 1.
 </div></article></section><section class="subsection" id="subsection-comparison-tests-for-improper-integrals"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.4.3</span> <span class="title">Comparison Tests for Improper Integrals</span>
 </h3>
-<a href="section-improper-integrals.html#subsection-comparison-tests-for-improper-integrals" class="permalink">¶</a><p id="p-604">For integrals, we have two comparison tests that allow us to determine if an improper integral converges by comparing it with a simpler integral. First, we'll look at the <dfn class="terminology">direct comparison test</dfn>.</p>
+<a href="section-improper-integrals.html#subsection-comparison-tests-for-improper-integrals" class="permalink">¶</a><p id="p-607">For integrals, we have two comparison tests that allow us to determine if an improper integral converges by comparing it with a simpler integral. First, we'll look at the <dfn class="terminology">direct comparison test</dfn>.</p>
 <article class="theorem-like" id="theorem-direct-comparison-test-integral"><h6 class="heading">
-<span class="type">Theorem</span> <span class="codenumber">6.4.10</span>. <span class="title">Direct Comparison Test.</span>
+<span class="type">Theorem</span> <span class="codenumber">6.4.12</span>. <span class="title">Direct Comparison Test.</span>
 </h6>
-<p id="p-605">Suppose that \(f(x)\) and \(g(x)\) are continuous functions and that</p>
+<p id="p-608">Suppose that \(f(x)\) and \(g(x)\) are continuous functions and that</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) \geq g(x) \geq 0
 \end{equation*}
 </div>
-<p>for \(x\geq a\text{,}\) for some real number \(a\text{.}\) Then if \(\int_{a}^{\infty}f(x)\,dx\) converges, so goes \(\int_{a}^{\infty}g(x)\,dx\text{.}\) Likewise, if \(\int_{a}^{\infty}g(x)\,dx\) diverges, then so does \(\int_{a}^{\infty}f(x)\,dx\text{.}\)</p></article><article class="example-like" id="example-135"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">6.4.11</span>.</h6>
-<p id="p-606">Does \(\int_{1}^{\infty}\frac{1}{\sqrt{e^{x} + x}}\,dx\) converge?</p>
+<p>for \(x\geq a\text{,}\) for some real number \(a\text{.}\) Then if \(\int_{a}^{\infty}f(x)\,dx\) converges, so goes \(\int_{a}^{\infty}g(x)\,dx\text{.}\) Likewise, if \(\int_{a}^{\infty}g(x)\,dx\) diverges, then so does \(\int_{a}^{\infty}f(x)\,dx\text{.}\)</p></article><article class="example-like" id="example-137"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.13</span>.</h6>
+<p id="p-609">Does \(\int_{1}^{\infty}\frac{1}{\sqrt{e^{x} + x}}\,dx\) converge?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-131" id="solution-131"><span class="type">Solution</span></a><div id="hk-solution-131" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-607">This integrand looks pretty awful. However, we can say that</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-132" id="solution-132"><span class="type">Solution</span></a><div id="hk-solution-132" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-610">This integrand looks pretty awful. However, we can say that</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{\sqrt{e^{x} + x}} \leq \frac{1}{\sqrt{e^{x}}} = e^{-\frac{x}{2}}.
@@ -527,15 +563,15 @@ f(x) \geq g(x) \geq 0
 \int_{1}^{\infty}e^{-\frac{x}{2}}\,dx &amp; = 2\sqrt{e}, 
 \end{align*}
 </div>
-<p><a data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 6.4.10: Direct Comparison Test">Theorem 6.4.10</a> implies that the original integral must converge as well. Note that we don't know <em class="emphasis">what</em> it converges to, only that it does.</p>
+<p><a data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 6.4.12: Direct Comparison Test">Theorem 6.4.12</a> implies that the original integral must converge as well. Note that we don't know <em class="emphasis">what</em> it converges to, only that it does.</p>
 </div></div>
 </div></article><article class="example-like" id="example-the-gaussian-integral"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">6.4.12</span>. <span class="title">The Gaussian Integral.</span>
+<span class="type">Example</span> <span class="codenumber">6.4.14</span>. <span class="title">The Gaussian Integral.</span>
 </h6>
-<p id="p-608">Show that the integral \(\int_{0}^{\infty}e^{-x^{2}}\,dx\) is convergent.</p>
+<p id="p-611">Show that the integral \(\int_{0}^{\infty}e^{-x^{2}}\,dx\) is convergent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-132" id="solution-132"><span class="type">Solution</span></a><div id="hk-solution-132" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-609">We can do this by breaking the integral into two parts: \(\int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx.\) If \(x\) is between \(0\) and \(1\text{,}\) then \(e^{-x^{2}} \leq e^{0} = 1\text{.}\) On the other hand, if \(1\leq x\lt \infty\text{,}\) then \(e^{-x^{2}} \leq e^{-x}\text{.}\) Therefore</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-133" id="solution-133"><span class="type">Solution</span></a><div id="hk-solution-133" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-612">We can do this by breaking the integral into two parts: \(\int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx.\) If \(x\) is between \(0\) and \(1\text{,}\) then \(e^{-x^{2}} \leq e^{0} = 1\text{.}\) On the other hand, if \(1\leq x\lt \infty\text{,}\) then \(e^{-x^{2}} \leq e^{-x}\text{.}\) Therefore</p>
 <div class="displaymath">
 \begin{align*}
 \int_{0}^{\infty}e^{-x^{2}}\,dx &amp; = \int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx\\
@@ -553,11 +589,11 @@ sp.init_printing()
 x = sp.Symbol('x')
 sp.integrate(sp.exp(-x**2), (x, 0, oo))
 </script></div>
-<p id="p-610">To use <a data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 6.4.10: Direct Comparison Test">Theorem 6.4.10</a> successfully, we need to choose a simpler function that's related to the integrand and then use algebra to justify a specific inequality. It is sometimes more straightforward to apply the <dfn class="terminology">limit comparison test</dfn>.</p>
+<p id="p-613">To use <a data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 6.4.12: Direct Comparison Test">Theorem 6.4.12</a> successfully, we need to choose a simpler function that's related to the integrand and then use algebra to justify a specific inequality. It is sometimes more straightforward to apply the <dfn class="terminology">limit comparison test</dfn>.</p>
 <article class="theorem-like" id="theorem-limit-comparison-test-integral"><h6 class="heading">
-<span class="type">Theorem</span> <span class="codenumber">6.4.13</span>. <span class="title">Limit Comparison Test.</span>
+<span class="type">Theorem</span> <span class="codenumber">6.4.15</span>. <span class="title">Limit Comparison Test.</span>
 </h6>
-<p id="p-611">Let \(f(x)\) and \(g(x)\) be positive, continuous functions on \([a,\infty)\) for some constant \(a\text{.}\) If</p>
+<p id="p-614">Let \(f(x)\) and \(g(x)\) be positive, continuous functions on \([a,\infty)\) for some constant \(a\text{.}\) If</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to\infty}\frac{f(x)}{g(x)}
@@ -569,19 +605,19 @@ sp.integrate(sp.exp(-x**2), (x, 0, oo))
 \int_{a}^{\infty}f(x)\,dx\quad\text{and}\quad\int_{a}^{\infty}g(x)\,dx
 \end{equation*}
 </div>
-<p>must both converge or both diverge.</p></article><article class="example-like" id="example-137"><h6 class="heading">
-<span class="type">Example</span> <span class="codenumber">6.4.14</span>.</h6>
-<p id="p-612">Determine if \(\displaystyle\int_{1}^{\infty}\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}\,dx\) converges.</p>
+<p>must both converge or both diverge.</p></article><article class="example-like" id="example-139"><h6 class="heading">
+<span class="type">Example</span> <span class="codenumber">6.4.16</span>.</h6>
+<p id="p-615">Determine if \(\displaystyle\int_{1}^{\infty}\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}\,dx\) converges.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref" data-refid="hk-solution-133" id="solution-133"><span class="type">Solution</span></a><div id="hk-solution-133" class="hidden-content tex2jax_ignore"><div class="solution">
-<p id="p-613">The integrand is awful again, but if \(x\) is very large then we can say that</p>
+<a data-knowl="" class="id-ref" data-refid="hk-solution-134" id="solution-134"><span class="type">Solution</span></a><div id="hk-solution-134" class="hidden-content tex2jax_ignore"><div class="solution">
+<p id="p-616">The integrand is awful again, but if \(x\) is very large then we can say that</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}} \approx \frac{1}{x^{2}}.
 \end{equation*}
 </div>
-<p>Since \(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\) converges, this suggests that maybe the original integral does as well. We can prove this using <a data-knowl="./knowl/theorem-limit-comparison-test-integral.html" title="Theorem 6.4.13: Limit Comparison Test">Theorem 6.4.13</a>.</p>
-<p id="p-614">In fact, we have</p>
+<p>Since \(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\) converges, this suggests that maybe the original integral does as well. We can prove this using <a data-knowl="./knowl/theorem-limit-comparison-test-integral.html" title="Theorem 6.4.15: Limit Comparison Test">Theorem 6.4.15</a>.</p>
+<p id="p-617">In fact, we have</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to\infty}\frac{\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}}{\frac{1}{x^{2}}} = \frac{2}{5}.
@@ -592,6 +628,6 @@ sp.integrate(sp.exp(-x**2), (x, 0, oo))
 </div></article></section></section></div></main>
 </div>
 <div class="login-link"><span id="loginlogout" class="login">login</span></div>
-<script src="https://pretextbook.org/js/0.11/login.js"></script>
+<script src="https://pretextbook.org/js/0.12/login.js"></script>
 </body>
 </html>
