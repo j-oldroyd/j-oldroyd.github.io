@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2020-04-17T17:10:44-04:00    *-->
+<!--*    on 2020-08-16T22:49:07-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -11,39 +11,55 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
 </head>
-<body><div class="solution">
-<p>First, we can simplify:</p>
+<body><div class="solution solution-like">
+<p>Since \(\frac{1}{(x^{2} - 1)^{2}} = \frac{1}{(x-1)^{2}(x+1)^{2}}\text{,}\) it's tempting to write</p>
 <div class="displaymath">
 \begin{equation*}
-\frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}} = \frac{x + 5}{x(x^{2} + 3)}.
+\frac{1}{(x^{2}-1)^{2}} = \frac{A_{1}}{x-1} + \frac{A_{2}}{x+1}.
 \end{equation*}
 </div>
-<p>Now that we've factored the denominator, we can attempt to find the partial fraction decomposition. So assume that</p>
+<p data-braille="continuation">Unfortunately, doing so gives \(A_{1} = A_{2} = 0\text{,}\) which obviously won't work. If we instead use</p>
 <div class="displaymath">
 \begin{equation*}
-\frac{x + 5}{x(x^{2} + 3)} = \frac{A_{1}}{x} + \frac{A_{2}x + A_{3}}{x^{2} + 3}
+\frac{1}{(x^{2}-1)^{2}} = \frac{A_{1}}{(x-1)^{2}} + \frac{A_{2}}{(x+1)^{2}},
 \end{equation*}
 </div>
-<p>Note the linear term \(A_{2}x + A_{3}\) above the quadratic!</p>
-<p>The rest of this computation goes like it did before. If we clear fractions, we get</p>
+<p data-braille="continuation">we get \(A_{1} = A_{2} = \frac{1}{4}\text{.}\) However,</p>
 <div class="displaymath">
 \begin{equation*}
-x + 5 = A_{1}(x^{2} + 3) + A_{2}x^{2} + A_{3}x.
+\frac{1}{(x^{2}-1)^{2}} \neq \frac{\frac{1}{4}}{(x-1)^{2}} + \frac{\frac{1}{4}}{(x+1)^{2}}.
 \end{equation*}
 </div>
-<p>If we plug in \(x = 0\text{,}\) we obtain \(A_{1} = \frac{5}{3}\text{.}\) At this point, we could plug in \(x = \sqrt{3}i\) (which would be okay!) or differentiate both sides, but it might be easier to take the following approach: expand the right hand side and collect like terms to get</p>
+<p>What we need to do is assume</p>
 <div class="displaymath">
 \begin{equation*}
-x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
+\frac{1}{(x^{2}-1)^{2}} = \frac{A_{1}}{x-1} + \frac{A_{2}}{x+1} + \frac{A_{3}}{(x-1)^{2}} + \frac{A_{4}}{(x+1)^{2}}.
 \end{equation*}
 </div>
-<p>For the right hand side to equal the left hand side, \(A_{1} + A_{2}\) <em class="emphasis">must be zero</em>. Hence \(A_{2} = -A_{1} = -\frac{5}{3}\text{.}\) Similarly, \(A_{3}\) <em class="emphasis">must equal one</em>. Therefore</p>
+<p data-braille="continuation">If we don't account for <em class="emphasis">each</em> power, we're not guaranteed a partial fraction decomposition. Now let's clear fractions:</p>
 <div class="displaymath">
-\begin{align*}
-\int\frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}}\,dx &amp; = \int\left[\frac{5/3}{x} + \frac{1 - \frac{5}{3}x}{x^{2} + 3}\right]\,dx \\
-&amp; = \frac{5}{3}\int\frac{1}{x}\,dx + \int\frac{1}{x^{2} + 3}\,dx - \frac{5}{3}\int\frac{x}{x^{2} + 3}\,dx \\
-&amp; = \frac{5}{3}\ln|x| + \frac{1}{\sqrt{3}}\tan^{-1}\frac{x}{\sqrt{3}} - \frac{5}{6}\ln(x^{2} + 3). 
-\end{align*}
+\begin{equation}
+1 = A_{1}(x-1)(x+1)^{2} + A_{2}(x+1)(x-1)^{2} + A_{3}(x+1)^{2} + A_{4}(x-1)^{2}.\tag{7.3.2}
+\end{equation}
+</div>
+<p data-braille="continuation">Quickly, using \(x=-1\) we find that \(A_{4} = \frac{1}{4}\text{,}\) and using \(x = 1\) we find that \(A_{3} = \frac{1}{4}\text{.}\)</p>
+<p>At this point there are no nice values left to plug into the right hand side of <a class="xref" data-knowl="./knowl/equation-partial-fraction-2.html" title="Equation 7.3.2">(7.3.2)</a>, so we need to find \(A_{1}\) and \(A_{2}\) another way. One possibility is to differentiate both sides to make the right hand side simpler, which gives</p>
+<div class="displaymath">
+\begin{equation}
+0 = A_{1}(x+1)^{2} + 2A_{1}(x^{2}-1) + A_{2}(x-1)^{2} + 2A_{2}(x^{2} - 1) + 2A_{3}(x+1) + 2A_{4}(x-1).\tag{7.3.3}
+\end{equation}
+</div>
+<p data-braille="continuation">Now, entering \(x = -1\) into <a class="xref" data-knowl="./knowl/equation-partial-fraction-3.html" title="Equation 7.3.3">(7.3.3)</a> gives</p>
+<div class="displaymath">
+\begin{equation*}
+0 = 4A_{2} - 4A_{4}
+\end{equation*}
+</div>
+<p data-braille="continuation">and so \(A_{2} = A_{4} = \frac{1}{4}\text{.}\) Similarly, \(A_{1} = - A_{3} = -\frac{1}{4}\text{.}\) Therefore</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{1}{(x^{2} - 1)}^{2} = \frac{1}{4}\left[-\frac{1}{x-1} + \frac{1}{x+1} + \frac{1}{(x-1)^{2}} + \frac{1}{(x+1)^{2}}\right].
+\end{equation*}
 </div>
 </div></body>
 </html>

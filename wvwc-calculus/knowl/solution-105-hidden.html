@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--**************************************-->
 <!--*    Generated from PreTeXt source   *-->
-<!--*    on 2020-04-17T17:10:42-04:00    *-->
+<!--*    on 2020-08-16T22:49:05-04:00    *-->
 <!--*                                    *-->
 <!--*      https://pretextbook.org       *-->
 <!--*                                    *-->
@@ -11,33 +11,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
 </head>
-<body><div class="solution">
-<p>We need to rewrite the integral in terms of \(u\text{.}\) An easy way to start is to replace \(3x-2\) with \(u\text{:}\)</p>
+<body><div class="solution solution-like">
+<p>First, we need to figure out the cost per month due to depreciation and maintenance, call it \(C(t)\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
-\int e^{3x-2}\,dx = \int e^{u}\,dx.
+C(t) = \frac{\text{total depreciation} - \text{total maintenance}}{t}.
 \end{equation*}
 </div>
-<p>However, <em class="emphasis">we can't integrate yet</em>. This is because the integral needs to be written entirely in terms of \(u\) and \(du\text{;}\) no terms involving \(x\text{,}\) including \(dx\text{,}\) can remain. to rewrite \(dx\) in terms of \(du\text{,}\) we'll find \(\dv{u}{x}\) and then "solve" for \(dx\text{:}\)</p>
+<p data-braille="continuation">Now, the total depreciation after \(t\) months is \(\int_{0}^{t}f(s)\,ds\text{,}\) and the total maintenance cost after \(t\) months is \(\int_{0}^{t}g(s)\,ds\text{.}\) So</p>
 <div class="displaymath">
 \begin{equation*}
-\dv{u}{x} = 3 \Rightarrow du = 3\,dx \Rightarrow dx = \frac{du}{3}.
+C(t) = \frac{1}{t}\int_{0}^{t}[f(s) + g(s)]\,ds.
 \end{equation*}
 </div>
-<p>So our integral turns into</p>
-<div class="displaymath">
-\begin{align*}
-\int e^{3x-2}\,dx &amp; = \int e^{u}\left(\frac{du}{3}\right) \\
-&amp; = \frac{1}{3}\int e^{u}\,du \\
-&amp; = \frac{1}{3}e^{u} + C. 
-\end{align*}
-</div>
-<p>The last step is to replace \(u\) with \(3x-2\text{,}\) and so</p>
+<p data-braille="continuation">This is the function we need to minimize.</p>
+<p>To minimize \(C(t)\text{,}\) we'll start by finding its critical points. Assuming that each of these functions is differentiable, we have</p>
 <div class="displaymath">
 \begin{equation*}
-\int e^{3x-2}\,dx = \frac{1}{3}e^{3x-2} + C.
+C'(t) = -\frac{1}{t^{2}}\int_{0}^{t}[f(s)+g(s)]\,ds + \frac{f(t) + g(t)}{t}
 \end{equation*}
 </div>
-<p>We can also check this by differentiating.</p>
+<p data-braille="continuation">which reduces to</p>
+<div class="displaymath">
+\begin{equation*}
+C'(t) = -\frac{1}{t}C(t) + \frac{f(t) + g(t)}{t}.
+\end{equation*}
+</div>
+<p data-braille="continuation">So the critical points occur at any value \(t = T\) for which \(C(T) = f(T) + g(T)\text{,}\) i.e., the cost per month due to depreciation and maintenance equals the rate of depreciation plus the rate of maintenance costs.</p>
+<p>Now we need to see if we have a minimum or a maximum. To do so, we can use the second derivative test. After some algebra, we get that</p>
+<div class="displaymath">
+\begin{equation*}
+C''(t) = 2\frac{C(t) - (f(t) + g(t))}{t^{2}} + \frac{f'(t) + g'(t)}{t^{2}},
+\end{equation*}
+</div>
+<p data-braille="continuation">and so</p>
+<div class="displaymath">
+\begin{equation*}
+C''(T) = \frac{f'(T) + g'(T)}{T^{2}} &gt;0.
+\end{equation*}
+</div>
+<p data-braille="continuation">Therefore \(T\) gives a local minimum. If we assume that \(C(t)\) is differentiable everywhere, then this local minimum should also be an absolute minimum since it's the only critical point.</p>
 </div></body>
 </html>
