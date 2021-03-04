@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-09-24T20:49:53-04:00       *-->
+<!--*       on 2021-03-03T14:18:31-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,18 +14,19 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body><div class="solution solution-like">
-<p>This looks awful to integrate with respect to \(y\) first, so we'll try changing the order of integration. \(x\) looks easiest, so let's try using \(dV = dx\,dy\,dz\) instead. If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals. So</p>
+<p>First, we can center the sphere at the origin without loss of generality. Such a sphere is given by \(x^{2} + y^{2} + z^{2} = \rho^{2}\text{.}\) If we solve for \(z\text{,}\) we get</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}
+\end{equation*}
+</div>
+<p class="continuation">Let \(D\) denote the disk of radius \(\rho\) in the \(xy\)-plane centered at the origin. Then the volume of the sphere is</p>
 <div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
 \begin{align*}
-\int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz  &amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}\int_{z}^{4z}x^{-3/2}\sin\sqrt{yz}\,dx\,dy\,dz \\
-&amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}\left[-2x^{-1/2}\sin\sqrt{yz}\right]_{x=z}^{4z}\,dy\,dz \\
-&amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}z^{-1/2}\sin\sqrt{yz}\,dy\,dz \\
-&amp; = \int_{0}^{\pi^{2}}\int_{1}^{4}z^{-1/2}\sin\sqrt{yz}\,dz\,dy \\
-&amp; = \int_{0}^{\pi^{2}}\int_{\sqrt{y}}^{2\sqrt{y}}\frac{2}{\sqrt{y}}\sin u\,du\,dy \\
-&amp; = -\int_{0}^{\pi^{2}}\frac{2}{\sqrt{y}}\cos u\bigg]_{u=\sqrt{y}}^{2\sqrt{y}}\,dy \\
-&amp; = \int_{0}^{\pi^{2}}\frac{2}{\sqrt{y}}(\cos\sqrt{y} - \cos2\sqrt{y})\,dy \\
-&amp; = 4\int_{0}^{\pi} (\cos v - \cos2v)\,dv \\
-&amp; = 0 
+2\iint_{D}\sqrt{\rho^{2} - x^{2} - y^{2}}\,dA &amp; = 2\int_{0}^{2\pi}\int_{0}^{\rho}\sqrt{\rho^{2} - r^{2}}r\,dr\,d\theta \\
+&amp; = -\int_{0}^{2\pi}\int_{\rho^{2}}^{0}\sqrt{u}\,du\,d\theta \\
+&amp; = \frac{2}{3}\int_{0}^{2\pi}u^{3/2}\bigg]_{u=0}^{\rho^{2}}\,d\theta \\
+&amp; = \frac{4\pi}{3}\rho^{3} 
 \end{align*}
 </div>
 </div></body>

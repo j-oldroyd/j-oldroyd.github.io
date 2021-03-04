@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-09-24T20:49:11-04:00       *-->
+<!--*       on 2021-03-03T14:17:45-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -57,7 +57,7 @@ MathJax.Hub.Config({
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -129,6 +129,7 @@ MathJax.Hub.Config({
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
 <li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
+<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -156,6 +157,7 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
+<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
 </ul>
 </li>
@@ -179,6 +181,9 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
+<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
+<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
+<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,79 +285,79 @@ MathJax.Hub.Config({
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-directional-derivatives-and-gradients"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.6</span> <span class="title">Directional Derivatives and Gradients</span>
 </h2>
-<section class="introduction" id="introduction-34"><p id="p-1436">For a differentiable function \(f(x,y)\text{,}\) the partial derivatives \(f_{x}\) and \(f_{y}\) give the rates of change of \(f\) in the directions of the \(x\)-axis and \(y\)-axis, respectively. To put this another way, \(f_{x}\) gives the rate of change of \(f\) in the direction of the vector \(\vv{i}\text{,}\) and \(f_{y}\) gives the rate of change in the direction of the vector \(\vv{j}\text{.}\) But we have infinitely many directions to work with. How can we find the rate of change of \(f\) in <em class="emphasis">any</em> direction? We'll look at two tools to help us with this: directional derivatives and gradients.</p></section><section class="subsection" id="subsection-the-directional-derivative"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-34"><p id="p-1470">For a differentiable function \(f(x,y)\text{,}\) the partial derivatives \(f_{x}\) and \(f_{y}\) give the rates of change of \(f\) in the directions of the \(x\)-axis and \(y\)-axis, respectively. To put this another way, \(f_{x}\) gives the rate of change of \(f\) in the direction of the vector \(\vv{i}\text{,}\) and \(f_{y}\) gives the rate of change in the direction of the vector \(\vv{j}\text{.}\) But we have infinitely many directions to work with. How can we find the rate of change of \(f\) in <em class="emphasis">any</em> direction? We'll look at two tools to help us with this: directional derivatives and gradients.</p></section><section class="subsection" id="subsection-the-directional-derivative"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">12.6.1</span> <span class="title">The Directional Derivative</span>
 </h3>
-<p id="p-1437">Suppose we have a function \(f(x,y)\) defined at a point \((x_{0},y_{0})\text{.}\) We want to find how quickly \(f(x,y)\) is changing in the direction of some unit vector \(\vv{u} = \dotprod{a,b}\text{.}\) We can estimate this by moving from the point \((x_{0},y_{0})\) by some small increment \(h\vv{u}\text{,}\) and evaluating \(f\) at this new point, which is just \((x_{0} + ha, y_{0} + hb)\text{.}\) So the approximate rate of change in \(f\) in the direction of \(\vv{u}\) is given by</p>
+<p id="p-1471">Suppose we have a function \(f(x,y)\) defined at a point \((x_{0},y_{0})\text{.}\) We want to find how quickly \(f(x,y)\) is changing in the direction of some unit vector \(\vv{u} = \dotprod{a,b}\text{.}\) We can estimate this by moving from the point \((x_{0},y_{0})\) by some small increment \(h\vv{u}\text{,}\) and evaluating \(f\) at this new point, which is just \((x_{0} + ha, y_{0} + hb)\text{.}\) So the approximate rate of change in \(f\) in the direction of \(\vv{u}\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}
 \end{equation*}
 </div>
-<p data-braille="continuation">As \(h\to0\text{,}\) this should become exact. This leads us to our next definition.</p>
+<p class="continuation">As \(h\to0\text{,}\) this should become exact. This leads us to our next definition.</p>
 <article class="definition definition-like" id="definition-directional-derivative"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">12.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Directional Derivative.</span>
 </h6>
-<p id="p-1438">The <dfn class="terminology">directional derivative</dfn> of the function \(f(x,y)\) at the point \((x_{0},y_{0})\) in the direction of the vector \(\vv{u} = \dotprod{a,b}\) is given by</p>
+<p id="p-1472">The <dfn class="terminology">directional derivative</dfn> of the function \(f(x,y)\) at the point \((x_{0},y_{0})\) in the direction of the vector \(\vv{u} = \dotprod{a,b}\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 D_{\vv{u}}f(x_{0},y_{0}) = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}
 \end{equation*}
 </div>
-<p data-braille="continuation">assuming this limit exists. As we mentioned above, \(D_{\vv{i}}f = f_{x}\) and \(D_{\vv{j}}f = f_{y}\text{.}\)</p></article><p id="p-1439">We have a definition for the directional derivative, but we don't want to have to use this all the time. So we'd like to get a more practical formula.</p>
+<p class="continuation">assuming this limit exists. As we mentioned above, \(D_{\vv{i}}f = f_{x}\) and \(D_{\vv{j}}f = f_{y}\text{.}\)</p></article><p id="p-1473">We have a definition for the directional derivative, but we don't want to have to use this all the time. So we'd like to get a more practical formula.</p>
 <article class="theorem theorem-like" id="theorem-computing-the-directional-derivative"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Computing the Directional Derivative.</span>
 </h6>
-<p id="p-1440">Let \(f(x,y)\) be a function whose partial derivatives \(f_{x}\) and \(f_{y}\) exist and are continuous. Let \(\vv{u} = \dotprod{a,b}\) be a unit vector. Then \(D_{\vv{u}}f(x,y)\) exists, and is given by</p>
+<p id="p-1474">Let \(f(x,y)\) be a function whose partial derivatives \(f_{x}\) and \(f_{y}\) exist and are continuous. Let \(\vv{u} = \dotprod{a,b}\) be a unit vector. Then \(D_{\vv{u}}f(x,y)\) exists, and is given by</p>
 <div class="displaymath">
 \begin{equation*}
 D_{\vv{u}}f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b.
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-16"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-16"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-16"><article class="hiddenproof"><p id="p-1441">First, set</p>
+</div></article><article class="hiddenproof" id="proof-16"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-16"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-16"><article class="hiddenproof"><p id="p-1475">First, set</p>
 <div class="displaymath">
 \begin{equation*}
 g(h) = f(x_{0}+ha, y_{0} +hb)
 \end{equation*}
 </div>
-<p data-braille="continuation">Then by the Calculus I definition of the derivative,</p>
+<p class="continuation">Then by the Calculus I definition of the derivative,</p>
 <div class="displaymath">
 \begin{equation*}
 g'(0) = \lim_{h\to0}\frac{g(h) - g(0)}{h} = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0}+hb) - f(x_{0},y_{0})}{h} = D_{\vv{u}}f(x_{0},y_{0}).
 \end{equation*}
 </div>
-<p data-braille="continuation">On the other hand, if we set \(x = x_{0} + ha\) and \(y = y_{0} + hb\text{,}\) then \(g(h) = f(x,y)\text{.}\) We can then find \(g'(h)\) using the chain rule from <a href="section-the-chain-rule.html" class="internal" title="Section 3.5: The Chain Rule">Section 3.5</a> to get</p>
+<p class="continuation">On the other hand, if we set \(x = x_{0} + ha\) and \(y = y_{0} + hb\text{,}\) then \(g(h) = f(x,y)\text{.}\) We can then find \(g'(h)\) using the chain rule from <a href="section-the-chain-rule.html" class="internal" title="Section 3.5: The Chain Rule">Section 3.5</a> to get</p>
 <div class="displaymath">
 \begin{equation*}
 g'(h) = f_{x}\dv{x}{h} + f_{y}\dv{y}{h} = f_{x}(x,y)a + f_{y}(x,y)b
 \end{equation*}
 </div>
-<p data-braille="continuation">So \(g'(0) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.\) Therefore</p>
+<p class="continuation">So \(g'(0) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.\) Therefore</p>
 <div class="displaymath">
 \begin{equation*}
 D_{\vv{u}}f(x_{0},y_{0}) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.
 \end{equation*}
 </div></article></div>
-<p id="p-1442">The formula in <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> extends to functions such as \(f(x,y,z)\) as well. We just need to include more partial derivatives.</p>
+<p id="p-1476">The formula in <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> extends to functions such as \(f(x,y,z)\) as well. We just need to include more partial derivatives.</p>
 <article class="example example-like" id="example-computing-a-directional-derivative"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a directional derivative.</span>
 </h6>
-<p id="p-1443">Let \(f(r,s) = \frac{r}{r^{2}+s^{2}}\text{.}\) Find the directional derivative of \(f\) in the direction of \(\vv{v} = 3\vv{i} + 5\vv{j}\) at the point \((1,2)\text{.}\)</p>
+<p id="p-1477">Let \(f(r,s) = \frac{r}{r^{2}+s^{2}}\text{.}\) Find the directional derivative of \(f\) in the direction of \(\vv{v} = 3\vv{i} + 5\vv{j}\) at the point \((1,2)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-231" id="solution-231"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-231"><div class="solution solution-like">
-<p id="p-1444">We can use <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> to find the directional derivative. However, there's something we need to watch out for here. Both <a class="xref" data-knowl="./knowl/definition-directional-derivative.html" title="Definition 12.6.1: Directional Derivative">Definition 12.6.1</a> and <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> require using a <em class="emphasis">unit vector</em>, but our vector \(\vv{v}\) isn't a unit vector at all. So we need to <dfn class="terminology">normalize</dfn> \(\vv{v}\) to get a unit vector \(\vv{u}\) that is parallel to \(\vv{v}\text{:}\)</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-237" id="solution-237"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-237"><div class="solution solution-like">
+<p id="p-1478">We can use <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> to find the directional derivative. However, there's something we need to watch out for here. Both <a class="xref" data-knowl="./knowl/definition-directional-derivative.html" title="Definition 12.6.1: Directional Derivative">Definition 12.6.1</a> and <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> require using a <em class="emphasis">unit vector</em>, but our vector \(\vv{v}\) isn't a unit vector at all. So we need to <dfn class="terminology">normalize</dfn> \(\vv{v}\) to get a unit vector \(\vv{u}\) that is parallel to \(\vv{v}\text{:}\)</p>
 <div class="displaymath">
 \begin{equation*}
 \vv{u} = \frac{\vv{v}}{|\vv{v}|} = \dotprod{\frac{3}{\sqrt{34}}, \frac{5}{\sqrt{34}}}
 \end{equation*}
 </div>
-<p data-braille="continuation">Since</p>
+<p class="continuation">Since</p>
 <div class="displaymath">
 \begin{align*}
 f_{r} &amp; = \frac{s^{2} - r^{2}}{(r^{2} + s^{2})^{2}} \\
 f_{s} &amp; = -\frac{2rs}{(r^{2} + s^{2})^{2}} 
 \end{align*}
 </div>
-<p data-braille="continuation">we see that the directional derivative we need is given by</p>
+<p class="continuation">we see that the directional derivative we need is given by</p>
 <div class="displaymath">
 \begin{align*}
 D_{\vv{u}}f(1,2) &amp; = f_{r}(1,2)\frac{3}{\sqrt{34}} + f_{s}(1,2)\frac{5}{\sqrt{34}} \\
@@ -363,24 +368,24 @@ D_{\vv{u}}f(1,2) &amp; = f_{r}(1,2)\frac{3}{\sqrt{34}} + f_{s}(1,2)\frac{5}{\sqr
 </div></article></section><section class="subsection" id="subsection-gradients"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">12.6.2</span> <span class="title">Gradients</span>
 </h3>
-<p id="p-1445"><a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> shows that the partial derivatives of a function are important in computing the directional derivatives. This leads us to the concept of a <dfn class="terminology">gradient</dfn>.</p>
+<p id="p-1479"><a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> shows that the partial derivatives of a function are important in computing the directional derivatives. This leads us to the concept of a <dfn class="terminology">gradient</dfn>.</p>
 <article class="definition definition-like" id="definition-gradient-of-a-function"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">12.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Gradient of a Function.</span>
 </h6>
-<p id="p-1446">Let \(f(x,y,z)\) be a function with partial derivatives \(f_{x}, f_{y}, f_{z}\text{.}\) The gradient of \(f\) is the vector \(\grad f = \dotprod{f_{x}, f_{y}, f_{z}}\text{.}\)</p></article><article class="example example-like" id="example-computing-a-gradient"><h6 class="heading">
+<p id="p-1480">Let \(f(x,y,z)\) be a function with partial derivatives \(f_{x}, f_{y}, f_{z}\text{.}\) The gradient of \(f\) is the vector \(\grad f = \dotprod{f_{x}, f_{y}, f_{z}}\text{.}\)</p></article><article class="example example-like" id="example-computing-a-gradient"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a gradient.</span>
 </h6>
-<p id="p-1447">Let \(f(x,y) = x^{2} + y^{2}\text{.}\) Compute \(\grad f\text{.}\)</p>
+<p id="p-1481">Let \(f(x,y) = x^{2} + y^{2}\text{.}\) Compute \(\grad f\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-232" id="solution-232"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-232"><div class="solution solution-like">
-<p id="p-1448">We have</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-238" id="solution-238"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-238"><div class="solution solution-like">
+<p id="p-1482">We have</p>
 <div class="displaymath">
 \begin{equation*}
 \grad f = \dotprod{2x, 2y}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1449">We can restate <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> very quickly in terms of the gradient. In particular, if \(\vv{u}\) is a vector (not necessarily a unit vector) then</p>
+</div></article><p id="p-1483">We can restate <a class="xref" data-knowl="./knowl/theorem-computing-the-directional-derivative.html" title="Theorem 12.6.2: Computing the Directional Derivative">Theorem 12.6.2</a> very quickly in terms of the gradient. In particular, if \(\vv{u}\) is a vector (not necessarily a unit vector) then</p>
 <div class="displaymath">
 \begin{equation}
 D_{\vv{u}}f = \grad f\cdot \frac{\vv{u}}{|\vv{u}|}\label{equation-directional-derivative-gradient}\tag{12.6.1}
@@ -389,10 +394,10 @@ D_{\vv{u}}f = \grad f\cdot \frac{\vv{u}}{|\vv{u}|}\label{equation-directional-de
 <article class="example example-like" id="example-directional-derivative-using-the-gradient"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">Directional derivative using the gradient.</span>
 </h6>
-<p id="p-1450">Is the function \(f(x,y,z) = xy + yz + zx\) increasing or decreasing at \(P(1,-1,3)\) and in the direction of \(Q(2,4,5)\text{.}\)</p>
+<p id="p-1484">Is the function \(f(x,y,z) = xy + yz + zx\) increasing or decreasing at \(P(1,-1,3)\) and in the direction of \(Q(2,4,5)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-233" id="solution-233"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-233"><div class="solution solution-like">
-<p id="p-1451">We need to compute \(D_{\vec{PQ}}f(1,-1,3)\) and check if it's positive or negative. Since \(\grad f = \dotprod{y, z, x}\) and \(\vec{PQ} = \dotprod{1,5,2}\text{,}\) it follows that</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-239" id="solution-239"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-239"><div class="solution solution-like">
+<p id="p-1485">We need to compute \(D_{\vec{PQ}}f(1,-1,3)\) and check if it's positive or negative. Since \(\grad f = \dotprod{y, z, x}\) and \(\vec{PQ} = \dotprod{1,5,2}\text{,}\) it follows that</p>
 <div class="displaymath">
 \begin{align*}
 D_{\vec{PQ}}f(1,-1,3) &amp; = \grad f (1,-1,3)\cdot\frac{\vec{PQ}}{|\vec{PQ}|} \\
@@ -400,39 +405,39 @@ D_{\vec{PQ}}f(1,-1,3) &amp; = \grad f (1,-1,3)\cdot\frac{\vec{PQ}}{|\vec{PQ}|} \
 &amp; = \frac{16}{\sqrt{30}} 
 \end{align*}
 </div>
-<p data-braille="continuation">Hence \(f\) is increasing at \((1,-1,3)\) and in the direction of \((2,4,5)\text{.}\)</p>
+<p class="continuation">Hence \(f\) is increasing at \((1,-1,3)\) and in the direction of \((2,4,5)\text{.}\)</p>
 </div></div>
-</div></article><p id="p-1452">The gradient is also useful for telling us where a function is increasing and decreasing the greatest. By <a class="xref" data-knowl="./knowl/equation-directional-derivative-gradient.html" title="Equation 12.6.1">(12.6.1)</a>, we can write</p>
+</div></article><p id="p-1486">The gradient is also useful for telling us where a function is increasing and decreasing the greatest. By <a class="xref" data-knowl="./knowl/equation-directional-derivative-gradient.html" title="Equation 12.6.1">(12.6.1)</a>, we can write</p>
 <div class="displaymath">
 \begin{equation*}
 D_{\vv{u}}f = \grad f\cdot\frac{\vv{u}}{|\vv{u}|} = |\grad f| \cos\theta,
 \end{equation*}
 </div>
-<p data-braille="continuation">where \(\theta\) is the acute angle between \(\grad f\) and \(\vv{u}\text{.}\) It follows that</p>
+<p class="continuation">where \(\theta\) is the acute angle between \(\grad f\) and \(\vv{u}\text{.}\) It follows that</p>
 <div class="displaymath">
 \begin{equation*}
 -|\grad f| \leq D_{\vv{u}}f \leq |\grad f|.
 \end{equation*}
 </div>
-<p data-braille="continuation">We summarize this in the following theorem.</p>
+<p class="continuation">We summarize this in the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-direction-of-greatest-increase-and-decrease"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Direction of Greatest Increase and Decrease.</span>
 </h6>
-<p id="p-1453">Let \(f\) be a function with continuous first partial derivatives. Then \(\grad f\) points in the direction of greatest increase of \(f\text{,}\) and the rate of maximum increase of \(f\) is given by \(|\grad f|\text{.}\) Similarly, \(-\grad f\) points in the direction of greatest decrease, and the rate of maximum decrease of \(f\) is given by \(-|\grad f|\text{.}\)</p></article><article class="example example-like" id="example-finding-the-direction-and-rate-of-maximum-decrease"><h6 class="heading">
+<p id="p-1487">Let \(f\) be a function with continuous first partial derivatives. Then \(\grad f\) points in the direction of greatest increase of \(f\text{,}\) and the rate of maximum increase of \(f\) is given by \(|\grad f|\text{.}\) Similarly, \(-\grad f\) points in the direction of greatest decrease, and the rate of maximum decrease of \(f\) is given by \(-|\grad f|\text{.}\)</p></article><article class="example example-like" id="example-finding-the-direction-and-rate-of-maximum-decrease"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.6.8</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the direction and rate of maximum decrease.</span>
 </h6>
-<p id="p-1454">Let \(f(s,t) = te^{st}\text{.}\) What is the direction and rate of greatest decrease of \(f\) at the point \((0,2)\text{?}\)</p>
+<p id="p-1488">Let \(f(s,t) = te^{st}\text{.}\) What is the direction and rate of greatest decrease of \(f\) at the point \((0,2)\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-234" id="solution-234"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-234"><div class="solution solution-like">
-<p id="p-1455">We need to compute \(-\grad f\text{,}\) which gives</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-240" id="solution-240"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-240"><div class="solution solution-like">
+<p id="p-1489">We need to compute \(-\grad f\text{,}\) which gives</p>
 <div class="displaymath">
 \begin{equation*}
 -\grad f = \dotprod{-(1 + st)e^{st}, -ste^{st}}
 \end{equation*}
 </div>
-<p data-braille="continuation">So the direction of greatest decrease at \((0,2)\) is given by \(-\grad f(0,2) = \dotprod{-1, 0}\text{.}\) The rate of maximum decrease in this direction is \(-|\grad f(0,2)| = -|\dotprod{-1,0}| = -1\text{.}\)</p>
+<p class="continuation">So the direction of greatest decrease at \((0,2)\) is given by \(-\grad f(0,2) = \dotprod{-1, 0}\text{.}\) The rate of maximum decrease in this direction is \(-|\grad f(0,2)| = -|\dotprod{-1,0}| = -1\text{.}\)</p>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-7"><p id="p-1456">SUGGESTED PROBLEMS: 1, 3, 11, 15, 21</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-7"><p id="p-1490">SUGGESTED PROBLEMS: 1, 3, 11, 15, 21</p></section></section></div></main>
 </div>
 </body>
 </html>
