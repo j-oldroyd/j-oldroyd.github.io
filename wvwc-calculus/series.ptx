@@ -1,0 +1,1827 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="series" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Series</title>
+  <introduction>
+    <p>
+      In physics, the motion of a simple pendulum can be modeled using the second-order differential equation
+      <me>\dv[2]{\theta}{t} + \frac{g}{l}\sin\theta = 0</me>
+      where <m>g</m> is the acceleration due to gravity,<m>l</m> is the length of the pendulum rod and <m>\theta</m> is the angular displacement of the pendulum.
+      Unfortunately, it turns out that this ODE is impossible to solve exactly in terms of <q>elementary functions</q>.
+      The sine term is, surprisingly, too complicated to handle by standard methods for solving ODEs.
+    </p>
+    <p>
+      However, we can <em>replace</em> the sine term with a reasonable approximation, namely the linear approximations from <xref ref="section-linear-approximations" text="type-global" />.
+      The linear approximation <m>L(\theta)</m> to <m>\sin\theta</m> at <m>\theta = 0</m> is given by
+      <me>L(\theta) = \sin0 + \dv{}{\theta}\sin\theta\Big|_{\theta= 0}(\theta - 0),</me>
+      or just <m>L(\theta) = \theta</m> (see <xref ref="figure-sine-linear-approximation" text="type-global" />).
+      This replaces the pendulum ODE with the approximation
+      <me>\dv[2]{\theta}{t} + \frac{g}{l}\theta = 0,</me>
+      which is much simpler and can be easily solved (using methods from differential equations) to get
+      <me>\theta(t) = c_{1}\cos\sqrt{\frac{g}{l}}t + c_{2}\sin\sqrt{\frac{g}{l}}t.</me>
+    </p>
+    <figure xml:id="figure-sine-linear-approximation">
+      <image>
+        <latex-image><![CDATA[
+        \begin{tikzpicture}
+          \begin{axis}[%
+          mystyle,
+          xmin = -1.2*pi, xmax = 1.2*pi,
+          ymin = -2, ymax = 2,
+          xlabel={$\theta$},
+          xtick={-3.14159, 3.14159},
+          xticklabels={$-\pi$, $\pi$},
+          ytick={-1, 1},
+          legend style={at={(axis cs:1,-1)}, anchor={west}}]
+          \addplot[thick, smooth, blue]{sin(deg(x))};
+          \addlegendentry{$\sin \theta$};
+
+          \addplot[thick, red, smooth]{x};
+          \addlegendentry{$\theta$};
+          \end{axis}
+          \end{tikzpicture}]]>
+        </latex-image>
+      </image>
+      <caption><m>\sin\theta</m> and its linear approximation at <m>\theta=0</m>.</caption>
+    </figure>
+    <p>
+      As we can see from <xref ref="figure-sine-linear-approximation" text="type-global" />, the linear approximation serves as a reasonable estimate of <m>\sin\theta</m> if <m>\theta</m> is small, but loses accuracy quickly as <m>\theta</m> moves away from <m>0</m>.
+      A reasonable question then is how we can improve the accuracy of our approximation.
+      One way to do so is to find a <em>quadratic</em> approximation to <m>\sin\theta</m>, the idea being that allowing higher powers of <m>\theta</m> in our approximation will remove some of the error.
+    </p>
+    <p>
+      To find the <q>best</q> quadratic approximation to <m>f(\theta) = \sin\theta</m> at <m>\theta = 0</m>, we want to find the quadratic function <m>g(\theta) = a\theta^{2} + b\theta + c</m> that satisfies the following:
+    </p>
+    <ul>
+      <li>
+        <m>f(0) = g(0).</m>
+      </li>
+      <li>
+        <m>f'(0) = g'(0).</m>
+      </li>
+      <li>
+        <m>f''(0) = g''(0).</m>
+      </li>
+    </ul>
+    <p>
+      These three conditions give
+    </p>
+    <ul>
+      <li>
+        <m>0 = c</m>
+      </li>
+      <li>
+        <m>1 = b</m>
+      </li>
+      <li>
+        <m>0 = 2a</m>
+      </li>
+    </ul>
+    <p>
+      So the best quadratic approximation to <m>\sin\theta</m> (in the sense of matching derivatives up to the second order) is given by
+      <me>g(\theta) = 0\theta^{2} + \theta + 0 = \theta.</me>
+      This is the same as the linear approximation, so we'll go one more step up to get the best cubic approximation to <m>f(\theta) = \sin\theta</m>, <ie />, the best approximation of the form <m>h(\theta) = a\theta^{3} + b\theta^{2} + c\theta + d</m> in the sense that
+    </p>
+    <ul>
+      <li>
+        <m>f(0) = h(0)</m>
+      </li>
+      <li>
+        <m>f'(0) = h'(0)</m>
+      </li>
+      <li>
+        <m>f''(0)</m>
+      </li>
+      <li>
+        <m>f'''(0) = g'''(0)</m>
+      </li>
+    </ul>
+    <p>
+      This simplifies to
+    </p>
+    <ul>
+      <li>
+        <m>0 = d</m>
+      </li>
+      <li>
+        <m>1 = c</m>
+      </li>
+      <li>
+        <m>0 = 2b</m>
+      </li>
+      <li>
+        <m>-1 = 6a</m>
+      </li>
+    </ul>
+    <p>
+      So the best cubic approximation to <m>\sin\theta</m> is given by
+      <me>h(\theta) = -\frac{1}{6}\theta^{3} + 0\theta^{2} + \theta - 0 = \theta  -\frac{1}{6}\theta^{3}.</me>
+      Plotting this against <m>\sin \theta</m> and <m>\theta</m> as in <xref ref="figure-sine-linear-approximation" text="type-global" /> gives <xref ref="figure-sine-cubic-approximation" text="type-global" />:
+    </p>
+    <figure xml:id="figure-sine-cubic-approximation">
+      <image>
+        <latex-image><![CDATA[
+        \begin{tikzpicture}
+            \begin{axis}[%
+            mystyle,
+            xmin = -1.2*pi, xmax = 1.2*pi,
+            ymin = -2, ymax = 2,
+            xlabel={$\theta$},
+            xtick={-3.14159, 3.14159},
+            xticklabels={$-\pi$, $\pi$},
+            ytick={-1, 1},
+            legend style={at={(axis cs:1,-1)}, anchor={west}}]
+            \addplot[thick, smooth, blue]{sin(deg(x))};
+            \addlegendentry{$\sin \theta$};
+
+            \addplot[thick, red, smooth]{x};
+            \addlegendentry{$\theta$};
+
+            \addplot[thick,teal,smooth]{x - (x^3)/6};
+            \addlegendentry{$\theta - \frac{1}{6}\theta^{3}$};
+            \end{axis}
+            \end{tikzpicture}]]>
+          </latex-image>
+        </image>
+        <caption><m>\sin\theta</m> and its linear and cubic approximations at <m>\theta=0</m>.</caption>
+      </figure>
+      <p>
+        It turns out that this process can be continued indefinitely, giving us
+        <me>\sin x = \sum_{n=0}^{\infty}a_{n}x^{n}.</me>
+        The expression on the right is known as a <term>power series</term>, and provides many advantages for performing calculus with the sine function.
+        The list of coefficients <m>\{a_{n}\}_{n=0}^{\infty}</m> is known as a <term>sequence</term>, and completely determines the properties of sine.
+      </p>
+    </introduction>
+    <section xml:id="section-sequences">
+      <title>Sequences</title>
+      <p>
+        A <term>sequence</term> is a list of numbers:
+        <me>a_{0}, a_{1}, a_{2}, \ldots,</me>
+        often written <m>\{a_{n}\}_{n=0}^{\infty}</m>.
+        We call <m>a_{n}</m> the <m>\mathbf{n}^{\text{\textbf{th}}}</m> term of the sequence, and <m>n</m> itself the <term>index</term>.
+      </p>
+      <p>
+        Sequences are usually specified in one of two ways: as an <term>explicit formula</term> such as
+        <me>a_{n} = \frac{1}{1 - 2n}</me>,
+        or recursively by means of a <term>recurrence relation</term>, such as
+        <me>F_{n} = F_{n-1} + F_{n-2}, \quad f_{0} = f_{1} = 1.</me>
+        Note that for recurrence relations, we need to specify <q>base cases</q>.
+      </p>
+      <example xml:id="example-an-alternating-sequence">
+        <title>An Alternating Sequence</title>
+        <statement>
+          <p>
+            Find the first few terms of the sequence <m>\{\cos(n\pi)\}_{n=2}^{\infty}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This sequence simplifies down to <m>\{1, -1, 1, -1, 1, \ldots\}</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Sequences have limits just as functions do.
+      </p>
+      <definition xml:id="definition-limit-of-a-sequence">
+        <title>Limit of a Sequence</title>
+        <statement>
+          <p>
+            A sequence <m>\{a_{n}\}</m> has limit <m>L</m>, denoted
+            <me>\lim_{n\to\infty}a_{n} = L \quad \text{or} \quad a_{n}\to L</me>,
+            if <m>a_{n}</m> gets arbitrarily close to <m>L</m> as <m>n</m> increases.
+            If a sequence has a limit, we say the sequence is <term>convergent</term> and <term>converges</term>.
+            Otherwise, we say the sequence is <term>divergent</term> and <term>diverges</term>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        One of the most important sequential limits is the following:
+        <me>\frac{1}{n^{p}}\to 0\quad\text{as}\quad n\to\infty</me>
+        if <m>p > 0</m>.
+      </p>
+      <example>
+        <statement>
+          <p>
+            Find the limit of the sequence
+            <me>a_{n} = \frac{3n - n^{3}}{5n^{3} + 2n^{2}}.</me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We can try dividing the numerator and denominator by the highest power of <m>n</m> that appears: <m>n^{3}</m>.
+            This gives
+            <me>a_{n} = \frac{3n^{-2} - 1}{5 + 2n^{-1}}</me>.
+            Now we can take the limit as <m>n\to\infty</m> to get <m>a_{n}\to\frac{-1}{5}</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can also apply Calculus 1 limits to sequences by using the following theorem.
+      </p>
+      <theorem xml:id="theorem-sequential-and-functional-limits">
+        <title>Sequential and Functional Limits</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function and suppose that
+            <me>lim_{x\to\infty}f(x) = L</me>.
+            Then
+            <me>\lim_{n\to\infty}f(n) = L</me>
+            also.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        One immediate advantage of <xref ref="theorem-sequential-and-functional-limits" text="type-global" /> is that L'Hospital's Rule from <xref ref="section-l-hospital-s-rule" text="type-global" /> applies to sequential limits as well, <em>as long as the sequence consists of values from a differential function</em>.
+      </p>
+      <example xml:id="example-finding-a-sequential-limit-using-l-hospital-s-rule">
+        <title>Finding a Sequential Limit Using L'Hospital's Rule</title>
+        <statement>
+          <p>
+            Let <m>a_{n} = n^{2}e^{-n}</m>.
+            Find <m>\lim_{n\to\infty}a_{n}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, note that <m>a_{n} = f(n)</m> where
+            <me>f(x) = \frac{x^{2}}{e^{x}}</me>.
+            Therefore
+          </p>
+          <md>
+            <mrow>\lim_{n\to\infty}a_{n} \amp = \lim_{x\to\infty}\frac{x^{2}}{e^{x}} </mrow>
+            <mrow> \amp = \lim_{x\to\infty}\frac{2x}{e^{x}} </mrow>
+            <mrow> \amp = \lim_{x\to\infty}\frac{2}{e^{x}} </mrow>
+            <mrow> \amp = 0 </mrow>
+          </md>.
+        </solution>
+      </example>
+      <example xml:id="example-geometric-sequences">
+        <title>Geometric Sequences</title>
+        <statement>
+          <p>
+            A <term>geometric sequence</term> is a sequence of the form
+            <me>a_{n} = ar^{n}.</me>
+            Find <m>\lim_{n\to\infty}a_{n}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This limit depends on whether or not <m>r</m> is in <m>(-1,1]</m>.
+            If <m>|r| \lt 1</m> then <m>r^{n}\to 0</m>.
+            If <m>r = 1</m> then <m>r^{n} = 1</m> for all <m>n</m>.
+            Finally, if <m>r</m> is outside of this interval, then <m>r^{n}</m> diverges.
+            Therefore
+            <me>a_{n} \to \begin{cases} 0 \amp \text{ if } -1 \lt r \lt 1 \\ a \amp \text{ if } r = 1 \end{cases}</me>
+            and diverges otherwise.
+          </p>
+        </solution>
+      </example>
+      <p>
+        May decimals can be represented using geometric sequences.
+      </p>
+      <example xml:id="example---9--repeating">
+        <title><m>.9</m> Repeating</title>
+        <statement>
+          <p>
+            Determine the limit of the sequence
+            <me>\{.9, .99, .999, .9999, .99999, \ldots\}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            It looks like the terms of the sequence are approaching <m>1</m>, and we can verify this using a geometric sequence.
+            We can write this sequence as
+            <me>a_{n} = 1 - (.1)^{n}\quad\text{for}\quad n\geq 1</me>.
+            So the limit of the sequence is
+            <me>\lim_{n\to\infty}a_{n} = 1</me>.
+            Note that this suggests the (true!) statement that <m>.9999\ldots = 1</m>.
+          </p>
+        </solution>
+      </example>
+      <definition xml:id="definition-infinite-limits">
+        <title>Infinite Limits</title>
+        <statement>
+          <p>
+            Let <m>a_{n}</m> be a sequence.
+            If the terms of <m>a_{n}</m> grow without bound as <m>n</m> increases, we say that <m>a_{n}\to\infty</m>.
+            If the terms of <m>a_{n}</m> decrease without bound as <m>n</m> increases, we say that <m>a_{n}\to-\infty</m>.
+          </p>
+        </statement>
+      </definition>
+      <example xml:id="example-limit-of-the-fibonacci-sequence">
+        <title>Limit of the Fibonacci Sequence</title>
+        <statement>
+          <p>
+            Let <m>F_{n}</m> denote the <m>n^{\text{th}}</m> term of the Fibonacci sequence.
+            Determine <m>\lim_{n\to\infty}F_{n}</m>.
+            Estimate <m>\lim_{n\to\infty}\frac{F_{n}}{F_{n-1}}</m>.
+          </p>
+        </statement>
+      </example>
+      <p>
+        To calculate limits, we can use a version of the limit laws.
+      </p>
+      <theorem xml:id="theorem-sequential-limit-laws">
+        <title>Sequential Limit Laws</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}</m> and <m>\{b_{n}\}</m> be sequences with <m>a_{n}\to a</m> and <m>b_{n}\to b</m>.
+            Let <m>c</m> be a constant.
+            Then the following are true:
+          </p>
+          <ol>
+            <li>
+              <m>a_{n} + b_{n} \to a + b.</m>
+            </li>
+            <li>
+              <m>ca_{n}\to ca.</m>
+            </li>
+            <li>
+              <m>a_{n}b_{n}\to ab.</m>
+            </li>
+            <li>
+              <m>\frac{a_{n}}{b_{n}}\to\frac{a}{b}</m> assuming <m>b\neq 0</m>.
+            </li>
+            <li>
+              <m>a_{n}^{p}\to a^{p}</m> if <m>a_{n},p \gt 0</m>.
+            </li>
+            <li>
+              <m>f(a_{n})\to f(a)</m> if <m>f</m> is continuous at <m>a</m>.
+            </li>
+          </ol>
+        </statement>
+      </theorem>
+      <p>
+        Another useful tool for evaluating limits of recursive sequences is the following result: if <m>\lim_{n\to\infty}a_{n} = L</m>, then <m>\lim_{n\to\infty}a_{n-1} = L</m> also.
+      </p>
+      <example xml:id="example-a-limit-from-newton-s-method">
+        <title>A Limit from Newton's Method</title>
+        <statement>
+          <p>
+            Find the limit of the sequence
+            <me>x_{n} = \frac{1}{2}\left(x_{n} + \frac{2}{x_{n}}\right)\quad\text{where}\quad x_{0} = 1</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, assume <m>\lim_{n\to\infty}x_{n} = x</m>.
+            Then taking the limit of both sides of the recurrence relation gives
+            <me>x = \frac{1}{2}\left(x + \frac{2}{x}\right)</me>.
+            Solving for <m>x</m>, we get <m>x^{2} = 2</m>, which simplifies to <m>x = \sqrt{2}</m>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-a-false-limit">
+        <title>A False Limit</title>
+        <statement>
+          <p>
+            Find the limit of the sequence
+            <me>s_{n} = 3 - s_{n - 1}\quad\text{where}\quad s_{0} = 1</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we let <m>s = \lim_{n\to\infty}s_{n}</m> and take the limit of both sides of the recurrence, we get <m>s = 3 - s</m> or just <m>s = \frac{3}{2}</m>.
+            However, the actual terms of the sequence are given by
+            <me>\{s_{n}\}_{n=0}^{\infty} = \{1, 2, 1, 2, 1, 2, \ldots\}</me>,
+            which is clearly divergent!
+            The problem here is that we assumed a limit existed in the first place.
+            <em>This is not always valid</em>.
+            So we need to be careful.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can check whether or not a sequence is convergent without actually finding a limit, at least in certain cases.
+      </p>
+      <theorem xml:id="theorem-absolute-value-test">
+        <title>Absolute Value Test</title>
+        <statement>
+          <p>
+            Suppose that <m>\lim_{n\to\infty}|a_{n}| = 0</m>.
+            Then <m>a_{n}\to0</m> as well.
+          </p>
+        </statement>
+      </theorem>
+      <theorem xml:id="theorem-the-squeeze-theorem-for-sequences">
+        <title>The Squeeze Theorem for Sequences</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}, \{b_{n}\}</m> and <m>\{c_{n}\}</m> be sequences such that
+            <me>a_{n} \leq b_{n} \leq c_{n}</me>.
+            If <m>a_{n},c_{n}\to L</m>, then <m>b_{n}\to L</m>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-applying-the-squeeze-theorem-and-the-absolute-value-test">
+        <title>Applying the Squeeze Theorem and the Absolute Value Test</title>
+        <statement>
+          <p>
+            Let
+            <me>a_{n} = \frac{(-1)^{n}\sin n}{\frac{n}{2}\cos n + n}</me>.
+            Find <m>\lim_{n\to\infty}a_{n}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This sequence is complicated, so we'll try comparing with simpler sequences instead.
+            First, we'll take the absolute value to get rid of the <m>(-1)^{n}</m> term:
+            <me>|a_{n}| = \frac{|\sin n|}{\left|\frac{n}{2}\cos n + n\right|} = \frac{|\sin n|}{n\left|1 + \frac{1}{2}\cos n\right|}</me>.
+            Now we'll use the fact that <m>|a_{n}|\geq 0, |\sin n| \leq 1</m> and <m>\left|1 + \frac{1}{2}\cos n\right| \geq \frac{1}{2}</m> to write
+            <me>0\leq |a_{n}| \leq \frac{1}{\frac{n}{2}} = \frac{2}{n}</me>.
+            Since <m>\frac{2}{n}\to 0</m>, this forces <m>|a_{n}|</m>, and this <m>a_{n}</m>, to converge to <m>0</m> as well.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Another important way to check if a sequence converges is the <term>Monotone Convergence Theorem</term> <xref ref="theorem-monotone-convergence-theorem" text="type-global" />.
+      </p>
+      <definition xml:id="definition-monotone-sequences">
+        <title>Monotone Sequences</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}</m> be a sequence.
+            Then <m>\{a_{n}\}</m> is <term>increasing</term> if <m>a_{n+1} \gt a_{n}</m> for all <m>n</m> and <term>decreasing</term> if <m>a_{n+1}\lt a_{n} </m> for all <m>n</m>.
+            In either case, we say that the sequence is monotone.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        If we add one more condition to a monotone sequence, we get a convergent sequence.
+      </p>
+      <definition xml:id="definition-bounded-sequences">
+        <title>Bounded Sequences</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}</m> be a sequence.
+            We say that <m>\{a_{n}\}</m> is <term>bounded</term> if there exists some real number <m>M</m> such that <m>|a_{n}| \leq M</m> for all <m>n</m>.
+          </p>
+        </statement>
+      </definition>
+      <theorem xml:id="theorem-monotone-convergence-theorem">
+        <title>Monotone Convergence Theorem</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}</m> be a bounded monotone sequence.
+            Then <m>\{a_{n}\}</m> converges.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-applying-the-mct">
+        <title>Applying the MCT</title>
+        <statement>
+          <p>
+            Let <m>\{a_{n}\}</m> denote the sequence
+            <me>\{\sqrt{2}, \sqrt{2\sqrt{2}}, \sqrt{2\sqrt{2\sqrt{2}}},\ldots\}</me>
+            Determine if the sequence converges and if so find its limit.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, note that
+            <me>a_{n} = \sqrt{2a_{n-1}}\quad\text{and}\quad a_{1} = \sqrt{2}.</me>
+            To show this converges, we'll use the MCT.
+            To do so, we must show that the sequence is bounded and increasing.
+            To show it's bounded, we'll guess that <m>a_{n}\lt 2</m> for some <m>n</m>.
+            Then
+            <me>a_{n+1} = \sqrt{2a_{n}}\lt \sqrt{2}\sqrt{2} = 2</me>,
+            implying the claim.
+            Now,
+            <me>a_{n+1} = \sqrt{2}\sqrt{a_{n}} \gt \sqrt{a_{n}^{2}} = a_{n}</me>,
+            showing the sequence is increasing.
+            Hence it's convergent by the MCT.
+            The limit is equal to <m>2</m>.
+          </p>
+        </solution>
+      </example>
+    </section>
+    <section xml:id="section-series">
+      <title>Series</title>
+      <p>
+        Consider the number <m>\pi = 3.14159\ldots</m>.
+        This number is irrational and so cannot be represented as a rational number <m>\frac{a}{b}</m>.
+        This leads to the question of what we mean by <m>\pi</m>?
+        Or in particular, how can we actually make sense of <m>\pi</m>, or represent it?
+      </p>
+      <p>
+        We can consider rewriting <m>\pi</m> as follows:
+        <me>\pi = 3.14159\ldots = 3 + \frac{1}{10} + \frac{4}{100} + \frac{1}{1000} + \frac{5}{10000} + \frac{9}{100000} + \cdots</me>.
+        So we can identify <m>\pi</m> with the sequence <m>\{a_{n}\}_{n=0}^{\infty} = \{3, \frac{1}{10}, \frac{4}{100}, \ldots\}</m> and the <term>series</term>
+        <me>a_{0} + a_{1} + a_{2} + \cdots</me>.
+      </p>
+      <definition xml:id="definition-infinite-series">
+        <title>Infinite Series</title>
+        <statement>
+          <p>
+            An infinite series is a sum of the form
+            <me>\sum_{k=0}^{\infty}a_{k} = a_{0} + a_{1} + \cdots</me>
+            where <m>\{a_{k}\}_{k=0}^{\infty}</m> is a sequence.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Infinite series are useful for representing (and computing) irrational numbers (which includes almost all numbers).
+      </p>
+      <example xml:id="example-guessing-sums">
+        <title>Guessing Sums</title>
+        <statement>
+          <p>
+            Guess the sums of the following series:
+            <ol>
+              <li>
+                <m>\sum_{k=0}^{\infty}2^{k}</m>
+              </li>
+              <li>
+                <m>\sum_{k=1}^{\infty}2^{-k}</m>
+              </li>
+              <li>
+                <m>1 - 1 + 1 - 1 + 1 - \cdots</m>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have the following:
+            <ol>
+              <li>
+                <m>\sum_{k=0}^{\infty}2^{k} = \infty</m>
+              </li>
+              <li>
+                <m>\sum_{k=1}^{\infty}2^{-k} = 1</m>
+              </li>
+              <li>
+                <p>
+                  For this last sum we have an issue: there's no sensible way to define this sum.
+                  We can say that <m>1 - 1 + \cdots = 0</m> or <m>1</m> by grouping terms differently.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can determine what the value of a series should be by using limits.
+      </p>
+      <definition xml:id="definition-partial-sums-and-convergence">
+        <title>Partial Sums and Convergence</title>
+        <statement>
+          <p>
+            Given the series <m>\sum_{k=0}^{\infty}a_{k}</m>, we denote its <m>n^{\text{th}}</m> <term>partial sum</term> by
+            <me>S_{n} = \sum_{k=0}^{n}a_{k}</me>.
+            If the sequence <m>\{S_{n}\}</m> is convergent and <m>S_{n}\to S</m>, then we say that the original series <term>converges</term> and <m>\sum_{k=0}^{\infty}a_{k} = S</m>.
+            If the sequence of partial sums diverges, we say the original series <term>diverges</term>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Using <xref ref="definition-partial-sums-and-convergence" text="type-global" />, we can say that the sum <m>1 - 1 + 1 - 1 + \cdots</m> diverges, since its sequence of partial sums is <m>\{1,0,1,0,1,\ldots\}</m>.
+        The same is true for the first series in <xref ref="example-guessing-sums" text="type-global" />, but the second series converges.
+      </p>
+      <example xml:id="example-determining-convergence-of-a-series">
+        <title>Determining Convergence of a Series</title>
+        <statement>
+          <p>
+            Does the series <m>\sum_{n=1}^{\infty}3^{-n}</m> converge?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We'll look at the sequence of partial sums.
+            We have
+            <md>
+              <mrow>S_{1} \amp = \frac{1}{3} </mrow>
+              <mrow>S_{2} \amp = \frac{4}{9} </mrow>
+              <mrow>S_{3} \amp = \frac{13}{27} </mrow>
+            </md>
+            and so on.
+            It looks like the sequence of partial sums approaches <m>\frac{1}{2}</m>, so we guess that the series equals the same.
+          </p>
+        </solution>
+      </example>
+      <p>
+        The series in <xref ref="example-determining-convergence-of-a-series" text="type-global" />, as well as the first two series in <xref ref="example-guessing-sums" text="type-global" />, are examples of an important series known as a <term>geometric series</term>.
+      </p>
+      <definition xml:id="definition-geometric-series">
+        <title>Geometric Series</title>
+        <statement>
+          <p>
+            A series <m>\sum_{k=0}^{\infty}a_{k}</m> is a geometric series if <m>a_{k} = ar^{k}</m> for some constants <m>a</m> and <m>r</m>.
+            Equivalently, the terms of the series form a geometric sequence (see <xref ref="example-geometric-sequences" text="type-global" />).
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Geometric series are useful because it's straightforward to find their values.
+        To see how, let <m>\sum_{k=0}^{\infty}ar^{k}</m> be a geometric series and let <m>\{S_{n}\}</m> denote the corresponding sequence of partial sums.
+        Then
+        <me>S_{n} = a + ar + ar^{2} + \cdots + ar^{n}</me>
+        which gives
+        <me>S_{n} - rS_{n} = a - ar^{n+1}</me>.
+        We can solve this for <m>S_{n}</m> to get
+        <me>S_{n} = \frac{a - ar^{n+1}}{1 - r}</me>.
+      </p>
+      <p>
+        At this point, we can find the limit of the partial sums using <xref ref="example-geometric-sequences" text="type-global" />.
+        Therefore <m>\sum_{k=0}^{\infty}ar^{k}</m> converges to <m>\frac{a}{1 - r}</m> if <m>|r| \lt 1</m> and diverges otherwise.
+      </p>
+      <p>
+        As a quick example of this result, we can find the value of <m>\sum_{n=1}^{\infty}3^{-n}</m> since this series is geometric.
+        To do so, we must determine <m>a</m> and <m>r</m> for this sum.
+        Since
+        <me>\sum_{n=1}^{\infty}3^{-n} = \frac{1}{3} + \frac{1}{9} + \frac{1}{27} + \cdots</me>,
+        we have <m>a = \frac{1}{3}</m> and <m>r = \frac{1}{3}</m> also.
+        Hence the series sums to <m>\frac{1/3}{2/3} = \frac{1}{2}</m>.
+      </p>
+      <example xml:id="example-computing-a-geometric-series">
+        <title>Computing a Geometric Series</title>
+        <statement>
+          <p>
+            Determine the value of <m>\sum_{k=0}^{\infty}\left(-\frac{1}{4}\right)^{k} 5^{6 - k}</m> if it exists.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since this series contains terms being raised to the <m>k^{\text{th}}</m> power, we suspect it may be geometric.
+            If we write out the first several terms, we get
+            <me>\sum_{k=0}^{\infty}\left(-\frac{1}{4}\right)^{k} 5^{6 - k} = 5^{6} - \frac{5^{5}}{4} + \frac{5^{4}}{4^{2}} - \cdots</me>,
+            so at each step we're dividing by <m>4\cdot5 = -20</m>.
+            This series is therefore a geometric series with <m>a = 5^{6}</m> and <m>r = -\frac{1}{20}</m>.
+            Since <m>|r| \lt 1</m>, this series converges.
+            The value of this series is
+            <me>\sum_{k=0}^{\infty}\left(-\frac{1}{4}\right)^{k} 5^{6 - k} = \frac{a}{1 - r} = \frac{5^{6}}{21/20}</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can also find <m>a</m> and <m>r</m> without writing out the first few terms of the series.
+      </p>
+      <example xml:id="example-finding-a--and-r-">
+        <title>Finding <m>a</m> and <m>r</m></title>
+        <statement>
+          <p>
+            Determine the value of <m>\sum_{k=2}^{\infty}3^{4 - k}7^{3k}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We can rewrite the series as
+            <me>\sum_{k=2}^{\infty}3^{4 - k}7^{3k} = \sum_{k=2}^{\infty}3^{4}\left(\frac{7^{3}}{3}\right)^{k}</me>.
+            This is a geometric series with
+            <me>a = 3^{4}\frac{7^{6}}{3^{2}}\quad\text{and}\quad r = \frac{7^{3}}{3}</me>.
+            Since <m>|r| > 1</m>, the series diverges.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example---9-ldots--repeating">
+        <title><m>.9\ldots</m> repeating</title>
+        <statement>
+          <p>
+            Prove that <m>.9\ldots = 1</m> using geometric series.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, we need to write <m>.9\ldots</m> as a geometric series.
+            We can do so as follows:
+            <me>.9\ldots = \frac{9}{10} + \frac{9}{100} + \cdots</me>,
+            and so we see that
+            <me>.9\ldots = \sum_{k=1}^{\infty}\frac{9}{10^{k}}</me>.
+            This is a geometric series with <m>a = \frac{9}{10}</m> and <m>r = \frac{1}{10}</m> (and so is convergent!), and so
+            <me>\sum_{k=1}^{\infty}\frac{9}{10^{k}} = \frac{9/10}{1 - \frac{1}{10}} = 1</me>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-writing-a-decimal-as-a-fraction">
+        <title>Writing a Decimal as a Fraction</title>
+        <statement>
+          <p>
+            Rewrite the decimal <m>.123451234512345\ldots</m> as a fraction <m>\frac{m}{n}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, it's a mathematical fact that any repeating decimal can be written as a rational number so we know that we can actually write <m>0.\overline{12345}</m> as a fraction.
+            We'll do so by rewriting the decimal as a geometric series:
+            <me>0.\overline{12345} = \frac{12345}{100000} + \frac{12345}{10000000000} + \cdots</me>,
+            which is a geometric series with <m>a = \frac{12345}{100000}</m> and <m>r = \frac{1}{100000}</m>.
+            This series is also convergent, and has sum
+            <me>\frac{a}{1 - r} = \frac{12345/100000}{99999/100000} = \frac{12345}{99999}</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Another type of series that can be calculated (relatively) easily is the <term>telescoping series</term>.
+        We'll demonstrate by way of example.
+      </p>
+      <example xml:id="example-telescoping-logarithms">
+        <title>Telescoping Logarithms</title>
+        <statement>
+          <p>
+            Find <m>\sum_{k=1}^{\infty}\ln\frac{k + 1}{k}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we write out the first few terms, we get
+            <me>\sum_{k=1}^{\infty}\ln\frac{k + 1}{k} = (\ln2 - \ln 1) + (\ln3 - \ln2) + \cdots</me>
+            so it looks like many of these terms cancel each other out.
+            To be precise about this, we'll find the partial sums of this series and then consider their limit:
+            <me>S_{n} = \sum_{k=1}^{n}\ln\frac{k+1}{k} = \ln(n + 1)</me>,
+            which goes to <m>\infty</m> as <m>n\to\infty</m>.
+            So the series diverges.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Not every series is obviously a telescoping series.
+      </p>
+      <example xml:id="example-rewriting-a-telescoping-series">
+        <title>Rewriting a Telescoping Series</title>
+        <statement>
+          <p>
+            Find <m>\sum_{n=3}^{\infty}\frac{3}{n(n-1)}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            It's not obvious at all that the series is telescoping, even if we write out a few terms.
+            However, if we try partial fractions on <m>\frac{3}{n(n-1)}</m> we obtain (see SageMath cell below)
+            <me>\frac{3}{n(n-1)} = \frac{3}{n - 1} - \frac{3}{n}</me>.
+            So
+            <me>\sum_{n=3}^{\infty}\frac{3}{n(n-1)} = \sum_{n=3}^{\infty}\left[\frac{3}{n-1} - \frac{3}{n}\right]</me>.
+          </p>
+          <p>
+            The <m>k^{\text{th}}</m> partial sum is
+            <me>S_{k} = \sum_{n=3}^{k}\left[\frac{3}{n-1} - \frac{3}{n}\right] = \frac{3}{2} - \frac{3}{k}</me>,
+            and so <m>S_{k}\to \frac{3}{2}</m>.
+            Hence <m>\sum_{n=3}^{\infty}\frac{3}{n(n-1)} = \frac{3}{2}</m>.
+          </p>
+        </solution>
+      </example>
+      <sage>
+        <input>
+          # Finds partial fraction decomposition for previous example
+          import sympy as sp
+          sp.init_printing()
+          n = sp.Symbol('n')
+
+          expr = 3 / ( n * ( n - 1 ) )
+          expr.apart()
+        </input>
+      </sage>
+      <p>
+        The next series is important despite diverging.
+      </p>
+      <example xml:id="example-the-harmonic-series">
+        <title>The Harmonic Series</title>
+        <statement>
+          <p>
+            Show that the <term>harmonic series</term>
+            <me>\sum_{k=1}^{\infty}\frac{1}{k} = 1 + \frac{1}{2} + \cdots</me>
+            is divergent.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The idea here (which will return later) is to compare this series with a simpler one that we know diverges.
+            We'll do so by looking at a specific set of partial sums:
+            <md>
+              <mrow>S_{1} \amp = 1 </mrow>
+              <mrow>S_{2} \amp = 1 + \frac{1}{2} </mrow>
+              <mrow>S_{4} \amp = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} \gt 1 + \frac{1}{2} + \frac{1}{2} </mrow>
+              <mrow>S_{8} \amp \gt 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} </mrow>
+            </md>
+            and in general
+            <me>S_{2^{n}} \gt 1 + \frac{n}{2}</me>.
+          </p>
+          <p>
+            So it follows that
+            <me>\lim_{n\to\infty}S_{n} \geq \lim_{n\to\infty}\left(1 + \frac{n}{2}\right) = \infty</me>.
+            Hence the harmonic series is divergent.
+          </p>
+        </solution>
+      </example>
+      <p>
+        A useful test for divergence of a series involves the long-term behavior of the terms of the series.
+      </p>
+      <theorem xml:id="theorem-divergence-test">
+        <title>Divergence Test</title>
+        <statement>
+          <p>
+            Consider the series <m>\sum a_{k}</m>.
+            If <m>\lim_{k\to\infty}a_{k}\neq0</m>, then <m>\sum a_{k}</m> diverges.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            We'll prove the <term>contrapositive</term> of this statement.
+            That is, we'll show that if the series converges then the terms go to <m>0</m>.
+            So suppose <m>\sum a_{k}</m> converges and let <m>S_{n}</m> denote the sequence of partial sums.
+            Then <m>a_{n+1} = S_{n+1} - S_{n}</m> which must go to <m>0</m> since the partial sums converge.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        Note that <xref ref="theorem-divergence-test" text="type-global" /> cannot be used to prove <em>convergence</em>, only divergence.
+        For example, the terms of the harmonic series go to <m>0</m> but the series itself diverges.
+      </p>
+      <example xml:id="example-using-the-divergence-test">
+        <title>Using the Divergence Test</title>
+        <statement>
+          <p>
+            Determine if <m>\sum_{n=1}^{\infty}\sin n</m> diverges.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since <m>\lim_{n\to\infty}\sin n\neq 0</m> (in fact, it doesn't exist at all), the series must diverge.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Series, or rather the summation symbol <m>\Sigma</m>, obey many of the same laws as integrals: they split over sums and we may pull constants out.
+      </p>
+      <example xml:id="example-splitting-a-sum">
+          <title>Splitting a Sum</title>
+          <statement>
+            <p>
+              Find the value of <m>\sum_{k=4}^{\infty}\left(3\cdot2^{-k} - \pi e^{-k}\right)</m>.
+            </p>
+          </statement>
+      </example>
+    </section>
+    <section xml:id="section-the-integral-and-comparison-tests">
+        <title>The Integral and Comparison Tests</title>
+        <introduction xml:id="introduction-convergence-tests">
+            <title>Convergence Tests</title>
+            <p>
+              The Divergence Test proven in <xref ref="theorem-divergence-test" text="type-global" /> is our first example of a <term>convergence test</term>: a test that determines if a given series converges or diverges.
+              In this section we'll introduce two more such tests.
+              It's important to remember that convergence tests <em>usually cannot be used to evaluate a series</em>.
+              Their primary importance is to check if a given series converges.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-the-integral-test">
+            <title>The Integral Test</title>
+            <p>
+              The main idea behind the <term>integral test</term> is to relate the value of a series to the value of a certain (improper) integral.
+              This is useful since integrals are often easier to compute than series.
+            </p>
+            <theorem xml:id="theorem-integral-test">
+                <title>Integral Test</title>
+                <statement>
+                  <p>
+                    Suppose that <m>f(x)</m> is a positive, decreasing function on <m>[1,\infty)</m> and let <m>a_{n} = f(n)</m>.
+                    Then
+                    <me>\int_{1}^{\infty}f(x)\,dx\quad\text{and}\quad \sum_{n=1}^{\infty}a_{n}</me>
+                    must both converge or both diverge.
+                  </p>
+                </statement>
+            </theorem>
+            <remark>
+              <p>
+                Remember that the Integral Test usually <em>cannot</em> determine the value of a series.
+                It can only be used to determine convergence.
+              </p>
+            </remark>
+            <example xml:id="example-determining-convergence-using-the-integral-test">
+                <title>Determining Convergence Using the Integral Test</title>
+                <statement>
+                  <p>
+                    Determine if the series <m>\sum_{k=0}^{\infty}\frac{1}{1 + k^{2}}</m> converges or diverges.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    We can use the Integral Test here since <m>\frac{1}{1 + k^{2}}</m> is positive and decreasing.
+                    If we define <m>f(x) = \frac{1}{1 + x^{2}}</m>, then <m>\frac{1}{1 + k^{2}} = f(k)</m>.
+                    Now we'll compute <m>\int_{0}^{\infty}f(x)\,dx</m>:
+                    <md>
+                      <mrow>\int_{0}^{\infty}\frac{1}{1 + x^{2}}\,dx \amp = \lim_{b\to\infty}\int_{0}^{b}\frac{1}{1 + x^{2}}\,dx </mrow>
+                      <mrow> \amp = \lim_{b\to\infty}\tan^{-1}b </mrow>
+                      <mrow> \amp = \frac{\pi}{2} </mrow>
+                    </md>.
+                    Since the integral converges, so does the series.
+                    In fact, the value of the series is
+                    <me>\frac{\pi\coth\pi + 1}{2}</me>.
+                  </p>
+                </solution>
+            </example>
+            <example xml:id="example-the-alternating-harmonic-series">
+                <title>The Alternating Harmonic Series</title>
+                <statement>
+                  <p>
+                    Explain why <xref ref="theorem-integral-test" text="type-global" /> cannot be applied to the <term>alternating harmonic series</term>
+                    <me>\sum_{k=1}^{\infty}\frac{(-1)^{k + 1}}{k}</me>.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    Since <m>\frac{(-1)^{k+1}}{k}</m> is neither decreasing nor positive, the Integral Test doesn't apply here.
+                  </p>
+                </solution>
+            </example>
+            <p>
+              An important corollary to <xref ref="theorem-integral-test" text="type-global" /> is that the integral <m>p</m>-test from <xref ref="section-improper-integrals" text="type-global" /> applies to series as well.
+            </p>
+            <theorem xml:id="theorem-series-p--test">
+                <title>Series <m>p</m>-Test</title>
+                <statement>
+                  <p>
+                    The series <m>\sum_{n=1}^{\infty}\frac{1}{n^{p}}</m> converges if and only if <m>p \gt 1</m>.
+                  </p>
+                </statement>
+            </theorem>
+        </subsection>
+        <subsection xml:id="subsection-comparison-tests">
+            <title>Comparison Tests</title>
+            <theorem xml:id="theorem-direct-comparison-test-series">
+              <idx><h>convergence tests</h><h>series</h><h>direct comparison test</h></idx>
+                <title>Comparison Test</title>
+                <statement>
+                  <p>
+                    Let <m>\sum a_{k}</m> and <m>\sum b_{k}</m> be series with <em>positive</em> terms.
+                    Then
+                    <ol>
+                      <li>
+                        <p>If <m>a_{k}\leq b_{k}</m> and <m>\sum b_{k}</m> converges, then so does <m>\sum a_{k}</m>.</p>
+                      </li>
+                      <li>
+                        <p>If <m>a_{k} \geq b_{k}</m> and <m>\sum b_{k}</m> diverges, then so does <m>\sum a_{k}</m>.</p>
+                      </li>
+                    </ol>
+                  </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-using-the-comparison-test">
+                <title>Using the Comparison Test</title>
+                <statement>
+                  <p>
+                    Show that <m>\sum_{k=1}^{\infty}\frac{k + 1}{k^{2}}</m> diverges.
+                  </p>
+                </statement>
+            </example>
+            <p>
+              Sometimes using the Comparison Test requires a little ingenuity.
+            </p>
+            <example xml:id="example-a-little-ingenuity">
+                <title>A Little Ingenuity</title>
+                <statement>
+                  <p>
+                    Show that <m>\sum_{k=1}^{\infty}\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}</m> converges.
+                  </p>
+                </statement>
+            </example>
+            <p>
+              A test that is sometimes more straightforward is the <term>Limit Comparison Test</term>.
+            </p>
+            <theorem xml:id="theorem-limit-comparison-test-series">
+              <idx><h>convergence tests</h><h>series</h><h>limit comparison test</h></idx>
+              <title>Limit Comparison Test</title>
+              <statement>
+                <p>
+                  Suppose that <m>\sum a_{k}</m> and <m>\sum b_{k}</m> are both series with positive terms, and suppose
+                  <me>L = \lim_{k\to\infty}\frac{a_{k}}{b_{k}}</me>
+                  exists.
+                  Then
+                  <ol>
+                    <li>
+                      <p>if <m>0 \lt L \lt \infty</m>, then either both series converge or both series diverge.</p>
+                    </li>
+                    <li>
+                      <p>if <m>L = 0</m> and <m>\sum b_{k}</m> converges, then so does <m>\sum a_{k}</m>.</p>
+                    </li>
+                    <li>
+                      <p>if <m>L = \infty</m> and <m>\sum b_{k}</m> diverges, then so does <m>\sum a_{k}</m>.</p>
+                    </li>
+                  </ol>
+                </p>
+              </statement>
+            </theorem>
+            <p>
+              The quantity <m>L</m> in <xref ref="theorem-limit-comparison-test-series" text="type-global" /> can be thought of as the relative size of <m>a_{k}</m> as compared to <m>b_{k}</m>.
+            </p>
+            <example xml:id="example-a-little-less-ingenuity">
+                <title>A Little Less Ingenuity</title>
+                <statement>
+                  <p>
+                    Show that <m>\sum_{k=1}^{\infty}\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}</m> converges.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    We saw previously that
+                    <me>\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3} \approx \frac{1}{k^{2}}</me>,
+                    which suggests comparing the original series with the <m>p</m>-series <m>\sum\frac{1}{k^{2}}</m>.
+                    If we let <m>a_{k} = \frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}</m> and <m>b_{k} = \frac{1}{k^{2}}</m>, then we see that
+                    <me>\frac{a_{k}}{b_{k}} \to 1</me>.
+                    By <xref ref="theorem-limit-comparison-test-series" text="type-global" /> and <xref ref="theorem-series-p--test" text="type-global" />, the original series converges.
+                  </p>
+                </solution>
+            </example>
+            <p>
+              The Limit Comparison Test works very well with series containing terms given by a ratio of powers, in conjunction with the <m>p</m>-series Test.
+            </p>
+            <example xml:id="example-radical-powers-of-k-">
+                <title>Radical Powers of <m>k</m></title>
+                <statement>
+                  <p>
+                    Does
+                    <me>\sum_{k=55}^{\infty}\frac{k^{3} - 3\sqrt{k} + 1}{\sqrt[4]{k^{10}} + k^{2}}</me>
+                    converge or diverge?
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    The series diverges by comparison with <m>\frac{1}{k^{1/3}}</m>.
+                  </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-other-convergence-tests">
+        <title>Other Convergence Tests</title>
+        <subsection xml:id="subsection-alternating-series">
+            <title>Alternating Series</title>
+            <p>
+              An <term>alternating series</term> is any series whose terms switch sign.
+              Written in summation notation, they take the form <m>\sum (-1)^{k}a_{k}</m> where <m>a_{k}</m> is a positive sequence.
+              Alternating series have a very useful test for convergence.
+            </p>
+            <theorem xml:id="theorem-alternating-series-test">
+                <title>Alternating Series Test</title>
+                <statement>
+                  <p>
+                    Consider the alternating series <m>S = \sum (-1)^{k}a_{k}</m>, where <m>a_{k}</m> is positive <em>and decreasing</em>.
+                    If <m>a_{k}\to0</m>, then the series converges.
+                    Furthermore, for such a series we have the <term>remainder</term> estimate
+                    <me>|R_{n}| = |S - S_{n}| \leq |a_{n+1}|</me>.
+                  </p>
+                </statement>
+            </theorem>
+            <p>
+              Note that <xref ref="theorem-alternating-series-test" text="type-global" /> is <em>not</em> the same as <xref ref="theorem-divergence-test" text="type-global" />.
+            </p>
+            <example xml:id="example-an-alternating-series-with-roots">
+                <title>An Alternating Series with Roots</title>
+                <statement>
+                  <p>
+                    Does
+                    <me>\sum_{n = 6}^{\infty}(-1)^{n}\frac{n^{\frac{n + 1}{n}} - n}{n}</me> converge or diverge?
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    Let <m>a_{n} = \frac{n^{\frac{n+1}{n}} - n}{n} = n^{1/n} - 1</m>.
+                    Then <m>a_{n}</m> is decreasing, and <m>a_{n}\to0</m>, so the series converges.
+                  </p>
+                </solution>
+            </example>
+            <example xml:id="example-alternating-harmonic-series">
+                <title>Alternating Harmonic Series</title>
+                <statement>
+                  <p>
+                    Show that the Alternating Harmonic Series <m>\sum_{k=1}^{\infty}\frac{(-1)^{k + 1}}{k}</m> converges, and determine a value of <m>n</m> for which <m>S_{n}</m> is within <m>.001</m> of the actual value of <m>\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}</m>.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    Since the Alternating Harmonic Series is an alternating series with <m>a_{k} = \frac{1}{k}</m>, and because these terms decrease to <m>0</m>, the sum must converge.
+                    However, we do not yet know <em>what</em> it converges to yet.
+
+                    Now let <m>S_{n}</m> denote the <m>n^{\text{th}}</m> partial sum.
+                    Then we know the error between <m>S</m> and <m>S_{n}</m> is at most
+                    <me>|a_{n+1}| = \frac{1}{n + 1}</me>.
+                    To make this less than <m>.001</m>, we must have <m>n\geq 999</m>.
+                  </p>
+                </solution>
+            </example>
+            <p>
+              The Alternating Harmonic Series is also a useful example to illustrate the following definitions.
+            </p>
+            <definition xml:id="definition-absolute-and-conditional-convergence">
+                <title>Absolute and Conditional Convergence</title>
+                <statement>
+                  <p>
+                    A series <m>\sum a_{k}</m> is <term>absolutely convergent</term> if <m>\sum |a_{k}|</m> converges.
+                    A series <m>\sum a_{k}</m> is <term>conditionally convergent</term> if it converges but <m>\sum|a_{k}|</m> diverges.
+                  </p>
+                </statement>
+            </definition>
+            <p>
+              The Alternating Harmonic Series is an example of a conditionally convergent series.
+              There are two important consequences of <xref ref="definition-absolute-and-conditional-convergence" text="type-global" />:
+              <ol>
+                <li>
+                  <p>Absolutely convergent series are also convergent series.</p>
+                </li>
+                <li>
+                  <p>For conditionally convergent series, <em>order matters</em>.</p>
+                </li>
+              </ol>
+            </p>
+            <example xml:id="example-convergence-of-a-series-involving-sine">
+                <title>Convergence of a Series Involving Sine</title>
+                <statement>
+                  <p>
+                    Determine if
+                    <me>\sum_{n=4}^{\infty}\frac{\sin(3n - \sqrt{n})}{3^{n}}</me>
+                    converges or diverges.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    If we take the absolute value of each term, then we get
+                    <me>\frac{|\sin(3n - \sqrt{n})|}{3^{n}} \leq \frac{1}{3^{n}}</me>.
+                    Since <m>\sum_{n=4}^{\infty}3^{-n}</m> is a geometric series with <m>|r|\lt 1</m>, then
+                    <me>\sum_{n=4}^{\infty}\left|\frac{|\sin(3n - \sqrt{n})|}{3^{n}}\right|</me>
+                    must converge by <xref ref="theorem-direct-comparison-test-series" text="type-global" />.
+                  </p>
+                  <p>
+                    Hence the original series is absolutely convergent, and so also convergent.
+                  </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-ratio-test">
+            <title>Ratio Test</title>
+            <p>
+              Geometric series are among the easiest to sum and determine convergence for.
+              So it's useful to try to compare an arbitrary series with a geometric series.
+              The main idea is to look at the long-term behavior of <em>ratios</em> of consecutive terms.
+            </p>
+            <theorem xml:id="theorem-ratio-test">
+                <title>Ratio Test</title>
+                <statement>
+                  <p>
+                    Let <m>\sum a_{k}</m> be an infinite series and let
+                    <me>r = \lim_{k\to\infty}\left|\frac{a_{k+1}}{a_{k}}\right|</me>.
+                    Then
+                    <ol>
+                      <li>
+                        <p>If <m>r \lt 1</m> the series converges absolutely.</p>
+                      </li>
+                      <li>
+                        <p>If <m>r \gt 1</m> the series diverges.</p>
+                      </li>
+                      <li>
+                        <p>If <m>r = 1</m> the test fails.</p>
+                      </li>
+                    </ol>
+                  </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-using-the-ratio-test">
+                <title>Using the Ratio Test</title>
+                <statement>
+                  <p>
+                    Does
+                    <me>\sum_{k=1}^{\infty}\frac{(-1)^{k-1}3^{2k+1}}{k^{2}5^{k}}</me>
+                    converge or diverge?
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    Since
+                    <me>r = \frac{9}{5} \gt 1</me>,
+                    the series diverges by <xref ref="theorem-ratio-test" text="type-global" />.
+                  </p>
+                </solution>
+            </example>
+            <p>
+              The ratio test works well with series whose terms involve factorials or powers involving <m>k</m>.
+            </p>
+            <example xml:id="example-factorials-over-powers">
+                <title>Factorials over Powers</title>
+                <statement>
+                  <p>
+                    Show that <m>\sum_{k=0}^{\infty}\frac{k!}{k^{k}}</m> converges.
+                  </p>
+                </statement>
+                <solution>
+                  <p>
+                    Since <m>a_{k} = \frac{k!}{k^{k}}</m>, we have
+                    <me>\lim_{k\to\infty}\left|\frac{a_{k+1}}{a_{k}}\right| = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k}</me>.
+                    We can find this limit using L'Hospital's Rule (see <xref ref="section-l-hospital-s-rule" text="type-global" />) since this limit is the indeterminate form <m>[1^{\infty}]</m>.
+                    So set <m>y = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k}</m>.
+                    Then
+                    <md>
+                      <mrow>\ln y \amp = \lim_{k\to\infty}k\ln\left(\frac{k}{k+1}\right) </mrow>
+                      <mrow> \amp = \lim_{k\to\infty}\frac{\ln k - \ln(k+1)}{1/k} </mrow>
+                      <mrow> \amp = \lim_{k\to\infty}\frac{1/k - 1/(k+1)}{-1/k^{2}} </mrow>
+                      <mrow> \amp = \lim_{k\to\infty}\frac{-k^{2}}{k(k+1)} </mrow>
+                      <mrow> \amp = -1 </mrow>
+                    </md>.
+                    Therefore <m>y = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k} = e^{-1}</m>, which means that the series converges by the ratio test.
+                  </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-root-test">
+            <title>Root Test</title>
+            <p>
+              The root test is similar to the ratio test in that it compares a given series with an appropriate geometric series to determine if the original converges.
+            </p>
+            <theorem xml:id="theorem-root-test">
+                <title>Root Test</title>
+                <statement>
+                  <p>
+                    Let <m>\sum a_{k}</m> be an infinite series and let
+                    <me>r = \lim_{k\to\infty}\sqrt[k]{|a_{k}|}</me>.
+                    Then
+                    <ol>
+                      <li>
+                        <p>If <m>r \lt 1</m> the series converges absolutely.</p>
+                      </li>
+                      <li>
+                        <p>If <m>r \gt 1</m> the series diverges.</p>
+                      </li>
+                      <li>
+                        <p>If <m>r = 1</m> the test fails.</p>
+                      </li>
+                    </ol>
+                  </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-a-k-text-th-m-power">
+                <title>A <m>k^{\text{th}}</m> Power</title>
+                <statement>
+                  <p>
+                    Show that <m>\sum_{k=3}^{\infty}\frac{2^{k}}{k^{10}}</m> diverges.
+                  </p>
+                </statement>
+            </example>
+            <example xml:id="example-a-series-with-rational-terms">
+                <title>A Series with Rational Terms</title>
+                <statement>
+                  <p>
+                    Does <m>\sum_{k=5}^{\infty}(-1)^{2k - 3}\left(\frac{3k^{2} - 5k}{k^{3} - 1}\right)^{2k}</m> converge or diverge?
+                  </p>
+                </statement>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-power-series">
+        <title>Power Series</title>
+        <p>
+          A <term>power series</term> is a series of the form
+          <me>\sum_{k=0}^{\infty}a_{k}x^{k}</me>
+          where <m>x</m> is a variable.
+          Note that for such a series, only nonnegative, integer powers of <m>x</m> are permitted.
+          The terms <m>a_{k}</m> are called <term>coefficients</term>, and we'll see later that they determine all properties of the series.
+        </p>
+        <example xml:id="example-examples-of-power-series">
+            <title>Examples of Power Series</title>
+            <statement>
+              <p>
+                Determine which of the following are power series:
+                <ol>
+                  <li>
+                    <m>\sum_{k=0}^{\infty}\frac{(-1)^{k}x^{k}}{k!}</m>
+                  </li>
+                  <li>
+                    <m>x - \pi x^{4} + x^{6} + \frac{1}{10}x^{100} + \cdots</m>
+                  </li>
+                  <li>
+                    <m>\frac{1}{x^{2}} + \frac{1}{x} + 1 + x + x^{2} + \cdots</m>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </example>
+        <p>
+          Power series can also be <em>centered</em> at other numbers.
+          A power series <term>centered about</term> <m>\mathbf{a}</m> is a series of the form
+          <me>\sum_{k=0}^{\infty}a_{k}(x - a)^{k}</me>.
+        </p>
+        <p>
+          An important concern about power series is for which values of <m>x</m> the series will converge.
+          These questions are usually answered using the root or ratio tests.
+        </p>
+        <example xml:id="example-convergence-of-a-power-series">
+            <title>Convergence of a Power Series</title>
+            <statement>
+              <p>
+                For what values of <m>x</m> does the series
+                <me>\sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>
+                converge?
+              </p>
+            </statement>
+            <solution>
+              <p>
+                We'll try the ratio test to check convergence of this series.
+                Doing so, we get
+                <me>r = \lim_{k\to\infty}|x|\frac{k+1}{k+2} = |x|</me>.
+                So the series converges if <m>|x| \lt 1</m> and diverges if <m>|x| > 1</m>.
+              </p>
+              <p>
+                When <m>r = |x| = 1</m>, or <m>x = \pm1</m>, the test fails.
+                So we need to use other methods to determine the convergence or the series at these points.
+                At <m>x = -1</m>, the series becomes
+                <me>\sum_{k=0}^{\infty}\frac{(-1)^{2k+1}}{k+1} = - \sum_{k=0}^{\infty}\frac{1}{k+1}</me>,
+                which diverges by the comparison test.
+                At <m>x = 1</m>, the series reduces to the alternating harmonic series which converges by <xref ref="example-alternating-harmonic-series" text="type-global" />.
+              </p>
+              <p>
+                Therefore this series converges for all <m>x</m> in the interval <m>(-1, 1]</m> and diverges otherwise.
+              </p>
+            </solution>
+        </example>
+        <p>
+          In <xref ref="example-convergence-of-a-power-series" text="type-global" />, the values of <m>x</m> for which the series converged was an interval.
+          It turns out that this will always be the case, and the resulting interval is known as the <term>interval of convergence</term> of the series.
+          The <q>radius</q> of this interval is called the <term>radius of convergence</term>.
+          In general, we have the following.
+        </p>
+        <theorem xml:id="theorem-convergence-of-power-series">
+            <title>Convergence of Power Series</title>
+            <statement>
+              <p>
+                 Given a series <m>\sum_{k=0}^{\infty}a_{k}x^{k}</m>, there exists <m>R \geq 0</m> such that the series converges on the interval <m>(a - R, a + R)</m>.
+                 The largest such <m>R</m> is the radius of convergence.
+               </p>
+            </statement>
+        </theorem>
+        <p>
+          For most series we'll consider (i.e., those of the form <m>\sum a_{k}(x - a)^{k}</m>), we can find <m>R</m> using the following formula:
+          <me>R = \lim_{k\to\infty}\left|\frac{a_{k}}{a_{k+1}}\right|</me>.
+        </p>
+        <example xml:id="example-interval-and-radius-of-convergence">
+            <title>Interval and Radius of Convergence</title>
+            <statement>
+              <p>
+                Find the interval and radius of convergence of the series <m>\sum_{k = 0}^{\infty}\frac{(-1)^{2k}(x - \frac{\pi}{2})^{2k}}{(2k)!}</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                We'll find the radius of convergence first, which is given by
+                <md>
+                  <mrow>R \amp = \lim_{k\to\infty}\frac{(2k + 2)!}{(2k)!} </mrow>
+                  <mrow> \amp = \lim_{k\to\infty} (2k + 2)(2k + 1) </mrow>
+                  <mrow> \amp = \infty </mrow>
+                </md>.
+                So the radius of convergence is infinite, implying that the interval of convergence is <m>(-\infty,\infty)</m>.
+              </p>
+            </solution>
+        </example>
+        <p>
+          We can also use the root test instead of the ratio test.
+        </p>
+        <example xml:id="example-interval-and-radius-of-convergence-from-root-test">
+            <title>Interval and Radius of Convergence from Root Test</title>
+            <statement>
+              <p>
+                Determine the interval and radius of convergence of
+                <me>\sum_{n = 1}^{\infty} \frac{(-2)^{n}}{\sqrt{n}}(4x + 3)^{n}</me>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                If we apply the root test to this series, we get
+                <me>r = \lim_{n\to\infty}\sqrt[n]{\frac{2^{n}|4x + 3|^{n}}{\sqrt{n}}} = \lim_{n\to\infty}\frac{2}{n^{1/2n}}|4x + 3| = 2|4x + 3|</me>.
+                We need this to be less than <m>1</m>, which gives
+                <me>2|4x + 3| \lt 1 \Rightarrow -\frac{7}{8} \lt x \lt -\frac{5}{8}</me>,
+                and so the series converges for all <m>x</m> in <m>(-\frac{7}{8}, -\frac{5}{8})</m>.
+                So the radius of convergence is <m>\frac{1}{8}</m>.
+              </p>
+              <p>
+                Now we need to check the endpoints.
+                At <m>x = -\frac{7}{8}</m>, the series becomes <m>\sum_{n = 1}^{\infty}\frac{1}{\sqrt{n}}</m>, which diverges by the <m>p</m>-series test.
+                At <m>x = -\frac{5}{8}</m>, the series becomes <m>\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}}</m> which converges by the alternating series test.
+              </p>
+              <p>
+                Therefore the interval of convergence is <m>(-\frac{7}{8}, -\frac{5}{8}]</m>.
+              </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-representing-functions-as-power-series">
+        <title>Representing Functions as Power Series</title>
+        <p>
+          A power series can be viewed as a function with domain given by the interval of convergence.
+          One of our goals is to use power series to represent functions that can't be written in terms of <q>elementary functions</q>.
+          Our first example comes from the geometric series.
+        </p>
+        <example xml:id="example-power-series-from-geometric-series">
+            <title>Power Series from Geometric Series</title>
+            <statement>
+              <p>
+                Let
+                <me>f(x) = \sum_{k = 0}^{\infty} x^{k}</me>.
+                Then the domain of <m>f(x)</m> is <m>(-1,1)</m> and for <m>x</m> in this interval we have
+                <me>f(x) = \frac{1}{1 - x}</me>.
+              </p>
+            </statement>
+        </example>
+        <p>
+          Note that the equation
+          <me>\sum_{k=0}^{\infty}x^{k} = \frac{1}{1 - x}</me>
+          is only valid where the series on the left converges.
+          If we try to plug in <m>x = -1</m> into this equation and treat it as valid, we get
+          <me>\frac{1}{2} = 1 - 1 + 1 - 1 + \cdots</me>,
+          which is nonsense.
+        </p>
+        <p>
+          Now that we have a power series representation of <m>\frac{1}{1 - x}</m>, we can use it to find other power series representations.
+        </p>
+        <example xml:id="example-finding-a-power-series-representation">
+            <title>Finding a Power Series Representation</title>
+            <statement>
+              <p>
+                Find a power series representation for <m>\displaystyle\frac{x}{1 + 4x}</m> and state the interval over which it is valid.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                We'll try to relate this to the series in <xref ref="example-power-series-from-geometric-series" text="type-global" />:
+                <md>
+                  <mrow>\frac{x}{1 + 4x} \amp = x \frac{1}{1 + 4x} </mrow>
+                  <mrow> \amp = x \frac{1}{1 - (-4x)} </mrow>
+                  <mrow> \amp = x \sum_{k=0}^{\infty}(-4x)^{k} \quad\text{valid for }|4x| \lt 1 </mrow>
+                  <mrow> \amp = \sum_{k=0}^{\infty} (-1)^{k}4^{k}x^{k+1} </mrow>
+                </md>.
+                This representation is valid for <m>|x| \lt \frac{1}{4}</m>, or for <m>x</m> in the interval <m>(-\frac{1}{4}, \frac{1}{4})</m>.
+              </p>
+            </solution>
+        </example>
+        <p>
+          One of the most useful properties of power series is that the fundamental calculus operations, differentiation and integration, are valid for power series within their intervals of convergence.
+        </p>
+        <theorem xml:id="theorem-differentiation-and-integration-of-power-series">
+            <title>Differentiation and Integration of Power Series</title>
+            <statement>
+              <p>
+                Suppose the power series <m>\sum_{k = 0}^{\infty}a_{k}(x - a)^{k}</m> has radius of convergence <m>R \gt 0</m>, and let <m>f(x)</m> denote the series on the interval <m>(a - R, a + R)</m>.
+                Then <m>f(x)</m> is differentiable on <m>(a - R, a + R)</m> and
+                <md>
+                  <mrow> f'(x) \amp = \dv{}{x}\left(a_{0} + a_{1}(x - a) + a_{2}(x - a)^{2} + a_{3}(x - a)^{3} + \cdots\right)</mrow>
+                  <mrow> \amp a_{1} + 2a_{2}(x - a) + 3a_{3}(x - a)^{2} + \cdots </mrow>
+                </md>
+                or in other words
+                <me>f'(x) = \dv{}{x}\sum_{k=0}^{\infty}a_{k}x^{k} = \sum_{k=0}^{\infty} ka_{k}x^{k-1}</me>.
+                Similarly,
+                <me>\int f(x)\,dx = \int \sum_{k = 0}^{\infty}a_{k}x^{k}\,dx = \sum_{k = 0}^{\infty} a_{k}\frac{x^{k + 1}}{k + 1} + C</me>.
+                Both of these series have radius of convergence <m>R</m>.
+              </p>
+            </statement>
+        </theorem>
+        <p>
+          <xref ref="theorem-differentiation-and-integration-of-power-series" text="type-global" /> shows that integrating and differentiating power series is as easy as integrating or differentiating powers of <m>x</m>.
+          However, we do need to be careful at the endpoints.
+        </p>
+        <example xml:id="example-power-series-for-the-logarithm">
+            <title>Power Series for the Logarithm</title>
+            <statement>
+              <p>
+                Find a power series representation of <m>\ln(1 + x)</m> centered at <m>0</m> and its interval of convergence.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Since <m>\dv{}{x}\ln(1 + x) = \frac{1}{1 + x}</m>, we can integrate the series for <m>\frac{1}{1 + x}</m> to get the series for the logarithm.
+                Doing so, we get
+                <md>
+                  <mrow>\ln(1 + x) + C \amp = \int\sum_{k=0}^{\infty}(-1)^{k}x^{k}\,dx </mrow>
+                  <mrow> \amp = \sum_{k=0} (-1)^{k} \frac{x^{k+1}}{k+1}</mrow>
+                </md>.
+                The series on the right has radius of convergence <m>R = 1</m> and interval of convergence <m>(-1, 1]</m> by <xref ref="example-convergence-of-a-power-series" text="type-global" />.
+                To find <m>C</m>, we can substitute <m>x = 0</m> into the equation (which is valid!) to get
+                <me>\ln1 + C = 0 - \frac{0^{2}}{2} + \cdots = 0</me>.
+                So <m>C = 0</m>, and
+                <me>\ln(1 + x) = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>.
+                Plugging in <m>x = 1</m>, we get the series
+                <me>\ln2 = 1 - \frac{1}{2} + \frac{1}{3} - \cdots</me>.
+              </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-taylor-and-maclaurin-series">
+        <title>Taylor and Maclaurin Series</title>
+        <p>
+          In <xref ref="section-representing-functions-as-power-series" text="type-global" /> we found how to obtain power series using the geometric series.
+          What we'll do in this section is determine how to find more general power series.
+          To start, suppose we can represent <m>f(x)</m> as a power series centered at some number <m>a</m>:
+          <me>f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k} = c_{0} + c_{1}(x - a) + c_{2}(x - a)^{2} + c_{3}(x - a)^{3} + \cdots</me>
+          Then this representation is valid on some interval <m>(a - R, a + R)</m>.
+          Our goal is to find what the coefficients <m>c_{k}</m> are.
+        </p>
+        <p>
+          We'll start with the first coefficient <m>c_{0}</m>.
+          We can find it very easily by setting <m>x = a</m> to get
+          <me>f(a) = c_{0}</me>.
+          So the first coefficient <em>must</em> be equal to <m>f(a)</m>.
+          Now we'll try to find <m>c_{1}</m>, which we can do by differentiating:
+          <me>f'(x) = c_{1} + 2c_{2}(x - a) + 3c_{3}(x - a)^{2} + \cdots</me>,
+          which is still valid for <m>(a - R, a + R)</m>.
+          Now set <m>x = a</m> again to obtain
+          <me>f'(a) = c_{1}</me>.
+        </p>
+        <p>
+          Now differentiate again to get
+          <me>f''(x) = 2a_{2} + 3\cdot2(x - a) + \cdots</me>
+          which gives
+          <me>a_{2} = \frac{f''(a)}{2}</me>.
+          Similarly,
+          <me>a_{3} = \frac{f'''(a)}{3!}</me>.
+          We can continue this process in general to get the following theorem.
+        </p>
+        <theorem xml:id="theorem-taylor-s-formula">
+            <title>Taylor's Formula</title>
+            <statement>
+              <p>
+                If <m>f(x)</m> has a power series representation/expansion at <m>a</m> with positive radius of convergence <m>R</m>, then
+                <me>f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k}</me>
+                where
+                <me>c_{k} = \frac{f^{(k)}(a)}{k!}</me>.
+                This series is called the <term>Taylor series</term> of <m>f</m> about <m>a</m>.
+              </p>
+            </statement>
+        </theorem>
+        <p>
+          A Taylor series about <m>0</m> is also known as a <term>Maclaurin series</term>.
+        </p>
+        <example xml:id="example-maclaurin-series-for-the-exponential">
+            <title>Maclaurin Series for the Exponential</title>
+            <statement>
+              <p>
+                Find the Maclaurin series for <m>e^{x}</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                If we let <m>f(x) = e^{x}</m>, then the Maclaurin series is
+                <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}</me>
+                where
+                <me>f^{(k)}(0) = e^{0} = 1</me>.
+                So the Maclaurin series is
+                <me>\sum_{k=0}^{\infty}\frac{1}{k!}x^{k} = 1 + x + \frac{1}{2}x^{2} + \frac{1}{3!}x^{3} + \cdots</me>.
+              </p>
+            </solution>
+        </example>
+        <p>
+          <xref ref="example-maclaurin-series-for-the-exponential" text="type-global" /> gives us the Taylor series about <m>0</m> for <m>e^{x}</m>, but at the moment we don't know if it actually equals <m>e^{x}</m>.
+          However, if we differentiate the series we get the same series back.
+          In other words, the Taylor series of <m>e^{x}</m> <em>is its own derivative</em>, which is a promising sign.
+        </p>
+        <example xml:id="example-taylor-series-from-the-exponential">
+            <title>Taylor Series from the Exponential</title>
+            <statement>
+              <p>
+                Assuming that <m>e^{x}</m> equals its Taylor series, find the Maclaurin series for <m>e^{-x^{2}}</m>.
+                Also, find the <m>70^{\text{th}}</m> derivative of <m>e^{-x^{2}}</m> at <m>x = 0</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                We could use <xref ref="theorem-taylor-s-formula" text="type-global" /> to find the Maclaurin series for <m>e^{-x^{2}}</m>, but it's far, far easier to use the series for <m>e^{x}</m>:
+                <me>e^{-x^{2}} = \sum_{k=0}^{\infty}\frac{(-x^{2})^{k}}{k!} = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{2k}}{k!}</me>.
+              </p>
+              <p>
+                It turns out that this lets us find derivatives at <m>0</m> incredibly quickly.
+                If we let <m>f(x) = e^{-x^{2}}</m>, then it follows that <m>\frac{f^{(k)}(0)}{k!}</m> is the coefficient of <m>x^{k}</m> in the power series for <m>f(x)</m>.
+                Therefore
+                <me>\frac{f^{(70)}(0)}{70!} = \frac{(-1)^{35}}{35!} \Rightarrow f^{(70)}(0) = -\frac{70!}{35!}</me>.
+              </p>
+            </solution>
+        </example>
+        <p>
+          Showing that a function equals its power series requires the <term>Lagrange remainder formula</term> for Taylor series, which states the following: if <m>f(x)</m> is differentiable <m>N+1</m> times on an interval containing <m>a</m>, then for each <m>x</m> in <m>I</m> there exists <m>z</m> in <m>I</m> such that
+          <me>R_{N}(x) = f(x) - \sum_{k=0}^{N}\frac{f^{(k)}(a)}{k!}(x - a)^{k}</me>
+          is equal to
+          <me>\frac{f^{(N+1)}(z)}{(N+1)!}(x - a)^{N+1}</me>.
+          A useful fact when using this is that
+          <me>\frac{x^{N}}{N!}\to0</me>
+          as <m>N\to\infty</m> for all <m>x</m>.
+        </p>
+        <example xml:id="example-maclaurin-series-for-cosine">
+            <title>Maclaurin Series for Cosine</title>
+            <statement>
+              <p>
+                Find the Maclaurin series for <m>\cos x</m> and show that <m>\cos x</m> equals its Maclaurin series for all <m>x</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Using <xref ref="theorem-taylor-s-formula" text="type-global" />, the Taylor series for <m>f(x) = \cos x</m> at <m>a = 0</m> is given by
+                <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}</me>.
+                So to find this series we need to find the derivatives of cosine at <m>0</m>:
+                <md>
+                  <mrow>f(0) \amp = 1 </mrow>
+                  <mrow>f'(0) \amp = 0 </mrow>
+                  <mrow>f''(0) \amp = -1 </mrow>
+                  <mrow>f'''(0) \amp = 0 </mrow>
+                </md>
+                and so on.
+                So the Maclaurin series for <m>\cos x</m> is given by
+                <me>1 - \frac{1}{2!}x^{2} + \frac{1}{4!}x^{4} - \frac{1}{6!}x^{6} + \cdots</me>.
+              </p>
+              <p>
+                To express this using sigma notation, note that this series has only even powers of <m>x</m>.
+                Hence the sum should look like <m>\sum_{k=0}^{\infty}c_{k}x^{2k}</m>.
+                Looking at the pattern of the coefficients here, we can rewrite this as
+                <me>\sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k)!}x^{2k}</me>.
+                Using the ratio test, we can also show that this series converges for all <m>x</m>.
+                To show that this series actually equals <m>\cos x</m>, we need to consider the remainder term
+                <me>R_{N}(x) = \frac{f^{(N+1)}(z)}{(N+1)!}x^{N+1}</me>.
+              </p>
+              <p>
+                We don't know what exactly <m>z</m> is, except that it's in some interval around <m>0</m>.
+                However, we do know that <m>\|f^{(N+1)}(z)\|\leq 1</m>, which means that the remainder satisfies
+                <me>\|R_{N}(x)\| \leq \frac{|x|^{N+1}}{(N+1)!}\to0</me>.
+                Therefore <m>\cos x</m> equals its Maclaurin series.
+              </p>
+            </solution>
+        </example>
+        <p>
+          Now that we know how to express <m>\cos x</m> as a power series, we can do the same for <m>\sin x</m>.
+        </p>
+        <example xml:id="example-maclaurin-series-for-sine">
+            <title>Maclaurin Series for Sine</title>
+            <statement>
+              <p>
+                Find the Maclaurin series for <m>\sin x</m>.
+              </p>
+            </statement>
+        </example>
+        <p>
+          Knowing a power series representation for a function makes calculus with that function extremely straightforward, at least if you're willing to use series.
+        </p>
+        <example xml:id="example-computing-a-definite-integral">
+            <title>Computing a Definite Integral</title>
+            <statement>
+              <p>
+                Use power series to find <m>\displaystyle\int_{0}^{1}e^{-x^{2}}\,dx</m>, and find an approximation within <m>.01</m> of the exact value.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Using the power series for <m>e^{-x^{2}}</m> from <xref ref="example-taylor-series-from-the-exponential" text="type-global" />, we have
+                <me>\int_{0}^{1}e^{-x^{2}}\,dx = \sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k+1)k!}</me>.
+                This is an alternating series, so by the alternating series test the partial sum <m>\displaystyle\sum_{k=0}^{N}\frac{(-1)^{k}}{(2k+1)k!}</m> is always within
+                <me>\frac{1}{(2(N+1)+1)(N+1)!}</me>
+                of the exact value.
+                So if we want to get enough terms of the series to be within <m>.01</m> of the exact value, we need to pick <m>N</m> so that
+                <me>\frac{1}{(2(N+1)+1)(N+1)!} \lt .01</me>,
+                which occurs at <m>N = 3</m>.
+                So
+                <me>\int_{0}^{1}e^{-x^{2}}\,dx \approx 1 - \frac{1}{3} + \frac{1}{10} - \frac{1}{42} = 0.742...</me>.
+                This is within about <m>.004</m> of the exact value.
+              </p>
+            </solution>
+        </example>
+        <p>
+          One extremely useful application of power series in mathematics and its applications is in deriving <term>Euler's Formula</term>.
+        </p>
+        <theorem xml:id="theorem-euler-s-formula">
+            <title>Euler's Formula</title>
+            <statement>
+              <p>
+                Let <m>i = \sqrt{-1}</m>.
+                Then <m>e^{ix} = \cos x + i\sin x</m>.
+              </p>
+            </statement>
+            <proof>
+              <p>
+                We can try to use power series to make sense of <m>e^{ix}</m>.
+                Our idea is that since the power series for <m>e^{x}</m> is valid for all <m>x</m>, it should be valid for all <m>ix</m> as well, giving
+                <md>
+                  <mrow>e^{ix} \amp 1 + (ix) + \frac{(ix)^{2}}{2!} + \frac{(ix)^{3}}{3!} + \frac{(ix)^{4}}{4!} + \cdots </mrow>
+                  <mrow> \amp = \cos x + i\sin x </mrow>
+                </md>.
+                In particular,
+                <me>e^{i\pi} = -1</me>.
+              </p>
+            </proof>
+        </theorem>
+    </section>
+    <exercises>
+      <title>MyOpenMath Problems</title>
+      <introduction>
+        <p>
+          These problems are only intended for practice.
+          They are <em>not</em> required.
+        </p>
+      </introduction>
+      <exercisegroup>
+        <title>Exercises for <xref ref="section-sequences" text="type-global" /></title>
+        <introduction>
+          <p>
+            These exercises deal with sequences and their limits.
+          </p>
+        </introduction>
+        <exercise>
+          <myopenmath problem="5805"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5806"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5807"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5808"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5809"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5812"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5817"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5840"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="68773"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="78466"/>
+        </exercise>
+      </exercisegroup>
+      <exercisegroup>
+        <title>Exercises for <xref ref="section-series" text="type-global" /></title>
+        <introduction>
+          <p>
+            These exercises deal with series and notions of convergence.
+          </p>
+        </introduction>
+        <exercise>
+          <myopenmath problem="5857"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5859"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5860"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5861"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5880"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5888"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5894"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="16684"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="20278"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="20285"/>
+        </exercise>
+      </exercisegroup>
+      <exercisegroup>
+        <title>Exercises for <xref ref="section-the-integral-and-comparison-tests" text="type-global" /></title>
+        <introduction>
+          <p>
+            These exercises deal with using the Integral and Comparison Tests to determine if the given series converge.
+          </p>
+        </introduction>
+        <exercise>
+          <myopenmath problem="5901"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5902"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="15044"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="15045"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="20299"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="20300"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5907"/>
+        </exercise>
+        <exercise>
+          <myopenmath problem="5909"/>
+        </exercise>
+      </exercisegroup>
+    </exercises>
+  </chapter>

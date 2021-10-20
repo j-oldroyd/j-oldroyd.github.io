@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="limits" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Limits of Functions</title>
+    <introduction>
+        <p>
+            At its heart, calculus is just the mathematics of change.
+            In particular, calculus provides the tools necessary to describe how a function changes.
+            Since a function can be used to represent many quantities that appear in real life, calculus therefore gives us a way to study how many different quantities (such as temperature, acceleration, energy of a signal, etc.) can change.
+            But before we can start using calculus, we need to come up with the proper language to describe it.
+            The language we will need to develop is that of the <em>limit of a function</em>.
+        </p>
+    </introduction>
+    <section xml:id="section-the-limit-of-a-function">
+        <title>The Limit of a Function</title>
+        <subsection xml:id="subsection-motivating-limits">
+            <title>Motivating Limits</title>
+            <p>
+                Imagine creating a mathematical valley out of the graph of <m>f(x) = x^{2}</m>, and in this valley walks a mathematical ant.
+                The ant is walking towards the place on the hill directly above <m>x = -\frac{1}{2}</m>.
+                At <m>x=-2</m>, the ant is <m>4</m> units above the ground.
+                At <m>x=-1</m>, the ant is now <m>1</m> unit above the ground.
+                As the ant moves towards <m>x=-\frac{1}{2}</m>, its height above the ground gets closer and closer to <m>\frac{1}{4}</m>.
+                To say it more clearly, and because modern calculus is built on this idea, <em>as the ant approaches</em> the point above <m>x = -\frac{1}{2}</m>, its <em>height above the ground approaches</em> the value <m>\frac{1}{4}</m>.
+                In other words, the <em>limit</em> of <m>f(x) = x^{2}</m> as <m>x</m> approaches <m>-\frac{1}{2}</m> is <m>\frac{1}{4}</m>.
+            </p>
+            <figure xml:id="figure-math-valley">
+                <image width="50%">
+                    <asymptote>
+                        import graph;
+                        size(200,IgnoreAspect);
+
+                        real f(real x) {return x^2;}
+
+                        draw(graph(f,-2,2), deepblue);
+                        
+                        dot((-2,f(-2)), red);
+                        draw((-2,0)--(-2,f(-2)), red+dashed);
+                        dot((-1,f(-1)), red);
+                        draw((-1,0)--(-1,f(-1)), red+dashed);
+                        dot((-.5,f(-.5)), red);
+                        draw((-.5,0)--(-.5,f(-.5)), red+dashed);
+
+                        yaxis("$y$",ymin=-.1,ymax=f(2.1),RightTicks(Label(Fill(white))),EndArrow);
+                        xaxis("$x$",xmin=-5,xmax=5,LeftTicks,EndArrow);
+                    </asymptote>
+                </image>
+                <caption>A mathematical valley minus a mathematical ant.</caption>
+            </figure>
+            <p>
+                Remember that a function <m>f</m> of the variable <m>x</m> is just a rule that turns one number, <m>x</m>, into another number, <m>f(x)</m>.
+                So the idea that the <em>limit of a function</em> is trying to express is what happens to the number <m>f(x)</m> (the output) as the number <m>x</m> (the input) approaches some particular value.
+            </p>
+            <aside>
+                <p>
+                    Actually, functions are much more general than this.
+                    But for calculus, it won't hurt us to view functions in this way.
+                </p>
+            </aside>
+            <p>
+                We're not quite ready to define the limit of a function precisely, but we can point one thing out right away: <em>the limit of a function requires two pieces of information: the function itself and the number that <m>x</m> is approaching.</em>
+                The limit should then be whatever number that <m>f(x)</m> is approaching.
+            </p>
+            <example xml:id="example-estimating-the-limit-of-a-trigonometric-function">
+                <title>Estimating the limit of a trigonometric function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \sin x\cos x</m>.
+                        What is the limit of <m>f(x)</m> as <m>x</m> approaches the number <m>\pi</m>?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We don't have a lot of tools to find limits yet, so we'll try to estimate it instead.
+                        What we'll do is we'll plug numbers that are closer and closer to <m>\pi</m> into <m>f(x)</m>.
+                        Let's list several values of <m>f(x)</m> as <m>x</m> gets closer to <m>\pi</m> from the left:
+                    </p>
+                    <table>
+                        <tabular halign="center" top="major">
+                            <row top="major" bottom="minor">
+                                <cell><m>x</m></cell>
+                                <cell><m>f(x)</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>3</m></cell>
+                                <cell><m>-.140</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>3.1</m></cell>
+                                <cell><m>-.042</m></cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>3.14</m></cell>
+                                <cell><m>-.002</m></cell>
+                            </row>
+                        </tabular>
+                        <caption>Estimating <m>\lim_{x\to\pi}f(x)</m>.</caption>
+                    </table>
+                    <p>
+                        We can even let <m>x</m> approach <m>\pi</m> from the other direction as well (i.e. "from the right") and <m>f(x)</m> will still approach <m>0</m> as <m>x</m> gets closer and closer to <m>\pi</m>.
+                        So it looks like the limit should be <m>0</m>.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                To keep ourselves from writing "the limit of <m>f(x)</m> as <m>x</m> approaches some number <m>a</m>" over and over, let's introduce some notation: <m>\lim_{x\to a}f(x)</m>.
+            </p>
+            <example xml:id="example-limit-of-a-piecewise-function">
+                <title>Limit of a piecewise function</title>
+                <statement>
+                    <p>
+                        Let
+                    </p>
+                    <me>f(x) = \begin{cases} \sin x &amp; \text{if $x&lt;0$} \\ \cos x &amp; \text{otherwise} \end{cases}.</me>
+                    <p>
+                        Find <m>\lim_{x\to0}f(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we graph this function, we see that at <m>x=0</m> there is a jump in the graph.
+                        In particular, if <m>x</m> approaches <m>0</m> from the left then <m>f(x)</m> approaches <m>0</m>, whereas if <m>x</m> approaches <m>0</m> from the right then <m>f(x)</m> approaches <m>1</m>.
+                        So this function does not appear to have an unambiguous limit as <m>x</m> approaches <m>0</m>.
+                        Another way to say this: <m>\lim_{x\to0}f(x)</m> <em>does not exist</em>.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                <xref ref="example-limit-of-a-piecewise-function" text="type-global" /> shows us something very important about limits: they depend on the two different ways <m>x</m> can approach a number.
+                So we introduce two new pieces of notation: the <term>left-hand limit</term> <m>\lim_{x\to a^{-}}f(x)</m> will stand for the value <m>f(x)</m> approaches (if any) as <m>x</m> approaches <m>a</m> from the left (i.e. as <m>x</m> increases to <m>a</m>), and <term>the right-hand limit</term> <m>\lim_{x\to a^{+}}f(x)</m> will stand for the value <m>f(x)</m> approaches (if any) as <m>x</m> approaches <m>a</m> from the right (i.e. as <m>x</m> decreases to <m>a</m>).
+            </p>
+            <p>
+                At this point, we can make a rough definition for the limit of a function.
+            </p>
+            <definition xml:id="definition-limit-of-a-function">
+                <title>Limit of a Function</title>
+                <idx><h>limit</h><h>function of a single variable</h></idx>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function.
+                        Suppose that both the left-hand limit <m>\lim_{x\to a^{-}}f(x)</m> and the right-hand limit <m>\lim_{x\to a^{+}}f(x)</m> exist and are equal to the same number <m>L</m>.
+                        Then we say that the limit of <m>f(x)</m> as <m>x</m> approaches <m>a</m> exists and is equal to <m>L</m>.
+                        We denote this by writing <m>\lim_{x\to a}f(x) = L</m>.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-piecewise-function-again">
+                <title>Piecewise function again</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be given by
+                        <me>f(x) = \begin{cases} 0 &amp; -3\leq x \leq -1 \\ x^{2} &amp; -1 &lt; x &lt; \frac{1}{2} \\ \frac{1-x}{2} &amp; \frac{1}{2} &lt; x &lt; 3. \end{cases} </me>
+                        Evaluate <m>\lim_{x\to-1}f(x)</m> and <m>\lim_{x\to\frac{1}{2}}f(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we graph <m>f(x)</m>, we get the following:
+                    </p>
+                    <figure>
+                        <image width="50%">
+                            <latex-image><![CDATA[
+                                \pgfmathdeclarefunction{MyFunction}{1}{%
+                                  \pgfmathparse{%
+                                    (and(   1,    #1<-1)*(0)            +%
+                                    (and(#1>=-1,  #1< .5)*(#1*#1)   +%
+                                    (and(#1>= .5,  #1< 3)*(.5-0.5*#1)%
+                                    }%
+                                }
+                                \begin{tikzpicture}
+                                    \begin{axis}[%
+                                        axis x line = center,
+                                        axis y line = center,
+                                        xtick={-3,...,3},
+                                        ytick={-3,...,3},
+                                        xmin = -4,
+                                        xmax = 4,
+                                        ymin = -1.5,
+                                        ymax = 1.5,
+                                        xlabel={$x$},
+                                        ylabel={$y$},
+                                        grid=both
+                                        ]
+                                        \foreach \xStart/\xEnd  in {-3/-1, -1/.5, .5/3} {
+                                        \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {MyFunction(x)};
+                                        }
+                                        \addplot[incl] coordinates{(-3,0)};
+                                        \addplot[incl] coordinates{(-1,0)};
+                                        \addplot[excl] coordinates{(-1,1)};
+                                        \addplot[excl] coordinates{(.5,.25)};
+                                        \addplot[excl] coordinates{(3,-1)};
+                                        \addlegendentry{$y = f(x)$};
+                                    \end{axis}
+                                \end{tikzpicture}]]>
+                            </latex-image>
+                        </image>
+                        <caption>Graphing <m>f(x)</m>.</caption>
+                    </figure>
+                    <p>
+                        The graph shows us that <m>\lim_{x\to-1^{-}}f(x) = 0</m>, while <m>\lim_{x\to-1^{+}}f(x) = 1</m>.
+                        Therefore <m>\lim_{x\to-1}f(x)</m> does not exist.
+                        On the other hand, <m>\lim_{x\to\frac{1}{2}}f(x)</m> exists and is equal to <m>\frac{1}{4}</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-computing-limits">
+        <title>Computing Limits</title>
+        <introduction>
+            <p>
+                We've got a handle on how to estimate limits from <xref ref="section-the-limit-of-a-function" text="type-global" />, but the process is very tedious.
+                It requires either graphing the function in question or laboriously entering values into a calculator.
+                So our first order of business now that we have the concept of a limit is to find an easier way to calculate it.
+                This will be a running theme throughout the course.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-the-limit-laws">
+            <title>The Limit Laws</title>
+            <p>
+                In many cases of interest, we can use knowledge of simpler limits to obtain more complicated limits.
+                We do this via the <term>Limit Laws</term>.
+                Before we get to them, we'll state two very simple (and hopefully very believable) limits.
+            </p>
+            <proposition xml:id="proposition-simple-limits">
+                <title>Simple Limits</title>
+                <statement>
+                    <p>
+                        For any value of <m>a</m>, the following limits hold:
+                        <me>\lim_{x\to a}c = c</me>
+                        if <m>c</m> is a constant and
+                        <me>\lim_{x\to a}x = a.</me>
+                    </p>
+                </statement>
+            </proposition>
+            <theorem xml:id="theorem-the-limit-laws">
+                <title>The Limit Laws</title>
+                <statement>
+                    <p>
+                        Let <m>c</m> be a constant, let <m>n</m> be a positive whole number and let <m>f(x)</m> and <m>g(x)</m> be functions.
+                        Suppose that <m>\lim_{x\to a}f(x)</m> and <m>\lim_{x\to a}g(x)</m> both exist for some number <m>a</m>.
+                        Then the following rules hold:
+                    </p>
+                    <table xml:id="table-limit-laws">
+                        <caption>The Limit Laws.</caption>
+                        <tabular halign="left" top="major">
+                            <row top="major">
+                                <cell><m>1. \lim_{x\to a}[f(x)\pm g(x)] = \lim_{x\to a}f(x)\pm \lim_{x\to a}g(x)</m></cell>
+                                <cell><m>2. \lim_{x\to a}cf(x) = c\lim_{x\to a}f(x)</m> </cell>
+                            </row>
+                            <row>
+                                <cell><m>3. \lim_{x\to a}[f(x)g(x)] = \lim_{x\to a}f(x)\lim_{x\to a}g(x)</m></cell>
+                                <cell><m>4. \lim_{x\to a}\frac{f(x)}{g(x)} = \frac{\lim_{x\to a}f(x)}{\lim_{x\to a}g(x)}</m> (if <m>\lim_{x\to a}g(x)\neq 0</m>)</cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>5. \lim_{x\to a}[f(x)^{n}] = [\lim_{x\to a}f(x)]^{n}</m></cell>
+                                <cell><m>6. \lim_{x\to a}\sqrt[n]{f(x)} = \sqrt[n]{\lim_{x\to a}f(x)}</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    <p>
+                        Note that item six in the table above only holds (in this class...) if <m>n</m> is odd or if <m>\lim_{x\to a}f(x)\geq0</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                <xref ref="theorem-the-limit-laws" text="type-global" /> gives us the ability to compute a wide variety of limits.
+            </p>
+            <example xml:id="example-limit-of-a-rational-function">
+                <title>Limit of a rational function</title>
+                <statement>
+                    <p>
+                        Let 
+                        <me>f(x) = \frac{3 - x^{5} + 5x}{2x-\sqrt[4]{x}}.</me>
+                        Evaluate <m>\lim_{x\to 16}f(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We can evaluate <m>\lim_{x\to 16}f(x)</m> by making use of the appropriate Limit Laws and <xref ref="proposition-simple-limits" text="type-global" />:
+                    </p>
+                    <md>
+                        <mrow>\lim_{x\to 16}\frac{3 - x^{5} + 5x}{2x-\sqrt[4]{x}} &amp; = \frac{\lim_{x\to 16}(3 - x^{5} + 5x)}{\lim_{x\to 16}(2x-\sqrt[4]{x})} &amp; \text{by Limit Law 4}</mrow>
+                        <mrow> &amp; = \frac{\lim_{x\to 16}3 - \lim_{x\to 16}x^{5} + \lim_{x\to 16}5x}{\lim_{x\to 16}2x-\lim_{x\to 16}\sqrt[4]{x}} &amp; \text{by Limit Law 1.} </mrow>
+                        <mrow> &amp; = \frac{3 - [\lim_{x\to 16}x]^{5} + 5\lim_{x\to 16}x}{2\lim_{x\to 16}x-\sqrt[4]{\lim_{x\to 16}x}} &amp; \text{by Limit Laws 2, 5, and 6.} </mrow>
+                        <mrow> &amp; = \frac{3-16^{5}+80}{30} &amp;</mrow>
+                    </md>
+                </solution>
+            </example>
+            <p>
+                In particular, Limit Laws 1-5 give us the following: if <m>f(x)</m> is a polynomial or rational function, then <m>\lim_{x\to a}f(x) = f(a)</m> as long as <m>a</m> is in the domain of <m>f(x)</m>.
+                If <m>a</m> is not in the domain, trickery may be required.
+            </p>
+            <example xml:id="example-trickery">
+                <title>Trickery</title>
+                <statement>
+                    <p>
+                        Evaluate 
+                        <me>\lim_{x\to1}\frac{\sqrt{x}-1}{x-1}.</me>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First, note that we can't use the Limit Laws right away since the denominator is <m>0</m> at <m>x=1</m>.
+                        What we need to do is use algebra to simplify the expression inside the limit:
+                    </p>
+                    <md>
+                        <mrow>\frac{\sqrt{x}-1}{x-1} &amp; = \frac{\sqrt{x}-1}{x-1}\frac{\sqrt{x}+1}{\sqrt{x}+1} </mrow>
+                        <mrow> &amp; = \frac{x - 1}{(x-1)(\sqrt{x}+1)} </mrow>
+                        <mrow> &amp; = \frac{1}{\sqrt{x}+1}. </mrow>
+                    </md>
+                    <p>
+                        Now we can use the Limit Laws to find the limit as <m>x</m> approaches <m>1</m>, since we no longer have a divide-by-zero problem in the denominator:
+                    </p>
+                    <md>
+                        <mrow>\lim_{x\to1}\frac{\sqrt{x}-1}{x-1} &amp; = \lim_{x\to1}\frac{1}{\sqrt{x}+1} </mrow>
+                        <mrow> &amp; = \frac{1}{2}. </mrow>
+                    </md>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-continuity">
+        <title>Continuity</title>
+        <p>
+            We saw in <xref ref="section-computing-limits" text="type-global" /> that for a function like <m>f(x) = x+3x^{2}</m>, we could evaluate <m>\lim_{x\to a}f(x)</m> by simply plugging in <m>x=a</m>.
+            In other words, <m>\lim_{x\to a}f(x) = f(a)</m>.
+            Functions that have this property are extremely important in mathematics, so we give them a name.
+        </p>
+        <definition xml:id="definition-continuous-functions">
+            <title>Continuous Functions</title>
+            <idx><h>continuous functions</h><h>definition</h></idx>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be a function and suppose that <m>a</m> is in the domain of <m>f(x)</m>.
+                    Then we say that <m>f(x)</m> is <term>continuous at <m>a</m></term> if
+                    <me>\lim_{x\to a}f(x) = f(a)</me>.
+                    Otherwise, we say that <m>f(x)</m> is <term>discontinuous at <m>a</m></term>.
+                    We say that <m>f(x)</m> is continuous on an interval if it is continuous at every point of an interval.
+                    Otherwise, we say that <m>f(x)</m> is discontinuous on the interval.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            <xref ref="definition-continuous-functions" text="type-global" /> says that it is extremely easy to evaluate limits of continuous functions: just plug the value that <m>x</m> is approaching into the function <m>f(x)</m>.
+            So the limit is then <m>f(a)</m>.
+            If a function <m>f(x)</m> is continuous on an interval, then this means that the graph of <m>f(x)</m> has no "gaps" over this interval.
+        </p>
+        <example xml:id="example-determining-if-a-function-is-continuous">
+            <title>Determining if a function is continuous</title>
+            <statement>
+                <p>
+                    Let <m>f(x) = \frac{1}{x}</m>.
+                    Is <m>f(x)</m> continuous on <m>(-\infty,\infty)</m>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we graph <m>f(x)</m>, then we see that it is discontinuous at <m>x=0</m>.
+                    Therefore <m>f(x)</m> is discontinuous on the interval <m>(-\infty,\infty)</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            If we're dealing with a function on a (bounded) closed interval, we need to introduce some new terminology.
+            We say that a function <m>f(x)</m> is <term>continuous from the left</term> at <m>x=a</m> if <m>\lim_{x\to a^{-}}f(x) = f(a)</m>.
+            Similarly, we say that <m>f(x)</m> is <term>continuous from the right</term> at <m>x=a</m> if <m>\lim_{x\to a^{+}}f(x) = f(a)</m>.
+            This is of course assuming that <m>a</m> is in the domain of <m>f(x)</m>.
+            Finally, we say that <m>f(x)</m> is continuous on the closed interval <m>[a,b]</m> if it is continuous on <m>(a,b)</m>, continuous from the right at <m>a</m> and continuous from the left at <m>b</m>.
+            The main idea is still that the graph contains no gaps over this interval.
+        </p>
+        <example xml:id="example-continuity-over-a-closed-interval">
+            <title>Continuity over a closed interval</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> be given by
+                    <me>f(x) = \begin{cases} 3x-1 &amp; 1\leq x&lt; 2 \\ 9-x^{2} &amp; 2\leq x\leq 4.\end{cases}</me>
+                    Is <m>f(x)</m> continuous over <m>[1,4]</m>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we graph <m>f(x)</m> over this interval, we get the following:
+                </p>
+                <figure>
+                    <image width="50%">
+                        <latex-image><![CDATA[
+                            \pgfmathdeclarefunction{MyFunction}{1}{%
+                              \pgfmathparse{%
+                                (and(#1>=1,  #1< 2)*(3*#1-1)   +%
+                                (and(#1>= 2,  #1<= 4)*(9-#1*#1)%
+                                }%
+                            }
+                            \begin{tikzpicture}
+                                \begin{axis}[%
+                                    axis x line = center,
+                                    axis y line = center,
+                                    xtick={0,...,5},
+                                    ytick={-7,...,5},
+                                    xmin = -1,
+                                    xmax = 5,
+                                    ymin = -7.5,
+                                    ymax = 5.5,
+                                    xlabel={$x$},
+                                    ylabel={$y$},
+                                    grid=both
+                                    ]
+                                    \foreach \xStart/\xEnd  in {1/2, 2/4} {
+                                    \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {MyFunction(x)};
+                                    }
+                                    \addplot[incl] coordinates{(1,2)};
+                                    \addplot[incl] coordinates{(4,-7)};
+                                    \addlegendentry{$y = f(x)$};
+                                \end{axis}
+                            \end{tikzpicture}]]>
+                        </latex-image>
+                    </image>
+                    <caption>Graphing <m>f(x)</m> over <m>[1,4]</m>.</caption>
+                </figure>
+                <p>
+                    So from the graph it appears that <m>f(x)</m> is continuous on this interval.
+                </p>
+            </solution>
+        </example>
+        <p>
+            Remember that we said a function is continuous over an interval if its graph has no gaps over that interval.
+            This is a very rough explanation of continuity, but it should make the following theorem plausible.
+        </p>
+        <theorem xml:id="theorem-continuous-functions">
+            <title>Continuous Functions</title>
+            <statement>
+                <p>
+                    Polynomial, rational, root and trigonometric functions are continuous at every point of their domain.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            Although it doesn't directly mention piecewise functions, <xref ref="theorem-continuous-functions" text="type-global" /> is still useful for determining if they are continuous.
+            If a piecewise function is defined using any of the functions from <xref ref="theorem-continuous-functions" text="type-global" />, then the only points we really need to check for continuity are the the places where the function "changes rules".
+        </p>
+        <example xml:id="example-another-piecewise-function">
+            <title>Another piecewise function</title>
+            <statement>
+                <p>
+                    Over what intervals is the function <m>g(s)</m> given by
+                    <me>g(s) = \begin{cases} s^{2} &amp; s&lt;-1 \\ -5\cos (\pi s) &amp; -1\leq s\leq 1 \\ 5 &amp; s&gt; 1 \end{cases}</me>
+                    continuous?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to check continuity at <m>s=-1</m> and <m>s=1</m>.
+                    At <m>s=-1</m>, we need to make sure that <m>\lim_{s\to -1}g(s)</m> exists and is equal to <m>g(-1)</m>.
+                    Since
+                    <me>\lim_{s\to-1^{-1}}g(s) = \lim_{s\to-1^{-1}}s^{2} = 1</me>
+                    and
+                    <me>\lim_{s\to-1^{+}}g(s) = \lim_{s\to-1^{+}}\cos(\pi s) = -1,</me>
+                    it follows that <m>\lim_{s\to-1}g(s)</m> does not exist.
+                    So <m>g(s)</m> can't be continuous at <m>s=-1</m>.
+                </p>
+                <p>
+                    On the other hand, since <m>\lim_{s\to1^{-1}}g(s) = 5 = \lim_{s\to1^{+}}g(s)</m>, it follows that <m>\lim_{s\to1}g(s)</m> exists and is equal to <m>5</m>.
+                    Since <m>g(1)</m> also equals <m>5</m>, <m>g(s)</m> is continuous at <m>s=1</m>.
+                    So <m>g(s)</m> must be continuous on <m>(-\infty, -1)\cup(-1,\infty)</m>.
+                </p>
+            </solution>
+        </example>
+        <p>
+            We can also build more complicated continuous functions out of simpler ones.
+        </p>
+        <theorem xml:id="theorem-combining-continuous-functions">
+            <title>Combining Continuous Functions</title>
+            <statement>
+                <p>
+                    Let <m>f(x)</m> and <m>g(x)</m> be continuous at a point <m>a</m>.
+                    Then the following statements are true:
+                    <ol>
+                        <li><m>f(x)+g(x)</m> is continuous at <m>a</m>.</li>
+                        <li><m>f(x)g(x)</m> is continuous at <m>a</m>.</li>
+                        <li><m>\frac{f(x)}{g(x)}</m> is continuous at <m>a</m> if <m>g(a)\neq0</m>.</li>
+                        <li><m>f(g(x))</m> is continuous at <m>a</m> if <m>g(a)</m> is in the domain of <m>f(x)</m>.</li>
+                    </ol>
+                </p>
+            </statement>
+        </theorem>
+        <example xml:id="example-determining-where-functions-are-continuous">
+            <title>Determining where functions are continuous</title>
+            <statement>
+                <p>
+                    Let <m>h(t) = \sqrt{t} + \frac{t}{t-4} - \frac{t+1}{t^{2}-1}</m>.
+                    On what intervals is <m>h(t)</m> continuous?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    By <xref ref="theorem-combining-continuous-functions" text="type-global" />, <m>h(t)</m> should be continuous wherever <m>\sqrt{t}, \frac{t}{t-4}</m> and <m>\frac{t+1}{t^{2}-1}</m> are all defined.
+                    Since <m>\sqrt{t}</m> is defined for <m>t\geq0</m>, <m>\frac{t}{t-4}</m> is defined for <m>t\neq4</m> and <m>\frac{t+1}{t^{2}-1}</m> is defined for <m>t\neq\pm1</m>, it follows that <m>h(t)</m> is continuous on <m>[0,1)\cup(1,4)\cup(4,\infty)</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-using-continuity-to-evaluate-a-limit">
+            <title>Using continuity to evaluate a limit</title>
+            <statement>
+                <p>
+                    Evaluate <m>\lim_{x\to\pi}\cos(x+\sin x)</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Since <m>x, \cos x</m> and <m>\sin x</m> are all continuous, this means that <m>\cos(x+\sin x)</m> must be continuous as well.
+                    Therefore
+                    <me>\lim_{x\to\pi}\cos(x+\sin x) = \cos(\pi+\sin\pi) = -1.</me>
+                </p>
+            </solution>
+        </example>
+    </section>
+    <section xml:id="section-limits-involving-infinity">
+        <title>Limits Involving Infinity</title>
+        <subsection xml:id="subsection-limits-involving-vertical-asymptotes">
+            <title>Limits Involving Vertical Asymptotes</title>
+            <p>
+                Consider the function <m>f(x)=\frac{1}{x}</m>.
+                We know from algebra that this function has a vertical asymptote at <m>x=0</m>, and so in particular is undefined there.
+                However, just because it's undefined at <m>x=0</m> doesn't mean that we can't gather important information about the function near <m>0</m>.
+                This is because the function behaves in a very specific way as we let <m>x</m> approach <m>0</m>.
+                For example, if we let <m>x</m> approach <m>0</m> from the right, then <m>f(x)</m> increases without bound.
+                Similarly, <m>f(x)</m> decreases without bound as <m>x</m> approaches <m>0</m> from the left.
+            </p>
+            <p>
+                Even though <m>f(x)</m> is not approaching a specific value as <m>x</m> approaches <m>0</m> from either direction, this behavior shows up often enough and is important enough that we want to introduce notation to describe it.
+                For this function, we would say <m>\lim_{x\to0^{+}}\frac{1}{x}=\infty</m> and <m>\lim_{x\to0^{-}}\frac{1}{x}=-\infty</m>.
+            </p>
+            <p>
+                Now consider <m>g(x) = \frac{1}{(x-3)^{2}}</m>.
+                Then <m>\lim_{x\to3^{-}}g(x) = \lim_{x\to3^{+}}g(x) = \infty</m> since the function increases without bound when <m>x</m> approaches <m>3</m> from both directions.
+                In this case, we say that <m>\lim_{x\to3}g(x)=\infty</m>.
+            </p>
+            <aside>
+                <p>
+                    It's <em>extremely</em> important to remember that the symbol <m>\infty</m> is not being used to represent a number or variable that we can perform algebra on.
+                    It's a symbol indicating how a particular function is behaving at a certain point.
+                </p>
+            </aside>
+            <p>
+                If <m>f(x)</m> is a function and <m>\lim_{x\to a}f(x)=\pm\infty</m>, <m>\lim_{x\to a^{-}}f(x)=\pm\infty</m> or <m>\lim_{x\to a^{+}}f(x)=\pm\infty</m>, then this means that the function has a vertical asymptote at <m>x=a</m>.
+                In this course, this basically corresponds to a divide-by-zero problem.
+            </p>
+            <example xml:id="example-infinite-limit-involving-a-rational-function">
+                <title>Infinite limit involving a rational function</title>
+                <statement>
+                    <p>
+                        Determine <m>\lim_{x\to4^{-}}\frac{x-3}{2x-8}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we try to plug in <m>x=4</m> into <m>\frac{x-3}{2x-8}</m> we get <m>\frac{1}{0}</m>, which means we have run into a divide-by-zero problem.
+                        This is a good hint that the limit should be <m>\pm\infty</m>, we just need to figure out the correct sign.
+                        There are a couple ways we can do this.
+                        First, we could set up a sign chart for this function to see where it's positive and negative and then use that to see if it's increasing or decreasing without bound as <m>x\to4^{-}</m>.
+                        Second, we could just plug in values of <m>x</m> that are closer and closer to <m>4</m> and see how the function behaves.
+                        Either way, we see that it's negative for values of <m>x</m> that are close to (but less than) <m>4</m>.
+                        Hence <m>\lim_{x\to4^{-}}\frac{x-3}{2x-8}=-\infty</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-limits-at-infinity">
+            <title>Limits at Infinity</title>
+            <p>
+                <xref ref="subsection-limits-involving-vertical-asymptotes" text="type-global" /> involved limits of functions whose values approached <m>\pm\infty</m>.
+                Now we look at what can happen to a function if its input values approach <m>\pm\infty</m>.
+                First, a definition of sorts.
+            </p>
+            <definition xml:id="definition-limit-at-infinity">
+                <title>Limit at Infinity</title>
+                <statement>
+                    <p>
+                        Let <m>f(x)</m> be a function.
+                        We say that <m>\lim_{x\to\infty}f(x) = L</m> if <m>f(x)</m> gets (and stays) arbitrarily close to <m>L</m> as <m>x</m> is made arbitrarily large.
+                        Similarly, we say that <m>\lim_{x\to-\infty}f(x) = L</m> if <m>f(x)</m> gets (and stays) arbitrarily close to <m>L</m> as <m>x</m> is made arbitrarily small.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-an-important-limit-at-infinity">
+                <title>An important limit at infinity</title>
+                <statement>
+                    <p>
+                        Let <m>f(x) = \frac{1}{x}</m>.
+                        Determine <m>\lim_{x\to\infty}f(x)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        As <m>x</m> gets arbitrarily large, <m>\frac{1}{x}</m> gets arbitrarily close to <m>0</m>.
+                        Therefore <m>\lim_{x\to\infty}f(x) = 0</m>.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                <xref ref="example-an-important-limit-at-infinity" text="type-global" /> holds for many other reciprocal powers of <m>x</m>.
+                In particular, if <m>n&gt;0</m> then <m>\lim_{x\to\infty}\frac{1}{x^{n}} = \lim_{x\to-\infty}\frac{1}{x^{n}} = 0</m>.
+            </p>
+            <example xml:id="example-a-limit-at-infinity-involving-sine">
+                <title>A limit at infinity involving cosine</title>
+                <statement>
+                    <p>
+                        Let <m>g(s) = \cos s^{-3}</m>.
+                        Compute <m>\lim_{s\to-\infty}g(s)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First, note that <m>g(s) = \cos\frac{1}{s^{3}}</m>.
+                        By the previous remark, we know that <m>\lim_{s\to-\infty}\frac{1}{s^{3}} = 0</m>.
+                        Therefore <m>\lim_{s\to-\infty}g(s) = \cos0 = 1</m>.
+                    </p>
+                </solution>
+            </example>
+            <aside>
+                <p>
+                    The reason we were able to find the limit in <xref ref="example-a-limit-at-infinity-involving-sine" text="type-global" /> was because of the following fact: if <m>\lim_{x\to a}g(x)</m> exists and if <m>f(x)</m> is continuous at <m>\lim_{x\to a}g(x)</m>, then <m>\lim_{x\to a}f(g(x)) = f(\lim_{x\to a}g(x))</m>.
+                    Basically, we can swap continuous functions with limits without causing any harm.
+                </p>
+            </aside>
+            <p>
+                For limits at infinity involving powers of a variable, it is the highest power variables that determine the outcome.
+            </p>
+            <example xml:id="example-limit-at-infinity-of-a-rational-function">
+                <title>Limit at infinity of a rational function</title>
+                <statement>
+                    <p>
+                        Let 
+                        <me>f(t) = \frac{100t - 3 + t^{3}}{5t^{2}+1}\text{ and } g(t) = \frac{1-2t^{4}}{5t^{4}+3000t}.</me>
+                        Find <m>\lim_{t\to\infty} f(t)</m> and <m>\lim_{t\to-\infty}g(t)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Let's start with <m>f(t)</m>.
+                        To figure out what this limit should be, we could try the following.
+                        As <m>t</m> gets very large the <m>t^{3}</m> term in the numerator should drown out everything else in the numerator.
+                        Similarly, the <m>5t^{2}</m> term in the denominator should drown out everything else in the denominator.
+                        So for <m>t</m> very large, <m>f(t)\approx\frac{t^{3}}{5t^{2}} = \frac{1}{5}t</m>.
+                        Hence <m>f(t)</m> should probably go to <m>\infty</m> as <m>t</m> goes to <m>\infty</m>.
+                        To make this more precise, we'll just divide the numerator and denominator by the largest power of the denominator, <m>t^{2}</m>, and then take the limit:
+                    </p>
+                    <md>
+                        <mrow>\lim_{t\to\infty}f(t) &amp; = \lim_{t\to\infty}\frac{100t-3+t^{3}}{5t^{2}+1} </mrow>
+                        <mrow> &amp; = \lim_{t\to\infty}\frac{\frac{100}{t} - \frac{3}{t^{2}}+t}{5+\frac{1}{t^{2}}} </mrow>
+                        <mrow> &amp; = \infty. </mrow>
+                    </md>
+                    <p>
+                        We can find <m>\lim_{t\to-\infty}g(t)</m> using the same idea.
+                        Just divide by the highest power in the denominator and then take the limit:
+                    </p>
+                    <md>
+                        <mrow>\lim_{t\to-\infty}g(t) &amp; = \lim_{t\to-\infty}\frac{\frac{1}{t^{4}}-2}{5+\frac{3000}{t^{3}}} </mrow>
+                        <mrow> &amp; = -\frac{2}{5}. </mrow>
+                    </md>
+                </solution>
+            </example>
+            <p>
+                These limits at infinity have a graphical meaning as well.
+                If <m>\lim_{x\to\infty}f(x)</m> or <m>\lim_{x\to-\infty}f(x)</m> exists and is equal to <m>L</m>, then the line <m>y=L</m> is a horizontal asymptote of the graph of <m>y=f(x)</m>.
+            </p>
+            <example xml:id="example-asymptotic-equivalence">
+                <title>Asymptotic equivalence</title>
+                <statement>
+                    <p>
+                        Two functions <m>f(x)</m> and <m>g(x)</m> are said to be <term>asymptotically equivalent</term>, written <m>f\sim g</m>, if the following is true:
+                        <me>\lim_{x\to\infty}\frac{f(x)}{g(x)} = 1.</me>
+                        Show that <m>\sin\frac{1}{x}\sim\frac{1}{x}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        All we need to do is compute <m>\lim_{x\to\infty}\frac{\sin\frac{1}{x}}{\frac{1}{x}}:</m>
+                        <md>
+                            <mrow>\lim_{x\to\infty}\frac{\sin\frac{1}{x}}{\frac{1}{x}} &amp; = \lim_{\theta\to0^{+}}\frac{\sin\theta}{\theta} </mrow>
+                            <mrow> &amp; = 1. </mrow>
+                        </md>
+                        Therefore <m>\sin\frac{1}{x}\sim\frac{1}{x}</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+</chapter>

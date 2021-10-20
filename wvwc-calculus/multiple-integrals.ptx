@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="multiple-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Multiple Integrals</title>
+  <introduction>
+    <p>
+      From Calculus I, we know how to find the area under the graph <m>y = f(x)</m> from <m>x = a</m> to <m>x = b</m>: it's just
+      <me>\int_{a}^{b}f(x)\,dx.</me>
+      What we want to do now is to take the notion of integration and extend it to higher dimensions.
+      As a starting motivation, we'd like to develop the concept of an integral of a function <m>f(x,y)</m> of two independent variables in order to find the volume under the surface <m>z = f(x,y)</m>.
+    </p>
+  </introduction>
+  <section xml:id="section-double-integrals-over-rectangles">
+    <title>Double Integrals over Rectangles</title>
+    <introduction>
+      <p>
+        We want to try to find the volume under the surface <m>z = f(x,y)</m> and above some rectangle <m>R</m> in the <m>xy</m>-plane.
+        If <m>f(x,y)</m> is a constant function, then this is easy: the resulting surface and the <m>xy</m>-plane then form a rectangular prism.
+        If <m>f(x,y)</m> is more complicated, then we might not have a nice volume formula to use.
+        However, we can steal an idea from Calculus I and try to approximate the volume by using simpler shapes; in this case, rectangular prisms.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-riemann-sums">
+      <title>Riemann Sums</title>
+      <p>
+        Given a continuous function <m>f(x,y)</m> defined over the rectangle
+        <me>R = \{(x,y) : a\leq x\leq b, c\leq y\leq d\}</me>
+        to approximate the volume under <m>f</m> and above <m>R</m> we'll divide the rectangle up into smaller rectangles.
+        In particular, let's divide the intervals <m>[a,b]</m> and <m>[c,d]</m> into subintervals <m>[x_{i},x_{i+1}], [y_{j},y_{j+1}],</m> where
+        <md>
+          <mrow>a = x_{0} &amp; &lt; x_{1} &lt; x_{2} &lt; \dots &lt; x_{m} = b </mrow>
+          <mrow>c = y_{0} &amp; &lt; y_{1} &lt; y_{2} &lt; \dots &lt; y_{n} = d </mrow>
+          <mrow>\Delta x &amp; = x_{i+1} - x_{i} </mrow>
+          <mrow>\Delta y &amp; = y_{j+1} - y_{j} </mrow>
+        </md>
+        If we let <m>R_{ij}</m> denote the subrectangle given by
+        <me>R_{ij} = \{(x,y) : x_{i}\leq x\leq x_{i+1}, y_{j}\leq y\leq y_{j+1}\}</me>
+        then the volume under <m>f(x,y)</m> and above <m>R_{ij}</m> is about equal to
+        <me>f(x_{i},y_{j})\Delta x\Delta y</me>
+        Hence the volume under <m>f(x,y)</m> and above <m>R</m> should be about equal to
+        <me>\sum_{i=0}^{m}\sum_{j=0}^{n}f(x_{i},y_{j})\Delta x\Delta y</me>
+        If we replace <m>\Delta x\Delta y</m> with <m>\Delta A</m> and send <m>\Delta A\to0</m>, this approximation becomes exact.
+        This gives us the following definition.
+      </p>
+      <definition xml:id="definition-double-integral-over-a-rectangle">
+        <idx><h>double integrals</h><h>over a rectangle</h></idx>
+        <title>Double Integral Over a Rectangle</title>
+        <statement>
+          <p>
+            Let <m>f(x,y)</m> be a function defined over the rectangle <m>R</m>.
+            Then the <term>double integral</term> of <m>f(x,y)</m> over <m>R</m> is defined to be
+            <me>\iint_{R}f(x,y)\,dA = \lim_{\Delta A\to0}\sum_{i=0}^{m}\sum_{j=0}^{n}f(x_{i},y_{j})\Delta A</me>
+            If the limit exists, we say that <m>f</m> is <term>integrable</term> over <m>R</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        The geometric intuition behind the double integral is that it represents a volume under a surface.
+        Negative values for a double integral indicate that a surface tends to lie below the <m>xy</m>-plane, while positive values indicate that the surface tends to lie above the <m>xy</m>-plane.
+        Furthermore, continuous functions are integrable over any rectangle <m>R</m>.
+      </p>
+      <example xml:id="example-double-integrals-by-volume">
+        <title>Double integrals by volume</title>
+        <statement>
+          <p>
+            Let <m>f(x,y) = 5 - x</m> and let
+            <me>R = \{(x,y) : 0\leq x\leq 5, 0\leq y\leq 3\}</me>
+            Find <m>\iint_{R}f(x,y)\,dA</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we graph <m>f(x,y)</m>, we get a triangular cylinder running along the <m>y</m> axis.
+            The volume of this cylinder over <m>R</m> is just the area of the triangular "base" times the "height," or just
+            <me>\frac{1}{2}5\cdot5\cdot3 = \frac{75}{2}</me>
+            So
+            <me>\iint_{R}(5-x)\,dA = \frac{75}{2}</me>
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-fubini-s-theorem">
+      <title>Fubini's Theorem</title>
+      <p>
+        Now that we have a definition for the double integral, we want to find a better way of computing it.
+        Thankfully, we do have such a method: Fubini's Theorem.
+      </p>
+      <theorem xml:id="theorem-fubini-s-theorem">
+        <title>Fubini's Theorem</title>
+        <statement>
+          <p>
+            Let <m>f(x,y)</m> be continuous on the rectangle
+            <me>R = \{(x,y) : a\leq x\leq b, c\leq y\leq d\}</me>
+            Then
+            <me>\iint_{R}f(x,y)\,dA = \int_{a}^{b}\left[\int_{c}^{d}f(x,y)\,dy\right]\,dx = \int_{c}^{d}\left[\int_{a}^{b}f(x,y)\,dx\right]\,dy</me>
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-double-integrals-by-fubini-s-theorem">
+        <idx><h>Fubini's Theorem</h><h>double integrals</h></idx>
+        <title>Double integrals by Fubini's Theorem</title>
+        <statement>
+          <p>
+            Let <m>f(x,y) = 5 - x</m> and let
+            <me>R = \{(x,y) : 0\leq x\leq 5, 0\leq y\leq 3\}</me>
+            Find <m>\iint_{R}f(x,y)\,dA</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We found this previously in <xref ref="example-double-integrals-by-volume" text="type-global" />, so we'll try it again using Fubini's Theorem and see if we get the same answer.
+            By <xref ref="theorem-fubini-s-theorem" text="type-global" />, we have
+            <md>
+              <mrow>\iint_{R}f(x,y)\,dA &amp; = \int_{0}^{3}\left[\int_{0}^{5}(5-x)\,dx\right]\,dy </mrow>
+              <mrow> &amp; = \int_{0}^{3}\left[5x - \frac{x^{2}}{2}\right]_{x=0}^{5}\,dy </mrow>
+              <mrow> &amp; = \int_{0}^{3}\frac{25}{2}\,dy </mrow>
+              <mrow> &amp; = \frac{75}{2} </mrow>
+            </md>
+          </p>
+        </solution>
+      </example>
+      <p>
+        The double integral, like the Calculus I integral, derivative and partial derivatives, is <em>linear</em>.
+        This means that you can break it up over addition and pull constants outside of it.
+        In other words, if <m>f</m> and <m>g</m> are integrable and if <m>c</m> is a constant, then
+        <md>
+          <mrow>\iint_{R}(f(x,y) + g(x,y))\,dA &amp; = \iint_{R}f(x,y)\,dA + \iint_{R}g(x,y)\,dA </mrow>
+          <mrow>\iint_{R}cf(x,y)\,dA &amp; = c\iint_{R}f(x,y)\,dA </mrow>
+        </md>
+      </p>
+      <example xml:id="example-double-integral-of-a-logarithm">
+        <title>Double integral of a logarithm</title>
+        <statement>
+          <p>
+            Find
+            <me>\int_{1}^{3}\int_{1}^{3}\frac{\ln(xy)}{xy}\,dy\,dx</me>
+          </p>
+        </statement>
+        <solution>
+          <h>
+            First, note that
+            <me>\int_{1}^{3}\int_{1}^{3}\frac{\ln(xy)}{xy}\,dy\,dx = \int_{1}^{3}\int_{1}^{3}\frac{\ln(x)}{xy}\,dy\,dx + \int_{1}^{3}\int_{1}^{3}\frac{\ln(y)}{xy}\,dy\,dx</me>
+            To find the first double integral on the right, first we integrate with respect to <m>y</m> to get
+            <me>\int_{1}^{3}\int_{1}^{3}\frac{\ln(x)}{xy}\,dy\,dx = \int_{1}^{3}\frac{\ln x}{x}\ln y\big|_{y=1}^{3}\,dx = \ln 3\int_{1}^{3}\frac{\ln x}{x}\,dx</me>
+            Now we can use <m>u</m>-sub with <m>u = \ln x</m> and <m>du = \frac{1}{x}\,dx</m> to get
+            <md>
+              <mrow>\ln3\int_{1}^{3}\frac{\ln(x)}{x}\,dx &amp; = \ln3 \frac{u^{2}}{2}\big|_{u=0}^{\ln 3} </mrow>
+              <mrow> &amp; = \frac{1}{2}(\ln3)^{3} </mrow>
+            </md>
+            The same exact process shows that <m>\int_{1}^{3}\frac{\ln y}{xy}\,dy\,dx</m> must also equal <m>\frac{1}{2}(\ln3)^{3}</m>.
+            Therefore
+            <me>\int_{1}^{3}\int_{1}^{3}\frac{\ln(xy)}{xy}\,dy\,dx = (\ln3)^{3}</me>
+          </h>
+        </solution>
+      </example>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 7, 9, 15, 19
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-double-integrals-over-general-regions">
+    <title>Double Integrals over General Regions</title>
+    <conclusion>
+      <p>
+        <xref ref="section-double-integrals-over-rectangles" text="type-global" /> shows how to define the double integral over a rectangle <m>R</m>.
+        Now we want to extend it to more general regions.
+        We'll be skipping an issue with how to actually define such an integral in terms of Riemann sums, but the main idea is to take a function defined over some general region <m>D</m> and then extend it to cover a rectangular region <m>R</m>.
+        Then we can just use <xref ref="definition-double-integral-over-a-rectangle" text="type-global" /> to define this new integral as well.
+      </p>
+      <p>
+        Our primary tool for computing double integrals will still be <xref ref="theorem-fubini-s-theorem" text="type-global" />.
+        The main difficulty we'll encounter (aside from the usual integration issues) is how to properly set up limits for <m>x</m> and <m>y</m> for some region <m>D</m>.
+      </p>
+    </conclusion>
+    <example xml:id="example-integrating-over-a-region-defined-by-a-parabola">
+      <title>Integrating over a region defined by a parabola</title>
+      <statement>
+        <p>
+          Let <m>f(x,y) = \frac{y}{x^{5}+1}</m> and let <m>D</m> be the region under the parabola <m>y = x^{2}</m>, above the <m>x</m>-axis and between <m>x=0</m> and <m>x=1</m>.
+          Find <m>\iint_{D}f(x,y)\,dA</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The first step is to determine limits for <m>x</m> and <m>y</m> that describe this region.
+          One possible description is the following:
+          <me>D = \{(x,y) : 0\leq y\leq x^{2}, 0\leq x\leq 1\}</me>
+          If we use this, we can write
+          <md>
+            <mrow>\iint_{D}\frac{y}{x^{5}+1}\,dA &amp; = \int_{0}^{1}\int_{0}^{x^{2}}\frac{y}{x^{5}+1}\,dy\,dx </mrow>
+            <mrow> &amp; = \frac{1}{2}\int_{0}^{1}\frac{1}{x^{5}+1}y^{2}\bigg|_{y=0}^{x^{2}}\,dx </mrow>
+            <mrow> &amp; = \frac{1}{2}\int_{0}^{1}\frac{x^{4}}{x^{5}+1}\,dx </mrow>
+            <mrow> &amp; = \frac{1}{10}\int_{1}^{2}\frac{1}{u}\,du </mrow>
+            <mrow> &amp; =  \frac{1}{10}\ln2</mrow>
+          </md>
+        </p>
+        <p>
+          We also could have described <m>D</m> as the set of all points
+          <me>D = \{(x,y) : \sqrt{y} \leq x\leq 1, 0\leq y\leq 1\}</me>
+          If we do this instead, we get
+          <me>\iint_{D}\frac{y}{x^{5}+1}\,dA = \int_{0}^{1}\int_{\sqrt{y}}^{1}\frac{y}{x^{5}+1}\,dx\,dy </me>
+          By <xref ref="theorem-fubini-s-theorem" text="type-global" />, this is guaranteed to equal <m>\frac{1}{10}\ln2</m>.
+          However, the actual process of computing the double integral using this choice for the limits is much more difficult, since we would need to integrate <m>\frac{1}{x^{5}+1}</m> with respect to <m>x</m>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      There are several important things we can take away from the above example:
+      <ul>
+        <li>Much of the difficulty in computing double integrals lies in finding limits that describe the region you're integrating over. In general, it's a good idea to sketch the region you're integrating over in order to figure out what your limits should be.</li>
+        <li>There can be multiple ways to describe a single region. This leads to multiple ways of setting up limits for double integrals over this region. If the integrand is continuous, then <xref ref="theorem-fubini-s-theorem" text="type-global" /> guarantees that these different methods will all produce the same value.</li>
+        <li>It's important to choose limits in such a way as to make computing the double integral more manageable.</li>
+        <li>When finding limits for a double integral, the outermost limits <em>must be constant</em> since the double integral must eventually simplify to a constant. In other words, we don't really have a notion of an "indefinite" double integral.</li>
+      </ul>
+    </p>
+    <example xml:id="example-reversing-the-order-of-integration">
+      <title>Reversing the order of integration</title>
+      <statement>
+        <p>
+          Compute <m>\int_{0}^{\sqrt{\pi}}\int_{y}^{\sqrt{\pi}}\cos x^{2}\,dx\,dy</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we try to integrate with respect to <m>x</m> right away, then we're stuck: <m>\cos x^{2}</m> has no elementary antiderivative, which for us means that we can only integrate it using power series.
+          However, it is continuous, so <xref ref="theorem-fubini-s-theorem" text="type-global" /> tells us that if we can integrate it with respect to <m>y</m> first and then <m>x</m> (i.e. replace <m>dx\,dy</m> with <m>dy\,dx</m>), we'll still get the same answer.
+          And integrating <m>\cos x^{2}</m> with respect to <m>y</m> is actually very easy.
+          This is called <term>reversing the order of integration</term>.
+        </p>
+        <p>
+          In order to change the order of integration, we need to change the limits.
+          The region we're integrating over is the region
+          <me>D = \{(x,y) : y\leq x\leq \sqrt{\pi}, 0\leq y\leq\sqrt{\pi}\}</me>
+          If we sketch this, we see that this is just the region below the line <m>y = x</m>, above the <m>x</m>-axis and bounded from <m>x=0</m> to <m>x=\sqrt{\pi}</m>.
+          So we can also write
+          <me>D = \{(x,y) : 0\leq y\leq x, 0\leq x\leq\sqrt{\pi}\}</me>
+          Therefore
+          <md>
+            <mrow>\int_{0}^{\sqrt{\pi}}\int_{y}^{\sqrt{\pi}}\cos x^{2}\,dx\,dy &amp; = \int_{0}^{\sqrt{\pi}}\int_{0}^{x}\cos x^{2}\,dy\,dx </mrow>
+            <mrow> &amp; = \int_{0}^{\sqrt{\pi}}y\cos x^{2}\bigg|_{y=0}^{x}\,dx </mrow>
+            <mrow> &amp; = \int_{0}^{\sqrt{\pi}}x\cos x^{2}\,dx </mrow>
+            <mrow> &amp; = \frac{1}{2}\int_{0}^{\pi}\cos u\,du </mrow>
+            <mrow> &amp; = 0 </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Sometimes, the order of integration can be chosen to make the limits of integration easier to set up.
+    </p>
+    <example xml:id="example-integrating-over-a-triangle">
+      <title>Integrating over a Triangle</title>
+      <statement>
+        <p>
+          Integrate <m>f(x,y) = x^{2} + y^{2}</m> over the triangle <m>T</m> with vertices <m>(0,0), (1,1)</m> and <m>(0,2)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we wanted to integrate with respect to <m>x</m> first, we would have to break our double integral up into two different double integrals.
+          This is because the limits for <m>x</m> change halfway up the triangle.
+          So it'd be better for us to integrate with respect to <m>y</m> first.
+          Since
+          <me>T = \{(x,y) : x \leq y \leq 2-x, 0\leq x\leq 1</me>
+          we have
+          <md>
+            <mrow>\iint_{T}(x^{2} + y^{2})\,dA &amp; = \int_{0}^{1}\int_{x}^{2-x}(x^{2} + y^{2})\,dy\,dx </mrow>
+            <mrow> &amp; = \int_{0}^{1}\left[x^{2}y + \frac{y^{3}}{3}\right]_{y=x}^{2-x}\,dx </mrow>
+            <mrow> &amp; = \int_{0}^{1} \left[x^{2}(2-2x) + \frac{1}{3}[(2-x)^{3} - x^{3}]\right]\,dx </mrow>
+            <mrow> &amp; = \left[\frac{2x^{3}}{3} - \frac{1}{2}x^{4} - \frac{(2-x)^{4}}{12} - \frac{x^{4}}{4}\right]_{0}^{1} </mrow>
+            <mrow> &amp; = \frac{2}{3} - \frac{1}{2} - \frac{1}{12} - \frac{1}{4} + \frac{16}{12} </mrow>
+            <mrow> &amp; = \frac{7}{6} </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Besides finding volumes, we can also use double integrals to find areas.
+      If <m>D</m> is some region in the <m>xy</m>-plane, then <m>\iint_{D}\,dA</m> represents the volume under the surface <m>z=1</m> and above <m>D</m>.
+      This is a solid with the constant height of <m>1</m>, so the volume should be equal to the area of <m>D</m> times <m>1</m>.
+      That is, <m>\iint_{D}\,dA</m> is equal to the area of <m>D</m>.
+    </p>
+    <p>
+      SUGGESTED PROBLEMS: 1, 5, 11, 13, 17, 21
+    </p>
+  </section>
+  <section xml:id="section-double-integrals-in-polar-coordinates">
+    <title>Double Integrals in Polar Coordinates</title>
+    <p>
+      Recall that the double integral was defined by first setting up a rectangular grid.
+      The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense.
+      If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward.
+      However, polar coordinates from <xref ref="section-polar-coordinates" text="type-global" /> work very nicely with circular regions.
+      So we want to find out how to set up double integrals using polar coordinates.
+    </p>
+    <p>
+      If we're given a function <m>f(x,y)</m>, then it's not too hard to convert this to the polar form <m>f(r,\theta)</m>.
+      Just replace <m>x</m> with <m>r\cos\theta</m> and <m>y</m> with <m>r\sin\theta</m>.
+      The tricky part with setting up double integrals in polar coordinates is how to deal with the <term>area element</term> <m>dA</m>, which in Cartesian coordinates is just <m>dx\,dy</m> or <m>dy\,dx</m>.
+      To figure out what <m>dA</m> should be in polar coordinates, i.e. in terms of <m>r</m> and <m>\theta</m>, consider the following "polar rectangle":
+      <figure xml:id="figure-polar-rectangle">
+        <image xml:id="image-polar-rectangle">
+          <latex-image><![CDATA[
+            \begin{tikzpicture}[scale=1.5]
+
+            \draw[thick,->] (0,0) -- (5,0);     
+            \draw[thick,->] (0,0) -- (0,4);     
+
+            % plot points
+            \coordinate (A) at (74:2);
+
+            \coordinate (B) at (54:2);
+
+            \coordinate (C) at (34:2);
+
+            \coordinate (D) at (14:2);
+
+            \coordinate (E) at (74:4);
+
+            \coordinate (F) at (54:4);
+
+            \coordinate (G) at (34:4);
+
+            \coordinate (H) at (14:4);
+
+            \begin{scope}
+
+            % connect points & shade
+            \path[clip] ((14:4) arc (14:74:4) -- (74:2) arc (74:14:2) -- (14:4);
+            \draw[thick, black] (0,0) circle (2);
+            \draw[thick, black] (0,0) circle (4);
+            \fill[opacity=.5,blue!15] (0,0) circle (2) -- (0,0) circle (4);
+
+            \end{scope}
+
+            \draw (A) -- (E);
+            \draw (64:2) -- (64:4);
+            \draw (B) -- (F);
+            \draw (44:2) -- (44:4);
+            \draw (C) -- (G);
+            \draw (24:2) -- (24:4);
+            \draw (D) -- (H);
+
+            \draw (74:3.5) arc (74:14:3.5);
+            \draw (74:3) arc (74:14:3);
+            \draw (74:2.5) arc (74:14:2.5);
+
+            % Draw angles $d\theta$
+            \draw[red, dashed] (0,0) -- (34:2);
+            \draw[red, dashed] (0,0) -- (44:2);
+            \draw (44.2:1.25) arc (44.2:34.2:1.25);
+            \node at (40:1.5) [black]{$\Delta\theta$};
+            \end{tikzpicture}
+            ]]>
+          </latex-image>
+        </image>
+        <caption>A polar grid.</caption>
+      </figure>
+    </p>
+    <p>
+      Let <m>\Delta A</m> represent the area of one of these sectors.
+      If we let <m>r</m> denote the distance from the origin to one sector, <m>\Delta r</m> the length of a sector and <m>\Delta\theta</m> the angle spanned by a sector, then we can say that
+      <md>
+        <mrow>\Delta A &amp; \approx \frac{1}{2}[r\cos(\Delta\theta)][r\sin(\Delta\theta)] - \frac{1}{2}[(r-\Delta r)\cos(\Delta\theta)][(r-\Delta r)\sin(\Delta\theta)] </mrow>
+        <mrow> &amp; = r\Delta r\cos(\Delta\theta)\sin(\Delta\theta) - \frac{1}{2}(\Delta r)^{2}\cos(\Delta\theta)\sin(\Delta\theta)</mrow>
+      </md>
+      If we assume that <m>\Delta r</m> and <m>\Delta\theta</m> are both small (which means the polar grid in <xref ref="figure-polar-rectangle" text="type-global" /> is very fine), then
+      <md>
+        <mrow>\cos(\Delta\theta) &amp; \approx 1 </mrow>
+        <mrow>\sin(\Delta\theta) &amp; \approx \Delta\theta </mrow>
+        <mrow>(\Delta r)^{2} &amp; \approx 0 </mrow>
+      </md>
+      So
+      <me>\Delta A \approx r\Delta r\Delta\theta</me>.
+      As <m>\Delta r</m> and <m>\Delta\theta</m> approach <m>0</m>, this becomes more exact, and we get
+      <me>dA = r\,dr\,d\theta</me>.
+    </p>
+    <theorem xml:id="theorem-double-integrals-in-polar-coordinates">
+      <idx><h>double integrals</h><h>polar coordinates</h></idx>
+      <title>Double Integrals in Polar Coordinates</title>
+      <statement>
+        <p>
+          Let <m>f(x,y)</m> be a continuous function.
+          Then
+          <me>\iint_{D}f(x,y)\,dA = \iint_{D}f(r\cos\theta,r\sin\theta)r\,dr\,d\theta</me>
+          and limits are chosen using polar coordinates.
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-integrating-over-a-circular-sector">
+      <title>Integrating over a circular sector</title>
+      <statement>
+        <p>
+          Find
+          <me>\int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx</me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant.
+          So we'll switch to polar coordinates to solve this integral:
+          <md>
+            <mrow>\int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx &amp; = \int_{\pi}^{\frac{3\pi}{2}}\int_{0}^{1}\frac{2}{1+r}r\,dr\,d\theta </mrow>
+            <mrow> &amp; = 2\int_{\pi}^{\frac{3\pi}{2}} \frac{r}{1+r}\,dr\,d\theta </mrow>
+            <mrow> &amp; = 2\int_{\pi}^{\frac{3\pi}{2}} \bigg[r - \ln(1+r)\bigg]_{r=0}^{1}\,d\theta </mrow>
+            <mrow> &amp; = \pi(1-\ln2) </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Polar coordinates may also be used, surprisingly, to evaluate the <term>Gaussian integral</term> <m>\int_{-\infty}^{\infty}e^{-x^{2}}\,dx</m>.
+    </p>
+    <theorem xml:id="theorem-the-gaussian-integral">
+      <title>The Gaussian Integral</title>
+      <statement>
+        <p>
+          We have
+          <me>\int_{-\infty}^{\infty}e^{-x^{2}}\,dx = \sqrt{\pi}</me>
+        </p>
+      </statement>
+    </theorem>
+    <proof>
+      <p>
+        First, let <m>I = \int_{-\infty}^{\infty}e^{-x^{2}}\,dx</m>.
+        We'll show that <m>I^{2} = \pi</m>.
+        We have
+        <md>
+          <mrow>I^{2} &amp; = \left(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-y^{2}}\,dy\right) </mrow>
+          <mrow> &amp; = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-(x^{2} + y^{2})}\,dx\,dy </mrow>
+          <mrow> &amp; = \int_{0}^{2\pi}\int_{0}^{\infty}e^{-r^{2}}r\,dr\,d\theta </mrow>
+          <mrow> &amp; = \int_{0}^{2\pi} \lim_{b\to\infty}\frac{-1}{2}e^{-r^{2}}\bigg]_{r=0}^{b}\,d\theta </mrow>
+          <mrow> &amp; = \int_{0}^{2\pi} \frac{1}{2}\,d\theta </mrow>
+          <mrow> &amp; = \pi </mrow>
+        </md>
+        Since <m>I^{2} = \pi</m>, this gives
+        <me>\int_{-\infty}^{\infty}e^{-x^{2}}\,dx = \sqrt{\pi}</me>
+      </p>
+    </proof>
+    <example xml:id="example-volume-of-a-sphere">
+      <title>Volume of a sphere</title>
+      <statement>
+        <p>
+          Find the volume of a sphere of radius <m>\rho</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, we can center the sphere at the origin without loss of generality.
+          Such a sphere is given by <m>x^{2} + y^{2} + z^{2} = \rho^{2}</m>.
+          If we solve for <m>z</m>, we get
+          <me>z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}</me>
+          Let <m>D</m> denote the disk of radius <m>\rho</m> in the <m>xy</m>-plane centered at the origin.
+          Then the volume of the sphere is
+          <md>
+            <mrow>2\iint_{D}\sqrt{\rho^{2} - x^{2} - y^{2}}\,dA &amp; = 2\int_{0}^{2\pi}\int_{0}^{\rho}\sqrt{\rho^{2} - r^{2}}r\,dr\,d\theta </mrow>
+            <mrow> &amp; = -\int_{0}^{2\pi}\int_{\rho^{2}}^{0}\sqrt{u}\,du\,d\theta </mrow>
+            <mrow> &amp; = \frac{2}{3}\int_{0}^{2\pi}u^{3/2}\bigg]_{u=0}^{\rho^{2}}\,d\theta </mrow>
+            <mrow> &amp; = \frac{4\pi}{3}\rho^{3} </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 5, 13, 23
+    </p>
+  </section>
+  <section xml:id="section-applications-of-double-integrals">
+    <title>Applications of Double Integrals</title>
+    <subsection xml:id="subsection-mass">
+      <title>Mass</title>
+      <p>
+        Consider a thin plate in the <m>xy</m>-plane, say the region <m>R</m>.
+        If the density of the plate <m>\rho(x,y)</m> at <m>(x,y)</m> is constant, say <m>\rho(x,y) = C</m>, then the mass of the plate is just the density times the area.
+        On the other hand, if the density is varies then this becomes more complicated, and we must use double integrals.
+        In particular, the mass of a plate contained in the region <m>R</m> in the <m>xy</m>-plane with density <m>\rho(x,y)</m> is given by
+        <me>\iint_{R}\rho(x,y)\,dA</me>
+      </p>
+      <example xml:id="example-mass-of-a-triangular-plate">
+        <title>Mass of a triangular plate</title>
+        <statement>
+          <p>
+            Find the mass of the plate contained in the triangular region <m>D</m> bounded by lines <m>y=x, y = 6</m> and <m>2x+y = 6</m>, given that the density is <m>\rho(x,y) = x^{2}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The mass is
+            <md>
+              <mrow>\iint_{D}x^{2}\,A &amp; =  \int_{2}^{6}\int_{\frac{6-y}{2}}^{y}x^{2}\,dx\,dy</mrow>
+              <mrow> &amp; = \frac{1}{3}\int_{2}^{6}\left[\frac{y^{3} - (6-y)^{3}}{8}\right]\,dy </mrow>
+            </md>
+          </p>
+        </solution>
+      </example>
+      <p>
+        The <term>moments</term> of the mass contained in <m>D</m> and with density <m>\rho(x,y)</m> are defined as follows:
+        <md>
+          <mrow>M_{x} &amp; = \iint_{D}y\rho(x,y)\,dA </mrow>
+          <mrow>M_{y} &amp; = \iint_{D}x\rho(x,y)\,dA </mrow>
+        </md>
+        If we let <m>m</m> denote the total mass, then we also define the <term>center of mass</term> (or <term>centroid</term>) to be the point <m>(\bar{x},\bar{y})</m>, where
+        <md>
+          <mrow>\bar{x} &amp; = \frac{M_{y}}{m} </mrow>
+          <mrow>\bar{y} &amp; = \frac{M_{x}}{m} </mrow>
+        </md>
+      </p>
+      <example xml:id="example-center-of-mass-of-an-annulus">
+        <title>Center of mass of an annulus</title>
+        <statement>
+          <p>
+            Find the center of mass of the plate <m>D</m> outside of the circle <m>x^{2}+y^{2} = 1</m> and inside the circle <m>x^{2} + y^{2} = 4</m>, with density <m>\rho(x,y) = \frac{1}{\sqrt{x^{2} + y^{2}}}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The mass is given by
+            <md>
+              <mrow>\iint_{D} \frac{1}{\sqrt{x^{2}+y^{2}}}\,dA &amp; = \int_{0}^{2\pi}\int_{1}^{2}\frac{r}{r}\,dr\,d\theta </mrow>
+              <mrow> &amp; = 2\pi </mrow>
+            </md>
+            The moments are
+            <md>
+              <mrow>M_{x} &amp; = \iint_{D}\frac{y}{\sqrt{x^{2} + y^{2}}}\,dA </mrow>
+              <mrow> &amp; = \int_{0}^{2\pi}\int_{1}^{2} \frac{r\sin\theta}{r}r\,dr\,d\theta </mrow>
+              <mrow> &amp; = 0 </mrow>
+            </md>
+            and likewise <m>M_{y} = 0</m>.
+            So the center of mass is <m>(0,0)</m>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 3, 5, 13
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-triple-integrals">
+    <title>Triple Integrals</title>
+    <p>
+      In <m>\RR</m>, we have
+      <me>\int_{a}^{b}f(x)\,dx = \lim_{\Delta x\to0}\sum_{i=0}^{n}f(x_{i})\Delta x.</me>
+      This represents the area under <m>y=f(x)</m> and over <m>[a,b]</m>.
+      Furthermore, <m>\int_{a}^{b}\,dx</m> gives the length of <m>[a,b]</m>.
+      In <m>\mathbb{R}^{2}</m>, we have
+      <me>\int_{D}f(x,y)\,dA = \lim_{\Delta A\to0}\sum_{i=0}^{m}\sum_{j=0}^{n}f(x_{i},y_{j})\Delta A,</me>
+      This represents the volume under <m>z = f(x,y)</m> and above the region <m>D</m>, where <m>\Delta A = \Delta x\Delta y</m>.
+      Furthermore, <m>\iint_{D}\,dA</m> gives the area of <m>D</m>.
+    </p>
+    <p>
+      We can extend all of this to <m>\RR^{3}</m> by introducing the concept of the <term>triple integral</term>.
+    </p>
+    <definition xml:id="definition-triple-integrals-over-a-rectangle">
+      <idx><h>triple integrals</h><h>rectangular coordinates</h></idx>
+      <title>Triple Integrals over a Rectangle</title>
+      <statement>
+        <p>
+          Let <m>f(x,y,z)</m> be defined on some region <m>D</m> in <m>\RR^{3}</m>.
+          Then the triple integral of <m>f</m> over <m>D</m> is given by
+          <me>\iiint_{D}f(x,y,z)\,dV = \lim_{\Delta V\to0}\sum_{i=0}^{l}\sum_{j=0}^{m}\sum_{k=0}^{n}f(x_{i},y_{j},z_{k})\Delta V</me>
+          where <m>\Delta V = \Delta x\Delta y\Delta z</m>.
+          If the limit exists, we say that <m>f</m> is <term>integrable</term> on <m>D</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      For a double integral in rectangular coordinates, we have <m>dA = dx\,dy</m> or <m>dy\,dx</m>.
+      Similarly, for a triple integral in rectangular coordinates we have six different choices for <m>dV</m>:
+      <table xml:id="table-volume-elements">
+        <caption>Absolute values on the disk</caption>
+        <tabular halign="center" top="major">
+          <row top="major">
+            <cell><m>dx\,dy\,dz</m></cell>
+            <cell><m>dx\,dz\,dy</m></cell>
+          </row>
+          <row>
+            <cell><m>dy\,dx\,dz</m></cell>
+            <cell><m>dy\,dz\,dx</m></cell>
+          </row>
+          <row bottom="major">
+            <cell><m>dz\,dx\,dy</m></cell>
+            <cell><m>dz\,dy\,dx</m></cell>
+          </row>
+        </tabular>
+      </table>
+      Just as we can view <m>dx</m> as an infinitesimal length and <m>dA</m> as an infinitesimal area, <m>dV</m> represents an infinitesimal volume.
+    </p>
+    <h>
+      Our main use for <xref ref="definition-triple-integrals-over-a-rectangle" text="type-global" /> will be to recognize a triple integral "in the wild," but we won't actually use it to compute integrals.
+      For this purpose, we still use Fubini's Theorem.
+    </h>
+    <theorem xml:id="theorem-fubini-s-theorem-for-triple-integrals">
+      <idx><h>Fubini's Theorem</h><h>triple integrals</h></idx>
+      <title>Fubini's Theorem for Triple Integrals</title>
+      <statement>
+        <p>
+          Suppose <m>f(x,y,z)</m> is a continuous function on the closed and bounded region <m>D</m> in <m>\RR^{3}</m>.
+          Then <m>\iiint_{D}f(x,y,z)\,dV</m> can be computed as an iterated integral, and the answer does not depend on the choice of <m>dV</m>.
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-a-triple-integral-over-a-rectangular-prism">
+      <title>A triple integral over a rectangular prism</title>
+      <statement>
+        <p>
+          Compute <m>\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV</m>, where
+          <me>D = \{(x,y) : 0\leq x\leq\sqrt{\ln2}, 0\leq y\leq\sqrt{\ln4}, 0\leq z\leq 1\}</me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We'll integrate using <m>dV = dx\,dy\,dz</m>.
+          Then we have
+          <md>
+            <mrow>\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV &amp; = \int_{0}^{1}\int_{0}^{\sqrt{\ln4}}\int_{0}^{\sqrt{\ln2}} xyze^{-x^{2} - y^{2}}\,dx\,dy\,dz </mrow>
+            <mrow> &amp; = \int_{0}^{1}\int_{0}^{\sqrt{\ln4}}\left[-\frac{yze^{-x^{2} - y^{2}}}{2}\right]_{x=0}^{\sqrt{\ln2}} </mrow>
+            <mrow> &amp; = -\frac{1}{2}\int_{0}^{1}\int_{0}^{\sqrt{\ln4}} yz(e^{-\ln2 - y^{2}} - e^{-y^{2}})\,dy\,dz </mrow>
+            <mrow> &amp; = -\frac{e^{-\ln2} - 1}{2}\int_{0}^{1}\int_{0}^{\sqrt{\ln4}} yze^{-y^{2}}\,dy\,dz </mrow>
+            <mrow> &amp; = \frac{-\frac{1}{2}}{4}\int_{0}^{1}\left[ze^{-y^{2}}\right]_{y=0}^{\sqrt{\ln4}}\,dz </mrow>
+            <mrow> &amp; = \frac{\frac{3}{4}}{8}\int_{0}^{1}z\,dz </mrow>
+            <mrow> &amp; = \frac{3}{32}\frac{1}{2} </mrow>
+            <mrow> &amp; = \frac{3}{64} </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      An unfortunate side effect of increasing the dimension for our integral is that we lose a little bit of geometric intuition.
+      For instance, <xref ref="example-a-triple-integral-over-a-rectangular-prism" text="type-global" /> is indeed calculating a "volume," but the volume in question is for a four dimensional region (the graph of <m>f(x,y,z)</m> over the rectangular prism).
+      We can only really visualize the "base" of this region, which served as our region of integration in <xref ref="example-a-triple-integral-over-a-rectangular-prism" text="type-global" />.
+      Even so, the triple integral can still tell us important things about functions of three variables.
+    </p>
+    <example xml:id="example-finding-an-average-value">
+      <title>Finding an average value</title>
+      <statement>
+        <p>
+          Find the average value of the function <m>f(x,y,z) = xyze^{-x^{2} - y^{2}}</m> over the region <m>D</m> given in <xref ref="example-a-triple-integral-over-a-rectangular-prism" text="type-global" />.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, let <m>\operatorname{Vol}(D)</m> denote the volume of <m>D</m>.
+          Then the average value of <m>f</m> over <m>D</m> is just
+          <me>\frac{\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV}{\operatorname{Vol}(D)} = \frac{\frac{3}{64}}{\sqrt{\ln2\ln4}} \approx .05</me>
+        </p>
+      </solution>
+    </example>
+    <p>
+      We can also compute triple integrals over more general regions.
+    </p>
+    <example xml:id="example-volume-using-triple-integrals">
+      <title>Volume using triple integrals</title>
+      <statement>
+        <p>
+          Find the volume of the region bounded by the cylinder <m>y = x^{2}</m> and the planes <m>z = 3-y</m> and <m>z=0</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we let <m>D</m> denote this region, then its volume is given by <m>\iiint_{D}\,dV</m>.
+          The volume is then
+          <md>
+            <mrow>\iiint_{D}\,dV &amp; = \int_{-\sqrt{3}}^{\sqrt{3}}\int_{x^{2}}^{3}\int_{0}^{3-y}\,dz\,dy\,dx </mrow>
+            <mrow> &amp; = \int_{-\sqrt{3}}^{\sqrt{3}}\int_{x^{2}}^{3} (3-y)\,dy\,dx </mrow>
+            <mrow> &amp; = \int_{-\sqrt{3}}^{\sqrt{3}}\left[3y-\frac{y^{2}}{2}\right]_{y=x^{2}}^{3}\,dx </mrow>
+            <mrow> &amp; = \int_{-\sqrt{3}}^{\sqrt{3}}\left[9 - \frac{9}{2} - 3x^{2} + \frac{x^{2}}{2}\right]\,dx </mrow>
+            <mrow> &amp; = \frac{24\sqrt{3}}{2} </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      When setting up limits for triple integrals, say using <m>dV = dx\,dy\,dz</m>, then the limits on the innermost integral are typically functions of <m>y</m> and <m>z</m>, the limits on the middle integral are functions of <m>z</m> and the limits on the outermost integral are constant.
+      We can also change the order of integration to make an integral more tractable.
+    </p>
+    <example xml:id="example-changing-the-order-of-integration">
+      <title>Changing the order of integration</title>
+      <statement>
+        <p>
+          Compute <m>\int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          This looks awful to integrate with respect to <m>y</m> first, so we'll try changing the order of integration.
+          <m>x</m> looks easiest, so let's try using <m>dV = dx\,dy\,dz</m> instead.
+          If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals.
+          So
+          <md>
+            <mrow>\int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz  &amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}\int_{z}^{4z}x^{-3/2}\sin\sqrt{yz}\,dx\,dy\,dz </mrow>
+            <mrow> &amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}\left[-2x^{-1/2}\sin\sqrt{yz}\right]_{x=z}^{4z}\,dy\,dz </mrow>
+            <mrow> &amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}z^{-1/2}\sin\sqrt{yz}\,dy\,dz </mrow>
+            <mrow> &amp; = \int_{0}^{\pi^{2}}\int_{1}^{4}z^{-1/2}\sin\sqrt{yz}\,dz\,dy </mrow>
+            <mrow> &amp; = \int_{0}^{\pi^{2}}\int_{\sqrt{y}}^{2\sqrt{y}}\frac{2}{\sqrt{y}}\sin u\,du\,dy </mrow>
+            <mrow> &amp; = -\int_{0}^{\pi^{2}}\frac{2}{\sqrt{y}}\cos u\bigg]_{u=\sqrt{y}}^{2\sqrt{y}}\,dy </mrow>
+            <mrow> &amp; = \int_{0}^{\pi^{2}}\frac{2}{\sqrt{y}}(\cos\sqrt{y} - \cos2\sqrt{y})\,dy </mrow>
+            <mrow> &amp; = 4\int_{0}^{\pi} (\cos v - \cos2v)\,dv </mrow>
+            <mrow> &amp; = 0 </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 5, 11, 13, 19, 25, 29
+    </p>
+  </section>
+  <section xml:id="section-cylindrical-coordinates">
+    <title>Triple Integrals in Cylindrical Coordinates</title>
+    <p>
+      In <xref ref="section-polar-coordinates" text="type-global" />, we saw that introducing a new coordinate system made certain double integrals much easier to work with.
+      The same idea works with triple integrals.
+      The first such system we'll look at is <term>cylindrical coordinates</term>, which are useful for computing triple integrals over cylindrical regions.
+      To convert Cartesian coordinates <m>(x,y,z)</m> into cylindrical coordinates <m>(r,\theta,z)</m>, simply replace <m>x,y</m> with polar coordinates, and use <m>dV = r\,dr\,d\theta\,dz</m>.
+      We leave <m>z</m> alone.
+    </p>
+    <example xml:id="example-computing-a-triple-integral-over-a-cylinder">
+      <title>Computing a triple integral over a cylinder</title>
+      <statement>
+        <p>
+          Let <m>D</m> be the cylinder in <m>\RR^{3}</m> with height <m>2</m> and base given by the circle of radius <m>4</m> centered at the origin, restricted to the first and second octants.
+          Let <m>f(x,y,z) = \frac{z}{1+x^{2}+y^{2}}</m>.
+          Compute <m>\iiint_{D}f(x,y,z)\,dV</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Since we're dealing with a cylinder, we'll switch to cylindrical coordinates <m>r\,dr\,d\theta\,dz</m>:
+          <md>
+            <mrow>\iiint_{D}f(x,y,z)\,dV &amp; = \int_{0}^{2}\int_{0}^{\pi}\int_{0}^{4}\frac{r}{1+r^{2}}\,dr\,d\theta\,dz </mrow>
+            <mrow> &amp; = \pi\ln17 </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-cylindrical-volume">
+      <title>Cylindrical Volume</title>
+      <statement>
+        <p>
+          Find the volume of the region below the inverted cone <m>z = 9 - 3\sqrt{x^{2} + y^{2}}</m> and in the first and second octants.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, let <m>D</m> denote the region in question.
+          Then
+          <me>D = \left\{(x,y,z) : 0\leq z\leq 9 - 3\sqrt{x^{2} + y^{2}}, 0\leq y \leq \sqrt{9 - x^{2}}, -3\leq x\leq 3\right\}</me>.
+          The graph of this region isn't too difficult to find, especially using resources such as <url href="https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/">CalcPlot3D</url>, and is given by
+          <figure xml:id="figure-inverted-cone">
+            <caption><m>z = 9 - 3\sqrt{x^{2} + y^{2}}</m></caption>
+            <interactive xml:id="interactive-inverted-cone" calcplot3d="type=z;z=9-3sqrt(x^2+y^2);visible=true;umin=-3;umax=3;vmin=-3;vmax=3;grid=30;format=normal;alpha=-1;constcol=rgb(255,0,0);view=0;contourcolor=red;fixdomain=true&amp;type=window;hsrmode=3;nomidpts=true;anaglyph=-1;center=4.184650745404618,8.764423369815555,2.3819280286365534,1;focus=0,0,0,1;up=-0.23113448217879629,-0.1508581421590715,0.9611548637406215,1;transparent=false;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=false;gridcolor=rgb(128,128,128);xmin=-3;xmax=3;ymin=-3;ymax=3;zmin=-1;zmax=10;xscale=1;yscale=1;zscale=1;zcmin=0;zcmax=9;zoom=0.307394;xscalefactor=1;yscalefactor=1;zscalefactor=1" 
+              variant="minimal" 
+              width="90%">
+              <static>
+                <image source="images/interactive-inverted-cone-preview.png" width="50%" />
+              </static>
+            </interactive>
+          </figure>
+          However, this region is much easier to describe in cylindrical coorindates:
+          <me>D = \left\{(r,\theta,z) : 0\leq z\leq 9 - 3r, 0\leq r\leq 3, 0\leq \theta\leq \pi\right\}</me>.
+
+          Hence the volume is
+          <md>
+            <mrow>\iiint_{D}\,dV \amp = \int_{0}^{\pi}\int_{0}^{3}\int_{0}^{9-3r}r\,dz\,dr\,d\theta </mrow>
+            <mrow> \amp = \int_{0}^{\pi}\int_{0}^{3}(9r - 3r^{2})\,dr\,d\theta </mrow>
+            <mrow> \amp = \int_{0}^{\pi}\left(\frac{81}{2} - 27\right)\,d\theta </mrow>
+            <mrow> \amp = \frac{27\pi}{2} </mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-finding-the-volume-of-the-unit-sphere">
+      <title>Finding the Volume of the Unit Sphere</title>
+      <statement>
+        <p>
+          Find the volume of the unit sphere; that is, the sphere of radius <m>1</m> centered at the origin.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The unit sphere is specified by the inequalities
+          <me>-\sqrt{1 - x^{2} - y^{2}} \leq z \leq \sqrt{1 - x^{2} - y^{2}}, -\sqrt{1 - x^{2}} \leq y \leq \sqrt{1 - x^{2}} \qq{and} -1\leq x\leq 1</me>.
+          It's much easier to describe this region using cylindrical coordinates:
+          <me>-\sqrt{1 - r^{2}}\leq z\leq \sqrt{1 - r^{2}}, 0\leq r\leq 1\qq{and} 0\leq \theta\leq 2\pi</me>.
+          By symmetry, the volume must be
+          <me>2\int_{0}^{2\pi}\int_{0}^{1}\int_{0}^{\sqrt{1 - r^{2}}}r\,dz\,dr\,d\theta = \frac{4}{3}\pi</me>.
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-triple-integrals-in-spherical-coordinates">
+    <title>Triple Integrals in Spherical Coordinates</title>
+    <p>
+      Although cylindrical coordinates worked just fine in <xref ref="example-finding-the-volume-of-the-unit-sphere" text="type-global" />, it makes more sense to use a coordinate system based on spheres in this case.
+      These situations call for <term>spherical coordinates</term>.
+    </p>
+    <p>
+      Just as any point <m>(x,y)</m> in <m>\mathbb{R}^{2}</m> can be represented as a point <m>(r,\theta)</m> in polar coordinates, we can represent any point <m>(x,y,z)</m> in <m>\mathbb{R}^{3}</m> using the spherical coordinates <m>(\rho, \theta,\varphi)</m>.
+      Here, <m>\rho</m> is distance from the origin, <m>\theta</m> is the angle the point makes with the <m>x</m>-axis and <m>\varphi</m> is the angle the point makes with the <m>z</m>-axis.
+      In general,
+      <me>0\leq\rho\lt\infty, 0\leq\theta\leq2\pi\qq{and} 0\leq \varphi\leq \pi</me>.
+      <m>\varphi = 0</m> corresponds to a point on the positive <m>z</m>-axis, while <m>\varphi = \pi</m> corresponds to a point on the negative <m>z</m>-axis.
+    </p>
+    <p>
+      Using triangles, we have the conversion formulas
+      <me>x = \rho\sin\varphi\cos\theta, y = \rho\sin\varphi\sin\theta\qq{and} z = \rho\cos\varphi</me>.
+      Note that
+      <me>\rho^{2} = x^{2} + y^{2} + z^{2}</me>.
+    </p>
+    <p>
+      Just as constant limits in Cartesian coordinates correspond to rectangular regions of integration, constant limits in spherical coordinates give rise to spherical regions of integration.
+    </p>
+    <example xml:id="example-sketching-a-spherical-region">
+      <title>Sketching a Spherical Region</title>
+      <statement>
+        <p>
+          Sketch the region determined by the spherical inequalities
+          <me>2\leq \rho\leq 3, 0\leq \varphi\leq \frac{\pi}{4} \qq{and} \frac{3\pi}{2}\leq \theta\leq 2\pi</me>.
+        </p>
+      </statement>
+    </example>
+    <p>
+      If we wish to compute integrals using spherical coordinates, then we must alter <m>dV</m> just as we did in <xref ref="section-cylindrical-coordinates" text="type-global" />.
+      In particular, we use
+      <me>dV = \rho^{2}\sin\varphi\,d\rho\,d\varphi\,d\theta</me>.
+    </p>
+    <example xml:id="example-volume-of-the-unit-sphere">
+      <title>Volume of the Unit Sphere</title>
+      <statement>
+        <p>
+          Find the volume of the unit sphere <m>S^{2}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The volume of <m>S^{2}</m> can be found using the triple integral <m>\iiint_{S^{2}}\,dV</m>.
+          Because of the spherical region of integration, this is best found using spherical coordinates.
+          So
+          <md>
+            <mrow>\operatorname{vol}(S^{2}) \amp = \iiint_{S^{2}}\,dV </mrow>
+            <mrow> \amp = \int_{0}^{2\pi}\int_{0}^{\pi}\int_{0}^{1}\rho^{2}\sin\varphi\,d\rho\,d\varphi\,d\theta </mrow>
+            <mrow> \amp = \frac{4\pi}{3} </mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      The integrand can also suggest a transformation to spherical coordinates.
+      In particular, integrands depending on <m>x^{2} + y^{2} + x^{2}</m> are often made easier by converting to spherical.
+    </p>
+    <example xml:id="example-average-value-inside-of-the-unit-sphere">
+      <title>Average Value Inside of the Unit Sphere</title>
+      <statement>
+        <p>
+          Let <m>f(x,y,z) = e^{-(x^{2} + y^{2} + z^{2})^{3/2}}</m>.
+          Find the average value of <m>f</m> over the unit sphere.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          By definition, the average value of <m>f</m> is given by
+          <me>\frac{1}{\operatorname{vol}(S^{2})}\iiint_{S^{2}}f(x,y,z)\,dV</me>.
+          We'll follow the same strategy we used in <xref ref="example-volume-of-the-unit-sphere" text="type-global" /> to compute this integral.
+          If we convert to spherical coordinates, we get
+          <md>
+            <mrow>\frac{3}{4\pi}\int_{0}^{2\pi}\int_{0}^{\pi}\int_{0}^{1}\rho^{2}e^{-\rho^{3}}\sin\varphi \,d\rho\,d\varphi\,d\theta \amp = \frac{3}{2}\int_{0}^{\pi}\int_{0}^{1}\rho^{2}e^{-\rho^{3}}\sin\varphi \,d\rho\,d\varphi </mrow>
+            <mrow> \amp = \frac{1}{2}\int_{0}^{\pi}\int_{-1}^{0}e^{u}\sin\varphi \,du\,d\varphi </mrow>
+            <mrow> \amp = 1 - \frac{1}{e} </mrow>
+          </md>.
+        </p>
+        <p>
+          So the average value of <m>f</m> over <m>S^{2}</m> is <m>1 - \frac{1}{e}</m>.
+        </p>
+      </solution>
+    </example>
+  </section>
+  <section xml:id="section-change-of-variables">
+    <title>Change of Variables</title>
+    <introduction>
+      <p>
+        The goal now is to determine a general method to change coordinates in multiple integrals.
+        We'll start with double integrals.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-change-of-variables-in-double-integrals">
+      <title>Change of Variables in Double Integrals</title>
+      <p>
+        Any change of coordinates involves a transformation between new variables <m>u,v</m> and the original variables <m>x,y</m>.
+        We indicate this as follows:
+        <me>x = g(u,v) \qq{and} y = h(u,v)</me>.
+        In <xref ref="section-double-integrals-in-polar-coordinates" text="type-global" />, the transformation was just
+        <me>x = g(r,\theta) = r\cos\theta \qq{and} y = h(r,\theta) = r\sin\theta</me>.
+      </p>
+      <p>
+        So the goal behind integrating with change of variables is to find relate the integral <m>\iint_{D}f(x,y)\,dA</m>, where <m>D</m> is in the <m>xy</m>-plane, to a new integral <m>\iint_{R}f(g(u,v),h(u,v))\,dA</m>, where <m>R</m> is in the <m>uv</m>-plane.
+        The main issue with such a transformation is one that we're familiar with from working with polar coordinates: <m>dA = dx\,dy</m> in the first set of coordinates is not necessarily equal to <m>du\,dv</m> in the new set of coordinates.
+        In general we'll need a scaling factor that depends on <m>u</m> and <m>v</m>.
+        As it turns out, the proper scaling factor comes from a determinant.
+      </p>
+      <definition xml:id="definition-jacobian">
+        <idx><h>Jacobian</h></idx>
+        <title>Jacobian</title>
+        <statement>
+          <p>
+            The <term>Jacobian determinant</term> or <term>Jacobian</term> of the coordinate transformation <m>x = g(u,v)</m> and <m>y = h(u,v)</m> is the quantity
+            <me>J(u,v) = \left|\begin{array}{cc} x_{u} \amp x_{v} \\ y_{u} \amp y_{v}\end{array}\right|</me>.
+          </p>
+        </statement>
+      </definition>
+      <example xml:id="example-jacobian-in-polar-coordinates">
+        <title>Jacobian in Polar Coordinates</title>
+        <statement>
+          <p>
+            Determine <m>J(r,\theta)</m> for the transformation to polar coordinates.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <md>
+              <mrow>x_{r} \amp = \cos\theta </mrow>
+              <mrow>x_{\theta} \amp = -r\sin\theta </mrow>
+              <mrow>y_{r} \amp = \sin\theta </mrow>
+              <mrow>y_{\theta} \amp = r\cos\theta </mrow>
+            </md>.
+            Hence
+            <me>J(r,\theta) = r\cos^{2}\theta + r\sin^{2}\theta = r</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        The Jacobian helps us in the following way: when making the change of variables <m>x = g(u,v), y= h(u,v)</m>, the area element <m>dA</m> becomes <m>dA = |J(u,v)|\,du\,dv</m>.
+      </p>
+      <example xml:id="example-finding-jacobian">
+        <statement>
+          <p>
+            Compute <m>J(u,v)</m> for the transformation
+            <me>u = x + 4y \qq{and} v = 3x + 2y</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We need to get <m>x</m> and <m>y</m> in terms of <m>u</m> and <m>v</m> first.
+            Since
+            <me>3u - v = 10y \qq{and} 2v - u = 5x</me>,
+            it follows that
+            <me>x = \frac{2v - u}{5} \qq{and} y = \frac{3u - v}{10}</me>.
+            Hence
+            <me>J(u,v) = -\frac{1}{10}</me>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-change-of-variables-in-two-dimensions">
+        <title>Change of Variables in Two Dimensions</title>
+        <statement>
+          <p>
+            Find the volume of the region under the surface <m>z = \sqrt{y^{2} - x^{2}}</m> and over the region <m>R</m> bounded by <m>y - x = 0, y - x = 2, y + x = 0</m>, and <m>y + x = 2</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Both the integrand and the region of integration are awful here, but if we set <m>u = y - x</m> and <m>v = y + x</m> then the limits of integration become very simple:
+            <me>0 \leq u,v \leq 2</me>.
+            See <xref ref="figure-change-of-variables-in-two-dimensions" text="type-global" />.
+            The integrand gets better too: <m>\sqrt{y^{2} - x^{2}} = \sqrt{uv}</m>.
+            So we can write
+            <me>\iint_{R}\sqrt{y^{2} - x^{2}}\,dA = \int_{0}^{2}\int_{0}^{2}\sqrt{uv}|J(u,v)|\,du\,dv</me>.
+            Essentially, we're moving from integrating over a diamond in the <m>xy</m>-plane to integrating over a square in the <m>uv</m>-plane.
+            If we can find <m>J(u,v)</m>, we can start computing the integral.
+          </p>
+          <figure xml:id="figure-change-of-variables-in-two-dimensions">
+            <caption>The region of integration in the <m>xy</m>-plane and in the <m>uv</m>-plane.</caption>
+            <sidebyside>
+              <figure>
+                <caption></caption>
+                <image>
+                  <latex-image><![CDATA[
+                    \begin{tikzpicture}
+                    \begin{axis}[
+                        mystyle,
+                        xmin=-1.5,
+                        xmax=1.5,
+                        xtick={-1,...,1},
+                        minor xtick={-1,...,1},
+                        ytick={-1,0,...,2},
+                        minor ytick={-1,0,...,2},
+                        ymin=-.5,
+                        ymax=2.5,
+                        samples=100,
+                        ]
+                        \addplot[myplot, name path=lr] ({x},{x});     % lower left part of diamond
+                        \addplot[myplot, name path=ul] ({x},{x+2});   % upper left
+                        \addplot[myplot, name path=ll] ({x},{-x});
+                        \addplot[myplot, name path=ur] ({x},{-x+2});
+
+                        \addplot[fill=blue, fill opacity=0.05] fill between[of=ll and ul, soft clip={domain=-1:0}];
+                        \addplot[fill=blue, fill opacity=0.05] fill between[of=lr and ur, soft clip={domain=0:1}];
+
+                        \node at (axis cs: .21, 1) {$R$};
+                    \end{axis}
+                    \end{tikzpicture}
+                    ]]>
+                  </latex-image>
+                </image>
+              </figure>
+              <figure>
+                <caption></caption>
+                <image>
+                  <latex-image><![CDATA[
+                    \begin{tikzpicture}
+                    \begin{axis}[
+                        mystyle,
+                        xlabel={$u$},
+                        ylabel={$v$},
+                        xmin=-.5,
+                        xmax=2.5,
+                        xtick={0,...,2},
+                        minor xtick={0,...,2},
+                        ytick={0,...,2},
+                        minor ytick={0,...,2},
+                        ymin=-.5,
+                        ymax=2.5,
+                        samples=100,
+                        ]
+                        \addplot[myplot, name path=lower, domain=0:2] ({x},{0});
+                        \addplot[myplot, name path=upper, domain=0:2] ({x},{2});
+                        \addplot[myplot, name path=left, domain=0:2] ({0},{x});
+                        \addplot[myplot, name path=right, domain=0:2] ({2},{x});
+
+                        \addplot[fill=blue, fill opacity=0.05] fill between[of=lower and upper, soft clip={domain=0:2}];
+                    \end{axis}
+                    \end{tikzpicture}
+                    ]]>
+                  </latex-image>
+                </image>
+              </figure>
+            </sidebyside>
+          </figure>
+          <p>
+            To find <m>J(u,v)</m>, we need to get <m>x,y</m> in terms of <m>u,v</m> in order to use <xref ref="definition-jacobian" text="type-global" />.
+            Since <m>u + v = 2y</m> and <m>u - v = -2x</m>, we get
+            <me>x = \frac{v - u}{2} \qq{and} y = \frac{v + u}{2}</me>.
+            Hence
+            <me>J(u,v) = \left|\begin{array}{cc}-\frac{1}{2} \amp \frac{1}{2} \\ \frac{1}{2} \amp \frac{1}{2}\end{array}\right| = -\frac{1}{2}</me>,
+            and we have
+            <md>
+              <mrow>\iint_{R}\sqrt{y^{2} - x^{2}}\,dA \amp = \frac{1}{2}\int_{0}^{2}\int_{0}^{2}\sqrt{uv}\,du\,dv </mrow>
+              <mrow> \amp = \frac{1}{2}\left(\int_{0}^{2}\sqrt{u}\,du\right)^{2} </mrow>
+              <mrow> \amp = \frac{16}{9} </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-integrating-between-hyperbolas">
+          <title>Integrating Between Hyperbolas</title>
+          <statement>
+            <p>
+              Compute <m>\iint_{R}e^{xy}\,dA</m> where <m>R</m> is the region bounded between the curves <m>xy = 1</m>, <m>xy = 4</m>, <m>y = x</m> and <m>y = 3x</m> in the first quadrant.
+            </p>
+        </statement>
+        <solution>
+          <p>
+            The integrand doesn't look too bad at first, but the region of integration would be very annoying here:
+          </p>
+          <figure xml:id="figure-change-of-variables-hyperbola-region">
+            <caption></caption>
+            <image xml:id="image-change-of-variables-hyperbola-region">
+              <latex-image><![CDATA[
+                \begin{tikzpicture}
+                  \begin{axis}[%
+                    mystyle,
+                    xmin = -1.1,
+                    xmax = 4.1,
+                    ymin = -1.1,
+                    ymax = 4.1,
+                  ]
+                    \addplot[myplot, name path=ll, domain=.1:3.7] {1/x}; % lower left part of region
+                    \addlegendentry{$xy = 1$};
+                    \addplot[myplot, name path=ur, dashdotted, domain=.1:3.7] {4/x};
+                    \addlegendentry{$xy = 4$};
+                    \addplot[myplot, name path=lr, red, domain=-.6:3.7] {x};
+                    \addlegendentry{$y = x$};
+                    \addplot[myplot, name path=ul, red, dashdotted, domain=-.3:1.3] {3*x};
+                    \addlegendentry{$y = 3x$};
+
+                    \addplot[fill=blue, fill opacity=0.05] fill between[of=ll and ul, soft clip={domain=.57735:1}];
+                    \addplot[fill=blue, fill opacity=0.05] fill between[of=lr and ul, soft clip={domain=1:1.1547}];
+                    \addplot[fill=blue, fill opacity=0.05] fill between[of=lr and ur, soft clip={domain=1.1547:2}];
+
+                    \node at (axis cs: 1.25, 2) {$R$};
+                  \end{axis}
+                \end{tikzpicture}]]>
+              </latex-image>
+            </image>
+          </figure>
+          <p>
+            To deal with this, we'll use the change of variables <m>u = xy</m> and <m>v = \frac{y}{x}</m>.
+            The corresponding limits are <m>1\leq u\leq 4</m> and <m>1 \leq v\leq 3</m>, and our integral becomes
+            <me>\iint_{R} e^{xy}\,dA = \int_{1}^{3}\int_{1}^{4}e^{u}\abs{J(u,v)}\,du\,dv</me>.
+            We also get that the Jacobian is <m>J(u,v) = \frac{1}{2v}</m>.
+            Therefore
+            <md>
+              <mrow>\iint_{R}e^{xy}\,dA \amp = \int_{1}^{3}\int_{1}^{4}\frac{1}{2v}e^{u}\,du\,dv </mrow>
+              <mrow> \amp = \frac{e^{4} - e}{2}\int_{1}^{3}\frac{1}{v}\,dv </mrow>
+              <mrow> \amp = \frac{e^{4} - e}{2}\ln 3 </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-change">
+        <title>Change of Variables in Triple Integrals</title>
+        <p>
+          What we did in <xref ref="subsection-change-of-variables-in-double-integrals" text="type-global" /> carries over directly to triple integrals and beyond.
+          We just need to compute <m>3\times3</m> determinants instead of <m>2\times2</m>.
+        </p>
+        <example xml:id="example-volume-of-a-region-between-planes">
+            <title>Volume of a Region Between Planes</title>
+            <statement>
+              <p>
+                Find the volume of the region bounded by the planes <m>y - 2x = 0</m>, <m>y - 2x = 1</m>, <m>z - 3y = 0</m>, <m>z - 3y = 1</m>, <m>z - 4x = 0</m> and <m>z - 4x = 3</m>.
+              </p>
+          </statement>
+          <solution>
+            <p>
+              If we let <m>D</m> denote the region we're trying to find the volume of, then the volume of this region is just
+              <md>
+                <mrow>\iiint_{D}\,dV \amp = \int_{0}^{3}\int_{0}^{1}\int_{0}^{1}\abs{J(u,v,w)}\,du\,dv\,dw </mrow>
+                <mrow> \amp = \frac{1}{2}\int_{0}^{3}\int_{0}^{1}\int_{0}^{1}\,du\,dv\,dw </mrow>
+              </md>,
+              where <m>u = y - 2x</m>, <m>v = z - 3y</m> and <m>w = z - 4x</m>.
+            </p>
+          </solution>
+        </example>
+        <example xml:id="example-transforming-to-a-spherical-region">
+            <title>Transforming to a Spherical Region</title>
+            <statement>
+              <p>
+                Evaluate
+                <me>\iiint_{D}\abs{xyz}\,dV</me>
+                where
+                <me>D = \set{(x,y,z) : x^{2} + \frac{y^{2}}{9} + \frac{z^{2}}{4} \leq 1}</me>.
+              </p>
+              <aside>
+                <p>
+                  Problem adapted from Exercise 21 on page 1137 in <em>Thomas' Calculus</em>, <m>11^{\text{th}}</m> edition.
+                </p>
+              </aside>
+          </statement>
+          <solution>
+            <p>
+              The region of integration is an ellipsoid, but if we can change this to a sphere then we can use spherical coordinates to help us.
+              A quick fix is to set
+              <me>u = x, v = \frac{y}{3} \qq{and} w = \frac{z}{2}</me>.
+              Then these new variables satisfy
+              <me>u^{2} + v^{2} + w^{2} \leq 1</me>
+              and so the corresponding region <m>S</m> in <m>uvw</m>-space is the unit sphere.
+            </p>
+            <p>
+              Now we need to find <m>J(u,v,w)</m>.
+              Thankfully, this is straightforward and we get <m>\abs{J(u,v,w)} = \frac{1}{6}</m>.
+              Therefore
+              <md>
+                <mrow>\iiint_{D}\abs{xyz}\,dV \amp = \iiint_{S}\abs{uvw}\,du\,dv\,dw </mrow>
+                <mrow> \amp = 8\iiint_{S'}\abs{uvw}\,du\,dv\,dw </mrow>
+                <mrow> \amp = 8\int_{0}^{\frac{\pi}{2}}\int_{0}^{\frac{\pi}{2}}\int_{0}^{1}(\rho^{3}\sin^{2}\varphi\cos\varphi\sin\theta\cos\theta)\rho^{2}\sin\varphi\,d\rho\,d\varphi\,d\theta </mrow>
+                <mrow> \amp = 8\int_{0}^{\frac{\pi}{2}}\int_{0}^{\frac{\pi}{2}}\int_{0}^{1}\rho^{5}\sin^{3}\varphi\cos\varphi\sin\theta\cos\theta\,d\rho\,d\varphi\,d\theta</mrow>
+              </md>,
+              which we can actually integrate without too much trouble.
+            </p>
+          </solution>
+        </example>
+    </subsection>
+  </section>
+</chapter>

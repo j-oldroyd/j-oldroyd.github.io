@@ -1,0 +1,1762 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="vector-calculus" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Vector Calculus</title>
+  <introduction>
+    <p>
+      In this chapter, we reach the culmination of our work in <xref first="vectors-space-geometry" last="multiple-integrals" text="global">Chapters</xref>, obtaining a unified picture of calculus in higher dimensions.
+    </p>
+  </introduction>
+  <section xml:id="section-vector-fields">
+    <title>Vector Fields</title>
+    <introduction>
+      <p>
+        Consider the function <m>f(x,y) = \frac{1}{2}(x^{2} + y^{2})</m>.
+        The gradient of this function is <m>\grad f = \dotprod{x,y}</m>.
+        We can view the gradient as a <em>function</em> that assigns the vector <m>\grad f(x,y)</m> to each point <m>(x,y)</m> in the plane.
+        We often draw these vectors so that they're rescaled or normalized.
+        <figure xml:id="figure-the-gradient-field-for--grad-f-">
+          <caption></caption>
+          <sidebyside>
+            <figure>
+              <caption>Rescaled gradient field for <m>\grad f = \dotprod{x,y}</m>.</caption>
+              <image xml:id="image-the-gradient-field-for--grad-f-">
+                <asymptote>
+                  import graph;
+                  import slopefield;
+                  import fontsize;
+                  defaultpen(fontsize(9pt));
+                  size(200);
+                  real xmin=-2, xmax=2;
+                  real ymin=-2, ymax=2;
+                  real eps = .2;
+
+                  pair a=(-2,-2);
+                  pair b=(2,2);
+
+                  //Define gradient field
+                  path vector(pair z) {return (0,0)--(z.x,z.y);}
+
+                  add(vectorfield(vector,a,b,20,deepblue+0.4bp));
+
+                  //plot annotations
+                  arrowbar axisarrow = Arrow(TeXHead);
+                  Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                  Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                  xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                  yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+                  // "Nice" labeling for origin.
+                  label("$0$", (0,0), NW);
+                </asymptote>
+              </image>
+            </figure>
+            <figure>
+              <caption>Normalized gradient field <m>\frac{\grad f}{\norm{\grad f}}</m>.</caption>
+              <image>
+                <asymptote>
+                  import graph;
+                  import slopefield;
+                  import fontsize;
+                  defaultpen(fontsize(9pt));
+                  size(200);
+                  real xmin=-2, xmax=2;
+                  real ymin=-2, ymax=2;
+                  real eps = .2;
+
+                  pair a=(-2,-2);
+                  pair b=(2,2);
+
+                  //Define gradient field
+                  path vector(pair z) {return (0,0)--unit((z.x,z.y));}
+
+                  add(vectorfield(vector,a,b,20,deepblue+0.4bp));
+
+                  //plot annotations
+                  arrowbar axisarrow = Arrow(TeXHead);
+                  Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                  Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                  xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                  yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+                  // "Nice" labeling for origin.
+                  label("$0$", (0,0), NW);
+                </asymptote>
+              </image>
+            </figure>
+          </sidebyside>
+        </figure>
+        Such functions are the main object of this section.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-vector-fields-in--rr-2-m-and--rr-3-m-">
+      <title>Vector Fields in <m>\RR^{2}</m> and <m>\RR^{3}</m></title>
+      <definition xml:id="definition-vector-fields">
+        <idx><h>vector fields</h></idx>
+        <title>Vector Fields</title>
+        <statement>
+          <p>
+            A <term>vector field</term> is a function <m>\vv{F}</m> that assigns vectors to points.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        A vector field on <m>\RR^{2}</m> would look like
+        <me>\vv{F}(x,y) = \dotprod{P(x,y), Q(x,y)} = P(x,y)\vv{i} + Q(x,y)\vv{j} = P\vv{i} + Q\vv{j}</me>.
+        Similarly, a vector field on <m>\RR^{3}</m> would be
+        <me>\vb{F}(x,y,z) = P\vb{i} + Q\vb{j} + R\vb{k}</me>.
+      </p>
+      <example xml:id="example-sketching-a-vector-field">
+        <title>Sketching a Vector Field</title>
+        <statement>
+          <p>
+            Sketch <m>\vb{F} = \dotprod{x, e^{-y}}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Our sketch looks like
+            <figure xml:id="figure---vb-f-x-vb-i-e-y-vb-j-m">
+              <caption><m>\vb{F} = x\vb{i} + e^{-y}\vb{j}</m></caption>
+              <image xml:id="image---vb-f-x-vb-i-e-y-vb-j-m">
+                <asymptote><![CDATA[
+                  import graph;
+                  import slopefield;
+                  import fontsize;
+                  defaultpen(fontsize(9pt));
+                  size(200);
+                  real xmin=-2, xmax=2;
+                  real ymin=-2, ymax=2;
+                  real eps = .2;
+
+                  pair a=(-2,-2);
+                  pair b=(2,2);
+
+                  //Define gradient field
+                  path vector(pair z) {return (0,0)--(z.x, exp(-z.y));}
+
+                  add(vectorfield(vector,a,b,20,deepblue+0.4bp));
+
+                  //plot annotations
+                  arrowbar axisarrow = Arrow(TeXHead);
+                  Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                  Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                  xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                  yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+                  // "Nice" labeling for origin.
+                  label("$0$", (0,0), NW);]]>
+                </asymptote>
+              </image>
+            </figure>
+            Note that the vectors in <xref ref="figure---vb-f-x-vb-i-e-y-vb-j-m" text="type-global" /> get extremely small as <m>y</m> increases, so it may be better to represent the vector field using normalized vectors instead.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-a-vector-field-in--rr-3-m-">
+        <title>A Vector Field in <m>\RR^{3}</m></title>
+        <statement>
+          <p>
+            Sketch
+            <me>\vb{F} = \dotprod{-y, x, z}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            An interactive sketch from <url href="https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/">CalcPlot3D</url> is given below:
+            <figure xml:id="figure-a-vector-field-in-xyz--space">
+              <caption>A vector field in <m>xyz</m>-space.</caption>
+              <interactive xml:id="interactive-vector-field-3d" calcplot3d="type=z;z=7xy/e^(x^2+y^2);visible=false;umin=-2;umax=2;vmin=-2;vmax=2;grid=30;format=normal;alpha=-1;constcol=rgb(255,0,0);view=0;contourcolor=red;fixdomain=false&amp;type=vectorfield;vectorfield=vf;m=-y;n=x;p=z;visible=true;scale=4;nx=9;ny=9;nz=6;mode=0;twod=false;constcol=false;color=rgb(0,0,255);norm=false;desystem=false&amp;type=slider;slider=t;value=0;steps=30;pmin=0;pmax=10;repeat=true;bounce=false;waittime=1;careful=false;noanimate=false;name=-1&amp;type=window;hsrmode=3;nomidpts=true;anaglyph=-1;center=7.596651715730415,6.498258063791084,0.2520413582230838,1;focus=0,0,0,1;up=0.028603639936775938,0.04150616312230267,0.9987287270351407,1;transparent=false;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=false;gridcolor=rgb(128,128,128);xmin=-2;xmax=2;ymin=-2;ymax=2;zmin=-2;zmax=2;xscale=1;yscale=1;zscale=1;zcmin=-4;zcmax=4;zoom=1.245333;xscalefactor=1;yscalefactor=1;zscalefactor=1" variant="minimal" width="90%">
+                <static>
+                  <image source="images/interactive-vector-field-3d-preview.png" width="50%"/>
+                </static>
+              </interactive>
+            </figure>
+          </p>
+          <p>
+            The vector field rotates about the <m>z</m>-axis in the counterclockwise direction, flowing upwards if <m>z \gt 0</m> and flowing downwards if <m>z \lt 0</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        A <term>velocity field</term> is just a vector field that assigns velocities to points.
+      </p>
+      <example xml:id="example-particle-in-velocity-field">
+        <title>Particle Trapped in a Velocity Field</title>
+        <statement>
+          <p>
+            At time <m>t = 0</m> seconds, a particle is at position <m>(1,2)</m>.
+            The particle is within the velocity field
+            <me>\vb{V}(x,y) = \frac{\dotprod{1,1}}{\sqrt{x^{2} + y^{2}}}</me>.
+            Estimate the particle's position at <m>t = 0.5</m> seconds.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since the particle starts at <m>\dotprod{1,2}</m>, its velocity at time <m>t = 0</m> is given by
+            <me>\vb{V}(1,2) = \frac{1}{\sqrt{5}}\dotprod{1,1}</me>.
+            Hence the displacement of the particle from <m>t = 0</m> to <m>t = 0.5</m> seconds should be approximately
+            <me>0.5\vb{V}(1,2) = \frac{1}{2\sqrt{5}}\dotprod{1,1}</me>,
+            which gives the new position as roughly
+            <me>\dotprod{1,2} + \frac{1}{2\sqrt{5}}\dotprod{1,1}</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        In <xref ref="example-particle-in-velocity-field" text="type-global" />, we're actually attempting to approximate the <term>integral curve</term> for <m>\vb{V}</m> that passes through <m>(1,2)</m>.
+        For velocity fields these are also known as <term>streamlines</term>, while for magnetic fields these can be known as <term>field lines</term>.
+        For a velocity field, streamlines represent the valid paths a particle subject to the field can travel.
+        By sketching <m>\vb{V}</m>, we see that every streamline of <m>\vb{V}</m> is parallel to <m>y = x</m>.
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-gradient-fields-and-potential-functions">
+      <title>Gradient Fields and Potential Functions</title>
+        <p>
+          Recall that the gradient of a function <m>f(x,y)</m> is a kind of derivative of that function.
+          Hence we can view the original scalar function <m>f(x,y)</m>, also known as the <term>potential function</term>, as a kind of antiderivative for the gradient <m>\grad f</m>.
+          Since the gradient <m>\grad f</m> is also a vector field, called the <term>gradient field</term>, this means that vector fields that have a corresponding potential function should obey familiar rules from calculus.
+          In particular, they obey a version of the Fundamental Theorem of Calculus (see <xref ref="section-the-fundamental-theorem-for-line-integrals" text="type-global" />).
+        </p>
+        <example xml:id="example-gradient-field-for-gravitational-potential">
+          <title>Gradient Field for Gravitational Potential</title>
+          <statement>
+            <p>
+              Find the gradient field associated to
+              <me>\varphi(x,y,z) = \frac{mMG}{\sqrt{x^{2} + y^{2} + z^{2}}}</me>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              We can find the gradient field right away:
+              <me>\grad\varphi = \frac{-mMG}{(x^{2} + y^{2} + z^{2})^{3/2}}\dotprod{x,y,z}</me>.
+            </p>
+          </solution>
+        </example>
+        <p>
+          A vector field <m>\vb{F}</m> is <term>conservative</term> if it can be written as the gradient of some corresponding potential function <m>\varphi</m>, that is, <m>\vb{F} = \grad\varphi</m>.
+          In physics, the convention is often written <m>\vb{F} = -\grad\varphi</m>.
+        </p>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 3, 5, 7, 11, 13, 21, 31
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-line-integrals">
+    <title>Line Integrals</title>
+    <introduction>
+      <p>
+        In this section we move on to computing integrals over curves in <m>\RR^{2}</m> and <m>\RR^{3}</m>.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-scalar-line-integrals">
+      <title>Scalar Line Integrals</title>
+      <p>
+        Suppose we wish to find the mass of a wire given by a curve <m>C</m> in the <m>xy</m>-plane.
+        If the density is a constant <m>\rho</m> then this is simple: the mass is just <m>\rho L</m> where <m>L</m> denotes the length of the wire.
+      </p>
+      <p>
+        Now suppose that the density varies, and is now a function <m>\rho(x,y)</m>.
+        Then we can estimate the mass of the wire by chopping the wire into <m>k</m> smaller segments, each of length <m>\Delta s</m>, choosing points <m>(x_{i},y_{i})</m> from each segment, and then computing
+        <me>\sum_{j=1}^{k}\rho(x_{j}, y_{j})\Delta s</me>.
+        If we send <m>\Delta s\to 0</m>the approximation becomes exact, and defines the <term>scalar line integral</term> of <m>\rho</m> along <m>C</m>.
+      </p>
+      <definition xml:id="definition-scalar-line-integral">
+          <idx><h>line integrals</h><h>scalar</h></idx>
+          <title>Scalar Line Integral</title>
+          <statement>
+            <p>
+              Suppose that <m>C</m> is a smooth curve in <m>\RR^{2}</m> and that the function <m>f(x,y)</m> is continuous on <m>C</m>.
+              The scalar line integral of <m>f</m> along <m>C</m> is the number <m>\int_{C}f(x,y)\,ds</m> defined to be
+              <me>\int_{C}f(x,y)\,ds = \lim_{\Delta s\to 0}\sum_{j=1}^{k}f(x_{j},y_{j})\Delta s</me>.
+            </p>
+            <aside>
+              <p>
+                An analogous definition holds for curves in <m>\RR^{3}</m>.
+                We can also replace the assumption that <m>C</m> is smooth with the assumption that <m>C</m> is <em>rectifiable</em>, which (roughly) means it has a well-defined length.
+              </p>
+            </aside>
+          </statement>
+      </definition>
+      <p>
+        Geometrically, <m>\int_{C}f(x,y)\,ds</m> represents the area under <m>z = f(x,y)</m> and above <m>C</m>.
+      </p>
+      <p>
+        If <m>C</m> is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral.
+        Note that <m>ds</m> can be viewed as representing an <em>infinitesimal length</em> along the curve <m>C</m>.
+        If <m>C</m> is traced out by the parametric equations
+        <md>
+          <mrow>x \amp = x(t) </mrow>
+          <mrow>y \amp = y(t) </mrow>
+          <mrow>a \amp \leq t\leq b </mrow>
+        </md>,
+        then the length of <m>C</m> from <m>a</m> to <m>t</m> is given by the <em>arc length function</em>
+        <me>s(t) = \int_{a}^{t}\sqrt{x'(u)^{2} + y'(u)^{2}}\,du</me>.
+        See <xref ref="subsection-arc-length-parametric-curves" text="type-global" /> and <xref ref="subsection-arc-length" text="type-global" />.
+        Thus
+        <me>\dv{s}{t} = \sqrt{x'(t)^{2} + y'(t)^{2}}</me>,
+        and we can write
+        <me>\int_{C}f(x,y)\,ds = \int_{a}^{b}f(x(t),y(t))\sqrt{x'(t)^{2} + y'(t)^{2}}\,dt</me>.
+      </p>
+      <p>
+        If we view <m>C</m> as being traced out by a vector function <m>\vb{r}(t), a\leq t\leq b</m>, then we can write this formula even more compactly:
+        <me>\int_{C}f(x,y)\,ds = \int_{a}^{b}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt</me>.
+      </p>
+      <example xml:id="example-computing-a-scalar-line-integral">
+        <title>Computing a Scalar Line Integral</title>
+        <statement>
+          <p>
+            Compute <m>\int_{C}(xy)^{1/3}\,ds</m>, where <m>C</m> is the segment of the parabola <m>y = x^{2}</m> from <m>x = 0</m> to <m>x = 1</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The curve <m>C</m> is traced out by the vector function <m>\vb{r}(t) = \dotprod{t,t^{2}}</m> for <m>0\leq t\leq 1</m>.
+            Therefore
+            <md>
+              <mrow>\int_{C}(xy)^{1/3}\,ds \amp = \int_{0}^{1} t\sqrt{1 + 4t^{2}}\,dt </mrow>
+              <mrow> \amp = \frac{1}{8}\int_{1}^{5}\sqrt{u}\,du </mrow>
+              <mrow> \amp = \frac{5^{3/2} - 1}{12} </mrow>
+            </md>
+          </p>
+        </solution>
+      </example>
+      <p>
+        Line integrals along piecewise smooth curves can be found without too much trouble.
+      </p>
+      <example xml:id="example-integrating-along-line-segments">
+        <title>Integrating Along Line Segments</title>
+        <statement>
+          <p>
+            Find <m>\int_{C}(3x - 3y)\,ds</m> where <m>C</m> denotes the line segment from <m>(-1,0)</m> to <m>(0,1)</m> followed by the segment from <m>(0,1)</m> to <m>(1,0)</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We find this by breaking <m>C</m> down as the union of two smooth curves <m>C_{1}</m> and <m>C_{2}</m>, where
+            <md>
+              <mrow>C_{1}:\vb{r}_{1}(t) \amp = (1-t)\dotprod{-1,0} + t\dotprod{0,1}, 0\leq t\leq 1 </mrow>
+              <mrow>C_{2}:\vb{r}_{2}(t) \amp = (1-t)\dotprod{0,1} + t\dotprod{1,0} </mrow>
+            </md>
+            Then
+            <md>
+              <mrow>\int_{C}(2x - 3y)\,ds \amp = \int_{C_{1}}(2x - 3y)\,ds + \int_{C_{2}}(2x - 3y)\,ds </mrow>
+              <mrow> \amp = \int_{0}^{1}\left[(2t - 2 - 3t) + (2t - 3 + 3t)\right]\sqrt{2}\,dt </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can also compute scalar line integrals in <m>\RR^{3}</m>.
+      </p>
+      <example xml:id="example-average-value-on-a-circle">
+        <title>Average Value on a Circle</title>
+        <statement>
+          <p>
+            Let <m>f(x,y,z) = x^{2} + y^{2} - 2z^{2}</m> and let
+            <me>C:\vb{r}(t) = \dotprod{5\sin t,3\cos t, 4\cos t}, 0\leq t\leq 2\pi</me>.
+            Find the average value of <m>f</m> on <m>C</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The average value of <m>f</m> on <m>C</m> is given by
+            <me>\frac{1}{\operatorname{length}(C)}\int_{C}f(x,y,z)\,ds</me>
+            where
+            <md>
+              <mrow>\operatorname{length}(C) \amp = \int_{C}\,ds </mrow>
+              <mrow> \amp = 10\pi </mrow>
+            </md>
+            and
+            <md>
+              <mrow>\int_{C}f(x,y,z)\,ds \amp = \int_{0}^{2\pi}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt </mrow>
+              <mrow> \amp = 5\int_{0}^{2\pi}(25\sin^{2}t + 9\cos^{2}t - 32\cos^{2}t)\,dt </mrow>
+              <mrow> \amp = 5\int_{0}^{2\pi}(25 - 48\cos^{2}t)\,dt</mrow>
+              <mrow> \amp = 10\pi </mrow>
+            </md>.
+            Therefore <m>f(x,y,z)</m> has an average value of <m>1</m> on <m>C</m>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-vector-field-line-integrals">
+      <title>Vector Field Line Integrals</title>
+      <p>
+        Suppose we have a <em>force field</em> <m>\vb{F}</m> in <m>\RR^{2}</m> and some particle that is acted upon by the force.
+        The particle has a trajectory given by a curve <m>C: \vb{r}(t), 0\leq t\leq 1</m>.
+        <figure xml:id="figure-trajectory-in-a-force-field">
+          <caption>Trajectory in a force field.</caption>
+          <image xml:id="image-trajectory-in-a-force-field">
+            <asymptote>
+              import graph;
+              import fontsize;
+              size(200);
+              defaultpen(fontsize(9pt));
+
+
+              real xmin=-2, xmax=2;
+              real ymin=-2, ymax=2;
+              real eps=.2;
+
+              //plot annotations
+              arrowbar axisarrow = Arrow(TeXHead);
+              Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+              Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+              //define and add vector field
+              pair a=(-2,-2);
+              pair b=(2,2);
+              path vector(pair z) {return (0,0)--(z.x + cos(z.y), 2 + 3*exp(-z.y**2));}
+              add(vectorfield(vector,a,b,10,deepblue+0.4bp));
+
+              //define and add curve
+              pair f(real t) {
+                return (t*cos(t), exp(-t**3));
+              }
+              path curveC = graph(f, 0, 2, operator ..); // "operator .." is for bezier; 0≤t≤2
+              Label L = Label("$C$", position=Relative(0.25), align=E);
+              draw(curveC, black+0.6bp, L = L, Arrow(arrowhead = SimpleHead,position=Relative(0.45)));
+
+              // Label beginning and end
+              dot(f(0));
+              dot(f(2));
+              Label Lbegin = Label("$t = 0$", position=Relative(0), align=NE);
+              Label Lend = Label("$t = 1$", position=Relative(1), align=2N);
+              draw(f(0),L=Lbegin);
+              draw(f(2), L=Lend);
+
+
+              //draw axes
+              xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+              yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+              // "Nice" labeling for origin.
+              label("$0$", (0,0), NW);
+            </asymptote>
+          </image>
+        </figure>
+      </p>
+      <p>
+        We want to determine how the trajectory of the particle aligns with the forcefield <m>\vb{F}</m>.
+        We can do this by picking an arbitrary point along <m>C</m>, finding the unit tangent <m>\vb{T}</m> at this point, and then comparing the direction of <m>\vb{T}</m> and that of <m>\vb{F}</m> by computing the dot product <m>\vb{F}\cdot\vb{T}</m>.
+        This is a measure of how <m>\vb{F}</m> and <m>C</m> align at a specific point, and integrating this along <m>C</m> should tell us how <m>C</m> and <m>\vb{F}</m> align overall.
+      </p>
+      <definition xml:id="definition-line-integral-of-a-vector-field">
+        <idx><h>line integrals</h><h>vector fields</h></idx>
+        <title>Line Integral of a Vector Field</title>
+        <statement>
+          <p>
+            Let <m>C</m> denote a smooth curve and let <m>\vb{F}</m> be a vector field continuous on <m>C</m>.
+            Then we define the <term>line integral of <m>\vb{F}</m> over <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+          </p>
+          <aside>
+            <p>
+              This integral is also sometimes called the <term>circulation integral</term> of <m>\vb{F}</m> along <m>C</m>.
+            </p>
+          </aside>
+        </statement>
+      </definition>
+      <p>
+        To find line integrals of vector fields, we proceed as follows.
+        Suppose that <m>C:\vb{r}(t), a\leq t\leq b</m>.
+        Then
+        <md>
+          <mrow>\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\frac{\vb{r}'(t)}{\norm{\vb{r}'(t)}}\norm{\vb{r}'(t)}\,dt </mrow>
+          <mrow> \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\vb{r}'(t)\,dt </mrow>
+        </md>.
+        We can also write this as
+        <me>\int_{a}^{b}\vb{F}\cdot d\vb{r} \qq{or} \int_{a}^{b} P\,dx + Q\,dy</me>,
+        assuming that <m>\vb{F} = \dotprod{P,Q}</m>.
+      </p>
+      <p>
+        In addition to measuring how well <m>C</m> and <m>\vb{F}</m> align, vector field line integrals can also represent work done.
+      </p>
+      <example xml:id="example-flow-along-a-circle">
+        <title>Flow Along a Circle</title>
+        <statement>
+          <p>
+            Let <m>C</m> denote the segment of the parabola <m>y = \cos x</m> traversed once from <m>x = -\frac{\pi}{2}</m> to <m>x = \frac{\pi}{2}</m>, and let
+            <me>\vb{F} = \dotprod{y^{2}, -x}</me>.
+            Does <m>\vb{F}</m> tend to flow with or against <m>C</m>?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we graph <m>\vb{F}</m> and <m>C</m>, we get the following:
+            <figure xml:id="figure-flow-over-cosine-">
+              <caption>Flow over <m>y = \cos x</m>.</caption>
+              <image xml:id="image-flow-over-cosine-">
+                <asymptote>
+                  import graph;
+                  import fontsize;
+                  size(200);
+                  defaultpen(fontsize(9pt));
+
+
+                  real xmin=-2, xmax=2;
+                  real ymin=-2, ymax=2;
+                  real eps=.2;
+
+                  //plot annotations
+                  arrowbar axisarrow = Arrow(TeXHead);
+                  Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                  Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                  //define and add vector field
+                  pair a=(-2,-2);
+                  pair b=(2,2);
+                  path vector(pair z) {return (0,0)--(z.y**2, -z.x);}
+                  add(vectorfield(vector,a,b,10,deepblue+0.4bp));
+
+                  //define and add curve
+                  pair f(real t) {
+                    return (t, cos(t));
+                  }
+                  path curveC = graph(f, -pi/2, pi/2, operator ..); // "operator .." is for bezier; 0≤t≤2π
+                  Label L = Label("$C$", position=Relative(0.25), align=NW);
+                  draw(curveC, black+0.6bp, L = L, Arrow(arrowhead = SimpleHead,position=Relative(0.25)));
+                  add(arrow(curveC,arrowhead = SimpleHead,position=Relative(.75)));
+
+                  //draw axes
+                  xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                  yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+                  // "Nice" labeling for origin.
+                  label("$0$", (0,0), NW);
+                </asymptote>
+              </image>
+            </figure>
+          </p>
+          <p>
+            <xref ref="figure-flow-over-cosine-" text="type-global" /> suggests that <m>\vb{F}</m> flows with <m>C</m>, and we can verify this by computing <m>\int_{C}\vb{F}\cdot d\vb{r}</m>:
+            <md>
+              <mrow>\int_{C}\vb{F}\cdot d\vb{r} \amp = \int_{-\pi/2}^{\pi/2} \dotprod{\cos^{2}t, -t}\cdot\dotprod{1,-\sin t}\,dt</mrow>
+              <mrow> \amp = \int_{-\pi/2}^{\pi/2} \brackets{\cos^{2}t + t\sin t}\,dt</mrow>
+              <mrow> \amp = \int_{-\pi/2}^{\pi/2} \brackets{ \frac{1}{2}\parens{1 + \cos 2t} + t\sin t}\,dt </mrow>
+              <mrow> \amp = \brackets{\frac{1}{2}\parens{ t + \frac{1}{2}\sin 2t} - t\cos t + \sin t}_{-\pi/2}^{\pi/2} </mrow>
+              <mrow> \amp = \frac{\pi}{2} + 2 </mrow>
+            </md>.
+            Since the result is positive, this tells us that <m>\vb{F}</m> tends to flow with <m>C</m>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-a-nonconservative-force">
+        <title>A Nonconservative Force</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \dotprod{-y, x}</m> denote a force field.
+            Is the force <m>\vb{F}</m> conservative?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Here we are using the physical definition of a conservative force, namely that the work done must be <em>path independent</em>.
+            So we'll choose two paths between two points and find the work done on each path.
+            Let the first path, <m>C_{1}</m>, denote the top half of the unit circle traversed counterclockwise.
+            Similarly, let the second path, <m>C_{2}</m>, denote the bottom half of the unit circle traversed clockwise.
+            Then both paths have the same initial and terminal points.
+          </p>
+          <p>
+            From <xref ref="figure-a-rotating-force-field-" text="type-global" />, it appears as though <m>\int_{C_{2}}\vb{F}\cdot d\vb{r} \lt 0 \lt \int_{C_{1}}\vb{F}\cdot d\vb{r}</m>, which suggests that the vector field is path dependent.
+            <figure xml:id="figure-a-rotating-force-field-">
+              <caption>A rotating force field.</caption>
+              <image xml:id="image-a-rotating-force-field-">
+                <asymptote>
+                  import graph;
+                  import fontsize;
+                  size(200);
+                  defaultpen(fontsize(9pt));
+
+
+                  real xmin=-2, xmax=2;
+                  real ymin=-2, ymax=2;
+                  real eps=.2;
+
+                  //plot annotations
+                  arrowbar axisarrow = Arrow(TeXHead);
+                  Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                  Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                  //define and add vector field
+                  pair a=(-2,-2);
+                  pair b=(2,2);
+                  path vector(pair z) {return (0,0)--(-z.y, z.x);}
+                  add(vectorfield(vector,a,b,10,deepblue+0.4bp));
+
+                  //define and add curves
+                  pair f(real t) {
+                    return (cos(t), sin(t));
+                  }
+                  path curveC1 = graph(f, 0, pi, operator ..); // "operator .." is for bezier; 0≤t≤2π
+                  Label L1 = Label("$C_{1}$", position=Relative(0.25), align=NE);
+                  draw(curveC1, black+0.6bp, L = L1, Arrow(arrowhead = SimpleHead,position=Relative(0.25)));
+                  add(arrow(curveC1,arrowhead = SimpleHead,position=Relative(.75)));
+
+                  path curveC2 = graph(f, 2*pi, pi, operator ..); // "operator .." is for bezier; 0≤t≤2π
+                  Label L2 = Label("$C_{2}$", position=Relative(0.25), align=SE);
+                  draw(curveC2, black+0.6bp, L = L2, Arrow(arrowhead = SimpleHead,position=Relative(0.25)));
+                  add(arrow(curveC2,arrowhead = SimpleHead,position=Relative(.75)));
+
+                  //draw axes
+                  xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                  yaxis(XEquals(0),ymin - eps,ymax + eps,RightTicks(NoZeroFormat), L = ylabel, arrow = axisarrow);
+                  // "Nice" labeling for origin.
+                  label("$0$", (0,0), NW);
+                </asymptote>
+              </image>
+            </figure>
+            To verify this, we'll compute the appropriate line integrals.
+          </p>
+          <p>
+            For <m>C_{1}:\vb{r}_{1}(t) = \dotprod{\cos t,\sin t}, 0\leq t\leq \pi</m>, the total circulation is
+            <md>
+              <mrow>\int_{C_{1}}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{\pi}P\,dx + Q\,dy</mrow>
+              <mrow> \amp = \int_{0}^{\pi}\,dt </mrow>
+              <mrow> \amp = \pi </mrow>
+            </md>.
+            Likewise, the circulation of <m>\vb{F}</m> along <m>C_{2}</m> is
+            <me>\int_{C_{2}}\vb{F}\cdot\vb{T}\,ds = -\pi</me>.
+          </p>
+          <p>
+            Since the work done by <m>\vb{F}</m> between the points <m>(1,0)</m> and <m>(-1,0)</m> clearly depends on the path taken between the points, this means that <m>\vb{F}</m> is path dependent and, therefore, not conservative.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can also compute vector field line integrals in <m>\RR^{3}</m> with essentially the same formula.
+      </p>
+      <example xml:id="example-circulation-in-R3">
+        <title>Circulation in <m>\RR^{3}</m></title>
+        <statement>
+          <p>
+            Find the circulation of <m>\vb{F} = x^{2}\vb{i} + \vb{k}</m> along
+            <me>C:\vb{r}(t) = 3t\vb{i} + 4t\vb{j}, 0\leq t\leq 2</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <md>
+              <mrow>\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{2} P\,dx + Q\,dy + R\,dz </mrow>
+              <mrow> \amp = \int_{0}^{2}\brackets{9t^{2}(3) + 0 + 0}\,dt </mrow>
+              <mrow> \amp = 72 </mrow>
+            </md>.
+            Since the circulation is positive, this also shows that <m>\vb{F}</m> tends to flow with <m>C</m>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-flux-integrals">
+      <title>Flux Integrals</title>
+      <p>
+        The circulation integral in <xref ref="definition-line-integral-of-a-vector-field" text="type-global" /> is useful for measuring how much a vector field flows along a given curve.
+        Now, we want to measure how a vector field flows <em>across</em> a curve, at least in <m>\RR^{2}</m>.
+      </p>
+      <p>
+        Given a smooth curve <m>C</m> with unit tangent <m>\vb{T}</m>, recall that <m>\vb{F}\cdot\vb{T}</m> measures how well a vector field <m>\vb{F}</m> and <m>\vb{T}</m> align at a point on <m>C</m>.
+        By integrating this, we get a measure along the entire curve.
+        So if we want to get a sense of how <m>\vb{F}</m> flows across <m>C</m>, we can do so by looking at a single point and then integrating along the curve again.
+      </p>
+      <p>
+        To do this, let <m>\vb{N}</m> be the unit normal vector to <m>C</m>, given in <xref ref="definition-unit-normal-vectors" text="type-global" />.
+        Then <m>\vb{F}\cdot\vb{N}</m> determines how <m>\vb{F}</m> flows across <m>C</m> at a specific point, and integrating <m>\vb{F}\cdot\vb{N}</m> provides a measure along the entire curve.
+        But there's one slight issue: if <m>C</m> is a closed curve then it's possible that <m>\vb{N}</m> points <em>into</em> the region enclosed by <m>C</m>.
+        We would like to measure how <m>\vb{F}</m> flows out of <m>C</m> instead, so we'll replace <m>\vb{N}</m> with <m>\vb{n}</m>, the <term>outward unit normal</term>.
+        This leads us to the <term>flux integral</term>.
+      </p>
+      <definition xml:id="definition-line-integral-flux-integral">
+        <idx><h>line integrals</h><h>flux integral</h></idx>
+        <title>Flux Integral</title>
+        <statement>
+          <p>
+            Let <m>C</m> denote a smooth curve and let <m>\vb{F}</m> be a vector field continuous on <m>C</m>.
+            Then we define the <term>flux integral of <m>\vb{F}</m> across <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{n}\,ds</m>, where <m>\vb{n}</m> is the outward unit normal vector to <m>C</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        At this point it may be helpful to introduce some new notation.
+        If <m>C</m> is a closed curve, then we often denote line integrals involving <m>C</m> with <m>\oint_{C}</m> instead of <m>\int_{C}</m>.
+      </p>
+      <example xml:id="example-flux-across-the-unit-circle">
+        <title>Flux Across the Unit Circle</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \dotprod{-y, x}</m> and let <m>C</m> denote the unit circle, traversed exactly once counterclockwise.
+            What is <m>\oint_{C}\vb{F}\cdot\vb{n}\,ds</m>?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We should have <m>\oint_{C}\vb{F}\cdot\vb{n}\,ds = 0</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        In order to actually compute flux integrals, we need to write <m>\vb{n}</m> using <m>C</m>.
+        So suppose that <m>C</m> is traced out by the vector function <m>\vb{r}(t) = \dotprod{x(t), y(t)}</m>.
+        Then <m>\vb{n}</m> must be perpendicular to the unit tangent
+        <me>\vb{T} = \frac{1}{\sqrt{x^{2} + y^{2}}}\dotprod{x', y'}</me>
+        or equivalently <m>\dotprod{x',y'}</m>.
+        Our primary tool for finding perpendicular vectors, the cross product, only applies in <m>\RR^{3}</m>.
+        So to find <m>\vb{n}</m> we'll (temporarily) move everything into <m>\RR^{3}</m>.
+        Now we need to find a vector orthogonal to <m>\dotprod{x', y', 0}</m> that also lies in the <m>xy</m>-plane.
+        This can be done by computing
+        <me>\dotprod{x',y',0}\times\vb{k} \qq{or} \vb{k}\times \dotprod{x',y',0}</me>.
+      </p>
+      <p>
+        At this point we need to decide which direction we want our normal vector to go.
+        We'll usually choose the first option if <m>C</m> is traversed counterclockwise and the second option otherwise.
+        Assuming counterclockwise orientation, we have
+        <me>\dotprod{x', y', 0}\times \vb{k} = \dotprod{y', -x', 0}</me>.
+        Now moving back down to <m>\RR^{3}</m>, we can write the outward unit normal as
+        <me>\vb{n} = \frac{1}{\sqrt{(x')^{2} + (y')^{2}}}\dotprod{y', -x'} = \frac{1}{\norm{\vb{r}'(t)}}\dotprod{y', -x'}</me>.
+      </p>
+      <p>
+        Therefore
+        <md>
+          <mrow>\int_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{C}\vb{F}\cdot\dotprod{y', -x'}\,dt</mrow>
+          <mrow> \amp = \int_{C} P\,dy - Q\,dx </mrow>
+        </md>.
+      </p>
+      <example xml:id="example-verifying-the-flux">
+        <title>Verifying the Flux</title>
+        <statement>
+          <p>
+            Compute the flux integral in <xref ref="example-flux-across-the-unit-circle" text="type-global" />.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We have
+            <md>
+              <mrow>\oint_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{0}^{2\pi}P\,dy - Q\,dx </mrow>
+              <mrow> \amp = \int_{0}^{2}\brackets{-\sin t\cos t - \cos t(-\sin t)}\,dt </mrow>
+              <mrow> \amp = 0 </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-the-fundamental-theorem-for-line-integrals">
+    <title>The Fundamental Theorem for Line Integrals</title>
+    <introduction>
+      <p>
+        From <xref ref="theorem-fundamental-theorem-of-calculus" text="type-global" />, we know that integrals and derivatives are closely related:
+        <me>\int_{a}^{b}\dv{f}{x}\,dx = f(b) - f(a)</me>.
+        We want to extend this result to line integrals of vector fields over curves.
+        In particular, we want to prove a relationship of the form
+        <me>\int_{C}\grad f\cdot d\vb{r} = \int_{A}^{B}\grad f\cdot d\vb{r} = f(B) - f(A)</me>
+        where <m>A</m> and <m>B</m> are the endpoints of the curve <m>C</m>.
+        This is the content of the main result in this section: <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" />.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-path-independence">
+    <title>Path Independence</title>
+      <p>
+        Unless otherwise mentioned, we'll assume that we're always working with an <term>open, simply connected domain</term> <m>D</m>.
+        This is a region that, roughly, does not contain its boundary and does not contain any holes.
+        A curve <m>C</m> contained in <m>D</m> is <term>closed</term> if its initial and terminal points are the same.
+        We'll denote the <term>boundary</term> of <m>D</m> by <m>\partial D</m>.
+        <aside>
+          <p>
+            Unless mentioned otherwise, we assume <m>\partial D</m> is traversed counterclockwise is <m>D</m> is in the <m>xy</m>-plane.
+          </p>
+        </aside>
+        We often denote line integrals over closed curves using the symbol <m>\oint</m>.
+      </p>
+      <p>
+        The mathematical definition of a conservative vector field is that it's the gradient of some scalar function.
+      </p>
+      <definition xml:id="definition-conservative-vector-fields-mathematical-definition">
+        <idx><h>conservative vector field</h><h>mathematical definition</h></idx>
+        <title>Conservative Vector Fields (Mathematical Definition)</title>
+        <statement>
+          <p>
+            Let <m>\vb{F}</m> be a vector field.
+            We say that <m>\vb{F}</m> is <term>conservative</term> on a domain <m>D</m> if <m>\vb{F} = \grad f</m> on <m>D</m> for some scalar function <m>f</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        However, we also have a physical definition!
+        Which may be useful.
+        This definition relies on the concept of <term>path independence</term>.
+      </p>
+      <definition xml:id="definition-path-independence">
+        <idx><h>vector fields</h><h>path independence</h></idx>
+        <title>Path Independence</title>
+        <statement>
+          <p>
+            A vector field <m>\vb{F}</m> is path independent on a domain <m>D</m> if
+            <me>\int_{C_{1}}\vb{F}\dr = \int_{C_{2}}\vb{F}\cdot d\vb{r}</me>
+            for any piecewise smooth paths in <m>D</m> with the same endpoints.
+            Equivalently, <m>\vb{F}</m> is path independent if
+            <me>\oint_{C}\vb{F}\cdot d\vb{r} = 0</me>
+            for any piecewise smooth closed curve <m>C</m> in <m>D</m>.
+          </p>
+        </statement>
+      </definition>
+      <definition xml:id="definition-conservative-vector-fields-physical-definition">
+        <title>Conservative Vector Fields (Physical Definition)</title>
+        <statement>
+          <p>
+            Let <m>\vb{F}</m> denote a (vector) force field.
+            We say that <m>\vb{F}</m> is conservative on a domain <m>D</m> if <m>\vb{F}</m> is path independent on <m>D</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        In physical terms, <xref ref="definition-conservative-vector-fields-physical-definition" text="type-global" /> says that the work done by a conservative force <m>\vb{F}</m> on a particle moving along a path depends only on the initial and terminal points of the path.
+        Equivalently, the work done on a closed path must always be <m>0</m>.
+      </p>
+      <p>
+        These two definitions are related by <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" />.
+      </p>
+      <theorem xml:id="theorem-fundamental-theorem-line-integrals">
+        <idx><h>line integrals</h><h>Fundamental Theorem of Line Integrals</h></idx>
+        <title>Fundamental Theorem of Line Integrals</title>
+        <statement>
+          <p>
+            Suppose that <m>\vb{F}</m> is a conservative vector field (in the sense of <xref ref="definition-conservative-vector-fields-mathematical-definition" text="type-global" />) with continuous components on an open simply connected region <m>D</m>.
+            Then <m>\vb{F}</m> is path independent.
+            Furthermore, if <m>\vb{F} = \grad f</m> and <m>C</m> is a curve in <m>D</m> with initial point <m>A</m> and terminal point <m>B</m>, then
+            <me>\int_{C}\vb{F}\cdot d\vb{r} = f(B) - f(A)</me>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-an-awful-example">
+        <title>An Awful Example</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \grad(x^{2}y^{3})</m> and let <m>C</m> be the path in the <m>xy</m>-plane composed of the line segment from <m>(-1,1)</m> to <m>(0,1)</m> followed by the circular arc from <m>(0,1)</m> to <m>(1,0)</m> followed by the logarithmic arc <m>y = \ln x</m> from <m>(1,0)</m> to <m>(e,1)</m>.
+            Find <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            <m>C</m> is piecewise smooth and consists of the components
+            <md>
+              <mrow>C_{1} \amp : \vb{r}_{1}(t) = \dotprod{t - 1, 1}, 0\leq t\leq 1 </mrow>
+              <mrow>C_{2} \amp : \vb{r}_{2}(t) = \dotprod{\sin t, \cos t}, 0\leq t\leq \frac{\pi}{2} </mrow>
+              <mrow>C_{3} \amp : \vb{r}_{3}(t) = \dotprod{t, \ln t}, 1\leq t\leq e </mrow>
+            </md>.
+            To find <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>, we can find <m>\int_{C_{i}}\vb{F}\cdot\vb{T}\,ds</m> for <m>1\leq i\leq 3</m> and add the resulting values.
+            So let's do that!
+            <md>
+              <mrow>\int_{C_{1}}\vb{F}\cdot d\vb{r} \amp = \int_{C_{1}} \dotprod{2xy^{3}, 3x^{2}y^{2}}\dr</mrow>
+              <mrow> \amp = \int_{0}^{1}\dotprod{2(t-1), 3(t-1)^{2}}\cdot\dotprod{1, 0}\,dt </mrow>
+              <mrow> \amp = \brackets{t^{2} - 2t}_{0}^{1} </mrow>
+              <mrow> \amp = -1 </mrow>
+            </md>.
+            Similarly,
+            <md>
+              <mrow>\int_{C_{2}} \vb{F}\dr \amp = \int_{0}^{\frac{\pi}{2}}\dotprod{2\sin t\cos^{3}t, 3\sin^{2}t\cos^{2}t}\cdot\dotprod{\cos t, -\sin t}\,dt </mrow>
+              <mrow> \amp = 0</mrow>
+            </md>
+            and <em>finally</em>
+            <md>
+              <mrow>\int_{C_{3}}\vb{F}\dr \amp = \int_{1}^{e}\dotprod{2t(\ln t)^{3}, 3t^{2}(\ln t)^{2}}\cdot\dotprod{1, \frac{1}{t}}\,dt </mrow>
+              <mrow> \amp = e^{2}</mrow>
+            </md>.
+            Putting this all together, we get
+            <me>\int_{C}\vb{F}\dr = e^{2} - 1</me>.
+          </p>
+          <p>
+            Now let's compare this approach with using <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" />.
+            Since <m>\vb{F} = \grad(x^{2}y^{3})</m>, <m>\vb{F}</m> is conservative by definition.
+            Hence <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" /> applies, and (setting <m>f(x,y) = x^{2}y^{3}</m>) we get
+            <me>\int_{C}\vb{F}\dr = f(e, 1) - f(-1, 1) = e^{2} - 1</me>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-using-potential-to-find-work-done">
+      <title>Using Potential to Find Work Done</title>
+      <statement>
+        <p>
+          Let <m>\vb{F} = \dotprod{xy^{2}, x^{2}y}</m> be a force field and let <m>C</m> denote the parabolic arc <m>y = x^{2}</m> from <m>(1,1)</m> to <m>(3,9)</m>.
+          Find the work done by <m>\vb{F}</m> along <m>C</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The work done is just <m>\int_{C}\vb{F}\dr</m>.
+          Note that <m>\vb{F} = \grad(\frac{1}{2}x^{2}y^{2})</m>, and so the work done is just
+          <me>\frac{1}{2}3^{2}9^{2} - \frac{1}{2}1^{2}1^{2}</me>
+          by <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" />.
+        </p>
+      </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-conservative-vector-fields">
+      <title>Conservative Vector Fields</title>
+      <p>
+        <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" /> shows that line integrals involving conservative vector fields are straightforward to evaluate if we know a corresponding potential function.
+        So now we want to do two things:
+        <ol>
+          <li>
+            <p>Given a vector field <m>\vb{F}</m>, determine if it's conservative.</p>
+          </li>
+        </ol>
+        <ol>
+          <li>
+            <p>Given a conservative vector field <m>\vb{F}</m>, determine a potential function <m>\varphi</m>.</p>
+          </li>
+        </ol>
+      </p>
+      <p>
+        For the first, we can use our intuition that conservative vector fields shouldn't rotate.
+        So let's assume that <m>\vb{F} = \dotprod{P,Q}</m> is a (differentiable) vector field on <m>\RR^{2}</m> and let <m>(x,y)</m> be a point in the plane.
+        We can estimate the rotation, or <em>circulation</em>, of <m>\vb{F}</m> at <m>(x,y)</m> by constructing a rectangle with length <m>\Delta x</m> and height <m>\Delta y</m> at <m>(x,y)</m> and measuring how <m>\vb{F}</m> flows counterclockwise around the rectangle.
+        If we do so, then we can estimate the circulation along each side as follows:
+        <md>
+          <mrow>\text{Top:} \amp P(x,y + \Delta y)\cdot(-\Delta x\vb{i})</mrow>
+          <mrow>\text{Bottom:} \amp P(x, y)\cdot(\Delta x)\vb{i}</mrow>
+          <mrow>\text{Left:} \amp Q(x,y)\cdot(-\Delta y\vb{j})</mrow>
+          <mrow>\text{Right:} \amp Q(x + \Delta x,y)\cdot(\Delta y\vb{j})</mrow>
+        </md>.
+        Therefore the total circulation near <m>(x,y)</m> should be about
+        <me>\Delta x\vb{i}\brackets{P(x,y) - P(x, y + \Delta y)} + \Delta y\vb{j}\brackets{Q(x + \Delta x, y) - Q(x,y)}</me>.
+        If we divide by <m>\Delta x\Delta y</m> to normalize, then we can say that the circulation is about
+        <me>\pdv{Q}{x} - \pdv{P}{y}</me>.
+      </p>
+      <theorem xml:id="theorem-conservative-vector-fields-are-irrotational">
+        <title>Conservative Vector Fields are Irrotational</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \dotprod{P,Q}</m> be a continuously differentiable vector field on an open simply connected region in <m>\RR^{2}</m>.
+            Then <m>\vb{F}</m> is conservative on this region if and only if
+            <me>\pdv{Q}{x} - \pdv{P}{y} = 0</me>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-finding-a-line-integral">
+        <title>Finding a Line Integral</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = (3x^{2} + 2y^{2})\vb{i} + (4xy - e^{-y^{2}})\vb{j}</m> and let <m>C</m> denote the ellipse
+            <me>\frac{(x-1)^{2}}{9} + \frac{(3y + 2)^{2}}{10} = 5</me>.
+            Find <m>\oint_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We can parameterize <m>C</m> and then compute <m>\oint_{C}\vb{F}\dr</m> as in <xref ref="section-line-integrals" text="type-global" />, but we'll first check if <m>\vb{F}</m> is conservative.
+            Since <m>\pdv{Q}{x} = 4y = \pdv{P}{y}</m>, it follows that <m>\vb{F}</m> is conservative.
+            Hence <m>\oint_{C}\vb{F}\dr = 0</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        The quantity <m>\pdv{Q}{x} - \pdv{P}{y}</m> in <xref ref="theorem-conservative-vector-fields-are-irrotational" text="type-global" /> is called the (two-dimensional) <term>curl</term> of <m>\vb{F}</m> and is denoted by <m>\curlt \vb{F}</m>.
+        This represents the tendency of <m>\vb{F}</m> to rotate counterclockwise around a given point.
+        This can be extended to three dimensions using the following formula:
+        <me>\curlt\vb{F} = \curl\vb{F}</me>
+        where <m>\nabla = \dotprod{\pdv{}{x}, \pdv{}{y}, \pdv{}{z}}</m>.
+        The direction of <m>\curl\vb{F}</m> provides the <em>axis of rotation</em> at a point, and its magnitude is the tendency of <m>\vb{F}</m> to rotate counterclockwise around this axis of rotation (viewed head on).
+      </p>
+      <example xml:id="example-testing-a-vector-field-in-RR3">
+        <title>Testing a Vector Field in <m>\RR^{3}</m></title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \dotprod{e^{x}\cos y + yz, xz - e^{x}\sin y, xy + z}</m>.
+            Determine if <m>\vb{F}</m> is conservative.
+          </p>
+          <aside>
+            <p>This is taken from Example 2 on page 1165 of <em>Thomas' Calculus</em>, <m>11^{\text{th}}</m> edition.</p>
+          </aside>
+        </statement>
+        <solution>
+          <p>
+            We need to check if <m>\curl\vb{F} = \vb{0}</m>.
+            So we compute this like a cross product, giving <m>\vb{0}</m>.
+            Hence the vector field is irrotational and therefore conservative.
+          </p>
+        </solution>
+      </example>
+      <p>
+        So now we have a good test for if a vector field is conservative.
+        Next, we want to be able to find a corresponding potential function to a conservative vector field.
+      </p>
+      <p>
+        Consider the vector field <m>\vb{F}</m> from <xref ref="example-testing-a-vector-field-in-RR3" text="type-global" />.
+        We know this is conservative, so there must exist a corresponding potential function <m>f(x,y,z)</m> such that <m>\grad f = \vb{F}</m>.
+        To find this, we start by noting that whatever <m>f</m> is, its partial derivatives must be the components of <m>\vb{F}</m>.
+        In particular,
+        <me>\pdv{f}{x} = e^{x}\cos y + yz \implies f = e^{x}\cos y + xyz + g(y,z)</me>.
+        Now we look at <m>\pdv{f}{y}</m> to pin down <m>g(y,z)</m>:
+        <me>\pdv{f}{y} = xz - e^{x}\sin y = -e^{x}\sin y + xz + \pdv{g}{y} \implies \pdv{g}{y} = 0</me>,
+        and so <m>g(y,z) = g(z)</m>.
+        Finally,
+        <me>\pdv{f}{z} = xy + z = xy + g'(z) \implies g'(z) = z</me>
+        and so <m>g(z) = \frac{z^{2}}{2} + C</m>.
+        Therefore a potential function for <m>\vb{F}</m> is
+        <me>f(x,y,z) = e^{x}\cos y + xyz + \frac{z^{2}}{2}</me>.
+      </p>
+      <example xml:id="example-line-integral-along-an-elliptical-arc">
+        <title>Line Integral Along an Elliptical Arc</title>
+        <statement>
+          <p>
+            Compute <m>\int_{C}(1 + xy)e^{xy}\,dx + x^{2}e^{xy}\,dy</m>, where
+            <me>C: \vb{r}(t) = \cos t\vb{i} + 2\sin t\vb{j}, 0\leq t\leq \frac{\pi}{2}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, we'll check if <m>\vb{F}</m> is conservative.
+            If it is, we can use <xref ref="theorem-fundamental-theorem-line-integrals" text="type-global" />.
+            Since <m>\pdv{Q}{x} - \pdv{P}{y} = 2xe^{xy} + x^{2}ye^{xy} - \brackets{xe^{xy} + \parens{x + x^{2}y}e^{xy}} = 0</m>,
+            we see that <m>\vb{F}</m> is in fact conservative.
+          </p>
+          <p>
+            Now we need to find a potential function <m>f(x,y)</m>.
+            Since <m>f_{x} = (1 + xy)e^{xy}</m>, we can integrate with respect to <m>x</m> to get
+            <me>f(x,y) = xe^{xy} + g(y)</me>.
+            Now differentiate with respect to <m>y</m> to get
+            <me>x^{2}e^{xy} = x^{2}e^{xy} + g'(y) \implies g(y) = C</me>.
+            Hence a potential function for <m>\vb{F}</m> is <m>f = xe^{xy}</m>, and so
+            <me>\int_{C}(1 + xy)e^{xy}\,dx + x^{2}e^{xy}\,dy = -1</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS:3-13 odd, 19, 21
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-green-s-theorem">
+    <title>Green's Theorem</title>
+    <p>
+      Recall that <m>\int_{C}\vb{F}\cdot\vb{T}\,ds = \int_{C} P\,dx + Q\,dy</m> is the <xref ref="definition-line-integral-of-a-vector-field" text="title">circulation</xref> of <m>\vb{F}</m> along <m>C</m>.
+      Likewise, <m>Q_{x} - P_{y}</m> is a measure of how <m>\vb{F}</m> rotates counterclockwise.
+      These two quantities are tied together by Green's Theorem.
+    </p>
+    <theorem xml:id="theorem-green-s-theorem">
+      <idx><h>Green's Theorem</h></idx>
+      <title>Green's Theorem</title>
+      <statement>
+        <p>
+          Let <m>C</m> be a positively oriented, piecewise smooth, simple closed curve in the plane containing some region <m>D</m>.
+          Let <m>\vb{F} = \dotprod{P,Q}</m> denote a vector field that is continuously differentiable on an open, simply connected domain containing <m>C</m>.
+          Then
+          <me>\oint_{C}\vb{F}\cdot\vb{T}\,ds = \iint_{D}\brackets{\pdv{Q}{x} - \pdv{P}{y}}\,dA</me>.
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-green-s-theorem-on-a-triangle">
+      <title>Green's Theorem on a Triangle</title>
+      <statement>
+        <p>
+          Compute <m>\oint_{C}\vb{F}\dr</m>, where <m>\vb{F} = \dotprod{-3y, 3x}</m> and <m>C</m> is the triangle with vertices <m>(0,0), (1,0)</m> and <m>(0,2)</m> traversed once counterclockwise.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, note that <m>\vb{F}</m> isn't conservative and so we can't just say the integral is <m>0</m>.
+          Finding the line integral directly would require computing three separate line integrals, so we'll try Green's Theorem instead.
+        </p>
+        <p>
+          Let <m>D</m> denote the inside of the triangle.
+          Then we have
+          <me>\oint_{C}\vb{F}\dr = \iint_{D}\brackets{3 - (-3)}\,dA</me>,
+          which simplifies to <m>6</m>.
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-work-with-green-s-theorem">
+      <title>Work with Green's Theorem</title>
+      <statement>
+        <p>
+          Find the work done by <m>\vb{F} = \dotprod{y + e^{-x^{3}}, 2x + \cos y^{2}}</m> along the boundary of the region bounded by <m>y = x^{2}</m> and <m>x = y^{2}</m>, traversed <em>clockwise</em> exactly once.
+        </p>
+      </statement>
+    </example>
+    <example xml:id="example-circulation-along-an-annulus">
+      <title>Circulation Along an Annulus</title>
+      <statement>
+        <p>
+          Does <m>\vb{F} = (1 - y^{3})\vb{i} + (x^{3} + e^{y^{2}})\vb{j}</m> flow with the boundary of the annulus <m>D</m> bounded by <m>x^{2} + y^{2} = 1</m> and <m>x^{2} + y^{2} = 9</m>?
+          Here, assume that the boundary of <m>D</m> is oriented in a way that is consistent with Green's Theorem.
+        </p>
+      </statement>
+    </example>
+    <p>
+      <xref ref="theorem-green-s-theorem" text="title" /> applies to circulation integrals, but there's also a version for flux integrals.
+    </p>
+    <theorem xml:id="theorem-green-s-theorem-for-flux-integrals">
+      <idx><h>Green's Theorem</h><h>flux integrals</h></idx>
+      <title>Green's Theorem for Flux Integrals</title>
+      <statement>
+        <p>
+          Let <m>\vb{F}</m>, <m>C</m> and <m>D</m> satisfy the same hypotheses as in <xref ref="theorem-green-s-theorem" text="type-global" />.
+          Then
+          <me>\oint_{C}\vb{F}\cdot\vb{n}\,ds = \iint_{D}\brackets{\pdv{P}{x} + \pdv{Q}{y}}\,dA</me>.
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      The quantity <m>P_{x} + Q_{y}</m> is known as the <term>divergence</term> of <m>\vb{F}</m>, and measures how <m>\vb{F}</m> flows across a point.
+    </p>
+    <example xml:id="example-flux-across-a-square">
+      <title>Flux Across a Square</title>
+      <statement>
+        <p>
+          Does <m>\vb{F} = \dotprod{y^{2} - x^{2}, x^{2} + y^{2}}</m> tend to flow out of the unit square?
+        </p>
+      </statement>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 1, 3, 5, 9, 17
+    </p>
+  </section>
+  <section xml:id="section-curl-and-divergence">
+    <title>Curl and Divergence</title>
+    <introduction>
+      <p>
+        In this section we look at two different analogues of the derivative for vector fields.
+        Once we have these versions of the derivative, we'll also be able to state a corresponding version of the <xref ref="theorem-fundamental-theorem-of-calculus" text="title" />, just as the <xref ref="theorem-fundamental-theorem-line-integrals" text="title" /> corresponds to the gradient.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-curl">
+      <title>Curl</title>
+      <p>
+        In <xref ref="section-the-fundamental-theorem-for-line-integrals" text="type-global" /> we introduced the <m>\del</m> operator, which in <m>\RR^{3}</m> is given by
+        <me>\del = \dotprod{\pdv{}{x}, \pdv{}{y}, \pdv{}{z}}</me>.
+        In this class, <m>\del</m> has no meaning when by itself.
+        However, it gains meaning when <q>multiplied</q> by a scalar function <m>f</m>, leaving the gradient <m>\grad f</m>.
+        We also used it to define the <term>curl</term>, which we repeat below.
+      </p>
+      <definition xml:id="definition-curl-of-a-vector-field-in--rr-3-m-">
+        <idx><h>vector fields</h><h>curl in <m>\RR^{3}</m></h></idx>
+        <title>Curl of a Vector Field in <m>\RR^{3}</m></title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = P\vb{i} + Q\vb{j} + R\vb{k}</m> be a vector field in <m>\RR^{3}</m> with continuously differentiable components.
+            The curl of <m>\vb{F}</m> is the vector
+            <me>\curlt{\vb{F}} = \curl\vb{F} = \parens{\pdv{R}{y} - \pdv{Q}{z}}\vb{i} + \parens{\pdv{P}{z} - \pdv{R}{x}}\vb{j} + \parens{\pdv{Q}{x} - \pdv{P}{y}}\vb{k}</me>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        We've already seen a couple nice properties of curls.
+        First, the curl vector gives the axis of rotation about which <m>\vb{F}</m> tends to rotate counterclockwise when viewed head on, and <m>\norm{\curl\vb{F}}</m> is a measure of the amount of rotation.
+        Second, the curl can be used to determine if a vector field is conservative or not.
+      </p>
+      <theorem xml:id="theorem-conservative-vector-fields-in--rr-3-m-">
+        <title>Conservative Vector Fields in <m>\RR^{3}</m></title>
+        <statement>
+          <p>
+            Let <m>\vb{F}</m> denote a continuously differentiable vector field on an open set containing the simply connected region <m>D</m>.
+            Then <m>\vb{F}</m> is conservative if and only if <m>\curl\vb{F} = \vb{0}</m>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-determining-rotation-in-a-vector-field">
+        <title>Determining Rotation in a Vector Field</title>
+        <statement>
+          <p>
+            Suppose the vector field <m>\vb{F} = \dotprod{1, \sin z, x - yz^{2}}</m> represents a swirling fluid.
+            Within this fluid you place a small paddle wheel at the point <m>(1,-2,0)</m>.
+            When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First we need to get a measure of the rotation of <m>\vb{F}</m>, so we compute the curl:
+            <me>\curl\vb{F} = \dotprod{-z^{2} - \cos z, -1, 0}</me>,
+            which is just <m>\dotprod{-1, -1, 0}</m> at our point.
+            This provides the axis around which the paddle wheel rotates counterclockwise.
+            And since <m>\curl\vb{F}\cdot\vb{k} = 0</m>, the paddle wheel does not appear to rotate at all when viewed from above.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-divergence">
+      <title>Divergence</title>
+      <p>
+        Our second notion of derivative for vector fields is the <term>divergence</term>.
+        If <m>\vb{F}</m> is a continuously differentiable vector field, then we define the divergence of <m>\vb{F}</m> to be the <em>scalar</em> function <m>\divt\vb{F}</m> given by
+        <me>\divt\vb{F} = \div\vb{F}</me>.
+        The divergence of a vector field is a measure of <q>outflow minus inflow</q>.
+        If <m>\div\vb{F} = 0</m>, then we say that <m>\vb{F}</m> is <term>incompressible</term> or <term>solenoidal</term> (just as we say that <m>\vb{F}</m> is irrotational if <m>\curl\vb{F} = \vb{0}</m>).
+      </p>
+      <example xml:id="example-divergence-on-a-rectangle">
+        <title>Divergence on a Rectangle</title>
+        <statement>
+          <p>
+            Let <m>\vb{F} = \dotprod{xy, x}</m> and let <m>C</m> denote the unit circle, traversed counterclockwise once.
+            Find the divergence of <m>\vb{F}</m> at <m>(-1,0)</m> and <m>(0,-1)</m>.
+            Then find the <em>net divergence</em> of <m>\vb{F}</m> through the interior of <m>C</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            At <m>(-1,0)</m>, <m>\div\vb{F} = y = 0</m>.
+            At this particular point, outflow is balanced with inflow.
+            Likewise, at <m>(0,-1)</m> we can see that inflow is greater than outflow.
+          </p>
+          <p>
+            We can compute the net divergence as <m>\iint_{D}\div\vb{F}\,dA</m>, where <m>D</m> is the interior of the unit circle.
+            This is equal to <m>0</m>, which means the net flow throughout <m>D</m> is <m>0</m>.
+            By <xref ref="theorem-green-s-theorem-for-flux-integrals" text="type-global" />, this is also equal to the net flux across <m>C</m>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-laplacian">
+      <title>Laplacian</title>
+      <p>
+        From the divergence we get another useful form of (second) derivative for scalar functions.
+        First, let <m>f(x,y,z)</m> be a differentiable scalar function.
+        Then we can compute its gradient <m>\grad f</m>.
+        This is a vector field that represents how <m>f</m> changes.
+        Now, since <m>\grad f</m> is a vector field we can also consider its curl and divergence.
+        If <m>f</m> is <q>nice enough</q> we know that <m>\curl(\grad f) = \vb{0}</m>, which is not particularly useful in this case.
+        But if we take the divergence, we get
+        <me>\div(\grad f) = f_{xx} + f_{yy} + f_{zz}</me>.
+      </p>
+      <definition xml:id="definition-laplacian">
+        <idx><h>Laplacian</h></idx>
+        <title>Laplacian</title>
+        <statement>
+          <p>
+            Let <m>f</m> be a twice differentiable scalar function on <m>\RR^{3}</m>.
+            The <term>Laplacian</term> of <m>f</m> is the function
+            <me>\div(\grad f) = \del^{2}f = \Delta f</me>
+            given by <m>f_{xx} + f_{yy} + f_{zz}</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        <xref ref="definition-laplacian" text="type-global" /> extends to other dimensions in the obvious way.
+        The Laplacian is useful since it provides a measure of how a function's value at a point differs from the average value at nearby points.
+      </p>
+      <example xml:id="example-laplacians-and-average-values">
+        <title>Laplacians and Average Values</title>
+        <statement>
+          <p>
+            Let <m>f_{1} = x^{2} + y^{2}</m> and let <m>f_{2} = x^{2} - y^{2}</m>.
+            Let <m>C</m> denote the unit circle traversed once counterclockwise.
+            Find the average values of <m>f_{i}</m> on <m>C</m>, their specific values at <m>(0,0)</m> and the Laplacians at <m>(0,0)</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we compute the average values, we get
+            <md>
+              <mrow>\frac{1}{2\pi}\oint_{C}f_{1}(x,y)\,ds \amp = 1 </mrow>
+              <mrow>\frac{1}{2\pi}\oint_{C}f_{2}(x,y)\,ds \amp = 0 </mrow>
+            </md>.
+            Furthermore, <m>f_{1}(0,0) = 0 = f_{2}(0,0)</m>.
+            We also have <m>\Delta f_{1} = 4</m> and <m>\Delta f_{2} = 0</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        To see how the Laplacian can arise, consider the following situation explained in Evans' <em>Partial Differential Equations</em>, <m>2^{\text{nd}}</m> edition.
+        We have some <em>density</em> function <m>f</m>; this could be mass density, charge density, etc.
+        Now we'll let <m>\vb{F}</m> denote the flux of <m>f</m>.
+        It's often reasonable to assume that the flux is proportional to the negative of the gradient of <m>f</m>: <m>\vb{F} = -a\grad f</m> where <m>a \gt 0</m>.
+        This means that the quantity flows from regions of higher concentration to regions of lower concentration.
+        If <m>f</m> represents a quantity in equilibrium within some region <m>D</m>, then the net flux across <m>D</m> should be <m>0</m>.
+        In terms of <xref ref="theorem-green-s-theorem-for-flux-integrals" text="type-global" />, we have
+        <me>\iint_{D}\div\vb{F}\,dA = \oint_{\partial D}\vb{F}\cdot\vb{n}\,ds = 0</me>.
+      </p>
+      <p>
+        Now we'll make the argument that <m>\div\vb{F} = 0</m> since the above should be true for arbitrary subregions of <m>D</m>.
+        But
+        <me>\div\vb{F} = -a\div(\grad f) = -a\del^{2}f</me>,
+        which means that <m>\Delta f = 0</m>.
+      </p>
+      <p>
+        We say that a function is <term>harmonic</term> if its Laplacian is <m>0</m>.
+        The equation <m>\Delta f = 0</m> is known as <term>Laplace's equation</term>.
+        Harmonic functions are extremely useful, as they represent quantities in a kind of equilibrium state.
+        If <m>f</m> represents chemical concentration, temperature or electrostatic potential, then Laplace's equation is Fick's law of diffusion, Fourier's law of heat conduction or Ohm's law of electrical conduction, respectively.
+        See Evans text for more.
+      </p>
+      <p>
+        Laplacians also appear in certain integral identities.
+      </p>
+      <theorem xml:id="theorem-green-s-first-identity">
+        <idx>Green's First Identity</idx>
+        <title>Green's First Identity</title>
+        <statement>
+          <p>
+            Let <m>D</m> denote a simply connected region with piecewise smooth boundary <m>\partial D</m>.
+            Suppose that <m>f</m> is continuously differentiable and <m>g</m> is twice continuously differentiable on an open domain containing <m>D</m>.
+            Then
+            <me>\iint_{D}f\del^{2}g\,dA = \oint_{\partial D}f(\grad g)\dn - \iint_{D}\grad f\cdot \grad g\,dA</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            Since the right hand side involves a flux integral, this suggests that <xref ref="theorem-green-s-theorem-for-flux-integrals" text="title" /> may prove useful.
+            Applying this to <m>\oint_{\partial D}f(\grad g)\dn</m> gives
+            <me>\oint_{\partial D}f(\grad g)\dn = \iint_{D}\div(f\grad g)\,dA</me>.
+          </p>
+          <p>
+            Now, recall that <m>\div</m> is a kind of derivative operator.
+            For this reason, it also satisfies a version of the product rule:
+            <me>\div(f\grad g) = \grad f\cdot \grad g + f \div(\grad g) = \grad f\cdot\grad g + f\del^{2}g</me>.
+            Plugging this into the double integral and rearranging proves the result.
+          </p>
+        </proof>
+      </theorem>
+      <aside>
+        <p>
+          <xref ref="theorem-green-s-first-identity" text="type-global" /> acts as a kind of <q>integration by parts</q> in higher dimensions.
+        </p>
+      </aside>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 1-9 odd, 10, 11-15 odd.
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-parametric-surfaces-and-areas">
+    <title>Parametric Surfaces and Areas</title>
+    <introduction>
+      <p>
+        To extend <xref ref="theorem-green-s-theorem" text="type-global" /> to surfaces in <m>\RR^{3}</m>, we need to parameterize surfaces just as we did curves.
+        As before, our computations depend on the specific parameterization we choose.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-parameterizing-surfaces">
+      <title>Parameterizing Surfaces</title>
+      <p>
+        A curve is a one-dimensional object, and so our parameterizations typically involved only one independent variable.
+        A surface is fundamentally a two-dimensional object, and so we expect its parameterizations to involve two independent variables<mdash/>even if the surface is in <m>\RR^{3}</m>.
+        We will use vector functions of the form
+        <me>\vb{r}(u,v) = \dotprod{x(u,v), y(u,v), z(u,v)}</me>
+        to represent our parameterizations.
+      </p>
+      <example xml:id="example-finding-a-surface">
+        <title>Finding a Surface</title>
+        <statement>
+          <p>
+            Find the surface traced out by
+            <me>\vb{r}(u,v) = (3u - v)\vb{i} + (u + v)\vb{j} + (2u + 3v)\vb{k}</me>
+            in <m>\RR^{3}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            For any point <m>(x,y,z)</m> on this surface, we know that <m>x = 3u - v, y = u + v</m> and <m>z = 2u + 3v</m>.
+            We can use these conditions to find an equation in <m>x, y</m> and <m>z</m> that is equivalent to <m>\vb{r}</m>.
+          </p>
+          <p>
+            First, let's solve for <m>u</m> and <m>v</m>, giving
+            <md>
+              <mrow>u \amp = \frac{x + y}{4} </mrow>
+              <mrow>v \amp = \frac{3y - x}{4} </mrow>
+            </md>
+            So
+            <me>x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y</me>,
+            which implies that
+            <me>\frac{1}{4}x - \frac{11}{4}y + z = 0</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        In general, any plane can be represented using a vector function of the form
+        <me>\vb{r}(u,v) = \vb{r}_{0} + u\vb{a} + v\vb{b}</me>.
+      </p>
+      <example xml:id="example-parameterizing-a-cylinder">
+        <title>Parameterizing a Cylinder</title>
+        <statement>
+          <p>
+            Find a vector function <m>\vb{r}</m> that traces out the portion of the cylinder <m>x^{2} + z^{2} = 1</m> contained in the seventh octant.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The presence of <m>x^{2} + z^{2}</m> in the equation defining this surface suggests something like polar coordinates, except for the <m>xz</m>-plane instead of the <m>xy</m>-plane.
+            So let <m>r = \sqrt{x^{2} + z^{2}}, x = r\cos\theta, y = y</m> and <m>z = r\sin\theta</m>.
+            Then <m>r = 1</m> on our surface, and we can parameterize it using
+            <me>\vb{r}(\theta,y) = \dotprod{\cos\theta, y,\sin\theta}</me>.
+            To place this in the correct octant, we must provide limits for <m>\theta</m> and <m>y</m>:
+            <me>\pi\leq\theta\leq\frac{3\pi}{2}\qq{and} y\leq0</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-tangent-planes">
+      <title>Tangent Planes</title>
+      <p>
+        If <m>C:\vb{r}(t)</m>, then <m>\vb{r}'(t)</m> gives the tangent vector to <m>C</m> at the point corresponding to <m>\vb{r}(t)</m>.
+        In the same way, if a surface <m>S</m> is given by <m>\vb{r}(u,v)</m>, then
+        <md>
+          <mrow>\pdv{\vb{r}}{u} \amp = \vb{r}_{u} </mrow>
+          <mrow>\pdv{\vb{r}}{v} \amp = \vb{r}_{v} </mrow>
+        </md>
+        give tangent vectors to <m>S</m> at the point corresponding to <m>\vb{r}(u,v)</m>.
+        <m>\vb{r}_{u}</m> gives the tangent in the direction of increasing <m>u</m>, while <m>\vb{r}_{v}</m> gives the tangent in the direction of increasing <m>v</m>.
+        We say that <m>S</m> is <term>smooth</term> if <m>\vb{r}_{u}</m> and <m>\vb{r}_{v}</m> exist, are continuous and are never <m>\vb{0}</m>.
+        In this case, we can construct the tangent plane to <m>S</m>.
+      </p>
+      <example xml:id="example-tangent-plane-to-a-sphere">
+        <title>Tangent Plane to a Sphere</title>
+        <statement>
+          <p>
+            Let <m>S</m> be the sphere centered at the origin of radius <m>2</m>.
+            Parameterize the tangent plane to <m>S</m> at <m>\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, note that <m>\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}</m> actually lies on this sphere so the tangent plane here makes sense.
+            To parameterize the tangent plane, we first need to parameterize <m>S</m>:
+            <me>\vb{r}(\theta,\varphi) = \dotprod{2\cos\theta\sin\varphi, 2\sin\theta\sin\varphi, 2\cos\varphi}</me>.
+            Setting <m>\vb{r}_{0} = \dotprod{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}} = \vb{r}(\frac{\pi}{4}, \frac{\pi}{6}), \vb{a} = \vb{r}_{\theta}(\frac{\pi}{4}, \frac{\pi}{6})</m> and <m>\vb{b} = \vb{r}_{\varphi}(\frac{\pi}{4}, \frac{\pi}{6})</m>, it follows that the tangent plane is parameterized by
+            <me>\vb{s}(\theta,\varphi) = \dotprod{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}} + \theta\dotprod{-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, 0} + \varphi\dotprod{\frac{\sqrt{6}}{2}, \frac{\sqrt{6}}{2}, -1}</me>.
+          </p>
+          <p>
+            If we want the Cartesian equation of the plane instead, that's not too difficult either.
+            We just need a normal vector to the plane, and we can just use <m>\vb{r}_{\theta}\times\vb{r}_{\varphi}</m> for this:
+            <me>\vb{n} = \dotprod{-\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2},0}</me>.
+            If we want something even simpler, we can use <m>\vb{n} = \dotprod{1,1,0}</m>.
+            So a Cartesian equation for our plane is
+            <me>\parens{x -\frac{\sqrt{2}}{2}} + \parens{y-\frac{\sqrt{2}}{2}} = 0</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-surface-areas">
+      <title>Surface Areas</title>
+      <p>
+        In addition to giving us a normal vector to the surface <m>S</m>, the quantity <m>\vb{r}_{u}\times\vb{r}_{v}</m> can also be used to estimate the area of a small <q>parallelogram</q> on <m>S</m> at a given point <m>\vb{r}(u_{0}, v_{0})</m>.
+        In particular, if
+        <md>
+          <mrow>u_{0} \amp \leq u\leq u_{0} + \Delta u </mrow>
+          <mrow>v_{0} \amp \leq v\leq v_{0} + \Delta v </mrow>
+        </md>,
+        then the area of the surface
+        <me>\vb{r}(u,v)</me>
+        subject to the above restrictions on <m>u</m> and <m>v</m> is approximately
+        <me>\norm{\vb{r}_{u}\times\vb{r}_{v}}\Delta u\Delta v</me>,
+        where the cross product is evaluated at <m>(u_{0}, v_{0})</m>.
+        This suggests the following definition.
+      </p>
+      <definition xml:id="definition-surface-area">
+        <idx><h>parametric surfaces</h><h>surface area</h></idx>
+        <title>Surface Area</title>
+        <statement>
+          <p>
+            Let <m>S</m> be a smooth surface parameterized by <m>\vb{r}(u,v)</m> for <m>(u,v)\in D</m>.
+            Then the <term>surface area</term> of <m>S</m> is defined to be
+            <me>\iint_{D}\norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA</me>.
+          </p>
+        </statement>
+      </definition>
+      <example xml:id="example-area-of-a-cone">
+        <title>Area of a Cone</title>
+        <statement>
+          <p>
+            Find the area of the part of the cone <m>z = \sqrt{x^{2} + y^{2}}</m> bounded by <m>y = x</m> and <m>y = x^{2}</m> in the first octant.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, we parameterize the cone using
+            <me>\vb{r}(x,y) = \dotprod{x, y, \sqrt{x^{2} + y^{2}}}, x^{2}\leq y\leq x\qq{and} 0\leq x\leq 1</me>.
+            This gives
+            <me>\norm{\vb{r}_{x}\times\vb{r}_{y}} = 1</me>,
+            and so the area of the conical segment is
+            <me>\int_{0}^{1}\int_{x^{2}}^{x}\,dy\,dx</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        The reason we care about smooth surfaces above is that they let us specify a normal vector to that surface.
+        There are typically two choices for such a normal vector (inside vs.<nbsp/> outside), but once we choose a direction the normal vector becomes ambiguous.
+        Such surfaces are said to be <term>orientable</term>, and it's these surfaces that we can do calculus on.
+      </p>
+      <p>
+        As an example of a surface that is not orientable, consider the surface parameterized by
+        <me>\vb{r}(u,v) = \dotprod{2\cos u + v\cos\frac{u}{2}, 2\sin u + v\cos\frac{u}{2}, v\sin\frac{u}{2}}</me>
+        for <m>0\leq u\leq 2\pi</m> and <m>-\frac{1}{2}\leq v\leq \frac{1}{2}</m>.
+        After a <em>lot</em> of algebra, we find that the normal vector <m>\vb{r}_{u}\times\vb{r}_{v}</m> should be
+        <me>(\frac{v}{2} - 2 \sin{\left (\frac{u}{2} \right )} \cos{\left (u \right )})\vb{i} + (- \frac{v}{2} - 2 \sin{\left (\frac{u}{2} \right )} \sin{\left (u \right )})\vb{j} + (2 \sqrt{2} \sin{\left (u + \frac{\pi}{4} \right )} \cos{\left (\frac{u}{2} \right )})\vb{k}</me>.
+      </p>
+      <p>
+        Here's the problem: the normal vector is different at <m>u = v = 0</m> compared with <m>u = 2\pi, v = 0</m> since the <m>\vb{k}</m> component gets its sign flipped.
+        But on the original surface there's no difference between <m>u = v = 0</m> and <m>u = 2\pi, v = 0</m>.
+        Hence this surface is non-orientable.
+      </p>
+    </subsection>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS:1, 3, 15, 19, 33, 43.
+      </p>
+    </conclusion>
+  </section>
+  <section xml:id="section-surface-integrals">
+    <title>Surface Integrals</title>
+    <p>
+      A <term>surface integral</term> of a function <m>f(x,y,z)</m> over a surface <m>S</m> in <m>\RR^{3}</m> will be an integral of the form
+      <me>\iint_{S}f\,dS</me>.
+      This integral represents the net accumulation, or <q>sum</q>, of <m>f</m> on the surface <m>S</m>.
+      We use <m>dS</m> to indicate an <q>infinitesimal surface area</q> on <m>S</m>.
+      Since we already know the surface area from <xref ref="definition-surface-area" text="type-global" />, we can say that
+      <me>dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA</me>
+      for some vector function <m>\vb{r}(u,v)</m> that parameterizes <m>S</m>.
+      Hence
+      <me>\iint_{S}f\,dS = \iint_{D}f(\vb{r}(u,v))\norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA</me>
+      where <m>D</m> is a corresponding region in the <m>uv</m>-plane.
+      When computing surface integrals, we want to make sure our surface is <term>orientable</term>.
+    </p>
+    <example xml:id="example-mass-of-a-surface">
+      <title>Mass of a Surface</title>
+      <statement>
+        <p>
+          Find the mass of the hemisphere <m>S</m> given by <m>x^{2} + y^{2} + z^{2} = 4, z\geq 0</m> assuming that <m>\rho(x,y,z) = x^{2}z + y^{2}z</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We need to compute the surface integral <m>\iint_{S}\rho\,dS</m>.
+          First, we need to find a vector function that traces out the hemisphere.
+          Using spherical coordinates for inspiration, we can use
+          <me>\vb{r}(\varphi,\theta) = \dotprod{2\sin\varphi\cos\theta, 2\sin\varphi\sin\theta, 2\cos\varphi}</me>
+          with
+          <md>
+            <mrow>0\leq \varphi \amp \leq \frac{\pi}{2} </mrow>
+            <mrow>0\leq \theta \amp \leq 2\pi </mrow>
+          </md>
+          Then
+          <md>
+            <mrow>\vb{r}_{\varphi}\times\vb{r}_{\theta} \amp= \left|\begin{array}{ccc} \vb{i} \amp \vb{j} \amp \vb{k} \\ 2\cos\varphi\cos\theta \amp 2\cos\varphi\sin\theta \amp -2\sin\varphi \\ -2\sin\varphi\sin\theta \amp 2\sin\varphi\cos\theta \amp 0\end{array}\right|</mrow>
+            <mrow> \amp= \dotprod{4\sin^{2}\varphi\cos\theta, 4\sin^{2}\varphi\sin\theta, 4\cos\varphi\sin\varphi\cos^{2}\theta + 4\cos\varphi\sin\varphi\sin^{2}\theta}</mrow>
+          </md>
+          Now we need to find the magnitude:
+          <me>\norm{\vb{r}_{\varphi}\times\vb{r}_{\theta}} = 4\sqrt{\sin^{4}\varphi\cos^{2}\theta + \sin^{4}\varphi\sin^{2}\theta + \cos^{2}\varphi\sin^{2}\varphi} = 4\sin\varphi</me>.
+          So the mass is
+          <md>
+            <mrow>\iint_{S}\rho\,dS \amp = \int_{0}^{2\pi}\int_{0}^{\frac{\pi}{2}}8\sin^{2}\varphi\cos\varphi(4\sin\varphi)\,d\varphi\,d\theta</mrow>
+            <mrow> \amp = \frac{8\pi}{3} </mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      If <m>S</m> is given by the equation <m>z = g(x,y)</m>, then we can use
+      <me>\vb{r}(x,y) = \dotprod{x, y, g(x,y)}</me>
+      to trace out <m>S</m>.
+      This gives
+      <me>\norm{\vb{r}_{x}\times\vb{r}_{y}} = \sqrt{z_{x}^{2} + z_{y}^{2} + 1}</me>.
+    </p>
+    <example xml:id="example-surface-integral-on-a-cone">
+      <title>Surface Integral on a Cone</title>
+      <statement>
+        <p>
+          Set up the surface integral that gives the average value of <m>f(x,y,z) = xy + z^{2}</m> on the part of the cone <m>z = \sqrt{x^{2} + y^{2}}</m> that lies above the unit circle in the third octant.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Let <m>S</m> denote the part of the cone in the third octant above the unit circle and let <m>D</m> denote the portion of the unit circle directly under <m>S</m>.
+          The surface area of this part of the cone is <m>\frac{\pi}{4}</m>, so the average value of <m>f</m> on this part of the cone is
+          <md>
+            <mrow>\frac{4}{\pi} \amp \iint_{S}(xy + z^{2})\,dS </mrow>
+            <mrow> \amp = \iint_{D} (xy + x^{2} + y^{2})\sqrt{2}\,dA </mrow>
+            <mrow> \amp = \int_{\pi}^{\frac{3\pi}{2}}\sqrt{2}r^{3}(\cos\theta\sin\theta + 1)\,dr\,d\theta </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      We can also talk about surface integrals of vector fields.
+      These are higher dimensional versions of flux integrals.
+    </p>
+    <definition xml:id="definition-surface-integral-of-a-vector-field">
+      <title>Surface Integral of a Vector Field</title>
+      <statement>
+        <p>
+          Let <m>\vb{F}</m> be a continuous vector field on the piecewise smooth, oriented surface <m>S</m>.
+          Then the <term>surface integral of <m>\vb{F}</m> over <m>S</m></term> is the quantity
+          <me>\iint_{S}\vb{F}\cdot d\vb{S} = \iint_{S}\vb{F}\cdot\vb{n}\,dS</me>
+          where <m>\vb{n}</m> is chosen the unit normal vector to <m>S</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      The surface integral above measures how <m>\vb{F}</m> flows across the surface <m>S</m> in the direction of <m>\vb{n}</m>.
+      However, we will always have two possible choices for <m>\vb{n}</m>.
+      If <m>S</m> is orientable, then we know we can specify a consistent choice of direction <m>\vb{n}</m>.
+      We just need to make sure this is done before computing the integral.
+    </p>
+    <p>
+      If <m>S:\vb{r}(u,v)</m>, we can replace <m>\vb{n}</m> with
+      <me>\frac{\vb{r}_{u}\times\vb{r}_{v}}{\norm{\vb{r}_{u}\times\vb{r}_{v}}}</me>,
+      which gives
+      <me>\iint_{S}\vb{F}\cdot d\vb{S} = \iint_{S}\vb{F}\cdot\vb{r}_{u}\times\vb{r}_{v}\,dA</me>.
+    </p>
+    <example xml:id="example-flux-Into-a-sphere">
+      <title>Flux Into a Sphere</title>
+      <statement>
+        <p>
+          Does <m>\vb{F} = x\vb{i} - z\vb{j} + y\vb{k}</m> tend to flow into the sphere <m>S: x^{2} + y^{2} + z^{2} = 4</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Stealing our work from <xref ref="example-mass-of-a-surface" text="type-global" />, we can parameterize <m>S</m> using
+          <me>\vb{r}(\varphi,\theta) = \dotprod{2\sin\varphi\cos\theta, 2\sin\varphi\sin\theta, 2\cos\varphi}</me>
+          which gives
+          <me>\vb{r}_{\varphi}\times\vb{r}_{\theta} = \dotprod{4\sin^{2}\varphi\cos\theta, 4\sin^{2}\varphi\sin\theta, 4\cos\varphi\sin\varphi}</me>.
+          However, this is <em>not</em> the normal vector we need to use here.
+          Instead, we'll multiply by a negative to get the inward normal.
+          So
+          <md>
+            <mrow>\iint_{S}\vb{F}\cdot d\vb{S} \amp = \iint_{S} \vb{F}\cdot(\vb{r}_{\varphi}\times\vb{r}_{\theta})\,dA </mrow>
+            <mrow> \amp = 8\int_{0}^{\pi}\int_{0}^{2\pi}(\sin^{3}\varphi\cos^{2}\theta + \sin^{2}\varphi\cos\varphi\sin\theta + \sin^{2}\varphi\cos\varphi\sin\theta)\,d\varphi\,d\theta</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 7, 9, 23, 29.
+    </p>
+  </section>
+  <section xml:id="section-stokes-theorem">
+    <title>Stokes' Theorem</title>
+    <p>
+      Suppose we want to find the circulation of a vector field <m>\vb{F}</m> on a surface <m>S</m>.
+      If <m>S</m> lies in the plane, then we can use Green's Theorem to say that
+      <me>\iint_{S}\curlt{\vb{F}}\,dA = \oint_{\partial S}\vb{F}\cdot\vb{T}\,ds</me>.
+      If <m>S</m> is a surface in <m>\RR^{3}</m>, then we must take the dot product of <m>\curlt\vb{F}</m> with the unit normal to <m>S</m>.
+      The corresponding result is known as <term>Stokes' Theorem</term>.
+    </p>
+    <theorem xml:id="theorem-stokes-theorem">
+      <title>Stokes' Theorem</title>
+      <statement>
+        <p>
+          Let <m>S</m> denote a simple, closed, orientable surface with unit normal <m>\vb{n}</m> and let <m>\vb{F}</m> denote a continuously differentiable vector field on <m>S</m>.
+          Then
+          <me>\oint_{\partial S}\vb{F}\cdot\vb{T}\,ds = \iint_{S}\curl\vb{F}\,d\vb{S}</me>,
+          where <m>\partial S</m> is oriented counterclockwise with respect to <m>\vb{n}</m>.
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-circulation-along-a-triangle">
+      <title>Circulation Along a Triangle</title>
+      <statement>
+        <p>
+          Let <m>C</m> denote the triangle formed by the boundary of the plane <m>x + y+ z = 1</m> in the first octant, traversed counterclockwise when viewed from below.
+          Let <m>\vb{F} = \dotprod{y^{2} + z^{2}, x^{2} + z^{2}, x^{2} + y^{2}}</m>.
+          Find <m>\oint_{C}\vb{F}\dr</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          By <xref ref="theorem-stokes-theorem" text="title" />, we can write
+          <me>\oint_{C}\vb{F}\dr = \iint_{S}\curl\vb{F}\cdot\vb{n}\,dS</me>
+          where <m>S</m> is the surface contained by <m>C</m>.
+          To find <m>\vb{n}</m> we'll parameterize <m>S</m> using
+          <me>\vb{r}(u,v) = \dotprod{u, v, 1 - u - v}, 0\leq u \leq 1 - v,  0\leq v\leq 1</me>.
+          Then
+          <me>\vb{r}_{u}\times\vb{r}_{v} = \dotprod{1, 1, 1}</me>.
+          Likewise,
+          <me>\curl\vb{F} = 2\dotprod{y - z, z - x, x - y}</me>.
+          So
+          <me>\oint_{C}\vb{F}\dr = \int_{0}^{1}\int_{0}^{1 - v}-2(0)\,du\,dv = 0</me>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      An easier way to find a normal vector in the last example would be to use our knowledge from <xref ref="section-equations-of-lines-and-planes" text="type-global" />.
+      However, the following approach is more general.
+      If <m>S</m> is described by the equation <m>F(x,y,z) = 0</m>, then <m>\grad\vb{F}</m> is guaranteed to be normal to <m>S</m>.
+      This is especially useful if <m>S</m> can be described by an equation of the form <m>z = f(x,y)</m>, as above.
+      To see how, note that
+      <md>
+        <mrow>x + y + z \amp = 1 </mrow>
+        <mrow> \amp \implies F(x,y,z) = 1 - x - y - z </mrow>
+        <mrow> \amp \implies \grad\vb{F} = \dotprod{-1, -1, -1} </mrow>
+      </md>.
+    </p>
+    <example xml:id="example-circulation-along-a-paraboloid">
+      <title>Circulation Along a Paraboloid</title>
+      <statement>
+        <p>
+          Let <m>\vb{F} = \dotprod{xz, yz, xyz}</m> and let <m>S</m> denote the paraboloid <m>z = x^{2} + y^{2}</m> that lies inside the cylinder <m>x^{2} + y^{2} = 1</m>, oriented upwards.
+          Use Stokes' Theorem to set up the surface integral equal to <m>\oint_{\partial S}\vb{F}\dr</m>.
+        </p>
+      </statement>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 1, 3, 5, 7
+    </p>
+  </section>
+  <section xml:id="section-the-divergence-theorem">
+    <title>The Divergence Theorem</title>
+    <p>
+      So far we've considered several different versions of the <xref ref="theorem-fundamental-theorem-of-calculus" text="title" />.
+      There is the <xref ref="theorem-fundamental-theorem-line-integrals" text="title" /> which applies to the gradient operator <m>\grad</m>, <xref ref="theorem-green-s-theorem" text="title" /> which applies to the two-dimensional curl, <xref ref="theorem-stokes-theorem" text="title" /> which applies to <m>\curl</m>, and also <xref ref="theorem-green-s-theorem-for-flux-integrals" text="title" /> which applies to the two-dimensional divergence.
+      The only remaining generalization is the <term>divergence theorem</term>.
+    </p>
+    <theorem xml:id="theorem-divergence-theorem">
+      <title>Divergence Theorem</title>
+      <statement>
+        <p>
+          Let <m>E</m> be a simple solid region and let <m>S</m> be the boundary surface of <m>E</m> oriented outwards.
+          Let <m>\vb{F}</m> denote a continuously differentiable vector field on <m>E</m>.
+          Then
+          <me>\iint_{S}\vb{F}\cdot d\vb{S} = \iiint_{E}\div\vb{F}\,dV</me>.
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-flux-across-a-spherical-cap">
+      <title>Flux across a spherical cap</title>
+      <statement>
+        <p>
+          Let <m>S</m> denote the top half of the sphere of radius <m>5</m> centered at the origin.
+          Let <m>\vb{F} = \dotprod{x^{3} - y^{3}, y^{3} - z^{3}, z^{3} - x^{3}}</m>.
+          Determine if <m>\vb{F}</m> flows out of or into <m>S</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We need to calculate the flux integral <m>\iint_{S}\vb{F}\cdot d\vb{S}</m>, which is made easier using <xref ref="theorem-divergence-theorem" text="type-global" />.
+          If we let <m>E</m> denote the interior of this region, we get
+          <md>
+            <mrow>\iint_{S}\vb{F}\cdot d\vb{S} \amp \iiint_{E}\div\vb{F}\,dV </mrow>
+            <mrow> \amp = \iiint_{E}3(x^{2} + y^{2} + z^{2})\,dV </mrow>
+            <mrow> \amp = \int_{0}^{2\pi}\int_{0}^{\frac{\pi}{2}}\int_{0}^{5}3\rho^{4}\sin\varphi\,d\rho\,d\varphi\,d\theta </mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-flux-across-a-cube">
+      <title>Flux across a cube</title>
+      <statement>
+        <p>
+          Let <m>S</m> denote the surface of the unit cube with vertices at <m>(0,0,0)</m> and <m>(1,1,1)</m> and let <m>\vb{F} = \dotprod{xy, y^{2}z, z^{3}}</m>.
+          Find <m>\iint_{S}\vb{F}\cdot\vb{n}\,dS</m> where <m>\vb{n}</m> is the <em>inward</em> unit normal to <m>S</m>.
+        </p>
+      </statement>
+    </example>
+    <p>
+      SUGGESTED PROBLEMS: 1, 3, 5, 19.
+    </p>
+  </section>
+</chapter>

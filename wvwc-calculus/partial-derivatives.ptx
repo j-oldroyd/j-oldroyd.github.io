@@ -1,0 +1,1348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="partial-derivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Partial Derivatives</title>
+    <introduction>
+        <p>
+            For functions that depend on a single independent variable such as <m>x</m> or <m>t</m>, derivatives are useful because they represent how the function itself changes as the independent variable changes.
+            However, there are many situations where it makes sense to consider functions of more than one independent variable.
+            Therefore, we will want to extend the notion of derivative to include these functions as well.
+            Our primary tool for this will be the <term>partial derivative</term>, which we'll see in <xref ref="section-partial-derivatives" text="type-global" />.
+            But we'll need to build up some terminology to get there.
+        </p>
+    </introduction>
+    <section xml:id="section-functions-of-several-independent-variables">
+        <title>Functions of Several Independent Variables</title>
+        <introduction>
+            <p>
+                Now we need to consider calculus with functions of more than one independent variable.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-functions-of-two-variables">
+            <title>Functions of Two Variables</title>
+            <p>
+                A function of several variables is a function that depends on more than one independent variable.
+                One such example comes from differential equations, where quantities such as the temperature of a metal rod depend on both a position <m>x</m> and a time <m>t</m>.
+            </p>
+            <definition xml:id="definition-functions-of-two-variables">
+                <idx><h>functions of several variables</h><h>two variables</h></idx>
+                <title>Functions of Two Variables</title>
+                <statement>
+                    <p>
+                        A <term>function of two variables</term> is a rule <m>f</m> or <m>z = f(x,y)</m> that assigns pairs <m>(x,y)</m> of real numbers to real numbers.
+                        The <term>domain</term> is the set <m>D</m> in <m>\RR^{2}</m> for which the rule is defined.
+                        The <term>range</term> is the set <m>R</m> in <m>\RR</m> of all possible values of <m>f</m>.
+                        <m>x,y</m> are called independent variables and <m>z</m> is called the <term>dependent variable</term>.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-domain-of-a-function">
+                <title>Domain of a function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = \frac{1}{\sqrt{4 - x^{2} - y^{2}}}</m>.
+                        Find the domain of <m>f</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We'll break this down into pieces. 
+                        First, since we're dealing with square roots in real numbers we need <m>x^{2}+y^{2}\leq4</m>.
+                        Second, we need to make sure that <m>\sqrt{4 - x^{2} - y^{2}}\neq0</m>.
+                        So the domain of <m>f</m> is the set of all points <m>(x,y)</m> in <m>\RR^{2}</m> such that <m>x^{2} + y^{2} &lt; 4</m>.
+                        In other words, the domain is just the inside of the circle of radius <m>2</m> centered at the origin.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                We can also graph functions of two variables by viewing <m>f(x,y)</m> as representing the height of some surface over the point <m>(x,y)</m> in the <m>xy</m>-plane.
+                In other words, just as <m>y = f(x)</m> represents a curve in <m>\RR^{2}</m>, the equation <m>z = f(x,y)</m> represents a surface in <m>\RR^{3}</m>.
+            </p>
+            <example xml:id="example-sketching-a-cone">
+                <title>Sketching a cone</title>
+                <statement>
+                    <p>
+                        Sketch the surface given by <m>f(x,y) = \sqrt{4x^{2} + y^{2}}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need to sketch <m>z = \sqrt{4x^{2} + y^{2}}</m>.
+                        We can start by squaring both sides to get <m>z^{2} = 4x^{2} + y^{2}</m>.
+                        If we look at the right hand side, it looks a lot like an ellipse, so we'll try to work with that.
+                        Assuming <m>z\neq0</m>, we can rewrite the equation to get
+                        <me>\frac{x^{2}}{z^{2}/4} + \frac{y^{2}}{z^{2}} = 1</me>
+                        For any given positive value of <m>z</m>, this represents an ellipse that extends to <m>\frac{z}{2}</m> in the <m>x</m> direction and <m>z</m> in the <m>y</m> direction.
+                        So as <m>z</m> increases, these ellipses increase in size as well.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-contour-plots">
+            <title>Contour Plots</title>
+            <definition xml:id="definition-contour-plots">
+                <idx><h>functions of several variables</h><h>contour plots</h></idx>
+                <title>Contour Plots</title>
+                <statement>
+                    <p>
+                        Given a function <m>f(x,y)</m>, a <term>contour plot</term> is the plot of an equation of the form <m>f(x,y) = k</m> for some constant <m>k</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                A contour plot can be viewed as slicing a surface in <m>\RR^{3}</m> with a level plane.
+                The contour plot is exactly where the plane intersects the surface.
+            </p>
+            <example xml:id="example-contours-on-a-paraboloid">
+                <title>Contours on a paraboloid</title>
+                <statement>
+                    <p>
+                        What do the contours of <m>f(x,y) = x^{2} + \frac{y^{2}}{9}</m> look like?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        If we pick different (nonnegative) values for <m>k</m>, then all of the contours of <m>f(x,y)</m> take the form
+                        <me>x^{2} + \frac{y^{2}}{9} = k</me>
+                        which turns into
+                        <me>\frac{x^{2}}{k} + \frac{y^{2}}{{9k}} = 1.</me>
+                        This is a family of ellipses.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 5, 11, 13
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-limits-and-continuity">
+        <title>Limits and Continuity</title>
+        <introduction>
+            <p>
+                In this section we begin extending calculus concepts from one dimension to higher dimensions, starting with limits.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-limits">
+            <title>Limits</title>
+            <p>
+                Just as functions of one variable have a notion of limit, the same can be said for functions of several variables.
+                However, limits involving several variables tend to be more restrictive.
+            </p>
+            <definition xml:id="definition-limit-of-a-function-of-two-variables">
+                <idx><h>functions of several variables</h><h>two variables</h><h>limits</h></idx>
+                <title>Limit of a Function of Two Variables</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be some function and let <m>(a,b)</m> be a point arbitrarily close to the domain of <m>f</m>.
+                        We say that
+                        <me>\lim_{(x,y)\to(a,b)}f(x,y) = L</me>
+                        if <m>f(x,y)</m> gets arbitrarily close to <m>L</m> as <m>(x,y)</m> gets arbitrarily close to <m>(a,b)</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                Here's why limits can be tricky in two dimensions: for the limit to exist, <m>f(x,y)</m> must approach the same value <m>L</m> no matter how <m>(x,y)</m> approaches <m>(a,b)</m>!
+            </p>
+            <example>
+                <statement>
+                    <p>
+                        Find 
+                        <me>\lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}}</me>
+                        or show that it doesn't exist.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First, we'll start simple.
+                        If we set <m>x = 0</m> then the limit becomes
+                        <me>\lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}} = \lim_{y\to0}\frac{0}{2y} = 0.</me>
+                        Likewise, if we set <m>y=0</m> then the limit becomes
+                        <me>\lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}} = \lim_{x\to0}\frac{0}{x^{3}} = 0.</me>
+                        From this, we might suspect that the limit actually exists. 
+                        However, we need to make sure that this approaches <m>0</m> along <em>all possible paths</em> to <m>(0,0)</m>.
+                        Here's another path we can try: <m>y = x</m>.
+                        If we do this, then the limit becomes
+                        <me>\lim_{(x,y)\to(0,0)}\frac{x^{2}\sin y}{x^{3}+2y^{3}} = \lim_{x\to0}\frac{x^{2}\sin x}{3x^{3}} = \frac{1}{3}.</me>
+                        Since the value that <m>\frac{x^{2}\sin y}{x^{3}+2y^{3}}</m> approaches as <m>(x,y)\to(0,0)</m> depends on how <m>(x,y)</m> approaches <m>(0,0)</m>, we can say that the limit does not exist.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                In general, showing limits exist for functions of several variables can be tricky.
+                However, occasionally we can use some tricks to make these problems more manageable.
+            </p>
+            <example xml:id="example-showing-a-limit-exists">
+                <title>Showing a limit exists</title>
+                <statement>
+                    <p>
+                        Find <m>\lim_{(x,y)\to(0,0)}(x^{2}+y^{2})\ln(x^{2}+y^{2})</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Since the inside of the limit depends on <m>x^{2}+y^{2}</m>, this suggests that switching to polar coordinates might be beneficial.
+                        So let's try that!
+                        <me>\lim_{(x,y)\to(0,0)}(x^{2}+y^{2})\ln(x^{2}+y^{2}) = \lim_{(r,\theta)\to(0,0)}r^{2}\ln r^{2}.</me>
+                        Here's why this helps us.
+                        If we look at our new limit, we see that it doesn't depend on <m>\theta</m> at all.
+                        In other words, <em>it doesn't depend on the direction</em> we approach the origin from, just the distance from the origin <m>r</m>.
+                        So
+                        <md>
+                            <mrow>\lim_{(r,\theta)\to(0,0)}r^{2}\ln r^{2} &amp; = \lim_{r\to0^{+}} 2r^{3}\ln r </mrow>
+                            <mrow> &amp; = 0 </mrow>
+                        </md>
+                        and so the original limit also equals <m>0</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-continuous-functions">
+            <title>Continuous Functions</title>
+            <p>
+                Now that we have the notion of limit, we can define continuous functions of two variables.
+            </p>
+            <definition xml:id="definition-continuous-function-of-two-variables">
+                <idx><h>functions of several variables</h><h>two variables</h><h>continuity</h></idx>
+                <title>Continuous Function of Two Variables</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be a function of two variables.
+                        We say that <m>f</m> is <term>continuous</term> at <m>(a,b)</m> if 
+                        <me>\lim_{(x,y)\to(a,b)}f(x,y) = f(a,b).</me>
+                        If <m>f</m> is continuous at all points in a set <m>D</m>, we say that <m>f</m> is continuous on <m>D</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                We won't typically use the definition of continuity in this course.
+                We'll just make of several common types of continuous functions:
+            </p>
+            <ol>
+                <li>Polynomials in two variables, such as <m>x-3x^{4}y^{5}</m>, are continuous on <m>\RR^{2}</m>.</li>
+                <li>Ratios of polynomials (i.e. <term>rational functions</term>), such as <m>\frac{y^{3}-x}{1+x^{20}y^{5}}</m>, are continuous on their domains.</li>
+                <li>Compositions of the form <m>g(f(x,y))</m>, where <m>g(x)</m> and <m>f(x,y)</m> are continuous, are continuous wherever they are defined.</li>
+            </ol>
+            <example xml:id="example-limit-of-a-continuous-function">
+                <title>Limit of a continuous function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = \tan\frac{3x^{2}-5y}{1-xy}</m>.
+                        Find
+                        <me>\lim_{(x,y)\to(3,4)}f(x,y).</me>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First, note that this is a composition of continuous functions, so <m>f(x,y)</m> should be continuous wherever it's defined.
+                        Since this is defined at <m>(3,4)</m>, we can say that <m>f</m> is continuous there as well and that
+                        <me>\lim_{(x,y)\to(3,4)}f(x,y) = f(3,4) = \frac{7}{-11}.</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 3, 11, 19, 23, 31
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-partial-derivatives">
+        <title>Partial Derivatives</title>
+        <h>
+            Now that we know how to take limits for functions of two variables, we can define a notion of derivative for these functions as well, which we'll call the <term>partial derivative</term>.
+            The main idea behind the partial derivative is to measure how a function <m>f(x,y)</m> changes as a single variable changes.
+            Although the definition given is only for functions of two variables, it also extends to functions of many variables.
+        </h>
+        <definition xml:id="definition-partial-derivatives">
+            <idx>partial derivatives</idx>
+            <title>Partial Derivatives</title>
+            <statement>
+                <p>
+                    Let <m>f(x,y)</m> be a function of two variables.
+                    The <term>partial derivative of <m>f</m> with respect to <m>x</m></term> is the function
+                    <me>\pdv{f}{x} = f_{x}(x,y) = \lim_{h\to0}\frac{f(x+h,y)-f(x,y)}{h}</me>,
+                    assuming that this limit exists.
+                    Similarly, the <term>partial derivative of <m>f</m> with respect to <m>y</m></term> is the function
+                    <me>\pdv{f}{y} = f_{y}(x,y) = \lim_{h\to0}\frac{f(x,y+h)-f(x,y)}{h}</me>,
+                    assuming that this limit exists.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            When computing partial derivatives with respect to <m>x</m>, you just need to differentiate <m>f(x,y)</m> treating it as a function of <m>x</m> alone and considering <m>y</m> as a constant.
+            Similarly, if you want to compute <m>f_{y}</m> you differentiate with respect to <m>y</m> and treat <m>x</m> as constant.
+        </p>
+        <example>
+            <statement>
+                <p>
+                    Let <m>f(x,y) = ye^{x-y} - x^{3}\tan y^{4}</m>.
+                    Find <m>\pdv{f}{y}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Since we need to find <m>\pdv{f}{y}</m>, we differentiate <m>f(x,y)</m> with respect to <m>y</m> and treat <m>x</m> as a constant:
+                    <md>
+                        <mrow>\pdv{f}{y} &amp; = \pdv{}{y}\left[ye^{x-y} - x^{3}\tan y^{4}\right] </mrow>
+                        <mrow> &amp; = e^{x-y} - ye^{x-y} - 4x^{3}y^{3}\sec^{2}y^{4} </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            Geometrically, <m>f_{x}(a,b)</m> represents the rate of change of the surface <m>z = f(x,y)</m> at the point <m>(a,b)</m> in the <m>x</m> direction, and a similar statement is true for <m>f_{y}(a,b)</m>.
+        </p>
+        <example xml:id="example-partial-derivatives-on-the-unit-sphere">
+            <title>Partial derivatives on the unit sphere</title>
+            <statement>
+                <p>
+                    Let <m>z = \sqrt{1-x^{2} - y^{2}}</m>.
+                    Where is <m>\pdv{z}{y}</m> equal to <m>0</m>?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can find this algebraically, but we'll try to answer this geometrically instead.
+                    First, note that <m>z = \sqrt{1 - x^{2} - y^{2}}</m> is actually the top half of the unit sphere.
+                    If we're trying to find where <m>\pdv{z}{y}</m> is zero, then we need to find where this surface is "flat" when moving in the <m>y</m> direction.
+                    If we think about this a bit, this should only occur when <m>y=0</m>, i.e. along the <m>x</m>-axis.
+                    At any other location on the unit sphere, moving in the <m>y</m>-direction on the unit sphere requires going uphill or downhill, which means <m>z_{y}\neq0</m> at these locations.
+                </p>
+            </solution>
+        </example>
+        <p>
+            We can also find higher partial derivatives.
+            For example, the second partial derivatives of a function <m>f(x,y)</m> are given by
+            <md>
+                <mrow>\pdv[2]{f}{x} &amp; = \pdv{}{x}\left(\pdv{f}{x}\right) = (f_{x})_{x} </mrow>
+                <mrow>\pdv[2]{f}{y} &amp; = \pdv{}{y}\left(\pdv{f}{y}\right) = (f_{y})_{y} </mrow>
+                <mrow>\pdv{{}^{2}f}{x\partial y} &amp; = \pdv{}{x}\left(\pdv{f}{y}\right) = (f_{y})_{x} </mrow>
+                <mrow>\pdv{{}^{2}f}{y\partial x} &amp; = \pdv{}{y}\left(\pdv{f}{x}\right) = (f_{x})_{y} </mrow>
+            </md>
+            The last two derivatives are examples of <term>mixed derivatives</term>.
+        </p>
+        <example xml:id="example-mixed-partials">
+            <title>Mixed partials</title>
+            <statement>
+                <p>
+                    Let <m>f(x,y) = \sin^{2}(mx+ny)</m> where <m>m,n</m> are constants.
+                    Find the mixed partials <m>f_{xy}</m> and <m>f_{yx}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We have
+                    <md>
+                        <mrow>f_{xy} &amp; = (f_{x})_{y} </mrow>
+                        <mrow> &amp; = (2m\cos(mx+ny)\sin(mx+ny))_{y} </mrow>
+                        <mrow> &amp; = -2mn\sin^{2}(mx+ny) + 2mn\cos^{2}(mx+ny) </mrow>
+                        <mrow> &amp; = 2mn\cos(2mx+2ny) </mrow>
+                    </md>
+                    as well as
+                    <md>
+                        <mrow>f_{yx} &amp; = (f_{y})_{x} </mrow>
+                        <mrow> &amp; = (2n\cos(mx+ny)\sin(mx+ny))_{x} </mrow>
+                        <mrow> &amp; = -2mn\sin^{2}(mx+ny) + 2mn\cos^{2}(mx+ny) </mrow>
+                        <mrow> &amp; = 2mn\cos(2mx+2ny) </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <p>
+            In the last example the mixed partial were equal, but this is not always true.
+            However, if <m>f(x,y)</m> is a function with "nice" mixed partial derivatives, then its mixed partials will be equal.
+        </p>
+        <theorem xml:id="theorem-clairaut-s-theorem">
+            <title>Clairaut's Theorem</title>
+            <statement>
+                <p>
+                    Suppose that <m>f(x,y)</m> is defined on a disk <m>D</m> that contains the point <m>(a,b)</m>.
+                    If <m>f_{xy}</m> and <m>f_{yx}</m> are both continuous on <m>D</m>, then
+                    <me>f_{xy}(a,b) = f_{yx}(a,b).</me>
+                    In other words, the mixed partials are equal to each other wherever they happen to be continuous.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            Partial derivatives are important for their use in <term>partial differential equations (PDEs)</term>, which are equations that involve partial derivatives of an unknown function <m>f</m>.
+        </p>
+        <example xml:id="example-the-wave-equation">
+            <title>The Wave Equation</title>
+            <statement>
+                <p>
+                    One of the most important PDEs is the <term>wave equation</term>
+                    <me>u_{tt} = c^{2}u_{xx},</me>
+                    which is used to model the displacement of a string <m>u(x,t)</m> at position <m>x</m> and time <m>t</m>.
+                    Determine if 
+                    <me>u(x,t) = \sin(x-3t) + \ln(x+3t)</me>
+                    is a solution of the wave equation.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We need to plug <m>u</m> into the PDE and check that it satisfies the PDE.
+                    Since
+                    <md>
+                        <mrow>u_{tt} &amp; = -9\cos(x-3t) - \frac{9}{(x+3t)^{2}} </mrow>
+                        <mrow>u_{xx} &amp; = -\sin(x-3t) - \frac{1}{(x+3t)^{2}} </mrow>
+                    </md>
+                    it follows that <m>u_{tt} = 9u_{xx}</m>.
+                    So <m>u(x,t)</m> satisfies the wave equation with <m>c=3</m>, and so is a solution of the wave equation.
+                </p>
+            </solution>
+        </example>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 3, 7, 11, 19, 31, 45, 49, 51, 53, 61
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-tangent-planes-and-linear-approximations">
+        <title>Tangent Planes and Linear Approximations</title>
+        <introduction>
+            <p>
+                In Calculus I, derivatives are used to find linear approximations to functions of the form <m>f(x)</m>.
+                We can use partial derivatives to do the same for functions with several independent variables.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-tangent-planes">
+            <title>Tangent Planes</title>
+            <p>
+                Recall that if a curve <m>y=f(x)</m> is differentiable at a point <m>x_{0}</m>, then it has a tangent line passing through <m>(x_{0},f(x_{0})).</m>
+                The tangent line can be viewed as a linear approximation of the curve <m>y=f(x)</m> near the point <m>x_{0}</m>.
+                We can apply a similar ideas to surfaces <m>z = f(x,y)</m>.
+                It turns out that if we have a surface <m>z = f(x,y)</m> and a point <m>(x_{0},y_{0}, f(x_{0},y_{0}))</m> on the surface, then every tangent vector at this point is contained in a single plane called the <term>tangent plane</term>.
+            </p>
+            <p>
+                We'd like to find the equation of this plane.
+                First, recall that every plane can be described by an equation of the form
+                <me>a(x-x_{0})+b(y-y_{0})+c(z-z_{0}) = 0.</me>
+                We can view <m>x_{0},y_{0}</m> and <m>z_{0} = f(x_{0},y_{0})</m> as given, so we just need to find <m>a,b,c</m>.
+                If we assume that <m>c\neq 0</m>, then we can rewrite this equation to obtain
+                <me>z-z_{0} = A(x-x_{0}) + B(y-y_{0})</me>
+                where <m>A = -\frac{a}{c}</m> and <m>B = -\frac{b}{c}</m>.
+                If we set <m>y=y_{0}</m>, then we have <m>z-z_{0} = A(x-x_{0})</m>.
+                This is the equation of a line tangent to the surface and parallel to the <m>x</m>-axis, and so the slope of this line must be
+                <me>A = f_{x}(x_{0},y_{0})</me>
+                since the slope of a tangent line in the <m>x</m>-direction gives the rate of change in the <m>x</m>-direction.
+                Similarly, 
+                <me>B = f_{y}(x_{0},y_{0}).</me>
+                Putting all of this together gives the following theorem.
+            </p>
+            <theorem xml:id="theorem-tangent-planes-to-surfaces">
+                <title>Tangent Planes to Surfaces</title>
+                <idx><h>tangent planes</h></idx>
+                <statement>
+                    <p>
+                        Let <m>z = f(x,y)</m> be a surface and suppose that <m>f</m> has continuous partial derivatives at the point <m>(x_{0},y_{0})</m>.
+                        Then the tangent plane to the surface <m>z = f(x,y)</m> at the point <m>(x_{0},y_{0})</m> is given by
+                        <me>z - z_{0} = f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},y_{0})(y - y_{0}),</me>
+                        where <m>z_{0} = f(x_{0},y_{0})</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-approximations-by-tangent-planes">
+                <title>Approximations by tangent planes</title>
+                <statement>
+                    <p>
+                        Find the tangent plane to <m>f(x,y) = xe^{xy}</m> at the point <m>(2,0,2)</m>.
+                        Use this to approximate <m>f(1.9,0)</m>
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The equation of the tangent plane is given by
+                        <me>z - 2 = (x - 2) + 4(y - 0)</me>
+                        which we can rewrite as 
+                        <me>z = x + 4y.</me>
+                        So at <m>(1.9,0)</m>, we should have
+                        <me>f(1.9,0)\approx 1.9 + 4(0) = 1.9.</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-linear-approximations">
+            <title>Linear Approximations</title>
+            <p>
+                <xref ref="example-approximations-by-tangent-planes" text="type-global" /> shows that we can use tangent planes to approximate complicated functions.
+                This leads us to the idea of a linear approximation, or <term>linearization</term> of a function of the form <m>f(x,y)</m>.
+            </p>
+            <definition xml:id="definition-linearization">
+                <idx><h>linearization</h></idx>
+                <title>Linearization</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be a function for which <m>f_{x}</m> and <m>f_{y}</m> are both continuous at a point <m>(x_{0},y_{0})</m>.
+                        Then the linearization of <m>f(x,y)</m> at <m>(x_{0},y_{0})</m> is the function <m>L(x,y)</m> given by
+                        <me>L(x,y) = f(x_{0},y_{0}) + f_{x}(x_{0},y_{0})(x-x_{0}) + f_{y}(x_{0},y_{0})(y-y_{0}).</me>
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                For well-behaved functions (i.e. functions that have continuous partial derivatives), <m>L(x,y)\approx f(x,y)</m> if <m>(x,y)</m> is close to the point <m>(x_{0},y_{0})</m>.
+            </p>
+            <example xml:id="example-linearization-of-an-exponential-and-a-sinusoid">
+                <title>Linearization of an exponential and a sinusoid</title>
+                <statement>
+                    <p>
+                        Let <m>u(x,t) = 30e^{-t}\sin x</m>.
+                        Find the linearization of <m>u</m> at the point <m>(0,\frac{\pi}{2})</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        By <xref ref="definition-linearization" text="type-global" />, the linearization is given by
+                        <me>L(x,y) = 30 - 30(t - 0) = 30(1 - t).</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                <xref ref="definition-linearization" text="type-global" /> can also be extended to functions with more than two variables.
+            </p>
+            <example xml:id="example-linearization-in-three-variables">
+                <title>Linearization in three variables</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z) = xze^{-y^{2}-z^{2}}</m>.
+                        Find the linearization <m>L(x,y,z)</m> at the point <m>(-3,\sqrt{\ln2},-\sqrt{\ln3})</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The formula we need to use now is
+                        <me>L(x,y,z) = f_{x}(-3,\sqrt{\ln2},-\sqrt{\ln3})(x+3) + f_{y}(-3,\sqrt{\ln2},-\sqrt{\ln3})(y - \sqrt{\ln2}) + f_{z}(-3,\sqrt{\ln2},-\sqrt{\ln3})(z + \sqrt{\ln3}).</me>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 15, 19
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-the-chain-rule-in-several-variables">
+        <title>The Chain Rule in Several Variables</title>
+        <p>
+            Recall that from Calc I, we know that
+            <me>\dv{}{x}f(g(x)) = \dv{f}{g}\dv{g}{x} = f'(g(x))g'(x).</me>
+            This is just the the chain rule, which tells us how to differentiate functions that depend on other functions.
+            Or to think of it another way, it tells us how to differentiate <em>variables</em> like <m>f</m> that depend on other variables like <m>g</m> and <m>x</m>.
+            What we'd like to do now is to extend the chain rule to more complicated situations.
+            We'll start with the following formula.
+        </p>
+        <theorem xml:id="theorem-chain-rule-for-one-independent-variable">
+            <idx><h>chain rule</h><h>one independent variable</h></idx>
+            <title>Chain Rule for One Independent Variable</title>
+            <statement>
+                <p>
+                    Let <m>z = f(x,y)</m> be differentiable (so the partial derivatives <m>f_{x}</m> and <m>f_{y}</m> exist).
+                    If <m>x</m> and <m>y</m> both depend on <m>t</m> (i.e. <m>x = x(t)</m> and <m>y = y(t)</m>), then
+                    <me>\dv{z}{t} = \pdv{z}{x}\dv{x}{t} + \pdv{z}{y}\dv{y}{t}</me>
+                    See <xref ref="figure-chain-rule-one-independent-variable" text="type-global" />.
+                </p>
+            </statement>
+        </theorem>
+        <figure xml:id="figure-chain-rule-one-independent-variable">
+            <image xml:id="image-chain-rule-one-independent-variable" width="20%">
+                <latex-image><![CDATA[
+                    \begin{tikzpicture}[scale=.15]
+                        \Tree [.\node{$z$}; [.\node{$x$}; [.\node{$t$};]]
+                                          [.\node{$y$}; [.\node{$t$};]]
+                                          ]
+                        \end{tikzpicture}
+                    ]]>
+                </latex-image>
+            </image>
+            <caption>The chain rule for one independent variable.</caption>
+        </figure>
+        <example xml:id="example-using-multivariable-chain-rule">
+            <title>Using the multivariable chain rule</title>
+            <statement>
+                <p>
+                    Let <m>f(x,y,z) = \ln\sqrt{x^{2}+y^{2}+z^{2}}</m> where
+                    <me>x = \sin t,\quad y = \cos t\quad\text{and } z = \tan t.</me>
+                    Find <m>\dv{f}{t}\bigg]_{t=0}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, let's try to simplify <m>f</m>.
+                    If we do so, we get
+                    <me>f(x,y,z) = \frac{1}{2}\ln(x^{2} + y^{2} + z^{2}).</me>
+                    Now, to find <m>\dv{f}{t}</m> we need to use the chain rule, which gives
+                    <md>
+                        <mrow>\dv{f}{t} &amp; = f_{x}x'(t) + f_{y}y'(t) + f_{z}z'(t) </mrow>
+                        <mrow> &amp; = \frac{x}{x^{2} + y^{2} + z^{2}}\cos t  - \frac{y}{x^{2} + y^{2} + z^{2}}\sin t + \frac{z}{x^{2} + y^{2} + z^{2}}\sec^{2}t</mrow>
+                        <mrow> &amp; = \frac{\sin t\cos t}{\sec^{2}t} - \frac{\cos t\sin t}{\sec^{2}t} + \frac{\tan t}{\sec^{2}t}</mrow>
+                        <mrow> &amp; = \cos t\sin t </mrow>
+                        <mrow> &amp; = \frac{1}{2}\sin2t </mrow>
+                    </md>
+                    So
+                    <me>\dv{f}{t}\bigg]_{t=0} = 0.</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            If we have more than one independent variable, then the situation becomes a little bit more complicated.
+        </p>
+        <theorem xml:id="theorem-chain-rule-with-two-independent-variables">
+            <idx><h>chain rule</h><h>two independent variables</h></idx>
+            <title>Chain Rule with Two Independent Variables</title>
+            <statement>
+                <p>
+                    Let <m>f(x,y)</m> be differentiable, and suppose that <m>x = x(s,t)</m> and <m>y = y(s,t)</m>.
+                    Then
+                    <md>
+                        <mrow>\pdv{f}{s} &amp; = f_{x}x_{s} + f_{y}y_{s} </mrow>
+                        <mrow>\pdv{f}{t} &amp; = f_{x}x_{t} + f_{y}y_{t} </mrow>
+                    </md>
+                </p>
+            </statement>
+        </theorem>
+        <figure xml:id="figure-chain-rule-two-independent-variables">
+            <image xml:id="image-chain-rule-two-independent-variables" width="30%">
+                <latex-image><![CDATA[
+                    \begin{tikzpicture}[scale=.15]
+                        \Tree [.\node{$f$}; [.\node{$x$}; [.\node{$s$};]
+                                                        [.\node{$t$};]]
+                                          [.\node{$y$}; [.\node{$s$};]
+                                                        [.\node{$t$};]]
+                                          ]
+                        \end{tikzpicture}
+                    ]]>
+                </latex-image>
+            </image>
+            <caption>The chain rule for two independent variables.</caption>
+        </figure>
+        <example xml:id="example-chain-rule-two-variables">
+            <title>Chain rule with two independent variables</title>
+            <statement>
+                <p>
+                    Let <m>f(x,y,z) = x^{2} - \sin^{-1}(z-y)</m>, where
+                    <me>x = e^{t}, \quad y = s + t\quad\text{and } z = t^{2} - st.</me>
+                    Find <m>\pdv{f}{s}</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    A good way to tackle these problems is to set up a tree diagram like <xref ref="figure-chain-rule-two-independent-variables" text="type-global" /> to list the dependencies between all of the variables.
+                    For <m>f(x,y,z)</m>, we get
+                    <figure xml:id="figure-chain-rule-two-variables">
+                        <image width="30%">
+                            <latex-image><![CDATA[
+                                \begin{tikzpicture}[scale=.15]
+                                    \Tree [.\node{$f$}; [.\node{$x$}; [.\node{$t$};]]
+                                                      [.\node{$y$}; [.\node{$s$};]
+                                                                    [.\node{$t$};]]
+                                                    [.\node{$z$}; [.\node{$s$};]
+                                                    [.\node{$t$};]]
+                                                      ]
+                                    \end{tikzpicture}
+                                ]]>
+                            </latex-image>
+                        </image>
+                        <caption>Tree diagram for <m>f(x,y,z)</m>.</caption>
+                    </figure>
+                    So we can say that
+                    <md>
+                        <mrow>\pdv{f}{s} &amp; = f_{y}y_{s} + f_{z}z_{s} </mrow>
+                        <mrow> &amp; = \frac{1}{\sqrt{1 - (z - y)^{2}}} - \frac{1}{\sqrt{1 - (z - y)^{2}}}(-t) </mrow>
+                        <mrow> &amp; = \frac{1 + t}{\sqrt{1 - (z - y)^{2}}} </mrow>
+                        <mrow> &amp; = \frac{1 + t}{\sqrt{1 - (t^{2} - st - s - t)^{2}}} </mrow>
+                    </md>
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-chain-rule-from-a-tree-diagram">
+            <title>Chain rule from a tree diagram</title>
+            <statement>
+                <p>
+                    Let <m>R = f(x,y,z,t)</m>, where <m>x = x(u,v,w)</m>, <m>y = y(u, v)</m>, <m>z = z(v)</m> and <m>t = t(v,w)</m>.
+                    Assume that all of these functions are differentiable.
+                    Find a formula for <m>\pdv{R}{w}.</m>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can set up a tree diagram as above to find the right formula for <m>R_{w}</m>.
+                    If we do so, we obtain
+                    <me>R_{w} = R_{x}x_{w} + R_{t}t_{w}.</me>
+                </p>
+            </solution>
+        </example>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 7, 11, 15, 21
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-directional-derivatives-and-gradients">
+        <title>Directional Derivatives and Gradients</title>
+        <introduction>
+            <p>
+                For a differentiable function <m>f(x,y)</m>, the partial derivatives <m>f_{x}</m> and <m>f_{y}</m> give the rates of change of <m>f</m> in the directions of the <m>x</m>-axis and <m>y</m>-axis, respectively.
+                To put this another way, <m>f_{x}</m> gives the rate of change of <m>f</m> in the direction of the vector <m>\vv{i}</m>, and <m>f_{y}</m> gives the rate of change in the direction of the vector <m>\vv{j}</m>.
+                But we have infinitely many directions to work with.
+                How can we find the rate of change of <m>f</m> in <em>any</em> direction?
+                We'll look at two tools to help us with this: directional derivatives and gradients.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-the-directional-derivative">
+            <title>The Directional Derivative</title>
+            <p>
+                Suppose we have a function <m>f(x,y)</m> defined at a point <m>(x_{0},y_{0})</m>.
+                We want to find how quickly <m>f(x,y)</m> is changing in the direction of some unit vector <m>\vv{u} = \dotprod{a,b}</m>.
+                We can estimate this by moving from the point <m>(x_{0},y_{0})</m> by some small increment <m>h\vv{u}</m>, and evaluating <m>f</m> at this new point, which is just <m>(x_{0} + ha, y_{0} + hb)</m>.
+                So the approximate rate of change in <m>f</m> in the direction of <m>\vv{u}</m> is given by
+                <me>\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}</me>
+                As <m>h\to0</m>, this should become exact.
+                This leads us to our next definition.
+            </p>
+            <definition xml:id="definition-directional-derivative">
+                <idx><h>directional derivative</h><h>definition</h></idx>
+                <title>Directional Derivative</title>
+                <statement>
+                    <p>
+                        The <term>directional derivative</term> of the function <m>f(x,y)</m> at the point <m>(x_{0},y_{0})</m> in the direction of the vector <m>\vv{u} = \dotprod{a,b}</m> is given by
+                        <me>D_{\vv{u}}f(x_{0},y_{0}) = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}</me>
+                        assuming this limit exists.
+                        As we mentioned above, <m>D_{\vv{i}}f = f_{x}</m> and <m>D_{\vv{j}}f = f_{y}</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                We have a definition for the directional derivative, but we don't want to have to use this all the time.
+                So we'd like to get a more practical formula.
+            </p>
+            <theorem xml:id="theorem-computing-the-directional-derivative">
+                <idx><h>directional derivative</h><h>formula</h></idx>
+                <title>Computing the Directional Derivative</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be a function whose partial derivatives <m>f_{x}</m> and <m>f_{y}</m> exist and are continuous.
+                        Let <m>\vv{u} = \dotprod{a,b}</m> be a unit vector.
+                        Then <m>D_{\vv{u}}f(x,y)</m> exists, and is given by
+                        <me>D_{\vv{u}}f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b.</me>
+                    </p>
+                </statement>
+                <proof>
+                    <p>
+                        First, set
+                        <me>g(h) = f(x_{0}+ha, y_{0} +hb)</me>
+                        Then by the Calculus I definition of the derivative,
+                        <me>g'(0) = \lim_{h\to0}\frac{g(h) - g(0)}{h} = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0}+hb) - f(x_{0},y_{0})}{h} = D_{\vv{u}}f(x_{0},y_{0}).</me>
+                        On the other hand, if we set <m>x = x_{0} + ha</m> and <m>y = y_{0} + hb</m>, then <m>g(h) = f(x,y)</m>.
+                        We can then find <m>g'(h)</m> using the chain rule from <xref ref="section-the-chain-rule" text="type-global" /> to get
+                        <me>g'(h) = f_{x}\dv{x}{h} + f_{y}\dv{y}{h} = f_{x}(x,y)a + f_{y}(x,y)b</me>
+                        So <m>g'(0) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.</m>
+                        Therefore
+                        <me>D_{\vv{u}}f(x_{0},y_{0}) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.</me>
+                    </p>
+                </proof>
+            </theorem>
+            <p>
+                The formula in <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> extends to functions such as <m>f(x,y,z)</m> as well.
+                We just need to include more partial derivatives.
+            </p>
+            <example xml:id="example-computing-a-directional-derivative">
+                <title>Computing a directional derivative</title>
+                <statement>
+                    <p>
+                        Let <m>f(r,s) = \frac{r}{r^{2}+s^{2}}</m>.
+                        Find the directional derivative of <m>f</m> in the direction of <m>\vv{v} = 3\vv{i} + 5\vv{j}</m> at the point <m>(1,2)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We can use <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> to find the directional derivative.
+                        However, there's something we need to watch out for here.
+                        Both <xref ref="definition-directional-derivative" text="type-global" /> and <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> require using a <em>unit vector</em>, but our vector <m>\vv{v}</m> isn't a unit vector at all.
+                        So we need to <term>normalize</term> <m>\vv{v}</m> to get a unit vector <m>\vv{u}</m> that is parallel to <m>\vv{v}</m>:
+                        <me>\vv{u} = \frac{\vv{v}}{|\vv{v}|} = \dotprod{\frac{3}{\sqrt{34}}, \frac{5}{\sqrt{34}}}</me>
+                        Since
+                        <md>
+                            <mrow>f_{r} &amp; = \frac{s^{2} - r^{2}}{(r^{2} + s^{2})^{2}} </mrow>
+                            <mrow>f_{s} &amp; = -\frac{2rs}{(r^{2} + s^{2})^{2}} </mrow>
+                        </md>
+                        we see that the directional derivative we need is given by
+                        <md>
+                            <mrow>D_{\vv{u}}f(1,2) &amp; = f_{r}(1,2)\frac{3}{\sqrt{34}} + f_{s}(1,2)\frac{5}{\sqrt{34}} </mrow>
+                            <mrow> &amp; = \frac{3}{25}\frac{3}{\sqrt{34}} - \frac{4}{25}\frac{5}{\sqrt{34}} </mrow>
+                        </md>
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-gradients">
+            <title>Gradients</title>
+            <p>
+                <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> shows that the partial derivatives of a function are important in computing the directional derivatives.
+                This leads us to the concept of a <term>gradient</term>.
+            </p>
+            <definition xml:id="definition-gradient-of-a-function">
+                <title>Gradient of a Function</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z)</m> be a function with partial derivatives <m>f_{x}, f_{y}, f_{z}</m>.
+                        The gradient of <m>f</m> is the vector <m>\grad f = \dotprod{f_{x}, f_{y}, f_{z}}</m>.
+                    </p>
+                </statement>
+            </definition>
+            <example xml:id="example-computing-a-gradient">
+                <title>Computing a gradient</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = x^{2} + y^{2}</m>.
+                        Compute <m>\grad f</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We have
+                        <me>\grad f = \dotprod{2x, 2y}</me>
+                    </p>
+                </solution>
+            </example>
+            <p>
+                We can restate <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> very quickly in terms of the gradient.
+                In particular, if <m>\vv{u}</m> is a vector (not necessarily a unit vector) then 
+                <men xml:id="equation-directional-derivative-gradient">D_{\vv{u}}f = \grad f\cdot \frac{\vv{u}}{|\vv{u}|}</men>
+            </p>
+            <example xml:id="example-directional-derivative-using-the-gradient">
+                <title>Directional derivative using the gradient</title>
+                <statement>
+                    <p>
+                        Is the function <m>f(x,y,z) = xy + yz + zx</m> increasing or decreasing at <m>P(1,-1,3)</m> and in the direction of <m>Q(2,4,5)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need to compute <m>D_{\vec{PQ}}f(1,-1,3)</m> and check if it's positive or negative.
+                        Since <m>\grad f = \dotprod{y, z, x}</m> and <m>\vec{PQ} = \dotprod{1,5,2}</m>, it follows that
+                        <md>
+                            <mrow>D_{\vec{PQ}}f(1,-1,3) &amp; = \grad f (1,-1,3)\cdot\frac{\vec{PQ}}{|\vec{PQ}|} </mrow>
+                            <mrow> &amp; = \dotprod{-1, 3, 1}\cdot\dotprod{\frac{1}{\sqrt{30}}, \frac{5}{\sqrt{30}}, \frac{2}{\sqrt{30}}} </mrow>
+                            <mrow> &amp; = \frac{16}{\sqrt{30}} </mrow>
+                        </md>
+                        Hence <m>f</m> is increasing at <m>(1,-1,3)</m> and in the direction of <m>(2,4,5)</m>.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                The gradient is also useful for telling us where a function is increasing and decreasing the greatest.
+                By <xref ref="equation-directional-derivative-gradient" text="type-global" />, we can write 
+                <me>D_{\vv{u}}f = \grad f\cdot\frac{\vv{u}}{|\vv{u}|} = |\grad f| \cos\theta,</me>
+                where <m>\theta</m> is the acute angle between <m>\grad f</m> and <m>\vv{u}</m>.
+                It follows that
+                <me>-|\grad f| \leq D_{\vv{u}}f \leq |\grad f|.</me>
+                We summarize this in the following theorem.
+            </p>
+            <theorem xml:id="theorem-direction-of-greatest-increase-and-decrease">
+                <idx><h>gradient</h><h>direction of greatest increase/decrease</h></idx>
+                <title>Direction of Greatest Increase and Decrease</title>
+                <statement>
+                    <p>
+                        Let <m>f</m> be a function with continuous first partial derivatives.
+                        Then <m>\grad f</m> points in the direction of greatest increase of <m>f</m>, and the rate of maximum increase of <m>f</m> is given by <m>|\grad f|</m>.
+                        Similarly, <m>-\grad f</m> points in the direction of greatest decrease, and the rate of maximum decrease of <m>f</m> is given by <m>-|\grad f|</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-finding-the-direction-and-rate-of-maximum-decrease">
+                <title>Finding the direction and rate of maximum decrease</title>
+                <statement>
+                    <p>
+                        Let <m>f(s,t) = te^{st}</m>.
+                        What is the direction and rate of greatest decrease of <m>f</m> at the point <m>(0,2)</m>?
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We need to compute <m>-\grad f</m>, which gives
+                        <me>-\grad f = \dotprod{-(1 + st)e^{st}, -ste^{st}}</me>
+                        So the direction of greatest decrease at <m>(0,2)</m> is given by <m>-\grad f(0,2) = \dotprod{-1, 0}</m>.
+                        The rate of maximum decrease in this direction is <m>-|\grad f(0,2)| = -|\dotprod{-1,0}| = -1</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 3, 11, 15, 21
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-extreme-values">
+        <title>Extreme Values</title>
+        <introduction>
+            <p>
+                Finding the extreme values of a function remains in important goal for functions of several independent variables.
+            </p>
+        </introduction>
+        <subsection xml:id="subsection-local-maxima-and-minima">
+            <title>Local Maxima and Minima</title>
+            <p>
+                One of the most important applications of the derivative in Calculus I is in finding local maxima and minima of functions <m>y = f(x)</m>.
+                We'd like to extend this concept to functions of multiple variables, but first we need to define what local maxima and minima actually are in this new setting.
+            </p>
+            <definition xml:id="definition-local-maxima-and-minima">
+                <idx><h>maxima and minima</h><h>local</h></idx>
+                <title>Local Maxima and Minima</title>
+                <statement>
+                    <p>
+                        We say that a function <m>f(x,y)</m> has a local maximum (respectively, local minimum) at <m>(x_{0},y_{0})</m> if <m>f(x,y)\leq f(x_{0},y_{0})</m> (respectively, <m>f(x,y)\geq f(x_{0},y_{0})</m>) for all points <m>(x,y)</m> contained in some disk centered at <m>(x_{0},y_{0})</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                Just as we used derivatives in Calculus I to find maxima and minima, we can use partial derivatives for that purpose here.
+            </p>
+            <theorem xml:id="theorem-derivatives-at-a-local-maximum-or-minimum">
+                <title>Derivatives at a Local Maximum or Minimum</title>
+                <statement>
+                    <p>
+                        Suppose that <m>f(x,y)</m> is differentiable, and has a local maximum or minimum at <m>(x_{0},y_{0})</m>.
+                        Then 
+                        <me>f_{x}(x_{0},y_{0}) = f_{y}(x_{0},y_{0}) = 0.</me>
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                <xref ref="theorem-derivatives-at-a-local-maximum-or-minimum" text="global-type" /> does not tell us if a differentiable function <m>f(x,y)</m> has a local maximum or minimum at <m>(x_{0},y_{0})</m>, but it does tell us where to look.
+                We call <m>(x_{0},y_{0})</m> a <term>critical point</term> of <m>f(x,y)</m> if <m>f_{x}(x_{0},y_{0}) = f_{y}(x_{0},y_{0}) = 0</m> or if these partial derivatives fail to exist at <m>(x_{0},y_{0})</m>.
+            </p>
+            <example xml:id="example-critical-points-of-an-exponential">
+                <title>Critical points of an exponential</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = xe^{-x^{2} - y^{2}}</m>.
+                        Find its critical points.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        Find the critical points by solving <m>f_{x} = 0</m> and <m>f_{y} = 0</m>.
+                        Since 
+                        <me>f_{x} = e^{-x^{2} - y^{2}} -2x^{2}e^{-x^{2} - y^{2}} = e^{-x^{2} - y^{2}}(1 - 2x^{2})</me>
+                        then <m>f_{x} = 0</m> forces <m>x = \pm\sqrt{\frac{1}{2}}</m>.
+                        Similarly, since
+                        <me>f_{y} = -2xye^{-x^{2} - y^{2}}</me>
+                        then <m>f_{y} = 0</m> forces <m>x = 0</m> or <m>y = 0</m>.
+                        So the only points that satisfy <em>both</em> <m>f_{x} = 0</m> and <m>f_{y} = 0</m> are <m>(\pm\sqrt{\frac{1}{2}}, 0).</m>
+                        So these must be our critical points.
+                    </p>
+                </solution>
+            </example>
+            <p>
+                We found the critical points in <xref ref="example-critical-points-of-an-exponential" text="type-global" /> without too much trouble, but these are still not guaranteed to be local maxima or minima.
+                To determine if they are, we need to use the <term>second derivative test</term>.
+            </p>
+            <theorem xml:id="theorem-second-derivative-test">
+                <idx><h>maxima and minima</h><h>second derivative test</h></idx>
+                <title>Second Derivative Test</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be a differentiable function with continuous second partial derivatives, and let <m>(x_{0},y_{0})</m> be a critical point of <m>f</m>.
+                        Define <m>D</m> to be
+                        <me>D(x,y) = f_{xx}f_{yy} - (f_{xy})^{2}</me>
+                        Then we have the following possibilities:
+                        <ul>
+                            <li>If <m>D(x_{0},y_{0}) &gt; 0 </m> and <m>f_{xx}(x_{0},y_{0}) &gt; 0</m>, then <m>(x_{0},y_{0})</m> is a local minimum.</li>
+                            <li>If <m>D(x_{0},y_{0}) &gt; 0 </m> and <m>f_{xx}(x_{0},y_{0}) &lt; 0</m>, then <m>(x_{0},y_{0})</m> is a local maximum.</li>
+                            <li>If <m>D(x_{0},y_{0}) &lt; 0 </m>, then <m>(x_{0},y_{0})</m> is a neither a local minimum nor local maximum. In this case we call <m>(x_{0},y_{0})</m> a <term>saddle point</term>.</li>
+                            <li>If <m>D(x_{0},y_{0}) = 0 </m>, the test is inconclusive.</li>
+                        </ul>
+                    </p>
+                </statement>
+            </theorem>
+            <p>
+                The quantity <m>D</m> from <xref ref="theorem-second-derivative-test" text="type-global" /> is actually a determinant:
+                <me>D(x,y) = \left|\begin{array}{cc} f_{xx} &amp; f_{xy} \\ f_{yx} &amp; f_{yy}\end{array}\right|</me>
+            </p>
+            <example xml:id="example-local-extrema-of-an-exponential">
+                <title>Local extrema of an exponential</title>
+                <statement>
+                    <p>
+                        Classify the critical points of the function from <xref ref="example-critical-points-of-an-exponential" text="type-global" />.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We have <m>f(x,y) = xe^{-x^{2} - y^{2}}</m>, and the critical points are <m>(-\sqrt{\frac{1}{2}},0)</m> and <m>(\sqrt{\frac{1}{2}},0)</m>.
+                        We need to find <m>D(x,y)</m>.
+                        Since <m>f_{x} = (1 - 2x^{2})e^{-x^{2} - y^{2}}</m>, we get
+                        <md>
+                            <mrow>f_{xx} &amp; = -4xe^{-x^{2} - y^{2}} - 2x(1 - 2x^{2})e^{-x^{2} - y^{2}} </mrow>
+                            <mrow>f_{xy} &amp; = -2y(1-2x^{2})e^{-x^{2} - y^{2}} = f_{yx} </mrow>
+                        </md>
+                        and similarly
+                        <me>f_{yy} = -2xe^{-x^{2} - y^{2}} + 4xy^{2}e^{-x^{2} - y^{2}}</me>
+                        At <m>(-\sqrt{\frac{1}{2}},0)</m>, we have
+                        <md>
+                            <mrow>D\left(-\sqrt{\frac{1}{2}},0\right) &amp; = 4\sqrt{\frac{1}{2}}e^{-\frac{1}{2}}\cdot2\sqrt{\frac{1}{2}}e^{-\frac{1}{2}}</mrow>
+                            <mrow> &amp; &gt; 0 </mrow>
+                        </md>
+                        and <m>f_{xx}(-\sqrt{\frac{1}{2}},0) &gt;0</m> as well.
+                        So this is a local minimum.
+                        At <m>(\sqrt{\frac{1}{2}},0)</m>, we still have <m>D&gt;0</m>, but now <m>f_{xx}&lt;0</m>.
+                        So this is a local maximum.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <subsection xml:id="subsection-absolute-maxima-and-minima">
+            <title>Absolute Maxima and Minima</title>
+            <p>
+                Even if a function <m>f(x,y)</m> has a local minimum at <m>(x_{0},y_{0})</m>, there's no guarantee that this is the smallest value the function can take on its domain.
+                A similar statement is also true for local maxima, which leads to the following definition.
+            </p>
+                <definition xml:id="definition-absolute-maxima-and-minima">
+                    <idx><h>maxima and minima</h><h>absolute</h></idx>
+                    <title>Absolute Maxima and Minima</title>
+                    <statement>
+                        <p>
+                            Let <m>f(x,y)</m> be a function defined on the set <m>D</m>.
+                            We call the point <m>(x_{0},y_{0})</m> an <term>absolute minimum</term> (respectively, <term>absolute maximum</term>) if <m>f(x,y)\geq f(x_{0},y_{0})</m> (respectively, <m>f(x,y)\leq f(x_{0},y_{0})</m>) for all points <m>(x,y)</m> in <m>R</m>.
+                        </p>
+                    </statement>
+                </definition>
+            <p>
+                As a first example, consider <m>f(x,y) = \sqrt{1 - x^{2} - y^{2}}</m>, which gives the top half of the unit sphere.
+                Using critical points and the second derivative test, we can show that the origin is a local maximum.
+                However, this method is blind to the absolute minimum values of <m>f(x,y)</m>, which occur at the boundary <m>x^{2} + y^{2} = 1</m>, where the sphere intersects the <m>xy</m>-plane.
+                So this means we can't use critical points alone to find absolute maxima and minima, in general.
+                However, the following theorem says that they'll get us most of the way there.
+            </p>
+            <theorem xml:id="theorem-extreme-value-multivariable">
+                <idx><h>Extreme Value Theorem</h><h>functions of several variables</h></idx>
+                <title>Extreme Value Theorem</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y)</m> be a continuous function defined on a closed and bounded set <m>D</m>.
+                        <fn>This means that <m>D</m> is finite in size and that it includes its boundary.</fn>
+                        Then <m>f</m> is guaranteed to have an absolute maximum and absolute minimum.
+                        Furthermore, these must occur either at a critical point or on the boundary of <m>D</m>.
+                    </p>
+                </statement>
+            </theorem>
+            <example xml:id="example-absolute-values-on-a-triangle">
+                <title>Absolute values on a triangle</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = x + y - xy</m>.
+                        Find the absolute maxima and minima of <m>f</m> on the triangle with vertices <m>(0,0), (0,2)</m> and <m>(4,0)</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        We'll start off by finding any critical points.
+                        Since <m>\grad f = \dotprod{1-y, 1-x}</m>, we see that the only critical point is <m>(1,1)</m>.
+                        Now we need to see what happens to <m>f(x,y)</m> on the edges of the triangle, and to do that we need to find equations for the edges.
+                        Let <m>l_{1}</m> denote the edge from <m>(0,0)</m> to <m>(0,2)</m>, <m>l_{2}</m> the edge from <m>(0,2)</m> to <m>(4,0)</m> and <m>l_{3}</m> the edge from <m>(0,0)</m> to <m>(4,0)</m>.
+                        Then <m>l_{1}</m> is given by the equation <m>x = 0</m>, <m>l_{2}</m> is given by <m>y = -\frac{1}{2}(x-4)</m> and <m>l_{3}</m> is given by <m>y = 0</m>.
+                        So on <m>l_{1}</m> we have <m>f(x,y) = f(0,y) = y</m>, on <m>l_{2}</m> we have
+                        <me>f(x,y) = f\left(x,-\frac{1}{2}(x-4)\right) = \frac{1}{2}\left[\left(x-\frac{3}{2}\right)^{2} + \frac{7}{4}\right]</me>
+                        and on <m>l_{3}</m> we have <m>f(x,y) = f(x,0) = x</m>.
+                        We can then set up the following table:
+                    </p>
+                    <table xml:id="table-triangle-extrema">
+                        <caption>Absolute values on the boundary</caption>
+                        <tabular halign="center" top="major">
+                            <row top="major" bottom="minor">
+                                <cell>edge</cell>
+                                <cell><m>f(x,y)</m></cell>
+                                <cell>max</cell>
+                                <cell>min</cell>
+                            </row>
+                            <row>
+                                <cell><m>l_{1}</m></cell>
+                                <cell><m>y</m></cell>
+                                <cell><m>2</m></cell>
+                                <cell><m>0</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>l_{2}</m></cell>
+                                <cell><m>\frac{1}{2}\left[\left(x-\frac{3}{2}\right)^{2} + \frac{7}{4}\right]</m></cell>
+                                <cell><m>\frac{1}{2}\left[\left(4-\frac{3}{2}\right)^{2} + \frac{7}{4}\right] = 4</m></cell>
+                                <cell><m>\frac{7}{8}</m></cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>l_{3}</m></cell>
+                                <cell><m>x</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>0</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    <p>
+                        Finally, at the critical point <m>(1,1)</m> we have <m>f(1,1) = 1</m>.
+                        So putting this all together, we can say that the absolute maximum of <m>f(x,y)</m> on this triangle is <m>4</m>, and this is reached at <m>(4,0)</m>.
+                        Similarly, the absolute minimum is <m>0</m>, and this is reached at the origin. 
+                    </p>
+                </solution>
+            </example>
+            <p>
+                Note that in <xref ref="example-absolute-values-on-a-triangle" text="type-global" />, we don't actually determine if the critical point is a local maximum or minimum.
+                We just compare the value <m>f</m> reaches at the critical point with its maximum and minimum values on the boundary.
+            </p>
+            <example xml:id="example-absolute-maxima-and-minima-on-a-circular-sector">
+                <title>Absolute maxima and minima on a circular sector</title>
+                <statement>
+                    <p>
+                        Let <m>f(x,y) = xy^{2}</m> and let
+                        <me>D = \{(x,y) : x,y \geq 0, x^{2} + y^{2} \leq 3\}</me>
+                        Find the absolute maxima and minima of <m>f</m> on <m>D</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        First we'll find the critical point(s).
+                        If we compute <m>\grad f</m>, we get <m>\grad f = \dotprod{y^{2}, 2xy}</m>.
+                        This is <m>0</m> if and only if <m>y=0</m>, and if <m>y=0</m> then this forces <m>f(x,y) = f(x,0) = 0</m>.
+                    </p>
+                    <p>
+                        Now we need to determine the maximum and minimum values of <m>f(x,y)</m> on the boundary of <m>D</m>.
+                        Let <m>C_{1}</m> denote the line segment from <m>(0,0)</m> to <m>(\sqrt{3},0)</m>, <m>C_{2}</m> the circular arc from <m>(\sqrt{3},0)</m> to <m>(0,\sqrt{3})</m> and <m>C_{3}</m> the line segment from <m>(0,\sqrt{3})</m> to <m>(0,0)</m>.
+                        Then on <m>C_{1}</m> we have <m>f(x,y) = 0</m>, on <m>C_{2}</m> we have 
+                        <me>f(x,y) = xy^{2} = x(3-x^{2})</me>
+                        and on <m>C_{3}</m> we have <m>f(x,y) = 0</m>.
+                        So the smallest value that <m>f</m> takes on the boundary is <m>0</m>, and the largest value is <m>2</m>.
+                        So the absolute maximum is <m>2</m> and the absolute minimum is <m>0</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+        <conclusion>
+            <p>
+                SUGGESTED PROBLEMS: 1, 3, 13, 23
+            </p>
+        </conclusion>
+    </section>
+    <section xml:id="section-lagrange-multipliers">
+        <title>Lagrange Multipliers</title>
+        <p>
+            <xref ref="theorem-second-derivative-test" text="type-global" /> is useful for finding local maxima and minima of a function <m>f(x,y)</m>, but it's often the case where we have an additional restriction on the variables <m>x</m> and <m>y</m>, which we interpret as an equality <m>g(x,y) = k</m> for some constant <m>k</m>.
+            Geometrically, this reduces down to finding the maximum and minimum values of <m>f(x,y)</m> on the curve <m>g(x,y) = k</m>.
+            In these cases, <xref ref="theorem-second-derivative-test" text="type-global" /> is not as useful because there's no guarantee that the critical points of <m>f</m> will lie on the curve <m>g(x,y) = k</m>.
+            For this scenario, we must use the method of <term>Lagrange multipliers</term>.
+        </p>
+        <algorithm xml:id="algorithm-method-of-lagrange-multipliers">
+            <idx><h>Lagrange multipliers</h></idx>
+            <title>Method of Lagrange Multipliers</title>
+            <statement>
+                <p>
+                    Suppose that <m>f</m> and <m>g</m> are both differentiable functions, and suppose that <m>\grad g\neq\vv{0}</m> on the curve <m>g(x,y) = k</m>.
+                    To find the extreme values of <m>f(x,y)</m> subject to the constraint <m>g(x,y) = k</m>, perform the following steps:
+                    <ol>
+                        <li>
+                            Find all points <m>(x_{0},y_{0})</m> such that <m>\grad f(x_{0},y_{0}) = \lambda \grad g(x_{0},y_{0})</m>, where <m>\lambda</m> is a constant we call the <term>Lagrange multiplier</term>.
+                        </li>
+                        <li>
+                            Compute <m>f</m> at all points from the first step and compare values to find any maxima or minima.
+                        </li>
+                    </ol>
+                </p>
+            </statement>
+        </algorithm>
+        <example xml:id="example-maximizing-volume">
+            <!-- Stolen from Stewart... -->
+            <title>Maximizing volume</title>
+            <statement>
+                <p>
+                    A lidless box may be made from <quantity><mag>12</mag><unit base="meter" exp="2" /></quantity> of material.
+                    What dimensions give the maximum volume?
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    If we denote the dimensions of the box by <m>x,y,z</m>, then the function we need to maximize is <m>V(x,y,z) = xyz</m>.
+                    However, not all dimensions are valid since we're only allowed to use <quantity><mag>12</mag><unit base="meter" exp="2" /></quantity> of material.
+                    This means that the surface area of the box, which is given by <m>A(x,y,z) = xy + 2xz + 2yz</m>, must be equal to <m>12</m>.
+                    So our constraint is that <m>A(x,y,z) = 12</m>, and because we have this constraint we'll try to solve this using <xref ref="algorithm-method-of-lagrange-multipliers" text="type-global" />.
+                </p>
+                <p>
+                    To begin, we need to solve <m>\grad V = \lambda \grad A</m>.
+                    Equivalently, we need to solve the system
+                    <md>
+                        <mrow>V_{x} &amp; = \lambda A_{x} </mrow>
+                        <mrow>V_{y} &amp; = \lambda A_{y} </mrow>
+                        <mrow>V_{z} &amp; = \lambda A_{z} </mrow>
+                    </md>
+                    which turns into
+                    <md>
+                        <mrow>yz &amp; = \lambda(y + 2z) </mrow>
+                        <mrow>xz &amp; = \lambda(x + 2z) </mrow>
+                        <mrow>xy &amp; = \lambda(2x + 2y) </mrow>
+                    </md>
+                    Now, we don't actually need to find a value for <m>\lambda</m>.
+                    We just need values for <m>x,y,z</m>.
+                    If we multiply these equations by <m>x</m>, <m>y</m> and <m>z</m> respectively, then we get
+                    <md>
+                        <mrow>xyz &amp; = \lambda(xy + 2xz) </mrow>
+                        <mrow>xyz &amp; = \lambda(xy + 2yz) </mrow>
+                        <mrow>xyz &amp; = \lambda(2xz + 2yz) </mrow>
+                    </md>
+                    or just
+                    <me>\lambda(xy + 2xz) = \lambda(xy + 2yz) = \lambda(2xz + 2yz)</me>
+                    We can also divide by <m>\lambda</m>, since there's no way <m>\lambda</m> could equal <m>0</m> and satisfy the above equations (since <m>x,y,z</m> are all positive).
+                    This gives us
+                    <men xml:id="equation-lagrange-example-1">xy + 2xz = xy + 2yz = 2xz + 2yz</men>
+                </p>
+                <p>
+                    The first two expressions in <xref ref="equation-lagrange-example-1" text="type-global" /> simplify to <m>x=y</m>, while the first and third reduce to <m>x = 2z</m>.
+                    So
+                    <me>x = y = 2z</me>.
+                    But these variables also need to satisfy <m>A(x,y,z) = 12</m>:
+                    <md>
+                        <mrow>12 &amp; = xy + 2xz + 2yz </mrow>
+                        <mrow> &amp; = 4z^{2} + 4z^{2} + 4z^{2} </mrow>
+                        <mrow> &amp; = 12z^{2} </mrow>
+                    </md>
+                    Therefore <m>z = \pm1</m>, so we take <m>z=1</m> (since we're dealing with dimensions).
+                    This also means that <m>x = y = 2(1) = 2</m>.
+                    So the point <m>(2,2,1)</m> is therefore our candidate for the dimensions that maximize volume subject to the constraint <m>A = 12</m>.
+                </p>
+                <p>
+                    In order to actually verify that <m>V(2,2,1) = 4</m> is actually the largest possible volume we can obtain, we need to show that it's actually a maximum and not a minimum.
+                    This means we need to find another point <m>(x,y,z)</m> that also satisfies <m>A = 12</m>, and show that it gives a smaller value for <m>V</m>.
+                    One such point is just <m>(-2,-2,-1)</m>, and <m>V(-2,-2,-1) = -4 &lt; V(2,2,1)</m>.
+                    So <m>4</m> is actually a maximum value and not a minimum value.
+                </p>
+            </solution>
+        </example>
+        <p>
+            The points we'll obtain using Lagrange multipliers will be either maxima or minima, but the method itself doesn't always tell us which is which.
+            As in the last example, sometimes it's up to us to find that on our own.
+        </p>
+        <example xml:id="example-extreme-values-on-a-paraboloid">
+            <!-- Stolen from Stewart... -->
+            <title>Extreme values on a paraboloid</title>
+            <statement>
+                <p>
+                    Find the absolute maxima and minima for <m>f(x,y) = x^{2} + 2y^{2}</m> over this disk <m>x^{2} + y^{2} \leq 1</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    First, recall from <xref ref="section-extreme-values" text="type-global" /> that the absolute maxima and minima of a differentiable function over a bounded set occur at either a critical point or somewhere on the boundary.
+                    So first, we need to find if <m>f(x,y)</m> has any critical points inside the disk.
+                    If we solve <m>f_{x} = f_{y} = 0</m>, then we quickly get that <m>(0,0)</m> is a critical point, and hence a possible maximum or minimum value.
+                    The only other place we need to check is the boundary <m>x^{2} + y^{2} = 1</m>, and this is something we can use Lagrange multipliers for.
+                </p>
+                <p>
+                    Set <m>g(x,y) = x^{2} + y^{2}</m>.
+                    Then we need to find the extreme values of <m>f</m> subject to the constraint <m>g = 1</m>.
+                    The system of equations we need to solve is then
+                    <md>
+                        <mrow>2x &amp; = \lambda(2x) &amp; \Rightarrow x = \lambda x </mrow>
+                        <mrow>4y &amp; = \lambda(2y) &amp; \Rightarrow 2y = \lambda y</mrow>
+                        <mrow>x^{2} + y^{2} &amp; = 1 </mrow>
+                    </md>
+                    The first equation is true if <m>\lambda = 1</m>, but then this forces <m>y = 0</m> in the second equation.
+                    If we then plug <m>y = 0</m> into the constraint, this forces <m>x = \pm1</m>.
+                    So the case <m>\lambda=1</m> gives us two points to test: <m>(-1,0)</m> and <m>(1,0)</m>.
+                    On the other hand, the second equation is true if <m>\lambda = 2</m>.
+                    This then forces <m>x = 0</m> and <m>y = \pm 1</m>, which gives us the points <m>(0,-1)</m> and <m>(0,1)</m>.
+                    Finally, if <m>\lambda\neq1,2</m>, then this forces <m>x = y = 0</m>.
+                    But there's no way to satisfy the constraint if <m>x = y = 0</m>, so we discard this possibility.
+                </p>
+                <p>
+                    So we have five points that we need to check, which we arrange in the following table:
+                    <table xml:id="table-lagrange-example-2">
+                        <caption>Absolute values on the disk</caption>
+                        <tabular halign="center" top="major">
+                            <row top="major" bottom="minor">
+                                <cell><m>(x,y)</m></cell>
+                                <cell><m>f(x,y)</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>(0,0)</m></cell>
+                                <cell><m>0</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>(-1,0)</m></cell>
+                                <cell><m>1</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>(1,0)</m></cell>
+                                <cell><m>1</m></cell>
+                            </row>
+                            <row>
+                                <cell><m>(0,-1)</m></cell>
+                                <cell><m>2</m></cell>
+                            </row>
+                            <row bottom="major">
+                                <cell><m>(0,1)</m></cell>
+                                <cell><m>2</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    So the absolute minimum is <m>0</m>, which occurs at the origin.
+                    The absolute maximum is <m>2</m>, which occurs at the points <m>(0,\pm1)</m>.
+                </p>
+            </solution>
+        </example>
+        <example xml:id="example-maximizing-the-volume-of-a-prism-within-an-ellipsoid">
+            <title>Maximizing the volume of a prism within an ellipsoid</title>
+            <statement>
+                <p>
+                    A rectangular prism, centered at the origin and with sides parallel to the coordinate planes, is inscribed within the ellipsoid <m>x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1</m>.
+                    Find the dimensions of the prism that maximize the volume.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    Let <m>(x,y,z)</m> denote the corner of the prism located in the first octant.
+                    Then we want to maximize <m>V(x,y,z) = (2x)(2y)(2z)</m> subject to the constraint <m>g(x,y,z) = x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1</m>.
+                    So we'll use the method of Lagrange multipliers again to get the system
+                    <md>
+                        <mrow>8yz &amp; = 2\lambda x </mrow>
+                        <mrow>8xz &amp; = \frac{\lambda}{2}y </mrow>
+                        <mrow>8xy &amp; = \frac{\lambda}{2}z </mrow>
+                        <mrow>x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} &amp; =1 </mrow>
+                    </md>
+                    We can assume that <m>x,y,z</m> are all positive (since we're trying to find the <em>maximum</em> volume), so we can go ahead and solve each equation for <m>\lambda</m> to get
+                    <me>\lambda = \frac{4yz}{x} = \frac{16xz}{y} = \frac{16xy}{z}</me>
+                    Setting the first two fractions equal and simplifying gives <m>y^{2} = 4x^{2}</m>.
+                    Similarly, the second and third fractions give <m>y^{2} = z^{2}</m>.
+                    So 
+                    <me>y^{2} = z^{2} = 4x^{2}.</me>
+                </p>
+                <p>
+                    Now we plug this into our constraint to get
+                    <md>
+                        <mrow>1 &amp; = x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1 </mrow>
+                        <mrow> &amp; = 3x^{2} </mrow>
+                    </md>
+                    so <m>x = \pm\sqrt{\frac{1}{3}}</m>.
+                    Since we're assuming that <m>(x,y,z)</m> lies in the first octant, this means that <m>x &gt; 0</m>, along with <m>y </m>and <m>z</m>.
+                    So 
+                    <md>
+                        <mrow>x &amp; = \sqrt{\frac{1}{3}} </mrow>
+                        <mrow>y &amp; = 2\sqrt{\frac{1}{3}} </mrow>
+                        <mrow>z &amp; = 2\sqrt{\frac{1}{3}} </mrow>
+                    </md>
+                    To check that these values actually maximize <m>V(x,y,z)</m>, we can compare them with the point <m>(1,0,0)</m>, which also satisfies the constraint <m>g = 1</m>.
+                    Since <m>V(1,0,0) = 0</m>, this means that the dimensions that maximize the volume are given by 
+                    <me>\frac{2}{\sqrt{3}}\times\frac{4}{\sqrt{3}}\times\frac{4}{\sqrt{3}}</me>
+                </p>
+            </solution>
+        </example>
+        <p>
+            SUGGESTED PROBLEMS: 1-11 odd, 17, 19
+        </p>
+    </section>
+</chapter>
