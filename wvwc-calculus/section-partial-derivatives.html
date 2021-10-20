@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:44-05:00       *-->
+<!--*       on 2021-10-20T15:43:35-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Partial Derivatives</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,14 +279,14 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-partial-derivatives"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.3</span> <span class="title">Partial Derivatives</span>
 </h2>Now that we know how to take limits for functions of two variables, we can define a notion of derivative for these functions as well, which we'll call the <dfn class="terminology">partial derivative</dfn>. The main idea behind the partial derivative is to measure how a function \(f(x,y)\) changes as a single variable changes. Although the definition given is only for functions of two variables, it also extends to functions of many variables.<article class="definition definition-like" id="definition-partial-derivatives"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">12.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Partial Derivatives.</span>
 </h6>
-<p id="p-1428">Let \(f(x,y)\) be a function of two variables. The <dfn class="terminology">partial derivative of \(f\) with respect to \(x\)</dfn> is the function</p>
+<p id="p-1381">Let \(f(x,y)\) be a function of two variables. The <dfn class="terminology">partial derivative of \(f\) with respect to \(x\)</dfn> is the function</p>
 <div class="displaymath">
 \begin{equation*}
 \pdv{f}{x} = f_{x}(x,y) = \lim_{h\to0}\frac{f(x+h,y)-f(x,y)}{h}\text{,}
@@ -299,14 +298,13 @@ MathJax.Hub.Config({
 \pdv{f}{y} = f_{y}(x,y) = \lim_{h\to0}\frac{f(x,y+h)-f(x,y)}{h}\text{,}
 \end{equation*}
 </div>
-<p class="continuation">assuming that this limit exists.</p></article><p id="p-1429">When computing partial derivatives with respect to \(x\text{,}\) you just need to differentiate \(f(x,y)\) treating it as a function of \(x\) alone and considering \(y\) as a constant. Similarly, if you want to compute \(f_{y}\) you differentiate with respect to \(y\) and treat \(x\) as constant.</p>
-<article class="example example-like" id="example-307"><h6 class="heading">
+<p class="continuation">assuming that this limit exists.</p></article><p id="p-1382">When computing partial derivatives with respect to \(x\text{,}\) you just need to differentiate \(f(x,y)\) treating it as a function of \(x\) alone and considering \(y\) as a constant. Similarly, if you want to compute \(f_{y}\) you differentiate with respect to \(y\) and treat \(x\) as constant.</p>
+<article class="example example-like" id="example-289"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-289"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.3.2</span><span class="period">.</span>
-</h6>
-<p id="p-1430">Let \(f(x,y) = ye^{x-y} - x^{3}\tan y^{4}\text{.}\) Find \(\pdv{f}{y}\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-289"><article class="example example-like"><p id="p-1383">Let \(f(x,y) = ye^{x-y} - x^{3}\tan y^{4}\text{.}\) Find \(\pdv{f}{y}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-227" id="solution-227"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-227"><div class="solution solution-like">
-<p id="p-1431">Since we need to find \(\pdv{f}{y}\text{,}\) we differentiate \(f(x,y)\) with respect to \(y\) and treat \(x\) as a constant:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-219" id="solution-219"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-219"><div class="solution solution-like">
+<p id="p-1384">Since we need to find \(\pdv{f}{y}\text{,}\) we differentiate \(f(x,y)\) with respect to \(y\) and treat \(x\) as a constant:</p>
 <div class="displaymath">
 \begin{align*}
 \pdv{f}{y} &amp; = \pdv{}{y}\left[ye^{x-y} - x^{3}\tan y^{4}\right] \\
@@ -314,14 +312,15 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1432">Geometrically, \(f_{x}(a,b)\) represents the rate of change of the surface \(z = f(x,y)\) at the point \((a,b)\) in the \(x\) direction, and a similar statement is true for \(f_{y}(a,b)\text{.}\)</p>
-<article class="example example-like" id="example-partial-derivatives-on-the-unit-sphere"><h6 class="heading">
+</div></article></div>
+<p id="p-1385">Geometrically, \(f_{x}(a,b)\) represents the rate of change of the surface \(z = f(x,y)\) at the point \((a,b)\) in the \(x\) direction, and a similar statement is true for \(f_{y}(a,b)\text{.}\)</p>
+<article class="example example-like" id="example-partial-derivatives-on-the-unit-sphere"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-partial-derivatives-on-the-unit-sphere"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Partial derivatives on the unit sphere.</span>
-</h6>
-<p id="p-1433">Let \(z = \sqrt{1-x^{2} - y^{2}}\text{.}\) Where is \(\pdv{z}{y}\) equal to \(0\text{?}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-partial-derivatives-on-the-unit-sphere"><article class="example example-like"><p id="p-1386">Let \(z = \sqrt{1-x^{2} - y^{2}}\text{.}\) Where is \(\pdv{z}{y}\) equal to \(0\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-228" id="solution-228"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-228"><div class="solution solution-like"><p id="p-1434">We can find this algebraically, but we'll try to answer this geometrically instead. First, note that \(z = \sqrt{1 - x^{2} - y^{2}}\) is actually the top half of the unit sphere. If we're trying to find where \(\pdv{z}{y}\) is zero, then we need to find where this surface is "flat" when moving in the \(y\) direction. If we think about this a bit, this should only occur when \(y=0\text{,}\) i.e. along the \(x\)-axis. At any other location on the unit sphere, moving in the \(y\)-direction on the unit sphere requires going uphill or downhill, which means \(z_{y}\neq0\) at these locations.</p></div></div>
-</div></article><p id="p-1435">We can also find higher partial derivatives. For example, the second partial derivatives of a function \(f(x,y)\) are given by</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-220" id="solution-220"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-220"><div class="solution solution-like"><p id="p-1387">We can find this algebraically, but we'll try to answer this geometrically instead. First, note that \(z = \sqrt{1 - x^{2} - y^{2}}\) is actually the top half of the unit sphere. If we're trying to find where \(\pdv{z}{y}\) is zero, then we need to find where this surface is "flat" when moving in the \(y\) direction. If we think about this a bit, this should only occur when \(y=0\text{,}\) i.e. along the \(x\)-axis. At any other location on the unit sphere, moving in the \(y\)-direction on the unit sphere requires going uphill or downhill, which means \(z_{y}\neq0\) at these locations.</p></div></div>
+</div></article></div>
+<p id="p-1388">We can also find higher partial derivatives. For example, the second partial derivatives of a function \(f(x,y)\) are given by</p>
 <div class="displaymath">
 \begin{align*}
 \pdv[2]{f}{x} &amp; = \pdv{}{x}\left(\pdv{f}{x}\right) = (f_{x})_{x} \\
@@ -331,13 +330,12 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 <p class="continuation">The last two derivatives are examples of <dfn class="terminology">mixed derivatives</dfn>.</p>
-<article class="example example-like" id="example-mixed-partials"><h6 class="heading">
+<article class="example example-like" id="example-mixed-partials"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-mixed-partials"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">Mixed partials.</span>
-</h6>
-<p id="p-1436">Let \(f(x,y) = \sin^{2}(mx+ny)\) where \(m,n\) are constants. Find the mixed partials \(f_{xy}\) and \(f_{yx}\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-mixed-partials"><article class="example example-like"><p id="p-1389">Let \(f(x,y) = \sin^{2}(mx+ny)\) where \(m,n\) are constants. Find the mixed partials \(f_{xy}\) and \(f_{yx}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-229" id="solution-229"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-229"><div class="solution solution-like">
-<p id="p-1437">We have</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-221" id="solution-221"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-221"><div class="solution solution-like">
+<p id="p-1390">We have</p>
 <div class="displaymath">
 \begin{align*}
 f_{xy} &amp; = (f_{x})_{y} \\
@@ -356,21 +354,21 @@ f_{yx} &amp; = (f_{y})_{x} \\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1438">In the last example the mixed partial were equal, but this is not always true. However, if \(f(x,y)\) is a function with "nice" mixed partial derivatives, then its mixed partials will be equal.</p>
+</div></article></div>
+<p id="p-1391">In the last example the mixed partial were equal, but this is not always true. However, if \(f(x,y)\) is a function with "nice" mixed partial derivatives, then its mixed partials will be equal.</p>
 <article class="theorem theorem-like" id="theorem-clairaut-s-theorem"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Clairaut's Theorem.</span>
 </h6>
-<p id="p-1439">Suppose that \(f(x,y)\) is defined on a disk \(D\) that contains the point \((a,b)\text{.}\) If \(f_{xy}\) and \(f_{yx}\) are both continuous on \(D\text{,}\) then</p>
+<p id="p-1392">Suppose that \(f(x,y)\) is defined on a disk \(D\) that contains the point \((a,b)\text{.}\) If \(f_{xy}\) and \(f_{yx}\) are both continuous on \(D\text{,}\) then</p>
 <div class="displaymath">
 \begin{equation*}
 f_{xy}(a,b) = f_{yx}(a,b).
 \end{equation*}
 </div>
-<p class="continuation">In other words, the mixed partials are equal to each other wherever they happen to be continuous.</p></article><p id="p-1440">Partial derivatives are important for their use in <dfn class="terminology">partial differential equations (PDEs)</dfn>, which are equations that involve partial derivatives of an unknown function \(f\text{.}\)</p>
-<article class="example example-like" id="example-the-wave-equation"><h6 class="heading">
+<p class="continuation">In other words, the mixed partials are equal to each other wherever they happen to be continuous.</p></article><p id="p-1393">Partial derivatives are important for their use in <dfn class="terminology">partial differential equations (PDEs)</dfn>, which are equations that involve partial derivatives of an unknown function \(f\text{.}\)</p>
+<article class="example example-like" id="example-the-wave-equation"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-the-wave-equation"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Wave Equation.</span>
-</h6>
-<p id="p-1441">One of the most important PDEs is the <dfn class="terminology">wave equation</dfn></p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-the-wave-equation"><article class="example example-like"><p id="p-1394">One of the most important PDEs is the <dfn class="terminology">wave equation</dfn></p>
 <div class="displaymath">
 \begin{equation*}
 u_{tt} = c^{2}u_{xx},
@@ -384,8 +382,8 @@ u(x,t) = \sin(x-3t) + \ln(x+3t)
 </div>
 <p class="continuation">is a solution of the wave equation.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-230" id="solution-230"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-230"><div class="solution solution-like">
-<p id="p-1442">We need to plug \(u\) into the PDE and check that it satisfies the PDE. Since</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-222" id="solution-222"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-222"><div class="solution solution-like">
+<p id="p-1395">We need to plug \(u\) into the PDE and check that it satisfies the PDE. Since</p>
 <div class="displaymath">
 \begin{align*}
 u_{tt} &amp; = -9\cos(x-3t) - \frac{9}{(x+3t)^{2}} \\
@@ -394,7 +392,8 @@ u_{xx} &amp; = -\sin(x-3t) - \frac{1}{(x+3t)^{2}}
 </div>
 <p class="continuation">it follows that \(u_{tt} = 9u_{xx}\text{.}\) So \(u(x,t)\) satisfies the wave equation with \(c=3\text{,}\) and so is a solution of the wave equation.</p>
 </div></div>
-</div></article><section class="conclusion" id="conclusion-4"><p id="p-1443">SUGGESTED PROBLEMS: 1, 3, 7, 11, 19, 31, 45, 49, 51, 53, 61</p></section></section></div></main>
+</div></article></div>
+<section class="conclusion" id="conclusion-4"><p id="p-1396">SUGGESTED PROBLEMS: 1, 3, 7, 11, 19, 31, 45, 49, 51, 53, 61</p></section></section></div></main>
 </div>
 </body>
 </html>

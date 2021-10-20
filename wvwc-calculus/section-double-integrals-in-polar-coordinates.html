@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:47-05:00       *-->
+<!--*       on 2021-10-20T15:43:37-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Double Integrals in Polar Coordinates</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,15 +279,15 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-double-integrals-in-polar-coordinates"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">13.3</span> <span class="title">Double Integrals in Polar Coordinates</span>
 </h2>
-<p id="p-1560">Recall that the double integral was defined by first setting up a rectangular grid. The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense. If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward. However, polar coordinates from <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a> work very nicely with circular regions. So we want to find out how to set up double integrals using polar coordinates.</p>
-<p id="p-1561">If we're given a function \(f(x,y)\text{,}\) then it's not too hard to convert this to the polar form \(f(r,\theta)\text{.}\) Just replace \(x\) with \(r\cos\theta\) and \(y\) with \(r\sin\theta\text{.}\) The tricky part with setting up double integrals in polar coordinates is how to deal with the <dfn class="terminology">area element</dfn> \(dA\text{,}\) which in Cartesian coordinates is just \(dx\,dy\) or \(dy\,dx\text{.}\) To figure out what \(dA\) should be in polar coordinates, i.e. in terms of \(r\) and \(\theta\text{,}\) consider the following "polar rectangle": <figure class="figure figure-like" id="figure-polar-rectangle"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-polar-rectangle.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
+<p id="p-1513">Recall that the double integral was defined by first setting up a rectangular grid. The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense. If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward. However, polar coordinates from <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a> work very nicely with circular regions. So we want to find out how to set up double integrals using polar coordinates.</p>
+<p id="p-1514">If we're given a function \(f(x,y)\text{,}\) then it's not too hard to convert this to the polar form \(f(r,\theta)\text{.}\) Just replace \(x\) with \(r\cos\theta\) and \(y\) with \(r\sin\theta\text{.}\) The tricky part with setting up double integrals in polar coordinates is how to deal with the <dfn class="terminology">area element</dfn> \(dA\text{,}\) which in Cartesian coordinates is just \(dx\,dy\) or \(dy\,dx\text{.}\) To figure out what \(dA\) should be in polar coordinates, i.e. in terms of \(r\) and \(\theta\text{,}\) consider the following "polar rectangle": <figure class="figure figure-like" id="figure-polar-rectangle"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-polar-rectangle.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">13.3.1<span class="period">.</span></span><span class="space"> </span>A polar grid.</figcaption></figure></p>
-<p id="p-1562">Let \(\Delta A\) represent the area of one of these sectors. If we let \(r\) denote the distance from the origin to one sector, \(\Delta r\) the length of a sector and \(\Delta\theta\) the angle spanned by a sector, then we can say that</p>
+<p id="p-1515">Let \(\Delta A\) represent the area of one of these sectors. If we let \(r\) denote the distance from the origin to one sector, \(\Delta r\) the length of a sector and \(\Delta\theta\) the angle spanned by a sector, then we can say that</p>
 <div class="displaymath">
 \begin{align*}
 \Delta A &amp; \approx \frac{1}{2}[r\cos(\Delta\theta)][r\sin(\Delta\theta)] - \frac{1}{2}[(r-\Delta r)\cos(\Delta\theta)][(r-\Delta r)\sin(\Delta\theta)] \\
@@ -318,24 +317,23 @@ dA = r\,dr\,d\theta\text{.}
 <article class="theorem theorem-like" id="theorem-double-integrals-in-polar-coordinates"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">13.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Double Integrals in Polar Coordinates.</span>
 </h6>
-<p id="p-1563">Let \(f(x,y)\) be a continuous function. Then</p>
+<p id="p-1516">Let \(f(x,y)\) be a continuous function. Then</p>
 <div class="displaymath">
 \begin{equation*}
 \iint_{D}f(x,y)\,dA = \iint_{D}f(r\cos\theta,r\sin\theta)r\,dr\,d\theta
 \end{equation*}
 </div>
-<p class="continuation">and limits are chosen using polar coordinates.</p></article><article class="example example-like" id="example-integrating-over-a-circular-sector"><h6 class="heading">
+<p class="continuation">and limits are chosen using polar coordinates.</p></article><article class="example example-like" id="example-integrating-over-a-circular-sector"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-integrating-over-a-circular-sector"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating over a circular sector.</span>
-</h6>
-<p id="p-1564">Find</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-integrating-over-a-circular-sector"><article class="example example-like"><p id="p-1517">Find</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-254" id="solution-254"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-254"><div class="solution solution-like">
-<p id="p-1565">If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-246" id="solution-246"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-246"><div class="solution solution-like">
+<p id="p-1518">If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:</p>
 <div class="displaymath">
 \begin{align*}
 \int_{-1}^{0}\int_{-\sqrt{1-x^{2}}}^{0}\frac{2}{1+\sqrt{x^{2} + y^{2}}}\,dy\,dx &amp; = \int_{\pi}^{\frac{3\pi}{2}}\int_{0}^{1}\frac{2}{1+r}r\,dr\,d\theta \\
@@ -345,16 +343,17 @@ dA = r\,dr\,d\theta\text{.}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1566">Polar coordinates may also be used, surprisingly, to evaluate the <dfn class="terminology">Gaussian integral</dfn> \(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\)</p>
+</div></article></div>
+<p id="p-1519">Polar coordinates may also be used, surprisingly, to evaluate the <dfn class="terminology">Gaussian integral</dfn> \(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\)</p>
 <article class="theorem theorem-like" id="theorem-the-gaussian-integral"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">13.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">The Gaussian Integral.</span>
 </h6>
-<p id="p-1567">We have</p>
+<p id="p-1520">We have</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{-\infty}^{\infty}e^{-x^{2}}\,dx = \sqrt{\pi}
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-17"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-17"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-17"><article class="hiddenproof"><p id="p-1568">First, let \(I = \int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\) We'll show that \(I^{2} = \pi\text{.}\) We have</p>
+</div></article><article class="hiddenproof" id="proof-17"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-17"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-17"><article class="hiddenproof"><p id="p-1521">First, let \(I = \int_{-\infty}^{\infty}e^{-x^{2}}\,dx\text{.}\) We'll show that \(I^{2} = \pi\text{.}\) We have</p>
 <div class="displaymath">
 \begin{align*}
 I^{2} &amp; = \left(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-y^{2}}\,dy\right) \\
@@ -371,13 +370,12 @@ I^{2} &amp; = \left(\int_{-\infty}^{\infty}e^{-x^{2}}\,dx\right)\left(\int_{-\in
 \int_{-\infty}^{\infty}e^{-x^{2}}\,dx = \sqrt{\pi}
 \end{equation*}
 </div></article></div>
-<article class="example example-like" id="example-volume-of-a-sphere"><h6 class="heading">
+<article class="example example-like" id="example-volume-of-a-sphere"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-volume-of-a-sphere"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Volume of a sphere.</span>
-</h6>
-<p id="p-1569">Find the volume of a sphere of radius \(\rho\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-volume-of-a-sphere"><article class="example example-like"><p id="p-1522">Find the volume of a sphere of radius \(\rho\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-255" id="solution-255"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-255"><div class="solution solution-like">
-<p id="p-1570">First, we can center the sphere at the origin without loss of generality. Such a sphere is given by \(x^{2} + y^{2} + z^{2} = \rho^{2}\text{.}\) If we solve for \(z\text{,}\) we get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-247" id="solution-247"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-247"><div class="solution solution-like">
+<p id="p-1523">First, we can center the sphere at the origin without loss of generality. Such a sphere is given by \(x^{2} + y^{2} + z^{2} = \rho^{2}\text{.}\) If we solve for \(z\text{,}\) we get</p>
 <div class="displaymath">
 \begin{equation*}
 z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}
@@ -393,7 +391,8 @@ z = \pm\sqrt{\rho^{2} - x^{2} - y^{2}}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1571">SUGGESTED PROBLEMS: 5, 13, 23</p></section></div></main>
+</div></article></div>
+<p id="p-1524">SUGGESTED PROBLEMS: 5, 13, 23</p></section></div></main>
 </div>
 </body>
 </html>

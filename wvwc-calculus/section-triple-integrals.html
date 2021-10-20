@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:48-05:00       *-->
+<!--*       on 2021-10-20T15:43:38-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Triple Integrals</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,12 +279,12 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-triple-integrals"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">13.5</span> <span class="title">Triple Integrals</span>
 </h2>
-<p id="p-1579">In \(\RR\text{,}\) we have</p>
+<p id="p-1532">In \(\RR\text{,}\) we have</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \lim_{\Delta x\to0}\sum_{i=0}^{n}f(x_{i})\Delta x.
@@ -298,17 +297,17 @@ MathJax.Hub.Config({
 \end{equation*}
 </div>
 <p class="continuation">This represents the volume under \(z = f(x,y)\) and above the region \(D\text{,}\) where \(\Delta A = \Delta x\Delta y\text{.}\) Furthermore, \(\iint_{D}\,dA\) gives the area of \(D\text{.}\)</p>
-<p id="p-1580">We can extend all of this to \(\RR^{3}\) by introducing the concept of the <dfn class="terminology">triple integral</dfn>.</p>
+<p id="p-1533">We can extend all of this to \(\RR^{3}\) by introducing the concept of the <dfn class="terminology">triple integral</dfn>.</p>
 <article class="definition definition-like" id="definition-triple-integrals-over-a-rectangle"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">13.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Triple Integrals over a Rectangle.</span>
 </h6>
-<p id="p-1581">Let \(f(x,y,z)\) be defined on some region \(D\) in \(\RR^{3}\text{.}\) Then the triple integral of \(f\) over \(D\) is given by</p>
+<p id="p-1534">Let \(f(x,y,z)\) be defined on some region \(D\) in \(\RR^{3}\text{.}\) Then the triple integral of \(f\) over \(D\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 \iiint_{D}f(x,y,z)\,dV = \lim_{\Delta V\to0}\sum_{i=0}^{l}\sum_{j=0}^{m}\sum_{k=0}^{n}f(x_{i},y_{j},z_{k})\Delta V
 \end{equation*}
 </div>
-<p class="continuation">where \(\Delta V = \Delta x\Delta y\Delta z\text{.}\) If the limit exists, we say that \(f\) is <dfn class="terminology">integrable</dfn> on \(D\text{.}\)</p></article><p id="p-1582">For a double integral in rectangular coordinates, we have \(dA = dx\,dy\) or \(dy\,dx\text{.}\) Similarly, for a triple integral in rectangular coordinates we have six different choices for \(dV\text{:}\) <figure class="table table-like" id="table-volume-elements"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">13.5.2<span class="period">.</span></span><span class="space"> </span>Absolute values on the disk</figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p class="continuation">where \(\Delta V = \Delta x\Delta y\Delta z\text{.}\) If the limit exists, we say that \(f\) is <dfn class="terminology">integrable</dfn> on \(D\text{.}\)</p></article><p id="p-1535">For a double integral in rectangular coordinates, we have \(dA = dx\,dy\) or \(dy\,dx\text{.}\) Similarly, for a triple integral in rectangular coordinates we have six different choices for \(dV\text{:}\) <figure class="table table-like" id="table-volume-elements"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">13.5.2<span class="period">.</span></span><span class="space"> </span>Absolute values on the disk</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="c m b0 r0 l0 t3 lines">\(dx\,dy\,dz\)</td>
 <td class="c m b0 r0 l0 t3 lines">\(dx\,dz\,dy\)</td>
@@ -324,18 +323,17 @@ MathJax.Hub.Config({
 </table></div></figure> Just as we can view \(dx\) as an infinitesimal length and \(dA\) as an infinitesimal area, \(dV\) represents an infinitesimal volume.</p>Our main use for <a class="xref" data-knowl="./knowl/definition-triple-integrals-over-a-rectangle.html" title="Definition 13.5.1: Triple Integrals over a Rectangle">Definition 13.5.1</a> will be to recognize a triple integral "in the wild," but we won't actually use it to compute integrals. For this purpose, we still use Fubini's Theorem.<article class="theorem theorem-like" id="theorem-fubini-s-theorem-for-triple-integrals"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">13.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Fubini's Theorem for Triple Integrals.</span>
 </h6>
-<p id="p-1583">Suppose \(f(x,y,z)\) is a continuous function on the closed and bounded region \(D\) in \(\RR^{3}\text{.}\) Then \(\iiint_{D}f(x,y,z)\,dV\) can be computed as an iterated integral, and the answer does not depend on the choice of \(dV\text{.}\)</p></article><article class="example example-like" id="example-a-triple-integral-over-a-rectangular-prism"><h6 class="heading">
+<p id="p-1536">Suppose \(f(x,y,z)\) is a continuous function on the closed and bounded region \(D\) in \(\RR^{3}\text{.}\) Then \(\iiint_{D}f(x,y,z)\,dV\) can be computed as an iterated integral, and the answer does not depend on the choice of \(dV\text{.}\)</p></article><article class="example example-like" id="example-a-triple-integral-over-a-rectangular-prism"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-a-triple-integral-over-a-rectangular-prism"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">A triple integral over a rectangular prism.</span>
-</h6>
-<p id="p-1584">Compute \(\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV\text{,}\) where</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-a-triple-integral-over-a-rectangular-prism"><article class="example example-like"><p id="p-1537">Compute \(\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV\text{,}\) where</p>
 <div class="displaymath">
 \begin{equation*}
 D = \{(x,y) : 0\leq x\leq\sqrt{\ln2}, 0\leq y\leq\sqrt{\ln4}, 0\leq z\leq 1\}
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-258" id="solution-258"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-258"><div class="solution solution-like">
-<p id="p-1585">We'll integrate using \(dV = dx\,dy\,dz\text{.}\) Then we have</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-250" id="solution-250"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-250"><div class="solution solution-like">
+<p id="p-1538">We'll integrate using \(dV = dx\,dy\,dz\text{.}\) Then we have</p>
 <div class="displaymath">
 \begin{align*}
 \iiint_{D}xyze^{-x^{2} - y^{2}}\,dV &amp; = \int_{0}^{1}\int_{0}^{\sqrt{\ln4}}\int_{0}^{\sqrt{\ln2}} xyze^{-x^{2} - y^{2}}\,dx\,dy\,dz \\
@@ -349,28 +347,28 @@ D = \{(x,y) : 0\leq x\leq\sqrt{\ln2}, 0\leq y\leq\sqrt{\ln4}, 0\leq z\leq 1\}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1586">An unfortunate side effect of increasing the dimension for our integral is that we lose a little bit of geometric intuition. For instance, <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a> is indeed calculating a "volume," but the volume in question is for a four dimensional region (the graph of \(f(x,y,z)\) over the rectangular prism). We can only really visualize the "base" of this region, which served as our region of integration in <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a>. Even so, the triple integral can still tell us important things about functions of three variables.</p>
-<article class="example example-like" id="example-finding-an-average-value"><h6 class="heading">
+</div></article></div>
+<p id="p-1539">An unfortunate side effect of increasing the dimension for our integral is that we lose a little bit of geometric intuition. For instance, <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a> is indeed calculating a "volume," but the volume in question is for a four dimensional region (the graph of \(f(x,y,z)\) over the rectangular prism). We can only really visualize the "base" of this region, which served as our region of integration in <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a>. Even so, the triple integral can still tell us important things about functions of three variables.</p>
+<article class="example example-like" id="example-finding-an-average-value"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-finding-an-average-value"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Finding an average value.</span>
-</h6>
-<p id="p-1587">Find the average value of the function \(f(x,y,z) = xyze^{-x^{2} - y^{2}}\) over the region \(D\) given in <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a>.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-finding-an-average-value"><article class="example example-like"><p id="p-1540">Find the average value of the function \(f(x,y,z) = xyze^{-x^{2} - y^{2}}\) over the region \(D\) given in <a class="xref" data-knowl="./knowl/example-a-triple-integral-over-a-rectangular-prism.html" title="Example 13.5.4: A triple integral over a rectangular prism">Example 13.5.4</a>.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-259" id="solution-259"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-259"><div class="solution solution-like">
-<p id="p-1588">First, let \(\operatorname{Vol}(D)\) denote the volume of \(D\text{.}\) Then the average value of \(f\) over \(D\) is just</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-251" id="solution-251"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-251"><div class="solution solution-like">
+<p id="p-1541">First, let \(\operatorname{Vol}(D)\) denote the volume of \(D\text{.}\) Then the average value of \(f\) over \(D\) is just</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{\iiint_{D}xyze^{-x^{2} - y^{2}}\,dV}{\operatorname{Vol}(D)} = \frac{\frac{3}{64}}{\sqrt{\ln2\ln4}} \approx .05
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1589">We can also compute triple integrals over more general regions.</p>
-<article class="example example-like" id="example-volume-using-triple-integrals"><h6 class="heading">
+</div></article></div>
+<p id="p-1542">We can also compute triple integrals over more general regions.</p>
+<article class="example example-like" id="example-volume-using-triple-integrals"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-volume-using-triple-integrals"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Volume using triple integrals.</span>
-</h6>
-<p id="p-1590">Find the volume of the region bounded by the cylinder \(y = x^{2}\) and the planes \(z = 3-y\) and \(z=0\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-volume-using-triple-integrals"><article class="example example-like"><p id="p-1543">Find the volume of the region bounded by the cylinder \(y = x^{2}\) and the planes \(z = 3-y\) and \(z=0\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-260" id="solution-260"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-260"><div class="solution solution-like">
-<p id="p-1591">If we let \(D\) denote this region, then its volume is given by \(\iiint_{D}\,dV\text{.}\) The volume is then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-252" id="solution-252"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-252"><div class="solution solution-like">
+<p id="p-1544">If we let \(D\) denote this region, then its volume is given by \(\iiint_{D}\,dV\text{.}\) The volume is then</p>
 <div class="displaymath">
 \begin{align*}
 \iiint_{D}\,dV &amp; = \int_{-\sqrt{3}}^{\sqrt{3}}\int_{x^{2}}^{3}\int_{0}^{3-y}\,dz\,dy\,dx \\
@@ -381,14 +379,14 @@ D = \{(x,y) : 0\leq x\leq\sqrt{\ln2}, 0\leq y\leq\sqrt{\ln4}, 0\leq z\leq 1\}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1592">When setting up limits for triple integrals, say using \(dV = dx\,dy\,dz\text{,}\) then the limits on the innermost integral are typically functions of \(y\) and \(z\text{,}\) the limits on the middle integral are functions of \(z\) and the limits on the outermost integral are constant. We can also change the order of integration to make an integral more tractable.</p>
-<article class="example example-like" id="example-changing-the-order-of-integration"><h6 class="heading">
+</div></article></div>
+<p id="p-1545">When setting up limits for triple integrals, say using \(dV = dx\,dy\,dz\text{,}\) then the limits on the innermost integral are typically functions of \(y\) and \(z\text{,}\) the limits on the middle integral are functions of \(z\) and the limits on the outermost integral are constant. We can also change the order of integration to make an integral more tractable.</p>
+<article class="example example-like" id="example-changing-the-order-of-integration"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-changing-the-order-of-integration"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.5.7</span><span class="period">.</span><span class="space"> </span><span class="title">Changing the order of integration.</span>
-</h6>
-<p id="p-1593">Compute \(\int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-changing-the-order-of-integration"><article class="example example-like"><p id="p-1546">Compute \(\int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-261" id="solution-261"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-261"><div class="solution solution-like">
-<p id="p-1594">This looks awful to integrate with respect to \(y\) first, so we'll try changing the order of integration. \(x\) looks easiest, so let's try using \(dV = dx\,dy\,dz\) instead. If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals. So</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-253" id="solution-253"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-253"><div class="solution solution-like">
+<p id="p-1547">This looks awful to integrate with respect to \(y\) first, so we'll try changing the order of integration. \(x\) looks easiest, so let's try using \(dV = dx\,dy\,dz\) instead. If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals. So</p>
 <div class="displaymath">
 \begin{align*}
 \int_{1}^{4}\int_{z}^{4z}\int_{0}^{\pi^{2}}\frac{\sin\sqrt{yz}}{x^{3/2}}\,dy\,dx\,dz  &amp; = \int_{1}^{4}\int_{0}^{\pi^{2}}\int_{z}^{4z}x^{-3/2}\sin\sqrt{yz}\,dx\,dy\,dz \\
@@ -403,7 +401,8 @@ D = \{(x,y) : 0\leq x\leq\sqrt{\ln2}, 0\leq y\leq\sqrt{\ln4}, 0\leq z\leq 1\}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1595">SUGGESTED PROBLEMS: 5, 11, 13, 19, 25, 29</p></section></div></main>
+</div></article></div>
+<p id="p-1548">SUGGESTED PROBLEMS: 5, 11, 13, 19, 25, 29</p></section></div></main>
 </div>
 </body>
 </html>

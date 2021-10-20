@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:52-05:00       *-->
+<!--*       on 2021-10-20T15:43:41-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Parametric Surfaces and Areas</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,25 +279,24 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-parametric-surfaces-and-areas"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">14.6</span> <span class="title">Parametric Surfaces and Areas</span>
 </h2>
-<section class="introduction" id="introduction-44"><p id="p-1771">To extend <a class="xref" data-knowl="./knowl/theorem-green-s-theorem.html" title="Theorem 14.4.1: Green's Theorem">Theorem 14.4.1</a> to surfaces in \(\RR^{3}\text{,}\) we need to parameterize surfaces just as we did curves. As before, our computations depend on the specific parameterization we choose.</p></section><section class="subsection" id="subsection-parameterizing-surfaces"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-43"><p id="p-1724">To extend <a class="xref" data-knowl="./knowl/theorem-green-s-theorem.html" title="Theorem 14.4.1: Green's Theorem">Theorem 14.4.1</a> to surfaces in \(\RR^{3}\text{,}\) we need to parameterize surfaces just as we did curves. As before, our computations depend on the specific parameterization we choose.</p></section><section class="subsection" id="subsection-parameterizing-surfaces"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">14.6.1</span> <span class="title">Parameterizing Surfaces</span>
 </h3>
-<p id="p-1772">A curve is a one-dimensional object, and so our parameterizations typically involved only one independent variable. A surface is fundamentally a two-dimensional object, and so we expect its parameterizations to involve two independent variables—even if the surface is in \(\RR^{3}\text{.}\) We will use vector functions of the form</p>
+<p id="p-1725">A curve is a one-dimensional object, and so our parameterizations typically involved only one independent variable. A surface is fundamentally a two-dimensional object, and so we expect its parameterizations to involve two independent variables—even if the surface is in \(\RR^{3}\text{.}\) We will use vector functions of the form</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(u,v) = \dotprod{x(u,v), y(u,v), z(u,v)}
 \end{equation*}
 </div>
 <p class="continuation">to represent our parameterizations.</p>
-<article class="example example-like" id="example-finding-a-surface"><h6 class="heading">
+<article class="example example-like" id="example-finding-a-surface"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-finding-a-surface"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Surface.</span>
-</h6>
-<p id="p-1773">Find the surface traced out by</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-finding-a-surface"><article class="example example-like"><p id="p-1726">Find the surface traced out by</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(u,v) = (3u - v)\vb{i} + (u + v)\vb{j} + (2u + 3v)\vb{k}
@@ -306,9 +304,9 @@ MathJax.Hub.Config({
 </div>
 <p class="continuation">in \(\RR^{3}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-294" id="solution-294"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-294"><div class="solution solution-like">
-<p id="p-1774">For any point \((x,y,z)\) on this surface, we know that \(x = 3u - v, y = u + v\) and \(z = 2u + 3v\text{.}\) We can use these conditions to find an equation in \(x, y\) and \(z\) that is equivalent to \(\vb{r}\text{.}\)</p>
-<p id="p-1775">First, let's solve for \(u\) and \(v\text{,}\) giving</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-286" id="solution-286"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-286"><div class="solution solution-like">
+<p id="p-1727">For any point \((x,y,z)\) on this surface, we know that \(x = 3u - v, y = u + v\) and \(z = 2u + 3v\text{.}\) We can use these conditions to find an equation in \(x, y\) and \(z\) that is equivalent to \(\vb{r}\text{.}\)</p>
+<p id="p-1728">First, let's solve for \(u\) and \(v\text{,}\) giving</p>
 <div class="displaymath">
 \begin{align*}
 u \amp = \frac{x + y}{4} \\
@@ -328,19 +326,19 @@ x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y\text{,}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1776">In general, any plane can be represented using a vector function of the form</p>
+</div></article></div>
+<p id="p-1729">In general, any plane can be represented using a vector function of the form</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(u,v) = \vb{r}_{0} + u\vb{a} + v\vb{b}\text{.}
 \end{equation*}
 </div>
-<article class="example example-like" id="example-parameterizing-a-cylinder"><h6 class="heading">
+<article class="example example-like" id="example-parameterizing-a-cylinder"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-parameterizing-a-cylinder"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Parameterizing a Cylinder.</span>
-</h6>
-<p id="p-1777">Find a vector function \(\vb{r}\) that traces out the portion of the cylinder \(x^{2} + z^{2} = 1\) contained in the seventh octant.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-parameterizing-a-cylinder"><article class="example example-like"><p id="p-1730">Find a vector function \(\vb{r}\) that traces out the portion of the cylinder \(x^{2} + z^{2} = 1\) contained in the seventh octant.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-295" id="solution-295"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-295"><div class="solution solution-like">
-<p id="p-1778">The presence of \(x^{2} + z^{2}\) in the equation defining this surface suggests something like polar coordinates, except for the \(xz\)-plane instead of the \(xy\)-plane. So let \(r = \sqrt{x^{2} + z^{2}}, x = r\cos\theta, y = y\) and \(z = r\sin\theta\text{.}\) Then \(r = 1\) on our surface, and we can parameterize it using</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-287" id="solution-287"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-287"><div class="solution solution-like">
+<p id="p-1731">The presence of \(x^{2} + z^{2}\) in the equation defining this surface suggests something like polar coordinates, except for the \(xz\)-plane instead of the \(xy\)-plane. So let \(r = \sqrt{x^{2} + z^{2}}, x = r\cos\theta, y = y\) and \(z = r\sin\theta\text{.}\) Then \(r = 1\) on our surface, and we can parameterize it using</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(\theta,y) = \dotprod{\cos\theta, y,\sin\theta}\text{.}
@@ -353,10 +351,10 @@ x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y\text{,}
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
+</div></article></div></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">14.6.2</span> <span class="title">Tangent Planes</span>
 </h3>
-<p id="p-1779">If \(C:\vb{r}(t)\text{,}\) then \(\vb{r}'(t)\) gives the tangent vector to \(C\) at the point corresponding to \(\vb{r}(t)\text{.}\) In the same way, if a surface \(S\) is given by \(\vb{r}(u,v)\text{,}\) then</p>
+<p id="p-1732">If \(C:\vb{r}(t)\text{,}\) then \(\vb{r}'(t)\) gives the tangent vector to \(C\) at the point corresponding to \(\vb{r}(t)\text{.}\) In the same way, if a surface \(S\) is given by \(\vb{r}(u,v)\text{,}\) then</p>
 <div class="displaymath">
 \begin{align*}
 \pdv{\vb{r}}{u} \amp = \vb{r}_{u} \\
@@ -364,13 +362,12 @@ x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y\text{,}
 \end{align*}
 </div>
 <p class="continuation">give tangent vectors to \(S\) at the point corresponding to \(\vb{r}(u,v)\text{.}\) \(\vb{r}_{u}\) gives the tangent in the direction of increasing \(u\text{,}\) while \(\vb{r}_{v}\) gives the tangent in the direction of increasing \(v\text{.}\) We say that \(S\) is <dfn class="terminology">smooth</dfn> if \(\vb{r}_{u}\) and \(\vb{r}_{v}\) exist, are continuous and are never \(\vb{0}\text{.}\) In this case, we can construct the tangent plane to \(S\text{.}\)</p>
-<article class="example example-like" id="example-tangent-plane-to-a-sphere"><h6 class="heading">
+<article class="example example-like" id="example-tangent-plane-to-a-sphere"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-tangent-plane-to-a-sphere"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Tangent Plane to a Sphere.</span>
-</h6>
-<p id="p-1780">Let \(S\) be the sphere centered at the origin of radius \(2\text{.}\) Parameterize the tangent plane to \(S\) at \(\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-tangent-plane-to-a-sphere"><article class="example example-like"><p id="p-1733">Let \(S\) be the sphere centered at the origin of radius \(2\text{.}\) Parameterize the tangent plane to \(S\) at \(\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-296" id="solution-296"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-296"><div class="solution solution-like">
-<p id="p-1781">First, note that \(\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}\) actually lies on this sphere so the tangent plane here makes sense. To parameterize the tangent plane, we first need to parameterize \(S\text{:}\)</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-288" id="solution-288"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-288"><div class="solution solution-like">
+<p id="p-1734">First, note that \(\parens{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}}\) actually lies on this sphere so the tangent plane here makes sense. To parameterize the tangent plane, we first need to parameterize \(S\text{:}\)</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(\theta,\varphi) = \dotprod{2\cos\theta\sin\varphi, 2\sin\theta\sin\varphi, 2\cos\varphi}\text{.}
@@ -382,7 +379,7 @@ x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y\text{,}
 \vb{s}(\theta,\varphi) = \dotprod{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, \sqrt{3}} + \theta\dotprod{-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, 0} + \varphi\dotprod{\frac{\sqrt{6}}{2}, \frac{\sqrt{6}}{2}, -1}\text{.}
 \end{equation*}
 </div>
-<p id="p-1782">If we want the Cartesian equation of the plane instead, that's not too difficult either. We just need a normal vector to the plane, and we can just use \(\vb{r}_{\theta}\times\vb{r}_{\varphi}\) for this:</p>
+<p id="p-1735">If we want the Cartesian equation of the plane instead, that's not too difficult either. We just need a normal vector to the plane, and we can just use \(\vb{r}_{\theta}\times\vb{r}_{\varphi}\) for this:</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{n} = \dotprod{-\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2},0}\text{.}
@@ -395,10 +392,10 @@ x + y + z = 6u + 3v = \frac{3}{4}x + \frac{15}{4}y\text{,}
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="subsection" id="subsection-surface-areas"><h3 class="heading hide-type">
+</div></article></div></section><section class="subsection" id="subsection-surface-areas"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">14.6.3</span> <span class="title">Surface Areas</span>
 </h3>
-<p id="p-1783">In addition to giving us a normal vector to the surface \(S\text{,}\) the quantity \(\vb{r}_{u}\times\vb{r}_{v}\) can also be used to estimate the area of a small “parallelogram” on \(S\) at a given point \(\vb{r}(u_{0}, v_{0})\text{.}\) In particular, if</p>
+<p id="p-1736">In addition to giving us a normal vector to the surface \(S\text{,}\) the quantity \(\vb{r}_{u}\times\vb{r}_{v}\) can also be used to estimate the area of a small “parallelogram” on \(S\) at a given point \(\vb{r}(u_{0}, v_{0})\text{.}\) In particular, if</p>
 <div class="displaymath">
 \begin{align*}
 u_{0} \amp \leq u\leq u_{0} + \Delta u \\
@@ -421,18 +418,17 @@ v_{0} \amp \leq v\leq v_{0} + \Delta v \text{,}
 <article class="definition definition-like" id="definition-surface-area"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">14.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Surface Area.</span>
 </h6>
-<p id="p-1784">Let \(S\) be a smooth surface parameterized by \(\vb{r}(u,v)\) for \((u,v)\in D\text{.}\) Then the <dfn class="terminology">surface area</dfn> of \(S\) is defined to be</p>
+<p id="p-1737">Let \(S\) be a smooth surface parameterized by \(\vb{r}(u,v)\) for \((u,v)\in D\text{.}\) Then the <dfn class="terminology">surface area</dfn> of \(S\) is defined to be</p>
 <div class="displaymath">
 \begin{equation*}
 \iint_{D}\norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA\text{.}
 \end{equation*}
-</div></article><article class="example example-like" id="example-area-of-a-cone"><h6 class="heading">
+</div></article><article class="example example-like" id="example-area-of-a-cone"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-area-of-a-cone"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Area of a Cone.</span>
-</h6>
-<p id="p-1785">Find the area of the part of the cone \(z = \sqrt{x^{2} + y^{2}}\) bounded by \(y = x\) and \(y = x^{2}\) in the first octant.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-area-of-a-cone"><article class="example example-like"><p id="p-1738">Find the area of the part of the cone \(z = \sqrt{x^{2} + y^{2}}\) bounded by \(y = x\) and \(y = x^{2}\) in the first octant.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-297" id="solution-297"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-297"><div class="solution solution-like">
-<p id="p-1786">First, we parameterize the cone using</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-289" id="solution-289"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-289"><div class="solution solution-like">
+<p id="p-1739">First, we parameterize the cone using</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(x,y) = \dotprod{x, y, \sqrt{x^{2} + y^{2}}}, x^{2}\leq y\leq x\qq{and} 0\leq x\leq 1\text{.}
@@ -451,8 +447,9 @@ v_{0} \amp \leq v\leq v_{0} + \Delta v \text{,}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1787">The reason we care about smooth surfaces above is that they let us specify a normal vector to that surface. There are typically two choices for such a normal vector (inside vs.  outside), but once we choose a direction the normal vector becomes ambiguous. Such surfaces are said to be <dfn class="terminology">orientable</dfn>, and it's these surfaces that we can do calculus on.</p>
-<p id="p-1788">As an example of a surface that is not orientable, consider the surface parameterized by</p>
+</div></article></div>
+<p id="p-1740">The reason we care about smooth surfaces above is that they let us specify a normal vector to that surface. There are typically two choices for such a normal vector (inside vs.  outside), but once we choose a direction the normal vector becomes ambiguous. Such surfaces are said to be <dfn class="terminology">orientable</dfn>, and it's these surfaces that we can do calculus on.</p>
+<p id="p-1741">As an example of a surface that is not orientable, consider the surface parameterized by</p>
 <div class="displaymath">
 \begin{equation*}
 \vb{r}(u,v) = \dotprod{2\cos u + v\cos\frac{u}{2}, 2\sin u + v\cos\frac{u}{2}, v\sin\frac{u}{2}}
@@ -464,7 +461,7 @@ v_{0} \amp \leq v\leq v_{0} + \Delta v \text{,}
 (\frac{v}{2} - 2 \sin{\left (\frac{u}{2} \right )} \cos{\left (u \right )})\vb{i} + (- \frac{v}{2} - 2 \sin{\left (\frac{u}{2} \right )} \sin{\left (u \right )})\vb{j} + (2 \sqrt{2} \sin{\left (u + \frac{\pi}{4} \right )} \cos{\left (\frac{u}{2} \right )})\vb{k}\text{.}
 \end{equation*}
 </div>
-<p id="p-1789">Here's the problem: the normal vector is different at \(u = v = 0\) compared with \(u = 2\pi, v = 0\) since the \(\vb{k}\) component gets its sign flipped. But on the original surface there's no difference between \(u = v = 0\) and \(u = 2\pi, v = 0\text{.}\) Hence this surface is non-orientable.</p></section><section class="conclusion" id="conclusion-16"><p id="p-1790">SUGGESTED PROBLEMS:1, 3, 15, 19, 33, 43.</p></section></section></div></main>
+<p id="p-1742">Here's the problem: the normal vector is different at \(u = v = 0\) compared with \(u = 2\pi, v = 0\) since the \(\vb{k}\) component gets its sign flipped. But on the original surface there's no difference between \(u = v = 0\) and \(u = 2\pi, v = 0\text{.}\) Hence this surface is non-orientable.</p></section><section class="conclusion" id="conclusion-16"><p id="p-1743">SUGGESTED PROBLEMS:1, 3, 15, 19, 33, 43.</p></section></section></div></main>
 </div>
 </body>
 </html>

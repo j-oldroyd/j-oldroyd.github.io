@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:24-05:00       *-->
+<!--*       on 2021-10-20T15:43:22-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Antiderivatives</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives" class="active">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,12 +279,12 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-antiderivatives"><h2 class="heading hide-type">
-<span class="type">Section</span> <span class="codenumber">5.9</span> <span class="title">Antiderivatives</span>
+<span class="type">Section</span> <span class="codenumber">5.6</span> <span class="title">Antiderivatives</span>
 </h2>
-<p id="p-415">Suppose we're tracking a moving object, and through experimentation we know its acceleration to be equal to <span class="quantity">3 <sup>m</sup>⁄<sub>s<sup>2</sup></sub></span> to the right. Say we want to find the velocity of the mass at time \(t\text{.}\) Then if we set \(v(t)\) equal to the velocity and \(a(t)\) equal to the acceleration, we know that</p>
+<p id="p-397">Suppose we're tracking a moving object, and through experimentation we know its acceleration to be equal to <span class="quantity">3 <sup>m</sup>⁄<sub>s<sup>2</sup></sub></span> to the right. Say we want to find the velocity of the mass at time \(t\text{.}\) Then if we set \(v(t)\) equal to the velocity and \(a(t)\) equal to the acceleration, we know that</p>
 <div class="displaymath">
 \begin{equation*}
 v'(t) = a(t) = 3.
@@ -293,67 +292,66 @@ v'(t) = a(t) = 3.
 </div>
 <p class="continuation">Therefore \(v(t)\) is a function whose derivative is \(3\text{.}\) So one possible choice for \(v(t)\) is \(v(t) = 3t\text{.}\) This leads us to the definition of an <dfn class="terminology">antiderivative</dfn>.</p>
 <article class="definition definition-like" id="definition-antiderivatives"><h6 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.9.1</span><span class="period">.</span><span class="space"> </span><span class="title">Antiderivatives.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Antiderivatives.</span>
 </h6>
-<p id="p-416">A function \(F(x)\) is called an antiderivative of the function \(f(x)\) if \(F'(x) = f(x)\) for all \(x\) in an interval \(I\text{.}\)</p></article><article class="example example-like" id="example-multiple-antiderivatives"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.2</span><span class="period">.</span><span class="space"> </span><span class="title">Multiple antiderivatives.</span>
-</h6>
-<p id="p-417">Find three different antiderivatives for \(f(x) = \cos x\text{.}\)</p>
+<p id="p-398">A function \(F(x)\) is called an antiderivative of the function \(f(x)\) if \(F'(x) = f(x)\) for all \(x\) in an interval \(I\text{.}\)</p></article><article class="example example-like" id="example-multiple-antiderivatives"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-multiple-antiderivatives"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Multiple antiderivatives.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-multiple-antiderivatives"><article class="example example-like"><p id="p-399">Find three different antiderivatives for \(f(x) = \cos x\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-87"><div class="solution solution-like">
-<p id="p-418">An antiderivative of \(\cos x\) is any function whose derivative is \(\cos x\text{.}\) So three antiderivatives could be</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-85" id="solution-85"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-85"><div class="solution solution-like">
+<p id="p-400">An antiderivative of \(\cos x\) is any function whose derivative is \(\cos x\text{.}\) So three antiderivatives could be</p>
 <div class="displaymath">
 \begin{equation*}
 F_{1}(x) = \sin x, F_{2}(x) = \sin x + 4, F_{3}(x) = \sin x - 100.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-419">From <a class="xref" data-knowl="./knowl/example-multiple-antiderivatives.html" title="Example 5.9.2: Multiple antiderivatives">Example 5.9.2</a> we see that any function of the form \(\sin x +C\) is an antiderivative of \(\cos x\text{.}\) In fact, this describes all possible antiderivatives of \(\cos x\text{.}\) This suggests the following theorem.</p>
+</div></article></div>
+<p id="p-401">From <a class="xref" data-knowl="./knowl/example-multiple-antiderivatives.html" title="Example 5.6.2: Multiple antiderivatives">Example 5.6.2</a> we see that any function of the form \(\sin x +C\) is an antiderivative of \(\cos x\text{.}\) In fact, this describes all possible antiderivatives of \(\cos x\text{.}\) This suggests the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-general-antiderivatives"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.9.3</span><span class="period">.</span><span class="space"> </span><span class="title">General Antiderivatives.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">General Antiderivatives.</span>
 </h6>
-<p id="p-420">Let \(f(x)\) be some function with antiderivative \(F(x)\) on some interval \(I\text{.}\) Then the most general antiderivative of \(f(x)\) is</p>
+<p id="p-402">Let \(f(x)\) be some function with antiderivative \(F(x)\) on some interval \(I\text{.}\) Then the most general antiderivative of \(f(x)\) is</p>
 <div class="displaymath">
 \begin{equation*}
 F(x) + C
 \end{equation*}
 </div>
-<p class="continuation">where \(C\) is an arbitrary constant.</p></article><article class="hiddenproof" id="proof-9"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-9"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-9"><article class="hiddenproof"><p id="p-421">It might not seem like this statement requires a proof, but it does! We can check very easily that every function of the form \(F(x)+C\) is an antiderivative of \(f(x)\text{,}\) but how do we know every antiderivative takes this form? To prove this, let \(G(x)\) be an arbitrary antiderivative of \(f(x)\text{.}\) Then we need to show that \(G(x) = F(x) + C\text{,}\) or equivalently that \(G(x) - F(x) = C\text{.}\) We can do this by taking the derivative of \(G(x) - F(x)\) to get</p>
+<p class="continuation">where \(C\) is an arbitrary constant.</p></article><article class="hiddenproof" id="proof-9"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-9"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-9"><article class="hiddenproof"><p id="p-403">It might not seem like this statement requires a proof, but it does! We can check very easily that every function of the form \(F(x)+C\) is an antiderivative of \(f(x)\text{,}\) but how do we know every antiderivative takes this form? To prove this, let \(G(x)\) be an arbitrary antiderivative of \(f(x)\text{.}\) Then we need to show that \(G(x) = F(x) + C\text{,}\) or equivalently that \(G(x) - F(x) = C\text{.}\) We can do this by taking the derivative of \(G(x) - F(x)\) to get</p>
 <div class="displaymath">
 \begin{equation*}
 G'(x) - F'(x) = f(x) - f(x) = 0,
 \end{equation*}
 </div>
-<p class="continuation">and so by <a class="xref" data-knowl="./knowl/theorem-zero-derivative-theorem.html" title="Theorem 5.4.5: Zero Derivative Theorem">Theorem 5.4.5</a> we know that \(G(x) - F(x)\) must be constant on \(I\text{.}\) Hence \(G(x) - F(x) = C\) for some constant \(C\text{,}\) or equivalently \(G(x) = F(x)+C\text{.}\) Therefore <em class="emphasis">every</em> antiderivative of \(f(x)\) can be written as \(F(x) + C\text{.}\)</p></article></div>
-<p id="p-422">It might seem superfluous, but typically when dealing with models requiring us to find antiderivatives we'll want to find the most general antiderivative somewhere along the way. Moral of the story: <em class="emphasis">don't forget to add \(C\text{.}\)</em></p>
-<article class="example example-like" id="example-finding-antiderivatives"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.4</span><span class="period">.</span><span class="space"> </span><span class="title">Finding antiderivatives.</span>
-</h6>
-<p id="p-423">Find the most general antiderivatives of the following functions:</p>
+<p class="continuation">and so by <a class="xref" data-knowl="./knowl/theorem-zero-derivative-theorem.html" title="Theorem 5.2.5: Zero Derivative Theorem">Theorem 5.2.5</a> we know that \(G(x) - F(x)\) must be constant on \(I\text{.}\) Hence \(G(x) - F(x) = C\) for some constant \(C\text{,}\) or equivalently \(G(x) = F(x)+C\text{.}\) Therefore <em class="emphasis">every</em> antiderivative of \(f(x)\) can be written as \(F(x) + C\text{.}\)</p></article></div>
+<p id="p-404">It might seem superfluous, but typically when dealing with models requiring us to find antiderivatives we'll want to find the most general antiderivative somewhere along the way. Moral of the story: <em class="emphasis">don't forget to add \(C\text{.}\)</em></p>
+<article class="example example-like" id="example-finding-antiderivatives"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-finding-antiderivatives"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Finding antiderivatives.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-finding-antiderivatives"><article class="example example-like"><p id="p-405">Find the most general antiderivatives of the following functions:</p>
 <ol class="decimal">
-<li id="li-28">\(\displaystyle x^{3}.\)</li>
-<li id="li-29">\(\displaystyle -\frac{1}{2}x^{\frac{5}{3}}.\)</li>
-<li id="li-30">\(\displaystyle \sqrt{x} - 3x^{3} + x^{-2}.\)</li>
-<li id="li-31">\(\displaystyle \sin x + \cos (5x) + e^{4x}.\)</li>
+<li id="li-28"><p id="p-derived-li-28">\(\displaystyle x^{3}.\)</p></li>
+<li id="li-29"><p id="p-derived-li-29">\(\displaystyle -\frac{1}{2}x^{\frac{5}{3}}.\)</p></li>
+<li id="li-30"><p id="p-derived-li-30">\(\displaystyle \sqrt{x} - 3x^{3} + x^{-2}.\)</p></li>
+<li id="li-31"><p id="p-derived-li-31">\(\displaystyle \sin x + \cos (5x) + e^{4x}.\)</p></li>
 </ol>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-88"><div class="solution solution-like">
-<p id="p-424">We have the following:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-86"><div class="solution solution-like">
+<p id="p-406">We have the following:</p>
 <ol class="decimal">
-<li id="li-32">The general antiderivative of \(x^{3}\) is \(\frac{1}{4}x^{4}+C.\)</li>
-<li id="li-33">The general antiderivative of \(-\frac{1}{2}x^{\frac{5}{3}}\) is \(-\frac{1}{2}\frac{3}{8}x^{\frac{8}{3}}+C.\)</li>
-<li id="li-34">The general antiderivative of \(\sqrt{x} - 3x^{3} + x^{-2}\) is \(\frac{2}{3}x^{\frac{3}{2}} - \frac{3}{4}x^{4} - \frac{1}{x} + C\text{.}\)</li>
-<li id="li-35">The general antiderivative of \(\sin x + \cos (5x) + e^{4x}\) is \(-\cos x + \frac{1}{5}\sin(5x) + \frac{1}{4}e^{4x} + C.\)</li>
+<li id="li-32"><p id="p-derived-li-32">The general antiderivative of \(x^{3}\) is \(\frac{1}{4}x^{4}+C.\)</p></li>
+<li id="li-33"><p id="p-derived-li-33">The general antiderivative of \(-\frac{1}{2}x^{\frac{5}{3}}\) is \(-\frac{1}{2}\frac{3}{8}x^{\frac{8}{3}}+C.\)</p></li>
+<li id="li-34"><p id="p-derived-li-34">The general antiderivative of \(\sqrt{x} - 3x^{3} + x^{-2}\) is \(\frac{2}{3}x^{\frac{3}{2}} - \frac{3}{4}x^{4} - \frac{1}{x} + C\text{.}\)</p></li>
+<li id="li-35"><p id="p-derived-li-35">The general antiderivative of \(\sin x + \cos (5x) + e^{4x}\) is \(-\cos x + \frac{1}{5}\sin(5x) + \frac{1}{4}e^{4x} + C.\)</p></li>
 </ol>
 </div></div>
-</div></article><article class="example example-like" id="example-the-antiderivative-of--frac-1-x-m-"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.5</span><span class="period">.</span><span class="space"> </span><span class="title">The antiderivative of \(\frac{1}{x}\).</span>
-</h6>
-<p id="p-425">Find the general antiderivative of \(f(x) = \frac{1}{x}\text{.}\)</p>
+</div></article></div>
+<article class="example example-like" id="example-the-antiderivative-of--frac-1-x-m-"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-the-antiderivative-of--frac-1-x-m-"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">The antiderivative of \(\frac{1}{x}\).</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-the-antiderivative-of--frac-1-x-m-"><article class="example example-like"><p id="p-407">Find the general antiderivative of \(f(x) = \frac{1}{x}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-89" id="solution-89"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-89"><div class="solution solution-like">
-<p id="p-426">We have two cases we need to consider, since the domain of \(f(x)\) consists of two intervals. First, suppose that \(x\) is in \((0,\infty)\text{.}\) Then we know that \(\dv{}{x}\ln x = \frac{1}{x}\text{,}\) so on this interval the most general antiderivative of \(\frac{1}{x}\) is \(\ln x + C_{1}\text{.}\)</p>
-<p id="p-427">Now let \(x\) be in \((-\infty,0)\text{.}\) Then \(\ln x\) isn't defined here. However, we can write</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-87"><div class="solution solution-like">
+<p id="p-408">We have two cases we need to consider, since the domain of \(f(x)\) consists of two intervals. First, suppose that \(x\) is in \((0,\infty)\text{.}\) Then we know that \(\dv{}{x}\ln x = \frac{1}{x}\text{,}\) so on this interval the most general antiderivative of \(\frac{1}{x}\) is \(\ln x + C_{1}\text{.}\)</p>
+<p id="p-409">Now let \(x\) be in \((-\infty,0)\text{.}\) Then \(\ln x\) isn't defined here. However, we can write</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{x} = -\frac{1}{-x},
@@ -373,16 +371,17 @@ F(x) = \begin{cases} \ln x + C_{1} &amp; x &gt; 0 \\ \ln(-x) + C_{2} &amp; x &lt
 </div>
 <p class="continuation">If we know that we're only selecting values of \(x\) with the same sign, then we can just say that the antiderivative of \(\frac{1}{x}\) is \(\ln|x| + C\text{.}\)</p>
 </div></div>
-</div></article><article class="example example-like" id="example-antiderivatives-involving-secant"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.6</span><span class="period">.</span><span class="space"> </span><span class="title">Antiderivatives involving secant.</span>
-</h6>
-<p id="p-428">Find the general antiderivatives of \(\sec^{2}t\) and \(-2\sec3t\tan3t\text{.}\)</p>
+</div></article></div>
+<article class="example example-like" id="example-antiderivatives-involving-secant"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-antiderivatives-involving-secant"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">Antiderivatives involving secant.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-antiderivatives-involving-secant"><article class="example example-like"><p id="p-410">Find the general antiderivatives of \(\sec^{2}t\) and \(-2\sec3t\tan3t\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-90" id="solution-90"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-90"><div class="solution solution-like"><p id="p-429">The first antiderivative isn't too hard; it's just \(\tan t+C\text{.}\) The second is a little more complicated but still not too bad. Since \(\dv{}{t}\sec t = \sec t\tan t\text{,}\) a good guess for an antiderivative of \(-2\sec3t\tan3t\) would be \(-2\sec3t.\) However, the derivative of this is \(-6\sec3t\tan3t\text{,}\) so we're off by a factor of \(3\text{.}\) So we just need to divide our guess by \(3\) to correct for this. Hence the general antiderivative of \(-2\sec3t\tan3t\) is \(-\frac{2}{3}\sec3t\text{.}\)</p></div></div>
-</div></article><article class="theorem theorem-like" id="theorem-antidifferentiation-formulas"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.9.7</span><span class="period">.</span><span class="space"> </span><span class="title">Antidifferentiation Formulas.</span>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-88"><div class="solution solution-like"><p id="p-411">The first antiderivative isn't too hard; it's just \(\tan t+C\text{.}\) The second is a little more complicated but still not too bad. Since \(\dv{}{t}\sec t = \sec t\tan t\text{,}\) a good guess for an antiderivative of \(-2\sec3t\tan3t\) would be \(-2\sec3t.\) However, the derivative of this is \(-6\sec3t\tan3t\text{,}\) so we're off by a factor of \(3\text{.}\) So we just need to divide our guess by \(3\) to correct for this. Hence the general antiderivative of \(-2\sec3t\tan3t\) is \(-\frac{2}{3}\sec3t\text{.}\)</p></div></div>
+</div></article></div>
+<article class="theorem theorem-like" id="theorem-antidifferentiation-formulas"><h6 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Antidifferentiation Formulas.</span>
 </h6>
-<p id="p-430">Let \(F(x)\) and \(G(x)\) denote antiderivatives of \(f(x)\) and \(g(x)\text{,}\) and let \(c\) be a constant. Then we have the following: <figure class="table table-like" id="table-antiderivatives"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">5.9.8<span class="period">.</span></span><span class="space"> </span>Particular antiderivatives of functions</figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-412">Let \(F(x)\) and \(G(x)\) denote antiderivatives of \(f(x)\) and \(g(x)\text{,}\) and let \(c\) be a constant. Then we have the following: <figure class="table table-like" id="table-antiderivatives"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">5.6.8<span class="period">.</span></span><span class="space"> </span>Particular antiderivatives of functions</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="c m b1 r0 l0 t3 lines">Function</td>
 <td class="c m b1 r0 l0 t3 lines">Antiderivative</td>
@@ -411,52 +410,52 @@ F(x) = \begin{cases} \ln x + C_{1} &amp; x &gt; 0 \\ \ln(-x) + C_{2} &amp; x &lt
 <td class="c m b3 r0 l0 t0 lines">\(\sin cx, \cos cx, c\neq 0\)</td>
 <td class="c m b3 r0 l0 t0 lines">\(-\frac{1}{c}\cos cx, \frac{1}{c}\sin cx\)</td>
 </tr>
-</table></div></figure> These are by no means the only antiderivatives that you will need to deal with, but they are probably the most common.</p></article><article class="example example-like" id="example-falling-objects"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.9</span><span class="period">.</span><span class="space"> </span><span class="title">Falling objects.</span>
-</h6>
-<p id="p-431">An object is dropped from a height of <span class="quantity">100 m</span> above sea level and falls with downward acceleration equal to <span class="quantity">9.8 <sup>m</sup>⁄<sub>s<sup>2</sup></sub></span>. Find the height \(h(t)\) of the object \(t\) seconds after it's dropped.</p>
+</table></div></figure> These are by no means the only antiderivatives that you will need to deal with, but they are probably the most common.</p></article><article class="example example-like" id="example-falling-objects"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-falling-objects"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">Falling objects.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-falling-objects"><article class="example example-like"><p id="p-413">An object is dropped from a height of <span class="quantity">100 m</span> above sea level and falls with downward acceleration equal to <span class="quantity">9.8 <sup>m</sup>⁄<sub>s<sup>2</sup></sub></span>. Find the height \(h(t)\) of the object \(t\) seconds after it's dropped.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-91" id="solution-91"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-91"><div class="solution solution-like">
-<p id="p-432">Take downward to be the negative direction and sea level to be \(h=0\text{.}\) Since acceleration is the second derivative of position, then the position (i.e. height) of the object should be the second <em class="emphasis">antiderivative</em> of acceleration. At this step, it's tempting to say that since \(h''(t) = -9.8\text{,}\) we have</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-89" id="solution-89"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-89"><div class="solution solution-like">
+<p id="p-414">Take downward to be the negative direction and sea level to be \(h=0\text{.}\) Since acceleration is the second derivative of position, then the position (i.e. height) of the object should be the second <em class="emphasis">antiderivative</em> of acceleration. At this step, it's tempting to say that since \(h''(t) = -9.8\text{,}\) we have</p>
 <div class="displaymath">
 \begin{equation*}
 h'(t) = -9.8t\quad\text{and}\quad h(t) = -4.9 t^{2}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">And indeed, \(-4.9t^{2}\) is a function whose second derivative is \(-9.8\text{.}\) However, we have a slight problem here. We know that \(h(0) = 100\) and \(h'(0) = 0\text{.}\) If \(h(t) = -4.9t^{2}\text{,}\) then it's impossible for \(h(0)\) to equal \(100\text{.}\) The problem here is we forgot about the arbitrary constants.</p>
-<p id="p-433">To get an accurate expression for \(h(t)\text{,}\) we go back to \(h''(t) = -9.8\text{.}\) Then \(h'(t) = -9.8t+C_{1}\) for some constant \(C_{1}\text{.}\) Since \(h'(0) = 0\text{,}\) this forces \(C_{1} = 0\text{.}\) So we have \(h'(t) = -9.8t\text{.}\) Now we antidifferentiate one more time to get \(h(t) = -4.9t^{2} + C_{2}\text{.}\) Since \(h(0) = 100\text{,}\) this forces \(C_{2} = 100\text{.}\) So</p>
+<p id="p-415">To get an accurate expression for \(h(t)\text{,}\) we go back to \(h''(t) = -9.8\text{.}\) Then \(h'(t) = -9.8t+C_{1}\) for some constant \(C_{1}\text{.}\) Since \(h'(0) = 0\text{,}\) this forces \(C_{1} = 0\text{.}\) So we have \(h'(t) = -9.8t\text{.}\) Now we antidifferentiate one more time to get \(h(t) = -4.9t^{2} + C_{2}\text{.}\) Since \(h(0) = 100\text{,}\) this forces \(C_{2} = 100\text{.}\) So</p>
 <div class="displaymath">
 \begin{equation*}
 h(t) = -4.9t^{2} + 100\text{.}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-434">Some functions that do not have an obvious antiderivative can be simplified through algebra into a form that is perhaps more helpful.</p>
-<article class="example example-like" id="example-a-tricky-antiderivative"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.9.10</span><span class="period">.</span><span class="space"> </span><span class="title">A tricky antiderivative.</span>
-</h6>
-<p id="p-435">Find the most general antiderivative of</p>
+</div></article></div>
+<p id="p-416">Some functions that do not have an obvious antiderivative can be simplified through algebra into a form that is perhaps more helpful.</p>
+<article class="example example-like" id="example-a-tricky-antiderivative"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-a-tricky-antiderivative"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.6.10</span><span class="period">.</span><span class="space"> </span><span class="title">A tricky antiderivative.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-a-tricky-antiderivative"><article class="example example-like"><p id="p-417">Find the most general antiderivative of</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = \frac{2+x^{2}}{1+x^{2}}.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-92" id="solution-92"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-92"><div class="solution solution-like">
-<p id="p-436">It's tough to think of a function whose derivative is \(f(x)\text{,}\) though since the denominator is \(1+x^{2}\) it seems likely that this antiderivative will involve \(\tan^{-1}x\) in some way. In order to actually find the antiderivative, we'll rewrite \(f(x)\) into a more convenient form. First, note that the numerator is very close to the denominator, which means we can almost cancel it out. So we'll split up the numerator as follows:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-90" id="solution-90"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-90"><div class="solution solution-like">
+<p id="p-418">It's tough to think of a function whose derivative is \(f(x)\text{,}\) though since the denominator is \(1+x^{2}\) it seems likely that this antiderivative will involve \(\tan^{-1}x\) in some way. In order to actually find the antiderivative, we'll rewrite \(f(x)\) into a more convenient form. First, note that the numerator is very close to the denominator, which means we can almost cancel it out. So we'll split up the numerator as follows:</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{2+x^{2}}{1+x^{2}} = \frac{1+(1+x^{2})}{1+x^{2}} = \frac{1}{1+x^{2}} + 1.
 \end{equation*}
 </div>
-<p id="p-437">We can find the antiderivative of this term by term, so the most general antiderivative of \(f(x)\) is</p>
+<p id="p-419">We can find the antiderivative of this term by term, so the most general antiderivative of \(f(x)\) is</p>
 <div class="displaymath">
 \begin{equation*}
 F(x) = \tan^{-1}x + x + C.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-438">At this point, it's natural to think about what an antiderivative means geometrically since the derivative of a function has such a nice interpretation. One approach to this is to think about <dfn class="terminology">net change</dfn> of the antiderivative. Let \(F(x)\) be an antiderivative of \(f(x)\) on some interval containing \(a,b\text{.}\) The net change of \(F(x)\) from \(x=a\) to \(x=b\) is given by</p>
+</div></article></div>
+<p id="p-420">At this point, it's natural to think about what an antiderivative means geometrically since the derivative of a function has such a nice interpretation. One approach to this is to think about <dfn class="terminology">net change</dfn> of the antiderivative. Let \(F(x)\) be an antiderivative of \(f(x)\) on some interval containing \(a,b\text{.}\) The net change of \(F(x)\) from \(x=a\) to \(x=b\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 F(b) - F(a).

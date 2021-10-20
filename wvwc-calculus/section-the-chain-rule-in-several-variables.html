@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:44-05:00       *-->
+<!--*       on 2021-10-20T15:43:35-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>The Chain Rule in Several Variables</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,12 +279,12 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-the-chain-rule-in-several-variables"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.5</span> <span class="title">The Chain Rule in Several Variables</span>
 </h2>
-<p id="p-1459">Recall that from Calc I, we know that</p>
+<p id="p-1412">Recall that from Calc I, we know that</p>
 <div class="displaymath">
 \begin{equation*}
 \dv{}{x}f(g(x)) = \dv{f}{g}\dv{g}{x} = f'(g(x))g'(x).
@@ -295,17 +294,16 @@ MathJax.Hub.Config({
 <article class="theorem theorem-like" id="theorem-chain-rule-for-one-independent-variable"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Chain Rule for One Independent Variable.</span>
 </h6>
-<p id="p-1460">Let \(z = f(x,y)\) be differentiable (so the partial derivatives \(f_{x}\) and \(f_{y}\) exist). If \(x\) and \(y\) both depend on \(t\) (i.e. \(x = x(t)\) and \(y = y(t)\)), then</p>
+<p id="p-1413">Let \(z = f(x,y)\) be differentiable (so the partial derivatives \(f_{x}\) and \(f_{y}\) exist). If \(x\) and \(y\) both depend on \(t\) (i.e. \(x = x(t)\) and \(y = y(t)\)), then</p>
 <div class="displaymath">
 \begin{equation*}
 \dv{z}{t} = \pdv{z}{x}\dv{x}{t} + \pdv{z}{y}\dv{y}{t}
 \end{equation*}
 </div>
-<p class="continuation">See <a class="xref" data-knowl="./knowl/figure-chain-rule-one-independent-variable.html" title="Figure 12.5.2">Figure 12.5.2</a>.</p></article><figure class="figure figure-like" id="figure-chain-rule-one-independent-variable"><div class="image-box" style="width: 20%; margin-left: 40%; margin-right: 40%;"><img src="images/image-chain-rule-one-independent-variable.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">12.5.2<span class="period">.</span></span><span class="space"> </span>The chain rule for one independent variable.</figcaption></figure><article class="example example-like" id="example-using-multivariable-chain-rule"><h6 class="heading">
+<p class="continuation">See <a class="xref" data-knowl="./knowl/figure-chain-rule-one-independent-variable.html" title="Figure 12.5.2">Figure 12.5.2</a>.</p></article><figure class="figure figure-like" id="figure-chain-rule-one-independent-variable"><div class="image-box" style="width: 20%; margin-left: 40%; margin-right: 40%;"><img src="images/image-chain-rule-one-independent-variable.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">12.5.2<span class="period">.</span></span><span class="space"> </span>The chain rule for one independent variable.</figcaption></figure><article class="example example-like" id="example-using-multivariable-chain-rule"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-using-multivariable-chain-rule"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Using the multivariable chain rule.</span>
-</h6>
-<p id="p-1461">Let \(f(x,y,z) = \ln\sqrt{x^{2}+y^{2}+z^{2}}\) where</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-using-multivariable-chain-rule"><article class="example example-like"><p id="p-1414">Let \(f(x,y,z) = \ln\sqrt{x^{2}+y^{2}+z^{2}}\) where</p>
 <div class="displaymath">
 \begin{equation*}
 x = \sin t,\quad y = \cos t\quad\text{and } z = \tan t.
@@ -313,8 +311,8 @@ x = \sin t,\quad y = \cos t\quad\text{and } z = \tan t.
 </div>
 <p class="continuation">Find \(\dv{f}{t}\bigg]_{t=0}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-234" id="solution-234"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-234"><div class="solution solution-like">
-<p id="p-1462">First, let's try to simplify \(f\text{.}\) If we do so, we get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-226" id="solution-226"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-226"><div class="solution solution-like">
+<p id="p-1415">First, let's try to simplify \(f\text{.}\) If we do so, we get</p>
 <div class="displaymath">
 \begin{equation*}
 f(x,y,z) = \frac{1}{2}\ln(x^{2} + y^{2} + z^{2}).
@@ -337,21 +335,21 @@ f(x,y,z) = \frac{1}{2}\ln(x^{2} + y^{2} + z^{2}).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1463">If we have more than one independent variable, then the situation becomes a little bit more complicated.</p>
+</div></article></div>
+<p id="p-1416">If we have more than one independent variable, then the situation becomes a little bit more complicated.</p>
 <article class="theorem theorem-like" id="theorem-chain-rule-with-two-independent-variables"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Chain Rule with Two Independent Variables.</span>
 </h6>
-<p id="p-1464">Let \(f(x,y)\) be differentiable, and suppose that \(x = x(s,t)\) and \(y = y(s,t)\text{.}\) Then</p>
+<p id="p-1417">Let \(f(x,y)\) be differentiable, and suppose that \(x = x(s,t)\) and \(y = y(s,t)\text{.}\) Then</p>
 <div class="displaymath">
 \begin{align*}
 \pdv{f}{s} &amp; = f_{x}x_{s} + f_{y}y_{s} \\
 \pdv{f}{t} &amp; = f_{x}x_{t} + f_{y}y_{t} 
 \end{align*}
-</div></article><figure class="figure figure-like" id="figure-chain-rule-two-independent-variables"><div class="image-box" style="width: 30%; margin-left: 35%; margin-right: 35%;"><img src="images/image-chain-rule-two-independent-variables.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">12.5.5<span class="period">.</span></span><span class="space"> </span>The chain rule for two independent variables.</figcaption></figure><article class="example example-like" id="example-chain-rule-two-variables"><h6 class="heading">
+</div></article><figure class="figure figure-like" id="figure-chain-rule-two-independent-variables"><div class="image-box" style="width: 30%; margin-left: 35%; margin-right: 35%;"><img src="images/image-chain-rule-two-independent-variables.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">12.5.5<span class="period">.</span></span><span class="space"> </span>The chain rule for two independent variables.</figcaption></figure><article class="example example-like" id="example-chain-rule-two-variables"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-chain-rule-two-variables"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Chain rule with two independent variables.</span>
-</h6>
-<p id="p-1465">Let \(f(x,y,z) = x^{2} - \sin^{-1}(z-y)\text{,}\) where</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-chain-rule-two-variables"><article class="example example-like"><p id="p-1418">Let \(f(x,y,z) = x^{2} - \sin^{-1}(z-y)\text{,}\) where</p>
 <div class="displaymath">
 \begin{equation*}
 x = e^{t}, \quad y = s + t\quad\text{and } z = t^{2} - st.
@@ -359,8 +357,8 @@ x = e^{t}, \quad y = s + t\quad\text{and } z = t^{2} - st.
 </div>
 <p class="continuation">Find \(\pdv{f}{s}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-235" id="solution-235"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-235"><div class="solution solution-like">
-<p id="p-1466">A good way to tackle these problems is to set up a tree diagram like <a class="xref" data-knowl="./knowl/figure-chain-rule-two-independent-variables.html" title="Figure 12.5.5">Figure 12.5.5</a> to list the dependencies between all of the variables. For \(f(x,y,z)\text{,}\) we get <figure class="figure figure-like" id="figure-chain-rule-two-variables"><div class="image-box" style="width: 30%; margin-left: 35%; margin-right: 35%;"><img src="images/image-55.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-227" id="solution-227"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-227"><div class="solution solution-like">
+<p id="p-1419">A good way to tackle these problems is to set up a tree diagram like <a class="xref" data-knowl="./knowl/figure-chain-rule-two-independent-variables.html" title="Figure 12.5.5">Figure 12.5.5</a> to list the dependencies between all of the variables. For \(f(x,y,z)\text{,}\) we get <figure class="figure figure-like" id="figure-chain-rule-two-variables"><div class="image-box" style="width: 30%; margin-left: 35%; margin-right: 35%;"><img src="images/image-55.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">12.5.7<span class="period">.</span></span><span class="space"> </span>Tree diagram for \(f(x,y,z)\text{.}\)</figcaption></figure> So we can say that</p>
 <div class="displaymath">
 \begin{align*}
@@ -371,20 +369,21 @@ x = e^{t}, \quad y = s + t\quad\text{and } z = t^{2} - st.
 \end{align*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-chain-rule-from-a-tree-diagram"><h6 class="heading">
+</div></article></div>
+<article class="example example-like" id="example-chain-rule-from-a-tree-diagram"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-chain-rule-from-a-tree-diagram"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">Chain rule from a tree diagram.</span>
-</h6>
-<p id="p-1467">Let \(R = f(x,y,z,t)\text{,}\) where \(x = x(u,v,w)\text{,}\) \(y = y(u, v)\text{,}\) \(z = z(v)\) and \(t = t(v,w)\text{.}\) Assume that all of these functions are differentiable. Find a formula for \(\pdv{R}{w}.\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-chain-rule-from-a-tree-diagram"><article class="example example-like"><p id="p-1420">Let \(R = f(x,y,z,t)\text{,}\) where \(x = x(u,v,w)\text{,}\) \(y = y(u, v)\text{,}\) \(z = z(v)\) and \(t = t(v,w)\text{.}\) Assume that all of these functions are differentiable. Find a formula for \(\pdv{R}{w}.\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-236" id="solution-236"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-236"><div class="solution solution-like">
-<p id="p-1468">We can set up a tree diagram as above to find the right formula for \(R_{w}\text{.}\) If we do so, we obtain</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-228" id="solution-228"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-228"><div class="solution solution-like">
+<p id="p-1421">We can set up a tree diagram as above to find the right formula for \(R_{w}\text{.}\) If we do so, we obtain</p>
 <div class="displaymath">
 \begin{equation*}
 R_{w} = R_{x}x_{w} + R_{t}t_{w}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><section class="conclusion" id="conclusion-6"><p id="p-1469">SUGGESTED PROBLEMS: 1, 7, 11, 15, 21</p></section></section></div></main>
+</div></article></div>
+<section class="conclusion" id="conclusion-6"><p id="p-1422">SUGGESTED PROBLEMS: 1, 7, 11, 15, 21</p></section></section></div></main>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:46-05:00       *-->
+<!--*       on 2021-10-20T15:43:36-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Lagrange Multipliers</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,27 +279,26 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-lagrange-multipliers"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.8</span> <span class="title">Lagrange Multipliers</span>
 </h2>
-<p id="p-1516"><a class="xref" data-knowl="./knowl/theorem-second-derivative-test.html" title="Theorem 12.7.4: Second Derivative Test">Theorem 12.7.4</a> is useful for finding local maxima and minima of a function \(f(x,y)\text{,}\) but it's often the case where we have an additional restriction on the variables \(x\) and \(y\text{,}\) which we interpret as an equality \(g(x,y) = k\) for some constant \(k\text{.}\) Geometrically, this reduces down to finding the maximum and minimum values of \(f(x,y)\) on the curve \(g(x,y) = k\text{.}\) In these cases, <a class="xref" data-knowl="./knowl/theorem-second-derivative-test.html" title="Theorem 12.7.4: Second Derivative Test">Theorem 12.7.4</a> is not as useful because there's no guarantee that the critical points of \(f\) will lie on the curve \(g(x,y) = k\text{.}\) For this scenario, we must use the method of <dfn class="terminology">Lagrange multipliers</dfn>.</p>
+<p id="p-1469"><a class="xref" data-knowl="./knowl/theorem-second-derivative-test.html" title="Theorem 12.7.4: Second Derivative Test">Theorem 12.7.4</a> is useful for finding local maxima and minima of a function \(f(x,y)\text{,}\) but it's often the case where we have an additional restriction on the variables \(x\) and \(y\text{,}\) which we interpret as an equality \(g(x,y) = k\) for some constant \(k\text{.}\) Geometrically, this reduces down to finding the maximum and minimum values of \(f(x,y)\) on the curve \(g(x,y) = k\text{.}\) In these cases, <a class="xref" data-knowl="./knowl/theorem-second-derivative-test.html" title="Theorem 12.7.4: Second Derivative Test">Theorem 12.7.4</a> is not as useful because there's no guarantee that the critical points of \(f\) will lie on the curve \(g(x,y) = k\text{.}\) For this scenario, we must use the method of <dfn class="terminology">Lagrange multipliers</dfn>.</p>
 <article class="algorithm theorem-like" id="algorithm-method-of-lagrange-multipliers"><h6 class="heading">
 <span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">12.8.1</span><span class="period">.</span><span class="space"> </span><span class="title">Method of Lagrange Multipliers.</span>
 </h6>
-<p id="p-1517">Suppose that \(f\) and \(g\) are both differentiable functions, and suppose that \(\grad g\neq\vv{0}\) on the curve \(g(x,y) = k\text{.}\) To find the extreme values of \(f(x,y)\) subject to the constraint \(g(x,y) = k\text{,}\) perform the following steps:</p>
+<p id="p-1470">Suppose that \(f\) and \(g\) are both differentiable functions, and suppose that \(\grad g\neq\vv{0}\) on the curve \(g(x,y) = k\text{.}\) To find the extreme values of \(f(x,y)\) subject to the constraint \(g(x,y) = k\text{,}\) perform the following steps:</p>
 <ol class="decimal">
-<li id="li-141">Find all points \((x_{0},y_{0})\) such that \(\grad f(x_{0},y_{0}) = \lambda \grad g(x_{0},y_{0})\text{,}\) where \(\lambda\) is a constant we call the <dfn class="terminology">Lagrange multiplier</dfn>.</li>
-<li id="li-142">Compute \(f\) at all points from the first step and compare values to find any maxima or minima.</li>
-</ol></article><article class="example example-like" id="example-maximizing-volume"><h6 class="heading">
+<li id="li-141"><p id="p-derived-li-141">Find all points \((x_{0},y_{0})\) such that \(\grad f(x_{0},y_{0}) = \lambda \grad g(x_{0},y_{0})\text{,}\) where \(\lambda\) is a constant we call the <dfn class="terminology">Lagrange multiplier</dfn>.</p></li>
+<li id="li-142"><p id="p-derived-li-142">Compute \(f\) at all points from the first step and compare values to find any maxima or minima.</p></li>
+</ol></article><article class="example example-like" id="example-maximizing-volume"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-maximizing-volume"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.8.2</span><span class="period">.</span><span class="space"> </span><span class="title">Maximizing volume.</span>
-</h6>
-<p id="p-1518">A lidless box may be made from <span class="quantity">12 m<sup>2</sup></span> of material. What dimensions give the maximum volume?</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-maximizing-volume"><article class="example example-like"><p id="p-1471">A lidless box may be made from <span class="quantity">12 m<sup>2</sup></span> of material. What dimensions give the maximum volume?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-245" id="solution-245"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-245"><div class="solution solution-like">
-<p id="p-1519">If we denote the dimensions of the box by \(x,y,z\text{,}\) then the function we need to maximize is \(V(x,y,z) = xyz\text{.}\) However, not all dimensions are valid since we're only allowed to use <span class="quantity">12 m<sup>2</sup></span> of material. This means that the surface area of the box, which is given by \(A(x,y,z) = xy + 2xz + 2yz\text{,}\) must be equal to \(12\text{.}\) So our constraint is that \(A(x,y,z) = 12\text{,}\) and because we have this constraint we'll try to solve this using <a class="xref" data-knowl="./knowl/algorithm-method-of-lagrange-multipliers.html" title="Algorithm 12.8.1: Method of Lagrange Multipliers">Algorithm 12.8.1</a>.</p>
-<p id="p-1520">To begin, we need to solve \(\grad V = \lambda \grad A\text{.}\) Equivalently, we need to solve the system</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-237" id="solution-237"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-237"><div class="solution solution-like">
+<p id="p-1472">If we denote the dimensions of the box by \(x,y,z\text{,}\) then the function we need to maximize is \(V(x,y,z) = xyz\text{.}\) However, not all dimensions are valid since we're only allowed to use <span class="quantity">12 m<sup>2</sup></span> of material. This means that the surface area of the box, which is given by \(A(x,y,z) = xy + 2xz + 2yz\text{,}\) must be equal to \(12\text{.}\) So our constraint is that \(A(x,y,z) = 12\text{,}\) and because we have this constraint we'll try to solve this using <a class="xref" data-knowl="./knowl/algorithm-method-of-lagrange-multipliers.html" title="Algorithm 12.8.1: Method of Lagrange Multipliers">Algorithm 12.8.1</a>.</p>
+<p id="p-1473">To begin, we need to solve \(\grad V = \lambda \grad A\text{.}\) Equivalently, we need to solve the system</p>
 <div class="displaymath">
 \begin{align*}
 V_{x} &amp; = \lambda A_{x} \\
@@ -336,7 +334,7 @@ xyz &amp; = \lambda(2xz + 2yz)
 xy + 2xz = xy + 2yz = 2xz + 2yz\label{equation-lagrange-example-1}\tag{12.8.1}
 \end{equation}
 </div>
-<p id="p-1521">The first two expressions in <a class="xref" data-knowl="./knowl/equation-lagrange-example-1.html" title="Equation 12.8.1">(12.8.1)</a> simplify to \(x=y\text{,}\) while the first and third reduce to \(x = 2z\text{.}\) So</p>
+<p id="p-1474">The first two expressions in <a class="xref" data-knowl="./knowl/equation-lagrange-example-1.html" title="Equation 12.8.1">(12.8.1)</a> simplify to \(x=y\text{,}\) while the first and third reduce to \(x = 2z\text{.}\) So</p>
 <div class="displaymath">
 \begin{equation*}
 x = y = 2z\text{.}
@@ -351,17 +349,17 @@ x = y = 2z\text{.}
 \end{align*}
 </div>
 <p class="continuation">Therefore \(z = \pm1\text{,}\) so we take \(z=1\) (since we're dealing with dimensions). This also means that \(x = y = 2(1) = 2\text{.}\) So the point \((2,2,1)\) is therefore our candidate for the dimensions that maximize volume subject to the constraint \(A = 12\text{.}\)</p>
-<p id="p-1522">In order to actually verify that \(V(2,2,1) = 4\) is actually the largest possible volume we can obtain, we need to show that it's actually a maximum and not a minimum. This means we need to find another point \((x,y,z)\) that also satisfies \(A = 12\text{,}\) and show that it gives a smaller value for \(V\text{.}\) One such point is just \((-2,-2,-1)\text{,}\) and \(V(-2,-2,-1) = -4 &lt; V(2,2,1)\text{.}\) So \(4\) is actually a maximum value and not a minimum value.</p>
+<p id="p-1475">In order to actually verify that \(V(2,2,1) = 4\) is actually the largest possible volume we can obtain, we need to show that it's actually a maximum and not a minimum. This means we need to find another point \((x,y,z)\) that also satisfies \(A = 12\text{,}\) and show that it gives a smaller value for \(V\text{.}\) One such point is just \((-2,-2,-1)\text{,}\) and \(V(-2,-2,-1) = -4 &lt; V(2,2,1)\text{.}\) So \(4\) is actually a maximum value and not a minimum value.</p>
 </div></div>
-</div></article><p id="p-1523">The points we'll obtain using Lagrange multipliers will be either maxima or minima, but the method itself doesn't always tell us which is which. As in the last example, sometimes it's up to us to find that on our own.</p>
-<article class="example example-like" id="example-extreme-values-on-a-paraboloid"><h6 class="heading">
+</div></article></div>
+<p id="p-1476">The points we'll obtain using Lagrange multipliers will be either maxima or minima, but the method itself doesn't always tell us which is which. As in the last example, sometimes it's up to us to find that on our own.</p>
+<article class="example example-like" id="example-extreme-values-on-a-paraboloid"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-extreme-values-on-a-paraboloid"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.8.3</span><span class="period">.</span><span class="space"> </span><span class="title">Extreme values on a paraboloid.</span>
-</h6>
-<p id="p-1524">Find the absolute maxima and minima for \(f(x,y) = x^{2} + 2y^{2}\) over this disk \(x^{2} + y^{2} \leq 1\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-extreme-values-on-a-paraboloid"><article class="example example-like"><p id="p-1477">Find the absolute maxima and minima for \(f(x,y) = x^{2} + 2y^{2}\) over this disk \(x^{2} + y^{2} \leq 1\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-246" id="solution-246"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-246"><div class="solution solution-like">
-<p id="p-1525">First, recall from <a href="section-extreme-values.html" class="internal" title="Section 12.7: Extreme Values">Section 12.7</a> that the absolute maxima and minima of a differentiable function over a bounded set occur at either a critical point or somewhere on the boundary. So first, we need to find if \(f(x,y)\) has any critical points inside the disk. If we solve \(f_{x} = f_{y} = 0\text{,}\) then we quickly get that \((0,0)\) is a critical point, and hence a possible maximum or minimum value. The only other place we need to check is the boundary \(x^{2} + y^{2} = 1\text{,}\) and this is something we can use Lagrange multipliers for.</p>
-<p id="p-1526">Set \(g(x,y) = x^{2} + y^{2}\text{.}\) Then we need to find the extreme values of \(f\) subject to the constraint \(g = 1\text{.}\) The system of equations we need to solve is then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-238" id="solution-238"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-238"><div class="solution solution-like">
+<p id="p-1478">First, recall from <a href="section-extreme-values.html" class="internal" title="Section 12.7: Extreme Values">Section 12.7</a> that the absolute maxima and minima of a differentiable function over a bounded set occur at either a critical point or somewhere on the boundary. So first, we need to find if \(f(x,y)\) has any critical points inside the disk. If we solve \(f_{x} = f_{y} = 0\text{,}\) then we quickly get that \((0,0)\) is a critical point, and hence a possible maximum or minimum value. The only other place we need to check is the boundary \(x^{2} + y^{2} = 1\text{,}\) and this is something we can use Lagrange multipliers for.</p>
+<p id="p-1479">Set \(g(x,y) = x^{2} + y^{2}\text{.}\) Then we need to find the extreme values of \(f\) subject to the constraint \(g = 1\text{.}\) The system of equations we need to solve is then</p>
 <div class="displaymath">
 \begin{align*}
 2x &amp; = \lambda(2x) &amp; \Rightarrow x = \lambda x \\
@@ -370,7 +368,7 @@ x^{2} + y^{2} &amp; = 1
 \end{align*}
 </div>
 <p class="continuation">The first equation is true if \(\lambda = 1\text{,}\) but then this forces \(y = 0\) in the second equation. If we then plug \(y = 0\) into the constraint, this forces \(x = \pm1\text{.}\) So the case \(\lambda=1\) gives us two points to test: \((-1,0)\) and \((1,0)\text{.}\) On the other hand, the second equation is true if \(\lambda = 2\text{.}\) This then forces \(x = 0\) and \(y = \pm 1\text{,}\) which gives us the points \((0,-1)\) and \((0,1)\text{.}\) Finally, if \(\lambda\neq1,2\text{,}\) then this forces \(x = y = 0\text{.}\) But there's no way to satisfy the constraint if \(x = y = 0\text{,}\) so we discard this possibility.</p>
-<p id="p-1527">So we have five points that we need to check, which we arrange in the following table: <figure class="table table-like" id="table-lagrange-example-2"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">12.8.4<span class="period">.</span></span><span class="space"> </span>Absolute values on the disk</figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-1480">So we have five points that we need to check, which we arrange in the following table: <figure class="table table-like" id="table-lagrange-example-2"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">12.8.4<span class="period">.</span></span><span class="space"> </span>Absolute values on the disk</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="c m b1 r0 l0 t3 lines">\((x,y)\)</td>
 <td class="c m b1 r0 l0 t3 lines">\(f(x,y)\)</td>
@@ -397,13 +395,13 @@ x^{2} + y^{2} &amp; = 1
 </tr>
 </table></div></figure> So the absolute minimum is \(0\text{,}\) which occurs at the origin. The absolute maximum is \(2\text{,}\) which occurs at the points \((0,\pm1)\text{.}\)</p>
 </div></div>
-</div></article><article class="example example-like" id="example-maximizing-the-volume-of-a-prism-within-an-ellipsoid"><h6 class="heading">
+</div></article></div>
+<article class="example example-like" id="example-maximizing-the-volume-of-a-prism-within-an-ellipsoid"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-maximizing-the-volume-of-a-prism-within-an-ellipsoid"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.8.5</span><span class="period">.</span><span class="space"> </span><span class="title">Maximizing the volume of a prism within an ellipsoid.</span>
-</h6>
-<p id="p-1528">A rectangular prism, centered at the origin and with sides parallel to the coordinate planes, is inscribed within the ellipsoid \(x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1\text{.}\) Find the dimensions of the prism that maximize the volume.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-maximizing-the-volume-of-a-prism-within-an-ellipsoid"><article class="example example-like"><p id="p-1481">A rectangular prism, centered at the origin and with sides parallel to the coordinate planes, is inscribed within the ellipsoid \(x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1\text{.}\) Find the dimensions of the prism that maximize the volume.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-247" id="solution-247"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-247"><div class="solution solution-like">
-<p id="p-1529">Let \((x,y,z)\) denote the corner of the prism located in the first octant. Then we want to maximize \(V(x,y,z) = (2x)(2y)(2z)\) subject to the constraint \(g(x,y,z) = x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1\text{.}\) So we'll use the method of Lagrange multipliers again to get the system</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-239" id="solution-239"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-239"><div class="solution solution-like">
+<p id="p-1482">Let \((x,y,z)\) denote the corner of the prism located in the first octant. Then we want to maximize \(V(x,y,z) = (2x)(2y)(2z)\) subject to the constraint \(g(x,y,z) = x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1\text{.}\) So we'll use the method of Lagrange multipliers again to get the system</p>
 <div class="displaymath">
 \begin{align*}
 8yz &amp; = 2\lambda x \\
@@ -424,7 +422,7 @@ x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} &amp; =1
 y^{2} = z^{2} = 4x^{2}.
 \end{equation*}
 </div>
-<p id="p-1530">Now we plug this into our constraint to get</p>
+<p id="p-1483">Now we plug this into our constraint to get</p>
 <div class="displaymath">
 \begin{align*}
 1 &amp; = x^{2} + \frac{y^{2}}{4} + \frac{z^{2}}{4} = 1 \\
@@ -446,7 +444,8 @@ z &amp; = 2\sqrt{\frac{1}{3}}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1531">SUGGESTED PROBLEMS: 1-11 odd, 17, 19</p></section></div></main>
+</div></article></div>
+<p id="p-1484">SUGGESTED PROBLEMS: 1-11 odd, 17, 19</p></section></div></main>
 </div>
 </body>
 </html>

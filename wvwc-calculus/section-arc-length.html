@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:30-05:00       *-->
+<!--*       on 2021-10-20T15:43:26-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Arc Length</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,23 +279,23 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-arc-length"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">8.4</span> <span class="title">Arc Length</span>
 </h2>
-<p id="p-722">Say the motion of a particle is described by \(y = f(x) \text{ for } a \leq x \leq b.\) Then the path that the particle travels will look like a curve, say <figure class="figure figure-like" id="figure-arc-length-basic-curve"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-14.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
+<p id="p-672">Say the motion of a particle is described by \(y = f(x) \text{ for } a \leq x \leq b.\) Then the path that the particle travels will look like a curve, say <figure class="figure figure-like" id="figure-arc-length-basic-curve"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-14.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.4.1<span class="period">.</span></span><span class="space"> </span>Trajectory of our particle.</figcaption></figure></p>
-<p id="p-723">Our goal now is to determine how far the particle travels as \(x\) goes from \(a\) to \(b\text{.}\) In other words, we want to find the length of this curve from \(x=a\) to \(x=b\text{.}\)</p>
-<p id="p-724">If the curve were just a line we could easily find its length by using the Pythagorean theorem, but for a more general curve like this we're stuck. So we'll start by approximating the curve by using line segments, which we'll call \(L_1\text{,}\) \(L_2\text{,}\) and so on up to \(L_{n}\text{,}\) then we'll find the lengths of the line segments. Say the first line segment goes from \(x=x_0\) to \(x=x_1\text{,}\) the second from \(x=x_1\) to \(x=x_2\) and so on. To make life simpler, we'll assume that all these intervals have equal length \(\Delta x\text{.}\) That is,</p>
+<p id="p-673">Our goal now is to determine how far the particle travels as \(x\) goes from \(a\) to \(b\text{.}\) In other words, we want to find the length of this curve from \(x=a\) to \(x=b\text{.}\)</p>
+<p id="p-674">If the curve were just a line we could easily find its length by using the Pythagorean theorem, but for a more general curve like this we're stuck. So we'll start by approximating the curve by using line segments, which we'll call \(L_1\text{,}\) \(L_2\text{,}\) and so on up to \(L_{n}\text{,}\) then we'll find the lengths of the line segments. Say the first line segment goes from \(x=x_0\) to \(x=x_1\text{,}\) the second from \(x=x_1\) to \(x=x_2\) and so on. To make life simpler, we'll assume that all these intervals have equal length \(\Delta x\text{.}\) That is,</p>
 <div class="displaymath">
 \begin{equation*}
 x_{i} - x_{i-1}  = \Delta x
 \end{equation*}
 </div>
 <p class="continuation">for \(0 \leq i\leq n\text{.}\) Also, we'll define \(\Delta y_{i} = f(x_{i}) - f(x_{i-1})\text{.}\)</p>
-<figure class="figure figure-like" id="figure-arc-length-breaking-into-line-segments"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-15.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.4.2<span class="period">.</span></span><span class="space"> </span>Approximating arc length with line segments.</figcaption></figure><p id="p-725">If we look at \(L_1\text{,}\) then the line goes \(\Delta x\) in the \(x\)-direction and \(\Delta y_1\) in the \(y\)-direction, so by the Pythagorean theorem,</p>
+<figure class="figure figure-like" id="figure-arc-length-breaking-into-line-segments"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-15.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.4.2<span class="period">.</span></span><span class="space"> </span>Approximating arc length with line segments.</figcaption></figure><p id="p-675">If we look at \(L_1\text{,}\) then the line goes \(\Delta x\) in the \(x\)-direction and \(\Delta y_1\) in the \(y\)-direction, so by the Pythagorean theorem,</p>
 <div class="displaymath">
 \begin{equation*}
 \text{length of } L_1 = \sqrt{(\Delta x)^2 + (\Delta y_1)^2} = \sqrt{1 + \left(\frac{\Delta y_{i}}{\Delta x}\right)}\Delta x.
@@ -309,7 +308,7 @@ x_{i} - x_{i-1}  = \Delta x
 \end{equation*}
 </div>
 <p class="continuation">if \(\Delta x\approx 0\text{.}\)</p>
-<p id="p-726">We can extend this estimate to the other line segments as well, so we can say that the total length \(L\) of the curve is approximately</p>
+<p id="p-676">We can extend this estimate to the other line segments as well, so we can say that the total length \(L\) of the curve is approximately</p>
 <div class="displaymath">
 \begin{equation*}
 \sum_{i=1}^{n}\sqrt{1 + f'(x_{i})^{2}}\Delta x.
@@ -319,18 +318,17 @@ x_{i} - x_{i-1}  = \Delta x
 <article class="definition definition-like" id="definition-arc-length-of-a-curve"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">8.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Arc Length of a Curve.</span>
 </h6>
-<p id="p-727">Let \(y = f(x)\) denote a continuous function defined on some interval \([a,b]\text{.}\) The <dfn class="terminology">arc length</dfn> of \(f(x)\) over this interval is defined to be</p>
+<p id="p-677">Let \(y = f(x)\) denote a continuous function defined on some interval \([a,b]\text{.}\) The <dfn class="terminology">arc length</dfn> of \(f(x)\) over this interval is defined to be</p>
 <div class="displaymath">
 \begin{equation*}
 L = \lim_{\Delta x\to0}\sum_{i=1}^{n}\sqrt{1 + f'(x_{i})^{2}}\Delta x = \int_{a}^{b}\sqrt{1 + f'(x)^{2}}\,dx.
 \end{equation*}
-</div></article><article class="example example-like" id="example-the-circumference-of-a-circle"><h6 class="heading">
+</div></article><article class="example example-like" id="example-the-circumference-of-a-circle"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-the-circumference-of-a-circle"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">8.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">The Circumference of a Circle.</span>
-</h6>
-<p id="p-728">Find the circumference of a circle of radius \(r\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-the-circumference-of-a-circle"><article class="example example-like"><p id="p-678">Find the circumference of a circle of radius \(r\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-152" id="solution-152"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-152"><div class="solution solution-like">
-<p id="p-729">To find the circumference of this circle, we need to find an equation whose graph is the circle, or at least part of it. One choice is \(y = \sqrt{r^{2} - x^{2}}\) for \(-r\leq x\leq r\text{.}\) Since this gives the top half of a circle, the circumference is then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-144" id="solution-144"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-144"><div class="solution solution-like">
+<p id="p-679">To find the circumference of this circle, we need to find an equation whose graph is the circle, or at least part of it. One choice is \(y = \sqrt{r^{2} - x^{2}}\) for \(-r\leq x\leq r\text{.}\) Since this gives the top half of a circle, the circumference is then</p>
 <div class="displaymath">
 \begin{align*}
 2\int_{-r}^{r}\sqrt{1 + [y']^{2}}\,dx \amp = 2\int_{-r}^{r}\sqrt{1 + \frac{x^{2}}{r^{2} - x^{2}}}\,dx \\
@@ -340,21 +338,21 @@ L = \lim_{\Delta x\to0}\sum_{i=1}^{n}\sqrt{1 + f'(x_{i})^{2}}\Delta x = \int_{a}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-730">We could try to use <a class="xref" data-knowl="./knowl/definition-arc-length-of-a-curve.html" title="Definition 8.4.3: Arc Length of a Curve">Definition 8.4.3</a> to find the arc length of an ellipse, but it turns out the resulting integral is too complicated to have a "closed form" solution.</p>
-<p id="p-731">We can use <a class="xref" data-knowl="./knowl/definition-arc-length-of-a-curve.html" title="Definition 8.4.3: Arc Length of a Curve">Definition 8.4.3</a> to define the <dfn class="terminology">arc length function</dfn>:</p>
+</div></article></div>
+<p id="p-680">We could try to use <a class="xref" data-knowl="./knowl/definition-arc-length-of-a-curve.html" title="Definition 8.4.3: Arc Length of a Curve">Definition 8.4.3</a> to find the arc length of an ellipse, but it turns out the resulting integral is too complicated to have a "closed form" solution.</p>
+<p id="p-681">We can use <a class="xref" data-knowl="./knowl/definition-arc-length-of-a-curve.html" title="Definition 8.4.3: Arc Length of a Curve">Definition 8.4.3</a> to define the <dfn class="terminology">arc length function</dfn>:</p>
 <div class="displaymath">
 \begin{equation*}
 s(x) = \int_{a}^{x}\sqrt{1 + [f'(t)]^{2}}\,dt.
 \end{equation*}
 </div>
 <p class="continuation">This function can be useful to <em class="emphasis">parameterize</em> movement along a curve, which you'll see in Calculus 3.</p>
-<article class="example example-like" id="example-171"><h6 class="heading">
+<article class="example example-like" id="example-152"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-152"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">8.4.5</span><span class="period">.</span>
-</h6>
-<p id="p-732">Find the arc length function for \(y = x^{2}\) assuming that \(x = 0\) is the starting point.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-152"><article class="example example-like"><p id="p-682">Find the arc length function for \(y = x^{2}\) assuming that \(x = 0\) is the starting point.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-153" id="solution-153"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-153"><div class="solution solution-like">
-<p id="p-733">We have</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-145" id="solution-145"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-145"><div class="solution solution-like">
+<p id="p-683">We have</p>
 <div class="displaymath">
 \begin{equation*}
 s(x) = \int_{1}^{x}\sqrt{1 + 4t^{2}}\,dt.
@@ -369,7 +367,7 @@ s(x) \amp = \frac{1}{2}\int_{0}^{\tan^{-1}(2x)}\sqrt{1 + \tan^{2}\theta}\sec^{2}
 \end{align*}
 </div>
 </div></div>
-</div></article></section></div></main>
+</div></article></div></section></div></main>
 </div>
 </body>
 </html>

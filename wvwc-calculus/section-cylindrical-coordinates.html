@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:48-05:00       *-->
+<!--*       on 2021-10-20T15:43:38-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Triple Integrals in Cylindrical Coordinates</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,19 +279,18 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-cylindrical-coordinates"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">13.6</span> <span class="title">Triple Integrals in Cylindrical Coordinates</span>
 </h2>
-<p id="p-1596">In <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a>, we saw that introducing a new coordinate system made certain double integrals much easier to work with. The same idea works with triple integrals. The first such system we'll look at is <dfn class="terminology">cylindrical coordinates</dfn>, which are useful for computing triple integrals over cylindrical regions. To convert Cartesian coordinates \((x,y,z)\) into cylindrical coordinates \((r,\theta,z)\text{,}\) simply replace \(x,y\) with polar coordinates, and use \(dV = r\,dr\,d\theta\,dz\text{.}\) We leave \(z\) alone.</p>
-<article class="example example-like" id="example-computing-a-triple-integral-over-a-cylinder"><h6 class="heading">
+<p id="p-1549">In <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a>, we saw that introducing a new coordinate system made certain double integrals much easier to work with. The same idea works with triple integrals. The first such system we'll look at is <dfn class="terminology">cylindrical coordinates</dfn>, which are useful for computing triple integrals over cylindrical regions. To convert Cartesian coordinates \((x,y,z)\) into cylindrical coordinates \((r,\theta,z)\text{,}\) simply replace \(x,y\) with polar coordinates, and use \(dV = r\,dr\,d\theta\,dz\text{.}\) We leave \(z\) alone.</p>
+<article class="example example-like" id="example-computing-a-triple-integral-over-a-cylinder"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-computing-a-triple-integral-over-a-cylinder"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a triple integral over a cylinder.</span>
-</h6>
-<p id="p-1597">Let \(D\) be the cylinder in \(\RR^{3}\) with height \(2\) and base given by the circle of radius \(4\) centered at the origin, restricted to the first and second octants. Let \(f(x,y,z) = \frac{z}{1+x^{2}+y^{2}}\text{.}\) Compute \(\iiint_{D}f(x,y,z)\,dV\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-computing-a-triple-integral-over-a-cylinder"><article class="example example-like"><p id="p-1550">Let \(D\) be the cylinder in \(\RR^{3}\) with height \(2\) and base given by the circle of radius \(4\) centered at the origin, restricted to the first and second octants. Let \(f(x,y,z) = \frac{z}{1+x^{2}+y^{2}}\text{.}\) Compute \(\iiint_{D}f(x,y,z)\,dV\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-262" id="solution-262"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-262"><div class="solution solution-like">
-<p id="p-1598">Since we're dealing with a cylinder, we'll switch to cylindrical coordinates \(r\,dr\,d\theta\,dz\text{:}\)</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-254" id="solution-254"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-254"><div class="solution solution-like">
+<p id="p-1551">Since we're dealing with a cylinder, we'll switch to cylindrical coordinates \(r\,dr\,d\theta\,dz\text{:}\)</p>
 <div class="displaymath">
 \begin{align*}
 \iiint_{D}f(x,y,z)\,dV &amp; = \int_{0}^{2}\int_{0}^{\pi}\int_{0}^{4}\frac{r}{1+r^{2}}\,dr\,d\theta\,dz \\
@@ -300,13 +298,13 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-cylindrical-volume"><h6 class="heading">
+</div></article></div>
+<article class="example example-like" id="example-cylindrical-volume"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-cylindrical-volume"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Cylindrical Volume.</span>
-</h6>
-<p id="p-1599">Find the volume of the region below the inverted cone \(z = 9 - 3\sqrt{x^{2} + y^{2}}\) and in the first and second octants.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-cylindrical-volume"><article class="example example-like"><p id="p-1552">Find the volume of the region below the inverted cone \(z = 9 - 3\sqrt{x^{2} + y^{2}}\) and in the first and second octants.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-263" id="solution-263"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-263"><div class="solution solution-like">
-<p id="p-1600">First, let \(D\) denote the region in question. Then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-255" id="solution-255"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-255"><div class="solution solution-like">
+<p id="p-1553">First, let \(D\) denote the region in question. Then</p>
 <div class="displaymath">
 \begin{equation*}
 D = \left\{(x,y,z) : 0\leq z\leq 9 - 3\sqrt{x^{2} + y^{2}}, 0\leq y \leq \sqrt{9 - x^{2}}, -3\leq x\leq 3\right\}\text{.}
@@ -328,13 +326,13 @@ D = \left\{(r,\theta,z) : 0\leq z\leq 9 - 3r, 0\leq r\leq 3, 0\leq \theta\leq \p
 \end{align*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-finding-the-volume-of-the-unit-sphere"><h6 class="heading">
+</div></article></div>
+<article class="example example-like" id="example-finding-the-volume-of-the-unit-sphere"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-finding-the-volume-of-the-unit-sphere"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the Volume of the Unit Sphere.</span>
-</h6>
-<p id="p-1601">Find the volume of the unit sphere; that is, the sphere of radius \(1\) centered at the origin.</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-finding-the-volume-of-the-unit-sphere"><article class="example example-like"><p id="p-1554">Find the volume of the unit sphere; that is, the sphere of radius \(1\) centered at the origin.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-264" id="solution-264"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-264"><div class="solution solution-like">
-<p id="p-1602">The unit sphere is specified by the inequalities</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-256" id="solution-256"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-256"><div class="solution solution-like">
+<p id="p-1555">The unit sphere is specified by the inequalities</p>
 <div class="displaymath">
 \begin{equation*}
 -\sqrt{1 - x^{2} - y^{2}} \leq z \leq \sqrt{1 - x^{2} - y^{2}}, -\sqrt{1 - x^{2}} \leq y \leq \sqrt{1 - x^{2}} \qq{and} -1\leq x\leq 1\text{.}
@@ -353,7 +351,7 @@ D = \left\{(r,\theta,z) : 0\leq z\leq 9 - 3r, 0\leq r\leq 3, 0\leq \theta\leq \p
 \end{equation*}
 </div>
 </div></div>
-</div></article></section></div></main>
+</div></article></div></section></div></main>
 </div>
 </body>
 </html>

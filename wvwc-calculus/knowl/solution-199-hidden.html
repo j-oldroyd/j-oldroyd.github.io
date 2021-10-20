@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:18:18-05:00       *-->
+<!--*       on 2021-10-20T15:44:02-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,22 +14,45 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body><div class="solution solution-like">
-<p>Since \(a_{k} = \frac{k!}{k^{k}}\text{,}\) we have</p>
+<p>Using <a class="xref" data-knowl="./knowl/theorem-taylor-s-formula.html" title="Theorem 9.7.1: Taylor's Formula">Theorem 9.7.1</a>, the Taylor series for \(f(x) = \cos x\) at \(a = 0\) is given by</p>
 <div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
 \begin{equation*}
-\lim_{k\to\infty}\left|\frac{a_{k+1}}{a_{k}}\right| = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k}\text{.}
+\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}\text{.}
 \end{equation*}
 </div>
-<p class="continuation">We can find this limit using L'Hospital's Rule (see <a href="section-l-hospital-s-rule.html" class="internal" title="Section 5.7: L'Hospital's Rule">Section 5.7</a>) since this limit is the indeterminate form \([1^{\infty}]\text{.}\) So set \(y = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k}\text{.}\) Then</p>
+<p class="continuation">So to find this series we need to find the derivatives of cosine at \(0\text{:}\)</p>
 <div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
 \begin{align*}
-\ln y \amp = \lim_{k\to\infty}k\ln\left(\frac{k}{k+1}\right) \\
-\amp = \lim_{k\to\infty}\frac{\ln k - \ln(k+1)}{1/k} \\
-\amp = \lim_{k\to\infty}\frac{1/k - 1/(k+1)}{-1/k^{2}} \\
-\amp = \lim_{k\to\infty}\frac{-k^{2}}{k(k+1)} \\
-\amp = -1 \text{.}
+f(0) \amp = 1 \\
+f'(0) \amp = 0 \\
+f''(0) \amp = -1 \\
+f'''(0) \amp = 0 
 \end{align*}
 </div>
-<p class="continuation">Therefore \(y = \lim_{k\to\infty}\left(\frac{k}{k+1}\right)^{k} = e^{-1}\text{,}\) which means that the series converges by the ratio test.</p>
+<p class="continuation">and so on. So the Maclaurin series for \(\cos x\) is given by</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+1 - \frac{1}{2!}x^{2} + \frac{1}{4!}x^{4} - \frac{1}{6!}x^{6} + \cdots\text{.}
+\end{equation*}
+</div>
+<p>To express this using sigma notation, note that this series has only even powers of \(x\text{.}\) Hence the sum should look like \(\sum_{k=0}^{\infty}c_{k}x^{2k}\text{.}\) Looking at the pattern of the coefficients here, we can rewrite this as</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+\sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k)!}x^{2k}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Using the ratio test, we can also show that this series converges for all \(x\text{.}\) To show that this series actually equals \(\cos x\text{,}\) we need to consider the remainder term</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+R_{N}(x) = \frac{f^{(N+1)}(z)}{(N+1)!}x^{N+1}\text{.}
+\end{equation*}
+</div>
+<p>We don't know what exactly \(z\) is, except that it's in some interval around \(0\text{.}\) However, we do know that \(\|f^{(N+1)}(z)\|\leq 1\text{,}\) which means that the remainder satisfies</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+\|R_{N}(x)\| \leq \frac{|x|^{N+1}}{(N+1)!}\to0\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Therefore \(\cos x\) equals its Maclaurin series.</p>
 </div></body>
 </html>

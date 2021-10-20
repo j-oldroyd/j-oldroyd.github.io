@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:23-05:00       *-->
+<!--*       on 2021-10-20T15:43:20-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>L'Hospital's Rule</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -108,11 +114,11 @@ MathJax.Hub.Config({
 <nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
 <div class="navbar-top-buttons">
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-optimization-problems.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="applications-differentiation.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-newton-s-method.html" title="Next">Next</a></span>
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-inverse-trigonometric-functions.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="inverse-functions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="applications-differentiation.html" title="Next">Next</a></span>
 </div>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
-<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-optimization-problems.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="applications-differentiation.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-newton-s-method.html" title="Next">Next</a>
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-inverse-trigonometric-functions.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="inverse-functions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="applications-differentiation.html" title="Next">Next</a>
 </div>
 </div></nav></header><div class="page">
 <div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule" class="active">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule" class="active">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,37 +279,36 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-l-hospital-s-rule"><h2 class="heading hide-type">
-<span class="type">Section</span> <span class="codenumber">5.7</span> <span class="title">L'Hospital's Rule</span>
+<span class="type">Section</span> <span class="codenumber">4.6</span> <span class="title">L'Hospital's Rule</span>
 </h2>
-<p id="p-378">Consider the important limit \(\lim_{x\to0}\frac{\sin x}{x}\text{.}\) If we try to plug in \(x=0\text{,}\) we get \(\frac{0}{0}\text{,}\) which is undefined. However, we can prove using geometry that the limit is \(1\text{.}\) As another example, consider \(\lim_{x\to\infty}\frac{1-x^{3}}{4x^{3}}\text{.}\) Once again, if we try to plug the limit in we get an expression of the form \(\frac{-\infty}{\infty}\text{.}\) However, the limit is just \(-\frac{1}{4}\text{,}\) which we can find using algebra.</p>
-<p id="p-379">Limits of the form \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) are known as <dfn class="terminology">indeterminate forms</dfn>. There is no restriction whatsoever on what value a limit involving an indeterminate form may take, or even that it has to exist at all.</p>
-<article class="example example-like" id="example-different-indeterminate-forms"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.1</span><span class="period">.</span><span class="space"> </span><span class="title">Different indeterminate forms.</span>
-</h6>
-<p id="p-380">Find \(\frac{\infty}{\infty}\) indeterminate forms that, respectively, evaluate to \(1, 0\) and do not exist.</p>
+<p id="p-302">Consider the important limit \(\lim_{x\to0}\frac{\sin x}{x}\text{.}\) If we try to plug in \(x=0\text{,}\) we get \(\frac{0}{0}\text{,}\) which is undefined. However, we can prove using geometry that the limit is \(1\text{.}\) As another example, consider \(\lim_{x\to\infty}\frac{1-x^{3}}{4x^{3}}\text{.}\) Once again, if we try to plug the limit in we get an expression of the form \(\frac{-\infty}{\infty}\text{.}\) However, the limit is just \(-\frac{1}{4}\text{,}\) which we can find using algebra.</p>
+<p id="p-303">Limits of the form \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) are known as <dfn class="terminology">indeterminate forms</dfn>. There is no restriction whatsoever on what value a limit involving an indeterminate form may take, or even that it has to exist at all.</p>
+<article class="example example-like" id="example-different-indeterminate-forms"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-different-indeterminate-forms"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Different indeterminate forms.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-different-indeterminate-forms"><article class="example example-like"><p id="p-304">Find \(\frac{\infty}{\infty}\) indeterminate forms that, respectively, evaluate to \(1, 0\) and do not exist.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-76" id="solution-76"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-76"><div class="solution solution-like"><p id="p-381">Let \(f(x) = \frac{1-x}{3-x}\text{,}\) \(g(x) = \frac{1+x^{4}}{1+x^{3}}\) and \(h(x) = \frac{\ln x}{\cot x}\text{.}\) Then \(\lim_{x\to\infty}f(x), \lim_{x\to\infty}g(x)\) and \(\lim_{x\to0^{+}}h(x)\) are all \(\frac{\infty}{\infty}\) indeterminate forms. The first evaluates to \(1\text{,}\) the second does not exist (it's \(\infty\)) while the third appears to be equal to \(0\text{.}\)</p></div></div>
-</div></article><p id="p-382">The goal of this section is to determine a method that can help us evaluate limits involving indeterminate forms. This method is called <dfn class="terminology">L'Hospital's Rule</dfn>.</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-63" id="solution-63"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-63"><div class="solution solution-like"><p id="p-305">Let \(f(x) = \frac{1-x}{3-x}\text{,}\) \(g(x) = \frac{1+x^{4}}{1+x^{3}}\) and \(h(x) = \frac{\ln x}{\cot x}\text{.}\) Then \(\lim_{x\to\infty}f(x), \lim_{x\to\infty}g(x)\) and \(\lim_{x\to0^{+}}h(x)\) are all \(\frac{\infty}{\infty}\) indeterminate forms. The first evaluates to \(1\text{,}\) the second does not exist (it's \(\infty\)) while the third appears to be equal to \(0\text{.}\)</p></div></div>
+</div></article></div>
+<p id="p-306">The goal of this section is to determine a method that can help us evaluate limits involving indeterminate forms. This method is called <dfn class="terminology">L'Hospital's Rule</dfn>.</p>
 <article class="theorem theorem-like" id="theorem-l-hospital-s-rule"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.7.2</span><span class="period">.</span><span class="space"> </span><span class="title">L'Hospital's Rule.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">L'Hospital's Rule.</span>
 </h6>
-<p id="p-383">Let \(f(x)\) and \(g(x)\) be differentiable functions. If \(\lim_{x\to a}\frac{f(x)}{g(x)}\) is either one of the indeterminate forms \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\text{,}\) then</p>
+<p id="p-307">Let \(f(x)\) and \(g(x)\) be differentiable functions. If \(\lim_{x\to a}\frac{f(x)}{g(x)}\) is either one of the indeterminate forms \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\text{,}\) then</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}
 \end{equation*}
 </div>
-<p class="continuation">if the limit on the right exists or is \(\pm\infty\text{.}\)</p></article><p id="p-384">It's important to note that L'Hospital's Rule does not necessarily ask you to use the quotient rule!</p>
-<article class="example example-like" id="example-using-l-hospital-s-rule"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.3</span><span class="period">.</span><span class="space"> </span><span class="title">Using L'Hospital's Rule.</span>
-</h6>
-<p id="p-385">Let \(h(x) = \frac{\ln x}{\cot x}\text{.}\) Find \(\lim_{x\to0^{+}}h(x)\text{.}\)</p>
+<p class="continuation">if the limit on the right exists or is \(\pm\infty\text{.}\)</p></article><p id="p-308">It's important to note that L'Hospital's Rule does not necessarily ask you to use the quotient rule!</p>
+<article class="example example-like" id="example-using-l-hospital-s-rule"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-using-l-hospital-s-rule"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Using L'Hospital's Rule.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-using-l-hospital-s-rule"><article class="example example-like"><p id="p-309">Let \(h(x) = \frac{\ln x}{\cot x}\text{.}\) Find \(\lim_{x\to0^{+}}h(x)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-77" id="solution-77"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-77"><div class="solution solution-like">
-<p id="p-386">We saw in <a class="xref" data-knowl="./knowl/example-different-indeterminate-forms.html" title="Example 5.7.1: Different indeterminate forms">Example 5.7.1</a> that this limit gives us the indeterminate form \(\frac{\infty}{\infty}\text{,}\) so L'Hospital's Rule applies. Hence</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-64" id="solution-64"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-64"><div class="solution solution-like">
+<p id="p-310">We saw in <a class="xref" data-knowl="./knowl/example-different-indeterminate-forms.html" title="Example 4.6.1: Different indeterminate forms">Example 4.6.1</a> that this limit gives us the indeterminate form \(\frac{\infty}{\infty}\text{,}\) so L'Hospital's Rule applies. Hence</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{x\to0^{+}}\frac{\ln x}{\cot x} &amp; = \lim_{x\to0^{+}}\frac{1/x}{-\csc^{2}x} \\
@@ -320,14 +318,14 @@ MathJax.Hub.Config({
 </div>
 <p class="continuation">and so the limit is indeed \(0\text{.}\)</p>
 </div></div>
-</div></article><p id="p-387">L'Hospital's Rule also applies for limits approaching \(\pm\infty\text{.}\)</p>
-<article class="example example-like" id="example-exponential-and-polynomial-growth"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.4</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential and polynomial growth.</span>
-</h6>
-<p id="p-388">Let \(f(x) = ax^{2} + bx + c\) and let \(g(x) = e^{x}\text{,}\) where \(a,b,c\) are arbitrary constants. Find \(\lim_{x\to\infty}\frac{ax^{2} + bx + c}{e^{x}}\text{.}\)</p>
+</div></article></div>
+<p id="p-311">L'Hospital's Rule also applies for limits approaching \(\pm\infty\text{.}\)</p>
+<article class="example example-like" id="example-exponential-and-polynomial-growth"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-exponential-and-polynomial-growth"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential and polynomial growth.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-exponential-and-polynomial-growth"><article class="example example-like"><p id="p-312">Let \(f(x) = ax^{2} + bx + c\) and let \(g(x) = e^{x}\text{,}\) where \(a,b,c\) are arbitrary constants. Find \(\lim_{x\to\infty}\frac{ax^{2} + bx + c}{e^{x}}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-78" id="solution-78"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-78"><div class="solution solution-like">
-<p id="p-389">This is another example of a \(\frac{\infty}{\infty}\) indeterminate form, and so L'Hospital's Rule applies. If we use it, we get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-65" id="solution-65"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-65"><div class="solution solution-like">
+<p id="p-313">This is another example of a \(\frac{\infty}{\infty}\) indeterminate form, and so L'Hospital's Rule applies. If we use it, we get</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{x\to\infty}\frac{ax^{2} + bx + c}{e^{x}} &amp; = \lim_{x\to\infty}\frac{2ax+b}{e^{x}} \\
@@ -337,13 +335,13 @@ MathJax.Hub.Config({
 </div>
 <p class="continuation">In other words, the exponential function grows faster than <em class="emphasis">any</em> quadratic function.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-another-limit-involving-exponentials"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.5</span><span class="period">.</span><span class="space"> </span><span class="title">Another limit involving exponentials.</span>
-</h6>
-<p id="p-390">Find \(\lim_{t\to1^{+}}\frac{9^{t-1} - 4^{t-1}}{t-1}\text{.}\)</p>
+</div></article></div>
+<article class="example example-like" id="example-another-limit-involving-exponentials"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-another-limit-involving-exponentials"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Another limit involving exponentials.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-another-limit-involving-exponentials"><article class="example example-like"><p id="p-314">Find \(\lim_{t\to1^{+}}\frac{9^{t-1} - 4^{t-1}}{t-1}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-79" id="solution-79"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-79"><div class="solution solution-like">
-<p id="p-391">This is a \(\frac{0}{0}\) indeterminate form, so L'Hospital's Rule applies. We get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-66" id="solution-66"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-66"><div class="solution solution-like">
+<p id="p-315">This is a \(\frac{0}{0}\) indeterminate form, so L'Hospital's Rule applies. We get</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{t\to1^{+}}\frac{9^{t-1} - 4^{t-1}}{t-1} &amp; = \lim_{t\to1^{+}}\frac{9^{t-1}\ln9 - 4^{t-1}\ln4}{1} \\
@@ -351,21 +349,21 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-392">L'Hospital's Rule only applies <em class="emphasis">directly</em> to the indeterminate forms \(\frac{0}{0}\) and \(\frac{\infty}{\infty}\text{,}\) but these are not the only problems when L'Hospital's Rule proves useful.</p>
-<article class="example example-like" id="example-a-different-indeterminate-form"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.6</span><span class="period">.</span><span class="space"> </span><span class="title">A different indeterminate form.</span>
-</h6>
-<p id="p-393">Find \(\lim_{x\to\infty}xe^{-3x - x^{2}}\text{.}\)</p>
+</div></article></div>
+<p id="p-316">L'Hospital's Rule only applies <em class="emphasis">directly</em> to the indeterminate forms \(\frac{0}{0}\) and \(\frac{\infty}{\infty}\text{,}\) but these are not the only problems when L'Hospital's Rule proves useful.</p>
+<article class="example example-like" id="example-a-different-indeterminate-form"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-a-different-indeterminate-form"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">A different indeterminate form.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-a-different-indeterminate-form"><article class="example example-like"><p id="p-317">Find \(\lim_{x\to\infty}xe^{-3x - x^{2}}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-80" id="solution-80"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-80"><div class="solution solution-like">
-<p id="p-394">If we try to evaluate the limit, we get the expression \(\infty\cdot0\text{.}\) This is another indeterminate form, but is not one that we can apply L'Hospital's Rule to without doing some algebra first. We can write</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-67" id="solution-67"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-67"><div class="solution solution-like">
+<p id="p-318">If we try to evaluate the limit, we get the expression \(\infty\cdot0\text{.}\) This is another indeterminate form, but is not one that we can apply L'Hospital's Rule to without doing some algebra first. We can write</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to\infty}xe^{-3x-x^{2}} = \lim_{x\to\infty}\frac{x}{e^{3x+x^{2}}}
 \end{equation*}
 </div>
 <p class="continuation">which is a \(\frac{\infty}{\infty}\) indeterminate form. We <em class="emphasis">can</em> use L'Hospital's on this expression!</p>
-<p id="p-395">If we do so, we get</p>
+<p id="p-319">If we do so, we get</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{x\to\infty}\frac{x}{e^{3x+x^{2}}} &amp; = \lim_{x\to\infty}\frac{1}{(3+2x)e^{3x+x^{2}}} \\
@@ -374,14 +372,14 @@ MathJax.Hub.Config({
 </div>
 <p class="continuation">So \(\lim_{x\to\infty}xe^{-3x-x^{2}} = 0\text{.}\)</p>
 </div></div>
-</div></article><p id="p-396"><a class="xref" data-knowl="./knowl/example-a-different-indeterminate-form.html" title="Example 5.7.6: A different indeterminate form">Example 5.7.6</a> shows that \(0\cdot\infty\) indeterminate forms can be dealt with by rewriting them in the form \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) and then applying L'Hospital's Rule. It's trickier, but we can also deal with \(\infty-\infty\) indeterminate forms by rewriting them in this way.</p>
-<article class="example example-like" id="example---infty-infty--indeterminate-form"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.7</span><span class="period">.</span><span class="space"> </span><span class="title">\(\infty-\infty\) indeterminate form.</span>
-</h6>
-<p id="p-397">Find \(\lim_{x\to\frac{\pi}{2}^{-1}}(\sec x-\tan x)\text{.}\)</p>
+</div></article></div>
+<p id="p-320"><a class="xref" data-knowl="./knowl/example-a-different-indeterminate-form.html" title="Example 4.6.6: A different indeterminate form">Example 4.6.6</a> shows that \(0\cdot\infty\) indeterminate forms can be dealt with by rewriting them in the form \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) and then applying L'Hospital's Rule. It's trickier, but we can also deal with \(\infty-\infty\) indeterminate forms by rewriting them in this way.</p>
+<article class="example example-like" id="example---infty-infty--indeterminate-form"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example---infty-infty--indeterminate-form"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">\(\infty-\infty\) indeterminate form.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example---infty-infty--indeterminate-form"><article class="example example-like"><p id="p-321">Find \(\lim_{x\to\frac{\pi}{2}^{-1}}(\sec x-\tan x)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-81" id="solution-81"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-81"><div class="solution solution-like">
-<p id="p-398">As \(x\to\frac{\pi}{2}^{-}\text{,}\) \(\sec x\to\infty\) and \(\tan x\to\infty\text{.}\) So this limit is the indeterminate form \(\infty-\infty\text{.}\) We can't sue L'Hospital's Rule yet, but we can try to rewrite this limit as a \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) indeterminate form. We'll try to do this by replacing \(\sec x,\tan x\) with \(\sin x,\cos x\) to get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-68" id="solution-68"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-68"><div class="solution solution-like">
+<p id="p-322">As \(x\to\frac{\pi}{2}^{-}\text{,}\) \(\sec x\to\infty\) and \(\tan x\to\infty\text{.}\) So this limit is the indeterminate form \(\infty-\infty\text{.}\) We can't sue L'Hospital's Rule yet, but we can try to rewrite this limit as a \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) indeterminate form. We'll try to do this by replacing \(\sec x,\tan x\) with \(\sin x,\cos x\) to get</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{x\to\frac{\pi}{2}^{-}}(\sec x - \tan x) &amp; =\lim_{x\to\frac{\pi}{2}^{-}}\frac{1-\sin x}{\cos x} \\
@@ -390,13 +388,13 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-limit-involving-radicals"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.8</span><span class="period">.</span><span class="space"> </span><span class="title">Limit involving radicals.</span>
-</h6>
-<p id="p-399">Find \(\lim_{x\to\infty}(\sqrt{2x^{2} - x} - \sqrt{2x^{2}+1})\text{.}\)</p>
+</div></article></div>
+<article class="example example-like" id="example-limit-involving-radicals"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-limit-involving-radicals"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.8</span><span class="period">.</span><span class="space"> </span><span class="title">Limit involving radicals.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-limit-involving-radicals"><article class="example example-like"><p id="p-323">Find \(\lim_{x\to\infty}(\sqrt{2x^{2} - x} - \sqrt{2x^{2}+1})\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-82"><div class="solution solution-like">
-<p id="p-400">This is another \(\infty-\infty\) form, so we'll try to rewrite it into a form we can use L'Hospital's Rule on. The trick here is to factor an \(x\) out so we can get a \(0\cdot\infty\) form, which we've already seen how to handle:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-69" id="solution-69"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-69"><div class="solution solution-like">
+<p id="p-324">This is another \(\infty-\infty\) form, so we'll try to rewrite it into a form we can use L'Hospital's Rule on. The trick here is to factor an \(x\) out so we can get a \(0\cdot\infty\) form, which we've already seen how to handle:</p>
 <div class="displaymath">
 \begin{align*}
 \lim_{x\to\infty}(\sqrt{2x^{2} - x} - \sqrt{2x^{2} + 1}) &amp; = \lim_{x\to\infty}(x\sqrt{2 - x^{-1}} - x\sqrt{2+x^{-2}}) \\
@@ -407,14 +405,14 @@ MathJax.Hub.Config({
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-401">There are three other indeterminate forms that L'Hospital's Rule can help us with (after some algebra): \(1^{\infty}, \infty^{0}\) and \(0^{0}\text{.}\) All of these can be found by first using logarithms.</p>
-<article class="example example-like" id="example-a-natural-limit"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.7.9</span><span class="period">.</span><span class="space"> </span><span class="title">A natural limit.</span>
-</h6>
-<p id="p-402">Find \(\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}\text{.}\)</p>
+</div></article></div>
+<p id="p-325">There are three other indeterminate forms that L'Hospital's Rule can help us with (after some algebra): \(1^{\infty}, \infty^{0}\) and \(0^{0}\text{.}\) All of these can be found by first using logarithms.</p>
+<article class="example example-like" id="example-a-natural-limit"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-a-natural-limit"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">A natural limit.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-a-natural-limit"><article class="example example-like"><p id="p-326">Find \(\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-83" id="solution-83"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-83"><div class="solution solution-like">
-<p id="p-403">This limit is a \(1^{\infty}\) indeterminate form. We'll try taking logarithms to rewrite it as a \(0\cdot\infty\) form, so set \(y = \lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}\text{.}\) Then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-70" id="solution-70"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-70"><div class="solution solution-like">
+<p id="p-327">This limit is a \(1^{\infty}\) indeterminate form. We'll try taking logarithms to rewrite it as a \(0\cdot\infty\) form, so set \(y = \lim_{x\to\infty}\left(1+\frac{1}{x}\right)^{x}\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \ln y = \lim_{x\to\infty}x\ln\left(1+\frac{1}{x}\right)
@@ -422,7 +420,7 @@ MathJax.Hub.Config({
 </div>
 <p class="continuation">is a \(0\cdot\infty\) form. We can use L'Hospital's by rewriting this limit at a \(\frac{0}{0}\) form or \(\frac{\infty}{\infty}\text{.}\) Either way, we get \(\ln y = 1\) and so the original limit is \(y = e\text{.}\)</p>
 </div></div>
-</div></article></section></div></main>
+</div></article></div></section></div></main>
 </div>
 </body>
 </html>

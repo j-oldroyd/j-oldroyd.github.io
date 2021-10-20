@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:28-05:00       *-->
+<!--*       on 2021-10-20T15:43:24-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Partial Fractions</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,16 +279,15 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-partial-fractions"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.3</span> <span class="title">Partial Fractions</span>
 </h2>
-<p id="p-619">At this point we have tools available to us that allow us to compute integrals of products (<a href="section-integration-by-parts.html" class="internal" title="Section 7.1: Integration by Parts">Section 7.1</a>), and trigonometric functions and certain radicals(<a href="section-trigonometric-integrals-and-substitution.html" class="internal" title="Section 7.2: Trigonometric Integrals and Substitution">Section 7.2</a>). Now we'll move on to a tool that will help us integrate rational functions (quotients of polynomials). The idea behind this method is to write a rational function, such as \(\frac{1}{x^{2} - 1}\text{,}\) in terms of simpler fractions. We'll demonstrate by example.</p>
-<article class="example example-like" id="example-integrating-a-rational-function"><h6 class="heading">
+<p id="p-569">At this point we have tools available to us that allow us to compute integrals of products (<a href="section-integration-by-parts.html" class="internal" title="Section 7.1: Integration by Parts">Section 7.1</a>), and trigonometric functions and certain radicals(<a href="section-trigonometric-integrals-and-substitution.html" class="internal" title="Section 7.2: Trigonometric Integrals and Substitution">Section 7.2</a>). Now we'll move on to a tool that will help us integrate rational functions (quotients of polynomials). The idea behind this method is to write a rational function, such as \(\frac{1}{x^{2} - 1}\text{,}\) in terms of simpler fractions. We'll demonstrate by example.</p>
+<article class="example example-like" id="example-integrating-a-rational-function"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-integrating-a-rational-function"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating a Rational Function.</span>
-</h6>
-<p id="p-620">Let</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-integrating-a-rational-function"><article class="example example-like"><p id="p-570">Let</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = \frac{1}{x^{2} - 1}.
@@ -297,14 +295,14 @@ f(x) = \frac{1}{x^{2} - 1}.
 </div>
 <p class="continuation">Find \(\int f(x)\,dx\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-130" id="solution-130"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-130"><div class="solution solution-like">
-<p id="p-621">We could try secant substitution, but that we'll instead focus on simplifying this fraction. First, factor the denominator:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-122" id="solution-122"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-122"><div class="solution solution-like">
+<p id="p-571">We could try secant substitution, but that we'll instead focus on simplifying this fraction. First, factor the denominator:</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{x^{2} - 1} = \frac{1}{(x-1)(x+1)}.
 \end{equation*}
 </div>
-<p id="p-622">Now, assume that we can find constants \(A_{1}, A_{2}\) such that</p>
+<p id="p-572">Now, assume that we can find constants \(A_{1}, A_{2}\) such that</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{x^{2} - 1} = \frac{A_{1}}{x-1} + \frac{A_{2}}{x + 1}.
@@ -316,7 +314,7 @@ f(x) = \frac{1}{x^{2} - 1}.
 1 = A_{1}(x + 1) + A_{2}(x - 1).\label{equation-partial-fraction-1}\tag{7.3.1}
 \end{equation}
 </div>
-<p id="p-623">So \(A_{1},A_{2}\) need to satisfy this equation <em class="emphasis">for all possible values of</em> \(x\text{.}\) We'll pick values for \(x\) that make it easy to find \(A_{1}\) and \(A_{2}\text{.}\) If \(x = -1\text{,}\) then <a class="xref" data-knowl="./knowl/equation-partial-fraction-1.html" title="Equation 7.3.1">(7.3.1)</a> becomes</p>
+<p id="p-573">So \(A_{1},A_{2}\) need to satisfy this equation <em class="emphasis">for all possible values of</em> \(x\text{.}\) We'll pick values for \(x\) that make it easy to find \(A_{1}\) and \(A_{2}\text{.}\) If \(x = -1\text{,}\) then <a class="xref" data-knowl="./knowl/equation-partial-fraction-1.html" title="Equation 7.3.1">(7.3.1)</a> becomes</p>
 <div class="displaymath">
 \begin{equation*}
 1 = -2A_{2} \Rightarrow A_{2} = -\frac{1}{2}.
@@ -330,14 +328,14 @@ f(x) = \frac{1}{x^{2} - 1}.
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-624">Finding partial fraction decompositions as in <a class="xref" data-knowl="./knowl/example-integrating-a-rational-function.html" title="Example 6.6.6: Integrating a Rational Function">Example 6.6.6</a> isn't too bad as long as the denominator can be factored into distinct (i.e. non-repeated) <em class="emphasis">linear factors</em>. The situation is more complicated if the factors are repeated or are quadratics (or both).</p>
-<article class="example example-like" id="example-finding-a-partial-fraction-decomposition-with-repeated-powers"><h6 class="heading">
+</div></article></div>
+<p id="p-574">Finding partial fraction decompositions as in <a class="xref" data-knowl="./knowl/example-integrating-a-rational-function.html" title="Example 7.3.1: Integrating a Rational Function">Example 7.3.1</a> isn't too bad as long as the denominator can be factored into distinct (i.e. non-repeated) <em class="emphasis">linear factors</em>. The situation is more complicated if the factors are repeated or are quadratics (or both).</p>
+<article class="example example-like" id="example-finding-a-partial-fraction-decomposition-with-repeated-powers"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-finding-a-partial-fraction-decomposition-with-repeated-powers"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Partial Fraction Decomposition with Repeated Powers.</span>
-</h6>
-<p id="p-625">Find the partial fraction decomposition for \(\frac{1}{(x^{2} - 1)^{2}}\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-finding-a-partial-fraction-decomposition-with-repeated-powers"><article class="example example-like"><p id="p-575">Find the partial fraction decomposition for \(\frac{1}{(x^{2} - 1)^{2}}\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-131" id="solution-131"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-131"><div class="solution solution-like">
-<p id="p-626">Since \(\frac{1}{(x^{2} - 1)^{2}} = \frac{1}{(x-1)^{2}(x+1)^{2}}\text{,}\) it's tempting to write</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-123" id="solution-123"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-123"><div class="solution solution-like">
+<p id="p-576">Since \(\frac{1}{(x^{2} - 1)^{2}} = \frac{1}{(x-1)^{2}(x+1)^{2}}\text{,}\) it's tempting to write</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{(x^{2}-1)^{2}} = \frac{A_{1}}{x-1} + \frac{A_{2}}{x+1}.
@@ -355,7 +353,7 @@ f(x) = \frac{1}{x^{2} - 1}.
 \frac{1}{(x^{2}-1)^{2}} \neq \frac{\frac{1}{4}}{(x-1)^{2}} + \frac{\frac{1}{4}}{(x+1)^{2}}.
 \end{equation*}
 </div>
-<p id="p-627">What we need to do is assume</p>
+<p id="p-577">What we need to do is assume</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{1}{(x^{2}-1)^{2}} = \frac{A_{1}}{x-1} + \frac{A_{2}}{x+1} + \frac{A_{3}}{(x-1)^{2}} + \frac{A_{4}}{(x+1)^{2}}.
@@ -368,7 +366,7 @@ f(x) = \frac{1}{x^{2} - 1}.
 \end{equation}
 </div>
 <p class="continuation">Quickly, using \(x=-1\) we find that \(A_{4} = \frac{1}{4}\text{,}\) and using \(x = 1\) we find that \(A_{3} = \frac{1}{4}\text{.}\)</p>
-<p id="p-628">At this point there are no nice values left to plug into the right hand side of <a class="xref" data-knowl="./knowl/equation-partial-fraction-2.html" title="Equation 7.3.2">(7.3.2)</a>, so we need to find \(A_{1}\) and \(A_{2}\) another way. One possibility is to differentiate both sides to make the right hand side simpler, which gives</p>
+<p id="p-578">At this point there are no nice values left to plug into the right hand side of <a class="xref" data-knowl="./knowl/equation-partial-fraction-2.html" title="Equation 7.3.2">(7.3.2)</a>, so we need to find \(A_{1}\) and \(A_{2}\) another way. One possibility is to differentiate both sides to make the right hand side simpler, which gives</p>
 <div class="displaymath">
 \begin{equation}
 0 = A_{1}(x+1)^{2} + 2A_{1}(x^{2}-1) + A_{2}(x-1)^{2} + 2A_{2}(x^{2} - 1) + 2A_{3}(x+1) + 2A_{4}(x-1).\label{equation-partial-fraction-3}\tag{7.3.3}
@@ -387,19 +385,19 @@ f(x) = \frac{1}{x^{2} - 1}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-629">In order to find partial fraction decompositions when the denominator contains a quadratic, we must allow for the possibility of the numerator being <em class="emphasis">linear</em>.</p>
-<article class="example example-like" id="example-partial-fraction-decomposition-with-a-quadratic"><h6 class="heading">
+</div></article></div>
+<p id="p-579">In order to find partial fraction decompositions when the denominator contains a quadratic, we must allow for the possibility of the numerator being <em class="emphasis">linear</em>.</p>
+<article class="example example-like" id="example-partial-fraction-decomposition-with-a-quadratic"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-partial-fraction-decomposition-with-a-quadratic"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Partial Fraction Decomposition with a Quadratic.</span>
-</h6>
-<p id="p-630">Determine</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-partial-fraction-decomposition-with-a-quadratic"><article class="example example-like"><p id="p-580">Determine</p>
 <div class="displaymath">
 \begin{equation*}
 \int\frac{5x^{2} + x^{3}}{x^{5} + 3x^{3}}\,dx.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-132" id="solution-132"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-132"><div class="solution solution-like">
-<p id="p-631">First, we can simplify:</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-124" id="solution-124"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-124"><div class="solution solution-like">
+<p id="p-581">First, we can simplify:</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}} = \frac{x + 5}{x(x^{2} + 3)}.
@@ -412,7 +410,7 @@ f(x) = \frac{1}{x^{2} - 1}.
 \end{equation*}
 </div>
 <p class="continuation">Note the linear term \(A_{2}x + A_{3}\) above the quadratic!</p>
-<p id="p-632">The rest of this computation goes like it did before. If we clear fractions, we get</p>
+<p id="p-582">The rest of this computation goes like it did before. If we clear fractions, we get</p>
 <div class="displaymath">
 \begin{equation*}
 x + 5 = A_{1}(x^{2} + 3) + A_{2}x^{2} + A_{3}x.
@@ -424,7 +422,7 @@ x + 5 = A_{1}(x^{2} + 3) + A_{2}x^{2} + A_{3}x.
 x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 \end{equation*}
 </div>
-<p id="p-633">For the right hand side to equal the left hand side, \(A_{1} + A_{2}\) <em class="emphasis">must be zero</em>. Hence \(A_{2} = -A_{1} = -\frac{5}{3}\text{.}\) Similarly, \(A_{3}\) <em class="emphasis">must equal one</em>. Therefore</p>
+<p id="p-583">For the right hand side to equal the left hand side, \(A_{1} + A_{2}\) <em class="emphasis">must be zero</em>. Hence \(A_{2} = -A_{1} = -\frac{5}{3}\text{.}\) Similarly, \(A_{3}\) <em class="emphasis">must equal one</em>. Therefore</p>
 <div class="displaymath">
 \begin{align*}
 \int\frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}}\,dx &amp; = \int\left[\frac{5/3}{x} + \frac{1 - \frac{5}{3}x}{x^{2} + 3}\right]\,dx \\
@@ -433,25 +431,25 @@ x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-634">Comparing like terms as in <a class="xref" data-knowl="./knowl/example-partial-fraction-decomposition-with-a-quadratic.html" title="Example 7.3.3: Partial Fraction Decomposition with a Quadratic">Example 7.3.3</a> is a useful technique even beyond partial fractions.</p>
-<p id="p-635">The method of partial fractions works <em class="emphasis">as long as the degree of the numerator is strictly less than that of the denominator.</em></p>
+</div></article></div>
+<p id="p-584">Comparing like terms as in <a class="xref" data-knowl="./knowl/example-partial-fraction-decomposition-with-a-quadratic.html" title="Example 7.3.3: Partial Fraction Decomposition with a Quadratic">Example 7.3.3</a> is a useful technique even beyond partial fractions.</p>
+<p id="p-585">The method of partial fractions works <em class="emphasis">as long as the degree of the numerator is strictly less than that of the denominator.</em></p>
 <article class="algorithm theorem-like" id="algorithm-partial-fractions-algorithm"><h6 class="heading">
 <span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">7.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">Partial Fractions Algorithm.</span>
 </h6>
-<p id="p-636">To find the partial fraction decomposition for the rational function \(\frac{P(x)}{Q(x)}\text{,}\) do the following:</p>
+<p id="p-586">To find the partial fraction decomposition for the rational function \(\frac{P(x)}{Q(x)}\text{,}\) do the following:</p>
 <ol class="decimal">
-<li id="li-47">Simplify \(\frac{P(x)}{Q(x)}\) as much as possible, using long division if necessary when \(\deg P(x) \geq \deg Q(x)\text{.}\)</li>
-<li id="li-48">Factor \(Q(x)\text{.}\)</li>
-<li id="li-49">Based on the factors of \(Q(x)\text{,}\) determine the proper form of the partial fraction decomposition.</li>
-<li id="li-50">Clear fractions.</li>
-<li id="li-51">Find the unknown constants of the decomposition by plugging values for \(x\) that simplify the equation, differentiating both sides, and/or comparing like terms.</li>
-</ol></article><article class="example example-like" id="example-using-long-division"><h6 class="heading">
+<li id="li-47"><p id="p-derived-li-47">Simplify \(\frac{P(x)}{Q(x)}\) as much as possible, using long division if necessary when \(\deg P(x) \geq \deg Q(x)\text{.}\)</p></li>
+<li id="li-48"><p id="p-derived-li-48">Factor \(Q(x)\text{.}\)</p></li>
+<li id="li-49"><p id="p-derived-li-49">Based on the factors of \(Q(x)\text{,}\) determine the proper form of the partial fraction decomposition.</p></li>
+<li id="li-50"><p id="p-derived-li-50">Clear fractions.</p></li>
+<li id="li-51"><p id="p-derived-li-51">Find the unknown constants of the decomposition by plugging values for \(x\) that simplify the equation, differentiating both sides, and/or comparing like terms.</p></li>
+</ol></article><article class="example example-like" id="example-using-long-division"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-using-long-division"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Using Long Division.</span>
-</h6>
-<p id="p-637">Determine \(\int\frac{2y^{4}}{y^{3} - y^{2} + y - 1}\,dy\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-using-long-division"><article class="example example-like"><p id="p-587">Determine \(\int\frac{2y^{4}}{y^{3} - y^{2} + y - 1}\,dy\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-133" id="solution-133"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-133"><div class="solution solution-like">
-<p id="p-638">Before setting up partial fractions, we should simplify the integrand as much as possible. Here, we can use long division since the degree of the numerator is greater than or equal to the degree of the denominator. Doing so, we get</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-125" id="solution-125"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-125"><div class="solution solution-like">
+<p id="p-588">Before setting up partial fractions, we should simplify the integrand as much as possible. Here, we can use long division since the degree of the numerator is greater than or equal to the degree of the denominator. Doing so, we get</p>
 <div class="displaymath">
 \begin{equation*}
 \frac{2y^{4}}{y^{3} - y^{2} + y - 1} = 2y + 2 + \frac{2}{y^{3} - y^{2} + y - 1}.
@@ -465,7 +463,7 @@ x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 &amp; = \frac{A_{1}}{y} + \frac{A_{2}}{y^{2}} + \frac{A_{3}}{y - 1} 
 \end{align*}
 </div>
-<p id="p-639">Now clear fractions to get</p>
+<p id="p-589">Now clear fractions to get</p>
 <div class="displaymath">
 \begin{equation*}
 2 = A_{1}y(y-1) + A_{2}(y-1) + A_{3}y^{2}.
@@ -478,7 +476,7 @@ x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 \end{equation*}
 </div>
 <p class="continuation">Hence \(A_{1} = -A_{3} = -2\text{.}\)</p>
-<p id="p-640">Therefore</p>
+<p id="p-590">Therefore</p>
 <div class="displaymath">
 \begin{align*}
 \int\frac{2y^{4}}{y^{3} - y^{2} + y - 1}\,dy &amp; = \int\left[2y + 2 - \frac{2}{y} - \frac{2}{y^{2}} + \frac{2}{y - 1}\right]\,dy  \\
@@ -486,14 +484,14 @@ x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-641">The next example shows a substitution that may occasionally work when partial fractions fails.</p>
-<article class="example example-like" id="example-twisty-substitution"><h6 class="heading">
+</div></article></div>
+<p id="p-591">The next example shows a substitution that may occasionally work when partial fractions fails.</p>
+<article class="example example-like" id="example-twisty-substitution"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-twisty-substitution"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Twisty Substitution.</span>
-</h6>
-<p id="p-642">Determine \(\int_{\frac{1}{3}}^{3}\frac{\sqrt{x}}{x^{2} + x}\,dx.\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-twisty-substitution"><article class="example example-like"><p id="p-592">Determine \(\int_{\frac{1}{3}}^{3}\frac{\sqrt{x}}{x^{2} + x}\,dx.\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-134" id="solution-134"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-134"><div class="solution solution-like">
-<p id="p-643">Once again we have a radical causing problems, and it's not in any of the three trigonometric substitution forms we can use either. We want it to go away, so we'll try just that: set \(u = \sqrt{x}\text{,}\) which gives \(du = \frac{1}{2\sqrt{x}}\,dx\text{.}\) Then</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-126" id="solution-126"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-126"><div class="solution solution-like">
+<p id="p-593">Once again we have a radical causing problems, and it's not in any of the three trigonometric substitution forms we can use either. We want it to go away, so we'll try just that: set \(u = \sqrt{x}\text{,}\) which gives \(du = \frac{1}{2\sqrt{x}}\,dx\text{.}\) Then</p>
 <div class="displaymath">
 \begin{equation*}
 \int_{\frac{1}{3}}^{3}\frac{\sqrt{x}}{x^{2} + x}\,dx = \int_{\frac{1}{\sqrt{3}}}^{\sqrt{3}}\frac{2x}{x^{2} + x}\,du.
@@ -512,7 +510,7 @@ x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
 \end{equation*}
 </div>
 </div></div>
-</div></article></section></div></main>
+</div></article></div></section></div></main>
 </div>
 </body>
 </html>

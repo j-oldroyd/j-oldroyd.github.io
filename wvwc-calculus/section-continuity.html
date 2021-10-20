@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:16-05:00       *-->
+<!--*       on 2021-10-20T15:43:17-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Continuity</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity" class="active">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,33 +279,32 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-continuity"><h2 class="heading hide-type">
-<span class="type">Section</span> <span class="codenumber">2.4</span> <span class="title">Continuity</span>
+<span class="type">Section</span> <span class="codenumber">2.3</span> <span class="title">Continuity</span>
 </h2>
-<p id="p-67">We saw in <a href="section-computing-limits.html" class="internal" title="Section 2.3: Computing Limits">Section 2.3</a> that for a function like \(f(x) = x+3x^{2}\text{,}\) we could evaluate \(\lim_{x\to a}f(x)\) by simply plugging in \(x=a\text{.}\) In other words, \(\lim_{x\to a}f(x) = f(a)\text{.}\) Functions that have this property are extremely important in mathematics, so we give them a name.</p>
+<p id="p-51">We saw in <a href="section-computing-limits.html" class="internal" title="Section 2.2: Computing Limits">Section 2.2</a> that for a function like \(f(x) = x+3x^{2}\text{,}\) we could evaluate \(\lim_{x\to a}f(x)\) by simply plugging in \(x=a\text{.}\) In other words, \(\lim_{x\to a}f(x) = f(a)\text{.}\) Functions that have this property are extremely important in mathematics, so we give them a name.</p>
 <article class="definition definition-like" id="definition-continuous-functions"><h6 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Continuous Functions.</span>
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Continuous Functions.</span>
 </h6>
-<p id="p-68">Let \(f(x)\) be a function and suppose that \(a\) is in the domain of \(f(x)\text{.}\) Then we say that \(f(x)\) is <dfn class="terminology">continuous at \(a\)</dfn> if</p>
+<p id="p-52">Let \(f(x)\) be a function and suppose that \(a\) is in the domain of \(f(x)\text{.}\) Then we say that \(f(x)\) is <dfn class="terminology">continuous at \(a\)</dfn> if</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to a}f(x) = f(a)\text{.}
 \end{equation*}
 </div>
-<p class="continuation">Otherwise, we say that \(f(x)\) is <dfn class="terminology">discontinuous at \(a\)</dfn>. We say that \(f(x)\) is continuous on an interval if it is continuous at every point of an interval. Otherwise, we say that \(f(x)\) is discontinuous on the interval.</p></article><p id="p-69"><a class="xref" data-knowl="./knowl/definition-continuous-functions.html" title="Definition 2.4.1: Continuous Functions">Definition 2.4.1</a> says that it is extremely easy to evaluate limits of continuous functions: just plug the value that \(x\) is approaching into the function \(f(x)\text{.}\) So the limit is then \(f(a)\text{.}\) If a function \(f(x)\) is continuous on an interval, then this means that the graph of \(f(x)\) has no "gaps" over this interval.</p>
-<article class="example example-like" id="example-determining-if-a-function-is-continuous"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Determining if a function is continuous.</span>
-</h6>
-<p id="p-70">Let \(f(x) = \frac{1}{x}\text{.}\) Is \(f(x)\) continuous on \((-\infty,\infty)\text{?}\)</p>
+<p class="continuation">Otherwise, we say that \(f(x)\) is <dfn class="terminology">discontinuous at \(a\)</dfn>. We say that \(f(x)\) is continuous on an interval if it is continuous at every point of an interval. Otherwise, we say that \(f(x)\) is discontinuous on the interval.</p></article><p id="p-53"><a class="xref" data-knowl="./knowl/definition-continuous-functions.html" title="Definition 2.3.1: Continuous Functions">Definition 2.3.1</a> says that it is extremely easy to evaluate limits of continuous functions: just plug the value that \(x\) is approaching into the function \(f(x)\text{.}\) So the limit is then \(f(a)\text{.}\) If a function \(f(x)\) is continuous on an interval, then this means that the graph of \(f(x)\) has no "gaps" over this interval.</p>
+<article class="example example-like" id="example-determining-if-a-function-is-continuous"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-determining-if-a-function-is-continuous"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Determining if a function is continuous.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-determining-if-a-function-is-continuous"><article class="example example-like"><p id="p-54">Let \(f(x) = \frac{1}{x}\text{.}\) Is \(f(x)\) continuous on \((-\infty,\infty)\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-8" id="solution-8"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-8"><div class="solution solution-like"><p id="p-71">If we graph \(f(x)\text{,}\) then we see that it is discontinuous at \(x=0\text{.}\) Therefore \(f(x)\) is discontinuous on the interval \((-\infty,\infty)\text{.}\)</p></div></div>
-</div></article><p id="p-72">If we're dealing with a function on a (bounded) closed interval, we need to introduce some new terminology. We say that a function \(f(x)\) is <dfn class="terminology">continuous from the left</dfn> at \(x=a\) if \(\lim_{x\to a^{-}}f(x) = f(a)\text{.}\) Similarly, we say that \(f(x)\) is <dfn class="terminology">continuous from the right</dfn> at \(x=a\) if \(\lim_{x\to a^{+}}f(x) = f(a)\text{.}\) This is of course assuming that \(a\) is in the domain of \(f(x)\text{.}\) Finally, we say that \(f(x)\) is continuous on the closed interval \([a,b]\) if it is continuous on \((a,b)\text{,}\) continuous from the right at \(a\) and continuous from the left at \(b\text{.}\) The main idea is still that the graph contains no gaps over this interval.</p>
-<article class="example example-like" id="example-continuity-over-a-closed-interval"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity over a closed interval.</span>
-</h6>
-<p id="p-73">Let \(f(x)\) be given by</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-7" id="solution-7"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-7"><div class="solution solution-like"><p id="p-55">If we graph \(f(x)\text{,}\) then we see that it is discontinuous at \(x=0\text{.}\) Therefore \(f(x)\) is discontinuous on the interval \((-\infty,\infty)\text{.}\)</p></div></div>
+</div></article></div>
+<p id="p-56">If we're dealing with a function on a (bounded) closed interval, we need to introduce some new terminology. We say that a function \(f(x)\) is <dfn class="terminology">continuous from the left</dfn> at \(x=a\) if \(\lim_{x\to a^{-}}f(x) = f(a)\text{.}\) Similarly, we say that \(f(x)\) is <dfn class="terminology">continuous from the right</dfn> at \(x=a\) if \(\lim_{x\to a^{+}}f(x) = f(a)\text{.}\) This is of course assuming that \(a\) is in the domain of \(f(x)\text{.}\) Finally, we say that \(f(x)\) is continuous on the closed interval \([a,b]\) if it is continuous on \((a,b)\text{,}\) continuous from the right at \(a\) and continuous from the left at \(b\text{.}\) The main idea is still that the graph contains no gaps over this interval.</p>
+<article class="example example-like" id="example-continuity-over-a-closed-interval"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-continuity-over-a-closed-interval"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity over a closed interval.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-continuity-over-a-closed-interval"><article class="example example-like"><p id="p-57">Let \(f(x)\) be given by</p>
 <div class="displaymath">
 \begin{equation*}
 f(x) = \begin{cases} 3x-1 &amp; 1\leq x&lt; 2 \\ 9-x^{2} &amp; 2\leq x\leq 4.\end{cases}
@@ -314,20 +312,20 @@ f(x) = \begin{cases} 3x-1 &amp; 1\leq x&lt; 2 \\ 9-x^{2} &amp; 2\leq x\leq 4.\en
 </div>
 <p class="continuation">Is \(f(x)\) continuous over \([1,4]\text{?}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-9" id="solution-9"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-9"><div class="solution solution-like">
-<p id="p-74">If we graph \(f(x)\) over this interval, we get the following:</p>
-<figure class="figure figure-like" id="figure-3"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-3.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.4.4<span class="period">.</span></span><span class="space"> </span>Graphing \(f(x)\) over \([1,4]\text{.}\)</figcaption></figure><p id="p-75">So from the graph it appears that \(f(x)\) is continuous on this interval.</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-8" id="solution-8"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-8"><div class="solution solution-like">
+<p id="p-58">If we graph \(f(x)\) over this interval, we get the following:</p>
+<figure class="figure figure-like" id="figure-3"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-3.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.3.4<span class="period">.</span></span><span class="space"> </span>Graphing \(f(x)\) over \([1,4]\text{.}\)</figcaption></figure><p id="p-59">So from the graph it appears that \(f(x)\) is continuous on this interval.</p>
 </div></div>
-</div></article><p id="p-76">Remember that we said a function is continuous over an interval if its graph has no gaps over that interval. This is a very rough explanation of continuity, but it should make the following theorem plausible.</p>
+</div></article></div>
+<p id="p-60">Remember that we said a function is continuous over an interval if its graph has no gaps over that interval. This is a very rough explanation of continuity, but it should make the following theorem plausible.</p>
 <article class="theorem theorem-like" id="theorem-continuous-functions"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Continuous Functions.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Continuous Functions.</span>
 </h6>
-<p id="p-77">Polynomial, rational, root and trigonometric functions are continuous at every point of their domain.</p></article><p id="p-78">Although it doesn't directly mention piecewise functions, <a class="xref" data-knowl="./knowl/theorem-continuous-functions.html" title="Theorem 2.4.5: Continuous Functions">Theorem 2.4.5</a> is still useful for determining if they are continuous. If a piecewise function is defined using any of the functions from <a class="xref" data-knowl="./knowl/theorem-continuous-functions.html" title="Theorem 2.4.5: Continuous Functions">Theorem 2.4.5</a>, then the only points we really need to check for continuity are the the places where the function "changes rules".</p>
-<article class="example example-like" id="example-another-piecewise-function"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Another piecewise function.</span>
-</h6>
-<p id="p-79">Over what intervals is the function \(g(s)\) given by</p>
+<p id="p-61">Polynomial, rational, root and trigonometric functions are continuous at every point of their domain.</p></article><p id="p-62">Although it doesn't directly mention piecewise functions, <a class="xref" data-knowl="./knowl/theorem-continuous-functions.html" title="Theorem 2.3.5: Continuous Functions">Theorem 2.3.5</a> is still useful for determining if they are continuous. If a piecewise function is defined using any of the functions from <a class="xref" data-knowl="./knowl/theorem-continuous-functions.html" title="Theorem 2.3.5: Continuous Functions">Theorem 2.3.5</a>, then the only points we really need to check for continuity are the the places where the function "changes rules".</p>
+<article class="example example-like" id="example-another-piecewise-function"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-another-piecewise-function"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Another piecewise function.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-another-piecewise-function"><article class="example example-like"><p id="p-63">Over what intervals is the function \(g(s)\) given by</p>
 <div class="displaymath">
 \begin{equation*}
 g(s) = \begin{cases} s^{2} &amp; s&lt;-1 \\ -5\cos (\pi s) &amp; -1\leq s\leq 1 \\ 5 &amp; s&gt; 1 \end{cases}
@@ -335,8 +333,8 @@ g(s) = \begin{cases} s^{2} &amp; s&lt;-1 \\ -5\cos (\pi s) &amp; -1\leq s\leq 1 
 </div>
 <p class="continuation">continuous?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-10" id="solution-10"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-10"><div class="solution solution-like">
-<p id="p-80">We need to check continuity at \(s=-1\) and \(s=1\text{.}\) At \(s=-1\text{,}\) we need to make sure that \(\lim_{s\to -1}g(s)\) exists and is equal to \(g(-1)\text{.}\) Since</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-9" id="solution-9"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-9"><div class="solution solution-like">
+<p id="p-64">We need to check continuity at \(s=-1\) and \(s=1\text{.}\) At \(s=-1\text{,}\) we need to make sure that \(\lim_{s\to -1}g(s)\) exists and is equal to \(g(-1)\text{.}\) Since</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{s\to-1^{-1}}g(s) = \lim_{s\to-1^{-1}}s^{2} = 1
@@ -349,38 +347,38 @@ g(s) = \begin{cases} s^{2} &amp; s&lt;-1 \\ -5\cos (\pi s) &amp; -1\leq s\leq 1 
 \end{equation*}
 </div>
 <p class="continuation">it follows that \(\lim_{s\to-1}g(s)\) does not exist. So \(g(s)\) can't be continuous at \(s=-1\text{.}\)</p>
-<p id="p-81">On the other hand, since \(\lim_{s\to1^{-1}}g(s) = 5 = \lim_{s\to1^{+}}g(s)\text{,}\) it follows that \(\lim_{s\to1}g(s)\) exists and is equal to \(5\text{.}\) Since \(g(1)\) also equals \(5\text{,}\) \(g(s)\) is continuous at \(s=1\text{.}\) So \(g(s)\) must be continuous on \((-\infty, -1)\cup(-1,\infty)\text{.}\)</p>
+<p id="p-65">On the other hand, since \(\lim_{s\to1^{-1}}g(s) = 5 = \lim_{s\to1^{+}}g(s)\text{,}\) it follows that \(\lim_{s\to1}g(s)\) exists and is equal to \(5\text{.}\) Since \(g(1)\) also equals \(5\text{,}\) \(g(s)\) is continuous at \(s=1\text{.}\) So \(g(s)\) must be continuous on \((-\infty, -1)\cup(-1,\infty)\text{.}\)</p>
 </div></div>
-</div></article><p id="p-82">We can also build more complicated continuous functions out of simpler ones.</p>
+</div></article></div>
+<p id="p-66">We can also build more complicated continuous functions out of simpler ones.</p>
 <article class="theorem theorem-like" id="theorem-combining-continuous-functions"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">Combining Continuous Functions.</span>
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Combining Continuous Functions.</span>
 </h6>
-<p id="p-83">Let \(f(x)\) and \(g(x)\) be continuous at a point \(a\text{.}\) Then the following statements are true:</p>
+<p id="p-67">Let \(f(x)\) and \(g(x)\) be continuous at a point \(a\text{.}\) Then the following statements are true:</p>
 <ol class="decimal">
-<li id="li-1">\(f(x)+g(x)\) is continuous at \(a\text{.}\)</li>
-<li id="li-2">\(f(x)g(x)\) is continuous at \(a\text{.}\)</li>
-<li id="li-3">\(\frac{f(x)}{g(x)}\) is continuous at \(a\) if \(g(a)\neq0\text{.}\)</li>
-<li id="li-4">\(f(g(x))\) is continuous at \(a\) if \(g(a)\) is in the domain of \(f(x)\text{.}\)</li>
-</ol></article><article class="example example-like" id="example-determining-where-functions-are-continuous"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Determining where functions are continuous.</span>
-</h6>
-<p id="p-84">Let \(h(t) = \sqrt{t} + \frac{t}{t-4} - \frac{t+1}{t^{2}-1}\text{.}\) On what intervals is \(h(t)\) continuous?</p>
+<li id="li-1"><p id="p-derived-li-1">\(f(x)+g(x)\) is continuous at \(a\text{.}\)</p></li>
+<li id="li-2"><p id="p-derived-li-2">\(f(x)g(x)\) is continuous at \(a\text{.}\)</p></li>
+<li id="li-3"><p id="p-derived-li-3">\(\frac{f(x)}{g(x)}\) is continuous at \(a\) if \(g(a)\neq0\text{.}\)</p></li>
+<li id="li-4"><p id="p-derived-li-4">\(f(g(x))\) is continuous at \(a\) if \(g(a)\) is in the domain of \(f(x)\text{.}\)</p></li>
+</ol></article><article class="example example-like" id="example-determining-where-functions-are-continuous"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-determining-where-functions-are-continuous"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Determining where functions are continuous.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-determining-where-functions-are-continuous"><article class="example example-like"><p id="p-68">Let \(h(t) = \sqrt{t} + \frac{t}{t-4} - \frac{t+1}{t^{2}-1}\text{.}\) On what intervals is \(h(t)\) continuous?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-11" id="solution-11"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-11"><div class="solution solution-like"><p id="p-85">By <a class="xref" data-knowl="./knowl/theorem-combining-continuous-functions.html" title="Theorem 2.4.7: Combining Continuous Functions">Theorem 2.4.7</a>, \(h(t)\) should be continuous wherever \(\sqrt{t}, \frac{t}{t-4}\) and \(\frac{t+1}{t^{2}-1}\) are all defined. Since \(\sqrt{t}\) is defined for \(t\geq0\text{,}\) \(\frac{t}{t-4}\) is defined for \(t\neq4\) and \(\frac{t+1}{t^{2}-1}\) is defined for \(t\neq\pm1\text{,}\) it follows that \(h(t)\) is continuous on \([0,1)\cup(1,4)\cup(4,\infty)\text{.}\)</p></div></div>
-</div></article><article class="example example-like" id="example-using-continuity-to-evaluate-a-limit"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Using continuity to evaluate a limit.</span>
-</h6>
-<p id="p-86">Evaluate \(\lim_{x\to\pi}\cos(x+\sin x)\text{.}\)</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-10" id="solution-10"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-10"><div class="solution solution-like"><p id="p-69">By <a class="xref" data-knowl="./knowl/theorem-combining-continuous-functions.html" title="Theorem 2.3.7: Combining Continuous Functions">Theorem 2.3.7</a>, \(h(t)\) should be continuous wherever \(\sqrt{t}, \frac{t}{t-4}\) and \(\frac{t+1}{t^{2}-1}\) are all defined. Since \(\sqrt{t}\) is defined for \(t\geq0\text{,}\) \(\frac{t}{t-4}\) is defined for \(t\neq4\) and \(\frac{t+1}{t^{2}-1}\) is defined for \(t\neq\pm1\text{,}\) it follows that \(h(t)\) is continuous on \([0,1)\cup(1,4)\cup(4,\infty)\text{.}\)</p></div></div>
+</div></article></div>
+<article class="example example-like" id="example-using-continuity-to-evaluate-a-limit"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-using-continuity-to-evaluate-a-limit"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Using continuity to evaluate a limit.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-using-continuity-to-evaluate-a-limit"><article class="example example-like"><p id="p-70">Evaluate \(\lim_{x\to\pi}\cos(x+\sin x)\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-12" id="solution-12"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-12"><div class="solution solution-like">
-<p id="p-87">Since \(x, \cos x\) and \(\sin x\) are all continuous, this means that \(\cos(x+\sin x)\) must be continuous as well. Therefore</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-11" id="solution-11"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-11"><div class="solution solution-like">
+<p id="p-71">Since \(x, \cos x\) and \(\sin x\) are all continuous, this means that \(\cos(x+\sin x)\) must be continuous as well. Therefore</p>
 <div class="displaymath">
 \begin{equation*}
 \lim_{x\to\pi}\cos(x+\sin x) = \cos(\pi+\sin\pi) = -1.
 \end{equation*}
 </div>
 </div></div>
-</div></article></section></div></main>
+</div></article></div></section></div></main>
 </div>
 </body>
 </html>

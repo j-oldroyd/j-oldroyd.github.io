@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:18:08-05:00       *-->
+<!--*       on 2021-10-20T15:43:53-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -16,19 +16,35 @@
 <body>
 <div class="solution solution-like">
 <h6 xmlns:svg="http://www.w3.org/2000/svg" class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">6.5.5.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">7.1.4.1</span><span class="period">.</span>
 </h6>
-<p>This integral looks awful, but the integrand contains \(\ln x\) and its derivative \(\frac{1}{x}\text{,}\) which suggests that the substitution \(u = \ln x\) might simplify things. So let \(u = \ln x\text{.}\) Then \(du = \frac{1}{x}\,dx\text{,}\) or \(dx = x\,du\text{,}\) and the integral becomes</p>
+<p>Here, it doesn't make much difference what we select for \(u\) or \(dv\text{,}\) since both \(e^{t}\) and \(\cos t\) are easy to differentiate and integrate, while neither becomes simpler. But since we're integrating a product, we'll try to use integration by parts anyway and hope for the best. To that end, let \(u = e^{t}\) and \(dv = \cos t\text{.}\) Then \(du = e^{t}\,dt\) and \(v = \sin t\text{,}\) which gives</p>
 <div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
 \begin{align*}
-\int_{e^{2}}^{e^{4}}\frac{dx}{x\sqrt{\ln x}} &amp; \int_{x=e^{2}}^{x=e^{4}}\frac{x\,du}{x\sqrt{u}} \\
-&amp; = \int_{x=e^{2}}^{x=e^{4}}\frac{du}{\sqrt{u}} \\
-&amp; = \Big[u\Big]_{x=e^{2}}^{x=e^{4}} \\
-&amp; = \Big[\ln x\Big]_{e^{2}}^{e^{4}} \\
-&amp; = 2. 
+\int e^{t}\cos t\,dt &amp; = uv - \int v\,du \\
+&amp; = e^{t}\sin t - \int e^{t}\sin t\,dt. 
 \end{align*}
 </div>
+<p>As expected, the new integral isn't any simpler than the one that we started with. However, it's not any more <em xmlns:svg="http://www.w3.org/2000/svg" class="emphasis">complicated</em> either. So we'll try integration by parts on the new integral as well, with \(u = e^{t}, du = e^{t}\,dt, dv = \sin t\,dt\) and \(v = -\cos t\text{.}\) Then</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+\int e^{t}\sin t\,dt = -e^{t}\cos t + \int e^{t}\cos t\,dt.
+\end{equation*}
 </div>
-<span class="incontext"><a href="section-substitution.html#solution-113">in-context</a></span>
+<p>So we have</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{align*}
+\int e^{t}\cos t\,dt &amp; = e^{t}\sin t - (-e^{t}\cos t + \int e^{t}\cos t\,dt) \\
+&amp; = e^{t}\sin t + e^{t}\cos t - \int e^{t}\cos t\,dt 
+\end{align*}
+</div>
+<p>There is something very strange about this equation: <em xmlns:svg="http://www.w3.org/2000/svg" class="emphasis">the same integral appears on both sides</em>. This is no longer a calculus problem, it's an algebra problem! Solving for the integral algebraically (and including the arbitrary constant!) gives</p>
+<div xmlns:svg="http://www.w3.org/2000/svg" class="displaymath">
+\begin{equation*}
+\int e^{t}\cos t\,dt = \frac{e^{t}\sin t + e^{t}\cos t}{2} + C.
+\end{equation*}
+</div>
+</div>
+<span class="incontext"><a href="section-integration-by-parts.html#solution-113">in-context</a></span>
 </body>
 </html>

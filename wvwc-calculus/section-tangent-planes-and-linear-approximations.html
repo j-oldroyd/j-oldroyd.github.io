@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-03-03T14:17:44-05:00       *-->
+<!--*       on 2021-10-20T15:43:35-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Tangent Planes and Linear Approximations</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
@@ -56,7 +62,7 @@ MathJax.Hub.Config({
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
+<body class="pretext-book has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
@@ -128,13 +134,10 @@ MathJax.Hub.Config({
 <a href="functions.html" data-scroll="functions"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions">Trigonometric Functions</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="limits.html" data-scroll="limits"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-tangent-line-problem-and-fluxions.html" data-scroll="section-the-tangent-line-problem-and-fluxions">The Tangent Line Problem and Fluxions</a></li>
 <li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function">The Limit of a Function</a></li>
 <li><a href="section-computing-limits.html" data-scroll="section-computing-limits">Computing Limits</a></li>
 <li><a href="section-continuity.html" data-scroll="section-continuity">Continuity</a></li>
@@ -149,6 +152,8 @@ MathJax.Hub.Config({
 <li><a href="section-product-and-quotient-rules.html" data-scroll="section-product-and-quotient-rules">Product and Quotient Rules</a></li>
 <li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule">The Chain Rule</a></li>
 <li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation">Implicit Differentiation</a></li>
+<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
+<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 </ul>
 </li>
 <li class="link">
@@ -157,19 +162,16 @@ MathJax.Hub.Config({
 <li><a href="section-logarithms.html" data-scroll="section-logarithms">Logarithms</a></li>
 <li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions">Derivatives of Exponential and Logarithmic Functions</a></li>
 <li><a href="section-exponential-models.html" data-scroll="section-exponential-models">Exponential Models</a></li>
-<li><a href="section-inverse-functions.html" data-scroll="section-inverse-functions">Inverse Functions</a></li>
 <li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions">Inverse Trigonometric Functions</a></li>
+<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 </ul>
 </li>
 <li class="link">
 <a href="applications-differentiation.html" data-scroll="applications-differentiation"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations">Linear Approximations</a></li>
 <li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions">Extreme Values of Functions</a></li>
 <li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem">The Mean Value Theorem</a></li>
 <li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs">Derivatives and Graphs</a></li>
 <li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems">Optimization Problems</a></li>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule">L'Hospital's Rule</a></li>
 <li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method">Newton's Method</a></li>
 <li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives">Antiderivatives</a></li>
 </ul>
@@ -181,9 +183,6 @@ MathJax.Hub.Config({
 <li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals">Evaluating Integrals</a></li>
 <li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</a></li>
 <li><a href="section-substitution.html" data-scroll="section-substitution">Substitution</a></li>
-<li><a href="section-integrals-involving-exponentials-and-logarithms.html" data-scroll="section-integrals-involving-exponentials-and-logarithms">Integrals Involving Exponentials and Logarithms</a></li>
-<li><a href="section-integrals-involving-inverse-trigonometric-functions.html" data-scroll="section-integrals-involving-inverse-trigonometric-functions">Integrals Involving Inverse Trigonometric Functions</a></li>
-<li><a href="section-integrals-involving-hyperbolic-trigonometric-functions.html" data-scroll="section-integrals-involving-hyperbolic-trigonometric-functions">Integrals Involving Hyperbolic Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -280,16 +279,16 @@ MathJax.Hub.Config({
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-tangent-planes-and-linear-approximations"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.4</span> <span class="title">Tangent Planes and Linear Approximations</span>
 </h2>
-<section class="introduction" id="introduction-33"><p id="p-1444">In Calculus I, derivatives are used to find linear approximations to functions of the form \(f(x)\text{.}\) We can use partial derivatives to do the same for functions with several independent variables.</p></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-32"><p id="p-1397">In Calculus I, derivatives are used to find linear approximations to functions of the form \(f(x)\text{.}\) We can use partial derivatives to do the same for functions with several independent variables.</p></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">12.4.1</span> <span class="title">Tangent Planes</span>
 </h3>
-<p id="p-1445">Recall that if a curve \(y=f(x)\) is differentiable at a point \(x_{0}\text{,}\) then it has a tangent line passing through \((x_{0},f(x_{0})).\) The tangent line can be viewed as a linear approximation of the curve \(y=f(x)\) near the point \(x_{0}\text{.}\) We can apply a similar ideas to surfaces \(z = f(x,y)\text{.}\) It turns out that if we have a surface \(z = f(x,y)\) and a point \((x_{0},y_{0}, f(x_{0},y_{0}))\) on the surface, then every tangent vector at this point is contained in a single plane called the <dfn class="terminology">tangent plane</dfn>.</p>
-<p id="p-1446">We'd like to find the equation of this plane. First, recall that every plane can be described by an equation of the form</p>
+<p id="p-1398">Recall that if a curve \(y=f(x)\) is differentiable at a point \(x_{0}\text{,}\) then it has a tangent line passing through \((x_{0},f(x_{0})).\) The tangent line can be viewed as a linear approximation of the curve \(y=f(x)\) near the point \(x_{0}\text{.}\) We can apply a similar ideas to surfaces \(z = f(x,y)\text{.}\) It turns out that if we have a surface \(z = f(x,y)\) and a point \((x_{0},y_{0}, f(x_{0},y_{0}))\) on the surface, then every tangent vector at this point is contained in a single plane called the <dfn class="terminology">tangent plane</dfn>.</p>
+<p id="p-1399">We'd like to find the equation of this plane. First, recall that every plane can be described by an equation of the form</p>
 <div class="displaymath">
 \begin{equation*}
 a(x-x_{0})+b(y-y_{0})+c(z-z_{0}) = 0.
@@ -317,19 +316,18 @@ B = f_{y}(x_{0},y_{0}).
 <article class="theorem theorem-like" id="theorem-tangent-planes-to-surfaces"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Tangent Planes to Surfaces.</span>
 </h6>
-<p id="p-1447">Let \(z = f(x,y)\) be a surface and suppose that \(f\) has continuous partial derivatives at the point \((x_{0},y_{0})\text{.}\) Then the tangent plane to the surface \(z = f(x,y)\) at the point \((x_{0},y_{0})\) is given by</p>
+<p id="p-1400">Let \(z = f(x,y)\) be a surface and suppose that \(f\) has continuous partial derivatives at the point \((x_{0},y_{0})\text{.}\) Then the tangent plane to the surface \(z = f(x,y)\) at the point \((x_{0},y_{0})\) is given by</p>
 <div class="displaymath">
 \begin{equation*}
 z - z_{0} = f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},y_{0})(y - y_{0}),
 \end{equation*}
 </div>
-<p class="continuation">where \(z_{0} = f(x_{0},y_{0})\text{.}\)</p></article><article class="example example-like" id="example-approximations-by-tangent-planes"><h6 class="heading">
+<p class="continuation">where \(z_{0} = f(x_{0},y_{0})\text{.}\)</p></article><article class="example example-like" id="example-approximations-by-tangent-planes"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-approximations-by-tangent-planes"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Approximations by tangent planes.</span>
-</h6>
-<p id="p-1448">Find the tangent plane to \(f(x,y) = xe^{xy}\) at the point \((2,0,2)\text{.}\) Use this to approximate \(f(1.9,0)\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-approximations-by-tangent-planes"><article class="example example-like"><p id="p-1401">Find the tangent plane to \(f(x,y) = xe^{xy}\) at the point \((2,0,2)\text{.}\) Use this to approximate \(f(1.9,0)\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-231" id="solution-231"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-231"><div class="solution solution-like">
-<p id="p-1449">The equation of the tangent plane is given by</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-223" id="solution-223"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-223"><div class="solution solution-like">
+<p id="p-1402">The equation of the tangent plane is given by</p>
 <div class="displaymath">
 \begin{equation*}
 z - 2 = (x - 2) + 4(y - 0)
@@ -348,47 +346,46 @@ f(1.9,0)\approx 1.9 + 4(0) = 1.9.
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="subsection" id="subsection-linear-approximations"><h3 class="heading hide-type">
+</div></article></div></section><section class="subsection" id="subsection-linear-approximations"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">12.4.2</span> <span class="title">Linear Approximations</span>
 </h3>
-<p id="p-1450"><a class="xref" data-knowl="./knowl/example-approximations-by-tangent-planes.html" title="Example 12.4.2: Approximations by tangent planes">Example 12.4.2</a> shows that we can use tangent planes to approximate complicated functions. This leads us to the idea of a linear approximation, or <dfn class="terminology">linearization</dfn> of a function of the form \(f(x,y)\text{.}\)</p>
+<p id="p-1403"><a class="xref" data-knowl="./knowl/example-approximations-by-tangent-planes.html" title="Example 12.4.2: Approximations by tangent planes">Example 12.4.2</a> shows that we can use tangent planes to approximate complicated functions. This leads us to the idea of a linear approximation, or <dfn class="terminology">linearization</dfn> of a function of the form \(f(x,y)\text{.}\)</p>
 <article class="definition definition-like" id="definition-linearization"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">12.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization.</span>
 </h6>
-<p id="p-1451">Let \(f(x,y)\) be a function for which \(f_{x}\) and \(f_{y}\) are both continuous at a point \((x_{0},y_{0})\text{.}\) Then the linearization of \(f(x,y)\) at \((x_{0},y_{0})\) is the function \(L(x,y)\) given by</p>
+<p id="p-1404">Let \(f(x,y)\) be a function for which \(f_{x}\) and \(f_{y}\) are both continuous at a point \((x_{0},y_{0})\text{.}\) Then the linearization of \(f(x,y)\) at \((x_{0},y_{0})\) is the function \(L(x,y)\) given by</p>
 <div class="displaymath">
 \begin{equation*}
 L(x,y) = f(x_{0},y_{0}) + f_{x}(x_{0},y_{0})(x-x_{0}) + f_{y}(x_{0},y_{0})(y-y_{0}).
 \end{equation*}
-</div></article><p id="p-1452">For well-behaved functions (i.e. functions that have continuous partial derivatives), \(L(x,y)\approx f(x,y)\) if \((x,y)\) is close to the point \((x_{0},y_{0})\text{.}\)</p>
-<article class="example example-like" id="example-linearization-of-an-exponential-and-a-sinusoid"><h6 class="heading">
+</div></article><p id="p-1405">For well-behaved functions (i.e. functions that have continuous partial derivatives), \(L(x,y)\approx f(x,y)\) if \((x,y)\) is close to the point \((x_{0},y_{0})\text{.}\)</p>
+<article class="example example-like" id="example-linearization-of-an-exponential-and-a-sinusoid"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-linearization-of-an-exponential-and-a-sinusoid"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization of an exponential and a sinusoid.</span>
-</h6>
-<p id="p-1453">Let \(u(x,t) = 30e^{-t}\sin x\text{.}\) Find the linearization of \(u\) at the point \((0,\frac{\pi}{2})\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-linearization-of-an-exponential-and-a-sinusoid"><article class="example example-like"><p id="p-1406">Let \(u(x,t) = 30e^{-t}\sin x\text{.}\) Find the linearization of \(u\) at the point \((0,\frac{\pi}{2})\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-232" id="solution-232"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-232"><div class="solution solution-like">
-<p id="p-1454">By <a class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a>, the linearization is given by</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-224" id="solution-224"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-224"><div class="solution solution-like">
+<p id="p-1407">By <a class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a>, the linearization is given by</p>
 <div class="displaymath">
 \begin{equation*}
 L(x,y) = 30 - 30(t - 0) = 30(1 - t).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1455"><a class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a> can also be extended to functions with more than two variables.</p>
-<article class="example example-like" id="example-linearization-in-three-variables"><h6 class="heading">
+</div></article></div>
+<p id="p-1408"><a class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a> can also be extended to functions with more than two variables.</p>
+<article class="example example-like" id="example-linearization-in-three-variables"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-linearization-in-three-variables"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization in three variables.</span>
-</h6>
-<p id="p-1456">Let \(f(x,y,z) = xze^{-y^{2}-z^{2}}\text{.}\) Find the linearization \(L(x,y,z)\) at the point \((-3,\sqrt{\ln2},-\sqrt{\ln3})\text{.}\)</p>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-linearization-in-three-variables"><article class="example example-like"><p id="p-1409">Let \(f(x,y,z) = xze^{-y^{2}-z^{2}}\text{.}\) Find the linearization \(L(x,y,z)\) at the point \((-3,\sqrt{\ln2},-\sqrt{\ln3})\text{.}\)</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-233" id="solution-233"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-233"><div class="solution solution-like">
-<p id="p-1457">The formula we need to use now is</p>
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-225" id="solution-225"><span class="type">Solution.</span> </a><div class="hidden-content tex2jax_ignore" id="hk-solution-225"><div class="solution solution-like">
+<p id="p-1410">The formula we need to use now is</p>
 <div class="displaymath">
 \begin{equation*}
 L(x,y,z) = f_{x}(-3,\sqrt{\ln2},-\sqrt{\ln3})(x+3) + f_{y}(-3,\sqrt{\ln2},-\sqrt{\ln3})(y - \sqrt{\ln2}) + f_{z}(-3,\sqrt{\ln2},-\sqrt{\ln3})(z + \sqrt{\ln3}).
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-5"><p id="p-1458">SUGGESTED PROBLEMS: 1, 15, 19</p></section></section></div></main>
+</div></article></div></section><section class="conclusion" id="conclusion-5"><p id="p-1411">SUGGESTED PROBLEMS: 1, 15, 19</p></section></section></div></main>
 </div>
 </body>
 </html>
