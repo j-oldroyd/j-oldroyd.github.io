@@ -220,9 +220,21 @@
         </statement>
       </definition>
       <p>
+        Graphically, we can say that a sequence <m>a_n</m> has a limit <m>L</m> if the points <m>(n, a_n)</m> become arbitrarily close to the line <m>y = L</m>:
+        <sage>
+          <input>
+            # plot of cos(n)/(n^1.5)
+            # limit is L = 0
+            points([(n, cos(n)/n^(3/2)) for n in range(1, 100)], legend_label = r'$a_n = \frac{\cos(n)}{n}$')
+          </input>
+        </sage>
+        If you run the above code cell, you get some pretty convincing evidence that <m>\frac{\cos(n)}{n^{3/2}}\to0</m> as <m>n\to\infty</m>.
+      </p>
+      <p>
         One of the most important sequential limits is the following:
         <me>\frac{1}{n^{p}}\to 0\quad\text{as}\quad n\to\infty</me>
         if <m>p > 0</m>.
+        Many limits involving sequences with terms that are rational functions of <m>n</m> can be reduced to this form when finding limits.
       </p>
       <example>
         <statement>
@@ -248,7 +260,7 @@
         <statement>
           <p>
             Let <m>f(x)</m> be a function and suppose that
-            <me>lim_{x\to\infty}f(x) = L</me>.
+            <me>\lim_{x\to\infty}f(x) = L</me>.
             Then
             <me>\lim_{n\to\infty}f(n) = L</me>
             also.
@@ -256,7 +268,7 @@
         </statement>
       </theorem>
       <p>
-        One immediate advantage of <xref ref="theorem-sequential-and-functional-limits" text="type-global" /> is that L'Hospital's Rule from <xref ref="section-l-hospital-s-rule" text="type-global" /> applies to sequential limits as well, <em>as long as the sequence consists of values from a differential function</em>.
+        One immediate advantage of <xref ref="theorem-sequential-and-functional-limits" text="type-global" /> is that L'Hospital's Rule from <xref ref="section-l-hospital-s-rule" text="type-global" /> applies to sequential limits as well, <em>as long as the sequence consists of values from a differentiable function</em>.
       </p>
       <example xml:id="example-finding-a-sequential-limit-using-l-hospital-s-rule">
         <title>Finding a Sequential Limit Using L'Hospital's Rule</title>
@@ -342,7 +354,25 @@
             Estimate <m>\lim_{n\to\infty}\frac{F_{n}}{F_{n-1}}</m>.
           </p>
         </statement>
+        <solution>
+          <p>
+            One approach to estimate the limit is to graph the ratio <m>\frac{F_n}{F_{n-1}}</m> to see if it approaches a limiting value.
+            A computer system can handle this easily.
+             The values of <m>\frac{F_n}{F_{n-1}}</m> appear to settle in quickly around <m>L\approx1.6</m>.
+             <aside>
+              <p>
+                The actual limiting value is <m>\varphi = \frac{1+\sqrt{5}}{2}</m>, the <term>golden ratio</term>.
+              </p>
+            </aside>
+          </p>
+        </solution>
       </example>
+      <sage>
+        <input>
+          # plot of F_n / F_(n-1)
+          points([(n, fibonacci(n)/fibonacci(n-1)) for n in range(2, 50)])
+        </input>
+      </sage>
       <p>
         To calculate limits, we can use a version of the limit laws.
       </p>
