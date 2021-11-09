@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-08-19T16:26:04-04:00       *-->
+<!--*       on 2021-11-09T16:16:13-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,50 +14,56 @@
 <title>Separable ODEs and Substitution</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\require{caption}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -89,7 +95,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +105,7 @@ MathJax.Hub.Config({
 <nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
 <div class="navbar-top-buttons">
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-direction-fields.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-first-order-linear-odes.html" title="Next">Next</a></span>
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-direction-fields.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-first-order-linear-odes.html" title="Next">Next</a></span>
 </div>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
@@ -108,101 +114,44 @@ MathJax.Hub.Config({
 </div></nav></header><div class="page">
 <div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution" class="active">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform">The Fourier Transform</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
-</ul>
-</li>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-separable-odes-and-substitution"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.3</span> <span class="title">Separable ODEs and Substitution</span>
 </h2>
-<section class="introduction" id="introduction-4"><p id="p-51">This section corresponds to Section 1.3 from the text.</p></section><section class="subsection" id="subsection-separable-odes"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-4"><p id="p-53">This section corresponds to Section 1.3 from the text.</p></section><section class="subsection" id="subsection-separable-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">1.3.1</span> <span class="title">Separable ODEs</span>
 </h3>
-<p id="p-52">The simplest ODEs to solve are the first-order ODEs of the form \(\dv{y}{x} = f(x)\text{.}\) The Fundamental Theorem of Calculus guarantees that the solution \(y\) is given by \(y = \int f(x)\,dx\text{.}\)</p>
-<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-3" id="fn-3"><sup> 1 </sup></a><p id="p-53">Another type of ODE that is relatively straightforward to solve is the <dfn class="terminology">separable ODE</dfn>, which is a first-order ODE that can be written in the form</p>
-<div class="displaymath">
+<p id="p-54">The simplest ODEs to solve are the first-order ODEs of the form <span class="process-math">\(\dv{y}{x} = f(x)\text{.}\)</span> The Fundamental Theorem of Calculus guarantees that the solution <span class="process-math">\(y\)</span> is given by <span class="process-math">\(y = \int f(x)\,dx\text{.}\)</span></p>
+<aside class="aside aside-like" id="aside-4"></aside><p id="p-55">Another type of ODE that is relatively straightforward to solve is the <dfn class="terminology">separable ODE</dfn>, which is a first-order ODE that can be written in the form</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \dv{y}{x} = f(x)g(y).
 \end{equation*}
 </div>
-<p id="p-54">These ODEs can be solved by integration as well, but only after some rearranging.</p>
-<article class="example example-like" id="example-solving-a-separable-ode"><h6 class="heading">
+<p id="p-56">These ODEs can be solved by integration as well, but only after some rearranging.</p>
+<article class="example example-like" id="example-solving-a-separable-ode"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a separable ODE.</span>
-</h6>
-<p id="p-55">Solve the IVP given by \(y' = x+4xy^{2}, y(0)=1\text{.}\)</p>
+</h4>
+<p id="p-57">Solve the IVP given by <span class="process-math">\(y' = x+4xy^{2}, y(0)=1\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-9" id="solution-9"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-9"><div class="solution solution-like">
-<p id="p-56">The first step to solving this IVP is to solve the ODE \(y' = x+4xy^{2}\text{.}\) It may not look like it at first, but this ODE is separable since we can rewrite it as \(y' = x(1+4y^{2})\text{.}\) To solve this ODE, we need to move the \(y\) terms to the left hand side of the equation and the \(x\) terms to the right hand side. We'll abuse notation a little bit to do so by rewriting \(y' = \dv{y}{x}\) and treating \(\dv{y}{x}\) as a fraction, but it won't get us into too much trouble here:</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-9" id="solution-9"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-9"><div class="solution solution-like">
+<p id="p-58">The first step to solving this IVP is to solve the ODE <span class="process-math">\(y' = x+4xy^{2}\text{.}\)</span> It may not look like it at first, but this ODE is separable since we can rewrite it as <span class="process-math">\(y' = x(1+4y^{2})\text{.}\)</span> To solve this ODE, we need to move the <span class="process-math">\(y\)</span> terms to the left hand side of the equation and the <span class="process-math">\(x\)</span> terms to the right hand side. We'll abuse notation a little bit to do so by rewriting <span class="process-math">\(y' = \dv{y}{x}\)</span> and treating <span class="process-math">\(\dv{y}{x}\)</span> as a fraction, but it won't get us into too much trouble here:</p>
+<div class="displaymath process-math">
 \begin{align*}
 \dv{y}{x} = x(1+4y^{2}) &amp;\Rightarrow \frac{dy}{1+4y^{2}} = x\,dx \\
 &amp;\Rightarrow \int\frac{dy}{1+4y^{2}}  = \int x\,dx \\
@@ -210,93 +159,93 @@ MathJax.Hub.Config({
 &amp;\Rightarrow \tan^{-1}(2y)  = x^{2}+C_{1} 
 \end{align*}
 </div>
-<p id="p-57">At this step we can either leave the solution as is (in <dfn class="terminology">implicit form</dfn>) or solve for \(y\) to get an <dfn class="terminology">explicit form</dfn>. We'll leave this in implicit form and then plug in the initial condition to get</p>
-<div class="displaymath">
+<p id="p-59">At this step we can either leave the solution as is (in <dfn class="terminology">implicit form</dfn>) or solve for <span class="process-math">\(y\)</span> to get an <dfn class="terminology">explicit form</dfn>. We'll leave this in implicit form and then plug in the initial condition to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \tan^{-1}(2) = C_{1}.
 \end{equation*}
 </div>
-<p data-braille="continuation">So the implicit solution of this IVP is given by</p>
-<div class="displaymath">
+<p class="continuation">So the implicit solution of this IVP is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \tan^{-1}(2y) = x^{2}+\tan^{-1}(2).
 \end{equation*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-newton-s-law-of-cooling-again"><h6 class="heading">
+</div></article><article class="example example-like" id="example-newton-s-law-of-cooling-again"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Newton's Law of Cooling again.</span>
-</h6>
-<p id="p-58">A metal plate is removed from an oven and placed in a room. The temperature of the plate is \(100^{\circ}\) Celsius and the temperature of the room is fixed at \(15^{\circ}\) Celsius. After \(20\) minutes the temperature of the plate drops to \(90^{\circ}\) Celsius. How hot is the plate after five hours?</p>
+</h4>
+<p id="p-60">A metal plate is removed from an oven and placed in a room. The temperature of the plate is <span class="process-math">\(100^{\circ}\)</span> Celsius and the temperature of the room is fixed at <span class="process-math">\(15^{\circ}\)</span> Celsius. After <span class="process-math">\(20\)</span> minutes the temperature of the plate drops to <span class="process-math">\(90^{\circ}\)</span> Celsius. How hot is the plate after five hours?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-10" id="solution-10"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-10"><div class="solution solution-like">
-<p id="p-59">Let \(T(t)\) denote the temperature of the plate \(t\) minutes after being removed from the oven and let \(A(t)\) denote the temperature of the room \(t\) minutes after the plate is removed from the oven. Then \(T(0) = 100\) and Newton's Law of Cooling says that</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-10" id="solution-10"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-10"><div class="solution solution-like">
+<p id="p-61">Let <span class="process-math">\(T(t)\)</span> denote the temperature of the plate <span class="process-math">\(t\)</span> minutes after being removed from the oven and let <span class="process-math">\(A(t)\)</span> denote the temperature of the room <span class="process-math">\(t\)</span> minutes after the plate is removed from the oven. Then <span class="process-math">\(T(0) = 100\)</span> and Newton's Law of Cooling says that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \dv{T}{t} = k(T-15).
 \end{equation*}
 </div>
-<p id="p-60">To answer this question we need to find \(T\text{,}\) and although we don't know \(k\) at the moment we can still make some progress just by remembering that it's a constant. This ODE is separable, so we'll separate variables and integrate both sides to get</p>
-<div class="displaymath">
+<p id="p-62">To answer this question we need to find <span class="process-math">\(T\text{,}\)</span> and although we don't know <span class="process-math">\(k\)</span> at the moment we can still make some progress just by remembering that it's a constant. This ODE is separable, so we'll separate variables and integrate both sides to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \ln(T-15) = kt+C
 \end{equation*}
 </div>
-<p data-braille="continuation">which simplifies to \(T-15 = C_{1}e^{kt}\) or just \(T = 15+C_{1}e^{kt}\text{.}\)</p>
-<p id="p-61">Now we need to find \(C_{1}\) and \(k\text{.}\) To find \(C_{1}\text{,}\) we just use the initial condition to get \(C_{1} = 85\text{.}\) The only piece of information that we have left to find \(k\) is the fact that the temperature of the plate drops to \(90\) after \(20\) minutes. In other words, \(T(20) = 90\text{.}\) Therefore</p>
-<div class="displaymath">
+<p class="continuation">which simplifies to <span class="process-math">\(T-15 = C_{1}e^{kt}\)</span> or just <span class="process-math">\(T = 15+C_{1}e^{kt}\text{.}\)</span></p>
+<p id="p-63">Now we need to find <span class="process-math">\(C_{1}\)</span> and <span class="process-math">\(k\text{.}\)</span> To find <span class="process-math">\(C_{1}\text{,}\)</span> we just use the initial condition to get <span class="process-math">\(C_{1} = 85\text{.}\)</span> The only piece of information that we have left to find <span class="process-math">\(k\)</span> is the fact that the temperature of the plate drops to <span class="process-math">\(90\)</span> after <span class="process-math">\(20\)</span> minutes. In other words, <span class="process-math">\(T(20) = 90\text{.}\)</span> Therefore</p>
+<div class="displaymath process-math">
 \begin{equation*}
 90 = 15+85e^{20k}
 \end{equation*}
 </div>
-<p data-braille="continuation">which becomes</p>
-<div class="displaymath">
+<p class="continuation">which becomes</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \ln\frac{75}{85} = 20k\text{.}
 \end{equation*}
 </div>
-<p data-braille="continuation">Therefore \(k = \frac{1}{20}\ln\frac{15}{17}\approx-.006.\)</p>
-<p id="p-62">So, finally, \(T(t) = 15+85e^{-.006t}\) and the temperature after five hours is \(T(300)\approx28\text{.}\)</p>
+<p class="continuation">Therefore <span class="process-math">\(k = \frac{1}{20}\ln\frac{15}{17}\approx-.006.\)</span></p>
+<p id="p-64">So, finally, <span class="process-math">\(T(t) = 15+85e^{-.006t}\)</span> and the temperature after five hours is <span class="process-math">\(T(300)\approx28\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-substitution-methods"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">1.3.2</span> <span class="title">Substitution Methods</span>
 </h3>
-<p id="p-63">At this point we can only solve a couple types of differential equations. An ODE that isn't of the form \(\dv{y}{x} = f(x)\) or separable may prove troublesome. However, there are certain cases where we can rewrite an ODE into one of these forms by using the right substitution.</p>
-<article class="example example-like" id="example-substitution-to-solve-an-ode"><h6 class="heading">
+<p id="p-65">At this point we can only solve a couple types of differential equations. An ODE that isn't of the form <span class="process-math">\(\dv{y}{x} = f(x)\)</span> or separable may prove troublesome. However, there are certain cases where we can rewrite an ODE into one of these forms by using the right substitution.</p>
+<article class="example example-like" id="example-substitution-to-solve-an-ode"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Substitution to solve an ODE.</span>
-</h6>
-<p id="p-64">Find the general solution of \(y' = (x+y+3)^{2}\text{.}\)</p>
+</h4>
+<p id="p-66">Find the general solution of <span class="process-math">\(y' = (x+y+3)^{2}\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-11" id="solution-11"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-11"><div class="solution solution-like">
-<p id="p-65">This ODE is not separable and we can't just integrate it (since the right hand side depends on the dependent variable). However, the form of the right hand side suggests a substitution: \(u = x+y+3\text{.}\) This would simplify things quite a bit, leaving us with \(y'=u^{2}\text{.}\) The only problem with this is that \(y'\) depends on \(x\text{,}\) not \(u\text{.}\) We must rewrite \(y'\) in terms of the new variable \(u\text{,}\) which isn't too bad. Since \(u = x+y+3\text{,}\) we get \(y' = u'-1\text{.}\) Therefore the ODE becomes</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-11" id="solution-11"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-11"><div class="solution solution-like">
+<p id="p-67">This ODE is not separable and we can't just integrate it (since the right hand side depends on the dependent variable). However, the form of the right hand side suggests a substitution: <span class="process-math">\(u = x+y+3\text{.}\)</span> This would simplify things quite a bit, leaving us with <span class="process-math">\(y'=u^{2}\text{.}\)</span> The only problem with this is that <span class="process-math">\(y'\)</span> depends on <span class="process-math">\(x\text{,}\)</span> not <span class="process-math">\(u\text{.}\)</span> We must rewrite <span class="process-math">\(y'\)</span> in terms of the new variable <span class="process-math">\(u\text{,}\)</span> which isn't too bad. Since <span class="process-math">\(u = x+y+3\text{,}\)</span> we get <span class="process-math">\(y' = u'-1\text{.}\)</span> Therefore the ODE becomes</p>
+<div class="displaymath process-math">
 \begin{equation*}
 u'-1 = u^{2}\text{ or just }\dv{u}{x} = 1+u^{2}.
 \end{equation*}
 </div>
-<p id="p-66">This new ODE <em class="emphasis">is</em> separable, and so we separate variables and integrate to get \(\tan^{-1}u = x+C\text{.}\) If we don't care about finding an explicit solution, then we can just replace \(u\) to get the equation back in terms of \(y\text{.}\) So our (implicit) general solution is \(\tan^{-1}(x+y+3) = x+C\text{.}\)</p>
+<p id="p-68">This new ODE <em class="emphasis">is</em> separable, and so we separate variables and integrate to get <span class="process-math">\(\tan^{-1}u = x+C\text{.}\)</span> If we don't care about finding an explicit solution, then we can just replace <span class="process-math">\(u\)</span> to get the equation back in terms of <span class="process-math">\(y\text{.}\)</span> So our (implicit) general solution is <span class="process-math">\(\tan^{-1}(x+y+3) = x+C\text{.}\)</span></p>
 </div></div>
-</div></article><article class="example example-like" id="example-a-less-obvious-substitution"><h6 class="heading">
+</div></article><article class="example example-like" id="example-a-less-obvious-substitution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">A less obvious substitution.</span>
-</h6>
-<p id="p-67">Find an explicit solution of \(xy'=x+y\text{.}\)</p>
+</h4>
+<p id="p-69">Find an explicit solution of <span class="process-math">\(xy'=x+y\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-12" id="solution-12"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-12"><div class="solution solution-like">
-<p id="p-68">It's tough to see what to do right away, so we'll try simplifying the ODE first. In particular, we'll solve for \(y'\) to get</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-12" id="solution-12"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-12"><div class="solution solution-like">
+<p id="p-70">It's tough to see what to do right away, so we'll try simplifying the ODE first. In particular, we'll solve for <span class="process-math">\(y'\)</span> to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y' = 1+\frac{y}{x}.
 \end{equation*}
 </div>
-<p data-braille="continuation">If we stare at this for a while, we might convince ourselves that the right hand side really just depends on \(\frac{y}{x}\text{,}\) so we'll try replacing that with \(u\text{.}\) Then the ODE becomes \(y'=1+u\text{.}\)</p>
-<p id="p-69">Once again, this is much simpler but we need to rewrite \(y'\) in terms of \(u\text{.}\) Since \(u=\frac{y}{x}\text{,}\) this means that \(y=ux\) and so \(y' = u+u'x\text{.}\) Then the ODE becomes</p>
-<div class="displaymath">
+<p class="continuation">If we stare at this for a while, we might convince ourselves that the right hand side really just depends on <span class="process-math">\(\frac{y}{x}\text{,}\)</span> so we'll try replacing that with <span class="process-math">\(u\text{.}\)</span> Then the ODE becomes <span class="process-math">\(y'=1+u\text{.}\)</span></p>
+<p id="p-71">Once again, this is much simpler but we need to rewrite <span class="process-math">\(y'\)</span> in terms of <span class="process-math">\(u\text{.}\)</span> Since <span class="process-math">\(u=\frac{y}{x}\text{,}\)</span> this means that <span class="process-math">\(y=ux\)</span> and so <span class="process-math">\(y' = u+u'x\text{.}\)</span> Then the ODE becomes</p>
+<div class="displaymath process-math">
 \begin{equation*}
 u+x\dv{u}{x} = 1+u\text{ or just } x\dv{u}{x} = 1\text{.}
 \end{equation*}
 </div>
-<p id="p-70">This new ODE can be rearranged to get \(\dv{u}{x} = \frac{1}{x}\text{,}\) and so \(u = \ln|x|+C\text{.}\) Getting back in terms of \(y\text{,}\) we have \(\frac{y}{x} = \ln|x|+C\) or just \(y = x\ln|x|+Cx\text{.}\)</p>
+<p id="p-72">This new ODE can be rearranged to get <span class="process-math">\(\dv{u}{x} = \frac{1}{x}\text{,}\)</span> and so <span class="process-math">\(u = \ln|x|+C\text{.}\)</span> Getting back in terms of <span class="process-math">\(y\text{,}\)</span> we have <span class="process-math">\(\frac{y}{x} = \ln|x|+C\)</span> or just <span class="process-math">\(y = x\ln|x|+Cx\text{.}\)</span></p>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-3"><p id="p-71">SUGGESTED PROBLEMS: 3, 5, 9, 11, 15, 19, 25</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-3"><p id="p-73">SUGGESTED PROBLEMS: 3, 5, 9, 11, 15, 19, 25</p></section></section></div></main>
 </div>
 </body>
 </html>

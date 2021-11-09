@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-08-19T16:26:05-04:00       *-->
+<!--*       on 2021-11-09T16:16:13-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,50 +14,56 @@
 <title>Second-Order Linear ODEs</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\require{caption}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -89,7 +95,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +105,7 @@ MathJax.Hub.Config({
 <nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
 <div class="navbar-top-buttons">
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="linear-odes-constant-coefficients.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="linear-odes-constant-coefficients.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-homogeneous-odes-with-constant-coefficients.html" title="Next">Next</a></span>
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="linear-odes-constant-coefficients.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="linear-odes-constant-coefficients.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-homogeneous-odes-with-constant-coefficients.html" title="Next">Next</a></span>
 </div>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
@@ -108,133 +114,76 @@ MathJax.Hub.Config({
 </div></nav></header><div class="page">
 <div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes" class="active">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform">The Fourier Transform</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
-</ul>
-</li>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-second-order-linear-odes"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.1</span> <span class="title">Second-Order Linear ODEs</span>
 </h2>
-<section class="introduction" id="introduction-8"><p id="p-145">Recall that a second-order ODE is an ODE whose highest derivative is the second derivative. In this section, we'll look at how to solve second-order ODEs of a special type. Our method of solution here will be generalized to many, many other ODEs.</p></section><section class="subsection" id="subsection-types-of-linear-odes"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-8"><p id="p-148">Recall that a second-order ODE is an ODE whose highest derivative is the second derivative. In this section, we'll look at how to solve second-order ODEs of a special type. Our method of solution here will be generalized to many, many other ODEs.</p></section><section class="subsection" id="subsection-types-of-linear-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.1.1</span> <span class="title">Types of Linear ODEs</span>
 </h3>
-<p id="p-146">A first-order ODE is linear if it can be written in the form \(y'+P(x)y = Q(x)\) (see <a class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.4.1: First-Order Linear ODEs">Definition 1.4.1</a>). We have a similar definition for second-order ODEs.</p>
-<article class="definition definition-like" id="definition-second-order-linear-odes"><h6 class="heading">
+<p id="p-149">A first-order ODE is linear if it can be written in the form <span class="process-math">\(y'+P(x)y = Q(x)\)</span> (see <a href="" class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.4.1: First-Order Linear ODEs">Definition 1.4.1</a>). We have a similar definition for second-order ODEs.</p>
+<article class="definition definition-like" id="definition-second-order-linear-odes"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Second-Order Linear ODEs.</span>
-</h6>
-<p id="p-147">A second-order ODE is <dfn class="terminology">linear</dfn> if it can be written in the form</p>
-<div class="displaymath">
+</h4>
+<p id="p-150">A second-order ODE is <dfn class="terminology">linear</dfn> if it can be written in the form</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y''+P(x)y'+Q(x)y = R(x).
 \end{equation*}
 </div>
-<p data-braille="continuation">A second-order linear ODE is <dfn class="terminology">homogeneous</dfn> if \(R(x) = 0\) and <dfn class="terminology">nonhomogeneous</dfn> if \(R(x)\neq0\text{.}\)</p></article><article class="example example-like" id="example-types-of-second-order-odes"><h6 class="heading">
+<p class="continuation">A second-order linear ODE is <dfn class="terminology">homogeneous</dfn> if <span class="process-math">\(R(x) = 0\)</span> and <dfn class="terminology">nonhomogeneous</dfn> if <span class="process-math">\(R(x)\neq0\text{.}\)</span></p></article><article class="example example-like" id="example-types-of-second-order-odes"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Types of second-order ODEs.</span>
-</h6>
-<p id="p-148">Consider the following ODEs:</p>
+</h4>
+<p id="p-151">Consider the following ODEs:</p>
 <ol class="decimal">
-<li id="li-14">\(y'' = y' - \sin^{2}x\) is linear but nonhomogeneous.</li>
-<li id="li-15">\(\dv[2]{x}{t} - x^{3} = 0\) is nonlinear.</li>
-<li id="li-16">\(\sqrt{x}e^{\tan^{-1}x}y'' = x^{2}y\) is linear and homogeneous.</li>
-</ol></article><p id="p-149">Newton's Second Law is a great source of linear second-order ODEs, as <a class="xref" data-knowl="./knowl/example-a-second-order-model.html" title="Example 2.1.4: A second-order model">Example 2.1.4</a> shows. However, we will first need to state <dfn class="terminology">Hooke's Law</dfn>.</p>
-<article class="theorem theorem-like" id="theorem-hooke-s-law"><h6 class="heading">
+<li id="li-14"><p id="p-derived-li-14"><span class="process-math">\(y'' = y' - \sin^{2}x\)</span> is linear but nonhomogeneous.</p></li>
+<li id="li-15"><p id="p-derived-li-15"><span class="process-math">\(\dv[2]{x}{t} - x^{3} = 0\)</span> is nonlinear.</p></li>
+<li id="li-16"><p id="p-derived-li-16"><span class="process-math">\(\sqrt{x}e^{\tan^{-1}x}y'' = x^{2}y\)</span> is linear and homogeneous.</p></li>
+</ol></article><p id="p-152">Newton's Second Law is a great source of linear second-order ODEs, as <a href="" class="xref" data-knowl="./knowl/example-a-second-order-model.html" title="Example 2.1.4: A second-order model">Example 2.1.4</a> shows. However, we will first need to state <dfn class="terminology">Hooke's Law</dfn>.</p>
+<article class="theorem theorem-like" id="theorem-hooke-s-law"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Hooke's Law.</span>
-</h6>
-<p id="p-150">Consider an object attached to a spring. The force exerted by the spring on the object is directly proportional to the displacement of the object from the spring's equilibrium, or at rest, position.</p></article><article class="example example-like" id="example-a-second-order-model"><h6 class="heading">
+</h4>
+<p id="p-153">Consider an object attached to a spring. The force exerted by the spring on the object is directly proportional to the displacement of the object from the spring's equilibrium, or at rest, position.</p></article><article class="example example-like" id="example-a-second-order-model"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">A second-order model.</span>
-</h6>
-<p id="p-151">An object of mass <span class="quantity">4 kg</span> is attached to a horizontal, frictionless spring. Let \(x=0\) denote the equilibrium position of the spring and let \(x(t)\) denote the displacement of the mass from the spring's equilibrium position. The only force acting on the mass is the force of the spring itself. Find a mathematical model for \(x(t)\text{.}\)</p>
+</h4>
+<p id="p-154">An object of mass <span class="quantity">4 kg</span> is attached to a horizontal, frictionless spring. Let <span class="process-math">\(x=0\)</span> denote the equilibrium position of the spring and let <span class="process-math">\(x(t)\)</span> denote the displacement of the mass from the spring's equilibrium position. The only force acting on the mass is the force of the spring itself. Find a mathematical model for <span class="process-math">\(x(t)\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-24" id="solution-24"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-24"><div class="solution solution-like">
-<p id="p-152">Let \(F_{S}\) denote the force of the spring on the mass. Then by <a class="xref" data-knowl="./knowl/theorem-hooke-s-law.html" title="Theorem 2.1.3: Hooke's Law">Theorem 2.1.3</a> we must have \(F_{S} = -kx\) for some \(k&gt;0\text{.}\) Now, by Newton's Second Law we must also have \(F_{S} = 4x''\text{.}\) Hence</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-24" id="solution-24"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-24"><div class="solution solution-like">
+<p id="p-155">Let <span class="process-math">\(F_{S}\)</span> denote the force of the spring on the mass. Then by <a href="" class="xref" data-knowl="./knowl/theorem-hooke-s-law.html" title="Theorem 2.1.3: Hooke's Law">Theorem 2.1.3</a> we must have <span class="process-math">\(F_{S} = -kx\)</span> for some <span class="process-math">\(k&gt;0\text{.}\)</span> Now, by Newton's Second Law we must also have <span class="process-math">\(F_{S} = 4x''\text{.}\)</span> Hence</p>
+<div class="displaymath process-math">
 \begin{equation*}
 4x'' = -kx\quad\text{or}\quad4x''+kx = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">So the motion of the mass is modeled by a linear, second-order homogeneous ODE.</p>
+<p class="continuation">So the motion of the mass is modeled by a linear, second-order homogeneous ODE.</p>
 </div></div>
-</div></article><aside class="aside aside-like" id="aside-2"><p id="p-153">The reason we take \(F_{S} = -kx\) in Hooke's Law is because we want to emphasize that the spring force is a <em class="emphasis">restoring force</em>, since it acts against the displacement of the mass.</p></aside><p id="p-154">The general trend that we will see for mathematical models using linear ODEs is that they will be homogeneous if we assume that there is no external force, and nonhomogeneous if we assume there is an external force.</p></section><section class="subsection" id="subsection-solutions-of-second-order-linear-ODEs"><h3 class="heading hide-type">
+</div></article><aside class="aside aside-like" id="aside-6"><p id="p-156">The reason we take <span class="process-math">\(F_{S} = -kx\)</span> in Hooke's Law is because we want to emphasize that the spring force is a <em class="emphasis">restoring force</em>, since it acts against the displacement of the mass.</p></aside><p id="p-157">The general trend that we will see for mathematical models using linear ODEs is that they will be homogeneous if we assume that there is no external force, and nonhomogeneous if we assume there is an external force.</p></section><section class="subsection" id="subsection-solutions-of-second-order-linear-ODEs"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.1.2</span> <span class="title">Solutions of Second-Order Linear ODEs</span>
 </h3>
-<p id="p-155">The reason we restrict ourselves to linear ODEs is because their solutions behave very nicely. In particular, we have the <a class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a>, which is an important principle for homogeneous ODEs. First, some terminology.</p>
-<article class="definition definition-like" id="definition-linear-combinations"><h6 class="heading">
+<p id="p-158">The reason we restrict ourselves to linear ODEs is because their solutions behave very nicely. In particular, we have the <a href="" class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a>, which is an important principle for homogeneous ODEs. First, some terminology.</p>
+<article class="definition definition-like" id="definition-linear-combinations"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Combinations.</span>
-</h6>
-<p id="p-156">Let \(f\) and \(g\) denote functions of \(x\text{.}\) A <dfn class="terminology">linear combination</dfn> of \(f\) and \(g\) is a function of the form \(c_{1}f+c_{2}g\) where \(c_{1},c_{2}\) are constants.</p></article><article class="theorem theorem-like" id="theorem-the-superposition-principle"><h6 class="heading">
+</h4>
+<p id="p-159">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> denote functions of <span class="process-math">\(x\text{.}\)</span> A <dfn class="terminology">linear combination</dfn> of <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> is a function of the form <span class="process-math">\(c_{1}f+c_{2}g\)</span> where <span class="process-math">\(c_{1},c_{2}\)</span> are constants.</p></article><article class="theorem theorem-like" id="theorem-the-superposition-principle"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Superposition Principle.</span>
-</h6>
-<p id="p-157">Let \(y_{1}\) and \(y_{2}\) denote two (possibly different) solutions of the ODE \(y''+P(x)y'+Q(x)y = 0\text{.}\) Then any linear combination of these solutions is itself another solution of the same ODE.</p></article><article class="hiddenproof" id="proof-1"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-1"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-1"><article class="hiddenproof"><p id="p-158">We need to show that \(y = c_{1}y_{1} + c_{2}y_{2}\) is another solution of the same ODE, where \(c_{1},c_{2}\) are arbitrary constants. To do this, we'll just plug the linear combination into the ODE and simplify:</p>
-<div class="displaymath">
+</h4>
+<p id="p-160">Let <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\)</span> denote two (possibly different) solutions of the ODE <span class="process-math">\(y''+P(x)y'+Q(x)y = 0\text{.}\)</span> Then any linear combination of these solutions is itself another solution of the same ODE.</p></article><article class="hiddenproof" id="proof-1"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-1"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-1"><article class="hiddenproof"><p id="p-161">We need to show that <span class="process-math">\(y = c_{1}y_{1} + c_{2}y_{2}\)</span> is another solution of the same ODE, where <span class="process-math">\(c_{1},c_{2}\)</span> are arbitrary constants. To do this, we'll just plug the linear combination into the ODE and simplify:</p>
+<div class="displaymath process-math">
 \begin{align*}
 y''+P(x)y'+Q(x)y \amp = (c_{1}y_{1}+c_{2}y_{2})''+P(x)(c_{1}y_{1}+c_{2}y_{2})+Q(x)(c_{1}y_{1}+c_{2}y_{2})y \\
 \amp = c_{1}y''_{1}+c_{2}y''_{2} + c_{1}P(x)y'_{1}+c_{2}P(x)y'_{2} + c_{1}Q(x)y_{1} + c_{2}Q(x)y_{2}\\
@@ -242,109 +191,109 @@ y''+P(x)y'+Q(x)y \amp = (c_{1}y_{1}+c_{2}y_{2})''+P(x)(c_{1}y_{1}+c_{2}y_{2})+Q(
 \amp = 0. 
 \end{align*}
 </div></article></div>
-<p id="p-159"><a class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a> is important because it tells us how to construct new solutions of homogeneous ODEs out of known solutions. The next example demonstrates this.</p>
-<article class="example example-like" id="example-solving-a-second-order-ivp"><h6 class="heading">
+<p id="p-162"><a href="" class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a> is important because it tells us how to construct new solutions of homogeneous ODEs out of known solutions. The next example demonstrates this.</p>
+<article class="example example-like" id="example-solving-a-second-order-ivp"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a second-order IVP.</span>
-</h6>
-<p id="p-160">Using the fact that \(y_{1} = \cosh\frac{x}{2}\) and \(y_{2} = \sinh\frac{x}{2}\) are both solutions of \(4y''-y = 0\text{,}\) solve the IVP given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-163">Using the fact that <span class="process-math">\(y_{1} = \cosh\frac{x}{2}\)</span> and <span class="process-math">\(y_{2} = \sinh\frac{x}{2}\)</span> are both solutions of <span class="process-math">\(4y''-y = 0\text{,}\)</span> solve the IVP given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 4y''-y=0\quad\text{and}\quad y(0)=3,y'(0)=1.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-25" id="solution-25"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-25"><div class="solution solution-like">
-<p id="p-161">Note that we have <em class="emphasis">two</em> initial conditions. In general, we'll need as many initial conditions as the order of the ODE.</p>
-<p id="p-162">To solve the IVP, we'll use the superposition principle to give us as much leeway as possible in constructing a solution of out \(y_{1}\) and \(y_{2}\text{.}\) So we'll guess the solution takes the form \(y = c_{1}\cosh\frac{x}{2} + c_{2}\sinh\frac{x}{2}\text{.}\) By the superposition principle we're guaranteed that this is a solution of the ODE \(4y''-y=0\text{,}\) so we just need to pick the constants \(c_{1},c_{2}\) in order to satisfy the initial conditions. Let's start with the first initial condition, \(y(0) = 3\text{.}\) This gives us the equation</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-25" id="solution-25"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-25"><div class="solution solution-like">
+<p id="p-164">Note that we have <em class="emphasis">two</em> initial conditions. In general, we'll need as many initial conditions as the order of the ODE.</p>
+<p id="p-165">To solve the IVP, we'll use the superposition principle to give us as much leeway as possible in constructing a solution of out <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span> So we'll guess the solution takes the form <span class="process-math">\(y = c_{1}\cosh\frac{x}{2} + c_{2}\sinh\frac{x}{2}\text{.}\)</span> By the superposition principle we're guaranteed that this is a solution of the ODE <span class="process-math">\(4y''-y=0\text{,}\)</span> so we just need to pick the constants <span class="process-math">\(c_{1},c_{2}\)</span> in order to satisfy the initial conditions. Let's start with the first initial condition, <span class="process-math">\(y(0) = 3\text{.}\)</span> This gives us the equation</p>
+<div class="displaymath process-math">
 \begin{equation*}
 3 = c_{1}\cosh0+c_{2}\sinh0 = 3.
 \end{equation*}
 </div>
-<p data-braille="continuation">So \(c_{1} = 3\text{.}\) Similarly, \(y'(0) = 1\) gives us</p>
-<div class="displaymath">
+<p class="continuation">So <span class="process-math">\(c_{1} = 3\text{.}\)</span> Similarly, <span class="process-math">\(y'(0) = 1\)</span> gives us</p>
+<div class="displaymath process-math">
 \begin{equation*}
 1 = \frac{3}{2}\sinh0+\frac{c_{2}}{2}\cosh0 = \frac{c_{2}}{2}.
 \end{equation*}
 </div>
-<p data-braille="continuation">Hence \(c_{2} = 2\text{,}\) and the solution of the IVP is</p>
-<div class="displaymath">
+<p class="continuation">Hence <span class="process-math">\(c_{2} = 2\text{,}\)</span> and the solution of the IVP is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = 3\cosh\frac{x}{2} + 2\sinh\frac{x}{2}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-163">The reason we were able to solve the IVP in <a class="xref" data-knowl="./knowl/example-solving-a-second-order-ivp.html" title="Example 2.1.7: Solving a second-order IVP">Example 2.1.7</a> was because the individual solutions \(\cosh\frac{x}{2}\) and \(\sinh\frac{x}{2}\) gave us enough to build the particular solution of the IVP. It turns out that <em class="emphasis">every</em> solution of \(4y''-y=0\) can be written as a linear combination of these two functions, so knowing these two functions is enough to solve every IVP involving this ODE.</p>
-<p id="p-164">In general, our goal will be to describe a "basis" of solutions for a given homogeneous ODE, a finite set of solutions that can be used to describe all possible solutions. This can be done if the functions in the basis aren't too "similar", in the following sense.</p>
-<article class="definition definition-like" id="definition-linear-independence-of-functions"><h6 class="heading">
+</div></article><p id="p-166">The reason we were able to solve the IVP in <a href="" class="xref" data-knowl="./knowl/example-solving-a-second-order-ivp.html" title="Example 2.1.7: Solving a second-order IVP">Example 2.1.7</a> was because the individual solutions <span class="process-math">\(\cosh\frac{x}{2}\)</span> and <span class="process-math">\(\sinh\frac{x}{2}\)</span> gave us enough to build the particular solution of the IVP. It turns out that <em class="emphasis">every</em> solution of <span class="process-math">\(4y''-y=0\)</span> can be written as a linear combination of these two functions, so knowing these two functions is enough to solve every IVP involving this ODE.</p>
+<p id="p-167">In general, our goal will be to describe a "basis" of solutions for a given homogeneous ODE, a finite set of solutions that can be used to describe all possible solutions. This can be done if the functions in the basis aren't too "similar", in the following sense.</p>
+<article class="definition definition-like" id="definition-linear-independence-of-functions"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Independence of Functions.</span>
-</h6>
-<p id="p-165">Two functions \(f\) and \(g\) are said to be <dfn class="terminology">linearly independent</dfn> on an interval \(I\) if the linear combination \(c_{1}f + c_{2}g\) is equal to \(0\) if and only if \(c_{1} = c_{2} = 0\text{.}\) Otherwise, we say that they are <dfn class="terminology">linearly dependent</dfn>.</p></article><p id="p-166">The main idea behind <a class="xref" data-knowl="./knowl/definition-linear-independence-of-functions.html" title="Definition 2.1.8: Linear Independence of Functions">Definition 2.1.8</a> is that \(f\) and \(g\) are linearly independent if they are not like terms (i.e. they don't cancel each other out). Note that \(f,g\) are linearly dependent if and only if \(f = \alpha g\) for some \(\alpha\neq 0\text{.}\) Equivalently, they are linearly dependent if and only if \(\frac{f}{g} = \alpha\) for some \(\alpha\neq0\text{.}\)</p>
-<article class="example example-like" id="example-linear-independence-of-sine-and-cosine"><h6 class="heading">
+</h4>
+<p id="p-168">Two functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are said to be <dfn class="terminology">linearly independent</dfn> on an interval <span class="process-math">\(I\)</span> if the linear combination <span class="process-math">\(c_{1}f + c_{2}g\)</span> is equal to <span class="process-math">\(0\)</span> if and only if <span class="process-math">\(c_{1} = c_{2} = 0\text{.}\)</span> Otherwise, we say that they are <dfn class="terminology">linearly dependent</dfn>.</p></article><p id="p-169">The main idea behind <a href="" class="xref" data-knowl="./knowl/definition-linear-independence-of-functions.html" title="Definition 2.1.8: Linear Independence of Functions">Definition 2.1.8</a> is that <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are linearly independent if they are not like terms (i.e. they don't cancel each other out). Note that <span class="process-math">\(f,g\)</span> are linearly dependent if and only if <span class="process-math">\(f = \alpha g\)</span> for some <span class="process-math">\(\alpha\neq 0\text{.}\)</span> Equivalently, they are linearly dependent if and only if <span class="process-math">\(\frac{f}{g} = \alpha\)</span> for some <span class="process-math">\(\alpha\neq0\text{.}\)</span></p>
+<article class="example example-like" id="example-linear-independence-of-sine-and-cosine"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Linear independence of sine and cosine.</span>
-</h6>
-<p id="p-167">Show that \(\sin x\) and \(\cos x\) are linearly independent.</p>
+</h4>
+<p id="p-170">Show that <span class="process-math">\(\sin x\)</span> and <span class="process-math">\(\cos x\)</span> are linearly independent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-26" id="solution-26"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-26"><div class="solution solution-like"><p id="p-168">Since \(\frac{\sin x}{\cos x} = \tan x\) is <em class="emphasis">not</em> constant, this means that \(\sin x\) and \(\cos x\) must be linearly independent.</p></div></div>
-</div></article><p id="p-169">Although it wasn't too hard to see that the functions in <a class="xref" data-knowl="./knowl/example-linear-independence-of-sine-and-cosine.html" title="Example 2.1.9: Linear independence of sine and cosine">Example 2.1.9</a> were linearly independent, in other cases it can be much trickier (especially when we move to higher order ODEs). For example, suppose we set \(f(t) = -5(t-15)^{2} + 450\) and \(g(t) = 12t(30-t)\text{.}\) Then it's not obvious at all that these two functions are linearly dependent! In fact,</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-26" id="solution-26"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-26"><div class="solution solution-like"><p id="p-171">Since <span class="process-math">\(\frac{\sin x}{\cos x} = \tan x\)</span> is <em class="emphasis">not</em> constant, this means that <span class="process-math">\(\sin x\)</span> and <span class="process-math">\(\cos x\)</span> must be linearly independent.</p></div></div>
+</div></article><p id="p-172">Although it wasn't too hard to see that the functions in <a href="" class="xref" data-knowl="./knowl/example-linear-independence-of-sine-and-cosine.html" title="Example 2.1.9: Linear independence of sine and cosine">Example 2.1.9</a> were linearly independent, in other cases it can be much trickier (especially when we move to higher order ODEs). For example, suppose we set <span class="process-math">\(f(t) = -5(t-15)^{2} + 450\)</span> and <span class="process-math">\(g(t) = 12t(30-t)\text{.}\)</span> Then it's not obvious at all that these two functions are linearly dependent! In fact,</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \frac{2}{5}f(t) - \frac{1}{6}g(t) = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">So generally when we try to determine if two functions are linearly independent, we'll make use of the <dfn class="terminology">Wronskian</dfn>.</p>
-<article class="definition definition-like" id="definition-wronskian-of-two-functions"><h6 class="heading">
+<p class="continuation">So generally when we try to determine if two functions are linearly independent, we'll make use of the <dfn class="terminology">Wronskian</dfn>.</p>
+<article class="definition definition-like" id="definition-wronskian-of-two-functions"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Wronskian of Two Functions.</span>
-</h6>
-<p id="p-170">Let \(f\) and \(g\) denote two differentiable functions. The Wronskian of \(f\) and \(g\text{,}\) denoted \(W(f,g)\text{,}\) is given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-173">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> denote two differentiable functions. The Wronskian of <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> denoted <span class="process-math">\(W(f,g)\text{,}\)</span> is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 W(f,g) = \left|\begin{matrix} f \amp g \\ f' \amp g' \end{matrix}\right| = fg' - f'g.
 \end{equation*}
-</div></article><article class="theorem theorem-like" id="theorem-linear-independence-and-the-wronskian"><h6 class="heading">
+</div></article><article class="theorem theorem-like" id="theorem-linear-independence-and-the-wronskian"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.11</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Independence and the Wronskian.</span>
-</h6>
-<p id="p-171">Let \(f\) and \(g\) be two functions that are differentiable on some interval \(I\text{.}\) Then \(f\) and \(g\) are linearly independent on \(I\) if \(W(f,g) \neq 0\) <em class="emphasis">somewhere</em> \(I\text{.}\) Conversely, if \(W(f,g) = 0\) <em class="emphasis">and</em> \(f\) and \(g\) can both be represented by power series on \(I\text{,}\) then \(f\) and \(g\) are linearly dependent.</p></article><article class="example example-like" id="example-using-the-wronskian"><h6 class="heading">
+</h4>
+<p id="p-174">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> be two functions that are differentiable on some interval <span class="process-math">\(I\text{.}\)</span> Then <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are linearly independent on <span class="process-math">\(I\)</span> if <span class="process-math">\(W(f,g) \neq 0\)</span> <em class="emphasis">somewhere</em> <span class="process-math">\(I\text{.}\)</span> Conversely, if <span class="process-math">\(W(f,g) = 0\)</span> <em class="emphasis">and</em> <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> can both be represented by power series on <span class="process-math">\(I\text{,}\)</span> then <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are linearly dependent.</p></article><article class="example example-like" id="example-using-the-wronskian"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Wronskian.</span>
-</h6>
-<p id="p-172">If we let \(f(t) = -5(t-15)^{2} + 450\) and \(g(t) = 12t(30-t)\) and compute their Wronskian, we obtain (after a fair bit of algebra) \(W(f,g) = 0\text{.}\) Since \(f\) and \(g\) can clearly be represented by power series on any interval \(I\) (since, being polynomials, they already <em class="emphasis">are</em> power series), this means that the two functions are linearly independent.</p></article><p id="p-173">We mentioned earlier that we'll try to find a basis of solutions for linear ODEs. Now that we have the concept of linear independence and the Wronskian for checking if two functions are linearly independent, we can make the following definition.</p>
-<article class="definition definition-like" id="definition-basis-of-solutions"><h6 class="heading">
+</h4>
+<p id="p-175">If we let <span class="process-math">\(f(t) = -5(t-15)^{2} + 450\)</span> and <span class="process-math">\(g(t) = 12t(30-t)\)</span> and compute their Wronskian, we obtain (after a fair bit of algebra) <span class="process-math">\(W(f,g) = 0\text{.}\)</span> Since <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> can clearly be represented by power series on any interval <span class="process-math">\(I\)</span> (since, being polynomials, they already <em class="emphasis">are</em> power series), this means that the two functions are linearly independent.</p></article><p id="p-176">We mentioned earlier that we'll try to find a basis of solutions for linear ODEs. Now that we have the concept of linear independence and the Wronskian for checking if two functions are linearly independent, we can make the following definition.</p>
+<article class="definition definition-like" id="definition-basis-of-solutions"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.13</span><span class="period">.</span><span class="space"> </span><span class="title">Basis of Solutions.</span>
-</h6>
-<p id="p-174">Let \(y_{1}\) and \(y_{2}\) denote solutions of some second-order linear homogeneous ODE. We call \(\{y_{1},y_{2}\}\) a <dfn class="terminology">basis</dfn> if \(y_{1}\) and \(y_{2}\) are also linearly independent.</p></article><p id="p-175">Once we have a basis for a second-order linear homogeneous ODE, we can solve any IVP that we wish involving that ODE. In particular, if \(\{y_{1},y_{2}\}\) is a basis for such an ODE, then <em class="emphasis">every</em> solution of the ODE can be written as a linear combination of \(y_{1}\) and \(y_{2}\text{.}\)</p>
-<article class="example example-like" id="example-linear-independence-using-the-wronskian"><h6 class="heading">
+</h4>
+<p id="p-177">Let <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\)</span> denote solutions of some second-order linear homogeneous ODE. We call <span class="process-math">\(\{y_{1},y_{2}\}\)</span> a <dfn class="terminology">basis</dfn> if <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\)</span> are also linearly independent.</p></article><p id="p-178">Once we have a basis for a second-order linear homogeneous ODE, we can solve any IVP that we wish involving that ODE. In particular, if <span class="process-math">\(\{y_{1},y_{2}\}\)</span> is a basis for such an ODE, then <em class="emphasis">every</em> solution of the ODE can be written as a linear combination of <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span></p>
+<article class="example example-like" id="example-linear-independence-using-the-wronskian"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.14</span><span class="period">.</span><span class="space"> </span><span class="title">Linear independence using the Wronskian.</span>
-</h6>
-<p id="p-176">Let</p>
-<div class="displaymath">
+</h4>
+<p id="p-179">Let</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x_{1} = t\cos\ln t\quad\text{and}\quad t\sin\ln t.
 \end{equation*}
 </div>
-<p data-braille="continuation">Given that these functions are both solutions of</p>
-<div class="displaymath">
+<p class="continuation">Given that these functions are both solutions of</p>
+<div class="displaymath process-math">
 \begin{equation*}
 t^{2}x'' - tx' + 2x = 0,
 \end{equation*}
 </div>
-<p data-braille="continuation">solve the corresponding IVP with initial conditions \(x(1) = 1, x'(1) = -1\text{.}\)</p>
+<p class="continuation">solve the corresponding IVP with initial conditions <span class="process-math">\(x(1) = 1, x'(1) = -1\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-27" id="solution-27"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-27"><div class="solution solution-like">
-<p id="p-177">We need to start by showing that \(\{x_{1},x_{2}\}\) is a basis for the ODE. First, we compute \(W(x_{1},x_{2})\text{:}\)</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-27" id="solution-27"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-27"><div class="solution solution-like">
+<p id="p-180">We need to start by showing that <span class="process-math">\(\{x_{1},x_{2}\}\)</span> is a basis for the ODE. First, we compute <span class="process-math">\(W(x_{1},x_{2})\text{:}\)</span></p>
+<div class="displaymath process-math">
 \begin{equation*}
 W(x_{1},x_{2}) = (t\cos\ln t)(\sin\ln t + \cos\ln t) - (t\sin\ln t)(\cos\ln t - \sin\ln t) = t(\cos^{2}\ln t + \sin^{2}\ln t) = t.
 \end{equation*}
 </div>
-<p data-braille="continuation">So \(W(x_{1},x_{2}) = t\text{,}\) which is clearly nonzero on the interval \((0,\infty)\text{.}\) Hence \(x_{1}\) and \(x_{2}\) are linearly independent, and therefore \(\{x_{1},x_{2}\}\) is a basis for the ODE.</p>
-<p id="p-178">To actually find the solution (call it \(x\)), we'll set \(x = c_{1}x_{1} + c_{2}x_{2}\) and use the initial conditions to find \(c_{1}\) and \(c_{2}\text{.}\) Doing so gives \(c_{1} = 1\) and \(c_{2} = -2\text{,}\) and so the solution of the IVP is</p>
-<div class="displaymath">
+<p class="continuation">So <span class="process-math">\(W(x_{1},x_{2}) = t\text{,}\)</span> which is clearly nonzero on the interval <span class="process-math">\((0,\infty)\text{.}\)</span> Hence <span class="process-math">\(x_{1}\)</span> and <span class="process-math">\(x_{2}\)</span> are linearly independent, and therefore <span class="process-math">\(\{x_{1},x_{2}\}\)</span> is a basis for the ODE.</p>
+<p id="p-181">To actually find the solution (call it <span class="process-math">\(x\)</span>), we'll set <span class="process-math">\(x = c_{1}x_{1} + c_{2}x_{2}\)</span> and use the initial conditions to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> Doing so gives <span class="process-math">\(c_{1} = 1\)</span> and <span class="process-math">\(c_{2} = -2\text{,}\)</span> and so the solution of the IVP is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x = \cos\ln t - 2\sin\ln t.
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-5"><p id="p-179">SUGGESTED PROBLEMS: 15, 17, 19</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-5"><p id="p-182">SUGGESTED PROBLEMS: 15, 17, 19</p></section></section></div></main>
 </div>
 </body>
 </html>

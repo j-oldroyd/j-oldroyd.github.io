@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-08-19T16:26:08-04:00       *-->
+<!--*       on 2021-11-09T16:16:16-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,50 +14,56 @@
 <title>Frobenius Method</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\require{caption}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -89,7 +95,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +105,7 @@ MathJax.Hub.Config({
 <nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
 <div class="navbar-top-buttons">
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-legendre-s-equation-and-legendre-polynomials.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-bessel-s-equation.html" title="Next">Next</a></span>
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-legendre-s-equation-and-legendre-polynomials.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="series-solutions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-bessel-s-equation.html" title="Next">Next</a></span>
 </div>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
@@ -108,188 +114,131 @@ MathJax.Hub.Config({
 </div></nav></header><div class="page">
 <div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method" class="active">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform">The Fourier Transform</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
-</ul>
-</li>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-frobenius-method"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">5.3</span> <span class="title">Frobenius Method</span>
 </h2>
-<aside class="aside aside-like" id="aside-17"><p id="p-473">This section corresponds to Section 5.3 of the text.</p></aside><section class="subsection" id="subsection-regular-points-and-singular-points"><h3 class="heading hide-type">
+<aside class="aside aside-like" id="aside-21"><p id="p-476">This section corresponds to Section 5.3 of the text.</p></aside><section class="subsection" id="subsection-regular-points-and-singular-points"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.3.1</span> <span class="title">Regular Points and Singular Points</span>
 </h3>
-<p id="p-474">Recall that a homogeneous, linear second order ODE has the form</p>
-<div class="displaymath">
+<p id="p-477">Recall that a homogeneous, linear second order ODE has the form</p>
+<div class="displaymath process-math">
 \begin{equation*}
 A(x)y''+B(x)y'+C(x)y = 0. 
 \end{equation*}
 </div>
-<p data-braille="continuation">We can rewrite this in the form</p>
-<div class="displaymath">
+<p class="continuation">We can rewrite this in the form</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y''+P(x)y'+Q(x)y = 0.
 \end{equation*}
 </div>
-<article class="definition definition-like" id="definition-regular-points-and-singular-points"><h6 class="heading">
+<article class="definition definition-like" id="definition-regular-points-and-singular-points"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Regular Points and Singular Points.</span>
-</h6>
-<p id="p-475">A point \(x=a\) is called a <dfn class="terminology">regular point</dfn> if \(P(x)\) and \(Q(x)\) both have power series expansions at \(x=a\text{.}\) If \(x=a\) is not a regular point we call it a <dfn class="terminology">singular point</dfn>.</p></article><p id="p-476">Regular points of an ODE are nice because of the following theorem:</p>
-<article class="theorem theorem-like" id="theorem-15"><h6 class="heading">
+</h4>
+<p id="p-478">A point <span class="process-math">\(x=a\)</span> is called a <dfn class="terminology">regular point</dfn> if <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> both have power series expansions at <span class="process-math">\(x=a\text{.}\)</span> If <span class="process-math">\(x=a\)</span> is not a regular point we call it a <dfn class="terminology">singular point</dfn>.</p></article><p id="p-479">Regular points of an ODE are nice because of the following theorem:</p>
+<article class="theorem theorem-like" id="theorem-15"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span>
-</h6>
-<p id="p-477">Suppose that \(a\) is a regular point of the differential equation \(y''+P(x)y'+Q(x)y=0\text{.}\) Then the ODE has two linearly independent solutions of the form</p>
-<div class="displaymath">
+</h4>
+<p id="p-480">Suppose that <span class="process-math">\(a\)</span> is a regular point of the differential equation <span class="process-math">\(y''+P(x)y^\prime+Q(x)y=0\text{.}\)</span> Then the ODE has two linearly independent solutions of the form</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y(x) = \sum_{n=0}^{\infty}c_{n}(x-a)^{n}.
 \end{equation*}
 </div>
-<p data-braille="continuation">The radius of convergence is at least as large as the distance from \(a\) to the nearest singular point of the ODE.</p></article><p id="p-478">In other words, <em class="emphasis">the power series method works at regular points.</em></p>
-<article class="example example-like" id="example-77"><h6 class="heading">
+<p class="continuation">The radius of convergence is at least as large as the distance from <span class="process-math">\(a\)</span> to the nearest singular point of the ODE.</p></article><p id="p-481">In other words, <em class="emphasis">the power series method works at regular points.</em></p>
+<article class="example example-like" id="example-77"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span>
-</h6>
-<p id="p-479">Find the general solution, as a power series in powers of \(x\text{,}\) for the ODE \((x^{2}+2)y''+4xy'+2y=0\text{.}\)</p>
+</h4>
+<p id="p-482">Find the general solution, as a power series in powers of <span class="process-math">\(x\text{,}\)</span> for the ODE <span class="process-math">\((x^{2}+2)y''+4xy^\prime+2y=0\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-74" id="solution-74"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-74"><div class="solution solution-like">
-<p id="p-480">The first thing we will do is make sure that the ODE actually has a power series solution at \(x=0\text{.}\) To do this, we need to show that \(x=0\) is a regular point of the ODE. So we need to find \(P(x)\) and \(Q(x)\) and check that they (or their power series) make sense at \(x=0\text{.}\) If we divide through the ODE by \(x^{2}+2\) we obtain</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-74" id="solution-74"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-74"><div class="solution solution-like">
+<p id="p-483">The first thing we will do is make sure that the ODE actually has a power series solution at <span class="process-math">\(x=0\text{.}\)</span> To do this, we need to show that <span class="process-math">\(x=0\)</span> is a regular point of the ODE. So we need to find <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> and check that they (or their power series) make sense at <span class="process-math">\(x=0\text{.}\)</span> If we divide through the ODE by <span class="process-math">\(x^{2}+2\)</span> we obtain</p>
+<div class="displaymath process-math">
 \begin{equation*}
-y''+\frac{4x}{x^{2}+2}y'+\frac{2}{x^{2}+2}y = 0
+y''+\frac{4x}{x^{2}+2}y^\prime+\frac{2}{x^{2}+2}y = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">so</p>
-<div class="displaymath">
+<p class="continuation">so</p>
+<div class="displaymath process-math">
 \begin{align*}
 P(x) \amp= \frac{4x}{x^{2}+2}\\
 Q(x) \amp= \frac{2}{x^{2}+2}\text{.}
 \end{align*}
 </div>
-<p data-braille="continuation">Since both of these exist at \(x=0\text{,}\) it follows that \(x=0\) is a regular point of the ODE. Therefore the ODE has a power series solution at \(x=0\) (that is, in powers of \(x\)).</p>
-<p id="p-481">We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand \(P(x)\) and \(Q(x)\) using their own power series, and this would <em class="emphasis">greatly</em> complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form \(y = \sum_{n=0}^{\infty}c_{n}x^{n}\text{,}\) or just \(y=\sum_{n\geq0}c_{n}x^{n}\) for short. Now we plug this into the ODE to get</p>
-<div class="displaymath">
+<p class="continuation">Since both of these exist at <span class="process-math">\(x=0\text{,}\)</span> it follows that <span class="process-math">\(x=0\)</span> is a regular point of the ODE. Therefore the ODE has a power series solution at <span class="process-math">\(x=0\)</span> (that is, in powers of <span class="process-math">\(x\)</span>).</p>
+<p id="p-484">We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> using their own power series, and this would <em class="emphasis">greatly</em> complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\text{,}\)</span> or just <span class="process-math">\(y=\sum_{n\geq0}c_{n}x^{n}\)</span> for short. Now we plug this into the ODE to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 (x^{2}+2)\sum_{n\geq0}^{}n(n-1)c_{n}x^{n-2}+4x\sum_{n\geq0}^{}nc_{n}x^{n-1}+2\sum_{n\geq0}^{}c_{n}x^{n} = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">which simplifies to</p>
-<div class="displaymath">
+<p class="continuation">which simplifies to</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}n(n-1)c_{n}x^{n}+\sum_{n\geq2}^{}2n(n-1)c_{n}x^{n-2}+\sum_{n\geq0}^{}4nc_{n}x^{n}+\sum_{n\geq0}^{}2c_{n}x^{n} = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">or just</p>
-<div class="displaymath">
+<p class="continuation">or just</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}n(n-1)c_{n}x^{n}+\sum_{n\geq0}^{}2(n+2)(n+1)c_{n+2}x^{n}+\sum_{n\geq0}^{}4nc_{n}x^{n}+\sum_{n\geq0}^{}2c_{n}x^{n} = 0
 \end{equation*}
 </div>
-<p id="p-482">Now we can collect like terms, and combine everything on the left hand side into one sum:</p>
-<div class="displaymath">
+<p id="p-485">Now we can collect like terms, and combine everything on the left hand side into one sum:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}\left[n(n-1)c_{n}+2(n+2)(n+1)c_{n+2}+4nc_{n}+2c_{n}\right]x^{n} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">For this sum to be \(0\) each of the coefficients must be \(0\text{,}\) so we must have</p>
-<div class="displaymath">
+<p class="continuation">For this sum to be <span class="process-math">\(0\)</span> each of the coefficients must be <span class="process-math">\(0\text{,}\)</span> so we must have</p>
+<div class="displaymath process-math">
 \begin{equation*}
 n(n-1)c_{n}+2(n+2)(n+1)c_{n+2}+4nc_{n}+2c_{n} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">We can solve this for \(c_{n+2}\) to get a recurrence relation for these coefficients:</p>
-<div class="displaymath">
+<p class="continuation">We can solve this for <span class="process-math">\(c_{n+2}\)</span> to get a recurrence relation for these coefficients:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 2(n+2)(n+1)c_{n+2} = -c_{n}[n(n-1)+4n+2] \qq{for }
 \end{equation*}
 </div>
-<p data-braille="continuation">so</p>
-<div class="displaymath">
+<p class="continuation">so</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{n+2} = -\frac{1}{2}c_{n}\qq{for }.
 \end{equation*}
 </div>
-<p id="p-483">We need to find a pattern for the coefficients. Since this is a two-step relation, we'll set up two columns: one column for even \(n\) and one column for odd \(n\text{:}\)</p>
-<div class="displaymath">
+<p id="p-486">We need to find a pattern for the coefficients. Since this is a two-step relation, we'll set up two columns: one column for even <span class="process-math">\(n\)</span> and one column for odd <span class="process-math">\(n\text{:}\)</span></p>
+<div class="displaymath process-math">
 \begin{align*}
 c_{2} \amp= -\frac{1}{2}c_{0} \amp c_{3} \amp= -\frac{1}{2}c_{1}\\
 c_{4} \amp= -\frac{1}{2}c_{2} = \frac{1}{2^{2}}c_{0} \amp c_{5} \amp= -\frac{1}{2}c_{3} = \frac{1}{2^{2}}c_{1}\text{.}
 \end{align*}
 </div>
-<p data-braille="continuation">So it appears that</p>
-<div class="displaymath">
+<p class="continuation">So it appears that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{2n} = (-1)^{n}\frac{1}{2^{n}}c_{0}\qq{and}c_{2n+1} = (-1)^{n}\frac{1}{2^{n}}c_{1}\text{.}
 \end{equation*}
 </div>
-<p id="p-484">Therefore the general solution of the ODE is</p>
-<div class="displaymath">
+<p id="p-487">Therefore the general solution of the ODE is</p>
+<div class="displaymath process-math">
 \begin{align*}
 y \amp= \sum_{n\geq0}^{}c_{n}x^{n}\\
 \amp= \sum_{n\geq0}c_{2n}x^{2n} + \sum_{n\geq0}c_{2n+1}x^{2n+1}\\
@@ -302,207 +251,207 @@ y \amp= \sum_{n\geq0}^{}c_{n}x^{n}\\
 </div></article></section><section class="subsection" id="subsection-solutions-at-singular-points-and-indicial-equations"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.3.2</span> <span class="title">Solutions at Singular Points and Indicial Equations</span>
 </h3>
-<article class="example example-like" id="example-78"><h6 class="heading">
+<article class="example example-like" id="example-78"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.4</span><span class="period">.</span>
-</h6>
-<p id="p-485">Attempt to solve the ODE \(x^{2}y''+x^{2}y'+y=0\text{.}\)</p>
+</h4>
+<p id="p-488">Attempt to solve the ODE <span class="process-math">\(x^{2}y''+x^{2}y^\prime+y=0\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-75" id="solution-75"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-75"><div class="solution solution-like">
-<p id="p-486">We start, just as we did before, by assuming the solution is a power series: \(y=\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\) If we plug this into the ODE and simplify somewhat, we get the equation</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-75" id="solution-75"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-75"><div class="solution solution-like">
+<p id="p-489">We start, just as we did before, by assuming the solution is a power series: <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span> If we plug this into the ODE and simplify somewhat, we get the equation</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{0}+\sum_{n\geq2}^{}\left[n(n-1)c_{n}+(n-1)c_{n-1}+c_{n}\right]x^{n} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">So it follows that</p>
-<div class="displaymath">
+<p class="continuation">So it follows that</p>
+<div class="displaymath process-math">
 \begin{align*}
 c_{0} \amp= 0\\
 c_{n} \amp= -\frac{n-1}{n(n-1)+1}c_{n-1}
 \end{align*}
 </div>
-<p data-braille="continuation">so the recurrence relation shows that \(c_{1} = 0, c_{2} = 0,\ldots\) so the solution would have to be \(y=0\text{.}\) This is certainly a solution, but it can't be the general solution. What this tells us is that the general solution of this ODE <em class="emphasis">cannot</em> be written as a power series.</p>
+<p class="continuation">so the recurrence relation shows that <span class="process-math">\(c_{1} = 0, c_{2} = 0,\ldots\)</span> so the solution would have to be <span class="process-math">\(y=0\text{.}\)</span> This is certainly a solution, but it can't be the general solution. What this tells us is that the general solution of this ODE <em class="emphasis">cannot</em> be written as a power series.</p>
 </div></div>
-</div></article><p id="p-487">The reason we couldn't find a solution of the form \(y=\sum_{n\geq0}^{}c_{n}x^{n}\) was because \(x=0\) is a singular point of the ODE. If we divide through by \(x^{2}\) we get</p>
-<div class="displaymath">
+</div></article><p id="p-490">The reason we couldn't find a solution of the form <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n}\)</span> was because <span class="process-math">\(x=0\)</span> is a singular point of the ODE. If we divide through by <span class="process-math">\(x^{2}\)</span> we get</p>
+<div class="displaymath process-math">
 \begin{equation*}
-y''+\frac{1}{x}y'+\frac{1}{x^{2}}y = 0
+y''+\frac{1}{x}y^\prime+\frac{1}{x^{2}}y = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">and it's obvious that the coefficients have a divide by \(0\) problem at \(x=0\text{.}\)</p>
-<p id="p-488">Our goal is to find a way of dealing with situations where \(x=0\) is a singular point of the ODE</p>
-<div class="displaymath">
+<p class="continuation">and it's obvious that the coefficients have a divide by <span class="process-math">\(0\)</span> problem at <span class="process-math">\(x=0\text{.}\)</span></p>
+<p id="p-491">Our goal is to find a way of dealing with situations where <span class="process-math">\(x=0\)</span> is a singular point of the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y'+q(x)y=0.
+x^{2}y''+xp(x)y^\prime+q(x)y=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">We know, in general, that we won't be able to find a power series solution \(\sum_{n\geq0}^{}c_{n}x^{n}\text{;}\) intuitively, a power series solution is too ``nice'' to be a solution of this ODE if \(x=0\) is a singular point. To fix this, we change our guess for \(y\) to \(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\) or, equivalently,</p>
-<div class="displaymath">
+<p class="continuation">We know, in general, that we won't be able to find a power series solution <span class="process-math">\(\sum_{n\geq0}^{}c_{n}x^{n}\text{;}\)</span> intuitively, a power series solution is too ``nice'' to be a solution of this ODE if <span class="process-math">\(x=0\)</span> is a singular point. To fix this, we change our guess for <span class="process-math">\(y\)</span> to <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> or, equivalently,</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = \sum_{n\geq0}^{}c_{n}x^{n+r}.
 \end{equation*}
 </div>
-<p data-braille="continuation">Here, \(r\) can be any number (real or complex!), so in general \(y\) <em class="emphasis">will not be a power series</em>. <aside class="aside aside-like" id="aside-18"><p id="p-489">Recall that a power series, by definition, has only nonnegative whole number powers of \(x\text{.}\)</p></aside> We lose a little bit by no longer assuming that \(y\) is a power series, but this expression may be flexible enough to lead to a solution of the ODE if \(x=0\) is a singular point. Our goal now is to find the value of \(r\) based on the ODE.</p>
-<p id="p-490">To do so, we will plug \(y=\sum_{n\geq0}^{}c_{n}x^{n+r}\) into the ODE</p>
-<div class="displaymath">
+<p class="continuation">Here, <span class="process-math">\(r\)</span> can be any number (real or complex!), so in general <span class="process-math">\(y\)</span> <em class="emphasis">will not be a power series</em>. <aside class="aside aside-like" id="aside-22"><p id="p-492">Recall that a power series, by definition, has only nonnegative whole number powers of <span class="process-math">\(x\text{.}\)</span></p></aside> We lose a little bit by no longer assuming that <span class="process-math">\(y\)</span> is a power series, but this expression may be flexible enough to lead to a solution of the ODE if <span class="process-math">\(x=0\)</span> is a singular point. Our goal now is to find the value of <span class="process-math">\(r\)</span> based on the ODE.</p>
+<p id="p-493">To do so, we will plug <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n+r}\)</span> into the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y'+q(x)y = 0
+x^{2}y''+xp(x)y^\prime+q(x)y = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">and attempt to get some conditions on \(r\text{.}\) First, note that</p>
-<div class="displaymath">
+<p class="continuation">and attempt to get some conditions on <span class="process-math">\(r\text{.}\)</span> First, note that</p>
+<div class="displaymath process-math">
 \begin{align*}
-y' \amp= \sum_{n\geq0}^{}(n+r)c_{n}x^{n+r-1}\\
+y^\prime \amp= \sum_{n\geq0}^{}(n+r)c_{n}x^{n+r-1}\\
 y'' \amp= \sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r-2}
 \end{align*}
 </div>
-<p data-braille="continuation">so when we plug these into the ODE we get</p>
-<div class="displaymath">
+<p class="continuation">so when we plug these into the ODE we get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r}+\sum_{n\geq0}^{}p(x)(n+r)c_{n}x^{n+r}+\sum_{n\geq0}^{}q(x)c_{n}x^{n+r} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">Now combine everything into one sum to get</p>
-<div class="displaymath">
+<p class="continuation">Now combine everything into one sum to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}\left[(n+r)(n+r-1)+p(x)(n+r)+q(x)\right]c_{n}x^{n+r} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">So for this equation to be true, we need to have</p>
-<div class="displaymath">
+<p class="continuation">So for this equation to be true, we need to have</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \left[(n+r)(n+r-1)+p(x)(n+r)+q(x)\right]c_{n} = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">for every \(n\) and every \(x\text{.}\) Since we are trying to find \(r\text{,}\) we'll pick values for \(n\) and \(x\text{.}\) In particular, if we assume that \(p(x)\) and \(q(x)\) exist at \(x=0\) we can pick \(n=x=0\) to get</p>
-<div class="displaymath">
+<p class="continuation">for every <span class="process-math">\(n\)</span> and every <span class="process-math">\(x\text{.}\)</span> Since we are trying to find <span class="process-math">\(r\text{,}\)</span> we'll pick values for <span class="process-math">\(n\)</span> and <span class="process-math">\(x\text{.}\)</span> In particular, if we assume that <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> exist at <span class="process-math">\(x=0\)</span> we can pick <span class="process-math">\(n=x=0\)</span> to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r(r-1)+p(0)r+q(0) = 0
 \end{equation*}
 </div>
-<p data-braille="continuation">(we can assume that \(c_{0}\neq0\)). This equation tells us how to find \(r\text{.}\)</p>
-<article class="definition definition-like" id="definition-indicial-equation"><h6 class="heading">
+<p class="continuation">(we can assume that <span class="process-math">\(c_{0}\neq0\)</span>). This equation tells us how to find <span class="process-math">\(r\text{.}\)</span></p>
+<article class="definition definition-like" id="definition-indicial-equation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Indicial Equation.</span>
-</h6>
-<p id="p-491">Suppose that \(x=0\) is a singular point of the ODE</p>
-<div class="displaymath">
+</h4>
+<p id="p-494">Suppose that <span class="process-math">\(x=0\)</span> is a singular point of the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y'+q(x)y=0
+x^{2}y''+xp(x)y^\prime+q(x)y=0
 \end{equation*}
 </div>
-<p data-braille="continuation">but that \(p(x)\) and \(q(x)\) have well-defined power series at \(x=0\) (i.e. \(p(0)\) and \(q(0)\) make sense). The <dfn class="terminology">indicial equation</dfn> is given by</p>
-<div class="displaymath">
+<p class="continuation">but that <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> have well-defined power series at <span class="process-math">\(x=0\)</span> (i.e. <span class="process-math">\(p(0)\)</span> and <span class="process-math">\(q(0)\)</span> make sense). The <dfn class="terminology">indicial equation</dfn> is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r(r-1)+p(0)r+q(0) = 0.
 \end{equation*}
-</div></article><p id="p-492">What we've shown is that if \(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\) is a solution of the ODE</p>
-<div class="displaymath">
+</div></article><p id="p-495">What we've shown is that if <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> is a solution of the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y'+q(x)y=0
+x^{2}y''+xp(x)y^\prime+q(x)y=0
 \end{equation*}
 </div>
-<p data-braille="continuation">then \(r\) must be a root of the indicial equation. In fact, we can say more.</p>
-<article class="theorem theorem-like" id="theorem-method-of-frobenius"><h6 class="heading">
+<p class="continuation">then <span class="process-math">\(r\)</span> must be a root of the indicial equation. In fact, we can say more.</p>
+<article class="theorem theorem-like" id="theorem-method-of-frobenius"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Method of Frobenius.</span>
-</h6>
-<p id="p-493">Consider the ODE</p>
-<div class="displaymath">
+</h4>
+<p id="p-496">Consider the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y'+q(x)y=0.
+x^{2}y''+xp(x)y^\prime+q(x)y=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">Let \(r_{1}\geq r_{2}\) be (real) roots of the indicial equation \(r(r-1)+p(0)r+q(0)=0\text{.}\)</p>
+<p class="continuation">Let <span class="process-math">\(r_{1}\geq r_{2}\)</span> be (real) roots of the indicial equation <span class="process-math">\(r(r-1)+p(0)r+q(0)=0\text{.}\)</span></p>
 <ol class="decimal">
-<li id="li-29"><p id="p-494">There is a solution of the ODE of the form \(y_{1}(x) = x^{r_{1}}\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</p></li>
-<li id="li-30"><p id="p-495">If \(r_{1}-r_{2}\) is <em class="emphasis">not</em> equal to an integer, then there exists a second linearly independent solution of the form \(y_{2}(x) = x^{r_{2}}\sum_{n\geq0}^{}d_{n}x^{n}\text{.}\)</p></li>
-<li id="li-31"><p id="p-496">If \(r_{1} = r_{2}\text{,}\) there exists a second linearly independent solution of the form \(y_{2}(x) = y_{1}(x)\ln x + x^{r_{1}}(C_{0} + C_{1}x + \cdots )\text{.}\)</p></li>
-<li id="li-32"><p id="p-497">If \(r_{1} - r_{2}\) is a nonzero integer, there exists a second linearly independent solution of the form \(y_{2}(x) = ky_{1}(x)\ln x + x^{r_{2}}(C_{0} + C_{1}x + \cdots )\text{.}\)</p></li>
-</ol></article><article class="example example-like" id="example-using-method-of-frobenius"><h6 class="heading">
+<li id="li-29"><p id="p-497">There is a solution of the ODE of the form <span class="process-math">\(y_{1}(x) = x^{r_{1}}\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span></p></li>
+<li id="li-30"><p id="p-498">If <span class="process-math">\(r_{1}-r_{2}\)</span> is <em class="emphasis">not</em> equal to an integer, then there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = x^{r_{2}}\sum_{n\geq0}^{}d_{n}x^{n}\text{.}\)</span></p></li>
+<li id="li-31"><p id="p-499">If <span class="process-math">\(r_{1} = r_{2}\text{,}\)</span> there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = y_{1}(x)\ln x + x^{r_{1}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span></p></li>
+<li id="li-32"><p id="p-500">If <span class="process-math">\(r_{1} - r_{2}\)</span> is a nonzero integer, there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = ky_{1}(x)\ln x + x^{r_{2}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span></p></li>
+</ol></article><article class="example example-like" id="example-using-method-of-frobenius"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Method of Frobenius.</span>
-</h6>
-<p id="p-498">Find a series solution centered at \(0\) of the ODE</p>
-<div class="displaymath">
+</h4>
+<p id="p-501">Find a series solution centered at <span class="process-math">\(0\)</span> of the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xy'+(x^{2}-\frac{1}{4})y=0.
+x^{2}y''+xy^\prime+(x^{2}-\frac{1}{4})y=0.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-76" id="solution-76"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-76"><div class="solution solution-like">
-<p id="p-499">If we divide through the ODE by \(x^{2}\) we get a divide-by-zero problem at \(x=0\text{,}\) so \(x=0\) is a singular point. However, for this ODE we have</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-76" id="solution-76"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-76"><div class="solution solution-like">
+<p id="p-502">If we divide through the ODE by <span class="process-math">\(x^{2}\)</span> we get a divide-by-zero problem at <span class="process-math">\(x=0\text{,}\)</span> so <span class="process-math">\(x=0\)</span> is a singular point. However, for this ODE we have</p>
+<div class="displaymath process-math">
 \begin{align*}
 p(x) \amp= 1\\
 q(x) \amp= x^{2}-\frac{1}{4}
 \end{align*}
 </div>
-<p data-braille="continuation">so \(p(0)\) and \(q(0)\) both make sense. This means we can use the method of Frobenius to find a solution.</p>
-<p id="p-500">The first step is to set up and solve the indicial equation, which in this case is given by</p>
-<div class="displaymath">
+<p class="continuation">so <span class="process-math">\(p(0)\)</span> and <span class="process-math">\(q(0)\)</span> both make sense. This means we can use the method of Frobenius to find a solution.</p>
+<p id="p-503">The first step is to set up and solve the indicial equation, which in this case is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r(r-1)+r-\frac{1}{4} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">We solve this algebraically for \(r\) to get the roots \(r_{1}=\frac{1}{2}\) and \(r_{2}=-\frac{1}{2}\text{.}\) Since \(r_{1}-r_{2} = 1\) is an integer, we are guaranteed a solution based on \(r_{1} = \frac{1}{2}\) and a second solution based on \(r_{2} = -\frac{1}{2}\) and the logarithm. So we make the guess</p>
-<div class="displaymath">
+<p class="continuation">We solve this algebraically for <span class="process-math">\(r\)</span> to get the roots <span class="process-math">\(r_{1}=\frac{1}{2}\)</span> and <span class="process-math">\(r_{2}=-\frac{1}{2}\text{.}\)</span> Since <span class="process-math">\(r_{1}-r_{2} = 1\)</span> is an integer, we are guaranteed a solution based on <span class="process-math">\(r_{1} = \frac{1}{2}\)</span> and a second solution based on <span class="process-math">\(r_{2} = -\frac{1}{2}\)</span> and the logarithm. So we make the guess</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = x^{\frac{1}{2}}\sum_{n\geq0}^{}c_{n}x^{n} = \sum_{n\geq0}^{}c_{n}x^{n+\frac{1}{2}}.
 \end{equation*}
 </div>
-<p data-braille="continuation">Now we plug this into the ODE to get</p>
-<div class="displaymath">
+<p class="continuation">Now we plug this into the ODE to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}c_{n}(n+\frac{1}{2})(n-\frac{1}{2})x^{n+\frac{1}{2}} + \sum_{n\geq0}c_{n}(n+\frac{1}{2})x^{n+\frac{1}{2}} 
 + \sum_{n\geq0}c_{n}x^{n+\frac{5}{2}} - \sum_{n\geq0}\frac{1}{4}c_{n}x^{n+\frac{1}{2}}
 \end{equation*}
 </div>
-<p data-braille="continuation">or just</p>
-<div class="displaymath">
+<p class="continuation">or just</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}^{}\left[(n+\frac{1}{2})(n-\frac{1}{2})+(n+\frac{1}{2})-\frac{1}{4}\right]c_{n}x^{n+\frac{1}{2}} 
 +\sum_{n\geq2}^{}c_{n-2}x^{n+\frac{1}{2}}=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">which simplifies to</p>
-<div class="displaymath">
+<p class="continuation">which simplifies to</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \sum_{n\geq0}\brackets{n(n+1)}c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">So the recurrence relation the coefficients \(c_{n}\) need to satisfy is</p>
-<div class="displaymath">
+<p class="continuation">So the recurrence relation the coefficients <span class="process-math">\(c_{n}\)</span> need to satisfy is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{n} = -\frac{1}{n(n+1)}c_{n-2}\quad\text{for}\quad n\geq2.
 \end{equation*}
 </div>
-<p id="p-501">The recurrence relation will tell us <em class="emphasis">nothing</em> about \(c_{0},c_{1}\text{,}\) so to see if there are any restrictions on \(c_{0},c_{1}\) we separate the \(n=0\) and \(n=1\) terms from the summation to get</p>
-<div class="displaymath">
+<p id="p-504">The recurrence relation will tell us <em class="emphasis">nothing</em> about <span class="process-math">\(c_{0},c_{1}\text{,}\)</span> so to see if there are any restrictions on <span class="process-math">\(c_{0},c_{1}\)</span> we separate the <span class="process-math">\(n=0\)</span> and <span class="process-math">\(n=1\)</span> terms from the summation to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 0c_{0}x^{\frac{1}{2}}+2c_{1}x^{\frac{3}{2}}+\sum_{n\geq2}^{}\left[n(n+1)c_{n}+c_{n-2}\right]x^{n+\frac{1}{2}}=0
 \end{equation*}
 </div>
-<p data-braille="continuation">This equation places no restrictions at all on \(c_{0}\text{,}\) but it does force \(c_{1} = 0\) since we need the \(x^{\frac{3}{2}}\) term to disappear to make this equation true. This tells us that we can ignore the coefficients \(c_{n}\) with odd index, since they will all disappear.</p>
-<p id="p-502">Now we'll try to find a pattern in the remaining coefficients:</p>
-<div class="displaymath">
+<p class="continuation">This equation places no restrictions at all on <span class="process-math">\(c_{0}\text{,}\)</span> but it does force <span class="process-math">\(c_{1} = 0\)</span> since we need the <span class="process-math">\(x^{\frac{3}{2}}\)</span> term to disappear to make this equation true. This tells us that we can ignore the coefficients <span class="process-math">\(c_{n}\)</span> with odd index, since they will all disappear.</p>
+<p id="p-505">Now we'll try to find a pattern in the remaining coefficients:</p>
+<div class="displaymath process-math">
 \begin{align*}
 c_{2} \amp= -\frac{1}{2\cdot3}c_{0}\\
 c_{4} \amp= -\frac{1}{4\cdot5}c_{2} = \frac{(-1)^{2}}{5!}c_{0}\\
 c_{6} \amp= -\frac{1}{6\cdot7}c_{4} = \frac{(-1)^{3}}{7!}c_{0}
 \end{align*}
 </div>
-<p data-braille="continuation">and in general</p>
-<div class="displaymath">
+<p class="continuation">and in general</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{2n} = \frac{(-1)^{n}}{(2n+1)!}c_{0}.
 \end{equation*}
 </div>
-<p data-braille="continuation">So the solution of this ODE is given by</p>
-<div class="displaymath">
+<p class="continuation">So the solution of this ODE is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = \sum_{n\geq0}c_{2n}x^{2n+\frac{1}{2}} = \sum_{n\geq0}\frac{(-1)^{n}}{(2n+1)!}c_{0}x^{2n+\frac{1}{2}},
 \end{equation*}
 </div>
-<p data-braille="continuation">which is actually just</p>
-<div class="displaymath">
+<p class="continuation">which is actually just</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{0}\frac{\sin x}{\sqrt{x}}
 \end{equation*}

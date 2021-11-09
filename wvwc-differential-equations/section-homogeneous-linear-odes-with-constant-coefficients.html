@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2020-08-19T16:26:06-04:00       *-->
+<!--*       on 2021-11-09T16:16:14-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,50 +14,56 @@
 <title>Homogeneous Linear ODEs with Constant Coefficients</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\require{caption}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -89,7 +95,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +105,7 @@ MathJax.Hub.Config({
 <nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
 <div class="navbar-top-buttons">
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-14.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="higher-order-linear-odes.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="higher-order-linear-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" title="Next">Next</a></span>
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="higher-order-linear-odes.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="higher-order-linear-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" title="Next">Next</a></span>
 </div>
 </div>
 <div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
@@ -108,93 +114,36 @@ MathJax.Hub.Config({
 </div></nav></header><div class="page">
 <div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations">Population Models and Autonomous Equations</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance">Forced Oscillations and Resonance</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients" class="active">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems">Nonlinear Systems</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation">Bessel's Equation</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products">Convolution Products</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform">The Fourier Transform</a></li>
-</ul>
-</li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation">The Heat Equation</a></li>
-</ul>
-</li>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-14.html" data-scroll="index-14"><span class="title">Index</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-homogeneous-linear-odes-with-constant-coefficients"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">3.1</span> <span class="title">Homogeneous Linear ODEs with Constant Coefficients</span>
 </h2>
-<p id="p-261">Each tool that we used for solving second order linear ODEs with constant coefficients, in other words those ODEs of the form \(ay''+by'+cy=f(x)\text{,}\) can be extended to solving more general \(n^{\text{th}}\) order linear ODEs with constant coefficients, which take the form</p>
-<div class="displaymath">
+<p id="p-264">Each tool that we used for solving second order linear ODEs with constant coefficients, in other words those ODEs of the form <span class="process-math">\(ay''+by'+cy=f(x)\text{,}\)</span> can be extended to solving more general <span class="process-math">\(n^{\text{th}}\)</span> order linear ODEs with constant coefficients, which take the form</p>
+<div class="displaymath process-math">
 \begin{equation}
 a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y=f(x)\label{equation-constant-coeffs}\tag{3.1.1}
 \end{equation}
 </div>
-<p data-braille="continuation">where \(a_{i},0\leq i\leq n\) are constants and \(a_{n}\neq0\text{.}\) In this section, we'll focus on solutions of \textit{homogeneous} \(n^{\th}\) order linear ODEs with constant coefficients. These are the ODEs where \(f(x) = 0\) in <a class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a>.</p>
-<p id="p-262">Recall that in Chapter 2, the general solution of \(ay''+by'+cy=0\) could be obtained by finding <em class="emphasis">two</em> linearly independent solutions \(y_{1},y_{2}\text{.}\) The general solution was then \(y = c_{1}y_{1}+c_{2}y_{2}\) (which is guaranteed to be a solution by <a class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a> where \(c_{1},c_{2}\) are arbitrary constants. Similarly, the general solution of <a class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a> is found by obtaining \(n\) linearly independent solutions \(y_{1},\dots,y_{n}\text{.}\) The general solution in this case is now \(y = \sum_{i=1}^{n}c_{i}y_{i}\text{,}\) where \(c_{i},1\leq i\leq n\) are arbitrary constants. Our main tool for showing that a collection \(\{y_{1},\dots,y_{n}\}\) of solutions is in fact linearly independent is again the <em class="emphasis">Wronskian</em>.</p>
-<article class="definition definition-like" id="definition-the-wronskian-of-several-functions"><h6 class="heading">
+<p class="continuation">where <span class="process-math">\(a_{i},0\leq i\leq n\)</span> are constants and <span class="process-math">\(a_{n}\neq0\text{.}\)</span> In this section, we'll focus on solutions of \textit{homogeneous} <span class="process-math">\(n^{\th}\)</span> order linear ODEs with constant coefficients. These are the ODEs where <span class="process-math">\(f(x) = 0\)</span> in <a href="" class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a>.</p>
+<p id="p-265">Recall that in Chapter 2, the general solution of <span class="process-math">\(ay''+by'+cy=0\)</span> could be obtained by finding <em class="emphasis">two</em> linearly independent solutions <span class="process-math">\(y_{1},y_{2}\text{.}\)</span> The general solution was then <span class="process-math">\(y = c_{1}y_{1}+c_{2}y_{2}\)</span> (which is guaranteed to be a solution by <a href="" class="xref" data-knowl="./knowl/theorem-the-superposition-principle.html" title="Theorem 2.1.6: The Superposition Principle">Theorem 2.1.6</a> where <span class="process-math">\(c_{1},c_{2}\)</span> are arbitrary constants. Similarly, the general solution of <a href="" class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a> is found by obtaining <span class="process-math">\(n\)</span> linearly independent solutions <span class="process-math">\(y_{1},\dots,y_{n}\text{.}\)</span> The general solution in this case is now <span class="process-math">\(y = \sum_{i=1}^{n}c_{i}y_{i}\text{,}\)</span> where <span class="process-math">\(c_{i},1\leq i\leq n\)</span> are arbitrary constants. Our main tool for showing that a collection <span class="process-math">\(\{y_{1},\dots,y_{n}\}\)</span> of solutions is in fact linearly independent is again the <em class="emphasis">Wronskian</em>.</p>
+<article class="definition definition-like" id="definition-the-wronskian-of-several-functions"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">The Wronskian of Several Functions.</span>
-</h6> Let \(\{y_{1},\dots,y_{n}\}\) be a collection of functions. Then the \textbf{Wronskian} of \(\{y_{1},\dots,y_{n}\}\text{,}\) denoted by \(W(y_{1},\dots,y_{n})\text{,}\) is defined by<div class="displaymath">
+</h3> Let <span class="process-math">\(\{y_{1},\dots,y_{n}\}\)</span> be a collection of functions. Then the \textbf{Wronskian} of <span class="process-math">\(\{y_{1},\dots,y_{n}\}\text{,}\)</span> denoted by <span class="process-math">\(W(y_{1},\dots,y_{n})\text{,}\)</span> is defined by<div class="displaymath process-math">
 \begin{equation*}
 W(y_{1},\dots,y_{n}) = \left|\begin{array}{cccc}
 y_{1} \amp y_{2} \amp \dots   \amp y_{n}   \\
@@ -203,53 +152,53 @@ y'_{1}  \amp y'_{2}  \amp \dots   \amp y'_{n}  \\
 y^{(n-1)}_{1} \amp y^{(n-1)}_{2} \amp \dots   \amp y^{(n-1)}_{n} \\
 \end{array}\right|.
 \end{equation*}
-</div></article><p id="p-263">Just as before, we have the following connection between the Wronskian and linear independence. This theorem is a restatement of <a class="xref" data-knowl="./knowl/theorem-linear-independence-and-the-wronskian.html" title="Theorem 2.1.11: Linear Independence and the Wronskian">Theorem 2.1.11</a> for collections involving more than two functions.</p>
-<article class="theorem theorem-like" id="theorem-linear-independence-and-the-wronskian-several-functions"><h6 class="heading">
+</div></article><p id="p-266">Just as before, we have the following connection between the Wronskian and linear independence. This theorem is a restatement of <a href="" class="xref" data-knowl="./knowl/theorem-linear-independence-and-the-wronskian.html" title="Theorem 2.1.11: Linear Independence and the Wronskian">Theorem 2.1.11</a> for collections involving more than two functions.</p>
+<article class="theorem theorem-like" id="theorem-linear-independence-and-the-wronskian-several-functions"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Independence and the Wronskian (Several Functions).</span>
-</h6>
-<p id="p-264">Let \(I\) be some open interval (we often take \(I\) to be \((-\infty,\infty)\text{,}\) but it doesn't have to be so) and let \(\set{y_{1},\dots,y_{n}}\) be solutions of <a class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a>. If \(W(y_{1},\dots,y_{n})\neq0\) for some point \(x_{0}\in I\text{,}\) then \(\set{y_{1},\dots,y_{n}}\) is linearly independent.</p></article><p id="p-265">Now that we have a tool for determining linear independence of several functions, we can also define a <em class="emphasis">basis of solutions</em> for higher order ODEs.</p>
-<article class="definition definition-like" id="definition-basis-of-solutions-higher-order"><h6 class="heading">
+</h3>
+<p id="p-267">Let <span class="process-math">\(I\)</span> be some open interval (we often take <span class="process-math">\(I\)</span> to be <span class="process-math">\((-\infty,\infty)\text{,}\)</span> but it doesn't have to be so) and let <span class="process-math">\(\set{y_{1},\dots,y_{n}}\)</span> be solutions of <a href="" class="xref" data-knowl="./knowl/equation-constant-coeffs.html" title="Equation 3.1.1">(3.1.1)</a>. If <span class="process-math">\(W(y_{1},\dots,y_{n})\neq0\)</span> for some point <span class="process-math">\(x_{0}\in I\text{,}\)</span> then <span class="process-math">\(\set{y_{1},\dots,y_{n}}\)</span> is linearly independent.</p></article><p id="p-268">Now that we have a tool for determining linear independence of several functions, we can also define a <em class="emphasis">basis of solutions</em> for higher order ODEs.</p>
+<article class="definition definition-like" id="definition-basis-of-solutions-higher-order"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Basis of Solutions (Higher Order ODEs).</span>
-</h6>
-<p id="p-266">Let \(y_{1}, y_{2},\ldots,\) and \(y_{n}\) denote solutions of some \(n^{\text{th}}\) order linear homogeneous ODE. We call \(\{y_{1},y_{2},\ldots,y_{n}\}\) a <dfn class="terminology">basis</dfn> if this set is also linearly independent.</p></article><p id="p-267">Bases are used to determine general solutions of linear ODEs.</p>
-<article class="example example-like" id="example-finding-a-basis-set-of-solutions"><h6 class="heading">
+</h3>
+<p id="p-269">Let <span class="process-math">\(y_{1}, y_{2},\ldots,\)</span> and <span class="process-math">\(y_{n}\)</span> denote solutions of some <span class="process-math">\(n^{\text{th}}\)</span> order linear homogeneous ODE. We call <span class="process-math">\(\{y_{1},y_{2},\ldots,y_{n}\}\)</span> a <dfn class="terminology">basis</dfn> if this set is also linearly independent.</p></article><p id="p-270">Bases are used to determine general solutions of linear ODEs.</p>
+<article class="example example-like" id="example-finding-a-basis-set-of-solutions"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Basis Set of Solutions.</span>
-</h6>
-<p id="p-268">Find the general solution of</p>
-<div class="displaymath">
+</h3>
+<p id="p-271">Find the general solution of</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y^{(3)}-6y''+11y'-6y=0
 \end{equation*}
 </div>
-<p data-braille="continuation">where \(y\) is a function of \(x\text{.}\)</p>
+<p class="continuation">where <span class="process-math">\(y\)</span> is a function of <span class="process-math">\(x\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-38" id="solution-38"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-38"><div class="solution solution-like">
-<p id="p-269">Just as we did for second order ODEs, we'll solve this by finding the characteristic equation. To get the characteristic equation, we replace derivatives of \(y\) with powers of \(r\) to get</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-38" id="solution-38"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-38"><div class="solution solution-like">
+<p id="p-272">Just as we did for second order ODEs, we'll solve this by finding the characteristic equation. To get the characteristic equation, we replace derivatives of <span class="process-math">\(y\)</span> with powers of <span class="process-math">\(r\)</span> to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{3}-6r^{2}+11r-6=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">Now we need to solve this equation. It can factor (notice that \(r=1\) is a solution and then divide \(r^{3}-6r^{2}+11r-6\) by \(r-1\)) as</p>
-<div class="displaymath">
+<p class="continuation">Now we need to solve this equation. It can factor (notice that <span class="process-math">\(r=1\)</span> is a solution and then divide <span class="process-math">\(r^{3}-6r^{2}+11r-6\)</span> by <span class="process-math">\(r-1\)</span>) as</p>
+<div class="displaymath process-math">
 \begin{equation*}
 (r-1)(r-2)(r-3)=0
 \end{equation*}
 </div>
-<p data-braille="continuation">and so \(r=1,2,3.\) This means that the functions</p>
-<div class="displaymath">
+<p class="continuation">and so <span class="process-math">\(r=1,2,3.\)</span> This means that the functions</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y_{1} = e^{x},y_{2} = e^{2x},y_{3} = e^{3x}
 \end{equation*}
 </div>
-<p data-braille="continuation">are all solutions of the original ODE. If we can show that they're also linearly independent, then this will imply that the general solution of the ODE is given by</p>
-<div class="displaymath">
+<p class="continuation">are all solutions of the original ODE. If we can show that they're also linearly independent, then this will imply that the general solution of the ODE is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}e^{x}+c_{2}e^{2x}+c_{3}e^{3x}.
 \end{equation*}
 </div>
-<p data-braille="continuation">To do this, we just compute the Wronskian of these functions:</p>
-<div class="displaymath">
+<p class="continuation">To do this, we just compute the Wronskian of these functions:</p>
+<div class="displaymath process-math">
 \begin{align*}
 W(e^{x},e^{2x},e^{3x})
 \amp= \left|
@@ -264,157 +213,157 @@ e^{x} \amp 4e^{2x} \amp 9e^{3x} \\
 \amp\neq0.
 \end{align*}
 </div>
-<p id="p-270">Since the Wronskian is nonzero, \(y_{1},y_{2}\) and \(y_{3}\) are in fact linearly independent, and so the general solution of this ODE is</p>
-<div class="displaymath">
+<p id="p-273">Since the Wronskian is nonzero, <span class="process-math">\(y_{1},y_{2}\)</span> and <span class="process-math">\(y_{3}\)</span> are in fact linearly independent, and so the general solution of this ODE is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}e^{x}+c_{2}e^{2x}+c_{3}e^{3x}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><aside class="aside aside-like" id="aside-10"><p id="p-271">It can get tedious to try to compute the Wronskian every time when solving linear ODEs with constant coefficients, so it's good to note that \(\set{e^{r_{1}x},\dots,e^{r_{n}x}}\) is guaranteed to be linearly independent as long as each of the \(r_{i}\) are distinct from the others.</p></aside><article class="example example-like" id="example-42"><h6 class="heading">
+</div></article><aside class="aside aside-like" id="aside-14"><p id="p-274">It can get tedious to try to compute the Wronskian every time when solving linear ODEs with constant coefficients, so it's good to note that <span class="process-math">\(\set{e^{r_{1}x},\dots,e^{r_{n}x}}\)</span> is guaranteed to be linearly independent as long as each of the <span class="process-math">\(r_{i}\)</span> are distinct from the others.</p></aside><article class="example example-like" id="example-42"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.5</span><span class="period">.</span>
-</h6>
-<p id="p-272">Find the general solution of \(y^{(4)}-y=0\text{,}\) where \(y\) is a function of \(x\text{.}\)</p>
+</h3>
+<p id="p-275">Find the general solution of <span class="process-math">\(y^{(4)}-y=0\text{,}\)</span> where <span class="process-math">\(y\)</span> is a function of <span class="process-math">\(x\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-39" id="solution-39"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-39"><div class="solution solution-like">
-<p id="p-273">We begin by finding the characteristic equation, which is</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-39" id="solution-39"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-39"><div class="solution solution-like">
+<p id="p-276">We begin by finding the characteristic equation, which is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{4}-1=0\quad\text{or}\quad (r^{2}-1)(r^{2}+1)=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">This has solutions \(r=\pm1,\pm i\text{.}\) This means that \(y_{1} = e^{x},y_{2}=e^{-x},y_{3}=e^{ix}\) and \(y=e^{-ix}\) are all solutions of the ODE. Since the roots of the characteristic equation are all distinct, this means that these solutions are linearly independent from each other. Since we have four linearly independent solutions, we can then construct the general solution of this ODE:</p>
-<div class="displaymath">
+<p class="continuation">This has solutions <span class="process-math">\(r=\pm1,\pm i\text{.}\)</span> This means that <span class="process-math">\(y_{1} = e^{x},y_{2}=e^{-x},y_{3}=e^{ix}\)</span> and <span class="process-math">\(y=e^{-ix}\)</span> are all solutions of the ODE. Since the roots of the characteristic equation are all distinct, this means that these solutions are linearly independent from each other. Since we have four linearly independent solutions, we can then construct the general solution of this ODE:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}e^{x}+c_{2}e^{-x}+c_{3}e^{ix}+c_{4}e^{-ix},
 \end{equation*}
 </div>
-<p data-braille="continuation">which we can also rewrite using Euler's Formula \(e^{i\theta} = \cos\theta+i\sin\theta\) to get</p>
-<div class="displaymath">
+<p class="continuation">which we can also rewrite using Euler's Formula <span class="process-math">\(e^{i\theta} = \cos\theta+i\sin\theta\)</span> to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}e^{x}+c_{2}e^{-x}+A\cos x+B\sin x.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-274">In general, any root of the characteristic equation of the form \(r=a\pm bi\) contributes the term \(e^{ax}\brackets{A\cos bx+B\sin bx}\) to the general solution. As we saw in Chapter 2, it's possible for some characteristic equations to have repeated roots. In this case, we initially weren't able to get enough linearly independent solutions, so we had to adjust our method a bit. The same adjustment will work here.</p>
-<article class="example example-like" id="example-characteristic-equation-with-repeated-roots"><h6 class="heading">
+</div></article><p id="p-277">In general, any root of the characteristic equation of the form <span class="process-math">\(r=a\pm bi\)</span> contributes the term <span class="process-math">\(e^{ax}\brackets{A\cos bx+B\sin bx}\)</span> to the general solution. As we saw in Chapter 2, it's possible for some characteristic equations to have repeated roots. In this case, we initially weren't able to get enough linearly independent solutions, so we had to adjust our method a bit. The same adjustment will work here.</p>
+<article class="example example-like" id="example-characteristic-equation-with-repeated-roots"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Characteristic Equation with Repeated Roots.</span>
-</h6>
-<p id="p-275">Find the general solution of</p>
-<div class="displaymath">
+</h3>
+<p id="p-278">Find the general solution of</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x^{(3)}+4x''+4x'=0
 \end{equation*}
 </div>
-<p data-braille="continuation">where \(x\) is a function of \(t\text{.}\)</p>
+<p class="continuation">where <span class="process-math">\(x\)</span> is a function of <span class="process-math">\(t\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-40" id="solution-40"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-40"><div class="solution solution-like">
-<p id="p-276">The characteristic equation is</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-40" id="solution-40"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-40"><div class="solution solution-like">
+<p id="p-279">The characteristic equation is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{3}+4r^{2}+4r = 0\quad\text{or}\quad r(r+2)^{2}=0
 \end{equation*}
 </div>
-<p data-braille="continuation">so \(r=0,-2,-2\text{.}\) One solution of the ODE will be \(x_{1} = e^{0t} = 1\text{,}\) and a second solution will be \(x_{2} = e^{-2t}\text{.}\) But since \(r=-2\) is a repeated root, it does not provide a third linearly independent solution \(x_{3}\text{.}\) So we'll use the same trick we used before and multiply by \(t\) to get a third solution: \(x_{3} = te^{-2t}\text{.}\) It can be verified that \(x_{3}\) is in fact a solution of the ODE, and is also linearly independent from \(x_{1},x_{2}\text{.}\) Therefore the general solution of the ODE is</p>
-<div class="displaymath">
+<p class="continuation">so <span class="process-math">\(r=0,-2,-2\text{.}\)</span> One solution of the ODE will be <span class="process-math">\(x_{1} = e^{0t} = 1\text{,}\)</span> and a second solution will be <span class="process-math">\(x_{2} = e^{-2t}\text{.}\)</span> But since <span class="process-math">\(r=-2\)</span> is a repeated root, it does not provide a third linearly independent solution <span class="process-math">\(x_{3}\text{.}\)</span> So we'll use the same trick we used before and multiply by <span class="process-math">\(t\)</span> to get a third solution: <span class="process-math">\(x_{3} = te^{-2t}\text{.}\)</span> It can be verified that <span class="process-math">\(x_{3}\)</span> is in fact a solution of the ODE, and is also linearly independent from <span class="process-math">\(x_{1},x_{2}\text{.}\)</span> Therefore the general solution of the ODE is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x = c_{1}+c_{2}e^{-2t}+c_{3}te^{-2t}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-277">Solutions of linear, homogeneous ODEs with constant coefficients depend <em class="emphasis">entirely</em> on the roots of the corresponding characteristic equation. If we write the independent variable as \(x\text{,}\) and if \(r_{k}\) denotes a single root of the characteristic equation, then the general solution of the ODE will contain \(e^{r_{k}x},xe^{r_{k}x},x^{2}e^{r_{k}x},\dots\text{,}\) with the number of exponentials contributed by \(r_{k}\) being equal to its multiplicity. That is, the number of times \(r_{k}\) appears as a solution of the characteristic equation.</p>
-<article class="example example-like" id="example-44"><h6 class="heading">
+</div></article><p id="p-280">Solutions of linear, homogeneous ODEs with constant coefficients depend <em class="emphasis">entirely</em> on the roots of the corresponding characteristic equation. If we write the independent variable as <span class="process-math">\(x\text{,}\)</span> and if <span class="process-math">\(r_{k}\)</span> denotes a single root of the characteristic equation, then the general solution of the ODE will contain <span class="process-math">\(e^{r_{k}x},xe^{r_{k}x},x^{2}e^{r_{k}x},\dots\text{,}\)</span> with the number of exponentials contributed by <span class="process-math">\(r_{k}\)</span> being equal to its multiplicity. That is, the number of times <span class="process-math">\(r_{k}\)</span> appears as a solution of the characteristic equation.</p>
+<article class="example example-like" id="example-44"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.7</span><span class="period">.</span>
-</h6>
-<p id="p-278">A linear, homogeneous ODE with constant coefficients (and independent variable \(t\)) has characteristic equation given by</p>
-<div class="displaymath">
+</h3>
+<p id="p-281">A linear, homogeneous ODE with constant coefficients (and independent variable <span class="process-math">\(t\)</span>) has characteristic equation given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r(r-1)(r+1)^{2}(2r-3)^{3} = 0.
 \end{equation*}
 </div>
-<p data-braille="continuation">What is the general solution of the ODE?</p>
+<p class="continuation">What is the general solution of the ODE?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-41" id="solution-41"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-41"><div class="solution solution-like">
-<p id="p-279">We'll set up a table listing each root, its multiplicity and its contribution to the general solution:</p>
-<figure class="table table-like" id="table-4"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.1.8<span class="period">.</span></span><span class="space"> </span></figcaption><table>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-41" id="solution-41"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-41"><div class="solution solution-like">
+<p id="p-282">We'll set up a table listing each root, its multiplicity and its contribution to the general solution:</p>
+<figure class="table table-like" id="table-4"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.1.8<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Root</td>
 <td class="l m b3 r0 l0 t3 lines">Multiplicity</td>
-<td class="l m b3 r0 l0 t3 lines" data-braille="last-cell">Contribution</td>
+<td class="l m b3 r0 l0 t3 lines">Contribution</td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(0\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(1\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(1\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(1\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(1\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(e^{t}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{t}\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(-1\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(2\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(e^{-t},te^{-t}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(-1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-t},te^{-t}\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(\frac{3}{2}\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(3\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(e^{3t/2},te^{3t/2},t^{2}e^{3t/2}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\frac{3}{2}\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{3t/2},te^{3t/2},t^{2}e^{3t/2}\)</span></td>
 </tr>
-</table></figure> So the general solution of this ODE is<div class="displaymath">
+</table></div></figure> So the general solution of this ODE is<div class="displaymath process-math">
 \begin{equation*}
 c_{1}+c_{2}e^{t}+c_{3}e^{-t}+c_{4}te^{-t}+c_{5}e^{3t/2}+c_{6}te^{3t/2}+c_{7}t^{2}e^{3t/2}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-45"><h6 class="heading">
+</div></article><article class="example example-like" id="example-45"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.9</span><span class="period">.</span>
-</h6>
-<p id="p-280">An ODE (with independent variable \(x\)) has characteristic equation given by</p>
-<div class="displaymath">
+</h3>
+<p id="p-283">An ODE (with independent variable <span class="process-math">\(x\)</span>) has characteristic equation given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{2}(r-3)(r^{2}+4)(r^{2}+6r+13)^{3}=0.
 \end{equation*}
 </div>
-<p data-braille="continuation">Find the general solution.</p>
+<p class="continuation">Find the general solution.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-42" id="solution-42"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-42"><div class="solution solution-like">
-<p id="p-281">We'll set up another table help us determine the general solution:</p>
-<figure class="table table-like" id="table-5"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.1.10<span class="period">.</span></span><span class="space"> </span></figcaption><table>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-42" id="solution-42"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-42"><div class="solution solution-like">
+<p id="p-284">We'll set up another table help us determine the general solution:</p>
+<figure class="table table-like" id="table-5"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.1.10<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Root</td>
 <td class="l m b3 r0 l0 t3 lines">Multiplicity</td>
-<td class="l m b3 r0 l0 t3 lines" data-braille="last-cell">Contribution</td>
+<td class="l m b3 r0 l0 t3 lines">Contribution</td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(0\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(2\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(1,x\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1,x\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(3\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(1\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(e^{3x}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{3x}\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(\pm2i\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(1\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(\cos2x,\sin2x\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\pm2i\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\cos2x,\sin2x\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(-3\pm2i\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(3\)</td>
-<td class="l m b3 r0 l0 t0 lines" data-braille="last-cell">\(e^{-3x}\cos2x,e^{-3x}\sin2x,xe^{-3x}\cos2x,xe^{-3x}\sin2x,x^{2}e^{-3x}\cos2x,x^{2}e^{-3x}\sin2x\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(-3\pm2i\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\cos2x,e^{-3x}\sin2x,xe^{-3x}\cos2x,xe^{-3x}\sin2x,x^{2}e^{-3x}\cos2x,x^{2}e^{-3x}\sin2x\)</span></td>
 </tr>
-</table></figure><p id="p-282">So the general solution is</p>
-<div class="displaymath">
+</table></div></figure><p id="p-285">So the general solution is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 c_{1}+c_{2}x+c_{3}e^{3x}+A\cos2x+B\sin2x+e^{-3x}\brackets{(A_{1}+A_{2}x+A_{3}x^{2})\cos2x+(B_{1}+B_{2}x+B_{3}x^{2})\sin2x}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><section class="conclusion" id="conclusion-8"><p id="p-283">SUGGESTED PROBLEMS: 1, 3, 7, 9</p></section></section></div></main>
+</div></article><section class="conclusion" id="conclusion-8"><p id="p-286">SUGGESTED PROBLEMS: 1, 3, 7, 9</p></section></section></div></main>
 </div>
 </body>
 </html>
