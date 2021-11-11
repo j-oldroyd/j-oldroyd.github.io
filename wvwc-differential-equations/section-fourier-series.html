@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T16:15:10-05:00       *-->
+<!--*       on 2021-11-10T20:30:05-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,42 +14,36 @@
 <title>Fourier Series</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    useLabelIds: true,
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
-  },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
-                var display = !!node.type.match(/; *mode=display/);
-                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                var text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = {node: text, delim: '', n: 0};
-                math.end = {node: text, delim: '', n: 0};
-                doc.math.push(math);
-            });
-        }, '']
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
     },
-  },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
-  },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
-  },
-};
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -57,21 +51,21 @@
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -95,7 +89,7 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</span></div>
+\)</div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -107,7 +101,7 @@
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "graphing",
+var ggbApp = new GGBApplet({"appName": "classic",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -142,16 +136,16 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-fourier-series"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.1</span> <span class="title">Fourier Series</span>
 </h2>
-<section class="introduction" id="introduction-18"><p id="p-602">The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of <em class="emphasis">orthonormal bases</em>. Knowing an orthonormal basis for a vector space <span class="process-math">\(V\)</span> can greatly simplify linear algebra in that vector space. In this section, we'll do something similar with periodic functions.</p></section><section class="subsection" id="subsection-periodic-functions"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-18"><p id="p-602">The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of <em class="emphasis">orthonormal bases</em>. Knowing an orthonormal basis for a vector space \(V\) can greatly simplify linear algebra in that vector space. In this section, we'll do something similar with periodic functions.</p></section><section class="subsection" id="subsection-periodic-functions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.1.1</span> <span class="title">Periodic Functions</span>
 </h3>
-<p id="p-603">Consider the function <span class="process-math">\(f(x)\)</span> given by the following graph:</p>
-<figure class="figure figure-like" id="figure-sageplot-periodic-function"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-sageplot-periodic-function.svg" role="img" class="contained" alt="A periodic function." onerror="this.src='images/image-sageplot-periodic-function.png';this.onerror=null;"></div>
+<p id="p-603">Consider the function \(f(x)\) given by the following graph:</p>
+<figure class="figure figure-like" id="figure-sageplot-periodic-function"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-sageplot-periodic-function.svg" role="img" style="width: 100%; height: auto;" alt="A periodic function." onerror="this.src='images/image-sageplot-periodic-function.png';this.onerror=null;"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.1<span class="period">.</span></span><span class="space"> </span>A periodic function.</figcaption></figure><p id="p-604">This function can be plotted using the following code:</p>
 <div class="sagecell-sage" id="sage-9"><script type="text/x-sage">reset
 
@@ -174,17 +168,17 @@ plt.legend()
 plt.show()
 </script></div>
 <p id="p-605">If we look at the graph, we see that it repeats itself if we wait long enough. Functions that have this property are called <dfn class="terminology">periodic functions</dfn>.</p>
-<article class="definition definition-like" id="definition-periodic-functions"><h4 class="heading">
+<article class="definition definition-like" id="definition-periodic-functions"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Periodic Functions.</span>
-</h4>
-<p id="p-606">Let <span class="process-math">\(f(x)\)</span> be a real function defined for all <span class="process-math">\(x\text{.}\)</span> We say that <span class="process-math">\(f\)</span> is a periodic function if there exists a positive number <span class="process-math">\(p\)</span> such that</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-606">Let \(f(x)\) be a real function defined for all \(x\text{.}\) We say that \(f\) is a periodic function if there exists a positive number \(p\) such that</p>
+<div class="displaymath">
 \begin{equation*}
 f(x+p) = f(x)
 \end{equation*}
 </div>
-<p class="continuation">for all <span class="process-math">\(x\text{.}\)</span></p></article> <p id="p-607">Let <span class="process-math">\(n\)</span> be any integer. Then the functions <span class="process-math">\(\sin nx\)</span> and <span class="process-math">\(\cos nx\)</span> are both periodic and have period <span class="process-math">\(2\pi\)</span> since</p>
-<div class="displaymath process-math">
+<p class="continuation">for all \(x\text{.}\)</p></article> <p id="p-607">Let \(n\) be any integer. Then the functions \(\sin nx\) and \(\cos nx\) are both periodic and have period \(2\pi\) since</p>
+<div class="displaymath">
 \begin{align*}
 \sin[n(x+2\pi)] \amp = \sin nx\cos2\pi + \cos nx\sin2\pi = \sin nx \\
 \cos[n(x+2\pi)] \amp = \cos nx\cos2\pi - \sin nx\sin2\pi = \cos nx 
@@ -205,46 +199,46 @@ plt.plot(x,y2,label=r'$\sin2x$')
 plt.legend()
 plt.show()
 </script></div>
-<p id="p-608">If you go back to the first plot, you may notice from the code used to generate the function <span class="process-math">\(f(x)\)</span> that <span class="process-math">\(f(x)\)</span> is just the sum of two basic trigonometric functions:</p>
-<div class="displaymath process-math">
+<p id="p-608">If you go back to the first plot, you may notice from the code used to generate the function \(f(x)\) that \(f(x)\) is just the sum of two basic trigonometric functions:</p>
+<div class="displaymath">
 \begin{equation*}
 f(x) = \cos5x-5\sin3x.
 \end{equation*}
 </div>
-<p class="continuation">In other words, the (finite) sum of functions of the form <span class="process-math">\(\sin nx,\cos mx\)</span> where <span class="process-math">\(n,m\)</span> are integers is also periodic, and also has period <span class="process-math">\(2\pi\text{.}\)</span> One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written in this way if we allow <em class="emphasis">infinite</em> sums of this form, which we call <dfn class="terminology">trigonometric series</dfn>.</p></section><section class="subsection" id="subsection-trig-and-fourier-series"><h3 class="heading hide-type">
+<p class="continuation">In other words, the (finite) sum of functions of the form \(\sin nx,\cos mx\) where \(n,m\) are integers is also periodic, and also has period \(2\pi\text{.}\) One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written in this way if we allow <em class="emphasis">infinite</em> sums of this form, which we call <dfn class="terminology">trigonometric series</dfn>.</p></section><section class="subsection" id="subsection-trig-and-fourier-series"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.1.2</span> <span class="title">Trigonometric Series and Fourier Series</span>
 </h3>
-<article class="definition definition-like" id="definition-trigonometric-series"><h4 class="heading">
+<article class="definition definition-like" id="definition-trigonometric-series"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Trigonometric Series.</span>
-</h4>
+</h6>
 <p id="p-609">A trigonometric series is a series of the form</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 \sum_{k=0}^{\infty}(a_{k}\cos kx+b_{k}\sin kx) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx)
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(a_{k},b_{k}\)</span> are constants, called the <dfn class="terminology">coefficients</dfn> of the series.</p></article><p id="p-610">Our primary goal in this section is to take a function <span class="process-math">\(f(x)\)</span> of period <span class="process-math">\(2\pi\)</span> and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that</p>
-<div class="displaymath process-math">
+<p class="continuation">where \(a_{k},b_{k}\) are constants, called the <dfn class="terminology">coefficients</dfn> of the series.</p></article><p id="p-610">Our primary goal in this section is to take a function \(f(x)\) of period \(2\pi\) and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that</p>
+<div class="displaymath">
 \begin{equation*}
 f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx),
 \end{equation*}
 </div>
-<p class="continuation">and we'll look at what the coefficients of the series need to be to make this equation true. To do this, we'll need the so-called <dfn class="terminology">orthogonality relations</dfn> for <span class="process-math">\(\sin nx,\cos mx\text{.}\)</span></p>
-<article class="theorem theorem-like" id="theorem-orthogonality-relations"><h4 class="heading">
+<p class="continuation">and we'll look at what the coefficients of the series need to be to make this equation true. To do this, we'll need the so-called <dfn class="terminology">orthogonality relations</dfn> for \(\sin nx,\cos mx\text{.}\)</p>
+<article class="theorem theorem-like" id="theorem-orthogonality-relations"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Orthogonality Relations.</span>
-</h4>
-<p id="p-611">Let <span class="process-math">\(m,n\)</span> be whole numbers with <span class="process-math">\(m,n&gt;0\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-611">Let \(m,n\) be whole numbers with \(m,n&gt;0\text{.}\) Then</p>
+<div class="displaymath">
 \begin{equation*}
 \int_{-\pi}^{\pi}\sin mx\cos nx\,dx = 0
 \end{equation*}
 </div>
 <p class="continuation">and</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 \int_{-\pi}^{\pi}\sin mx\sin nx\,dx = \begin{cases} \pi \amp m=n \\ 0 \amp m\neq n\end{cases}\text{ and }\int_{-\pi}^{\pi}\cos mx\cos nx\,dx = \begin{cases} \pi \amp m=n \\ 0 \amp m\neq n\end{cases}\text{.}
 \end{equation*}
-</div></article><p id="p-612">We can verify <a href="" class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> using a computer algebra system. Proving it is a little bit more work, but can be done using trigonometric identities or Euler's formula.</p>
+</div></article><p id="p-612">We can verify <a class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> using a computer algebra system. Proving it is a little bit more work, but can be done using trigonometric identities or Euler's formula.</p>
 <div class="sagecell-sage" id="sage-11"><script type="text/x-sage"># Declare variables.
 var('x,m,n')
 assume(m,n,'integer')
@@ -259,80 +253,80 @@ I5 = integral(cos(n*x)*cos(n*x),x,-pi,pi)
 # List the results.
 I1,I2,I3,I4,I5
 </script></div>
-<p id="p-613"><a href="" class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> will be our primary tool for expressing a function <span class="process-math">\(f(x)\)</span> as a trigonometric series. To see how, suppose that we have</p>
-<div class="displaymath process-math">
+<p id="p-613"><a class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> will be our primary tool for expressing a function \(f(x)\) as a trigonometric series. To see how, suppose that we have</p>
+<div class="displaymath">
 \begin{equation*}
 f(x) = a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx).
 \end{equation*}
 </div>
-<p class="continuation">If this equation were true, then we should be able to integrate both sides of it and get another true equation. Since <a href="" class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> suggests that integrals involving <span class="process-math">\(\sin nx,\cos nx\)</span> simplify very nicely, we'll try to integrate both sides of the equation against <span class="process-math">\(\sin nx,\cos nx\)</span> from <span class="process-math">\(x=-\pi\)</span> to <span class="process-math">\(x=\pi\)</span> for some <span class="process-math">\(n&gt;0\text{.}\)</span> If we do this, we get</p>
-<div class="displaymath process-math">
+<p class="continuation">If this equation were true, then we should be able to integrate both sides of it and get another true equation. Since <a class="xref" data-knowl="./knowl/theorem-orthogonality-relations.html" title="Theorem 7.1.4: Orthogonality Relations">Theorem 7.1.4</a> suggests that integrals involving \(\sin nx,\cos nx\) simplify very nicely, we'll try to integrate both sides of the equation against \(\sin nx,\cos nx\) from \(x=-\pi\) to \(x=\pi\) for some \(n&gt;0\text{.}\) If we do this, we get</p>
+<div class="displaymath">
 \begin{align*}
 \int_{-\pi}^{\pi}f(x)\sin nx\,dx \amp = a_{0}\int_{-\pi}^{\pi}\sin nx\,dx + \sum_{k=1}^{\infty}\left(a_{k}\int_{-\pi}^{\pi}\cos kx\sin nx\,dx + b_{k}\int_{-\pi}^{\pi}\sin kx\sin nx\,dx\right)\\
 \amp = b_{n}\int_{-\pi}^{\pi}\sin nx \sin nx \,dx\\
 \amp = \pi b_{n}
 \end{align*}
 </div>
-<p class="continuation">This lets us solve for <span class="process-math">\(b_{n}\text{!}\)</span> We have</p>
-<div class="displaymath process-math">
+<p class="continuation">This lets us solve for \(b_{n}\text{!}\) We have</p>
+<div class="displaymath">
 \begin{equation*}
 b_{n} = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\,dx\text{ for $n\geq 1$.}
 \end{equation*}
 </div>
 <p class="continuation">Similarly,</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{align*}
 a_{n} \amp = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx\text{ for $n\geq1$.}\\
 a_{0} \amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,dx
 \end{align*}
 </div>
 <p class="continuation">These formulas are useful enough that we'll place them together in a theorem.</p>
-<article class="theorem theorem-like" id="theorem-fourier-series-coefficients"><h4 class="heading">
+<article class="theorem theorem-like" id="theorem-fourier-series-coefficients"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Series Coefficients.</span>
-</h4>
-<p id="p-614">Let <span class="process-math">\(f(x)\)</span> be a periodic function with period <span class="process-math">\(2\pi\text{.}\)</span> Then the Fourier coefficients of <span class="process-math">\(f(x)\)</span> are given by</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-614">Let \(f(x)\) be a periodic function with period \(2\pi\text{.}\) Then the Fourier coefficients of \(f(x)\) are given by</p>
+<div class="displaymath">
 \begin{align*}
 a_{0} \amp= \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,dx\\
 a_{n} \amp = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx\text{ for $n\geq1$.}\\
 b_{n} \amp= \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\,dx\text{ for $n\geq 1$.}
 \end{align*}
-</div></article><article class="example example-like" id="example-fourier-series-of-x-cubed"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Fourier series of <span class="process-math">\(x^{3}\)</span>.</span>
-</h4>
-<p id="p-615">Define <span class="process-math">\(f(x) = x^{3}\)</span> for <span class="process-math">\(-\pi\leq x\leq \pi\text{.}\)</span> To find its Fourier series, we can just use the previous formulas to find the values of the coefficients <span class="process-math">\(a_{0},a_{k},b_{k}\)</span> for <span class="process-math">\(k\geq1\text{.}\)</span> We know that</p>
-<div class="displaymath process-math">
+</div></article><article class="example example-like" id="example-fourier-series-of-x-cubed"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Fourier series of \(x^{3}\).</span>
+</h6>
+<p id="p-615">Define \(f(x) = x^{3}\) for \(-\pi\leq x\leq \pi\text{.}\) To find its Fourier series, we can just use the previous formulas to find the values of the coefficients \(a_{0},a_{k},b_{k}\) for \(k\geq1\text{.}\) We know that</p>
+<div class="displaymath">
 \begin{align*}
 a_{0} \amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}x^{3}\,dx\\
 a_{k} \amp = \frac{1}{\pi}\int_{-\pi}^{\pi}x^{3}\cos kx\,dx \\
 b_{k} \amp = \frac{1}{\pi}\int_{-\pi}^{\pi}x^{3}\sin kx\,dx.
 \end{align*}
 </div>
-<p class="continuation">As nasty as these are, the first two are actually very easy to compute. Here's why: <span class="process-math">\(x^{3}\)</span> and <span class="process-math">\(x^{3}\cos kx\)</span> are both <em class="emphasis">odd</em> functions, and the integral of any odd function in an interval that is symmetric about <span class="process-math">\(0\)</span> is always <span class="process-math">\(0\)</span> (since the areas cancel out). So <span class="process-math">\(a_{0} = a_{k} = 0\)</span> for all <span class="process-math">\(k\geq0\text{.}\)</span> The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that</p>
-<div class="displaymath process-math">
+<p class="continuation">As nasty as these are, the first two are actually very easy to compute. Here's why: \(x^{3}\) and \(x^{3}\cos kx\) are both <em class="emphasis">odd</em> functions, and the integral of any odd function in an interval that is symmetric about \(0\) is always \(0\) (since the areas cancel out). So \(a_{0} = a_{k} = 0\) for all \(k\geq0\text{.}\) The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that</p>
+<div class="displaymath">
 \begin{equation*}
 \int x^{3}\sin kx\,dx = -\frac{{\left(k^{3} x^{3} - 6 \, k x\right)} \cos\left(k x\right) - 3 \, {\left(k^{2} x^{2} - 2\right)} \sin\left(k x\right)}{k^{4}} + C.
 \end{equation*}
 </div>
 <p class="continuation">If we plug in the limits of integration and simplify (again, computers are handy for this!), we get</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 b_{k} = \frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}.
 \end{equation*}
 </div>
-<p class="continuation">So the Fourier series for <span class="process-math">\(f(x) = x^{3}\)</span> is given by</p>
-<div class="displaymath process-math">
+<p class="continuation">So the Fourier series for \(f(x) = x^{3}\) is given by</p>
+<div class="displaymath">
 \begin{align*}
 a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx) \amp= \sum_{k=1}^{\infty}b_{k}\sin kx \\
 \amp= \sum_{k=1}^{\infty}\frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}\sin kx. 
 \end{align*}
-</div></article><p id="p-616">A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function <span class="process-math">\(f(x)\text{?}\)</span> Are they actually equal? If we use the following code (adapted from <a class="external" href="https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/" target="_blank">here</a>) to compare the partial sums</p>
-<div class="displaymath process-math">
+</div></article><p id="p-616">A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function \(f(x)\text{?}\) Are they actually equal? If we use the following code (adapted from <a class="external" href="https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/" target="_blank">here</a>) to compare the partial sums</p>
+<div class="displaymath">
 \begin{equation*}
 \sum_{k=1}^{n}\frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}\sin kx
 \end{equation*}
 </div>
-<p class="continuation">of the Fourier series with <span class="process-math">\(f(x) = x^{3}\text{,}\)</span> then it looks like the partial sums get closer and closer if we choose larger values of <span class="process-math">\(n\text{.}\)</span></p>
+<p class="continuation">of the Fourier series with \(f(x) = x^{3}\text{,}\) then it looks like the partial sums get closer and closer if we choose larger values of \(n\text{.}\)</p>
 <div class="sagecell-sage" id="sage-12"><script type="text/x-sage">var('x,k,i')
 
 # Defines the function to determine Fourier series of. Feel free to play around with this.
@@ -355,12 +349,12 @@ n = 3
 p = plot(FS(n),(x,-pi,pi), color='red') + plot(f(x),(x,-pi,pi))
 p
 </script></div>
-<p id="p-617">In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-footnote-convergence-of-fourier-series" id="footnote-convergence-of-fourier-series"><sup> 1 </sup></a> However, for many of the functions we care about in this course we have the following theorem.</p>
+<p id="p-617">In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-footnote-convergence-of-fourier-series" id="footnote-convergence-of-fourier-series"><sup> 1 </sup></a> However, for many of the functions we care about in this course we have the following theorem.</p>
 <div class="hidden-content tex2jax_ignore" id="hk-footnote-convergence-of-fourier-series"><div class="fn">In fact, the convergence of Fourier series for what one might consider to be the more "well-behaved" functions in mathematics was an open question until the 1960s. See <a class="external" href="https://en.wikipedia.org/wiki/Carleson%27s_theorem" target="_blank">Carleson's Theorem</a>.</div></div>
-<article class="theorem theorem-like" id="theorem-pointwise-convergence-of-fourier-series"><h4 class="heading">
+<article class="theorem theorem-like" id="theorem-pointwise-convergence-of-fourier-series"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Series of Piecewise Continuous Functions.</span>
-</h4>
-<p id="p-618">Let <span class="process-math">\(f(x)\)</span> be a piecewise continuous function on the interval <span class="process-math">\(-\pi\leq x\leq\pi\text{,}\)</span> and suppose that it's also periodic with period <span class="process-math">\(2\pi\text{,}\)</span> and is differentiable everywhere that it's continuous. Then the Fourier series of <span class="process-math">\(f(x)\)</span> converges to <span class="process-math">\(f(x)\)</span> except at the points where <span class="process-math">\(f(x)\)</span> is discontinuous.</p></article></section></section></div></main>
+</h6>
+<p id="p-618">Let \(f(x)\) be a piecewise continuous function on the interval \(-\pi\leq x\leq\pi\text{,}\) and suppose that it's also periodic with period \(2\pi\text{,}\) and is differentiable everywhere that it's continuous. Then the Fourier series of \(f(x)\) converges to \(f(x)\) except at the points where \(f(x)\) is discontinuous.</p></article></section></section></div></main>
 </div>
 </body>
 </html>

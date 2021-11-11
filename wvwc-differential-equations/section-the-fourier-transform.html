@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T16:15:10-05:00       *-->
+<!--*       on 2021-11-10T20:30:06-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,56 +14,50 @@
 <title>The Fourier Transform</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    useLabelIds: true,
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
-  },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
-                var display = !!node.type.match(/; *mode=display/);
-                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                var text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = {node: text, delim: '', n: 0};
-                math.end = {node: text, delim: '', n: 0};
-                doc.math.push(math);
-            });
-        }, '']
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
     },
-  },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
-  },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
-  },
-};
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -87,7 +81,7 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</span></div>
+\)</div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +93,7 @@
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "graphing",
+var ggbApp = new GGBApplet({"appName": "classic",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -134,56 +128,56 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-the-fourier-transform"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.5</span> <span class="title">The Fourier Transform</span>
 </h2>
-<p id="p-655">If <span class="process-math">\(f(x)\)</span> is a periodic function with period <span class="process-math">\(p=2L\text{,}\)</span> then we know how to find its Fourier series, both real and complex. But what do we do if our function <span class="process-math">\(f(x)\)</span> is not periodic? Can we still get a similar representation?</p>
-<p id="p-656">Let <span class="process-math">\(f(x)\)</span> be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of <span class="process-math">\(f(x)\text{,}\)</span> and replace it with a periodic function that is equal to <span class="process-math">\(f(x)\)</span> on some interval <span class="process-math">\((-L,L)\text{.}\)</span> Then we can find the Fourier series of <em class="emphasis">this</em> function, which by <a href="" class="xref" data-knowl="./knowl/theorem-complex-fourier-series.html" title="Theorem 7.3.1: Complex Fourier Series">Theorem 7.3.1</a> is given by <span class="process-math">\(\sum_{k=-\infty}^{\infty}c_{k}e^{i\frac{k\pi}{L}x}\)</span> where</p>
-<div class="displaymath process-math">
+<p id="p-655">If \(f(x)\) is a periodic function with period \(p=2L\text{,}\) then we know how to find its Fourier series, both real and complex. But what do we do if our function \(f(x)\) is not periodic? Can we still get a similar representation?</p>
+<p id="p-656">Let \(f(x)\) be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of \(f(x)\text{,}\) and replace it with a periodic function that is equal to \(f(x)\) on some interval \((-L,L)\text{.}\) Then we can find the Fourier series of <em class="emphasis">this</em> function, which by <a class="xref" data-knowl="./knowl/theorem-complex-fourier-series.html" title="Theorem 7.3.1: Complex Fourier Series">Theorem 7.3.1</a> is given by \(\sum_{k=-\infty}^{\infty}c_{k}e^{i\frac{k\pi}{L}x}\) where</p>
+<div class="displaymath">
 \begin{equation*}
 c_{k} = \frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx.
 \end{equation*}
 </div>
 <p class="continuation">So we can write</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 f(x) = \sum_{k=-\infty}^{\infty}\left(\frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx\right)e^{i\frac{k\pi}{L}x}
 \end{equation*}
 </div>
-<p class="continuation">wherever <span class="process-math">\(f(x)\)</span> is continuous on <span class="process-math">\(-L \lt x \lt x\text{.}\)</span></p>
-<p id="p-657">The idea now is that the larger that <span class="process-math">\(T\)</span> gets, this expression can be used to represent <span class="process-math">\(f(x)\)</span> for more and more values of <span class="process-math">\(x\text{.}\)</span> So we want to see what happens to this as <span class="process-math">\(T\to\infty\text{.}\)</span> First, we'll clean this up a little bit by writing <span class="process-math">\(w_{k} = \frac{k\pi}{L}\)</span> and <span class="process-math">\(\Delta w = w_{k+1} - w_{k}\text{,}\)</span> so that <span class="process-math">\(\frac{1}{2L} = \frac{\Delta w}{2\pi}\text{.}\)</span> Then if <span class="process-math">\(x\)</span> is in <span class="process-math">\((-L,L)\)</span> and <span class="process-math">\(f\)</span> is continuous at <span class="process-math">\(x\text{,}\)</span> then we can say</p>
-<div class="displaymath process-math">
+<p class="continuation">wherever \(f(x)\) is continuous on \(-L \lt x \lt x\text{.}\)</p>
+<p id="p-657">The idea now is that the larger that \(T\) gets, this expression can be used to represent \(f(x)\) for more and more values of \(x\text{.}\) So we want to see what happens to this as \(T\to\infty\text{.}\) First, we'll clean this up a little bit by writing \(w_{k} = \frac{k\pi}{L}\) and \(\Delta w = w_{k+1} - w_{k}\text{,}\) so that \(\frac{1}{2L} = \frac{\Delta w}{2\pi}\text{.}\) Then if \(x\) is in \((-L,L)\) and \(f\) is continuous at \(x\text{,}\) then we can say</p>
+<div class="displaymath">
 \begin{align*}
 f(x) \amp = \sum_{k=-\infty}^{\infty}\left(\frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx\right)e^{i\frac{k\pi}{L}x} \\
 \amp = \sum_{k=-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-L}^{L}f(x)e^{-iw_{k}x}\,dx\right)e^{iw_{k}x}\Delta w. 
 \end{align*}
 </div>
-<p class="continuation">As <em class="emphasis">awful</em> as this looks, we can relate this to a Riemann sum! As <span class="process-math">\(L\to\infty,\)</span> <span class="process-math">\(\Delta w\to0\text{,}\)</span> we can replace <span class="process-math">\(w_{k}\)</span> with the new variable <span class="process-math">\(\omega\)</span> and this expression becomes</p>
-<div class="displaymath process-math">
+<p class="continuation">As <em class="emphasis">awful</em> as this looks, we can relate this to a Riemann sum! As \(L\to\infty,\) \(\Delta w\to0\text{,}\) we can replace \(w_{k}\) with the new variable \(\omega\) and this expression becomes</p>
+<div class="displaymath">
 \begin{equation*}
 f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\right)e^{i\omega x}\,d\omega.
 \end{equation*}
 </div>
 <p class="continuation">This leads to the definition of the <dfn class="terminology">Fourier transform</dfn>. But first we need another definition.</p>
-<article class="definition definition-like" id="definition-absolutely-integrable-functions"><h3 class="heading">
+<article class="definition definition-like" id="definition-absolutely-integrable-functions"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Absolutely Integrable Functions.</span>
-</h3>
-<p id="p-658">Let <span class="process-math">\(f(x)\)</span> be a piecewise continuous function. Then <span class="process-math">\(f(x)\)</span> is absolutely integrable if <span class="process-math">\(\int_{-\infty}^{\infty}|f(x)|\,dx \lt \infty.\)</span></p></article><article class="definition definition-like" id="definition-the-fourier-transform"><h3 class="heading">
+</h6>
+<p id="p-658">Let \(f(x)\) be a piecewise continuous function. Then \(f(x)\) is absolutely integrable if \(\int_{-\infty}^{\infty}|f(x)|\,dx \lt \infty.\)</p></article><article class="definition definition-like" id="definition-the-fourier-transform"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">The Fourier Transform.</span>
-</h3>
-<p id="p-659">Let <span class="process-math">\(f(x)\)</span> be an absolutely integrable piecewise continuous function. The Fourier transform of <span class="process-math">\(f(x)\)</span> is the function <span class="process-math">\(\hat{f}(\omega)\)</span> defined by</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-659">Let \(f(x)\) be an absolutely integrable piecewise continuous function. The Fourier transform of \(f(x)\) is the function \(\hat{f}(\omega)\) defined by</p>
+<div class="displaymath">
 \begin{equation*}
 \hat{f}(\omega) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx.
 \end{equation*}
 </div>
-<p class="continuation">We often write <span class="process-math">\(\mathcal{F}(f)\)</span> to denote the Fourier transform as well.</p></article><article class="example example-like" id="example-fourier-transform-of-a-piecewise-exponential"><h3 class="heading">
+<p class="continuation">We often write \(\mathcal{F}(f)\) to denote the Fourier transform as well.</p></article><article class="example example-like" id="example-fourier-transform-of-a-piecewise-exponential"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier transform of a piecewise exponential.</span>
-</h3>
-<p id="p-660">Let <span class="process-math">\(f(x) = e^{-2x}\)</span> for <span class="process-math">\(x&gt;-5\)</span> and <span class="process-math">\(0\)</span> otherwise. Then the Fourier transform of <span class="process-math">\(f(x)\)</span> is</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-660">Let \(f(x) = e^{-2x}\) for \(x&gt;-5\) and \(0\) otherwise. Then the Fourier transform of \(f(x)\) is</p>
+<div class="displaymath">
 \begin{align*}
 \hat{f}(\omega) \amp = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx \\
 \amp = \frac{1}{\sqrt{2\pi}}\int_{-5}^{\infty}e^{-2x}e^{-i\omega x}\,dx \\
@@ -191,29 +185,29 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 \amp = -\frac{1}{(2+i\omega)\sqrt{2\pi}}e^{-(2+i\omega)x}\Big]_{-5}^{\infty}\\
 \amp = \frac{e^{(2+i\omega)5}}{(2+i\omega)\sqrt{2\pi}}. 
 \end{align*}
-</div></article><p id="p-661">As with the Laplace transform, the Fourier transform of a function is said to be in the <dfn class="terminology">frequency domain</dfn>. In fact, the magnitude of <span class="process-math">\(\hat{f}(\omega)\)</span> represents the <dfn class="terminology">frequency content</dfn> of the function <span class="process-math">\(f(x)\)</span> (thought of as a signal) at the frequency <span class="process-math">\(\omega\text{.}\)</span> It's also a quick jump to get the <dfn class="terminology">inverse Fourier transform</dfn>.</p>
-<article class="definition definition-like" id="definition-the-inverse-fourier-transform"><h3 class="heading">
+</div></article><p id="p-661">As with the Laplace transform, the Fourier transform of a function is said to be in the <dfn class="terminology">frequency domain</dfn>. In fact, the magnitude of \(\hat{f}(\omega)\) represents the <dfn class="terminology">frequency content</dfn> of the function \(f(x)\) (thought of as a signal) at the frequency \(\omega\text{.}\) It's also a quick jump to get the <dfn class="terminology">inverse Fourier transform</dfn>.</p>
+<article class="definition definition-like" id="definition-the-inverse-fourier-transform"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">The Inverse Fourier Transform.</span>
-</h3>
-<p id="p-662">The inverse Fourier transform of <span class="process-math">\(\hat{f}(\omega)\)</span> is</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-662">The inverse Fourier transform of \(\hat{f}(\omega)\) is</p>
+<div class="displaymath">
 \begin{equation*}
 \mathcal{F}^{-1}(\hat{f}) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\hat{f}(\omega)e^{i\omega x}\,d\omega.
 \end{equation*}
-</div></article><article class="theorem theorem-like" id="theorem-fourier-integral-representation"><h3 class="heading">
+</div></article><article class="theorem theorem-like" id="theorem-fourier-integral-representation"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Inversion Theorem.</span>
-</h3>
-<p id="p-663">Let <span class="process-math">\(f(x)\)</span> be an absolutely integrable, piecewise differentiable function. Then <span class="process-math">\(f(x) = \mathcal{F}^{-1}(\hat{f})\)</span> wherever <span class="process-math">\(f(x)\)</span> is continuous.</p></article><article class="example example-like" id="example-inverse-fourier-transform-of-a-step-function"><h3 class="heading">
+</h6>
+<p id="p-663">Let \(f(x)\) be an absolutely integrable, piecewise differentiable function. Then \(f(x) = \mathcal{F}^{-1}(\hat{f})\) wherever \(f(x)\) is continuous.</p></article><article class="example example-like" id="example-inverse-fourier-transform-of-a-step-function"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Inverse Fourier transform of a step function.</span>
-</h3>
-<p id="p-664">Define <span class="process-math">\(\hat{f}(\omega)\)</span> by</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-664">Define \(\hat{f}(\omega)\) by</p>
+<div class="displaymath">
 \begin{equation*}
 \hat{f}(\omega) = \begin{cases} 1 \amp -1 &lt; x &lt; 1 \\ 0 \amp \text{otherwise.}\end{cases}
 \end{equation*}
 </div>
-<p class="continuation">Then we can find the inverse transform using <a href="" class="xref" data-knowl="./knowl/definition-the-inverse-fourier-transform.html" title="Definition 7.5.4: The Inverse Fourier Transform">Definition 7.5.4</a>:</p>
-<div class="displaymath process-math">
+<p class="continuation">Then we can find the inverse transform using <a class="xref" data-knowl="./knowl/definition-the-inverse-fourier-transform.html" title="Definition 7.5.4: The Inverse Fourier Transform">Definition 7.5.4</a>:</p>
+<div class="displaymath">
 \begin{align*}
 \mathcal{F}^{-1}\{\hat{f}\} \amp = \frac{1}{2\pi}\int_{-\infty}^{\infty}\hat{f}(\omega)e^{i\omega x}\,d\omega \\
 \amp = \frac{1}{2\pi}\int_{-1}^{1}e^{i\omega x}\,d\omega \\
@@ -221,38 +215,38 @@ f(x) = \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\infty}^{\infty}f(x)e^{
 \amp = \frac{1}{2\pi}\frac{e^{ix}-e^{-ix}}{ix} \\
 \amp = \frac{1}{\pi}\frac{\sin x}{x}. 
 \end{align*}
-</div></article><p id="p-665">The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if <span class="process-math">\(a,b\)</span> are constants and <span class="process-math">\(f,g\)</span> are functions, then</p>
-<div class="displaymath process-math">
+</div></article><p id="p-665">The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if \(a,b\) are constants and \(f,g\) are functions, then</p>
+<div class="displaymath">
 \begin{equation*}
 \mathcal{F}\{af+bg\} = a\hat{f}+b\hat{g}
 \end{equation*}
 </div>
 <p class="continuation">and</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 \mathcal{F}^{-1}(a\hat{f}+b\hat{g}) = af + bg.
 \end{equation*}
 </div>
 <p class="continuation">The Fourier transform also works well with derivatives.</p>
-<article class="theorem theorem-like" id="theorem-fourier-transforms-and-derivatives"><h3 class="heading">
+<article class="theorem theorem-like" id="theorem-fourier-transforms-and-derivatives"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.5.7</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Transforms and Derivatives.</span>
-</h3>
-<p id="p-666">Let <span class="process-math">\(f(x)\)</span> be differentiable with derivative <span class="process-math">\(f'(x)\text{.}\)</span> Suppose that both <span class="process-math">\(f(x)\)</span> and <span class="process-math">\(f'(x)\)</span> are absolutely integrable. Then</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-666">Let \(f(x)\) be differentiable with derivative \(f'(x)\text{.}\) Suppose that both \(f(x)\) and \(f'(x)\) are absolutely integrable. Then</p>
+<div class="displaymath">
 \begin{equation*}
 \mathcal{F}(f') = i\omega\hat{f}(\omega).
 \end{equation*}
 </div></article><p id="p-667">Fourier transforms also behave well with another type of convolution.</p>
-<article class="theorem theorem-like" id="theorem-convolution-theorem"><h3 class="heading">
+<article class="theorem theorem-like" id="theorem-convolution-theorem"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution Theorem.</span>
-</h3>
-<p id="p-668">Suppose that <span class="process-math">\(f(x),g(x)\)</span> are piecewise continuous, bounded and absolutely integrable. Define <span class="process-math">\(f\ast g\)</span> by</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-668">Suppose that \(f(x),g(x)\) are piecewise continuous, bounded and absolutely integrable. Define \(f\ast g\) by</p>
+<div class="displaymath">
 \begin{equation*}
 f\ast g = \int_{-\infty}^{\infty}f(\tau)g(x-\tau)\,d\tau.
 \end{equation*}
 </div>
-<p class="continuation">Then <span class="process-math">\(\mathcal{F}(f\ast g) = \hat{f}\hat{g}.\)</span></p></article></section></div></main>
+<p class="continuation">Then \(\mathcal{F}(f\ast g) = \hat{f}\hat{g}.\)</p></article></section></div></main>
 </div>
 </body>
 </html>

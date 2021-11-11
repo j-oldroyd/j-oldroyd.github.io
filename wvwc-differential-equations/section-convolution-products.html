@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T16:15:10-05:00       *-->
+<!--*       on 2021-11-10T20:30:05-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,56 +14,50 @@
 <title>Convolution Products</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    useLabelIds: true,
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
-  },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
-                var display = !!node.type.match(/; *mode=display/);
-                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                var text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = {node: text, delim: '', n: 0};
-                math.end = {node: text, delim: '', n: 0};
-                doc.math.push(math);
-            });
-        }, '']
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']]
     },
-  },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
-  },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
-  },
-};
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+    asciimath2jax: {
+        ignoreClass: ".*",
+        processClass: "has_am"
+    },
+    jax: ["input/AsciiMath"],
+    extensions: ["asciimath2jax.js"],
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -87,7 +81,7 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</span></div>
+\)</div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -99,7 +93,7 @@
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "graphing",
+var ggbApp = new GGBApplet({"appName": "classic",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -134,43 +128,43 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-convolution-products"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.5</span> <span class="title">Convolution Products</span>
 </h2>
-<p id="p-585">Consider the function <span class="process-math">\(F(s)\)</span> in the frequency domain <span class="process-math">\(s\)</span> defined by</p>
-<div class="displaymath process-math">
+<p id="p-585">Consider the function \(F(s)\) in the frequency domain \(s\) defined by</p>
+<div class="displaymath">
 \begin{equation*}
 F(s) = \frac{1}{s(s^{2}+4)}.
 \end{equation*}
 </div>
-<p class="continuation">This does not match a Laplace transform on our table. If we wanted to find the inverse transform <span class="process-math">\(f(t)\text{,}\)</span> we would have to use partial fractions to find it. However, <span class="process-math">\(F(s)\)</span> is easily seen to be the <em class="emphasis">product</em> of two recognizable transforms:</p>
-<div class="displaymath process-math">
+<p class="continuation">This does not match a Laplace transform on our table. If we wanted to find the inverse transform \(f(t)\text{,}\) we would have to use partial fractions to find it. However, \(F(s)\) is easily seen to be the <em class="emphasis">product</em> of two recognizable transforms:</p>
+<div class="displaymath">
 \begin{equation*}
 F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}.
 \end{equation*}
 </div>
 <p class="continuation">What we would like to do is find a way to determine inverse transforms of products of transforms. To do this, we need to define the <em class="emphasis">convolution</em> of two functions.</p>
-<article class="definition definition-like" id="definition-convolution-of-functions"><h3 class="heading">
+<article class="definition definition-like" id="definition-convolution-of-functions"><h6 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution of Functions.</span>
-</h3>
-<p id="p-586">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> be piecewise continuous functions. The <dfn class="terminology">convolution</dfn> of <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> denoted by <span class="process-math">\((f\ast g)(t)\text{,}\)</span> <span class="process-math">\(f(t)\ast g(t)\)</span> or just <span class="process-math">\(f\ast g\text{,}\)</span> is defined for <span class="process-math">\(t\geq0\)</span> by</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-586">Let \(f\) and \(g\) be piecewise continuous functions. The <dfn class="terminology">convolution</dfn> of \(f\) and \(g\text{,}\) denoted by \((f\ast g)(t)\text{,}\) \(f(t)\ast g(t)\) or just \(f\ast g\text{,}\) is defined for \(t\geq0\) by</p>
+<div class="displaymath">
 \begin{equation*}
 (f\ast g)(t) = \Int{0}{t} f(\tau)g(t-\tau)\,d\tau.
 \end{equation*}
 </div>
-<p class="continuation">The variable <span class="process-math">\(\tau\)</span> is a dummy variable.</p></article><p id="p-587">Note that <span class="process-math">\(f\ast g\)</span> lies in the time domain instead of the frequency domain. In general, we will only take convolutions of functions in the time domain.</p>
+<p class="continuation">The variable \(\tau\) is a dummy variable.</p></article><p id="p-587">Note that \(f\ast g\) lies in the time domain instead of the frequency domain. In general, we will only take convolutions of functions in the time domain.</p>
 <p id="p-588">Convolutions are important because they act as “smoothing operators”. If you have a “rough” (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation.</p>
-<article class="example example-like" id="example-convolution-with-unit-step"><h3 class="heading">
+<article class="example example-like" id="example-convolution-with-unit-step"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution with Unit Step.</span>
-</h3>
-<p id="p-589">Compute <span class="process-math">\(u\ast t\text{,}\)</span> where <span class="process-math">\(u(t)\)</span> is the unit step function.</p>
+</h6>
+<p id="p-589">Compute \(u\ast t\text{,}\) where \(u(t)\) is the unit step function.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-92" id="solution-92"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-92"><div class="solution solution-like">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-92" id="solution-92"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-92"><div class="solution solution-like">
 <p id="p-590">By definition,</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{align*}
 u(t)\ast t \amp= \Int{0}{t}u(\tau)(t-\tau)\,d\tau \\
 \amp= \Int{0}{t}(t-\tau)\,d\tau \\
@@ -179,36 +173,36 @@ u(t)\ast t \amp= \Int{0}{t}u(\tau)(t-\tau)\,d\tau \\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-591">One important property of convolutions is that they are <em class="emphasis">commutative</em>: that is, <span class="process-math">\(f\ast g = g\ast f\)</span> for any piecewise continuous functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{.}\)</span> Another important property of convolutions is that they tend to work well with integral transforms. In particular, we have the following theorem.</p>
-<article class="theorem theorem-like" id="theorem-convolution-transform"><h3 class="heading">
+</div></article><p id="p-591">One important property of convolutions is that they are <em class="emphasis">commutative</em>: that is, \(f\ast g = g\ast f\) for any piecewise continuous functions \(f\) and \(g\text{.}\) Another important property of convolutions is that they tend to work well with integral transforms. In particular, we have the following theorem.</p>
+<article class="theorem theorem-like" id="theorem-convolution-transform"><h6 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution Theorem.</span>
-</h3>
-<p id="p-592">The Laplace transform distributes over convolution. In other words, if <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are piecewise continuous functions, then</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-592">The Laplace transform distributes over convolution. In other words, if \(f\) and \(g\) are piecewise continuous functions, then</p>
+<div class="displaymath">
 \begin{equation*}
 \Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}.
 \end{equation*}
 </div>
-<p class="continuation">Equivalently, if we write <span class="process-math">\(F(s) = \Laplace{f(t)}\)</span> and <span class="process-math">\(G(s) = \Laplace{g(t)}\text{,}\)</span> then</p>
-<div class="displaymath process-math">
+<p class="continuation">Equivalently, if we write \(F(s) = \Laplace{f(t)}\) and \(G(s) = \Laplace{g(t)}\text{,}\) then</p>
+<div class="displaymath">
 \begin{equation*}
 \iLaplace{F(s)G(s)} = f(t)\ast g(t) = \Int{0}{t}f(\tau)g(t-\tau).
 \end{equation*}
 </div></article><p id="p-593">One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain. Let's return to the example we started with.</p>
-<article class="example example-like" id="example-using-the-convolution-theorem"><h3 class="heading">
+<article class="example example-like" id="example-using-the-convolution-theorem"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Convolution Theorem.</span>
-</h3>
+</h6>
 <p id="p-594">Let</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 F(s) = \frac{1}{s(s^{2}+4)}.
 \end{equation*}
 </div>
-<p class="continuation">Find <span class="process-math">\(f(t) = \iLaplace{F(s)}\text{.}\)</span></p>
+<p class="continuation">Find \(f(t) = \iLaplace{F(s)}\text{.}\)</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-93" id="solution-93"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-93"><div class="solution solution-like">
-<p id="p-595">We will use <a href="" class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> to express the inverse transform:</p>
-<div class="displaymath process-math">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-93" id="solution-93"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-93"><div class="solution solution-like">
+<p id="p-595">We will use <a class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> to express the inverse transform:</p>
+<div class="displaymath">
 \begin{align*}
 f(t) \amp= \iLaplace{F(s)}\\
 \amp= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}\\
@@ -219,44 +213,44 @@ f(t) \amp= \iLaplace{F(s)}\\
 \end{align*}
 </div>
 </div></div>
-</div></article><article class="example example-like" id="example-solving-ivps-with-the-convolution-theorem"><h3 class="heading">
+</div></article><article class="example example-like" id="example-solving-ivps-with-the-convolution-theorem"><h6 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Solving IVPs with the Convolution Theorem.</span>
-</h3>
-<p id="p-596">Let <span class="process-math">\(x\)</span> be a function of <span class="process-math">\(t\text{.}\)</span> Solve the IVP</p>
-<div class="displaymath process-math">
+</h6>
+<p id="p-596">Let \(x\) be a function of \(t\text{.}\) Solve the IVP</p>
+<div class="displaymath">
 \begin{equation*}
 x''+4x'+13x = f(t)\qq{where}x(0) = x'(0) = 0
 \end{equation*}
 </div>
-<p class="continuation">for <span class="process-math">\(x(t)\)</span> in terms of the function <span class="process-math">\(f(t)\text{.}\)</span></p>
+<p class="continuation">for \(x(t)\) in terms of the function \(f(t)\text{.}\)</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-94" id="solution-94"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-94"><div class="solution solution-like">
-<p id="p-597">We're trying to find the solution <span class="process-math">\(x(t)\)</span> for arbitrary <span class="process-math">\(f(t)\text{,}\)</span> which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and <a href="" class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a>. So we start by taking the Laplace transform of the ODE to get</p>
-<div class="displaymath process-math">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-94" id="solution-94"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-94"><div class="solution solution-like">
+<p id="p-597">We're trying to find the solution \(x(t)\) for arbitrary \(f(t)\text{,}\) which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and <a class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a>. So we start by taking the Laplace transform of the ODE to get</p>
+<div class="displaymath">
 \begin{equation*}
 s^{2}X(s) +4sX(s) + 13X(s) = F(s)
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(X(s) = \Laplace{x(t)}\)</span> and <span class="process-math">\(F(s) = \Laplace{f(t)}\text{.}\)</span> Now we solve for <span class="process-math">\(X(s)\)</span> to get</p>
-<div class="displaymath process-math">
+<p class="continuation">where \(X(s) = \Laplace{x(t)}\) and \(F(s) = \Laplace{f(t)}\text{.}\) Now we solve for \(X(s)\) to get</p>
+<div class="displaymath">
 \begin{equation*}
 X(s) = \frac{F(s)}{s^{2}+4s+13} = F(s)G(s)
 \end{equation*}
 </div>
 <p class="continuation">where</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{equation*}
 G(s) = \frac{1}{s^{2}+4s+13}
 \end{equation*}
 </div>
-<p class="continuation"><a href="" class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> tells us then that</p>
-<div class="displaymath process-math">
+<p class="continuation"><a class="xref" data-knowl="./knowl/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> tells us then that</p>
+<div class="displaymath">
 \begin{equation*}
 x(t) = \iLaplace{F(s)G(s)} = f(t)*g(t)
 \end{equation*}
 </div>
 <p class="continuation">where</p>
-<div class="displaymath process-math">
+<div class="displaymath">
 \begin{align*}
 g(t) \amp= \iLaplace{G(s)}\\
 \amp= \iLaplace{\frac{1}{s^{2}+4s+13}} \\
@@ -264,8 +258,8 @@ g(t) \amp= \iLaplace{G(s)}\\
 \amp= \frac{1}{3}e^{-2t}\sin3t \amp \text{use a translation formula}
 \end{align*}
 </div>
-<p class="continuation">Therefore the solution of the ODE in terms of the function <span class="process-math">\(f(t)\)</span> is given by</p>
-<div class="displaymath process-math">
+<p class="continuation">Therefore the solution of the ODE in terms of the function \(f(t)\) is given by</p>
+<div class="displaymath">
 \begin{align*}
 x(t) \amp= f(t)\ast g(t)\\
 \amp= \Int{0}{t}f(\tau)g(t-\tau)\,d\tau\\
@@ -273,26 +267,26 @@ x(t) \amp= f(t)\ast g(t)\\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-598">There are a couple of interesting things happening in the last example. In particular, we were able to write the solution <span class="process-math">\(x(t)\)</span> in terms of <span class="process-math">\(f(t)\)</span> as</p>
-<div class="displaymath process-math">
+</div></article><p id="p-598">There are a couple of interesting things happening in the last example. In particular, we were able to write the solution \(x(t)\) in terms of \(f(t)\) as</p>
+<div class="displaymath">
 \begin{equation*}
 x(t) = g(t)\ast f(t)\text{.}
 \end{equation*}
 </div>
-<p class="continuation">In these terms, we can view <span class="process-math">\(f(t)\)</span> as the input into a particular system (whose behavior is determined by the ODE) and the solution <span class="process-math">\(x(t)\)</span> is the corresponding output. This relationship is even easier to write in the frequency domain: the frequency input <span class="process-math">\(F(s)\)</span> is turned into the frequency output <span class="process-math">\(X(s)\)</span> by means of the <dfn class="terminology">transfer function</dfn> <span class="process-math">\(G(s)\text{:}\)</span></p>
-<div class="displaymath process-math">
+<p class="continuation">In these terms, we can view \(f(t)\) as the input into a particular system (whose behavior is determined by the ODE) and the solution \(x(t)\) is the corresponding output. This relationship is even easier to write in the frequency domain: the frequency input \(F(s)\) is turned into the frequency output \(X(s)\) by means of the <dfn class="terminology">transfer function</dfn> \(G(s)\text{:}\)</p>
+<div class="displaymath">
 \begin{equation*}
 X(s) = G(s)F(s)\text{.}
 \end{equation*}
 </div>
-<p id="p-599">The importance of the transfer function in applications is that it encodes <em class="emphasis">all possible outputs</em> the system is capable of producing. There are multiple ways to find the transfer function, assuming that all initial conditions are <span class="process-math">\(0\text{.}\)</span> First, if <span class="process-math">\(F(s)\)</span> is the input and <span class="process-math">\(X(s)\)</span> is some measured output (once again, in the frequency domain), then the transfer function <span class="process-math">\(G(s)\)</span> satisfies</p>
-<div class="displaymath process-math">
+<p id="p-599">The importance of the transfer function in applications is that it encodes <em class="emphasis">all possible outputs</em> the system is capable of producing. There are multiple ways to find the transfer function, assuming that all initial conditions are \(0\text{.}\) First, if \(F(s)\) is the input and \(X(s)\) is some measured output (once again, in the frequency domain), then the transfer function \(G(s)\) satisfies</p>
+<div class="displaymath">
 \begin{equation*}
 G(s) = \frac{X(s)}{F(s)}\text{,}
 \end{equation*}
 </div>
-<p class="continuation">and this quantity is independent of the particular choice of <span class="process-math">\(F(s)\text{.}\)</span> In particular, we can replace the time domain input <span class="process-math">\(f(t)\)</span> with <span class="process-math">\(\delta(t)\text{.}\)</span> In this case, the corresponding output in the frequency domain is</p>
-<div class="displaymath process-math">
+<p class="continuation">and this quantity is independent of the particular choice of \(F(s)\text{.}\) In particular, we can replace the time domain input \(f(t)\) with \(\delta(t)\text{.}\) In this case, the corresponding output in the frequency domain is</p>
+<div class="displaymath">
 \begin{equation*}
 X(s) = G(s)\Laplace{\delta(t)} = G(s)\text{.}
 \end{equation*}
