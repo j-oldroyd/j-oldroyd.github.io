@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:30:02-05:00       *-->
+<!--*       on 2021-11-11T08:47:34-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Forced Oscillations and Resonance</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,21 +57,21 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -74,7 +80,10 @@ MathJax.Hub.Config({
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
@@ -89,7 +98,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -101,7 +110,7 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "classic",
+var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -136,7 +145,7 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-forced-oscillations-and-resonance"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.5</span> <span class="title">Forced Oscillations and Resonance</span>
@@ -144,52 +153,50 @@ true);
 <section class="introduction" id="introduction-11"><p id="p-250">In this section we will develop models for certain systems under the influence of a periodic, external force. The presence of an external force leads to non-homogeneous models, and we will use the techniques we developed in <a href="section-solutions-of-nonhomogeneous-equations.html" class="internal" title="Section 2.4: Solutions of Non-homogeneous Equations">Section 2.4</a> to deal with these systems.</p></section><aside class="aside aside-like" id="aside-12"><p id="p-251">This section corresponds to Section 2.8 of the text.</p></aside><section class="subsection" id="subsection-undamped-systems"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.5.1</span> <span class="title">Undamped Systems</span>
 </h3>
-<p id="p-252">Consider the spring-mass system set up as in <a class="xref" data-knowl="./knowl/figure-spring-mass-system.html" title="Figure 2.3.1">Figure 2.3.1</a>. Then we know that the displacement \(x(t)\) satisfies \(x'' + \omega_{0}^{2}x = 0\text{,}\) where \(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</p>
-<p id="p-253">Now suppose that an external force \(F_{E} = F_{0}\cos(\omega t)\) also acts on the mass. Then the ODE that models the displacement \(x(t)\) is</p>
-<div class="displaymath">
+<p id="p-252">Consider the spring-mass system set up as in <a href="" class="xref" data-knowl="./knowl/figure-spring-mass-system.html" title="Figure 2.3.1">Figure 2.3.1</a>. Then we know that the displacement <span class="process-math">\(x(t)\)</span> satisfies <span class="process-math">\(x'' + \omega_{0}^{2}x = 0\text{,}\)</span> where <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span></p>
+<p id="p-253">Now suppose that an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\)</span> also acts on the mass. Then the ODE that models the displacement <span class="process-math">\(x(t)\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x'' + \omega_{0}^{2}x = \frac{F_{0}}{m}\cos(\omega t).
 \end{equation*}
 </div>
-<p class="continuation">The solution of this ODE is then \(x = x_{c} + x_{p}\text{,}\) where</p>
-<div class="displaymath">
+<p class="continuation">The solution of this ODE is then <span class="process-math">\(x = x_{c} + x_{p}\text{,}\)</span> where</p>
+<div class="displaymath process-math">
 \begin{align*}
 x_{c} \amp= A\cos(\omega-{0}t) + B\sin(\omega_{0}t)\\
 x_{p} \amp= \begin{cases} \frac{F_{0}}{m(\omega_{0}^{2} - \omega^{2})} \cos(\omega t) \amp\text{if }\omega\neq\omega_{0} \\ \frac{F_{0}}{2m\omega_{0}} t\sin(\omega_{0} t) \amp\text{if }\omega=\omega_{0} \end{cases}
 \end{align*}
 </div>
-<p class="continuation">Systems where the <dfn class="terminology">external frequency</dfn> \(\omega\) is equal to the <dfn class="terminology">internal frequency</dfn> \(\omega_{0}\) are said to be in <dfn class="terminology">resonance</dfn>. Without a damping force, the mass in such systems will move wildly out of control \(|x_{p}(t)|\) gets arbitrarily large as \(t\to\infty\text{.}\)</p>
-<article class="example example-like" id="example-determining-resonance"><h6 class="heading">
+<p class="continuation">Systems where the <dfn class="terminology">external frequency</dfn> <span class="process-math">\(\omega\)</span> is equal to the <dfn class="terminology">internal frequency</dfn> <span class="process-math">\(\omega_{0}\)</span> are said to be in <dfn class="terminology">resonance</dfn>. Without a damping force, the mass in such systems will move wildly out of control <span class="process-math">\(|x_{p}(t)|\)</span> gets arbitrarily large as <span class="process-math">\(t\to\infty\text{.}\)</span></p>
+<article class="example example-like" id="example-determining-resonance"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Determining Resonance.</span>
-</h6>
-<p id="p-254">An object with mass <span class="quantity">2 kg</span> is attached to a spring and is held <span class="quantity">1 m</span> to the right of the spring's equilibrium position by a force of <span class="quantity">8 N</span> At time \(t = 0\) seconds the mass is set in motion with an initial velocity of <span class="quantity">2 <sup>m</sup>⁄<sub>s</sub></span> to the left. Suppose an external force \(F_{E} = 3\cos(2t)\) acts on the mass as well. Will the spring eventually break?</p>
+</h4>
+<p id="p-254">An object with mass <span class="quantity">2 kg</span> is attached to a spring and is held <span class="quantity">1 m</span> to the right of the spring's equilibrium position by a force of <span class="quantity">8 N</span> At time <span class="process-math">\(t = 0\)</span> seconds the mass is set in motion with an initial velocity of <span class="quantity">2 <sup>m</sup>⁄<sub>s</sub></span> to the left. Suppose an external force <span class="process-math">\(F_{E} = 3\cos(2t)\)</span> acts on the mass as well. Will the spring eventually break?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-36" id="solution-36"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-36"><div class="solution solution-like"><p id="p-255">We can answer this question by determining if resonance is present in this system. The external frequency is \(\omega = 2\text{,}\) and the internal frequency is \(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\) Since \(k = 8\) and \(m = 2\text{,}\) we have \(\omega_{0} = \sqrt{\frac{8}{2}} = 2\text{,}\) and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.</p></div></div>
-</div></article><aside class="aside aside-like" id="aside-13"><p id="p-256">It's not too hard to solve for \(x(t)\) exactly here to get</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-36" id="solution-36"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-36"><div class="solution solution-like"><p id="p-255">We can answer this question by determining if resonance is present in this system. The external frequency is <span class="process-math">\(\omega = 2\text{,}\)</span> and the internal frequency is <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span> Since <span class="process-math">\(k = 8\)</span> and <span class="process-math">\(m = 2\text{,}\)</span> we have <span class="process-math">\(\omega_{0} = \sqrt{\frac{8}{2}} = 2\text{,}\)</span> and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.</p></div></div>
+</div></article><aside class="aside aside-like" id="aside-13"><p id="p-256">It's not too hard to solve for <span class="process-math">\(x(t)\)</span> exactly here to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x(t) = \frac{1}{4}\cos(2t) - \sin(2t) + \frac{3}{8}t\sin(2t).
 \end{equation*}
 </div>
-<p class="continuation">Graphing this, we get</p>
-<figure class="figure figure-like" id="figure-13"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="images/image-13.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.5.2<span class="period">.</span></span><span class="space"> </span>A plot of the motion of the mass in <a class="xref" data-knowl="./knowl/example-determining-resonance.html" title="Example 2.5.1: Determining Resonance">Example 2.5.1</a>.</figcaption></figure></aside></section><section class="subsection" id="subsection-damped-systems"><h3 class="heading hide-type">
+<p class="continuation">Graphing this, we get</p></aside></section><section class="subsection" id="subsection-damped-systems"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.5.2</span> <span class="title">Damped Systems</span>
 </h3>
-<p id="p-257">Now we'll take a look at forced, damped systems. Suppose a mass \(m\) is fixed to a spring with spring force \(F_{S} = -kx\text{,}\) and is acted upon by a dashpot with force \(F_{R} = -cx'\text{,}\) where \(c,k \gt 0\) and \(x\) represents the displacement of the mass at time \(t\text{.}\) If the mass is still acted upon by an external force \(F_{E} = F_{0}\cos(\omega t)\text{,}\) then by Newton's Second Law the displacement \(x\) must satisfy</p>
-<div class="displaymath">
+<p id="p-257">Now we'll take a look at forced, damped systems. Suppose a mass <span class="process-math">\(m\)</span> is fixed to a spring with spring force <span class="process-math">\(F_{S} = -kx\text{,}\)</span> and is acted upon by a dashpot with force <span class="process-math">\(F_{R} = -cx'\text{,}\)</span> where <span class="process-math">\(c,k \gt 0\)</span> and <span class="process-math">\(x\)</span> represents the displacement of the mass at time <span class="process-math">\(t\text{.}\)</span> If the mass is still acted upon by an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\text{,}\)</span> then by Newton's Second Law the displacement <span class="process-math">\(x\)</span> must satisfy</p>
+<div class="displaymath process-math">
 \begin{equation*}
 mx'' + cx' + kx = F_{0}\cos(\omega t).
 \end{equation*}
 </div>
-<p class="continuation">The solution is given by \(x = x_{c} + x_{p}\text{,}\) where \(x_{c}\) is found as in <a href="section-spring-mass-models.html#subsection-free-damped-motion" class="internal" title="Subsection 2.3.2: Free Damped Motion">Subsection 2.3.2</a> and goes to \(0\) as \(t\to\infty\text{.}\) With a little help from a computer algebra system such as Sage (see below), we see that</p>
-<div class="displaymath">
+<p class="continuation">The solution is given by <span class="process-math">\(x = x_{c} + x_{p}\text{,}\)</span> where <span class="process-math">\(x_{c}\)</span> is found as in <a href="section-spring-mass-models.html#subsection-free-damped-motion" class="internal" title="Subsection 2.3.2: Free Damped Motion">Subsection 2.3.2</a> and goes to <span class="process-math">\(0\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> With a little help from a computer algebra system such as Sage (see below), we see that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x_{p} = \frac{m(\omega_{0}^{2} - \omega^{2})F_{0}}{m^{2}(\omega_{0}^{2} - \omega^{2})^{2} + \omega^{2}c^{2}}\cos(\omega t) + \frac{\omega c F_{0}}{m^{2}(\omega_{0}^{2} - \omega^{2})^{2} + \omega^{2}c^{2}}\sin(\omega t),
 \end{equation*}
 </div>
-<p class="continuation">where \(\omega_{0} = \sqrt{\frac{k}{m}}\) as usual.</p>
-<p id="p-258">Since \(x_{c}\) will always approach \(0\) in these situations, as time goes on the position is determined increasingly by \(x_{p}\text{.}\) We call \(x_{c}\) the <dfn class="terminology">transient solution</dfn> and \(x_{p}\) the <dfn class="terminology">steady-state solution</dfn>. Note that resonance is impossible in this system since \(x_{c}\) and \(x_{p}\) can never overlap (assuming the external force is still a sinusoid). Therefore the smallest amount of damping prevents the mass from going out of control.</p>
+<p class="continuation">where <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\)</span> as usual.</p>
+<p id="p-258">Since <span class="process-math">\(x_{c}\)</span> will always approach <span class="process-math">\(0\)</span> in these situations, as time goes on the position is determined increasingly by <span class="process-math">\(x_{p}\text{.}\)</span> We call <span class="process-math">\(x_{c}\)</span> the <dfn class="terminology">transient solution</dfn> and <span class="process-math">\(x_{p}\)</span> the <dfn class="terminology">steady-state solution</dfn>. Note that resonance is impossible in this system since <span class="process-math">\(x_{c}\)</span> and <span class="process-math">\(x_{p}\)</span> can never overlap (assuming the external force is still a sinusoid). Therefore the smallest amount of damping prevents the mass from going out of control.</p>
 <div class="sagecell-sage" id="sage-3"><script type="text/x-sage"># Set variables
 t = var('t')
 m, c, k, F0, omega, omega_0 = var('m c k F0 omega omega_0')
@@ -206,33 +213,33 @@ P = desolve(m*diff(x, t, 2) + c*diff(x,t) + k*x == F0*cos(omega*t), x, ivar=t)
 # Make "nice" output for solution
 pretty_print(P.substitute(k == m*(omega_0)^2))
 </script></div>
-<article class="example example-like" id="example-steady-state-approximation"><h6 class="heading">
+<article class="example example-like" id="example-steady-state-approximation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Steady-State Approximation.</span>
-</h6>
-<p id="p-259">An object of mass <span class="quantity">3 kg</span> is fixed to both a spring and a dashpot with respective forces \(F_{S} = -9x\) and \(F_{R} = -2x'\text{,}\) where \(x\) is the displacement of the mass in meters and \(x = 0\) is the equilibrium position. An external force \(F_{E} = 5\cos(\sqrt{3}t)\) is also applied to the mass, where \(t\) is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately <span class="quantity">7 s</span> ago. What will be the approximate position of the mass in <span class="quantity">40 s</span>?</p>
+</h4>
+<p id="p-259">An object of mass <span class="quantity">3 kg</span> is fixed to both a spring and a dashpot with respective forces <span class="process-math">\(F_{S} = -9x\)</span> and <span class="process-math">\(F_{R} = -2x'\text{,}\)</span> where <span class="process-math">\(x\)</span> is the displacement of the mass in meters and <span class="process-math">\(x = 0\)</span> is the equilibrium position. An external force <span class="process-math">\(F_{E} = 5\cos(\sqrt{3}t)\)</span> is also applied to the mass, where <span class="process-math">\(t\)</span> is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately <span class="quantity">7 s</span> ago. What will be the approximate position of the mass in <span class="quantity">40 s</span>?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-37" id="solution-37"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-37"><div class="solution solution-like">
-<p id="p-260">We know that the position will look like \(x = x_{c} + x_{p}\) where \(x_{c}\to0\) as \(t\to\infty\text{,}\) but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution \(x_{p}\text{.}\) Since</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-37" id="solution-37"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-37"><div class="solution solution-like">
+<p id="p-260">We know that the position will look like <span class="process-math">\(x = x_{c} + x_{p}\)</span> where <span class="process-math">\(x_{c}\to0\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution <span class="process-math">\(x_{p}\text{.}\)</span> Since</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \omega = \omega_{0} = \sqrt{3}, \quad F_{0} = 5\quad\text{and}\quad c = 2,
 \end{equation*}
 </div>
 <p class="continuation">we get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 x_{p} = \frac{5}{6}\sqrt{3}\sin(\sqrt{3}t).
 \end{equation*}
 </div>
-<p class="continuation">So after <span class="quantity">40 s</span> more seconds the mass should be around \(x_{p}(47)\text{,}\) or about <span class="quantity">-0.388 m</span>.</p>
+<p class="continuation">So after <span class="quantity">40 s</span> more seconds the mass should be around <span class="process-math">\(x_{p}(47)\text{,}\)</span> or about <span class="quantity">-0.388 m</span>.</p>
 </div></div>
-</div></article><p id="p-261">In fact, the actual initial conditions used in <a class="xref" data-knowl="./knowl/example-steady-state-approximation.html" title="Example 2.5.3: Steady-State Approximation">Example 2.5.3</a> were \(x(0) = 1\) and \(x'(0) = -2\text{.}\) The corresponding exact solution is</p>
-<div class="displaymath">
+</div></article><p id="p-261">In fact, the actual initial conditions used in <a href="" class="xref" data-knowl="./knowl/example-steady-state-approximation.html" title="Example 2.5.3: Steady-State Approximation">Example 2.5.3</a> were <span class="process-math">\(x(0) = 1\)</span> and <span class="process-math">\(x'(0) = -2\text{.}\)</span> The corresponding exact solution is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x = e^{-\frac{t}{3}}\left[\cos\frac{\sqrt{26}}{3}t - \frac{25}{52}\sin\frac{\sqrt{26}}{3}t\right] + \frac{5}{6}\sqrt{3}\sin(\sqrt{3}t).
 \end{equation*}
 </div>
-<p class="continuation">The exact value of \(x(47)\) is within several <em class="emphasis">millionths</em> of the approximation \(x_{p}(47)\text{.}\)</p></section><section class="conclusion" id="conclusion-7"><p id="p-262">SUGGESTED PROBLEMS: 3, 9</p></section></section></div></main>
+<p class="continuation">The exact value of <span class="process-math">\(x(47)\)</span> is within several <em class="emphasis">millionths</em> of the approximation <span class="process-math">\(x_{p}(47)\text{.}\)</span></p></section><section class="conclusion" id="conclusion-7"><p id="p-262">SUGGESTED PROBLEMS: 3, 9</p></section></section></div></main>
 </div>
 </body>
 </html>

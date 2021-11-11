@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:30:06-05:00       *-->
+<!--*       on 2021-11-11T08:47:39-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,50 +14,56 @@
 <title>The Heat Equation</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -66,7 +72,10 @@ MathJax.Hub.Config({
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
@@ -81,7 +90,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -93,7 +102,7 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "classic",
+var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -128,91 +137,91 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-the-heat-equation"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">8.4</span> <span class="title">The Heat Equation</span>
 </h2>
-<section class="introduction" id="introduction-22"><p id="p-729">The last equation we will look at is the <dfn class="terminology">heat equation</dfn>, which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the \(x\)-axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the \(x\)-direction only. With these assumptions, the temperature \(u(x,t)\) of the bar at position \(x\) and time \(t\) satisfies the PDE</p>
-<div class="displaymath">
+<section class="introduction" id="introduction-22"><p id="p-729">The last equation we will look at is the <dfn class="terminology">heat equation</dfn>, which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the <span class="process-math">\(x\)</span>-axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the <span class="process-math">\(x\)</span>-direction only. With these assumptions, the temperature <span class="process-math">\(u(x,t)\)</span> of the bar at position <span class="process-math">\(x\)</span> and time <span class="process-math">\(t\)</span> satisfies the PDE</p>
+<div class="displaymath process-math">
 \begin{align*}
 \pdv{u}{t} \amp = c^{2}\pdv[2]{u}{x} \text{.}
 \end{align*}
 </div>
 <p id="p-730">This is called the <dfn class="terminology">one-dimensional heat equation</dfn>.</p></section><section class="subsection" id="subsection-bar-with-ends-fixed-at-"><h3 class="heading hide-type">
-<span class="type">Subsection</span> <span class="codenumber">8.4.1</span> <span class="title">Bar with ends fixed at \(0\)</span>
+<span class="type">Subsection</span> <span class="codenumber">8.4.1</span> <span class="title">Bar with ends fixed at <span class="process-math">\(0\)</span></span>
 </h3>
-<p id="p-731">We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature \(0\text{.}\) If we're given an initial temperature distribution \(f(x)\text{,}\) then \(u(x,t)\) is the solution of the boundary value problem</p>
-<div class="displaymath">
+<p id="p-731">We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature <span class="process-math">\(0\text{.}\)</span> If we're given an initial temperature distribution <span class="process-math">\(f(x)\text{,}\)</span> then <span class="process-math">\(u(x,t)\)</span> is the solution of the boundary value problem</p>
+<div class="displaymath process-math">
 \begin{align}
 u_{t} \amp = c^{2}u_{xx} \label{equation-one-dimensional-heat-equation}\tag{8.4.1}\\
 u(0,t) = u(L,t) \amp = 0 \label{heat-equation-boundary-conditions-fixed-temperature}\tag{8.4.2}\\
 u(x,0) \amp = f(x) \text{.}\label{heat-equation-initial-condition}\tag{8.4.3}
 \end{align}
 </div>
-<p id="p-732">We can solve this boundary value problem using separation of variables, much as we did in <a href="section-wave-equation-and-separation-of-variables.html" class="internal" title="Section 8.2: The Wave Equation and Separation of Variables">Section 8.2</a>. So to start, we assume that \(u(x,t) = X(x)T(t)\text{.}\) If we plug this into the heat equation <a class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a>, then we get</p>
-<div class="displaymath">
+<p id="p-732">We can solve this boundary value problem using separation of variables, much as we did in <a href="section-wave-equation-and-separation-of-variables.html" class="internal" title="Section 8.2: The Wave Equation and Separation of Variables">Section 8.2</a>. So to start, we assume that <span class="process-math">\(u(x,t) = X(x)T(t)\text{.}\)</span> If we plug this into the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a>, then we get</p>
+<div class="displaymath process-math">
 \begin{equation}
 \frac{T'}{c^{2}T} = \frac{X''}{X} = k.\label{equation-odes-from-heat-equation}\tag{8.4.4}
 \end{equation}
 </div>
-<p id="p-733">Now we have three separate cases to consider for \(k\text{:}\) \(k\gt0, k=0\) or \(k\lt0\text{.}\) Just as with the wave equation, the only case that doesn't lead to trivial solutions is \(k=-\mu^{2}\lt0\text{.}\) In this case <a class="xref" data-knowl="./knowl/equation-odes-from-heat-equation.html" title="Equation 8.4.4">(8.4.4)</a> leads to the two ODEs given by</p>
-<div class="displaymath">
+<p id="p-733">Now we have three separate cases to consider for <span class="process-math">\(k\text{:}\)</span> <span class="process-math">\(k\gt0, k=0\)</span> or <span class="process-math">\(k\lt0\text{.}\)</span> Just as with the wave equation, the only case that doesn't lead to trivial solutions is <span class="process-math">\(k=-\mu^{2}\lt0\text{.}\)</span> In this case <a href="" class="xref" data-knowl="./knowl/equation-odes-from-heat-equation.html" title="Equation 8.4.4">(8.4.4)</a> leads to the two ODEs given by</p>
+<div class="displaymath process-math">
 \begin{align*}
 X''+\mu^{2}X \amp = 0 \\
 T'+c^{2}\mu^{2}T \amp = 0 \text{.}
 \end{align*}
 </div>
-<p id="p-734">The boundary conditions in <a class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a> force \(X(0) = X(L) = 0\text{,}\) and the only nontrivial solutions of \(X''+\mu^{2}X = 0\) occur when \(\mu = \frac{n\pi}{L}\text{.}\) So we get the solutions \(X = X_{n} = \sin\frac{n\pi}{L}x\text{,}\) just as with the wave equation.</p>
-<p id="p-735">For the second ODE, we readily solve it to obtain \(T = T_{n} = b_{n}e^{-\lambda_{n}^{2}t}\) where \(\lambda_{n} = c\frac{n\pi}{L}\) as before. So every function</p>
-<div class="displaymath">
+<p id="p-734">The boundary conditions in <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a> force <span class="process-math">\(X(0) = X(L) = 0\text{,}\)</span> and the only nontrivial solutions of <span class="process-math">\(X''+\mu^{2}X = 0\)</span> occur when <span class="process-math">\(\mu = \frac{n\pi}{L}\text{.}\)</span> So we get the solutions <span class="process-math">\(X = X_{n} = \sin\frac{n\pi}{L}x\text{,}\)</span> just as with the wave equation.</p>
+<p id="p-735">For the second ODE, we readily solve it to obtain <span class="process-math">\(T = T_{n} = b_{n}e^{-\lambda_{n}^{2}t}\)</span> where <span class="process-math">\(\lambda_{n} = c\frac{n\pi}{L}\)</span> as before. So every function</p>
+<div class="displaymath process-math">
 \begin{equation*}
 u_{n}(x,t) = X_{n}T_{n} = b_{n}\sin\frac{n\pi}{L}xe^{-\lambda_{n}^{2}t}
 \end{equation*}
 </div>
-<p class="continuation">is a solution of <a class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a> that satisfies the boundary equations <a class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a>. In order to satisfy the arbitrary initial condition \(f(x)\text{,}\) we take an infinite sum of the functions \(u_{n}(x,t)\) to get</p>
-<div class="displaymath">
+<p class="continuation">is a solution of <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a> that satisfies the boundary equations <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a>. In order to satisfy the arbitrary initial condition <span class="process-math">\(f(x)\text{,}\)</span> we take an infinite sum of the functions <span class="process-math">\(u_{n}(x,t)\)</span> to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}.
 \end{equation*}
 </div>
-<p id="p-736">Finally, if we plug in \(t=0\) and use the initial condition \(u(x,0) = f(x)\text{,}\) we get \(f(x) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x\text{.}\) This is just the Fourier series of the odd extension of \(f(x)\text{,}\) which lets us find \(b_{n}\text{.}\) We summarize all of this in the following theorem.</p>
-<article class="theorem theorem-like" id="theorem-solution-of-the-heat-equation-with-fixed-temperature"><h6 class="heading">
+<p id="p-736">Finally, if we plug in <span class="process-math">\(t=0\)</span> and use the initial condition <span class="process-math">\(u(x,0) = f(x)\text{,}\)</span> we get <span class="process-math">\(f(x) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x\text{.}\)</span> This is just the Fourier series of the odd extension of <span class="process-math">\(f(x)\text{,}\)</span> which lets us find <span class="process-math">\(b_{n}\text{.}\)</span> We summarize all of this in the following theorem.</p>
+<article class="theorem theorem-like" id="theorem-solution-of-the-heat-equation-with-fixed-temperature"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">8.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solution of the Heat Equation with Fixed Temperature.</span>
-</h6>
-<p id="p-737">The solution of the heat equation <a class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a> satisfying the boundary conditions <a class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a> and initial condition <a class="xref" data-knowl="./knowl/heat-equation-initial-condition.html" title="Equation 8.4.3">(8.4.3)</a> is given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-737">The solution of the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 8.4.1">(8.4.1)</a> satisfying the boundary conditions <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 8.4.2">(8.4.2)</a> and initial condition <a href="" class="xref" data-knowl="./knowl/heat-equation-initial-condition.html" title="Equation 8.4.3">(8.4.3)</a> is given by</p>
+<div class="displaymath process-math">
 \begin{equation}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}\label{heat-equation-fixed-ends-solution}\tag{8.4.5}
 \end{equation}
 </div>
 <p class="continuation">where</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align}
 b_{n} \amp = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}x\,dx \label{heat-equation-fixed-ends-solution-coeff}\tag{8.4.6}\\
 \lambda_{n} \amp = c\frac{n\pi}{L}. \label{heat-equation-fixed-ends-solution-exponent}\tag{8.4.7}
 \end{align}
-</div></article><article class="example example-like" id="example-sinusoidal-initial-temperature"><h6 class="heading">
+</div></article><article class="example example-like" id="example-sinusoidal-initial-temperature"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">8.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Sinusoidal initial temperature.</span>
-</h6>
-<p id="p-738">Consider a thin metal bar of length \(\pi\) placed on the \(x\)-axis, with one end at \(x=0\) and the other at \(x=\pi\text{.}\) Assuming that \(c=1\) and that the initial temperature is \(f(x) = 30\sin x\) for \(0\leq x\leq\pi\text{,}\) find the temperature distribution using <a class="xref" data-knowl="./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" title="Theorem 8.4.1: Solution of the Heat Equation with Fixed Temperature">Theorem 8.4.1</a>.</p>
+</h4>
+<p id="p-738">Consider a thin metal bar of length <span class="process-math">\(\pi\)</span> placed on the <span class="process-math">\(x\)</span>-axis, with one end at <span class="process-math">\(x=0\)</span> and the other at <span class="process-math">\(x=\pi\text{.}\)</span> Assuming that <span class="process-math">\(c=1\)</span> and that the initial temperature is <span class="process-math">\(f(x) = 30\sin x\)</span> for <span class="process-math">\(0\leq x\leq\pi\text{,}\)</span> find the temperature distribution using <a href="" class="xref" data-knowl="./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" title="Theorem 8.4.1: Solution of the Heat Equation with Fixed Temperature">Theorem 8.4.1</a>.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-101" id="solution-101"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-101"><div class="solution solution-like">
-<p id="p-739">The temperature is the function \(u(x,t)\) given by</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-101" id="solution-101"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-101"><div class="solution solution-like">
+<p id="p-739">The temperature is the function <span class="process-math">\(u(x,t)\)</span> given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n x)e^{-n^{2}t},
 \end{equation*}
 </div>
-<p class="continuation">where \(b_{n}\) is the \(n^{\th}\) coefficient of the Fourier series of the odd extension of \(f(x)\text{.}\) The odd extension of \(f(x)\) is \(30\sin x\text{.}\) Furthermore, the Fourier series of \(30\sin x\) is clearly just \(30\sin x\text{.}\)</p>
+<p class="continuation">where <span class="process-math">\(b_{n}\)</span> is the <span class="process-math">\(n^{\th}\)</span> coefficient of the Fourier series of the odd extension of <span class="process-math">\(f(x)\text{.}\)</span> The odd extension of <span class="process-math">\(f(x)\)</span> is <span class="process-math">\(30\sin x\text{.}\)</span> Furthermore, the Fourier series of <span class="process-math">\(30\sin x\)</span> is clearly just <span class="process-math">\(30\sin x\text{.}\)</span></p>
 <p id="p-740">So in other words,</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 b_{n} = \begin{cases} 30 \amp n=1 \\ 0 \amp otherwise.\end{cases}
 \end{equation*}
 </div>
 <p class="continuation">Hence</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 u(x,t) = 30e^{-t}\sin x.
 \end{equation*}

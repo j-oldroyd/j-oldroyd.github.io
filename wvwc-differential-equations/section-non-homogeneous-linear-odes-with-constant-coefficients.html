@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:30:02-05:00       *-->
+<!--*       on 2021-11-11T08:47:35-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Non-homogeneous Linear ODEs with Constant Coefficients</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,21 +57,21 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -74,7 +80,10 @@ MathJax.Hub.Config({
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
@@ -89,7 +98,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -101,7 +110,7 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "classic",
+var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -136,159 +145,163 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-non-homogeneous-linear-odes-with-constant-coefficients"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">3.2</span> <span class="title">Non-homogeneous Linear ODEs with Constant Coefficients</span>
 </h2>
-<p id="p-287">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution \(y_{c}\) and then a corresponding particular solution \(y_{p}\text{.}\) The general solution was then \(y=y_{c}+y_{p}\text{.}\) \(y_{c}\) was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find \(y_{p}\text{.}\) Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</p>
-<article class="example example-like" id="example-46"><h6 class="heading">
+<p id="p-287">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution <span class="process-math">\(y_{c}\)</span> and then a corresponding particular solution <span class="process-math">\(y_{p}\text{.}\)</span> The general solution was then <span class="process-math">\(y=y_{c}+y_{p}\text{.}\)</span> <span class="process-math">\(y_{c}\)</span> was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find <span class="process-math">\(y_{p}\text{.}\)</span> Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</p>
+<article class="example example-like" id="example-46"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.1</span><span class="period">.</span>
-</h6>
+</h3>
 <p id="p-288">Find the general solution of</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 y^{(3)}-y' = \sinh 2x.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-43" id="solution-43"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-43"><div class="solution solution-like">
-<p id="p-289">The general solution takes the form \(y = y_{c}+y_{p}\text{,}\) where \(y_{c}\) is a solution of the associated homogeneous equation \(y^{(3)}-y'=0\) and \(y_{p}\) is a single solution of the original ODE \(y^{(3)}-y'=\sinh 2x\text{.}\) Since the characteristic equation of \(y^{(3)}-y'=0\) is \(r^{3}-r=0\text{,}\) we get</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-43" id="solution-43"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-43"><div class="solution solution-like">
+<p id="p-289">The general solution takes the form <span class="process-math">\(y = y_{c}+y_{p}\text{,}\)</span> where <span class="process-math">\(y_{c}\)</span> is a solution of the associated homogeneous equation <span class="process-math">\(y^{(3)}-y'=0\)</span> and <span class="process-math">\(y_{p}\)</span> is a single solution of the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\text{.}\)</span> Since the characteristic equation of <span class="process-math">\(y^{(3)}-y'=0\)</span> is <span class="process-math">\(r^{3}-r=0\text{,}\)</span> we get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y_{c} = c_{1}+c_{2}e^{x}+c_{3}e^{-x} = c_{1}+A\cosh x+B\sinh x.
 \end{equation*}
 </div>
-<p class="continuation">Now we'll find \(y_{p}\text{.}\) Since the right hand side of the ODE is \(\sinh 2x\text{,}\) a good initial guess would be \(y_{p} = C\sinh 2x\text{.}\) However, when we take this guess and plug it into the ODE, we'll start seeing terms involving \(\cosh 2x\) as well (since \(\frac{d}{dx}\sinh 2x = 2\cosh 2x\)) so this means we'll want to include \(\cosh 2x\) into our guess for \(y_{p}\) also. So we'll modify our guess to be \(y_{p} = C\cosh 2x+D\sinh 2x\text{.}\)</p>
-<p id="p-290">Since our guess for \(y_{p}\) doesn't overlap with \(y_{c}\text{,}\) we can proceed with plugging our guess into the original ODE \(y^{(3)}-y'=\sinh 2x\) and equating coefficients, just as we did before.</p>
-<div class="displaymath">
+<p class="continuation">Now we'll find <span class="process-math">\(y_{p}\text{.}\)</span> Since the right hand side of the ODE is <span class="process-math">\(\sinh 2x\text{,}\)</span> a good initial guess would be <span class="process-math">\(y_{p} = C\sinh 2x\text{.}\)</span> However, when we take this guess and plug it into the ODE, we'll start seeing terms involving <span class="process-math">\(\cosh 2x\)</span> as well (since <span class="process-math">\(\frac{d}{dx}\sinh 2x = 2\cosh 2x\)</span>) so this means we'll want to include <span class="process-math">\(\cosh 2x\)</span> into our guess for <span class="process-math">\(y_{p}\)</span> also. So we'll modify our guess to be <span class="process-math">\(y_{p} = C\cosh 2x+D\sinh 2x\text{.}\)</span></p>
+<p id="p-290">Since our guess for <span class="process-math">\(y_{p}\)</span> doesn't overlap with <span class="process-math">\(y_{c}\text{,}\)</span> we can proceed with plugging our guess into the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\)</span> and equating coefficients, just as we did before.</p>
+<div class="displaymath process-math">
 \begin{align*}
 \sinh 2x \amp= y^{(3)}_{p}-y'_{p}\\
 \amp= \parens{8C\sinh2x+8D\cosh2x}-\parens{2C\sinh2x+2D\cosh2x}\\
 \amp= 6C\sinh2x+6D\cosh2x.
 \end{align*}
 </div>
-<p class="continuation">So we get \(C = \frac{1}{6}\) and \(D=0\text{,}\) which means that \(y_{p} = \frac{1}{6}\cosh2x\text{.}\) When solving for \(y_{p}\text{,}\) always remember to plug the values you find back into the guess for \(y_{p}\) that you used! So the general solution of the ODE is</p>
-<div class="displaymath">
+<p class="continuation">So we get <span class="process-math">\(C = \frac{1}{6}\)</span> and <span class="process-math">\(D=0\text{,}\)</span> which means that <span class="process-math">\(y_{p} = \frac{1}{6}\cosh2x\text{.}\)</span> When solving for <span class="process-math">\(y_{p}\text{,}\)</span> always remember to plug the values you find back into the guess for <span class="process-math">\(y_{p}\)</span> that you used! So the general solution of the ODE is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}+A\cosh x+B\sinh x+\frac{1}{6}\cosh2x.
 \end{equation*}
 </div>
 </div></div>
 </div></article><p id="p-291">Just as before, we also need to worry about overlaps.</p>
-<article class="example example-like" id="example-47"><h6 class="heading">
+<article class="example example-like" id="example-47"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.2</span><span class="period">.</span>
-</h6>
-<p id="p-292">Find the appropriate form of \(x_{p}\) for the ODE</p>
-<div class="displaymath">
+</h3>
+<p id="p-292">Find the appropriate form of <span class="process-math">\(x_{p}\)</span> for the ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t} = 5t-3t^{2}+e^{-t}\cos2t-3t\sin2t.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
-<p id="p-293">We need to find \(x_{c}\) first since \(x_{p}\) will change depending on \(x_{c}\text{.}\) Since the characteristic equation of the associated homogeneous ODE \(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\) is</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
+<p id="p-293">We need to find <span class="process-math">\(x_{c}\)</span> first since <span class="process-math">\(x_{p}\)</span> will change depending on <span class="process-math">\(x_{c}\text{.}\)</span> Since the characteristic equation of the associated homogeneous ODE <span class="process-math">\(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{7}+8r^{5}+16r^{3} = 0\quad\text{or}\quad r^{3}(r^{2}+4)^{2}=0,
 \end{equation*}
 </div>
 <p class="continuation">we get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 \end{equation*}
 </div>
-<p id="p-294">Now we come up with a guess for \(x_{p}\) using the right hand side of the original ODE and dividing it into ``components:''</p>
+<p id="p-294">Now we come up with a guess for <span class="process-math">\(x_{p}\)</span> using the right hand side of the original ODE and dividing it into ``components:''</p>
 <figure class="table table-like" id="table-6"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component</td>
-<td class="l m b3 r0 l0 t3 lines">Contribution to \(x_{p}\)</td>
+<td class="l m b3 r0 l0 t3 lines">Contribution to <span class="process-math">\(x_{p}\)</span>
+</td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\(2t-3t^{2}\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(C_{1}t^{2}+C_{2}t+C_{3}\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(2t-3t^{2}\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(C_{1}t^{2}+C_{2}t+C_{3}\)</span></td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\(e^{-t}\cos2t\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(e^{-t}\brackets{C_{4}\cos2t+C_{5}\sin2t}\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(e^{-t}\cos2t\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(e^{-t}\brackets{C_{4}\cos2t+C_{5}\sin2t}\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(-3t\sin2t\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(\parens{C_{6}t+C_{7}}\cos2t+\parens{C_{8}t+C_{9}}\sin2t\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(-3t\sin2t\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\parens{C_{6}t+C_{7}}\cos2t+\parens{C_{8}t+C_{9}}\sin2t\)</span></td>
 </tr>
-</table></div></figure><p id="p-295">However, we now have a problem with overlaps between \(x_{p}\) and \(x_{c}\text{.}\) The guess corresponding to the first component overlaps with \(x_{c}\text{,}\) so we need to multiply it by \(t^{3}\) to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by \(t^{2}\text{.}\) Therefore, our guess for \(x_{p}\) should be</p>
-<div class="displaymath">
+</table></div></figure><p id="p-295">However, we now have a problem with overlaps between <span class="process-math">\(x_{p}\)</span> and <span class="process-math">\(x_{c}\text{.}\)</span> The guess corresponding to the first component overlaps with <span class="process-math">\(x_{c}\text{,}\)</span> so we need to multiply it by <span class="process-math">\(t^{3}\)</span> to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by <span class="process-math">\(t^{2}\text{.}\)</span> Therefore, our guess for <span class="process-math">\(x_{p}\)</span> should be</p>
+<div class="displaymath process-math">
 \begin{equation*}
 x_{p} = C_{1}t^{5}+C_{2}t^{4}+C_{3}t^{3}+e^{-t}\brackets{C_{4}\cos2t+C_{5}\sin2t}+(C_{6}t^{3}+C_{7}t^{2})\cos2t+(C_{8}t^{3}+C_{9}t^{2})\sin2t.
 \end{equation*}
 </div>
 </div></div>
 </div></article><p id="p-296">The method of undetermined coefficients applied to the ODE</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)   
 \end{equation*}
 </div>
-<p class="continuation">can be summarized by the following table. Note that \(x^m\) is the <em class="emphasis">smallest</em> power of \(x\) required to remove any overlaps with \(y_{c}\text{.}\)</p>
+<p class="continuation">can be summarized by the following table. Note that <span class="process-math">\(x^m\)</span> is the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> required to remove any overlaps with <span class="process-math">\(y_{c}\text{.}\)</span></p>
 <figure class="table table-like" id="table-7"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.4<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
-<td class="l m b3 r0 l0 t3 lines">Component of \(f(x)\)</td>
-<td class="l m b3 r0 l0 t3 lines">Contribution to \(y_{p}\)</td>
+<td class="l m b3 r0 l0 t3 lines">Component of <span class="process-math">\(f(x)\)</span>
+</td>
+<td class="l m b3 r0 l0 t3 lines">Contribution to <span class="process-math">\(y_{p}\)</span>
+</td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\(c_{k}x^{k}+\dots+c_{1}x+c_{0}\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(x^{m}(C_{k}x^{k}+C_{k-1}x^{k-1}+\dots+C_{1}x+C_{0})\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(c_{k}x^{k}+\dots+c_{1}x+c_{0}\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x^{m}(C_{k}x^{k}+C_{k-1}x^{k-1}+\dots+C_{1}x+C_{0})\)</span></td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\sin bx\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cos bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sin bx}\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\sin bx\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cos bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sin bx}\)</span></td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\cos bx\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cos bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sin bx}\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\cos bx\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cos bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sin bx}\)</span></td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\sinh bx\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cosh bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sinh bx}\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\sinh bx\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cosh bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sinh bx}\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\cosh bx\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cosh bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sinh bx}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\cosh bx\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cosh bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sinh bx}\)</span></td>
 </tr>
-</table></div></figure><article class="example example-like" id="example-48"><h6 class="heading">
+</table></div></figure><article class="example example-like" id="example-48"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.5</span><span class="period">.</span>
-</h6>
+</h3>
 <p id="p-297">Find the general solution of</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 y^{(3)}-2y''+3y'= x+e^{-3x}\sin x
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
-<p id="p-298">We begin by finding \(y_{c}\text{.}\) Since the characteristic equation of the corresponding homogeneous ODE is \(r^{3}-2r^{2}+3r=0\text{,}\) we get \(r=-0,\frac{2\pm\sqrt{4-12}}{2}\) or just \(r=0,1\pm i\sqrt{2}\text{.}\) So</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
+<p id="p-298">We begin by finding <span class="process-math">\(y_{c}\text{.}\)</span> Since the characteristic equation of the corresponding homogeneous ODE is <span class="process-math">\(r^{3}-2r^{2}+3r=0\text{,}\)</span> we get <span class="process-math">\(r=-0,\frac{2\pm\sqrt{4-12}}{2}\)</span> or just <span class="process-math">\(r=0,1\pm i\sqrt{2}\text{.}\)</span> So</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
 \end{equation*}
 </div>
-<p class="continuation">Now we can set up \(y_{p}\text{:}\)</p>
+<p class="continuation">Now we can set up <span class="process-math">\(y_{p}\text{:}\)</span></p>
 <figure class="table table-like" id="table-8"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.6<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component</td>
-<td class="l m b3 r0 l0 t3 lines">Contribution to \(y_{p}\)</td>
+<td class="l m b3 r0 l0 t3 lines">Contribution to <span class="process-math">\(y_{p}\)</span>
+</td>
 </tr>
 <tr>
-<td class="l m b0 r0 l0 t0 lines">\(x\)</td>
-<td class="l m b0 r0 l0 t0 lines">\(x(C_{1}x+C_{2})\)</td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(x(C_{1}x+C_{2})\)</span></td>
 </tr>
 <tr>
-<td class="l m b3 r0 l0 t0 lines">\(e^{-3x}\sin x\)</td>
-<td class="l m b3 r0 l0 t0 lines">\(e^{-3x}\brackets{C_{3}\cos x+C_{4}\sin x}\)</td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\sin x\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\brackets{C_{3}\cos x+C_{4}\sin x}\)</span></td>
 </tr>
-</table></div></figure><p id="p-299">So our initial guess for \(y_{p}\) is given by \(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\) Plugging this into the ODE into a CAS such as Maple or Sage gives</p>
-<div class="displaymath">
+</table></div></figure><p id="p-299">So our initial guess for <span class="process-math">\(y_{p}\)</span> is given by <span class="process-math">\(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\)</span> Plugging this into the ODE into a CAS such as Maple or Sage gives</p>
+<div class="displaymath process-math">
 \begin{align*}
 x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 \amp= 6C_{1}x+(3C_{2}-4C_{1}) \\
@@ -296,7 +309,7 @@ x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 \end{align*}
 </div>
 <p class="continuation">This gives us the system of equations</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 6C_{1}  \amp=  1\\
 3C_{2}-4C_{1} \amp=  0\\
@@ -305,13 +318,13 @@ x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 \end{align*}
 </div>
 <p class="continuation">which we can solve using Sage to get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 C_{1} = \frac{1}{6},C_{2} = \frac{2}{9},C_{3} = -\frac{41}{3530},C_{4}=-\frac{43}{3530}.
 \end{equation*}
 </div>
 <p id="p-300">So the general solution of the ODE is</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 y = y_{c}+y_{p} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x) +\frac{1}{6}x^{2}+\frac{2}{9}x-\frac{e^{-3x}}{3530}\brackets{41\cos x+43\sin x}.
 \end{equation*}

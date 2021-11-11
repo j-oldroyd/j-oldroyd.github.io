@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:30:03-05:00       *-->
+<!--*       on 2021-11-11T08:47:35-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Constant Coefficient Systems and the Phase Plane</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,21 +57,21 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -74,7 +80,10 @@ MathJax.Hub.Config({
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
@@ -89,7 +98,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -101,7 +110,7 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "classic",
+var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -136,27 +145,27 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-constant-coefficient-systems-and-the-phase-plane"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">4.2</span> <span class="title">Constant Coefficient Systems and the Phase Plane</span>
 </h2>
 <section class="introduction" id="introduction-13"><aside class="aside aside-like" id="aside-15"><p id="p-329">This section corresponds to Section 4.3 of the text.</p></aside></section><section class="subsection" id="subsection-solutions-of--vec-x-a-vec-x-m-"><h3 class="heading hide-type">
-<span class="type">Subsection</span> <span class="codenumber">4.2.1</span> <span class="title">Solutions of \(\vec{x}' = A\vec{x}\)</span>
+<span class="type">Subsection</span> <span class="codenumber">4.2.1</span> <span class="title">Solutions of <span class="process-math">\(\vec{x}' = A\vec{x}\)</span></span>
 </h3>
-<article class="theorem theorem-like" id="theorem-solutions-of-systems"><h6 class="heading">
+<article class="theorem theorem-like" id="theorem-solutions-of-systems"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solutions of Systems.</span>
-</h6>
-<p id="p-330">Let \(A\) be an \(n\times n\) constant matrix, and suppose that \(A\) has \(n\) linearly independent eigenvectors \(\vec{x}_{1},\dots,\vec{x}_{n}\) with corresponding eigenvalues \(\lambda_{1},\dots,\lambda_{1}\text{.}\) Then the general solution of \(\vec{x}'=A\vec{x}\) is given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-330">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> constant matrix, and suppose that <span class="process-math">\(A\)</span> has <span class="process-math">\(n\)</span> linearly independent eigenvectors <span class="process-math">\(\vec{x}_{1},\dots,\vec{x}_{n}\)</span> with corresponding eigenvalues <span class="process-math">\(\lambda_{1},\dots,\lambda_{1}\text{.}\)</span> Then the general solution of <span class="process-math">\(\vec{x}'=A\vec{x}\)</span> is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \sum_{i=1}^{n}c_{i}e^{\lambda_{i}t}\vec{x}_{i}.
 \end{equation*}
-</div></article><article class="example example-like" id="example-54"><h6 class="heading">
+</div></article><article class="example example-like" id="example-54"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.2</span><span class="period">.</span>
-</h6>
+</h4>
 <p id="p-331">Find the general solution of the system</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 x_{1}'  \amp = x_{1}-\frac{1}{2}x_{2}-\frac{1}{2}x_{3}\\
 x'_{2}  \amp =  -\frac{1}{2}x_{1}+x_{2}-\frac{1}{2}x_{3}\\
@@ -164,22 +173,22 @@ x'_{3}  \amp =  -\frac{1}{2}x_{1}-\frac{1}{2}x_{2}+x_{3}
 \end{align*}
 </div>
 <p class="continuation">given that</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}_{1} = \begin{bmatrix}1\\1\\1\end{bmatrix},\vec{x}_{2} = \begin{bmatrix}-1\\1\\0\end{bmatrix}\quad\text{and}\quad\vec{x}_{3} = \begin{bmatrix}-\frac{1}{2}\\-\frac{1}{2}\\1\end{bmatrix}
 \end{equation*}
 </div>
 <p class="continuation">are eigenvectors of the matrix</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 G = \begin{bmatrix}1 \amp  -\frac{1}{2}  \amp  -\frac{1}{2}\\-\frac{1}{2}  \amp  1 \amp  -\frac{1}{2} \\ -\frac{1}{2}  \amp  -\frac{1}{2}  \amp    1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">with corresponding eigenvalues \(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\text{.}\)</p>
+<p class="continuation">with corresponding eigenvalues <span class="process-math">\(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-51" id="solution-51"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-51"><div class="solution solution-like">
-<p id="p-332">First, note that the system we need to solve is equivalent to the matrix ODE \(\vec{x}' = G\vec{x}\text{.}\) If we can show that \(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\) are linearly independent, then we can use <a class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> to find the general solution of the system. So we'll compute their Wronskian:</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-51" id="solution-51"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-51"><div class="solution solution-like">
+<p id="p-332">First, note that the system we need to solve is equivalent to the matrix ODE <span class="process-math">\(\vec{x}' = G\vec{x}\text{.}\)</span> If we can show that <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\)</span> are linearly independent, then we can use <a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> to find the general solution of the system. So we'll compute their Wronskian:</p>
+<div class="displaymath process-math">
 \begin{align*}
 W(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}) \amp = \begin{vmatrix} 1  \amp  -1  \amp  -\frac{1}{2} \\ 1 \amp  1 \amp  -\frac{1}{2} \\ 1 \amp  0 \amp  1\end{vmatrix}\\
 \amp = 1+\frac{3}{2}+\frac{1}{2}\\
@@ -187,14 +196,14 @@ W(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}) \amp = \begin{vmatrix} 1  \amp  -1  \amp 
 \end{align*}
 </div>
 <p id="p-333">Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \vec{x} \amp = c_{1}e^{0t}\vec{x}_{1}+c_{2}e^{3t/2}\vec{x}_{2}+c_{3}e^{3t/2}\vec{x}_{3}\\
 \amp = \begin{bmatrix}c_{1}-c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{3}e^{3t/2}\end{bmatrix}
 \end{align*}
 </div>
 <p class="continuation">or just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 x_{1} \amp = c_{1}-\parens{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
 x_{2} \amp = c_{1}+\parens{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
@@ -205,114 +214,114 @@ x_{3} \amp = c_{1}+c_{3}e^{3t/2}
 </div></article></section><section class="subsection" id="subsection-finding-eigenvalues-and-eigenvectors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.2.2</span> <span class="title">Finding Eigenvalues and Eigenvectors</span>
 </h3>
-<p id="p-334"><a class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.</p>
-<p id="p-335">Let \(A\) be an \(n\times n\) matrix and suppose that \(\vec{v}\) is an eigenvector with corresponding eigenvalue \(\lambda\text{.}\) Then</p>
-<div class="displaymath">
+<p id="p-334"><a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.</p>
+<p id="p-335">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix and suppose that <span class="process-math">\(\vec{v}\)</span> is an eigenvector with corresponding eigenvalue <span class="process-math">\(\lambda\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 A\vec{v} = \lambda\vec{v}.
 \end{equation*}
 </div>
 <p class="continuation">We can rearrange this to get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 A\vec{v}-\lambda\vec{v} = (A-\lambda I)\vec{v} = \vec{0}
 \end{equation*}
 </div>
-<p class="continuation">where \(I\) is the identity matrix. Since \(\vec{v}\neq\vec{0}\) (since it's an eigenvector!), linear algebra tells us that \(\det(A-\lambda I) = 0\text{.}\) This gives us the following theorem.</p>
-<article class="theorem theorem-like" id="theorem-theorem-eigenvalues-from-characteristic-equation"><h6 class="heading">
+<p class="continuation">where <span class="process-math">\(I\)</span> is the identity matrix. Since <span class="process-math">\(\vec{v}\neq\vec{0}\)</span> (since it's an eigenvector!), linear algebra tells us that <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span> This gives us the following theorem.</p>
+<article class="theorem theorem-like" id="theorem-theorem-eigenvalues-from-characteristic-equation"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span>
-</h6>
-<p id="p-336">The eigenvalues of a square matrix \(A\) are the solutions of the equation \(\det(A-\lambda I) = 0\text{.}\)</p></article><article class="definition definition-like" id="definition-characteristic-equation"><h6 class="heading">
+</h4>
+<p id="p-336">The eigenvalues of a square matrix <span class="process-math">\(A\)</span> are the solutions of the equation <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span></p></article><article class="definition definition-like" id="definition-characteristic-equation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span>
-</h6>
-<p id="p-337">\(\det(A-\lambda I)=0\) is called the <dfn class="terminology">characteristic equation</dfn> of the matrix \(A\text{.}\)</p></article><article class="example example-like" id="example-55"><h6 class="heading">
+</h4>
+<p id="p-337"><span class="process-math">\(\det(A-\lambda I)=0\)</span> is called the <dfn class="terminology">characteristic equation</dfn> of the matrix <span class="process-math">\(A\text{.}\)</span></p></article><article class="example example-like" id="example-55"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.5</span><span class="period">.</span>
-</h6>
-<p id="p-338">Find the eigenvalues of the matrix \(A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}\text{.}\)</p>
+</h4>
+<p id="p-338">Find the eigenvalues of the matrix <span class="process-math">\(A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
-<p id="p-339">First, we need to set up the characteristic equation of \(A\text{.}\) Since</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
+<p id="p-339">First, we need to set up the characteristic equation of <span class="process-math">\(A\text{.}\)</span> Since</p>
+<div class="displaymath process-math">
 \begin{equation*}
 A-\lambda I = \begin{bmatrix}1-\lambda \amp  4 \\ 1 \amp  1-\lambda\end{bmatrix},
 \end{equation*}
 </div>
 <p class="continuation">we get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \det(A-\lambda I) = (1-\lambda)^{2} - 4 = \lambda^{2}-2\lambda+3
 \end{equation*}
 </div>
-<p class="continuation">so the characteristic equation of \(A\) is</p>
-<div class="displaymath">
+<p class="continuation">so the characteristic equation of <span class="process-math">\(A\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lambda^{2}-2\lambda+3 = 0
 \end{equation*}
 </div>
-<p class="continuation">which has solutions \(\lambda_{1} = -1,\lambda_{2} = 3\text{.}\) So the eigenvalues of \(A\) are \(-1,3\text{.}\)</p>
+<p class="continuation">which has solutions <span class="process-math">\(\lambda_{1} = -1,\lambda_{2} = 3\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(-1,3\text{.}\)</span></p>
 </div></div>
 </div></article><p id="p-340">A useful fact to remember is that the eigenvalues of a ``triangular'' matrix are just the diagonal entries.</p>
-<article class="example example-like" id="example-56"><h6 class="heading">
+<article class="example example-like" id="example-56"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span>
-</h6>
+</h4>
 <p id="p-341">Let</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix}1 \amp  3 \amp  -4 \amp  5 \\ 0 \amp  3 \amp  -2 \amp  -2 \\ 0 \amp  0 \amp  1 \amp  10^{50\pi-300} \\ 0 \amp  0 \amp  0 \amp  0\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Find the eigenvalues of \(A\text{.}\)</p>
+<p class="continuation">Find the eigenvalues of <span class="process-math">\(A\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like"><p id="p-342">\(A\) is a triangular matrix since everything below the main diagonal is \(0\text{.}\) So the eigenvalues of \(A\) are \(1,3,1,0\text{.}\)</p></div></div>
-</div></article><article class="example example-like" id="example-57"><h6 class="heading">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like"><p id="p-342"><span class="process-math">\(A\)</span> is a triangular matrix since everything below the main diagonal is <span class="process-math">\(0\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(1,3,1,0\text{.}\)</span></p></div></div>
+</div></article><article class="example example-like" id="example-57"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span>
-</h6>
-<p id="p-343">Find eigenvectors of \(A = \begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\) corresponding to the eigenvalues \(\lambda_{1} = -1\) and \(\lambda_{2} = 3\text{.}\)</p>
+</h4>
+<p id="p-343">Find eigenvectors of <span class="process-math">\(A = \begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\)</span> corresponding to the eigenvalues <span class="process-math">\(\lambda_{1} = -1\)</span> and <span class="process-math">\(\lambda_{2} = 3\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
-<p id="p-344">Suppose that \(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\) is an eigenvector corresponding to \(\lambda\text{.}\) Then we know that</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
+<p id="p-344">Suppose that <span class="process-math">\(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda\text{.}\)</span> Then we know that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\vec{v} = \lambda\vec{v} \Rightarrow \begin{bmatrix}v_{1}+4v_{2} \\ v_{1} + v_{2}\end{bmatrix} = \begin{bmatrix} \lambda v_{1} \\ \lambda v_{2} \end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">This tells us that if \(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2} \end{bmatrix}\) is an eigenvector for \(\lambda\text{,}\) then its entries need to satisfy</p>
-<div class="displaymath">
+<p class="continuation">This tells us that if <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then its entries need to satisfy</p>
+<div class="displaymath process-math">
 \begin{align}
 v_{1}+4v_{2}\amp =-v_{1}\notag\\
 v_{1}+v_{2} \amp = -v_{2}\notag
 \end{align}
 </div>
 <p class="continuation">which boils down to</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 (1-\lambda)v_{1}+4v_{2} \amp = 0\\
 v_{1} + (1-\lambda)v_{2} \amp = 0.
 \end{align*}
 </div>
-<p id="p-345">Now set \(\lambda = -1\) to get the system</p>
-<div class="displaymath">
+<p id="p-345">Now set <span class="process-math">\(\lambda = -1\)</span> to get the system</p>
+<div class="displaymath process-math">
 \begin{align*}
 2v_{1} + 4v_{2} \amp = 0\\
 v_{1} + 2v_{2} \amp = 0
 \end{align*}
 </div>
-<p class="continuation">and so \(v_{1} = -2v_{2}\text{.}\) We don't really care about what the entries of \(\vec{v}\) look like so long as \(\vec{v}\) is an eigenvector, so we can pick \(v_{1},v_{2}\) however we want, just so long as they satisfy this relation (and are not both \(0\text{!}\)). So pick \(v_{2} = 1\text{,}\) which forces \(v_{1} = -2\text{.}\) Then</p>
-<div class="displaymath">
+<p class="continuation">and so <span class="process-math">\(v_{1} = -2v_{2}\text{.}\)</span> We don't really care about what the entries of <span class="process-math">\(\vec{v}\)</span> look like so long as <span class="process-math">\(\vec{v}\)</span> is an eigenvector, so we can pick <span class="process-math">\(v_{1},v_{2}\)</span> however we want, just so long as they satisfy this relation (and are not both <span class="process-math">\(0\text{!}\)</span>). So pick <span class="process-math">\(v_{2} = 1\text{,}\)</span> which forces <span class="process-math">\(v_{1} = -2\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}-2\\1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">is an eigenvector of \(A\) corresponding to the eigenvalue \(\lambda_{1} = -1\text{.}\)</p>
-<p id="p-346">To find an eigenvector for \(\lambda_{2} = 3\) we just set \(\lambda  = 3\) in \ref{eqn:eigenvector-relation} and run through the same process:</p>
-<div class="displaymath">
+<p class="continuation">is an eigenvector of <span class="process-math">\(A\)</span> corresponding to the eigenvalue <span class="process-math">\(\lambda_{1} = -1\text{.}\)</span></p>
+<p id="p-346">To find an eigenvector for <span class="process-math">\(\lambda_{2} = 3\)</span> we just set <span class="process-math">\(\lambda  = 3\)</span> in \ref{eqn:eigenvector-relation} and run through the same process:</p>
+<div class="displaymath process-math">
 \begin{align*}
 -2v_{1}+4v_{2} \amp = 0\\
 v_{1} - 2v_{2} \amp = 0
 \end{align*}
 </div>
-<p class="continuation">The second equation simplifies to \(v_{1} = 2v_{2}\text{,}\) so one eigenvector for \(\lambda_{2}\) is</p>
-<div class="displaymath">
+<p class="continuation">The second equation simplifies to <span class="process-math">\(v_{1} = 2v_{2}\text{,}\)</span> so one eigenvector for <span class="process-math">\(\lambda_{2}\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}2 \\ 1\end{bmatrix}.
 \end{equation*}
@@ -321,96 +330,96 @@ v_{1} - 2v_{2} \amp = 0
 </div></article></section><section class="subsection" id="subsection-solving-matrix-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.2.3</span> <span class="title">Solving Matrix ODEs</span>
 </h3>
-<p id="p-347">We now have the tools we need to begin solving matrix ODEs. Recall that if \(A\) is an \(n\times n\) matrix with constant entries, and if \(\vec{x}_{1},\vec{x}_{2},\ldots,\vec{x}_{n}\) are \(n\) linearly independent solutions of the matrix ODE \(\vec{x}'=A\vec{x}\text{,}\) then the general solution of the matrix ODE is</p>
-<div class="displaymath">
+<p id="p-347">We now have the tools we need to begin solving matrix ODEs. Recall that if <span class="process-math">\(A\)</span> is an <span class="process-math">\(n\times n\)</span> matrix with constant entries, and if <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\ldots,\vec{x}_{n}\)</span> are <span class="process-math">\(n\)</span> linearly independent solutions of the matrix ODE <span class="process-math">\(\vec{x}'=A\vec{x}\text{,}\)</span> then the general solution of the matrix ODE is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \sum_{k=1}^{n}c_{k}\vec{x}_{k}.
 \end{equation*}
 </div>
-<p class="continuation">Furthermore, if \(\lambda\) is an eigenvalue of \(A\) with eigenvector \(\vec{v}\text{,}\) then \(e^{\lambda t}\vec{v}\) is a solution of \(\vec{x}'=A\vec{x}\text{.}\) So to solve the matrix ODE \(\vec{x}'=A\vec{x}\) requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:</p>
-<article class="theorem theorem-like" id="theorem-linear-independence-distinct-eigenvalues"><h6 class="heading">
+<p class="continuation">Furthermore, if <span class="process-math">\(\lambda\)</span> is an eigenvalue of <span class="process-math">\(A\)</span> with eigenvector <span class="process-math">\(\vec{v}\text{,}\)</span> then <span class="process-math">\(e^{\lambda t}\vec{v}\)</span> is a solution of <span class="process-math">\(\vec{x}'=A\vec{x}\text{.}\)</span> So to solve the matrix ODE <span class="process-math">\(\vec{x}'=A\vec{x}\)</span> requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:</p>
+<article class="theorem theorem-like" id="theorem-linear-independence-distinct-eigenvalues"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.8</span><span class="period">.</span>
-</h6>
-<p id="p-348">Let \(A\) be an \(n\times n\) matrix with constant entries. If the eigenvalues \(\lambda_{1},\ldots,\lambda_{n}\) of \(A\) are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if \(\vec{v}_{i}\) is an eigenvector corresponding to \(\lambda_{i}\) then the eigenvectors \(\vec{v}_{1},\ldots,\vec{v}_{n}\) are linearly independent.</p></article><article class="example example-like" id="example-58"><h6 class="heading">
+</h4>
+<p id="p-348">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix with constant entries. If the eigenvalues <span class="process-math">\(\lambda_{1},\ldots,\lambda_{n}\)</span> of <span class="process-math">\(A\)</span> are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if <span class="process-math">\(\vec{v}_{i}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda_{i}\)</span> then the eigenvectors <span class="process-math">\(\vec{v}_{1},\ldots,\vec{v}_{n}\)</span> are linearly independent.</p></article><article class="example example-like" id="example-58"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span>
-</h6>
-<p id="p-349">Solve the matrix ODE given by \(\vec{x}' = A\vec{x}\) where</p>
-<div class="displaymath">
+</h4>
+<p id="p-349">Solve the matrix ODE given by <span class="process-math">\(\vec{x}' = A\vec{x}\)</span> where</p>
+<div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
-<p id="p-350">We already have everything we need. We know that the eigenvalues of \(A\) are \(\lambda_{1}=-1\) and \(\lambda_{2}=3\) and some corresponding eigenvectors are</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
+<p id="p-350">We already have everything we need. We know that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1}=-1\)</span> and <span class="process-math">\(\lambda_{2}=3\)</span> and some corresponding eigenvectors are</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{v}_{2} = \begin{bmatrix}2\\1\end{bmatrix}.
 \end{equation*}
 </div>
 <p class="continuation">Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE:</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}_{1} = e^{\lambda_{1}t}\vec{v}_{1} = e^{-t}\begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{x}_{2} = e^{\lambda_{2}t}\vec{v}_{2} = e^{3t}\begin{bmatrix}2\\1\end{bmatrix}
 \end{equation*}
 </div>
 <p class="continuation">So the general solution of the matrix ODE is</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}\vec{x}_{1} + c_{2}\vec{x}_{2} = c_{1}e^{-t}\begin{bmatrix}-2\\1\end{bmatrix} + c_{2}e^{3t}\begin{bmatrix}2\\1\end{bmatrix}.
 \end{equation*}
 </div>
 <p class="continuation">Note that the choice of eigenvector <em class="emphasis">doesn't matter</em>. Just so long as we find some particular eigenvector for each distinct eigenvalue.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-59"><h6 class="heading">
+</div></article><article class="example example-like" id="example-59"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span>
-</h6>
+</h4>
 <p id="p-351">Solve the first-order system given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 x_{1}' \amp = x_{1} - 5x_{2}\\
 x_{2}' \amp = x_{1} - x_{2}
 \end{align*}
 </div>
-<p class="continuation">where \(x_{1}\) and \(x_{2}\) are functions of \(t\text{.}\)</p>
+<p class="continuation">where <span class="process-math">\(x_{1}\)</span> and <span class="process-math">\(x_{2}\)</span> are functions of <span class="process-math">\(t\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-56" id="solution-56"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-56"><div class="solution solution-like">
-<p id="p-352">First, note that this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\) where</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-56" id="solution-56"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-56"><div class="solution solution-like">
+<p id="p-352">First, note that this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}' = A\vec{x}\)</span> where</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 \amp  -5 \\ 1 \amp  -1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">To solve this system we need to find the eigenvalues and eigenvectors of \(A\text{,}\) and then use these to build our general solution.</p>
+<p class="continuation">To solve this system we need to find the eigenvalues and eigenvectors of <span class="process-math">\(A\text{,}\)</span> and then use these to build our general solution.</p>
 <ol class="decimal">
 <li id="li-20">
 <p id="p-353">Find the eigenvalues.</p>
-<p id="p-354">We find the eigenvalues of \(A\) by solving the characteristic equation \(\det(A - \lambda I) = 0\) for \(\lambda\text{.}\) Since \(\det(A - \lambda I) = \lambda^{2}+4\text{,}\) we see that the eigenvalues of \(A\) are \(\lambda_{1} = -2i\) and \(\lambda_{2} = 2i\text{.}\) The fact that these eigenvalues are complex is <em class="emphasis">not</em> a problem. They're still distinct, so our method will work.</p>
+<p id="p-354">We find the eigenvalues of <span class="process-math">\(A\)</span> by solving the characteristic equation <span class="process-math">\(\det(A - \lambda I) = 0\)</span> for <span class="process-math">\(\lambda\text{.}\)</span> Since <span class="process-math">\(\det(A - \lambda I) = \lambda^{2}+4\text{,}\)</span> we see that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1} = -2i\)</span> and <span class="process-math">\(\lambda_{2} = 2i\text{.}\)</span> The fact that these eigenvalues are complex is <em class="emphasis">not</em> a problem. They're still distinct, so our method will work.</p>
 </li>
 <li id="li-21">
 <p id="p-355">Find corresponding eigenvectors.</p>
-<p id="p-356">Set \(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}\text{.}\) Then \(A\vec{v} = \lambda\vec{v}\) implies that</p>
-<div class="displaymath">
+<p id="p-356">Set <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}\text{.}\)</span> Then <span class="process-math">\(A\vec{v} = \lambda\vec{v}\)</span> implies that</p>
+<div class="displaymath process-math">
 \begin{align*}
 v_{1} - 5v_{2}  \amp =  \lambda v_{1}\\
 v_{1} -v_{2}  \amp =  \lambda v_{2}
 \end{align*}
 </div>
 <p class="continuation">or just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 (1-\lambda)v_{1} - 5v_{2} \amp =0\\
 v_{1} - (1+\lambda)v_{2} \amp = 0.
 \end{align*}
 </div>
-<p class="continuation">Setting \(\lambda=-2i\) in the second equation gives \(v_{1} = (1-2i)v_{2}\text{,}\) so an eigenvector of \(A\) corresponding to \(\lambda_{1} = -2i\) is</p>
-<div class="displaymath">
+<p class="continuation">Setting <span class="process-math">\(\lambda=-2i\)</span> in the second equation gives <span class="process-math">\(v_{1} = (1-2i)v_{2}\text{,}\)</span> so an eigenvector of <span class="process-math">\(A\)</span> corresponding to <span class="process-math">\(\lambda_{1} = -2i\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}1-2i \\ 1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Similarly, an eigenvector corresponding to \(\lambda_{2}=2i\) is</p>
-<div class="displaymath">
+<p class="continuation">Similarly, an eigenvector corresponding to <span class="process-math">\(\lambda_{2}=2i\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{2} = \begin{bmatrix}1+2i\\1\end{bmatrix}.
 \end{equation*}
@@ -419,7 +428,7 @@ v_{1} - (1+\lambda)v_{2} \amp = 0.
 <li id="li-22">
 <p id="p-357">Find the general solution.</p>
 <p id="p-358">At this step it is easy to construct the solution of the matrix ODE. It's just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{\lambda_{1}t}\vec{v}_{1} + c_{2}e^{\lambda_{2}t}\vec{v}_{2} = \begin{bmatrix}c_{1}e^{-2it}(1-2i)+c_{2}e^{2it}(1+2i) \\ c_{1}e^{-2it}+c_{2}e^{2it}\end{bmatrix}.
 \end{equation*}
@@ -427,11 +436,11 @@ v_{1} - (1+\lambda)v_{2} \amp = 0.
 </li>
 </ol>
 </div></div>
-</div></article><article class="example example-like" id="example-60"><h6 class="heading">
+</div></article><article class="example example-like" id="example-60"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span>
-</h6>
+</h4>
 <p id="p-359">Solve the first-order system</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \dv{x_{1}}{t} \amp = 3x_{1}+x_{3}\\
 \dv{x_{2}}{t} \amp = 9x_{1}-x_{2}+2x_{3}\\
@@ -439,27 +448,27 @@ v_{1} - (1+\lambda)v_{2} \amp = 0.
 \end{align*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-57" id="solution-57"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-57"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-57" id="solution-57"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-57"><div class="solution solution-like">
 <p id="p-360">As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}' = \begin{bmatrix}3 \amp  0 \amp  1 \\ 9 \amp  -1 \amp  2 \\ -9 \amp  4 \amp  -1\end{bmatrix}\vec{x} = A\vec{x}.
 \end{equation*}
 </div>
-<p id="p-361">To find the eigenvalues we must solve the characteristic equation \(\det(A-\lambda I)=0\text{.}\) However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of \(A\) as well as the corresponding eigenvectors. So we see that the eigenvalues are given by</p>
-<div class="displaymath">
+<p id="p-361">To find the eigenvalues we must solve the characteristic equation <span class="process-math">\(\det(A-\lambda I)=0\text{.}\)</span> However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of <span class="process-math">\(A\)</span> as well as the corresponding eigenvectors. So we see that the eigenvalues are given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lambda_{1} = 3, \quad\lambda_{2} = -1 - i\quad\text{and}\quad\lambda_{3} = -1 + i,
 \end{equation*}
 </div>
 <p class="continuation">while the corresponding eigenvectors are given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix}, \quad\vec{v}_{2} = \begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix}\quad\text{and}\vec{v}_{3} = \begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}
 \end{equation*}
 </div>
 <p id="p-362">We now have everything we need for the general solution of the matrix ODE. It's just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{3t}\begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix} + c_{2}e^{(-1 - i)t}\begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix} + c_{3}e^{(-1 + i)t}\begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}.
 \end{equation*}
@@ -476,223 +485,229 @@ pretty_print(M.eigenvectors_right())
 <span class="type">Subsection</span> <span class="codenumber">4.2.4</span> <span class="title">Applications of Matrix ODEs</span>
 </h3>
 <p id="p-363">Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.</p>
-<article class="example example-like" id="example-61"><h6 class="heading">
+<article class="example example-like" id="example-61"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span>
-</h6>
-<p id="p-364">Two brine tanks are set up as in <a class="xref" data-knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of \(r_{1}\text{,}\) well-mixed solution flows from Tank 1 to Tank 2 at a rate of \(r_{2}\) and well-mixed solution flows out of Tank 2 at a rate of \(r_{3}\text{.}\) Suppose that \(r_{1}, r_{2}\) and  \(r_{3}\) are <span class="quantity">5 <sup>gal</sup>⁄<sub>min</sub></span>, the volume of solution in Tank 1 is <span class="quantity">10 gal</span> and the volume of solution in Tank 2 is <span class="quantity">7 gal</span>. Suppose Tank 1 has <span class="quantity">5 lb</span> of salt at time \(t=0\) and Tank 2 has <span class="quantity">2 lb</span> of salt at time \(t=0\text{.}\) How much salt is in each tank at time \(t\text{?}\)</p>
+</h4>
+<p id="p-364">Two brine tanks are set up as in <a href="" class="xref" data-knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of <span class="process-math">\(r_{1}\text{,}\)</span> well-mixed solution flows from Tank 1 to Tank 2 at a rate of <span class="process-math">\(r_{2}\)</span> and well-mixed solution flows out of Tank 2 at a rate of <span class="process-math">\(r_{3}\text{.}\)</span> Suppose that <span class="process-math">\(r_{1}, r_{2}\)</span> and  <span class="process-math">\(r_{3}\)</span> are <span class="quantity">5 <sup>gal</sup>⁄<sub>min</sub></span>, the volume of solution in Tank 1 is <span class="quantity">10 gal</span> and the volume of solution in Tank 2 is <span class="quantity">7 gal</span>. Suppose Tank 1 has <span class="quantity">5 lb</span> of salt at time <span class="process-math">\(t=0\)</span> and Tank 2 has <span class="quantity">2 lb</span> of salt at time <span class="process-math">\(t=0\text{.}\)</span> How much salt is in each tank at time <span class="process-math">\(t\text{?}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-58" id="solution-58"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-58"><div class="solution solution-like">
-<p id="p-365">To start, let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\) and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\text{,}\) where \(t\) is in minutes. Then from Section 4.1, we know that</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-58" id="solution-58"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-58"><div class="solution solution-like">
+<p id="p-365">To start, let <span class="process-math">\(x_{1}(t)\)</span> denote the amount of salt in Tank 1 at time <span class="process-math">\(t\)</span> and <span class="process-math">\(x_{2}(t)\)</span> denote the amount of salt in Tank 2 at time <span class="process-math">\(t\text{,}\)</span> where <span class="process-math">\(t\)</span> is in minutes. Then from Section 4.1, we know that</p>
+<div class="displaymath process-math">
 \begin{align*}
 x'_{1} \amp = -\frac{1}{2}x_{1}\\
 x'_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 \end{align*}
 </div>
 <p class="continuation">If we set</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \qq{and} A = \begin{bmatrix}-\frac{1}{2} \amp  0 \\ \frac{1}{2} \amp  -\frac{5}{7}\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">then this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\text{.}\) To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation \(\det(A-\lambda I) = 0\) or use Maple, but it's easier to note that \(A\) is a triangular matrix. So the eigenvalues are just \(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</p>
+<p class="continuation">then this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}' = A\vec{x}\text{.}\)</span> To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation <span class="process-math">\(\det(A-\lambda I) = 0\)</span> or use Maple, but it's easier to note that <span class="process-math">\(A\)</span> is a triangular matrix. So the eigenvalues are just <span class="process-math">\(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</span></p>
 <p id="p-366">Now we find eigenvectors. So let</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">If \(\vec{v}\) is an eigenvector for \(\lambda\text{,}\) then we know \(A\vec{v} = \lambda\vec{v}\text{,}\) which gives the system</p>
-<div class="displaymath">
+<p class="continuation">If <span class="process-math">\(\vec{v}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then we know <span class="process-math">\(A\vec{v} = \lambda\vec{v}\text{,}\)</span> which gives the system</p>
+<div class="displaymath process-math">
 \begin{align*}
 (-\frac{1}{2}-\lambda)v_{1} \amp = 0\\
 \frac{1}{2}v_{1} + (-\frac{5}{7}-\lambda)v_{2} \amp = 0
 \end{align*}
 </div>
-<p class="continuation">If we set \(\lambda=-\frac{1}{2}\text{,}\) then we just get \(v_{1} = \frac{3}{14}v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{1} = -\frac{1}{2}\) is</p>
-<div class="displaymath">
+<p class="continuation">If we set <span class="process-math">\(\lambda=-\frac{1}{2}\text{,}\)</span> then we just get <span class="process-math">\(v_{1} = \frac{3}{14}v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{1} = -\frac{1}{2}\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-367">Similarly, if we set \(\lambda=-\frac{5}{7}\) we get \(v_{1} = 0\text{,}\) but no restrictions on \(v_{2}\text{.}\) So an eigenvector corresponding to \(\lambda_{2} = -\frac{5}{7}\) is</p>
-<div class="displaymath">
+<p id="p-367">Similarly, if we set <span class="process-math">\(\lambda=-\frac{5}{7}\)</span> we get <span class="process-math">\(v_{1} = 0\text{,}\)</span> but no restrictions on <span class="process-math">\(v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{2} = -\frac{5}{7}\)</span> is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}.
 \end{equation*}
 </div>
 <p id="p-368">The general solution of our matrix ODE is then</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}
 \end{equation*}
 </div>
-<p id="p-369">But we're not done yet, since we have the initial conditions \(x_{1}(0) = 5\) and \(x_{2}(0) = 2\text{,}\) or in terms of our matrix ODE</p>
-<div class="displaymath">
+<p id="p-369">But we're not done yet, since we have the initial conditions <span class="process-math">\(x_{1}(0) = 5\)</span> and <span class="process-math">\(x_{2}(0) = 2\text{,}\)</span> or in terms of our matrix ODE</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">We can use this to find \(c_{1}\) and \(c_{2}\text{.}\) If we set \(t=0\text{,}\) then we get</p>
-<div class="displaymath">
+<p class="continuation">We can use this to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> If we set <span class="process-math">\(t=0\text{,}\)</span> then we get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">so \(c_{2} = \frac{5}{3}\) and \(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</p>
+<p class="continuation">so <span class="process-math">\(c_{2} = \frac{5}{3}\)</span> and <span class="process-math">\(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</span></p>
 <p id="p-370">So the solution of the matrix ODE (and hence the original system) is</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">The amount of salt in the first tank, \(x_{1}\text{,}\) is given by the top entry and the amount of salt in the second tank, \(x_{2}\text{,}\) is given by the bottom entry.</p>
+<p class="continuation">The amount of salt in the first tank, <span class="process-math">\(x_{1}\text{,}\)</span> is given by the top entry and the amount of salt in the second tank, <span class="process-math">\(x_{2}\text{,}\)</span> is given by the bottom entry.</p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-the-phase-plane"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.2.5</span> <span class="title">The Phase Plane</span>
 </h3>
 <p id="p-371">Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align}
 y'_{1}  \amp =  a_{11}y_{1} + a_{12}y_{2}\label{equation-2-by-2-system}\tag{4.2.1}\\
 y'_{2}  \amp =  a_{21}y_{1}+  a_{22}y_{2}\notag
 \end{align}
 </div>
 <p class="continuation">or</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}' = A\vec{y}\quad\text{where}\quad A = \begin{bmatrix}a_{11}  \amp  a_{12}  \\  a_{21}  \amp  a_{22}\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-372">The solution of this looks like \(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\) As \(t\) varies, \(\vec{y}(t)\) will trace out a curve in the \(y_{1}y_{2}\)-plane, which we call the <dfn class="terminology">trajectory</dfn>. The \(y_{1}y_{2}\)-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.2.1">(4.2.1)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.2.1">(4.2.1)</a> without actually solving the system.</p>
-<article class="example example-like" id="example-sketch-phase-portrait"><h6 class="heading">
+<p id="p-372">The solution of this looks like <span class="process-math">\(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\)</span> As <span class="process-math">\(t\)</span> varies, <span class="process-math">\(\vec{y}(t)\)</span> will trace out a curve in the <span class="process-math">\(y_{1}y_{2}\)</span>-plane, which we call the <dfn class="terminology">trajectory</dfn>. The <span class="process-math">\(y_{1}y_{2}\)</span>-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.2.1">(4.2.1)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.2.1">(4.2.1)</a> without actually solving the system.</p>
+<article class="example example-like" id="example-sketch-phase-portrait"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span>
-</h6>
+</h4>
 <p id="p-373">Sketch a phase portrait for the system</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \dv{y_{1}}{t}  \amp =  2y_{1} - 3y_{2}\\
 \dv{y_{2}}{t}  \amp =  -2y_{1} + y_{2}.
 \end{align*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-59" id="solution-59"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-59"><div class="solution solution-like">
-<p id="p-374">First, note that we can rewrite the system as \(\vec{y}' = A\vec{y}\) using</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-59" id="solution-59"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-59"><div class="solution solution-like">
+<p id="p-374">First, note that we can rewrite the system as <span class="process-math">\(\vec{y}' = A\vec{y}\)</span> using</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}2 \amp  -3 \\-2 \amp  1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Now, we can view \(\vec{y}\) as corresponding to a point in the phase plane. Hence \(\vec{y}'\) corresponds to a \emph{tangent} at the point \(\vec{y}\text{.}\) For example, let's find the tangent at the point \(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{:}\)</p>
-<div class="displaymath">
+<p class="continuation">Now, we can view <span class="process-math">\(\vec{y}\)</span> as corresponding to a point in the phase plane. Hence <span class="process-math">\(\vec{y}'\)</span> corresponds to a \emph{tangent} at the point <span class="process-math">\(\vec{y}\text{.}\)</span> For example, let's find the tangent at the point <span class="process-math">\(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{:}\)</span></p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}' = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}2\\2\end{bmatrix} = \begin{bmatrix}-2 \\ -2\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-375">So at the point \((2,2)\) in the phase plane, the trajectory should be heading in the direction of the point \((-2,-2)\) from the origin. Similarly, if we let \(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\) then we get</p>
-<div class="displaymath">
+<p id="p-375">So at the point <span class="process-math">\((2,2)\)</span> in the phase plane, the trajectory should be heading in the direction of the point <span class="process-math">\((-2,-2)\)</span> from the origin. Similarly, if we let <span class="process-math">\(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\)</span> then we get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}' = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix} = \begin{bmatrix}-3 \\ 1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">So the trajectory going through \((0,1)\) in the phase plane should be heading in the direction of \((-3,1)\) viewed from the origin.</p>
-<p id="p-376">Plotting other points in the phase plane like this, we get <a class="xref" data-knowl="./knowl/figure-sketch-phase-portrait.html" title="Figure 4.2.14">Figure 4.2.14</a>. One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions \(y_{1}(0) = y_{2}(0)\text{,}\) appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is</p>
-<div class="displaymath">
+<p class="continuation">So the trajectory going through <span class="process-math">\((0,1)\)</span> in the phase plane should be heading in the direction of <span class="process-math">\((-3,1)\)</span> viewed from the origin.</p>
+<p id="p-376">Plotting other points in the phase plane like this, we get <a href="" class="xref" data-knowl="./knowl/figure-sketch-phase-portrait.html" title="Figure 4.2.14">Figure 4.2.14</a>. One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions <span class="process-math">\(y_{1}(0) = y_{2}(0)\text{,}\)</span> appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y} = c_{1}e^{4t}\begin{bmatrix}-3\\2\end{bmatrix}+c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-377">If \(\vec{y}\) lies on the line \(y_{2} = y_{1}\text{,}\) then \(c_{1}\) has to equal \(0\text{,}\) which follows from the fact that \(\begin{bmatrix}-3\\2\end{bmatrix}\) and \(\begin{bmatrix}1\\1\end{bmatrix}\) are linearly independent. So trajectories that lie on the line \(y_{2} = y_{1}\) must take the form \(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\) and every solution of this form goes to \(\vec{0}\) as \(t\to\infty\text{.}\) <em class="emphasis">Every other trajectory</em> will move away from the origin as \(t\to\infty\text{,}\) although the trajectories that lie on the line \(y_{2} = -\frac{2}{3}y_{1}\) will travel to the origin as \(t\to-\infty\) (i.e. ``backwards in time''):</p>
+<p id="p-377">If <span class="process-math">\(\vec{y}\)</span> lies on the line <span class="process-math">\(y_{2} = y_{1}\text{,}\)</span> then <span class="process-math">\(c_{1}\)</span> has to equal <span class="process-math">\(0\text{,}\)</span> which follows from the fact that <span class="process-math">\(\begin{bmatrix}-3\\2\end{bmatrix}\)</span> and <span class="process-math">\(\begin{bmatrix}1\\1\end{bmatrix}\)</span> are linearly independent. So trajectories that lie on the line <span class="process-math">\(y_{2} = y_{1}\)</span> must take the form <span class="process-math">\(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\)</span> and every solution of this form goes to <span class="process-math">\(\vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> <em class="emphasis">Every other trajectory</em> will move away from the origin as <span class="process-math">\(t\to\infty\text{,}\)</span> although the trajectories that lie on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\)</span> will travel to the origin as <span class="process-math">\(t\to-\infty\)</span> (i.e. ``backwards in time''):</p>
 </div></div>
 </div></article><figure class="figure figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095146049186%"><iframe src="images/image-15.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><p id="p-378">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><p id="p-378">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</p>
 <div class="sagecell-sage" id="sage-6"><script type="text/x-sage">var('y1 y2') # define from system variables
 VF=plot_vector_field([2*y1 - 3*y2,-2*y1 + y2],[y1,-2,2],[y2,-2,2]) # creates plot of phase portrait from system
 show(VF) # shows the plot
 </script></div>
-<p id="p-379">Note that \(\vec{y}=\vec{0}\) is <em class="emphasis">always</em> a solution of \(\vec{y}'=A\vec{y}\text{.}\) This is because \(\vec{0}'=A\vec{0} = \vec{0}\text{.}\) We call \(\vec{y} = \vec{0}\) the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system \(\vec{y}'=A\vec{y}\text{.}\) In the next section, we will be concerned with the behavior of trajectories of the system \(\vec{y}'=A\vec{y}\) near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix \(A\text{.}\)</p>
-<p id="p-380">We will classify the behavior of trajectories at the critical point \(\vec{x} = \vec{0}\) into five different cases:</p>
+<p id="p-379">Note that <span class="process-math">\(\vec{y}=\vec{0}\)</span> is <em class="emphasis">always</em> a solution of <span class="process-math">\(\vec{y}'=A\vec{y}\text{.}\)</span> This is because <span class="process-math">\(\vec{0}'=A\vec{0} = \vec{0}\text{.}\)</span> We call <span class="process-math">\(\vec{y} = \vec{0}\)</span> the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system <span class="process-math">\(\vec{y}'=A\vec{y}\text{.}\)</span> In the next section, we will be concerned with the behavior of trajectories of the system <span class="process-math">\(\vec{y}'=A\vec{y}\)</span> near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix <span class="process-math">\(A\text{.}\)</span></p>
+<p id="p-380">We will classify the behavior of trajectories at the critical point <span class="process-math">\(\vec{x} = \vec{0}\)</span> into five different cases:</p>
 <figure class="table table-like" id="table-9"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">4.2.15<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Classification</td>
-<td class="l m b3 r0 l0 t3 lines">Behavior at \(\vec{0}\)</td>
+<td class="l m b3 r0 l0 t3 lines">Behavior at <span class="process-math">\(\vec{0}\)</span>
+</td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines">Improper node</td>
-<td class="l m b0 r0 l0 t0 lines">Every trajectory except two has the same limiting tangent at \(\vec{0}\)</td>
+<td class="l m b0 r0 l0 t0 lines">Every trajectory except two has the same limiting tangent at <span class="process-math">\(\vec{0}\)</span>
+</td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines">Proper node</td>
-<td class="l m b0 r0 l0 t0 lines">For every direction \(\vec{d}\) there exists trajectory with limiting tangent \(\vec{d}\)</td>
+<td class="l m b0 r0 l0 t0 lines">For every direction <span class="process-math">\(\vec{d}\)</span> there exists trajectory with limiting tangent <span class="process-math">\(\vec{d}\)</span>
+</td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines">Saddle point</td>
-<td class="l m b0 r0 l0 t0 lines">Two incoming trajectories, two outgoing trajectories; all others bypass \(\vec{0}\)</td>
+<td class="l m b0 r0 l0 t0 lines">Two incoming trajectories, two outgoing trajectories; all others bypass <span class="process-math">\(\vec{0}\)</span>
+</td>
 </tr>
 <tr>
 <td class="l m b0 r0 l0 t0 lines">Center</td>
-<td class="l m b0 r0 l0 t0 lines">\(\vec{0}\) is enclosed by infinitely many closed (repeating) trajectories</td>
+<td class="l m b0 r0 l0 t0 lines">
+<span class="process-math">\(\vec{0}\)</span> is enclosed by infinitely many closed (repeating) trajectories</td>
 </tr>
 <tr>
 <td class="l m b3 r0 l0 t0 lines">Spiral point</td>
-<td class="l m b3 r0 l0 t0 lines">Trajectories spiral inwards or outwards from \(\vec{0}\)</td>
+<td class="l m b3 r0 l0 t0 lines">Trajectories spiral inwards or outwards from <span class="process-math">\(\vec{0}\)</span>
+</td>
 </tr>
-</table></div></figure><p id="p-381">\(\vec{0}\) was a saddle point in <a class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a> since there were incoming trajectories on the line \(y_{2} = y_{1}\) and outgoing trajectories on the line \(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</p>
-<article class="example example-like" id="example-stability-equilibrium-solution"><h6 class="heading">
+</table></div></figure><p id="p-381"><span class="process-math">\(\vec{0}\)</span> was a saddle point in <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a> since there were incoming trajectories on the line <span class="process-math">\(y_{2} = y_{1}\)</span> and outgoing trajectories on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</span></p>
+<article class="example example-like" id="example-stability-equilibrium-solution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span>
-</h6>
-<p id="p-382">Using a phase portrait, determine the type of critical point that \(\vec{y} = \vec{0}\) is for the matrix ODE \(\vec{y}'=A\vec{y}\) where</p>
-<div class="displaymath">
+</h4>
+<p id="p-382">Using a phase portrait, determine the type of critical point that <span class="process-math">\(\vec{y} = \vec{0}\)</span> is for the matrix ODE <span class="process-math">\(\vec{y}'=A\vec{y}\)</span> where</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}3 \amp  4 \\ -4 \amp  3\end{bmatrix}.
 \end{equation*}
 </div>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-60" id="solution-60"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-60"><div class="solution solution-like">
-<p id="p-383">As seen in <a class="xref" data-knowl="./knowl/figure-classify-stability-using-phase-portrait.html" title="Figure 4.2.17">Figure 4.2.17</a>, every (nonzero) trajectory will spiral outward from \(\vec{y} = \vec{0}\) as \(t\to\infty\text{,}\) so \(\vec{0}\) is a spiral point of this system. To see why, we only need to look at the eigenvalues of \(A\text{,}\) which we find to be</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-60" id="solution-60"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-60"><div class="solution solution-like">
+<p id="p-383">As seen in <a href="" class="xref" data-knowl="./knowl/figure-classify-stability-using-phase-portrait.html" title="Figure 4.2.17">Figure 4.2.17</a>, every (nonzero) trajectory will spiral outward from <span class="process-math">\(\vec{y} = \vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> so <span class="process-math">\(\vec{0}\)</span> is a spiral point of this system. To see why, we only need to look at the eigenvalues of <span class="process-math">\(A\text{,}\)</span> which we find to be</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lambda_{1} = 3+4i,\lambda_{2} = 3-4i.
 \end{equation*}
 </div>
-<p class="continuation">This means that the general solution of \(\vec{y}' = A\vec{y}\) must look like</p>
-<div class="displaymath">
+<p class="continuation">This means that the general solution of <span class="process-math">\(\vec{y}' = A\vec{y}\)</span> must look like</p>
+<div class="displaymath process-math">
 \begin{align*}
 \vec{y} \amp = c_{1}e^{(3+4i)t}\vec{y}_{1} + c_{2}e^{(3-4i)t}\vec{y}_{2}\\
 \amp = e^{3t}\brackets{c_{1}e^{4it}\vec{y}_{1}+c_{2}e^{-4it}\vec{y}_{2}}\\
 \amp = e^{3t}\brackets{(\cos4t)\vec{x}_{1}+(\sin4t)\vec{x}_{2}}\text{.}
 \end{align*}
 </div>
-<p id="p-384">The real part of the eigenvalues leads to the ``growth term'' of \(e^{3t}\) appearing in the solution, which causes the trajectories to diverge as \(t\to\infty\text{.}\) The imaginary part of the eigenvalues leads to the ``oscillating terms'' of \(\cos4t,\sin4t\) appearing in the solution, which gives the trajectories their spiral motion.</p>
+<p id="p-384">The real part of the eigenvalues leads to the ``growth term'' of <span class="process-math">\(e^{3t}\)</span> appearing in the solution, which causes the trajectories to diverge as <span class="process-math">\(t\to\infty\text{.}\)</span> The imaginary part of the eigenvalues leads to the ``oscillating terms'' of <span class="process-math">\(\cos4t,\sin4t\)</span> appearing in the solution, which gives the trajectories their spiral motion.</p>
 </div></div>
 </div></article><figure class="figure figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095146049186%"><iframe src="images/image-16.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><p id="p-385">In general, the eigenvalues of the matrix \(A\) in the system \(\vec{y}' = A\vec{y}\) will determine the type of critical point that \(\vec{0}\) is for the system \(\vec{y}'=A\vec{y}\text{.}\)</p>
-<article class="example example-like" id="example-64"><h6 class="heading">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a href="" class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><p id="p-385">In general, the eigenvalues of the matrix <span class="process-math">\(A\)</span> in the system <span class="process-math">\(\vec{y}' = A\vec{y}\)</span> will determine the type of critical point that <span class="process-math">\(\vec{0}\)</span> is for the system <span class="process-math">\(\vec{y}'=A\vec{y}\text{.}\)</span></p>
+<article class="example example-like" id="example-64"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.18</span><span class="period">.</span>
-</h6>
-<p id="p-386">What kind of critical point is \(\vec{y} = \vec{0}\) for the system</p>
-<div class="displaymath">
+</h4>
+<p id="p-386">What kind of critical point is <span class="process-math">\(\vec{y} = \vec{0}\)</span> for the system</p>
+<div class="displaymath process-math">
 \begin{align*}
 y'_{1} \amp = -4y_{2}\\
 y'_{2}  \amp =  4y_{1}
 \end{align*}
 </div>
-<p class="continuation">where \(y_{i} = y_{i}(t)\text{?}\)</p>
+<p class="continuation">where <span class="process-math">\(y_{i} = y_{i}(t)\text{?}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-61" id="solution-61"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-61"><div class="solution solution-like">
-<p id="p-387">We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories \(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \) if we can find a relationship between \(y_{1}\) and \(y_{2}\text{.}\) To do so, we “cross-multiply” the system to get</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-61" id="solution-61"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-61"><div class="solution solution-like">
+<p id="p-387">We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories <span class="process-math">\(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \)</span> if we can find a relationship between <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span> To do so, we “cross-multiply” the system to get</p>
+<div class="displaymath process-math">
 \begin{equation*}
 4y_{1}y'_{1} = -4y_{2}y'_{2} \quad\text{or}\quad 4y_{1}\dd{y_{1}} = -4y_{2}\dd{y_{2}}.
 \end{equation*}
 </div>
 <p class="continuation">So we can integrate this to get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 2y_{1}^{2} = -2y_{2}^{2}+C\qq{or}y_{1}^{2}+y_{2}^{2} = C_{1}.
 \end{equation*}
 </div>
-<p id="p-388">This is the equation of a circle of radius \(\sqrt{C_{1}}\text{,}\) and so every trajectory \(\vec{y}\) for this system will be a circle centered at \(\vec{0}\text{.}\) Hence \(\vec{0}\) is a center.</p>
+<p id="p-388">This is the equation of a circle of radius <span class="process-math">\(\sqrt{C_{1}}\text{,}\)</span> and so every trajectory <span class="process-math">\(\vec{y}\)</span> for this system will be a circle centered at <span class="process-math">\(\vec{0}\text{.}\)</span> Hence <span class="process-math">\(\vec{0}\)</span> is a center.</p>
 </div></div>
 </div></article></section></section></div></main>
 </div>

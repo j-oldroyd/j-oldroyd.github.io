@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:30:00-05:00       *-->
+<!--*       on 2021-11-11T08:47:33-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Direction Fields</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,21 +57,21 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -74,7 +80,10 @@ MathJax.Hub.Config({
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}    
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
@@ -89,7 +98,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -101,7 +110,7 @@ MathJax.Hub.Config({
 <button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
 <a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
-var ggbApp = new GGBApplet({"appName": "classic",
+var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
     "height": 600,
     "showToolBar": true,
@@ -136,7 +145,7 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-direction-fields"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.2</span> <span class="title">Direction Fields</span>
@@ -144,69 +153,69 @@ true);
 <section class="introduction" id="introduction-3"><p id="p-36">This section corresponds to Section 1.2 from the textbook.</p></section><section class="subsection" id="subsection-direction-fields-and-solution-curves"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">1.2.1</span> <span class="title">Direction Fields and Solution Curves</span>
 </h3>
-<p id="p-37">Suppose we wanted to solve the ODE \(\dv{y}{x} = x\text{.}\) Then we can do so using the tools already available to us, since the mystery function \(y=y(x)\) must have derivative given by \(x\text{.}\) So</p>
-<div class="displaymath">
+<p id="p-37">Suppose we wanted to solve the ODE <span class="process-math">\(\dv{y}{x} = x\text{.}\)</span> Then we can do so using the tools already available to us, since the mystery function <span class="process-math">\(y=y(x)\)</span> must have derivative given by <span class="process-math">\(x\text{.}\)</span> So</p>
+<div class="displaymath process-math">
 \begin{equation*}
 y = \int x\,dx = \frac{1}{2}x^{2}+C.
 \end{equation*}
 </div>
-<p class="continuation">Any choice for \(C\) yields another solution of the ODE \(\dv{y}{x} = x\text{.}\)</p>
-<aside class="aside aside-like" id="aside-1"><p id="p-38">Again, it's very important in this course not to forget the arbitrary constant \(C\text{!}\)</p></aside><p id="p-39">Now let's make things a little more interesting. Suppose we wanted to solve the ODE \(\dv{y}{x} = e^{-x^{2}}\text{.}\) Then this is <em class="emphasis">impossible</em> to do in a single "closed-form". <aside class="aside aside-like" id="aside-2"><p id="p-40">By closed-form we basically mean in terms of the usual exponential, trigonometric and polynomial functions, as well as their inverses.</p></aside> This is because solving this ODE requires integrating \(e^{-x^{2}}\text{,}\) which as you may remember from Calculus 2 cannot be done without resorting to something like power series. Even if we can't solve the ODE, or if we can't solve it easily, we still want to be able to obtain some information from it. One way to do this is by using <dfn class="terminology">direction fields</dfn>, which is a graphical representation of the ODE.</p>
+<p class="continuation">Any choice for <span class="process-math">\(C\)</span> yields another solution of the ODE <span class="process-math">\(\dv{y}{x} = x\text{.}\)</span></p>
+<aside class="aside aside-like" id="aside-1"><p id="p-38">Again, it's very important in this course not to forget the arbitrary constant <span class="process-math">\(C\text{!}\)</span></p></aside><p id="p-39">Now let's make things a little more interesting. Suppose we wanted to solve the ODE <span class="process-math">\(\dv{y}{x} = e^{-x^{2}}\text{.}\)</span> Then this is <em class="emphasis">impossible</em> to do in a single "closed-form". <aside class="aside aside-like" id="aside-2"><p id="p-40">By closed-form we basically mean in terms of the usual exponential, trigonometric and polynomial functions, as well as their inverses.</p></aside> This is because solving this ODE requires integrating <span class="process-math">\(e^{-x^{2}}\text{,}\)</span> which as you may remember from Calculus 2 cannot be done without resorting to something like power series. Even if we can't solve the ODE, or if we can't solve it easily, we still want to be able to obtain some information from it. One way to do this is by using <dfn class="terminology">direction fields</dfn>, which is a graphical representation of the ODE.</p>
 <p id="p-41">To construct a direction field for an ODE of the form</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \dv{y}{x} = f(x,y)
 \end{equation*}
 </div>
 <p class="continuation">perform the following steps:</p>
 <ol class="decimal">
-<li id="li-5">Pick a point \((a,b)\) in the \(xy\)-plane.</li>
-<li id="li-6">Plug the point \((a,b)\) into \(f(x,y)\) to obtain the number \(f(a,b)\text{.}\)</li>
-<li id="li-7">Plot a short line segment with slope \(f(a,b)\) at the point \((a,b)\text{.}\)</li>
-<li id="li-8">Repeat at several other points in the \(xy\)-plane until you develop a satisfactory picture of the behavior of the ODE.</li>
+<li id="li-5"><p id="p-derived-li-5">Pick a point <span class="process-math">\((a,b)\)</span> in the <span class="process-math">\(xy\)</span>-plane.</p></li>
+<li id="li-6"><p id="p-derived-li-6">Plug the point <span class="process-math">\((a,b)\)</span> into <span class="process-math">\(f(x,y)\)</span> to obtain the number <span class="process-math">\(f(a,b)\text{.}\)</span></p></li>
+<li id="li-7"><p id="p-derived-li-7">Plot a short line segment with slope <span class="process-math">\(f(a,b)\)</span> at the point <span class="process-math">\((a,b)\text{.}\)</span></p></li>
+<li id="li-8"><p id="p-derived-li-8">Repeat at several other points in the <span class="process-math">\(xy\)</span>-plane until you develop a satisfactory picture of the behavior of the ODE.</p></li>
 </ol>
 <p class="continuation">The resulting graph is called the direction field for the ODE.</p>
-<aside class="aside aside-like" id="aside-3"><p id="p-42">Direction fields are often called slope fields.</p></aside><article class="example example-like" id="example-plotting-a-direction-field-by-hand"><h6 class="heading">
+<aside class="aside aside-like" id="aside-3"><p id="p-42">Direction fields are often called slope fields.</p></aside><article class="example example-like" id="example-plotting-a-direction-field-by-hand"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Plotting a direction field by hand.</span>
-</h6>
-<p id="p-43">Fill in the direction field for \(y' = t - y\) at the indicated points:</p>
-<figure class="figure figure-like" id="figure-dirfield-template"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-2.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
+</h4>
+<p id="p-43">Fill in the direction field for <span class="process-math">\(y' = t - y\)</span> at the indicated points:</p>
+<figure class="figure figure-like" id="figure-dirfield-template"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-2.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.2<span class="period">.</span></span><span class="space"> </span></figcaption></figure><div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-6" id="solution-6"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-6"><div class="solution solution-like">
-<p id="p-44">To plot the direction field, remember that we're basically plotting <em class="emphasis">slopes</em>. So we first need to figure out \(y' = t-y\) at the indicated points. The following table lists values for \(y'\) at some of these points: <figure class="table table-like" id="table-1"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">1.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-6" id="solution-6"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-6"><div class="solution solution-like">
+<p id="p-44">To plot the direction field, remember that we're basically plotting <em class="emphasis">slopes</em>. So we first need to figure out <span class="process-math">\(y' = t-y\)</span> at the indicated points. The following table lists values for <span class="process-math">\(y'\)</span> at some of these points: <figure class="table table-like" id="table-1"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">1.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
-<td class="c m b1 r0 l0 t3 lines">\((t,y)\)</td>
-<td class="c m b1 r0 l0 t3 lines">\(y' = t-y\)</td>
+<td class="c m b1 r0 l0 t3 lines"><span class="process-math">\((t,y)\)</span></td>
+<td class="c m b1 r0 l0 t3 lines"><span class="process-math">\(y' = t-y\)</span></td>
 </tr>
 <tr>
-<td class="c m b1 r0 l0 t0 lines">\((0,0)\)</td>
-<td class="c m b1 r0 l0 t0 lines">\(0-0 = 0\)</td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\((0,0)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\(0-0 = 0\)</span></td>
 </tr>
 <tr>
-<td class="c m b1 r0 l0 t0 lines">\((2,2)\)</td>
-<td class="c m b1 r0 l0 t0 lines">\(2-2=0\)</td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\((2,2)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\(2-2=0\)</span></td>
 </tr>
 <tr>
-<td class="c m b1 r0 l0 t0 lines">\((1,2)\)</td>
-<td class="c m b1 r0 l0 t0 lines">\(1-2 = -1\)</td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\((1,2)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines"><span class="process-math">\(1-2 = -1\)</span></td>
 </tr>
 <tr>
-<td class="c m b3 r0 l0 t0 lines">\((0,1)\)</td>
-<td class="c m b3 r0 l0 t0 lines">\(0-1=-1\)</td>
+<td class="c m b3 r0 l0 t0 lines"><span class="process-math">\((0,1)\)</span></td>
+<td class="c m b3 r0 l0 t0 lines"><span class="process-math">\(0-1=-1\)</span></td>
 </tr>
-</table></div></figure> If we fill out the remaining values of \(y'\) and plot the corresponding slopes, we should get something like this:</p>
-<figure class="figure figure-like" id="figure-3"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-3.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
+</table></div></figure> If we fill out the remaining values of <span class="process-math">\(y'\)</span> and plot the corresponding slopes, we should get something like this:</p>
+<figure class="figure figure-like" id="figure-3"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="images/image-3.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.4<span class="period">.</span></span><span class="space"> </span></figcaption></figure>
 </div></div>
-</div></article><article class="example example-like" id="example-plotting-a-direction-field-with-a-cas"><h6 class="heading">
+</div></article><article class="example example-like" id="example-plotting-a-direction-field-with-a-cas"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Plotting a direction field with a CAS.</span>
-</h6>
-<p id="p-45">Plot the direction field for the differential equation \(x' = x(1-x)\text{,}\) where \(x=x(t)\text{.}\)</p>
+</h4>
+<p id="p-45">Plot the direction field for the differential equation <span class="process-math">\(x' = x(1-x)\text{,}\)</span> where <span class="process-math">\(x=x(t)\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-7" id="solution-7"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-7"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-7" id="solution-7"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-7"><div class="solution solution-like">
 <p id="p-46">We can easily do this with a computer system (such as Sage!). For example, try running the cell below this example. If we do so, we get something like the following diagram:</p>
 <figure class="figure figure-like" id="figure-dirfield1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 99.0164229381366%"><iframe src="images/image-4.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.6<span class="period">.</span></span><span class="space"> </span>The direction field for \(x' = x(1-x)\text{.}\)</figcaption></figure>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.6<span class="period">.</span></span><span class="space"> </span>The direction field for <span class="process-math">\(x' = x(1-x)\text{.}\)</span></figcaption></figure>
 </div></div>
 </div></article><div class="sagecell-sage" id="sage-1"><script type="text/x-sage">var('t, x')    # tells Sage what variables we're using
 f = x * (1 - x)
@@ -217,22 +226,22 @@ f = x * (1 - x)
 streamline_plot(f, (t, -5, 5), (x, -1, 2))
 </script></div> This can also be created by hand from a slope field without too much trouble.</p>
 <p id="p-48">If we only graph a single curve in the direction field we get what's known as a <dfn class="terminology">solution curve</dfn>, which represents a solution of an initial value problem corresponding to the ODE the direction field is drawn from.</p>
-<article class="example example-like" id="example-information-from-a-solution-curve"><h6 class="heading">
+<article class="example example-like" id="example-information-from-a-solution-curve"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Information from a solution curve.</span>
-</h6>
-<p id="p-49">Let \(x(t)\) represent the solution of the initial value problem</p>
-<div class="displaymath">
+</h4>
+<p id="p-49">Let <span class="process-math">\(x(t)\)</span> represent the solution of the initial value problem</p>
+<div class="displaymath process-math">
 \begin{align*}
 x' &amp; = x(1-x) \\
 x(0) &amp; = \frac{1}{2}. 
 \end{align*}
 </div>
-<p class="continuation">Determine \(\lim_{t\to\infty}x(t)\text{.}\)</p>
+<p class="continuation">Determine <span class="process-math">\(\lim_{t\to\infty}x(t)\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-8" id="solution-8"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-8"><div class="solution solution-like">
-<p id="p-50">Since we don't know how to solve this IVP yet, we'll make use of the direction field from <a class="xref" data-knowl="./knowl/example-plotting-a-direction-field-with-a-cas.html" title="Example 1.2.5: Plotting a direction field with a CAS">Example 1.2.5</a> to find an approximate solution curve. Since the initial condition is \(x(0) = \frac{1}{2}\text{,}\) this means that the solution must pass through the point \((0,\frac{1}{2})\text{.}\) So if we start at this point and trace a curve that flows with the direction field, we get the following solution curve:</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-8" id="solution-8"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-8"><div class="solution solution-like">
+<p id="p-50">Since we don't know how to solve this IVP yet, we'll make use of the direction field from <a href="" class="xref" data-knowl="./knowl/example-plotting-a-direction-field-with-a-cas.html" title="Example 1.2.5: Plotting a direction field with a CAS">Example 1.2.5</a> to find an approximate solution curve. Since the initial condition is <span class="process-math">\(x(0) = \frac{1}{2}\text{,}\)</span> this means that the solution must pass through the point <span class="process-math">\((0,\frac{1}{2})\text{.}\)</span> So if we start at this point and trace a curve that flows with the direction field, we get the following solution curve:</p>
 <figure class="figure figure-like" id="figure-solcurve1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 98.9583437465636%"><iframe src="images/image-5.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.8<span class="period">.</span></span><span class="space"> </span>The solution curve corresponding to the initial condition \(x(0) = \frac{1}{2}\text{.}\)</figcaption></figure><p id="p-51">So it appears that \(\lim_{t\to\infty}x(t) = 1\text{.}\)</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.8<span class="period">.</span></span><span class="space"> </span>The solution curve corresponding to the initial condition <span class="process-math">\(x(0) = \frac{1}{2}\text{.}\)</span></figcaption></figure><p id="p-51">So it appears that <span class="process-math">\(\lim_{t\to\infty}x(t) = 1\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="conclusion" id="conclusion-2"><p id="p-52">SUGGESTED PROBLEMS: 1-7 odd</p></section></section></div></main>
 </div>
