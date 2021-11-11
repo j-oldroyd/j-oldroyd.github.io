@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:39:14-05:00       *-->
+<!--*       on 2021-11-10T20:52:29-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Equations of Lines and Planes</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,29 +57,26 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-
-\newcommand{\vv}[1]{\mathbf{#1}}
-\newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\curl}{\nabla\times}
 \newcommand{\curlt}{\operatorname{curl}}
@@ -100,7 +103,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -155,130 +158,131 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-equations-of-lines-and-planes"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.5</span> <span class="title">Equations of Lines and Planes</span>
 </h2>
-<section class="introduction" id="introduction-26"><p id="p-1227">Recall that the equation of a line in \(\RR^{2}\) has the general form \(ax+by + c = 0\text{.}\) However, this equation does not give a line in \(\RR^{3}\text{.}\) In fact, it actually gives a plane, as we'll see! What we want to do now is find exactly how to describe a given line or plane.</p></section><section class="subsection" id="subsection-equations-of-lines"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-26"><p id="p-1227">Recall that the equation of a line in <span class="process-math">\(\RR^{2}\)</span> has the general form <span class="process-math">\(ax+by + c = 0\text{.}\)</span> However, this equation does not give a line in <span class="process-math">\(\RR^{3}\text{.}\)</span> In fact, it actually gives a plane, as we'll see! What we want to do now is find exactly how to describe a given line or plane.</p></section><section class="subsection" id="subsection-equations-of-lines"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.5.1</span> <span class="title">Equations of Lines</span>
 </h3>
-<p id="p-1228">First, suppose we have a line \(L\) in \(\RR^{3}\) as follows:</p>
-<figure class="figure figure-like" id="figure-line-in-space"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.1<span class="period">.</span></span><span class="space"> </span>A line in \(\mathbb{R}^{3}\text{.}\)</figcaption></figure><p id="p-1229">Our goal is to find an equation that describes this line. Imagine that we have a vector \(\vv{r}_{0}\) pointing from the origin to the point \(A\text{,}\) like so:</p>
-<figure class="figure figure-like" id="figure-line-in-space-1"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space-1.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.2<span class="period">.</span></span><span class="space"> </span>Tracing out \(L\) using vectors.</figcaption></figure><p id="p-1230">Then we can get to every other point on the line by starting from \(\vv{r}_{0}\text{.}\) In particular, if \(\vv{u}\) is any vector parallel to \(\vec{AB}\text{,}\) then \(\vv{r} = \vv{r}_{0}+\vv{u}\) must also be on the line \(L\text{:}\)</p>
-<figure class="figure figure-like" id="figure-line-in-space-2"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space-2.svg" role="img" style="width: 100%; height: auto;" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.3<span class="period">.</span></span><span class="space"> </span>Tracing out \(L\) using vectors.</figcaption></figure><p id="p-1231">So to get all possible points on \(L\text{,}\) we just need to look at all possible vectors \(\vv{r} = \vv{r}_{0}+\vv{u}\text{,}\) where \(\vv{u}\) is any vector parallel to \(\vec{AB}\text{.}\) If we set \(\vv{v} = \vec{AB}\text{,}\)<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-6" id="fn-6"><sup> 1 </sup></a> then</p>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-6"><div class="fn">We don't actually have to pick \(\vv{v} = \vec{AB}\text{,}\) we just need \(\vv{v}\) to be parallel to \(\vec{AB}\text{.}\)</div></div>
-<div class="displaymath">
+<p id="p-1228">First, suppose we have a line <span class="process-math">\(L\)</span> in <span class="process-math">\(\RR^{3}\)</span> as follows:</p>
+<figure class="figure figure-like" id="figure-line-in-space"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.1<span class="period">.</span></span><span class="space"> </span>A line in <span class="process-math">\(\mathbb{R}^{3}\text{.}\)</span></figcaption></figure><p id="p-1229">Our goal is to find an equation that describes this line. Imagine that we have a vector <span class="process-math">\(\vv{r}_{0}\)</span> pointing from the origin to the point <span class="process-math">\(A\text{,}\)</span> like so:</p>
+<figure class="figure figure-like" id="figure-line-in-space-1"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space-1.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.2<span class="period">.</span></span><span class="space"> </span>Tracing out <span class="process-math">\(L\)</span> using vectors.</figcaption></figure><p id="p-1230">Then we can get to every other point on the line by starting from <span class="process-math">\(\vv{r}_{0}\text{.}\)</span> In particular, if <span class="process-math">\(\vv{u}\)</span> is any vector parallel to <span class="process-math">\(\vec{AB}\text{,}\)</span> then <span class="process-math">\(\vv{r} = \vv{r}_{0}+\vv{u}\)</span> must also be on the line <span class="process-math">\(L\text{:}\)</span></p>
+<figure class="figure figure-like" id="figure-line-in-space-2"><div class="image-box" style="width: 90%; margin-left: 5%; margin-right: 5%;"><img src="images/image-line-in-space-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.5.3<span class="period">.</span></span><span class="space"> </span>Tracing out <span class="process-math">\(L\)</span> using vectors.</figcaption></figure><p id="p-1231">So to get all possible points on <span class="process-math">\(L\text{,}\)</span> we just need to look at all possible vectors <span class="process-math">\(\vv{r} = \vv{r}_{0}+\vv{u}\text{,}\)</span> where <span class="process-math">\(\vv{u}\)</span> is any vector parallel to <span class="process-math">\(\vec{AB}\text{.}\)</span> If we set <span class="process-math">\(\vv{v} = \vec{AB}\text{,}\)</span><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-6" id="fn-6"><sup> 1 </sup></a> then</p>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-6"><div class="fn">We don't actually have to pick <span class="process-math">\(\vv{v} = \vec{AB}\text{,}\)</span> we just need <span class="process-math">\(\vv{v}\)</span> to be parallel to <span class="process-math">\(\vec{AB}\text{.}\)</span>
+</div></div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \vv{r}_{0}+t\vv{v}
 \end{equation*}
 </div>
-<p id="p-1232">will trace out all points on \(L\) as \(t\) varies from \(-\infty\) to \(\infty\text{.}\)</p>
-<article class="theorem theorem-like" id="theorem-parametric-equations-of-a-line"><h6 class="heading">
+<p id="p-1232">will trace out all points on <span class="process-math">\(L\)</span> as <span class="process-math">\(t\)</span> varies from <span class="process-math">\(-\infty\)</span> to <span class="process-math">\(\infty\text{.}\)</span></p>
+<article class="theorem theorem-like" id="theorem-parametric-equations-of-a-line"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Parametric Equations of a Line.</span>
-</h6>
-<p id="p-1233">If \(P_{0}(x_{0},y_{0},z_{0})\) is a point on a line \(L\text{,}\) and if \(\vv{v} = \dotprod{a,b,c}\) is parallel to \(L\text{,}\) then</p>
-<div class="displaymath">
+</h4>
+<p id="p-1233">If <span class="process-math">\(P_{0}(x_{0},y_{0},z_{0})\)</span> is a point on a line <span class="process-math">\(L\text{,}\)</span> and if <span class="process-math">\(\vv{v} = \dotprod{a,b,c}\)</span> is parallel to <span class="process-math">\(L\text{,}\)</span> then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \vv{r}_{0}+t\vv{v}
 \end{equation*}
 </div>
-<p id="p-1234">traces out \(L\text{,}\) where</p>
-<div class="displaymath">
+<p id="p-1234">traces out <span class="process-math">\(L\text{,}\)</span> where</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \dotprod{x,y,z},\quad\vv{r}_{0} = \dotprod{x_{0},y_{0},z_{0}}.
 \end{equation*}
 </div>
 <p id="p-1235">We can also write this as the system of equations</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 x = x_{0}+ta,\quad y=y_{0}+tb\quad\text{and}\quad z = z_{0}+tc.
 \end{equation*}
-</div></article><article class="example example-like" id="example-equation-of-a-line-with-a-given-direction-and-point"><h6 class="heading">
+</div></article><article class="example example-like" id="example-equation-of-a-line-with-a-given-direction-and-point"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of a line with a given direction and point.</span>
-</h6>
-<p id="p-1236">Suppose we want to find the equation of a line \(L\) that passes through \((2,5,-3)\) and is perpendicular to \(\vv{u} = \dotprod{2,1,2}\text{.}\) <a class="xref" data-knowl="./knowl/theorem-parametric-equations-of-a-line.html" title="Theorem 11.5.4: Parametric Equations of a Line">Theorem 11.5.4</a> says that we only need to find the right choices for \(\vv{r}_{0}\) and \(\vv{v}\) in order to get the equation of such a line, and we can write down one of these right away:</p>
-<div class="displaymath">
+</h4>
+<p id="p-1236">Suppose we want to find the equation of a line <span class="process-math">\(L\)</span> that passes through <span class="process-math">\((2,5,-3)\)</span> and is perpendicular to <span class="process-math">\(\vv{u} = \dotprod{2,1,2}\text{.}\)</span> <a href="" class="xref" data-knowl="./knowl/theorem-parametric-equations-of-a-line.html" title="Theorem 11.5.4: Parametric Equations of a Line">Theorem 11.5.4</a> says that we only need to find the right choices for <span class="process-math">\(\vv{r}_{0}\)</span> and <span class="process-math">\(\vv{v}\)</span> in order to get the equation of such a line, and we can write down one of these right away:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r}_{0} = \dotprod{2,5,-3}.
 \end{equation*}
 </div>
-<p id="p-1237">So we just need to find \(\vv{v}\text{.}\) Since \(L\) is orthogonal to \(\vv{u} = \dotprod{2,1,2}\text{,}\) this means we want \(\vv{v}\) to be orthogonal to \(\vv{u}\) as well. A great way to find such a \(\vv{v}\) is to use the cross product. If \(\vv{w}\) is any nonzero vector, then \(\vv{u}\times\vv{w}\) must be orthogonal to both \(\vv{u}\) and \(\vv{w}\text{,}\) and in particular it must be orthogonal to \(\vv{u}\text{.}\) So we can take</p>
-<div class="displaymath">
+<p id="p-1237">So we just need to find <span class="process-math">\(\vv{v}\text{.}\)</span> Since <span class="process-math">\(L\)</span> is orthogonal to <span class="process-math">\(\vv{u} = \dotprod{2,1,2}\text{,}\)</span> this means we want <span class="process-math">\(\vv{v}\)</span> to be orthogonal to <span class="process-math">\(\vv{u}\)</span> as well. A great way to find such a <span class="process-math">\(\vv{v}\)</span> is to use the cross product. If <span class="process-math">\(\vv{w}\)</span> is any nonzero vector, then <span class="process-math">\(\vv{u}\times\vv{w}\)</span> must be orthogonal to both <span class="process-math">\(\vv{u}\)</span> and <span class="process-math">\(\vv{w}\text{,}\)</span> and in particular it must be orthogonal to <span class="process-math">\(\vv{u}\text{.}\)</span> So we can take</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{v} = \dotprod{2,1,2}\times\vv{i} = \dotprod{0,2,-1}.
 \end{equation*}
 </div>
 <p id="p-1238">So the equation of this line is</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \dotprod{2,1+2t,2-t}
 \end{equation*}
 </div>
-<p id="p-1239">As \(t\) varies, this will trace out our line.</p></article><p id="p-1240">When we begin working with line integrals, we'll need to know how to parameterize a line segment, so we'll discuss that now. Suppose we have a line segment between two points \(P_{0}\) and \(P_{1}\text{.}\) Let \(\vv{r}_{0}\) and \(\vv{r}_{1}\) denote the corresponding position vectors of these points (i.e. the vectors whose components are given by the coordinates of these points). Then the equation of the <em class="emphasis">line</em> between \(P_{0}\) and \(P_{1}\) is given by</p>
-<div class="displaymath">
+<p id="p-1239">As <span class="process-math">\(t\)</span> varies, this will trace out our line.</p></article><p id="p-1240">When we begin working with line integrals, we'll need to know how to parameterize a line segment, so we'll discuss that now. Suppose we have a line segment between two points <span class="process-math">\(P_{0}\)</span> and <span class="process-math">\(P_{1}\text{.}\)</span> Let <span class="process-math">\(\vv{r}_{0}\)</span> and <span class="process-math">\(\vv{r}_{1}\)</span> denote the corresponding position vectors of these points (i.e. the vectors whose components are given by the coordinates of these points). Then the equation of the <em class="emphasis">line</em> between <span class="process-math">\(P_{0}\)</span> and <span class="process-math">\(P_{1}\)</span> is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r}] = \vv{r}_{0}+t(\vv{r}_{1}-\vv{r}_{0}) = (1-t)\vv{r}_{0}+t\vv{r}_{1}.
 \end{equation*}
 </div>
-<p id="p-1241">To get the line segment we're actually looking for, we just need to restrict \(t\) to the interval \(0\leq t\leq 1\text{.}\) So we can say that</p>
-<div class="displaymath">
+<p id="p-1241">To get the line segment we're actually looking for, we just need to restrict <span class="process-math">\(t\)</span> to the interval <span class="process-math">\(0\leq t\leq 1\text{.}\)</span> So we can say that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = (1-t)\vv{r}_{0}+t\vv{r}_{1} \quad\text{with}\quad0\leq t\leq 1
 \end{equation*}
 </div>
-<p id="p-1242">traces out the line segment between \(P_{0}\) and \(P_{1}\text{.}\)</p></section><section class="subsection" id="subsection-equations-of-planes"><h3 class="heading hide-type">
+<p id="p-1242">traces out the line segment between <span class="process-math">\(P_{0}\)</span> and <span class="process-math">\(P_{1}\text{.}\)</span></p></section><section class="subsection" id="subsection-equations-of-planes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.5.2</span> <span class="title">Equations of Planes</span>
 </h3>
 <p id="p-1243">Now we move on to finding the equation of a plane. We'll try a vector approach to this like we did for lines, and this won't be too bad to do. We just need to keep the following in mind:</p>
-<article class="observation remark-like" id="observation-vectors-and-planes"><h6 class="heading">
+<article class="observation remark-like" id="observation-vectors-and-planes"><h4 class="heading">
 <span class="type">Observation</span><span class="space"> </span><span class="codenumber">11.5.6</span><span class="period">.</span>
-</h6>
-<p id="p-1244">A plane in \(\RR^{3}\) is uniquely determined by specifying a single point for it to pass through and a direction for it to face.</p></article><p id="p-1245">So in particular, vectors will provide a nice way to specify the direction of a plane, and any vector that does so must be orthogonal to the plane. If a (nonzero) vector \(\vv{n}\) is orthogonal to a given plane, then we call \(\vv{n}\) a <dfn class="terminology">normal vector</dfn> to the plane. Now we can build up an equation of a given plane.</p>
-<p id="p-1246">Let \(P_{0}(x_{0},y_{0},z_{0})\) denote a point on the plane, and let \(\vv{n} = \dotprod{a,b,c}\) be a normal vector to the plane. If \(\vv{r}=\dotprod{x,y,z}\) is the position vector of any other point on the plane, then it must be true that \(\vv{n}\cdot(\vv{r}-\vv{r}_{0}) = 0\text{,}\) where \(\vv{r}_{0}\) is the position vector of \(P_{0}\text{.}\) We can summarize this in the following theorem.</p>
-<article class="theorem theorem-like" id="theorem-vector-and-scalar-equations-of-a-plane"><h6 class="heading">
+</h4>
+<p id="p-1244">A plane in <span class="process-math">\(\RR^{3}\)</span> is uniquely determined by specifying a single point for it to pass through and a direction for it to face.</p></article><p id="p-1245">So in particular, vectors will provide a nice way to specify the direction of a plane, and any vector that does so must be orthogonal to the plane. If a (nonzero) vector <span class="process-math">\(\vv{n}\)</span> is orthogonal to a given plane, then we call <span class="process-math">\(\vv{n}\)</span> a <dfn class="terminology">normal vector</dfn> to the plane. Now we can build up an equation of a given plane.</p>
+<p id="p-1246">Let <span class="process-math">\(P_{0}(x_{0},y_{0},z_{0})\)</span> denote a point on the plane, and let <span class="process-math">\(\vv{n} = \dotprod{a,b,c}\)</span> be a normal vector to the plane. If <span class="process-math">\(\vv{r}=\dotprod{x,y,z}\)</span> is the position vector of any other point on the plane, then it must be true that <span class="process-math">\(\vv{n}\cdot(\vv{r}-\vv{r}_{0}) = 0\text{,}\)</span> where <span class="process-math">\(\vv{r}_{0}\)</span> is the position vector of <span class="process-math">\(P_{0}\text{.}\)</span> We can summarize this in the following theorem.</p>
+<article class="theorem theorem-like" id="theorem-vector-and-scalar-equations-of-a-plane"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.5.7</span><span class="period">.</span><span class="space"> </span><span class="title">Vector and Scalar Equations of a Plane.</span>
-</h6>
-<p id="p-1247">If \(\vv{r}_{0} = \dotprod{x_{0},y_{0},z_{0}}\) is the position vector for some point on a plane with normal vector \(\vv{n} = \dotprod{a,b,c}\text{,}\) then the position vector \(\vv{r} = \dotprod{x,y,z}\) of any other point on the plane must satisfy the <dfn class="terminology">vector equation of the plane</dfn>:</p>
-<div class="displaymath">
+</h4>
+<p id="p-1247">If <span class="process-math">\(\vv{r}_{0} = \dotprod{x_{0},y_{0},z_{0}}\)</span> is the position vector for some point on a plane with normal vector <span class="process-math">\(\vv{n} = \dotprod{a,b,c}\text{,}\)</span> then the position vector <span class="process-math">\(\vv{r} = \dotprod{x,y,z}\)</span> of any other point on the plane must satisfy the <dfn class="terminology">vector equation of the plane</dfn>:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{n}\cdot(\vv{r}-\vv{r}_{0}) = 0.
 \end{equation*}
 </div>
-<p id="p-1248">Equivalently, any point \((x,y,z)\) must also satisfy the equivalent <dfn class="terminology">scalar equation of the plane</dfn>:</p>
-<div class="displaymath">
+<p id="p-1248">Equivalently, any point <span class="process-math">\((x,y,z)\)</span> must also satisfy the equivalent <dfn class="terminology">scalar equation of the plane</dfn>:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 a(x-x_{0})+b(y-y_{0})+c(z-z_{0}) = 0.
 \end{equation*}
-</div></article><article class="example example-like" id="example-equation-of-a-plane-ortho"><h6 class="heading">
+</div></article><article class="example example-like" id="example-equation-of-a-plane-ortho"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of a plane orthogonal to a line.</span>
-</h6>
-<p id="p-1249">Consider the two lines in \(\RR^{3}\) determined by the equations</p>
-<div class="displaymath">
+</h4>
+<p id="p-1249">Consider the two lines in <span class="process-math">\(\RR^{3}\)</span> determined by the equations</p>
+<div class="displaymath process-math">
 \begin{align*}
 \vv{r}_{1} &amp; = \dotprod{1,1,0} + t\dotprod{1,-1,2} \\
 \vv{r}_{2} &amp; = \dotprod{2,0,2} + s\dotprod{-1,1,0} 
 \end{align*}
 </div>
-<p id="p-1250">We want to find the equation of the plane that contains the intersection of these two lines and is orthogonal to the first line. By <a class="xref" data-knowl="./knowl/theorem-vector-and-scalar-equations-of-a-plane.html" title="Theorem 11.5.7: Vector and Scalar Equations of a Plane">Theorem 11.5.7</a>, we need a point on the plane and a normal vector. Since the plane must contain the intersection of these two lines, that's our point. To find it, we'll set \(\vv{r}_{1} = \vv{r}_{2}\) and go from there:</p>
-<div class="displaymath">
+<p id="p-1250">We want to find the equation of the plane that contains the intersection of these two lines and is orthogonal to the first line. By <a href="" class="xref" data-knowl="./knowl/theorem-vector-and-scalar-equations-of-a-plane.html" title="Theorem 11.5.7: Vector and Scalar Equations of a Plane">Theorem 11.5.7</a>, we need a point on the plane and a normal vector. Since the plane must contain the intersection of these two lines, that's our point. To find it, we'll set <span class="process-math">\(\vv{r}_{1} = \vv{r}_{2}\)</span> and go from there:</p>
+<div class="displaymath process-math">
 \begin{align*}
 \vv{r}_{1}=\vv{r}_{2} &amp; \Rightarrow \dotprod{-1,1,-2} + \dotprod{t+s,s-t,2t} = \vv{0} \\
 &amp; \Rightarrow t+s-1 = s-t+1 = 2t-2 = 0 \\
 &amp; \Rightarrow t = 1\quad\text{and}\quad s=0 
 \end{align*}
 </div>
-<p id="p-1251">So the position vector \(\vv{r}_{0}\) of the point where these lines intersect is given by \(\vv{r}_{0} = \dotprod{2,0,2}\text{.}\) We also need a normal vector to the plane, but this is easy to find: since the plane needs to be orthogonal to the first line, we can just take \(\vv{n} = \dotprod{1,-1,2}\text{.}\) So the equation of our plane is</p>
-<div class="displaymath">
+<p id="p-1251">So the position vector <span class="process-math">\(\vv{r}_{0}\)</span> of the point where these lines intersect is given by <span class="process-math">\(\vv{r}_{0} = \dotprod{2,0,2}\text{.}\)</span> We also need a normal vector to the plane, but this is easy to find: since the plane needs to be orthogonal to the first line, we can just take <span class="process-math">\(\vv{n} = \dotprod{1,-1,2}\text{.}\)</span> So the equation of our plane is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \dotprod{1,-1,2}\cdot\dotprod{x-2,y,z-2} = 0
 \end{equation*}
 </div>
 <p id="p-1252">or equivalently</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 x-y+2z -6 = 0.
 \end{equation*}
@@ -289,38 +293,38 @@ P = plot3d((y-x)/2+3, (x,-3,3), (y,-3,3))
 set_axes_labels(P,'x','y','z')
 </script></div>
 <p id="p-1254">We can rewrite the equation of a plane in the form</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 ax+by+cz+d = 0.
 \end{equation*}
 </div>
-<p id="p-1255">A normal vector to this plane is given by \(\vv{n} = \dotprod{a,b,c}\text{.}\)</p>
-<article class="example example-like" id="example-equation-of-a-line-orthogonal-to-a-plane"><h6 class="heading">
+<p id="p-1255">A normal vector to this plane is given by <span class="process-math">\(\vv{n} = \dotprod{a,b,c}\text{.}\)</span></p>
+<article class="example example-like" id="example-equation-of-a-line-orthogonal-to-a-plane"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.5.9</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of a line orthogonal to a plane.</span>
-</h6>
-<p id="p-1256">Suppose we're given the plane \(3x-5z+2 = 0\text{,}\) and we want to find the equation of the line orthogonal to this plane and passing through the point \((3,-1,2)\text{.}\) Then the equation of this line is</p>
-<div class="displaymath">
+</h4>
+<p id="p-1256">Suppose we're given the plane <span class="process-math">\(3x-5z+2 = 0\text{,}\)</span> and we want to find the equation of the line orthogonal to this plane and passing through the point <span class="process-math">\((3,-1,2)\text{.}\)</span> Then the equation of this line is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \vv{r}_{0}+t\vv{v}
 \end{equation*}
 </div>
-<p id="p-1257">where \(\vv{r}_{0} = \dotprod{3,-1,2}\) and \(\vv{v}\) is a vector parallel to the line. Since the line must be orthogonal to the plane, we can take \(\vv{v} = \dotprod{3,0,-5}\text{.}\) So the equation of this line is</p>
-<div class="displaymath">
+<p id="p-1257">where <span class="process-math">\(\vv{r}_{0} = \dotprod{3,-1,2}\)</span> and <span class="process-math">\(\vv{v}\)</span> is a vector parallel to the line. Since the line must be orthogonal to the plane, we can take <span class="process-math">\(\vv{v} = \dotprod{3,0,-5}\text{.}\)</span> So the equation of this line is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r} = \dotprod{3,-1,2}+\dotprod{3t,0,-5t}.
 \end{equation*}
-</div></article><article class="example example-like" id="example-equation-of-a-line-of-intersection-between-two-planes"><h6 class="heading">
+</div></article><article class="example example-like" id="example-equation-of-a-line-of-intersection-between-two-planes"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.5.10</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of a plane containing a line and a point.</span>
-</h6>
-<p id="p-1258">Suppose we're trying to find a plane containing the point \((1,2,0)\) and containing the line \(\vv{r} = \dotprod{3-t,2,5+2t}\text{.}\) To get the equation of this plane, we also need a normal vector to the plane. We can find the normal vector by computing the cross product of two vectors parallel to the plane.</p>
-<p id="p-1259">First, since the plane contains the line \(\dotprod{3-t,2,5+2t},\) the direction of this line must be parallel to the plane. So we know that \(\vv{v} = \dotprod{-1,0,2}\) is parallel to the plane. To get another vector parallel to this plane, we can use the given point and a second point in the plane, say \((3,2,5)\text{,}\) which comes from the line (just set \(t=0\)). So the vector \(\vv{u} = \dotprod{3-1,2-2,5-0} = \dotprod{2,0,5}\) must also be parallel to the plane. Hence a normal vector to this plane is</p>
-<div class="displaymath">
+</h4>
+<p id="p-1258">Suppose we're trying to find a plane containing the point <span class="process-math">\((1,2,0)\)</span> and containing the line <span class="process-math">\(\vv{r} = \dotprod{3-t,2,5+2t}\text{.}\)</span> To get the equation of this plane, we also need a normal vector to the plane. We can find the normal vector by computing the cross product of two vectors parallel to the plane.</p>
+<p id="p-1259">First, since the plane contains the line <span class="process-math">\(\dotprod{3-t,2,5+2t},\)</span> the direction of this line must be parallel to the plane. So we know that <span class="process-math">\(\vv{v} = \dotprod{-1,0,2}\)</span> is parallel to the plane. To get another vector parallel to this plane, we can use the given point and a second point in the plane, say <span class="process-math">\((3,2,5)\text{,}\)</span> which comes from the line (just set <span class="process-math">\(t=0\)</span>). So the vector <span class="process-math">\(\vv{u} = \dotprod{3-1,2-2,5-0} = \dotprod{2,0,5}\)</span> must also be parallel to the plane. Hence a normal vector to this plane is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{n} = \vv{u}\times\vv{v} = \dotprod{0,9,0}.
 \end{equation*}
 </div>
 <p id="p-1260">So an equation of this plane is given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 9(y-2) = 0.
 \end{equation*}

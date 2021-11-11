@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:39:15-05:00       *-->
+<!--*       on 2021-11-10T20:52:30-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Arc Length and Curvature</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,29 +57,26 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-
-\newcommand{\vv}[1]{\mathbf{#1}}
-\newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\curl}{\nabla\times}
 \newcommand{\curlt}{\operatorname{curl}}
@@ -100,7 +103,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -155,7 +158,7 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-arc-length-and-curvature"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.8</span> <span class="title">Arc Length and Curvature</span>
@@ -163,39 +166,39 @@ true);
 <section class="subsection" id="subsection-arc-length"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.8.1</span> <span class="title">Arc Length</span>
 </h3>
-<p id="p-1304">Suppose some particle travels along the space curve given by \(\vv{r}(t)\) for \(a\leq t\leq b\text{.}\) What we'd like to do is determine how far the particle travels over this time interval. Recall that distance is just speed multiplied by time, and the speed of this particle is given by \(\norm{\vv{r}'(t)}\text{.}\) So we can imagine that the distance traveled by this particle over some infinitesimal time interval \(dt\) to be given by \(\norm{\vv{r}'(t)}\,dt\text{.}\) So adding up all of these distances from \(t=a\) to \(t=b\) should give us the arc length. This suggests (but does not prove!) the following formula for arc length:</p>
-<div class="displaymath">
+<p id="p-1304">Suppose some particle travels along the space curve given by <span class="process-math">\(\vv{r}(t)\)</span> for <span class="process-math">\(a\leq t\leq b\text{.}\)</span> What we'd like to do is determine how far the particle travels over this time interval. Recall that distance is just speed multiplied by time, and the speed of this particle is given by <span class="process-math">\(\norm{\vv{r}'(t)}\text{.}\)</span> So we can imagine that the distance traveled by this particle over some infinitesimal time interval <span class="process-math">\(dt\)</span> to be given by <span class="process-math">\(\norm{\vv{r}'(t)}\,dt\text{.}\)</span> So adding up all of these distances from <span class="process-math">\(t=a\)</span> to <span class="process-math">\(t=b\)</span> should give us the arc length. This suggests (but does not prove!) the following formula for arc length:</p>
+<div class="displaymath process-math">
 \begin{equation}
 L = \int_{a}^{b}\norm{\vv{r}'(t)}\,dt.\label{equation-arc-length-formula}\tag{11.8.1}
 \end{equation}
 </div>
-<p id="p-1305"><a class="xref" data-knowl="./knowl/equation-arc-length-formula.html" title="Equation 11.8.1">(11.8.1)</a> gives the length \(L\) of the space curve \(\vv{r}(t)\) from \(t=a\) to \(t=b\text{,}\) assuming that the integral exists.</p>
-<article class="example example-like" id="example-arc-length-of-a-helix"><h6 class="heading">
+<p id="p-1305"><a href="" class="xref" data-knowl="./knowl/equation-arc-length-formula.html" title="Equation 11.8.1">(11.8.1)</a> gives the length <span class="process-math">\(L\)</span> of the space curve <span class="process-math">\(\vv{r}(t)\)</span> from <span class="process-math">\(t=a\)</span> to <span class="process-math">\(t=b\text{,}\)</span> assuming that the integral exists.</p>
+<article class="example example-like" id="example-arc-length-of-a-helix"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.1</span><span class="period">.</span><span class="space"> </span><span class="title">Arc length of a helix.</span>
-</h6>
-<p id="p-1306">Suppose we want to find the arc length of the helix \(\vv{r}(t) = \dotprod{\cos 3t,\sin 3t, t}\) from \(t=0\) to \(t=1\text{.}\) Then this is given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-1306">Suppose we want to find the arc length of the helix <span class="process-math">\(\vv{r}(t) = \dotprod{\cos 3t,\sin 3t, t}\)</span> from <span class="process-math">\(t=0\)</span> to <span class="process-math">\(t=1\text{.}\)</span> Then this is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 L = \int_{0}^{1}\norm{\dotprod{-3\sin3t, 3\cos3t, 1}}\,dt = \int_{0}^{1}\sqrt{10}\,dt = \sqrt{10}.
 \end{equation*}
-</div></article><p id="p-1307">One thing we'd like to do now is to parametrize a space curve \(\vv{r}(t)\) with respect to arc length. Here's what we mean by this: given some \(\vv{r}(t)\) with \(a\leq t\leq b\text{,}\) we define its <dfn class="terminology">arc length function</dfn> \(s(t)\) by</p>
-<div class="displaymath">
+</div></article><p id="p-1307">One thing we'd like to do now is to parametrize a space curve <span class="process-math">\(\vv{r}(t)\)</span> with respect to arc length. Here's what we mean by this: given some <span class="process-math">\(\vv{r}(t)\)</span> with <span class="process-math">\(a\leq t\leq b\text{,}\)</span> we define its <dfn class="terminology">arc length function</dfn> <span class="process-math">\(s(t)\)</span> by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 s(t) = \int_{a}^{t}\norm{\vv{r}'(u)}\,du.
 \end{equation*}
 </div>
-<p id="p-1308">If we can then solve for \(t\) in terms of \(s\text{,}\) this parametrizes the curve \(\vv{r}(t)\) in terms of the arc length variable \(s\text{.}\)</p>
-<article class="example example-like" id="example-reparametrizing-a-space-curve"><h6 class="heading">
+<p id="p-1308">If we can then solve for <span class="process-math">\(t\)</span> in terms of <span class="process-math">\(s\text{,}\)</span> this parametrizes the curve <span class="process-math">\(\vv{r}(t)\)</span> in terms of the arc length variable <span class="process-math">\(s\text{.}\)</span></p>
+<article class="example example-like" id="example-reparametrizing-a-space-curve"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.2</span><span class="period">.</span><span class="space"> </span><span class="title">Reparametrizing a space curve.</span>
-</h6>
+</h4>
 <p id="p-1309">Suppose we're given the space curve</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r}(t) = \left(\frac{2}{t^{2}+1}-1\right)\vv{i}+\frac{2t}{t^{2}+1}\vv{j}
 \end{equation*}
 </div>
-<p id="p-1310">which starts at \((1,0)\text{,}\) (so \(t\) starts at \(0\)) and we want to find the point that is \(\frac{\pi}{2}\) units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function \(s(t)\text{:}\)</p>
-<div class="displaymath">
+<p id="p-1310">which starts at <span class="process-math">\((1,0)\text{,}\)</span> (so <span class="process-math">\(t\)</span> starts at <span class="process-math">\(0\)</span>) and we want to find the point that is <span class="process-math">\(\frac{\pi}{2}\)</span> units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function <span class="process-math">\(s(t)\text{:}\)</span></p>
+<div class="displaymath process-math">
 \begin{align*}
 s(t) &amp; = \int_{0}^{t}\norm{\vv{r}'(u)}\,du \\
 &amp; = \int_{0}^{t} \sqrt{\frac{4u^{2}+4(u^{2}+1)^{2}-16u^{2}(u^{2}+1)+16u^{4}}{(u^{2}+1)^{4}}}\,du \\
@@ -203,14 +206,14 @@ s(t) &amp; = \int_{0}^{t}\norm{\vv{r}'(u)}\,du \\
 &amp; = 2\tan^{-1}t 
 \end{align*}
 </div>
-<p id="p-1311">Since \(s = 2\tan^{-1}t\text{,}\) we get \(t = t(s) = \tan\frac{s}{2}\text{.}\) So</p>
-<div class="displaymath">
+<p id="p-1311">Since <span class="process-math">\(s = 2\tan^{-1}t\text{,}\)</span> we get <span class="process-math">\(t = t(s) = \tan\frac{s}{2}\text{.}\)</span> So</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r}(t(s)) = \left(\frac{2}{\tan^{2}\frac{s}{2}+1}-1\right)\vv{i}+\frac{2\tan\frac{s}{2}}{\tan^{2}\frac{s}{2}+1}\vv{j}
 \end{equation*}
 </div>
-<p id="p-1312">reparametrizes the space curve \(\vv{r}\) in terms of arc length. So the point on the curve that is \(\frac{\pi}{2}\) units along in the positive direction is given by</p>
-<div class="displaymath">
+<p id="p-1312">reparametrizes the space curve <span class="process-math">\(\vv{r}\)</span> in terms of arc length. So the point on the curve that is <span class="process-math">\(\frac{\pi}{2}\)</span> units along in the positive direction is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{r}(t(\pi/2)) = \dotprod{0,1}.
 \end{equation*}
@@ -240,27 +243,27 @@ plt.show()
 </script></div></section><section class="subsection" id="subsection-curvature"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.8.2</span> <span class="title">Curvature</span>
 </h3>
-<p id="p-1313">What we want to do now is measure how much a curve "turns" at some point. First, we call a space curve \(\vv{r}(t)\) <dfn class="terminology">smooth</dfn> on some interval \(I\) if \(\vv{r}'(t)\neq0\) for any \(t\) in \(I\text{.}\) Now, if we want to measure how quickly a curve is changing direction then we can use the unit tangent vector \(\vv{T}(t)\) to measure this. In particular, the derivative of the unit tangent should provide a good measure of how quickly a curve turns. However, we don't want to let the specific parametrization of the curve affect this; in other words, the rate at which a curve is turning should not depend on the speed at which the curve is traveled. This leads to the following definition.</p>
-<article class="definition definition-like" id="definition-curvature"><h6 class="heading">
+<p id="p-1313">What we want to do now is measure how much a curve "turns" at some point. First, we call a space curve <span class="process-math">\(\vv{r}(t)\)</span> <dfn class="terminology">smooth</dfn> on some interval <span class="process-math">\(I\)</span> if <span class="process-math">\(\vv{r}'(t)\neq0\)</span> for any <span class="process-math">\(t\)</span> in <span class="process-math">\(I\text{.}\)</span> Now, if we want to measure how quickly a curve is changing direction then we can use the unit tangent vector <span class="process-math">\(\vv{T}(t)\)</span> to measure this. In particular, the derivative of the unit tangent should provide a good measure of how quickly a curve turns. However, we don't want to let the specific parametrization of the curve affect this; in other words, the rate at which a curve is turning should not depend on the speed at which the curve is traveled. This leads to the following definition.</p>
+<article class="definition definition-like" id="definition-curvature"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.8.3</span><span class="period">.</span><span class="space"> </span><span class="title">Curvature.</span>
-</h6>
-<p id="p-1314">Let \(\vv{r}(t)\) denote a smooth curve on some interval \(I\text{.}\) The <dfn class="terminology">curvature</dfn> of \(\vv{r}(t)\) on \(I\) is defined to be the function \(\kappa(t)\) given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-1314">Let <span class="process-math">\(\vv{r}(t)\)</span> denote a smooth curve on some interval <span class="process-math">\(I\text{.}\)</span> The <dfn class="terminology">curvature</dfn> of <span class="process-math">\(\vv{r}(t)\)</span> on <span class="process-math">\(I\)</span> is defined to be the function <span class="process-math">\(\kappa(t)\)</span> given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \kappa(t) = \frac{\norm{\vv{T}'(t)}}{\norm{\vv{r}'(t)}},
 \end{equation*}
 </div>
-<p id="p-1315">where \(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\) is the unit tangent to the curve.</p></article><article class="example example-like" id="example-computing-a-curvature"><h6 class="heading">
+<p id="p-1315">where <span class="process-math">\(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\)</span> is the unit tangent to the curve.</p></article><article class="example example-like" id="example-computing-a-curvature"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.4</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a curvature.</span>
-</h6>
-<p id="p-1316">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}.\) We'll try to find the curvature by making use of <a class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a>. First, we need to find \(\vv{T}\) so we can take its derivative:</p>
-<div class="displaymath">
+</h4>
+<p id="p-1316">Consider the curve <span class="process-math">\(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}.\)</span> We'll try to find the curvature by making use of <a href="" class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a>. First, we need to find <span class="process-math">\(\vv{T}\)</span> so we can take its derivative:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{T}(t) = \frac{\dotprod{1,t,2t}}{\sqrt{1+t^{2}+4t^{2}}}.
 \end{equation*}
 </div>
 <p id="p-1317">Therefore</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \vv{T}'(t) &amp; = -\frac{1}{2}(1+5t^{2})^{-3/2}(10t)\dotprod{1,t,2t} + (1+5t^{2})^{-1/2}\dotprod{0,1,2} \\
 &amp; = -5t(1+5t^{2})^{-3/2}\dotprod{1,t,2t} + (1 + 5t^{2})^{-1/2}\dotprod{0,1,2}. \\
@@ -268,79 +271,79 @@ plt.show()
 \end{align*}
 </div>
 <p id="p-1318">So the curvature is given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \kappa(t) &amp; = \frac{(1+5t^{2})^{-3/2}\sqrt{25t^{2}+5}}{(1+5t^{2})^{1/2}} \\
 &amp; = \sqrt{5}(1+5t^{2})^{-3/2} 
 \end{align*}
-</div></article><article class="example example-like" id="example-using-curvature"><h6 class="heading">
+</div></article><article class="example example-like" id="example-using-curvature"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.5</span><span class="period">.</span><span class="space"> </span><span class="title">Using curvature.</span>
-</h6>
-<p id="p-1319">Consider the curve \(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}\) once again. We'll try to find where this curve turns the fastest. To do this, we look at the curvature \(\kappa(t)\) we found from <a class="xref" data-knowl="./knowl/example-computing-a-curvature.html" title="Example 11.8.4: Computing a curvature">Example 11.8.4</a>:</p>
-<div class="displaymath">
+</h4>
+<p id="p-1319">Consider the curve <span class="process-math">\(\vv{r}(t) = \dotprod{t,\frac{1}{2}t^{2},t^{2}}\)</span> once again. We'll try to find where this curve turns the fastest. To do this, we look at the curvature <span class="process-math">\(\kappa(t)\)</span> we found from <a href="" class="xref" data-knowl="./knowl/example-computing-a-curvature.html" title="Example 11.8.4: Computing a curvature">Example 11.8.4</a>:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \kappa(t) = \sqrt{\frac{5}{(1+5t^{2})^{3}}}.
 \end{equation*}
 </div>
-<p id="p-1320">This curve is turning the fastest precisely where the curvature is largest, and this happens at \(t=0\text{.}\)</p></article><p id="p-1321">We can use <a class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a> to compute curvatures, but we've seen that it can be pretty awful. So we'd like to use another formula if we can; thankfully, there is another option.</p>
-<article class="theorem theorem-like" id="theorem-alternative-curvature-formula"><h6 class="heading">
+<p id="p-1320">This curve is turning the fastest precisely where the curvature is largest, and this happens at <span class="process-math">\(t=0\text{.}\)</span></p></article><p id="p-1321">We can use <a href="" class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a> to compute curvatures, but we've seen that it can be pretty awful. So we'd like to use another formula if we can; thankfully, there is another option.</p>
+<article class="theorem theorem-like" id="theorem-alternative-curvature-formula"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.8.6</span><span class="period">.</span><span class="space"> </span><span class="title">Alternative Curvature Formula.</span>
-</h6>
-<p id="p-1322">The curvature of \(\vv{r}(t)\) in \(\RR^{3}\) is given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-1322">The curvature of <span class="process-math">\(\vv{r}(t)\)</span> in <span class="process-math">\(\RR^{3}\)</span> is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \kappa(t) = \frac{\norm{\vv{r}'(t)\times\vv{r}''(t)}}{\norm{\vv{r}'(t)}^{3}}.
 \end{equation*}
-</div></article><p id="p-1323">The formula in <a class="xref" data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 11.8.6: Alternative Curvature Formula">Theorem 11.8.6</a> may look worse than the formula given in <a class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a>, but it has one significant advantage: we don't need to differentiate any magnitudes, which is required in the previous formula to compute \(\vv{T}'(t)\text{.}\)</p>
-<article class="example example-like" id="example-using-the-alternative-formula"><h6 class="heading">
+</div></article><p id="p-1323">The formula in <a href="" class="xref" data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 11.8.6: Alternative Curvature Formula">Theorem 11.8.6</a> may look worse than the formula given in <a href="" class="xref" data-knowl="./knowl/definition-curvature.html" title="Definition 11.8.3: Curvature">Definition 11.8.3</a>, but it has one significant advantage: we don't need to differentiate any magnitudes, which is required in the previous formula to compute <span class="process-math">\(\vv{T}'(t)\text{.}\)</span></p>
+<article class="example example-like" id="example-using-the-alternative-formula"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.7</span><span class="period">.</span><span class="space"> </span><span class="title">Using the alternative formula.</span>
-</h6>
-<p id="p-1324">Let \(\vv{r}(t) = t\vv{i}+t^{2}\vv{j}+e^{t}\vv{k}\text{.}\) We'll make use of <a class="xref" data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 11.8.6: Alternative Curvature Formula">Theorem 11.8.6</a> to find \(\kappa(t).\) We have</p>
-<div class="displaymath">
+</h4>
+<p id="p-1324">Let <span class="process-math">\(\vv{r}(t) = t\vv{i}+t^{2}\vv{j}+e^{t}\vv{k}\text{.}\)</span> We'll make use of <a href="" class="xref" data-knowl="./knowl/theorem-alternative-curvature-formula.html" title="Theorem 11.8.6: Alternative Curvature Formula">Theorem 11.8.6</a> to find <span class="process-math">\(\kappa(t).\)</span> We have</p>
+<div class="displaymath process-math">
 \begin{align*}
 \vv{r}'(t) &amp; = \dotprod{1,2t,e^{t}} \\
 \vv{r}''(t) &amp; = \dotprod{0,2,e^{t}} 
 \end{align*}
 </div>
 <p id="p-1325">and so</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \kappa(t) = \frac{\norm{\dotprod{2e^{t}(t-1),-e^{t},2}}}{\norm{\dotprod{1,2t,e^{t}}}^{3}} = \frac{\sqrt{4e^{2t}(t-1)^{2}+e^{2t}+4}}{(1+4t^{2}+e^{2t})^{3/2}}.
 \end{equation*}
 </div></article></section><section class="subsection" id="subsection-normal-and-binormal-vectors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">11.8.3</span> <span class="title">Normal and Binormal Vectors</span>
 </h3>
-<p id="p-1326">Consider a curve \(\vv{r}(t)\text{.}\) Then the direction of the curve is given by the unit tangent vector \(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\text{.}\) If we differentiate \(\vv{T}(t)\) to get \(\vv{T}'(t)\text{,}\) we can view this vector as telling us the direction the curve is turning. This leads us to the concept of <dfn class="terminology">unit normal vectors</dfn> to a space curve.</p>
-<article class="definition definition-like" id="definition-unit-normal-vectors"><h6 class="heading">
+<p id="p-1326">Consider a curve <span class="process-math">\(\vv{r}(t)\text{.}\)</span> Then the direction of the curve is given by the unit tangent vector <span class="process-math">\(\vv{T}(t) = \frac{\vv{r}'(t)}{\norm{\vv{r}'(t)}}\text{.}\)</span> If we differentiate <span class="process-math">\(\vv{T}(t)\)</span> to get <span class="process-math">\(\vv{T}'(t)\text{,}\)</span> we can view this vector as telling us the direction the curve is turning. This leads us to the concept of <dfn class="terminology">unit normal vectors</dfn> to a space curve.</p>
+<article class="definition definition-like" id="definition-unit-normal-vectors"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.8.8</span><span class="period">.</span><span class="space"> </span><span class="title">Unit Normal Vectors.</span>
-</h6>
-<p id="p-1327">Consider a space curve given by \(\vv{r}(t)\text{.}\) The unit normal vector is the vector \(\vv{N}(t)\) given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-1327">Consider a space curve given by <span class="process-math">\(\vv{r}(t)\text{.}\)</span> The unit normal vector is the vector <span class="process-math">\(\vv{N}(t)\)</span> given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{N}(t) = \frac{\vv{T}'(t)}{\norm{\vv{T}'(t)}},
 \end{equation*}
 </div>
-<p id="p-1328">where \(\vv{T}'\) is the derivative of the unit tangent vector.</p></article><article class="example example-like" id="example-unit-normal-on-a-circle"><h6 class="heading">
+<p id="p-1328">where <span class="process-math">\(\vv{T}'\)</span> is the derivative of the unit tangent vector.</p></article><article class="example example-like" id="example-unit-normal-on-a-circle"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.8.9</span><span class="period">.</span><span class="space"> </span><span class="title">Unit normal on a circle.</span>
-</h6>
-<p id="p-1329">Find the unit normal vector of the curve given by \(\vv{r}(t) = \dotprod{\cos t,\sin t}\text{.}\)</p>
+</h4>
+<p id="p-1329">Find the unit normal vector of the curve given by <span class="process-math">\(\vv{r}(t) = \dotprod{\cos t,\sin t}\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-211" id="solution-211"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-211"><div class="solution solution-like">
-<p id="p-1330">If we think of a particle moving along \(\vv{r}(t)\text{,}\) then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, \(\vv{N}(t)\) should point towards the origin. To prove this, we'll use the formula above to find the unit normal:</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-211" id="solution-211"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-211"><div class="solution solution-like">
+<p id="p-1330">If we think of a particle moving along <span class="process-math">\(\vv{r}(t)\text{,}\)</span> then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, <span class="process-math">\(\vv{N}(t)\)</span> should point towards the origin. To prove this, we'll use the formula above to find the unit normal:</p>
+<div class="displaymath process-math">
 \begin{align*}
 \vv{N}(t) &amp; = \frac{\vv{T}'(t)}{\norm{\vv{T}'(t)}} \\
 &amp; = \frac{\dotprod{-\cos t, -\sin t}}{1} 
 \end{align*}
 </div>
-<p id="p-1331">So \(\vv{N}(t) = \dotprod{-\cos t, -\sin t} = -\vv{r}(t)\text{.}\) So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.</p>
+<p id="p-1331">So <span class="process-math">\(\vv{N}(t) = \dotprod{-\cos t, -\sin t} = -\vv{r}(t)\text{.}\)</span> So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.</p>
 </div></div>
-</div></article><p id="p-1332">It's not clear from <a class="xref" data-knowl="./knowl/definition-unit-normal-vectors.html" title="Definition 11.8.8: Unit Normal Vectors">Definition 11.8.8</a>, but \(\vv{N}(t)\) is <em class="emphasis">always</em> orthogonal to \(\vv{T}(t)\) for any space curve/vector function \(\vv{r}(t)\text{.}\) We can use these two vectors to get another vector called the <dfn class="terminology">binormal vector</dfn>.</p>
-<article class="definition definition-like" id="definition-binormal-vector"><h6 class="heading">
+</div></article><p id="p-1332">It's not clear from <a href="" class="xref" data-knowl="./knowl/definition-unit-normal-vectors.html" title="Definition 11.8.8: Unit Normal Vectors">Definition 11.8.8</a>, but <span class="process-math">\(\vv{N}(t)\)</span> is <em class="emphasis">always</em> orthogonal to <span class="process-math">\(\vv{T}(t)\)</span> for any space curve/vector function <span class="process-math">\(\vv{r}(t)\text{.}\)</span> We can use these two vectors to get another vector called the <dfn class="terminology">binormal vector</dfn>.</p>
+<article class="definition definition-like" id="definition-binormal-vector"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.8.10</span><span class="period">.</span><span class="space"> </span><span class="title">Binormal Vector.</span>
-</h6>
-<p id="p-1333">Let \(\vv{r}(t)\) be a vector function with unit tangent \(\vv{T}(t)\) and unit normal \(\vv{N}(t)\text{.}\) Then the unit binormal vector is the vector \(\vv{B}(t)\) given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-1333">Let <span class="process-math">\(\vv{r}(t)\)</span> be a vector function with unit tangent <span class="process-math">\(\vv{T}(t)\)</span> and unit normal <span class="process-math">\(\vv{N}(t)\text{.}\)</span> Then the unit binormal vector is the vector <span class="process-math">\(\vv{B}(t)\)</span> given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \vv{B}(t) = \vv{T}(t)\times\vv{N}(t).
 \end{equation*}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:39:02-05:00       *-->
+<!--*       on 2021-11-10T20:52:18-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,58 +14,61 @@
 <title>The Fundamental Theorem of Calculus</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-
-\newcommand{\vv}[1]{\mathbf{#1}}
-\newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\curl}{\nabla\times}
 \newcommand{\curlt}{\operatorname{curl}}
@@ -92,7 +95,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -147,136 +150,136 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-the-fundamental-theorem-of-calculus"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.4</span> <span class="title">The Fundamental Theorem of Calculus</span>
 </h2>
 <p id="p-480">The previous section used antiderivatives to find definite integrals. Now we'll go the other direction and use integrals to define antiderivatives. We can do this as follows.</p>
-<p id="p-481">Let \(f\) be some function continuous on \([a,b]\text{.}\) Then we can say that \(f\) must be continuous on every interval of the form \([a,x]\) for \(x\) in \([a,b]\text{.}\) This means that the definite integrals \(\int_{a}^{x}f(t)\,dt\) exist, and so we can use these to define a function, say \(g(x)\text{.}\)</p>
-<article class="example example-like" id="example-functions-from-integrals"><h6 class="heading">
+<p id="p-481">Let <span class="process-math">\(f\)</span> be some function continuous on <span class="process-math">\([a,b]\text{.}\)</span> Then we can say that <span class="process-math">\(f\)</span> must be continuous on every interval of the form <span class="process-math">\([a,x]\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\([a,b]\text{.}\)</span> This means that the definite integrals <span class="process-math">\(\int_{a}^{x}f(t)\,dt\)</span> exist, and so we can use these to define a function, say <span class="process-math">\(g(x)\text{.}\)</span></p>
+<article class="example example-like" id="example-functions-from-integrals"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Functions from integrals.</span>
-</h6>
-<p id="p-482">Let \(f(x) = 2 - x^{2}\) and define \(g(x) = \int_{1}^{x}f(t)\,dt\text{.}\) Find \(g(x)\text{.}\) Where is \(g(x)\) the largest?</p>
+</h3>
+<p id="p-482">Let <span class="process-math">\(f(x) = 2 - x^{2}\)</span> and define <span class="process-math">\(g(x) = \int_{1}^{x}f(t)\,dt\text{.}\)</span> Find <span class="process-math">\(g(x)\text{.}\)</span> Where is <span class="process-math">\(g(x)\)</span> the largest?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-102" id="solution-102"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-102"><div class="solution solution-like">
-<p id="p-483">First, note that we can compute \(\int_{1}^{x}f(t)\,dt\) by finding an antiderivative of \(f(t) = 2 - t^{2}\text{.}\) So</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-102" id="solution-102"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-102"><div class="solution solution-like">
+<p id="p-483">First, note that we can compute <span class="process-math">\(\int_{1}^{x}f(t)\,dt\)</span> by finding an antiderivative of <span class="process-math">\(f(t) = 2 - t^{2}\text{.}\)</span> So</p>
+<div class="displaymath process-math">
 \begin{equation*}
 g(x) = \int_{1}^{x}(2-t^{2})\,dt = \left[2t-\frac{1}{3}t^{3}\right]_{t=1}^{x}
 \end{equation*}
 </div>
 <p class="continuation">or just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 g(x) = 2x - \frac{1}{3}x^{3} - \frac{5}{3}.
 \end{equation*}
 </div>
-<p id="p-484">We can find where \(g\) is largest by using a derivative test or just geometry. Since \(g\) represents the area under \(f\) from \(1\) to \(x\text{,}\) it follows that this area will be largest at \(x=\sqrt{2}\text{,}\) since this is where \(f\) crosses the axis.</p>
+<p id="p-484">We can find where <span class="process-math">\(g\)</span> is largest by using a derivative test or just geometry. Since <span class="process-math">\(g\)</span> represents the area under <span class="process-math">\(f\)</span> from <span class="process-math">\(1\)</span> to <span class="process-math">\(x\text{,}\)</span> it follows that this area will be largest at <span class="process-math">\(x=\sqrt{2}\text{,}\)</span> since this is where <span class="process-math">\(f\)</span> crosses the axis.</p>
 </div></div>
-</div></article><p id="p-485">There's one important thing to take away from the previous example. The function \(g(x) = \int_{1}^{x}f(t)\,dt\) turned out to be an antiderivative of \(f(x)\text{,}\) so in particular \(g'(x) = f(x)\text{.}\) This is not a coincidence.</p>
-<article class="theorem theorem-like" id="theorem-fundamental-theorem-of-calculus"><h6 class="heading">
+</div></article><p id="p-485">There's one important thing to take away from the previous example. The function <span class="process-math">\(g(x) = \int_{1}^{x}f(t)\,dt\)</span> turned out to be an antiderivative of <span class="process-math">\(f(x)\text{,}\)</span> so in particular <span class="process-math">\(g'(x) = f(x)\text{.}\)</span> This is not a coincidence.</p>
+<article class="theorem theorem-like" id="theorem-fundamental-theorem-of-calculus"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Fundamental Theorem of Calculus.</span>
-</h6>
-<p id="p-486">Let \(f(x)\) be a continuous function defined on \([a,b]\text{.}\)</p>
+</h3>
+<p id="p-486">Let <span class="process-math">\(f(x)\)</span> be a continuous function defined on <span class="process-math">\([a,b]\text{.}\)</span></p>
 <ol class="decimal">
-<li id="li-40">Define \(g(x) = \int_{a}^{x}f(t)\,dt\) for \(x\) in \([a,x]\text{.}\) Then \(g'(x) = f(x)\text{,}\) i.e., \(g\) is an antiderivative of \(f\text{.}\)</li>
-<li id="li-41">Let \(F\) be a particular antiderivative of \(f\text{.}\) Then \(\int_{a}^{b}f(x)\,dx = F(b) - F(a).\)</li>
-</ol></article><article class="hiddenproof" id="proof-11"><a data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-11"><h6 class="heading"><span class="type">Proof<span class="period">.</span></span></h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-11"><article class="hiddenproof"><p id="p-487">We'll sketch the proof of the first part. First, assume that \(g(x) = \int_{a}^{x}f(t)\,dt\text{.}\) Then</p>
-<div class="displaymath">
+<li id="li-40"><p id="p-derived-li-40">Define <span class="process-math">\(g(x) = \int_{a}^{x}f(t)\,dt\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\([a,x]\text{.}\)</span> Then <span class="process-math">\(g'(x) = f(x)\text{,}\)</span> i.e., <span class="process-math">\(g\)</span> is an antiderivative of <span class="process-math">\(f\text{.}\)</span></p></li>
+<li id="li-41"><p id="p-derived-li-41">Let <span class="process-math">\(F\)</span> be a particular antiderivative of <span class="process-math">\(f\text{.}\)</span> Then <span class="process-math">\(\int_{a}^{b}f(x)\,dx = F(b) - F(a).\)</span></p></li>
+</ol></article><article class="hiddenproof" id="proof-11"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-11"><h3 class="heading"><span class="type">Proof<span class="period">.</span></span></h3></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-11"><article class="hiddenproof"><p id="p-487">We'll sketch the proof of the first part. First, assume that <span class="process-math">\(g(x) = \int_{a}^{x}f(t)\,dt\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \frac{g(x+h)-g(x)}{h} = \frac{1}{h}\int_{x}^{x+h}f(t)\,dt.
 \end{equation*}
 </div>
-<p class="continuation">Now, if \(h\) is small and if \(x\leq t\leq x+h\text{,}\) then \(\int_{x}^{x+h}f(t)\,dt\) should be approximately equal to \(f(x)h\) since \(f\) is continuous. Therefore</p>
-<div class="displaymath">
+<p class="continuation">Now, if <span class="process-math">\(h\)</span> is small and if <span class="process-math">\(x\leq t\leq x+h\text{,}\)</span> then <span class="process-math">\(\int_{x}^{x+h}f(t)\,dt\)</span> should be approximately equal to <span class="process-math">\(f(x)h\)</span> since <span class="process-math">\(f\)</span> is continuous. Therefore</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lim_{h\to0}\frac{g(x+h)-g(x)}{h} = \lim_{h\to0}\frac{f(x)h}{h} = f(x),
 \end{equation*}
 </div>
-<p class="continuation">and so \(g'(x) = f(x)\text{.}\)</p></article></div>
-<p id="p-488">The second part of <a class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Theorem 6.4.2</a> is something we've seen before in <a class="xref" data-knowl="./knowl/theorem-evaluation-theorem.html" title="Theorem 6.3.1: Evaluation Theorem">Theorem 6.3.1</a>, but the first part is new. Essentially, this result says that integration and differentiation are <em class="emphasis">inverses</em> of each other.</p>
-<article class="example example-like" id="example-error-function"><h6 class="heading">
+<p class="continuation">and so <span class="process-math">\(g'(x) = f(x)\text{.}\)</span></p></article></div>
+<p id="p-488">The second part of <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Theorem 6.4.2</a> is something we've seen before in <a href="" class="xref" data-knowl="./knowl/theorem-evaluation-theorem.html" title="Theorem 6.3.1: Evaluation Theorem">Theorem 6.3.1</a>, but the first part is new. Essentially, this result says that integration and differentiation are <em class="emphasis">inverses</em> of each other.</p>
+<article class="example example-like" id="example-error-function"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Error function.</span>
-</h6>
+</h3>
 <p id="p-489">The <dfn class="terminology">error function</dfn>, defined by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 erf(x) = \frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}\,dt,
 \end{equation*}
 </div>
-<p class="continuation">is one of the most important functions in statistics and other applications of mathematics (such as modeling the spread of a virus or the spread of heat). Find the derivative of \(\erf(x)\text{.}\)</p>
+<p class="continuation">is one of the most important functions in statistics and other applications of mathematics (such as modeling the spread of a virus or the spread of heat). Find the derivative of <span class="process-math">\(\erf(x)\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-103" id="solution-103"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-103"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-103" id="solution-103"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-103"><div class="solution solution-like">
 <p id="p-490">By the Fundamental Theorem of Calculus, we have</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 erf'(x) = \frac{2}{\sqrt{\pi}}e^{-x^{2}}.
 \end{equation*}
 </div>
-<p class="continuation">Note that \(\erf'(x)\to0\) as \(x\to\infty\text{,}\) which suggests that the error function "levels out" as \(x\) increases, which is in fact true.</p>
+<p class="continuation">Note that <span class="process-math">\(\erf'(x)\to0\)</span> as <span class="process-math">\(x\to\infty\text{,}\)</span> which suggests that the error function "levels out" as <span class="process-math">\(x\)</span> increases, which is in fact true.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-computing-derivatives"><h6 class="heading">
+</div></article><article class="example example-like" id="example-computing-derivatives"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Computing derivatives.</span>
-</h6>
-<p id="p-491">Let \(f(x) = \int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt.\) Find \(f'(x)\text{.}\)</p>
+</h3>
+<p id="p-491">Let <span class="process-math">\(f(x) = \int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt.\)</span> Find <span class="process-math">\(f'(x)\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-104" id="solution-104"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-104"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-104" id="solution-104"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-104"><div class="solution solution-like">
 <p id="p-492">We have</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 f'(x) &amp; = \dv{}{x}\int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt \\
 &amp; = -\dv{}{x}\int_{1}^{\sin x}\sqrt{t^{2} + e^{-t}}\,dt \\
 &amp; = -\sqrt{\sin^{2}x+e^{-\sin x}}\cos x. 
 \end{align*}
 </div>
-<p class="continuation">Here, \(\sin x\) acts like an inside function so we must use the chain rule in addition to the Fundamental Theorem of Calculus to find this derivative.</p>
+<p class="continuation">Here, <span class="process-math">\(\sin x\)</span> acts like an inside function so we must use the chain rule in addition to the Fundamental Theorem of Calculus to find this derivative.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-a-business-problem"><h6 class="heading">
+</div></article><article class="example example-like" id="example-a-business-problem"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">A business problem.</span>
-</h6>
-<p id="p-493">A company purchases equipment that depreciates at a rate \(f(t)\) and accumulates maintenance costs at a rate \(g(t)\text{,}\) where \(t\) denotes the number of months after purchase. The company wants to minimize the cost per month of the equipment due to depreciation and maintenance. After how much time should the company replace the equipment?</p>
+</h3>
+<p id="p-493">A company purchases equipment that depreciates at a rate <span class="process-math">\(f(t)\)</span> and accumulates maintenance costs at a rate <span class="process-math">\(g(t)\text{,}\)</span> where <span class="process-math">\(t\)</span> denotes the number of months after purchase. The company wants to minimize the cost per month of the equipment due to depreciation and maintenance. After how much time should the company replace the equipment?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-105" id="solution-105"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-105"><div class="solution solution-like">
-<p id="p-494">First, we need to figure out the cost per month due to depreciation and maintenance, call it \(C(t)\text{.}\) Then</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-105" id="solution-105"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-105"><div class="solution solution-like">
+<p id="p-494">First, we need to figure out the cost per month due to depreciation and maintenance, call it <span class="process-math">\(C(t)\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 C(t) = \frac{\text{total depreciation} - \text{total maintenance}}{t}.
 \end{equation*}
 </div>
-<p class="continuation">Now, the total depreciation after \(t\) months is \(\int_{0}^{t}f(s)\,ds\text{,}\) and the total maintenance cost after \(t\) months is \(\int_{0}^{t}g(s)\,ds\text{.}\) So</p>
-<div class="displaymath">
+<p class="continuation">Now, the total depreciation after <span class="process-math">\(t\)</span> months is <span class="process-math">\(\int_{0}^{t}f(s)\,ds\text{,}\)</span> and the total maintenance cost after <span class="process-math">\(t\)</span> months is <span class="process-math">\(\int_{0}^{t}g(s)\,ds\text{.}\)</span> So</p>
+<div class="displaymath process-math">
 \begin{equation*}
 C(t) = \frac{1}{t}\int_{0}^{t}[f(s) + g(s)]\,ds.
 \end{equation*}
 </div>
 <p class="continuation">This is the function we need to minimize.</p>
-<p id="p-495">To minimize \(C(t)\text{,}\) we'll start by finding its critical points. Assuming that each of these functions is differentiable, we have</p>
-<div class="displaymath">
+<p id="p-495">To minimize <span class="process-math">\(C(t)\text{,}\)</span> we'll start by finding its critical points. Assuming that each of these functions is differentiable, we have</p>
+<div class="displaymath process-math">
 \begin{equation*}
 C'(t) = -\frac{1}{t^{2}}\int_{0}^{t}[f(s)+g(s)]\,ds + \frac{f(t) + g(t)}{t}
 \end{equation*}
 </div>
 <p class="continuation">which reduces to</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 C'(t) = -\frac{1}{t}C(t) + \frac{f(t) + g(t)}{t}.
 \end{equation*}
 </div>
-<p class="continuation">So the critical points occur at any value \(t = T\) for which \(C(T) = f(T) + g(T)\text{,}\) i.e., the cost per month due to depreciation and maintenance equals the rate of depreciation plus the rate of maintenance costs.</p>
+<p class="continuation">So the critical points occur at any value <span class="process-math">\(t = T\)</span> for which <span class="process-math">\(C(T) = f(T) + g(T)\text{,}\)</span> i.e., the cost per month due to depreciation and maintenance equals the rate of depreciation plus the rate of maintenance costs.</p>
 <p id="p-496">Now we need to see if we have a minimum or a maximum. To do so, we can use the second derivative test. After some algebra, we get that</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 C''(t) = 2\frac{C(t) - (f(t) + g(t))}{t^{2}} + \frac{f'(t) + g'(t)}{t^{2}},
 \end{equation*}
 </div>
 <p class="continuation">and so</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 C''(T) = \frac{f'(T) + g'(T)}{T^{2}} &gt;0.
 \end{equation*}
 </div>
-<p class="continuation">Therefore \(T\) gives a local minimum. If we assume that \(C(t)\) is differentiable everywhere, then this local minimum should also be an absolute minimum since it's the only critical point.</p>
+<p class="continuation">Therefore <span class="process-math">\(T\)</span> gives a local minimum. If we assume that <span class="process-math">\(C(t)\)</span> is differentiable everywhere, then this local minimum should also be an absolute minimum since it's the only critical point.</p>
 </div></div>
 </div></article></section></div></main>
 </div>

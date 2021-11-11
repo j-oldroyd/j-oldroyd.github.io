@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2021-11-10T20:39:04-05:00       *-->
+<!--*       on 2021-11-10T20:52:20-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,36 +14,42 @@
 <title>Improper Integrals</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['\\(','\\)']]
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
     },
-    asciimath2jax: {
-        ignoreClass: ".*",
-        processClass: "has_am"
-    },
-    jax: ["input/AsciiMath"],
-    extensions: ["asciimath2jax.js"],
-    TeX: {
-        extensions: ["extpfeil.js", "autobold.js", "https://pretextbook.org/js/lib/mathjaxknowl.js", "AMScd.js", ],
-        // scrolling to fragment identifiers is controlled by other Javascript
-        positionToHash: false,
-        equationNumbers: { autoNumber: "none", useLabelIds: true, },
-        TagSide: "right",
-        TagIndent: ".8em",
-    },
-    // HTML-CSS output Jax to be dropped for MathJax 3.0
-    "HTML-CSS": {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-    CommonHTML: {
-        scale: 88,
-        mtextFontInherit: true,
-    },
-});
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML-full"></script><script>$(function () {
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
     // Make *any* div with class 'sagecell-sage' an executable Sage cell
     // Their results will be linked, only within language type
     sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
@@ -51,29 +57,26 @@ MathJax.Hub.Config({
                            languages: ['sage'],
                            evalButtonText: 'Evaluate (Sage)'});
 });
-</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg">miniversion=0.6</script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
 </script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
-<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
 <!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mathbook-book has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-
-\newcommand{\vv}[1]{\mathbf{#1}}
-\newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
 \newcommand{\curl}{\nabla\times}
 \newcommand{\curlt}{\operatorname{curl}}
@@ -100,7 +103,7 @@ MathJax.Hub.Config({
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
-\)</div>
+\)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
@@ -155,90 +158,90 @@ true);
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
 <li class="link"><a href="colophon-2.html" data-scroll="colophon-2"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="section-improper-integrals"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">7.4</span> <span class="title">Improper Integrals</span>
 </h2>
-<section class="introduction" id="introduction-12"><p id="p-594">(Note: this section corresponds to Section 6.6 of the text.) Consider the following problem: determine the smallest velocity required for an object to escape the earth's gravitational pull (i.e., the <dfn class="terminology">escape velocity</dfn>). We can try to answer this problem by looking at the total work \(W\) needed to move this object. From one viewpoint, work is just the total change in kinetic energy. If the object is moving at escape velocity, say \(v_{e}\text{,}\) then all of its kinetic energy must have been converted into work: \(W = \frac{1}{2}m_{O}v_{e}^{2}\text{,}\) where \(m_{O}\) is the mass of the object.</p>
+<section class="introduction" id="introduction-12"><p id="p-594">(Note: this section corresponds to Section 6.6 of the text.) Consider the following problem: determine the smallest velocity required for an object to escape the earth's gravitational pull (i.e., the <dfn class="terminology">escape velocity</dfn>). We can try to answer this problem by looking at the total work <span class="process-math">\(W\)</span> needed to move this object. From one viewpoint, work is just the total change in kinetic energy. If the object is moving at escape velocity, say <span class="process-math">\(v_{e}\text{,}\)</span> then all of its kinetic energy must have been converted into work: <span class="process-math">\(W = \frac{1}{2}m_{O}v_{e}^{2}\text{,}\)</span> where <span class="process-math">\(m_{O}\)</span> is the mass of the object.</p>
 <p id="p-595">As we'll see later, work is also the integral of force, so let's examine the force on the object. If we neglect air resistance and assume that the only force acting on the object is gravity, then the force exerted on the object is given by</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 F(r) = \frac{m_{E}m_{O}}{r^{2}}G,
 \end{equation*}
 </div>
-<p class="continuation">where \(m_{E}\) is the mass of the Earth, \(m_{O}\) is still the mass of the object, \(r\) is the distance from the center of mass of the Earth to the center of mass of the object, and \(G\) is the gravitational constant. Now assume that the Earth is a sphere of radius \(R_{0}\text{,}\) and that the object has enough velocity to move it a distance of \(R_{1}\) units from the surface of the Earth. Then the total work done in moving the object this distance is</p>
-<div class="displaymath">
+<p class="continuation">where <span class="process-math">\(m_{E}\)</span> is the mass of the Earth, <span class="process-math">\(m_{O}\)</span> is still the mass of the object, <span class="process-math">\(r\)</span> is the distance from the center of mass of the Earth to the center of mass of the object, and <span class="process-math">\(G\)</span> is the gravitational constant. Now assume that the Earth is a sphere of radius <span class="process-math">\(R_{0}\text{,}\)</span> and that the object has enough velocity to move it a distance of <span class="process-math">\(R_{1}\)</span> units from the surface of the Earth. Then the total work done in moving the object this distance is</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{R_{0}}^{R_{1}}F(r)\,dr = m_{E}m_{O}G\int_{R_{0}}^{R_{1}}\frac{1}{r^{2}}\,dr.
 \end{equation*}
 </div>
 <p class="continuation">Now let's think about should happen if the object is at escape velocity. In this case, theoretically at least, there should be no limit to the distance the object can travel if given enough time. So what's the total work done?</p>
-<p id="p-596">Let's try to compute \(m_{E}m_{O}G\int_{R_{0}}^{R_{1}}\frac{1}{r^{2}}\,dr.\) We get</p>
-<div class="displaymath">
+<p id="p-596">Let's try to compute <span class="process-math">\(m_{E}m_{O}G\int_{R_{0}}^{R_{1}}\frac{1}{r^{2}}\,dr.\)</span> We get</p>
+<div class="displaymath process-math">
 \begin{align*}
 m_{E}m_{O}G\int_{R_{0}}^{R_{1}}\frac{1}{r^{2}}\,dr &amp; = -\frac{m_{E}m_{O}G}{r}\big]_{R_{0}}^{R_{1}} \\
 &amp; = \frac{m_{E}m_{O}G}{R_{0}} - \frac{m_{E}m_{O}G}{R_{1}}. 
 \end{align*}
 </div>
-<p class="continuation">Note that this is still an underestimate for the total work theoretically done, since \(R_{1}\) can increase without bound. So let's send \(R_{1}\) to \(\infty\) and see what we get:</p>
-<div class="displaymath">
+<p class="continuation">Note that this is still an underestimate for the total work theoretically done, since <span class="process-math">\(R_{1}\)</span> can increase without bound. So let's send <span class="process-math">\(R_{1}\)</span> to <span class="process-math">\(\infty\)</span> and see what we get:</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lim_{R_{1}\to\infty}\frac{m_{E}m_{O}G}{R_{0}} - \frac{m_{E}m_{O}G}{R_{1}} = \frac{m_{E}m_{O}G}{R_{0}}.
 \end{equation*}
 </div>
-<p id="p-597">So, to summarize, the total work \(W\) should be</p>
-<div class="displaymath">
+<p id="p-597">So, to summarize, the total work <span class="process-math">\(W\)</span> should be</p>
+<div class="displaymath process-math">
 \begin{equation*}
 W = \lim_{R_{1}\to\infty}\left(m_{E}m_{O}G\int_{R_{0}}^{R_{1}}\frac{1}{r^{2}}\,dr\right) = \frac{1}{2}m_{O}v_{e}^{2}
 \end{equation*}
 </div>
 <p class="continuation">or just</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 W = \frac{m_{E}m_{O}G}{R_{0}} = \frac{1}{2}m_{O}v_{e}^{2}.
 \end{equation*}
 </div>
-<p class="continuation"><em class="emphasis">We can solve this equation for \(v_{e}\)</em>, and so the escape velocity should be</p>
-<div class="displaymath">
+<p class="continuation"><em class="emphasis">We can solve this equation for <span class="process-math">\(v_{e}\)</span></em>, and so the escape velocity should be</p>
+<div class="displaymath process-math">
 \begin{equation*}
 v_{e} = \sqrt{\frac{2 m_{E}G}{R_{0}}}.
 \end{equation*}
 </div>
-<p class="continuation">As a neat bonus, this shows that the escape velocity only depends on \(G\text{,}\) the mass of the Earth \(m_{E}\) and the "radius" of the Earth \(R_{0}\text{.}\) Plugging in values for these figures, we get \(v_{e} \approx 11185\) meters per second, or \(11.185\) kilometers per second.</p>
-<p id="p-598">This is all very important obviously, but this is calculus, and what <em class="emphasis">we</em> really care about are the mathematical tools required to solve this problem. To do this, we basically had to figure out what the integral of \(\frac{1}{r^{2}}\) was over the interval \([R_{0},\infty)\text{.}\) This is our first example of an <dfn class="terminology">improper integral</dfn>.</p></section><section class="subsection" id="subsection-improper-integrals-over-infinite-intervals"><h3 class="heading hide-type">
+<p class="continuation">As a neat bonus, this shows that the escape velocity only depends on <span class="process-math">\(G\text{,}\)</span> the mass of the Earth <span class="process-math">\(m_{E}\)</span> and the "radius" of the Earth <span class="process-math">\(R_{0}\text{.}\)</span> Plugging in values for these figures, we get <span class="process-math">\(v_{e} \approx 11185\)</span> meters per second, or <span class="process-math">\(11.185\)</span> kilometers per second.</p>
+<p id="p-598">This is all very important obviously, but this is calculus, and what <em class="emphasis">we</em> really care about are the mathematical tools required to solve this problem. To do this, we basically had to figure out what the integral of <span class="process-math">\(\frac{1}{r^{2}}\)</span> was over the interval <span class="process-math">\([R_{0},\infty)\text{.}\)</span> This is our first example of an <dfn class="terminology">improper integral</dfn>.</p></section><section class="subsection" id="subsection-improper-integrals-over-infinite-intervals"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.4.1</span> <span class="title">Improper Integrals over Infinite Intervals</span>
 </h3>
 <p id="p-599">First, a definition.</p>
-<article class="definition definition-like" id="definition-type-1-improper-integral"><h6 class="heading">
+<article class="definition definition-like" id="definition-type-1-improper-integral"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Type 1 Improper Integral.</span>
-</h6>
-<p id="p-600">Let \(f(x)\) be some function, and let \(a\) be a constant. If \(\int_{a}^{b}f(x)\,dx\) exists for every \(b\geq a\text{,}\) then we define</p>
-<div class="displaymath">
+</h4>
+<p id="p-600">Let <span class="process-math">\(f(x)\)</span> be some function, and let <span class="process-math">\(a\)</span> be a constant. If <span class="process-math">\(\int_{a}^{b}f(x)\,dx\)</span> exists for every <span class="process-math">\(b\geq a\text{,}\)</span> then we define</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{a}^{\infty}f(x)\,dx = \lim_{b\to\infty}\int_{a}^{b}f(x)\,dx,
 \end{equation*}
 </div>
-<p class="continuation">assuming this limit exists. Similarly, if \(\int_{b}^{a}f(x)\,dx\) exists for every \(b\leq a\text{,}\) then we define</p>
-<div class="displaymath">
+<p class="continuation">assuming this limit exists. Similarly, if <span class="process-math">\(\int_{b}^{a}f(x)\,dx\)</span> exists for every <span class="process-math">\(b\leq a\text{,}\)</span> then we define</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{-\infty}^{a}f(x)\,dx = \lim_{b\to-\infty}\int_{b}^{a}f(x)\,dx,
 \end{equation*}
 </div>
 <p class="continuation">assuming this limit exists. These improper integrals are <dfn class="terminology">convergent</dfn> if the corresponding limits exist and <dfn class="terminology">divergent</dfn> otherwise.</p>
-<p id="p-601">Finally, if both \(\int_{-\infty}^{a}f(x)\,dx\) and \(\int_{a}^{\infty}f(x)\,dx\) are convergent, then we define</p>
-<div class="displaymath">
+<p id="p-601">Finally, if both <span class="process-math">\(\int_{-\infty}^{a}f(x)\,dx\)</span> and <span class="process-math">\(\int_{a}^{\infty}f(x)\,dx\)</span> are convergent, then we define</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{-\infty}^{\infty}f(x)\,dx = \int_{-\infty}^{a}f(x)\,dx + \int_{a}^{\infty}f(x)\,dx.
 \end{equation*}
-</div></article><article class="example example-like" id="example-a-divergent-integral"><h6 class="heading">
+</div></article><article class="example example-like" id="example-a-divergent-integral"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">A Divergent Integral.</span>
-</h6>
-<p id="p-602">Determine if \(\int_{1}^{\infty}\frac{1}{x}\,dx\) is convergent or divergent.</p>
+</h4>
+<p id="p-602">Determine if <span class="process-math">\(\int_{1}^{\infty}\frac{1}{x}\,dx\)</span> is convergent or divergent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-127" id="solution-127"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-127"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-127" id="solution-127"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-127"><div class="solution solution-like">
 <p id="p-603">By definition, we have</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \int_{1}^{\infty}\frac{1}{x}\,dx &amp; = \lim_{b\to\infty}\int_{1}^{b}\frac{1}{x}\,dx \\
 &amp; = \lim_{b\to\infty}(\ln b - \ln 1) \\
@@ -247,29 +250,29 @@ v_{e} = \sqrt{\frac{2 m_{E}G}{R_{0}}}.
 </div>
 <p class="continuation">Hence the integral is divergent.</p>
 </div></div>
-</div></article><p id="p-604">In <a class="xref" data-knowl="./knowl/example-a-divergent-integral.html" title="Example 7.4.2: A Divergent Integral">Example 7.4.2</a>, note that \(\frac{1}{x}\to0\) as \(x\to\infty\text{.}\) However, it doesn't go to \(0\) <em class="emphasis">fast enough</em> for the integral to converge.</p>
-<article class="example example-like" id="example-convergent-improper-integral"><h6 class="heading">
+</div></article><p id="p-604">In <a href="" class="xref" data-knowl="./knowl/example-a-divergent-integral.html" title="Example 7.4.2: A Divergent Integral">Example 7.4.2</a>, note that <span class="process-math">\(\frac{1}{x}\to0\)</span> as <span class="process-math">\(x\to\infty\text{.}\)</span> However, it doesn't go to <span class="process-math">\(0\)</span> <em class="emphasis">fast enough</em> for the integral to converge.</p>
+<article class="example example-like" id="example-convergent-improper-integral"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.3</span><span class="period">.</span>
-</h6>
-<p id="p-605">Is \(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\) convergent?</p></article><p id="p-606">The convergence of \(\int_{1}^{\infty}\frac{1}{x^{p}}\,dx\) depends on the value of \(p\text{.}\)</p>
-<article class="theorem theorem-like" id="theorem-integral-p-test"><h6 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Integral \(p\)-test.</span>
-</h6>
-<p id="p-607">The integral \(\int_{1}^{\infty}\frac{1}{x^{p}}\,dx\) converges if and only if \(p \gt 1\text{.}\)</p></article><article class="example example-like" id="example-area-under-a-graph"><h6 class="heading">
+</h4>
+<p id="p-605">Is <span class="process-math">\(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\)</span> convergent?</p></article><p id="p-606">The convergence of <span class="process-math">\(\int_{1}^{\infty}\frac{1}{x^{p}}\,dx\)</span> depends on the value of <span class="process-math">\(p\text{.}\)</span></p>
+<article class="theorem theorem-like" id="theorem-integral-p-test"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Integral <span class="process-math">\(p\)</span>-test.</span>
+</h4>
+<p id="p-607">The integral <span class="process-math">\(\int_{1}^{\infty}\frac{1}{x^{p}}\,dx\)</span> converges if and only if <span class="process-math">\(p \gt 1\text{.}\)</span></p></article><article class="example example-like" id="example-area-under-a-graph"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Area Under a Graph.</span>
-</h6>
-<p id="p-608">Find the area under \(f(x) = xe^{-x^{2}}\text{.}\)</p>
+</h4>
+<p id="p-608">Find the area under <span class="process-math">\(f(x) = xe^{-x^{2}}\text{.}\)</span></p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-128" id="solution-128"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-128"><div class="solution solution-like">
-<p id="p-609">The area under \(f(x)\) is given by \(\int_{-\infty}^{\infty}xe^{-x^{2}}\text{.}\) To evaluate this integral, we must split it into two improper integrals:</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-128" id="solution-128"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-128"><div class="solution solution-like">
+<p id="p-609">The area under <span class="process-math">\(f(x)\)</span> is given by <span class="process-math">\(\int_{-\infty}^{\infty}xe^{-x^{2}}\text{.}\)</span> To evaluate this integral, we must split it into two improper integrals:</p>
+<div class="displaymath process-math">
 \begin{align*}
 \int_{-\infty}^{\infty}xe^{-x^{2}}\,dx &amp; = \int_{-\infty}^{0}xe^{-x^{2}}\,dx + \int_{0}^{\infty}xe^{-x^{2}}\,dx \\
 &amp; = \lim_{a\to\-\infty}\int_{a}^{0}xe^{-x^{2}}\,dx + \lim_{b\to\infty}\int_{0}^{b}xe^{-x^{2}}\,dx 
 \end{align*}
 </div>
-<p id="p-610">At this point, we can use \(u\)-substitution to find each integral, using \(u = -x^{2}\) and \(du = -2x\,dx\text{.}\) So we get</p>
-<div class="displaymath">
+<p id="p-610">At this point, we can use <span class="process-math">\(u\)</span>-substitution to find each integral, using <span class="process-math">\(u = -x^{2}\)</span> and <span class="process-math">\(du = -2x\,dx\text{.}\)</span> So we get</p>
+<div class="displaymath process-math">
 \begin{align*}
 \lim_{a\to\-\infty}\int_{a}^{0}xe^{-x^{2}}\,dx + \lim_{b\to\infty}\int_{0}^{b}xe^{-x^{2}} &amp; = \lim_{a\to\-\infty}\int_{-a^{2}}^{0}\frac{-e^{u}}{2}\,du + \lim_{b\to\infty}\int_{0}^{-b^{2}}\frac{-e^{u}}{2}\,du \\
 &amp; = \lim_{a\to-\infty}\left[-\frac{1}{2} + \frac{e^{-a^{2}}}{2}\right] + \lim_{b\to\infty}\left[-\frac{e^{-b^{2}}}{2} + \frac{1}{2}\right]\\
@@ -277,28 +280,28 @@ v_{e} = \sqrt{\frac{2 m_{E}G}{R_{0}}}.
 &amp; = 0. 
 \end{align*}
 </div>
-<p id="p-611">Hence the area under \(f(x)\) is \(0\) (which might not be so surprising if you graph \(f(x)\)).</p>
+<p id="p-611">Hence the area under <span class="process-math">\(f(x)\)</span> is <span class="process-math">\(0\)</span> (which might not be so surprising if you graph <span class="process-math">\(f(x)\)</span>).</p>
 </div></div>
-</div></article><article class="example example-like" id="example-radioactive-decay"><h6 class="heading">
+</div></article><article class="example example-like" id="example-radioactive-decay"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Radioactive Decay.</span>
-</h6>
-<p id="p-612">A radioactive substance undergoes decay, and has mass \(m(t)\) at time \(t\) given by</p>
-<div class="displaymath">
+</h4>
+<p id="p-612">A radioactive substance undergoes decay, and has mass <span class="process-math">\(m(t)\)</span> at time <span class="process-math">\(t\)</span> given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 m(t) = m_{0}e^{-kt}
 \end{equation*}
 </div>
-<p class="continuation">for some \(k\gt0\text{.}\) The <em class="emphasis">expected lifetime</em> of a particle is given by</p>
-<div class="displaymath">
+<p class="continuation">for some <span class="process-math">\(k\gt0\text{.}\)</span> The <em class="emphasis">expected lifetime</em> of a particle is given by</p>
+<div class="displaymath process-math">
 \begin{equation*}
 k\int_{0}^{\infty}te^{-kt}\,dt.
 \end{equation*}
 </div>
 <p class="continuation">Find this value.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-129" id="solution-129"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-129"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-129" id="solution-129"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-129"><div class="solution solution-like">
 <p id="p-613">We can solve this using integration by parts. Doing so, we get</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 k\int_{0}^{\infty}te^{-kt}\,dt &amp; = -\lim_{b\to\infty}\left[te^{-kt} + \frac{1}{k}e^{-kt}\right]_{0}^{b} \\
 &amp; = \frac{1}{k} 
@@ -316,20 +319,20 @@ k,t = symbols('k t', positive=True)
 m = k*t*exp(-k*t)
 
 m.integrate((t, 0, oo))
-</script></div></section><article class="example example-like" id="example-a-probability-distribution"><h6 class="heading">
+</script></div></section><article class="example example-like" id="example-a-probability-distribution"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">A Probability Distribution.</span>
-</h6>
-<p id="p-614">In probability, a <dfn class="terminology">probability distribution</dfn> is a function \(f(x)\) satisfying</p>
-<div class="displaymath">
+</h3>
+<p id="p-614">In probability, a <dfn class="terminology">probability distribution</dfn> is a function <span class="process-math">\(f(x)\)</span> satisfying</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{-\infty}^{\infty}f(x)\,dx = 1\text{.}
 \end{equation*}
 </div>
-<p class="continuation">Is \(f(x) = \int_{-\infty}^{\infty}\frac{1}{1 + x^{2}}\,dx\) a probability distribution?</p>
+<p class="continuation">Is <span class="process-math">\(f(x) = \int_{-\infty}^{\infty}\frac{1}{1 + x^{2}}\,dx\)</span> a probability distribution?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-130" id="solution-130"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-130"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-130" id="solution-130"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-130"><div class="solution solution-like">
 <p id="p-615">We have</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \int_{-\infty}^{\infty}\frac{1}{1 + x^{2}}\,dx \amp = \tan^{-1}x\big]_{-\infty}^{\infty} \\
 \amp = \lim_{b\to\infty}\tan^{-1}x\big]_{0}^{b} + \lim_{c\to-\infty}\tan^{-1}x\big]_{c}^{0} \\
@@ -338,50 +341,50 @@ m.integrate((t, 0, oo))
 </div>
 <p class="continuation">So this isn't a probability distribution.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-another-laplace-transform"><h6 class="heading">
+</div></article><article class="example example-like" id="example-another-laplace-transform"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Another Laplace Transform.</span>
-</h6>
-<p id="p-616">The <dfn class="terminology">Laplace transform</dfn> of a function \(f(t)\) is defined to be</p>
-<div class="displaymath">
+</h3>
+<p id="p-616">The <dfn class="terminology">Laplace transform</dfn> of a function <span class="process-math">\(f(t)\)</span> is defined to be</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{0}^{\infty}f(t)e^{-st}\,st\text{,}
 \end{equation*}
 </div>
-<p class="continuation">assuming \(s\) is chosen so that the integral converges. Find the Laplace transform of \(f(t) = t\text{.}\)</p></article><section class="subsection" id="subsection-improper-integrals-with-discontinuous-integrands"><h3 class="heading hide-type">
+<p class="continuation">assuming <span class="process-math">\(s\)</span> is chosen so that the integral converges. Find the Laplace transform of <span class="process-math">\(f(t) = t\text{.}\)</span></p></article><section class="subsection" id="subsection-improper-integrals-with-discontinuous-integrands"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.4.2</span> <span class="title">Improper Integrals with Discontinuous Integrands</span>
 </h3>
 <p id="p-617">The second type of improper integral we'll consider involves integrands with "divide-by-zero" problems.</p>
-<article class="definition definition-like" id="definition-type-2-improper-integral"><h6 class="heading">
+<article class="definition definition-like" id="definition-type-2-improper-integral"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Type 2 Improper Integral.</span>
-</h6>
-<p id="p-618">If \(f(x)\) is continuous on \([a,b)\) and is discontinuous at \(b\text{,}\) then</p>
-<div class="displaymath">
+</h4>
+<p id="p-618">If <span class="process-math">\(f(x)\)</span> is continuous on <span class="process-math">\([a,b)\)</span> and is discontinuous at <span class="process-math">\(b\text{,}\)</span> then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \lim_{c\to b^{-}}\int_{a}^{c}f(x)\,dx
 \end{equation*}
 </div>
 <p class="continuation">assuming this limit exists.</p>
-<p id="p-619">If \(f(x)\) is continuous on \((a,b]\) and is discontinuous at \(a\text{,}\) then</p>
-<div class="displaymath">
+<p id="p-619">If <span class="process-math">\(f(x)\)</span> is continuous on <span class="process-math">\((a,b]\)</span> and is discontinuous at <span class="process-math">\(a\text{,}\)</span> then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \lim_{c\to a^{+}}\int_{c}^{b}f(x)\,dx
 \end{equation*}
 </div>
 <p class="continuation">assuming this limit exists.</p>
-<p id="p-620">If \(f(x)\) is at \(c\) where \(a \lt c\lt b\text{,}\) then</p>
-<div class="displaymath">
+<p id="p-620">If <span class="process-math">\(f(x)\)</span> is at <span class="process-math">\(c\)</span> where <span class="process-math">\(a \lt c\lt b\text{,}\)</span> then</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx
 \end{equation*}
 </div>
-<p class="continuation">assuming these integrals are convergent.</p></article><article class="example example-like" id="example-logarithmic-discontinuity"><h6 class="heading">
+<p class="continuation">assuming these integrals are convergent.</p></article><article class="example example-like" id="example-logarithmic-discontinuity"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">Logarithmic Discontinuity.</span>
-</h6>
-<p id="p-621">Determine if \(\int_{0}^{1}\ln x\,dx\) is convergent.</p>
+</h4>
+<p id="p-621">Determine if <span class="process-math">\(\int_{0}^{1}\ln x\,dx\)</span> is convergent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-131" id="solution-131"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-131"><div class="solution solution-like">
-<p id="p-622">This integral is improper since \(\ln x\) is discontinuous at \(x = 0\text{.}\) To evaluate it, we'll use limits:</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-131" id="solution-131"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-131"><div class="solution solution-like">
+<p id="p-622">This integral is improper since <span class="process-math">\(\ln x\)</span> is discontinuous at <span class="process-math">\(x = 0\text{.}\)</span> To evaluate it, we'll use limits:</p>
+<div class="displaymath process-math">
 \begin{align*}
 \int_{0}^{1}\ln x\,dx &amp; = \lim_{c\to0^{+}}\int_{c}^{1}\ln x\,dx \\
 &amp; = \lim_{c\to0^{+}}\left[x\ln x - x\right]_{c}^{1} \\
@@ -389,71 +392,71 @@ m.integrate((t, 0, oo))
 &amp; = -1, 
 \end{align*}
 </div>
-<p class="continuation">where we used the fact that \(c\ln c\to 0\) as \(c\to0\) by L'Hopital's Rule.</p>
+<p class="continuation">where we used the fact that <span class="process-math">\(c\ln c\to 0\)</span> as <span class="process-math">\(c\to0\)</span> by L'Hopital's Rule.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-another-integral-p-test"><h6 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Another Integral \(p\)-Test.</span>
-</h6>
-<p id="p-623">For what values of \(p\) is the integral \(\int_{0}^{1}\frac{1}{\sqrt[p]{x}}\,dx\) convergent?</p>
+</div></article><article class="example example-like" id="example-another-integral-p-test"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Another Integral <span class="process-math">\(p\)</span>-Test.</span>
+</h4>
+<p id="p-623">For what values of <span class="process-math">\(p\)</span> is the integral <span class="process-math">\(\int_{0}^{1}\frac{1}{\sqrt[p]{x}}\,dx\)</span> convergent?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-132" id="solution-132"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-132"><div class="solution solution-like">
-<p id="p-624">We could try to compute this as is, but we can save ourselves some work by making use of <a class="xref" data-knowl="./knowl/theorem-integral-p-test.html" title="Theorem 7.4.4: Integral \(p\)-test">Theorem 7.4.4</a>. First, we'll use the substitution \(u = x^{-\frac{1}{p}}\text{.}\) Then \(du = -\frac{1}{p}x^{-\frac{1}{p} - 1}\) and</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-132" id="solution-132"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-132"><div class="solution solution-like">
+<p id="p-624">We could try to compute this as is, but we can save ourselves some work by making use of <a href="" class="xref" data-knowl="./knowl/theorem-integral-p-test.html" title="Theorem 7.4.4: Integral \(p\)-test">Theorem 7.4.4</a>. First, we'll use the substitution <span class="process-math">\(u = x^{-\frac{1}{p}}\text{.}\)</span> Then <span class="process-math">\(du = -\frac{1}{p}x^{-\frac{1}{p} - 1}\)</span> and</p>
+<div class="displaymath process-math">
 \begin{align*}
 u\to\infty &amp; \quad\text{as}\quad x\to0^{+}\\
 u = 1 &amp; \quad\text{if}\quad x = 1.
 \end{align*}
 </div>
 <p class="continuation">Therefore</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \int_{0}^{1}\frac{1}{\sqrt[p]{x}}\,dx &amp;= \int_{\infty}^{1}u\left[-pu^{-1 - p}\right]\,du\\
 &amp; = p\int_{1}^{\infty}\frac{1}{u^{p}}\,du
 \end{align*}
 </div>
-<p class="continuation">which we know converges if and only if \(p \gt 1\text{.}\) Hence the original integral converges if and only if \(p\gt1\text{.}\)</p>
+<p class="continuation">which we know converges if and only if <span class="process-math">\(p \gt 1\text{.}\)</span> Hence the original integral converges if and only if <span class="process-math">\(p\gt1\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-comparison-tests-for-improper-integrals"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">7.4.3</span> <span class="title">Comparison Tests for Improper Integrals</span>
 </h3>
 <p id="p-625">For integrals, we have two comparison tests that allow us to determine if an improper integral converges by comparing it with a simpler integral. First, we'll look at the <dfn class="terminology">direct comparison test</dfn>.</p>
-<article class="theorem theorem-like" id="theorem-direct-comparison-test-integral"><h6 class="heading">
+<article class="theorem theorem-like" id="theorem-direct-comparison-test-integral"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.4.12</span><span class="period">.</span><span class="space"> </span><span class="title">Direct Comparison Test.</span>
-</h6>
-<p id="p-626">Suppose that \(f(x)\) and \(g(x)\) are continuous functions and that</p>
-<div class="displaymath">
+</h4>
+<p id="p-626">Suppose that <span class="process-math">\(f(x)\)</span> and <span class="process-math">\(g(x)\)</span> are continuous functions and that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 f(x) \geq g(x) \geq 0
 \end{equation*}
 </div>
-<p class="continuation">for \(x\geq a\text{,}\) for some real number \(a\text{.}\) Then if \(\int_{a}^{\infty}f(x)\,dx\) converges, so goes \(\int_{a}^{\infty}g(x)\,dx\text{.}\) Likewise, if \(\int_{a}^{\infty}g(x)\,dx\) diverges, then so does \(\int_{a}^{\infty}f(x)\,dx\text{.}\)</p></article><article class="example example-like" id="example-140"><h6 class="heading">
+<p class="continuation">for <span class="process-math">\(x\geq a\text{,}\)</span> for some real number <span class="process-math">\(a\text{.}\)</span> Then if <span class="process-math">\(\int_{a}^{\infty}f(x)\,dx\)</span> converges, so goes <span class="process-math">\(\int_{a}^{\infty}g(x)\,dx\text{.}\)</span> Likewise, if <span class="process-math">\(\int_{a}^{\infty}g(x)\,dx\)</span> diverges, then so does <span class="process-math">\(\int_{a}^{\infty}f(x)\,dx\text{.}\)</span></p></article><article class="example example-like" id="example-140"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.13</span><span class="period">.</span>
-</h6>
-<p id="p-627">Does \(\int_{1}^{\infty}\frac{1}{\sqrt{e^{x} + x}}\,dx\) converge?</p>
+</h4>
+<p id="p-627">Does <span class="process-math">\(\int_{1}^{\infty}\frac{1}{\sqrt{e^{x} + x}}\,dx\)</span> converge?</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-133" id="solution-133"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-133"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-133" id="solution-133"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-133"><div class="solution solution-like">
 <p id="p-628">This integrand looks pretty awful. However, we can say that</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \frac{1}{\sqrt{e^{x} + x}} \leq \frac{1}{\sqrt{e^{x}}} = e^{-\frac{x}{2}}.
 \end{equation*}
 </div>
 <p class="continuation">Since</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{align*}
 \int_{1}^{\infty}e^{-\frac{x}{2}}\,dx &amp; = 2\sqrt{e}, 
 \end{align*}
 </div>
-<p class="continuation"><a class="xref" data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 7.4.12: Direct Comparison Test">Theorem 7.4.12</a> implies that the original integral must converge as well. Note that we don't know <em class="emphasis">what</em> it converges to, only that it does.</p>
+<p class="continuation"><a href="" class="xref" data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 7.4.12: Direct Comparison Test">Theorem 7.4.12</a> implies that the original integral must converge as well. Note that we don't know <em class="emphasis">what</em> it converges to, only that it does.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-the-gaussian-integral"><h6 class="heading">
+</div></article><article class="example example-like" id="example-the-gaussian-integral"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">The Gaussian Integral.</span>
-</h6>
-<p id="p-629">Show that the integral \(\int_{0}^{\infty}e^{-x^{2}}\,dx\) is convergent.</p>
+</h4>
+<p id="p-629">Show that the integral <span class="process-math">\(\int_{0}^{\infty}e^{-x^{2}}\,dx\)</span> is convergent.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-134" id="solution-134"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-134"><div class="solution solution-like">
-<p id="p-630">We can do this by breaking the integral into two parts: \(\int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx.\) If \(x\) is between \(0\) and \(1\text{,}\) then \(e^{-x^{2}} \leq e^{0} = 1\text{.}\) On the other hand, if \(1\leq x\lt \infty\text{,}\) then \(e^{-x^{2}} \leq e^{-x}\text{.}\) Therefore</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-134" id="solution-134"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-134"><div class="solution solution-like">
+<p id="p-630">We can do this by breaking the integral into two parts: <span class="process-math">\(\int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx.\)</span> If <span class="process-math">\(x\)</span> is between <span class="process-math">\(0\)</span> and <span class="process-math">\(1\text{,}\)</span> then <span class="process-math">\(e^{-x^{2}} \leq e^{0} = 1\text{.}\)</span> On the other hand, if <span class="process-math">\(1\leq x\lt \infty\text{,}\)</span> then <span class="process-math">\(e^{-x^{2}} \leq e^{-x}\text{.}\)</span> Therefore</p>
+<div class="displaymath process-math">
 \begin{align*}
 \int_{0}^{\infty}e^{-x^{2}}\,dx &amp; = \int_{0}^{\infty}e^{-x^{2}}\,dx = \int_{0}^{1}e^{-x^{2}}\,dx + \int_{1}^{\infty}e^{-x^{2}}\,dx\\
 &amp; \leq \int_{0}^{1}\,dx + \int_{1}^{\infty}e^{-x}\,dx \\
@@ -470,37 +473,37 @@ sp.init_printing()
 x = sp.Symbol('x')
 sp.integrate(sp.exp(-x**2), (x, 0, oo))
 </script></div>
-<p id="p-631">To use <a class="xref" data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 7.4.12: Direct Comparison Test">Theorem 7.4.12</a> successfully, we need to choose a simpler function that's related to the integrand and then use algebra to justify a specific inequality. It is sometimes more straightforward to apply the <dfn class="terminology">limit comparison test</dfn>.</p>
-<article class="theorem theorem-like" id="theorem-limit-comparison-test-integral"><h6 class="heading">
+<p id="p-631">To use <a href="" class="xref" data-knowl="./knowl/theorem-direct-comparison-test-integral.html" title="Theorem 7.4.12: Direct Comparison Test">Theorem 7.4.12</a> successfully, we need to choose a simpler function that's related to the integrand and then use algebra to justify a specific inequality. It is sometimes more straightforward to apply the <dfn class="terminology">limit comparison test</dfn>.</p>
+<article class="theorem theorem-like" id="theorem-limit-comparison-test-integral"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.4.15</span><span class="period">.</span><span class="space"> </span><span class="title">Limit Comparison Test.</span>
-</h6>
-<p id="p-632">Let \(f(x)\) and \(g(x)\) be positive, continuous functions on \([a,\infty)\) for some constant \(a\text{.}\) If</p>
-<div class="displaymath">
+</h4>
+<p id="p-632">Let <span class="process-math">\(f(x)\)</span> and <span class="process-math">\(g(x)\)</span> be positive, continuous functions on <span class="process-math">\([a,\infty)\)</span> for some constant <span class="process-math">\(a\text{.}\)</span> If</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \lim_{x\to\infty}\frac{f(x)}{g(x)}
 \end{equation*}
 </div>
 <p class="continuation">exists and is positive, then the integrals</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \int_{a}^{\infty}f(x)\,dx\quad\text{and}\quad\int_{a}^{\infty}g(x)\,dx
 \end{equation*}
 </div>
-<p class="continuation">must both converge or both diverge.</p></article><article class="example example-like" id="example-142"><h6 class="heading">
+<p class="continuation">must both converge or both diverge.</p></article><article class="example example-like" id="example-142"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">7.4.16</span><span class="period">.</span>
-</h6>
-<p id="p-633">Determine if \(\displaystyle\int_{1}^{\infty}\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}\,dx\) converges.</p>
+</h4>
+<p id="p-633">Determine if <span class="process-math">\(\displaystyle\int_{1}^{\infty}\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}\,dx\)</span> converges.</p>
 <div class="solutions">
-<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-135" id="solution-135"><span class="type">Solution</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-135"><div class="solution solution-like">
-<p id="p-634">The integrand is awful again, but if \(x\) is very large then we can say that</p>
-<div class="displaymath">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-135" id="solution-135"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-135"><div class="solution solution-like">
+<p id="p-634">The integrand is awful again, but if <span class="process-math">\(x\)</span> is very large then we can say that</p>
+<div class="displaymath process-math">
 \begin{equation*}
 \frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}} \approx \frac{1}{x^{2}}.
 \end{equation*}
 </div>
-<p class="continuation">Since \(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\) converges, this suggests that maybe the original integral does as well. We can prove this using <a class="xref" data-knowl="./knowl/theorem-limit-comparison-test-integral.html" title="Theorem 7.4.15: Limit Comparison Test">Theorem 7.4.15</a>.</p>
+<p class="continuation">Since <span class="process-math">\(\int_{1}^{\infty}\frac{1}{x^{2}}\,dx\)</span> converges, this suggests that maybe the original integral does as well. We can prove this using <a href="" class="xref" data-knowl="./knowl/theorem-limit-comparison-test-integral.html" title="Theorem 7.4.15: Limit Comparison Test">Theorem 7.4.15</a>.</p>
 <p id="p-635">In fact, we have</p>
-<div class="displaymath">
+<div class="displaymath process-math">
 \begin{equation*}
 \lim_{x\to\infty}\frac{\frac{3x^{3} + 2x^{5}}{5x^{7} + 4x^{2}}}{\frac{1}{x^{2}}} = \frac{2}{5}.
 \end{equation*}
