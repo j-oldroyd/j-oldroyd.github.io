@@ -511,15 +511,19 @@
       <p>
         Recall that a homogeneous, linear second order ODE has the form
         <me>
-          A(x)y''+B(x)y'+C(x)y = 0. 
+          A(x)y''+B(x)y^\prime+C(x)y = 0.
         </me>
         We can rewrite this in the form
         <me>
-          y''+P(x)y'+Q(x)y = 0.
+          y''+P(x)y^\prime+Q(x)y = 0.
         </me>
+        As we saw at the end of <xref ref="section-power-series-method" text="type-global" />, the usefulness of the power series method depends on the behavior of <m>P(x)</m> and <m>Q(x)</m> at the point we're centering our series solution at.
       </p>
       <definition xml:id="definition-regular-points-and-singular-points">
         <title>Regular Points and Singular Points</title>
+        <idx>
+          regular and singular points
+        </idx>
         <statement>
           <p>
             A point <m>x=a</m> is called a <term>regular point</term> if <m>P(x)</m> and <m>Q(x)</m> both have power series expansions at <m>x=a</m>.
@@ -530,7 +534,11 @@
       <p>
         Regular points of an ODE are nice because of the following theorem:
       </p>
-      <theorem>
+      <theorem xml:id="theorem-existence-of-series-solution">
+        <title>Existence of Series Solution</title>
+        <idx>
+          Existence of Series Solutions
+        </idx>
         <statement>
           <p>
             Suppose that <m>a</m> is a regular point of the differential equation <m>y''+P(x)y^\prime+Q(x)y=0</m>.
@@ -567,7 +575,13 @@
             </md>.
             Since both of these exist at <m>x=0</m>, it follows that <m>x=0</m> is a regular point of the ODE.
             Therefore the ODE has a power series solution at <m>x=0</m> (that is, in powers of <m>x</m>).
+            Since <m>P(x)</m> and <m>Q(x)</m> both have singular points at <m>x=\pm i</m>, it follows that the radius of convergence of the power series solution is at least <m>|i - 0| = 1</m>.
           </p>
+          <aside>
+            <p>
+              Here, we're using the formula <m>|a+bi| = sqrt{a^2 + b^2}.</m>
+            </p>
+          </aside>
           <p>
             We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand <m>P(x)</m> and <m>Q(x)</m> using their own power series, and this would <em>greatly</em> complicate the algebra.
             Just as we did in Section 5.1, we assume the ODE has a series solution of the form <m>y = \sum_{n=0}^{\infty}c_{n}x^{n}</m>, or just <m>y=\sum_{n\geq0}c_{n}x^{n}</m> for short.
@@ -627,9 +641,25 @@
           </p>
         </solution>
       </example>
+      <sage>
+        <input>
+          # code cell demonstrating series calculations in Sage
+          # guess y = sum(c_k * x^k) for solution
+          vars = var('c0 c1 c2 c3 c4 c5')
+          y = sum([vars[k]*x^k for k in srange(0, 6)])
+
+          # plug guess into ODE and simplify
+          deqn = (x^2 + 2)*y.diff(x, 2) + 4*x*y.diff(x) + 2*y
+          deqn.collect(x)
+        </input>
+      </sage>
     </subsection>
     <subsection xml:id="subsection-solutions-at-singular-points-and-indicial-equations">
       <title>Solutions at Singular Points and Indicial Equations</title>
+      <p>
+        We've seen several examples showing the effectiveness of the power series method at regular points, but the situation becomes more complicated at singular points.
+        At these points, we may not be guaranteed a power series solution.
+      </p>
       <example>
         <statement>
           <p>
@@ -661,7 +691,6 @@
         </me>
         and it's obvious that the coefficients have a divide by <m>0</m> problem at <m>x=0</m>.
       </p>
-
       <p>
         Our goal is to find a way of dealing with situations where <m>x=0</m> is a singular point of the ODE
         <me>
@@ -679,9 +708,9 @@
           </p>
         </aside>
         We lose a little bit by no longer assuming that <m>y</m> is a power series, but this expression may be flexible enough to lead to a solution of the ODE if <m>x=0</m> is a singular point.
-        Our goal now is to find the value of <m>r</m> based on the ODE.
       </p>
       <p>
+        Our goal now is to find the value of <m>r</m> based on the ODE and the coefficient functions <m>p(x)</m> and <m>q(x)</m>.
         To do so, we will plug <m>y=\sum_{n\geq0}^{}c_{n}x^{n+r}</m> into the ODE
         <me>
           x^{2}y''+xp(x)y^\prime+q(x)y = 0
@@ -713,6 +742,7 @@
       </p>
       <definition xml:id="definition-indicial-equation">
         <title>Indicial Equation</title>
+        <idx>indicial equation</idx>
         <statement>
           <p>
             Suppose that <m>x=0</m> is a singular point of the ODE
@@ -737,6 +767,7 @@
       </p>
       <theorem xml:id="theorem-method-of-frobenius">
         <title>Method of Frobenius</title>
+        <idx>Method of Frobenius</idx>
         <statement>
           <p>
             Consider the ODE
@@ -787,8 +818,8 @@
               <mrow>p(x) \amp= 1</mrow>
               <mrow>q(x) \amp= x^{2}-\frac{1}{4}</mrow>
             </md>
-            so <m>p(0)</m> and <m>q(0)</m> both make sense.
-            This means we can use the method of Frobenius to find a solution.
+            so <m>p(x)</m> and <m>q(x)</m> both have power series representations centered at <m>0</m> (namely, themselves!).
+            This means we can use the method of Frobenius to find a solution of the form <m>y = x^r\sum_{n=0}^{\infty}c_n x^n</m>.
           </p>
           <p>
             The first step is to set up and solve the indicial equation, which in this case is given by
@@ -813,7 +844,7 @@
             </me>
             which simplifies to
             <me>
-              \sum_{n\geq0}\brackets{n(n+1)}c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
+              \sum_{n\geq0} n(n+1)c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
             </me>
             So the recurrence relation the coefficients <m>c_{n}</m> need to satisfy is
             <me>
@@ -848,6 +879,25 @@
               y = c_{0}\frac{\sin x}{\sqrt{x}}
             </me>
           </p>
+          <p>
+            Technically, this isn't the general solution of the ODE as we still need a second linearly independent solution to construct it.
+            However, we know from <xref ref="theorem-method-of-frobenius" text="type-global" /> that the second solution must be of the form
+            <me>y_2 = k\frac{\sin(x)}{\sqrt{x}}\ln(x) + x^{-\frac{1}{2}}\sum_{n\geq0}C_n x^n.</me>
+            Plugging this into the original ODE (and using a computer algebra system such as Sage), we get
+            <me>{\left(C_{3} + 20 \, C_{5}\right)} x^{\frac{9}{2}} + {\left(C_{2} + 12 \, C_{4}\right)} x^{\frac{7}{2}} + {\left(C_{1} + 6 \, C_{3}\right)} x^{\frac{5}{2}} + {\left(C_{0} + 2 \, C_{2}\right)} x^{\frac{3}{2}} + 2 \, k \sqrt{x} \cos\left(x\right) - \frac{k \sin\left(x\right)}{\sqrt{x}} = 0</me>
+            after truncating the expansion up to the <m>n=5</m> term.
+            This allows us (theoretically) to solve for <m>k</m> and the coefficients <m>C_n</m>.
+            In fact, we get
+            <me>
+              <mrow>k \amp= 0</mrow>
+              <mrow>C_{2n} \amp= \frac{(-1)^n}{(2n)!}C_0</mrow>
+              <mrow>C_{2n+1} \amp= \frac{(-1)^n}{(2n+1)!}C_1</mrow>
+            </me>
+            and so
+            <me>y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right].</me>
+            Since the second series corresponds to a multiple of <m>y_1 = \frac{\sin(x)}{\sqrt{x}}</m>, we can safely set <m>C_1 = 0</m> and get <m>y_2 = C_0\frac{\cos(x)}{\sqrt{x}}</m>.
+            Therefore the general solution of the ODE is
+            <me>y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}.</me>
         </solution>
       </example>
     </subsection>
