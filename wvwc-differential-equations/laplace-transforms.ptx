@@ -370,6 +370,43 @@
         Y(s).partial_fraction_decomposition()
       </input>
     </sage>
+    <p>
+      One restriction of the Laplace transform approach as we've developed it is that it requires initial conditions at <m>t=0</m>.
+      If initial conditions are instead given at some other <m>t=t_0</m>, then we need to adjust our approach in order to continue to use <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> and its counterpart for second derivatives.
+      We'll demonstrate this by example.
+    </p>
+    <example xml:id="example-solving-an-ivp-with-shifted-initial-conditions">
+        <title>Solving an IVP with Shifted Initial Conditions</title>
+        <statement>
+          <p>
+            Solve the IVP given by
+            <me>y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17.</me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We would like to take the Laplce transform of both sides of this ODE, but since the initial conditions are not specified at <m>0</m> we can't do so right away. The trick here is to shift the initial conditions <em>back</em> to <m>0</m> as follows. First, we define a new function <m>\widetilde{y}</m> by
+            <me>\widetilde{y}(t) = y(t+4)</me>
+            where <m>y(t)</m> is the solution we seek. Then it follows that
+            <me>\widetilde{y}'' - 2\widetilde{y}^\prime - 3\widetilde{y} = 0</me>
+            and <m>\widetilde{y}(0) = y(4) = -3</m> and <m>\widetilde{y}^\prime(0) = y^\prime(4) = -17</m>.
+            So the Laplace transform method applies to solving for <m>\widetilde{y}</m> in this modified IVP.
+          </p>
+          <p>
+            Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <m>\widetilde{Y}(s)</m> of <m>\widetilde{y}(t)</m>.
+            Using our initial conditions and a bit of algebra, we get
+            <me>\widetilde{Y}(s) = \frac{-11s-3s}{s^2-2s-3}.</me>
+            At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get
+            <me>\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.</me>
+          </p>
+          <p>
+            The final step is to convert our answer from <m>\widetilde{y}</m> to <m>y</m> by making the substitution <m>t\mapsto t-4</m> in <m>\widetilde{y}</m>.
+            This gives
+            <me>y(t) = -5e^{3(t-4)} + 2e^{-(t-4)}</me>
+            as the solution of our IVP.
+          </p>
+        </solution>
+    </example>
     <term>SUGGESTED PROBLEMS:</term> 3-9 odd
   </section>
   <section xml:id="section-unit-step-functions-and-time-shifting">
