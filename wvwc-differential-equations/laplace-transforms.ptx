@@ -484,11 +484,11 @@
             \end{cases}
           </me>
           the motion of the mass satisfies the IVP
-          <me>x''+4x = F_{E}(t), x(0) = 1, x'(0) = 0.</me>
+          <me>x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0.</me>
           We can rewrite <m>F_{E}(t)</m> as follows:
           <me>F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t.</me>
           So the IVP we need to solve is
-          <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x'(0) = 0.</me>
+          <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0.</me>
         </p>
         <p>
           If we take Laplace transforms, this becomes
@@ -505,17 +505,39 @@
           If we solve this for <m>X(s)</m>, we get
           <me>X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},</me>
           and if we simplify this using partial fractions this becomes
-          <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\brackets{\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}}\parens{1-e^{-2\pi s}}.</me>
+          <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.</me>
         </p>
         <p>
           So the solution of the IVP is
           <md>
-            <mrow>x(t) \amp= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\brackets{\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}}\parens{1-e^{-2\pi s}}}</mrow>
-            <mrow>\amp= \cos2t + \frac{1}{5}\parens{\cos2t-\cos3t} - \frac{1}{5}\parens{u(t-2\pi)\cos[2(t-2\pi)] - u(t-2\pi)\cos[3(t-2\pi)]}</mrow>
+            <mrow>x(t) \amp= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens\left(1-e^{-2\pi s}}\right)</mrow>
+            <mrow>\amp= \cos2t + \frac{1}{5}\left(\cos2t-\cos3t\right) - \frac{1}{5}\left(u(t-2\pi)\cos[2(t-2\pi)] - u(t-2\pi)\cos[3(t-2\pi)]\right)</mrow>
           </md>.
         </p>
       </solution>
     </example>
+    <p>
+      Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <xref ref="example-ivp-with-discontinuous-forcing-function" text="type-global" /> are perhaps better left to computer systems.
+      The code cell below demonstrates how Sage can compute such a transform.
+      <alert>Be careful to place matching brackets and parentheses as appropriate</alert> when using the <c>piecewise</c> command in Sage to construct a piecewise function.
+    </p>
+    <sage>
+      <input>
+        # declare meaningful variables for Laplace transform
+        var('s t')
+
+        # define piecewise function using piecewise()
+        # piecewise() command uses a list of cases separated by commas to construct its function
+        # add more cases if needed
+        case1 = ((0, 2*pi), cos(3*t))
+        case2 = ((2*pi, oo), 0)
+        F_E = piecewise([case1, case2])
+
+        # now we can compute the Laplace transform using the .laplace() method
+        # the arguments (t,s) tell Sage to change from t to s after computing the transform
+        F_E.laplace(t,s)
+      </input>
+    </sage>
     <term>SUGGESTED PROBLEMS:</term> 5, 9, 13, 17, 19, 21 odd
   </section>
   <section xml:id="section-dirac-delta-functions">
