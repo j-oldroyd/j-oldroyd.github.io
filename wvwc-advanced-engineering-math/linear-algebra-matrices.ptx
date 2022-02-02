@@ -325,4 +325,50 @@
       </statement>
     </theorem>
   </section>
+  <section xml:id="section-determinants">
+    <title>Determinants</title>
+    <p>
+      If <m>A</m> is an <m>n\times n</m> square matrix and if <m>\vb{x}\in\RR^n</m>, then <m>\vb{x}</m> and <m>A\vb{x}</m> have the same size.
+      In other words, both <m>\vb{x}</m> and <m>A\vb{x}</m> live in the same vector space <m>\RR^n</m>.
+      This makes some geometry involving <m>A</m> slightly easier.
+      In particular, <m>\col{A}</m> must be a subspace of <m>\RR^n</m>.
+    </p>
+    <p>
+      If <m>\col{A}</m> is a subspace of <m>\RR^n</m> then we can say that the linear system <m>A\vb{x} = \vb{b}</m> is always consistent if and only if <m>\col{A} = \RR^n</m>.
+      If this were not the case, then there would exist some vector <m>\vb{b}\in\RR^n</m> such that <m>\vb{b}\notin\col{A}</m> and so <m>A\vb{x}=\vb{b}</m> would have to be inconsistent.
+      So square matrices <m>A</m> for which <m>\col{A}=\RR^n</m> are particularly well-behaved and useful.
+      Therefore we'd like to develop conditions to check for when a square matrix <m>A</m> satisfied this property.
+    </p>
+    <p>
+      One possible condition for this is the following: <m>\col{A}=\RR^n</m> if and only if <m>\dim\col{A}=n</m>, which happens if and only if <m>\rank{A}=n</m>.
+      Therefore <m>A\vb{x}=\vb{b}</m> is always consistent if and only if <m>\rank{A}=n</m>.
+      However, another useful condition which uses geometry is the following: <m>\col{A}=\RR^n</m> if and only if the columns of <m>A</m> span an <m>n</m>-dimensional figure in <m>\RR^n</m>.
+      To get an idea of why this should be true, consider a <m>2\times2</m> matrix <m>A</m> whose columns determine a parallelogram (as opposed to a line) in <m>\RR^2</m> such as
+      <me>A = \mqty[1 \amp 1 \\ 0 \amp 2].</me>
+      Since <m>\col{A}</m> is the set of all linear combinations of columns of <m>A</m>, and geometrically this is just the set of all points that we can reach in <m>\RR^2</m> by stretching and expanding the parallelogram determined by the columns, it follows that <m>\col{A} = \RR^2</m>.
+    </p>
+    <p>
+      The <em>determinant</em> makes this observation precise.
+      Given an <m>n\times n</m> square matrix <m>A</m>, the determinant of <m>A</m> represents the (signed) volume of the parallelepiped determined by the columns of <m>A</m>.
+      If this volume is nonzero then this means that the parallelepiped must be an <m>n</m>-dimensional figure in <m>\RR^n</m> and so the column space of <m>A</m> would be all of <m>\RR^n</m>.
+      In the <m>2\times2</m> case it's not too difficult to compute the determinant.
+      If
+      <me>A = \mqty[a \amp b \\ c \amp d],</me>
+      then <m>\det(A) = \mqty|a \amp b \\ c \amp d| = ad - bc</m>.
+      Note that <m>ad-bc</m> does give the area of the parallelogram determined by the columns of <m>A</m>.
+      In three dimensions and higher the formula becomes more complicated and must be defined recursively.
+    </p>
+    <definition xml:id="definition-determinant-of-a-matrix">
+      <title>Determinant of a Matrix</title>
+      <idx>determinant</idx>
+      <statement>
+        <p>
+          Let <m>A = \smqty[a_{ij}]</m> be an <m>n\times n</m> matrix.
+          Let <m>A_{ij}</m> denote the <em>sub-matrix</em> of <m>A</m> obtained by removing the <m>i^\th</m> row and <m>j^\th</m> column of <m>A</m> (the same row and column containing the entry <m>a_{ij}</m>).
+          Then the <term>determinant</term> of <m>A</m> is defined recursively by the formula
+          <me>\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).</me>
+        </p>
+      </statement>
+    </definition>
+  </section>
 </chapter>
