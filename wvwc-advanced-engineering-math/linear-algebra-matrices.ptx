@@ -367,8 +367,113 @@
           Let <m>A_{ij}</m> denote the <em>sub-matrix</em> of <m>A</m> obtained by removing the <m>i^\th</m> row and <m>j^\th</m> column of <m>A</m> (the same row and column containing the entry <m>a_{ij}</m>).
           Then the <term>determinant</term> of <m>A</m> is defined recursively by the formula
           <me>\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).</me>
+          <aside>
+            <p>
+              We'll see later that we can expand along any row or column, but for now we'll stick to the first row.
+            </p>
+          </aside>
         </p>
       </statement>
     </definition>
+    <example xml:id="example-computing-a-determinant">
+      <title>Computing a Determinant</title>
+      <statement>
+        <p>
+          Let
+          <me>A = \mqty[2 \amp -6 \amp 4 \\ 3 \amp 5 \amp -2 \\ 1 \amp 6 \amp 3].</me>
+          Find <m>\det(A)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The formula in <xref ref="definition-determinant-of-a-matrix" text="type-global" /> states that
+          <me>\det(A) = 2\mqty|5 \amp -2 \\ 6 \amp 3| - (-6)\mqty|3 \amp -2 \\ 1 \amp 3| + 4\mqty|3 \amp 5 \\ 1 \amp 6|</me>
+          which simplifies to <m>172</m>.
+          This can be confirmed in the Octave cell below.
+        </p>
+      </solution>
+    </example>
+    <sage language="octave">
+      <input>
+        A = [2, -6, 4; 3, 5, -2; 1, 6, 3]
+        det(A)
+      </input>
+    </sage>
+    <p>
+      When computing determinants by hand, it's often useful to expand along the row or column containing the most zeros instead of just the first row.
+      As long as we're careful about signs, the next result says this is permissible.
+    </p>
+    <theorem xml:id="theorem-cofactor-expansion">
+      <title>Cofactor Expansion</title>
+      <idx>
+        <h>determinant</h><h>cofactor expansion</h>
+      </idx>
+      <statement>
+        <p>
+          Let <m>A=[a_{ij}]</m> be an <m>n\times n</m> matrix and define <m>A_{ij}</m> as in <xref ref="definition-determinant-of-a-matrix" text="type-global" />.
+          Then
+          <me>\det(A) = \sum_{i=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}) = \sum_{j=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}).</me>
+        </p>
+      </statement>
+    </theorem>
+    <example xml:id="example-computing-a-determinant-with-a-cofactor-expansion">
+      <title>Computing a Determinant with a Cofactor Expansion</title>
+      <statement>
+        <p>
+          Let
+          <me>A = \mqty[1 \amp -2 \amp 5 \amp 2 \\ 0 \amp 0 \amp 3 \amp 0 \\ 2 \amp -6 \amp -7 \amp 5 \\ 5 \amp 0 \amp 4 \amp 4].</me>
+          Find <m>\det(A)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can save some work by expanding along the second row to take advantage of the zeros that appear.
+          Doing so, we get
+          <me>\det(A) = -3\mqty|1 \amp -2 \amp 2 \\ 2 \amp -6 \amp 5 \\ 5 \amp 0 \amp 4| = -3\qty(5\mqty|-2 \amp 2\\ -6 \amp 5| + 4\mqty|1 \amp -2 \\ 2 \amp -6|)</me>
+        </p>
+      </solution>
+    </example>
+    <p>
+      Computing determinants becomes very simple when working with <em>triangular matrices</em>.
+    </p>
+    <definition xml:id="definition-triangular-matrices">
+      <title>Triangular Matrices</title>
+      <statement>
+        <p>
+          A matrix <m>A</m> is <term>lower</term> (respectively, <term>upper</term>) <term>triangular</term> is all of the entries above (respectively, below) the main diagonal are <m>0</m>.
+          A matrix is <term>triangular</term> if it is lower triangular or upper triangular.
+        </p>
+      </statement>
+    </definition>
+    <example xml:id="example-computing-the-determinant-of-a-triangular-matrix">
+      <title>Computing the Determinant of a Triangular Matrix</title>
+      <statement>
+        <p>
+          Let
+          <me>A = \mqty[1 \amp 2 \amp 3 \\ 0 \amp 4 \amp 5 \\ 0 \amp 0 \amp -2].</me>
+          Find <m>\det(A)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Using appropriate cofactor expansions, we see that
+          <me>\det(A) = 1\cdot4\cdot(-2).</me>
+        </p>
+      </solution>
+    </example>
+    <theorem xml:id="theorem-determinants-of-triangular-matrices">
+      <title>Determinants of Triangular Matrices</title>
+      <idx>
+        <h>determinant</h>
+        <h>triangular matrix</h>
+      </idx>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>n\times n</m> triangular matrix.
+          Then <m>\det(A)</m> is just the product of its diagonal entries:
+          <me>\det(A) = \prod_{i=1}^{N}a_{ii}.</me>
+        </p>
+      </statement>
+    </theorem>
   </section>
 </chapter>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-02-02T10:09:49-05:00       *-->
+<!--*       on 2022-02-02T14:59:47-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -49,7 +49,23 @@
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script>$(function () {
+    // Make *any* div with class 'sagecell-octave' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-octave',
+                           linked: true,
+                           languages: ['octave'],
+                           evalButtonText: 'Evaluate (Octave)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -162,7 +178,90 @@ A = \mqty[a \amp b \\ c \amp d],
 <p id="p-41">Let <span class="process-math">\(A = \smqty[a_{ij}]\)</span> be an <span class="process-math">\(n\times n\)</span> matrix. Let <span class="process-math">\(A_{ij}\)</span> denote the <em class="emphasis">sub-matrix</em> of <span class="process-math">\(A\)</span> obtained by removing the <span class="process-math">\(i^\th\)</span> row and <span class="process-math">\(j^\th\)</span> column of <span class="process-math">\(A\)</span> (the same row and column containing the entry <span class="process-math">\(a_{ij}\)</span>). Then the <dfn class="terminology">determinant</dfn> of <span class="process-math">\(A\)</span> is defined recursively by the formula</p>
 <div class="displaymath process-math">
 \begin{equation*}
-\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{ij}\det(A_{1j}).
+\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).
+\end{equation*}
+</div>
+<p class="continuation"><aside class="aside aside-like" id="aside-1"><p id="p-42">We'll see later that we can expand along any row or column, but for now we'll stick to the first row.</p></aside></p></article><article class="example example-like" id="example-computing-a-determinant"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Determinant.</span>
+</h3>
+<p id="p-43">Let</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[2 \amp -6 \amp 4 \\ 3 \amp 5 \amp -2 \\ 1 \amp 6 \amp 3].
+\end{equation*}
+</div>
+<p class="continuation">Find <span class="process-math">\(\det(A)\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-3" id="solution-3"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-3"><div class="solution solution-like">
+<p id="p-44">The formula in <a href="" class="xref" data-knowl="./knowl/definition-determinant-of-a-matrix.html" title="Definition 1.6.1: Determinant of a Matrix">Definition 1.6.1</a> states that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\det(A) = 2\mqty|5 \amp -2 \\ 6 \amp 3| - (-6)\mqty|3 \amp -2 \\ 1 \amp 3| + 4\mqty|3 \amp 5 \\ 1 \amp 6|
+\end{equation*}
+</div>
+<p class="continuation">which simplifies to <span class="process-math">\(172\text{.}\)</span> This can be confirmed in the Octave cell below.</p>
+</div></div>
+</div></article><div class="sagecell-octave" id="sage-4"><script type="text/x-sage">A = [2, -6, 4; 3, 5, -2; 1, 6, 3]
+det(A)
+</script></div>
+<p id="p-45">When computing determinants by hand, it's often useful to expand along the row or column containing the most zeros instead of just the first row. As long as we're careful about signs, the next result says this is permissible.</p>
+<article class="theorem theorem-like" id="theorem-cofactor-expansion"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Cofactor Expansion.</span>
+</h3>
+<p id="p-46">Let <span class="process-math">\(A=[a_{ij}]\)</span> be an <span class="process-math">\(n\times n\)</span> matrix and define <span class="process-math">\(A_{ij}\)</span> as in <a href="" class="xref" data-knowl="./knowl/definition-determinant-of-a-matrix.html" title="Definition 1.6.1: Determinant of a Matrix">Definition 1.6.1</a>. Then</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\det(A) = \sum_{i=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}) = \sum_{j=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}).
+\end{equation*}
+</div></article><article class="example example-like" id="example-computing-a-determinant-with-a-cofactor-expansion"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Determinant with a Cofactor Expansion.</span>
+</h3>
+<p id="p-47">Let</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[1 \amp -2 \amp 5 \amp 2 \\ 0 \amp 0 \amp 3 \amp 0 \\ 2 \amp -6 \amp -7 \amp 5 \\ 5 \amp 0 \amp 4 \amp 4].
+\end{equation*}
+</div>
+<p class="continuation">Find <span class="process-math">\(\det(A)\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-4" id="solution-4"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-4"><div class="solution solution-like">
+<p id="p-48">We can save some work by expanding along the second row to take advantage of the zeros that appear. Doing so, we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\det(A) = -3\mqty|1 \amp -2 \amp 2 \\ 2 \amp -6 \amp 5 \\ 5 \amp 0 \amp 4| = -3\qty(5\mqty|-2 \amp 2\\ -6 \amp 5| + 4\mqty|1 \amp -2 \\ 2 \amp -6|)
+\end{equation*}
+</div>
+</div></div>
+</div></article><p id="p-49">Computing determinants becomes very simple when working with <em class="emphasis">triangular matrices</em>.</p>
+<article class="definition definition-like" id="definition-triangular-matrices"><h3 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Triangular Matrices.</span>
+</h3>
+<p id="p-50">A matrix <span class="process-math">\(A\)</span> is <dfn class="terminology">lower</dfn> (respectively, <dfn class="terminology">upper</dfn>) <dfn class="terminology">triangular</dfn> is all of the entries above (respectively, below) the main diagonal are <span class="process-math">\(0\text{.}\)</span> A matrix is <dfn class="terminology">triangular</dfn> if it is lower triangular or upper triangular.</p></article><article class="example example-like" id="example-computing-the-determinant-of-a-triangular-matrix"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">Computing the Determinant of a Triangular Matrix.</span>
+</h3>
+<p id="p-51">Let</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[1 \amp 2 \amp 3 \\ 0 \amp 4 \amp 5 \\ 0 \amp 0 \amp -2].
+\end{equation*}
+</div>
+<p class="continuation">Find <span class="process-math">\(\det(A)\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-5" id="solution-5"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-5"><div class="solution solution-like">
+<p id="p-52">Using appropriate cofactor expansions, we see that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\det(A) = 1\cdot4\cdot(-2).
+\end{equation*}
+</div>
+</div></div>
+</div></article><article class="theorem theorem-like" id="theorem-determinants-of-triangular-matrices"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Determinants of Triangular Matrices.</span>
+</h3>
+<p id="p-53">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> triangular matrix. Then <span class="process-math">\(\det(A)\)</span> is just the product of its diagonal entries:</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\det(A) = \prod_{i=1}^{N}a_{ii}.
 \end{equation*}
 </div></article></section></div></main>
 </div>
