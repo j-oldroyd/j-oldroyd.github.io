@@ -31,449 +31,818 @@
     <p>
       The following are examples of matrices:
       <me>
-        \begin{bmatrix} 1 \amp 2 \\ -3 \amp 4 \end{bmatrix}\text{ and }\begin{bmatrix}1 \amp -2 \amp 0 \\ 3 \amp -21 \amp 2\end{bmatrix}
-      </me>
-      The first is <m>2\times2</m> and the second is <m>2\times3</m>.
-    </p>
-    <p>
-      We say that a matrix is a <term>square matrix</term> if it has the same number of rows as columns.
-      <me>A = [a_{ij}] = \begin{bmatrix}
-        a_{11} \amp a_{12} \amp \dots \amp a_{1n} \\
-        a_{21} \amp a_{22} \amp \dots \amp a_{2n} \\
-        \vdots \amp \vdots \amp \ddots \amp \vdots \\
-        a_{n1} \amp a_{n2} \amp \dots \amp a_{nn}
-        \end{bmatrix},
-      </me>
-      The <term>diagonal entries</term> are <m>a_{ii},1\leq i\leq n</m> and these form the <term>main diagonal</term> of the matrix.
-    </p>
-    <p>
-      As important as matrices are in applications of mathematics, many computing solutions exist for handling computations involving them.
-      One open source solution (included in Sage/CoCalc!) is <url href="https://www.gnu.org/software/octave/index" visual="https://www.gnu.org/software/octave/index">Octave</url>, which is a free alternative to MATLAB.
-      In the code cell below Octave is used to define the square matrix above and get its diagonal entries.
-      Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.
-    </p>
-    <sage language="octave">
-      <input>
-        A = [1, 2; -3, 4]
-        diag(A)
-      </input>
-    </sage>
-  </section>
-  <section xml:id="section-matrix-multiplication">
-    <title>Matrix Multiplication</title>
-    <p>
-      To be completed.
-    </p>
-  </section>
-  <section xml:id="section-systems-of-linear-equations">
-    <title>Systems of Linear Equations</title>
-    <p>
-      To be completed.
-    </p>
-  </section>
-  <section xml:id="section-linear-independence">
-    <title>Linear Independence</title>
-    <p>
-      To be completed.
-    </p>
-    <definition xml:id="definition-pivot-columns">
-      <title>Pivot Columns</title>
-      <idx><h>echelon form</h><h>pivot columns</h></idx>
-      <statement>
-        <p>
-          Let <m>A</m> be a matrix.
-          The <term>pivot columns</term> of <m>A</m> are those columns which contain leading entries in any echelon form of <m>A</m>.
-        </p>
-      </statement>
-    </definition>
-    <theorem xml:id="theorem-rank-and-pivot-columns">
-      <title>Rank and Pivot Columns</title>
-      <statement>
-        <p>
-          Let <m>A</m> be a matrix.
-          Then <m>\rank{A}</m> is exactly equal to the number of pivot columns of <m>A</m>.
-        </p>
-      </statement>
-    </theorem>
-    <definition xml:id="definition-column-space">
-        <title>Column Space</title>
-        <idx>column space</idx>
-        <statement>
-          <p>
-            The <term>column space</term> of a matrix <m>A</m> is the span of the columns of <m>A</m>.
-            Equivalently, the column space is the set of all vectors of the form <m>A\vb{x}</m>.
-            The column space of <m>A</m> is denoted by <m>\col{A}</m>.
-          </p>
-        </statement>
-    </definition>
-  </section>
-  <section xml:id="section-existence-of-solutions">
-    <title>Existence of Solutions</title>
-    <p>
-      Recall that any linear system may be expressed as a matrix equation of the form <m>A\vb{x} = \vb{b}</m>.
-      Based on our previous work, we can make the following observations.
-    </p>
-    <theorem xml:id="theorem-consistency-rank-and-the-column-space">
-      <title>Consistency, Rank and the Column Space</title>
-      <idx><h>rank</h><h>consistency of systems</h></idx><idx><h>rank</h><h>consistency of systems</h><seealso>column space</seealso></idx>
-      <statement>
-        <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix, <m>\vb{x}\in\RR^{n}</m> and <m>\vb{b}\in\RR^{m}</m>.
-          The linear system <m>A\vb{x} = \vb{b}</m> is consistent if and only if <m>\vb{b}\in\col{A}</m>.
-          Equivalently, the system is consistent if and only if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]}</m>.
-          Furthermore, the system has precisely one solution if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]} = n</m> and has infinitely many solutions if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]} \lt n</m>.
-        </p>
-      </statement>
-    </theorem>
-    <p>
-      As before, we use Gaussian elimination (i.e., row reduction) to solve systems.
-    </p>
-    <example xml:id="example-free-variable-solution-vector-form">
-      <statement>
-        <p>
-          Find any solutions of
-          <md>
-            <mrow>5x - 7y + 3z \amp= 17</mrow>
-            <mrow>-15x + 20y - 9z \amp= -50 </mrow>
-          </md>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Reducing to an echelon form is enough to determine if the system is consistent and find the number of solutions it has.
-          Using Octave to find the reduced echelon form (see the code cell immediately after this example), we get
-          <me>\begin{bmatrix} 1 \amp 0 \amp \frac{3}{5} \amp 2 \\ 0 \amp 1 \amp 0 \amp -1\end{bmatrix}.</me>
-        </p>
-        <p>
-          From the reduced echelon form above, we see that the system must be consistent since the rank of the coefficient matrix is equal to the rank of the augmented matrix.
-          Equivalently, the last column is not a pivot column.
-          Furthermore, there are infinitely many solutions since the rank of the coefficient matrix is less than the total number of columns.
-        </p>
-        <p>
-          The solution set itself can be written in vector notation as
-          <me>\begin{bmatrix}x \\ y \\ z\end{bmatrix} = \begin{bmatrix}2 \\ -1 \\ 0\end{bmatrix} + z\begin{bmatrix}-\frac{3}{5} \\ 0 \\ 1\end{bmatrix}.</me>
-          This, again, is verified below.
-        </p>
-      </solution>
-    </example>
-    <sage language="octave">
-      <input>
-        A = [5, -7, 3; -15, 20, -9];
-        b = [17; -50];
-        rref([A, b]) % reduced echelon form of augmented matrix
+      \begin{bmatrix} 1 \amp 2 \\ -3 \amp 4 \end{bmatrix}\text{ and }\begin{bmatrix}1 \amp -2 \amp 0 \\ 3 \amp -21 \amp 2\end{bmatrix}
+    </me>
+    The first is <m>2\times2</m> and the second is <m>2\times3</m>.
+  </p>
+  <p>
+    We say that a matrix is a <term>square matrix</term> if it has the same number of rows as columns.
+    <me>A = [a_{ij}] = \begin{bmatrix}
+    a_{11} \amp a_{12} \amp \dots \amp a_{1n} \\
+    a_{21} \amp a_{22} \amp \dots \amp a_{2n} \\
+    \vdots \amp \vdots \amp \ddots \amp \vdots \\
+    a_{n1} \amp a_{n2} \amp \dots \amp a_{nn}
+    \end{bmatrix},
+  </me>
+  The <term>diagonal entries</term> are <m>a_{ii},1\leq i\leq n</m> and these form the <term>main diagonal</term> of the matrix.
+</p>
+<p>
+  As important as matrices are in applications of mathematics, many computing solutions exist for handling computations involving them.
+  One open source solution (included in Sage/CoCalc!) is <url href="https://www.gnu.org/software/octave/index" visual="https://www.gnu.org/software/octave/index">Octave</url>, which is a free alternative to MATLAB.
+  In the code cell below Octave is used to define the square matrix above and get its diagonal entries.
+  Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.
+</p>
+<sage language="octave">
+  <input>
+    A = [1, 2; -3, 4]
+    diag(A)
+  </input>
+</sage>
+</section>
+<section xml:id="section-matrix-multiplication">
+  <title>Matrix Multiplication</title>
+  <p>
+    To be completed.
+  </p>
+</section>
+<section xml:id="section-systems-of-linear-equations">
+  <title>Systems of Linear Equations</title>
+  <p>
+    To be completed.
+  </p>
+</section>
+<section xml:id="section-linear-independence">
+  <title>Linear Independence</title>
+  <p>
+    To be completed.
+  </p>
+  <definition xml:id="definition-pivot-columns">
+    <title>Pivot Columns</title>
+    <idx><h>echelon form</h><h>pivot columns</h></idx>
+    <statement>
+      <p>
+        Let <m>A</m> be a matrix.
+        The <term>pivot columns</term> of <m>A</m> are those columns which contain leading entries in any echelon form of <m>A</m>.
+      </p>
+    </statement>
+  </definition>
+  <theorem xml:id="theorem-rank-and-pivot-columns">
+    <title>Rank and Pivot Columns</title>
+    <statement>
+      <p>
+        Let <m>A</m> be a matrix.
+        Then <m>\rank{A}</m> is exactly equal to the number of pivot columns of <m>A</m>.
+      </p>
+    </statement>
+  </theorem>
+  <definition xml:id="definition-column-space">
+    <title>Column Space</title>
+    <idx>column space</idx>
+    <statement>
+      <p>
+        The <term>column space</term> of a matrix <m>A</m> is the span of the columns of <m>A</m>.
+        Equivalently, the column space is the set of all vectors of the form <m>A\vb{x}</m>.
+        The column space of <m>A</m> is denoted by <m>\col{A}</m>.
+      </p>
+    </statement>
+  </definition>
+</section>
+<section xml:id="section-existence-of-solutions">
+  <title>Existence of Solutions</title>
+  <p>
+    Recall that any linear system may be expressed as a matrix equation of the form <m>A\vb{x} = \vb{b}</m>.
+    Based on our previous work, we can make the following observations.
+  </p>
+  <theorem xml:id="theorem-consistency-rank-and-the-column-space">
+    <title>Consistency, Rank and the Column Space</title>
+    <idx><h>rank</h><h>consistency of systems</h></idx><idx><h>rank</h><h>consistency of systems</h><seealso>column space</seealso></idx>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix, <m>\vb{x}\in\RR^{n}</m> and <m>\vb{b}\in\RR^{m}</m>.
+        The linear system <m>A\vb{x} = \vb{b}</m> is consistent if and only if <m>\vb{b}\in\col{A}</m>.
+        Equivalently, the system is consistent if and only if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]}</m>.
+        Furthermore, the system has precisely one solution if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]} = n</m> and has infinitely many solutions if <m>\rank{A} = \rank{\mqty[A \amp \vb{b}]} \lt n</m>.
+      </p>
+    </statement>
+  </theorem>
+  <p>
+    As before, we use Gaussian elimination (i.e., row reduction) to solve systems.
+  </p>
+  <example xml:id="example-free-variable-solution-vector-form">
+    <statement>
+      <p>
+        Find any solutions of
+        <md>
+          <mrow>5x - 7y + 3z \amp= 17</mrow>
+          <mrow>-15x + 20y - 9z \amp= -50 </mrow>
+        </md>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Reducing to an echelon form is enough to determine if the system is consistent and find the number of solutions it has.
+        Using Octave to find the reduced echelon form (see the code cell immediately after this example), we get
+        <me>\begin{bmatrix} 1 \amp 0 \amp \frac{3}{5} \amp 2 \\ 0 \amp 1 \amp 0 \amp -1\end{bmatrix}.</me>
+      </p>
+      <p>
+        From the reduced echelon form above, we see that the system must be consistent since the rank of the coefficient matrix is equal to the rank of the augmented matrix.
+        Equivalently, the last column is not a pivot column.
+        Furthermore, there are infinitely many solutions since the rank of the coefficient matrix is less than the total number of columns.
+      </p>
+      <p>
+        The solution set itself can be written in vector notation as
+        <me>\begin{bmatrix}x \\ y \\ z\end{bmatrix} = \begin{bmatrix}2 \\ -1 \\ 0\end{bmatrix} + z\begin{bmatrix}-\frac{3}{5} \\ 0 \\ 1\end{bmatrix}.</me>
+        This, again, is verified below.
+      </p>
+    </solution>
+  </example>
+  <sage language="octave">
+    <input>
+      A = [5, -7, 3; -15, 20, -9];
+      b = [17; -50];
+      rref([A, b]) % reduced echelon form of augmented matrix
 
-        % verify solution
-        z = 3.1; % arbitrary value for z
-        x_soln = [2; -1; 0] + z*[-3/5; 0; 1]; % solution vector
-        A*x_soln % equals b
-      </input>
-    </sage>
+      % verify solution
+      z = 3.1; % arbitrary value for z
+      x_soln = [2; -1; 0] + z*[-3/5; 0; 1]; % solution vector
+      A*x_soln % equals b
+    </input>
+  </sage>
+  <p>
+    In the last example the variable <m>z</m> led to infinitely many solutions and we were able to write out solution depending on the value of this variable.
+    We call <m>z</m> a <em>free variable</em> and <m>x</m> and <m>y</m> <em>basic variables</em>.
+  </p>
+  <definition xml:id="definition-basic-and-free-variables">
+    <title>Basic and Free Variables</title>
+    <idx><h>linear systems</h><h>basic and free variables</h></idx><idx><h>linear systems</h><h>basic and free variables</h><seealso>pivot columns</seealso></idx>
+    <statement>
+      <p>
+        Given a consistent linear system <m>A\vb{x}=\vb{b}</m>, the variables corresponding to pivot columns of <m>A</m> are <term>basic variables</term> and the variables corresponding to non-pivot columns of <m>A</m> are <term>free variables</term>.
+      </p>
+    </statement>
+  </definition>
+  <p>
+    Any solution of the linear system <m>A\vb{x} = \vb{b}</m> can always be written to depend solely on any free variables as we did in <xref ref="example-free-variable-solution-vector-form" text="type-global" />.
+    In fact we can go a bit further, still using our answer in <xref ref="example-free-variable-solution-vector-form" text="type-global" /> as a guide.
+    Using free variables, any solution to <m>A\vb{x}=\vb{b}</m> can be written as a sum of two components:
+    <me>\vb{x} = \vb{x}_p + \vb{x}_{\text{free}}.</me>
+    This notation will change shortly, but the main idea is that one component of the solution will not depend on the free variable and will represent a single solution of the system <m>A\vb{x} = \vb{b}</m>.
+    In <xref ref="example-free-variable-solution-vector-form" text="type-global" /> this would be
+    <me>\vb{x}_{p} = \mqty[2\\-1\\0],</me>
+    and it's easy to verify that
+    <me>A\vb{x}_{p} = \mqty[5 \amp -7 \amp 3 \\ -15 \amp 20 \amp -9]\mqty[2\\-1\\0] = \mqty[17\\-50].</me>
+    The <em>other</em> component of the solution, <m>\vb{x}_{\text{free}}</m>, will depend on the free variable.
+    In <xref ref="example-free-variable-solution-vector-form" text="type-global" />, this component was
+    <me>\vb{x}_{\text{free}} = z\mqty[-\frac{3}{5} \\ 0 \\ 1].</me>
+    As it turns out, this component is <em>not</em> a solution of the original system <m>A\vb{x} = \vb{b}</m>.
+    Instead, <m>A\vb{x}_{\text{free}} = \vb{0}</m>.
+    This behavior is shared by all consistent systems with free variables, and leads us to introduce the following terminology.
+  </p>
+  <definition xml:id="definition-associated-homogeneous-system">
+    <title>Associated Homogeneous System</title>
+    <idx><h>linear systems</h><h>associated homogeneous system</h></idx>
+    <statement>
+      <p>
+        Given a linear system <m>A\vb{x} = \vb{b}</m>, we define the <term>associated homogeneous system</term> to be the system <m>A\vb{x} = \vb{0}</m>.
+      </p>
+    </statement>
+  </definition>
+  <p>
+    The observations made after <xref ref="example-free-variable-solution-vector-form" text="type-global" /> can be summarized in the following theorem.
+  </p>
+  <theorem xml:id="theorem-particular-and-homogeneous-solutions">
+    <title>Particular and Homogeneous Solutions</title>
+    <statement>
+      <p>
+        Suppose that <m>A\vb{x} = \vb{b}</m> is a consistent linear system.
+        Then the general solution <m>\vb{x}</m> can be written in the form <m>\vb{x} = \vb{x}_{p} + \vb{x}_{h}</m> where <m>\vb{x}_{p}</m> is a single solution of the original system <m>A\vb{x} = \vb{b}</m> and <m>\vb{x}_{h}</m> is the general solution of the associated homogeneous system <m>A\vb{x} = \vb{0}</m>.
+        We call <m>\vb{x}_{p}</m> a <term>particular solution</term>.
+      </p>
+    </statement>
+    <proof>
+      <p>
+        Here, we only prove that <m>\vb{x}_{h}</m> satisfies the associated homogeneous system.
+        Since <m>\vb{x}_{p}</m> is a solution of the original system along with <m>\vb{x} = \vb{x}_{p} + \vb{x}_{h}</m>, it follows that
+        <me>A\vb{x}_{h} = A(\vb{x}-x_{p}) = \vb{b} - \vb{b} = \vb{0}.</me>
+        Therefore <m>\vb{x}_{h}</m> is a solution of the associated homogeneous system.
+      </p>
+    </proof>
+  </theorem>
+  <p>
+    Since solutions of homogeneous systems play such an important role in the solution of non-homogeneous systems, we give their solution sets a special name.
+  </p>
+  <definition xml:id="definition-null-space">
+    <title>Null Space</title>
+    <idx>null space</idx>
+    <statement>
+      <p>
+        Let <m>A</m> be a matrix.
+        The <term>null space</term> of <m>A</m> is the set of all solutions of <m>A\vb{x} = \vb{0}</m>.
+        This is denoted by <m>\null{A}</m>.
+      </p>
+    </statement>
+  </definition>
+  <p>
+    As with column spaces and row spaces, null spaces are always subspaces.
+  </p>
+  <theorem xml:id="theorem-the-null-space-is-a-subspace">
+    <title>The Null Space is a Subspace</title>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix.
+        Then <m>\null{A}</m> is a subspace of <m>\RR^n</m>.
+      </p>
+    </statement>
+    <proof>
+      <p>
+        To show that <m>\null{A}</m> is a subspace we need to show that it's closed under linear combinations.
+        So let <m>\vb{u},\vb{v}\in\null{A}</m> be arbitrary vectors in the null space and let <m>\alpha,\beta\in\RR</m> be arbitrary scalars.
+        Our goal is to show that <m>\alpha\vb{u} + \beta\vb{v}\in\null{A}</m>.
+        Thankfully, we can do this very quickly:
+        <md>
+          <mrow> A(\alpha\vb{u} + \beta\vb{v}) \amp= \alpha A\vb{u} + \beta A\vb{v}</mrow>
+          <mrow> \amp= \vb{0} + \vb{0} </mrow>
+          <mrow> \amp= \vb{0}, </mrow>
+        </md>
+        which shows that the linear combination <m>\alpha\vb{u}+\beta\vb{v}</m> lies in <m>\null{A}</m>.
+      </p>
+    </proof>
+  </theorem>
+  <p>
+    The concept of the null space is related to that of the column space in <xref ref="definition-column-space" text="type-global" />, but they are distinct.
+    To be precise, if <m>A</m> is an <m>m\times n</m> matrix then
+    <md>
+      <mrow>\col{A} \amp= \qty{A\vb{x} : \vb{x}\in\RR^n} \subseteq \RR^{m} </mrow>
+      <mrow>\null{A} \amp= \qty{\vb{x} : A\vb{x} = \vb{0}} \subseteq \RR^{n} </mrow>
+    </md>
+  </p>
+  <example xml:id="example-finding-a-null-space">
+    <title>Finding a Null Space</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[0 \amp 5 \amp 5 \amp -10 \amp 0 \\ 2 \amp -3 \amp -3 \amp 6 \amp 2 \\ 4 \amp 1 \amp 1 \amp -2 \amp 4].</me>
+        Find <m>\null{A}</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We need to find the solution set of <m>A\vb{x} = \vb{0}</m> which we've done before.
+        The Octave code cell below can be used to solve this system, giving the reduced echelon form for the augmented matrix <m>\mqty[A \amp \vb{0}]</m> to be
+        <me>\mqty[1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0].</me>
+        Therefore any solution <m>\vb{x}\in\RR^5</m> of <m>A\vb{x}=\vb{0}</m> must look like
+        <me>\vb{x} = \mqty[x_1\\x_2\\x_3\\x_4\\x_5] = \mqty[-x_5\\-x_3+2x_4\\x_3\\x_4\\x_5] = x_3\mqty[0\\-1\\1\\0\\0] + x_4\mqty[0\\2\\0\\1\\0] + x_5\mqty[-1\\0\\0\\0\\1].</me>
+      </p>
+      <p>
+        Note that the above shows that
+        <me>\null{A} = \span{\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}}</me>
+        Since these vectors are also linearly independent, it follows that the set
+        <me>\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}</me>
+        is in fact a basis for <m>\null{A}</m> and <m>\dim{\null{A}} = 3</m>.
+      </p>
+    </solution>
+  </example>
+  <sage language="octave">
+    <input>
+      % code cell for finding null space in previous example
+    </input>
+  </sage>
+  <p>
+    At this point we can make a simple but useful observation.
+    In <xref ref="example-finding-a-null-space" text="type-global" />, the dimension of the null space was directly tied to the number of free variables in the system <m>A\vb{x} = \vb{0}</m>.
+    The number of basic variables is likewise equal to the number of pivot columns of <m>A</m>.
+    Noting that the number of basic variables plus the number of free variables must be the total number of columns of <m>A</m>, together with <xref ref="theorem-rank-and-pivot-columns" text="type-global" />, we get the <em>Rank-Nullity Theorem</em>.
+  </p>
+  <theorem xml:id="theorem-rank-nullity-theorem">
+    <title>Rank-Nullity Theorem</title>
+    <idx>Rank-Nullity Theorem</idx>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>m\times n</m> matrix.
+        Then
+        <me>\rank{A} + \dim\null{A} = n.</me>
+      </p>
+    </statement>
+  </theorem>
+</section>
+<section xml:id="section-determinants">
+  <title>Determinants</title>
+  <p>
+    If <m>A</m> is an <m>n\times n</m> square matrix and if <m>\vb{x}\in\RR^n</m>, then <m>\vb{x}</m> and <m>A\vb{x}</m> have the same size.
+    In other words, both <m>\vb{x}</m> and <m>A\vb{x}</m> live in the same vector space <m>\RR^n</m>.
+    This makes some geometry involving <m>A</m> slightly easier.
+    In particular, <m>\col{A}</m> must be a subspace of <m>\RR^n</m>.
+  </p>
+  <p>
+    If <m>\col{A}</m> is a subspace of <m>\RR^n</m> then we can say that the linear system <m>A\vb{x} = \vb{b}</m> is always consistent if and only if <m>\col{A} = \RR^n</m>.
+    If this were not the case, then there would exist some vector <m>\vb{b}\in\RR^n</m> such that <m>\vb{b}\notin\col{A}</m> and so <m>A\vb{x}=\vb{b}</m> would have to be inconsistent.
+    So square matrices <m>A</m> for which <m>\col{A}=\RR^n</m> are particularly well-behaved and useful.
+    Therefore we'd like to develop conditions to check for when a square matrix <m>A</m> satisfied this property.
+  </p>
+  <p>
+    One possible condition for this is the following: <m>\col{A}=\RR^n</m> if and only if <m>\dim\col{A}=n</m>, which happens if and only if <m>\rank{A}=n</m>.
+    Therefore <m>A\vb{x}=\vb{b}</m> is always consistent if and only if <m>\rank{A}=n</m>.
+    However, another useful condition which uses geometry is the following: <m>\col{A}=\RR^n</m> if and only if the columns of <m>A</m> span an <m>n</m>-dimensional figure in <m>\RR^n</m>.
+    To get an idea of why this should be true, consider a <m>2\times2</m> matrix <m>A</m> whose columns determine a parallelogram (as opposed to a line) in <m>\RR^2</m> such as
+    <me>A = \mqty[1 \amp 1 \\ 0 \amp 2].</me>
+    Since <m>\col{A}</m> is the set of all linear combinations of columns of <m>A</m>, and geometrically this is just the set of all points that we can reach in <m>\RR^2</m> by stretching and expanding the parallelogram determined by the columns, it follows that <m>\col{A} = \RR^2</m>.
+  </p>
+  <p>
+    The <em>determinant</em> makes this observation precise.
+    Given an <m>n\times n</m> square matrix <m>A</m>, the determinant of <m>A</m> represents the (signed) volume of the parallelepiped determined by the columns of <m>A</m>.
+    If this volume is nonzero then this means that the parallelepiped must be an <m>n</m>-dimensional figure in <m>\RR^n</m> and so the column space of <m>A</m> would be all of <m>\RR^n</m>.
+    In the <m>2\times2</m> case it's not too difficult to compute the determinant.
+    If
+    <me>A = \mqty[a \amp b \\ c \amp d],</me>
+    then <m>\det(A) = \mqty|a \amp b \\ c \amp d| = ad - bc</m>.
+    Note that <m>ad-bc</m> does give the area of the parallelogram determined by the columns of <m>A</m>.
+    In three dimensions and higher the formula becomes more complicated and must be defined recursively.
+  </p>
+  <definition xml:id="definition-determinant-of-a-matrix">
+    <title>Determinant of a Matrix</title>
+    <idx>determinant</idx>
+    <statement>
+      <p>
+        Let <m>A = \smqty[a_{ij}]</m> be an <m>n\times n</m> matrix.
+        Let <m>A_{ij}</m> denote the <em>sub-matrix</em> of <m>A</m> obtained by removing the <m>i^\th</m> row and <m>j^\th</m> column of <m>A</m> (the same row and column containing the entry <m>a_{ij}</m>).
+        Then the <term>determinant</term> of <m>A</m> is defined recursively by the formula
+        <me>\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).</me>
+        <aside>
+          <p>
+            We'll see later that we can expand along any row or column, but for now we'll stick to the first row.
+          </p>
+        </aside>
+      </p>
+    </statement>
+  </definition>
+  <example xml:id="example-computing-a-determinant">
+    <title>Computing a Determinant</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[2 \amp -6 \amp 4 \\ 3 \amp 5 \amp -2 \\ 1 \amp 6 \amp 3].</me>
+        Find <m>\det(A)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The formula in <xref ref="definition-determinant-of-a-matrix" text="type-global" /> states that
+        <me>\det(A) = 2\mqty|5 \amp -2 \\ 6 \amp 3| - (-6)\mqty|3 \amp -2 \\ 1 \amp 3| + 4\mqty|3 \amp 5 \\ 1 \amp 6|</me>
+        which simplifies to <m>172</m>.
+        This can be confirmed in the Octave cell below.
+      </p>
+    </solution>
+  </example>
+  <sage language="octave">
+    <input>
+      A = [2, -6, 4; 3, 5, -2; 1, 6, 3]
+      det(A)
+    </input>
+  </sage>
+  <p>
+    When computing determinants by hand, it's often useful to expand along the row or column containing the most zeros instead of just the first row.
+    As long as we're careful about signs, the next result says this is permissible.
+  </p>
+  <theorem xml:id="theorem-cofactor-expansion">
+    <title>Cofactor Expansion</title>
+    <idx>
+      <h>determinant</h><h>cofactor expansion</h>
+    </idx>
+    <statement>
+      <p>
+        Let <m>A=[a_{ij}]</m> be an <m>n\times n</m> matrix and define <m>A_{ij}</m> as in <xref ref="definition-determinant-of-a-matrix" text="type-global" />.
+        Then
+        <me>\det(A) = \sum_{i=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}) = \sum_{j=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}).</me>
+      </p>
+    </statement>
+  </theorem>
+  <example xml:id="example-computing-a-determinant-with-a-cofactor-expansion">
+    <title>Computing a Determinant with a Cofactor Expansion</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[1 \amp -2 \amp 5 \amp 2 \\ 0 \amp 0 \amp 3 \amp 0 \\ 2 \amp -6 \amp -7 \amp 5 \\ 5 \amp 0 \amp 4 \amp 4].</me>
+        Find <m>\det(A)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We can save some work by expanding along the second row to take advantage of the zeros that appear.
+        Doing so, we get
+        <me>\det(A) = -3\mqty|1 \amp -2 \amp 2 \\ 2 \amp -6 \amp 5 \\ 5 \amp 0 \amp 4| = -3\qty(5\mqty|-2 \amp 2\\ -6 \amp 5| + 4\mqty|1 \amp -2 \\ 2 \amp -6|)</me>
+      </p>
+    </solution>
+  </example>
+  <p>
+    Computing determinants becomes very simple when working with <em>triangular matrices</em>.
+  </p>
+  <definition xml:id="definition-triangular-matrices">
+    <title>Triangular Matrices</title>
+    <statement>
+      <p>
+        A matrix <m>A</m> is <term>lower</term> (respectively, <term>upper</term>) <term>triangular</term> is all of the entries above (respectively, below) the main diagonal are <m>0</m>.
+        A matrix is <term>triangular</term> if it is lower triangular or upper triangular.
+      </p>
+    </statement>
+  </definition>
+  <example xml:id="example-computing-the-determinant-of-a-triangular-matrix">
+    <title>Computing the Determinant of a Triangular Matrix</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[1 \amp 2 \amp 3 \\ 0 \amp 4 \amp 5 \\ 0 \amp 0 \amp -2].</me>
+        Find <m>\det(A)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Using appropriate cofactor expansions, we see that
+        <me>\det(A) = 1\cdot4\cdot(-2).</me>
+      </p>
+    </solution>
+  </example>
+  <theorem xml:id="theorem-determinants-of-triangular-matrices">
+    <title>Determinants of Triangular Matrices</title>
+    <idx>
+      <h>determinant</h>
+      <h>triangular matrix</h>
+    </idx>
+    <statement>
+      <p>
+        Let <m>A</m> be an <m>n\times n</m> triangular matrix.
+        Then <m>\det(A)</m> is just the product of its diagonal entries:
+        <me>\det(A) = \prod_{i=1}^{N}a_{ii}.</me>
+      </p>
+    </statement>
+  </theorem>
+  <p>
+    <xref ref="theorem-determinants-of-triangular-matrices" text="type-global" /> leads to another approach for finding determinants via row reduction.
+    If we have a square matrix <m>A</m> and we can reduce it to echelon form, then it becomes very easy to find the determinant of the echelon form.
+    If we can then relate this determinant back to <m>\det(A)</m>, then we would be able to find <m>\det(A)</m> using the echelon form instead.
+    It turns out this can be done as follows.
+  </p>
+  <theorem xml:id="theorem-row-operations-and-the-determinant">
+    <title>Row Operations and the Determinant</title>
+    <statement>
+      <p>
+        Let <m>A</m> and <m>B</m> denote square matrices of the same size and suppose that <m>B</m> is obtained from <m>A</m> by performing a single row operation.
+      </p>
+      <ol>
+        <li>If the row operation was row replacement, then <m>\det(A) = \det(B)</m>.</li>
+        <li>If the row operation was row scaling by a factor of <m>k</m>, then <m>\det(B) = k\det(A)</m>.</li>
+        <li>If the row operation was row interchange, then <m>\det(B) = -\det(A)</m>.</li>
+      </ol>
+    </statement>
+  </theorem>
+  <p>
+    Two other useful results about determinants are given below.
+  </p>
+  <theorem xml:id="theorem-multiplicative-property">
+    <title>Multiplicative Property</title>
+    <statement>
+      <p>
+        Let <m>A</m> and <m>B</m> denote square matrices of the same size.
+        Then <m>\det(AB) = \det(A)\det(B)</m>.
+      </p>
+    </statement>
+  </theorem>
+  <theorem xml:id="theorem-determinants-and-the-transpose">
+    <title>Determinants and the Transpose</title>
+    <statement>
+      <p>
+        Let <m>A</m> be a square matrix.
+        Then <m>\det(A) = \det(A^T)</m>.
+      </p>
+    </statement>
+  </theorem>
+</section>
+<section xml:id="section-matrix-inverses">
+  <title>Matrix Inverses</title>
+  <p>
+    Consider the equation <m>75x = 2</m>.
+    We can solve this quite easily for <m>x</m> by dividing both sides by <m>75</m>, or equivalently, multiplying both sides of the equation by <m>frac{1}{75} = 75^{-1}</m>.
+    <m>75^{-1}</m> is the <em>multiplicative inverse</em> of the number <m>75</m>, and so when multiplied to it we are left with only the number <m>1</m>.
+    We want to do the same with the matrix equation <m>A\vb{x} = \vb{b}</m>; that is, we want to find an <em>inverse matrix</em> <m>A^{-1}</m> that, when multiplied to <m>A</m>, leaves only the identity matrix.
+  </p>
+  <definition xml:id="definition-invertible-matrices">
+    <title>Invertible Matrices</title>
+    <idx><h>matrices</h><h>invertible</h></idx>
+    <statement>
+      <p>
+        An <m>n\times n</m> matrix <m>A</m> is said to be <term>invertible</term> (or <term>nonsingular</term>) if there exists a matrix <m>A^{-1}</m> such that <m>A^{-1}A = AA^{-1} = I_{n}</m>. We call <m>A^{-1}</m> the <term>inverse</term> of <m>A</m>.
+
+        If a matrix is <em>not</em> invertible, then we say that it is <term>singular</term>.
+      </p>
+    </statement>
+  </definition>
+  <p>
+    Note that if <m>A</m> is a square matrix and <m>C</m> is another square matrix such that either <m>AC = I</m> or <m>CA = I</m>, then <m>C = A^{-1}</m>.
+  </p>
+  <example xml:id="example-confirming-a-matrix-inverse">
+    <title>Confirming a Matrix Inverse</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[1 \amp 0 \amp -2 \\ -3 \amp 1 \amp 4 \\ 2 \amp -3 \amp 4].</me>
+      </p>
+      <ol>
+        <li>Show that the matrix <me>C = \mqty[8 \amp 3 \amp 1 \\ 10 \amp 4 \amp 1 \\ \frac{7}{2} \amp \frac{3}{2} \amp \frac{1}{2}]</me> is the inverse of <m>A</m>.</li>
+        <li>Let <me>\vb{b} = \mqty[1 \\ 1 \\ 1].</me> Solve <m>A\vb{x} = \vb{b}</m>.</li>
+      </ol>
+    </statement>
+    <solution>
+      <ol>
+        <li>All we need to do is to show that <m>AC = I</m>. This can be done quickly using Octave as in the code cell below.</li>
+        <li>The solution is <m>\vb{x} = A^{-1}\vb{b}</m>. Given that we now know <m>A^{-1}</m>, we can solve this quickly.</li>
+      </ol>
+    </solution>
+  </example>
+  <sage>
+    <input language="octave">
+      A = [1, 0, -2; -3, 1, 4; 2, -3, 4];
+      C = [8,3,1; 10,4,1; 7/2, 3/2, 1/2];
+
+      A*C % identity matrix
+
+      b = [1;1;1]
+      x = C*b % x = inv(A)*b is the solution
+    </input>
+  </sage>
+  <example>
+    <title>Inverse of an Orthogonal Matrix</title>
+    <statement>
+      <p>
+        Let <m>U</m> be an orthogonal matrix.
+        What is <m>U^{-1}</m>?
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <m>U^{-1} = U^{T}</m>.
+        So it is <em>very</em> easy to find the inverse of an orthogonal matrix.
+      </p>
+    </solution>
+  </example>
+  <p>
+    An important property about determinants is that they say precisely when a matrix is invertible.
+    If <m>A</m> is an <m>n\times n</m> matrix, then <m>A</m> has an inverse if and only if <m>\det A \neq 0</m>.
+  </p>
+  <theorem xml:id="theorem-invertibility-and-solutions">
+    <title>Invertibility and Solutions of Systems</title>
+    <idx><h>linear systems</h><h>invertibility</h></idx>
+    <statement>
+      <p>
+        Let <m>A</m> be an invertible <m>n\times n</m> matrix.
+        Then for each <m>\vb{b}\in\RR^{n}</m>, the matrix equation <m>A\vb{x} = \vb{b}</m> has <em>exactly</em> one solution: <m>\vb{x} = A^{-1}\vb{b}</m>.
+      </p>
+    </statement>
+    <proof>
+      <p>
+        To prove this statement we must show two things:
+        <ol>
+          <li>
+            <p><m>A^{-1}\vb{b}</m> is a solution.</p>
+          </li>
+          <li>
+            <p><m>A^{-1}\vb{b}</m> is the only solution.</p>
+          </li>
+        </ol>
+      </p>
+      <p>
+        We start with the first item.
+        To check that <m>A^{-1}\vb{b}</m> is a solution of <m>A\vb{x} = \vb{b}</m>, we just plug it in for <m>\vb{x}</m> and simplify:
+        <me>A(A^{-1}\vb{b}) = I\vb{b} = \vb{b}.</me>
+        Hence this is a solution.
+      </p>
+      <p>
+        To show that this is the only solution, suppose that <m>\vb{u}</m> is some other solution of <m>A\vb{x} = \vb{b}</m>.
+        We must show that <m>\vb{u} = A^{-1}\vb{b}</m>.
+        Since <m>\vb{u}</m> is assumed to be a solution, we have
+        <me>\vb{u} = \vb{b}\Rightarrow \vb{u} = A^{-1}\vb{b}.</me>
+        Hence <m>A^{-1}\vb{b}</m> is the only solution.
+      </p>
+    </proof>
+  </theorem>
+  <subsection xml:id="subsection-computing-the-inverse-of-a-matrix">
+    <title>Computing the Inverse of a Matrix</title>
     <p>
-      In the last example the variable <m>z</m> led to infinitely many solutions and we were able to write out solution depending on the value of this variable.
-      We call <m>z</m> a <em>free variable</em> and <m>x</m> and <m>y</m> <em>basic variables</em>.
+      For <m>2\times 2</m> matrices, we have a simple formula for the inverse.
     </p>
-    <definition xml:id="definition-basic-and-free-variables">
-      <title>Basic and Free Variables</title>
-      <idx><h>linear systems</h><h>basic and free variables</h></idx><idx><h>linear systems</h><h>basic and free variables</h><seealso>pivot columns</seealso></idx>
+    <theorem xml:id="theorem-inverse-of-2-times2--matrices">
+      <title>Inverse of <m>2\times2</m> Matrices</title>
       <statement>
         <p>
-          Given a consistent linear system <m>A\vb{x}=\vb{b}</m>, the variables corresponding to pivot columns of <m>A</m> are <term>basic variables</term> and the variables corresponding to non-pivot columns of <m>A</m> are <term>free variables</term>.
+          Let
+          <me>A = \mqty[a \amp b \\ c \amp d].</me>
+          If <m>ad-bc\neq0</m>, then
+          <me>A^{-1} = \frac{1}{ad-bc}\mqty[d \amp -b \\ -c \amp a].</me>
         </p>
       </statement>
-    </definition>
-    <p>
-      Any solution of the linear system <m>A\vb{x} = \vb{b}</m> can always be written to depend solely on any free variables as we did in <xref ref="example-free-variable-solution-vector-form" text="type-global" />.
-      In fact we can go a bit further, still using our answer in <xref ref="example-free-variable-solution-vector-form" text="type-global" /> as a guide.
-      Using free variables, any solution to <m>A\vb{x}=\vb{b}</m> can be written as a sum of two components:
-      <me>\vb{x} = \vb{x}_p + \vb{x}_{\text{free}}.</me>
-      This notation will change shortly, but the main idea is that one component of the solution will not depend on the free variable and will represent a single solution of the system <m>A\vb{x} = \vb{b}</m>.
-      In <xref ref="example-free-variable-solution-vector-form" text="type-global" /> this would be
-      <me>\vb{x}_{p} = \mqty[2\\-1\\0],</me>
-      and it's easy to verify that
-      <me>A\vb{x}_{p} = \mqty[5 \amp -7 \amp 3 \\ -15 \amp 20 \amp -9]\mqty[2\\-1\\0] = \mqty[17\\-50].</me>
-      The <em>other</em> component of the solution, <m>\vb{x}_{\text{free}}</m>, will depend on the free variable.
-      In <xref ref="example-free-variable-solution-vector-form" text="type-global" />, this component was
-      <me>\vb{x}_{\text{free}} = z\mqty[-\frac{3}{5} \\ 0 \\ 1].</me>
-      As it turns out, this component is <em>not</em> a solution of the original system <m>A\vb{x} = \vb{b}</m>.
-      Instead, <m>A\vb{x}_{\text{free}} = \vb{0}</m>.
-      This behavior is shared by all consistent systems with free variables, and leads us to introduce the following terminology.
-    </p>
-    <definition xml:id="definition-associated-homogeneous-system">
-      <title>Associated Homogeneous System</title>
-      <idx><h>linear systems</h><h>associated homogeneous system</h></idx>
-      <statement>
-        <p>
-          Given a linear system <m>A\vb{x} = \vb{b}</m>, we define the <term>associated homogeneous system</term> to be the system <m>A\vb{x} = \vb{0}</m>.
-        </p>
-      </statement>
-    </definition>
-    <p>
-      The observations made after <xref ref="example-free-variable-solution-vector-form" text="type-global" /> can be summarized in the following theorem.
-    </p>
-    <theorem xml:id="theorem-particular-and-homogeneous-solutions">
-      <title>Particular and Homogeneous Solutions</title>
-      <statement>
-        <p>
-          Suppose that <m>A\vb{x} = \vb{b}</m> is a consistent linear system.
-          Then the general solution <m>\vb{x}</m> can be written in the form <m>\vb{x} = \vb{x}_{p} + \vb{x}_{h}</m> where <m>\vb{x}_{p}</m> is a single solution of the original system <m>A\vb{x} = \vb{b}</m> and <m>\vb{x}_{h}</m> is the general solution of the associated homogeneous system <m>A\vb{x} = \vb{0}</m>.
-          We call <m>\vb{x}_{p}</m> a <term>particular solution</term>.
-        </p>
-      </statement>
-      <proof>
-        <p>
-          Here, we only prove that <m>\vb{x}_{h}</m> satisfies the associated homogeneous system.
-          Since <m>\vb{x}_{p}</m> is a solution of the original system along with <m>\vb{x} = \vb{x}_{p} + \vb{x}_{h}</m>, it follows that
-          <me>A\vb{x}_{h} = A(\vb{x}-x_{p}) = \vb{b} - \vb{b} = \vb{0}.</me>
-          Therefore <m>\vb{x}_{h}</m> is a solution of the associated homogeneous system.
-        </p>
-      </proof>
     </theorem>
     <p>
-      Since solutions of homogeneous systems play such an important role in the solution of non-homogeneous systems, we give their solution sets a special name.
+      The quantity <m>ad-bc</m> in <xref ref="theorem-inverse-of-2-times2--matrices" text="type-global" /> can also be recognized as the determinant of the matrix <m>A</m>.
+      See <xref ref="definition-determinant-of-a-matrix" text="type-global" />.
     </p>
-    <definition xml:id="definition-null-space">
-      <title>Null Space</title>
-      <idx>null space</idx>
+    <example>
       <statement>
         <p>
-          Let <m>A</m> be a matrix.
-          The <term>null space</term> of <m>A</m> is the set of all solutions of <m>A\vb{x} = \vb{0}</m>.
-          This is denoted by <m>\null{A}</m>.
-        </p>
-      </statement>
-    </definition>
-    <p>
-      As with column spaces and row spaces, null spaces are always subspaces.
-    </p>
-    <theorem xml:id="theorem-the-null-space-is-a-subspace">
-      <title>The Null Space is a Subspace</title>
-      <statement>
-        <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix.
-          Then <m>\null{A}</m> is a subspace of <m>\RR^n</m>.
-        </p>
-      </statement>
-      <proof>
-        <p>
-          To show that <m>\null{A}</m> is a subspace we need to show that it's closed under linear combinations.
-          So let <m>\vb{u},\vb{v}\in\null{A}</m> be arbitrary vectors in the null space and let <m>\alpha,\beta\in\RR</m> be arbitrary scalars.
-          Our goal is to show that <m>\alpha\vb{u} + \beta\vb{v}\in\null{A}</m>.
-          Thankfully, we can do this very quickly:
+          Show that the system
           <md>
-            <mrow> A(\alpha\vb{u} + \beta\vb{v}) \amp= \alpha A\vb{u} + \beta A\vb{v}</mrow>
-            <mrow> \amp= \vb{0} + \vb{0} </mrow>
-            <mrow> \amp= \vb{0}, </mrow>
+            <mrow>9x_{1}+3x_{2} \amp= -9</mrow>
+            <mrow>-6x_{1}-3x_{2} \amp= 4</mrow>
           </md>
-          which shows that the linear combination <m>\alpha\vb{u}+\beta\vb{v}</m> lies in <m>\null{A}</m>.
+          is consistent and then find the solution.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can rewrite this as the matrix equation <m>A\vb{x} = \vb{b}</m>, where
+          <me>A = \mqty[9 \amp 3 \\ -6 \amp -3],\qq{}\vb{x} = \mqty[x_{1} \\ x_{2}]\qq{and} \vb{b} = \mqty[-9 \\ 4].</me>
+          We can show that the system is consistent by computing <m>\det A</m>: since <m>\det A = -9\neq0</m>, <m>A^{-1}</m> exists.
+          And since <m>A^{-1}</m> exists, the system must be solvable.
+        </p>
+        <p>
+          To solve it, we use the above formula to compute <m>A^{-1}</m>:
+          <me>A^{-1} = -\frac{1}{9}\mqty[-3 \amp -3 \\ 6 \amp 9] = \mqty[\frac{1}{3} \amp \frac{1}{3} \\ -\frac{2}{3} \amp -1 ].</me>
+          So the (unique) solution is
+          <me>\vb{x} = A^{-1}\vb{b} = \mqty[\frac{1}{3} \amp \frac{1}{3} \\ -\frac{2}{3} \amp -1 ]\mqty[-9 \\ 4].</me>
+        </p>
+      </solution>
+    </example>
+    <theorem>
+      <statement>
+        <p>
+          Let <m>A</m> and <m>B</m> be invertible <m>n\times n</m> matrices.
+          <ol>
+            <li>
+              <p><m>(A^{-1})^{-1} = A</m></p>
+            </li>
+            <li>
+              <p><m>AB</m> is invertible, and <m>(AB)^{-1} = B^{-1}A^{-1}</m>.</p>
+            </li>
+            <li>
+              <p><m>A^{T}</m> is invertible, and <m>(A^{T})^{-1} = (A^{-1})^{T}</m>.</p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+  </subsection>
+  <subsection xml:id="subsection-">
+    <title>The Invertible Matrix Algorithm</title>
+    <p>
+      We can now find the inverse of a <m>2\times2</m> matrix; we need to determine how to find the inverse of a larger matrix. To do this, we will use <em>elementary matrices</em>.
+    </p>
+    <definition xml:id="definition-elementary-matrices">
+      <title>Elementary Matrices</title>
+      <statement>
+        <p>
+          An <term>elementary matrix</term> is a matrix obtained by performing a single elementary row operation on the identity matrix.
+        </p>
+      </statement>
+    </definition>
+    <example>
+      <statement>
+        <p>
+          The matrices
+          <me>E_{1} = \mqty[2 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1],E_{2} = \mqty[1 \amp 5 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1]\text{ and } E_{3} = \mqty[0 \amp 0 \amp 1 \\ 0 \amp 1 \amp 0 \\ 1 \amp 0 \amp 0]</me>
+          are elementary matrices.
+          The first corresponds to scaling the first row by <m>2</m>; the second corresponds to adding five times the second row to the first row; and the third corresponds to switching rows one and three.
+        </p>
+      </statement>
+    </example>
+    <p>
+      The important fact about elementary matrices is that multiplying them to <em>any</em> matrix has the same effect as performing the corresponding elementary row operation on the matrix.
+    </p>
+    <example>
+      <statement>
+        <p>
+          Let
+          <me>A = \mqty[1 \amp 2 \amp 9 \\ 0 \amp 3 \amp 3 \\ 4 \amp 4 \amp 1].</me>
+          Use elementary matrices to perform the following row operations:
+          <ol>
+            <li>
+              <p>Add two times row three to row two.</p>
+            </li>
+            <li>
+              <p>Scale row three by <m>-3</m>.</p>
+            </li>
+            <li>
+              <p>Swap row two with row one and then add five times row three to row one.</p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </example>
+    <solution>
+      <p>
+        For each case, we only need to determine the elementary matrix corresponding to each row operation.
+        The elementary matrix for the first operation is
+        <me>E_{1} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 2 \\ 0 \amp 0 \amp 1].</me>
+        To perform this operation on <m>A</m>, we just multiply <m>E_{1}</m> and <m>A</m>:
+        <md>
+          <mrow>A \amp\rowop{2R_{3}+R_{2}} E_{1}A </mrow>
+          <mrow> \amp= \mqty[1 \amp 2 \amp 9 \\ 8 \amp 11 \amp 5 \\ 4 \amp 4 \amp 1] </mrow>
+        </md>
+        which matches with the matrix we would have obtained just using a row operation.
+      </p>
+      <p>
+        The elementary matrix we need for the next operation is
+        <me>E_{2} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp -3]</me>
+        and so
+        <me>A\rowop{-3R_{3}} E_{2}A.</me>
+      </p>
+      <p>
+        Finally, we have two elementary row operations here, so we can't just use a single elementary matrix. We'll need to use two; one for each row operation:
+        <me>E_{3} = \mqty[0 \amp 1 \amp 0 \\ 1 \amp 0 \amp 0 \\ 0 \amp 0 \amp 1]\qq{and} E_{4} = \mqty[1 \amp 0 \amp 5 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1].</me>
+        So
+        <me>A\rowop[R_{1}\leftrightarrow R_{2}]{5R_{3}+R_{1}} E_{4}E_{3}A.</me>
+      </p>
+    </solution>
+    <p>
+      So row operations on a matrix can be viewed as multiplications by elementary matrices.
+      And since row operations are invertible, elementary matrices are invertible as well.
+      To find the inverse of an elementary matrix <m>E</m>, just write down the elementary matrix corresponding to the row operation that transforms <m>E</m> back into <m>I</m>.
+    </p>
+    <example>
+      <title>Inverse of an Elementary Matrix</title>
+      <statement>
+        <p>
+          Let <m>E_{1},E_{2}</m> and <m>E_{4}</m> be as above. Find the inverse of each matrix.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We have
+          <me>E_{1}^{-1} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp -2 \\ 0 \amp 0 \amp 1],\qq{}E_{2}^{-1} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp -\frac{1}{3}]\qq{and}E_{4}^{-1} = \mqty[1 \amp 0 \amp -5 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1].</me>
+        </p>
+      </solution>
+    </example>
+    <theorem>
+      <statement>
+        <p>
+          Let <m>A</m> be an <m>n\times n</m> matrix. If <m>A\sim I</m>, then <m>A</m> is invertible.
+        </p>
+      </statement>
+      <proof>
+        <p>
+          Suppose that <m>A</m> is row equivalent to the identity matrix <m>I</m>.
+          Then we can find elementary matrices <m>E_{1},E_{2},\ldots,E_{p}</m> such that
+          <me>I = E_{p}E_{p-1}\cdots E_{2}E_{1}A.</me>
+          Since elementary matrices are invertible, their product must be as well.
+          So we can write
+          <me>(E_{p}\cdots E_{1})^{-1} = A.</me>
+          Since <m>A</m> is the inverse of an invertible matrix, it must itself be invertible and furthermore
+          <me>A^{-1} = E_{p}\cdots E_{1}.</me>
         </p>
       </proof>
     </theorem>
     <p>
-      The concept of the null space is related to that of the column space in <xref ref="definition-column-space" text="type-global" />, but they are distinct.
-      To be precise, if <m>A</m> is an <m>m\times n</m> matrix then
-      <md>
-        <mrow>\col{A} \amp= \qty{A\vb{x} : \vb{x}\in\RR^n} \subseteq \RR^{m} </mrow>
-        <mrow>\null{A} \amp= \qty{\vb{x} : A\vb{x} = \vb{0}} \subseteq \RR^{n} </mrow>
-      </md>
+      The above theorem tells us that the sequence of row operations that reduces <m>A</m> to <m>I</m> also turns <m>I</m> into <m>A^{-1}</m>.
+      This gives us an algorithm for finding the inverse of a matrix. We show this with an example.
     </p>
-    <example xml:id="example-finding-a-null-space">
-      <title>Finding a Null Space</title>
+    <example>
       <statement>
         <p>
           Let
-          <me>A = \mqty[0 \amp 5 \amp 5 \amp -10 \amp 0 \\ 2 \amp -3 \amp -3 \amp 6 \amp 2 \\ 4 \amp 1 \amp 1 \amp -2 \amp 4].</me>
-          Find <m>\null{A}</m>.
+          <me>A = \mqty[-1 \amp -7 \amp -3 \\ 2 \amp 15 \amp 6 \\ 1 \amp 3 \amp 2].</me>
+          Compute <m>A^{-1}</m>.
         </p>
       </statement>
       <solution>
         <p>
-          We need to find the solution set of <m>A\vb{x} = \vb{0}</m> which we've done before.
-          The Octave code cell below can be used to solve this system, giving the reduced echelon form for the augmented matrix <m>\mqty[A \amp \vb{0}]</m> to be
-          <me>\mqty[1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0].</me>
-          Therefore any solution <m>\vb{x}\in\RR^5</m> of <m>A\vb{x}=\vb{0}</m> must look like
-          <me>\vb{x} = \mqty[x_1\\x_2\\x_3\\x_4\\x_5] = \mqty[-x_5\\-x_3+2x_4\\x_3\\x_4\\x_5] = x_3\mqty[0\\-1\\1\\0\\0] + x_4\mqty[0\\2\\0\\1\\0] + x_5\mqty[-1\\0\\0\\0\\1].</me>
+          We set up the augmented matrix <m>\mqty[A\amp I]</m>. The algorithm works by finding the reduced echelon form; the resulting augmented matrix is then <m>\mqty[I\amp A^{-1}]</m>.
+          <md>
+            <mrow>\mqty[-1 \amp -7 \amp -3 \amp 1 \amp 0 \amp 0 \\ 2 \amp 15 \amp 6 \amp 0 \amp 1 \amp 0 \\ 1 \amp 3 \amp 2 \amp 0 \amp 0 \amp 1] \amp\sim\mqty[1 \amp 7 \amp 3 \amp -1 \amp 0 \amp 0 \\ 2 \amp 15 \amp 6 \amp 0 \amp 1 \amp 0 \\ 1 \amp 3 \amp 2 \amp 0 \amp 0 \amp 1]</mrow>
+            <mrow>\amp\rowop[-2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[1 \amp 7 \amp 3 \amp -1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \amp 2 \amp 1 \amp 0 \\ 0 \amp -4 \amp -1 \amp 1 \amp 0 \amp 1]</mrow>
+            <mrow>\amp\rowop{4R_{2}+R_{3}}\mqty[1 \amp 7 \amp 3 \amp -1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \amp 2 \amp 1 \amp 0 \\ 0 \amp 0 \amp -1 \amp 9 \amp 4 \amp 1]</mrow>
+            <mrow>\amp\rowop{3R_{3}+R_{1}}\mqty[1 \amp 7 \amp 0 \amp 26 \amp 12 \amp 3 \\ 0 \amp 1 \amp 0 \amp 2 \amp 1 \amp 0 \\ 0 \amp 0 \amp -1 \amp 9 \amp 4 \amp 1]</mrow>
+            <mrow>\amp\rowop[-7R_{2}+R_{1}]{-R_{3}}\mqty[1 \amp 0 \amp 0 \amp 12 \amp 5 \amp 3 \\ 0 \amp 1 \amp 0 \amp 2 \amp 1 \amp 0 \\ 0 \amp 0 \amp 1 \amp -9 \amp -4 \amp -1]</mrow>
+          </md>
         </p>
         <p>
-          Note that the above shows that
-          <me>\null{A} = \span{\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}}</me>
-          Since these vectors are also linearly independent, it follows that the set
-          <me>\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}</me>
-          is in fact a basis for <m>\null{A}</m> and <m>\dim{\null{A}} = 3</m>.
+          So
+          <me>A^{-1} = \mqty[12 \amp 5 \amp 3 \\ 2 \amp 1 \amp 0 \\ -9 \amp -4 \amp -1].</me>
         </p>
       </solution>
     </example>
-    <sage language="octave">
-      <input>
-        % code cell for finding null space in previous example
-      </input>
-    </sage>
-    <p>
-      At this point we can make a simple but useful observation.
-      In <xref ref="example-finding-a-null-space" text="type-global" />, the dimension of the null space was directly tied to the number of free variables in the system <m>A\vb{x} = \vb{0}</m>.
-      The number of basic variables is likewise equal to the number of pivot columns of <m>A</m>.
-      Noting that the number of basic variables plus the number of free variables must be the total number of columns of <m>A</m>, together with <xref ref="theorem-rank-and-pivot-columns" text="type-global" />, we get the <em>Rank-Nullity Theorem</em>.
-    </p>
-    <theorem xml:id="theorem-rank-nullity-theorem">
-      <title>Rank-Nullity Theorem</title>
-      <idx>Rank-Nullity Theorem</idx>
+
+    <example>
       <statement>
         <p>
-          Let <m>A</m> be an <m>m\times n</m> matrix.
-          Then
-          <me>\rank{A} + \dim\null{A} = n.</me>
-        </p>
-      </statement>
-    </theorem>
-  </section>
-  <section xml:id="section-determinants">
-    <title>Determinants</title>
-    <p>
-      If <m>A</m> is an <m>n\times n</m> square matrix and if <m>\vb{x}\in\RR^n</m>, then <m>\vb{x}</m> and <m>A\vb{x}</m> have the same size.
-      In other words, both <m>\vb{x}</m> and <m>A\vb{x}</m> live in the same vector space <m>\RR^n</m>.
-      This makes some geometry involving <m>A</m> slightly easier.
-      In particular, <m>\col{A}</m> must be a subspace of <m>\RR^n</m>.
-    </p>
-    <p>
-      If <m>\col{A}</m> is a subspace of <m>\RR^n</m> then we can say that the linear system <m>A\vb{x} = \vb{b}</m> is always consistent if and only if <m>\col{A} = \RR^n</m>.
-      If this were not the case, then there would exist some vector <m>\vb{b}\in\RR^n</m> such that <m>\vb{b}\notin\col{A}</m> and so <m>A\vb{x}=\vb{b}</m> would have to be inconsistent.
-      So square matrices <m>A</m> for which <m>\col{A}=\RR^n</m> are particularly well-behaved and useful.
-      Therefore we'd like to develop conditions to check for when a square matrix <m>A</m> satisfied this property.
-    </p>
-    <p>
-      One possible condition for this is the following: <m>\col{A}=\RR^n</m> if and only if <m>\dim\col{A}=n</m>, which happens if and only if <m>\rank{A}=n</m>.
-      Therefore <m>A\vb{x}=\vb{b}</m> is always consistent if and only if <m>\rank{A}=n</m>.
-      However, another useful condition which uses geometry is the following: <m>\col{A}=\RR^n</m> if and only if the columns of <m>A</m> span an <m>n</m>-dimensional figure in <m>\RR^n</m>.
-      To get an idea of why this should be true, consider a <m>2\times2</m> matrix <m>A</m> whose columns determine a parallelogram (as opposed to a line) in <m>\RR^2</m> such as
-      <me>A = \mqty[1 \amp 1 \\ 0 \amp 2].</me>
-      Since <m>\col{A}</m> is the set of all linear combinations of columns of <m>A</m>, and geometrically this is just the set of all points that we can reach in <m>\RR^2</m> by stretching and expanding the parallelogram determined by the columns, it follows that <m>\col{A} = \RR^2</m>.
-    </p>
-    <p>
-      The <em>determinant</em> makes this observation precise.
-      Given an <m>n\times n</m> square matrix <m>A</m>, the determinant of <m>A</m> represents the (signed) volume of the parallelepiped determined by the columns of <m>A</m>.
-      If this volume is nonzero then this means that the parallelepiped must be an <m>n</m>-dimensional figure in <m>\RR^n</m> and so the column space of <m>A</m> would be all of <m>\RR^n</m>.
-      In the <m>2\times2</m> case it's not too difficult to compute the determinant.
-      If
-      <me>A = \mqty[a \amp b \\ c \amp d],</me>
-      then <m>\det(A) = \mqty|a \amp b \\ c \amp d| = ad - bc</m>.
-      Note that <m>ad-bc</m> does give the area of the parallelogram determined by the columns of <m>A</m>.
-      In three dimensions and higher the formula becomes more complicated and must be defined recursively.
-    </p>
-    <definition xml:id="definition-determinant-of-a-matrix">
-      <title>Determinant of a Matrix</title>
-      <idx>determinant</idx>
-      <statement>
-        <p>
-          Let <m>A = \smqty[a_{ij}]</m> be an <m>n\times n</m> matrix.
-          Let <m>A_{ij}</m> denote the <em>sub-matrix</em> of <m>A</m> obtained by removing the <m>i^\th</m> row and <m>j^\th</m> column of <m>A</m> (the same row and column containing the entry <m>a_{ij}</m>).
-          Then the <term>determinant</term> of <m>A</m> is defined recursively by the formula
-          <me>\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).</me>
-          <aside>
-            <p>
-              We'll see later that we can expand along any row or column, but for now we'll stick to the first row.
-            </p>
-          </aside>
-        </p>
-      </statement>
-    </definition>
-    <example xml:id="example-computing-a-determinant">
-      <title>Computing a Determinant</title>
-      <statement>
-        <p>
-          Let
-          <me>A = \mqty[2 \amp -6 \amp 4 \\ 3 \amp 5 \amp -2 \\ 1 \amp 6 \amp 3].</me>
-          Find <m>\det(A)</m>.
+          A square matrix <m>A</m> of size <m>10\times10</m>.
+          Suppose that <m>A</m> has rank <m>9</m>.
+          Is <m>A</m> invertible?
         </p>
       </statement>
       <solution>
         <p>
-          The formula in <xref ref="definition-determinant-of-a-matrix" text="type-global" /> states that
-          <me>\det(A) = 2\mqty|5 \amp -2 \\ 6 \amp 3| - (-6)\mqty|3 \amp -2 \\ 1 \amp 3| + 4\mqty|3 \amp 5 \\ 1 \amp 6|</me>
-          which simplifies to <m>172</m>.
-          This can be confirmed in the Octave cell below.
+          No! This is because <m>A</m> does not have a pivot in each row (since <m>\rank A = 9</m>, <m>A</m> only has <m>9</m> pivots).
+          Therefore we can't row reduce <m>A</m> to get <m>I</m>.
+          Since <m>A</m> is not row equivalent to the identity matrix, <m>A</m> cannot be invertible.
         </p>
       </solution>
     </example>
-    <sage language="octave">
-      <input>
-        A = [2, -6, 4; 3, 5, -2; 1, 6, 3]
-        det(A)
-      </input>
-    </sage>
-    <p>
-      When computing determinants by hand, it's often useful to expand along the row or column containing the most zeros instead of just the first row.
-      As long as we're careful about signs, the next result says this is permissible.
-    </p>
-    <theorem xml:id="theorem-cofactor-expansion">
-      <title>Cofactor Expansion</title>
-      <idx>
-        <h>determinant</h><h>cofactor expansion</h>
-      </idx>
-      <statement>
-        <p>
-          Let <m>A=[a_{ij}]</m> be an <m>n\times n</m> matrix and define <m>A_{ij}</m> as in <xref ref="definition-determinant-of-a-matrix" text="type-global" />.
-          Then
-          <me>\det(A) = \sum_{i=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}) = \sum_{j=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}).</me>
-        </p>
-      </statement>
-    </theorem>
-    <example xml:id="example-computing-a-determinant-with-a-cofactor-expansion">
-      <title>Computing a Determinant with a Cofactor Expansion</title>
-      <statement>
-        <p>
-          Let
-          <me>A = \mqty[1 \amp -2 \amp 5 \amp 2 \\ 0 \amp 0 \amp 3 \amp 0 \\ 2 \amp -6 \amp -7 \amp 5 \\ 5 \amp 0 \amp 4 \amp 4].</me>
-          Find <m>\det(A)</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We can save some work by expanding along the second row to take advantage of the zeros that appear.
-          Doing so, we get
-          <me>\det(A) = -3\mqty|1 \amp -2 \amp 2 \\ 2 \amp -6 \amp 5 \\ 5 \amp 0 \amp 4| = -3\qty(5\mqty|-2 \amp 2\\ -6 \amp 5| + 4\mqty|1 \amp -2 \\ 2 \amp -6|)</me>
-        </p>
-      </solution>
-    </example>
-    <p>
-      Computing determinants becomes very simple when working with <em>triangular matrices</em>.
-    </p>
-    <definition xml:id="definition-triangular-matrices">
-      <title>Triangular Matrices</title>
-      <statement>
-        <p>
-          A matrix <m>A</m> is <term>lower</term> (respectively, <term>upper</term>) <term>triangular</term> is all of the entries above (respectively, below) the main diagonal are <m>0</m>.
-          A matrix is <term>triangular</term> if it is lower triangular or upper triangular.
-        </p>
-      </statement>
-    </definition>
-    <example xml:id="example-computing-the-determinant-of-a-triangular-matrix">
-      <title>Computing the Determinant of a Triangular Matrix</title>
-      <statement>
-        <p>
-          Let
-          <me>A = \mqty[1 \amp 2 \amp 3 \\ 0 \amp 4 \amp 5 \\ 0 \amp 0 \amp -2].</me>
-          Find <m>\det(A)</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Using appropriate cofactor expansions, we see that
-          <me>\det(A) = 1\cdot4\cdot(-2).</me>
-        </p>
-      </solution>
-    </example>
-    <theorem xml:id="theorem-determinants-of-triangular-matrices">
-      <title>Determinants of Triangular Matrices</title>
-      <idx>
-        <h>determinant</h>
-        <h>triangular matrix</h>
-      </idx>
-      <statement>
-        <p>
-          Let <m>A</m> be an <m>n\times n</m> triangular matrix.
-          Then <m>\det(A)</m> is just the product of its diagonal entries:
-          <me>\det(A) = \prod_{i=1}^{N}a_{ii}.</me>
-        </p>
-      </statement>
-    </theorem>
-  </section>
+  </subsection>
+</section>
 </chapter>
