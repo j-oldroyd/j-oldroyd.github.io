@@ -778,10 +778,13 @@
         </p>
       </solution>
     </example>
-    <theorem>
+    <theorem xml:id="theorem-invertible-matrix-algorithm">
+      <title>Invertible Matrix Algorithm</title>
+      <idx><h>matrices</h><h>invertible</h><h>algorithm</h></idx>
       <statement>
         <p>
-          Let <m>A</m> be an <m>n\times n</m> matrix. If <m>A\sim I</m>, then <m>A</m> is invertible.
+          Let <m>A</m> be an <m>n\times n</m> matrix.
+          If <m>A\sim I</m>, then <m>A</m> is invertible.
         </p>
       </statement>
       <proof>
@@ -826,7 +829,6 @@
         </p>
       </solution>
     </example>
-
     <example>
       <statement>
         <p>
@@ -844,5 +846,100 @@
       </solution>
     </example>
   </subsection>
+</section>
+<section xml:id="section--LU-decomposition">
+  <title><m>LU</m> Decomposition</title>
+  <p>
+    The approach we used in <xref ref="theorem-invertible-matrix-algorithm" text="type-global" /> also gives us a useful way to <em>factor</em> matrices.
+    As with polynomials, the goal in factoring a matrix <m>A</m> is to write it as the product of simpler matrices.
+    The factorization we'll look at in this section is the <m>LU</m> decomposition, which we demonstrate first by an example.
+  </p>
+  <example xml:id="example--lu--factorization">
+    <title><m>LU</m> Factorization</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[3 \amp 2 \amp -1 \\ -2 \amp 4 \amp 4 \\ 3 \amp 1 \amp 2]</me>.
+        Now consider the problem of reducing <m>A</m> to an echelon form.
+        First, we can take <m>\frac{2}{3}</m> times row 1 and add it to row 2 and <m>-1</m> times row 1 and add it to row 3 to obtain
+        <me>\mqty[3 \amp 2 \amp -1 \\ 0 \amp \frac{16}{3} \amp \frac{10}{3} \\ 0 \amp -1 \amp 3].</me>
+        A final operation, adding <m>\frac{3}{16}</m> times row 2 to row 3, gives us the echelon form
+        <me>U = \mqty[3 \amp 2 \amp -1 \\ 0 \amp \frac{16}{3} \amp \frac{10}{3} \\ 0 \amp 0 \amp \frac{29}{8}]</me>
+      </p>
+      <p>
+        Now, we also saw in the last section that row operations correspond to multiplication by elementary matrices.
+        In this case, <m>U = E_{23}E_{13}E_{12}A</m> where
+        <me>E_{12} = \mqty[1 \amp 0 \amp 0 \\ \frac{2}{3}\amp 1 \amp 0 \\ 0 \amp 0 \amp 1], E_{13} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ -1 \amp 0 \amp 1]\text{ and }E_{23} = \mqty[1 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \\ 0 \amp \frac{3}{16} \amp 1].</me>
+        If we now solve the equation <m>U = E_{23}E_{13}E_{12}A</m> for <m>A</m>, we get the useful product
+        <me>A = E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}U.</me>
+        It turns out to be very easy to find <m>E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}</m> as these are elementary matrices, and we get
+        <me>E_{12}^{-1}E_{13}^{-1}E_{23}^{-1} = \mqty[1 \amp 0 \amp 0 \\ -\frac{2}{3} \amp 1 \amp 0 \\ 1 \amp -\frac{3}{16} \amp 1]</me>
+        This matrix is lower triangular, and we denote it by <m>L</m>.
+        Thus we have the factorization <m>A = LU</m>.
+      </p>
+    </statement>
+  </example>
+  <p>
+    We can verify the factorization in <xref ref="example--lu--factorization" text="type-global" /> using Octave as below:
+    <sage language="octave">
+      <input>
+        A = [3,2,-1;-2,4,4;3,1,2];
+        L = [1,0,0;-2/3,1,0;1,-3/16,1];
+        U = [3,2,-1;0,16/3,10/3;0,0,29/8];
+        L*U
+      </input>
+    </sage>
+    The Octave command <c>lu()</c> can also be used to find matrices <m>L</m> and <m>U</m> satisfying <m>A = LU</m>:
+    <sage language="octave">
+      <input>
+        % run the previous cell first!
+        [L1, U1] = lu(A);
+        L1*U1
+      </input>
+    </sage>
+  </p>
+  <p>
+    The matrix factorization <m>A = LU</m> demonstrated above can always be computes (reordering the rows of <m>A</m> if necessary).
+    In this factorization, <m>L</m> is lower triangular with <m>1</m>s along the diagonal and <m>U</m> is an echelon form of <m>A</m> (and therefore upper triangular if <m>A</m> is square).
+    This form has several advantages.
+    First, if <m>A</m> is square then <m>\det(A) = \det(L)\det(U) = \det(U)</m>, and the determinant of <m>U</m> is very easy to find.
+    Second, this form lets us solve systems more quickly.
+  </p>
+  <example xml:id="example-solving-a-system-with-lu--factorization">
+    <title>Solving a System with <m>LU</m> factorization</title>
+    <statement>
+      <p>
+        Let
+        <me>A = \mqty[-1 \amp -7 \amp -3 \\ 2 \amp 15 \amp 6 \\ 1 \amp 3 \amp 2]\text{ and }\vb{b} = \mqty[1 \\ -5 \\ 11].</me>
+        Find an <m>LU</m> decomposition of <m>A</m> and use it to solve <m>A\vb{x} = \vb{b}</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We can find <m>L</m> and <m>U</m> by reducing <m>A</m> to an echelon form.
+        One possibility is
+        <me>L = \mqty[1 \amp 0 \amp 0 \\ -2 \amp 1 \amp 0 \\ -1 \amp -4 \amp 1]\text{ and }U = \mqty[-1 \amp -7 \amp -3 \\ 0 \amp 1 \amp 0 \\ 0 \amp 0 \amp -1].</me>
+      </p>
+      <p>
+        Now we can solve <m>A\vb{x} = \vb{b}</m> in two steps:
+        <ol>
+          <li>
+            <p>Solve <m>L\vb{y} = \vb{b}</m> for <m>\vb{y}</m>.</p>
+          </li>
+          <li>
+            <p>Solve <m>U\vb{x} = \vb{y}</m> for <m>\vb{x}</m>.</p>
+          </li>
+        </ol>
+        Solving the first equation by reducing <m>\smqty[L \amp \vb{b}]</m> produces
+        <me>\vb{y} = \mqty[1 \\ -3 \\ 0]</me>.
+        Then, solving the second equation by reducing <m>\smqty[U \amp \vb{y}]</m> produces
+        <me>\vb{x} = \mqty[20\\-3\\0].</me>
+      </p>
+    </solution>
+  </example>
+  <p>
+    The process in <xref ref="example-solving-a-system-with-lu--factorization" text="type-global" /> produces the same exact answer that row reduction would if applied to <m>\smqty[A \amp \vb{b}]</m>, or if <m>A^{-1}</m> were found and multiplied to <m>\vb{b}</m>.
+    However, computing and using the <m>LU</m> factorization can be more stable numerically than either Gaussian elimination or computing the inverse.
+  </p>
 </section>
 </chapter>
