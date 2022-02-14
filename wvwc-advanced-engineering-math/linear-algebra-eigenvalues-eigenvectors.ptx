@@ -10,12 +10,12 @@
 <!--                                               -->
 <!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
 
-<chapter xml:id="chapter-linear-algebra-matrices" xmlns:xi="http://www.w3.org/2001/XInclude">
+<chapter xml:id="chapter-linear-eigenvalues-eigenvectors" xmlns:xi="http://www.w3.org/2001/XInclude">
 <title>Eigenvalues and Eigenvectors</title>
 <section xml:id="section-finding-eigenvalues-and-eigenvectors">
 <title>Finding Eigenvalues and Eigenvectors</title>
 <p>
-Many applications call for computing matrix-vector products like $A\vb{x}$, and in such cases it often happens that $A$ is a square matrix.
+Many applications call for computing matrix-vector products like <m>A\vb{x}</m>, and in such cases it often happens that <m>A</m> is a square matrix.
 If many such products need to be computed, it'd be nice to know if there was a way to simplify these calculations.
 One possible way to approach this is by using <em>eigenvectors and eigenvalues</em>.
 </p>
@@ -24,8 +24,8 @@ One possible way to approach this is by using <em>eigenvectors and eigenvalues</
 <idx>eigenvalues and eigenvectors</idx>
 <statement>
 <p>
-An \textbf{eigenvector} of an $n\times n$ matrix $A$ is a \textit{nonzero vector} $\vb{x}$ such that $A\vb{x} = \lambda\vb{x}$ for some scalar $\lambda$.
-A scalar $\lambda$ is called an \textbf{eigenvalue} of $A$ if there is a \textit{nonzero} solution of the equation $A\vb{x} = \lambda\vb{x}$.
+An <term>eigenvector</term> of an <m>n\times n</m> matrix <m>A</m> is a <em>nonzero vector</em> <m>\vb{x}</m> such that <m>A\vb{x} = \lambda\vb{x}</m> for some scalar <m>\lambda</m>.
+A scalar <m>\lambda</m> is called an <term>eigenvalue</term> of <m>A</m> if there is a <em>nonzero</em> solution of the equation <m>A\vb{x} = \lambda\vb{x}</m>.
 </p>
 </statement>
 </definition>
@@ -37,23 +37,17 @@ Note that the zero vector is not allowed to be an eigenvector, but zero is allow
 <statement>
 <p>
 Let
-\[
-A = \mqty[5 & 2 \\ 3 & 6],\qq{}\vb{v}_{1} = \mqty[1 \\ -1],\qq{}\vb{v}_{2} = \mqty[2 \\ 1]\qq{and}\vb{v}_{3} = \vb{0}.
-\]
-Which of the vectors, if any, is an eigenvector of $A$? What is one eigenvalue of $A$?
+<me>A = \mqty[5 \amp 2 \\ 3 \amp 6],\qq{}\vb{v}_{1} = \mqty[1 \\ -1],\qq{}\vb{v}_{2} = \mqty[2 \\ 1]\qq{and}\vb{v}_{3} = \vb{0}.</me>
+Which of the vectors, if any, is an eigenvector of <m>A</m>? What is one eigenvalue of <m>A</m>?
 </p>
 </statement>
 <solution>
 <p>
-First, note that $\vb{v}_{3} = \vb{0}$ is not an eigenvector since it is the zero vector. So we'll check if the other two vectors are eigenvectors:
-\[
-A\vb{v}_{1} = \mqty[3 \\ -3] = 3\mqty[1 \\ -1]
-\]
+First, note that <m>\vb{v}_{3} = \vb{0}</m> is not an eigenvector since it is the zero vector. So we'll check if the other two vectors are eigenvectors:
+<me>A\vb{v}_{1} = \mqty[3 \\ -3] = 3\mqty[1 \\ -1]</me>
 and
-\[
-A\vb{v}_{2} = \mqty[11 \\ 12].
-\]
-So $\vb{v}_{1}$ is an eigenvector of $A$ (with eigenvalue $3$), but $\vb{v}_{2}$ is not an eigenvector since there is no scalar we can multiply $\vb{v}_{2}$ by to get $A\vb{v}_{2}$.
+<me>A\vb{v}_{2} = \mqty[11 \\ 12].</me>
+So <m>\vb{v}_{1}</m> is an eigenvector of <m>A</m> (with eigenvalue <m>3</m>), but <m>\vb{v}_{2}</m> is not an eigenvector since there is no scalar we can multiply <m>\vb{v}_{2}</m> by to get <m>A\vb{v}_{2}</m>.
 </p>
 </solution>
 </example>
@@ -64,38 +58,31 @@ It's a little harder to verify if a given number is an eigenvalue of a matrix <m
 <title>Verifying Eigenvalues</title>
 <statement>
 <p>
-Is $-2$ an eigenvalue of the matrix
-\[
-Q = \mqty[0 & -1 & -1 \\ -1 & 0 & -1 \\ -1 & -1 & 0]?
-\]
+Is <m>-2</m> an eigenvalue of the matrix
+<me>Q = \mqty[0 \amp -1 \amp -1 \\ -1 \amp 0 \amp -1 \\ -1 \amp -1 \amp 0]?</me>
 If it is, find a corresponding eigenvector.
 </p>
 </statement>
 <solution>
 <p>
-$-2$ is an eigenvalue of $Q$ if and only if the equation $Q\vb{x} = -2\vb{x}$ has a \textit{nonzero} solution. Rearranging this equation, we can say that $-2$ is an eigenvalue of $Q$ if and only if $(Q+2I)\vb{x} = \vb{0}$ has a nontrivial solution. So we'll row reduce the augmented matrix $\mqty[Q+2I & \vb{0}]$ to see if the system has free variables:
-\begin{align*}
-\mqty[2 & -1 & -1 & 0 \\ -1 & 2 & -1 & 0 \\ -1 & -1 & 2 & 0]
-&\sim\mqty[-1 & 2 & -1 & 0 \\ 2 & -1 & -1 & 0 \\ -1 & -1 & 2 & 0] \\
-&\rowop[2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[-1 & 2 & -1 & 0 \\ 0 & 3 & -3 & 0 \\ 0 & -3 & 3 & 0] \\
-&\sim\mqty[-1 & 2 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0] \\
-\end{align*}
-so there are free variables and it follows that $-2$ is indeed an eigenvalue of $Q$.
-
-To find an eigenvector, we just need to find a nontrivial solution of $(Q+2I)\vb{x} = \vb{0}$---equivalently, a nonzero vector in $\null(Q+2I)$---so we'll continue row reducing:
-\begin{align*}
-\mqty[-1 & 2 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]
-&\rowop{-2R_{2}+R_{1}}\mqty[-1 & 0 & 1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]
-&\sim\mqty[1 & 0 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]
-\end{align*}
-So 
-\[
-\null(Q+2I) = \span{\mqty[1 \\ 1 \\ 1]}
-\]
-and a single eigenvector of $Q$ is given by
-\[
-\mqty[1 \\ 1 \\ 1].
-\]
+<m>-2</m> is an eigenvalue of <m>Q</m> if and only if the equation <m>Q\vb{x} = -2\vb{x}</m> has a <em>nonzero</em> solution. Rearranging this equation, we can say that <m>-2</m> is an eigenvalue of <m>Q</m> if and only if <m>(Q+2I)\vb{x} = \vb{0}</m> has a nontrivial solution. So we'll row reduce the augmented matrix <m>\mqty[Q+2I \amp \vb{0}]</m> to see if the system has free variables:
+<md>
+<mrow>\mqty[2 \amp -1 \amp -1 \amp 0 \\ -1 \amp 2 \amp -1 \amp 0 \\ -1 \amp -1 \amp 2 \amp 0] \amp\sim\mqty[-1 \amp 2 \amp -1 \amp 0 \\ 2 \amp -1 \amp -1 \amp 0 \\ -1 \amp -1 \amp 2 \amp 0]</mrow>
+<mrow>\amp\rowop[2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[-1 \amp 2 \amp -1 \amp 0 \\ 0 \amp 3 \amp -3 \amp 0 \\ 0 \amp -3 \amp 3 \amp 0]</mrow>
+<mrow>\amp\sim\mqty[-1 \amp 2 \amp -1 \amp 0 \\ 0 \amp 1 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0]</mrow>
+</md>
+so there are free variables and it follows that <m>-2</m> is indeed an eigenvalue of <m>Q</m>.
+</p>
+<p>
+To find an eigenvector, we just need to find a nontrivial solution of <m>(Q+2I)\vb{x} = \vb{0}</m>---equivalently, a nonzero vector in <m>\null(Q+2I)</m>---so we'll continue row reducing:
+<md>
+<mrow>\mqty[-1 \amp 2 \amp -1 \amp 0 \\ 0 \amp 1 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0] \amp\rowop{-2R_{2}+R_{1}}\mqty[-1 \amp 0 \amp 1 \amp 0 \\ 0 \amp 1 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0]</mrow>
+<mrow>\amp\sim\mqty[1 \amp 0 \amp -1 \amp 0 \\ 0 \amp 1 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0]</mrow>
+</md>
+So
+<me>\null(Q+2I) = \span{\mqty[1 \\ 1 \\ 1]}</me>
+and a single eigenvector of <m>Q</m> is given by
+<me>\mqty[1 \\ 1 \\ 1].</me>
 </p>
 </solution>
 </example>
@@ -103,7 +90,7 @@ and a single eigenvector of $Q$ is given by
 <title>Computing Eigenvalues and Eigenvectors</title>
 <p>
 There are two things we can note from <xref ref="example-verifying-eigenvalues" text="type-global" />.
-First, any nonzero vector in $\null(Q+2I)$ is an eigenvector of $Q$ with eigenvalue $-2$.
+First, any nonzero vector in <m>\null(Q+2I)</m> is an eigenvector of <m>Q</m> with eigenvalue <m>-2</m>.
 This leads to the following definition.
 </p>
 <definition xml:id="definition-eigenspaces">
@@ -111,13 +98,13 @@ This leads to the following definition.
 <idx><h>eigenvalues and eigenvectors</h><h>eigenspaces</h></idx>
 <statement>
 <p>
-Let $A$ be an $n\times n$ matrix and suppose that $\lambda$ is an eigenvalue of $A$. The \textbf{eigenspace} of $A$ corresponding to $\lambda$ is the subspace of $\RR^{n}$ containing all of the eigenvectors corresponding to $\lambda$ in addition to the zero vector. In other words, the eigenspace of $A$ corresponding to $\lambda$ is the set $\null(A-\lambda I)$.
+Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>\lambda</m> is an eigenvalue of <m>A</m>. The <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m> is the subspace of <m>\RR^{n}</m> containing all of the eigenvectors corresponding to <m>\lambda</m> in addition to the zero vector. In other words, the eigenspace of <m>A</m> corresponding to <m>\lambda</m> is the set <m>\null(A-\lambda I)</m>.
 </p>
 </statement>
 </definition>
 <p>
-The second item we note is that $-2$ was an eigenvalue precisely because the equation $(Q+2I)\vb{x} = \vb{0}$ had nontrivial solutions.
-In other words, $Q+2I$ \textit{was not invertible}.
+The second item we note is that <m>-2</m> was an eigenvalue precisely because the equation <m>(Q+2I)\vb{x} = \vb{0}</m> had nontrivial solutions.
+In other words, <m>Q+2I</m> <em>was not invertible</em>.
 In general, the polynomial <m>\det(A-\lambda I)</m> and equation <m>\det(A-\lambda I) = 0</m> are important enough that they deserve their own names.
 </p>
 <definition xml:id="definition-characteristic-polynomial-and-characteristic-equation">
@@ -125,9 +112,9 @@ In general, the polynomial <m>\det(A-\lambda I)</m> and equation <m>\det(A-\lamb
 <idx><h>eigenvalues and eigenvectors</h><h>characteristic polynomial and equation</h></idx>
 <statement>
 <p>
-Let $A$ be an $n\times n$ matrix.
-The \textbf{characteristic polynomial} of $A$ is the $n^\th$ degree polynomial $\det(A-\lambda I)$.
-The equation $\det(A-\lambda I) = 0$ is the \textbf{characteristic equation}.
+Let <m>A</m> be an <m>n\times n</m> matrix.
+The <term>characteristic polynomial</term> of <m>A</m> is the <m>n^\th</m> degree polynomial <m>\det(A-\lambda I)</m>.
+The equation <m>\det(A-\lambda I) = 0</m> is the <term>characteristic equation</term>.
 </p>
 </statement>
 </definition>
@@ -135,8 +122,8 @@ The equation $\det(A-\lambda I) = 0$ is the \textbf{characteristic equation}.
 <title>Eigenvalues and the Characteristic Equation</title>
 <statement>
 <p>
-Let $A$ be a square matrix.
-Then the eigenvalues of $A$ are the solutions of the characteristic equation $\det(A - \lambda I) = 0$.
+Let <m>A</m> be a square matrix.
+Then the eigenvalues of <m>A</m> are the solutions of the characteristic equation <m>\det(A - \lambda I) = 0</m>.
 </p>
 </statement>
 </theorem>
@@ -144,33 +131,26 @@ Then the eigenvalues of $A$ are the solutions of the characteristic equation $\d
 <title>Finding Eigenvalues</title>
 <statement>
 <p>
-Find the eigenvalues of the matrix 
-\[
-A = \mqty[4 & -2 & 3 \\ 0 & -1 & 3 \\ -1 & 2 & -2].
-\]
+Find the eigenvalues of the matrix
+<me>A = \mqty[4 \amp -2 \amp 3 \\ 0 \amp -1 \amp 3 \\ -1 \amp 2 \amp -2].</me>
 </p>
 </statement>
 <solution>
 <p>
-We need to compute the characteristic polynomial $\det(A-\lambda I)$. Now,
-\[
-A - \lambda I = \mqty[4 - \lambda & -2 & 3 \\ 0 & -1-\lambda & 3 \\ -1 & 2 & -2 - \lambda],
-\]
+We need to compute the characteristic polynomial <m>\det(A-\lambda I)</m>. Now,
+<me>A - \lambda I = \mqty[4 - \lambda \amp -2 \amp 3 \\ 0 \amp -1-\lambda \amp 3 \\ -1 \amp 2 \amp -2 - \lambda],</me>
 so
-\begin{align*}
-\det(A-\lambda I)
-&= (4-\lambda)\mqty|-1-\lambda & 3 \\ 2 & -2-\lambda| - \mqty|-2 & 3 \\ -1-\lambda & 3| \\
-&= (4-\lambda)\qty[(-1-\lambda)(-2-\lambda)-6] - \qty[-6-(-3-3\lambda)] \\
-&= (4-\lambda)(-4+3\lambda+\lambda^{2}) - (-3+3\lambda) \\
-&= (4-\lambda)(\lambda+4)(\lambda-1)+3(1-\lambda) \\
-&= (\lambda-1)\qty[(4-\lambda)(\lambda+4)-3] \\
-&= (\lambda-1)(13-\lambda^{2})
-\end{align*}
-The solutions of the characteristic equation 
-\[
-(\lambda-1)(13-\lambda^{2}) = 0
-\]
-are given by $\lambda = 1,\pm\sqrt{13}$. So the eigenvalues of $A$ are $1,-\sqrt{13}$ and $\sqrt{3}$.
+<md>
+  <mrow>\det(A-\lambda I) \amp= (4-\lambda)\mqty|-1-\lambda \amp 3 \\ 2 \amp -2-\lambda| - \mqty|-2 \amp 3 \\ -1-\lambda \amp 3|</mrow>
+<mrow>\amp= (4-\lambda)\qty[(-1-\lambda)(-2-\lambda)-6] - \qty[-6-(-3-3\lambda)]</mrow>
+<mrow>\amp= (4-\lambda)(-4+3\lambda+\lambda^{2}) - (-3+3\lambda)</mrow>
+<mrow>\amp= (4-\lambda)(\lambda+4)(\lambda-1)+3(1-\lambda)</mrow>
+<mrow>\amp= (\lambda-1)\qty[(4-\lambda)(\lambda+4)-3]</mrow>
+<mrow>\amp= (\lambda-1)(13-\lambda^{2})</mrow>
+</md>
+The solutions of the characteristic equation
+<me>(\lambda-1)(13-\lambda^{2}) = 0</me>
+are given by <m>\lambda = 1,\pm\sqrt{13}</m>. So the eigenvalues of <m>A</m> are <m>1,-\sqrt{13}</m> and <m>\sqrt{3}</m>.
 </p>
 </solution>
 </example>
@@ -181,23 +161,17 @@ Matters are simplified greatly when finding eigenvalues of triangular matrices (
 <title>Eigenvalues of a Triangular Matrix</title>
 <statement>
 <p>
-Find the eigenvalues of the matrix 
-\[
-B = \mqty[1 & 0 & 0 & 0 \\ 5 & 0 & 0 & 0 \\ -1 & -3 & -3 & 0 \\ 0 & 0 & 1 & -10].
-\]
+Find the eigenvalues of the matrix
+<me>B = \mqty[1 \amp 0 \amp 0 \amp 0 \\ 5 \amp 0 \amp 0 \amp 0 \\ -1 \amp -3 \amp -3 \amp 0 \\ 0 \amp 0 \amp 1 \amp -10].</me>
 </p>
 </statement>
 <solution>
 <p>
-To find the eigenvalues, we need to first find $\det(B-\lambda I)$. Since
-\[
-B-\lambda I = \mqty[1-\lambda & 0 & 0 & 0 \\ -1 & \lambda & 0 & 0 \\ -1 & -3 & -3-\lambda & 0 \\ 0 & 0 & -1 & -10-\lambda]
-\]
-is triangular (just as $B$ is triangular), it follows that 
-\[
-\det(B - \lambda I) = (1-\lambda)\lambda(-3-\lambda)(-10-\lambda).
-\]
-The solutions of the characteristic equation, and thus the eigenvalues of $B$, are given by $\lambda = 1, 0, -3, -10$.
+To find the eigenvalues, we need to first find <m>\det(B-\lambda I)</m>. Since
+<me>B-\lambda I = \mqty[1-\lambda \amp 0 \amp 0 \amp 0 \\ -1 \amp \lambda \amp 0 \amp 0 \\ -1 \amp -3 \amp -3-\lambda \amp 0 \\ 0 \amp 0 \amp -1 \amp -10-\lambda]</me>
+is triangular (just as <m>B</m> is triangular), it follows that
+<me>\det(B - \lambda I) = (1-\lambda)\lambda(-3-\lambda)(-10-\lambda).</me>
+The solutions of the characteristic equation, and thus the eigenvalues of <m>B</m>, are given by <m>\lambda = 1, 0, -3, -10</m>.
 </p>
 </solution>
 </example>
@@ -208,71 +182,57 @@ The solutions of the characteristic equation, and thus the eigenvalues of $B$, a
 <title>Eigenvalues of a Triangular Matrix</title>
 <statement>
 <p>
-Let $A$ be a square triangular matrix.
-Then the eigenvalues of $A$ are just the diagonal entries of $A$.
+Let <m>A</m> be a square triangular matrix.
+Then the eigenvalues of <m>A</m> are just the diagonal entries of <m>A</m>.
 </p>
 </statement>
 </theorem>
 <p>
-So now we have a good idea of how to find eigenvalues of a square matrix $A$: just solve the characteristic equation $\det(A-\lambda I) = 0$.
-To find the corresponding eigenvectors, we need to solve the related equation $A\vb{v} = \vb{0}$, which reduces to solving $(A-\lambda I)\vb{v} = \vb{0}$.
+So now we have a good idea of how to find eigenvalues of a square matrix <m>A</m>: just solve the characteristic equation <m>\det(A-\lambda I) = 0</m>.
+To find the corresponding eigenvectors, we need to solve the related equation <m>A\vb{v} = \vb{0}</m>, which reduces to solving <m>(A-\lambda I)\vb{v} = \vb{0}</m>.
 </p>
 <example xml:id="example-finding-eigenvalues-and-eigenvectors">
 <title>Finding Eigenvalues and Eigenvectors</title>
 <statement>
 <p>
 Find the eigenvalues and eigenvectors of
-\[
-A = \mqty[2 & 0 & -1 \\ 0 & \frac{1}{2} & 0 \\ 1 & 0 & 4].
-\]
+<me>A = \mqty[2 \amp 0 \amp -1 \\ 0 \amp \frac{1}{2} \amp 0 \\ 1 \amp 0 \amp 4].</me>
 </p>
 </statement>
 <solution>
 <p>
 First, we need to find the eigenvalues.
 Since
-\[
-\det(A-\lambda I) = \mqty|2-\lambda & 0 & -1 \\ 0 & \frac{1}{2}-\lambda & 0 \\ 1 & 0 & 4-\lambda| = (2-\lambda)\qty(\frac{1}{2}-\lambda)(4-\lambda) + \frac{1}{2}-\lambda 
-\]
+<me>\det(A-\lambda I) = \mqty|2-\lambda \amp 0 \amp -1 \\ 0 \amp \frac{1}{2}-\lambda \amp 0 \\ 1 \amp 0 \amp 4-\lambda| = (2-\lambda)\qty(\frac{1}{2}-\lambda)(4-\lambda) + \frac{1}{2}-\lambda </me>
 which simplifies to
-\[
-\det(A-\lambda I) = \qty(\frac{1}{2}-\lambda)\left[(2-\lambda)(4-\lambda)+1\right] = \qty(\frac{1}{2}-\lambda)[\lambda^{2}-6\lambda+9],
-\]
-we see that the eigenvalues of $A$ are given by $\lambda=\frac{1}{2},3$.
+<me>\det(A-\lambda I) = \qty(\frac{1}{2}-\lambda)\left[(2-\lambda)(4-\lambda)+1\right] = \qty(\frac{1}{2}-\lambda)[\lambda^{2}-6\lambda+9],</me>
+we see that the eigenvalues of <m>A</m> are given by <m>\lambda=\frac{1}{2},3</m>.
 </p>
 <p>
 Now we can start trying to find eigenvectors.
-First, we'll row reduce $\mqty[A-\frac{1}{2}I & 0]$ to find an eigenvector corresponding to $\lambda=\frac{1}{2}$:
-\begin{align*}
-\mqty[\frac{3}{2} & 0 & -1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & \frac{7}{2} & 0]
-&\rowop[2R_{3}]{2R_{1}}\mqty[3 & 0 & -2 & 0 \\ 0 & 0 & 0 & 0 \\ 2 & 0 & 7 & 0] \\
-&\rowop{2R_{3}+R_{1}}\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 2 & 0 & 7 & 0] \\
-&\rowop{-2R_{1}+R_{3}}\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 25 & 0] \\
-&\sim\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0] \\
-&\rowop{9R_{3}+R_{1}}\mqty[1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0].
-\end{align*}
-Here's what this is saying: if $\vb{v} = \mqty[\xmat*{v}{1}{3}]^{T}$ is an eigenvector of $A$ corresponding to $\lambda=\frac{1}{2}$, or in other words a nontrivial solution of $(A-\frac{1}{2}I)\vb{v} = \vb{0}$, then we must have $v_{1} = v_{3} = 0$ and $v_{2}$ free.
-So one nonzero eigenvector corresponding to $\lambda=\frac{1}{2}$ is given by
-\[
-\vb{v}_{1} = \mqty[0\\1\\0].
-\]
-To find an eigenvector corresponding to $\lambda = 3$, we'll now row reduce $\mqty[A - 3I & \vb{0}]$:
-\begin{align*}
-\mqty[-1 & 0 & -1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0]
-&\sim\mqty[0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0].
-\end{align*}
-So if $\vb{v}$ is an eigenvector corresponding to the eigenvalue $\lambda=3$, then we need $v_{1} = -v_{3}$, and $v_{2}$ and $v_{3}$ are both free.
+First, we'll row reduce <m>\mqty[A-\frac{1}{2}I \amp 0]</m> to find an eigenvector corresponding to <m>\lambda=\frac{1}{2}</m>:
+<md>
+<mrow>\mqty[\frac{3}{2} \amp 0 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp \frac{7}{2} \amp 0] \amp\rowop[2R_{3}]{2R_{1}}\mqty[3 \amp 0 \amp -2 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 2 \amp 0 \amp 7 \amp 0]</mrow>
+<mrow>\amp\rowop{2R_{3}+R_{1}}\mqty[1 \amp 0 \amp -9 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 2 \amp 0 \amp 7 \amp 0]</mrow>
+<mrow>\amp\rowop{-2R_{1}+R_{3}}\mqty[1 \amp 0 \amp -9 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 25 \amp 0]</mrow>
+<mrow>\amp\sim\mqty[1 \amp 0 \amp -9 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 1 \amp 0]</mrow>
+<mrow>\amp\rowop{9R_{3}+R_{1}}\mqty[1 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 1 \amp 0].</mrow>
+</md>
+</p>
+<p>
+Here's what this is saying: if <m>\vb{v} = \mqty[\xmat*{v}{1}{3}]^{T}</m> is an eigenvector of <m>A</m> corresponding to <m>\lambda=\frac{1}{2}</m>, or in other words a nontrivial solution of <m>(A-\frac{1}{2}I)\vb{v} = \vb{0}</m>, then we must have <m>v_{1} = v_{3} = 0</m> and <m>v_{2}</m> free.
+So one nonzero eigenvector corresponding to <m>\lambda=\frac{1}{2}</m> is given by
+<me>\vb{v}_{1} = \mqty[0\\1\\0].</me>
+To find an eigenvector corresponding to <m>\lambda = 3</m>, we'll now row reduce <m>\mqty[A - 3I \amp \vb{0}]</m>:
+<me>\mqty[-1 \amp 0 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0]\sim\mqty[0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0].</me>
+So if <m>\vb{v}</m> is an eigenvector corresponding to the eigenvalue <m>\lambda=3</m>, then we need <m>v_{1} = -v_{3}</m>, and <m>v_{2}</m> and <m>v_{3}</m> are both free.
 Which means that
-\[
-\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ v_{2} \\ v_{3}] = v_{2}\mqty[0\\1\\0]+v_{3}\mqty[-1\\0\\1].
-\]
-In this case, we can actually find \textit{two} linearly independent eigenvectors corresponding to $\lambda=3$:
-\[
-\vb{v}_{2} = \mqty[0\\1\\0]\qq{and}\vb{v}_{3} = \mqty[-1\\0\\1].
-\]
-Any (nonzero!) linear combination of these eigenvectors will provide another eigenvector corresponding to $\lambda=3$, but every other eigenvector must be a linear combination of $\vb{v}_{2}$ and $\vb{v}_{3}$.
-In other words, $\vb{v}_{2}$ and $\vb{v}_{3}$ form a basis for the eigenspace corresponding to $\lambda=3$.
-The same is also true of $\vb{v}_{1}$ and $\lambda=\frac{1}{2}$ above.
+<me>\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ v_{2} \\ v_{3}] = v_{2}\mqty[0\\1\\0]+v_{3}\mqty[-1\\0\\1].</me>
+In this case, we can actually find <em>two</em> linearly independent eigenvectors corresponding to <m>\lambda=3</m>:
+<me>\vb{v}_{2} = \mqty[0\\1\\0]\qq{and}\vb{v}_{3} = \mqty[-1\\0\\1].</me>
+Any (nonzero!) linear combination of these eigenvectors will provide another eigenvector corresponding to <m>\lambda=3</m>, but every other eigenvector must be a linear combination of <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m>.
+In other words, <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m> form a basis for the eigenspace corresponding to <m>\lambda=3</m>.
+The same is also true of <m>\vb{v}_{1}</m> and <m>\lambda=\frac{1}{2}</m> above.
 </p>
 </solution>
 </example>
@@ -281,9 +241,9 @@ The same is also true of $\vb{v}_{1}$ and $\lambda=\frac{1}{2}$ above.
 <title>Algebraic and Geometric Multiplicities of Eigenvalues</title>
 <p>
 There are a few of interesting things we can note about the <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />.
-First, each eigenvalue had \textit{at least} one corresponding eigenvector.
-Second, $\lambda=3$ was basically a ``repeated'' eigenvalue, since it showed up as a double root in the characteristic equation $\det(A-\lambda I)=0$.
-Third, the eigenvalue $\lambda=3$ has essentially two distinct eigenvectors corresponding to it, in the sense that every other possible eigenvector for $\lambda=3$ is a linear combination of $\vb{v}_{2}$ and $\vb{v}_{3}$.
+First, each eigenvalue had <em>at least</em> one corresponding eigenvector.
+Second, <m>\lambda=3</m> was basically a <q>repeated</q> eigenvalue, since it showed up as a double root in the characteristic equation <m>\det(A-\lambda I)=0</m>.
+Third, the eigenvalue <m>\lambda=3</m> has essentially two distinct eigenvectors corresponding to it, in the sense that every other possible eigenvector for <m>\lambda=3</m> is a linear combination of <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m>.
 This leads us to some terminology.
 </p>
 <definition xml:id="definition-algebraic-and-geometric-multiplicity">
@@ -291,10 +251,10 @@ This leads us to some terminology.
 <idx><h>eigenvalues and eigenvectors</h><h>algebraic and geometric multiplicity</h></idx>
 <statement>
 <p>
-Let $A$ be an $n\times n$ matrix and let $\lambda$ be an eigenvalue of $A$.
-The \textbf{algebraic multiplicity} of $\lambda$ is defined to be the multiplicity of $\lambda$ as a root of the characteristic equation.
-The \textbf{geometric multiplicity} of $\lambda$ is defined to be the number of linearly independent eigenvectors corresponding to $\lambda$.
-Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to $\lambda$.
+Let <m>A</m> be an <m>n\times n</m> matrix and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
+The <term>algebraic multiplicity</term> of <m>\lambda</m> is defined to be the multiplicity of <m>\lambda</m> as a root of the characteristic equation.
+The <term>geometric multiplicity</term> of <m>\lambda</m> is defined to be the number of linearly independent eigenvectors corresponding to <m>\lambda</m>.
+Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to <m>\lambda</m>.
 </p>
 </statement>
 </definition>
@@ -302,8 +262,8 @@ Equivalently, the geometric multiplicity is exactly the dimension of the eigensp
 <title>Bounds on Algebraic and Geometric Multiplicities</title>
 <statement>
 <p>
-If $A$ is an $n\times n$ matrix, then $A$ has exactly $n$ (not necessarily distinct!) eigenvalues, counting multiplicities.
-Furthermore, if $\lambda$ is an eigenvalue of $A$, then the geometric multiplicity is always less than or equal to the algebraic multiplicity.
+If <m>A</m> is an <m>n\times n</m> matrix, then <m>A</m> has exactly <m>n</m> (not necessarily distinct!) eigenvalues, counting multiplicities.
+Furthermore, if <m>\lambda</m> is an eigenvalue of <m>A</m>, then the geometric multiplicity is always less than or equal to the algebraic multiplicity.
 </p>
 </statement>
 </theorem>
@@ -311,32 +271,29 @@ Furthermore, if $\lambda$ is an eigenvalue of $A$, then the geometric multiplici
 <title>Multiplicities and Eigenspaces</title>
 <statement>
 <p>
-Graph the eigenspaces of the matrix 
-\[
-A = \mqty[1 & 3 \\ 0 & 0].
-\]
+Graph the eigenspaces of the matrix
+<me>A = \mqty[1 \amp 3 \\ 0 \amp 0].</me>
 What are the algebraic and geometric multiplicities of each eigenvalue?
 </p>
 </statement>
 <solution>
 <p>
-Since $A$ is triangular, its eigenvalues are $0$ and $1$.
-So we need to find $\null(A-0I) = \null A$ and $\null(A-I)$.
+Since <m>A</m> is triangular, its eigenvalues are <m>0</m> and <m>1</m>.
+So we need to find <m>\null(A-0I) = \null A</m> and <m>\null(A-I)</m>.
 By inspection,
-\[
-\null A = \span{\mqty[-3 \\ 1]}
-\]
-The eigenspace associated with $1$ is $\null(A-I)$.
+<me>\null A = \span{\mqty[-3 \\ 1]}</me>
+The eigenspace associated with <m>1</m> is <m>\null(A-I)</m>.
 Since
-\[
-A- I - \mqty[0 & 3 \\ 0 & -1]
-\]
+<me>A- I - \mqty[0 \amp 3 \\ 0 \amp -1]</me>
 we see that
-\[
-\null(A-I) = \span{\mqty[1\\0]}.
-\]
+<me>\null(A-I) = \span{\mqty[1\\0]}.</me>
 So the graph of the eigenspaces is given by
-\begin{center}
+</p>
+<figure>
+<caption>Eigenspaces of <m>A</m></caption>
+<image xml:id="image-eigenspaces-of-2x2-matrix" width="100%">
+<description>A plot of the eigenspaces of a matrix</description>
+<latex-image>
 \begin{tikzpicture}[scale = 0.7]
 \begin{axis}[
 enlargelimits=false,
@@ -353,7 +310,9 @@ grid=both
 \addlegendentry{$\null(A-I)$}
 \end{axis}
 \end{tikzpicture}
-</p>
+</latex-image>
+</image>
+</figure>
 </solution>
 </example>
 <example xml:id="example-matrix-multiplication-and-eigenvectors">
@@ -361,23 +320,18 @@ grid=both
 <statement>
 <p>
 Let
-\[
-\mathcal{B} = \qty{\vb{b}_{1},\vb{b}_{2}} = \qty{\mqty[-3 \\ 1], \mqty[1 \\ 0]}
-\]
-and let $A$ be as in the previous example. Suppose that $\vb{v}$ is a vector in $\RR^{2}$ such that
-\[
-\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}.
-\]
-Compute $A\vb{v}$.
+<me>\mathcal{B} = \qty{\vb{b}_{1},\vb{b}_{2}} = \qty{\mqty[-3 \\ 1], \mqty[1 \\ 0]}</me>
+and let <m>A</m> be as in the previous example.
+Suppose that <m>\vb{v}</m> is a vector in <m>\RR^{2}</m> such that
+<me>\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}.</me>
+Compute <m>A\vb{v}</m>.
 </p>
 </statement>
 <solution>
 <p>
 This computation will be quite easy.
-Since $\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}$, we have
-\[
-A\vb{v} = 4A\vb{b}_{1}+3A\vb{b}_{2} = 3\vb{b}_{2} = \mqty[3 \\ 0].
-\]
+Since <m>\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}</m>, we have
+<me>A\vb{v} = 4A\vb{b}_{1}+3A\vb{b}_{2} = 3\vb{b}_{2} = \mqty[3 \\ 0].</me>
 </p>
 </solution>
 </example>
