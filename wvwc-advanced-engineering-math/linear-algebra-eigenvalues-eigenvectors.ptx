@@ -98,7 +98,10 @@
         <idx><h>eigenvalues and eigenvectors</h><h>eigenspaces</h></idx>
         <statement>
           <p>
-            Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>\lambda</m> is an eigenvalue of <m>A</m>. The <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m> is the subspace of <m>\RR^{n}</m> containing all of the eigenvectors corresponding to <m>\lambda</m> in addition to the zero vector. In other words, the eigenspace of <m>A</m> corresponding to <m>\lambda</m> is the set <m>\null(A-\lambda I)</m>.
+            Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>\lambda</m> is an eigenvalue of <m>A</m>.
+            The <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m> is the subspace of <m>\RR^{n}</m> containing all of the eigenvectors corresponding to <m>\lambda</m> in addition to the zero vector.
+            In other words, the eigenspace of <m>A</m> corresponding to <m>\lambda</m> is the set <m>\null(A-\lambda I)</m>.
+            This set is often denoted <m>E_{\lambda}</m>.
           </p>
         </statement>
       </definition>
@@ -154,6 +157,19 @@
           </p>
         </solution>
       </example>
+      <p>
+        Computer systems such as Sage and Octave can, naturally, find eigenvalues and eigenvectors as well.
+        In Octave this is done with the <c>eig</c> command.
+        If no output is specified then the command produces an array of eigenvalues, while if two outputs are specified the command produces two matrices: the first matrix is a matrix of eigenvector columns of <m>A</m> and the second matrix is a diagonal matrix of eigenvalues of <m>A</m>.
+        See the code cell below.
+      </p>
+      <sage language="octave">
+        <input>
+          format short
+          A = [4, -2, 3; 0, -1, 3; -1, 2, -2];
+          [U,D] = eig(A)
+        </input>
+      </sage>
       <p>
         Matters are simplified greatly when finding eigenvalues of triangular matrices (see <xref ref="theorem-determinants-of-triangular-matrices" text="type-global" />).
       </p>
@@ -223,27 +239,63 @@
             Here's what this is saying: if <m>\vb{v} = \mqty[\xmat*{v}{1}{3}]^{T}</m> is an eigenvector of <m>A</m> corresponding to <m>\lambda=\frac{1}{2}</m>, or in other words a nontrivial solution of <m>(A-\frac{1}{2}I)\vb{v} = \vb{0}</m>, then we must have <m>v_{1} = v_{3} = 0</m> and <m>v_{2}</m> free.
             So one nonzero eigenvector corresponding to <m>\lambda=\frac{1}{2}</m> is given by
             <me>\vb{v}_{1} = \mqty[0\\1\\0].</me>
+            Therefore <m>\smqty[0\\1\\0]</m> forms a basis of the eigenspace <m>E_{\frac{1}{2}}</m> of <m>A</m>.
+          </p>
+          <p>
             To find an eigenvector corresponding to <m>\lambda = 3</m>, we'll now row reduce <m>\mqty[A - 3I \amp \vb{0}]</m>:
-            <me>\mqty[-1 \amp 0 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0]\sim\mqty[0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0].</me>
-            So if <m>\vb{v}</m> is an eigenvector corresponding to the eigenvalue <m>\lambda=3</m>, then we need <m>v_{1} = -v_{3}</m>, and <m>v_{2}</m> and <m>v_{3}</m> are both free.
+            <me>\mqty[-1 \amp 0 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0]\sim\mqty[0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 1 \amp 0 \amp 0 \\ 1 \amp 0 \amp 1 \amp 0].</me>
+            So if <m>\vb{v}</m> is an eigenvector corresponding to the eigenvalue <m>\lambda=3</m>, then we need <m>v_{1} = -v_{3}</m>, and <m>v_{2} = 0</m>.
             Which means that
-            <me>\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ v_{2} \\ v_{3}] = v_{2}\mqty[0\\1\\0]+v_{3}\mqty[-1\\0\\1].</me>
-            In this case, we can actually find <em>two</em> linearly independent eigenvectors corresponding to <m>\lambda=3</m>:
-            <me>\vb{v}_{2} = \mqty[0\\1\\0]\qq{and}\vb{v}_{3} = \mqty[-1\\0\\1].</me>
-            Any (nonzero!) linear combination of these eigenvectors will provide another eigenvector corresponding to <m>\lambda=3</m>, but every other eigenvector must be a linear combination of <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m>.
-            In other words, <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m> form a basis for the eigenspace corresponding to <m>\lambda=3</m>.
-            The same is also true of <m>\vb{v}_{1}</m> and <m>\lambda=\frac{1}{2}</m> above.
+            <me>\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ 0 \\ v_{3}] = v_{3}\mqty[-1\\0\\1].</me>
+            The vector <m>\smqty[-1\\0\\1]</m> therefore forms a basis of the eigenspace <m>E_3</m> of <m>A</m>.
           </p>
         </solution>
       </example>
+      <p>
+        As mentioned above, the computations in <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" /> can also be carried out using technology.
+        In Octave, the computation proceeds using <c>eig</c>:
+      </p>
+      <sage language="octave">
+        <input>
+          format short
+          A = [2, 0, -1; 0, 1/2, 0; 1, 0, 4];
+          [U,D] = eig(A)
+        </input>
+      </sage>
+      <p>
+        Octave by design will give eigenvectors that have unit norm (i.e., magnitude of <m>1</m>).
+        In the above cell the first two columns of <m>U</m> are eigenvectors in <m>E_3</m>, while the last column is an eigenvector in <m>E_{\frac{1}{2}}</m>.
+        In <xref ref="subsection-algebraic-and-geometric-multiplicities-of-eigenvalues" text="type-global" />, we examine the reason why <m>3</m> shows up twice in the matrix <m>D</m> of eigenvalues (and why a column of <m>U</m> is repeated here).
+      </p>
+      <p>
+        As Octave is designed for numerical work, it's a little awkward to try to get it to produce symbolic answers.
+        For symbolic mathematics, a system such as Sage (or another CAS) is more appropriate.
+        In Sage, eigenvalues can be found like so:
+        <aside><p><c>A.eigenvectors_right()</c> finds vectors <m>\vb{x}</m> satisfying <m>A\vb{x} = \lambda \vb{x}</m>. <c>A.eigenvectors_left()</c> finds vectors <m>\vb{y}</m> satisfying <m>\vb{y}^{T}A = \lambda\vb{y}^{T}</m>.</p></aside>
+      </p>
+      <sage>
+        <input>
+          A = Matrix([[2, 0, -1], [0, 1/2, 0], [1, 0, 4]])
+          A.eigenvectors_right()
+        </input>
+      </sage>
+      <p>
+        Octave-like output can also be produced using the <c>eigenmatrix_right()</c> method:
+      </p>
+      <sage>
+        <input>
+          # run the previous cell first so A is defined!
+          D,U = A.eigenmatrix_right()
+          D,U
+        </input>
+      </sage>
     </subsection>
     <subsection xml:id="subsection-algebraic-and-geometric-multiplicities-of-eigenvalues">
       <title>Algebraic and Geometric Multiplicities of Eigenvalues</title>
       <p>
-        There are a few of interesting things we can note about the <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />.
+        There are a couple of interesting things we can note about the <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />.
         First, each eigenvalue had <em>at least</em> one corresponding eigenvector.
         Second, <m>\lambda=3</m> was basically a <q>repeated</q> eigenvalue, since it showed up as a double root in the characteristic equation <m>\det(A-\lambda I)=0</m>.
-        Third, the eigenvalue <m>\lambda=3</m> has essentially two distinct eigenvectors corresponding to it, in the sense that every other possible eigenvector for <m>\lambda=3</m> is a linear combination of <m>\vb{v}_{2}</m> and <m>\vb{v}_{3}</m>.
         This leads us to some terminology.
       </p>
       <definition xml:id="definition-algebraic-and-geometric-multiplicity">
@@ -254,10 +306,31 @@
             Let <m>A</m> be an <m>n\times n</m> matrix and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
             The <term>algebraic multiplicity</term> of <m>\lambda</m> is defined to be the multiplicity of <m>\lambda</m> as a root of the characteristic equation.
             The <term>geometric multiplicity</term> of <m>\lambda</m> is defined to be the number of linearly independent eigenvectors corresponding to <m>\lambda</m>.
-            Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to <m>\lambda</m>.
+            Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to <m>\lambda</m>: <m>\dim E_{\lambda}</m>.
           </p>
         </statement>
       </definition>
+      <p>
+        In <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />, <m>\lambda = 3</m> had an algebraic multiplicity of <m>2</m>.
+        This could also be seen in the Octave and Sage results following the example, since <m>3</m> showed up twice in the diagonal matrix of eigenvalues.
+        This was also given after using <c>eigenvectors_right()</c> immediately after the given eigenvector for <m>\lambda  = 3</m>.
+        On the other hand, the geometric multiplicity of <m>\lambda = 3</m> was <m>\dim E_{3} = 1</m>.
+        This was represented in the repeated eigenvector in <m>U</m> in the Octave result and the single nonzero vector corresponding to <m>\lambda = 3</m> in the Sage result.
+        In this case, we say that <m>A</m> is <em>deficient</em>.
+      </p>
+      <definition xml:id="definition-deficient-matrices">
+        <title>Deficient Matrices</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>deficient matrix</h></idx><idx><h>eigenvalues and eigenvectors</h><h>deficient matrix</h><seealso>algebraic and geometric multiplicity</seealso></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be a square matrix.
+            If the sum of the geometric multiplicities of the eigenvalues of <m>A</m> is less than the sum of algebraic multiplicities of eigenvalues of <m>A</m>, then we say that <m>A</m> is <term>deficient</term>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        The following result gives some basic estimates for algebraic and geometric multiplicities of eigenvalues.
+      </p>
       <theorem xml:id="theorem-bounds-on-algebraic-and-geometric-multiplicities">
         <title>Bounds on Algebraic and Geometric Multiplicities</title>
         <statement>
@@ -267,6 +340,21 @@
           </p>
         </statement>
       </theorem>
+      <p>
+        From <xref ref="theorem-bounds-on-algebraic-and-geometric-multiplicities" text="type-global" />, an <m>n\times n</m> square matrix <m>A</m> is deficient if and only if it has at most <m>n-1</m> linearly independent eigenvectors.
+        Equivalently, the eigenvectors of <m>A</m> are not enough to form a basis (also known as an <em>eigenbasis</em>) of <m>\RR^n</m>.
+        This leads to difficulties in computations involving <m>A</m>.
+      </p>
+      <definition xml:id="definition-eigenbases">
+        <title>Eigenbases</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>eigenbases</h></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> square matrix that is not deficient.
+            A set <m>\qty{\vb{v}_1, \ldots, \vb{v}_n}</m> is called an <term>eigenbasis</term> for <m>\RR^n</m> if each vector in the set is an eigenvector of <m>A</m> and if the set also forms a basis of <m>\RR^n</m>.
+          </p>
+        </statement>
+      </definition>
       <example xml:id="example-multiplicities-and-eigenspaces">
         <title>Multiplicities and Eigenspaces</title>
         <statement>
@@ -279,9 +367,13 @@
         <solution>
           <p>
             Since <m>A</m> is triangular, its eigenvalues are <m>0</m> and <m>1</m>.
-            So we need to find <m>\null(A-0I) = \null A</m> and <m>\null(A-I)</m>.
+            We also know at this point that <m>A</m> can't be deficient.
+            In particular, we can form a basis of <m>\RR^2</m> entirely from eigenvectors of <m>A</m>.
+            To actually find the eigenvectors, we need to find the corresponding eigenspaces <m>E_{0} = \null(A-0I) = \null A</m> and <m>E_{1} = \null(A-I)</m>.
+          </p>
+          <p>
             By inspection,
-            <me>\null A = \span{\mqty[-3 \\ 1]}</me>
+            <me>\null A = \span{\mqty[-3 \\ 1]}.</me>
             The eigenspace associated with <m>1</m> is <m>\null(A-I)</m>.
             Since
             <me>A- I - \mqty[0 \amp 3 \\ 0 \amp -1]</me>
@@ -313,8 +405,14 @@
               </latex-image>
             </image>
           </figure>
+          <p>
+            A corresponding eigenbasis from <m>A</m> would be the set <m>\qty{\smqty[-3\\1], \smqty[1\\0]}</m>.
+          </p>
         </solution>
       </example>
+      <p>
+        The importance of an eigenbasis is demonstrated in the next example.
+      </p>
       <example xml:id="example-matrix-multiplication-and-eigenvectors">
         <title>Matrix Multiplication and Eigenvectors</title>
         <statement>
