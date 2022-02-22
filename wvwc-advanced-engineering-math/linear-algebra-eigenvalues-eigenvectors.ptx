@@ -452,13 +452,34 @@
           In symbols, we want to determine if <m>A^n\vb{x}_0 \to \vb{x}</m> as <m>n\to\infty</m>.
         </p>
         <p>
-          For such a vector, we should have <m>A\vb{x} = </m>
-      </statement>
-      <solution>
-        <p>
-          
+          For such a vector, we should have <m>A\vb{x} = \lim_{n\to\infty}A(A^n\vb{x}) = \vb{x}</m>.
+          In other words, <m>\vb{x}</m> is an <em>eigenvector of <m>A</m> with eigenvalue <m>1</m></em>.
+          We call this vector a <term>steady-state vector</term> of the Markov process.
         </p>
-      </solution>
+        <p>
+          Now let's suppose we model the weather with a Markov process with transition matrix
+          <me>A = \mqty[0.33 \amp 0.25 \amp 0.40 \\ 0.52 \amp 0.42 \amp 0.40 \\ 0.15 \amp 0.33 \amp 0.20],</me>
+          corresponding states <m>S, C</m> and <m>R</m> (i.e., "sunny", "cloudy" and "rainy") and we use an initial state vector of <m>\vb{x}_0 = \smqty[0 \amp 1 \amp 0]^T</m>.
+          To figure out the long-term probability that it will be a cloudy day, we can try computing <m>A^n\vb{x}_0</m> for large values of <m>n</m>.
+          See the Octave cell below.
+          If we do so, it appears that the long-term probability of a cloudy day settles in around <m>44.6\%</m>.
+        </p>
+        <p>
+          We can make this analysis more precise by looking for the steady state vector using <c>eig</c>.
+          If we take this approach, then we see that <m>A</m> has <m>1</m> as an eigenvalue and corresponding eigenvector <m>\smqty[0.52 \amp 0.74 \amp 0.41]^{T}</m>.
+          This is <em>not</em> a state vector since the values do not add to <m>1</m> and therefore can't be probabilities.
+          However, we can convert this into a state vector by dividing each entry by the sum <m>0.52+0.74+0.41 = 1.678</m> which in turn gives the eigenvector
+          <me>\vb{x} = \mqty[0.3113 \\ 0.4463 \\ 0.2425]</me>
+          confirming our earlier guess.
+          We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.
+        </p>
+      </statement>
     </example>
+    <sage language="octave">
+      <input>
+        format short
+        A = [0.33, 0.25, 0.40; 0.52, 0.42, 0.40; 0.15, 0.33, 0.20]
+      </input>
+    </sage>
   </section>
 </chapter>

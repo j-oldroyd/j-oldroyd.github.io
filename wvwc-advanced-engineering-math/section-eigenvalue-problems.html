@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-02-22T14:53:38-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Eigenvalue Problems</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Advanced Engineering Mathematics Lecture Notes">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    // Make *any* pre with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script>$(function () {
+    // Make *any* pre with class 'sagecell-octave' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'pre.sagecell-octave',
+                           linked: true,
+                           languages: ['octave'],
+                           evalButtonText: 'Evaluate (Octave)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+<!--*** Runestone Services ***-->
+<script type="text/javascript" src="_static/runtime.44deab00544cc8fc.bundle.js"></script><script type="text/javascript" src="_static/637.d54be67956c5c660.bundle.js"></script><script type="text/javascript" src="_static/runestone.a1a8707963a337ef.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/637.fafafbd97df8a0d1.css">
+<link rel="stylesheet" type="text/css" href="_static/runestone.d062db89aaf1dddd.css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\operatorname{col}{#1}}
+\newcommand{\rank}[1]{\operatorname{rank}{#1}}
+\newcommand{\null}[1]{\operatorname{null}{#1}}
+\newcommand{\span}[1]{\operatorname{span}{#1}}
+\newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-advanced-engineering-math.html"><span class="title">Advanced Engineering Mathematics Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-finding-eigenvalues-and-eigenvectors.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-linear-eigenvalues-eigenvectors.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="part-multivariable-calculus.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-finding-eigenvalues-and-eigenvectors.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-linear-eigenvalues-eigenvectors.html" title="Up">Up</a><a class="next-button button toolbar-item" href="part-multivariable-calculus.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link part"><a href="part-linear-algebra.html" data-scroll="part-linear-algebra" class="internal"><span class="codenumber">I</span> <span class="title">Linear Algebra</span></a></li>
+<li class="link"><a href="chapter-linear-algebra-matrices.html" data-scroll="chapter-linear-algebra-matrices" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Matrix Algebra</span></a></li>
+<li class="link"><a href="chapter-linear-eigenvalues-eigenvectors.html" data-scroll="chapter-linear-eigenvalues-eigenvectors" class="internal"><span class="codenumber">2</span> <span class="title">Eigenvalues and Eigenvectors</span></a></li>
+<li class="link part"><a href="part-multivariable-calculus.html" data-scroll="part-multivariable-calculus" class="internal"><span class="codenumber">II</span> <span class="title">Multivariable Calculus</span></a></li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-eigenvalue-problems"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">2.2</span> <span class="title">Eigenvalue Problems</span>
+</h2>
+<p id="p-163">Many important problems in mathematics and its applications reduce to statements of the form <span class="process-math">\(A\vb{x} = \lambda\vb{x}\text{.}\)</span> Naturally, eigenvalues and eigenvectors are useful tools for tackling these problems. As a first example, we'll again consider a Markov process.</p>
+<article class="example example-like" id="example-long-term-behavior-of-markov-processes"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Long-term Behavior of Markov Processes.</span>
+</h3>
+<p id="p-164">Recall that a Markov process describes the evolution of one state <span class="process-math">\(\vb{x}_{n}\)</span> into a future state <span class="process-math">\(\vb{x}_{n+1}\)</span> using the matrix equation <span class="process-math">\(A\vb{x}_n = \vb{x}_{n+1}\text{.}\)</span> In such a process, the matrix <span class="process-math">\(A\)</span> is a square matrix with non-negative entries whose columns sum to <span class="process-math">\(1\text{.}\)</span> Starting from an initial state <span class="process-math">\(\vb{x}_0\text{,}\)</span> we are often interested in whether the long-term evolution approaches a specific state vector <span class="process-math">\(\vb{x}\text{.}\)</span> In symbols, we want to determine if <span class="process-math">\(A^n\vb{x}_0 \to \vb{x}\)</span> as <span class="process-math">\(n\to\infty\text{.}\)</span></p>
+<p id="p-165">For such a vector, we should have <span class="process-math">\(A\vb{x} = \lim_{n\to\infty}A(A^n\vb{x}) = \vb{x}\text{.}\)</span> In other words, <span class="process-math">\(\vb{x}\)</span> is an <em class="emphasis">eigenvector of <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(1\)</span></em>. We call this vector a <dfn class="terminology">steady-state vector</dfn> of the Markov process.</p>
+<p id="p-166">Now let's suppose we model the weather with a Markov process with transition matrix</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[0.33 \amp 0.25 \amp 0.40 \\ 0.52 \amp 0.42 \amp 0.40 \\ 0.15 \amp 0.33 \amp 0.20],
+\end{equation*}
+</div>
+<p class="continuation">corresponding states <span class="process-math">\(S, C\)</span> and <span class="process-math">\(R\)</span> (i.e., "sunny", "cloudy" and "rainy") and we use an initial state vector of <span class="process-math">\(\vb{x}_0 = \smqty[0 \amp 1 \amp 0]^T\text{.}\)</span> To figure out the long-term probability that it will be a cloudy day, we can try computing <span class="process-math">\(A^n\vb{x}_0\)</span> for large values of <span class="process-math">\(n\text{.}\)</span> See the Octave cell below. If we do so, it appears that the long-term probability of a cloudy day settles in around <span class="process-math">\(44.6\%\text{.}\)</span></p>
+<p id="p-167">We can make this analysis more precise by looking for the steady state vector using <code class="code-inline tex2jax_ignore">eig</code>. If we take this approach, then we see that <span class="process-math">\(A\)</span> has <span class="process-math">\(1\)</span> as an eigenvalue and corresponding eigenvector <span class="process-math">\(\smqty[0.52 \amp 0.74 \amp 0.41]\text{.}\)</span> This is <em class="emphasis">not</em> a state vector since the values do not add to <span class="process-math">\(1\)</span> and therefore can't be probabilities. However, we can convert this into a state vector by dividing each entry by the sum <span class="process-math">\(0.52+0.74+0.41 = 1.678\)</span> which in turn gives the eigenvector</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\vb{x} = \mqty[0.3113 \\ 0.4463 \\ 0.2425]
+\end{equation*}
+</div>
+<p class="continuation">confirming our earlier guess. We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.</p></article><pre class="ptx-sagecell sagecell-octave" id="sage-12"><script type="text/x-sage">format short
+A = [0.33, 0.25, 0.40; 0.52, 0.42, 0.40; 0.15, 0.33, 0.20]
+</script></pre></section></div></main>
+</div>
+</body>
+</html>
