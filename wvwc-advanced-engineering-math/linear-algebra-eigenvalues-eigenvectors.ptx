@@ -510,4 +510,121 @@
       </input>
     </sage>
   </section>
+  <section xml:id="section-orthogonal-transformations">
+    <title>Orthogonal Transformations</title>
+    <p>
+      Two fundamental concepts in vector geometry are the <em>magnitude</em> and the <em>inner product</em>.
+      In <m>\RR^n</m> these topics are related as given by the following definition.
+    </p>
+    <definition xml:id="definition-inner-product-and-magnitude">
+      <title>Inner Product and Magnitude</title>
+      <idx>inner product</idx><idx>magnitude</idx>
+      <statement>
+        <p>
+          Let <m>\vb{x}</m> and <m>\vb{y}</m> be vectors in <m>\RR^n</m>.
+          The <term>inner product</term> of <m>\vb{x}</m> and <m>\vb{y}</m> is the real scalar <m>\dotprod{\vb{x},\vb{y}}</m> given by
+          <me>\dotprod{\vb{x},\vb{y}} = \vb{y}^{T}\vb{x}.</me>
+          The <term>magnitude</term> of <m>\vb{x}</m> is the nonnegative real number <m>\norm{\vb{x}}</m> given by
+          <me>\norm{\vb{x}} = \sqrt{\dotprod{\vb{x},\vb{x}}}.</me>
+        </p>
+      </statement>
+    </definition>
+    <p>
+      If you've taken Calculus III, then some of the following properties will be familiar with their analogues for the dot product (see <url href="https://j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html" visual="j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html">here</url>).
+    </p>
+    <theorem xml:id="theorem-properties-of-the-inner-product">
+      <title>Properties of the Inner Product</title>
+      <statement>
+        <p>
+          Let <m>\vb{x}, \vb{y}</m> and <m>\vb{z}</m> be vectors in <m>\RR^n</m> and let <m>\alpha</m> and <m>\beta</m> be real scalars.
+          Then the inner product satisfies the following properties:
+          <ol>
+            <li><m>\dotprod{\vb{x},\vb{y}} = \dotprod{\vb{y},\vb{x}}</m></li>
+            <li><m>\dotprod{\vb{x}, \vb{y}+\vb{z}} = \dotprod{\vb{x},\vb{y}} + \dotprod{\vb{x},\vb{z}}</m></li>
+            <li><m>\dotprod{\alpha\vb{x},\vb{y}} = \alpha\dotprod{\vb{x},\vb{y}}</m> and <m>\dotprod{\vb{x},\beta\vb{y}} = \beta\dotprod{\vb{x},\vb{y}}</m></li>
+            <li><m>\dotprod{\vb{x},\vb{y}} = \norm{\vb{x}}\norm{\vb{y}}\cos\theta</m> where <m>\theta</m> denotes the angle between <m>\vb{x}</m> and <m>\vb{y}</m> where <m>0\leq\theta\leq \pi</m>.</li>
+            <li><m>\dotprod{A\vb{x},\vb{y}} = \dotprod{\vb{x},A^{T}\vb{y}}</m> for any <m>n\times n</m> matrix <m>A</m>.</li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      The last property in <xref ref="theorem-properties-of-the-inner-product" text="type-global" /> is particularly important and can be taken as the definition of <m>A^{T}</m>.
+      We also have the following very important inequalities involving inner products and magnitudes.
+    </p>
+    <theorem xml:id="theorem-cauchy-schwarz-inequality">
+      <title>Cauchy-Schwarz Inequality</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m>.
+          Then
+          <me>\abs{\dotprod{\vb{x},\vb{y}}}\leq\norm{\vb{x}}\norm{\vb{y}}.</me>
+        </p>
+      </statement>
+    </theorem>
+    <theorem xml:id="theorem-triangle-inequality">
+      <idx>Triangle Inequality</idx>
+      <title>Triangle Inequality</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m>.
+          Then
+          <me>\norm{\vb{x} + \vb{y}}\leq\norm{\vb{x}} + \norm{\vb{y}}.</me>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      As the magnitude and inner product are both fundamental concepts in vector geometry, any transformation (i.e., any matrix) that preserves both of these quantities are particularly useful to work with.
+      Such matrices are called <em>orthogonal transformations</em>.
+    </p>
+    <definition xml:id="definition-orthogonal-transformation">
+      <idx>orthogonal matrix</idx>
+      <title>Orthogonal Transformation</title>
+      <statement>
+        <p>
+          Let <m>U</m> be a real <m>n\times n</m> matrix.
+          We say that <m>U</m> is <term>orthogonal</term> if
+          <me>UU^{T} = U^{T}U = I.</me>
+          The set of all orthogonal <m>n\times n</m> matrices is denoted by <m>O(n)</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      Geometrically, the action of an orthogonal matrix on vectors preserves angles between vectors as measured by the inner product.
+    </p>
+    <theorem xml:id="theorem-orthogonal-transformations-and-inner-products">
+      <title>Orthogonal Transformations and Inner Products</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m> and let <m>U</m> be an <m>n\times n</m> orthogonal matrix.
+          Then
+          <me>\dotprod{\vb{x},\vb{y}} = \dotprod{U\vb{x},U\vb{y}}.</me>
+          Furthermore, <m>\norm{\vb{x}} = \norm{U\vb{x}}</m>.
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      As orthogonal matrices are invertible, it follows that their columns form a basis.
+      Such as basis has some very useful characteristics.
+      To be precise, let <m>U = \smqty[\vb{u}_1 \amp \ldots \amp \vb{u}_{n}]</m> denote an <m>n\times n</m> orthogonal matrix.
+      Then the fact that <m>U^{T}U = I</m> implies that
+      <me>\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 \amp\text{ if }i=j \\ 0 \amp\text{ if }i\neq j\end{cases}.</me>
+      This leads to the following definition.
+    </p>
+    <definition xml:id="definition-orthonormal-basis">
+      <title>Orthonormal Basis</title>
+      <idx><h>basis</h><h>orthonormal</h></idx>
+      <statement>
+        <p>
+          Let <m>\qty{\vb{u}_{i}}_{i=1}^{n}</m> denote a collection of vectors in <m>\RR^n</m>.
+          This collection is an <term>orthonormal basis (ONB)</term> if
+          <me>\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 \amp\text{ if }i=j \\ 0 \amp\text{ if }i\neq j\end{cases}.</me>
+        </p>
+      </statement>
+    </definition>
+    <p>
+      Geometrically, an ONB in <m>\RR^n</m> is a collection of <m>n</m> orthogonal unit vectors.
+      These can be viewed as a generalization of the typical coordinate axes.
+    </p>
+  </section>
 </chapter>
