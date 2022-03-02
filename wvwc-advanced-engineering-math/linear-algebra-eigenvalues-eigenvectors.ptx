@@ -319,7 +319,7 @@
         In this case, we say that <m>A</m> is <em>defective</em>.
       </p>
       <definition xml:id="definition-defective-matrices">
-        <title>defective Matrices</title>
+        <title>Defective Matrices</title>
         <idx><h>eigenvalues and eigenvectors</h><h>defective matrix</h></idx><idx><h>eigenvalues and eigenvectors</h><h>defective matrix</h><seealso>algebraic and geometric multiplicity</seealso></idx>
         <statement>
           <p>
@@ -700,6 +700,60 @@
           rref(A) # reduces to find c_1, c_2
         </input>
       </sage>
+      <p>
+        <xref ref="example-using-an-eigenbasis-to-compute-a-matrix-product" text="type-global" /> shows that the existence of an eigenbasis can greatly simplify certain computations.
+        Unfortunately, not every matrix has a corresponding eigenbasis (see <xref ref="definition-defective-matrices" text="type-global" />).
+        However, the following theorem gives a simple condition that can be used to guarantee the existence of an eigenbasis.
+      </p>
+      <theorem xml:id="theorem-distinct-eigenvalues-and-eigenbases">
+          <title>Distinct Eigenvalues and Eigenbases</title>
+          <statement>
+            <p>
+              Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>A</m> has <m>n</m> distinct eigenvalues (equivalently, no eigenvalue is repeated).
+              Then <m>A</m> has an eigenbasis.
+            </p>
+          </statement>
+          <proof>
+            <p>
+              The proof of this statement follows from the fact that eigenvectors corresponding to distinct eigenvalues must be linearly independent, so we'll prove this first.
+              So let <m>\qty{\lambda_i}_{i=1}^n</m> denote the eigenvalues of <m>A</m> and let <m>\xx_i</m> denote an eigenvector of <m>A</m> corresponding to <m>\lambda_i</m>.
+              We'll show that <m>\qty{\xx_i}_{i=1}^n</m> is a linearly independent set.
+              As this will then be a set of <m>n</m> linearly independent vectors in <m>\RR^n</m>, this is enough to show that it's a basis as well.
+            </p>
+            <p>
+              Suppose that we have scalars <m>\qty{c_i}</m> such that <m>\sum_{i=1}^n c_i\xx_i = \vb{0}</m>.
+              We need to show that <m>c_1=\ldots=c_n=0</m>.
+              Now, since each <m>\xx_i</m> is an eigenvector of <m>A</m> with eigenvalue <m>\lambda_i</m>, it follows that
+              <me>A\qty(\sum_{i=1}^n c_i\xx_i) = \sum_{i=1}^n c_i A\xx_i = \sum_{i=1}^n c_i\lambda_i\xx_i</me>.
+              Since <m>A\vb{0} = \vb{0}</m> as well, we have
+              <me>\sum_{i=1}^n c_i\lambda_i\xx_i = \vb{0}</me>.
+              We can also multiply the original equation <m>\sum_{i=1}^{n}c_i\xx_i = \vb{0}</m> by <m>\lambda_1</m> to get
+              <me>\sum_{i=1}^{n}\lambda_1 c_i\xx_i = \vb{0}</me>.
+            </p>
+            <p>
+              Subtracting the previous two equations allows us to write
+              <me>\vb{0} = \sum_{i=1}^n c_i (\lambda_i - \lambda_1)\xx_i = \sum_{i=2}^n c_i(\lambda_i-\lambda_1)\xx_i = \sum_{i=2}^{n}d_i \xx_i</me>
+              where <m>d_i = c_i(\lambda_i-\lambda_1)</m>.
+              Now we can repeat the above process and write
+              <me>\sum_{i=2}^n d_i\lambda_i\xx_i = \vb{0} = \sum_{i=2}^n d_i\lambda_2\xx_i</me>
+              which gives (after subtracting)
+              <me>\vb{0} = \sum_{i=2}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n e_i\xx_i</me>
+              where <m>e_i = (\lambda_i-\lambda_2)d_i = (\lambda_i-\lambda_2)(\lambda_i-\lambda_1)c_i</m>.
+              Continuing this process, we are left with the equation
+              <me>\vb{0} = (\lambda_n-\lambda_{n-1})(\lambda_n-\lambda_{n-2})\cdots(\lambda_n-\lambda_1)c_n\xx_n</me>,
+              which forces <m>c_n = 0</m>.
+            </p>
+            <p>
+              Now we are left with
+              <me>\sum_{i=1}^{n-1}c_{i}\xx_i = \vb{0}</me>
+              since we can safely disregard <m>c_n\xx_n</m>.
+              But there's nothing stopping us from applying the previous trick to this new sum, which will eventually show that <m>c_{n-1} = 0</m>, and then <m>c_{n-2} = 0</m>, and so on.
+              Therefore
+              <me>c_1=\ldots = c_n = 0</me>
+              and the set <m>\qty{\xx_i}_{i=1}^n</m> must be linearly independent, which was what we needed to prove.
+            </p>
+          </proof>
+      </theorem>
     </subsection>
   </section>
 </chapter>

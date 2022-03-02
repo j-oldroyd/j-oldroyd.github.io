@@ -2,7 +2,7 @@
 <html lang="en-US">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-02-23T14:25:21-05:00       *-->
+<!--*       on 2022-03-02T14:39:30-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -14,13 +14,63 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<article class="hiddenproof"><h3 class="heading"><span class="type">Proof</span></h3>
-<p>Define <span class="process-math">\(U = \smqty[\vb{u}_{1} \amp \ldots \amp \vb{u}_{n}]\text{.}\)</span> Then <span class="process-math">\(U\)</span> is orthogonal since its columns form an ONB by assumption. Now, note that</p>
+<article class="hiddenproof"><h4 class="heading"><span class="type">Proof</span></h4>
+<p>The proof of this statement follows from the fact that eigenvectors corresponding to distinct eigenvalues must be linearly independent, so we'll prove this first. So let <span class="process-math">\(\qty{\lambda_i}_{i=1}^n\)</span> denote the eigenvalues of <span class="process-math">\(A\)</span> and let <span class="process-math">\(\xx_i\)</span> denote an eigenvector of <span class="process-math">\(A\)</span> corresponding to <span class="process-math">\(\lambda_i\text{.}\)</span> We'll show that <span class="process-math">\(\qty{\xx_i}_{i=1}^n\)</span> is a linearly independent set. As this will then be a set of <span class="process-math">\(n\)</span> linearly independent vectors in <span class="process-math">\(\RR^n\text{,}\)</span> this is enough to show that it's a basis as well.</p>
+<p>Suppose that we have scalars <span class="process-math">\(\qty{c_i}\)</span> such that <span class="process-math">\(\sum_{i=1}^n c_i\xx_i = \vb{0}\text{.}\)</span> We need to show that <span class="process-math">\(c_1=\ldots=c_n=0\text{.}\)</span> Now, since each <span class="process-math">\(\xx_i\)</span> is an eigenvector of <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(\lambda_i\text{,}\)</span> it follows that</p>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{i=1}^{n}\dotprod{\vb{x},\vb{u}_{i}}\vb{u}_{i} = U(U^{T}\vb{x})\text{.}
+A\qty(\sum_{i=1}^n c_i\xx_i) = \sum_{i=1}^n c_i A\xx_i = \sum_{i=1}^n c_i\lambda_i\xx_i\text{.}
 \end{equation*}
 </div>
-<p class="continuation">Since <span class="process-math">\(U\)</span> is orthogonal, this simplifies to <span class="process-math">\(I\vb{x} = \vb{x}\text{,}\)</span> proving the theorem.</p></article><span class="incontext"><a href="section-orthogonal-transformations.html#proof-5" class="internal">in-context</a></span>
+<p class="continuation">Since <span class="process-math">\(A\vb{0} = \vb{0}\)</span> as well, we have</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{i=1}^n c_i\lambda_i\xx_i = \vb{0}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">We can also multiply the original equation <span class="process-math">\(\sum_{i=1}^{n}c_i\xx_i = \vb{0}\)</span> by <span class="process-math">\(\lambda_1\)</span> to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{i=1}^{n}\lambda_1 c_i\xx_i = \vb{0}\text{.}
+\end{equation*}
+</div>
+<p>Subtracting the previous two equations allows us to write</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\vb{0} = \sum_{i=1}^n c_i (\lambda_i - \lambda_1)\xx_i = \sum_{i=2}^n c_i(\lambda_i-\lambda_1)\xx_i = \sum_{i=2}^{n}d_i \xx_i
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(d_i = c_i(\lambda_i-\lambda_1)\text{.}\)</span> Now we can repeat the above process and write</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{i=2}^n d_i\lambda_i\xx_i = \vb{0} = \sum_{i=2}^n d_i\lambda_2\xx_i
+\end{equation*}
+</div>
+<p class="continuation">which gives (after subtracting)</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\vb{0} = \sum_{i=2}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n e_i\xx_i
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(e_i = (\lambda_i-\lambda_2)d_i = (\lambda_i-\lambda_2)(\lambda_i-\lambda_1)c_i\text{.}\)</span> Continuing this process, we are left with the equation</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\vb{0} = (\lambda_n-\lambda_{n-1})(\lambda_n-\lambda_{n-2})\cdots(\lambda_n-\lambda_1)c_n\xx_n\text{,}
+\end{equation*}
+</div>
+<p class="continuation">which forces <span class="process-math">\(c_n = 0\text{.}\)</span></p>
+<p>Now we are left with</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{i=1}^{n-1}c_{i}\xx_i = \vb{0}
+\end{equation*}
+</div>
+<p class="continuation">since we can safely disregard <span class="process-math">\(c_n\xx_n\text{.}\)</span> But there's nothing stopping us from applying the previous trick to this new sum, which will eventually show that <span class="process-math">\(c_{n-1} = 0\text{,}\)</span> and then <span class="process-math">\(c_{n-2} = 0\text{,}\)</span> and so on. Therefore</p>
+<div class="displaymath process-math">
+\begin{equation*}
+c_1=\ldots = c_n = 0
+\end{equation*}
+</div>
+<p class="continuation">and the set <span class="process-math">\(\qty{\xx_i}_{i=1}^n\)</span> must be linearly independent, which was what we needed to prove.</p></article><span class="incontext"><a href="section-diagonalization-of-matrices.html#proof-5" class="internal">in-context</a></span>
 </body>
 </html>
