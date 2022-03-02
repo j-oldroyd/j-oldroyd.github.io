@@ -766,7 +766,7 @@
         Once we had the coordinates of <m>\bb</m> with respect to the eigenbasis, then finding <m>A\bb</m> amounted to multiplying <m>c_1</m> and <m>c_2</m> by <m>\lambda_1</m> and <m>\lambda_2</m> respectively.
         In matrix notation, this is equivalent to computing
         <me>D\mqty[c_1 \\ c_2]\text{ where } D = \mqty[\lambda_1 \amp 0 \\ 0 \amp \lambda_2]</me>.
-        Finally, we used the weights <m>\lmabda_1 c_1, \lambda_2 c_2</m> to reconstruct <m>A\bb</m> from <m>\vv_1,\vv_2</m>:
+        Finally, we used the weights <m>\lambda_1 c_1, \lambda_2 c_2</m> to reconstruct <m>A\bb</m> from <m>\vv_1,\vv_2</m>:
         <me>A\bb = \lambda_1 c_1\vv_1 + \lambda_2 c_2\vv_2</me>.
         Therefore
         <md>
@@ -845,6 +845,162 @@
           </p>
         </proof>
       </theorem>
+      <example xml:id="example-diagonalizing-a-matrix">
+        <title>Diagonalizing a Matrix</title>
+        <statement>
+          <p>
+            Find matrices <m>P</m> and <m>D</m> (if possible) that diagonalize
+            <me>A = \mqty[2 \amp -1 \amp -1 \\ -1 \amp 2 \amp -1 \\ -1 \amp -1 \amp 2]</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By <xref ref="theorem-diagonalization-and-eigenbases" text="type-global" />, <m>A</m> is diagonalizble if and only if <m>A</m> has an eigenbasis.
+            Using Octave we quickly see that the eigenvalues of <m>A</m> are <m>\lambda_1 = 0, \lambda_2 = \lambda_3 = 3</m>.
+            Now we need to <m>\smqty[A - 0I \amp \vb{0}]</m> and <m>\smqty[A - 3I \amp \vb{0}]</m>:
+            <me>\mqty[A\amp\vb{0}] \sim \mqty[1 \amp 0 \amp -1 \amp 0 \\ 0 \amp 1 \amp -1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0]\text{ and }\mqty[A-3I \amp \vb{0}] \sim \mqty[1 \amp 1 \amp 1 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 0]</me>.
+            Therefore
+            <me>\null(A) = \span{\qty{\mqty[1\\1\\1]}}\text{ and }\null(A-3I) = \span{\left\{\mqty[-1\\1\\0],\mqty[-1\\0\\1]\right\}}</me>.
+          </p>
+          <p>
+            Now we have everything we need to diagonalize <m>A</m>.
+            Define
+            <me>P = \mqty[1 \amp -1 \amp -1 \\ 1 \amp 1 \amp 0 \\ 1 \amp 0 \amp 1]\text{ and }D = \mqty[0 \amp 0 \amp 0 \\ 0 \amp 3 \amp 0 \\ 0 \amp 0 \amp 3]</me>.
+            Then <m>A = PDP^{-1}</m>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          # code cell to use for previous example
+          A = [2, -1, -1; -1, 2, -1; -1, -1, 2]
+          eig(A)
+        </input>
+      </sage>
+      <p>
+        Symmetric matrices have particularly nice diagonalizations.
+        First, their eigenvalues must be limited to real numbers.
+      </p>
+      <theorem xml:id="theorem-eigenvalues-of-symmetric-matrices">
+          <title>Eigenvalues of Symmetric Matrices</title>
+          <statement>
+            <p>
+              Let <m>A</m> be a symmetric matrix with real entries and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
+              Then <m>\lambda</m> must be a real number.
+            </p>
+          </statement>
+      </theorem>
+      <p>
+        The proof of <xref ref="theorem-eigenvalues-of-symmetric-matrices" text="type-global" /> is relatively simple but requires us to expand our terminology and notation a bit.
+        First, we redefine the inner product so that it also applies to complex vectors in <m>\CC^n</m>.
+      </p>
+      <definition xml:id="definition-complex-inner-product">
+        <title>Complex Inner Product</title>
+        <statement>
+          <p>
+            Let <m>\xx,\yy\in\CC^n</m>.
+            The <term>(complex) inner product</term> of <m>\xx</m> and <m>\yy</m> is the (complex) scalar
+            <me>\langle\xx,\yy\rangle = \yy^{*}\xx</me>
+            where <m>\yy^*</m> denotes the <term>conjugate transpose</term> of <m>\yy</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Now we expand our definition of symmetric matrices to include the complex case as well.
+      </p>
+      <definition xml:id="definition-hermitian-matrices">
+        <title>Hermitian Matrices</title>
+        <statement>
+          <p>
+            Let <m>A</m> denote a square matrix.
+            Then <m>A</m> is <term>Hermitian</term> if <m>A = A^{*}</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        <xref ref="definition-hermitian-matrices" text="type-global" /> generalizes the definition of a real symmetric matrix since <m>A^* = A^T</m> if <m>A</m> only has real entries.
+        The conjugate transpose and inner product also share many properties, including the following.
+      </p>
+      <proposition xml:id="proposition-conjugate-transpose-and-inner-product">
+        <title>Conjugate Transpose and Inner Product</title>
+        <statement>
+          <p>
+            Let <m>\xx,\yy\in\CC^n</m> and let <m>A</m> be a square matrix with complex entries.
+            Then
+            <me>\langle A\xx,\yy\rangle = \dotprod{\xx,A^*\yy}</me>.
+          </p>
+        </statement>
+      </proposition>
+      <p>
+        Now we can prove that real symmetric matrices, and more generally Hermitian matrices, always have real eigenvalues.
+      </p>
+      <theorem xml:id="theorem-eigenvalues-of-a-hermitian-matrix">
+        <title>Eigenvalues of a Hermitian Matrix</title>
+        <statement>
+          <p>
+            Let <m>A</m> denote a Hermitian matrix.
+            Then <m>A</m> has real eigenvalues.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            Let <m>\xx</m> denote an eigenvector of <m>A</m> with eigenvalue <m>\lambda</m>.
+            Then
+            <md>
+              <mrow>\lambda\dotprod{\xx,\xx} \amp = \dotprod{\lambda\xx,\xx} </mrow>
+              <mrow> \amp = \dotprod{A\xx,\xx} </mrow>
+              <mrow> \amp = \dotprod{\xx, A^*\xx} </mrow>
+              <mrow> \amp = \dotprod{\xx, A\xx} </mrow>
+              <mrow> \amp = \dotprod{\xx, \lambda \xx} </mrow>
+              <mrow> \amp = \overline{\lambda}\dotprod{\xx, \xx} </mrow>
+            </md>
+            Since <m>\dotprod{\xx,\xx} = \norm{\xx}^2\neq0</m>, it follows that <m>\lambda = \overline{\lambda}</m>.
+            Therefore <m>\lambda\in\RR</m>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        The eigenvectors of a Hermitian matrix also have nice geometric properties.
+      </p>
+      <theorem xml:id="theorem-eigenvectors-of-a-hermitian-matrix">
+        <title>Eigenvectors of a Hermitian Matrix</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a Hermitian matrix.
+            Suppose that <m>\xx</m> and <m>\yy</m> are eigenvectors for two distinct eigenvalues of <m>A</m>, say <m>\lambda_i</m> and <m>\lambda_j</m>.
+            Then <m>\xx</m> and <m>\yy</m> are orthogonal.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            We need to show that <m>\dotprod{\xx,\yy} = 0</m>.
+            Now,
+            <me>\lambda_i\dotprod{\xx,\yy} = \dotprod{A\xx,\yy} = \dotprod{\xx,A\yy} = \lambda_j\dotprod{\xx,\yy}</me>
+            or just <m>(\lambda_i-\lambda_j)\dotprod{\xx,\yy} = 0</m>.
+            Since <m>\lambda_i\neq \lambda_j</m>, it follows that <m>\dotprod{\xx,\yy} = 0</m>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        <xref ref="theorem-eigenvectors-of-a-hermitian-matrix" text="type-global" /> leads to an extremely useful fact about real symmetric matrices: they can always be <em>orthogonally diagonalized</em>.
+        This means that we can choose an eigenbasis that is also an orthonormal basis.
+        As an example, consider the eigenbasis found in <xref ref="example-diagonalizing-a-matrix" text="type-global" />, replicated here as columns of the matrix <m>P</m>:
+        <me>P = \mqty[1 \amp -1 \amp -1 \\ 1 \amp 1 \amp 0 \\ 1 \amp 0 \amp 1]</me>.
+        Note that the first column is orthogonal to the other two which is guaranteed by <xref ref="theorem-eigenvectors-of-a-hermitian-matrix" text="type-global" /> since these vectors correspond to different eigenvalues.
+        Although the last two columns are not orthogonal, they can be <em>orthogonalized</em>.
+        One way of doing so is to replace them with the vectors
+        <me>\mqty[-1\\1\\0]\text{ and }\mqty[-\frac{1}{2} \\ -\frac{1}{2} \\ 1] = \mqty[-1\\0\\1]-\frac{1}{2}\mqty[-1\\1\\0]</me>.
+        Both vectors are still eigenvectors with eigenvalue <m>0</m> and the two of them, together with <m>\smqty[1\\1\\1]</m>, still form an eigenbasis of <m>\RR^3</m>.
+        However, this new basis is orthogonal.
+      </p>
+      <p>
+        If we go one step further and normalize the vectors in this eigenbasis we then get the orthonormal eigenbasis
+        <me>\qty{\mqty[\frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}}], \mqty[-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0], \mqty[-\frac{1}{\sqrt{6}} \\ -\frac{1}{\sqrt{6}} \\ \sqrt{\frac{2}{3}}]}</me>.
+        This provides the orthogonal diagonalization
+        <me>U = \mqty[\frac{1}{\sqrt{3}} \amp -\frac{1}{\sqrt{2}} \amp -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{2}} \amp -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp 0 \amp \sqrt{\frac{2}{3}}]\text{ and }D = \mqty[0 \amp 0 \amp 0 \\ 0 \amp 3 \amp 0 \\ 0 \amp 0 \amp 3]</me>
+        which gives
+        <me>A = UDU^{-1} = UDU^T</me>.
+      </p>
     </subsection>
   </section>
 </chapter>
