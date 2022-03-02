@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-02T10:01:00-05:00       *-->
+<!--*       on 2022-03-02T10:39:12-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -50,7 +50,23 @@
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    // Make *any* pre with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script>$(function () {
+    // Make *any* pre with class 'sagecell-octave' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'pre.sagecell-octave',
+                           linked: true,
+                           languages: ['octave'],
+                           evalButtonText: 'Evaluate (Octave)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -83,6 +99,7 @@
 \newcommand{\kk}{\mathbf{k}}
 \newcommand{\uu}{\mathbf{u}}
 \newcommand{\vv}{\mathbf{v}}
+\newcommand{\bb}{\mathbf{b}}
 \newcommand{\ee}{\mathbf{e}}
 \newcommand{\col}[1]{\operatorname{col}{#1}}
 \newcommand{\rank}[1]{\operatorname{rank}{#1}}
@@ -155,16 +172,69 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-diagonalization-of-matrices"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.4</span> <span class="title">Diagonalization of Matrices</span>
 </h2>
-<section class="introduction" id="introduction-1"><p id="p-185">In this section we consider bases of <span class="process-math">\(\mathbb{R}^n\)</span> that are associated with eigenvectors a square matrix <span class="process-math">\(A\)</span> known as eigenbases (see <a href="" class="xref" data-knowl="./knowl/definition-eigenbases.html" title="Definition 2.1.14: Eigenbases">Definition 2.1.14</a>). The benefit to looking at such a basis instead of using the standard basis of <span class="process-math">\(\RR^n\)</span> is that the eigenbasis will make products involving <span class="process-math">\(A\)</span> much simpler through a process known as <em class="emphasis">diagonalization</em>.</p></section><section class="subsection" id="subsection-eigenbases"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-1"><p id="p-186">In this section we consider bases of <span class="process-math">\(\mathbb{R}^n\)</span> that are associated with eigenvectors a square matrix <span class="process-math">\(A\)</span> known as eigenbases (see <a href="" class="xref" data-knowl="./knowl/definition-eigenbases.html" title="Definition 2.1.14: Eigenbases">Definition 2.1.14</a>). The benefit to looking at such a basis instead of using the standard basis of <span class="process-math">\(\RR^n\)</span> is that the eigenbasis will make products involving <span class="process-math">\(A\)</span> much simpler through a process known as <em class="emphasis">diagonalization</em>.</p></section><section class="subsection" id="subsection-eigenbases"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.4.1</span> <span class="title">Eigenbases</span>
 </h3>
-<p id="p-186">Recall that a basis of <span class="process-math">\(\RR^n\)</span> is a linearly independent collection of <span class="process-math">\(n\)</span> vectors in <span class="process-math">\(\RR^n\text{.}\)</span> The defining characteristic of a basis is this: if <span class="process-math">\(\qty{\vb{b}_1,\ldots,\vb{b}_n}\)</span> is a basis of <span class="process-math">\(\RR^n\)</span> and if <span class="process-math">\(\vb{x}\in\RR^n\text{,}\)</span> then there exists a unique set of scalars <span class="process-math">\(c_1,\ldots,c_n\)</span> such that</p>
+<p id="p-187">Recall that a basis of <span class="process-math">\(\RR^n\)</span> is a linearly independent collection of <span class="process-math">\(n\)</span> vectors in <span class="process-math">\(\RR^n\)</span> (see also <a href="" class="xref" data-knowl="./knowl/definition-basis-of--rr-n-.html" title="Definition 1.4.1: Basis of \RR^n">Definition 1.4.1</a>). The defining characteristic of a basis is this: if <span class="process-math">\(\qty{\vb{b}_1,\ldots,\vb{b}_n}\)</span> is a basis of <span class="process-math">\(\RR^n\)</span> and if <span class="process-math">\(\vb{x}\in\RR^n\text{,}\)</span> then there exists a unique set of scalars <span class="process-math">\(c_1,\ldots,c_n\)</span> such that</p>
 <div class="displaymath process-math">
 \begin{equation*}
 \xx = \sum_{i=1}^{n}c_i\vb{b}_i\text{.}
 \end{equation*}
 </div>
-<p class="continuation">This makes it possible to use the basis as a coordinate system in <span class="process-math">\(\RR^n\text{.}\)</span></p></section></section></div></main>
+<p class="continuation">This makes it possible to use the basis as a coordinate system in <span class="process-math">\(\RR^n\text{.}\)</span> Therefore we may view an eigenbasis (<a href="" class="xref" data-knowl="./knowl/definition-eigenbases.html" title="Definition 2.1.14: Eigenbases">Definition 2.1.14</a>) of a matrix <span class="process-math">\(A\)</span> as a particular coordinate system that is well-suited to calculations involving <span class="process-math">\(A\text{,}\)</span> an idea which we make precise below.</p>
+<article class="example example-like" id="example-using-an-eigenbasis-to-compute-a-matrix-product"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Using an Eigenbasis to Compute a Matrix Product.</span>
+</h4>
+<p id="p-188">Let</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[-2 \amp 3 \\ -4 \amp 5]\text{ and }\vb{b} = \mqty[-2 \\ 10]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Given that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\vv_1 = \mqty[1\\1]\text{ and }\vv_2 = \mqty[3\\4]
+\end{equation*}
+</div>
+<p class="continuation">are eigenvectors of <span class="process-math">\(A\)</span> with corresponding eigenvalues <span class="process-math">\(\lambda_1 = 1\)</span> and <span class="process-math">\(\lambda_2 = 2\text{,}\)</span> find <span class="process-math">\(A^{100}\bb\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-21" id="solution-21"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-21"><div class="solution solution-like">
+<p id="p-189">First, note that <span class="process-math">\(\qty{\vv_1,\vv_2}\)</span> is a basis of <span class="process-math">\(\RR^2\text{.}\)</span> Therefore it's an eigenbasis since each vector is an eigenvector of <span class="process-math">\(A\text{.}\)</span> <aside class="aside aside-like" id="aside-3"><h5 class="heading"><span class="title">Bases in <span class="process-math">\(\RR^2\)</span>.</span></h5>
+<p id="p-190">One way to see that <span class="process-math">\(\qty{\vv_1,\vv_2}\)</span> must be a basis of <span class="process-math">\(\RR^2\)</span> is to observe that <span class="process-math">\(\vv_2\)</span> is not a scalar multiple of <span class="process-math">\(\vv_1\)</span> and so the two vectors are linearly independent. Then <span class="process-math">\(\qty{\vv_1,\vv_2}\)</span> is a set of two linearly independent vectors in the two-dimensional vector space <span class="process-math">\(\RR^2\text{,}\)</span> and so this set must be a basis of <span class="process-math">\(\RR^2\text{.}\)</span></p></aside></p>
+<p id="p-191">Since <span class="process-math">\(\qty{\vv_1,\vv_2}\)</span> is a basis of <span class="process-math">\(\RR^2\)</span> then there exist scalars <span class="process-math">\(c_1,c_2\)</span> such that <span class="process-math">\(\bb = c_1\vv_1 + c_2\vv_2\text{.}\)</span> We can find these scalars by row reduction of the augmented matrix <span class="process-math">\(\mqty[\vv_1 \amp \vv_2 \amp \bb]\text{.}\)</span> This reduces to</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\mqty[1 \amp 0 \amp -38 \\ 0 \amp 1 \amp 12]\text{,}
+\end{equation*}
+</div>
+<p class="continuation">and so <span class="process-math">\(c_1 = -38, c_2 = 12\)</span> and</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\bb = -38\vv_1 + 12\vv_2\text{.}
+\end{equation*}
+</div>
+<p id="p-192">Now that we've written <span class="process-math">\(\bb\)</span> in terms of the eigenbasis <span class="process-math">\(\qty{\vv_1,\vv_2}\text{,}\)</span> the computation of <span class="process-math">\(A^{100}\bb\)</span> becomes almost trivial:</p>
+<div class="displaymath process-math" id="md-11">
+\begin{align*}
+A^{100}\bb \amp = A^{100}(-38\vv_1 + 12\vv_2) \\
+\amp = -38 A^{100}\vv_1 + 12 A^{100}\vv_2 \\
+\amp = -38 \vv_1 + 12\cdot 2^{100}\vv_2 \\
+\amp = \mqty[-38 + 36(2^{100}) \\ -38 + 48(2^{100})] \text{.}
+\end{align*}
+</div>
+<p class="continuation"><aside class="aside aside-like" id="aside-4"><p id="p-193">The second to last line of this computation makes use of the fact that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A^n\xx = \lambda^n\xx
+\end{equation*}
+</div>
+<p class="continuation">for any eigenvector <span class="process-math">\(\xx\)</span> of <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(\lambda\text{.}\)</span></p></aside></p>
+</div></div>
+</div></article><pre class="ptx-sagecell sagecell-octave" id="sage-14"><script type="text/x-sage">format short
+A = [1, 3, -2; 1, 4, 10]
+rref(A) # reduces to find c_1, c_2
+</script></pre></section></section></div></main>
 </div>
 </body>
 </html>
