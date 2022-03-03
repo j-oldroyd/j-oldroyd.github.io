@@ -877,18 +877,21 @@
           eig(A)
         </input>
       </sage>
+    </subsection>
+    <subsection xml:id="subsection-diagonalizations-of-symmetric-and-hermitian-matrices">
+      <title>Diagonalizations of Symmetric and Hermitian Matrices</title>
       <p>
         Symmetric matrices have particularly nice diagonalizations.
         First, their eigenvalues must be limited to real numbers.
       </p>
       <theorem xml:id="theorem-eigenvalues-of-symmetric-matrices">
-          <title>Eigenvalues of Symmetric Matrices</title>
-          <statement>
-            <p>
-              Let <m>A</m> be a symmetric matrix with real entries and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
-              Then <m>\lambda</m> must be a real number.
-            </p>
-          </statement>
+        <title>Eigenvalues of Symmetric Matrices</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a symmetric matrix with real entries and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
+            Then <m>\lambda</m> must be a real number.
+          </p>
+        </statement>
       </theorem>
       <p>
         The proof of <xref ref="theorem-eigenvalues-of-symmetric-matrices" text="type-global" /> is relatively simple but requires us to expand our terminology and notation a bit.
@@ -987,6 +990,8 @@
         As an example, consider the eigenbasis found in <xref ref="example-diagonalizing-a-matrix" text="type-global" />, replicated here as columns of the matrix <m>P</m>:
         <me>P = \mqty[1 \amp -1 \amp -1 \\ 1 \amp 1 \amp 0 \\ 1 \amp 0 \amp 1]</me>.
         Note that the first column is orthogonal to the other two which is guaranteed by <xref ref="theorem-eigenvectors-of-a-hermitian-matrix" text="type-global" /> since these vectors correspond to different eigenvalues.
+      </p>
+      <p>
         Although the last two columns are not orthogonal, they can be <em>orthogonalized</em>.
         One way of doing so is to replace them with the vectors
         <me>\mqty[-1\\1\\0]\text{ and }\mqty[-\frac{1}{2} \\ -\frac{1}{2} \\ 1] = \mqty[-1\\0\\1]-\frac{1}{2}\mqty[-1\\1\\0]</me>.
@@ -1000,7 +1005,82 @@
         <me>U = \mqty[\frac{1}{\sqrt{3}} \amp -\frac{1}{\sqrt{2}} \amp -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp \frac{1}{\sqrt{2}} \amp -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} \amp 0 \amp \sqrt{\frac{2}{3}}]\text{ and }D = \mqty[0 \amp 0 \amp 0 \\ 0 \amp 3 \amp 0 \\ 0 \amp 0 \amp 3]</me>
         which gives
         <me>A = UDU^{-1} = UDU^T</me>.
+        Such a diagonalization is always possible for real symmetric and Hermitian matrices, a result known as the <em>Spectral Theorem</em>.
       </p>
+      <theorem xml:id="theorem-spectral-theorem">
+        <title>Spectral Theorem</title>
+        <idx>Spectral Theorem</idx>
+        <statement>
+          <p>
+            Let <m>A</m> be a (real) symmetric matrix.
+            Then there exists an orthogonal matrix <m>U</m> and a diagonal matrix <m>D</m> such that
+            <me>A = UDU^T</me>.
+            Equivalently, if <m>\qty{\uu_i}_{i=1}^n</m> is an orthonormal eigenbasis of <m>A</m> with corresponding eigenvalues <m>\qty{\lambda_i}_{i=1}^n</m>, then
+            <me>A = \sum_{i=1}^n \lambda_i \uu_i\uu_i^T</me>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-a-signal-processing-application">
+        <title>A Signal Processing Application</title>
+        <statement>
+          <p>
+            In the mathematics of signal processing, signals are often represented as particular vectors in <m>\RR^n</m>.
+            The problem of signal transmission then reduces to sending a list of numbers <m>c_1,\ldots, c_m</m> such that the receiver can use these to reconstruct a signal <m>\xx</m>.
+            Such a scheme can be implemented by choosing an appropriate <m>n\times m</m> matrix <m>F = \smqty[\vb{f}_1 \amp \ldots \amp \vb{f}_m]</m> and then computing and transmitting the coordinates of
+            <me>F^T\xx = \mqty[\langle \xx,\vb{f}_i\rangle]_{1\leq i\leq m}</me>.
+            The important properties of the columns of <m>F</m> can then be encoded in the <em>Gram matrix</em> <m>G = F^TF = \mqty[\dotprod{\vb{f}_i,\vb{f}_j}]</m>.
+            Find a <m>3\times 4</m> matrix <m>F</m> for which that Gram matrix is
+            <me>G = \mqty[1 \amp -\frac{1}{3} \amp -\frac{1}{3} \amp -\frac{1}{3} \\ -\frac{1}{3} \amp 1 \amp -\frac{1}{3} \amp -\frac{1}{3} \\ -\frac{1}{3} \amp -\frac{1}{3} \amp 1 \amp -\frac{1}{3} \\ -\frac{1}{3} \amp -\frac{1}{3} \amp -\frac{1}{3} \amp 1]</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This problem can be solved by diagonalizing <m>G</m>: if <m>G = UDU^T</m> then we can define <m>F</m> by using the rows of <m>U\sqrt{D}</m>.
+            <aside>
+              <p>
+                If <m>D</m> is diagonal with nonnegative entries, then we can define <m>\sqrt{D}</m> to be the matrix obtained by taking the square root of each entry of <m>D</m>.
+                It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues.
+                If we diagonalize <m>G</m> and find it has negative eigenvalues, then it cannot be a Gram matrix.
+              </p>
+            </aside>
+            So we'll diagonalize <m>G</m> with the help of the Octave cell below.
+            Doing so, we see that the eigenvalues of <m>G</m> are in fact nonnegative and so <m>U\sqrt{D}</m> will only contain real values.
+            Furthermore, <m>U</m> only has <m>3</m> nonzero columns since <m>G</m> only has three nonzero eigenvalues.
+            By removing the zero column from <m>U\sqrt{D}</m>, we obtain a <m>4\times3</m> matrix which we define to be <m>F^T</m>.
+            Then <m>F^TF = G</m>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          # diagonalizing a Gram matrix
+          format short
+          G = (4/3)*eye(4) - (1/3)*ones(4) # tricky way to define G
+        </input>
+      </sage>
+      <p>
+        Symmetric matrices are also useful in analyzing <em>quadratic forms</em>, which are expressions of the form
+        <me>\sum_{i,j}c_{ij} x_ix_j</me>
+        where the <m>x_i</m> are variables and the <m>c_{ij}</m> are the coefficients.
+        Such an expression can be rewritten as <m>\xx^T A\xx</m> where <m>A</m> is a symmetric matrix determined from the coefficients.
+      </p>
+      <example xml:id="example-analyzing-a-quadratic-form">
+        <title>Analyzing a Quadratic Form</title>
+        <statement>
+          <p>
+            Describe the curve given by
+            <me>9x^2 + 6xy + y^2</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This is a quadratic form with variables <m>x_1 = x,x_2 = y</m> and coefficients
+            <me>c_{11} = 9, c_{12} = c_{21} = \frac{6}{2}=3\text{ and }c_{22} = 1</me>.
+            Therefore we can write <m>9x^2 + 6xy + y^2 = \xx^T A\xx</m> where
+            <me>\xx = \mqty[x\\y]\text{ and }A = \mqty[9 \amp 3 \\ 3 \amp 1]</me>.
+          </p>
+        </solution>
+      </example>
     </subsection>
   </section>
 </chapter>
