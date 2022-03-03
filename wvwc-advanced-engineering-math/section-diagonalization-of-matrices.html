@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-03T11:26:10-05:00       *-->
+<!--*       on 2022-03-03T15:09:27-05:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -169,7 +169,8 @@ true);
 <li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
-<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-diagonalization-of-matrices"><h2 class="heading hide-type">
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="section-diagonalization-of-matrices"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.4</span> <span class="title">Diagonalization of Matrices</span>
 </h2>
 <section class="introduction" id="introduction-1"><p id="p-186">In this section we consider bases of <span class="process-math">\(\mathbb{R}^n\)</span> that are associated with eigenvectors a square matrix <span class="process-math">\(A\)</span> known as eigenbases (see <a href="" class="xref" data-knowl="./knowl/definition-eigenbases.html" title="Definition 2.1.14: Eigenbases">Definition 2.1.14</a>). The benefit to looking at such a basis instead of using the standard basis of <span class="process-math">\(\RR^n\)</span> is that the eigenbasis will make products involving <span class="process-math">\(A\)</span> much simpler through a process known as <em class="emphasis">diagonalization</em>.</p></section><section class="subsection" id="subsection-eigenbases"><h3 class="heading hide-type">
@@ -532,10 +533,161 @@ G = \mqty[1 \amp -\frac{1}{3} \amp -\frac{1}{3} \amp -\frac{1}{3} \\ -\frac{1}{3
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-23" id="solution-23"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-23"><div class="solution solution-like"><p id="p-231">This problem can be solved by diagonalizing <span class="process-math">\(G\text{:}\)</span> if <span class="process-math">\(G = UDU^T\)</span> then we can define <span class="process-math">\(F\)</span> by using the columns of <span class="process-math">\(U\sqrt{D}\text{.}\)</span> <aside class="aside aside-like" id="aside-6"><p id="p-232">If <span class="process-math">\(D\)</span> is diagonal with nonnegative entries, then we can define <span class="process-math">\(\sqrt{D}\)</span> to be the matrix obtained by taking the square root of each entry of <span class="process-math">\(D\text{.}\)</span> It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues. If we diagonalize <span class="process-math">\(G\)</span> and find it has negative eigenvalues, then it cannot be a Gram matrix.</p></aside> So we'll diagonalize <span class="process-math">\(G\)</span> with the help of the Octave cell below. Doing so, we see that the eigenvalues of <span class="process-math">\(G\)</span> are in fact nonnegative.</p></div></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-23" id="solution-23"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-23"><div class="solution solution-like"><p id="p-231">This problem can be solved by diagonalizing <span class="process-math">\(G\text{:}\)</span> if <span class="process-math">\(G = UDU^T\)</span> then we can define <span class="process-math">\(F\)</span> by using the rows of <span class="process-math">\(U\sqrt{D}\text{.}\)</span> <aside class="aside aside-like" id="aside-6"><p id="p-232">If <span class="process-math">\(D\)</span> is diagonal with nonnegative entries, then we can define <span class="process-math">\(\sqrt{D}\)</span> to be the matrix obtained by taking the square root of each entry of <span class="process-math">\(D\text{.}\)</span> It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues. If we diagonalize <span class="process-math">\(G\)</span> and find it has negative eigenvalues, then it cannot be a Gram matrix.</p></aside> So we'll diagonalize <span class="process-math">\(G\)</span> with the help of the Octave cell below. Doing so, we see that the eigenvalues of <span class="process-math">\(G\)</span> are in fact nonnegative and so <span class="process-math">\(U\sqrt{D}\)</span> will only contain real values. Furthermore, <span class="process-math">\(U\)</span> only has <span class="process-math">\(3\)</span> nonzero columns since <span class="process-math">\(G\)</span> only has three nonzero eigenvalues. By removing the zero column from <span class="process-math">\(U\sqrt{D}\text{,}\)</span> we obtain a <span class="process-math">\(4\times3\)</span> matrix which we define to be <span class="process-math">\(F^T\text{.}\)</span> Then <span class="process-math">\(F^TF = G\text{.}\)</span></p></div></div>
 </div></article><pre class="ptx-sagecell sagecell-octave" id="sage-16"><script type="text/x-sage"># diagonalizing a Gram matrix
+format short
 G = (4/3)*eye(4) - (1/3)*ones(4) # tricky way to define G
-</script></pre></section></section></div></main>
+</script></pre>
+<p id="p-233">Symmetric matrices are also useful in analyzing <em class="emphasis">quadratic forms</em>, which are expressions of the form</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{i,j}c_{ij} x_ix_j
+\end{equation*}
+</div>
+<p class="continuation">where the <span class="process-math">\(x_i\)</span> are variables and the <span class="process-math">\(c_{ij}\)</span> are the coefficients. Such an expression can be rewritten as <span class="process-math">\(\xx^T A\xx\)</span> where <span class="process-math">\(A\)</span> is a symmetric matrix determined from the coefficients.</p>
+<article class="example example-like" id="example-analyzing-a-quadratic-form"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">Analyzing a Quadratic Form.</span>
+</h4>
+<p id="p-234">Describe the curve given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+9x^2 + 6xy + y^2 = 10\text{.}
+\end{equation*}
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-24" id="solution-24"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-24"><div class="solution solution-like">
+<p id="p-235">The left hand side is a quadratic form with variables <span class="process-math">\(x_1 = x,x_2 = y\)</span> and coefficients</p>
+<div class="displaymath process-math">
+\begin{equation*}
+c_{11} = 9, c_{12} = c_{21} = \frac{6}{2}=3\text{ and }c_{22} = 1\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Therefore we can write <span class="process-math">\(9x^2 + 6xy + y^2 = \xx^T A\xx\)</span> where</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\xx = \mqty[x\\y]\text{ and }A = \mqty[9 \amp 3 \\ 3 \amp 1]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">To help us describe the curve we will “disentangle” the variables <span class="process-math">\(x\)</span> and <span class="process-math">\(y\)</span> by diagonalizing <span class="process-math">\(A\text{.}\)</span></p>
+<p id="p-236">Since <span class="process-math">\(A\)</span> is symmetric, we know that <span class="process-math">\(A\)</span> can be orthogonally diagonalized. One such diagonalization is given by <span class="process-math">\(A = UDU^T\)</span> where</p>
+<div class="displaymath process-math">
+\begin{equation*}
+U = \mqty[\frac{1}{\sqrt{10}} \amp \frac{3}{\sqrt{10}} \\ -\frac{3}{\sqrt{10}} \amp \frac{1}{\sqrt{10}}]\text{ and } D = \mqty[0 \amp 0 \\ 0 \amp 10]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">The quadratic form <span class="process-math">\(\xx^T A\xx\)</span> then becomes</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\xx^T UDU^T\xx = (U^T\xx)^T D (U^T \xx)\text{.}
+\end{equation*}
+</div>
+<p id="p-237">Now we define <span class="process-math">\(\yy = U^T\xx\)</span> as a change-of-variables. In particular,</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\yy = \mqty[X\\Y] = \mqty[\frac{1}{\sqrt{10}}x - \frac{3}{\sqrt{10}}y \\ \frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Our quadratic form is now</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\yy^T D\yy = 0X^2 + 10Y^2 = 10Y^2
+\end{equation*}
+</div>
+<p class="continuation">and our original equation becomes <span class="process-math">\(10Y^2 = 10\)</span> or just <span class="process-math">\(Y = \pm1\text{.}\)</span> Therefore the original equation describes the two different lines</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = -1\text{ and }\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = 1\text{.}
+\end{equation*}
+</div>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-analytic-functions-of-matrices"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.4.4</span> <span class="title">Analytic Functions of Matrices</span>
+</h3>
+<p id="p-238">A function <span class="process-math">\(f(x)\)</span> is <em class="emphasis">analytic</em> at <span class="process-math">\(x = a\)</span> if it has a power series representation on some interval centered around <span class="process-math">\(a\text{:}\)</span></p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(x) = \sum_{k=0}^\infty c_k(x-a)^k = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\text{ for }x\approx a\text{.}
+\end{equation*}
+</div>
+<p class="continuation">If <span class="process-math">\(A\)</span> denotes a square matrix, and if <span class="process-math">\(f(x)\)</span> is analytic at <span class="process-math">\(a=0\text{,}\)</span> then we can try to make sense of the expression <span class="process-math">\(f(A)\)</span> by using the power series for <span class="process-math">\(f(x)\text{:}\)</span></p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(A) = \sum_{k=0}^{\infty}c_k A^k = c_0I + c_1A + c_2A^2 + \cdots\text{,}
+\end{equation*}
+</div>
+<p class="continuation">assuming this sum actually exists.</p>
+<article class="example example-like" id="example-exponential-of-a-matrix"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.15</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential of a Matrix.</span>
+</h4>
+<p id="p-239">Let</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[0 \amp 2 \amp 3 \\ 0 \amp 0 \amp 2 \\ 0 \amp 0 \amp 0]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Find <span class="process-math">\(e^A\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-25" id="solution-25"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-25"><div class="solution solution-like">
+<p id="p-240">By definition,</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots\text{,}
+\end{equation*}
+</div>
+<p class="continuation">so we can find <span class="process-math">\(e^A\)</span> by looking at the powers of <span class="process-math">\(A\text{.}\)</span> In this case,</p>
+<div class="displaymath process-math">
+\begin{equation*}
+A^2 = \mqty[0 \amp 0 \amp 4 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0]\text{ and }A^3 = A^4 = \ldots = \mqty[0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Therefore</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^A = I + A + \frac{1}{2}A^2 = \mqty[1 \amp 2 \amp 5 \\ 0 \amp 1 \amp 2 \\ 0 \amp 0 \amp 1]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">This can be verified using the command <code class="code-inline tex2jax_ignore">expm</code> in Octave as below. <aside class="aside aside-like" id="aside-7"><p id="p-241">You want to be careful to use <code class="code-inline tex2jax_ignore">expm(A)</code> to compute <span class="process-math">\(e^A\)</span> in Octave, as this actually finds the matrix exponential. If you instead use <code class="code-inline tex2jax_ignore">exp(A)</code>, this just computes the matrix obtained by raising <span class="process-math">\(e\)</span> to each entry of <span class="process-math">\(A\text{,}\)</span> which in general is <em class="emphasis">not</em> equal to <span class="process-math">\(e^A\text{.}\)</span></p></aside></p>
+</div></div>
+</div></article><pre class="ptx-sagecell sagecell-octave" id="sage-17"><script type="text/x-sage">format short
+A = [0, 2, 3; 0, 0, 2; 0, 0, 0]
+expm(A) # don't use exp(A)! that just exponentiates each entry of A
+</script></pre>
+<article class="example example-like" id="example-function-of-a-diagonal-matrix"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.16</span><span class="period">.</span><span class="space"> </span><span class="title">Function of a Diagonal Matrix.</span>
+</h4>
+<p id="p-242">Let <span class="process-math">\(f(x)\)</span> be a function analytic at <span class="process-math">\(0\text{.}\)</span> Let <span class="process-math">\(D\)</span> be a diagonal matrix whose diagonal entries are within the interval of convergence of the power series for <span class="process-math">\(f(x)\)</span> centered at <span class="process-math">\(0\text{.}\)</span> Find <span class="process-math">\(f(D)\text{.}\)</span></p></article><p id="p-243">The last example shows that if <span class="process-math">\(f(x)\)</span> is analytic at <span class="process-math">\(0\)</span> then it is relatively straightforward to find <span class="process-math">\(f(D)\text{,}\)</span> assuming that the diagonal entries of <span class="process-math">\(D\)</span> are within the interval of convergence for the series representation of <span class="process-math">\(f(x)\)</span> at <span class="process-math">\(0\text{.}\)</span> Therefore we can find functions of diagonalizable matrices as well.</p>
+<article class="theorem theorem-like" id="theorem-analytic-functions-of-diagonalizable-matrices"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.17</span><span class="period">.</span><span class="space"> </span><span class="title">Analytic Functions of Diagonalizable Matrices.</span>
+</h4>
+<p id="p-244">Let <span class="process-math">\(f(x)\)</span> be a function that is analytic at <span class="process-math">\(0\)</span> and whose series representation at <span class="process-math">\(0\)</span> has interval of convergence <span class="process-math">\(I\text{.}\)</span> Let <span class="process-math">\(A\)</span> be a diagonalizable matrix diagonalized by <span class="process-math">\(P\)</span> and <span class="process-math">\(D\)</span> with eigenvalues contained in <span class="process-math">\(I\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(A) = Pf(D)P^{-1}\text{.}
+\end{equation*}
+</div></article><article class="hiddenproof" id="proof-9"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-9"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-9"><article class="hiddenproof"><p id="p-245">Let <span class="process-math">\(f(x) = \sum_{k=0}^{\infty}c_k x^k\)</span> and recall that <span class="process-math">\(A^k = PD^kP^{-1}\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(A) = \sum_{k=0}^{\infty}c_kA^k = P\qty(\sum_{k=0}^{\infty}c_k D^k)P^{-1} = Pf(D)P^{-1}\text{.}
+\end{equation*}
+</div></article></div>
+<p id="p-246"><a href="" class="xref" data-knowl="./knowl/theorem-analytic-functions-of-diagonalizable-matrices.html" title="Theorem 2.4.17: Analytic Functions of Diagonalizable Matrices">Theorem 2.4.17</a> allows for straightforward computations of matrix exponentials of diagonalizable matrices. This is useful in differential equations when solving linear systems of ODEs (see <a class="external" href="https://j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html" target="_blank">here</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-3" id="fn-3"><sup> 1 </sup></a>).</p>
+<article class="theorem theorem-like" id="theorem-exponential-solutions-of-linear-systems-of-odes"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.18</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential Solutions of Linear Systems of ODEs.</span>
+</h4>
+<p id="p-247">Let <span class="process-math">\(A\)</span> be a (constant) square matrix and consider the first-order system <span class="process-math">\(\xx^\prime = A\xx\)</span> with initial condition <span class="process-math">\(\xx(0) = \xx_0\text{.}\)</span> Then the solution of this initial value problem is</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\xx(t) = e^{At}\xx_0\text{.}
+\end{equation*}
+</div></article><article class="hiddenproof" id="proof-10"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-10"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-10"><article class="hiddenproof"><p id="p-248">The proof follows quickly from the fact that <span class="process-math">\(\dv{}{t}(e^{At}) = Ae^{At}\text{.}\)</span> Using this, we differentiate <span class="process-math">\(\xx(t) = e^{At}\xx_0\)</span> to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{\xx}{t} = Ae^{At}\xx_0 = A\xx\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Furthermore, <span class="process-math">\(\xx(0) = e^{\vb{0}}\xx_0 = \xx_0\text{.}\)</span> Therefore <span class="process-math">\(\xx(t) = e^{At}\xx_0\)</span> is a solution of the initial value problem.</p></article></div>
+<p id="p-249">Theorems <a href="" class="xref" data-knowl="./knowl/theorem-analytic-functions-of-diagonalizable-matrices.html" title="Theorem 2.4.17: Analytic Functions of Diagonalizable Matrices">2.4.17</a> and <a href="" class="xref" data-knowl="./knowl/theorem-exponential-solutions-of-linear-systems-of-odes.html" title="Theorem 2.4.18: Exponential Solutions of Linear Systems of ODEs">2.4.18</a> allow us to find solutions of linear systems that involve diagonalizable matrices in terms of the matrix exponential.</p></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-3"><div class="fn"><code class="code-inline tex2jax_ignore">j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html</code></div></div>
+</div></main>
 </div>
 </body>
 </html>

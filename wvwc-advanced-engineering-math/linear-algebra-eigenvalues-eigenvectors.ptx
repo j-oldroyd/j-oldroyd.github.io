@@ -1069,18 +1069,139 @@
         <statement>
           <p>
             Describe the curve given by
-            <me>9x^2 + 6xy + y^2</me>.
+            <me>9x^2 + 6xy + y^2 = 10</me>.
           </p>
         </statement>
         <solution>
           <p>
-            This is a quadratic form with variables <m>x_1 = x,x_2 = y</m> and coefficients
+            The left hand side is a quadratic form with variables <m>x_1 = x,x_2 = y</m> and coefficients
             <me>c_{11} = 9, c_{12} = c_{21} = \frac{6}{2}=3\text{ and }c_{22} = 1</me>.
             Therefore we can write <m>9x^2 + 6xy + y^2 = \xx^T A\xx</m> where
             <me>\xx = \mqty[x\\y]\text{ and }A = \mqty[9 \amp 3 \\ 3 \amp 1]</me>.
+            To help us describe the curve we will <q>disentangle</q> the variables <m>x</m> and <m>y</m> by diagonalizing <m>A</m>.
+          </p>
+          <p>
+            Since <m>A</m> is symmetric, we know that <m>A</m> can be orthogonally diagonalized.
+            One such diagonalization is given by <m>A = UDU^T</m> where
+            <me>U = \mqty[\frac{1}{\sqrt{10}} \amp \frac{3}{\sqrt{10}} \\ -\frac{3}{\sqrt{10}} \amp \frac{1}{\sqrt{10}}]\text{ and } D = \mqty[0 \amp 0 \\ 0 \amp 10]</me>.
+            The quadratic form <m>\xx^T A\xx</m> then becomes
+            <me>\xx^T UDU^T\xx = (U^T\xx)^T D (U^T \xx)</me>.
+          </p>
+          <p>
+            Now we define <m>\yy = U^T\xx</m> as a change-of-variables.
+            In particular,
+            <me>\yy = \mqty[X\\Y] = \mqty[\frac{1}{\sqrt{10}}x - \frac{3}{\sqrt{10}}y \\ \frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y]</me>.
+            Our quadratic form is now
+            <me>\yy^T D\yy = 0X^2 + 10Y^2 = 10Y^2</me>
+            and our original equation becomes <m>10Y^2 = 10</m> or just <m>Y = \pm1</m>.
+            Therefore the original equation describes the two different lines
+            <me>\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = -1\text{ and }\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = 1</me>.
           </p>
         </solution>
       </example>
+    </subsection>
+    <subsection xml:id="subsection-analytic-functions-of-matrices">
+      <title>Analytic Functions of Matrices</title>
+      <p>
+        A function <m>f(x)</m> is <em>analytic</em> at <m>x = a</m> if it has a power series representation on some interval centered around <m>a</m>:
+        <me>f(x) = \sum_{k=0}^\infty c_k(x-a)^k = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\text{ for }x\approx a</me>.
+        If <m>A</m> denotes a square matrix, and if <m>f(x)</m> is analytic at <m>a=0</m>, then we can try to make sense of the expression <m>f(A)</m> by using the power series for <m>f(x)</m>:
+        <me>f(A) = \sum_{k=0}^{\infty}c_k A^k = c_0I + c_1A + c_2A^2 + \cdots</me>,
+        assuming this sum actually exists.
+      </p>
+      <example xml:id="example-exponential-of-a-matrix">
+        <title>Exponential of a Matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>A = \mqty[0 \amp 2 \amp 3 \\ 0 \amp 0 \amp 2 \\ 0 \amp 0 \amp 0]</me>.
+            Find <m>e^A</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By definition,
+            <me>e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots</me>,
+            so we can find <m>e^A</m> by looking at the powers of <m>A</m>.
+            In this case,
+            <me>A^2 = \mqty[0 \amp 0 \amp 4 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0]\text{ and }A^3 = A^4 = \ldots = \mqty[0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0]</me>.
+            Therefore
+            <me>e^A = I + A + \frac{1}{2}A^2 = \mqty[1 \amp 2 \amp 5 \\ 0 \amp 1 \amp 2 \\ 0 \amp 0 \amp 1]</me>.
+            This can be verified using the command <c>expm</c> in Octave as below.
+            <aside>
+              <p>
+                You want to be careful to use <c>expm(A)</c> to compute <m>e^A</m> in Octave, as this actually finds the matrix exponential.
+                If you instead use <c>exp(A)</c>, this just computes the matrix obtained by raising <m>e</m> to each entry of <m>A</m>, which in general is <em>not</em> equal to <m>e^A</m>.
+              </p>
+            </aside>
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          format short
+          A = [0, 2, 3; 0, 0, 2; 0, 0, 0]
+          expm(A) # don't use exp(A)! that just exponentiates each entry of A
+        </input>
+      </sage>
+      <example xml:id="example-function-of-a-diagonal-matrix">
+        <title>Function of a Diagonal Matrix</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function analytic at <m>0</m>.
+            Let <m>D</m> be a diagonal matrix whose diagonal entries are within the interval of convergence of the power series for <m>f(x)</m> centered at <m>0</m>.
+            Find <m>f(D)</m>.
+          </p>
+        </statement>
+      </example>
+      <p>
+        The last example shows that if <m>f(x)</m> is analytic at <m>0</m> then it is relatively straightforward to find <m>f(D)</m>, assuming that the diagonal entries of <m>D</m> are within the interval of convergence for the series representation of <m>f(x)</m> at <m>0</m>.
+        Therefore we can find functions of diagonalizable matrices as well.
+      </p>
+      <theorem xml:id="theorem-analytic-functions-of-diagonalizable-matrices">
+        <title>Analytic Functions of Diagonalizable Matrices</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function that is analytic at <m>0</m> and whose series representation at <m>0</m> has interval of convergence <m>I</m>.
+            Let <m>A</m> be a diagonalizable matrix diagonalized by <m>P</m> and <m>D</m> with eigenvalues contained in <m>I</m>.
+            Then
+            <me>f(A) = Pf(D)P^{-1}</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            Let <m>f(x) = \sum_{k=0}^{\infty}c_k x^k</m> and recall that <m>A^k = PD^kP^{-1}</m>.
+            Then
+            <me>f(A) = \sum_{k=0}^{\infty}c_kA^k = P\qty(\sum_{k=0}^{\infty}c_k D^k)P^{-1} = Pf(D)P^{-1}</me>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        <xref ref="theorem-analytic-functions-of-diagonalizable-matrices" text="type-global" /> allows for straightforward computations of matrix exponentials of diagonalizable matrices.
+        This is useful in differential equations when solving linear systems of ODEs (see <url href="https://j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html" visual="j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html">here</url>).
+      </p>
+      <theorem xml:id="theorem-exponential-solutions-of-linear-systems-of-odes">
+        <title>Exponential Solutions of Linear Systems of ODEs</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a (constant) square matrix and consider the first-order system <m>\xx^\prime = A\xx</m> with initial condition <m>\xx(0) = \xx_0</m>.
+            Then the solution of this initial value problem is
+            <me>\xx(t) = e^{At}\xx_0</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            The proof follows quickly from the fact that <m>\dv{}{t}(e^{At}) = Ae^{At}</m>.
+            Using this, we differentiate <m>\xx(t) = e^{At}\xx_0</m> to get
+            <me>\dv{\xx}{t} = Ae^{At}\xx_0 = A\xx</me>.
+            Furthermore, <m>\xx(0) = e^{\vb{0}}\xx_0 = \xx_0</m>.
+            Therefore <m>\xx(t) = e^{At}\xx_0</m> is a solution of the initial value problem.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        Theorems <xref ref="theorem-analytic-functions-of-diagonalizable-matrices" text="global" /> and <xref ref="theorem-exponential-solutions-of-linear-systems-of-odes" text="global" /> allow us to find solutions of linear systems that involve diagonalizable matrices in terms of the matrix exponential.
+      </p>
     </subsection>
   </section>
 </chapter>
