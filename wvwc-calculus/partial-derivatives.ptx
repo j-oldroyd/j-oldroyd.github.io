@@ -584,7 +584,7 @@
                     <me>f(x,y,z) = \frac{1}{2}\ln(x^{2} + y^{2} + z^{2}).</me>
                     Now, to find <m>\dv{f}{t}</m> we need to use the chain rule, which gives
                     <md>
-                        <mrow>\dv{f}{t} &amp; = f_{x}x'(t) + f_{y}y'(t) + f_{z}z'(t) </mrow>
+                        <mrow>\dv{f}{t} &amp; = f_{x}x'(t) + f_{y}y'(t) + f_{z}z^\prime(t) </mrow>
                         <mrow> &amp; = \frac{x}{x^{2} + y^{2} + z^{2}}\cos t  - \frac{y}{x^{2} + y^{2} + z^{2}}\sin t + \frac{z}{x^{2} + y^{2} + z^{2}}\sec^{2}t</mrow>
                         <mrow> &amp; = \frac{\sin t\cos t}{\sec^{2}t} - \frac{\cos t\sin t}{\sec^{2}t} + \frac{\tan t}{\sec^{2}t}</mrow>
                         <mrow> &amp; = \cos t\sin t </mrow>
@@ -694,7 +694,7 @@
         <introduction>
             <p>
                 For a differentiable function <m>f(x,y)</m>, the partial derivatives <m>f_{x}</m> and <m>f_{y}</m> give the rates of change of <m>f</m> in the directions of the <m>x</m>-axis and <m>y</m>-axis, respectively.
-                To put this another way, <m>f_{x}</m> gives the rate of change of <m>f</m> in the direction of the vector <m>\vv{i}</m>, and <m>f_{y}</m> gives the rate of change in the direction of the vector <m>\vv{j}</m>.
+                To put this another way, <m>f_{x}</m> gives the rate of change of <m>f</m> in the direction of the vector <m>\vb{i}</m>, and <m>f_{y}</m> gives the rate of change in the direction of the vector <m>\vb{j}</m>.
                 But we have infinitely many directions to work with.
                 How can we find the rate of change of <m>f</m> in <em>any</em> direction?
                 We'll look at two tools to help us with this: directional derivatives and gradients.
@@ -704,9 +704,9 @@
             <title>The Directional Derivative</title>
             <p>
                 Suppose we have a function <m>f(x,y)</m> defined at a point <m>(x_{0},y_{0})</m>.
-                We want to find how quickly <m>f(x,y)</m> is changing in the direction of some unit vector <m>\vv{u} = \dotprod{a,b}</m>.
-                We can estimate this by moving from the point <m>(x_{0},y_{0})</m> by some small increment <m>h\vv{u}</m>, and evaluating <m>f</m> at this new point, which is just <m>(x_{0} + ha, y_{0} + hb)</m>.
-                So the approximate rate of change in <m>f</m> in the direction of <m>\vv{u}</m> is given by
+                We want to find how quickly <m>f(x,y)</m> is changing in the direction of some unit vector <m>\vb{u} = \dotprod{a,b}</m>.
+                We can estimate this by moving from the point <m>(x_{0},y_{0})</m> by some small increment <m>h\vb{u}</m>, and evaluating <m>f</m> at this new point, which is just <m>(x_{0} + ha, y_{0} + hb)</m>.
+                So the approximate rate of change in <m>f</m> in the direction of <m>\vb{u}</m> is given by
                 <me>\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}</me>
                 As <m>h\to0</m>, this should become exact.
                 This leads us to our next definition.
@@ -716,10 +716,10 @@
                 <title>Directional Derivative</title>
                 <statement>
                     <p>
-                        The <term>directional derivative</term> of the function <m>f(x,y)</m> at the point <m>(x_{0},y_{0})</m> in the direction of the vector <m>\vv{u} = \dotprod{a,b}</m> is given by
-                        <me>D_{\vv{u}}f(x_{0},y_{0}) = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}</me>
+                        The <term>directional derivative</term> of the function <m>f(x,y)</m> at the point <m>(x_{0},y_{0})</m> in the direction of the vector <m>\vb{u} = \dotprod{a,b}</m> is given by
+                        <me>D_{\vb{u}}f(x_{0},y_{0}) = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0} + hb) - f(x_{0},y_{0})}{h}</me>
                         assuming this limit exists.
-                        As we mentioned above, <m>D_{\vv{i}}f = f_{x}</m> and <m>D_{\vv{j}}f = f_{y}</m>.
+                        As we mentioned above, <m>D_{\vb{i}}f = f_{x}</m> and <m>D_{\vb{j}}f = f_{y}</m>.
                     </p>
                 </statement>
             </definition>
@@ -733,9 +733,9 @@
                 <statement>
                     <p>
                         Let <m>f(x,y)</m> be a function whose partial derivatives <m>f_{x}</m> and <m>f_{y}</m> exist and are continuous.
-                        Let <m>\vv{u} = \dotprod{a,b}</m> be a unit vector.
-                        Then <m>D_{\vv{u}}f(x,y)</m> exists, and is given by
-                        <me>D_{\vv{u}}f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b.</me>
+                        Let <m>\vb{u} = \dotprod{a,b}</m> be a unit vector.
+                        Then <m>D_{\vb{u}}f(x,y)</m> exists, and is given by
+                        <me>D_{\vb{u}}f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b.</me>
                     </p>
                 </statement>
                 <proof>
@@ -743,13 +743,13 @@
                         First, set
                         <me>g(h) = f(x_{0}+ha, y_{0} +hb)</me>
                         Then by the Calculus I definition of the derivative,
-                        <me>g'(0) = \lim_{h\to0}\frac{g(h) - g(0)}{h} = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0}+hb) - f(x_{0},y_{0})}{h} = D_{\vv{u}}f(x_{0},y_{0}).</me>
+                        <me>g'(0) = \lim_{h\to0}\frac{g(h) - g(0)}{h} = \lim_{h\to0}\frac{f(x_{0}+ha, y_{0}+hb) - f(x_{0},y_{0})}{h} = D_{\vb{u}}f(x_{0},y_{0}).</me>
                         On the other hand, if we set <m>x = x_{0} + ha</m> and <m>y = y_{0} + hb</m>, then <m>g(h) = f(x,y)</m>.
                         We can then find <m>g'(h)</m> using the chain rule from <xref ref="section-the-chain-rule" text="type-global" /> to get
                         <me>g'(h) = f_{x}\dv{x}{h} + f_{y}\dv{y}{h} = f_{x}(x,y)a + f_{y}(x,y)b</me>
                         So <m>g'(0) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.</m>
                         Therefore
-                        <me>D_{\vv{u}}f(x_{0},y_{0}) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.</me>
+                        <me>D_{\vb{u}}f(x_{0},y_{0}) = f_{x}(x_{0},y_{0})a + f_{y}(x_{0},y_{0})b.</me>
                     </p>
                 </proof>
             </theorem>
@@ -762,16 +762,16 @@
                 <statement>
                     <p>
                         Let <m>f(r,s) = \frac{r}{r^{2}+s^{2}}</m>.
-                        Find the directional derivative of <m>f</m> in the direction of <m>\vv{v} = 3\vv{i} + 5\vv{j}</m> at the point <m>(1,2)</m>.
+                        Find the directional derivative of <m>f</m> in the direction of <m>\vb{v} = 3\vb{i} + 5\vb{j}</m> at the point <m>(1,2)</m>.
                     </p>
                 </statement>
                 <solution>
                     <p>
                         We can use <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> to find the directional derivative.
                         However, there's something we need to watch out for here.
-                        Both <xref ref="definition-directional-derivative" text="type-global" /> and <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> require using a <em>unit vector</em>, but our vector <m>\vv{v}</m> isn't a unit vector at all.
-                        So we need to <term>normalize</term> <m>\vv{v}</m> to get a unit vector <m>\vv{u}</m> that is parallel to <m>\vv{v}</m>:
-                        <me>\vv{u} = \frac{\vv{v}}{|\vv{v}|} = \dotprod{\frac{3}{\sqrt{34}}, \frac{5}{\sqrt{34}}}</me>
+                        Both <xref ref="definition-directional-derivative" text="type-global" /> and <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> require using a <em>unit vector</em>, but our vector <m>\vb{v}</m> isn't a unit vector at all.
+                        So we need to <term>normalize</term> <m>\vb{v}</m> to get a unit vector <m>\vb{u}</m> that is parallel to <m>\vb{v}</m>:
+                        <me>\vb{u} = \frac{\vb{v}}{|\vb{v}|} = \dotprod{\frac{3}{\sqrt{34}}, \frac{5}{\sqrt{34}}}</me>
                         Since
                         <md>
                             <mrow>f_{r} &amp; = \frac{s^{2} - r^{2}}{(r^{2} + s^{2})^{2}} </mrow>
@@ -779,7 +779,7 @@
                         </md>
                         we see that the directional derivative we need is given by
                         <md>
-                            <mrow>D_{\vv{u}}f(1,2) &amp; = f_{r}(1,2)\frac{3}{\sqrt{34}} + f_{s}(1,2)\frac{5}{\sqrt{34}} </mrow>
+                            <mrow>D_{\vb{u}}f(1,2) &amp; = f_{r}(1,2)\frac{3}{\sqrt{34}} + f_{s}(1,2)\frac{5}{\sqrt{34}} </mrow>
                             <mrow> &amp; = \frac{3}{25}\frac{3}{\sqrt{34}} - \frac{4}{25}\frac{5}{\sqrt{34}} </mrow>
                         </md>
                     </p>
@@ -818,8 +818,8 @@
             </example>
             <p>
                 We can restate <xref ref="theorem-computing-the-directional-derivative" text="type-global" /> very quickly in terms of the gradient.
-                In particular, if <m>\vv{u}</m> is a vector (not necessarily a unit vector) then 
-                <men xml:id="equation-directional-derivative-gradient">D_{\vv{u}}f = \grad f\cdot \frac{\vv{u}}{|\vv{u}|}</men>
+                In particular, if <m>\vb{u}</m> is a vector (not necessarily a unit vector) then 
+                <men xml:id="equation-directional-derivative-gradient">D_{\vb{u}}f = \grad f\cdot \frac{\vb{u}}{|\vb{u}|}</men>
             </p>
             <example xml:id="example-directional-derivative-using-the-gradient">
                 <title>Directional derivative using the gradient</title>
@@ -844,10 +844,10 @@
             <p>
                 The gradient is also useful for telling us where a function is increasing and decreasing the greatest.
                 By <xref ref="equation-directional-derivative-gradient" text="type-global" />, we can write 
-                <me>D_{\vv{u}}f = \grad f\cdot\frac{\vv{u}}{|\vv{u}|} = |\grad f| \cos\theta,</me>
-                where <m>\theta</m> is the acute angle between <m>\grad f</m> and <m>\vv{u}</m>.
+                <me>D_{\vb{u}}f = \grad f\cdot\frac{\vb{u}}{|\vb{u}|} = |\grad f| \cos\theta,</me>
+                where <m>\theta</m> is the acute angle between <m>\grad f</m> and <m>\vb{u}</m>.
                 It follows that
-                <me>-|\grad f| \leq D_{\vv{u}}f \leq |\grad f|.</me>
+                <me>-|\grad f| \leq D_{\vb{u}}f \leq |\grad f|.</me>
                 We summarize this in the following theorem.
             </p>
             <theorem xml:id="theorem-direction-of-greatest-increase-and-decrease">
@@ -1144,7 +1144,7 @@
             <title>Method of Lagrange Multipliers</title>
             <statement>
                 <p>
-                    Suppose that <m>f</m> and <m>g</m> are both differentiable functions, and suppose that <m>\grad g\neq\vv{0}</m> on the curve <m>g(x,y) = k</m>.
+                    Suppose that <m>f</m> and <m>g</m> are both differentiable functions, and suppose that <m>\grad g\neq\vb{0}</m> on the curve <m>g(x,y) = k</m>.
                     To find the extreme values of <m>f(x,y)</m> subject to the constraint <m>g(x,y) = k</m>, perform the following steps:
                     <ol>
                         <li>
