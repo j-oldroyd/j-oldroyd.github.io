@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-03-16T16:50:59-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Functions of Arbitrary Period; Even and Odd Extensions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Differential Equations Lecture Notes">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-fourier-series.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="fourier-analysis.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-complex-fourier-series-and-parsevals-identity.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-fourier-series.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="fourier-analysis.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-complex-fourier-series-and-parsevals-identity.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="section-functions-of-arbitrary-period-even-and-odd-extensions"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">7.2</span> <span class="title">Functions of Arbitrary Period; Even and Odd Extensions</span>
+</h2>
+<section class="introduction" id="introduction-19"><p id="p-629">Now that we know how to find Fourier series of periodic functions with period <span class="process-math">\(2\pi\text{,}\)</span> we'd like to extend this idea to more general periodic functions, and then eventually to find Fourier series to represent (in some way) functions that aren't periodic.</p></section><section class="subsection" id="subsection-fourier-series-of-functions-of-arbitrary-period"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Fourier Series of Functions of Arbitrary Period</span>
+</h3>
+<p id="p-630">We know how to find the Fourier series of a function of period <span class="process-math">\(2\pi\)</span> by using <a href="" class="xref" data-knowl="./knowl/theorem-fourier-series-coefficients.html" title="Theorem 7.5: Fourier Series Coefficients">Theorem 7.5</a>. So we'd like to adapt this to functions that have period <span class="process-math">\(p = 2L\)</span> instead of <span class="process-math">\(2\pi\text{.}\)</span> This actually won't be too hard to do, since any function of period <span class="process-math">\(2L\)</span> can be scaled into a function with period <span class="process-math">\(2\pi\text{.}\)</span></p>
+<p id="p-631">To see how, let <span class="process-math">\(f(x)\)</span> denote a function of period <span class="process-math">\(2L\text{.}\)</span> Then we want to find a constant <span class="process-math">\(c\)</span> so that <span class="process-math">\(f(cx)\)</span> has period <span class="process-math">\(2\pi\text{,}\)</span> that is, so that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(c(x+2\pi)) = f(cx).
+\end{equation*}
+</div>
+<p class="continuation">For this to be true, we need <span class="process-math">\(2\pi c = 2L\text{,}\)</span> or in other words <span class="process-math">\(c = \frac{L}{\pi}\text{.}\)</span> So if <span class="process-math">\(f(x)\)</span> has period <span class="process-math">\(2L,\)</span> then <span class="process-math">\(f(\frac{L}{\pi}x)\)</span> has period <span class="process-math">\(2\pi\text{,}\)</span> and furthermore <span class="process-math">\(f(\frac{L}{\pi}x)\)</span> has Fourier coefficients given by</p>
+<div class="displaymath process-math">
+\begin{align*}
+a_{0} \amp= \frac{1}{2\pi}\int_{-\pi}^{\pi}f\left(\frac{L}{\pi}x\right)\,dx\\
+a_{k} \amp= \frac{1}{\pi}\int_{-\pi}^{\pi}f\left(\frac{L}{\pi}x\right)\cos kx\,dx\text{ for $k\geq1$.}\\
+b_{k} \amp= \frac{1}{\pi}\int_{-\pi}^{\pi}f\left(\frac{L}{\pi}x\right)\sin kx\,dx\text{ for $k\geq1$.}
+\end{align*}
+</div>
+<p class="continuation">Now we need to get everything back in terms of <span class="process-math">\(f(x)\text{,}\)</span> the function we started with. We can do this by making the substitution <span class="process-math">\(u = \frac{L}{\pi}x\text{.}\)</span> This gives us the following theorem after a little algebra.</p>
+<article class="theorem theorem-like" id="theorem-fourier-series-of-functions-with-arbitrary-period"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.8</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Series of Functions with Arbitrary Period.</span>
+</h4>
+<p id="p-632">Let <span class="process-math">\(f(x)\)</span> be a function with period <span class="process-math">\(p = 2L\text{.}\)</span> Then the Fourier coefficients of <span class="process-math">\(f(x)\)</span> are given by</p>
+<div class="displaymath process-math">
+\begin{align*}
+a_{0} \amp= \frac{1}{2L}\int_{-L}^{L}f\left(x\right)\,dx\\
+a_{k} \amp= \frac{1}{L}\int_{-L}^{L}f\left(x\right)\cos\left(\frac{k\pi}{L}x\right)\,dx\text{ for $k\geq1$}\\
+b_{k} \amp= \frac{1}{L}\int_{-L}^{L}f\left(x\right)\sin\left(\frac{k\pi}{L}x\right)\,dx\text{ for $k\geq1$}
+\end{align*}
+</div>
+<p class="continuation">and the corresponding Fourier series is</p>
+<div class="displaymath process-math">
+\begin{equation*}
+a_{0}+\sum_{k=1}^{\infty}\left(a_{k}\cos\left(\frac{k\pi}{L}x\right)+b_{k}\sin\left(\frac{k\pi}{L}x\right)\right).
+\end{equation*}
+</div></article><article class="example example-like" id="example-fourier-series-of-x-squared"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.9</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Series of <span class="process-math">\(f(x) = x^{2}\)</span>.</span>
+</h4>
+<p id="p-633">Let <span class="process-math">\(f(x) = x^{2}\)</span> for <span class="process-math">\(-1\leq x\leq 1\)</span> and have period <span class="process-math">\(p=2\text{.}\)</span> We can find its Fourier series using <a href="" class="xref" data-knowl="./knowl/theorem-fourier-series-of-functions-with-arbitrary-period.html" title="Theorem 7.8: Fourier Series of Functions with Arbitrary Period">Theorem 7.8</a>. If we do so, we get</p>
+<div class="displaymath process-math">
+\begin{align*}
+a_{0} \amp= \frac{1}{3}\\
+a_{k} \amp= \frac{4 \, \left(-1\right)^{k}}{\pi^{2} k^{2}}\\
+b_{k} \amp= 0
+\end{align*}
+</div>
+<p class="continuation">So the Fourier series of <span class="process-math">\(f(x)\)</span> is given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{1}{3} + \sum_{k=1}^{\infty}\frac{4 \, \left(-1\right)^{k}}{\pi^{2} k^{2}}\cos\left(k\pi x\right)\text{.}
+\end{equation*}
+</div></article><div class="sagecell-sage" id="sage-17"><script type="text/x-sage">var('x,k,i')
+assume(k,i,'integer')
+
+# Defines the function to determine Fourier series of. Feel free to play around with this.
+f(x) = x**2
+L = 1
+
+# Defines the Fourier coefficients.
+def a(k):
+  coeff = integral(f(x)*cos(k*pi*x/L), (x,-L,L))/L
+  return coeff
+
+def b(k):
+  coeff = integral(f(x)*sin(k*pi*x/L), (x,-L,L))/L
+  return coeff
+
+# Defines the corresponding (partial) Fourier series.
+def FS(k):
+  return a(0)/2 + sum(a(i)*cos(i*pi*x/L) + b(i)*sin(i*pi*x/L), i, 1, k)
+
+n = 3
+p = plot(FS(n),(x,-L,L), color='red') + plot(f(x),(x,-L,L))
+p
+</script></div></section><section class="subsection" id="subsection-even-and-odd-extensions"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Even and Odd Extensions</span>
+</h3>
+<p id="p-634">If you look at Examples <a href="" class="xref" data-knowl="./knowl/example-fourier-series-of-x-cubed.html" title="Example 7.6: The Fourier series of x^{3}">Example 7.6</a> and <a href="" class="xref" data-knowl="./knowl/example-fourier-series-of-x-squared.html" title="Example 7.9: Fourier Series of f(x) = x^{2}">Example 7.9</a>, then you'll notice that a lot of the Fourier coefficients were <span class="process-math">\(0\text{.}\)</span> In particular, <span class="process-math">\(a_{k} = 0\)</span> for <span class="process-math">\(k\geq0\)</span> for the first example, and <span class="process-math">\(b_{k}=0\)</span> for the second. The reason for this has to do with <dfn class="terminology">even and odd functions</dfn>.</p>
+<article class="definition definition-like" id="definition-even-and-odd-functions"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.10</span><span class="period">.</span><span class="space"> </span><span class="title">Even and Odd Functions.</span>
+</h4>
+<p id="p-635">Let <span class="process-math">\(f(x)\)</span> be a function. We say that <span class="process-math">\(f(x)\)</span> is</p>
+<div class="displaymath process-math">
+\begin{align*}
+\text{even if } \amp f(-x) = f(x)\\
+\text{odd if } \amp f(-x) = -f(x).
+\end{align*}
+</div></article><p id="p-636">In other words, a function <span class="process-math">\(f(x)\)</span> is even if and only if its graph is symmetric about the <span class="process-math">\(y\)</span>-axis, and is odd if and only if its graph is symmetric about the origin.</p>
+<p id="p-637">In <a href="" class="xref" data-knowl="./knowl/example-fourier-series-of-x-cubed.html" title="Example 7.6: The Fourier series of x^{3}">Example 7.6</a> and <a href="" class="xref" data-knowl="./knowl/example-fourier-series-of-x-squared.html" title="Example 7.9: Fourier Series of f(x) = x^{2}">Example 7.9</a> we began with functions that typically aren't thought of as periodic and found their Fourier series. Essentially what we did was we restricted our view of each function to a limited interval<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-footnote-periodic-extensions" id="footnote-periodic-extensions"><sup> 5 </sup></a> and then viewed that segment as defining a periodic function. This is the idea behind <dfn class="terminology">even and odd extensions</dfn> of functions.</p>
+<article class="definition definition-like" id="definition-even-and-odd-extensions"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.11</span><span class="period">.</span><span class="space"> </span><span class="title">Even and Odd Extensions.</span>
+</h4>
+<p id="p-638">Let <span class="process-math">\(f(x)\)</span> be a function defined on <span class="process-math">\([0,L]\text{.}\)</span> The even extension of <span class="process-math">\(f(x)\)</span> is the even periodic function defined by extending the graph of <span class="process-math">\(f(x)\)</span> on <span class="process-math">\([0,L]\)</span> to the rest of the real numbers in such a way that the resulting function is even and has period <span class="process-math">\(2L\text{.}\)</span> The odd extension of <span class="process-math">\(f(x)\)</span> is defined similarly.</p></article><p id="p-639">Computing Fourier series for even and odd functions is simpler than the general case.</p>
+<article class="theorem theorem-like" id="theorem-fourier-coefficients-of-even-and-odd-functions"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">7.12</span><span class="period">.</span><span class="space"> </span><span class="title">Fourier Coefficients of Even and Odd Functions.</span>
+</h4>
+<p id="p-640">Let <span class="process-math">\(f(x)\)</span> be periodic with period <span class="process-math">\(2L\text{.}\)</span> If <span class="process-math">\(f\)</span> is even, then the Fourier coefficients of <span class="process-math">\(f(x)\)</span> satisfy</p>
+<div class="displaymath process-math">
+\begin{equation*}
+a_{0} = \frac{1}{L}\int_{0}^{L}f(x)\,dx, a_{k} = \frac{2}{L}\int_{0}^{L}f(x)\cos\left(\frac{k\pi}{L}x\right)\,dx\text{ and } b_{k} = 0
+\end{equation*}
+</div>
+<p class="continuation">for <span class="process-math">\(k\geq1\text{.}\)</span> If <span class="process-math">\(f\)</span> is odd, then the Fourier coefficients of <span class="process-math">\(f(x)\)</span> are</p>
+<div class="displaymath process-math">
+\begin{equation*}
+b_{k} = \frac{2}{L}\int_{0}^{L}f(x)\sin\left(\frac{k\pi}{L}x\right)\,dx\text{ and } a_{k} = 0.
+\end{equation*}
+</div></article><article class="example example-like" id="example-even-extension-of-a-piecewise-function"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.13</span><span class="period">.</span><span class="space"> </span><span class="title">Even Extension of a Piecewise Function.</span>
+</h4>
+<p id="p-641">Define the piecewise function <span class="process-math">\(f(x)\)</span> by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+f(x) = \begin{cases}x \amp 0\leq x\leq \frac{\pi}{2} \\ \frac{\pi}{2} \amp \frac{\pi}{2}\leq x\leq \pi\end{cases}.
+\end{equation*}
+</div>
+<p class="continuation">Then the even extension of <span class="process-math">\(f(x)\)</span> is the new function <span class="process-math">\(f_{1}(x)\)</span> given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+f_{1}(x) = \begin{cases}|x| \amp -\frac{\pi}{2}\leq x\leq \frac{\pi}{2} \\ \frac{\pi}{2} \amp \frac{\pi}{2}\leq |x|\leq \pi\end{cases}.
+\end{equation*}
+</div>
+<p class="continuation">We can use <a href="" class="xref" data-knowl="./knowl/theorem-fourier-coefficients-of-even-and-odd-functions.html" title="Theorem 7.12: Fourier Coefficients of Even and Odd Functions">Theorem 7.12</a> to help us find the Fourier series for <span class="process-math">\(f_{1}(x)\text{.}\)</span> With a little bit of help, we get <span class="process-math">\(a_{0} = \frac{3\pi}{8}\)</span> and <span class="process-math">\(a_{k} = \frac{2\cos(\frac{\pi k}{2})-2}{\pi k^{2}}\text{,}\)</span> and so the Fourier series of <span class="process-math">\(f_{1}(x)\)</span> is</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{3\pi}{8}+\sum_{k=1}^{\infty}\frac{(-1)^{k}-1}{2\pi k^{2}}\cos(2kx).
+\end{equation*}
+</div></article><div class="sagecell-sage" id="sage-18"><script type="text/x-sage">var('x,k,i')
+assume(k,i,'integer')
+L = pi
+
+# Defines the Fourier coefficients.
+def a(k):
+  coeff1 = (2/L)*integral(x*cos(k*pi*x/L), (x,0,pi/2))
+  coeff2 = (2/L)*integral((pi/2)*cos(k*pi*x/L), (x,pi/2,pi))
+  return coeff1+coeff2
+
+# Defines the corresponding (partial) Fourier series.
+def FS(k):
+  return a(0)/2 + sum(a(i)*cos(i*pi*x/L), i, 1, k)
+
+# Define the even extension.
+f_e = piecewise([((-pi/2,pi/2), abs(x)), ((-oo,-pi/2), pi/2), ((pi/2, oo), pi/2)])
+
+n = 25
+p = plot(FS(n),(x,-L,L), color='red') + plot(f_e, (x, -L,L))
+p
+</script></div></section></section><div class="hidden-content tex2jax_ignore" id="hk-footnote-periodic-extensions"><div class="fn">
+<span class="process-math">\([-\pi,\pi]\)</span> in the case of <span class="process-math">\(x^{3}\)</span> and <span class="process-math">\([-1,1]\)</span> in the case of <span class="process-math">\(x^{2}\)</span>
+</div></div>
+</div></main>
+</div>
+</body>
+</html>

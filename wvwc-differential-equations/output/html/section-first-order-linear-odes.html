@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-03-16T16:50:54-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>First-Order Linear ODEs</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Differential Equations Lecture Notes">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-separable-odes-and-substitution.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-existence-and-uniqueness-of-solutions.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-separable-odes-and-substitution.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="intro-to-odes.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-existence-and-uniqueness-of-solutions.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-first-order-linear-odes"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">1.4</span> <span class="title">First-Order Linear ODEs</span>
+</h2>
+<section class="introduction" id="introduction-5"><p id="p-74">In this section we introduce a new type of ODE that we can solve, in addition to separable ODEs and "simple" ODEs of the form <span class="process-math">\(y'=f(x)\text{.}\)</span> The ODEs that we'll consider in this section are <dfn class="terminology">first-order linear ODEs</dfn>.</p>
+<article class="definition definition-like" id="definition-first-order-linear-odes"><h3 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.21</span><span class="period">.</span><span class="space"> </span><span class="title">First-Order Linear ODEs.</span>
+</h3>
+<p id="p-75">A first-order ODE is said to be linear if it can be written in the following form:</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{y}{x} + P(x)y = Q(x).
+\end{equation*}
+</div></article><p id="p-76">We've actually seen such an ODE all the way back in <a href="" class="xref" data-knowl="./knowl/example-an-ivp-modeling-a-falling-object.html" title="Example 1.8: An IVP modeling a falling object">Example 1.8</a>. The ODE that we came up with in that problem can be rewritten as a first-order linear ODE with the right substitution (say, <span class="process-math">\(u = y'\)</span>). Our first goal in this section is then to figure out how to solve these ODEs.</p>
+<p id="p-77">Note that this section corresponds to Section 1.5 from the text.</p></section><section class="subsection" id="subsection-integrating-factors"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Integrating Factors</span>
+</h3>
+<p id="p-78">To get a sense of how to solve first-order linear ODEs, we'll try some relatively simple examples first.</p>
+<article class="example example-like" id="example-solving-a-first-order-linear-ode"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.22</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a first-order linear ODE.</span>
+</h4>
+<p id="p-79">Find the general solution of <span class="process-math">\(\dv{y}{x}+2y = x\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-13" id="solution-13"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-13"><div class="solution solution-like">
+<p id="p-80">First, note that the ODE is indeed a first-order linear ODE since it takes the form given in <a href="" class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.21: First-Order Linear ODEs">Definition 1.21</a>. If we stare at the ODE for a bit, we might think that the left hand side looks like something we'd get after using the product rule. Just compare <span class="process-math">\((fg)' = fg'+f'g\)</span> with <span class="process-math">\(\dv{y}{x}+2y\text{,}\)</span> and it appears that the unknown function <span class="process-math">\(y\)</span> is taking the place of <span class="process-math">\(g\)</span> in the product rule formula. If we could just figure out what the function <span class="process-math">\(f\)</span> is supposed to be, then we could drastically simplify the left hand side of the ODE.</p>
+<p id="p-81">Unfortunately, there is no such function <span class="process-math">\(f\)</span> that works here. If there were, we'd have to have <span class="process-math">\(f'=2\)</span> and <span class="process-math">\(f=2x\text{,}\)</span> and clearly we aren't multiplying <span class="process-math">\(\dv{y}{x}\)</span> by <span class="process-math">\(2x\)</span> in the ODE. But we can pull a dirty trick here! We'll multiply through the ODE by <span class="process-math">\(e^{2x}\)</span> to get the new ODE</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^{2x}\dv{y}{x}+2e^{2x}y = xe^{2x}.
+\end{equation*}
+</div>
+<p class="continuation">It might not be all that obvious why this helps us out, but now the left hand side can be simplified by the product rule:</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^{2x}\dv{y}{x}+2e^{2x}y = \dv{}{x}[e^{2x}y].
+\end{equation*}
+</div>
+<p id="p-82">So we can rewrite the entire ODE as</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{}{x}[e^{2x}y] = xe^{2x}.
+\end{equation*}
+</div>
+<p class="continuation">We can integrate this on both sides to get <span class="process-math">\(e^{2x}y = \int xe^{2x}\,dx\text{,}\)</span> or just</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^{2x}y = \frac{1}{2}xe^{2x} - \frac{1}{4}e^{2x}+C.
+\end{equation*}
+</div>
+<p class="continuation">The explicit solution would be <span class="process-math">\(y = \frac{1}{2}x - \frac{1}{4} + Ce^{-2x}\text{.}\)</span></p>
+</div></div>
+</div></article><p id="p-83">The function <span class="process-math">\(e^{2x}\)</span> that we used in <a href="" class="xref" data-knowl="./knowl/example-solving-a-first-order-linear-ode.html" title="Example 1.22: Solving a first-order linear ODE">Example 1.22</a> is called an <dfn class="terminology">integrating factor</dfn>. Integrating factors are our primary tool in solving first-order linear ODEs. In general, to solve a first-order linear ODE <span class="process-math">\(y' +P(x)y=Q(x)\)</span> the first thing you must do is to multiply through it by the integrating factor <span class="process-math">\(e^{\int P(x)\,dx}\text{.}\)</span></p>
+<article class="example example-like" id="example-solving-a-first-order-linear-ode-in-disguise"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.23</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a first-order linear ODE in disguise.</span>
+</h4>
+<p id="p-84">Solve the second-order ODE given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+tx''+\frac{t}{1+t^{2}}x' = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}
+\end{equation*}
+</div>
+<p class="continuation">with initial conditions <span class="process-math">\(x(0) = x'(0) = -1.\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-14" id="solution-14"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-14"><div class="solution solution-like">
+<p id="p-85">Even though this is a second-order ODE, we can rewrite it as a first-order ODE using the substitution <span class="process-math">\(u = x'\text{.}\)</span> Then the ODE becomes</p>
+<div class="displaymath process-math">
+\begin{equation*}
+tu+\frac{t}{1+t^{2}}u = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}.
+\end{equation*}
+</div>
+<p class="continuation">If we divide through by <span class="process-math">\(t\text{,}\)</span> we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+u+\frac{1}{1+t^{2}}u = \frac{2t}{(1+t^{2})^{2}}e^{-\tan^{-1}t}.
+\end{equation*}
+</div>
+<p class="continuation">This can be solved by integrating factors since it takes the form given in <a href="" class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.21: First-Order Linear ODEs">Definition 1.21</a>. The integrating factor we need is given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^{\int \frac{1}{1+t^{2}}\,dt} = e^{\tan^{-1}t}.
+\end{equation*}
+</div>
+<p id="p-86">Now we multiply through the ODE by this integrating factor and rewrite the left hand side using the product rule to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{}{t}[e^{\tan^{-1}t}u] = \frac{2t}{(1+t^{2})^{2}}.
+\end{equation*}
+</div>
+<p class="continuation">At this step we can integrate both sides to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+e^{\tan^{-1}t}u = -\frac{1}{1+t^{2}}+C,
+\end{equation*}
+</div>
+<p class="continuation">which becomes</p>
+<div class="displaymath process-math">
+\begin{equation*}
+x' = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}+Ce^{-\tan^{-1}t}.
+\end{equation*}
+</div>
+<p id="p-87">If we plug in the initial condition <span class="process-math">\(x'(0) = -1\text{,}\)</span> this forces <span class="process-math">\(C=0\text{.}\)</span> Hence</p>
+<div class="displaymath process-math">
+\begin{equation*}
+x' = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}.
+\end{equation*}
+</div>
+<p class="continuation">Now we integrate one last time to get <span class="process-math">\(x\text{:}\)</span></p>
+<div class="displaymath process-math">
+\begin{equation*}
+x = e^{-\tan^{-1}t}+D.
+\end{equation*}
+</div>
+<p class="continuation">If we use the last initial condition <span class="process-math">\(x(0)=-1\text{,}\)</span> we see that <span class="process-math">\(D = -2\text{.}\)</span> Hence the solution of this IVP is</p>
+<div class="displaymath process-math">
+\begin{equation*}
+x = e^{-\tan^{-1}t}-2.
+\end{equation*}
+</div>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-applications"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Applications</span>
+</h3>
+<p id="p-88">A common application of first-order linear ODEs is in modeling "mixture" problems. Suppose we have a tank which contains a solution (mixture of solute and solvent, such as salt and water). Some amount of solution is also flowing into and out of the tank. We want to measure the amount of solute in the tank at time <span class="process-math">\(t\text{,}\)</span> call this amount <span class="process-math">\(x(t)\text{.}\)</span> Then <span class="process-math">\(x(t)\)</span> will change depending on how the solute flows into and out of the tank, making it a prime target for a differential equation.</p>
+<p id="p-89">If we set</p>
+<div class="displaymath process-math">
+\begin{align*}
+c_{i} &amp; =\text{concentration of solute flowing in} \\
+c_{o} &amp; =\text{concentration of solute flowing out} \\
+r_{i} &amp; =\text{rate solution is flowing in} \\
+r_{o} &amp; = \text{rate solution is flowing out} 
+\end{align*}
+</div>
+<p class="continuation">then we can say that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{x}{t} = r_{i}c_{i} - r_{o}c_{o} = r_{i}c_{i} - r_{0}\frac{x(t)}{V(t)}
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(V(t)\)</span> is the volume of solution in the tank at time <span class="process-math">\(t\text{.}\)</span> <aside class="aside aside-like" id="aside-5"><p id="p-90">We assume that <span class="process-math">\(c_{i},r_{i},r_{o}\)</span> are all constant.</p></aside> Furthermore, if we let <span class="process-math">\(V_{0} = V(0)\)</span> denote the initial volume of the solution in the tank then we can say that <span class="process-math">\(V(t) = V_{0} + (r_{i}-r_{0})t.\)</span> Hence the amount of solute <span class="process-math">\(x(t)\)</span> obeys the first-order linear ODE</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{x}{t} = r_{i}c_{i} - \frac{r_{o}}{V_{0}+(r_{i}-r_{o})t}x.
+\end{equation*}
+</div>
+<article class="example example-like" id="example-salt-in-a-tank"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.24</span><span class="period">.</span><span class="space"> </span><span class="title">Salt in a tank.</span>
+</h4>
+<p id="p-91">A tank contains <span class="quantity">100 L</span> of a solution consisting of <span class="quantity">50 kg</span> of salt dissolved in water. Solution containing <span class="quantity">1 <sup>kg</sup>⁄<sub>L</sub></span> of salt is pumped into the tank at a rate of <span class="quantity">2 <sup>L</sup>⁄<sub>min</sub></span> and the well-mixed solution is pumped out at the rate of <span class="quantity">3 <sup>L</sup>⁄<sub>min</sub></span>. How much salt will be in the tank after <span class="process-math">\(t\)</span> minutes?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-15" id="solution-15"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-15"><div class="solution solution-like">
+<p id="p-92">Let <span class="process-math">\(x(t)\)</span> denote the amount of salt in the tank after <span class="process-math">\(t\)</span> minutes, so <span class="process-math">\(x(0) = 50\text{.}\)</span> Then</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{x}{t} = r_{i}c_{i}-r_{o}c_{o} = 2\cdot1-3\frac{x}{100-t}.
+\end{equation*}
+</div>
+<p class="continuation">We can rearrange this to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{x}{t} + \frac{3}{100-t}x = 2.
+\end{equation*}
+</div>
+<p class="continuation">This ODE is linear and has integrating factor <span class="process-math">\((100-t)^{-3}\text{.}\)</span> Multiplying through the ODE by the integrating factor and rewriting it using the product rule then gives us</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\dv{}{t}[(100-t)^{-3}x] = 2(100-t)^{-3}.
+\end{equation*}
+</div>
+<p id="p-93">Now we can integrate both sides to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+(100-t)^{-3}x = (100-t)^{-2}+C
+\end{equation*}
+</div>
+<p class="continuation">or just <span class="process-math">\(x = 100-t+C(100-t)^{3}\text{.}\)</span> Finally, the initial condition can be used to show that <span class="process-math">\(C = -\frac{1}{20000}\text{,}\)</span> so <span class="process-math">\(x = 100-t - \frac{1}{20000}(100-t)^{3}\text{.}\)</span></p>
+</div></div>
+</div></article></section><section class="conclusion" id="conclusion-4"><p id="p-94">SUGGESTED PROBLEMS: 3-11 odd, 31, 33.</p></section></section></div></main>
+</div>
+</body>
+</html>

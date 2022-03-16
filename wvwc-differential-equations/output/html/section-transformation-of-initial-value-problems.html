@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-03-16T16:50:58-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Transformation of Initial Value Problems</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Differential Equations Lecture Notes">
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
+    // Make *any* div with class 'sagecell-sage' an executable Sage cell
+    // Their results will be linked, only within language type
+    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
+                           linked: true,
+                           languages: ['sage'],
+                           evalButtonText: 'Evaluate (Sage)'});
+});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+  \renewcommand{\arraystretch}{.8}
+  \begin{bmatrix}#1\end{bmatrix}
+  }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline"></p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-the-laplace-transform.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="laplace-transforms.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-unit-step-functions-and-time-shifting.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-the-laplace-transform.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="laplace-transforms.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-unit-step-functions-and-time-shifting.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></li>
+<li class="link"><a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></li>
+<li class="link"><a href="systems-of-odes.html" data-scroll="systems-of-odes" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></li>
+<li class="link"><a href="series-solutions.html" data-scroll="series-solutions" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></li>
+<li class="link"><a href="laplace-transforms.html" data-scroll="laplace-transforms" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></li>
+<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link"><a href="fourier-analysis.html" data-scroll="fourier-analysis" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></li>
+<li class="link"><a href="partial-differential-equations.html" data-scroll="partial-differential-equations" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-transformation-of-initial-value-problems"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.2</span> <span class="title">Transformation of Initial Value Problems</span>
+</h2>
+<article class="theorem theorem-like" id="theorem-laplace-transforms-of-derivatives"><h3 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.13</span><span class="period">.</span><span class="space"> </span><span class="title">Laplace Transforms of Derivatives.</span>
+</h3>
+<p id="p-549">Suppose that the function <span class="process-math">\(f(t)\)</span> is piecewise smooth and that <span class="process-math">\(F(s) = \Laplace{f(t)}\)</span> exists. Then <span class="process-math">\(\Laplace{f'(t)}\)</span> exists and</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\Laplace{f'(t)} = s\Laplace{f(t)}-f(0) = sF(s)-f(0).
+\end{equation*}
+</div></article><p id="p-550">The above theorem says that differentiation in the “time domain” corresponds to multiplication by <span class="process-math">\(s\)</span> in the “frequency domain.” This will be the most useful property of the Laplace transform for us: it will turn differential equations in the time domain into algebraic equations in the frequency domain.</p>
+<article class="example example-like" id="example-laplace-transform-of-a-second-derivative"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.14</span><span class="period">.</span><span class="space"> </span><span class="title">Laplace Transform of a Second Derivative.</span>
+</h3>
+<p id="p-551">Let <span class="process-math">\(f(t)\)</span> be piecewise smooth with Laplace transform <span class="process-math">\(F(s)\text{.}\)</span> Compute <span class="process-math">\(\Laplace{f''(t)}\)</span> using <a href="" class="xref" data-knowl="./knowl/theorem-laplace-transforms-of-derivatives.html" title="Theorem 6.13: Laplace Transforms of Derivatives">Theorem 6.13</a>.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-84" id="solution-84"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-84"><div class="solution solution-like">
+<p id="p-552">By <a href="" class="xref" data-knowl="./knowl/theorem-laplace-transforms-of-derivatives.html" title="Theorem 6.13: Laplace Transforms of Derivatives">Theorem 6.13</a> we know that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\Laplace{f'(t)} = sF(s)-f(0).
+\end{equation*}
+</div>
+<p class="continuation">We can apply <a href="" class="xref" data-knowl="./knowl/theorem-laplace-transforms-of-derivatives.html" title="Theorem 6.13: Laplace Transforms of Derivatives">Theorem 6.13</a> to <span class="process-math">\(f^\prime(t)\)</span> as well, since it must also be piecewise smooth:</p>
+<div class="displaymath process-math">
+\begin{align*}
+\Laplace{f''(t)} \amp= s\Laplace{f^\prime(t)} - f^\prime(0)\\
+\amp= s(sF(s)-f(0)) - f^\prime(0)\\
+\amp= s^{2}F(s) - sf(0) - f^\prime(0)\text{.}
+\end{align*}
+</div>
+<p class="continuation">This process can be continued indefinitely. In general,</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\Laplace{f^{(n)}(t)} = s^{n}F(s) - s^{n-1}f(0) - s^{n-2}f^\prime(0) - \cdots -sf^{(n-2)}(0) - f^{(n-1)}(0).
+\end{equation*}
+</div>
+<p class="continuation">This gives us everything we need to start solving ODEs using Laplace transforms.</p>
+</div></div>
+</div></article><article class="example example-like" id="example-solving-ivps-with-laplace-transforms"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.15</span><span class="period">.</span><span class="space"> </span><span class="title">Solving IVPs with Laplace Transforms.</span>
+</h3>
+<p id="p-553">Solve the IVP</p>
+<div class="displaymath process-math">
+\begin{equation*}
+x''+8x^\prime+15x = 0 \qq{} x(0) = 2, x^\prime(0) = -3
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(x\)</span> is a function of <span class="process-math">\(t\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-85" id="solution-85"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-85"><div class="solution solution-like">
+<p id="p-554">We will solve this by using Laplace transforms. If we set <span class="process-math">\(X(s) = \Laplace{x(t)}\text{,}\)</span> then</p>
+<div class="displaymath process-math">
+\begin{align*}
+\Laplace{x'(t)} \amp= sX(s) - 2\\
+\Laplace{x''(t)} \amp= s^{2}X(s) - 2s +3\text{.}
+\end{align*}
+</div>
+<p class="continuation">So if we take the Laplace transform of the entire ODE, we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\underbrace{s^{2}X(s) - 2s + 3}_{\Laplace{x''}} + \underbrace{8sX(s) - 16}_{\Laplace{8x'}} + 15X(s) = 0
+\end{equation*}
+</div>
+<p class="continuation">which simplifies to</p>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}X(s)+8sX(s)+15X(s) = 2s+13.
+\end{equation*}
+</div>
+<p class="continuation">To solve the ODE we need to find <span class="process-math">\(x(t) = \mathcal{L}^{-1}\{X(s)\}\text{,}\)</span> so we now solve the above for <span class="process-math">\(X(s)\)</span> in order to find the inverse Laplace transform. If we do so, we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+X(s) = \frac{2s+13}{s^{2}+8s+15} = \frac{2s+13}{(s+3)(s+5)}.
+\end{equation*}
+</div>
+<p class="continuation">This doesn't look like the Laplace transform of anything we know at the moment, but we can simplify the right hand side using partial fractions. If we do so, we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+X(s) = \frac{\frac{7}{2}}{s+3} - \frac{\frac{3}{2}}{s+5}.
+\end{equation*}
+</div>
+<p class="continuation">So</p>
+<div class="displaymath process-math">
+\begin{align*}
+x(t) \amp= \frac{7}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} - \frac{3}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+5}\right\}\\
+\amp= \frac{7}{2}e^{-3t} - \frac{3}{2}e^{-5t}\text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article><article class="example example-like" id="example-nonhomogeneous-ivps-with-laplace-transforms"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.16</span><span class="period">.</span><span class="space"> </span><span class="title">Nonhomogeneous IVPs with Laplace Transforms.</span>
+</h3>
+<p id="p-555">Solve the IVP given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+y''+9y = 10e^{-t},\quad y(0) = y^\prime(0) = 0.
+\end{equation*}
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-86"><div class="solution solution-like">
+<p id="p-556">We begin by taking the Laplace transform of both sides to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}
+\end{equation*}
+</div>
+<p class="continuation">or just</p>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}Y(s) + 9Y(s) = \frac{10}{s+1}.
+\end{equation*}
+</div>
+<p class="continuation">So</p>
+<div class="displaymath process-math">
+\begin{equation*}
+Y(s) = \frac{10}{(s+1)(s^{2}+9)}.
+\end{equation*}
+</div>
+<p class="continuation">By partial fractions, this becomes</p>
+<div class="displaymath process-math">
+\begin{equation*}
+Y(s) = \frac{1-s}{s^{2}+9} + \frac{1}{s+1} = \frac{1}{s^{2}+9} - \frac{s}{s^{2}+9} + \frac{1}{s+1},
+\end{equation*}
+</div>
+<p class="continuation">so the solution of the ODE is</p>
+<div class="displaymath process-math">
+\begin{align*}
+y(t) \amp = \iLaplace{Y(s)}\\
+\amp= \frac{1}{3}\sin3t -\cos3t + e^{-t}\text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article><div class="sagecell-sage" id="sage-11"><script type="text/x-sage">Y(s) = 10/((s+1) * (s^2+9))
+Y(s).partial_fraction_decomposition()
+</script></div>
+<p id="p-557">One restriction of the Laplace transform approach as we've developed it is that it requires initial conditions at <span class="process-math">\(t=0\text{.}\)</span> If initial conditions are instead given at some other <span class="process-math">\(t=t_0\text{,}\)</span> then we need to adjust our approach in order to continue to use <a href="" class="xref" data-knowl="./knowl/theorem-laplace-transforms-of-derivatives.html" title="Theorem 6.13: Laplace Transforms of Derivatives">Theorem 6.13</a> and its counterpart for second derivatives. We'll demonstrate this by example.</p>
+<article class="example example-like" id="example-solving-an-ivp-with-shifted-initial-conditions"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.17</span><span class="period">.</span><span class="space"> </span><span class="title">Solving an IVP with Shifted Initial Conditions.</span>
+</h3>
+<p id="p-558">Solve the IVP given by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17.
+\end{equation*}
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-87" id="solution-87"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-87"><div class="solution solution-like">
+<p id="p-559">We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at <span class="process-math">\(0\)</span> we can't do so right away. The trick here is to shift the initial conditions <em class="emphasis">back</em> to <span class="process-math">\(0\)</span> as follows. First, we define a new function <span class="process-math">\(\widetilde{y}\)</span> by</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde{y}(t) = y(t+4)
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(y(t)\)</span> is the solution we seek. Then it follows that</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde{y}'' - 2\widetilde{y}^\prime - 3\widetilde{y} = 0
+\end{equation*}
+</div>
+<p class="continuation">and <span class="process-math">\(\widetilde{y}(0) = y(4) = -3\)</span> and <span class="process-math">\(\widetilde{y}^\prime(0) = y^\prime(4) = -17\text{.}\)</span> So the Laplace transform method applies to solving for <span class="process-math">\(\widetilde{y}\)</span> in this modified IVP.</p>
+<p id="p-560">Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <span class="process-math">\(\widetilde{Y}(s)\)</span> of <span class="process-math">\(\widetilde{y}(t)\text{.}\)</span> Using our initial conditions and a bit of algebra, we get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde{Y}(s) = \frac{-11s-3s}{s^2-2s-3}.
+\end{equation*}
+</div>
+<p class="continuation">At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get</p>
+<div class="displaymath process-math">
+\begin{equation*}
+\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.
+\end{equation*}
+</div>
+<p id="p-561">The final step is to convert our answer from <span class="process-math">\(\widetilde{y}\)</span> to <span class="process-math">\(y\)</span> by making the substitution <span class="process-math">\(t\mapsto t-4\)</span> in <span class="process-math">\(\widetilde{y}\text{.}\)</span> This gives</p>
+<div class="displaymath process-math">
+\begin{equation*}
+y(t) = -5e^{3(t-4)} + 2e^{-(t-4)}
+\end{equation*}
+</div>
+<p class="continuation">as the solution of our IVP.</p>
+</div></div>
+</div></article><dfn class="terminology">SUGGESTED PROBLEMS:</dfn></section></div></main>
+</div>
+</body>
+</html>
