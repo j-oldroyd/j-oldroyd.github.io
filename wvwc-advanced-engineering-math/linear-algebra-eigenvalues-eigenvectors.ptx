@@ -1202,6 +1202,36 @@
       <p>
         Theorems <xref ref="theorem-analytic-functions-of-diagonalizable-matrices" text="global" /> and <xref ref="theorem-exponential-solutions-of-linear-systems-of-odes" text="global" /> allow us to find solutions of linear systems that involve diagonalizable matrices in terms of the matrix exponential.
       </p>
+      <example xml:id="example-solving-a-first-order-system">
+        <title>Solving a First-Order System</title>
+        <statement>
+          <p>
+            Solve
+            <me>x^\prime = 3x - 4y \text{ and } y^\prime = -4x + 3y</me>
+            with initial condition <m>x(0) = 2</m> and <m>y(0) = -1</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This can be solved very easily using the matrix exponential and diagonalization.
+            If we let
+            <me>\xx = \mqty[x \\ y]\text{ and }A = \mqty[3 \amp -4 \\ -4 \amp 3]</me>
+            then the system can be written as the matrix ODE <m>\xx^\prime = A\xx</m> with initial condition <m>\xx_0 = \smqty[2 \\ 1]</m>.
+            <m>A</m> is symmetric and can be orthogonally diagonalized by
+            <me>U = \mqty[\frac{\sqrt{2}}{2} \amp \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \amp -\frac{\sqrt{2}}{2}]\text{ and } D = \mqty[-1 \amp 0 \\ 0 \amp 7]</me>
+            as seen in the code cell below this example.
+            Therefore <m>A = UDU^T</m>, <m>e^{At} = Ue^{Dt}U^T</m> and the solution of the system must be
+            <me>\xx = \mqty[\frac{\sqrt{2}}{2} \amp \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \amp -\frac{\sqrt{2}}{2}]\mqty[e^{-t} \amp 0 \\ 0 \amp e^{7t}]\mqty[\frac{\sqrt{2}}{2} \amp \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \amp -\frac{\sqrt{2}}{2}]\mqty[2 \\ -1]</me>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          format short
+          A = [3, -4; -4, 3]
+          [U,D] = eig(A)
+        </input>
+      </sage>
     </subsection>
   </section>
 </chapter>
