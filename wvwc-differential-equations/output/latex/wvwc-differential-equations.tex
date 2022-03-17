@@ -1,6 +1,6 @@
 %********************************************%
 %*       Generated from PreTeXt source      *%
-%*       on 2022-03-16T17:01:55-04:00       *%
+%*       on 2022-03-17T15:52:15-04:00       *%
 %*   A recent stable commit (2020-08-09):   *%
 %* 98f21740783f166a773df4dc83cab5293ab63a4a *%
 %*                                          *%
@@ -9,7 +9,7 @@
 %********************************************%
 %% We elect to always write snapshot output into <job>.dep file
 \RequirePackage{snapshot}
-\documentclass[oneside,10pt,]{book}
+\documentclass[twoside,10pt,]{book}
 %% Custom Preamble Entries, early (use latex.preamble.early)
 %% Default LaTeX packages
 %%   1.  always employed (or nearly so) for some purpose, or
@@ -236,9 +236,15 @@ colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
 \renewpagestyle{plain}{%
 \setfoot{}{\pagefont\thepage}{}%
 }%
-%% Single pages as in default LaTeX
+%% Two-page spread as in default LaTeX
 \renewpagestyle{headings}{%
-\sethead{\pagefont\slshape\MakeUppercase{\ifthechapter{\chaptertitlename\space\thechapter.\space}{}\chaptertitle}}{}{\pagefont\thepage}%
+\sethead%
+[\pagefont\thepage]%
+[]
+[\pagefont\slshape\MakeUppercase{\ifthechapter{\chaptertitlename\space\thechapter.\space}{}\chaptertitle}]%
+{\pagefont\slshape\MakeUppercase{\ifthesection{Section\space\thesection.\space\sectiontitle}{}}}%
+{}%
+{\pagefont\thepage}%
 }%
 \pagestyle{headings}
 %% end: customizations of page styles via the modal "titleps-style" template
@@ -700,11 +706,11 @@ incl/.append style={jumpdot,fill=black},
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
 \renewcommand{\vec}[1]{\mathbf{#1}}
-\newcommand{\grad}{\nabla}
+\providecommand{\grad}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
-\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
-\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
-\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\providecommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\providecommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\providecommand{\dd}[2][]{\, d^{#1} #2\ }
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
@@ -781,7 +787,7 @@ It is straightforward to check if a function is a solution of some given differe
 \begin{example}{Verifying solutions.}{x:example:example-verifying-solutions}%
 Is \(y = 5e^{x^{2}}\) a solution of the ODE \(y' = 2xy\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548778879392}{}\quad{}At this point we don't know how to solve differential equations, but that doesn't mean we can't \emph{check} solutions of differential equations. To do so, we just plug \(5e^{x^{2}}\) wherever \(y\) shows up in the ODE and see if the resulting equation is true. So we have%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816122784}{}\quad{}At this point we don't know how to solve differential equations, but that doesn't mean we can't \emph{check} solutions of differential equations. To do so, we just plug \(5e^{x^{2}}\) wherever \(y\) shows up in the ODE and see if the resulting equation is true. So we have%
 \begin{align*}
 y' & = 2xy \\
 (5e^{x^{2}})' & = 2x(5e^{x^{2}}) \text{ after substituting }y = 5e^{x^{2}}\\
@@ -800,7 +806,7 @@ Solutions of ODEs that depend on arbitrary constants, such as \(y = Ce^{x^{2}}\)
 \begin{example}{A trigonometric solution.}{x:example:example-a-trigonometric-sol}%
 Show that \(x = A\cos(3t) + B\sin(3t)\), where \(A\) and \(B\) are arbitrary constants, is a general solution of \(x'' + 9x = 0\). Then find a particular solution.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548778892832}{}\quad{}To check that \(x = A\cos(3t) + B\sin(3t)\) is a general solution of \(x''+9x = 0\), we just need to plug it into the ODE and show that it satisfies it. Since%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816168864}{}\quad{}To check that \(x = A\cos(3t) + B\sin(3t)\) is a general solution of \(x''+9x = 0\), we just need to plug it into the ODE and show that it satisfies it. Since%
 \begin{equation*}
 x'' = -9(A\cos(3t)+B\sin(3t)) = -9x,
 \end{equation*}
@@ -814,7 +820,7 @@ An ODE together with an initial condition is called an \terminology{initial valu
 \begin{example}{Solving an IVP.}{x:example:example-solving-an-ivp}%
 Solve the IVP \(\dv{y}{x} = -xe^{-x^{2}}, y(0)=1\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548778900640}{}\quad{}We need to find a function \(y\) that satisfies two different constraints: \(y' = -xe^{-x^{2}}\) and \(y(0)=1\). We'll start with the first one, which we actually know how to do from Calculus I. If \(y' = -xe^{-x^{2}}\), then%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816143904}{}\quad{}We need to find a function \(y\) that satisfies two different constraints: \(y' = -xe^{-x^{2}}\) and \(y(0)=1\). We'll start with the first one, which we actually know how to do from Calculus I. If \(y' = -xe^{-x^{2}}\), then%
 \begin{equation*}
 y = \int -xe^{-x^{2}}\,dx = \frac{1}{2}e^{-x^{2}}+C.
 \end{equation*}
@@ -842,7 +848,7 @@ Differential equations are useful because they can provide a mathematical model 
 \begin{example}{Newton's Law of Cooling.}{x:example:example-newton-s-law-of-cooling}%
 Restate Newton's Law of Cooling as a differential equation.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780155168}{}\quad{}It may not be obvious that Newton's Law of Cooling can be restated as a differential equation, but the phrase "rate of change" that appears in the statement of the law is a good clue that this can be done. To do this, first we need to give the relevant quantities (the temperature of the object and the temperature of the surrounding medium) names. Let \(T(t)\) denote the temperature of the object at time \(t\) and let \(A(t)\) denote the temperature of the surrounding medium at time \(t\). Then Newton's Law of Cooling says that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816153248}{}\quad{}It may not be obvious that Newton's Law of Cooling can be restated as a differential equation, but the phrase "rate of change" that appears in the statement of the law is a good clue that this can be done. To do this, first we need to give the relevant quantities (the temperature of the object and the temperature of the surrounding medium) names. Let \(T(t)\) denote the temperature of the object at time \(t\) and let \(A(t)\) denote the temperature of the surrounding medium at time \(t\). Then Newton's Law of Cooling says that%
 \begin{equation*}
 \dv{T}{t} = k(T-A)
 \end{equation*}
@@ -854,7 +860,7 @@ Most of the mathematical models we'll look at will take the form of an IVP.%
 \begin{example}{An IVP modeling a falling object.}{x:example:example-an-ivp-modeling-a-falling-object}%
 A ball weighing \SI{0.5}{\kilo\gram} is dropped from a height of \SI{100}{\meter} and is acted upon by gravity and air resistance. Assuming that the force of air resistance is proportional to the velocity of the ball, what is an IVP that models the movement of the ball?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780164512}{}\quad{}What we need to do is to translate this physical situation into mathematics, and to do that we need to start assigning names to the quantities of interest. The quantities that matter in this problem are the movement of the ball, the force of gravity and the force of air resistance. We'll name them as follows:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816326176}{}\quad{}What we need to do is to translate this physical situation into mathematics, and to do that we need to start assigning names to the quantities of interest. The quantities that matter in this problem are the movement of the ball, the force of gravity and the force of air resistance. We'll name them as follows:%
 \begin{align*}
 \text{height of the ball  seconds after its released} &= y(t) \\
 \text{force of gravity} &= F_{G} = mg = -4.9\\
@@ -904,10 +910,10 @@ Suppose we wanted to solve the ODE \(\dv{y}{x} = x\). Then we can do so using th
 y = \int x\,dx = \frac{1}{2}x^{2}+C.
 \end{equation*}
 Any choice for \(C\) yields another solution of the ODE \(\dv{y}{x} = x\).%
-\begin{aside}{}{g:aside:idp105548780175392}%
+\begin{aside}{}{g:aside:idp105548816337312}%
 Again, it's very important in this course not to forget the arbitrary constant \(C\)!%
 \end{aside}
-Now let's make things a little more interesting. Suppose we wanted to solve the ODE \(\dv{y}{x} = e^{-x^{2}}\). Then this is \emph{impossible} to do in a single "closed-form". \begin{aside}{}{g:aside:idp105548780177312}%
+Now let's make things a little more interesting. Suppose we wanted to solve the ODE \(\dv{y}{x} = e^{-x^{2}}\). Then this is \emph{impossible} to do in a single "closed-form". \begin{aside}{}{g:aside:idp105548816339232}%
 By closed-form we basically mean in terms of the usual exponential, trigonometric and polynomial functions, as well as their inverses.%
 \end{aside}
  This is because solving this ODE requires integrating \(e^{-x^{2}}\), which as you may remember from Calculus 2 cannot be done without resorting to something like power series. Even if we can't solve the ODE, or if we can't solve it easily, we still want to be able to obtain some information from it. One way to do this is by using \terminology{direction fields}, which is a graphical representation of the ODE.%
@@ -924,7 +930,7 @@ perform the following steps:%
 \item{}Repeat at several other points in the \(xy\)-plane until you develop a satisfactory picture of the behavior of the ODE.%
 \end{enumerate}
 The resulting graph is called the direction field for the ODE.%
-\begin{aside}{}{g:aside:idp105548780183584}%
+\begin{aside}{}{g:aside:idp105548816312224}%
 Direction fields are often called slope fields.%
 \end{aside}
 \begin{example}{Plotting a direction field by hand.}{x:example:example-plotting-a-direction-field-by-hand}%
@@ -965,7 +971,7 @@ Fill in the direction field for \(y' = t - y\) at the indicated points:%
 \tcblower
 \end{figureptx}%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780119968}{}\quad{}To plot the direction field, remember that we're basically plotting \emph{slopes}. So we first need to figure out \(y' = t-y\) at the indicated points. The following table lists values for \(y'\) at some of these points: \begin{tableptx}{\textbf{}}{g:table:idp105548780121504}{}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816314656}{}\quad{}To plot the direction field, remember that we're basically plotting \emph{slopes}. So we first need to figure out \(y' = t-y\) at the indicated points. The following table lists values for \(y'\) at some of these points: \begin{tableptx}{\textbf{}}{g:table:idp105548816316192}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{cc}\hrulethick
@@ -978,7 +984,7 @@ Fill in the direction field for \(y' = t - y\) at the indicated points:%
 }%
 \end{tableptx}%
  If we fill out the remaining values of \(y'\) and plot the corresponding slopes, we should get something like this:%
-\begin{figureptx}{}{g:figure:idp105548780127520}{}%
+\begin{figureptx}{}{g:figure:idp105548816322208}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \resizebox{\linewidth}{!}{%
 \def\length{sqrt(1+(x-y)^2)}
@@ -1021,7 +1027,7 @@ Fill in the direction field for \(y' = t - y\) at the indicated points:%
 \begin{example}{Plotting a direction field with a CAS.}{x:example:example-plotting-a-direction-field-with-a-cas}%
 Plot the direction field for the differential equation \(x' = x(1-x)\), where \(x=x(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780129824}{}\quad{}We can easily do this with a computer system (such as Sage!). For example, try running the cell below this example. If we do so, we get something like the following diagram:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816357280}{}\quad{}We can easily do this with a computer system (such as Sage!). For example, try running the cell below this example. If we do so, we get something like the following diagram:%
 \begin{figureptx}{The direction field for \(x' = x(1-x)\).}{x:figure:figure-dirfield1}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \includegraphics[width=\linewidth]{generated/asymptote/image-4.pdf}
@@ -1050,7 +1056,7 @@ x(0) & = \frac{1}{2}.
 \end{align*}
 Determine \(\lim_{t\to\infty}x(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780136224}{}\quad{}Since we don't know how to solve this IVP yet, we'll make use of the direction field from \hyperref[x:example:example-plotting-a-direction-field-with-a-cas]{Example~{\xreffont\ref{x:example:example-plotting-a-direction-field-with-a-cas}}} to find an approximate solution curve. Since the initial condition is \(x(0) = \frac{1}{2}\), this means that the solution must pass through the point \((0,\frac{1}{2})\). So if we start at this point and trace a curve that flows with the direction field, we get the following solution curve:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816363680}{}\quad{}Since we don't know how to solve this IVP yet, we'll make use of the direction field from \hyperref[x:example:example-plotting-a-direction-field-with-a-cas]{Example~{\xreffont\ref{x:example:example-plotting-a-direction-field-with-a-cas}}} to find an approximate solution curve. Since the initial condition is \(x(0) = \frac{1}{2}\), this means that the solution must pass through the point \((0,\frac{1}{2})\). So if we start at this point and trace a curve that flows with the direction field, we get the following solution curve:%
 \begin{figureptx}{The solution curve corresponding to the initial condition \(x(0) = \frac{1}{2}\).}{x:figure:figure-solcurve1}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \includegraphics[width=\linewidth]{generated/asymptote/image-5.pdf}
@@ -1082,7 +1088,7 @@ This section corresponds to Section 1.3 from the text.%
 %
 \begin{subsectionptx}{Separable ODEs}{}{Separable ODEs}{}{}{x:subsection:subsection-separable-odes}
 The simplest ODEs to solve are the first-order ODEs of the form \(\dv{y}{x} = f(x)\). The Fundamental Theorem of Calculus guarantees that the solution \(y\) is given by \(y = \int f(x)\,dx\).%
-\begin{aside}{}{g:aside:idp105548780144544}%
+\begin{aside}{}{g:aside:idp105548816372000}%
 \end{aside}
 Another type of ODE that is relatively straightforward to solve is the \terminology{separable ODE}, which is a first-order ODE that can be written in the form%
 %
@@ -1093,7 +1099,7 @@ These ODEs can be solved by integration as well, but only after some rearranging
 \begin{example}{Solving a separable ODE.}{x:example:example-solving-a-separable-ode}%
 Solve the IVP given by \(y' = x+4xy^{2}, y(0)=1\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780148000}{}\quad{}The first step to solving this IVP is to solve the ODE \(y' = x+4xy^{2}\). It may not look like it at first, but this ODE is separable since we can rewrite it as \(y' = x(1+4y^{2})\). To solve this ODE, we need to move the \(y\) terms to the left hand side of the equation and the \(x\) terms to the right hand side. We'll abuse notation a little bit to do so by rewriting \(y' = \dv{y}{x}\) and treating \(\dv{y}{x}\) as a fraction, but it won't get us into too much trouble here:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816342176}{}\quad{}The first step to solving this IVP is to solve the ODE \(y' = x+4xy^{2}\). It may not look like it at first, but this ODE is separable since we can rewrite it as \(y' = x(1+4y^{2})\). To solve this ODE, we need to move the \(y\) terms to the left hand side of the equation and the \(x\) terms to the right hand side. We'll abuse notation a little bit to do so by rewriting \(y' = \dv{y}{x}\) and treating \(\dv{y}{x}\) as a fraction, but it won't get us into too much trouble here:%
 %
 \begin{align*}
 \dv{y}{x} = x(1+4y^{2}) &\Rightarrow \frac{dy}{1+4y^{2}} = x\,dx \\
@@ -1114,7 +1120,7 @@ So the implicit solution of this IVP is given by%
 \begin{example}{Newton's Law of Cooling again.}{x:example:example-newton-s-law-of-cooling-again}%
 A metal plate is removed from an oven and placed in a room. The temperature of the plate is \(100^{\circ}\) Celsius and the temperature of the room is fixed at \(15^{\circ}\) Celsius. After \(20\) minutes the temperature of the plate drops to \(90^{\circ}\) Celsius. How hot is the plate after five hours?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780090528}{}\quad{}Let \(T(t)\) denote the temperature of the plate \(t\) minutes after being removed from the oven and let \(A(t)\) denote the temperature of the room \(t\) minutes after the plate is removed from the oven. Then \(T(0) = 100\) and Newton's Law of Cooling says that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816350752}{}\quad{}Let \(T(t)\) denote the temperature of the plate \(t\) minutes after being removed from the oven and let \(A(t)\) denote the temperature of the room \(t\) minutes after the plate is removed from the oven. Then \(T(0) = 100\) and Newton's Law of Cooling says that%
 %
 \begin{equation*}
 \dv{T}{t} = k(T-15).
@@ -1149,7 +1155,7 @@ At this point we can only solve a couple types of differential equations. An ODE
 \begin{example}{Substitution to solve an ODE.}{x:example:example-substitution-to-solve-an-ode}%
 Find the general solution of \(y' = (x+y+3)^{2}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780103584}{}\quad{}This ODE is not separable and we can't just integrate it (since the right hand side depends on the dependent variable). However, the form of the right hand side suggests a substitution: \(u = x+y+3\). This would simplify things quite a bit, leaving us with \(y'=u^{2}\). The only problem with this is that \(y'\) depends on \(x\), not \(u\). We must rewrite \(y'\) in terms of the new variable \(u\), which isn't too bad. Since \(u = x+y+3\), we get \(y' = u'-1\). Therefore the ODE becomes%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816265760}{}\quad{}This ODE is not separable and we can't just integrate it (since the right hand side depends on the dependent variable). However, the form of the right hand side suggests a substitution: \(u = x+y+3\). This would simplify things quite a bit, leaving us with \(y'=u^{2}\). The only problem with this is that \(y'\) depends on \(x\), not \(u\). We must rewrite \(y'\) in terms of the new variable \(u\), which isn't too bad. Since \(u = x+y+3\), we get \(y' = u'-1\). Therefore the ODE becomes%
 \begin{equation*}
 u'-1 = u^{2}\text{ or just }\dv{u}{x} = 1+u^{2}.
 \end{equation*}
@@ -1160,7 +1166,7 @@ This new ODE \emph{is} separable, and so we separate variables and integrate to 
 \begin{example}{A less obvious substitution.}{x:example:example-a-less-obvious-substitution}%
 Find an explicit solution of \(xy'=x+y\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780111264}{}\quad{}It's tough to see what to do right away, so we'll try simplifying the ODE first. In particular, we'll solve for \(y'\) to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816273440}{}\quad{}It's tough to see what to do right away, so we'll try simplifying the ODE first. In particular, we'll solve for \(y'\) to get%
 \begin{equation*}
 y' = 1+\frac{y}{x}.
 \end{equation*}
@@ -1211,7 +1217,7 @@ To get a sense of how to solve first-order linear ODEs, we'll try some relativel
 \begin{example}{Solving a first-order linear ODE.}{x:example:example-solving-a-first-order-linear-ode}%
 Find the general solution of \(\dv{y}{x}+2y = x\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780060960}{}\quad{}First, note that the ODE is indeed a first-order linear ODE since it takes the form given in \hyperref[x:definition:definition-first-order-linear-odes]{Definition~{\xreffont\ref{x:definition:definition-first-order-linear-odes}}}. If we stare at the ODE for a bit, we might think that the left hand side looks like something we'd get after using the product rule. Just compare \((fg)' = fg'+f'g\) with \(\dv{y}{x}+2y\), and it appears that the unknown function \(y\) is taking the place of \(g\) in the product rule formula. If we could just figure out what the function \(f\) is supposed to be, then we could drastically simplify the left hand side of the ODE.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816256160}{}\quad{}First, note that the ODE is indeed a first-order linear ODE since it takes the form given in \hyperref[x:definition:definition-first-order-linear-odes]{Definition~{\xreffont\ref{x:definition:definition-first-order-linear-odes}}}. If we stare at the ODE for a bit, we might think that the left hand side looks like something we'd get after using the product rule. Just compare \((fg)' = fg'+f'g\) with \(\dv{y}{x}+2y\), and it appears that the unknown function \(y\) is taking the place of \(g\) in the product rule formula. If we could just figure out what the function \(f\) is supposed to be, then we could drastically simplify the left hand side of the ODE.%
 \par
 Unfortunately, there is no such function \(f\) that works here. If there were, we'd have to have \(f'=2\) and \(f=2x\), and clearly we aren't multiplying \(\dv{y}{x}\) by \(2x\) in the ODE. But we can pull a dirty trick here! We'll multiply through the ODE by \(e^{2x}\) to get the new ODE%
 \begin{equation*}
@@ -1241,7 +1247,7 @@ tx''+\frac{t}{1+t^{2}}x' = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}
 \end{equation*}
 with initial conditions \(x(0) = x'(0) = -1.\)%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780072992}{}\quad{}Even though this is a second-order ODE, we can rewrite it as a first-order ODE using the substitution \(u = x'\). Then the ODE becomes%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816300448}{}\quad{}Even though this is a second-order ODE, we can rewrite it as a first-order ODE using the substitution \(u = x'\). Then the ODE becomes%
 \begin{equation*}
 tu+\frac{t}{1+t^{2}}u = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}.
 \end{equation*}
@@ -1304,7 +1310,7 @@ then we can say that%
 \begin{equation*}
 \dv{x}{t} = r_{i}c_{i} - r_{o}c_{o} = r_{i}c_{i} - r_{0}\frac{x(t)}{V(t)}
 \end{equation*}
-where \(V(t)\) is the volume of solution in the tank at time \(t\). \begin{aside}{}{g:aside:idp105548780282272}%
+where \(V(t)\) is the volume of solution in the tank at time \(t\). \begin{aside}{}{g:aside:idp105548816280608}%
 We assume that \(c_{i},r_{i},r_{o}\) are all constant.%
 \end{aside}
  Furthermore, if we let \(V_{0} = V(0)\) denote the initial volume of the solution in the tank then we can say that \(V(t) = V_{0} + (r_{i}-r_{0})t.\) Hence the amount of solute \(x(t)\) obeys the first-order linear ODE%
@@ -1315,7 +1321,7 @@ We assume that \(c_{i},r_{i},r_{o}\) are all constant.%
 \begin{example}{Salt in a tank.}{x:example:example-salt-in-a-tank}%
 A tank contains \SI{100}{\liter} of a solution consisting of \SI{50}{\kilo\gram} of salt dissolved in water. Solution containing \SI{1}{\kilo\gram\per\liter} of salt is pumped into the tank at a rate of \SI{2}{\liter\per\minute} and the well-mixed solution is pumped out at the rate of \SI{3}{\liter\per\minute}. How much salt will be in the tank after \(t\) minutes?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780290848}{}\quad{}Let \(x(t)\) denote the amount of salt in the tank after \(t\) minutes, so \(x(0) = 50\). Then%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816289184}{}\quad{}Let \(x(t)\) denote the amount of salt in the tank after \(t\) minutes, so \(x(0) = 50\). Then%
 \begin{equation*}
 \dv{x}{t} = r_{i}c_{i}-r_{o}c_{o} = 2\cdot1-3\frac{x}{100-t}.
 \end{equation*}
@@ -1366,7 +1372,7 @@ Ideally, the answer to both of these questions will be yes.%
 \begin{example}{The answer is no.}{x:example:example-the-answer-is-no}%
 Does \(x\dv{y}{x} = \sqrt[3]{y},y(1) = 0\) have a unique solution?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780300576}{}\quad{}We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that \(y = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\). On the other hand, we can also eyeball a second solution: \(y=0\). So this IVP has \emph{two} different solutions: \(y_{1} = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\) and \(y_{2} = 0\).%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816463008}{}\quad{}We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that \(y = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\). On the other hand, we can also eyeball a second solution: \(y=0\). So this IVP has \emph{two} different solutions: \(y_{1} = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\) and \(y_{2} = 0\).%
 \end{example}
 Clearly, IVPs don't always have unique solutions. Sometimes it's difficult to determine precisely when an IVP can have a unique solution, but most of the cases we'll care about in this class will fall under the following theorem.%
 \begin{theorem}{Existence and Uniqueness Theorem.}{}{x:theorem:theorem-existence-and-uniqueness-theorem}%
@@ -1478,7 +1484,7 @@ The general population equation for a population \(P(t)\) is given by%
 \begin{example}{Population Explosion.}{x:example:example-population-explosion}%
 A population has \(100\) members at time \(t = 0\) years with a death rate of \(.25P\) and a birth rate of \(.5P\), where \(P(t)\) denotes the population after \(t\) years. Find \(P(t)\) and determine if this is a reasonable population model.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780271392}{}\quad{}If we assume that the population obeys the general growth equation, then we get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816498848}{}\quad{}If we assume that the population obeys the general growth equation, then we get%
 \begin{equation*}
 P' = .25P^{2}, P(0) = 100.
 \end{equation*}
@@ -1525,7 +1531,7 @@ where \(P_{0} = P(0)\). In order to verify the reasonableness of our logistic mo
 \begin{example}{Long-Term Behavior of Logistic Growth.}{x:example:example-long-term-behavior-of-logistic-growth}%
 What is the long-term population of a species that grows according to the logistic equation \(\dv{P}{t} = kP(M-P)\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780216864}{}\quad{}Using the fact that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816477088}{}\quad{}Using the fact that%
 \begin{equation*}
 P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},
 \end{equation*}
@@ -1539,7 +1545,7 @@ In the logistic equation \(P' = kP(M-P)\), the value \(M\) is the \terminology{c
 \begin{example}{Population Growth in the USA.}{x:example:example-population-growth-in-the-usa}%
 In millions, the population of the USA in 1990 was \(250\) and was growing at a rate of \(3.1\) per year. In 2012, the population was \(314\) and was growing at a rate of \(2.3\) per year. Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of \(325.7\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780222624}{}\quad{}Let \(P(t)\) denote the population of the USA (in millions), where \(t\) is the number of years after 1990. Then%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816482848}{}\quad{}Let \(P(t)\) denote the population of the USA (in millions), where \(t\) is the number of years after 1990. Then%
 \begin{equation*}
 \dv{P}{t} = kP(M-P)
 \end{equation*}
@@ -1584,7 +1590,7 @@ Autonomous ODEs like \(\dv{x}{t} = f(x)\) are useful because the behavior of the
 \begin{example}{Finding Equilibrium Solutions.}{x:example:example-finding-equilibrium-solutions}%
 Find the equilibrium solutions of \(\dv{x}{t} = -x^{2} + 7x - 10\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780239008}{}\quad{}We need to solve the equation \(-x^{2} + 7x - 10 = 0\). Thankfully, we can factor this to get \((2-x)(x-5) = 0\), and so the equilibrium solutions are \(x = 2,5\).%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816401184}{}\quad{}We need to solve the equation \(-x^{2} + 7x - 10 = 0\). Thankfully, we can factor this to get \((2-x)(x-5) = 0\), and so the equilibrium solutions are \(x = 2,5\).%
 \end{example}
 \begin{definition}{Stability of Solutions.}{x:definition:definition-stability-critial-points}%
 A critical point is \terminology{stable} if solutions that start "near" the point stay near it. A critical point is \terminology{unstable} if solutions that start "near" the point can diverge away from it.%
@@ -1592,8 +1598,8 @@ A critical point is \terminology{stable} if solutions that start "near" the poin
 \begin{example}{Determining the Stability of Solutions.}{x:example:example-determining-the-stability-of-solutions}%
 What are the stable critical points of \(\dv{x}{t} = -x^{2} + 7x - 10\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780243488}{}\quad{}We already know that the critical points are \(x = 2, 5\). We can determine their stability by making use of a \terminology{phase diagram}, which is essentially a sign chart for \(f(x) = -x^{2} + 7x - 10\):%
-\begin{figureptx}{The phase diagram for \(x' = f(x).\)}{g:figure:idp105548780245024}{}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816372640}{}\quad{}We already know that the critical points are \(x = 2, 5\). We can determine their stability by making use of a \terminology{phase diagram}, which is essentially a sign chart for \(f(x) = -x^{2} + 7x - 10\):%
+\begin{figureptx}{The phase diagram for \(x' = f(x).\)}{g:figure:idp105548816374176}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
@@ -1628,7 +1634,7 @@ Consider a population of fish that obeys the logistic equation%
 \end{equation*}
 where \(P(t)\) is the population of fish (in thousands) after \(t\) years. Suppose that the population is also harvested at some rate \(h\) (in thousands per year). What is the maximum sustainable rate of harvesting?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780185888}{}\quad{}To account for the harvesting, we need to modify the ODE:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816380576}{}\quad{}To account for the harvesting, we need to modify the ODE:%
 \begin{equation*}
 \dv{P}{t} = 2P(30 - P) - h.
 \end{equation*}
@@ -1646,7 +1652,7 @@ by the quadratic formula. We now have three cases to consider: \(3600 - 8h \lt 0
 0 \lt c_{1} \lt 15 \lt c_{2} \lt 75.
 \end{equation*}
 The phase diagram for this situation is%
-\begin{figureptx}{}{g:figure:idp105548780190112}{}%
+\begin{figureptx}{}{g:figure:idp105548816384800}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
@@ -1677,7 +1683,7 @@ The phase diagram for this situation is%
 \end{figureptx}%
 So we see that \(c_{1}\) is unstable while \(c_{2}\) is stable. In particular, as long as \(P\geq c_{1} = 15 - \sqrt{3600 - 8h}\), then the rate of harvesting is sustainable.%
 \item{}Now assume that \(h = 450\). Then we have only one equilibrium solution: \(c = 15\). The corresponding phase diagram is%
-\begin{figureptx}{}{g:figure:idp105548780193824}{}%
+\begin{figureptx}{}{g:figure:idp105548816421280}{}%
 \begin{image}{0.25}{0.5}{0.25}%
 \resizebox{\linewidth}{!}{%
     \begin{tikzpicture}
@@ -1720,7 +1726,7 @@ Suppose \(\dv{x}{t} = f(x)\) where \(f(x)\) is continuously differentiable, and 
 \begin{example}{Classifying the Critical Points of the Logistic Equation.}{x:example:example-classifying-the-critical-points-of-the-logistic-equation}%
 Classify the critical points of the logistic equation as stable or unstable.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780207136}{}\quad{}Recall that the logistic equation is given by \(P' = kP(M-P) = f(P)\) for (we'll assume) positive constants \(k,M\). From here, we clearly see that the critical points are \(P = 0\) and \(P = M\) (which makes sense from a population standpoint!). We could set up a phase diagram to determine stability, but we'll use \hyperref[x:theorem:theorem-linear-stability-analysis]{Theorem~{\xreffont\ref{x:theorem:theorem-linear-stability-analysis}}} instead.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816434848}{}\quad{}Recall that the logistic equation is given by \(P' = kP(M-P) = f(P)\) for (we'll assume) positive constants \(k,M\). From here, we clearly see that the critical points are \(P = 0\) and \(P = M\) (which makes sense from a population standpoint!). We could set up a phase diagram to determine stability, but we'll use \hyperref[x:theorem:theorem-linear-stability-analysis]{Theorem~{\xreffont\ref{x:theorem:theorem-linear-stability-analysis}}} instead.%
 \par
 Since \(f'(P) = k(M-P) - kP\), we see that%
 \begin{align*}
@@ -1785,13 +1791,13 @@ Consider an object attached to a spring. The force exerted by the spring on the 
 \begin{example}{A second-order model.}{x:example:example-a-second-order-model}%
 An object of mass \SI{4}{\kilo\gram} is attached to a horizontal, frictionless spring. Let \(x=0\) denote the equilibrium position of the spring and let \(x(t)\) denote the displacement of the mass from the spring's equilibrium position. The only force acting on the mass is the force of the spring itself. Find a mathematical model for \(x(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780426656}{}\quad{}Let \(F_{S}\) denote the force of the spring on the mass. Then by \hyperref[x:theorem:theorem-hooke-s-law]{Theorem~{\xreffont\ref{x:theorem:theorem-hooke-s-law}}} we must have \(F_{S} = -kx\) for some \(k>0\). Now, by Newton's Second Law we must also have \(F_{S} = 4x''\). Hence%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815540000}{}\quad{}Let \(F_{S}\) denote the force of the spring on the mass. Then by \hyperref[x:theorem:theorem-hooke-s-law]{Theorem~{\xreffont\ref{x:theorem:theorem-hooke-s-law}}} we must have \(F_{S} = -kx\) for some \(k>0\). Now, by Newton's Second Law we must also have \(F_{S} = 4x''\). Hence%
 \begin{equation*}
 4x'' = -kx\quad\text{or}\quad4x''+kx = 0.
 \end{equation*}
 So the motion of the mass is modeled by a linear, second-order homogeneous ODE.%
 \end{example}
-\begin{aside}{}{g:aside:idp105548780429472}%
+\begin{aside}{}{g:aside:idp105548815542816}%
 The reason we take \(F_{S} = -kx\) in Hooke's Law is because we want to emphasize that the spring force is a \emph{restoring force}, since it acts against the displacement of the mass.%
 \end{aside}
 The general trend that we will see for mathematical models using linear ODEs is that they will be homogeneous if we assume that there is no external force, and nonhomogeneous if we assume there is an external force.%
@@ -1812,7 +1818,7 @@ Let \(f\) and \(g\) denote functions of \(x\). A \terminology{linear combination
 \index{second-order ODEs!second-order linear ODEs!superposition principle}%
 Let \(y_{1}\) and \(y_{2}\) denote two (possibly different) solutions of the ODE \(y''+P(x)y'+Q(x)y = 0\). Then any linear combination of these solutions is itself another solution of the same ODE.%
 \end{theorem}
-\begin{proof}{}{g:proof:idp105548780440480}
+\begin{proof}{}{g:proof:idp105548815520800}
 We need to show that \(y = c_{1}y_{1} + c_{2}y_{2}\) is another solution of the same ODE, where \(c_{1},c_{2}\) are arbitrary constants. To do this, we'll just plug the linear combination into the ODE and simplify:%
 \begin{align*}
 y''+P(x)y'+Q(x)y \amp = (c_{1}y_{1}+c_{2}y_{2})''+P(x)(c_{1}y_{1}+c_{2}y_{2})+Q(x)(c_{1}y_{1}+c_{2}y_{2})y \\
@@ -1830,7 +1836,7 @@ Using the fact that \(y_{1} = \cosh\frac{x}{2}\) and \(y_{2} = \sinh\frac{x}{2}\
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780216608}{}\quad{}Note that we have \emph{two} initial conditions. In general, we'll need as many initial conditions as the order of the ODE.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815526432}{}\quad{}Note that we have \emph{two} initial conditions. In general, we'll need as many initial conditions as the order of the ODE.%
 \par
 To solve the IVP, we'll use the superposition principle to give us as much leeway as possible in constructing a solution of out \(y_{1}\) and \(y_{2}\). So we'll guess the solution takes the form \(y = c_{1}\cosh\frac{x}{2} + c_{2}\sinh\frac{x}{2}\). By the superposition principle we're guaranteed that this is a solution of the ODE \(4y''-y=0\), so we just need to pick the constants \(c_{1},c_{2}\) in order to satisfy the initial conditions. Let's start with the first initial condition, \(y(0) = 3\). This gives us the equation%
 \begin{equation*}
@@ -1857,7 +1863,7 @@ The main idea behind \hyperref[x:definition:definition-linear-independence-of-fu
 \begin{example}{Linear independence of sine and cosine.}{x:example:example-linear-independence-of-sine-and-cosine}%
 Show that \(\sin x\) and \(\cos x\) are linearly independent.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780398496}{}\quad{}Since \(\frac{\sin x}{\cos x} = \tan x\) is \emph{not} constant, this means that \(\sin x\) and \(\cos x\) must be linearly independent.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815577376}{}\quad{}Since \(\frac{\sin x}{\cos x} = \tan x\) is \emph{not} constant, this means that \(\sin x\) and \(\cos x\) must be linearly independent.%
 \end{example}
 Although it wasn't too hard to see that the functions in \hyperref[x:example:example-linear-independence-of-sine-and-cosine]{Example~{\xreffont\ref{x:example:example-linear-independence-of-sine-and-cosine}}} were linearly independent, in other cases it can be much trickier (especially when we move to higher order ODEs). For example, suppose we set \(f(t) = -5(t-15)^{2} + 450\) and \(g(t) = 12t(30-t)\). Then it's not obvious at all that these two functions are linearly dependent! In fact,%
 \begin{equation*}
@@ -1895,7 +1901,7 @@ t^{2}x'' - tx' + 2x = 0,
 \end{equation*}
 solve the corresponding IVP with initial conditions \(x(1) = 1, x'(1) = -1\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780359968}{}\quad{}We need to start by showing that \(\{x_{1},x_{2}\}\) is a basis for the ODE. First, we compute \(W(x_{1},x_{2})\):%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815473312}{}\quad{}We need to start by showing that \(\{x_{1},x_{2}\}\) is a basis for the ODE. First, we compute \(W(x_{1},x_{2})\):%
 \begin{equation*}
 W(x_{1},x_{2}) = (t\cos\ln t)(\sin\ln t + \cos\ln t) - (t\sin\ln t)(\cos\ln t - \sin\ln t) = t(\cos^{2}\ln t + \sin^{2}\ln t) = t.
 \end{equation*}
@@ -1957,7 +1963,7 @@ c_{1}e^{r_{1}x} + c_{2}e^{r_{2}x}.
 \begin{example}{Spring-mass system revisited.}{x:example:example-spring-mass-system-revisited}%
 An object of mass \SI{4}{\kilo\gram} is attached to a horizontal, frictionless spring. Suppose the spring constant is given by \(k=16\). The mass is held \SI{3}{\meter} to the right of the spring's equilibrium position, and is then released at time \(t=0\) where \(t\) is in seconds. Find the displacement \(x(t)\) of the mass.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780324128}{}\quad{}We know from \hyperref[x:example:example-a-second-order-model]{Example~{\xreffont\ref{x:example:example-a-second-order-model}}} that the second-order ODE given by%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815470240}{}\quad{}We know from \hyperref[x:example:example-a-second-order-model]{Example~{\xreffont\ref{x:example:example-a-second-order-model}}} that the second-order ODE given by%
 \begin{equation*}
 4x'' + kx = 0\quad\text{or}\quad x'' + 4x = 0
 \end{equation*}
@@ -2001,7 +2007,7 @@ Now we'll take a look at how to solve second-order homogeneous ODEs whose charac
 \begin{example}{Repeated roots in the characteristic equation.}{x:example:example-repeated-roots-in-the-characteristic-equation}%
 Find the general solution of \(y'' + 2y' + y = 0\) where \(y = y(x)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780338976}{}\quad{}We begin by solving the characteristic equation, which for this ODE is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815517856}{}\quad{}We begin by solving the characteristic equation, which for this ODE is%
 \begin{equation*}
 r^{2} + 2r + 1 = 0.
 \end{equation*}
@@ -2019,7 +2025,7 @@ y = c_{1}y_{1} + c_{2}y_{2} = c_{1}e^{-x} + c_{2}xe^{-x}.
 %
 \end{example}
 The method used in \hyperref[x:example:example-repeated-roots-in-the-characteristic-equation]{Example~{\xreffont\ref{x:example:example-repeated-roots-in-the-characteristic-equation}}} also works for other homogeneous ODEs with constant coefficients whose characteristic equations have repeated roots. Hence the roots of the characteristic equation \emph{completely} determine the general solutions of such ODEs. We summarize this in the following table.%
-\begin{tableptx}{\textbf{}}{g:table:idp105548780346912}{}%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815493024}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -2111,7 +2117,7 @@ We can go even further by making use of some clever algebra and the appropriate 
 x \amp = A\cos\omega_{0}t + B\sin\omega_{0}t \\
 \amp = \sqrt{A^{2}+B^{2}}\left(\frac{A}{\sqrt{A^{2}+B^{2}}}\cos\omega_{0}t + \frac{B}{\sqrt{A^{2} + B^{2}}}\sin\omega_{0}t\right) 
 \end{align*}
-Now set \(C = \sqrt{A^{2} + B^{2}}\) and define \(\varphi\) implicitly by \(\cos\varphi = \frac{A}{C}\) and \(\sin\varphi = \frac{B}{C}\). \begin{aside}{}{g:aside:idp105548780561568}%
+Now set \(C = \sqrt{A^{2} + B^{2}}\) and define \(\varphi\) implicitly by \(\cos\varphi = \frac{A}{C}\) and \(\sin\varphi = \frac{B}{C}\). \begin{aside}{}{g:aside:idp105548815674912}%
 There are infinitely many choices for \(\varphi\) here, but we can select a unique one if we make the extra restriction that \(\varphi\in[0,2\pi)\).%
 \end{aside}
  Then we get%
@@ -2122,7 +2128,7 @@ x = \cos\varphi\cos\omega_{0}t + \sin\varphi\sin\omega_{0}t = \cos(\omega_{0}t -
 \begin{example}{Another spring-mass system.}{x:example:example-another-spring-mass-system}%
 An object with a mass of \SI{5}{\kilo\gram} is fixed to a spring and a force of \SI{10}{\newton} holds the mass \SI{5}{\meter} to the left of the spring's equilibrium position. If the object is released, how long will it take for the mass to return to its original position? And what is the position \(x(t)\) of the mass?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780570400}{}\quad{}Let \(x(t)\) denote the position of the mass \(t\) seconds after being released, so that \(x(0) = -5\) and \(x'(0) = 0\). We could find the time it takes for the mass to return to its starting position by first finding \(x(t)\), but a quicker way is to just find the period \(T\) of \(x\). To do this, we must find the circular frequency \(\omega_{0} = \sqrt{\frac{k}{m}}\). Thankfully, half of the work is done for us (we know \(m=5\)), so we only need the value of \(k\) which itself comes from Hooke's Law.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815683744}{}\quad{}Let \(x(t)\) denote the position of the mass \(t\) seconds after being released, so that \(x(0) = -5\) and \(x'(0) = 0\). We could find the time it takes for the mass to return to its starting position by first finding \(x(t)\), but a quicker way is to just find the period \(T\) of \(x\). To do this, we must find the circular frequency \(\omega_{0} = \sqrt{\frac{k}{m}}\). Thankfully, half of the work is done for us (we know \(m=5\)), so we only need the value of \(k\) which itself comes from Hooke's Law.%
 \par
 Call the spring force \(F_{S}\) and recall that \(F_{S} = -kx\). We know that it takes a force of \SI{10}{\newton} to hold the mass still at \(x=-5\). The spring force must \emph{precisely} counterbalance this force in order for the mass to remain still as it's held, which means that \(F_{S} = 10\) since \(F_{S}\) pulls the mass to the right. Therefore \(-k(-5) = 10\) and so \(k=2\), which gives \(\omega_{0} = \sqrt{\frac{2}{5}}\). This means that the period of motion is%
 \begin{equation*}
@@ -2140,7 +2146,7 @@ x(t) = 5\cos(\sqrt{\frac{2}{5}}t-\pi).
 \end{equation*}
 %
 \end{example}
-\begin{aside}{}{g:aside:idp105548780517664}%
+\begin{aside}{}{g:aside:idp105548815663776}%
 You may be troubled by the fact that we only explicitly used the first initial condition in this example. However, the second condition \(x'(0) = 0\) was actually used implicitly: it allowed us to assume that the amplitude was \(5\) as opposed to another number. If \(x'(0)\neq0\), finding \(C\) would have been a little trickier.%
 \end{aside}
 \end{subsectionptx}
@@ -2251,7 +2257,7 @@ after applying Euler's formula. As in the previous two cases, \(x(t)\to0\) as \(
 \begin{example}{A Spring-Dashpot System.}{x:example:example-a-spring-dashpot-system}%
 Suppose that an object of mass \(m = 25\) is attached to both a spring and a dashpot. The mass is held \(1\) meter to the left of the spring's equilibrium position \(x = 0\). The force of the spring on the mass is \(F_{S} = -226x\) and the force of the dashpot on the mass is \(F_{R} = -10x'\), where \(x\) is the displacement of the mass. At time \(t = 0\), the mass is released. Find \(x(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780483360}{}\quad{}The ODE that models the motion of this mass is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815695008}{}\quad{}The ODE that models the motion of this mass is%
 \begin{equation*}
 25x'' + 10x' + 226x = 0,
 \end{equation*}
@@ -2308,7 +2314,7 @@ grid=both
 \begin{sectionptx}{Solutions of Non-homogeneous Equations}{}{Solutions of Non-homogeneous Equations}{}{}{x:section:section-solutions-of-nonhomogeneous-equations}
 \begin{introduction}{}%
 In this section we'll deal with non-homogeneous equations and finding their solutions. This will help us to model systems involving an external force.%
-\begin{aside}{}{g:aside:idp105548780492576}%
+\begin{aside}{}{g:aside:idp105548815605920}%
 This section corresponds to Section 2.7 of the text.%
 \end{aside}
 \end{introduction}%
@@ -2339,7 +2345,7 @@ y'' - y' - 2y = 3x + 4.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780504096}{}\quad{}To find the general solution we need to do two things: find the complementary solution \(y_{c}\) of the associated homogeneous equation and find a single particular solution \(y_{p}\) of the given ODE. We already know how to find \(y_{c},\)\begin{aside}{}{g:aside:idp105548780505504}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815617952}{}\quad{}To find the general solution we need to do two things: find the complementary solution \(y_{c}\) of the associated homogeneous equation and find a single particular solution \(y_{p}\) of the given ODE. We already know how to find \(y_{c},\)\begin{aside}{}{g:aside:idp105548815586080}%
 The characteristic equation of the ODE is \((r + 1)(r - 2)\).%
 \end{aside}
  which is just%
@@ -2348,7 +2354,7 @@ y_{c} = c_{1}e^{x} + c_{2}e^{-2x}.
 \end{equation*}
 Once we can find a single particular solution \(y_{p}\) we'll be finished.%
 \par
-If we stare that the ODE, then we see that \(y\) and its derivatives must cancel each other and leave a polynomial. So it's reasonable to guess that a polynomial might be a solution of the ODE, or equivalently, \(y_{p}\) \emph{should be a polynomial}. Since the degree\begin{aside}{}{g:aside:idp105548780508576}%
+If we stare that the ODE, then we see that \(y\) and its derivatives must cancel each other and leave a polynomial. So it's reasonable to guess that a polynomial might be a solution of the ODE, or equivalently, \(y_{p}\) \emph{should be a polynomial}. Since the degree\begin{aside}{}{g:aside:idp105548815589152}%
 Recall that the degree of a polynomial is just the highest power of the variable in the polynomial.%
 \end{aside}
  of the right hand side is \(1\), then \(y_{p}\) should probably be degree \(1\) as well. This means that \(y_{p} = A_{1}x + A_{2}\) for some constants \(A_{1},A_{2}\).%
@@ -2369,14 +2375,14 @@ y = y_{c} + y_{p} = c_{1}e^{x} + c_{2}e^{-2x} - \frac{3}{2}x + \frac{5}{4}.
 %
 \end{example}
 Note that in \hyperref[x:example:example-using-the-method-of-undetermined-coefficients]{Example~{\xreffont\ref{x:example:example-using-the-method-of-undetermined-coefficients}}}, we didn't need any initial conditions to find \(y_{p}\). This means that if a non-homogeneous ODE like the one in \hyperref[x:example:example-using-the-method-of-undetermined-coefficients]{Example~{\xreffont\ref{x:example:example-using-the-method-of-undetermined-coefficients}}} represents some physical system, then the initial configuration of that system \emph{has no effect on \(y_{p}\)}. We will see soon that particular solutions correspond to external forces on a system, like gravity, whereas complementary solutions correspond to internal forces in a system, such as the spring force.%
-\begin{example}{}{g:example:idp105548780450720}%
+\begin{example}{}{g:example:idp105548815596832}%
 Find the general solution of%
 \begin{equation*}
 y'' - 2y' + y = x - \sin(2x).
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780451616}{}\quad{}The general solution will take the form \(y = y_{c} + y_{p}\). Once again, we find \(y_{c}\) by solving the characteristic equation to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815597728}{}\quad{}The general solution will take the form \(y = y_{c} + y_{p}\). Once again, we find \(y_{c}\) by solving the characteristic equation to get%
 \begin{equation*}
 y_{c} = c_{1}x + c_{2}xe^{x}.
 \end{equation*}
@@ -2420,7 +2426,7 @@ y''+9y = 3\cos(3x),\quad y(0) = 1,y'(0) = -1
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780466848}{}\quad{}We can start this example the same way we've done the previous ones. First, we find \(y_{c}\) by solving \(y''+9y=0\). So%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815645728}{}\quad{}We can start this example the same way we've done the previous ones. First, we find \(y_{c}\) by solving \(y''+9y=0\). So%
 \begin{equation*}
 y_{c} = c_{1}\cos(3x)+c_{2}\sin(3x).
 \end{equation*}
@@ -2467,7 +2473,7 @@ What we did in \hyperref[x:example:example-method-of-undetermined-coefficients-w
 \begin{example}{Determining the Appropriate Form of the Particular Solution.}{x:example:example-determining-the-appropriate-form-of-the-particular-solution}%
 Consider the ODE \(x'' + 4x' + 4 = 3t^{3} - t + t^{2}\sin(2t) + 3e^{-2t}.\) Find the correct guess for \(x_{p}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779632416}{}\quad{}Before we can do anything with \(x_{p}\), we need to find the complementary solution \(x_{c}\). This is given by \(x_{c} = c_{1}e^{-2t} + c_{2}te^{-2t}.\) Now we can try to guess an appropriate form for \(x_{p}\) using the right hand side of the ODE. Each "component" of the right hand side contributes to our guess for \(x_{p}\) as follows: \begin{tableptx}{\textbf{}}{g:table:idp105548779634848}{}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815630496}{}\quad{}Before we can do anything with \(x_{p}\), we need to find the complementary solution \(x_{c}\). This is given by \(x_{c} = c_{1}e^{-2t} + c_{2}te^{-2t}.\) Now we can try to guess an appropriate form for \(x_{p}\) using the right hand side of the ODE. Each "component" of the right hand side contributes to our guess for \(x_{p}\) as follows: \begin{tableptx}{\textbf{}}{g:table:idp105548815632928}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -2495,7 +2501,7 @@ SUGGESTED PROBLEMS: 1, 3, 5, 11%
 \begin{introduction}{}%
 In this section we will develop models for certain systems under the influence of a periodic, external force. The presence of an external force leads to non-homogeneous models, and we will use the techniques we developed in \hyperref[x:section:section-solutions-of-nonhomogeneous-equations]{Section~{\xreffont\ref{x:section:section-solutions-of-nonhomogeneous-equations}}} to deal with these systems.%
 \end{introduction}%
-\begin{aside}{}{g:aside:idp105548779643808}%
+\begin{aside}{}{g:aside:idp105548815806240}%
 This section corresponds to Section 2.8 of the text.%
 \end{aside}
 %
@@ -2520,9 +2526,9 @@ Systems where the \terminology{external frequency} \(\omega\) is equal to the \t
 \begin{example}{Determining Resonance.}{x:example:example-determining-resonance}%
 An object with mass \SI{2}{\kilo\gram} is attached to a spring and is held \SI{1}{\meter} to the right of the spring's equilibrium position by a force of \SI{8}{\newton} At time \(t = 0\) seconds the mass is set in motion with an initial velocity of \SI{2}{\meter\per\second} to the left. Suppose an external force \(F_{E} = 3\cos(2t)\) acts on the mass as well. Will the spring eventually break?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779657632}{}\quad{}We can answer this question by determining if resonance is present in this system. The external frequency is \(\omega = 2\), and the internal frequency is \(\omega_{0} = \sqrt{\frac{k}{m}}\). Since \(k = 8\) and \(m = 2\), we have \(\omega_{0} = \sqrt{\frac{8}{2}} = 2\), and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815786784}{}\quad{}We can answer this question by determining if resonance is present in this system. The external frequency is \(\omega = 2\), and the internal frequency is \(\omega_{0} = \sqrt{\frac{k}{m}}\). Since \(k = 8\) and \(m = 2\), we have \(\omega_{0} = \sqrt{\frac{8}{2}} = 2\), and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.%
 \end{example}
-\begin{aside}{}{g:aside:idp105548779594400}%
+\begin{aside}{}{g:aside:idp105548815789088}%
 It's not too hard to solve for \(x(t)\) exactly here to get%
 \begin{equation*}
 x(t) = \frac{1}{4}\cos(2t) - \sin(2t) + \frac{3}{8}t\sin(2t).
@@ -2572,7 +2578,7 @@ pretty_print(P.substitute(k == m*(omega_0)^2))
 \begin{example}{Steady-State Approximation.}{x:example:example-steady-state-approximation}%
 An object of mass \SI{3}{\kilo\gram} is fixed to both a spring and a dashpot with respective forces \(F_{S} = -9x\) and \(F_{R} = -2x'\), where \(x\) is the displacement of the mass in meters and \(x = 0\) is the equilibrium position. An external force \(F_{E} = 5\cos(\sqrt{3}t)\) is also applied to the mass, where \(t\) is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately \SI{7}{\second} ago. What will be the approximate position of the mass in \SI{40}{\second}?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779614368}{}\quad{}We know that the position will look like \(x = x_{c} + x_{p}\) where \(x_{c}\to0\) as \(t\to\infty\), but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution \(x_{p}\). Since%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815841824}{}\quad{}We know that the position will look like \(x = x_{c} + x_{p}\) where \(x_{c}\to0\) as \(t\to\infty\), but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution \(x_{p}\). Since%
 \begin{equation*}
 \omega = \omega_{0} = \sqrt{3}, \quad F_{0} = 5\quad\text{and}\quad c = 2,
 \end{equation*}
@@ -2646,7 +2652,7 @@ y^{(3)}-6y''+11y'-6y=0
 \end{equation*}
 where \(y\) is a function of \(x\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779584928}{}\quad{}Just as we did for second order ODEs, we'll solve this by finding the characteristic equation. To get the characteristic equation, we replace derivatives of \(y\) with powers of \(r\) to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815746848}{}\quad{}Just as we did for second order ODEs, we'll solve this by finding the characteristic equation. To get the characteristic equation, we replace derivatives of \(y\) with powers of \(r\) to get%
 \begin{equation*}
 r^{3}-6r^{2}+11r-6=0.
 \end{equation*}
@@ -2683,13 +2689,13 @@ y = c_{1}e^{x}+c_{2}e^{2x}+c_{3}e^{3x}.
 \end{equation*}
 %
 \end{example}
-\begin{aside}{}{g:aside:idp105548779591712}%
+\begin{aside}{}{g:aside:idp105548815720864}%
 It can get tedious to try to compute the Wronskian every time when solving linear ODEs with constant coefficients, so it's good to note that \(\set{e^{r_{1}x},\dots,e^{r_{n}x}}\) is guaranteed to be linearly independent as long as each of the \(r_{i}\) are distinct from the others.%
 \end{aside}
-\begin{example}{}{g:example:idp105548779592864}%
+\begin{example}{}{g:example:idp105548815722016}%
 Find the general solution of \(y^{(4)}-y=0\), where \(y\) is a function of \(x\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779528992}{}\quad{}We begin by finding the characteristic equation, which is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815723680}{}\quad{}We begin by finding the characteristic equation, which is%
 \begin{equation*}
 r^{4}-1=0\quad\text{or}\quad (r^{2}-1)(r^{2}+1)=0.
 \end{equation*}
@@ -2711,7 +2717,7 @@ x^{(3)}+4x''+4x'=0
 \end{equation*}
 where \(x\) is a function of \(t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779535136}{}\quad{}The characteristic equation is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815729824}{}\quad{}The characteristic equation is%
 \begin{equation*}
 r^{3}+4r^{2}+4r = 0\quad\text{or}\quad r(r+2)^{2}=0
 \end{equation*}
@@ -2722,15 +2728,15 @@ x = c_{1}+c_{2}e^{-2t}+c_{3}te^{-2t}.
 %
 \end{example}
 Solutions of linear, homogeneous ODEs with constant coefficients depend \emph{entirely} on the roots of the corresponding characteristic equation. If we write the independent variable as \(x\), and if \(r_{k}\) denotes a single root of the characteristic equation, then the general solution of the ODE will contain \(e^{r_{k}x},xe^{r_{k}x},x^{2}e^{r_{k}x},\dots\), with the number of exponentials contributed by \(r_{k}\) being equal to its multiplicity. That is, the number of times \(r_{k}\) appears as a solution of the characteristic equation.%
-\begin{example}{}{g:example:idp105548779542304}%
+\begin{example}{}{g:example:idp105548815769760}%
 A linear, homogeneous ODE with constant coefficients (and independent variable \(t\)) has characteristic equation given by%
 \begin{equation*}
 r(r-1)(r+1)^{2}(2r-3)^{3} = 0.
 \end{equation*}
 What is the general solution of the ODE?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779543584}{}\quad{}We'll set up a table listing each root, its multiplicity and its contribution to the general solution:%
-\begin{tableptx}{\textbf{}}{g:table:idp105548779544096}{}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815771040}{}\quad{}We'll set up a table listing each root, its multiplicity and its contribution to the general solution:%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815771552}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{lll}\hrulethick
@@ -2747,15 +2753,15 @@ Root&Multiplicity&Contribution\tabularnewline\hrulethick
 c_{1}+c_{2}e^{t}+c_{3}e^{-t}+c_{4}te^{-t}+c_{5}e^{3t/2}+c_{6}te^{3t/2}+c_{7}t^{2}e^{3t/2}.
 \end{equation*}
 \end{example}
-\begin{example}{}{g:example:idp105548779551264}%
+\begin{example}{}{g:example:idp105548815778720}%
 An ODE (with independent variable \(x\)) has characteristic equation given by%
 \begin{equation*}
 r^{2}(r-3)(r^{2}+4)(r^{2}+6r+13)^{3}=0.
 \end{equation*}
 Find the general solution.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779552544}{}\quad{}We'll set up another table help us determine the general solution:%
-\begin{tableptx}{\textbf{}}{g:table:idp105548779552928}{}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815780000}{}\quad{}We'll set up another table help us determine the general solution:%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815780384}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{lll}\hrulethick
@@ -2785,14 +2791,14 @@ SUGGESTED PROBLEMS: 1, 3, 7, 9%
 %
 \begin{sectionptx}{Non-homogeneous Linear ODEs with Constant Coefficients}{}{Non-homogeneous Linear ODEs with Constant Coefficients}{}{}{x:section:section-non-homogeneous-linear-odes-with-constant-coefficients}
 For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution \(y_{c}\) and then a corresponding particular solution \(y_{p}\). The general solution was then \(y=y_{c}+y_{p}\). \(y_{c}\) was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find \(y_{p}\). Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.%
-\begin{example}{}{g:example:idp105548779760672}%
+\begin{example}{}{g:example:idp105548815759008}%
 Find the general solution of%
 \begin{equation*}
 y^{(3)}-y' = \sinh 2x.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779761568}{}\quad{}The general solution takes the form \(y = y_{c}+y_{p}\), where \(y_{c}\) is a solution of the associated homogeneous equation \(y^{(3)}-y'=0\) and \(y_{p}\) is a single solution of the original ODE \(y^{(3)}-y'=\sinh 2x\). Since the characteristic equation of \(y^{(3)}-y'=0\) is \(r^{3}-r=0\), we get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815759904}{}\quad{}The general solution takes the form \(y = y_{c}+y_{p}\), where \(y_{c}\) is a solution of the associated homogeneous equation \(y^{(3)}-y'=0\) and \(y_{p}\) is a single solution of the original ODE \(y^{(3)}-y'=\sinh 2x\). Since the characteristic equation of \(y^{(3)}-y'=0\) is \(r^{3}-r=0\), we get%
 \begin{equation*}
 y_{c} = c_{1}+c_{2}e^{x}+c_{3}e^{-x} = c_{1}+A\cosh x+B\sinh x.
 \end{equation*}
@@ -2811,14 +2817,14 @@ y = c_{1}+A\cosh x+B\sinh x+\frac{1}{6}\cosh2x.
 %
 \end{example}
 Just as before, we also need to worry about overlaps.%
-\begin{example}{}{g:example:idp105548779773088}%
+\begin{example}{}{g:example:idp105548815935008}%
 Find the appropriate form of \(x_{p}\) for the ODE%
 \begin{equation*}
 \dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t} = 5t-3t^{2}+e^{-t}\cos2t-3t\sin2t.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779774368}{}\quad{}We need to find \(x_{c}\) first since \(x_{p}\) will change depending on \(x_{c}\). Since the characteristic equation of the associated homogeneous ODE \(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\) is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815936288}{}\quad{}We need to find \(x_{c}\) first since \(x_{p}\) will change depending on \(x_{c}\). Since the characteristic equation of the associated homogeneous ODE \(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\) is%
 \begin{equation*}
 r^{7}+8r^{5}+16r^{3} = 0\quad\text{or}\quad r^{3}(r^{2}+4)^{2}=0,
 \end{equation*}
@@ -2829,7 +2835,7 @@ x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 %
 \par
 Now we come up with a guess for \(x_{p}\) using the right hand side of the original ODE and dividing it into \textasciigrave{}\textasciigrave{}components:'{}'{}%
-\begin{tableptx}{\textbf{}}{g:table:idp105548779777696}{}%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815939616}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -2851,7 +2857,7 @@ The method of undetermined coefficients applied to the ODE%
 a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)   
 \end{equation*}
 can be summarized by the following table. Note that \(x^m\) is the \emph{smallest} power of \(x\) required to remove any overlaps with \(y_{c}\).%
-\begin{tableptx}{\textbf{}}{g:table:idp105548779787168}{}%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815916320}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -2864,19 +2870,19 @@ Component of \(f(x)\)&Contribution to \(y_{p}\)\tabularnewline\hrulethick
 \end{tabular}
 }%
 \end{tableptx}%
-\begin{example}{}{g:example:idp105548779727904}%
+\begin{example}{}{g:example:idp105548815922592}%
 Find the general solution of%
 \begin{equation*}
 y^{(3)}-2y''+3y'= x+e^{-3x}\sin x
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779728800}{}\quad{}We begin by finding \(y_{c}\). Since the characteristic equation of the corresponding homogeneous ODE is \(r^{3}-2r^{2}+3r=0\), we get \(r=-0,\frac{2\pm\sqrt{4-12}}{2}\) or just \(r=0,1\pm i\sqrt{2}\). So%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815923488}{}\quad{}We begin by finding \(y_{c}\). Since the characteristic equation of the corresponding homogeneous ODE is \(r^{3}-2r^{2}+3r=0\), we get \(r=-0,\frac{2\pm\sqrt{4-12}}{2}\) or just \(r=0,1\pm i\sqrt{2}\). So%
 \begin{equation*}
 y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
 \end{equation*}
 Now we can set up \(y_{p}\):%
-\begin{tableptx}{\textbf{}}{g:table:idp105548779731488}{}%
+\begin{tableptx}{\textbf{}}{g:table:idp105548815926176}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -2960,7 +2966,7 @@ where \(a_{ij}\) are constants and \(y_{i}\) are functions of \(t\).%
 \begin{example}{}{x:example:example-interconnected-tanks}%
 Two brine tanks are set up as in \hyperref[x:figure:figure-interconnected-tanks]{Figure~{\xreffont\ref{x:figure:figure-interconnected-tanks}}}. Fresh water flows into the tank at a rate of \(r_{1}\), well-mixed solution flows from Tank 1 to Tank 2 at a rate of \(r_{2}\) and well-mixed solution flows out of Tank 2 at a rate of \(r_{3}\). Suppose that \(r_{1}, r_{2}\) and  \(r_{3}\) are \SI{5}{\gallon\per\minute}, the volume of solution in Tank 1 is \SI{10}{\gallon} and the volume of solution in Tank 2 is \SI{7}{\gallon}. Suppose Tank 1 has \SI{5}{\pound} of salt at time \(t=0\) and Tank 2 has \SI{2}{\pound} of salt at time \(t=0\). Set up a first-order system that describes the amount of salt in each tank at time \(t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779756704}{}\quad{}Let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\), and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\). Using the mixture ODE \(\dv{x}{t} = r_{i}c_{i}-r_{o}\frac{x}{V(t)}\) developed in \hyperref[x:section:section-first-order-linear-odes]{Section~{\xreffont\ref{x:section:section-first-order-linear-odes}}}, we can write%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815951392}{}\quad{}Let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\), and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\). Using the mixture ODE \(\dv{x}{t} = r_{i}c_{i}-r_{o}\frac{x}{V(t)}\) developed in \hyperref[x:section:section-first-order-linear-odes]{Section~{\xreffont\ref{x:section:section-first-order-linear-odes}}}, we can write%
 \begin{align*}
 \dv{x_{1}}{t} \amp= 5\cdot0 - 5\frac{x_{1}}{10}\\
 \dv{x_{2}}{t} \amp= 5\frac{x_{1}}{10}-5\frac{x_{2}}{7}
@@ -3031,10 +3037,10 @@ A\vec{v} = \begin{bmatrix} a_{11}v_{1}+a_{12}v_{2}\\a_{21}v_{1}+a_{22}v_{2} \end
 The \(2\times 2\) \terminology{identity matrix} is the matrix \(I = \begin{bmatrix}1\amp0\\0\amp1\end{bmatrix}\). A \terminology{scalar} is just a constant. To multiply a scalar \(c\) with a matrix \(A\), just multiply every element of \(A\) with \(c\).%
 \end{definition}
 If \(A\) is any \(2\times2\) matrix and \(\vec{v}\) and \(2\times1\) vector, then \(AI=IA=A\) and \(I\vec{v} = \vec{v}\).%
-\begin{example}{}{g:example:idp105548779716896}%
+\begin{example}{}{g:example:idp105548815878816}%
 Let \(A = \begin{bmatrix} 1\amp0\\-3\amp2 \end{bmatrix},\vec{v}_{1} = \begin{bmatrix}1\\1\end{bmatrix}\) and \(\vec{v}_{2} = \begin{bmatrix}0\\5\end{bmatrix}\). Compute \(A\vec{v}_{1}\) and \(A\vec{v}_{2}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779718944}{}\quad{}By definition,%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815848096}{}\quad{}By definition,%
 \begin{equation*}
 A\vec{v}_{1} = \begin{bmatrix}1\cdot1+0\cdot1\\-3\cdot1+2\cdot1\end{bmatrix} = \begin{bmatrix}1\\-1\end{bmatrix}\quad\text{and}\quad A\vec{v}_{2} = \begin{bmatrix}1\cdot0+0\cdot5\\-3\cdot0+2\cdot5\end{bmatrix} = \begin{bmatrix}0\\10\end{bmatrix}.
 \end{equation*}
@@ -3047,7 +3053,7 @@ Let \(A\) be a matrix. A nonzero vector \(\vec{v}\) is an \terminology{eigenvect
 \begin{example}{}{x:example:example-eigenvalue-eigenvector}%
 Determine if \(\vec{v} = \begin{bmatrix}-2\\1\end{bmatrix}\) is an eigenvector of \(A = \begin{bmatrix}1\amp4\\1\amp1\end{bmatrix}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779662112}{}\quad{}To do this, we just need to compute \(A\vec{v}:\)%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815856800}{}\quad{}To do this, we just need to compute \(A\vec{v}:\)%
 \begin{equation*}
 A\vec{v} = \begin{bmatrix}1\amp4\\1\amp1\end{bmatrix}\begin{bmatrix}-2\\1\end{bmatrix} = \begin{bmatrix}2\\-1\end{bmatrix} = -\vec{v}.
 \end{equation*}
@@ -3071,7 +3077,7 @@ In other words, we may rewrite the system as the matrix ODE%
 \vec{x}' =A\vec{x}.
 \end{equation*}
 %
-\begin{example}{}{g:example:idp105548779670560}%
+\begin{example}{}{g:example:idp105548815898016}%
 Write the system%
 \begin{align*}
 x'_{1}  \amp = -\frac{1}{2}x_{1}\\
@@ -3079,7 +3085,7 @@ x'_{2}  \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 \end{align*}
 as a matrix ODE.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779671840}{}\quad{}We need to find a matrix \(A\) and vector \(\vec{x}\) to let us rewrite this system. The matrix \(A\) is formed from the coefficients of \(x_{1},x_{2}\) on the right hand side of the system:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815899296}{}\quad{}We need to find a matrix \(A\) and vector \(\vec{x}\) to let us rewrite this system. The matrix \(A\) is formed from the coefficients of \(x_{1},x_{2}\) on the right hand side of the system:%
 \begin{equation*}
 A = \begin{bmatrix}-\frac{1}{2}\amp 0\\\frac{1}{2}\amp -\frac{5}{7}\end{bmatrix}.
 \end{equation*}
@@ -3093,14 +3099,14 @@ With these terms, the original system of ODEs is equivalent to the single matrix
 \end{equation*}
 %
 \end{example}
-\begin{example}{}{g:example:idp105548779675680}%
+\begin{example}{}{g:example:idp105548815903136}%
 Show that \(e^{-t}\vec{x}_{0}\) where \(\vec{x}_{0} = \begin{bmatrix}-2\\1\end{bmatrix}\) is a solution of the system%
 \begin{equation*}
 \vec{x}' = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}\vec{x}.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779677344}{}\quad{}We'll check that \(\vec{x}_{0}\) is a solution of the matrix ODE just as we check solutions for normal ODEs: plug the potential solution into the ODE and check both sides. If we do so, we get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815904800}{}\quad{}We'll check that \(\vec{x}_{0}\) is a solution of the matrix ODE just as we check solutions for normal ODEs: plug the potential solution into the ODE and check both sides. If we do so, we get%
 \begin{equation*}
 \dv{}{t}\brackets*{e^{-t}\vec{x}_{0}} = -e^{-t}\begin{bmatrix}-2\\1\end{bmatrix} = e^{-t}\begin{bmatrix}2\\-1\end{bmatrix}
 \end{equation*}
@@ -3137,7 +3143,7 @@ The vectors \(\vec{x}_{1},\dots,\vec{x}_{n}\) are linearly independent if and on
 %
 \begin{sectionptx}{Constant Coefficient Systems and the Phase Plane}{}{Constant Coefficient Systems and the Phase Plane}{}{}{x:section:section-constant-coefficient-systems-and-the-phase-plane}
 \begin{introduction}{}%
-\begin{aside}{}{g:aside:idp105548779691424}%
+\begin{aside}{}{g:aside:idp105548815886112}%
 This section corresponds to Section 4.3 of the text.%
 \end{aside}
 \end{introduction}%
@@ -3155,7 +3161,7 @@ Let \(A\) be an \(n\times n\) constant matrix, and suppose that \(A\) has \(n\) 
 \end{equation*}
 %
 \end{theorem}
-\begin{example}{}{g:example:idp105548779893536}%
+\begin{example}{}{g:example:idp105548815891872}%
 Find the general solution of the system%
 \begin{align*}
 x_{1}'  \amp = x_{1}-\frac{1}{2}x_{2}-\frac{1}{2}x_{3}\\
@@ -3172,7 +3178,7 @@ G = \begin{bmatrix}1 \amp  -\frac{1}{2}  \amp  -\frac{1}{2}\\-\frac{1}{2}  \amp 
 \end{equation*}
 with corresponding eigenvalues \(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779896224}{}\quad{}First, note that the system we need to solve is equivalent to the matrix ODE \(\vec{x}' = G\vec{x}\). If we can show that \(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\) are linearly independent, then we can use \hyperref[x:theorem:theorem-solutions-of-systems]{Theorem~{\xreffont\ref{x:theorem:theorem-solutions-of-systems}}} to find the general solution of the system. So we'll compute their Wronskian:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548815894560}{}\quad{}First, note that the system we need to solve is equivalent to the matrix ODE \(\vec{x}' = G\vec{x}\). If we can show that \(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\) are linearly independent, then we can use \hyperref[x:theorem:theorem-solutions-of-systems]{Theorem~{\xreffont\ref{x:theorem:theorem-solutions-of-systems}}} to find the general solution of the system. So we'll compute their Wronskian:%
 \begin{align*}
 W(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}) \amp = \begin{vmatrix} 1  \amp  -1  \amp  -\frac{1}{2} \\ 1 \amp  1 \amp  -\frac{1}{2} \\ 1 \amp  0 \amp  1\end{vmatrix}\\
 \amp = 1+\frac{3}{2}+\frac{1}{2}\\
@@ -3218,10 +3224,10 @@ The eigenvalues of a square matrix \(A\) are the solutions of the equation \(\de
 \begin{definition}{}{x:definition:definition-characteristic-equation}%
 \(\det(A-\lambda I)=0\) is called the \terminology{characteristic equation} of the matrix \(A\).%
 \end{definition}
-\begin{example}{}{g:example:idp105548779909664}%
+\begin{example}{}{g:example:idp105548817120416}%
 Find the eigenvalues of the matrix \(A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779910560}{}\quad{}First, we need to set up the characteristic equation of \(A\). Since%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817121312}{}\quad{}First, we need to set up the characteristic equation of \(A\). Since%
 \begin{equation*}
 A-\lambda I = \begin{bmatrix}1-\lambda \amp  4 \\ 1 \amp  1-\lambda\end{bmatrix},
 \end{equation*}
@@ -3236,19 +3242,19 @@ so the characteristic equation of \(A\) is%
 which has solutions \(\lambda_{1} = -1,\lambda_{2} = 3\). So the eigenvalues of \(A\) are \(-1,3\).%
 \end{example}
 A useful fact to remember is that the eigenvalues of a \textasciigrave{}\textasciigrave{}triangular'{}'{} matrix are just the diagonal entries.%
-\begin{example}{}{g:example:idp105548779914400}%
+\begin{example}{}{g:example:idp105548817125152}%
 Let%
 \begin{equation*}
 A = \begin{bmatrix}1 \amp  3 \amp  -4 \amp  5 \\ 0 \amp  3 \amp  -2 \amp  -2 \\ 0 \amp  0 \amp  1 \amp  10^{50\pi-300} \\ 0 \amp  0 \amp  0 \amp  0\end{bmatrix}.
 \end{equation*}
 Find the eigenvalues of \(A\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779915680}{}\quad{}\(A\) is a triangular matrix since everything below the main diagonal is \(0\). So the eigenvalues of \(A\) are \(1,3,1,0\).%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817093408}{}\quad{}\(A\) is a triangular matrix since everything below the main diagonal is \(0\). So the eigenvalues of \(A\) are \(1,3,1,0\).%
 \end{example}
-\begin{example}{}{g:example:idp105548779917600}%
+\begin{example}{}{g:example:idp105548817095328}%
 Find eigenvectors of \(A = \begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\) corresponding to the eigenvalues \(\lambda_{1} = -1\) and \(\lambda_{2} = 3\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779919264}{}\quad{}Suppose that \(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\) is an eigenvector corresponding to \(\lambda\). Then we know that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817096992}{}\quad{}Suppose that \(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\) is an eigenvector corresponding to \(\lambda\). Then we know that%
 \begin{equation*}
 \begin{bmatrix}1 \amp  4 \\ 1 \amp  1\end{bmatrix}\vec{v} = \lambda\vec{v} \Rightarrow \begin{bmatrix}v_{1}+4v_{2} \\ v_{1} + v_{2}\end{bmatrix} = \begin{bmatrix} \lambda v_{1} \\ \lambda v_{2} \end{bmatrix}.
 \end{equation*}
@@ -3302,14 +3308,14 @@ Furthermore, if \(\lambda\) is an eigenvalue of \(A\) with eigenvector \(\vec{v}
 \begin{theorem}{}{}{x:theorem:theorem-linear-independence-distinct-eigenvalues}%
 Let \(A\) be an \(n\times n\) matrix with constant entries. If the eigenvalues \(\lambda_{1},\ldots,\lambda_{n}\) of \(A\) are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if \(\vec{v}_{i}\) is an eigenvector corresponding to \(\lambda_{i}\) then the eigenvectors \(\vec{v}_{1},\ldots,\vec{v}_{n}\) are linearly independent.%
 \end{theorem}
-\begin{example}{}{g:example:idp105548779875232}%
+\begin{example}{}{g:example:idp105548817151264}%
 Solve the matrix ODE given by \(\vec{x}' = A\vec{x}\) where%
 \begin{equation*}
 A = \begin{bmatrix}1\amp 4\\1\amp 1\end{bmatrix}.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779876512}{}\quad{}We already have everything we need. We know that the eigenvalues of \(A\) are \(\lambda_{1}=-1\) and \(\lambda_{2}=3\) and some corresponding eigenvectors are%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817152544}{}\quad{}We already have everything we need. We know that the eigenvalues of \(A\) are \(\lambda_{1}=-1\) and \(\lambda_{2}=3\) and some corresponding eigenvectors are%
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{v}_{2} = \begin{bmatrix}2\\1\end{bmatrix}.
 \end{equation*}
@@ -3323,7 +3329,7 @@ So the general solution of the matrix ODE is%
 \end{equation*}
 Note that the choice of eigenvector \emph{doesn't matter}. Just so long as we find some particular eigenvector for each distinct eigenvalue.%
 \end{example}
-\begin{example}{}{g:example:idp105548779879712}%
+\begin{example}{}{g:example:idp105548817155744}%
 Solve the first-order system given by%
 \begin{align*}
 x_{1}' \amp = x_{1} - 5x_{2}\\
@@ -3331,7 +3337,7 @@ x_{2}' \amp = x_{1} - x_{2}
 \end{align*}
 where \(x_{1}\) and \(x_{2}\) are functions of \(t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779882144}{}\quad{}First, note that this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\) where%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817158176}{}\quad{}First, note that this system is equivalent to the matrix ODE \(\vec{x}' = A\vec{x}\) where%
 \begin{equation*}
 \vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 \amp  -5 \\ 1 \amp  -1\end{bmatrix}.
 \end{equation*}
@@ -3371,7 +3377,7 @@ At this step it is easy to construct the solution of the matrix ODE. It's just%
 \end{enumerate}
 %
 \end{example}
-\begin{example}{}{g:example:idp105548779829920}%
+\begin{example}{}{g:example:idp105548817138720}%
 Solve the first-order system%
 \begin{align*}
 \dv{x_{1}}{t} \amp = 3x_{1}+x_{3}\\
@@ -3380,7 +3386,7 @@ Solve the first-order system%
 \end{align*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779831584}{}\quad{}As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817140384}{}\quad{}As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is%
 \begin{equation*}
 \vec{x}' = \begin{bmatrix}3 \amp  0 \amp  1 \\ 9 \amp  -1 \amp  2 \\ -9 \amp  4 \amp  -1\end{bmatrix}\vec{x} = A\vec{x}.
 \end{equation*}
@@ -3420,10 +3426,10 @@ pretty_print(M.eigenvectors_right())
 %
 \begin{subsectionptx}{Applications of Matrix ODEs}{}{Applications of Matrix ODEs}{}{}{x:subsection:subsection-applications-of-matrix-odes}
 Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.%
-\begin{example}{}{g:example:idp105548779836576}%
+\begin{example}{}{g:example:idp105548817047072}%
 Two brine tanks are set up as in \hyperref[x:figure:figure-interconnected-tanks]{Figure~{\xreffont\ref{x:figure:figure-interconnected-tanks}}}. Fresh water flows into the tank at a rate of \(r_{1}\), well-mixed solution flows from Tank 1 to Tank 2 at a rate of \(r_{2}\) and well-mixed solution flows out of Tank 2 at a rate of \(r_{3}\). Suppose that \(r_{1}, r_{2}\) and  \(r_{3}\) are \SI{5}{\gallon\per\minute}, the volume of solution in Tank 1 is \SI{10}{\gallon} and the volume of solution in Tank 2 is \SI{7}{\gallon}. Suppose Tank 1 has \SI{5}{\pound} of salt at time \(t=0\) and Tank 2 has \SI{2}{\pound} of salt at time \(t=0\). How much salt is in each tank at time \(t\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779844512}{}\quad{}To start, let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\) and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\), where \(t\) is in minutes. Then from Section 4.1, we know that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817055264}{}\quad{}To start, let \(x_{1}(t)\) denote the amount of salt in Tank 1 at time \(t\) and \(x_{2}(t)\) denote the amount of salt in Tank 2 at time \(t\), where \(t\) is in minutes. Then from Section 4.1, we know that%
 \begin{align*}
 x'_{1} \amp = -\frac{1}{2}x_{1}\\
 x'_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
@@ -3505,7 +3511,7 @@ Sketch a phase portrait for the system%
 \end{align*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779804832}{}\quad{}First, note that we can rewrite the system as \(\vec{y}' = A\vec{y}\) using%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817080608}{}\quad{}First, note that we can rewrite the system as \(\vec{y}' = A\vec{y}\) using%
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}2 \amp  -3 \\-2 \amp  1\end{bmatrix}.
 \end{equation*}
@@ -3544,7 +3550,7 @@ show(VF) # shows the plot
 Note that \(\vec{y}=\vec{0}\) is \emph{always} a solution of \(\vec{y}'=A\vec{y}\). This is because \(\vec{0}'=A\vec{0} = \vec{0}\). We call \(\vec{y} = \vec{0}\) the \terminology{equilibrium solution} or \terminology{critical point} of the system \(\vec{y}'=A\vec{y}\). In the next section, we will be concerned with the behavior of trajectories of the system \(\vec{y}'=A\vec{y}\) near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix \(A\).%
 \par
 We will classify the behavior of trajectories at the critical point \(\vec{x} = \vec{0}\) into five different cases:%
-\begin{tableptx}{\textbf{}}{g:table:idp105548780022048}{}%
+\begin{tableptx}{\textbf{}}{g:table:idp105548817068704}{}%
 \centering%
 {\tabularfont%
 \begin{tabular}{ll}\hrulethick
@@ -3565,7 +3571,7 @@ Using a phase portrait, determine the type of critical point that \(\vec{y} = \v
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780032160}{}\quad{}As seen in \hyperref[x:figure:figure-classify-stability-using-phase-portrait]{Figure~{\xreffont\ref{x:figure:figure-classify-stability-using-phase-portrait}}}, every (nonzero) trajectory will spiral outward from \(\vec{y} = \vec{0}\) as \(t\to\infty\), so \(\vec{0}\) is a spiral point of this system. To see why, we only need to look at the eigenvalues of \(A\), which we find to be%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817242656}{}\quad{}As seen in \hyperref[x:figure:figure-classify-stability-using-phase-portrait]{Figure~{\xreffont\ref{x:figure:figure-classify-stability-using-phase-portrait}}}, every (nonzero) trajectory will spiral outward from \(\vec{y} = \vec{0}\) as \(t\to\infty\), so \(\vec{0}\) is a spiral point of this system. To see why, we only need to look at the eigenvalues of \(A\), which we find to be%
 \begin{equation*}
 \lambda_{1} = 3+4i,\lambda_{2} = 3-4i.
 \end{equation*}
@@ -3586,7 +3592,7 @@ The real part of the eigenvalues leads to the \textasciigrave{}\textasciigrave{}
 \tcblower
 \end{figureptx}%
 In general, the eigenvalues of the matrix \(A\) in the system \(\vec{y}' = A\vec{y}\) will determine the type of critical point that \(\vec{0}\) is for the system \(\vec{y}'=A\vec{y}\).%
-\begin{example}{}{g:example:idp105548780041120}%
+\begin{example}{}{g:example:idp105548817251616}%
 What kind of critical point is \(\vec{y} = \vec{0}\) for the system%
 \begin{align*}
 y'_{1} \amp = -4y_{2}\\
@@ -3594,7 +3600,7 @@ y'_{2}  \amp =  4y_{1}
 \end{align*}
 where \(y_{i} = y_{i}(t)\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780043168}{}\quad{}We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories \(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \) if we can find a relationship between \(y_{1}\) and \(y_{2}\). To do so, we ``cross-multiply'' the system to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817253664}{}\quad{}We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories \(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \) if we can find a relationship between \(y_{1}\) and \(y_{2}\). To do so, we ``cross-multiply'' the system to get%
 \begin{equation*}
 4y_{1}y'_{1} = -4y_{2}y'_{2} \quad\text{or}\quad 4y_{1}\dd{y_{1}} = -4y_{2}\dd{y_{2}}.
 \end{equation*}
@@ -3631,10 +3637,10 @@ Spiral point&Complex, not pure imaginary\tabularnewline\hrulethick
 The rule of thumb is this: the real parts of the eigenvalues determine whether a trajectory moves towards or away from the origin, and the imaginary part determines if the trajectory has a periodic\slash{}oscillating nature to it.%
 \par
 We say that the origin is a \terminology{stable} critical point of \(\vec{y}'=A\vec{y}\) if all trajectories that start \textasciigrave{}\textasciigrave{}close'{}'{} to \(\vec{0}\) remain close at all future times. Equivalently, it's stable if each trajectory will eventually be contained within some circle centered at the origin as \(t\to\infty\). Otherwise, we say that \(\vec{0}\) is \terminology{unstable}. If it so happens that every trajectory that starts close to \(\vec{0}\) tends to \(\vec{0}\) as \(t\to\infty\), we then say that \(\vec{0}\) is a \terminology{stable and attractive} (or \terminology{asymptotically stable}) critical point. Equivalently, \(\vec{0}\) is asymptotically stable if \emph{every} trajectory goes to \(\vec{0}\) as \(t\to\infty\).%
-\begin{example}{}{g:example:idp105548779996192}%
+\begin{example}{}{g:example:idp105548817239968}%
 Let \(\vec{y}' = A\vec{y}\) denote a matrix ODE where \(A\) is a constant \(2\times2\) matrix. What conditions on the eigenvalues of \(A\) will give an asymptotically stable critical point at \(\vec{y}=\vec{0}\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779998624}{}\quad{}Let \(\vec{y} = \vec{y}(t)\) denote a nonzero solution of the matrix ODE (and therefore a trajectory). Then in order for \(\vec{0}\) to be asymptotically stable, we need \(\vec{y}\to\vec{0}\) as \(t\to\infty\). Let \(\lambda_{1},\lambda_{2}\) denote the eigenvalues of \(A\). Then \(\vec{y}\) will have the form%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817274656}{}\quad{}Let \(\vec{y} = \vec{y}(t)\) denote a nonzero solution of the matrix ODE (and therefore a trajectory). Then in order for \(\vec{0}\) to be asymptotically stable, we need \(\vec{y}\to\vec{0}\) as \(t\to\infty\). Let \(\lambda_{1},\lambda_{2}\) denote the eigenvalues of \(A\). Then \(\vec{y}\) will have the form%
 \begin{equation*}
 \vec{y} = c_{1}e^{\lambda_{1}t}\vec{y}_{1}+c_{2}e^{\lambda_{2}t}\vec{y}_{2}.
 \end{equation*}
@@ -3647,7 +3653,7 @@ e^{\lambda_{i}t} = e^{at}[A\cos bt+B\sin bt]\text{.}
 So \(\vec{0}\) is asymptotically stable if the real parts of \emph{both} eigenvalues are negative.%
 \end{example}
 Similarly, we can say that \(\vec{0}\) is stable as long as the real part of each eigenvalue is no greater than \(0\). \(\vec{0}\) is unstable if the real part of \textbackslash{}emph\textbraceleft{}any\textbraceright{} eigenvalue is positive.%
-\begin{example}{}{g:example:idp105548780009632}%
+\begin{example}{}{g:example:idp105548817285664}%
 Two tanks \(T_{1}\) and \(T_{2}\) containing \SI{200}{\gallon} each of a water-salt mixture are set up as follows:%
 %
 \begin{itemize}[label=\textbullet]
@@ -3656,7 +3662,7 @@ Two tanks \(T_{1}\) and \(T_{2}\) containing \SI{200}{\gallon} each of a water-s
 \end{itemize}
 Will the salt eventually empty from both tanks?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780019488}{}\quad{}Let \(y_{1}(t)\) denote the amount of salt (in pounds) in Tank 1 at time \(t\) (in minutes), and let \(y_{2}(t)\) do the same for Tank 2. Then%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817262752}{}\quad{}Let \(y_{1}(t)\) denote the amount of salt (in pounds) in Tank 1 at time \(t\) (in minutes), and let \(y_{2}(t)\) do the same for Tank 2. Then%
 \begin{align*}
 y'_{1}  \amp =  4\frac{y_{2}}{200} - 16\frac{y_{1}}{200}\\
 y'_{2}  \amp =  16\frac{y_{1}}{200} - 16\frac{y_{2}}{200}\text{.}
@@ -3684,7 +3690,7 @@ Since both eigenvalues have negative real part, it follows that \(\vec{0}\) is a
 %
 \begin{sectionptx}{Nonlinear Systems}{}{Nonlinear Systems}{}{}{x:section:section-nonlinear-systems}
 \begin{introduction}{}%
-Now we apply phase plane methods to study \terminology{nonlinear autonomous systems}, \begin{aside}{}{g:aside:idp105548779962528}%
+Now we apply phase plane methods to study \terminology{nonlinear autonomous systems}, \begin{aside}{}{g:aside:idp105548817271328}%
 \emph{Autonomous} just means we can write the system without explicitly referring to the independent variable \(t\).%
 \end{aside}
  which for systems involving two ODEs take the form%
@@ -3705,10 +3711,10 @@ Just as in the previous sections, the \terminology{phase plane} is still the \(y
 f_{1}(y_{1},y_{2}) = 0\quad\text{and}\quad f_{2}(y_{1},y_{2}) = 0.  
 \end{equation*}
 %
-\begin{example}{}{g:example:idp105548779971616}%
+\begin{example}{}{g:example:idp105548817182112}%
 Express the \emph{pendulum equation} \(\theta''+\frac{g}{l}\sin\theta=0\), where \(\theta=\theta(t)\) represents the angular displacement of a pendulum from the vertical, as a nonlinear system \(\vecm{\theta}' = \vec{f}(\vecm{\theta})\) and then find its critical points.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779973664}{}\quad{}First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817184160}{}\quad{}First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set%
 \begin{equation*}
 \theta_{1} = \theta\quad\text{and}\quad\theta_{2} = \theta_{1}' = \theta'\text{.}
 \end{equation*}
@@ -3752,10 +3758,10 @@ The linearization of \(\vec{y}' = \vec{f}(\vec{y})\) at the point \(P = (p_{1},p
 A = J(p_{1},p_{2}).
 \end{equation*}
 %
-\begin{example}{}{g:example:idp105548779922336}%
+\begin{example}{}{g:example:idp105548817165600}%
 Find the linearization of the pendulum system \(\vecm{\theta}' = \vec{f}(\vecm{\theta})\) at the critical point \((0,0)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779923616}{}\quad{}For this system, we have \(f_{1}(\theta_{1},\theta_{2}) = \theta_{2}\) and \(f_{2}(\theta_{1},\theta_{2}) = -\frac{g}{l}\sin\theta_{1}\). The Jacobian is then given by%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817166880}{}\quad{}For this system, we have \(f_{1}(\theta_{1},\theta_{2}) = \theta_{2}\) and \(f_{2}(\theta_{1},\theta_{2}) = -\frac{g}{l}\sin\theta_{1}\). The Jacobian is then given by%
 \begin{equation*}
 J(\theta_{1},\theta_{2}) = \begin{bmatrix}0 \amp  1 \\ -\frac{g}{l}\cos\theta_{1} \amp  0\end{bmatrix}.
 \end{equation*}
@@ -3766,18 +3772,18 @@ A = J(0,0) = \begin{bmatrix}0 \amp  1 \\ -\frac{g}{l} \amp  0\end{bmatrix}.
 %
 \end{example}
 The linearization of a nonlinear system isn't just useful for approximating the nonlinear system. It's also incredibly useful for classifying the critical points of a nonlinear system; for the most part, the eigenvalues of the matrix \(A\) from the linearization also classify the critical points of the system \(\vec{y}' = \vec{f}(\vec{y})\).%
-\begin{example}{}{g:example:idp105548779926688}%
+\begin{example}{}{g:example:idp105548817169952}%
 Find and classify the critical points of the nonlinear system%
 \begin{align*}
 \dv{x}{t} \amp = x - y - x^{2} + xy \\
 \dv{y}{t} \amp = -x^{2} - y \text{.}
 \end{align*}
 %
-\begin{aside}{}{g:aside:idp105548779927968}%
+\begin{aside}{}{g:aside:idp105548817171232}%
 This example taken from \href{https://www.math.uci.edu/\~ndonalds/math3d/nonlinear.pdf}{here.}\footnotemark{}%
 \end{aside}
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779929120}{}\quad{}The critical points occur at \(x' = y' = 0\). If we set \(x' = y'\) and solve the resulting equation, we get \(x = 0\) or \(y = -1\). If \(x = 0\), then \(x' = -y\), and for this to be \(0\) we must have \(y = 0\). We can verify that \(x = y = 0\) makes \(y' = 0\) as well, so the origin is a critical point. Similarly, \(y = -1\) forces \(x = \pm1\), and we can verify that \(x' = y' = 0\) at \((-1,-1)\) and \((1,-1)\). So we have three critical points to check.%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817172384}{}\quad{}The critical points occur at \(x' = y' = 0\). If we set \(x' = y'\) and solve the resulting equation, we get \(x = 0\) or \(y = -1\). If \(x = 0\), then \(x' = -y\), and for this to be \(0\) we must have \(y = 0\). We can verify that \(x = y = 0\) makes \(y' = 0\) as well, so the origin is a critical point. Similarly, \(y = -1\) forces \(x = \pm1\), and we can verify that \(x' = y' = 0\) at \((-1,-1)\) and \((1,-1)\). So we have three critical points to check.%
 \par
 To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have%
 \begin{equation*}
@@ -3797,9 +3803,9 @@ J(1,-1) = \begin{bmatrix} -2 \amp 0 \\ -2 \amp -1\end{bmatrix}\text{,}
 \end{equation*}
 which has eigenvalues \(-2,-1\). Hence \((1,-1)\) is an asymptotically stable node.%
 \end{example}
-\footnotetext[1]{\nolinkurl{https://www.math.uci.edu/\~ndonalds/math3d/nonlinear.pdf}\label{g:fn:idp105548779928736}}%
+\footnotetext[1]{\nolinkurl{https://www.math.uci.edu/\~ndonalds/math3d/nonlinear.pdf}\label{g:fn:idp105548817172000}}%
 We can also use nonlinear systems to get more accurate population models.%
-\begin{example}{}{g:example:idp105548779940768}%
+\begin{example}{}{g:example:idp105548817216800}%
 Predator-prey populations can be modeled using the Lotka-Volterra model. Let \(y_{1}(t)\) denote the population of a prey species at time \(t\) and let \(y_{2}(t)\) denote the population of a predator species at time \(t\). Then the Lotka-Volterra model says that%
 \begin{align*}
 y'_{1} \amp = ay_{1}-by_{1}y_{2}\\
@@ -3807,7 +3813,7 @@ y'_{2} \amp = ky_{1}y_{2} - ly_{2}\text{,}
 \end{align*}
 where \(a,b,k,l>0\). Find and classify the critical points of this system.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548779943968}{}\quad{}The critical points are the points \((y_{1},y_{2})\) that satisfy the equations%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817220000}{}\quad{}The critical points are the points \((y_{1},y_{2})\) that satisfy the equations%
 \begin{equation*}
 ay_{1}-by_{1}y_{2} = 0\quad\text{and}\quad ky_{1}y_{2} - ly_{2} = 0.
 \end{equation*}
@@ -3856,7 +3862,7 @@ This matrix has characteristic equation \(\lambda^{2} + al = 0\), and so has eig
 \typeout{************************************************}
 %
 \begin{sectionptx}{Power Series Method}{}{Power Series Method}{}{}{x:section:section-power-series-method}
-In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, \(x-1,x^{2},3-x^{5}\)) it can be very straightforward, but for others (such as \(e^{-x^{2}}\)) it can be impossible. \begin{aside}{}{g:aside:idp105548781201440}%
+In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, \(x-1,x^{2},3-x^{5}\)) it can be very straightforward, but for others (such as \(e^{-x^{2}}\)) it can be impossible. \begin{aside}{}{g:aside:idp105548817200160}%
 At least, it can be impossible to integrate certain functions in terms of more \textasciigrave{}\textasciigrave{}everyday'{}'{} functions that we're used to.%
 \end{aside}
 %
@@ -3900,7 +3906,7 @@ c_{k} = \frac{f^{(k)}(0)}{k\cdot(k-1)\cdot\dots\cdot2\cdot1} = \frac{f^{(k)}(0)}
 \begin{example}{}{x:example:example-series-exponential}%
 Find a power series for \(e^{x}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781219488}{}\quad{}Any power series for \(f(x) = e^{x}\) looks like \(\sum_{k=0}^{\infty}c_{k}x^{k}\), where%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817381408}{}\quad{}Any power series for \(f(x) = e^{x}\) looks like \(\sum_{k=0}^{\infty}c_{k}x^{k}\), where%
 \begin{equation*}
 c_{k} = \frac{f^{(k)}(0)}{k!}.
 \end{equation*}
@@ -3926,7 +3932,7 @@ c_{k} = \frac{f^{(k)}(a)}{k!}.
 \begin{example}{}{x:example:example-series-sin-pi-over-2}%
 Find the power series for \(g(t) = \sin t\) centered at \(a = \frac{\pi}{2}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781229088}{}\quad{}A power series centered at \(a = \frac{\pi}{2}\) will look like%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817358240}{}\quad{}A power series centered at \(a = \frac{\pi}{2}\) will look like%
 \begin{equation*}
 \sum_{k=0}^{\infty}c_{k}\parens{t-\frac{\pi}{2}}^{k}
 \end{equation*}
@@ -3958,7 +3964,7 @@ Viewing a function as a power series can be extremely beneficial; if you have a 
 \begin{example}{}{x:example:example-series-integral}%
 Find \(\displaystyle\int_{0}^{1}e^{x^{2}}\dd{x}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781171488}{}\quad{}We can't integrate \(e^{x^{2}}\) using elementary functions \begin{aside}{}{g:aside:idp105548781172256}%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817366176}{}\quad{}We can't integrate \(e^{x^{2}}\) using elementary functions \begin{aside}{}{g:aside:idp105548817366944}%
 We can use a function known as the \terminology{error function}.%
 \end{aside}
  but this is straightforward to integrate using power series:%
@@ -3985,7 +3991,7 @@ Solve the ODE given by%
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781179808}{}\quad{}We could easily solve this using Chapter 1 methods, but we'll use power series to practice. To start, we assume that the solution \(y\) can be written as a power series:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817407264}{}\quad{}We could easily solve this using Chapter 1 methods, but we'll use power series to practice. To start, we assume that the solution \(y\) can be written as a power series:%
 \begin{equation*}
 y = \sum_{n=0}^{\infty}c_{n}x^{n}.
 \end{equation*}
@@ -4020,7 +4026,7 @@ and in general it appears that%
 \begin{equation*}
 c_{n} = \frac{4^{n}}{n!}c_{0}
 \end{equation*}
-for each \(n\). \begin{aside}{}{g:aside:idp105548781189280}%
+for each \(n\). \begin{aside}{}{g:aside:idp105548817416736}%
 We can't solve for \(c_{0}\) without specifying an initial condition of some kind.%
 \end{aside}
  So the solution \(y\) is%
@@ -4040,10 +4046,10 @@ To solve the above ODE we used the following steps:%
 \item{}Identify \(y\) as the power series of some function.%
 \end{enumerate}
 %
-\begin{example}{}{g:example:idp105548781196064}%
+\begin{example}{}{g:example:idp105548817390752}%
 Use power series to solve the ODE \(y^\prime+2xy=0\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781196960}{}\quad{}We will solve this using the steps listed above. First, assume \(y = \sum_{k=0}^{\infty}c_{k}x^{k}\). Now plug this guess for \(y\) into the ODE to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817391648}{}\quad{}We will solve this using the steps listed above. First, assume \(y = \sum_{k=0}^{\infty}c_{k}x^{k}\). Now plug this guess for \(y\) into the ODE to get%
 \begin{equation*}
 \sum_{k=1}^{\infty}kc_{k}x^{k-1} = -\sum_{k=0}^{\infty}2c_{k}x^{k+1}.
 \end{equation*}
@@ -4110,7 +4116,7 @@ Show that%
 \end{equation*}
 has a series solution centered at \(0\) and then find the solution up to the coefficient of \(x^{6}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781152800}{}\quad{}First, note that the equation can be rewritten%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817314720}{}\quad{}First, note that the equation can be rewritten%
 \begin{equation*}
 y'' - \frac{2x}{1 - x^{2}}y^\prime + \frac{2}{1 - x^{2}}y = 0\text{,}
 \end{equation*}
@@ -4262,7 +4268,7 @@ bonnet(n)
 \typeout{************************************************}
 %
 \begin{sectionptx}{Frobenius Method}{}{Frobenius Method}{}{}{x:section:section-frobenius-method}
-\begin{aside}{}{g:aside:idp105548781124000}%
+\begin{aside}{}{g:aside:idp105548817351456}%
 This section corresponds to Section 5.3 of the text.%
 \end{aside}
 %
@@ -4295,10 +4301,10 @@ y(x) = \sum_{n=0}^{\infty}c_{n}(x-a)^{n}.
 The radius of convergence is at least as large as the distance from \(a\) to the nearest singular point of the ODE.%
 \end{theorem}
 In other words, \emph{the power series method works at regular points.}%
-\begin{example}{}{g:example:idp105548781331360}%
+\begin{example}{}{g:example:idp105548817329440}%
 Find the general solution, as a power series in powers of \(x\), for the ODE \((x^{2}+2)y''+4xy^\prime+2y=0\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781332640}{}\quad{}The first thing we will do is make sure that the ODE actually has a power series solution at \(x=0\). To do this, we need to show that \(x=0\) is a regular point of the ODE. So we need to find \(P(x)\) and \(Q(x)\) and check that they (or their power series) make sense at \(x=0\). If we divide through the ODE by \(x^{2}+2\) we obtain%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817330720}{}\quad{}The first thing we will do is make sure that the ODE actually has a power series solution at \(x=0\). To do this, we need to show that \(x=0\) is a regular point of the ODE. So we need to find \(P(x)\) and \(Q(x)\) and check that they (or their power series) make sense at \(x=0\). If we divide through the ODE by \(x^{2}+2\) we obtain%
 \begin{equation*}
 y''+\frac{4x}{x^{2}+2}y^\prime+\frac{2}{x^{2}+2}y = 0
 \end{equation*}
@@ -4308,7 +4314,7 @@ P(x) \amp= \frac{4x}{x^{2}+2}\\
 Q(x) \amp= \frac{2}{x^{2}+2}\text{.}
 \end{align*}
 Since both of these exist at \(x=0\), it follows that \(x=0\) is a regular point of the ODE. Therefore the ODE has a power series solution at \(x=0\) (that is, in powers of \(x\)). Since \(P(x)\) and \(Q(x)\) both have singular points at \(x=\pm i\), it follows that the radius of convergence of the power series solution is at least \(|i - 0| = 1\).%
-\begin{aside}{}{g:aside:idp105548781339552}%
+\begin{aside}{}{g:aside:idp105548817337632}%
 Here, we're using the formula \(|a+bi| = sqrt{a^2 + b^2}.\)%
 \end{aside}
 We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand \(P(x)\) and \(Q(x)\) using their own power series, and this would \emph{greatly} complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form \(y = \sum_{n=0}^{\infty}c_{n}x^{n}\), or just \(y=\sum_{n\geq0}c_{n}x^{n}\) for short. Now we plug this into the ODE to get%
@@ -4383,10 +4389,10 @@ deqn.collect(x)
 %
 \begin{subsectionptx}{Solutions at Singular Points and Indicial Equations}{}{Solutions at Singular Points and Indicial Equations}{}{}{x:subsection:subsection-solutions-at-singular-points-and-indicial-equations}
 We've seen several examples showing the effectiveness of the power series method at regular points, but the situation becomes more complicated at singular points. At these points, we may not be guaranteed a power series solution.%
-\begin{example}{}{g:example:idp105548781354016}%
+\begin{example}{}{g:example:idp105548817515936}%
 Attempt to solve the ODE \(x^{2}y''+x^{2}y^\prime+y=0\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781354912}{}\quad{}We start, just as we did before, by assuming the solution is a power series: \(y=\sum_{n\geq0}^{}c_{n}x^{n}\). If we plug this into the ODE and simplify somewhat, we get the equation%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817516832}{}\quad{}We start, just as we did before, by assuming the solution is a power series: \(y=\sum_{n\geq0}^{}c_{n}x^{n}\). If we plug this into the ODE and simplify somewhat, we get the equation%
 \begin{equation*}
 c_{0}+\sum_{n\geq2}^{}\left[n(n-1)c_{n}+(n-1)c_{n-1}+c_{n}\right]x^{n} = 0.
 \end{equation*}
@@ -4411,7 +4417,7 @@ We know, in general, that we won't be able to find a power series solution \(\su
 \begin{equation*}
 y = \sum_{n\geq0}^{}c_{n}x^{n+r}.
 \end{equation*}
-Here, \(r\) can be any number (real or complex!), so in general \(y\) \emph{will not be a power series}. \begin{aside}{}{g:aside:idp105548781298848}%
+Here, \(r\) can be any number (real or complex!), so in general \(y\) \emph{will not be a power series}. \begin{aside}{}{g:aside:idp105548817493536}%
 Recall that a power series, by definition, has only nonnegative whole number powers of \(x\).%
 \end{aside}
  We lose a little bit by no longer assuming that \(y\) is a power series, but this expression may be flexible enough to lead to a solution of the ODE if \(x=0\) is a singular point.%
@@ -4481,7 +4487,7 @@ x^{2}y''+xy^\prime+(x^{2}-\frac{1}{4})y=0.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781325472}{}\quad{}If we divide through the ODE by \(x^{2}\) we get a divide-by-zero problem at \(x=0\), so \(x=0\) is a singular point. However, for this ODE we have%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817520160}{}\quad{}If we divide through the ODE by \(x^{2}\) we get a divide-by-zero problem at \(x=0\), so \(x=0\) is a singular point. However, for this ODE we have%
 \begin{align*}
 p(x) \amp= 1\\
 q(x) \amp= x^{2}-\frac{1}{4}
@@ -4635,7 +4641,7 @@ is known as the \terminology{Bessel function of the first kind} of order \(n\).%
 \begin{example}{Finding \(J_{0}\) and \(J_{1}\).}{x:example:example-finding-j_-0-m-and-j_-1-m-}%
 Find the zeroth order and first order Bessel functions of the first kind.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781234208}{}\quad{}Using \hyperref[x:men:equation-bessel-function-first-kind]{({\xreffont\ref{x:men:equation-bessel-function-first-kind}})}, we get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817428896}{}\quad{}Using \hyperref[x:men:equation-bessel-function-first-kind]{({\xreffont\ref{x:men:equation-bessel-function-first-kind}})}, we get%
 \begin{align*}
 J_{0}(x) \amp = \sum_{k\geq0}\frac{(-1)^{k}}{2^{2k}(k!)^{2}}x^{2k} \amp= 1 - \frac{1}{4}x^{2} + \frac{1}{16(4)}x^{4} - \cdots\\
 J_{1}(x) \amp = x\sum_{k\geq0}\frac{(-1)^{k}}{2^{2k + 1}k!(1 + k)!}x^{2k} \amp= \frac{1}{2}x - \frac{1}{8(2)}x^{3} + \cdots\text{.}
@@ -4736,7 +4742,7 @@ Y_{n}(x) \amp = \lim_{\nu\to n}Y_{\nu}(x)\text{.}\label{x:mrow:equation-bessel-s
 \begin{example}{Motivating the Laplace Transform.}{x:example:example-motivating-laplace}%
 A mass of \SI{1}{\kilogram} is attached to a spring that is held \SI{1}{\meter} to the right of its equilibrium position by a force of \SI{4}{\newton}. Beginning at time \(t=0\), a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\). What is an ODE that models the motion of the mass?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781263776}{}\quad{}We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817457568}{}\quad{}We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have%
 \begin{equation*}
 mx''+kx = F_{E}(t)
 \end{equation*}
@@ -4769,7 +4775,7 @@ Compute \(\mathcal{L}\left\{ 1 \right\}\).%
 \begin{example}{Computing the Laplace of \(t\).}{x:example:example-computing-the-laplace-of-t-}%
 Compute the Laplace transform of \(f(t) = t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781473952}{}\quad{}We compute the Laplace transform \(F(s)\) using the definition:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816587296}{}\quad{}We compute the Laplace transform \(F(s)\) using the definition:%
 \begin{align*}
 F(s) \amp= \Int{0}{\infty}te^{-st}\,dt\\
 \amp= \left[-\frac{t}{s}e^{-st}\right]_{0}^{\infty} + \frac{1}{s}\Int{0}{\infty}e^{-st}\,dt \amp\text{using integration by parts}\\
@@ -4795,7 +4801,7 @@ Let \(a\) and \(b\) be constants and suppose \(f(t)\) and \(g(t)\) are functions
 \begin{example}{Computing the Transform of a Polynomial.}{x:example:example-computing-the-transform-of-a-polynomial}%
 Compute \(\Laplace{(t-1)^{3}}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781482528}{}\quad{}We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816595872}{}\quad{}We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that%
 \begin{equation*}
 (t-1)^{3} = t^{3} - 3t^{2} +3t - 1
 \end{equation*}
@@ -4820,7 +4826,7 @@ u(t) =
 \end{equation*}
 Compute \(\Laplace{u(t-3)}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781487264}{}\quad{}Note that we are computing a \emph{translation} of the usual unit step function. We still compute \(\Laplace{u(t-3)}\) using the definition of the Laplace transform:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816600608}{}\quad{}Note that we are computing a \emph{translation} of the usual unit step function. We still compute \(\Laplace{u(t-3)}\) using the definition of the Laplace transform:%
 \begin{align*}
 \Laplace{u(t)} \amp= \Int{0}{\infty}u(t)e^{-st}\,dt\\
 \amp= \Int{3}{\infty}e^{-st}\,dt \amp\text{ since }u(t-3) \text{ is }0 \text{ for values of }t\lt3\\
@@ -4885,7 +4891,7 @@ F(s) = \frac{4}{s^{2}+2s+3}.
 \end{equation*}
 Find \(f(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781446816}{}\quad{}We'll start by completing the square on the denominator of \(F(s)\) to see if we can make it look like \((s-a)^{2}+\omega^{2}\) for some \(a,\omega\):%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816625696}{}\quad{}We'll start by completing the square on the denominator of \(F(s)\) to see if we can make it look like \((s-a)^{2}+\omega^{2}\) for some \(a,\omega\):%
 \begin{equation*}
 F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}.
 \end{equation*}
@@ -4920,7 +4926,7 @@ The above theorem says that differentiation in the ``time domain'' corresponds t
 \begin{example}{Laplace Transform of a Second Derivative.}{x:example:example-laplace-transform-of-a-second-derivative}%
 Let \(f(t)\) be piecewise smooth with Laplace transform \(F(s)\). Compute \(\Laplace{f''(t)}\) using \hyperref[x:theorem:theorem-laplace-transforms-of-derivatives]{Theorem~{\xreffont\ref{x:theorem:theorem-laplace-transforms-of-derivatives}}}.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781459744}{}\quad{}By \hyperref[x:theorem:theorem-laplace-transforms-of-derivatives]{Theorem~{\xreffont\ref{x:theorem:theorem-laplace-transforms-of-derivatives}}} we know that%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816605344}{}\quad{}By \hyperref[x:theorem:theorem-laplace-transforms-of-derivatives]{Theorem~{\xreffont\ref{x:theorem:theorem-laplace-transforms-of-derivatives}}} we know that%
 \begin{equation*}
 \Laplace{f'(t)} = sF(s)-f(0).
 \end{equation*}
@@ -4943,7 +4949,7 @@ x''+8x^\prime+15x = 0 \qq{} x(0) = 2, x^\prime(0) = -3
 \end{equation*}
 where \(x\) is a function of \(t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781399328}{}\quad{}We will solve this by using Laplace transforms. If we set \(X(s) = \Laplace{x(t)}\), then%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816610976}{}\quad{}We will solve this by using Laplace transforms. If we set \(X(s) = \Laplace{x(t)}\), then%
 \begin{align*}
 \Laplace{x'(t)} \amp= sX(s) - 2\\
 \Laplace{x''(t)} \amp= s^{2}X(s) - 2s +3\text{.}
@@ -4978,7 +4984,7 @@ y''+9y = 10e^{-t},\quad y(0) = y^\prime(0) = 0.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781405344}{}\quad{}We begin by taking the Laplace transform of both sides to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816616992}{}\quad{}We begin by taking the Laplace transform of both sides to get%
 \begin{equation*}
 s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}
 \end{equation*}
@@ -5013,7 +5019,7 @@ y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781411360}{}\quad{}We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at \(0\) we can't do so right away. The trick here is to shift the initial conditions \emph{back} to \(0\) as follows. First, we define a new function \(\widetilde{y}\) by%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816524704}{}\quad{}We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at \(0\) we can't do so right away. The trick here is to shift the initial conditions \emph{back} to \(0\) as follows. First, we define a new function \(\widetilde{y}\) by%
 \begin{equation*}
 \widetilde{y}(t) = y(t+4)
 \end{equation*}
@@ -5071,7 +5077,7 @@ A similar result is true for \(t\)-shifting.%
 \begin{theorem}{Time Shifting of Laplace Transforms.}{}{x:theorem:theorem-time-shifting-of-laplace-transforms}%
 Let \(f(t)\) denote a piecewise continuous function with Laplace transform \(F(s)\). Let \(a\geq0\). Then \(\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)\), or equivalently \(\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)\).%
 \end{theorem}
-\begin{proof}{}{g:proof:idp105548781428256}
+\begin{proof}{}{g:proof:idp105548816508576}
 To compute this we need to rely on the definition of the Laplace transform:%
 \begin{align*}
 \Laplace{u(t-a)f(t-a)} \amp= \int_{0}^{\infty}u(t-a)f(t-a)e^{-st}\,dt\\
@@ -5086,7 +5092,7 @@ The Heaviside function is useful for describing forces that turn on or off at sp
 \begin{example}{IVP with Discontinuous Forcing Function.}{x:example:example-ivp-with-discontinuous-forcing-function}%
 A mass of \SI{1}{\kilogram} is attached to a spring that is held \SI{1}{\meter} to the right of its equilibrium position by a force of \SI{4}{\newton}. Beginning at time \(t=0\), a machine is turned on and applies an external force of \(\cos2t\) to the mass. At time \(t=2\pi\) the machine is turned off and the external force disappears. Let \(x(t)\) be the displacement of the mass at time \(t\). What is an ODE that models the motion of the mass?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781370272}{}\quad{}By Hooke's Law and Newton's Second Law, we have%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816516384}{}\quad{}By Hooke's Law and Newton's Second Law, we have%
 \begin{equation*}
 mx''+kx = F_{E}(t)
 \end{equation*}
@@ -5237,7 +5243,7 @@ The \terminology{Dirac delta function}, denoted by the symbol \(\delta(t)\), is 
 \end{equation*}
 %
 \end{definition}
-The Dirac delta function is, of course, not an actual function. \begin{aside}{}{g:aside:idp105548781396000}%
+The Dirac delta function is, of course, not an actual function. \begin{aside}{}{g:aside:idp105548816541856}%
 The Dirac delta is actually an example of a \terminology{generalized function}, or \terminology{tempered distribution}.%
 \end{aside}
  But it's still useful as a mathematical formulation of an instantaneous force with unit impulse at \(t=0\).%
@@ -5250,7 +5256,7 @@ We can also take translations of the Dirac delta, which we view as a ``function'
 0 \amp\text{if }t\neq a
 \end{cases}.
 \end{equation*}
-We represent this graphically as an arrow: \begin{figureptx}{A plot of the Dirac delta function.}{g:figure:idp105548781595424}{}%
+We represent this graphically as an arrow: \begin{figureptx}{A plot of the Dirac delta function.}{g:figure:idp105548816544928}{}%
 \begin{image}{0}{1}{0}%
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
@@ -5284,7 +5290,7 @@ Let \(g(t)\) be a continuous function and let \(\alpha\leq a\leq\beta\). Then%
 \end{equation*}
 %
 \end{theorem}
-\begin{proof}{}{g:proof:idp105548781599392}
+\begin{proof}{}{g:proof:idp105548816548896}
 We treat \(\delta(t)\) as a function and perform the above integration:%
 \begin{align*}
 \end{align*}
@@ -5294,7 +5300,7 @@ The above theorem gives us another interpretation of the Dirac delta: it's a ``s
 \begin{example}{Laplace Transform of the Dirac Delta Function.}{x:example:example-laplace-transform-of-the-dirac-delta-function}%
 Compute \(\Laplace{\delta(t-a)}\), where \(a\geq0\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781604384}{}\quad{}We use the definition of the Laplace transform:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816717728}{}\quad{}We use the definition of the Laplace transform:%
 \begin{align*}
 \Laplace{\delta(t-a)} \amp= \int_{0}^{\infty}\delta(t-a)e^{-st}\,dt\\
 \amp= e^{-as}\text{.}
@@ -5313,7 +5319,7 @@ We use the Dirac delta to model instantaneous forces, such as sudden kicks or jo
 \begin{example}{IVP with Impulse.}{x:example:example-ivp-with-impulse}%
 An object of mass \(m=1\), at rest, is attached to a spring with spring constant \(k=9\). At time \(t=0\), the a hammer strikes the mass providing an impulse of \(3\) and setting the mass in motion. What is the displacement \(x(t)\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781609888}{}\quad{}\(x(t)\) satisfies the ODE%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816723488}{}\quad{}\(x(t)\) satisfies the ODE%
 \begin{equation*}
 mx''+kx = f(t)
 \end{equation*}
@@ -5335,7 +5341,7 @@ Note that the above solution does not appear to satisfy our initial conditions. 
 \begin{example}{Time-delayed Strike.}{x:example:example-time-delay}%
 Consider the spring-mass system above, but suppose now that the hammer hits the mass at time \(t=4\). What is the displacement \(x(t)\)?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781616928}{}\quad{}This time, the IVP we must solve is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816730528}{}\quad{}This time, the IVP we must solve is%
 \begin{equation*}
 x''+9x = 3\delta(t-4)\qq{where}x(0)=x'(0)=0.
 \end{equation*}
@@ -5373,7 +5379,7 @@ axis y line = center
 \begin{example}{Resonance with an Impulse Train.}{x:example:example-resonance-with-an-impulse-train}%
 Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every \(\frac{2\pi}{3}\) seconds, starting at \(t=0\). Find \(x(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781622304}{}\quad{}The IVP we need to solve now is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816702880}{}\quad{}The IVP we need to solve now is%
 \begin{align*}
 x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
 \amp= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
@@ -5450,7 +5456,7 @@ Convolutions are important because they act as ``smoothing operators''. If you h
 \begin{example}{Convolution with Unit Step.}{x:example:example-convolution-with-unit-step}%
 Compute \(u\ast t\), where \(u(t)\) is the unit step function.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781576224}{}\quad{}By definition,%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816754592}{}\quad{}By definition,%
 \begin{align*}
 u(t)\ast t \amp= \Int{0}{t}u(\tau)(t-\tau)\,d\tau \\
 \amp= \Int{0}{t}(t-\tau)\,d\tau \\
@@ -5479,7 +5485,7 @@ F(s) = \frac{1}{s(s^{2}+4)}.
 \end{equation*}
 Find \(f(t) = \iLaplace{F(s)}\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781584288}{}\quad{}We will use \hyperref[x:theorem:theorem-convolution-transform]{Theorem~{\xreffont\ref{x:theorem:theorem-convolution-transform}}} to express the inverse transform:%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816763168}{}\quad{}We will use \hyperref[x:theorem:theorem-convolution-transform]{Theorem~{\xreffont\ref{x:theorem:theorem-convolution-transform}}} to express the inverse transform:%
 \begin{align*}
 f(t) \amp= \iLaplace{F(s)}\\
 \amp= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}\\
@@ -5497,7 +5503,7 @@ x''+4x'+13x = f(t)\qq{where}x(0) = x'(0) = 0
 \end{equation*}
 for \(x(t)\) in terms of the function \(f(t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548781589792}{}\quad{}We're trying to find the solution \(x(t)\) for arbitrary \(f(t)\), which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and \hyperref[x:theorem:theorem-convolution-transform]{Theorem~{\xreffont\ref{x:theorem:theorem-convolution-transform}}}. So we start by taking the Laplace transform of the ODE to get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816735904}{}\quad{}We're trying to find the solution \(x(t)\) for arbitrary \(f(t)\), which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and \hyperref[x:theorem:theorem-convolution-transform]{Theorem~{\xreffont\ref{x:theorem:theorem-convolution-transform}}}. So we start by taking the Laplace transform of the ODE to get%
 \begin{equation*}
 s^{2}X(s) +4sX(s) + 13X(s) = F(s)
 \end{equation*}
@@ -5745,7 +5751,7 @@ a_{0} + \sum_{k=1}^{\infty}(a_{k}\cos kx+b_{k}\sin kx) \amp= \sum_{k=1}^{\infty}
 \end{align*}
 %
 \end{example}
-A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function \(f(x)\)? Are they actually equal? If we use the following code (adapted from \href{https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/}{here}\footnote{\nolinkurl{https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/}\label{g:fn:idp105548780675488}}) to compare the partial sums%
+A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function \(f(x)\)? Are they actually equal? If we use the following code (adapted from \href{https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/}{here}\footnote{\nolinkurl{https://doxdrum.wordpress.com/2011/01/31/sage-tip-fourier-series-approximation/}\label{g:fn:idp105548816674848}}) to compare the partial sums%
 \begin{equation*}
 \sum_{k=1}^{n}\frac{2 \, {\left(6 \, \pi - \pi^{3} k^{2}\right)} \left(-1\right)^{k}}{\pi k^{3}}\sin kx
 \end{equation*}
@@ -5773,7 +5779,7 @@ n = 3
 p = plot(FS(n),(x,-pi,pi), color='red') + plot(f(x),(x,-pi,pi))
 p
 \end{sageinput}
-In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.\footnote{In fact, the convergence of Fourier series for what one might consider to be the more "well-behaved" functions in mathematics was an open question until the 1960s. See \href{https://en.wikipedia.org/wiki/Carleson\%27s_theorem}{Carleson's Theorem}\footnote{\nolinkurl{https://en.wikipedia.org/wiki/Carleson\%27s_theorem}\label{g:fn:idp105548780678560}}.\label{x:fn:footnote-convergence-of-fourier-series}} However, for many of the functions we care about in this course we have the following theorem.%
+In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer.\footnote{In fact, the convergence of Fourier series for what one might consider to be the more "well-behaved" functions in mathematics was an open question until the 1960s. See \href{https://en.wikipedia.org/wiki/Carleson\%27s_theorem}{Carleson's Theorem}\footnote{\nolinkurl{https://en.wikipedia.org/wiki/Carleson\%27s_theorem}\label{g:fn:idp105548816677920}}.\label{x:fn:footnote-convergence-of-fourier-series}} However, for many of the functions we care about in this course we have the following theorem.%
 \begin{theorem}{Fourier Series of Piecewise Continuous Functions.}{}{x:theorem:theorem-pointwise-convergence-of-fourier-series}%
 \index{Fourier series!convergence}%
 Let \(f(x)\) be a piecewise continuous function on the interval \(-\pi\leq x\leq\pi\), and suppose that it's also periodic with period \(2\pi\), and is differentiable everywhere that it's continuous. Then the Fourier series of \(f(x)\) converges to \(f(x)\) except at the points where \(f(x)\) is discontinuous.%
@@ -5975,7 +5981,7 @@ c_{k} = \frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx.
 \end{equation*}
 This Fourier series converges to \(f(x)\) wherever \(f(x)\) is continuous.%
 \end{theorem}
-\begin{proof}{}{g:proof:idp105548780610848}
+\begin{proof}{}{g:proof:idp105548816872736}
 We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine. In particular, the relation we will use is the following:%
 \begin{equation*}
 \int_{-L}^{L}e^{i\frac{(m+n)\pi}{L}x}\,dx = \begin{cases} 2L \amp m=-n \\ 0 \amp \text{otherwise.}\end{cases}
@@ -6088,7 +6094,7 @@ which simplifies down to%
 \end{equation*}
 In other words, \(\sum_{k=1}^{\infty}\frac{1}{k^{2}} = \frac{\pi^{2}}{6}.\)%
 \end{example}
-\footnotetext[6]{Or at least math famous.\label{g:fn:idp105548780636448}}%
+\footnotetext[6]{Or at least math famous.\label{g:fn:idp105548816766880}}%
 \end{subsectionptx}
 \end{sectionptx}
 %
@@ -6139,7 +6145,7 @@ Define \(f(x) = x^{3}\) for \(-\pi\leq x < \pi\) as in \hyperref[x:example:examp
 \end{equation*}
 Find the trigonometric polynomial of degree \(N\) that best approximates \(f\) and give the corresponding error.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780590112}{}\quad{}The trigonometric polynomial of degree \(N\) that best approximates \(f(x)\) is%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816819104}{}\quad{}The trigonometric polynomial of degree \(N\) that best approximates \(f(x)\) is%
 \begin{equation*}
 \sum_{k = 1}^{N}(-1)^{k}\frac{2(6 - \pi^{2}k^{2})}{k^{3}}\sin kx\text{.}
 \end{equation*}
@@ -6161,7 +6167,7 @@ f(x) = \begin{cases} -1 \amp\text{ if } -1\leq x < 0 \\ 1 \amp\text{ if } 0 < x 
 \end{equation*}
 Apply Bessel's inequality to this function. What does Parseval's Identity say?%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780595488}{}\quad{}If we find the Fourier coefficients of \(f\), we get%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548816824480}{}\quad{}If we find the Fourier coefficients of \(f\), we get%
 \begin{equation*}
 b_{k} = \frac{2 - (-1)^{k}}{k\pi}\text{.}
 \end{equation*}
@@ -6366,7 +6372,7 @@ u_{t} = u_{xx},\quad u(0,t) = u(\pi,t) = 0\quad\text{and}\quad u(x,0) = \sin3x.
 \end{equation*}
 %
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780785056}{}\quad{}To do so, we need to compute the partial derivatives of \(u(x,t):\)%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548817003040}{}\quad{}To do so, we need to compute the partial derivatives of \(u(x,t):\)%
 %
 \begin{align*}
 u_{t}(x,t) \amp = \frac{\partial u}{\partial t} = -9e^{-9t}\sin3x \\
@@ -6507,7 +6513,7 @@ Now we'll use the initial conditions to actually determine \(b_{n},b^{*}_{n}\). 
 \begin{equation*}
 f(x) = u(x,0) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x.
 \end{equation*}
-\emph{This is a Fourier series}, and in particular it's the Fourier series of the odd extension of \(f(x)\) with period \(2L\). \footnote{See \hyperref[x:theorem:theorem-fourier-coefficients-of-even-and-odd-functions]{Theorem~{\xreffont\ref{x:theorem:theorem-fourier-coefficients-of-even-and-odd-functions}}}.\label{g:fn:idp105548780944544}} So it follows that%
+\emph{This is a Fourier series}, and in particular it's the Fourier series of the odd extension of \(f(x)\) with period \(2L\). \footnote{See \hyperref[x:theorem:theorem-fourier-coefficients-of-even-and-odd-functions]{Theorem~{\xreffont\ref{x:theorem:theorem-fourier-coefficients-of-even-and-odd-functions}}}.\label{g:fn:idp105548816944416}} So it follows that%
 %
 \begin{equation*}
 b_{n} = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}x\,dx.
@@ -6546,7 +6552,7 @@ f(x) = \begin{cases} 2x \amp 0\leq x\leq \frac{1}{2} \\ 2(1-x) \amp \frac{1}{2}\
 \end{equation*}
 The string is then released at time \(t=0\). Given \(c=4\), find the function \(u(x,t)\) that models the vertical displacement of the string at position \(x\) at time \(t\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780955680}{}\quad{}We can model \(u(x,t)\) as the solution of the wave equation%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548818167968}{}\quad{}We can model \(u(x,t)\) as the solution of the wave equation%
 \begin{equation*}
 \pdv[2]{u}{t} = 16\pdv[2]{u}{x}
 \end{equation*}
@@ -6645,7 +6651,7 @@ where \(f^{*}\) denotes the odd extension of \(f(x)\).%
 \begin{example}{Boundary value problem with sinusoidal deflection.}{x:example:example-boundary-value-problem-with-sinusoidal-deflection}%
 A string of length \(L=1\) has initial deflection, or position, given by \(f(x) = \sin\pi x - \frac{1}{2}\sin2\pi x\) for \(0\leq x\leq 1\). The string is released at time \(t=0\). Suppose \(c=1\). Find \(u(x,t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780913440}{}\quad{}We can do so very easily with \hyperref[x:theorem:theorem-d-alembert-s-solution-without-initial-velocity]{Theorem~{\xreffont\ref{x:theorem:theorem-d-alembert-s-solution-without-initial-velocity}}}, since the initial velocity of the string is \(0\). So we have%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548818191264}{}\quad{}We can do so very easily with \hyperref[x:theorem:theorem-d-alembert-s-solution-without-initial-velocity]{Theorem~{\xreffont\ref{x:theorem:theorem-d-alembert-s-solution-without-initial-velocity}}}, since the initial velocity of the string is \(0\). So we have%
 \begin{equation*}
 u(x,t) = \frac{1}{2}[f^{*}(x-t)+f^{*}(x+t)],
 \end{equation*}
@@ -6709,7 +6715,7 @@ where \(f^{*}\) denotes the odd extension of \(f(x)\) and \(g^{*}\) the odd exte
 \begin{example}{Boundary value problem with sinusoidal deflection and initial velocity.}{x:example:example-boundary-value-problem-with-sinusoidal-deflection-and-initial-velocity}%
 Consider a string of length \(L=1\), initial deflection \(f(x) = \sin\pi x\) and initial velocity \(\frac{1}{4}\sin2\pi x\). Assume that \(c = 2\). Find \(u(x,t)\), the vertical displacement at \((x,t)\).%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780936096}{}\quad{}The vertical displacement \(u(x,t)\) of the string is given by%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548818181152}{}\quad{}The vertical displacement \(u(x,t)\) of the string is given by%
 %
 \begin{align*}
 u(x,t) \amp = \frac{1}{2}[f^{*}(x-ct)+f^{*}(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\,ds \\
@@ -6787,7 +6793,7 @@ b_{n} \amp = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}x\,dx \label{x:mrow:he
 \begin{example}{Sinusoidal initial temperature.}{x:example:example-sinusoidal-initial-temperature}%
 Consider a thin metal bar of length \(\pi\) placed on the \(x\)-axis, with one end at \(x=0\) and the other at \(x=\pi\). Assuming that \(c=1\) and that the initial temperature is \(f(x) = 30\sin x\) for \(0\leq x\leq\pi\), find the temperature distribution using \hyperref[x:theorem:theorem-solution-of-the-heat-equation-with-fixed-temperature]{Theorem~{\xreffont\ref{x:theorem:theorem-solution-of-the-heat-equation-with-fixed-temperature}}}.%
 \par\smallskip%
-\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548780902816}{}\quad{}The temperature is the function \(u(x,t)\) given by%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idp105548818082336}{}\quad{}The temperature is the function \(u(x,t)\) given by%
 \begin{equation*}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n x)e^{-n^{2}t},
 \end{equation*}
@@ -6973,10 +6979,10 @@ If your document contains nontrivial examples of program code, we recommend rele
 %% Index locators are cross-references, so same font here
 {\xreffont\printindex}
 %
-\clearpage
+\cleardoublepage
 \pagestyle{empty}
 \vspace*{\stretch{1}}
-\begin{backcolophon}{g:colophon:idp105548781089184}%
+\begin{backcolophon}{g:colophon:idp105548818301600}%
 This book was authored in MathBook XML.%
 \end{backcolophon}%
 \vspace*{\stretch{2}}
