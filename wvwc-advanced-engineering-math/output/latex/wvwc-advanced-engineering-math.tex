@@ -1,0 +1,2584 @@
+%********************************************%
+%*       Generated from PreTeXt source      *%
+%*       on 2022-03-18T16:04:43-04:00       *%
+%*   A recent stable commit (2020-08-09):   *%
+%* 98f21740783f166a773df4dc83cab5293ab63a4a *%
+%*                                          *%
+%*         https://pretextbook.org          *%
+%*                                          *%
+%********************************************%
+%% We elect to always write snapshot output into <job>.dep file
+\RequirePackage{snapshot}
+\documentclass[twoside,10pt,]{book}
+%% Custom Preamble Entries, early (use latex.preamble.early)
+%% Default LaTeX packages
+%%   1.  always employed (or nearly so) for some purpose, or
+%%   2.  a stylewriter may assume their presence
+\usepackage{geometry}
+%% Some aspects of the preamble are conditional,
+%% the LaTeX engine is one such determinant
+\usepackage{ifthen}
+%% etoolbox has a variety of modern conveniences
+\usepackage{etoolbox}
+\usepackage{ifxetex,ifluatex}
+%% Raster graphics inclusion
+\usepackage{graphicx}
+%% Color support, xcolor package
+%% Always loaded, for: add/delete text, author tools
+%% Here, since tcolorbox loads tikz, and tikz loads xcolor
+\PassOptionsToPackage{usenames,dvipsnames,svgnames,table}{xcolor}
+\usepackage{xcolor}
+%% begin: defined colors, via xcolor package, for styling
+%% end: defined colors, via xcolor package, for styling
+%% Colored boxes, and much more, though mostly styling
+%% skins library provides "enhanced" skin, employing tikzpicture
+%% boxes may be configured as "breakable" or "unbreakable"
+%% "raster" controls grids of boxes, aka side-by-side
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcbuselibrary{raster}
+%% We load some "stock" tcolorbox styles that we use a lot
+%% Placement here is provisional, there will be some color work also
+%% First, black on white, no border, transparent, but no assumption about titles
+\tcbset{ bwminimalstyle/.style={size=minimal, boxrule=-0.3pt, frame empty,
+colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
+%% Second, bold title, run-in to text/paragraph/heading
+%% Space afterwards will be controlled by environment,
+%% independent of constructions of the tcb title
+%% Places \blocktitlefont onto many block titles
+\tcbset{ runintitlestyle/.style={fonttitle=\blocktitlefont\upshape\bfseries, attach title to upper} }
+%% Spacing prior to each exercise, anywhere
+\tcbset{ exercisespacingstyle/.style={before skip={1.5ex plus 0.5ex}} }
+%% Spacing prior to each block
+\tcbset{ blockspacingstyle/.style={before skip={2.0ex plus 0.5ex}} }
+%% xparse allows the construction of more robust commands,
+%% this is a necessity for isolating styling and behavior
+%% The tcolorbox library of the same name loads the base library
+\tcbuselibrary{xparse}
+%% The tcolorbox library loads TikZ, its calc package is generally useful,
+%% and is necessary for some smaller documents that use partial tcolor boxes
+%% See:  https://github.com/rbeezer/mathbook/issues/1624
+\usetikzlibrary{calc}
+%% Hyperref should be here, but likes to be loaded late
+%%
+%% Inline math delimiters, \(, \), need to be robust
+%% 2016-01-31:  latexrelease.sty  supersedes  fixltx2e.sty
+%% If  latexrelease.sty  exists, bugfix is in kernel
+%% If not, bugfix is in  fixltx2e.sty
+%% See:  https://tug.org/TUGboat/tb36-3/tb114ltnews22.pdf
+%% and read "Fewer fragile commands" in distribution's  latexchanges.pdf
+\IfFileExists{latexrelease.sty}{}{\usepackage{fixltx2e}}
+%% Footnote counters and part/chapter counters are manipulated
+%% April 2018:  chngcntr  commands now integrated into the kernel,
+%% but circa 2018/2019 the package would still try to redefine them,
+%% so we need to do the work of loading conditionally for old kernels.
+%% From version 1.1a,  chngcntr  should detect defintions made by LaTeX kernel.
+\ifdefined\counterwithin
+\else
+    \usepackage{chngcntr}
+\fi
+%% Text height identically 9 inches, text width varies on point size
+%% See Bringhurst 2.1.1 on measure for recommendations
+%% 75 characters per line (count spaces, punctuation) is target
+%% which is the upper limit of Bringhurst's recommendations
+\geometry{letterpaper,total={340pt,9.0in}}
+%% Custom Page Layout Adjustments (use latex.geometry)
+%% This LaTeX file may be compiled with pdflatex, xelatex, or lualatex executables
+%% LuaTeX is not explicitly supported, but we do accept additions from knowledgeable users
+%% The conditional below provides  pdflatex  specific configuration last
+%% begin: engine-specific capabilities
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: xelatex and lualatex-specific default configuration
+\ifxetex\usepackage{xltxtra}\fi
+%% realscripts is the only part of xltxtra relevant to lualatex 
+\ifluatex\usepackage{realscripts}\fi
+%% end:   xelatex and lualatex-specific default configuration
+}{
+%% begin: pdflatex-specific default configuration
+%% We assume a PreTeXt XML source file may have Unicode characters
+%% and so we ask LaTeX to parse a UTF-8 encoded file
+%% This may work well for accented characters in Western language,
+%% but not with Greek, Asian languages, etc.
+%% When this is not good enough, switch to the  xelatex  engine
+%% where Unicode is better supported (encouraged, even)
+\usepackage[utf8]{inputenc}
+%% end: pdflatex-specific default configuration
+}
+%% end:   engine-specific capabilities
+%%
+%% Fonts.  Conditional on LaTex engine employed.
+%% Default Text Font: The Latin Modern fonts are
+%% "enhanced versions of the [original TeX] Computer Modern fonts."
+%% We use them as the default text font for PreTeXt output.
+%% Default Monospace font: Inconsolata (aka zi4)
+%% Sponsored by TUG: http://levien.com/type/myfonts/inconsolata.html
+%% Loaded for documents with intentional objects requiring monospace
+%% See package documentation for excellent instructions
+%% fontspec will work universally if we use filename to locate OTF files
+%% Loads the "upquote" package as needed, so we don't have to
+%% Upright quotes might come from the  textcomp  package, which we also use
+%% We employ the shapely \ell to match Google Font version
+%% pdflatex: "varl" package option produces shapely \ell
+%% pdflatex: "var0" package option produces plain zero (not used)
+%% pdflatex: "varqu" package option produces best upright quotes
+%% xelatex,lualatex: add OTF StylisticSet 1 for shapely \ell
+%% xelatex,lualatex: add OTF StylisticSet 2 for plain zero (not used)
+%% xelatex,lualatex: add OTF StylisticSet 3 for upright quotes
+%%
+%% Automatic Font Control
+%% Portions of a document, are, or may, be affected by defined commands
+%% These are perhaps more flexible when using  xelatex  rather than  pdflatex
+%% The following definitions are meant to be re-defined in a style, using \renewcommand
+%% They are scoped when employed (in a TeX group), and so should not be defined with an argument
+\newcommand{\divisionfont}{\relax}
+\newcommand{\blocktitlefont}{\relax}
+\newcommand{\contentsfont}{\relax}
+\newcommand{\pagefont}{\relax}
+\newcommand{\tabularfont}{\relax}
+\newcommand{\xreffont}{\relax}
+\newcommand{\titlepagefont}{\relax}
+%%
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: font setup and configuration for use with xelatex
+%% Generally, xelatex is necessary for non-Western fonts
+%% fontspec package provides extensive control of system fonts,
+%% meaning *.otf (OpenType), and apparently *.ttf (TrueType)
+%% that live *outside* your TeX/MF tree, and are controlled by your *system*
+%% (it is possible that a TeX distribution will place fonts in a system location)
+%%
+%% The fontspec package is the best vehicle for using different fonts in  xelatex
+%% So we load it always, no matter what a publisher or style might want
+%%
+\usepackage{fontspec}
+%%
+%% begin: xelatex main font ("font-xelatex-main" template)
+%% Latin Modern Roman is the default font for xelatex and so is loaded with a TU encoding
+%% *in the format* so we can't touch it, only perhaps adjust it later
+%% in one of two ways (then known by NFSS names such as "lmr")
+%% (1) via NFSS with font family names such as "lmr" and "lmss"
+%% (2) via fontspec with commands like \setmainfont{Latin Modern Roman}
+%% The latter requires the font to be known at the system-level by its font name,
+%% but will give access to OTF font features through optional arguments
+%% https://tex.stackexchange.com/questions/470008/
+%% where-and-how-does-fontspec-sty-specify-the-default-font-latin-modern-roman
+%% http://tex.stackexchange.com/questions/115321
+%% /how-to-optimize-latin-modern-font-with-xelatex
+%%
+%% end:   xelatex main font ("font-xelatex-main" template)
+%% begin: xelatex mono font ("font-xelatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\IfFontExistsTF{Inconsolatazi4-Regular.otf}{}{\GenericError{}{The font "Inconsolatazi4-Regular.otf" requested by PreTeXt output is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Consult the PreTeXt Guide for help with LaTeX fonts.}{}}
+\IfFontExistsTF{Inconsolatazi4-Bold.otf}{}{\GenericError{}{The font "Inconsolatazi4-Bold.otf" requested by PreTeXt output is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Consult the PreTeXt Guide for help with LaTeX fonts.}{}}
+\usepackage{zi4}
+\setmonofont[BoldFont=Inconsolatazi4-Bold.otf,StylisticSet={1,3}]{Inconsolatazi4-Regular.otf}
+%% end:   xelatex mono font ("font-xelatex-mono" template)
+%% begin: xelatex font adjustments ("font-xelatex-style" template)
+%% end:   xelatex font adjustments ("font-xelatex-style" template)
+%%
+%% Extensive support for other languages
+\usepackage{polyglossia}
+%% Set main/default language based on pretext/@xml:lang value
+%% document language code is "en-US", US English
+%% usmax variant has extra hypenation
+\setmainlanguage[variant=usmax]{english}
+%% Enable secondary languages based on discovery of @xml:lang values
+%% Enable fonts/scripts based on discovery of @xml:lang values
+%% Western languages should be ably covered by Latin Modern Roman
+%% end:   font setup and configuration for use with xelatex
+}{%
+%% begin: font setup and configuration for use with pdflatex
+%% begin: pdflatex main font ("font-pdflatex-main" template)
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+%% end:   pdflatex main font ("font-pdflatex-main" template)
+%% begin: pdflatex mono font ("font-pdflatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\usepackage[varqu,varl]{inconsolata}
+%% end:   pdflatex mono font ("font-pdflatex-mono" template)
+%% begin: pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   font setup and configuration for use with pdflatex
+}
+%% Micromanage spacing, etc.  The named "microtype-options"
+%% template may be employed to fine-tune package behavior
+\usepackage{microtype}
+%% Symbols, align environment, commutative diagrams, bracket-matrix
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amssymb}
+%% allow page breaks within display mathematics anywhere
+%% level 4 is maximally permissive
+%% this is exactly the opposite of AMSmath package philosophy
+%% there are per-display, and per-equation options to control this
+%% split, aligned, gathered, and alignedat are not affected
+\allowdisplaybreaks[4]
+%% allow more columns to a matrix
+%% can make this even bigger by overriding with  latex.preamble.late  processing option
+\setcounter{MaxMatrixCols}{30}
+%%
+%%
+%% Division Titles, and Page Headers/Footers
+%% titlesec package, loading "titleps" package cooperatively
+%% See code comments about the necessity and purpose of "explicit" option.
+%% The "newparttoc" option causes a consistent entry for parts in the ToC 
+%% file, but it is only effective if there is a \titleformat for \part.
+%% "pagestyles" loads the  titleps  package cooperatively.
+\usepackage[explicit, newparttoc, pagestyles]{titlesec}
+%% The companion titletoc package for the ToC.
+\usepackage{titletoc}
+%% Fixes a bug with transition from chapters to appendices in a "book"
+%% See generating XSL code for more details about necessity
+\newtitlemark{\chaptertitlename}
+%% begin: customizations of page styles via the modal "titleps-style" template
+%% Designed to use commands from the LaTeX "titleps" package
+%% Plain pages should have the same font for page numbers
+\renewpagestyle{plain}{%
+\setfoot{}{\pagefont\thepage}{}%
+}%
+%% Two-page spread as in default LaTeX
+\renewpagestyle{headings}{%
+\sethead%
+[\pagefont\thepage]%
+[]
+[\pagefont\slshape\MakeUppercase{\ifthechapter{\chaptertitlename\space\thechapter.\space}{}\chaptertitle}]%
+{\pagefont\slshape\MakeUppercase{\ifthesection{Section\space\thesection.\space\sectiontitle}{}}}%
+{}%
+{\pagefont\thepage}%
+}%
+\pagestyle{headings}
+%% end: customizations of page styles via the modal "titleps-style" template
+%%
+%% Create globally-available macros to be provided for style writers
+%% These are redefined for each occurence of each division
+\newcommand{\divisionnameptx}{\relax}%
+\newcommand{\titleptx}{\relax}%
+\newcommand{\subtitleptx}{\relax}%
+\newcommand{\shortitleptx}{\relax}%
+\newcommand{\authorsptx}{\relax}%
+\newcommand{\epigraphptx}{\relax}%
+%% Create environments for possible occurences of each division
+%% Environment for a PTX "acknowledgement" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{acknowledgement}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Acknowledgements}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\chapter*{#1}%
+\addcontentsline{toc}{chapter}{#3}
+\label{#6}%
+}{}%
+%% Environment for a PTX "preface" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{preface}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Preface}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\chapter*{#1}%
+\addcontentsline{toc}{chapter}{#3}
+\label{#6}%
+}{}%
+%% Environment for a PTX "part" at the level of a LaTeX "part"
+\NewDocumentEnvironment{partptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Part}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\part[{#3}]{#1}%
+\label{#6}%
+}{}%
+%% Environment for a PTX "chapter" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{chapterptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Chapter}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\chapter[{#3}]{#1}%
+\label{#6}%
+}{}%
+%% Environment for a PTX "section" at the level of a LaTeX "section"
+\NewDocumentEnvironment{sectionptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Section}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\section[{#3}]{#1}%
+\label{#6}%
+}{}%
+%% Environment for a PTX "subsection" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{subsectionptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Subsection}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\subsection[{#3}]{#1}%
+\label{#6}%
+}{}%
+%% Environment for a PTX "appendix" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{appendixptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Appendix}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\chapter[{#3}]{#1}%
+\label{#6}%
+}{}%
+%% Environment for a PTX "index" at the level of a LaTeX "chapter"
+\NewDocumentEnvironment{indexptx}{mmmmmm}
+{%
+\renewcommand{\divisionnameptx}{Index}%
+\renewcommand{\titleptx}{#1}%
+\renewcommand{\subtitleptx}{#2}%
+\renewcommand{\shortitleptx}{#3}%
+\renewcommand{\authorsptx}{#4}%
+\renewcommand{\epigraphptx}{#5}%
+\chapter*{#1}%
+\addcontentsline{toc}{chapter}{#3}
+\label{#6}%
+}{}%
+%%
+%% Styles for six traditional LaTeX divisions
+\titleformat{\part}[display]
+{\divisionfont\Huge\bfseries\centering}{\divisionnameptx\space\thepart}{30pt}{\Huge#1}
+[{\Large\centering\authorsptx}]
+\titleformat{\chapter}[display]
+{\divisionfont\huge\bfseries}{\divisionnameptx\space\thechapter}{20pt}{\Huge#1}
+[{\Large\authorsptx}]
+\titleformat{name=\chapter,numberless}[display]
+{\divisionfont\huge\bfseries}{}{0pt}{#1}
+[{\Large\authorsptx}]
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+\titleformat{\section}[hang]
+{\divisionfont\Large\bfseries}{\thesection}{1ex}{#1}
+[{\large\authorsptx}]
+\titleformat{name=\section,numberless}[block]
+{\divisionfont\Large\bfseries}{}{0pt}{#1}
+[{\large\authorsptx}]
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titleformat{\subsection}[hang]
+{\divisionfont\large\bfseries}{\thesubsection}{1ex}{#1}
+[{\normalsize\authorsptx}]
+\titleformat{name=\subsection,numberless}[block]
+{\divisionfont\large\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\subsubsection}[hang]
+{\divisionfont\normalsize\bfseries}{\thesubsubsection}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\subsubsection,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\paragraph}[hang]
+{\divisionfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\paragraph,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5em}
+%%
+%% Styles for five traditional LaTeX divisions
+\titlecontents{part}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\Large\thecontentslabel\enspace}{\Large}%
+{}%
+[\addvspace{.5pc}]%
+\titlecontents{chapter}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\large\thecontentslabel\enspace}{\large}%
+{\hfill\bfseries\thecontentspage}%
+[\addvspace{.5pc}]%
+\dottedcontents{section}[3.8em]{\contentsfont}{2.3em}{1pc}%
+\dottedcontents{subsection}[6.1em]{\contentsfont}{3.2em}{1pc}%
+\dottedcontents{subsubsection}[9.3em]{\contentsfont}{4.3em}{1pc}%
+%%
+%% Begin: Semantic Macros
+%% To preserve meaning in a LaTeX file
+%%
+%% \mono macro for content of "c", "cd", "tag", etc elements
+%% Also used automatically in other constructions
+%% Simply an alias for \texttt
+%% Always defined, even if there is no need, or if a specific tt font is not loaded
+\newcommand{\mono}[1]{\texttt{#1}}
+%%
+%% Following semantic macros are only defined here if their
+%% use is required only in this specific document
+%%
+%% Used for inline definitions of terms
+\newcommand{\terminology}[1]{\textbf{#1}}
+%% End: Semantic Macros
+%% Localize LaTeX supplied names (possibly none)
+\renewcommand*{\appendixname}{Appendix}
+\renewcommand*{\partname}{Part}
+\renewcommand*{\chaptername}{Chapter}
+%% Equation Numbering
+%% Controlled by  numbering.equations.level  processing parameter
+%% No adjustment here implies document-wide numbering
+\numberwithin{equation}{part}
+%% "tcolorbox" environment for a single image, occupying entire \linewidth
+%% arguments are left-margin, width, right-margin, as multiples of
+%% \linewidth, and are guaranteed to be positive and sum to 1.0
+\tcbset{ imagestyle/.style={bwminimalstyle} }
+\NewTColorBox{image}{mmm}{imagestyle,left skip=#1\linewidth,width=#2\linewidth}
+%% Footnote Numbering
+%% Specified by numbering.footnotes.level
+%% Undo counter reset by chapter for a book
+\counterwithout{footnote}{chapter}
+%% Global numbering, since numbering.footnotes.level = 0
+%% Program listing support: for listings, programs, consoles, and Sage code
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}%
+  {\tcbuselibrary{listings}}%
+  {\tcbuselibrary{listingsutf8}}%
+%% We define the listings font style to be the default "ttfamily"
+%% To fix hyphens/dashes rendered in PDF as fancy minus signs by listing
+%% http://tex.stackexchange.com/questions/33185/listings-package-changes-hyphens-to-minus-signs
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+%% We define a null language, free of any formatting or style
+%% for use when a language is not supported, or pseudo-code, or consoles
+%% Not necessary for Sage code, so in limited cases included unnecessarily
+\lstdefinelanguage{none}{identifierstyle=,commentstyle=,stringstyle=,keywordstyle=}
+\ifthenelse{\boolean{xetex}}{}{%
+%% begin: pdflatex-specific listings configuration
+%% translate U+0080 - U+00F0 to their textmode LaTeX equivalents
+%% Data originally from https://www.w3.org/Math/characters/unicode.xml, 2016-07-23
+%% Lines marked in XSL with "$" were converted from mathmode to textmode
+\lstset{extendedchars=true}
+\lstset{literate={ }{{~}}{1}{¡}{{\textexclamdown }}{1}{¢}{{\textcent }}{1}{£}{{\textsterling }}{1}{¤}{{\textcurrency }}{1}{¥}{{\textyen }}{1}{¦}{{\textbrokenbar }}{1}{§}{{\textsection }}{1}{¨}{{\textasciidieresis }}{1}{©}{{\textcopyright }}{1}{ª}{{\textordfeminine }}{1}{«}{{\guillemotleft }}{1}{¬}{{\textlnot }}{1}{­}{{\-}}{1}{®}{{\textregistered }}{1}{¯}{{\textasciimacron }}{1}{°}{{\textdegree }}{1}{±}{{\textpm }}{1}{²}{{\texttwosuperior }}{1}{³}{{\textthreesuperior }}{1}{´}{{\textasciiacute }}{1}{µ}{{\textmu }}{1}{¶}{{\textparagraph }}{1}{·}{{\textperiodcentered }}{1}{¸}{{\c{}}}{1}{¹}{{\textonesuperior }}{1}{º}{{\textordmasculine }}{1}{»}{{\guillemotright }}{1}{¼}{{\textonequarter }}{1}{½}{{\textonehalf }}{1}{¾}{{\textthreequarters }}{1}{¿}{{\textquestiondown }}{1}{À}{{\`{A}}}{1}{Á}{{\'{A}}}{1}{Â}{{\^{A}}}{1}{Ã}{{\~{A}}}{1}{Ä}{{\"{A}}}{1}{Å}{{\AA }}{1}{Æ}{{\AE }}{1}{Ç}{{\c{C}}}{1}{È}{{\`{E}}}{1}{É}{{\'{E}}}{1}{Ê}{{\^{E}}}{1}{Ë}{{\"{E}}}{1}{Ì}{{\`{I}}}{1}{Í}{{\'{I}}}{1}{Î}{{\^{I}}}{1}{Ï}{{\"{I}}}{1}{Ð}{{\DH }}{1}{Ñ}{{\~{N}}}{1}{Ò}{{\`{O}}}{1}{Ó}{{\'{O}}}{1}{Ô}{{\^{O}}}{1}{Õ}{{\~{O}}}{1}{Ö}{{\"{O}}}{1}{×}{{\texttimes }}{1}{Ø}{{\O }}{1}{Ù}{{\`{U}}}{1}{Ú}{{\'{U}}}{1}{Û}{{\^{U}}}{1}{Ü}{{\"{U}}}{1}{Ý}{{\'{Y}}}{1}{Þ}{{\TH }}{1}{ß}{{\ss }}{1}{à}{{\`{a}}}{1}{á}{{\'{a}}}{1}{â}{{\^{a}}}{1}{ã}{{\~{a}}}{1}{ä}{{\"{a}}}{1}{å}{{\aa }}{1}{æ}{{\ae }}{1}{ç}{{\c{c}}}{1}{è}{{\`{e}}}{1}{é}{{\'{e}}}{1}{ê}{{\^{e}}}{1}{ë}{{\"{e}}}{1}{ì}{{\`{\i}}}{1}{í}{{\'{\i}}}{1}{î}{{\^{\i}}}{1}{ï}{{\"{\i}}}{1}{ð}{{\dh }}{1}{ñ}{{\~{n}}}{1}{ò}{{\`{o}}}{1}{ó}{{\'{o}}}{1}{ô}{{\^{o}}}{1}{õ}{{\~{o}}}{1}{ö}{{\"{o}}}{1}{÷}{{\textdiv }}{1}{ø}{{\o }}{1}{ù}{{\`{u}}}{1}{ú}{{\'{u}}}{1}{û}{{\^{u}}}{1}{ü}{{\"{u}}}{1}{ý}{{\'{y}}}{1}{þ}{{\th }}{1}{ÿ}{{\"{y}}}{1}}
+%% end: pdflatex-specific listings configuration
+}
+%% End of generic listing adjustments
+%% The listings package as tcolorbox for Sage code
+%% We do as much styling as possible with tcolorbox, not listings
+%% Sage's blue is 50%, we go way lighter (blue!05 would also work)
+%% Note that we defuse listings' default "aboveskip" and "belowskip"
+\definecolor{sageblue}{rgb}{0.95,0.95,1}
+\tcbset{ sagestyle/.style={left=0pt, right=0pt, top=0ex, bottom=0ex, middle=0pt, toptitle=0pt, bottomtitle=0pt,
+boxsep=4pt, listing only, fontupper=\small\ttfamily,
+breakable, parbox=false, 
+listing options={language=Python,breaklines=true,breakatwhitespace=true, extendedchars=true, aboveskip=0pt, belowskip=0pt}} }
+\newtcblisting{sageinput}{sagestyle, colback=sageblue, sharp corners, boxrule=0.5pt, toprule at break=-0.3pt, bottomrule at break=-0.3pt, }
+\newtcblisting{sageoutput}{sagestyle, colback=white, colframe=white, frame empty, before skip=0pt, after skip=0pt, }
+%% Fancy Verbatim for consoles, preformatted, code display, literate programming
+\usepackage{fancyvrb}
+%% Pre-formatted text, a peer of paragraphs
+\DefineVerbatimEnvironment{preformatted}{Verbatim}{}
+%% More flexible list management, esp. for references
+%% But also for specifying labels (i.e. custom order) on nested lists
+\usepackage{enumitem}
+%% Support for index creation
+%% imakeidx package does not require extra pass (as with makeidx)
+%% Title of the "Index" section set via a keyword
+%% Language support for the "see" and "see also" phrases
+\usepackage{imakeidx}
+\makeindex[title=Index, intoc=true]
+\renewcommand{\seename}{See}
+\renewcommand{\alsoname}{See also}
+%% hyperref driver does not need to be specified, it will be detected
+%% Footnote marks in tcolorbox have broken linking under
+%% hyperref, so it is necessary to turn off all linking
+%% It *must* be given as a package option, not with \hypersetup
+\usepackage[hyperfootnotes=false]{hyperref}
+%% configure hyperref's  \href{}{}  and  \nolinkurl  to match listings' inline verbatim
+\renewcommand\UrlFont{\small\ttfamily}
+%% Hyperlinking active in electronic PDFs, all links without surrounding boxes and blue
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue}
+\hypersetup{pdftitle={Advanced Engineering Mathematics Lecture Notes}}
+%% If you manually remove hyperref, leave in this next command
+%% This will allow LaTeX compilation, employing this no-op command
+\providecommand\phantomsection{}
+%% Division Numbering: Chapters, Sections, Subsections, etc
+%% Division numbers may be turned off at some level ("depth")
+%% A section *always* has depth 1, contrary to us counting from the document root
+%% The latex default is 3.  If a larger number is present here, then
+%% removing this command may make some cross-references ambiguous
+%% The precursor variable $numbering-maxlevel is checked for consistency in the common XSL file
+\setcounter{secnumdepth}{1}
+%%
+%% AMS "proof" environment is no longer used, but we leave previously
+%% implemented \qedhere in place, should the LaTeX be recycled
+\newcommand{\qedhere}{\relax}
+%%
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for most blocks (possibly not projects, 2D displays)
+%% Controlled by  numbering.theorems.level  processing parameter
+\newtcolorbox[auto counter, number within=chapter]{block}{}
+%%
+%% This document is set to number PROJECT-LIKE on a separate numbering scheme
+%% So, a faux tcolorbox whose only purpose is to provide this numbering
+%% Controlled by  numbering.projects.level  processing parameter
+\newtcolorbox[auto counter]{project-distinct}{}
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for 2D displays which are subnumbered as part of a "sidebyside"
+\makeatletter
+\newtcolorbox[auto counter, number within=tcb@cnt@block, number freestyle={\noexpand\thetcb@cnt@block(\noexpand\alph{\tcbcounter})}]{subdisplay}{}
+\makeatother
+%%
+%% tcolorbox, with styles, for THEOREM-LIKE
+%%
+%% theorem: fairly simple numbered block/structure
+\tcbset{ theoremstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, } }
+\newtcolorbox[use counter from=block]{theorem}[3]{title={{Theorem~\thetcbcounter\notblank{#1#2}{\space}{}\notblank{#1}{\space#1}{}\notblank{#2}{\space(#2)}{}}}, phantomlabel={#3}, breakable, parbox=false, after={\par}, fontupper=\itshape, theoremstyle, }
+%% proposition: fairly simple numbered block/structure
+\tcbset{ propositionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, } }
+\newtcolorbox[use counter from=block]{proposition}[3]{title={{Proposition~\thetcbcounter\notblank{#1#2}{\space}{}\notblank{#1}{\space#1}{}\notblank{#2}{\space(#2)}{}}}, phantomlabel={#3}, breakable, parbox=false, after={\par}, fontupper=\itshape, propositionstyle, }
+%%
+%% tcolorbox, with styles, for DEFINITION-LIKE
+%%
+%% definition: fairly simple numbered block/structure
+\tcbset{ definitionstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\lozenge\)}, } }
+\newtcolorbox[use counter from=block]{definition}[2]{title={{Definition~\thetcbcounter\notblank{#1}{\space\space#1}{}}}, phantomlabel={#2}, breakable, parbox=false, after={\par}, definitionstyle, }
+%%
+%% tcolorbox, with styles, for EXAMPLE-LIKE
+%%
+%% example: fairly simple numbered block/structure
+\tcbset{ examplestyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\square\)}, } }
+\newtcolorbox[use counter from=block]{example}[2]{title={{Example~\thetcbcounter\notblank{#1}{\space\space#1}{}}}, phantomlabel={#2}, breakable, parbox=false, after={\par}, examplestyle, }
+%%
+%% tcolorbox, with styles, for ASIDE-LIKE
+%%
+%% aside: fairly simple un-numbered block/structure
+\tcbset{ asidestyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, } }
+\newtcolorbox{aside}[2]{title={\notblank{#1}{#1}{}}, phantomlabel={#2}, breakable, parbox=false, asidestyle}
+%%
+%% tcolorbox, with styles, for FIGURE-LIKE
+%%
+%% figureptx: 2-D display structure
+\tcbset{ figureptxstyle/.style={bwminimalstyle, middle=1ex, blockspacingstyle, fontlower=\blocktitlefont} }
+\newtcolorbox[use counter from=block]{figureptx}[3]{lower separated=false, before lower={{\textbf{Figure~\thetcbcounter}\space#1}}, phantomlabel={#2}, unbreakable, parbox=false, figureptxstyle, }
+%%
+%% xparse environments for introductions and conclusions of divisions
+%%
+%% introduction: in a structured division
+\NewDocumentEnvironment{introduction}{m}
+{\notblank{#1}{\noindent\textbf{#1}\space}{}}{\par\medskip}
+%%
+%% tcolorbox, with styles, for miscellaneous environments
+%%
+%% proof: title is a replacement
+\tcbset{ proofstyle/.style={bwminimalstyle, fonttitle=\blocktitlefont\itshape, attach title to upper, after title={\space}, after upper={\space\space\hspace*{\stretch{1}}\(\blacksquare\)},
+} }
+\newtcolorbox{proof}[2]{title={\notblank{#1}{#1}{Proof.}}, phantom={\hypertarget{#2}{}}, breakable, parbox=false, after={\par}, proofstyle }
+%% paragraphs: the terminal, pseudo-division
+%% We use the lowest LaTeX traditional division
+\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{#1}
+\titlespacing*{\subparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{1em}
+\NewDocumentEnvironment{paragraphs}{mm}
+{\subparagraph*{#1}\hypertarget{#2}{}}{}
+%% back colophon, at the very end, typically on its own page
+\tcbset{ backcolophonstyle/.style={bwminimalstyle, blockspacingstyle, before skip=5ex, left skip=0.15\textwidth, right skip=0.15\textwidth, fonttitle=\blocktitlefont\large\bfseries, center title, halign=center, bottomtitle=2ex} }
+\newtcolorbox{backcolophon}[1]{title={Colophon}, phantom={\hypertarget{#1}{}}, breakable, parbox=false, backcolophonstyle}
+%% Graphics Preamble Entries
+\usepackage{pgfplots}
+\usepackage{tikz-qtree}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{decorations.markings,decorations.pathreplacing,arrows,calc,backgrounds}
+% These are the TikZ-PGFPlots settings I need.
+  \pgfplotsset{mystyle/.style={%
+  view={120}{30},
+  axis lines=center,
+  width=6cm,
+  xlabel=$x$, xlabel style={at=(current axis.right of origin), anchor=west},
+  ylabel=$y$, ylabel style={at=(current axis.above origin), anchor=south},
+  grid=both,
+  vector/.style={-stealth,blue,very thick}, 
+  vector guide/.style={dashed,red,thick}
+  }}
+
+  \pgfplotsset{numberline/.style={%
+  axis x line = center,
+  axis y line = none,
+  xlabel = {$x$},
+  ymin=0,
+  ymax=0}}
+
+  \tikzset{
+  jumpdot/.style={mark=*,solid},
+  excl/.append style={jumpdot,fill=white},
+  incl/.append style={jumpdot,fill=black},
+  }
+%% If tikz has been loaded, replace ampersand with \amp macro
+\ifdefined\tikzset
+    \tikzset{ampersand replacement = \amp}
+\fi
+%% extpfeil package for certain extensible arrows,
+%% as also provided by MathJax extension of the same name
+%% NB: this package loads mtools, which loads calc, which redefines
+%%     \setlength, so it can be removed if it seems to be in the 
+%%     way and your math does not use:
+%%     
+%%     \xtwoheadrightarrow, \xtwoheadleftarrow, \xmapsto, \xlongequal, \xtofrom
+%%     
+%%     we have had to be extra careful with variable thickness
+%%     lines in tables, and so also load this package late
+\usepackage{extpfeil}
+%% Custom Preamble Entries, late (use latex.preamble.late)
+%% Begin: Author-provided packages
+%% (From  docinfo/latex-preamble/package  elements)
+\usepackage{physics}%% End: Author-provided packages
+%% Begin: Author-provided macros
+%% (From  docinfo/macros  element)
+%% Plus three from MBX for XML characters
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\providecommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\ii}{\mathbf{i}}
+\newcommand{\jj}{\mathbf{j}}
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\col}[1]{\operatorname{col}{#1}}
+\providecommand{\rank}[1]{\operatorname{rank}{#1}}
+\newcommand{\nul}[1]{\operatorname{null}{#1}}
+\newcommand{\spn}[1]{\operatorname{span}{#1}}
+\newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+\providecommand{\grad}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\providecommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\providecommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\providecommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+      }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+\newcommand{\amp}{&}
+%% End: Author-provided macros
+\begin{document}
+%% bottom alignment is explicit, since it normally depends on oneside, twoside
+\raggedbottom
+\frontmatter
+%% begin: half-title
+\thispagestyle{empty}
+{\titlepagefont\centering
+\vspace*{0.28\textheight}
+{\Huge Advanced Engineering Mathematics Lecture Notes}\\[2\baselineskip]
+{\LARGE West Virginia Wesleyan College}\\
+}
+\clearpage
+%% end:   half-title
+%% begin: adcard (empty)
+\thispagestyle{empty}
+\null%
+\clearpage
+%% end:   adcard (empty)
+%% begin: title page
+%% Inspired by Peter Wilson's "titleDB" in "titlepages" CTAN package
+\thispagestyle{empty}
+{\titlepagefont\centering
+\vspace*{0.14\textheight}
+%% Target for xref to top-level element is ToC
+\addtocontents{toc}{\protect\hypertarget{x:book:wvwc-advanced-engineering-math}{}}
+{\Huge Advanced Engineering Mathematics Lecture Notes}\\[\baselineskip]
+{\LARGE West Virginia Wesleyan College}\\[3\baselineskip]
+{\Large Jesse Oldroyd}\\[0.5\baselineskip]
+{\Large West Virginia Wesleyan College}\\[3\baselineskip]
+{\Large March 18, 2022}\\}
+\clearpage
+%% end:   title page
+%% begin: copyright-page
+\thispagestyle{empty}
+\hypertarget{x:colophon:front-colophon}{}\vspace*{\stretch{2}}
+\noindent{\bfseries Edition}: Annual Edition 2022\par\medskip
+\noindent{\bfseries Website}: \href{https:\slash{}\slash{}j-oldroyd.github.io\slash{}wvwc-advanced-engineering-math\slash{}output\slash{}html\slash{}wvwc-advanced-engineering-math.html}{\mono{j-oldroyd.github.io/wvwc-advanced-engineering-math/output/html/wvwc-advanced-engineering-math.html}}\par\medskip
+\noindent\textcopyright{}2017\textendash{}2022\quad{}Jesse Oldroyd\\[0.5\baselineskip]
+Permission is granted to copy, distribute and\slash{}or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is included in the appendix entitled ``GNU Free Documentation License.''  All trademarks\texttrademark{} are the registered\textregistered{} marks of their respective owners.\par\medskip
+\vspace*{\stretch{1}}
+\null\clearpage
+%% end:   copyright-page
+%
+%
+\typeout{************************************************}
+\typeout{Acknowledgements  Acknowledgements}
+\typeout{************************************************}
+%
+\begin{acknowledgement}{Acknowledgements}{}{Acknowledgements}{}{}{x:acknowledgement:acknowledgement}
+\end{acknowledgement}
+%
+%
+\typeout{************************************************}
+\typeout{Preface  Preface}
+\typeout{************************************************}
+%
+\begin{preface}{Preface}{}{Preface}{}{}{x:preface:preface}
+This document was created to serve as a set of lecture notes for Advanced Engineering Mathematics (MATH 301) at West Virginia Wesleyan College. The goal of this course is to become familiar with basic concepts in linear algebra and multivariable calculus. As such, the course is naturally divided into two more or less independent parts: \hyperref[x:part:part-linear-algebra]{Part~{\xreffont\ref{x:part:part-linear-algebra}}} and \hyperref[x:part:part-multivariable-calculus]{Part~{\xreffont\ref{x:part:part-multivariable-calculus}}}.%
+\par
+This document also endeavors to include many examples that use code via Sage Cells (\href{https://cloud.sagemath.com}{\nolinkurl{cloud.sagemath.com}}), since many computations in linear algebra and multivariable calculus are tedious at best to do by hand. The programming languages used are Octave (\href{https://www.gnu.org/software/octave/index}{\nolinkurl{www.gnu.org/software/octave/index}}) and Sage (\href{http://sagemath.org}{\nolinkurl{sagemath.org}}), which are both free and open source systems. Familiarity with these programming languages is neither assumed nor required for this course.%
+\end{preface}
+%% begin: table of contents
+%% Adjust Table of Contents
+\setcounter{tocdepth}{0}
+\renewcommand*\contentsname{Contents}
+\tableofcontents
+%% end:   table of contents
+\mainmatter
+%
+%
+\typeout{************************************************}
+\typeout{Part I Linear Algebra}
+\typeout{************************************************}
+%
+\begin{partptx}{Linear Algebra}{}{Linear Algebra}{}{}{x:part:part-linear-algebra}
+ %
+%
+\typeout{************************************************}
+\typeout{Chapter 1 Introduction to Matrix Algebra}
+\typeout{************************************************}
+%
+\begin{chapterptx}{Introduction to Matrix Algebra}{}{Introduction to Matrix Algebra}{}{}{x:chapter:chapter-linear-algebra-matrices}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.1 Matrices, Vectors and Linear Combinations}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Matrices, Vectors and Linear Combinations}{}{Matrices, Vectors and Linear Combinations}{}{}{x:section:section-matrices-vectors-and-linear-combinations}
+The primary objects of study in the field of linear algebra and its applications are linear transformations between vector spaces. These linear transformations are often represented using \emph{matrices}.%
+\begin{definition}{Matrix.}{x:definition:definition-matrix}%
+\index{matrices!definition}%
+A \terminology{matrix} is a rectangular array of numbers. If this array has \(m\) rows and \(n\) columns, we say the matrix is an \(m\times n\) matrix.%
+\end{definition}
+The following are examples of matrices:%
+\begin{equation*}
+\begin{bmatrix} 1 & 2 \\ -3 & 4 \end{bmatrix}\text{ and }\begin{bmatrix}1 & -2 & 0 \\ 3 & -21 & 2\end{bmatrix}
+\end{equation*}
+The first is \(2\times2\) and the second is \(2\times3\).%
+\par
+We say that a matrix is a \terminology{square matrix} if it has the same number of rows as columns.%
+\begin{equation*}
+A = [a_{ij}] = \begin{bmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\
+a_{21} & a_{22} & \dots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \dots & a_{nn}
+\end{bmatrix},
+\end{equation*}
+The \terminology{diagonal entries} are \(a_{ii},1\leq i\leq n\) and these form the \terminology{main diagonal} of the matrix.%
+\par
+As important as matrices are in applications of mathematics, many computing solutions exist for handling computations involving them. One open source solution (included in Sage\slash{}CoCalc!) is \href{https://www.gnu.org/software/octave/index}{Octave}\footnote{\nolinkurl{https://www.gnu.org/software/octave/index}\label{g:fn:idm1633061304}}, which is a free alternative to MATLAB. In the code cell below Octave is used to define the square matrix above and get its diagonal entries. Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.%
+\begin{sageinput}
+A = [1, 2; -3, 4]
+diag(A)
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.2 Matrix Multiplication}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Matrix Multiplication}{}{Matrix Multiplication}{}{}{x:section:section-matrix-multiplication}
+To be completed.%
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.3 Systems of Linear Equations}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Systems of Linear Equations}{}{Systems of Linear Equations}{}{}{x:section:section-systems-of-linear-equations}
+To be completed.%
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.4 Linear Independence}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Linear Independence}{}{Linear Independence}{}{}{x:section:section-linear-independence}
+To be completed.%
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Bases in \(\RR^n\)}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Bases in \(\RR^n\)}{}{Bases in \(\RR^n\)}{}{}{x:subsection:subsection-bases-in--rr-n-}
+\begin{definition}{Basis of \(\RR^n\).}{x:definition:definition-basis-of--rr-n-}%
+\index{basis}%
+Let \(\mathcal{B} = \qty{\vb{b}_1,\ldots,\vb{b}_n}\) denote a subset of vectors in \(\RR^n\). We say that \(\mathcal{B}\) is a \terminology{basis} for \(\RR^n\) if it satisfies the following properties:%
+\begin{enumerate}
+\item{}\(\mathcal{B}\) is linearly independent.%
+\item{}\(\mathcal{B}\) is a spanning set, i.e., \(\spn{\mathcal{B}} = \RR^n\).%
+\end{enumerate}
+%
+\end{definition}
+\end{subsectionptx}
+\begin{definition}{Pivot Columns.}{x:definition:definition-pivot-columns}%
+\index{echelon form!pivot columns}%
+Let \(A\) be a matrix. The \terminology{pivot columns} of \(A\) are those columns which contain leading entries in any echelon form of \(A\).%
+\end{definition}
+\begin{theorem}{Rank and Pivot Columns.}{}{x:theorem:theorem-rank-and-pivot-columns}%
+Let \(A\) be a matrix. Then \(\rank{A}\) is exactly equal to the number of pivot columns of \(A\).%
+\end{theorem}
+\begin{definition}{Column Space.}{x:definition:definition-column-space}%
+\index{column space}%
+The \terminology{column space} of a matrix \(A\) is the span of the columns of \(A\). Equivalently, the column space is the set of all vectors of the form \(A\vb{x}\). The column space of \(A\) is denoted by \(\col{A}\).%
+\end{definition}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.5 Existence of Solutions}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Existence of Solutions}{}{Existence of Solutions}{}{}{x:section:section-existence-of-solutions}
+Recall that any linear system may be expressed as a matrix equation of the form \(A\vb{x} = \vb{b}\). Based on our previous work, we can make the following observations.%
+\begin{theorem}{Consistency, Rank and the Column Space.}{}{x:theorem:theorem-consistency-rank-and-the-column-space}%
+\index{rank!consistency of systems}%
+\index{rank!consistency of systems|seealso{column space}}%
+Let \(A\) be an \(m\times n\) matrix, \(\vb{x}\in\RR^{n}\) and \(\vb{b}\in\RR^{m}\). The linear system \(A\vb{x} = \vb{b}\) is consistent if and only if \(\vb{b}\in\col{A}\). Equivalently, the system is consistent if and only if \(\rank{A} = \rank{\mqty[A & \vb{b}]}\). Furthermore, the system has precisely one solution if \(\rank{A} = \rank{\mqty[A & \vb{b}]} = n\) and has infinitely many solutions if \(\rank{A} = \rank{\mqty[A & \vb{b}]} \lt n\).%
+\end{theorem}
+As before, we use Gaussian elimination (i.e., row reduction) to solve systems.%
+\begin{example}{}{x:example:example-free-variable-solution-vector-form}%
+Find any solutions of%
+\begin{align*}
+5x - 7y + 3z &= 17\\
+-15x + 20y - 9z &= -50 
+\end{align*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1651004264}{}\quad{}Reducing to an echelon form is enough to determine if the system is consistent and find the number of solutions it has. Using Octave to find the reduced echelon form (see the code cell immediately after this example), we get%
+\begin{equation*}
+\begin{bmatrix} 1 & 0 & \frac{3}{5} & 2 \\ 0 & 1 & 0 & -1\end{bmatrix}.
+\end{equation*}
+%
+\par
+From the reduced echelon form above, we see that the system must be consistent since the rank of the coefficient matrix is equal to the rank of the augmented matrix. Equivalently, the last column is not a pivot column. Furthermore, there are infinitely many solutions since the rank of the coefficient matrix is less than the total number of columns.%
+\par
+The solution set itself can be written in vector notation as%
+\begin{equation*}
+\begin{bmatrix}x \\ y \\ z\end{bmatrix} = \begin{bmatrix}2 \\ -1 \\ 0\end{bmatrix} + z\begin{bmatrix}-\frac{3}{5} \\ 0 \\ 1\end{bmatrix}.
+\end{equation*}
+This, again, is verified below.%
+\end{example}
+\begin{sageinput}
+A = [5, -7, 3; -15, 20, -9];
+b = [17; -50];
+rref([A, b]) % reduced echelon form of augmented matrix
+
+% verify solution
+z = 3.1; % arbitrary value for z
+x_soln = [2; -1; 0] + z*[-3/5; 0; 1]; % solution vector
+A*x_soln % equals b
+\end{sageinput}
+In the last example the variable \(z\) led to infinitely many solutions and we were able to write out solution depending on the value of this variable. We call \(z\) a \emph{free variable} and \(x\) and \(y\) \emph{basic variables}.%
+\begin{definition}{Basic and Free Variables.}{x:definition:definition-basic-and-free-variables}%
+\index{linear systems!basic and free variables}%
+\index{linear systems!basic and free variables|seealso{pivot columns}}%
+Given a consistent linear system \(A\vb{x}=\vb{b}\), the variables corresponding to pivot columns of \(A\) are \terminology{basic variables} and the variables corresponding to non-pivot columns of \(A\) are \terminology{free variables}.%
+\end{definition}
+Any solution of the linear system \(A\vb{x} = \vb{b}\) can always be written to depend solely on any free variables as we did in \hyperref[x:example:example-free-variable-solution-vector-form]{Example~{\xreffont\ref{x:example:example-free-variable-solution-vector-form}}}. In fact we can go a bit further, still using our answer in \hyperref[x:example:example-free-variable-solution-vector-form]{Example~{\xreffont\ref{x:example:example-free-variable-solution-vector-form}}} as a guide. Using free variables, any solution to \(A\vb{x}=\vb{b}\) can be written as a sum of two components:%
+\begin{equation*}
+\vb{x} = \vb{x}_p + \vb{x}_{\text{free}}.
+\end{equation*}
+This notation will change shortly, but the main idea is that one component of the solution will not depend on the free variable and will represent a single solution of the system \(A\vb{x} = \vb{b}\). In \hyperref[x:example:example-free-variable-solution-vector-form]{Example~{\xreffont\ref{x:example:example-free-variable-solution-vector-form}}} this would be%
+\begin{equation*}
+\vb{x}_{p} = \mqty[2\\-1\\0],
+\end{equation*}
+and it's easy to verify that%
+\begin{equation*}
+A\vb{x}_{p} = \mqty[5 & -7 & 3 \\ -15 & 20 & -9]\mqty[2\\-1\\0] = \mqty[17\\-50].
+\end{equation*}
+The \emph{other} component of the solution, \(\vb{x}_{\text{free}}\), will depend on the free variable. In \hyperref[x:example:example-free-variable-solution-vector-form]{Example~{\xreffont\ref{x:example:example-free-variable-solution-vector-form}}}, this component was%
+\begin{equation*}
+\vb{x}_{\text{free}} = z\mqty[-\frac{3}{5} \\ 0 \\ 1].
+\end{equation*}
+As it turns out, this component is \emph{not} a solution of the original system \(A\vb{x} = \vb{b}\). Instead, \(A\vb{x}_{\text{free}} = \vb{0}\). This behavior is shared by all consistent systems with free variables, and leads us to introduce the following terminology.%
+\begin{definition}{Associated Homogeneous System.}{x:definition:definition-associated-homogeneous-system}%
+\index{linear systems!associated homogeneous system}%
+Given a linear system \(A\vb{x} = \vb{b}\), we define the \terminology{associated homogeneous system} to be the system \(A\vb{x} = \vb{0}\).%
+\end{definition}
+The observations made after \hyperref[x:example:example-free-variable-solution-vector-form]{Example~{\xreffont\ref{x:example:example-free-variable-solution-vector-form}}} can be summarized in the following theorem.%
+\begin{theorem}{Particular and Homogeneous Solutions.}{}{x:theorem:theorem-particular-and-homogeneous-solutions}%
+Suppose that \(A\vb{x} = \vb{b}\) is a consistent linear system. Then the general solution \(\vb{x}\) can be written in the form \(\vb{x} = \vb{x}_{p} + \vb{x}_{h}\) where \(\vb{x}_{p}\) is a single solution of the original system \(A\vb{x} = \vb{b}\) and \(\vb{x}_{h}\) is the general solution of the associated homogeneous system \(A\vb{x} = \vb{0}\). We call \(\vb{x}_{p}\) a \terminology{particular solution}.%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1606405304}
+Here, we only prove that \(\vb{x}_{h}\) satisfies the associated homogeneous system. Since \(\vb{x}_{p}\) is a solution of the original system along with \(\vb{x} = \vb{x}_{p} + \vb{x}_{h}\), it follows that%
+\begin{equation*}
+A\vb{x}_{h} = A(\vb{x}-x_{p}) = \vb{b} - \vb{b} = \vb{0}.
+\end{equation*}
+Therefore \(\vb{x}_{h}\) is a solution of the associated homogeneous system.%
+\end{proof}
+Since solutions of homogeneous systems play such an important role in the solution of non-homogeneous systems, we give their solution sets a special name.%
+\begin{definition}{Null Space.}{x:definition:definition-null-space}%
+\index{null space}%
+Let \(A\) be a matrix. The \terminology{null space} of \(A\) is the set of all solutions of \(A\vb{x} = \vb{0}\). This is denoted by \(\nul{A}\).%
+\end{definition}
+As with column spaces and row spaces, null spaces are always subspaces.%
+\begin{theorem}{The Null Space is a Subspace.}{}{x:theorem:theorem-the-null-space-is-a-subspace}%
+Let \(A\) be an \(m\times n\) matrix. Then \(\nul{A}\) is a subspace of \(\RR^n\).%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1606383032}
+To show that \(\nul{A}\) is a subspace we need to show that it's closed under linear combinations. So let \(\vb{u},\vb{v}\in\nul{A}\) be arbitrary vectors in the null space and let \(\alpha,\beta\in\RR\) be arbitrary scalars. Our goal is to show that \(\alpha\vb{u} + \beta\vb{v}\in\nul{A}\). Thankfully, we can do this very quickly:%
+\begin{align*}
+A(\alpha\vb{u} + \beta\vb{v}) &= \alpha A\vb{u} + \beta A\vb{v}\\
+&= \vb{0} + \vb{0} \\
+&= \vb{0}, 
+\end{align*}
+which shows that the linear combination \(\alpha\vb{u}+\beta\vb{v}\) lies in \(\nul{A}\).%
+\end{proof}
+The concept of the null space is related to that of the column space in \hyperref[x:definition:definition-column-space]{Definition~{\xreffont\ref{x:definition:definition-column-space}}}, but they are distinct. To be precise, if \(A\) is an \(m\times n\) matrix then%
+\begin{align*}
+\col{A} &= \qty{A\vb{x} : \vb{x}\in\RR^n} \subseteq \RR^{m} \\
+\nul{A} &= \qty{\vb{x} : A\vb{x} = \vb{0}} \subseteq \RR^{n} 
+\end{align*}
+%
+\begin{example}{Finding a Null Space.}{x:example:example-finding-a-null-space}%
+Let%
+\begin{equation*}
+A = \mqty[0 & 5 & 5 & -10 & 0 \\ 2 & -3 & -3 & 6 & 2 \\ 4 & 1 & 1 & -2 & 4].
+\end{equation*}
+Find \(\nul{A}\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1653026968}{}\quad{}We need to find the solution set of \(A\vb{x} = \vb{0}\) which we've done before. The Octave code cell below can be used to solve this system, giving the reduced echelon form for the augmented matrix \(\mqty[A & \vb{0}]\) to be%
+\begin{equation*}
+\mqty[1 & 0 & 0 & 0 & 1 & 0 \\ 0 & 1 & 1 & -2 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0].
+\end{equation*}
+Therefore any solution \(\vb{x}\in\RR^5\) of \(A\vb{x}=\vb{0}\) must look like%
+\begin{equation*}
+\vb{x} = \mqty[x_1\\x_2\\x_3\\x_4\\x_5] = \mqty[-x_5\\-x_3+2x_4\\x_3\\x_4\\x_5] = x_3\mqty[0\\-1\\1\\0\\0] + x_4\mqty[0\\2\\0\\1\\0] + x_5\mqty[-1\\0\\0\\0\\1].
+\end{equation*}
+%
+\par
+Note that the above shows that%
+\begin{equation*}
+\nul{A} = \spn{\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}}
+\end{equation*}
+Since these vectors are also linearly independent, it follows that the set%
+\begin{equation*}
+\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}
+\end{equation*}
+is in fact a basis for \(\nul{A}\) and \(\dim{\nul{A}} = 3\).%
+\end{example}
+\begin{sageinput}
+% code cell for finding null space in previous example
+\end{sageinput}
+At this point we can make a simple but useful observation. In \hyperref[x:example:example-finding-a-null-space]{Example~{\xreffont\ref{x:example:example-finding-a-null-space}}}, the dimension of the null space was directly tied to the number of free variables in the system \(A\vb{x} = \vb{0}\). The number of basic variables is likewise equal to the number of pivot columns of \(A\). Noting that the number of basic variables plus the number of free variables must be the total number of columns of \(A\), together with \hyperref[x:theorem:theorem-rank-and-pivot-columns]{Theorem~{\xreffont\ref{x:theorem:theorem-rank-and-pivot-columns}}}, we get the \emph{Rank-Nullity Theorem}.%
+\begin{theorem}{Rank-Nullity Theorem.}{}{x:theorem:theorem-rank-nullity-theorem}%
+\index{Rank-Nullity Theorem}%
+Let \(A\) be an \(m\times n\) matrix. Then%
+\begin{equation*}
+\rank{A} + \dim\nul{A} = n.
+\end{equation*}
+%
+\end{theorem}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.6 Determinants}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Determinants}{}{Determinants}{}{}{x:section:section-determinants}
+If \(A\) is an \(n\times n\) square matrix and if \(\vb{x}\in\RR^n\), then \(\vb{x}\) and \(A\vb{x}\) have the same size. In other words, both \(\vb{x}\) and \(A\vb{x}\) live in the same vector space \(\RR^n\). This makes some geometry involving \(A\) slightly easier. In particular, \(\col{A}\) must be a subspace of \(\RR^n\).%
+\par
+If \(\col{A}\) is a subspace of \(\RR^n\) then we can say that the linear system \(A\vb{x} = \vb{b}\) is always consistent if and only if \(\col{A} = \RR^n\). If this were not the case, then there would exist some vector \(\vb{b}\in\RR^n\) such that \(\vb{b}\notin\col{A}\) and so \(A\vb{x}=\vb{b}\) would have to be inconsistent. So square matrices \(A\) for which \(\col{A}=\RR^n\) are particularly well-behaved and useful. Therefore we'd like to develop conditions to check for when a square matrix \(A\) satisfied this property.%
+\par
+One possible condition for this is the following: \(\col{A}=\RR^n\) if and only if \(\dim\col{A}=n\), which happens if and only if \(\rank{A}=n\). Therefore \(A\vb{x}=\vb{b}\) is always consistent if and only if \(\rank{A}=n\). However, another useful condition which uses geometry is the following: \(\col{A}=\RR^n\) if and only if the columns of \(A\) span an \(n\)-dimensional figure in \(\RR^n\). To get an idea of why this should be true, consider a \(2\times2\) matrix \(A\) whose columns determine a parallelogram (as opposed to a line) in \(\RR^2\) such as%
+\begin{equation*}
+A = \mqty[1 & 1 \\ 0 & 2].
+\end{equation*}
+Since \(\col{A}\) is the set of all linear combinations of columns of \(A\), and geometrically this is just the set of all points that we can reach in \(\RR^2\) by stretching and expanding the parallelogram determined by the columns, it follows that \(\col{A} = \RR^2\).%
+\par
+The \emph{determinant} makes this observation precise. Given an \(n\times n\) square matrix \(A\), the determinant of \(A\) represents the (signed) volume of the parallelepiped determined by the columns of \(A\). If this volume is nonzero then this means that the parallelepiped must be an \(n\)-dimensional figure in \(\RR^n\) and so the column space of \(A\) would be all of \(\RR^n\). In the \(2\times2\) case it's not too difficult to compute the determinant. If%
+\begin{equation*}
+A = \mqty[a & b \\ c & d],
+\end{equation*}
+then \(\det(A) = \mqty|a & b \\ c & d| = ad - bc\). Note that \(ad-bc\) does give the area of the parallelogram determined by the columns of \(A\). In three dimensions and higher the formula becomes more complicated and must be defined recursively.%
+\begin{definition}{Determinant of a Matrix.}{x:definition:definition-determinant-of-a-matrix}%
+\index{determinant}%
+Let \(A = \smqty[a_{ij}]\) be an \(n\times n\) matrix. Let \(A_{ij}\) denote the \emph{sub-matrix} of \(A\) obtained by removing the \(i^\th\) row and \(j^\th\) column of \(A\) (the same row and column containing the entry \(a_{ij}\)). Then the \terminology{determinant} of \(A\) is defined recursively by the formula%
+\begin{equation*}
+\det(A) = \sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(A_{1j}).
+\end{equation*}
+\begin{aside}{}{g:aside:idm1650136984}%
+We'll see later that we can expand along any row or column, but for now we'll stick to the first row.%
+\end{aside}
+%
+\end{definition}
+\begin{example}{Computing a Determinant.}{x:example:example-computing-a-determinant}%
+Let%
+\begin{equation*}
+A = \mqty[2 & -6 & 4 \\ 3 & 5 & -2 \\ 1 & 6 & 3].
+\end{equation*}
+Find \(\det(A)\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1650128664}{}\quad{}The formula in \hyperref[x:definition:definition-determinant-of-a-matrix]{Definition~{\xreffont\ref{x:definition:definition-determinant-of-a-matrix}}} states that%
+\begin{equation*}
+\det(A) = 2\mqty|5 & -2 \\ 6 & 3| - (-6)\mqty|3 & -2 \\ 1 & 3| + 4\mqty|3 & 5 \\ 1 & 6|
+\end{equation*}
+which simplifies to \(172\). This can be confirmed in the Octave cell below.%
+\end{example}
+\begin{sageinput}
+A = [2, -6, 4; 3, 5, -2; 1, 6, 3]
+det(A)
+\end{sageinput}
+When computing determinants by hand, it's often useful to expand along the row or column containing the most zeros instead of just the first row. As long as we're careful about signs, the next result says this is permissible.%
+\begin{theorem}{Cofactor Expansion.}{}{x:theorem:theorem-cofactor-expansion}%
+\index{determinant!cofactor expansion}%
+Let \(A=[a_{ij}]\) be an \(n\times n\) matrix and define \(A_{ij}\) as in \hyperref[x:definition:definition-determinant-of-a-matrix]{Definition~{\xreffont\ref{x:definition:definition-determinant-of-a-matrix}}}. Then%
+\begin{equation*}
+\det(A) = \sum_{i=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}) = \sum_{j=1}^{n}(-1)^{i+j}a_{ij}\det(A_{ij}).
+\end{equation*}
+%
+\end{theorem}
+\begin{example}{Computing a Determinant with a Cofactor Expansion.}{x:example:example-computing-a-determinant-with-a-cofactor-expansion}%
+Let%
+\begin{equation*}
+A = \mqty[1 & -2 & 5 & 2 \\ 0 & 0 & 3 & 0 \\ 2 & -6 & -7 & 5 \\ 5 & 0 & 4 & 4].
+\end{equation*}
+Find \(\det(A)\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1650306584}{}\quad{}We can save some work by expanding along the second row to take advantage of the zeros that appear. Doing so, we get%
+\begin{equation*}
+\det(A) = -3\mqty|1 & -2 & 2 \\ 2 & -6 & 5 \\ 5 & 0 & 4| = -3\qty(5\mqty|-2 & 2\\ -6 & 5| + 4\mqty|1 & -2 \\ 2 & -6|)
+\end{equation*}
+%
+\end{example}
+Computing determinants becomes very simple when working with \emph{triangular matrices}.%
+\begin{definition}{Triangular Matrices.}{x:definition:definition-triangular-matrices}%
+A matrix \(A\) is \terminology{lower} (respectively, \terminology{upper}) \terminology{triangular} is all of the entries above (respectively, below) the main diagonal are \(0\). A matrix is \terminology{triangular} if it is lower triangular or upper triangular.%
+\end{definition}
+\begin{example}{Computing the Determinant of a Triangular Matrix.}{x:example:example-computing-the-determinant-of-a-triangular-matrix}%
+Let%
+\begin{equation*}
+A = \mqty[1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & -2].
+\end{equation*}
+Find \(\det(A)\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1650256792}{}\quad{}Using appropriate cofactor expansions, we see that%
+\begin{equation*}
+\det(A) = 1\cdot4\cdot(-2).
+\end{equation*}
+%
+\end{example}
+\begin{theorem}{Determinants of Triangular Matrices.}{}{x:theorem:theorem-determinants-of-triangular-matrices}%
+\index{determinant!triangular matrix}%
+Let \(A\) be an \(n\times n\) triangular matrix. Then \(\det(A)\) is just the product of its diagonal entries:%
+\begin{equation*}
+\det(A) = \prod_{i=1}^{N}a_{ii}.
+\end{equation*}
+%
+\end{theorem}
+\hyperref[x:theorem:theorem-determinants-of-triangular-matrices]{Theorem~{\xreffont\ref{x:theorem:theorem-determinants-of-triangular-matrices}}} leads to another approach for finding determinants via row reduction. If we have a square matrix \(A\) and we can reduce it to echelon form, then it becomes very easy to find the determinant of the echelon form. If we can then relate this determinant back to \(\det(A)\), then we would be able to find \(\det(A)\) using the echelon form instead. It turns out this can be done as follows.%
+\begin{theorem}{Row Operations and the Determinant.}{}{x:theorem:theorem-row-operations-and-the-determinant}%
+Let \(A\) and \(B\) denote square matrices of the same size and suppose that \(B\) is obtained from \(A\) by performing a single row operation.%
+%
+\begin{enumerate}
+\item{}If the row operation was row replacement, then \(\det(A) = \det(B)\).%
+\item{}If the row operation was row scaling by a factor of \(k\), then \(\det(B) = k\det(A)\).%
+\item{}If the row operation was row interchange, then \(\det(B) = -\det(A)\).%
+\end{enumerate}
+\end{theorem}
+Two other useful results about determinants are given below.%
+\begin{theorem}{Multiplicative Property.}{}{x:theorem:theorem-multiplicative-property}%
+Let \(A\) and \(B\) denote square matrices of the same size. Then \(\det(AB) = \det(A)\det(B)\).%
+\end{theorem}
+\begin{theorem}{Determinants and the Transpose.}{}{x:theorem:theorem-determinants-and-the-transpose}%
+Let \(A\) be a square matrix. Then \(\det(A) = \det(A^T)\).%
+\end{theorem}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.7 Matrix Inverses}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Matrix Inverses}{}{Matrix Inverses}{}{}{x:section:section-matrix-inverses}
+Consider the equation \(75x = 2\). We can solve this quite easily for \(x\) by dividing both sides by \(75\), or equivalently, multiplying both sides of the equation by \(frac{1}{75} = 75^{-1}\). \(75^{-1}\) is the \emph{multiplicative inverse} of the number \(75\), and so when multiplied to it we are left with only the number \(1\). We want to do the same with the matrix equation \(A\vb{x} = \vb{b}\); that is, we want to find an \emph{inverse matrix} \(A^{-1}\) that, when multiplied to \(A\), leaves only the identity matrix.%
+\begin{definition}{Invertible Matrices.}{x:definition:definition-invertible-matrices}%
+\index{matrices!invertible}%
+An \(n\times n\) matrix \(A\) is said to be \terminology{invertible} (or \terminology{nonsingular}) if there exists a matrix \(A^{-1}\) such that \(A^{-1}A = AA^{-1} = I_{n}\). We call \(A^{-1}\) the \terminology{inverse} of \(A\). If a matrix is \emph{not} invertible, then we say that it is \terminology{singular}.%
+\end{definition}
+Note that if \(A\) is a square matrix and \(C\) is another square matrix such that either \(AC = I\) or \(CA = I\), then \(C = A^{-1}\).%
+\begin{example}{Confirming a Matrix Inverse.}{x:example:example-confirming-a-matrix-inverse}%
+Let%
+\begin{equation*}
+A = \mqty[1 & 0 & -2 \\ -3 & 1 & 4 \\ 2 & -3 & 4].
+\end{equation*}
+%
+%
+\begin{enumerate}
+\item{}Show that the matrix%
+\begin{equation*}
+C = \mqty[8 & 3 & 1 \\ 10 & 4 & 1 \\ \frac{7}{2} & \frac{3}{2} & \frac{1}{2}]
+\end{equation*}
+is the inverse of \(A\).%
+\item{}Let%
+\begin{equation*}
+\vb{b} = \mqty[1 \\ 1 \\ 1].
+\end{equation*}
+Solve \(A\vb{x} = \vb{b}\).%
+\end{enumerate}
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1608277096}{}\quad{}%
+\begin{enumerate}
+\item{}All we need to do is to show that \(AC = I\). This can be done quickly using Octave as in the code cell below.%
+\item{}The solution is \(\vb{x} = A^{-1}\vb{b}\). Given that we now know \(A^{-1}\), we can solve this quickly.%
+\end{enumerate}
+\end{example}
+\begin{sageinput}
+A = [1, 0, -2; -3, 1, 4; 2, -3, 4];
+C = [8,3,1; 10,4,1; 7/2, 3/2, 1/2];
+
+A*C % identity matrix
+
+b = [1;1;1]
+x = C*b % x = inv(A)*b is the solution
+\end{sageinput}
+\begin{example}{Inverse of an Orthogonal Matrix.}{g:example:idm1608263400}%
+Let \(U\) be an orthogonal matrix. What is \(U^{-1}\)?%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1659079000}{}\quad{}\(U^{-1} = U^{T}\). So it is \emph{very} easy to find the inverse of an orthogonal matrix.%
+\end{example}
+An important property about determinants is that they say precisely when a matrix is invertible. If \(A\) is an \(n\times n\) matrix, then \(A\) has an inverse if and only if \(\det A \neq 0\).%
+\begin{theorem}{Invertibility and Solutions of Systems.}{}{x:theorem:theorem-invertibility-and-solutions}%
+\index{linear systems!invertibility}%
+Let \(A\) be an invertible \(n\times n\) matrix. Then for each \(\vb{b}\in\RR^{n}\), the matrix equation \(A\vb{x} = \vb{b}\) has \emph{exactly} one solution: \(\vb{x} = A^{-1}\vb{b}\).%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1659102296}
+To prove this statement we must show two things:%
+\begin{enumerate}
+\item{}\(A^{-1}\vb{b}\) is a solution.%
+\item{}\(A^{-1}\vb{b}\) is the only solution.%
+\end{enumerate}
+%
+\par
+We start with the first item. To check that \(A^{-1}\vb{b}\) is a solution of \(A\vb{x} = \vb{b}\), we just plug it in for \(\vb{x}\) and simplify:%
+\begin{equation*}
+A(A^{-1}\vb{b}) = I\vb{b} = \vb{b}.
+\end{equation*}
+Hence this is a solution.%
+\par
+To show that this is the only solution, suppose that \(\vb{u}\) is some other solution of \(A\vb{x} = \vb{b}\). We must show that \(\vb{u} = A^{-1}\vb{b}\). Since \(\vb{u}\) is assumed to be a solution, we have%
+\begin{equation*}
+\vb{u} = \vb{b}\Rightarrow \vb{u} = A^{-1}\vb{b}.
+\end{equation*}
+Hence \(A^{-1}\vb{b}\) is the only solution.%
+\end{proof}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Computing the Inverse of a Matrix}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Computing the Inverse of a Matrix}{}{Computing the Inverse of a Matrix}{}{}{x:subsection:subsection-computing-the-inverse-of-a-matrix}
+For \(2\times 2\) matrices, we have a simple formula for the inverse.%
+\begin{theorem}{Inverse of \(2\times2\) Matrices.}{}{x:theorem:theorem-inverse-of-2-times2--matrices}%
+Let%
+\begin{equation*}
+A = \mqty[a & b \\ c & d].
+\end{equation*}
+If \(ad-bc\neq0\), then%
+\begin{equation*}
+A^{-1} = \frac{1}{ad-bc}\mqty[d & -b \\ -c & a].
+\end{equation*}
+%
+\end{theorem}
+The quantity \(ad-bc\) in \hyperref[x:theorem:theorem-inverse-of-2-times2--matrices]{Theorem~{\xreffont\ref{x:theorem:theorem-inverse-of-2-times2--matrices}}} can also be recognized as the determinant of the matrix \(A\). See \hyperref[x:definition:definition-determinant-of-a-matrix]{Definition~{\xreffont\ref{x:definition:definition-determinant-of-a-matrix}}}.%
+\begin{example}{}{g:example:idm1603753192}%
+Show that the system%
+\begin{align*}
+9x_{1}+3x_{2} &= -9\\
+-6x_{1}-3x_{2} &= 4
+\end{align*}
+is consistent and then find the solution.%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1603756392}{}\quad{}We can rewrite this as the matrix equation \(A\vb{x} = \vb{b}\), where%
+\begin{equation*}
+A = \mqty[9 & 3 \\ -6 & -3],\qq{}\vb{x} = \mqty[x_{1} \\ x_{2}]\qq{and} \vb{b} = \mqty[-9 \\ 4].
+\end{equation*}
+We can show that the system is consistent by computing \(\det A\): since \(\det A = -9\neq0\), \(A^{-1}\) exists. And since \(A^{-1}\) exists, the system must be solvable.%
+\par
+To solve it, we use the above formula to compute \(A^{-1}\):%
+\begin{equation*}
+A^{-1} = -\frac{1}{9}\mqty[-3 & -3 \\ 6 & 9] = \mqty[\frac{1}{3} & \frac{1}{3} \\ -\frac{2}{3} & -1 ].
+\end{equation*}
+So the (unique) solution is%
+\begin{equation*}
+\vb{x} = A^{-1}\vb{b} = \mqty[\frac{1}{3} & \frac{1}{3} \\ -\frac{2}{3} & -1 ]\mqty[-9 \\ 4].
+\end{equation*}
+%
+\end{example}
+\begin{theorem}{}{}{g:theorem:idm1652972568}%
+Let \(A\) and \(B\) be invertible \(n\times n\) matrices.%
+\begin{enumerate}
+\item{}\(\displaystyle (A^{-1})^{-1} = A\)%
+\item{}\(AB\) is invertible, and \((AB)^{-1} = B^{-1}A^{-1}\).%
+\item{}\(A^{T}\) is invertible, and \((A^{T})^{-1} = (A^{-1})^{T}\).%
+\end{enumerate}
+%
+\end{theorem}
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  The Invertible Matrix Algorithm}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{The Invertible Matrix Algorithm}{}{The Invertible Matrix Algorithm}{}{}{x:subsection:subsection-}
+We can now find the inverse of a \(2\times2\) matrix; we need to determine how to find the inverse of a larger matrix. To do this, we will use \emph{elementary matrices}.%
+\begin{definition}{Elementary Matrices.}{x:definition:definition-elementary-matrices}%
+An \terminology{elementary matrix} is a matrix obtained by performing a single elementary row operation on the identity matrix.%
+\end{definition}
+\begin{example}{}{g:example:idm1630997048}%
+The matrices%
+\begin{equation*}
+E_{1} = \mqty[2 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1],E_{2} = \mqty[1 & 5 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1]\text{ and } E_{3} = \mqty[0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0]
+\end{equation*}
+are elementary matrices. The first corresponds to scaling the first row by \(2\); the second corresponds to adding five times the second row to the first row; and the third corresponds to switching rows one and three.%
+\end{example}
+The important fact about elementary matrices is that multiplying them to \emph{any} matrix has the same effect as performing the corresponding elementary row operation on the matrix.%
+\begin{example}{}{g:example:idm1630998840}%
+Let%
+\begin{equation*}
+A = \mqty[1 & 2 & 9 \\ 0 & 3 & 3 \\ 4 & 4 & 1].
+\end{equation*}
+Use elementary matrices to perform the following row operations:%
+\begin{enumerate}
+\item{}Add two times row three to row two.%
+\item{}Scale row three by \(-3\).%
+\item{}Swap row two with row one and then add five times row three to row one.%
+\end{enumerate}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630992696}{}\quad{}For each case, we only need to determine the elementary matrix corresponding to each row operation. The elementary matrix for the first operation is%
+\begin{equation*}
+E_{1} = \mqty[1 & 0 & 0 \\ 0 & 1 & 2 \\ 0 & 0 & 1].
+\end{equation*}
+To perform this operation on \(A\), we just multiply \(E_{1}\) and \(A\):%
+\begin{align*}
+A &\rowop{2R_{3}+R_{2}} E_{1}A \\
+&= \mqty[1 & 2 & 9 \\ 8 & 11 & 5 \\ 4 & 4 & 1] 
+\end{align*}
+which matches with the matrix we would have obtained just using a row operation.%
+\par
+The elementary matrix we need for the next operation is%
+\begin{equation*}
+E_{2} = \mqty[1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -3]
+\end{equation*}
+and so%
+\begin{equation*}
+A\rowop{-3R_{3}} E_{2}A.
+\end{equation*}
+%
+\par
+Finally, we have two elementary row operations here, so we can't just use a single elementary matrix. We'll need to use two; one for each row operation:%
+\begin{equation*}
+E_{3} = \mqty[0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1]\qq{and} E_{4} = \mqty[1 & 0 & 5 \\ 0 & 1 & 0 \\ 0 & 0 & 1].
+\end{equation*}
+So%
+\begin{equation*}
+A\rowop[R_{1}\leftrightarrow R_{2}]{5R_{3}+R_{1}} E_{4}E_{3}A.
+\end{equation*}
+%
+\end{example}
+So row operations on a matrix can be viewed as multiplications by elementary matrices. And since row operations are invertible, elementary matrices are invertible as well. To find the inverse of an elementary matrix \(E\), just write down the elementary matrix corresponding to the row operation that transforms \(E\) back into \(I\).%
+\begin{example}{Inverse of an Elementary Matrix.}{g:example:idm1630989752}%
+Let \(E_{1},E_{2}\) and \(E_{4}\) be as above. Find the inverse of each matrix.%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630987832}{}\quad{}We have%
+\begin{equation*}
+E_{1}^{-1} = \mqty[1 & 0 & 0 \\ 0 & 1 & -2 \\ 0 & 0 & 1],\qq{}E_{2}^{-1} = \mqty[1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -\frac{1}{3}]\qq{and}E_{4}^{-1} = \mqty[1 & 0 & -5 \\ 0 & 1 & 0 \\ 0 & 0 & 1].
+\end{equation*}
+%
+\end{example}
+\begin{theorem}{Invertible Matrix Algorithm.}{}{x:theorem:theorem-invertible-matrix-algorithm}%
+\index{matrices!invertible!algorithm}%
+Let \(A\) be an \(n\times n\) matrix. If \(A\sim I\), then \(A\) is invertible.%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630980792}
+Suppose that \(A\) is row equivalent to the identity matrix \(I\). Then we can find elementary matrices \(E_{1},E_{2},\ldots,E_{p}\) such that%
+\begin{equation*}
+I = E_{p}E_{p-1}\cdots E_{2}E_{1}A.
+\end{equation*}
+Since elementary matrices are invertible, their product must be as well. So we can write%
+\begin{equation*}
+(E_{p}\cdots E_{1})^{-1} = A.
+\end{equation*}
+Since \(A\) is the inverse of an invertible matrix, it must itself be invertible and furthermore%
+\begin{equation*}
+A^{-1} = E_{p}\cdots E_{1}.\qedhere
+\end{equation*}
+%
+\end{proof}
+The above theorem tells us that the sequence of row operations that reduces \(A\) to \(I\) also turns \(I\) into \(A^{-1}\). This gives us an algorithm for finding the inverse of a matrix. We show this with an example.%
+\begin{example}{}{g:example:idm1630977080}%
+Let%
+\begin{equation*}
+A = \mqty[-1 & -7 & -3 \\ 2 & 15 & 6 \\ 1 & 3 & 2].
+\end{equation*}
+Compute \(A^{-1}\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630981048}{}\quad{}We set up the augmented matrix \(\mqty[A& I]\). The algorithm works by finding the reduced echelon form; the resulting augmented matrix is then \(\mqty[I& A^{-1}]\).%
+\begin{align*}
+\mqty[-1 & -7 & -3 & 1 & 0 & 0 \\ 2 & 15 & 6 & 0 & 1 & 0 \\ 1 & 3 & 2 & 0 & 0 & 1] &\sim\mqty[1 & 7 & 3 & -1 & 0 & 0 \\ 2 & 15 & 6 & 0 & 1 & 0 \\ 1 & 3 & 2 & 0 & 0 & 1]\\
+&\rowop[-2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[1 & 7 & 3 & -1 & 0 & 0 \\ 0 & 1 & 0 & 2 & 1 & 0 \\ 0 & -4 & -1 & 1 & 0 & 1]\\
+&\rowop{4R_{2}+R_{3}}\mqty[1 & 7 & 3 & -1 & 0 & 0 \\ 0 & 1 & 0 & 2 & 1 & 0 \\ 0 & 0 & -1 & 9 & 4 & 1]\\
+&\rowop{3R_{3}+R_{1}}\mqty[1 & 7 & 0 & 26 & 12 & 3 \\ 0 & 1 & 0 & 2 & 1 & 0 \\ 0 & 0 & -1 & 9 & 4 & 1]\\
+&\rowop[-7R_{2}+R_{1}]{-R_{3}}\mqty[1 & 0 & 0 & 12 & 5 & 3 \\ 0 & 1 & 0 & 2 & 1 & 0 \\ 0 & 0 & 1 & -9 & -4 & -1]
+\end{align*}
+%
+\par
+So%
+\begin{equation*}
+A^{-1} = \mqty[12 & 5 & 3 \\ 2 & 1 & 0 \\ -9 & -4 & -1].
+\end{equation*}
+%
+\end{example}
+\begin{example}{}{g:example:idm1630970808}%
+A square matrix \(A\) of size \(10\times10\). Suppose that \(A\) has rank \(9\). Is \(A\) invertible?%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630972600}{}\quad{}No! This is because \(A\) does not have a pivot in each row (since \(\rank A = 9\), \(A\) only has \(9\) pivots). Therefore we can't row reduce \(A\) to get \(I\). Since \(A\) is not row equivalent to the identity matrix, \(A\) cannot be invertible.%
+\end{example}
+\end{subsectionptx}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 1.8 \(LU\) Decomposition}
+\typeout{************************************************}
+%
+\begin{sectionptx}{\(LU\) Decomposition}{}{\(LU\) Decomposition}{}{}{x:section:section--LU-decomposition}
+The approach we used in \hyperref[x:theorem:theorem-invertible-matrix-algorithm]{Theorem~{\xreffont\ref{x:theorem:theorem-invertible-matrix-algorithm}}} also gives us a useful way to \emph{factor} matrices. As with polynomials, the goal in factoring a matrix \(A\) is to write it as the product of simpler matrices. The factorization we'll look at in this section is the \(LU\) decomposition, which we demonstrate first by an example.%
+\begin{example}{\(LU\) Factorization.}{x:example:example--lu--factorization}%
+Let%
+\begin{equation*}
+A = \mqty[3 & 2 & -1 \\ -2 & 4 & 4 \\ 3 & 1 & 2]\text{.}
+\end{equation*}
+Now consider the problem of reducing \(A\) to an echelon form. First, we can take \(\frac{2}{3}\) times row 1 and add it to row 2 and \(-1\) times row 1 and add it to row 3 to obtain%
+\begin{equation*}
+\mqty[3 & 2 & -1 \\ 0 & \frac{16}{3} & \frac{10}{3} \\ 0 & -1 & 3].
+\end{equation*}
+A final operation, adding \(\frac{3}{16}\) times row 2 to row 3, gives us the echelon form%
+\begin{equation*}
+U = \mqty[3 & 2 & -1 \\ 0 & \frac{16}{3} & \frac{10}{3} \\ 0 & 0 & \frac{29}{8}]
+\end{equation*}
+%
+\par
+Now, we also saw in the last section that row operations correspond to multiplication by elementary matrices. In this case, \(U = E_{23}E_{13}E_{12}A\) where%
+\begin{equation*}
+E_{12} = \mqty[1 & 0 & 0 \\ \frac{2}{3}& 1 & 0 \\ 0 & 0 & 1], E_{13} = \mqty[1 & 0 & 0 \\ 0 & 1 & 0 \\ -1 & 0 & 1]\text{ and }E_{23} = \mqty[1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & \frac{3}{16} & 1].
+\end{equation*}
+If we now solve the equation \(U = E_{23}E_{13}E_{12}A\) for \(A\), we get the useful product%
+\begin{equation*}
+A = E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}U.
+\end{equation*}
+It turns out to be very easy to find \(E_{12}^{-1}E_{13}^{-1}E_{23}^{-1}\) as these are elementary matrices, and we get%
+\begin{equation*}
+E_{12}^{-1}E_{13}^{-1}E_{23}^{-1} = \mqty[1 & 0 & 0 \\ -\frac{2}{3} & 1 & 0 \\ 1 & -\frac{3}{16} & 1]
+\end{equation*}
+This matrix is lower triangular, and we denote it by \(L\). Thus we have the factorization \(A = LU\).%
+\end{example}
+We can verify the factorization in \hyperref[x:example:example--lu--factorization]{Example~{\xreffont\ref{x:example:example--lu--factorization}}} using Octave as below: \begin{sageinput}
+A = [3,2,-1;-2,4,4;3,1,2];
+L = [1,0,0;-2/3,1,0;1,-3/16,1];
+U = [3,2,-1;0,16/3,10/3;0,0,29/8];
+L*U
+\end{sageinput}
+ The Octave command \mono{lu()} can also be used to find matrices \(L\) and \(U\) satisfying \(A = LU\): \begin{sageinput}
+% run the previous cell first!
+[L1, U1] = lu(A);
+L1*U1
+\end{sageinput}
+%
+\par
+The matrix factorization \(A = LU\) demonstrated above can always be computes (reordering the rows of \(A\) if necessary). In this factorization, \(L\) is lower triangular with \(1\)s along the diagonal and \(U\) is an echelon form of \(A\) (and therefore upper triangular if \(A\) is square). This form has several advantages. First, if \(A\) is square then \(\det(A) = \det(L)\det(U) = \det(U)\), and the determinant of \(U\) is very easy to find. Second, this form lets us solve systems more quickly.%
+\begin{example}{Solving a System with \(LU\) factorization.}{x:example:example-solving-a-system-with-lu--factorization}%
+Let%
+\begin{equation*}
+A = \mqty[-1 & -7 & -3 \\ 2 & 15 & 6 \\ 1 & 3 & 2]\text{ and }\vb{b} = \mqty[1 \\ -5 \\ 11].
+\end{equation*}
+Find an \(LU\) decomposition of \(A\) and use it to solve \(A\vb{x} = \vb{b}\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630943032}{}\quad{}We can find \(L\) and \(U\) by reducing \(A\) to an echelon form. One possibility is%
+\begin{equation*}
+L = \mqty[1 & 0 & 0 \\ -2 & 1 & 0 \\ -1 & -4 & 1]\text{ and }U = \mqty[-1 & -7 & -3 \\ 0 & 1 & 0 \\ 0 & 0 & -1].
+\end{equation*}
+%
+\par
+Now we can solve \(A\vb{x} = \vb{b}\) in two steps:%
+\begin{enumerate}
+\item{}Solve \(L\vb{y} = \vb{b}\) for \(\vb{y}\).%
+\item{}Solve \(U\vb{x} = \vb{y}\) for \(\vb{x}\).%
+\end{enumerate}
+Solving the first equation by reducing \(\smqty[L & \vb{b}]\) produces%
+\begin{equation*}
+\vb{y} = \mqty[1 \\ -3 \\ 0]\text{.}
+\end{equation*}
+Then, solving the second equation by reducing \(\smqty[U & \vb{y}]\) produces%
+\begin{equation*}
+\vb{x} = \mqty[20\\-3\\0].
+\end{equation*}
+%
+\end{example}
+The process in \hyperref[x:example:example-solving-a-system-with-lu--factorization]{Example~{\xreffont\ref{x:example:example-solving-a-system-with-lu--factorization}}} produces the same exact answer that row reduction would if applied to \(\smqty[A & \vb{b}]\), or if \(A^{-1}\) were found and multiplied to \(\vb{b}\). However, computing and using the \(LU\) factorization can be more stable numerically than either Gaussian elimination or computing the inverse.%
+\end{sectionptx}
+\end{chapterptx}
+  %
+%
+\typeout{************************************************}
+\typeout{Chapter 2 Eigenvalues and Eigenvectors}
+\typeout{************************************************}
+%
+\begin{chapterptx}{Eigenvalues and Eigenvectors}{}{Eigenvalues and Eigenvectors}{}{}{x:chapter:chapter-linear-eigenvalues-eigenvectors}
+%
+%
+\typeout{************************************************}
+\typeout{Section 2.1 Finding Eigenvalues and Eigenvectors}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Finding Eigenvalues and Eigenvectors}{}{Finding Eigenvalues and Eigenvectors}{}{}{x:section:section-finding-eigenvalues-and-eigenvectors}
+Many applications call for computing matrix-vector products like \(A\vb{x}\), and in such cases it often happens that \(A\) is a square matrix. If many such products need to be computed, it'd be nice to know if there was a way to simplify these calculations. One possible way to approach this is by using \emph{eigenvectors and eigenvalues}.%
+\begin{definition}{Eigenvalues and Eigenvectors.}{x:definition:definition-eigenvalues-and-eigenvectors}%
+\index{eigenvalues and eigenvectors}%
+An \terminology{eigenvector} of an \(n\times n\) matrix \(A\) is a \emph{nonzero vector} \(\vb{x}\) such that \(A\vb{x} = \lambda\vb{x}\) for some scalar \(\lambda\). A scalar \(\lambda\) is called an \terminology{eigenvalue} of \(A\) if there is a \emph{nonzero} solution of the equation \(A\vb{x} = \lambda\vb{x}\).%
+\end{definition}
+Note that the zero vector is not allowed to be an eigenvector, but zero is allowed to be an eigenvalue.%
+\begin{example}{Verifying Eigenvectors.}{x:example:example-verifying-eigenvectors}%
+Let%
+\begin{equation*}
+A = \mqty[5 & 2 \\ 3 & 6],\qq{}\vb{v}_{1} = \mqty[1 \\ -1],\qq{}\vb{v}_{2} = \mqty[2 \\ 1]\qq{and}\vb{v}_{3} = \vb{0}.
+\end{equation*}
+Which of the vectors, if any, is an eigenvector of \(A\)? What is one eigenvalue of \(A\)?%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630923320}{}\quad{}First, note that \(\vb{v}_{3} = \vb{0}\) is not an eigenvector since it is the zero vector. So we'll check if the other two vectors are eigenvectors:%
+\begin{equation*}
+A\vb{v}_{1} = \mqty[3 \\ -3] = 3\mqty[1 \\ -1]
+\end{equation*}
+and%
+\begin{equation*}
+A\vb{v}_{2} = \mqty[11 \\ 12].
+\end{equation*}
+So \(\vb{v}_{1}\) is an eigenvector of \(A\) (with eigenvalue \(3\)), but \(\vb{v}_{2}\) is not an eigenvector since there is no scalar we can multiply \(\vb{v}_{2}\) by to get \(A\vb{v}_{2}\).%
+\end{example}
+It's a little harder to verify if a given number is an eigenvalue of a matrix \(A\).%
+\begin{example}{Verifying Eigenvalues.}{x:example:example-verifying-eigenvalues}%
+Is \(-2\) an eigenvalue of the matrix%
+\begin{equation*}
+Q = \mqty[0 & -1 & -1 \\ -1 & 0 & -1 \\ -1 & -1 & 0]?
+\end{equation*}
+If it is, find a corresponding eigenvector.%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630917176}{}\quad{}\(-2\) is an eigenvalue of \(Q\) if and only if the equation \(Q\vb{x} = -2\vb{x}\) has a \emph{nonzero} solution. Rearranging this equation, we can say that \(-2\) is an eigenvalue of \(Q\) if and only if \((Q+2I)\vb{x} = \vb{0}\) has a nontrivial solution. So we'll row reduce the augmented matrix \(\mqty[Q+2I & \vb{0}]\) to see if the system has free variables:%
+\begin{align*}
+\mqty[2 & -1 & -1 & 0 \\ -1 & 2 & -1 & 0 \\ -1 & -1 & 2 & 0] &\sim\mqty[-1 & 2 & -1 & 0 \\ 2 & -1 & -1 & 0 \\ -1 & -1 & 2 & 0]\\
+&\rowop[2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[-1 & 2 & -1 & 0 \\ 0 & 3 & -3 & 0 \\ 0 & -3 & 3 & 0]\\
+&\sim\mqty[-1 & 2 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]
+\end{align*}
+so there are free variables and it follows that \(-2\) is indeed an eigenvalue of \(Q\).%
+\par
+To find an eigenvector, we just need to find a nontrivial solution of \((Q+2I)\vb{x} = \vb{0}\)-{}-{}-equivalently, a nonzero vector in \(\nul(Q+2I)\)-{}-{}-so we'll continue row reducing:%
+\begin{align*}
+\mqty[-1 & 2 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0] &\rowop{-2R_{2}+R_{1}}\mqty[-1 & 0 & 1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]\\
+&\sim\mqty[1 & 0 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]
+\end{align*}
+So%
+\begin{equation*}
+\nul(Q+2I) = \spn{\mqty[1 \\ 1 \\ 1]}
+\end{equation*}
+and a single eigenvector of \(Q\) is given by%
+\begin{equation*}
+\mqty[1 \\ 1 \\ 1].
+\end{equation*}
+%
+\end{example}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Computing Eigenvalues and Eigenvectors}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Computing Eigenvalues and Eigenvectors}{}{Computing Eigenvalues and Eigenvectors}{}{}{x:subsection:subsection-computing-eigenvalues-and-eigenvectors}
+There are two things we can note from \hyperref[x:example:example-verifying-eigenvalues]{Example~{\xreffont\ref{x:example:example-verifying-eigenvalues}}}. First, any nonzero vector in \(\nul(Q+2I)\) is an eigenvector of \(Q\) with eigenvalue \(-2\). This leads to the following definition.%
+\begin{definition}{Eigenspaces.}{x:definition:definition-eigenspaces}%
+\index{eigenvalues and eigenvectors!eigenspaces}%
+Let \(A\) be an \(n\times n\) matrix and suppose that \(\lambda\) is an eigenvalue of \(A\). The \terminology{eigenspace} of \(A\) corresponding to \(\lambda\) is the subspace of \(\RR^{n}\) containing all of the eigenvectors corresponding to \(\lambda\) in addition to the zero vector. In other words, the eigenspace of \(A\) corresponding to \(\lambda\) is the set \(\nul(A-\lambda I)\). This set is often denoted \(E_{\lambda}\).%
+\end{definition}
+The second item we note is that \(-2\) was an eigenvalue precisely because the equation \((Q+2I)\vb{x} = \vb{0}\) had nontrivial solutions. In other words, \(Q+2I\) \emph{was not invertible}. In general, the polynomial \(\det(A-\lambda I)\) and equation \(\det(A-\lambda I) = 0\) are important enough that they deserve their own names.%
+\begin{definition}{Characteristic Polynomial and Characteristic Equation.}{x:definition:definition-characteristic-polynomial-and-characteristic-equation}%
+\index{eigenvalues and eigenvectors!characteristic polynomial and equation}%
+Let \(A\) be an \(n\times n\) matrix. The \terminology{characteristic polynomial} of \(A\) is the \(n^\th\) degree polynomial \(\det(A-\lambda I)\). The equation \(\det(A-\lambda I) = 0\) is the \terminology{characteristic equation}.%
+\end{definition}
+\begin{theorem}{Eigenvalues and the Characteristic Equation.}{}{x:theorem:theorem-eigenvalues-and-the-characteristic-equation}%
+Let \(A\) be a square matrix. Then the eigenvalues of \(A\) are the solutions of the characteristic equation \(\det(A - \lambda I) = 0\).%
+\end{theorem}
+\begin{example}{Finding Eigenvalues.}{x:example:example-finding-eigenvalues}%
+Find the eigenvalues of the matrix%
+\begin{equation*}
+A = \mqty[4 & -2 & 3 \\ 0 & -1 & 3 \\ -1 & 2 & -2].
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630887096}{}\quad{}We need to compute the characteristic polynomial \(\det(A-\lambda I)\). Now,%
+\begin{equation*}
+A - \lambda I = \mqty[4 - \lambda & -2 & 3 \\ 0 & -1-\lambda & 3 \\ -1 & 2 & -2 - \lambda],
+\end{equation*}
+so%
+\begin{align*}
+\det(A-\lambda I) &= (4-\lambda)\mqty|-1-\lambda & 3 \\ 2 & -2-\lambda| - \mqty|-2 & 3 \\ -1-\lambda & 3|\\
+&= (4-\lambda)\qty[(-1-\lambda)(-2-\lambda)-6] - \qty[-6-(-3-3\lambda)]\\
+&= (4-\lambda)(-4+3\lambda+\lambda^{2}) - (-3+3\lambda)\\
+&= (4-\lambda)(\lambda+4)(\lambda-1)+3(1-\lambda)\\
+&= (\lambda-1)\qty[(4-\lambda)(\lambda+4)-3]\\
+&= (\lambda-1)(13-\lambda^{2})
+\end{align*}
+The solutions of the characteristic equation%
+\begin{equation*}
+(\lambda-1)(13-\lambda^{2}) = 0
+\end{equation*}
+are given by \(\lambda = 1,\pm\sqrt{13}\). So the eigenvalues of \(A\) are \(1,-\sqrt{13}\) and \(\sqrt{3}\).%
+\end{example}
+Computer systems such as Sage and Octave can, naturally, find eigenvalues and eigenvectors as well. In Octave this is done with the \mono{eig} command. If no output is specified then the command produces an array of eigenvalues, while if two outputs are specified the command produces two matrices: the first matrix is a matrix of eigenvector columns of \(A\) and the second matrix is a diagonal matrix of eigenvalues of \(A\). See the code cell below.%
+\begin{sageinput}
+format short
+A = [4, -2, 3; 0, -1, 3; -1, 2, -2];
+[U,D] = eig(A)
+\end{sageinput}
+Matters are simplified greatly when finding eigenvalues of triangular matrices (see \hyperref[x:theorem:theorem-determinants-of-triangular-matrices]{Theorem~{\xreffont\ref{x:theorem:theorem-determinants-of-triangular-matrices}}}).%
+\begin{example}{Eigenvalues of a Triangular Matrix.}{x:example:example-eigenvalues-of-a-triangular-matrix}%
+Find the eigenvalues of the matrix%
+\begin{equation*}
+B = \mqty[1 & 0 & 0 & 0 \\ 5 & 0 & 0 & 0 \\ -1 & -3 & -3 & 0 \\ 0 & 0 & 1 & -10].
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630878904}{}\quad{}To find the eigenvalues, we need to first find \(\det(B-\lambda I)\). Since%
+\begin{equation*}
+B-\lambda I = \mqty[1-\lambda & 0 & 0 & 0 \\ -1 & \lambda & 0 & 0 \\ -1 & -3 & -3-\lambda & 0 \\ 0 & 0 & -1 & -10-\lambda]
+\end{equation*}
+is triangular (just as \(B\) is triangular), it follows that%
+\begin{equation*}
+\det(B - \lambda I) = (1-\lambda)\lambda(-3-\lambda)(-10-\lambda).
+\end{equation*}
+The solutions of the characteristic equation, and thus the eigenvalues of \(B\), are given by \(\lambda = 1, 0, -3, -10\).%
+\end{example}
+\hyperref[x:example:example-eigenvalues-of-a-triangular-matrix]{Example~{\xreffont\ref{x:example:example-eigenvalues-of-a-triangular-matrix}}} suggests the following theorem.%
+\begin{theorem}{Eigenvalues of a Triangular Matrix.}{}{x:theorem:theorem-eigenvalues-of-a-triangular-matrix}%
+Let \(A\) be a square triangular matrix. Then the eigenvalues of \(A\) are just the diagonal entries of \(A\).%
+\end{theorem}
+So now we have a good idea of how to find eigenvalues of a square matrix \(A\): just solve the characteristic equation \(\det(A-\lambda I) = 0\). To find the corresponding eigenvectors, we need to solve the related equation \(A\vb{v} = \vb{0}\), which reduces to solving \((A-\lambda I)\vb{v} = \vb{0}\).%
+\begin{example}{Finding Eigenvalues and Eigenvectors.}{x:example:example-finding-eigenvalues-and-eigenvectors}%
+Find the eigenvalues and eigenvectors of%
+\begin{equation*}
+A = \mqty[2 & 0 & -1 \\ 0 & \frac{1}{2} & 0 \\ 1 & 0 & 4].
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630876216}{}\quad{}First, we need to find the eigenvalues. Since%
+\begin{equation*}
+\det(A-\lambda I) = \mqty|2-\lambda & 0 & -1 \\ 0 & \frac{1}{2}-\lambda & 0 \\ 1 & 0 & 4-\lambda| = (2-\lambda)\qty(\frac{1}{2}-\lambda)(4-\lambda) + \frac{1}{2}-\lambda 
+\end{equation*}
+which simplifies to%
+\begin{equation*}
+\det(A-\lambda I) = \qty(\frac{1}{2}-\lambda)\left[(2-\lambda)(4-\lambda)+1\right] = \qty(\frac{1}{2}-\lambda)[\lambda^{2}-6\lambda+9],
+\end{equation*}
+we see that the eigenvalues of \(A\) are given by \(\lambda=\frac{1}{2},3\).%
+\par
+Now we can start trying to find eigenvectors. First, we'll row reduce \(\mqty[A-\frac{1}{2}I & 0]\) to find an eigenvector corresponding to \(\lambda=\frac{1}{2}\):%
+\begin{align*}
+\mqty[\frac{3}{2} & 0 & -1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & \frac{7}{2} & 0] &\rowop[2R_{3}]{2R_{1}}\mqty[3 & 0 & -2 & 0 \\ 0 & 0 & 0 & 0 \\ 2 & 0 & 7 & 0]\\
+&\rowop{2R_{3}+R_{1}}\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 2 & 0 & 7 & 0]\\
+&\rowop{-2R_{1}+R_{3}}\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 25 & 0]\\
+&\sim\mqty[1 & 0 & -9 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0]\\
+&\rowop{9R_{3}+R_{1}}\mqty[1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0].
+\end{align*}
+%
+\par
+Here's what this is saying: if \(\vb{v} = \mqty[\xmat*{v}{1}{3}]^{T}\) is an eigenvector of \(A\) corresponding to \(\lambda=\frac{1}{2}\), or in other words a nontrivial solution of \((A-\frac{1}{2}I)\vb{v} = \vb{0}\), then we must have \(v_{1} = v_{3} = 0\) and \(v_{2}\) free. So one nonzero eigenvector corresponding to \(\lambda=\frac{1}{2}\) is given by%
+\begin{equation*}
+\vb{v}_{1} = \mqty[0\\1\\0].
+\end{equation*}
+Therefore \(\smqty[0\\1\\0]\) forms a basis of the eigenspace \(E_{\frac{1}{2}}\) of \(A\).%
+\par
+To find an eigenvector corresponding to \(\lambda = 3\), we'll now row reduce \(\mqty[A - 3I & \vb{0}]\):%
+\begin{equation*}
+\mqty[-1 & 0 & -1 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0]\sim\mqty[0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 1 & 0].
+\end{equation*}
+So if \(\vb{v}\) is an eigenvector corresponding to the eigenvalue \(\lambda=3\), then we need \(v_{1} = -v_{3}\), and \(v_{2} = 0\). Which means that%
+\begin{equation*}
+\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ 0 \\ v_{3}] = v_{3}\mqty[-1\\0\\1].
+\end{equation*}
+The vector \(\smqty[-1\\0\\1]\) therefore forms a basis of the eigenspace \(E_3\) of \(A\).%
+\end{example}
+As mentioned above, the computations in \hyperref[x:example:example-finding-eigenvalues-and-eigenvectors]{Example~{\xreffont\ref{x:example:example-finding-eigenvalues-and-eigenvectors}}} can also be carried out using technology. In Octave, the computation proceeds using \mono{eig}:%
+\begin{sageinput}
+format short
+A = [2, 0, -1; 0, 1/2, 0; 1, 0, 4];
+[U,D] = eig(A)
+\end{sageinput}
+Octave by design will give eigenvectors that have unit norm (i.e., magnitude of \(1\)). In the above cell the first two columns of \(U\) are eigenvectors in \(E_3\), while the last column is an eigenvector in \(E_{\frac{1}{2}}\). In \hyperref[x:subsection:subsection-algebraic-and-geometric-multiplicities-of-eigenvalues]{Subsection~}, we examine the reason why \(3\) shows up twice in the matrix \(D\) of eigenvalues (and why a column of \(U\) is repeated here).%
+\par
+As Octave is designed for numerical work, it's a little awkward to try to get it to produce symbolic answers. For symbolic mathematics, a system such as Sage (or another CAS) is more appropriate. In Sage, eigenvalues can be found like so: \begin{aside}{}{g:aside:idm1630850232}%
+\mono{A.eigenvectors\_right()} finds vectors \(\vb{x}\) satisfying \(A\vb{x} = \lambda \vb{x}\). \mono{A.eigenvectors\_left()} finds vectors \(\vb{y}\) satisfying \(\vb{y}^{T}A = \lambda\vb{y}^{T}\).%
+\end{aside}
+%
+\begin{sageinput}
+A = Matrix([[2, 0, -1], [0, 1/2, 0], [1, 0, 4]])
+A.eigenvectors_right()
+\end{sageinput}
+Octave-like output can also be produced using the \mono{eigenmatrix\_right()} method:%
+\begin{sageinput}
+# run the previous cell first so A is defined!
+D,U = A.eigenmatrix_right()
+D,U
+\end{sageinput}
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Algebraic and Geometric Multiplicities of Eigenvalues}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Algebraic and Geometric Multiplicities of Eigenvalues}{}{Algebraic and Geometric Multiplicities of Eigenvalues}{}{}{x:subsection:subsection-algebraic-and-geometric-multiplicities-of-eigenvalues}
+There are a couple of interesting things we can note about the \hyperref[x:example:example-finding-eigenvalues-and-eigenvectors]{Example~{\xreffont\ref{x:example:example-finding-eigenvalues-and-eigenvectors}}}. First, each eigenvalue had \emph{at least} one corresponding eigenvector. Second, \(\lambda=3\) was basically a ``repeated'' eigenvalue, since it showed up as a double root in the characteristic equation \(\det(A-\lambda I)=0\). This leads us to some terminology.%
+\begin{definition}{Algebraic and Geometric Multiplicity.}{x:definition:definition-algebraic-and-geometric-multiplicity}%
+\index{eigenvalues and eigenvectors!algebraic and geometric multiplicity}%
+Let \(A\) be an \(n\times n\) matrix and let \(\lambda\) be an eigenvalue of \(A\). The \terminology{algebraic multiplicity} of \(\lambda\) is defined to be the multiplicity of \(\lambda\) as a root of the characteristic equation. The \terminology{geometric multiplicity} of \(\lambda\) is defined to be the number of linearly independent eigenvectors corresponding to \(\lambda\). Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to \(\lambda\): \(\dim E_{\lambda}\).%
+\end{definition}
+In \hyperref[x:example:example-finding-eigenvalues-and-eigenvectors]{Example~{\xreffont\ref{x:example:example-finding-eigenvalues-and-eigenvectors}}}, \(\lambda = 3\) had an algebraic multiplicity of \(2\). This could also be seen in the Octave and Sage results following the example, since \(3\) showed up twice in the diagonal matrix of eigenvalues. This was also given after using \mono{eigenvectors\_right()} immediately after the given eigenvector for \(\lambda  = 3\). On the other hand, the geometric multiplicity of \(\lambda = 3\) was \(\dim E_{3} = 1\). This was represented in the repeated eigenvector in \(U\) in the Octave result and the single nonzero vector corresponding to \(\lambda = 3\) in the Sage result. In this case, we say that \(A\) is \emph{defective}.%
+\begin{definition}{Defective Matrices.}{x:definition:definition-defective-matrices}%
+\index{eigenvalues and eigenvectors!defective matrix}%
+\index{eigenvalues and eigenvectors!defective matrix|seealso{algebraic and geometric multiplicity}}%
+Let \(A\) be a square matrix. If the sum of the geometric multiplicities of the eigenvalues of \(A\) is less than the sum of algebraic multiplicities of eigenvalues of \(A\), then we say that \(A\) is \terminology{defective}.%
+\end{definition}
+The following result gives some basic estimates for algebraic and geometric multiplicities of eigenvalues.%
+\begin{theorem}{Bounds on Algebraic and Geometric Multiplicities.}{}{x:theorem:theorem-bounds-on-algebraic-and-geometric-multiplicities}%
+If \(A\) is an \(n\times n\) matrix, then \(A\) has exactly \(n\) (not necessarily distinct!) eigenvalues, counting multiplicities. Furthermore, if \(\lambda\) is an eigenvalue of \(A\), then the geometric multiplicity is always less than or equal to the algebraic multiplicity.%
+\end{theorem}
+From \hyperref[x:theorem:theorem-bounds-on-algebraic-and-geometric-multiplicities]{Theorem~{\xreffont\ref{x:theorem:theorem-bounds-on-algebraic-and-geometric-multiplicities}}}, an \(n\times n\) square matrix \(A\) is defective if and only if it has at most \(n-1\) linearly independent eigenvectors. Equivalently, the eigenvectors of \(A\) are not enough to form a basis (also known as an \emph{eigenbasis}) of \(\RR^n\). This leads to difficulties in computations involving \(A\).%
+\begin{definition}{Eigenbases.}{x:definition:definition-eigenbases}%
+\index{eigenvalues and eigenvectors!eigenbases}%
+Let \(A\) be an \(n\times n\) square matrix that is not defective. A set \(\qty{\vb{v}_1, \ldots, \vb{v}_n}\) is called an \terminology{eigenbasis} for \(\RR^n\) if each vector in the set is an eigenvector of \(A\) and if the set also forms a basis of \(\RR^n\).%
+\end{definition}
+\begin{example}{Multiplicities and Eigenspaces.}{x:example:example-multiplicities-and-eigenspaces}%
+Graph the eigenspaces of the matrix%
+\begin{equation*}
+A = \mqty[1 & 3 \\ 0 & 0].
+\end{equation*}
+What are the algebraic and geometric multiplicities of each eigenvalue?%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630814520}{}\quad{}Since \(A\) is triangular, its eigenvalues are \(0\) and \(1\). We also know at this point that \(A\) can't be defective. In particular, we can form a basis of \(\RR^2\) entirely from eigenvectors of \(A\). To actually find the eigenvectors, we need to find the corresponding eigenspaces \(E_{0} = \nul(A-0I) = \nul A\) and \(E_{1} = \nul(A-I)\).%
+\par
+By inspection,%
+\begin{equation*}
+\nul A = \spn{\mqty[-3 \\ 1]}.
+\end{equation*}
+The eigenspace associated with \(1\) is \(\nul(A-I)\). Since%
+\begin{equation*}
+A- I - \mqty[0 & 3 \\ 0 & -1]
+\end{equation*}
+we see that%
+\begin{equation*}
+\nul(A-I) = \spn{\mqty[1\\0]}.
+\end{equation*}
+So the graph of the eigenspaces is given by%
+\begin{figureptx}{Eigenspaces of \(A\)}{g:figure:idm1630804280}{}%
+\begin{image}{0}{1}{0}%
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[scale = 0.7]
+\begin{axis}[
+enlargelimits=false,
+legend cell align=left,
+axis x line = middle,
+xlabel = $x_{1}$,
+axis y line = center,
+ylabel = $x_{2}$,
+grid=both
+]
+\addplot[domain=-3:3,samples=200,blue]{(-1/3)*x};
+\addlegendentry{$\nul A$}
+\addplot[domain=-3:3,thick,samples=200,blue,dashed]{0};
+\addlegendentry{$\nul(A-I)$}
+\end{axis}
+\end{tikzpicture}
+}%
+\end{image}%
+\tcblower
+\end{figureptx}%
+A corresponding eigenbasis from \(A\) would be the set \(\qty{\smqty[-3\\1], \smqty[1\\0]}\).%
+\end{example}
+The importance of an eigenbasis is demonstrated in the next example.%
+\begin{example}{Matrix Multiplication and Eigenvectors.}{x:example:example-matrix-multiplication-and-eigenvectors}%
+Let%
+\begin{equation*}
+\mathcal{B} = \qty{\vb{b}_{1},\vb{b}_{2}} = \qty{\mqty[-3 \\ 1], \mqty[1 \\ 0]}
+\end{equation*}
+and let \(A\) be as in the previous example. Suppose that \(\vb{v}\) is a vector in \(\RR^{2}\) such that%
+\begin{equation*}
+\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}.
+\end{equation*}
+Compute \(A\vb{v}\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630809528}{}\quad{}This computation will be quite easy. Since \(\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}\), we have%
+\begin{equation*}
+A\vb{v} = 4A\vb{b}_{1}+3A\vb{b}_{2} = 3\vb{b}_{2} = \mqty[3 \\ 0].
+\end{equation*}
+%
+\end{example}
+\end{subsectionptx}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 2.2 Eigenvalue Problems}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Eigenvalue Problems}{}{Eigenvalue Problems}{}{}{x:section:section-eigenvalue-problems}
+Many important problems in mathematics and its applications reduce to statements of the form \(A\vb{x} = \lambda\vb{x}\). Naturally, eigenvalues and eigenvectors are useful tools for tackling these problems. As a first example, we'll again consider a Markov process.%
+\begin{example}{Long-term Behavior of Markov Processes.}{x:example:example-long-term-behavior-of-markov-processes}%
+Recall that a Markov process describes the evolution of one state \(\vb{x}_{n}\) into a future state \(\vb{x}_{n+1}\) using the matrix equation \(A\vb{x}_n = \vb{x}_{n+1}\). In such a process, the matrix \(A\) is a square matrix with non-negative entries whose columns sum to \(1\). Starting from an initial state \(\vb{x}_0\), we are often interested in whether the long-term evolution approaches a specific state vector \(\vb{x}\). In symbols, we want to determine if \(A^n\vb{x}_0 \to \vb{x}\) as \(n\to\infty\).%
+\par
+For such a vector, we should have \(A\vb{x} = \lim_{n\to\infty}A(A^n\vb{x}) = \vb{x}\). In other words, \(\vb{x}\) is an \emph{eigenvector of \(A\) with eigenvalue \(1\)}. We call this vector a \terminology{steady-state vector} of the Markov process.%
+\par
+Now let's suppose we model the weather with a Markov process with transition matrix%
+\begin{equation*}
+A = \mqty[0.33 & 0.25 & 0.40 \\ 0.52 & 0.42 & 0.40 \\ 0.15 & 0.33 & 0.20],
+\end{equation*}
+corresponding states \(S, C\) and \(R\) (i.e., "sunny", "cloudy" and "rainy") and we use an initial state vector of \(\vb{x}_0 = \smqty[0 & 1 & 0]^T\). To figure out the long-term probability that it will be a cloudy day, we can try computing \(A^n\vb{x}_0\) for large values of \(n\). See the Octave cell below. If we do so, it appears that the long-term probability of a cloudy day settles in around \(44.6\%\).%
+\par
+We can make this analysis more precise by looking for the steady state vector using \mono{eig}. If we take this approach, then we see that \(A\) has \(1\) as an eigenvalue and corresponding eigenvector \(\smqty[0.52 & 0.74 & 0.41]^{T}\). This is \emph{not} a state vector since the values do not add to \(1\) and therefore can't be probabilities. However, we can convert this into a state vector by dividing each entry by the sum \(0.52+0.74+0.41 = 1.678\) which in turn gives the eigenvector%
+\begin{equation*}
+\vb{x} = \mqty[0.3113 \\ 0.4463 \\ 0.2425]
+\end{equation*}
+confirming our earlier guess. We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.%
+\end{example}
+\begin{sageinput}
+% Code for Markov example
+format short
+A = [0.33, 0.25, 0.40; 0.52, 0.42, 0.40; 0.15, 0.33, 0.20]
+[U,D] = eig(A)
+\end{sageinput}
+\begin{example}{Singular Values and the Condition Number.}{x:example:example-singular-values-and-the-condition-number}%
+In numerical linear algebra, the \terminology{condition number} of an invertible matrix \(A\) gives an estimate of how solutions of \(A\vb{x} = \vb{b}\) can change in the presence of error. More precisely, the condition number measures the response of the solution \(\vb{x}\) if \(\vb{b}\) is perturbed by an error term. If the condition number is small then we expect a small change in \(\vb{x}\) if the error in \(\vb{b}\) is small. If the condition is large, however, small changes in \(\vb{b}\) can have significant effects on \(\vb{x}\).%
+\par
+The condition number itself is denoted \(\kappa(A)\). If we let \(A\vb{x} = \vb{b}\) denote the unperturbed system and \(A\hat{\vb{x}} = \hat{\vb{b}}\) denote the corresponding perturbed system, then the relative error between \(\hat{\vb{x}}\) and \(\vb{x}\) is at most equal to \(\kappa(A)\) times the relative error between \(\hat{\vb{b}}\) and \(\vb{b}\).%
+\par
+The condition number \(\kappa(A)\) itself can be calculated from the eigenvalues of \(A^{T}A\) as follows:%
+\begin{equation*}
+\kappa(A) = \frac{\sqrt{\lambda_{\text{max}}(A^{T}A)}}{\sqrt{\lambda_{\text{min}}(A^{T}A)}}.
+\end{equation*}
+Using this, find the \(\kappa(A)\) for%
+\begin{equation*}
+A = \mqty[1 & 3 & -2 \\ 0 & 2 & 4 \\ -3 & 2 & 3]
+\end{equation*}
+%
+\end{example}
+\begin{sageinput}
+% code cell for condition number example
+\end{sageinput}
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 2.3 Orthogonal Transformations}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Orthogonal Transformations}{}{Orthogonal Transformations}{}{}{x:section:section-orthogonal-transformations}
+Two fundamental concepts in vector geometry are the \emph{magnitude} and the \emph{inner product}. In \(\RR^n\) these topics are related as given by the following definition.%
+\begin{definition}{Inner Product and Magnitude.}{x:definition:definition-inner-product-and-magnitude}%
+\index{inner product}%
+\index{magnitude}%
+Let \(\vb{x}\) and \(\vb{y}\) be vectors in \(\RR^n\). The \terminology{inner product} of \(\vb{x}\) and \(\vb{y}\) is the real scalar \(\dotprod{\vb{x},\vb{y}}\) given by%
+\begin{equation*}
+\dotprod{\vb{x},\vb{y}} = \vb{y}^{T}\vb{x}.
+\end{equation*}
+The \terminology{magnitude} of \(\vb{x}\) is the nonnegative real number \(\norm{\vb{x}}\) given by%
+\begin{equation*}
+\norm{\vb{x}} = \sqrt{\dotprod{\vb{x},\vb{x}}}.
+\end{equation*}
+%
+\end{definition}
+If you've taken Calculus III, then some of the following properties will be familiar with their analogues for the dot product (see \href{https://j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html}{here}\footnote{\nolinkurl{j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html}\label{g:fn:idm1630769080}}).%
+\begin{theorem}{Properties of the Inner Product.}{}{x:theorem:theorem-properties-of-the-inner-product}%
+Let \(\vb{x}, \vb{y}\) and \(\vb{z}\) be vectors in \(\RR^n\) and let \(\alpha\) and \(\beta\) be real scalars. Then the inner product satisfies the following properties:%
+\begin{enumerate}
+\item{}\(\displaystyle \dotprod{\vb{x},\vb{y}} = \dotprod{\vb{y},\vb{x}}\)%
+\item{}\(\displaystyle \dotprod{\vb{x}, \vb{y}+\vb{z}} = \dotprod{\vb{x},\vb{y}} + \dotprod{\vb{x},\vb{z}}\)%
+\item{}\(\dotprod{\alpha\vb{x},\vb{y}} = \alpha\dotprod{\vb{x},\vb{y}}\) and \(\dotprod{\vb{x},\beta\vb{y}} = \beta\dotprod{\vb{x},\vb{y}}\)%
+\item{}\(\dotprod{\vb{x},\vb{y}} = \norm{\vb{x}}\norm{\vb{y}}\cos\theta\) where \(\theta\) denotes the angle between \(\vb{x}\) and \(\vb{y}\) where \(0\leq\theta\leq \pi\).%
+\item{}\(\dotprod{A\vb{x},\vb{y}} = \dotprod{\vb{x},A^{T}\vb{y}}\) for any \(n\times n\) matrix \(A\).%
+\end{enumerate}
+%
+\end{theorem}
+The last property in \hyperref[x:theorem:theorem-properties-of-the-inner-product]{Theorem~{\xreffont\ref{x:theorem:theorem-properties-of-the-inner-product}}} is particularly important and can be taken as the definition of \(A^{T}\). We also have the following very important inequalities involving inner products and magnitudes.%
+\begin{theorem}{Cauchy-Schwarz Inequality.}{}{x:theorem:theorem-cauchy-schwarz-inequality}%
+Let \(\vb{x},\vb{y}\in\RR^n\). Then%
+\begin{equation*}
+\abs{\dotprod{\vb{x},\vb{y}}}\leq\norm{\vb{x}}\norm{\vb{y}}.
+\end{equation*}
+%
+\end{theorem}
+\begin{theorem}{Triangle Inequality.}{}{x:theorem:theorem-triangle-inequality}%
+\index{Triangle Inequality}%
+Let \(\vb{x},\vb{y}\in\RR^n\). Then%
+\begin{equation*}
+\norm{\vb{x} + \vb{y}}\leq\norm{\vb{x}} + \norm{\vb{y}}.
+\end{equation*}
+%
+\end{theorem}
+As the magnitude and inner product are both fundamental concepts in vector geometry, any transformation (i.e., any matrix) that preserves both of these quantities are particularly useful to work with. Such matrices are called \emph{orthogonal transformations}.%
+\begin{definition}{Orthogonal Transformation.}{x:definition:definition-orthogonal-transformation}%
+\index{orthogonal matrix}%
+Let \(U\) be a real \(n\times n\) matrix. We say that \(U\) is \terminology{orthogonal} if%
+\begin{equation*}
+UU^{T} = U^{T}U = I.
+\end{equation*}
+The set of all orthogonal \(n\times n\) matrices is denoted by \(O(n)\).%
+\end{definition}
+Geometrically, the action of an orthogonal matrix on vectors preserves angles between vectors as measured by the inner product.%
+\begin{theorem}{Orthogonal Transformations and Inner Products.}{}{x:theorem:theorem-orthogonal-transformations-and-inner-products}%
+Let \(\vb{x},\vb{y}\in\RR^n\) and let \(U\) be an \(n\times n\) orthogonal matrix. Then%
+\begin{equation*}
+\dotprod{\vb{x},\vb{y}} = \dotprod{U\vb{x},U\vb{y}}.
+\end{equation*}
+Furthermore, \(\norm{\vb{x}} = \norm{U\vb{x}}\).%
+\end{theorem}
+As orthogonal matrices are invertible, it follows that their columns form a basis. Such as basis has some very useful characteristics. To be precise, let \(U = \smqty[\vb{u}_1 & \ldots & \vb{u}_{n}]\) denote an \(n\times n\) orthogonal matrix. Then the fact that \(U^{T}U = I\) implies that%
+\begin{equation*}
+\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 &\text{ if }i=j \\ 0 &\text{ if }i\neq j\end{cases}.
+\end{equation*}
+This leads to the following definition.%
+\begin{definition}{Orthonormal Basis.}{x:definition:definition-orthonormal-basis}%
+\index{basis!orthonormal}%
+Let \(\qty{\vb{u}_{i}}_{i=1}^{n}\) denote a collection of vectors in \(\RR^n\). This collection is an \terminology{orthonormal basis (ONB)} if%
+\begin{equation*}
+\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 &\text{ if }i=j \\ 0 &\text{ if }i\neq j\end{cases}.
+\end{equation*}
+%
+\end{definition}
+Geometrically, an ONB in \(\RR^n\) is a collection of \(n\) orthogonal unit vectors. These can be viewed as a generalization of the typical coordinate axes.%
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 2.4 Diagonalization of Matrices}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Diagonalization of Matrices}{}{Diagonalization of Matrices}{}{}{x:section:section-diagonalization-of-matrices}
+\begin{introduction}{}%
+In this section we consider bases of \(\mathbb{R}^n\) that are associated with eigenvectors a square matrix \(A\) known as eigenbases (see \hyperref[x:definition:definition-eigenbases]{Definition~{\xreffont\ref{x:definition:definition-eigenbases}}}). The benefit to looking at such a basis instead of using the standard basis of \(\RR^n\) is that the eigenbasis will make products involving \(A\) much simpler through a process known as \emph{diagonalization}.%
+\end{introduction}%
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Eigenbases}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Eigenbases}{}{Eigenbases}{}{}{x:subsection:subsection-eigenbases}
+Recall that a basis of \(\RR^n\) is a linearly independent collection of \(n\) vectors in \(\RR^n\) (see also \hyperref[x:definition:definition-basis-of--rr-n-]{Definition~{\xreffont\ref{x:definition:definition-basis-of--rr-n-}}}). The defining characteristic of a basis is this: if \(\qty{\vb{b}_1,\ldots,\vb{b}_n}\) is a basis of \(\RR^n\) and if \(\vb{x}\in\RR^n\), then there exists a unique set of scalars \(c_1,\ldots,c_n\) such that%
+\begin{equation*}
+\xx = \sum_{i=1}^{n}c_i\vb{b}_i\text{.}
+\end{equation*}
+This makes it possible to use the basis as a coordinate system in \(\RR^n\). Therefore we may view an eigenbasis (\hyperref[x:definition:definition-eigenbases]{Definition~{\xreffont\ref{x:definition:definition-eigenbases}}}) of a matrix \(A\) as a particular coordinate system that is well-suited to calculations involving \(A\), an idea which we make precise below.%
+\begin{example}{Using an Eigenbasis to Compute a Matrix Product.}{x:example:example-using-an-eigenbasis-to-compute-a-matrix-product}%
+Let%
+\begin{equation*}
+A = \mqty[-2 & 3 \\ -4 & 5]\text{ and }\vb{b} = \mqty[-2 \\ 10]\text{.}
+\end{equation*}
+Given that%
+\begin{equation*}
+\vv_1 = \mqty[1\\1]\text{ and }\vv_2 = \mqty[3\\4]
+\end{equation*}
+are eigenvectors of \(A\) with corresponding eigenvalues \(\lambda_1 = 1\) and \(\lambda_2 = 2\), find \(A^{100}\bb\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630641976}{}\quad{}First, note that \(\qty{\vv_1,\vv_2}\) is a basis of \(\RR^2\). Therefore it's an eigenbasis since each vector is an eigenvector of \(A\). \begin{aside}{Bases in \(\RR^2\).}{g:aside:idm1630647608}%
+One way to see that \(\qty{\vv_1,\vv_2}\) must be a basis of \(\RR^2\) is to observe that \(\vv_2\) is not a scalar multiple of \(\vv_1\) and so the two vectors are linearly independent. Then \(\qty{\vv_1,\vv_2}\) is a set of two linearly independent vectors in the two-dimensional vector space \(\RR^2\), and so this set must be a basis of \(\RR^2\).%
+\end{aside}
+%
+\par
+Since \(\qty{\vv_1,\vv_2}\) is a basis of \(\RR^2\) then there exist scalars \(c_1,c_2\) such that \(\bb = c_1\vv_1 + c_2\vv_2\). We can find these scalars by row reduction of the augmented matrix \(\mqty[\vv_1 & \vv_2 & \bb]\). This reduces to%
+\begin{equation*}
+\mqty[1 & 0 & -38 \\ 0 & 1 & 12]\text{,}
+\end{equation*}
+and so \(c_1 = -38, c_2 = 12\) and%
+\begin{equation*}
+\bb = -38\vv_1 + 12\vv_2\text{.}
+\end{equation*}
+%
+\par
+Now that we've written \(\bb\) in terms of the eigenbasis \(\qty{\vv_1,\vv_2}\), the computation of \(A^{100}\bb\) becomes almost trivial:%
+\begin{align*}
+A^{100}\bb & = A^{100}(-38\vv_1 + 12\vv_2) \\
+& = -38 A^{100}\vv_1 + 12 A^{100}\vv_2 \\
+& = -38 \vv_1 + 12\cdot 2^{100}\vv_2 \\
+& = \mqty[-38 + 36(2^{100}) \\ -38 + 48(2^{100})] \text{.}
+\end{align*}
+\begin{aside}{}{g:aside:idm1630635064}%
+The second to last line of this computation makes use of the fact that%
+\begin{equation*}
+A^n\xx = \lambda^n\xx
+\end{equation*}
+for any eigenvector \(\xx\) of \(A\) with eigenvalue \(\lambda\).%
+\end{aside}
+%
+\end{example}
+\begin{sageinput}
+format short
+A = [1, 3, -2; 1, 4, 10]
+rref(A) # reduces to find c_1, c_2
+\end{sageinput}
+\hyperref[x:example:example-using-an-eigenbasis-to-compute-a-matrix-product]{Example~{\xreffont\ref{x:example:example-using-an-eigenbasis-to-compute-a-matrix-product}}} shows that the existence of an eigenbasis can greatly simplify certain computations. Unfortunately, not every matrix has a corresponding eigenbasis (see \hyperref[x:definition:definition-defective-matrices]{Definition~{\xreffont\ref{x:definition:definition-defective-matrices}}}). However, the following theorem gives a simple condition that can be used to guarantee the existence of an eigenbasis.%
+\begin{theorem}{Distinct Eigenvalues and Eigenbases.}{}{x:theorem:theorem-distinct-eigenvalues-and-eigenbases}%
+Let \(A\) be an \(n\times n\) matrix and suppose that \(A\) has \(n\) distinct eigenvalues (equivalently, no eigenvalue is repeated). Then \(A\) has an eigenbasis.%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630626744}
+The proof of this statement follows from the fact that eigenvectors corresponding to distinct eigenvalues must be linearly independent, so we'll prove this first. So let \(\qty{\lambda_i}_{i=1}^n\) denote the eigenvalues of \(A\) and let \(\xx_i\) denote an eigenvector of \(A\) corresponding to \(\lambda_i\). We'll show that \(\qty{\xx_i}_{i=1}^n\) is a linearly independent set. As this will then be a set of \(n\) linearly independent vectors in \(\RR^n\), this is enough to show that it's a basis as well.%
+\par
+Suppose that we have scalars \(\qty{c_i}\) such that \(\sum_{i=1}^n c_i\xx_i = \vb{0}\). We need to show that \(c_1=\ldots=c_n=0\). Now, since each \(\xx_i\) is an eigenvector of \(A\) with eigenvalue \(\lambda_i\), it follows that%
+\begin{equation*}
+A\qty(\sum_{i=1}^n c_i\xx_i) = \sum_{i=1}^n c_i A\xx_i = \sum_{i=1}^n c_i\lambda_i\xx_i\text{.}
+\end{equation*}
+Since \(A\vb{0} = \vb{0}\) as well, we have%
+\begin{equation*}
+\sum_{i=1}^n c_i\lambda_i\xx_i = \vb{0}\text{.}
+\end{equation*}
+We can also multiply the original equation \(\sum_{i=1}^{n}c_i\xx_i = \vb{0}\) by \(\lambda_1\) to get%
+\begin{equation*}
+\sum_{i=1}^{n}\lambda_1 c_i\xx_i = \vb{0}\text{.}
+\end{equation*}
+%
+\par
+Subtracting the previous two equations allows us to write%
+\begin{equation*}
+\vb{0} = \sum_{i=1}^n c_i (\lambda_i - \lambda_1)\xx_i = \sum_{i=2}^n c_i(\lambda_i-\lambda_1)\xx_i = \sum_{i=2}^{n}d_i \xx_i
+\end{equation*}
+where \(d_i = c_i(\lambda_i-\lambda_1)\). Now we can repeat the above process and write%
+\begin{equation*}
+\sum_{i=2}^n d_i\lambda_i\xx_i = \vb{0} = \sum_{i=2}^n d_i\lambda_2\xx_i
+\end{equation*}
+which gives (after subtracting)%
+\begin{equation*}
+\vb{0} = \sum_{i=2}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n e_i\xx_i
+\end{equation*}
+where \(e_i = (\lambda_i-\lambda_2)d_i = (\lambda_i-\lambda_2)(\lambda_i-\lambda_1)c_i\). Continuing this process, we are left with the equation%
+\begin{equation*}
+\vb{0} = (\lambda_n-\lambda_{n-1})(\lambda_n-\lambda_{n-2})\cdots(\lambda_n-\lambda_1)c_n\xx_n\text{,}
+\end{equation*}
+which forces \(c_n = 0\).%
+\par
+Now we are left with%
+\begin{equation*}
+\sum_{i=1}^{n-1}c_{i}\xx_i = \vb{0}
+\end{equation*}
+since we can safely disregard \(c_n\xx_n\). But there's nothing stopping us from applying the previous trick to this new sum, which will eventually show that \(c_{n-1} = 0\), and then \(c_{n-2} = 0\), and so on. Therefore%
+\begin{equation*}
+c_1=\ldots = c_n = 0
+\end{equation*}
+and the set \(\qty{\xx_i}_{i=1}^n\) must be linearly independent, which was what we needed to prove.%
+\end{proof}
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Diagonalization}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Diagonalization}{}{Diagonalization}{}{}{x:subsection:subsection-diagonalization}
+Now we'll take a closer look at just what we did in \hyperref[x:example:example-using-an-eigenbasis-to-compute-a-matrix-product]{Example~{\xreffont\ref{x:example:example-using-an-eigenbasis-to-compute-a-matrix-product}}} to compute \(A^{100}\bb\) (or, more simply, \(A\bb\)). First, we found \(c_1,c_2\) such that \(\bb = c_1\vv_1 + c_2\vv_2\). If we let \(P = \smqty[\vv_1&\vv_2]\) then this is equivalent to solving the matrix equation%
+\begin{equation*}
+P\mqty[c_1 \\ c_2] = \bb\implies \mqty[c_1 \\ c_2] = P^{-1}\bb\text{.}
+\end{equation*}
+We therefore view \(P^{-1}\bb\) as the coordinates of \(\bb\) with respect to the eigenbasis \(\qty{\vv_1,\vv_2}\). Once we had the coordinates of \(\bb\) with respect to the eigenbasis, then finding \(A\bb\) amounted to multiplying \(c_1\) and \(c_2\) by \(\lambda_1\) and \(\lambda_2\) respectively. In matrix notation, this is equivalent to computing%
+\begin{equation*}
+D\mqty[c_1 \\ c_2]\text{ where } D = \mqty[\lambda_1 & 0 \\ 0 & \lambda_2]\text{.}
+\end{equation*}
+Finally, we used the weights \(\lambda_1 c_1, \lambda_2 c_2\) to reconstruct \(A\bb\) from \(\vv_1,\vv_2\):%
+\begin{equation*}
+A\bb = \lambda_1 c_1\vv_1 + \lambda_2 c_2\vv_2\text{.}
+\end{equation*}
+Therefore%
+\begin{align*}
+A\bb & = \lambda_1 c_1\vv_1 + \lambda_2 c_2\vv_2\\
+& = P\mqty[\lambda_1c_1 \\ \lambda_2c_2] \\
+& = PD\mqty[c_1 \\ c_2] \\
+& = PDP^{-1}\bb \text{.}
+\end{align*}
+Since this equation is true for any \(\bb\in\RR^2\), it follows that \(A = PDP^{-1}\).%
+\par
+The process outlined above and in \hyperref[x:example:example-using-an-eigenbasis-to-compute-a-matrix-product]{Example~{\xreffont\ref{x:example:example-using-an-eigenbasis-to-compute-a-matrix-product}}} is known as \emph{diagonalization}. This is only possible when \(A\) has an eigenbasis to work with, but can lead to vastly more efficient computations involving \(A\) by making use of the formula%
+\begin{equation*}
+A^n = PD^nP^{-1}
+\end{equation*}
+since raising diagonal matrices to a power is much simpler than raising general matrices to a power. Finding \(A^{100}\bb\) in \hyperref[x:example:example-using-an-eigenbasis-to-compute-a-matrix-product]{Example~{\xreffont\ref{x:example:example-using-an-eigenbasis-to-compute-a-matrix-product}}} was equivalent to the following computations:%
+\begin{align*}
+A^{100}\bb & = PD^{100}P^{-1}\bb \\
+& = \mqty[1 & 3 \\ 1 & 4]\mqty[1^{100} & 0 \\ 0 & 2^{100}]\mqty[4 & -3 \\ -1 & 1]\mqty[-2 \\ 10] \\
+& = \mqty[1 & 3 \\ 1 & 4]\mqty[1 & 0 \\ 0 & 2^{100}]\mqty[-38 \\ 12] \\
+& = \mqty[1 & 3 \\ 1 & 4]\mqty[-38 \\ 12(2^{100})] \\
+& = \mqty[-38 + 36(2^{100}) \\ -38 + 48(2^{100})] \text{.}
+\end{align*}
+%
+\begin{definition}{Diagonalization.}{x:definition:definition-diagonalization}%
+A matrix \(A\) is \terminology{diagonalizable} if there exists a matrix \(P\) and a diagonal matrix \(D\) such that%
+\begin{equation*}
+A = PDP^{-1}\text{.}
+\end{equation*}
+%
+\end{definition}
+As mentioned above, a matrix \(A\) is diagonalizable if and only if \(A\) has an eigenbasis.%
+\begin{theorem}{Diagonalization and Eigenbases.}{}{x:theorem:theorem-diagonalization-and-eigenbases}%
+Let \(A\) be an \(n\times n\) matrix. Then \(A\) is diagonalizable if and only if \(A\) has a corresponding eigenbasis \(\qty{\vv_i}_{i=1}^n\).%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630590264}
+First, assume that \(A\) is diagonalizble. Then there exist matrices \(P\) and \(D\), say%
+\begin{equation*}
+P = \mqty[\vv_1&\ldots&\vv_n]\text{ and }D = \mqty[\lambda_1 & 0 & \ldots & 0 \\ 0 & \lambda_2 & \ldots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \ldots & \lambda_n]
+\end{equation*}
+such that \(P\) is invertible and \(A = PDP^{-1}\).%
+\par
+We want to show that \(A\) must have an eigenbasis. We'll do this by showing that each column \(\vv_i\) of \(P\) must be an eigenvector of \(A\) with eigenvalue \(\lambda_i\). Now, since \(\vv_i = 0\vv_1 + 0\vv_2 + \cdots + 1\vv_i + \cdots + 0\vv_n\) it follows that \(P^{-1}\vv_i\) must be the vector with a single \(1\) in the \(i^\th\) entry and \(0\)s elsewhere. Therefore%
+\begin{align*}
+A\vv_i & = PDP^{-1}\vv_i \\
+& = PD\mqty[0\\0\\\vdots\\1\\\vdots\\0] \\
+& = P\mqty[0\\0\\\vdots\\\lambda_i\\\vdots\\0] \\
+& = \lambda_i\vv_i 
+\end{align*}
+and so \(\vv_i\) must be an eigenvector of \(A\) with eigenvalue \(\lambda_i\) for each \(i\) from \(1\) to \(n\). Since each column of \(P\) is an eigenvector of \(A\) and since \(P\) is invertible, it follows that the columns must be a basis and, hence, an eigenbasis for \(A\).%
+\par
+Now we prove the reverse direction. So assume that \(A\) has an eigenbasis \(\qty{\vv_i}_{i=1}^n\) with corresponding eigenvalues \(\qty{\lambda_i}_{i=1}^n\). We will show that \(A\) is diagonalized by%
+\begin{equation*}
+P = \mqty[\vv_1&\ldots&\vv_n]\text{ and }D = \mqty[\lambda_1 & 0 & \ldots & 0 \\ 0 & \lambda_2 & \ldots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \ldots & \lambda_n]\text{.}
+\end{equation*}
+Let \(\xx\in\RR^n\). Then we can find the coordinates of \(\xx\) with respect to the eigenbasis \(\qty{\vv_i}\) by computing \(P^{-1}\xx\). \begin{aside}{}{g:aside:idm1630568632}%
+Note that \(P\) is invertible since its columns form a basis!%
+\end{aside}
+ It follows that applying \(A\) to \(\xx\) is equivalent to applying \(PD\) to \(P^{-1}\xx\): \(DP^{-1}\xx\) will multiply the coordinates of \(\xx\) with respect to the eigenbasis by the corresponding eigenvalues, and \(PDP^{-1}\xx\) reconstructs \(A\xx\) using the weights \(DP^{-1}\xx\) to form a linear combination of the columns of \(P\). Therefore \(A\xx=PDP^{-1}\xx\) and so \(A = PDP^{-1}\).%
+\end{proof}
+\begin{example}{Diagonalizing a Matrix.}{x:example:example-diagonalizing-a-matrix}%
+Find matrices \(P\) and \(D\) (if possible) that diagonalize%
+\begin{equation*}
+A = \mqty[2 & -1 & -1 \\ -1 & 2 & -1 \\ -1 & -1 & 2]\text{.}
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630558008}{}\quad{}By \hyperref[x:theorem:theorem-diagonalization-and-eigenbases]{Theorem~{\xreffont\ref{x:theorem:theorem-diagonalization-and-eigenbases}}}, \(A\) is diagonalizble if and only if \(A\) has an eigenbasis. Using Octave we quickly see that the eigenvalues of \(A\) are \(\lambda_1 = 0, \lambda_2 = \lambda_3 = 3\). Now we need to \(\smqty[A - 0I & \vb{0}]\) and \(\smqty[A - 3I & \vb{0}]\):%
+\begin{equation*}
+\mqty[A&\vb{0}] \sim \mqty[1 & 0 & -1 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0]\text{ and }\mqty[A-3I & \vb{0}] \sim \mqty[1 & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0]\text{.}
+\end{equation*}
+Therefore%
+\begin{equation*}
+\nul(A) = \spn{\qty{\mqty[1\\1\\1]}}\text{ and }\nul(A-3I) = \spn{\left\{\mqty[-1\\1\\0],\mqty[-1\\0\\1]\right\}}\text{.}
+\end{equation*}
+%
+\par
+Now we have everything we need to diagonalize \(A\). Define%
+\begin{equation*}
+P = \mqty[1 & -1 & -1 \\ 1 & 1 & 0 \\ 1 & 0 & 1]\text{ and }D = \mqty[0 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3]\text{.}
+\end{equation*}
+Then \(A = PDP^{-1}\).%
+\end{example}
+\begin{sageinput}
+# code cell to use for previous example
+A = [2, -1, -1; -1, 2, -1; -1, -1, 2]
+eig(A)
+\end{sageinput}
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Diagonalizations of Symmetric and Hermitian Matrices}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Diagonalizations of Symmetric and Hermitian Matrices}{}{Diagonalizations of Symmetric and Hermitian Matrices}{}{}{x:subsection:subsection-diagonalizations-of-symmetric-and-hermitian-matrices}
+Symmetric matrices have particularly nice diagonalizations. First, their eigenvalues must be limited to real numbers.%
+\begin{theorem}{Eigenvalues of Symmetric Matrices.}{}{x:theorem:theorem-eigenvalues-of-symmetric-matrices}%
+Let \(A\) be a symmetric matrix with real entries and let \(\lambda\) be an eigenvalue of \(A\). Then \(\lambda\) must be a real number.%
+\end{theorem}
+The proof of \hyperref[x:theorem:theorem-eigenvalues-of-symmetric-matrices]{Theorem~{\xreffont\ref{x:theorem:theorem-eigenvalues-of-symmetric-matrices}}} is relatively simple but requires us to expand our terminology and notation a bit. First, we redefine the inner product so that it also applies to complex vectors in \(\CC^n\).%
+\begin{definition}{Complex Inner Product.}{x:definition:definition-complex-inner-product}%
+Let \(\xx,\yy\in\CC^n\). The \terminology{(complex) inner product} of \(\xx\) and \(\yy\) is the (complex) scalar%
+\begin{equation*}
+\langle\xx,\yy\rangle = \yy^{*}\xx
+\end{equation*}
+where \(\yy^*\) denotes the \terminology{conjugate transpose} of \(\yy\).%
+\end{definition}
+Now we expand our definition of symmetric matrices to include the complex case as well.%
+\begin{definition}{Hermitian Matrices.}{x:definition:definition-hermitian-matrices}%
+Let \(A\) denote a square matrix. Then \(A\) is \terminology{Hermitian} if \(A = A^{*}\).%
+\end{definition}
+\hyperref[x:definition:definition-hermitian-matrices]{Definition~{\xreffont\ref{x:definition:definition-hermitian-matrices}}} generalizes the definition of a real symmetric matrix since \(A^* = A^T\) if \(A\) only has real entries. The conjugate transpose and inner product also share many properties, including the following.%
+\begin{proposition}{Conjugate Transpose and Inner Product.}{}{x:proposition:proposition-conjugate-transpose-and-inner-product}%
+Let \(\xx,\yy\in\CC^n\) and let \(A\) be a square matrix with complex entries. Then%
+\begin{equation*}
+\langle A\xx,\yy\rangle = \dotprod{\xx,A^*\yy}\text{.}
+\end{equation*}
+%
+\end{proposition}
+Now we can prove that real symmetric matrices, and more generally Hermitian matrices, always have real eigenvalues.%
+\begin{theorem}{Eigenvalues of a Hermitian Matrix.}{}{x:theorem:theorem-eigenvalues-of-a-hermitian-matrix}%
+Let \(A\) denote a Hermitian matrix. Then \(A\) has real eigenvalues.%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630543032}
+Let \(\xx\) denote an eigenvector of \(A\) with eigenvalue \(\lambda\). Then%
+\begin{align*}
+\lambda\dotprod{\xx,\xx} & = \dotprod{\lambda\xx,\xx} \\
+& = \dotprod{A\xx,\xx} \\
+& = \dotprod{\xx, A^*\xx} \\
+& = \dotprod{\xx, A\xx} \\
+& = \dotprod{\xx, \lambda \xx} \\
+& = \overline{\lambda}\dotprod{\xx, \xx} 
+\end{align*}
+Since \(\dotprod{\xx,\xx} = \norm{\xx}^2\neq0\), it follows that \(\lambda = \overline{\lambda}\). Therefore \(\lambda\in\RR\).%
+\end{proof}
+The eigenvectors of a Hermitian matrix also have nice geometric properties.%
+\begin{theorem}{Eigenvectors of a Hermitian Matrix.}{}{x:theorem:theorem-eigenvectors-of-a-hermitian-matrix}%
+Let \(A\) be a Hermitian matrix. Suppose that \(\xx\) and \(\yy\) are eigenvectors for two distinct eigenvalues of \(A\), say \(\lambda_i\) and \(\lambda_j\). Then \(\xx\) and \(\yy\) are orthogonal.%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630536760}
+We need to show that \(\dotprod{\xx,\yy} = 0\). Now,%
+\begin{equation*}
+\lambda_i\dotprod{\xx,\yy} = \dotprod{A\xx,\yy} = \dotprod{\xx,A\yy} = \lambda_j\dotprod{\xx,\yy}
+\end{equation*}
+or just \((\lambda_i-\lambda_j)\dotprod{\xx,\yy} = 0\). Since \(\lambda_i\neq \lambda_j\), it follows that \(\dotprod{\xx,\yy} = 0\).%
+\end{proof}
+\hyperref[x:theorem:theorem-eigenvectors-of-a-hermitian-matrix]{Theorem~{\xreffont\ref{x:theorem:theorem-eigenvectors-of-a-hermitian-matrix}}} leads to an extremely useful fact about real symmetric matrices: they can always be \emph{orthogonally diagonalized}. This means that we can choose an eigenbasis that is also an orthonormal basis. As an example, consider the eigenbasis found in \hyperref[x:example:example-diagonalizing-a-matrix]{Example~{\xreffont\ref{x:example:example-diagonalizing-a-matrix}}}, replicated here as columns of the matrix \(P\):%
+\begin{equation*}
+P = \mqty[1 & -1 & -1 \\ 1 & 1 & 0 \\ 1 & 0 & 1]\text{.}
+\end{equation*}
+Note that the first column is orthogonal to the other two which is guaranteed by \hyperref[x:theorem:theorem-eigenvectors-of-a-hermitian-matrix]{Theorem~{\xreffont\ref{x:theorem:theorem-eigenvectors-of-a-hermitian-matrix}}} since these vectors correspond to different eigenvalues.%
+\par
+Although the last two columns are not orthogonal, they can be \emph{orthogonalized}. One way of doing so is to replace them with the vectors%
+\begin{equation*}
+\mqty[-1\\1\\0]\text{ and }\mqty[-\frac{1}{2} \\ -\frac{1}{2} \\ 1] = \mqty[-1\\0\\1]-\frac{1}{2}\mqty[-1\\1\\0]\text{.}
+\end{equation*}
+Both vectors are still eigenvectors with eigenvalue \(0\) and the two of them, together with \(\smqty[1\\1\\1]\), still form an eigenbasis of \(\RR^3\). However, this new basis is orthogonal.%
+\par
+If we go one step further and normalize the vectors in this eigenbasis we then get the orthonormal eigenbasis%
+\begin{equation*}
+\qty{\mqty[\frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}}], \mqty[-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0], \mqty[-\frac{1}{\sqrt{6}} \\ -\frac{1}{\sqrt{6}} \\ \sqrt{\frac{2}{3}}]}\text{.}
+\end{equation*}
+This provides the orthogonal diagonalization%
+\begin{equation*}
+U = \mqty[\frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & 0 & \sqrt{\frac{2}{3}}]\text{ and }D = \mqty[0 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3]
+\end{equation*}
+which gives%
+\begin{equation*}
+A = UDU^{-1} = UDU^T\text{.}
+\end{equation*}
+Such a diagonalization is always possible for real symmetric and Hermitian matrices, a result known as the \emph{Spectral Theorem}.%
+\begin{theorem}{Spectral Theorem.}{}{x:theorem:theorem-spectral-theorem}%
+\index{Spectral Theorem}%
+Let \(A\) be a (real) symmetric matrix. Then there exists an orthogonal matrix \(U\) and a diagonal matrix \(D\) such that%
+\begin{equation*}
+A = UDU^T\text{.}
+\end{equation*}
+Equivalently, if \(\qty{\uu_i}_{i=1}^n\) is an orthonormal eigenbasis of \(A\) with corresponding eigenvalues \(\qty{\lambda_i}_{i=1}^n\), then%
+\begin{equation*}
+A = \sum_{i=1}^n \lambda_i \uu_i\uu_i^T\text{.}
+\end{equation*}
+%
+\end{theorem}
+\begin{example}{A Signal Processing Application.}{x:example:example-a-signal-processing-application}%
+In the mathematics of signal processing, signals are often represented as particular vectors in \(\RR^n\). The problem of signal transmission then reduces to sending a list of numbers \(c_1,\ldots, c_m\) such that the receiver can use these to reconstruct a signal \(\xx\). Such a scheme can be implemented by choosing an appropriate \(n\times m\) matrix \(F = \smqty[\vb{f}_1 & \ldots & \vb{f}_m]\) and then computing and transmitting the coordinates of%
+\begin{equation*}
+F^T\xx = \mqty[\langle \xx,\vb{f}_i\rangle]_{1\leq i\leq m}\text{.}
+\end{equation*}
+The important properties of the columns of \(F\) can then be encoded in the \emph{Gram matrix} \(G = F^TF = \mqty[\dotprod{\vb{f}_i,\vb{f}_j}]\). Find a \(3\times 4\) matrix \(F\) for which that Gram matrix is%
+\begin{equation*}
+G = \mqty[1 & -\frac{1}{3} & -\frac{1}{3} & -\frac{1}{3} \\ -\frac{1}{3} & 1 & -\frac{1}{3} & -\frac{1}{3} \\ -\frac{1}{3} & -\frac{1}{3} & 1 & -\frac{1}{3} \\ -\frac{1}{3} & -\frac{1}{3} & -\frac{1}{3} & 1]\text{.}
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630509752}{}\quad{}This problem can be solved by diagonalizing \(G\): if \(G = UDU^T\) then we can define \(F\) by using the rows of \(U\sqrt{D}\). \begin{aside}{}{g:aside:idm1630514488}%
+If \(D\) is diagonal with nonnegative entries, then we can define \(\sqrt{D}\) to be the matrix obtained by taking the square root of each entry of \(D\). It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues. If we diagonalize \(G\) and find it has negative eigenvalues, then it cannot be a Gram matrix.%
+\end{aside}
+ So we'll diagonalize \(G\) with the help of the Octave cell below. Doing so, we see that the eigenvalues of \(G\) are in fact nonnegative and so \(U\sqrt{D}\) will only contain real values. Furthermore, \(U\) only has \(3\) nonzero columns since \(G\) only has three nonzero eigenvalues. By removing the zero column from \(U\sqrt{D}\), we obtain a \(4\times3\) matrix which we define to be \(F^T\). Then \(F^TF = G\).%
+\end{example}
+\begin{sageinput}
+# diagonalizing a Gram matrix
+format short
+G = (4/3)*eye(4) - (1/3)*ones(4) # tricky way to define G
+\end{sageinput}
+Symmetric matrices are also useful in analyzing \emph{quadratic forms}, which are expressions of the form%
+\begin{equation*}
+\sum_{i,j}c_{ij} x_ix_j
+\end{equation*}
+where the \(x_i\) are variables and the \(c_{ij}\) are the coefficients. Such an expression can be rewritten as \(\xx^T A\xx\) where \(A\) is a symmetric matrix determined from the coefficients.%
+\begin{example}{Analyzing a Quadratic Form.}{x:example:example-analyzing-a-quadratic-form}%
+Describe the curve given by%
+\begin{equation*}
+9x^2 + 6xy + y^2 = 10\text{.}
+\end{equation*}
+%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630506168}{}\quad{}The left hand side is a quadratic form with variables \(x_1 = x,x_2 = y\) and coefficients%
+\begin{equation*}
+c_{11} = 9, c_{12} = c_{21} = \frac{6}{2}=3\text{ and }c_{22} = 1\text{.}
+\end{equation*}
+Therefore we can write \(9x^2 + 6xy + y^2 = \xx^T A\xx\) where%
+\begin{equation*}
+\xx = \mqty[x\\y]\text{ and }A = \mqty[9 & 3 \\ 3 & 1]\text{.}
+\end{equation*}
+To help us describe the curve we will ``disentangle'' the variables \(x\) and \(y\) by diagonalizing \(A\).%
+\par
+Since \(A\) is symmetric, we know that \(A\) can be orthogonally diagonalized. One such diagonalization is given by \(A = UDU^T\) where%
+\begin{equation*}
+U = \mqty[\frac{1}{\sqrt{10}} & \frac{3}{\sqrt{10}} \\ -\frac{3}{\sqrt{10}} & \frac{1}{\sqrt{10}}]\text{ and } D = \mqty[0 & 0 \\ 0 & 10]\text{.}
+\end{equation*}
+The quadratic form \(\xx^T A\xx\) then becomes%
+\begin{equation*}
+\xx^T UDU^T\xx = (U^T\xx)^T D (U^T \xx)\text{.}
+\end{equation*}
+%
+\par
+Now we define \(\yy = U^T\xx\) as a change-of-variables. In particular,%
+\begin{equation*}
+\yy = \mqty[X\\Y] = \mqty[\frac{1}{\sqrt{10}}x - \frac{3}{\sqrt{10}}y \\ \frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y]\text{.}
+\end{equation*}
+Our quadratic form is now%
+\begin{equation*}
+\yy^T D\yy = 0X^2 + 10Y^2 = 10Y^2
+\end{equation*}
+and our original equation becomes \(10Y^2 = 10\) or just \(Y = \pm1\). Therefore the original equation describes the two different lines%
+\begin{equation*}
+\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = -1\text{ and }\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = 1\text{.}
+\end{equation*}
+%
+\end{example}
+\end{subsectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Subsection  Analytic Functions of Matrices}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Analytic Functions of Matrices}{}{Analytic Functions of Matrices}{}{}{x:subsection:subsection-analytic-functions-of-matrices}
+A function \(f(x)\) is \emph{analytic} at \(x = a\) if it has a power series representation on some interval centered around \(a\):%
+\begin{equation*}
+f(x) = \sum_{k=0}^\infty c_k(x-a)^k = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\text{ for }x\approx a\text{.}
+\end{equation*}
+If \(A\) denotes a square matrix, and if \(f(x)\) is analytic at \(a=0\), then we can try to make sense of the expression \(f(A)\) by using the power series for \(f(x)\):%
+\begin{equation*}
+f(A) = \sum_{k=0}^{\infty}c_k A^k = c_0I + c_1A + c_2A^2 + \cdots\text{,}
+\end{equation*}
+assuming this sum actually exists.%
+\begin{example}{Exponential of a Matrix.}{x:example:example-exponential-of-a-matrix}%
+Let%
+\begin{equation*}
+A = \mqty[0 & 2 & 3 \\ 0 & 0 & 2 \\ 0 & 0 & 0]\text{.}
+\end{equation*}
+Find \(e^A\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630489912}{}\quad{}By definition,%
+\begin{equation*}
+e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots\text{,}
+\end{equation*}
+so we can find \(e^A\) by looking at the powers of \(A\). In this case,%
+\begin{equation*}
+A^2 = \mqty[0 & 0 & 4 \\ 0 & 0 & 0 \\ 0 & 0 & 0]\text{ and }A^3 = A^4 = \ldots = \mqty[0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0]\text{.}
+\end{equation*}
+Therefore%
+\begin{equation*}
+e^A = I + A + \frac{1}{2}A^2 = \mqty[1 & 2 & 5 \\ 0 & 1 & 2 \\ 0 & 0 & 1]\text{.}
+\end{equation*}
+This can be verified using the command \mono{expm} in Octave as below. \begin{aside}{}{g:aside:idm1630480440}%
+You want to be careful to use \mono{expm(A)} to compute \(e^A\) in Octave, as this actually finds the matrix exponential. If you instead use \mono{exp(A)}, this just computes the matrix obtained by raising \(e\) to each entry of \(A\), which in general is \emph{not} equal to \(e^A\).%
+\end{aside}
+%
+\end{example}
+\begin{sageinput}
+format short
+A = [0, 2, 3; 0, 0, 2; 0, 0, 0]
+expm(A) # don't use exp(A)! that just exponentiates each entry of A
+\end{sageinput}
+\begin{example}{Function of a Diagonal Matrix.}{x:example:example-function-of-a-diagonal-matrix}%
+Let \(f(x)\) be a function analytic at \(0\). Let \(D\) be a diagonal matrix whose diagonal entries are within the interval of convergence of the power series for \(f(x)\) centered at \(0\). Find \(f(D)\).%
+\end{example}
+The last example shows that if \(f(x)\) is analytic at \(0\) then it is relatively straightforward to find \(f(D)\), assuming that the diagonal entries of \(D\) are within the interval of convergence for the series representation of \(f(x)\) at \(0\). Therefore we can find functions of diagonalizable matrices as well.%
+\begin{theorem}{Analytic Functions of Diagonalizable Matrices.}{}{x:theorem:theorem-analytic-functions-of-diagonalizable-matrices}%
+Let \(f(x)\) be a function that is analytic at \(0\) and whose series representation at \(0\) has interval of convergence \(I\). Let \(A\) be a diagonalizable matrix diagonalized by \(P\) and \(D\) with eigenvalues contained in \(I\). Then%
+\begin{equation*}
+f(A) = Pf(D)P^{-1}\text{.}
+\end{equation*}
+%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630473400}
+Let \(f(x) = \sum_{k=0}^{\infty}c_k x^k\) and recall that \(A^k = PD^kP^{-1}\). Then%
+\begin{equation*}
+f(A) = \sum_{k=0}^{\infty}c_kA^k = P\qty(\sum_{k=0}^{\infty}c_k D^k)P^{-1} = Pf(D)P^{-1}\text{.}\qedhere
+\end{equation*}
+%
+\end{proof}
+\hyperref[x:theorem:theorem-analytic-functions-of-diagonalizable-matrices]{Theorem~{\xreffont\ref{x:theorem:theorem-analytic-functions-of-diagonalizable-matrices}}} allows for straightforward computations of matrix exponentials of diagonalizable matrices. This is useful in differential equations when solving linear systems of ODEs (see \href{https://j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html}{here}\footnote{\nolinkurl{j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html}\label{g:fn:idm1630462264}}).%
+\begin{theorem}{Exponential Solutions of Linear Systems of ODEs.}{}{x:theorem:theorem-exponential-solutions-of-linear-systems-of-odes}%
+Let \(A\) be a (constant) square matrix and consider the first-order system \(\xx^\prime = A\xx\) with initial condition \(\xx(0) = \xx_0\). Then the solution of this initial value problem is%
+\begin{equation*}
+\xx(t) = e^{At}\xx_0\text{.}
+\end{equation*}
+%
+\end{theorem}
+\begin{proof}{}{g:proof:idm1630467512}
+The proof follows quickly from the fact that \(\dv{}{t}(e^{At}) = Ae^{At}\). Using this, we differentiate \(\xx(t) = e^{At}\xx_0\) to get%
+\begin{equation*}
+\dv{\xx}{t} = Ae^{At}\xx_0 = A\xx\text{.}
+\end{equation*}
+Furthermore, \(\xx(0) = e^{\vb{0}}\xx_0 = \xx_0\). Therefore \(\xx(t) = e^{At}\xx_0\) is a solution of the initial value problem.%
+\end{proof}
+Theorems \hyperref[x:theorem:theorem-analytic-functions-of-diagonalizable-matrices]{{\xreffont\ref{x:theorem:theorem-analytic-functions-of-diagonalizable-matrices}}} and \hyperref[x:theorem:theorem-exponential-solutions-of-linear-systems-of-odes]{{\xreffont\ref{x:theorem:theorem-exponential-solutions-of-linear-systems-of-odes}}} allow us to find solutions of linear systems that involve diagonalizable matrices in terms of the matrix exponential.%
+\begin{example}{Solving a First-Order System.}{x:example:example-solving-a-first-order-system}%
+Solve%
+\begin{equation*}
+x^\prime = 3x - 4y \text{ and } y^\prime = -4x + 3y
+\end{equation*}
+with initial condition \(x(0) = 2\) and \(y(0) = -1\).%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{g:solution:idm1630457656}{}\quad{}This can be solved very easily using the matrix exponential and diagonalization. If we let%
+\begin{equation*}
+\xx = \mqty[x \\ y]\text{ and }A = \mqty[3 & -4 \\ -4 & 3]
+\end{equation*}
+then the system can be written as the matrix ODE \(\xx^\prime = A\xx\) with initial condition \(\xx_0 = \smqty[2 \\ 1]\). \(A\) is symmetric and can be orthogonally diagonalized by%
+\begin{equation*}
+U = \mqty[\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}]\text{ and } D = \mqty[-1 & 0 \\ 0 & 7]
+\end{equation*}
+as seen in the code cell below this example. Therefore \(A = UDU^T\), \(e^{At} = Ue^{Dt}U^T\) and the solution of the system must be%
+\begin{equation*}
+\xx = \mqty[\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}]\mqty[e^{-t} & 0 \\ 0 & e^{7t}]\mqty[\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}]\mqty[2 \\ -1]\text{.}
+\end{equation*}
+%
+\end{example}
+\begin{sageinput}
+format short
+A = [3, -4; -4, 3]
+[U,D] = eig(A)
+\end{sageinput}
+\end{subsectionptx}
+\end{sectionptx}
+\end{chapterptx}
+ \end{partptx}
+%
+%
+\typeout{************************************************}
+\typeout{Part II Multivariable Calculus}
+\typeout{************************************************}
+%
+\begin{partptx}{Multivariable Calculus}{}{Multivariable Calculus}{}{}{x:part:part-multivariable-calculus}
+ %
+%
+\typeout{************************************************}
+\typeout{Chapter 3 Vector Derivatives}
+\typeout{************************************************}
+%
+\begin{chapterptx}{Vector Derivatives}{}{Vector Derivatives}{}{}{x:chapter:chapter-multivariable-calculus-vector-derivatives}
+\begin{introduction}{}%
+In this chapter we review important concepts relating to vector functions and their derivatives. As in introductory calculus, the derivative may be seen as giving the rate of change of a particular quantity. However, the move to higher dimensions involved with vector functions allows for multiple interpretations of the rate of change of a vector function, and therefore several different notions of the derivative.%
+\end{introduction}%
+\end{chapterptx}
+ \end{partptx}
+%
+\appendix%
+%
+\part*{Appendices}%
+%
+%
+\typeout{************************************************}
+\typeout{Appendix A GNU Free Documentation License}
+\typeout{************************************************}
+%
+\begin{appendixptx}{GNU Free Documentation License}{}{GNU Free Documentation License}{}{}{x:appendix:appendix-gfdl}
+Version 1.3, 3 November 2008%
+\par
+Copyright \textcopyright{} 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc. \textless{}\href{http://www.fsf.org/}{\nolinkurl{http://www.fsf.org/}}\textgreater{}%
+\par
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.%
+\begin{paragraphs}{0. PREAMBLE.}{x:paragraphs:gfdl-section0}%
+The purpose of this License is to make a manual, textbook, or other functional and useful document ``free'' in the sense of freedom: to assure everyone the effective freedom to copy and redistribute it, with or without modifying it, either commercially or noncommercially. Secondarily, this License preserves for the author and publisher a way to get credit for their work, while not being considered responsible for modifications made by others.%
+\par
+This License is a kind of ``copyleft'', which means that derivative works of the document must themselves be free in the same sense. It complements the GNU General Public License, which is a copyleft license designed for free software.%
+\par
+We have designed this License in order to use it for manuals for free software, because free software needs free documentation: a free program should come with manuals providing the same freedoms that the software does. But this License is not limited to software manuals; it can be used for any textual work, regardless of subject matter or whether it is published as a printed book. We recommend this License principally for works whose purpose is instruction or reference.%
+\end{paragraphs}%
+\begin{paragraphs}{1. APPLICABILITY AND DEFINITIONS.}{x:paragraphs:gfdl-section1}%
+This License applies to any manual or other work, in any medium, that contains a notice placed by the copyright holder saying it can be distributed under the terms of this License. Such a notice grants a world-wide, royalty-free license, unlimited in duration, to use that work under the conditions stated herein. The ``Document'', below, refers to any such manual or work. Any member of the public is a licensee, and is addressed as ``you''. You accept the license if you copy, modify or distribute the work in a way requiring permission under copyright law.%
+\par
+A ``Modified Version'' of the Document means any work containing the Document or a portion of it, either copied verbatim, or with modifications and\slash{}or translated into another language.%
+\par
+A ``Secondary Section'' is a named appendix or a front-matter section of the Document that deals exclusively with the relationship of the publishers or authors of the Document to the Document's overall subject (or to related matters) and contains nothing that could fall directly within that overall subject. (Thus, if the Document is in part a textbook of mathematics, a Secondary Section may not explain any mathematics.) The relationship could be a matter of historical connection with the subject or with related matters, or of legal, commercial, philosophical, ethical or political position regarding them.%
+\par
+The ``Invariant Sections'' are certain Secondary Sections whose titles are designated, as being those of Invariant Sections, in the notice that says that the Document is released under this License. If a section does not fit the above definition of Secondary then it is not allowed to be designated as Invariant. The Document may contain zero Invariant Sections. If the Document does not identify any Invariant Sections then there are none.%
+\par
+The ``Cover Texts'' are certain short passages of text that are listed, as Front-Cover Texts or Back-Cover Texts, in the notice that says that the Document is released under this License. A Front-Cover Text may be at most 5 words, and a Back-Cover Text may be at most 25 words.%
+\par
+A ``Transparent'' copy of the Document means a machine-readable copy, represented in a format whose specification is available to the general public, that is suitable for revising the document straightforwardly with generic text editors or (for images composed of pixels) generic paint programs or (for drawings) some widely available drawing editor, and that is suitable for input to text formatters or for automatic translation to a variety of formats suitable for input to text formatters. A copy made in an otherwise Transparent file format whose markup, or absence of markup, has been arranged to thwart or discourage subsequent modification by readers is not Transparent. An image format is not Transparent if used for any substantial amount of text. A copy that is not ``Transparent'' is called ``Opaque''.%
+\par
+Examples of suitable formats for Transparent copies include plain ASCII without markup, Texinfo input format, LaTeX input format, SGML or XML using a publicly available DTD, and standard-conforming simple HTML, PostScript or PDF designed for human modification. Examples of transparent image formats include PNG, XCF and JPG. Opaque formats include proprietary formats that can be read and edited only by proprietary word processors, SGML or XML for which the DTD and\slash{}or processing tools are not generally available, and the machine-generated HTML, PostScript or PDF produced by some word processors for output purposes only.%
+\par
+The ``Title Page'' means, for a printed book, the title page itself, plus such following pages as are needed to hold, legibly, the material this License requires to appear in the title page. For works in formats which do not have any title page as such, ``Title Page'' means the text near the most prominent appearance of the work's title, preceding the beginning of the body of the text.%
+\par
+The ``publisher'' means any person or entity that distributes copies of the Document to the public.%
+\par
+A section ``Entitled XYZ'' means a named subunit of the Document whose title either is precisely XYZ or contains XYZ in parentheses following text that translates XYZ in another language. (Here XYZ stands for a specific section name mentioned below, such as ``Acknowledgements'', ``Dedications'', ``Endorsements'', or ``History''.) To ``Preserve the Title'' of such a section when you modify the Document means that it remains a section ``Entitled XYZ'' according to this definition.%
+\par
+The Document may include Warranty Disclaimers next to the notice which states that this License applies to the Document. These Warranty Disclaimers are considered to be included by reference in this License, but only as regards disclaiming warranties: any other implication that these Warranty Disclaimers may have is void and has no effect on the meaning of this License.%
+\end{paragraphs}%
+\begin{paragraphs}{2. VERBATIM COPYING.}{x:paragraphs:gfdl-section2}%
+You may copy and distribute the Document in any medium, either commercially or noncommercially, provided that this License, the copyright notices, and the license notice saying this License applies to the Document are reproduced in all copies, and that you add no other conditions whatsoever to those of this License. You may not use technical measures to obstruct or control the reading or further copying of the copies you make or distribute. However, you may accept compensation in exchange for copies. If you distribute a large enough number of copies you must also follow the conditions in section 3.%
+\par
+You may also lend copies, under the same conditions stated above, and you may publicly display copies.%
+\end{paragraphs}%
+\begin{paragraphs}{3. COPYING IN QUANTITY.}{x:paragraphs:gfdl-section3}%
+If you publish printed copies (or copies in media that commonly have printed covers) of the Document, numbering more than 100, and the Document's license notice requires Cover Texts, you must enclose the copies in covers that carry, clearly and legibly, all these Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on the back cover. Both covers must also clearly and legibly identify you as the publisher of these copies. The front cover must present the full title with all words of the title equally prominent and visible. You may add other material on the covers in addition. Copying with changes limited to the covers, as long as they preserve the title of the Document and satisfy these conditions, can be treated as verbatim copying in other respects.%
+\par
+If the required texts for either cover are too voluminous to fit legibly, you should put the first ones listed (as many as fit reasonably) on the actual cover, and continue the rest onto adjacent pages.%
+\par
+If you publish or distribute Opaque copies of the Document numbering more than 100, you must either include a machine-readable Transparent copy along with each Opaque copy, or state in or with each Opaque copy a computer-network location from which the general network-using public has access to download using public-standard network protocols a complete Transparent copy of the Document, free of added material. If you use the latter option, you must take reasonably prudent steps, when you begin distribution of Opaque copies in quantity, to ensure that this Transparent copy will remain thus accessible at the stated location until at least one year after the last time you distribute an Opaque copy (directly or through your agents or retailers) of that edition to the public.%
+\par
+It is requested, but not required, that you contact the authors of the Document well before redistributing any large number of copies, to give them a chance to provide you with an updated version of the Document.%
+\end{paragraphs}%
+\begin{paragraphs}{4. MODIFICATIONS.}{x:paragraphs:gfdl-section4}%
+You may copy and distribute a Modified Version of the Document under the conditions of sections 2 and 3 above, provided that you release the Modified Version under precisely this License, with the Modified Version filling the role of the Document, thus licensing distribution and modification of the Modified Version to whoever possesses a copy of it. In addition, you must do these things in the Modified Version:%
+%
+\begin{enumerate}[label=\Alph*.]
+\item{}Use in the Title Page (and on the covers, if any) a title distinct from that of the Document, and from those of previous versions (which should, if there were any, be listed in the History section of the Document). You may use the same title as a previous version if the original publisher of that version gives permission.%
+\item{}List on the Title Page, as authors, one or more persons or entities responsible for authorship of the modifications in the Modified Version, together with at least five of the principal authors of the Document (all of its principal authors, if it has fewer than five), unless they release you from this requirement.%
+\item{}State on the Title page the name of the publisher of the Modified Version, as the publisher.%
+\item{}Preserve all the copyright notices of the Document.%
+\item{}Add an appropriate copyright notice for your modifications adjacent to the other copyright notices.%
+\item{}Include, immediately after the copyright notices, a license notice giving the public permission to use the Modified Version under the terms of this License, in the form shown in the Addendum below.%
+\item{}Preserve in that license notice the full lists of Invariant Sections and required Cover Texts given in the Document's license notice.%
+\item{}Include an unaltered copy of this License.%
+\item{}Preserve the section Entitled ``History'', Preserve its Title, and add to it an item stating at least the title, year, new authors, and publisher of the Modified Version as given on the Title Page. If there is no section Entitled ``History'' in the Document, create one stating the title, year, authors, and publisher of the Document as given on its Title Page, then add an item describing the Modified Version as stated in the previous sentence.%
+\item{}Preserve the network location, if any, given in the Document for public access to a Transparent copy of the Document, and likewise the network locations given in the Document for previous versions it was based on.  These may be placed in the ``History'' section. You may omit a network location for a work that was published at least four years before the Document itself, or if the original publisher of the version it refers to gives permission.%
+\item{}For any section Entitled ``Acknowledgements'' or ``Dedications'', Preserve the Title of the section, and preserve in the section all the substance and tone of each of the contributor acknowledgements and\slash{}or dedications given therein.%
+\item{}Preserve all the Invariant Sections of the Document, unaltered in their text and in their titles. Section numbers or the equivalent are not considered part of the section titles.%
+\item{}Delete any section Entitled ``Endorsements''. Such a section may not be included in the Modified Version.%
+\item{}Do not retitle any existing section to be Entitled ``Endorsements'' or to conflict in title with any Invariant Section.%
+\item{}Preserve any Warranty Disclaimers.%
+\end{enumerate}
+If the Modified Version includes new front-matter sections or appendices that qualify as Secondary Sections and contain no material copied from the Document, you may at your option designate some or all of these sections as invariant. To do this, add their titles to the list of Invariant Sections in the Modified Version's license notice. These titles must be distinct from any other section titles.%
+\par
+You may add a section Entitled ``Endorsements'', provided it contains nothing but endorsements of your Modified Version by various parties \textemdash{} for example, statements of peer review or that the text has been approved by an organization as the authoritative definition of a standard.%
+\par
+You may add a passage of up to five words as a Front-Cover Text, and a passage of up to 25 words as a Back-Cover Text, to the end of the list of Cover Texts in the Modified Version. Only one passage of Front-Cover Text and one of Back-Cover Text may be added by (or through arrangements made by) any one entity. If the Document already includes a cover text for the same cover, previously added by you or by arrangement made by the same entity you are acting on behalf of, you may not add another; but you may replace the old one, on explicit permission from the previous publisher that added the old one.%
+\par
+The author(s) and publisher(s) of the Document do not by this License give permission to use their names for publicity for or to assert or imply endorsement of any Modified Version.%
+\end{paragraphs}%
+\begin{paragraphs}{5. COMBINING DOCUMENTS.}{x:paragraphs:gfdl-section5}%
+You may combine the Document with other documents released under this License, under the terms defined in section 4 above for modified versions, provided that you include in the combination all of the Invariant Sections of all of the original documents, unmodified, and list them all as Invariant Sections of your combined work in its license notice, and that you preserve all their Warranty Disclaimers.%
+\par
+The combined work need only contain one copy of this License, and multiple identical Invariant Sections may be replaced with a single copy. If there are multiple Invariant Sections with the same name but different contents, make the title of each such section unique by adding at the end of it, in parentheses, the name of the original author or publisher of that section if known, or else a unique number. Make the same adjustment to the section titles in the list of Invariant Sections in the license notice of the combined work.%
+\par
+In the combination, you must combine any sections Entitled ``History'' in the various original documents, forming one section Entitled ``History''; likewise combine any sections Entitled ``Acknowledgements'', and any sections Entitled ``Dedications''. You must delete all sections Entitled ``Endorsements''.%
+\end{paragraphs}%
+\begin{paragraphs}{6. COLLECTIONS OF DOCUMENTS.}{x:paragraphs:gfdl-section6}%
+You may make a collection consisting of the Document and other documents released under this License, and replace the individual copies of this License in the various documents with a single copy that is included in the collection, provided that you follow the rules of this License for verbatim copying of each of the documents in all other respects.%
+\par
+You may extract a single document from such a collection, and distribute it individually under this License, provided you insert a copy of this License into the extracted document, and follow this License in all other respects regarding verbatim copying of that document.%
+\end{paragraphs}%
+\begin{paragraphs}{7. AGGREGATION WITH INDEPENDENT WORKS.}{x:paragraphs:gfdl-section7}%
+A compilation of the Document or its derivatives with other separate and independent documents or works, in or on a volume of a storage or distribution medium, is called an ``aggregate'' if the copyright resulting from the compilation is not used to limit the legal rights of the compilation's users beyond what the individual works permit. When the Document is included in an aggregate, this License does not apply to the other works in the aggregate which are not themselves derivative works of the Document.%
+\par
+If the Cover Text requirement of section 3 is applicable to these copies of the Document, then if the Document is less than one half of the entire aggregate, the Document's Cover Texts may be placed on covers that bracket the Document within the aggregate, or the electronic equivalent of covers if the Document is in electronic form. Otherwise they must appear on printed covers that bracket the whole aggregate.%
+\end{paragraphs}%
+\begin{paragraphs}{8. TRANSLATION.}{x:paragraphs:gfdl-section8}%
+Translation is considered a kind of modification, so you may distribute translations of the Document under the terms of section 4. Replacing Invariant Sections with translations requires special permission from their copyright holders, but you may include translations of some or all Invariant Sections in addition to the original versions of these Invariant Sections. You may include a translation of this License, and all the license notices in the Document, and any Warranty Disclaimers, provided that you also include the original English version of this License and the original versions of those notices and disclaimers. In case of a disagreement between the translation and the original version of this License or a notice or disclaimer, the original version will prevail.%
+\par
+If a section in the Document is Entitled ``Acknowledgements'', ``Dedications'', or ``History'', the requirement (section 4) to Preserve its Title (section 1) will typically require changing the actual title.%
+\end{paragraphs}%
+\begin{paragraphs}{9. TERMINATION.}{x:paragraphs:gfdl-section9}%
+You may not copy, modify, sublicense, or distribute the Document except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense, or distribute it is void, and will automatically terminate your rights under this License.%
+\par
+However, if you cease all violation of this License, then your license from a particular copyright holder is reinstated (a) provisionally, unless and until the copyright holder explicitly and finally terminates your license, and (b) permanently, if the copyright holder fails to notify you of the violation by some reasonable means prior to 60 days after the cessation.%
+\par
+Moreover, your license from a particular copyright holder is reinstated permanently if the copyright holder notifies you of the violation by some reasonable means, this is the first time you have received notice of violation of this License (for any work) from that copyright holder, and you cure the violation prior to 30 days after your receipt of the notice.%
+\par
+Termination of your rights under this section does not terminate the licenses of parties who have received copies or rights from you under this License. If your rights have been terminated and not permanently reinstated, receipt of a copy of some or all of the same material does not give you any rights to use it.%
+\end{paragraphs}%
+\begin{paragraphs}{10. FUTURE REVISIONS OF THIS LICENSE.}{x:paragraphs:gfdl-section10}%
+The Free Software Foundation may publish new, revised versions of the GNU Free Documentation License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns. See \href{http://www.gnu.org/copyleft/}{\nolinkurl{http://www.gnu.org/copyleft/}}.%
+\par
+Each version of the License is given a distinguishing version number. If the Document specifies that a particular numbered version of this License ``or any later version'' applies to it, you have the option of following the terms and conditions either of that specified version or of any later version that has been published (not as a draft) by the Free Software Foundation. If the Document does not specify a version number of this License, you may choose any version ever published (not as a draft) by the Free Software Foundation. If the Document specifies that a proxy can decide which future versions of this License can be used, that proxy's public statement of acceptance of a version permanently authorizes you to choose that version for the Document.%
+\end{paragraphs}%
+\begin{paragraphs}{11. RELICENSING.}{x:paragraphs:gfdl-section11}%
+``Massive Multiauthor Collaboration Site'' (or ``MMC Site'') means any World Wide Web server that publishes copyrightable works and also provides prominent facilities for anybody to edit those works. A public wiki that anybody can edit is an example of such a server. A ``Massive Multiauthor Collaboration'' (or ``MMC'') contained in the site means any set of copyrightable works thus published on the MMC site.%
+\par
+``CC-BY-SA'' means the Creative Commons Attribution-Share Alike 3.0 license published by Creative Commons Corporation, a not-for-profit corporation with a principal place of business in San Francisco, California, as well as future copyleft versions of that license published by that same organization.%
+\par
+``Incorporate'' means to publish or republish a Document, in whole or in part, as part of another Document.%
+\par
+An MMC is ``eligible for relicensing'' if it is licensed under this License, and if all works that were first published under this License somewhere other than this MMC, and subsequently incorporated in whole or in part into the MMC, (1) had no cover texts or invariant sections, and (2) were thus incorporated prior to November 1, 2008.%
+\par
+The operator of an MMC Site may republish an MMC contained in the site under CC-BY-SA on the same site at any time before August 1, 2009, provided the MMC is eligible for relicensing.%
+\end{paragraphs}%
+\begin{paragraphs}{ADDENDUM: How to use this License for your documents.}{x:paragraphs:gfdl-addendum}%
+To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page:%
+\begin{preformatted}
+Copyright (C)  YEAR  YOUR NAME.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+\end{preformatted}
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace the ``with\textellipsis{} Texts.'' line with this:%
+\begin{preformatted}
+with the Invariant Sections being LIST THEIR TITLES, with the
+Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+\end{preformatted}
+If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.%
+\par
+If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software.%
+\end{paragraphs}%
+\end{appendixptx}
+%
+\backmatter%
+%
+\clearpage\phantomsection%
+\addcontentsline{toc}{part}{Back Matter}%
+%
+%% The index is here, setup is all in preamble
+%% Index locators are cross-references, so same font here
+{\xreffont\printindex}
+%
+\cleardoublepage
+\pagestyle{empty}
+\vspace*{\stretch{1}}
+\begin{backcolophon}{g:colophon:idm1630394168}%
+This book was authored in MathBook XML.%
+\end{backcolophon}%
+\vspace*{\stretch{2}}
+\end{document}
