@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+Copyright 2015 Robert A. Beezer
+
+This file is part of MathBook XML.
+
+MathBook XML is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 or version 3 of the
+License (at your option).
+
+MathBook XML is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+<docinfo>
+  <latex-preamble>
+    <package>physics</package>
+  </latex-preamble>
+  <macros>
+    \newcommand{\RR}{\mathbb{R}}
+    \newcommand{\QQ}{\mathbb{Q}}
+    \newcommand{\NN}{\mathbb{N}}
+    \newcommand{\ZZ}{\mathbb{Z}}
+    \newcommand{\CC}{\mathbb{C}}
+    \renewcommand{\th}{\text{th}}
+    \renewcommand{\vec}[1]{\mathbf{#1}}
+    \newcommand{\vb}[1]{\mathbf{#1}}
+    \newcommand{\xx}{\mathbf{x}}
+    \newcommand{\yy}{\mathbf{y}}
+    \newcommand{\zz}{\mathbf{z}}
+    \newcommand{\ii}{\mathbf{i}}
+    \newcommand{\jj}{\mathbf{j}}
+    \newcommand{\kk}{\mathbf{k}}
+    \newcommand{\uu}{\mathbf{u}}
+    \newcommand{\vv}{\mathbf{v}}
+    \newcommand{\bb}{\mathbf{b}}
+    \newcommand{\ee}{\mathbf{e}}
+    \newcommand{\col}[1]{\operatorname{col}{#1}}
+    \newcommand{\rank}[1]{\operatorname{rank}{#1}}
+    \newcommand{\null}[1]{\operatorname{null}{#1}}
+    \newcommand{\span}[1]{\operatorname{span}{#1}}
+    \newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+    \newcommand{\grad}{\nabla}
+    \newcommand{\vecm}[1]{\bm{#1}}
+    \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+    \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+    \newcommand{\dd}[2][]{\, d^{#1} #2\ }
+    \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+    \newcommand{\Int}[2]{\int_{#1}^{#2}}
+    \newcommand{\limit}[2]{\lim_{#1\to#2}}
+    \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+    \newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+    \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+    % Inline vector... hopefully looks better than \irow.
+    \renewcommand{\vecm}[1]{\boldsymbol{#1}}
+    \newcommand{\ivec}[1]{%
+    \renewcommand{\arraystretch}{.8}%
+    \begin{bmatrix}#1\end{bmatrix}%
+          }
+    \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+  </macros>
+      <latex-image-preamble>
+      <!-- \usepackage{siunitx} -->
+      \usepackage{pgfplots}
+      \usepackage{tikz-qtree}
+      \pgfplotsset{compat=newest}
+      \usetikzlibrary{decorations.markings,decorations.pathreplacing,arrows,calc,backgrounds}
+      % These are the TikZ-PGFPlots settings I need.
+        \pgfplotsset{mystyle/.style={%
+        view={120}{30},
+        axis lines=center,
+        width=6cm,
+        xlabel=$x$, xlabel style={at=(current axis.right of origin), anchor=west},
+        ylabel=$y$, ylabel style={at=(current axis.above origin), anchor=south},
+        grid=both,
+        vector/.style={-stealth,blue,very thick}, 
+        vector guide/.style={dashed,red,thick}
+        }}
+
+        \pgfplotsset{numberline/.style={%
+        axis x line = center,
+        axis y line = none,
+        xlabel = {$x$},
+        ymin=0,
+        ymax=0}}
+
+        \tikzset{
+        jumpdot/.style={mark=*,solid},
+        excl/.append style={jumpdot,fill=white},
+        incl/.append style={jumpdot,fill=black},
+        }
+    </latex-image-preamble>
+    <!-- this is the default, but supresses a warning -->
+      <!-- <cross-references text="type-global" />
+      <search>
+      <google>
+        <cx>008832104071767086392:woji51c1uko</cx>
+      </google>
+  </search> -->
+
+  <!-- the other option is "long" which will produce an -->
+  <!-- entire front matter section with more headings   -->
+  <author-biographies length="short" />
+
+  <brandlogo url="http://abstract.pugetsound.edu" source="images/cover_aata_2014.png" />
+
+  <covers front="images/original-front-cover-aata.pdf"
+    back="images/plain-back-cover-aata.pdf"/>
+
+    <!-- Prefix to enhance Sage notebook contents -->
+    <initialism>WVWC-AEM</initialism>
+
+    <!-- Math-related macros from "macros.tex" in previous LaTeX version -->
+    <!-- \notdivide replaces \notmid to avoid conflict with tikz - TWJ 5/6/2010 -->
+    <!-- Added operator \gf  - TWJ 2/26/2013 -->
+    <!-- Added operator \inn - TWJ 4/6/2013  -->
+    <!-- Added operator \aut - TWJ 4/6/2013  -->
+    <!-- Added operator \Hom - TWJ 8/19/2010 -->
+    <macros>
+    \newcommand{\identity}{\mathrm{id}}
+    \newcommand{\notdivide}{{\not{\mid}}}
+    \newcommand{\notsubset}{\not\subset}
+    \newcommand{\lcm}{\operatorname{lcm}}
+    \newcommand{\gf}{\operatorname{GF}}
+    \newcommand{\inn}{\operatorname{Inn}}
+    \newcommand{\aut}{\operatorname{Aut}}
+    \newcommand{\Hom}{\operatorname{Hom}}
+    \newcommand{\cis}{\operatorname{cis}}
+    \newcommand{\chr}{\operatorname{char}}
+    \newcommand{\Null}{\operatorname{Null}}
+</macros>
+
+<!-- this is the default, but supresses a warning -->
+<cross-references text="type-global" />
+
+<!-- tikz package and libraries for images -->
+<latex-image-preamble>
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{arrows,matrix}
+\usetikzlibrary{snakes}
+</latex-image-preamble>
+
+</docinfo>
