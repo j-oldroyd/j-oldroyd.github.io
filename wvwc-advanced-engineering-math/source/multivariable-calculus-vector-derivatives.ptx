@@ -72,6 +72,40 @@
       </example>
       <p>
         Inner products are also useful when computing vector <em>projections</em>.
+        Intuitively, the projection of one vector <m>\xx</m> onto another vector <m>\yy</m> represents the vector parallel to <m>\yy</m> that is as close as possible to <m>\xx</m>.
+        Equivalently, the projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+      </p>
+      <theorem xml:id="theorem-vector-projections">
+        <title>Vector Projections</title>
+        <idx>vector projection</idx>
+        <statement>
+          <p>
+            Let <m>\xx,\yy\in\RR^n</m> with <m>\yy\neq\vb{0}</m>.
+            The <term>projection of <m>\xx</m> onto <m>\yy</m></term> is the vector <m>\proj{\yy}{\xx}</m> given by
+            <me>\proj{\yy}{\xx} = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            The projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+            Therefore we need to minimize <m>\norm{\xx-\alpha\yy}</m> over <m>\alpha</m>, which is equivalent to minimizing <m>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy}</m>.
+            If we expand this inner product, we get
+            <me>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy} = \norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2</me>.
+            This expression is quadratic in <m>\alpha</m> and can be simplified by completing the square in <m>\alpha</m>:
+            <md>
+              <mrow>\norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2 &amp; = \norm{\yy}^2\left(\alpha^2 - \frac{2\alpha}{\norm{\yy}^2}\dotprod{\xx,\yy}\right) + \norm{\xx}^2 </mrow>
+              <mrow> &amp; = \norm{\yy}^2\left(\alpha - \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}\right)^2 - \frac{\dotprod{\xx,\yy}^2}{\norm{\yy}^2} + \norm{\xx}^2 </mrow>
+            </md>
+            Therefore the value of <m>\alpha</m> that makes this quantity as small as possible must be <m>\alpha = \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}</m>, which means that
+            <me>\proj{\yy}{\xx} = \alpha\yy = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        The formula in <xref ref="theorem-vector-projections" text="type-global" /> can be generalized to subspaces of <m>\RR^n</m>.
+        In particular, if <m>S</m> is a subspace of <m>\RR^n</m> with a basis given by columns of a matrix <m>A</m>, then the projection of <m>\xx</m> onto <m>S</m>, <m>\proj{\xx}{S}</m>, is the vector
+        <me>\proj{S}{\xx} = A(A^{T}A)^{-1}A^{T}\xx</me>.
+        Note that this formula reduces to the formula in <xref ref="theorem-vector-projections" text="type-global" /> in the case that <m>A = [\yy]</m>.
       </p>
     </subsection>
   </section>
