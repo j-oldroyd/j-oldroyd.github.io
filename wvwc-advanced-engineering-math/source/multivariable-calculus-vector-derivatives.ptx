@@ -218,7 +218,58 @@
       <p>
         In this section we will review the concept of a <em>vector-valued function</em>, or more simply a <em>vector function</em>.
         These differ from <em>scalar functions</em> as the output of a vector function is a vector in <m>\RR^n</m> (where <m>n \gt 2</m>).
+        We will typically denote vector functions using boldface letters or arrows like so: <m>\vb{f}</m> and <m>\vec{f}</m>.
       </p>
     </introduction>
+    <subsection xml:id="subsection-visualizing-vector-functions">
+      <title>Visualizing Vector Functions</title>
+      <p>
+        Let <m>\vb{f}:\RR^n\to\RR^n</m> be a vector function and assume <m>n=2</m> or <m>n=3</m>.
+        Then <m>\vb{f}</m> may be visualized by using a <em>vector field</em>.
+        We sketch the vector field by attaching the vector <m>\vb{f}(P)</m> to the point <m>P</m>.
+        This is best done using technology.
+      </p>
+      <example xml:id="example-sketching-a-vector-field">
+        <title>Sketching a Vector Field</title>
+        <statement>
+          <p>
+            Sketch the vector field for <m>\vb{f}(x,y) = -y\vb{i} + x\vb{j}</m> in <m>\RR^2</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This can be done using the <c>plot_vector_field</c> command in Sage:
+          </p>
+          <sage>
+            <input>
+              # x is a variable by default
+              # can't hurt to make sure it's a variable here
+              var('x, y')
+
+              # define f = -y*i + x*j
+              f(x,y) = (-y, x)
+
+              # plot the vector field over the given ranges using blue arrows
+              plot_vector_field(f(x,y), (x,-2,2), (y, -2, 2), color="blue")
+            </input>
+          </sage>
+        </solution>
+      </example>
+      <p>
+        Sage can also create plots of vector fields in <m>\RR^3</m> using <c>plot_vector_field3d</c>:
+      </p>
+      <sage>
+        <input>
+          var('x y z')
+
+          f(x, y, z) = (y*z, x*z, x*y)
+
+          plot_vector_field3d(f(x,y,z), (x, -2, 2), (y, -2, 2), (z, -2, 2))
+        </input>
+      </sage>
+      <p>
+        You can interact with the plot above by zooming and rotating.
+      </p>
+    </subsection>
   </section>
 </chapter>
