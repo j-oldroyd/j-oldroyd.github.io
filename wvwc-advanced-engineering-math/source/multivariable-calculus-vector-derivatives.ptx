@@ -11,348 +11,407 @@
 <!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
 
 <chapter xml:id="chapter-multivariable-calculus-vector-derivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Vector Derivatives</title>
-  <introduction>
-    <p>
-      In this chapter we review important concepts relating to vector functions and their derivatives.
-      As in introductory calculus, the derivative may be seen as giving the rate of change of a particular quantity.
-      However, the move to higher dimensions involved with vector functions allows for multiple interpretations of the rate of change of a vector function, and therefore several different notions of the derivative.
-      These interpretations are based on combining the following three concepts:
-      <ul>
-        <li>The <em>gradient</em> of a scalar-valued function.</li>
-        <li>The inner product (see <xref ref="definition-inner-product-and-magnitude" text="type-global" />).</li>
-        <li>The <em>cross product</em>.</li>
-      </ul>
-      We will begin by examining the inner and cross products.
-    </p>
-  </introduction>
-  <section xml:id="section-inner-products-and-cross-products">
-    <title>Inner Products and Cross Products</title>
+    <title>Vector Derivatives</title>
+
     <introduction>
-      <p>
-        Inner products (also known as dot products) and cross products are two important examples of <q>vector multiplication</q>.
-        The inner product is a <em>scalar product</em> meaning that the resulting quantity is a scalar value.
-        Likewise, the cross product is a <em>vector product</em> and the resulting quantity is a vector.
-        Both products are extremely important in describing vector geometry.
-      </p>
+        <p>
+            In this chapter we review important concepts relating to vector functions and their derivatives.
+            As in introductory calculus, the derivative may be seen as giving the rate of change of a particular quantity.
+            However, the move to higher dimensions involved with vector functions allows for multiple interpretations of the rate of change of a vector function, and therefore several different notions of the derivative.
+            These interpretations are based on combining the following three concepts:
+            <ul>
+                <li>The <em>gradient</em> of a scalar-valued function.</li>
+                <li>The inner product (see <xref ref="definition-inner-product-and-magnitude" text="type-global" />).</li>
+                <li>The <em>cross product</em>.</li>
+            </ul>
+            We will begin by examining the inner and cross products.
+        </p>
     </introduction>
-    <subsection xml:id="subsection-inner-products">
-      <title>Inner Products</title>
-      <p>
-        Recall from <xref ref="definition-inner-product-and-magnitude" text="type-global" /> that the inner product of two vectors <m>\xx</m> and <m>\yy</m> in <m>\RR^n</m> is the scalar quantity
-        <me>\dotprod{\xx,\yy} = \yy^{T}\xx</me>.
-        This product has several nice properties (see <xref ref="theorem-properties-of-the-inner-product" text="type-global" />), but for now we'll consider the property
-        <me>\dotprod{\xx,\yy} = \norm{\xx}\norm{\yy}\cos\theta</me>
-        where <m>\theta</m> denotes the angle between the vectors <m>\xx</m> and <m>\yy</m> satisfying <m>0\leq\theta\leq\pi</m>.
-        An important interpretation of this property is that the inner product, and particularly <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}</m>, is a measure of the <em>correlation</em> between <m>\xx</m> and <m>\yy</m>.
-      </p>
-      <example xml:id="example-computing-an-inner-product">
-        <title>Computing an Inner Product</title>
-        <statement>
-          <p>
-            Let <m>\xx = \mqty[3 &amp; -4]^{T}</m> and <m>\yy = \mqty[12 &amp; -5]^{T}</m>.
-            Are these vectors pointed in the same direction?
-          </p>
-        </statement>
-        <solution>
-          <p>
-            We can approach this problem as a correlation problem.
-            We'll estimate the correlation between <m>\xx</m> and <m>\yy</m> as follows:
-            <me>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}} = \frac{56}{5\cdot13} = \frac{56}{65}</me>.
-            Since this quantity is close to <m>1</m>, these vectors appear to be correlated and therefore point in roughly the same direction.
-            <aside>
-              <p>
-                For any nonzero <m>\xx,\yy\in\RR^n</m>, it follows that <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}\in[-1,1]</m>.
-                Values of this quotient close to <m>1</m> imply that the vectors are correlated whereas values close to <m>-1</m> imply that the vectors are <em>anticorrelated</em>.
-                Values close to <m>0</m> imply that the vectors are nearly perpendicular.
-              </p>
-            </aside>
-          </p>
-        </solution>
-      </example>
-      <p>
-        Inner products are also useful when computing vector <em>projections</em>.
-        Intuitively, the projection of one vector <m>\xx</m> onto another vector <m>\yy</m> represents the vector parallel to <m>\yy</m> that is as close as possible to <m>\xx</m>.
-        Equivalently, the projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
-      </p>
-      <theorem xml:id="theorem-vector-projections">
-        <title>Vector Projections</title>
-        <idx>vector projection</idx>
-        <statement>
-          <p>
-            Let <m>\xx,\yy\in\RR^n</m> with <m>\yy\neq\vb{0}</m>.
-            The <term>projection of <m>\xx</m> onto <m>\yy</m></term> is the vector <m>\proj{\yy}{\xx}</m> given by
-            <me>\proj{\yy}{\xx} = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
-          </p>
-        </statement>
-        <proof>
-          <p>
-            The projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
-            Therefore we need to minimize <m>\norm{\xx-\alpha\yy}</m> over <m>\alpha</m>, which is equivalent to minimizing <m>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy}</m>.
-            If we expand this inner product, we get
-            <me>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy} = \norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2</me>.
-            This expression is quadratic in <m>\alpha</m> and can be simplified by completing the square in <m>\alpha</m>:
-            <md>
-              <mrow>\norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2 &amp; = \norm{\yy}^2\left(\alpha^2 - \frac{2\alpha}{\norm{\yy}^2}\dotprod{\xx,\yy}\right) + \norm{\xx}^2 </mrow>
-              <mrow> &amp; = \norm{\yy}^2\left(\alpha - \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}\right)^2 - \frac{\dotprod{\xx,\yy}^2}{\norm{\yy}^2} + \norm{\xx}^2 </mrow>
-            </md>
-            Therefore the value of <m>\alpha</m> that makes this quantity as small as possible must be <m>\alpha = \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}</m>, which means that
-            <me>\proj{\yy}{\xx} = \alpha\yy = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
-          </p>
-        </proof>
-      </theorem>
-      <example xml:id="example-projecting-onto-a-line">
-        <title>Projecting onto a Line</title>
-        <statement>
-          <p>
-            Let <m>\vv = \mqty[3 &amp; -2]^{T}</m> let <m>\uu = \mqty[-2 &amp; 2]</m>.
-            Find the projection of <m>\vv</m> onto <m>\uu</m>.
-          </p>
-        </statement>
-        <solution>
-          <p>
-            The projection is given by
-            <me>\frac{-10}{8}\mqty[-2 \\ 2] = -\frac{5}{2}\mqty[-1 \\ 1]</me>.
-          </p>
-        </solution>
-      </example>
-      <p>
-        The formula in <xref ref="theorem-vector-projections" text="type-global" /> can be generalized to subspaces of <m>\RR^n</m>.
-        In particular, if <m>S</m> is a subspace of <m>\RR^n</m> with a basis given by columns of a matrix <m>A</m>, then the projection of <m>\xx</m> onto <m>S</m>, <m>\proj{\xx}{S}</m>, is the vector
-        <me>\proj{S}{\xx} = A(A^{T}A)^{-1}A^{T}\xx</me>.
-        Note that this formula reduces to the formula in <xref ref="theorem-vector-projections" text="type-global" /> in the case that <m>A = [\yy]</m>.
-      </p>
-      <p>
-        Inner products are also connected to the physical concept of work.
-        In particular, if a force <m>\mathbf{F}</m> acts on a particle over a displacement <m>\mathbf{d}</m>, then the work done is given by <m>W = \langle\mathbf{F},\mathbf{d}\rangle</m>.
-      </p>
-    </subsection>
-    <subsection xml:id="subsection-cross-products">
-      <title>Cross Products</title>
-      <p>
-        Now we move to the other important example of vector multiplication in this course, the cross product.
-      </p>
-      <definition xml:id="definition-cross-product">
-        <title>Cross Product</title>
-        <idx>cross product</idx>
-        <statement>
-          <p>
-            Let <m>\uu,\vv\in\RR^3</m>.
-            The <term>cross product</term> of <m>\uu</m> and <m>\vv</m> is the unique vector <m>\uu\times\vv</m> satisfying
-            <ol>
-              <li><m>\uu\times\vv</m> is perpendicular to both <m>\uu</m> and <m>\vv</m> and has its direction determined by the <em>right-hand rule</em>.</li>
-              <li>The magnitude of <m>\uu\times\vv</m> is given by <m>\norm{\uu\times\vv} = \norm{\uu}\norm{\vv}\sin(\theta)</m> where <m>\theta</m> is the angle between <m>\uu</m> and <m>\vv</m>.</li>
-            </ol>
-          </p>
-        </statement>
-      </definition>
-      <p>
-        <xref ref="definition-cross-product" text="type-global" /> is useful for understanding what the cross product gives, but is less useful for actually determining cross products.
-        To compute cross products, we use the following computational formula.
-      </p>
-      <theorem xml:id="theorem-computing-cross-products">
-        <title>Computing Cross Products</title>
-        <statement>
-          <p>
-            Let <m>\uu = \smqty[u_1 &amp; u_2 &amp; u_3]^T, \vv = \smqty[v_1 &amp; v_2 &amp; v_3]^T\in\RR^3</m> and let <m>\{\ii,\jj,\kk\}</m> denote the standard basis vectors of <m>\RR^3</m>.
-            Then
-            <me>\uu\times\vv = \mqty| \ii &amp; \jj &amp; \kk \\ u_1 &amp; u_2 &amp; u_3 \\ v_1 &amp; v_2 &amp; v_3|</me>.
-          </p>
-        </statement>
-      </theorem>
-    </subsection>
-    <subsection xml:id="subsection-computing-inner-and-cross-products-using-technology">
-      <title>Computing Inner and Cross Products Using Technology</title>
-      <p>
-        Both Octave and Sage allow for quick computations of inner and cross products.
-        In Octave, these computations are done using the <c>dot</c> and <c>cross</c> commands:
-      </p>
-      <sage language="octave">
-        <input>
-          u = [1, -2, 3]
-          v = [4, 0, -1]
-          dot(u, v) % inner/dot product
-          cross(u, v) % cross product
-        </input>
-      </sage>
-      <p>
-        Since we will also be considering inner and cross products of vectors with symbolic components, it's also useful to use Sage for computations involving inner products and cross products.
-        This is accomplished using the <c>dot_product</c> and <c>cross_product</c> methods.
-        <aside>
-          <p>
-            In object-oriented programming languages like Sage and Python, methods are functions or procedures assigned to certain objects.
-            Sage has a variety of methods associated with vector objects.
-          </p>
-        </aside>
-      </p>
-      <sage>
-        <input>
-          var('x, y, z')
-          u = vector([x, 3*y, z^2])
-          v = vector([0, 1, x - y - sin(z)])
 
-          # without display only output from last line is shown
-          display(u.dot_product(v)) # inner product of u and v
+    <section xml:id="section-inner-products-and-cross-products">
+        <title>Inner Products and Cross Products</title>
 
-          u.cross_product(v) # cross product of u and v
-        </input>
-      </sage>
-      <p>
-        Sage and Octave cells are provided below for further computations.
-      </p>
-      <sage>
-        <input>
-          # code cell for Sage computations
-        </input>
-      </sage>
-      <sage language="octave">
-        <input>
-          % code cell for Octave computations
-        </input>
-      </sage>
-    </subsection>
-  </section>
-  <section xml:id="section-vector-functions">
-    <title>Vector Functions</title>
-    <introduction>
-      <p>
-        In this section we will review the concept of a <em>vector-valued function</em>, or more simply a <em>vector function</em>.
-        These differ from <em>scalar functions</em> as the output of a vector function is a vector in <m>\RR^n</m> (where <m>n \gt 2</m>).
-        We will typically denote vector functions using boldface letters or arrows like so: <m>\vb{f}</m> and <m>\vec{f}</m>.
-      </p>
-    </introduction>
-    <subsection xml:id="subsection-visualizing-vector-functions">
-      <title>Visualizing Vector Functions</title>
-      <p>
-        Let <m>\vb{f}:\RR^n\to\RR^n</m> be a vector function and assume <m>n=2</m> or <m>n=3</m>.
-        Then <m>\vb{f}</m> may be visualized by using a <em>vector field</em>.
-        We sketch the vector field by attaching the vector <m>\vb{f}(P)</m> to the point <m>P</m>.
-        This is best done using technology.
-      </p>
-      <example xml:id="example-sketching-a-vector-field">
-        <title>Sketching a Vector Field</title>
-        <statement>
-          <p>
-            Sketch the vector field for <m>\vb{f}(x,y) = -y\vb{i} + x\vb{j}</m> in <m>\RR^2</m>.
-          </p>
-        </statement>
-        <solution>
-          <p>
-            This can be done using the <c>plot_vector_field</c> command in Sage:
-          </p>
-          <sage>
-            <input>
-              # x is a variable by default
-              # can't hurt to make sure it's a variable here
-              var('x, y')
+        <introduction>
+            <p>
+                Inner products (also known as dot products) and cross products are two important examples of <q>vector multiplication</q>.
+                The inner product is a <em>scalar product</em> meaning that the resulting quantity is a scalar value.
+                Likewise, the cross product is a <em>vector product</em> and the resulting quantity is a vector.
+                Both products are extremely important in describing vector geometry.
+            </p>
+        </introduction>
 
-              # define f = -y*i + x*j
-              f(x,y) = (-y, x)
+        <subsection xml:id="subsection-inner-products">
+            <title>Inner Products</title>
 
-              # plot the vector field over the given ranges using blue arrows
-              plot_vector_field(f(x,y), (x,-2,2), (y, -2, 2), color="blue")
-            </input>
-          </sage>
-        </solution>
-      </example>
-      <p>
-        Sage can also create plots of vector fields in <m>\RR^3</m> using <c>plot_vector_field3d</c>:
-      </p>
-      <sage>
-        <input>
-          var('x y z')
+            <p>
+                Recall from <xref ref="definition-inner-product-and-magnitude" text="type-global" /> that the inner product of two vectors <m>\xx</m> and <m>\yy</m> in <m>\RR^n</m> is the scalar quantity
+                <me>\dotprod{\xx,\yy} = \yy^{T}\xx</me>.
+                This product has several nice properties (see <xref ref="theorem-properties-of-the-inner-product" text="type-global" />), but for now we'll consider the property
+                <me>\dotprod{\xx,\yy} = \norm{\xx}\norm{\yy}\cos\theta</me>
+                where <m>\theta</m> denotes the angle between the vectors <m>\xx</m> and <m>\yy</m> satisfying <m>0\leq\theta\leq\pi</m>.
+                An important interpretation of this property is that the inner product, and particularly <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}</m>, is a measure of the <em>correlation</em> between <m>\xx</m> and <m>\yy</m>.
+            </p>
 
-          f(x, y, z) = (y*z, x*z, x*y)
+            <example xml:id="example-computing-an-inner-product">
+                <title>Computing an Inner Product</title>
 
-          plot_vector_field3d(f(x,y,z), (x, -2, 2), (y, -2, 2), (z, -2, 2))
-        </input>
-      </sage>
-      <p>
-        You can interact with the plot above by zooming and rotating.
-      </p>
-    </subsection>
-    <subsection xml:id="subsection-vector-functions-and-motion">
-      <title>Vector Functions and Motion</title>
-      <p>
-        Vector functions of the form <m>\vb{r}:\RR\to\RR^n</m> (where <m>n = 2</m> or <m>n = 3</m>) are often useful in representing motion.
-        The single indepent variable is taken to be time <m>t</m>, and the dependent variables are position variables.
-        Furthermore, it's straightforward to differentiate and integrate such functions.
-        For example, if <m>\vb{r}(t) = \smqty[x(t) &amp; y(t)]</m>, then
-        <md>
-          <mrow>\vb{r}^\prime(t) &amp; = \mqty[x^\prime(t) &amp; y^\prime(t)] </mrow>
-          <mrow>\int_a^b\vb{r}(t)\dd{t} &amp; = \mqty[\int_a^b x(t)\dd{t} &amp; \int_a^b y(t)\dd{t}] </mrow>
-        </md>
-        The usual relations from Calculus I between motion and derivatives and integrals apply here as well.
-        In particular, the derivative of a position vector is a velocity vector and the derivative of a velocity vector is an acceleration vector.
-        We also have the important notion of a <em>unit tangent vector</em>.
-      </p>
-      <definition xml:id="definition-unit-tangent-vectors">
-        <title>Unit Tangent Vectors</title>
-        <idx>unit tangent</idx>
-        <statement>
-          <p>
-            Let <m>\vb{r}(t)</m> be a smooth vector function.
-            <aside>
-              <p>
-                A vector function is <em>smooth</em> on an ineterval <m>I</m> if it's continuously differentiable on <m>I</m> and <m>\vb{r}^\prime\neq\vb{0}</m> on <m>I</m>.
-                The graph would be a <em>space curve</em> with no cusps.
-              </p>
-            </aside>
-            The <term>unit tangent</term> to <m>\vb{r}(t)</m> is the vector function
-            <me>\vb{T}(t) = \frac{\vb{r}^\prime(t)}{\norm{\vb{r}^\prime(t)}}</me>.
-          </p>
-        </statement>
-      </definition>
-      <example xml:id="example-finding-a-velocity-vector">
-        <title>Finding a Velocity Vector</title>
-        <statement>
-          <p>
-            Let <m>\rr(t) = \smqty[\cos(t) &amp; -3\sin(t) &amp; t]</m> denote the position of some particle at time <m>t</m>.
-            Find the velocity and the unit tangent at <m>t = \frac{\pi}{4}</m>.
-          </p>
-        </statement>
-        <solution>
-          <p>
-            The velocity is just
-            <me>\rrp(t) = \mqty[-\sin(t) &amp; -3\cos(t) &amp; 1]</me>
-            which at <m>t = \frac{\pi}{4}</m> is <m>\rrp(\frac{\pi}{4}) = \smqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</m>.
-            The unit tangent at <m>t = \frac{\pi}{4}</m> is
-            <me>\TT(t) = \frac{1}{\sqrt{6}}\mqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</me>
-          </p>
-        </solution>
-      </example>
-      <p>
-        Space curves (vector functions of the form <m>\rr:\RR\to\RR^n</m>) are easy to visualize in two and three dimensions, and can be graphed using Sage with <c>parametric_plot</c> (for space curves in <m>\RR^2</m>) or <c>parametric_plot3d</c> (for space curves in <m>\RR^3</m>):
-      </p>
-      <sage>
-        <input>
-          var('t')
+                <statement>
+                    <p>
+                        Let <m>\xx = \mqty[3 &amp; -4]^{T}</m> and <m>\yy = \mqty[12 &amp; -5]^{T}</m>.
+                        Are these vectors pointed in the same direction?
+                    </p>
+                </statement>
 
-          r(t) = (cos(t), -3*sin(t), t)
+                <solution>
+                    <p>
+                        We can approach this problem as a correlation problem.
+                        We'll estimate the correlation between <m>\xx</m> and <m>\yy</m> as follows:
+                        <me>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}} = \frac{56}{5\cdot13} = \frac{56}{65}</me>.
+                        Since this quantity is close to <m>1</m>, these vectors appear to be correlated and therefore point in roughly the same direction.
+                        <aside>
+                            <p>
+                                For any nonzero <m>\xx,\yy\in\RR^n</m>, it follows that <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}\in[-1,1]</m>.
+                                Values of this quotient close to <m>1</m> imply that the vectors are correlated whereas values close to <m>-1</m> imply that the vectors are <em>anticorrelated</em>.
+                                Values close to <m>0</m> imply that the vectors are nearly perpendicular.
+                            </p>
+                        </aside>
+                    </p>
+                </solution>
+            </example>
 
-          parametric_plot3d(r(t), (t, 0, pi))
-        </input>
-      </sage>
-    </subsection>
-    <subsection xml:id="subsection-derivatives-of-vector-products">
-      <title>Derivatives of Vector Products</title>
-      <p>
-        Derivative formulas involving inner products and cross products look very similar to the product rule from calculus.
-        In particular, if <m>\uu</m> and <m>\vv</m> are differentiable space curves then the following formulas hold:
-        <ol>
-          <li><m>\dv{t}(\uu\cdot\vv) = \uup\cdot\vv + \uu\cdot\vvp</m></li>
-          <li><m>\dv{t}(\uu\times\vv) = \uup\times\vv + \uu\times\vvp</m></li>
-        </ol>
-      </p>
-      <example xml:id="example-space-curves-of-constant-magnitude-are-orthogonal-to-derivatives">
-        <title>Space Curves of Constant Magnitude Are Orthogonal to Derivatives</title>
-        <statement>
-          <p>
-            Let <m>\rr(t)</m> denote a smooth space curve with constant magnitude.
-            Then <m>\rr</m> and <m>\rrp</m> are orthogonal.
-          </p>
-        </statement>
-      </example>
-    </subsection>
-  </section>
+            <p>
+                Inner products are also useful when computing vector <em>projections</em>.
+                Intuitively, the projection of one vector <m>\xx</m> onto another vector <m>\yy</m> represents the vector parallel to <m>\yy</m> that is as close as possible to <m>\xx</m>.
+                Equivalently, the projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+            </p>
+
+            <theorem xml:id="theorem-vector-projections">
+                <title>Vector Projections</title>
+
+                <idx>vector projection</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\xx,\yy\in\RR^n</m> with <m>\yy\neq\vb{0}</m>.
+                        The <term>projection of <m>\xx</m> onto <m>\yy</m></term> is the vector <m>\proj{\yy}{\xx}</m> given by
+                        <me>\proj{\yy}{\xx} = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+                    </p>
+                </statement>
+
+                <proof>
+                    <p>
+                        The projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+                        Therefore we need to minimize <m>\norm{\xx-\alpha\yy}</m> over <m>\alpha</m>, which is equivalent to minimizing <m>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy}</m>.
+                        If we expand this inner product, we get
+                        <me>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy} = \norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2</me>.
+                        This expression is quadratic in <m>\alpha</m> and can be simplified by completing the square in <m>\alpha</m>:
+                        <md>
+                            <mrow>\norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2 &amp; = \norm{\yy}^2\left(\alpha^2 - \frac{2\alpha}{\norm{\yy}^2}\dotprod{\xx,\yy}\right) + \norm{\xx}^2 </mrow>
+                            <mrow> &amp; = \norm{\yy}^2\left(\alpha - \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}\right)^2 - \frac{\dotprod{\xx,\yy}^2}{\norm{\yy}^2} + \norm{\xx}^2 </mrow>
+                        </md>
+                        Therefore the value of <m>\alpha</m> that makes this quantity as small as possible must be <m>\alpha = \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}</m>, which means that
+                        <me>\proj{\yy}{\xx} = \alpha\yy = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+                    </p>
+                </proof>
+            </theorem>
+
+            <example xml:id="example-projecting-onto-a-line">
+                <title>Projecting onto a Line</title>
+
+                <statement>
+                    <p>
+                        Let <m>\vv = \mqty[3 &amp; -2]^{T}</m> let <m>\uu = \mqty[-2 &amp; 2]</m>.
+                        Find the projection of <m>\vv</m> onto <m>\uu</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The projection is given by
+                        <me>\frac{-10}{8}\mqty[-2 \\ 2] = -\frac{5}{2}\mqty[-1 \\ 1]</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                The formula in <xref ref="theorem-vector-projections" text="type-global" /> can be generalized to subspaces of <m>\RR^n</m>.
+                In particular, if <m>S</m> is a subspace of <m>\RR^n</m> with a basis given by columns of a matrix <m>A</m>, then the projection of <m>\xx</m> onto <m>S</m>, <m>\proj{\xx}{S}</m>, is the vector
+                <me>\proj{S}{\xx} = A(A^{T}A)^{-1}A^{T}\xx</me>.
+                Note that this formula reduces to the formula in <xref ref="theorem-vector-projections" text="type-global" /> in the case that <m>A = [\yy]</m>.
+            </p>
+
+            <p>
+                Inner products are also connected to the physical concept of work.
+                In particular, if a force <m>\mathbf{F}</m> acts on a particle over a displacement <m>\mathbf{d}</m>, then the work done is given by <m>W = \langle\mathbf{F},\mathbf{d}\rangle</m>.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-cross-products">
+            <title>Cross Products</title>
+
+            <p>
+                Now we move to the other important example of vector multiplication in this course, the cross product.
+            </p>
+
+            <definition xml:id="definition-cross-product">
+                <title>Cross Product</title>
+
+                <idx>cross product</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\uu,\vv\in\RR^3</m>.
+                        The <term>cross product</term> of <m>\uu</m> and <m>\vv</m> is the unique vector <m>\uu\times\vv</m> satisfying
+                        <ol>
+                            <li><m>\uu\times\vv</m> is perpendicular to both <m>\uu</m> and <m>\vv</m> and has its direction determined by the <em>right-hand rule</em>.</li>
+                            <li>The magnitude of <m>\uu\times\vv</m> is given by <m>\norm{\uu\times\vv} = \norm{\uu}\norm{\vv}\sin(\theta)</m> where <m>\theta</m> is the angle between <m>\uu</m> and <m>\vv</m>.</li>
+                        </ol>
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                <xref ref="definition-cross-product" text="type-global" /> is useful for understanding what the cross product gives, but is less useful for actually determining cross products.
+                To compute cross products, we use the following computational formula.
+            </p>
+
+            <theorem xml:id="theorem-computing-cross-products">
+                <title>Computing Cross Products</title>
+
+                <statement>
+                    <p>
+                        Let <m>\uu = \smqty[u_1 &amp; u_2 &amp; u_3]^T, \vv = \smqty[v_1 &amp; v_2 &amp; v_3]^T\in\RR^3</m> and let <m>\{\ii,\jj,\kk\}</m> denote the standard basis vectors of <m>\RR^3</m>.
+                        Then
+                        <me>\uu\times\vv = \mqty| \ii &amp; \jj &amp; \kk \\ u_1 &amp; u_2 &amp; u_3 \\ v_1 &amp; v_2 &amp; v_3|</me>.
+                    </p>
+                </statement>
+            </theorem>
+        </subsection>
+
+        <subsection xml:id="subsection-computing-inner-and-cross-products-using-technology">
+            <title>Computing Inner and Cross Products Using Technology</title>
+
+            <p>
+                Both Octave and Sage allow for quick computations of inner and cross products.
+                In Octave, these computations are done using the <c>dot</c> and <c>cross</c> commands:
+            </p>
+
+            <sage language="octave">
+                <input>
+                    u = [1, -2, 3]
+                    v = [4, 0, -1]
+                    dot(u, v) % inner/dot product
+                    cross(u, v) % cross product
+                </input>
+            </sage>
+
+            <p>
+                Since we will also be considering inner and cross products of vectors with symbolic components, it's also useful to use Sage for computations involving inner products and cross products.
+                This is accomplished using the <c>dot_product</c> and <c>cross_product</c> methods.
+                <aside>
+                    <p>
+                        In object-oriented programming languages like Sage and Python, methods are functions or procedures assigned to certain objects.
+                        Sage has a variety of methods associated with vector objects.
+                    </p>
+                </aside>
+            </p>
+
+            <sage>
+                <input>
+                    var('x, y, z')
+                    u = vector([x, 3*y, z^2])
+                    v = vector([0, 1, x - y - sin(z)])
+
+                    # without display only output from last line is shown
+                    display(u.dot_product(v)) # inner product of u and v
+
+                    u.cross_product(v) # cross product of u and v
+                </input>
+            </sage>
+
+            <p>
+                Sage and Octave cells are provided below for further computations.
+            </p>
+
+            <sage>
+                <input>
+                    # code cell for Sage computations
+                </input>
+            </sage>
+
+            <sage language="octave">
+                <input>
+                    % code cell for Octave computations
+                </input>
+            </sage>
+        </subsection>
+    </section>
+
+    <section xml:id="section-vector-functions">
+        <title>Vector Functions</title>
+
+        <introduction>
+            <p>
+                In this section we will review the concept of a <em>vector-valued function</em>, or more simply a <em>vector function</em>.
+                These differ from <em>scalar functions</em> as the output of a vector function is a vector in <m>\RR^n</m> (where <m>n \gt 2</m>).
+                We will typically denote vector functions using boldface letters or arrows like so: <m>\vb{f}</m> and <m>\vec{f}</m>.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-visualizing-vector-functions">
+            <title>Visualizing Vector Functions</title>
+
+            <p>
+                Let <m>\vb{f}:\RR^n\to\RR^n</m> be a vector function and assume <m>n=2</m> or <m>n=3</m>.
+                Then <m>\vb{f}</m> may be visualized by using a <em>vector field</em>.
+                We sketch the vector field by attaching the vector <m>\vb{f}(P)</m> to the point <m>P</m>.
+                This is best done using technology.
+            </p>
+
+            <example xml:id="example-sketching-a-vector-field">
+                <title>Sketching a Vector Field</title>
+
+                <statement>
+                    <p>
+                        Sketch the vector field for <m>\vb{f}(x,y) = -y\vb{i} + x\vb{j}</m> in <m>\RR^2</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        This can be done using the <c>plot_vector_field</c> command in Sage:
+                    </p>
+
+                    <sage>
+                        <input>
+                            # x is a variable by default
+                            # can't hurt to make sure it's a variable here
+                            var('x, y')
+
+                            # define f = -y*i + x*j
+                            f(x,y) = (-y, x)
+
+                            # plot the vector field over the given ranges using blue arrows
+                            plot_vector_field(f(x,y), (x,-2,2), (y, -2, 2), color="blue")
+                        </input>
+                    </sage>
+                </solution>
+            </example>
+
+            <p>
+                Sage can also create plots of vector fields in <m>\RR^3</m> using <c>plot_vector_field3d</c>:
+            </p>
+
+            <sage>
+                <input>
+                    var('x y z')
+
+                    f(x, y, z) = (y*z, x*z, x*y)
+
+                    plot_vector_field3d(f(x,y,z), (x, -2, 2), (y, -2, 2), (z, -2, 2))
+                </input>
+            </sage>
+
+            <p>
+                You can interact with the plot above by zooming and rotating.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-vector-functions-and-motion">
+            <title>Vector Functions and Motion</title>
+
+            <p>
+                Vector functions of the form <m>\vb{r}:\RR\to\RR^n</m> (where <m>n = 2</m> or <m>n = 3</m>) are often useful in representing motion.
+                The single indepent variable is taken to be time <m>t</m>, and the dependent variables are position variables.
+                Furthermore, it's straightforward to differentiate and integrate such functions.
+                For example, if <m>\vb{r}(t) = \smqty[x(t) &amp; y(t)]</m>, then
+                <md>
+                    <mrow>\vb{r}^\prime(t) &amp; = \mqty[x^\prime(t) &amp; y^\prime(t)] </mrow>
+                    <mrow>\int_a^b\vb{r}(t)\dd{t} &amp; = \mqty[\int_a^b x(t)\dd{t} &amp; \int_a^b y(t)\dd{t}] </mrow>
+                </md>
+                The usual relations from Calculus I between motion and derivatives and integrals apply here as well.
+                In particular, the derivative of a position vector is a velocity vector and the derivative of a velocity vector is an acceleration vector.
+                We also have the important notion of a <em>unit tangent vector</em>.
+            </p>
+
+            <definition xml:id="definition-unit-tangent-vectors">
+                <title>Unit Tangent Vectors</title>
+
+                <idx>unit tangent</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\vb{r}(t)</m> be a smooth vector function.
+                        <aside>
+                            <p>
+                                A vector function is <em>smooth</em> on an ineterval <m>I</m> if it's continuously differentiable on <m>I</m> and <m>\vb{r}^\prime\neq\vb{0}</m> on <m>I</m>.
+                                The graph would be a <em>space curve</em> with no cusps.
+                            </p>
+                        </aside>
+                        The <term>unit tangent</term> to <m>\vb{r}(t)</m> is the vector function
+                        <me>\vb{T}(t) = \frac{\vb{r}^\prime(t)}{\norm{\vb{r}^\prime(t)}}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <example xml:id="example-finding-a-velocity-vector">
+                <title>Finding a Velocity Vector</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t) = \smqty[\cos(t) &amp; -3\sin(t) &amp; t]</m> denote the position of some particle at time <m>t</m>.
+                        Find the velocity and the unit tangent at <m>t = \frac{\pi}{4}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The velocity is just
+                        <me>\rrp(t) = \mqty[-\sin(t) &amp; -3\cos(t) &amp; 1]</me>
+                        which at <m>t = \frac{\pi}{4}</m> is <m>\rrp(\frac{\pi}{4}) = \smqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</m>.
+                        The unit tangent at <m>t = \frac{\pi}{4}</m> is
+                        <me>\TT(t) = \frac{1}{\sqrt{6}}\mqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</me>
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Space curves (vector functions of the form <m>\rr:\RR\to\RR^n</m>) are easy to visualize in two and three dimensions, and can be graphed using Sage with <c>parametric_plot</c> (for space curves in <m>\RR^2</m>) or <c>parametric_plot3d</c> (for space curves in <m>\RR^3</m>):
+            </p>
+
+            <sage>
+                <input>
+                    var('t')
+
+                    r(t) = (cos(t), -3*sin(t), t)
+
+                    parametric_plot3d(r(t), (t, 0, pi))
+                </input>
+            </sage>
+        </subsection>
+
+        <subsection xml:id="subsection-derivatives-of-vector-products">
+            <title>Derivatives of Vector Products</title>
+
+            <p>
+                Derivative formulas involving inner products and cross products look very similar to the product rule from calculus.
+                In particular, if <m>\uu</m> and <m>\vv</m> are differentiable space curves then the following formulas hold:
+                <ol>
+                    <li><m>\dv{t}(\uu\cdot\vv) = \uup\cdot\vv + \uu\cdot\vvp</m></li>
+                    <li><m>\dv{t}(\uu\times\vv) = \uup\times\vv + \uu\times\vvp</m></li>
+                </ol>
+            </p>
+
+            <example xml:id="example-space-curves-of-constant-magnitude-are-orthogonal-to-derivatives">
+                <title>Space Curves of Constant Magnitude Are Orthogonal to Derivatives</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> denote a smooth space curve with constant magnitude.
+                        Then <m>\rr</m> and <m>\rrp</m> are orthogonal.
+                    </p>
+                </statement>
+            </example>
+        </subsection>
+    </section>
 </chapter>
