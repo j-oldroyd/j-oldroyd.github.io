@@ -414,4 +414,131 @@
             </example>
         </subsection>
     </section>
+
+    <section xml:id="section-arc-length-and-components-of-acceleration">
+        <title>Arc Length and Components of Acceleration</title>
+
+        <introduction>
+            <p>
+                In this section we review the concepts of arc length and components of acceration, two important quantities in the description of motion in higher dimensions.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-arc-length">
+            <title>Arc Length</title>
+
+            <p>
+                Given a smooth space curve over some interval <m>I</m> (see <xref ref="definition-unit-tangent-vectors" text="type-global" />), we can find the corresponding arc length over <m>I</m>.
+            </p>
+
+            <definition xml:id="definition-arc-length">
+                <title>Arc Length</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> be a smooth space curve defined over the interval <m>I</m> and let <m>a,b\in I</m>.
+                        The <term>arc length</term> of <m>\rr(t)</m> from <m>t = a</m> to <m>t = b</m> is the integral
+                        <me>s = \int_a^b \norm{\rrp(t)}\dd{t}</me>.
+                    </p>
+
+                    <aside>
+                        <p>
+                            The arc length formula is a generalization of the simple <m>d = st</m> formula from introductory physics.
+                            Here, the speed <m>s</m> is replaced with <m>\norm{\rrp(t)}</m> and the time <m>t</m> is replaced with <m>\dd{t}</m>.
+                            The integral can be viewed as a <q>continuous sum</q> of the possible products of speed and time over the interval <m>[a,b]</m>, and therefore gives the length or total distance traveled along the curve.
+                        </p>
+                    </aside>
+                </statement>
+            </definition>
+
+            <example xml:id="example-arc-length-of-a-parabolic-segment">
+                <title>Arc Length of a Parabolic Segment</title>
+
+                <statement>
+                    <p>
+                        Find the integral that gives the length of the parabolic segment <m>y = x^2</m> from <m>x = 0</m> to <m>x = 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        <em>Hint</em>: set <m>\rr(t) = \mqty[t &amp; t^2]</m> and use <xref ref="definition-arc-length" text="type-global" />.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Another application of the arc length integral is in the parameterization of curves with respect to arc length.
+                In particular, if <m>\rr(t)</m> is smooth over <m>I = [a, b]</m> and <m>t\in I</m>, then we can define an <em>arc length function</em> <m>s(t)</m> by
+                <me>s(t) = \int_a^b\norm{\rrp(t)}\dd{t}</me>.
+                This function is one-to-one and therefore invertible on <m>I</m> and so has an inverse function <m>t(s)</m>.
+                The arc length parameterization of the space curve <m>\rr(t)</m> is then defined to be <me>\rr(t(s))</me>.
+                In terms of motion, the arc length parameterization corresponds to moving along the curve <m>\rr</m> at unit velocity at all times.
+                This is because
+                <me>\dv{\rr}{s} = \dv{\rr}{t}\dd{t}{s} = \TT(t)</me>.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-components-of-acceleration">
+            <title>Components of Acceleration</title>
+
+            <p>
+                If a space curve <m>\rr(t)</m> is twice-differentiable then its acceleration is given by <m>\vb{a}(t) = \rr''(t)</m>.
+                If the space curve is also smooth then we can find how much of the acceleration is parallel to the velocity.
+            </p>
+
+            <definition xml:id="definition-tangential-component-of-acceleration">
+                <title>Tangential Component of Acceleration</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> denote a smooth, twice-differentiable space curve with corresponding acceleration vector <m>\vb{a}(t) = \rr''(t)</m> and unit tangent vector <m>\TT(t)</m>.
+                        The <term>tangential component</term> of acceleration is defined to be the vector <m>\vb{a}_{\text{tan}}</m> given by
+                        <me>\vb{a}_{\text{tan}} = (\vb{a}\cdot\TT)\TT</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                We can also define the <em>normal component</em> of acceleration to be the vector <m>\vb{a}_{\text{norm}}</m> given by
+                <me>\vb{a}_{\text{norm}} = \vb{a} - \vb{a}_{\text{tan}}</me>.
+                This vector is orthogonal to <m>\TT</m> (and therefore <m>\vb{a}_{\text{tan}}</m>), and the normal and tangential components of acceleration always sum to <m>\vb{a}</m>.
+                This is related to the <em>unit normal vector</em> <m>\vb{N}(t) = \frac{\TT^\prime(t)}{\norm{\TT^\prime(t)}}</m> by
+                <me>\vb{a}_{\text{norm}} = (\vb{a}\cdot\vb{N})\vb{N}</me>.
+            </p>
+        </subsection>
+    </section>
+
+    <section xml:id="section-gradients-and-potentials">
+        <title>Gradients and Potentials</title>
+
+        <introduction>
+            <p>
+                In this section we review the concept of the gradient of a scalar function and its relationship to potential functions.
+                The gradient is one of our key notions of derivatives in higher dimensions, and potentials are analogous to antiderivatives in this setting.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-gradients">
+            <title>Gradients</title>
+
+            <p>
+                Recall that a function of several variables, say <m>f(x,y,z)</m>, has <em>partial derivatives</em> corresponding to its variables.
+                These partial derivatives are computed by treating the other variables as constants.
+                The gradient of <m>f</m> is then the vector of partial derivatives.
+            </p>
+
+            <definition xml:id="definition-gradient-of-a-scalar-field">
+                <title>Gradient of a Scalar Field</title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z)</m> be a differentiable function (so its partial derivatives exist and are continuous).
+                        The <term>gradient</term> of <m>f(x,y,z)</m> is the vector field <m>\grad f(x,y,z)</m> defined by the equation
+                        <me>\grad f(x,y,z) = \mqty[\pdv{f}{x} &amp; \pdv{f}{y} &amp; \pdv{f}{z}]</me>.
+                    </p>
+                </statement>
+            </definition>
+        </subsection>
+    </section>
 </chapter>
