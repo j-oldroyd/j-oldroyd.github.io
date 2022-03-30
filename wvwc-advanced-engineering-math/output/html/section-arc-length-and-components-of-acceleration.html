@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-03-30T07:46:39-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WVWC-AEM Arc Length and Components of Acceleration</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-advanced-engineering-math/output/html/external/./wvwc-logo.jpg">
+<meta property="book:title" content="Advanced Engineering Mathematics Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\xxp}{\mathbf{x}^\prime}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\yyp}{\mathbf{y}^\prime}
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\zzp}{\mathbf{z}^\prime}
+\newcommand{\ii}{\mathbf{i}}
+\newcommand{\jj}{\mathbf{j}}
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\uup}{\mathbf{u}^\prime}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vvp}{\mathbf{v}^\prime}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\rr}{\mathbf{r}}
+\newcommand{\rrp}{\mathbf{r}^\prime}
+\newcommand{\ff}{\mathbf{f}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\col}[1]{\operatorname{col}{#1}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\nul}[1]{\operatorname{null}{#1}}
+\newcommand{\spn}[1]{\operatorname{span}{#1}}
+\newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+      }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\providecommand{\rank}[1]{\operatorname{rank}{#1}}
+\providecommand{\grad}{\nabla}
+\providecommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\providecommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\providecommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-advanced-engineering-math.html"><span class="title">Advanced Engineering Mathematics Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-vector-functions.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-derivatives.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-gradients-and-potentials.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-vector-functions.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-derivatives.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-gradients-and-potentials.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-linear-algebra.html" data-scroll="part-linear-algebra" class="internal"><span class="codenumber">I</span> <span class="title">Linear Algebra</span></a></li>
+<li class="link">
+<a href="chapter-linear-algebra-matrices.html" data-scroll="chapter-linear-algebra-matrices" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Matrix Algebra</span></a><ul>
+<li><a href="section-matrices-vectors-and-linear-combinations.html" data-scroll="section-matrices-vectors-and-linear-combinations" class="internal">Matrices, Vectors and Linear Combinations</a></li>
+<li><a href="section-matrix-multiplication.html" data-scroll="section-matrix-multiplication" class="internal">Matrix Multiplication</a></li>
+<li><a href="section-systems-of-linear-equations.html" data-scroll="section-systems-of-linear-equations" class="internal">Systems of Linear Equations</a></li>
+<li><a href="section-linear-independence.html" data-scroll="section-linear-independence" class="internal">Linear Independence</a></li>
+<li><a href="section-existence-of-solutions.html" data-scroll="section-existence-of-solutions" class="internal">Existence of Solutions</a></li>
+<li><a href="section-determinants.html" data-scroll="section-determinants" class="internal">Determinants</a></li>
+<li><a href="section-matrix-inverses.html" data-scroll="section-matrix-inverses" class="internal">Matrix Inverses</a></li>
+<li><a href="section--LU-decomposition.html" data-scroll="section--LU-decomposition" class="internal"><span class="process-math">\(LU\)</span> Decomposition</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-eigenvalues-eigenvectors.html" data-scroll="chapter-linear-eigenvalues-eigenvectors" class="internal"><span class="codenumber">2</span> <span class="title">Eigenvalues and Eigenvectors</span></a><ul>
+<li><a href="section-finding-eigenvalues-and-eigenvectors.html" data-scroll="section-finding-eigenvalues-and-eigenvectors" class="internal">Finding Eigenvalues and Eigenvectors</a></li>
+<li><a href="section-eigenvalue-problems.html" data-scroll="section-eigenvalue-problems" class="internal">Eigenvalue Problems</a></li>
+<li><a href="section-orthogonal-transformations.html" data-scroll="section-orthogonal-transformations" class="internal">Orthogonal Transformations</a></li>
+<li><a href="section-diagonalization-of-matrices.html" data-scroll="section-diagonalization-of-matrices" class="internal">Diagonalization of Matrices</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-multivariable-calculus.html" data-scroll="part-multivariable-calculus" class="internal"><span class="codenumber">II</span> <span class="title">Multivariable Calculus</span></a></li>
+<li class="link">
+<a href="chapter-multivariable-calculus-vector-derivatives.html" data-scroll="chapter-multivariable-calculus-vector-derivatives" class="internal"><span class="codenumber">3</span> <span class="title">Vector Derivatives</span></a><ul>
+<li><a href="section-inner-products-and-cross-products.html" data-scroll="section-inner-products-and-cross-products" class="internal">Inner Products and Cross Products</a></li>
+<li><a href="section-vector-functions.html" data-scroll="section-vector-functions" class="internal">Vector Functions</a></li>
+<li><a href="section-arc-length-and-components-of-acceleration.html" data-scroll="section-arc-length-and-components-of-acceleration" class="active">Arc Length and Components of Acceleration</a></li>
+<li><a href="section-gradients-and-potentials.html" data-scroll="section-gradients-and-potentials" class="internal">Gradients and Potentials</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-arc-length-and-components-of-acceleration"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">3.3</span> <span class="title">Arc Length and Components of Acceleration</span>
+</h2>
+<section class="introduction" id="introduction-5"><p id="p-289">In this section we review the concepts of arc length and components of acceration, two important quantities in the description of motion in higher dimensions.</p></section><section class="subsection" id="subsection-arc-length"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Arc Length</span>
+</h3>
+<p id="p-290">Given a smooth space curve over some interval <span class="process-math">\(I\)</span> (see <a href="" class="xref" data-knowl="./knowl/definition-unit-tangent-vectors.html" title="Definition 3.2.2: Unit Tangent Vectors">Definition 3.2.2</a>), we can find the corresponding arc length over <span class="process-math">\(I\text{.}\)</span></p>
+<article class="definition definition-like" id="definition-arc-length"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Arc Length.</span>
+</h4>
+<p id="p-291">Let <span class="process-math">\(\rr(t)\)</span> be a smooth space curve defined over the interval <span class="process-math">\(I\)</span> and let <span class="process-math">\(a,b\in I\text{.}\)</span> The <dfn class="terminology">arc length</dfn> of <span class="process-math">\(\rr(t)\)</span> from <span class="process-math">\(t = a\)</span> to <span class="process-math">\(t = b\)</span> is the integral</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+s = \int_a^b \norm{\rrp(t)}\dd{t}\text{.}
+\end{equation*}
+</div>
+<aside class="aside aside-like" id="aside-11"><p id="p-292">The arc length formula is a generalization of the simple <span class="process-math">\(d = st\)</span> formula from introductory physics. Here, the speed <span class="process-math">\(s\)</span> is replaced with <span class="process-math">\(\norm{\rrp(t)}\)</span> and the time <span class="process-math">\(t\)</span> is replaced with <span class="process-math">\(\dd{t}\text{.}\)</span> The integral can be viewed as a “continuous sum” of the possible products of speed and time over the interval <span class="process-math">\([a,b]\text{,}\)</span> and therefore gives the length or total distance traveled along the curve.</p></aside></article><article class="example example-like" id="example-arc-length-of-a-parabolic-segment"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Arc Length of a Parabolic Segment.</span>
+</h4>
+<p id="p-293">Find the integral that gives the length of the parabolic segment <span class="process-math">\(y = x^2\)</span> from <span class="process-math">\(x = 0\)</span> to <span class="process-math">\(x = 1\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-31" id="solution-31"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-31"><div class="solution solution-like"><p id="p-294"><em class="emphasis">Hint</em>: set <span class="process-math">\(\rr(t) = \mqty[t &amp; t^2]\)</span> and use <a href="" class="xref" data-knowl="./knowl/definition-arc-length.html" title="Definition 3.3.1: Arc Length">Definition 3.3.1</a>.</p></div></div>
+</div></article><p id="p-295">Another application of the arc length integral is in the parameterization of curves with respect to arc length. In particular, if <span class="process-math">\(\rr(t)\)</span> is smooth over <span class="process-math">\(I = [a, b]\)</span> and <span class="process-math">\(t\in I\text{,}\)</span> then we can define an <em class="emphasis">arc length function</em> <span class="process-math">\(s(t)\)</span> by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+s(t) = \int_a^b\norm{\rrp(t)}\dd{t}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">This function is one-to-one and therefore invertible on <span class="process-math">\(I\)</span> and so has an inverse function <span class="process-math">\(t(s)\text{.}\)</span> The arc length parameterization of the space curve <span class="process-math">\(\rr(t)\)</span> is then defined to be</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\rr(t(s))\text{.}
+\end{equation*}
+</div>
+<p class="continuation">In terms of motion, the arc length parameterization corresponds to moving along the curve <span class="process-math">\(\rr\)</span> at unit velocity at all times. This is because</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\dv{\rr}{s} = \dv{\rr}{t}\dd{t}{s} = \TT(t)\text{.}
+\end{equation*}
+</div></section><section class="subsection" id="subsection-components-of-acceleration"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Components of Acceleration</span>
+</h3>
+<p id="p-296">If a space curve <span class="process-math">\(\rr(t)\)</span> is twice-differentiable then its acceleration is given by <span class="process-math">\(\vb{a}(t) = \rr''(t)\text{.}\)</span> If the space curve is also smooth then we can find how much of the acceleration is parallel to the velocity.</p>
+<article class="definition definition-like" id="definition-tangential-component-of-acceleration"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Tangential Component of Acceleration.</span>
+</h4>
+<p id="p-297">Let <span class="process-math">\(\rr(t)\)</span> denote a smooth, twice-differentiable space curve with corresponding acceleration vector <span class="process-math">\(\vb{a}(t) = \rr''(t)\)</span> and unit tangent vector <span class="process-math">\(\TT(t)\text{.}\)</span> The <dfn class="terminology">tangential component</dfn> of acceleration is defined to be the vector <span class="process-math">\(\vb{a}_{\text{tan}}\)</span> given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\vb{a}_{\text{tan}} = (\vb{a}\cdot\TT)\TT\text{.}
+\end{equation*}
+</div></article><p id="p-298">We can also define the <em class="emphasis">normal component</em> of acceleration to be the vector <span class="process-math">\(\vb{a}_{\text{norm}}\)</span> given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\vb{a}_{\text{norm}} = \vb{a} - \vb{a}_{\text{tan}}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">This vector is orthogonal to <span class="process-math">\(\TT\)</span> (and therefore <span class="process-math">\(\vb{a}_{\text{tan}}\)</span>), and the normal and tangential components of acceleration always sum to <span class="process-math">\(\vb{a}\text{.}\)</span> This is related to the <em class="emphasis">unit normal vector</em> <span class="process-math">\(\vb{N}(t) = \frac{\TT^\prime(t)}{\norm{\TT^\prime(t)}}\)</span> by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\vb{a}_{\text{norm}} = (\vb{a}\cdot\vb{N})\vb{N}\text{.}
+\end{equation*}
+</div></section></section></div></main>
+</div>
+</body>
+</html>

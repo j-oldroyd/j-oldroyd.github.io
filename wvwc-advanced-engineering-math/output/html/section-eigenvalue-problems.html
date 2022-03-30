@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-24T15:05:17-04:00       *-->
+<!--*       on 2022-03-30T07:46:39-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -15,13 +15,13 @@
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-advanced-engineering-math/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Advanced Engineering Mathematics Lecture Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -52,22 +52,18 @@
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
-    // Make *any* div with class 'sagecell-sage' an executable Sage cell
-    // Their results will be linked, only within language type
-    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
-                           linked: true,
-                           languages: ['sage'],
-                           evalButtonText: 'Evaluate (Sage)'});
-});
-</script><script>$(function () {
-    // Make *any* div with class 'sagecell-octave' an executable Sage cell
-    // Their results will be linked, only within language type
-    sagecell.makeSagecell({inputLocation: 'div.sagecell-octave',
-                           linked: true,
-                           languages: ['octave'],
-                           evalButtonText: 'Evaluate (Octave)'});
-});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
+</script><script>// Make *any* pre with class 'sagecell-octave' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-octave',
+                       linked: true,
+                       languages: ['octave'],
+                       evalButtonText: 'Evaluate (Octave)'});
 </script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -197,6 +193,8 @@ true);
 <a href="chapter-multivariable-calculus-vector-derivatives.html" data-scroll="chapter-multivariable-calculus-vector-derivatives" class="internal"><span class="codenumber">3</span> <span class="title">Vector Derivatives</span></a><ul>
 <li><a href="section-inner-products-and-cross-products.html" data-scroll="section-inner-products-and-cross-products" class="internal">Inner Products and Cross Products</a></li>
 <li><a href="section-vector-functions.html" data-scroll="section-vector-functions" class="internal">Vector Functions</a></li>
+<li><a href="section-arc-length-and-components-of-acceleration.html" data-scroll="section-arc-length-and-components-of-acceleration" class="internal">Arc Length and Components of Acceleration</a></li>
+<li><a href="section-gradients-and-potentials.html" data-scroll="section-gradients-and-potentials" class="internal">Gradients and Potentials</a></li>
 </ul>
 </li>
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
@@ -215,41 +213,41 @@ true);
 <p id="p-167">Recall that a Markov process describes the evolution of one state <span class="process-math">\(\vb{x}_{n}\)</span> into a future state <span class="process-math">\(\vb{x}_{n+1}\)</span> using the matrix equation <span class="process-math">\(A\vb{x}_n = \vb{x}_{n+1}\text{.}\)</span> In such a process, the matrix <span class="process-math">\(A\)</span> is a square matrix with non-negative entries whose columns sum to <span class="process-math">\(1\text{.}\)</span> Starting from an initial state <span class="process-math">\(\vb{x}_0\text{,}\)</span> we are often interested in whether the long-term evolution approaches a specific state vector <span class="process-math">\(\vb{x}\text{.}\)</span> In symbols, we want to determine if <span class="process-math">\(A^n\vb{x}_0 \to \vb{x}\)</span> as <span class="process-math">\(n\to\infty\text{.}\)</span></p>
 <p id="p-168">For such a vector, we should have <span class="process-math">\(A\vb{x} = \lim_{n\to\infty}A(A^n\vb{x}) = \vb{x}\text{.}\)</span> In other words, <span class="process-math">\(\vb{x}\)</span> is an <em class="emphasis">eigenvector of <span class="process-math">\(A\)</span> with eigenvalue <span class="process-math">\(1\)</span></em>. We call this vector a <dfn class="terminology">steady-state vector</dfn> of the Markov process.</p>
 <p id="p-169">Now let's suppose we model the weather with a Markov process with transition matrix</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = \mqty[0.33 &amp; 0.25 &amp; 0.40 \\ 0.52 &amp; 0.42 &amp; 0.40 \\ 0.15 &amp; 0.33 &amp; 0.20],
 \end{equation*}
 </div>
 <p class="continuation">corresponding states <span class="process-math">\(S, C\)</span> and <span class="process-math">\(R\)</span> (i.e., "sunny", "cloudy" and "rainy") and we use an initial state vector of <span class="process-math">\(\vb{x}_0 = \smqty[0 &amp; 1 &amp; 0]^T\text{.}\)</span> To figure out the long-term probability that it will be a cloudy day, we can try computing <span class="process-math">\(A^n\vb{x}_0\)</span> for large values of <span class="process-math">\(n\text{.}\)</span> See the Octave cell below. If we do so, it appears that the long-term probability of a cloudy day settles in around <span class="process-math">\(44.6\%\text{.}\)</span></p>
 <p id="p-170">We can make this analysis more precise by looking for the steady state vector using <code class="code-inline tex2jax_ignore">eig</code>. If we take this approach, then we see that <span class="process-math">\(A\)</span> has <span class="process-math">\(1\)</span> as an eigenvalue and corresponding eigenvector <span class="process-math">\(\smqty[0.52 &amp; 0.74 &amp; 0.41]^{T}\text{.}\)</span> This is <em class="emphasis">not</em> a state vector since the values do not add to <span class="process-math">\(1\)</span> and therefore can't be probabilities. However, we can convert this into a state vector by dividing each entry by the sum <span class="process-math">\(0.52+0.74+0.41 = 1.678\)</span> which in turn gives the eigenvector</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \vb{x} = \mqty[0.3113 \\ 0.4463 \\ 0.2425]
 \end{equation*}
 </div>
-<p class="continuation">confirming our earlier guess. We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.</p></article><div class="sagecell-octave" id="sage-12"><script type="text/x-sage">% Code for Markov example
+<p class="continuation">confirming our earlier guess. We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.</p></article><pre class="ptx-sagecell sagecell-octave" id="sage-12"><script type="text/x-sage">% Code for Markov example
 format short
 A = [0.33, 0.25, 0.40; 0.52, 0.42, 0.40; 0.15, 0.33, 0.20]
 [U,D] = eig(A)
-</script></div>
+</script></pre>
 <article class="example example-like" id="example-singular-values-and-the-condition-number"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Singular Values and the Condition Number.</span>
 </h3>
 <p id="p-171">In numerical linear algebra, the <dfn class="terminology">condition number</dfn> of an invertible matrix <span class="process-math">\(A\)</span> gives an estimate of how solutions of <span class="process-math">\(A\vb{x} = \vb{b}\)</span> can change in the presence of error. More precisely, the condition number measures the response of the solution <span class="process-math">\(\vb{x}\)</span> if <span class="process-math">\(\vb{b}\)</span> is perturbed by an error term. If the condition number is small then we expect a small change in <span class="process-math">\(\vb{x}\)</span> if the error in <span class="process-math">\(\vb{b}\)</span> is small. If the condition is large, however, small changes in <span class="process-math">\(\vb{b}\)</span> can have significant effects on <span class="process-math">\(\vb{x}\text{.}\)</span></p>
 <p id="p-172">The condition number itself is denoted <span class="process-math">\(\kappa(A)\text{.}\)</span> If we let <span class="process-math">\(A\vb{x} = \vb{b}\)</span> denote the unperturbed system and <span class="process-math">\(A\hat{\vb{x}} = \hat{\vb{b}}\)</span> denote the corresponding perturbed system, then the relative error between <span class="process-math">\(\hat{\vb{x}}\)</span> and <span class="process-math">\(\vb{x}\)</span> is at most equal to <span class="process-math">\(\kappa(A)\)</span> times the relative error between <span class="process-math">\(\hat{\vb{b}}\)</span> and <span class="process-math">\(\vb{b}\text{.}\)</span></p>
 <p id="p-173">The condition number <span class="process-math">\(\kappa(A)\)</span> itself can be calculated from the eigenvalues of <span class="process-math">\(A^{T}A\)</span> as follows:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \kappa(A) = \frac{\sqrt{\lambda_{\text{max}}(A^{T}A)}}{\sqrt{\lambda_{\text{min}}(A^{T}A)}}.
 \end{equation*}
 </div>
 <p class="continuation">Using this, find the <span class="process-math">\(\kappa(A)\)</span> for</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = \mqty[1 &amp; 3 &amp; -2 \\ 0 &amp; 2 &amp; 4 \\ -3 &amp; 2 &amp; 3]
 \end{equation*}
-</div></article><div class="sagecell-octave" id="sage-13"><script type="text/x-sage">% code cell for condition number example
-</script></div></section></div></main>
+</div></article><pre class="ptx-sagecell sagecell-octave" id="sage-13"><script type="text/x-sage">% code cell for condition number example
+</script></pre></section></div></main>
 </div>
 </body>
 </html>
