@@ -618,6 +618,119 @@
                     </p>
                 </solution>
             </example>
+
+            <p>
+                The relationship between gradients and directional derivatives gives the following very important property of the gradient.
+            </p>
+
+            <theorem xml:id="theorem-gradients-and-maximum-rates-of-change">
+                <title>Gradients and Maximum Rates of Change</title>
+
+                <statement>
+                    <p>
+                        Let <m>f</m> be a continuously differentiable scalar field and suppose that <m>\grad f\neq\vb{0}</m> (so that <m>\grad f</m> is smooth).
+                        Then <m>\grad f</m> is parallel to the direction of greatest increase of <m>f</m>, and the corresponding rate of increase is <m>\norm{\grad{f}}</m>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <example xml:id="example-finding-a-heat-flow">
+                <title>Finding a Heat Flow</title>
+
+                <statement>
+                    <p>
+                        Let <m>T(x,y) = 3x^2 - 2y^2</m>.
+                        Find the direction and magnitude of the heat flow at the point <m>(3, 4)</m>.
+                    </p>
+                </statement>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-potential-functions">
+            <title>Potential Functions</title>
+
+            <p>
+                Given a continuous one-dimensional force <m>f(x)</m> defined on some interval <m>[a, b]</m>, we can define a corresponding potential function <m>U(x)</m> by
+                <me>U(x) = -\int_{x_0}^x f(t)\dd{t}</me>,
+                where <m>x_0\in[a,b]</m> is some previously chosen initial value.
+                With this definition, the work done by <m>f</m> in moving a particle from <m>x = x_1</m> to <m>x = x_2</m> can be written
+                <me>-\Delta U = -(U(x_2) - U(x_1))</me>.
+                In particular, the work done by <m>f</m> depends only on the initial point <m>x_1</m> and the terminal point <m>x_2</m> and the work done is <em>path independent</em>.
+            </p>
+
+            <p>
+                Now let's move to a higher dimensional setting.
+                Say we have the force <m>\ff(x,y) = \mqty[0 \amp x]</m> and we wish to find the work done as a particle moves from <m>(0, 0)</m> to <m>(1,0)</m>.
+                If we plot this force field we see that the vectors increase in magnitude as we move to the right.
+            </p>
+
+            <figure xml:id="figure-sageplot-nonconservative-vector-field">
+                <caption>A plot of <m>\ff(x,y) = \mqty[0 \amp x]</m>.</caption>
+
+                <image xml:id="image-sageplot-nonconservative-vector-field" width="50%">
+                    <description>A plot of <m>\ff(x,y) = \mqty[0 \amp x]</m>.</description>
+
+                    <sageplot>
+                        var('x, y')
+
+                        f(x, y) = (0, x)
+
+                        plot_vector_field(f(x, y), (x, 0, 1.1), (y, -2, 2), color="blue")
+                    </sageplot>
+                </image>
+            </figure>
+
+            <p>
+                In the force field above, the work done is now <em>path dependent</em>.
+                To see why, consider two paths from <m>(0,0)</m> to <m>(1,0)</m>: <m>C_1</m> given by the top half of the circle <m>(x-\frac{1}{2})^2 + y^2 = \frac{1}{4}</m> traversed clockwise and <m>C_2</m> given by the bottom half of the same circle traversed counterclockwise.
+                On <m>C_1</m> the work done will be negative since the path tends to go against <m>\ff</m> more than with <m>\ff</m>.
+                Likewise, the work will be positive on <m>C_2</m> since this path flows with <m>\ff</m> more than it flows against it.
+                Since the work depends on the path taken between <m>(0,0)</m> and <m>(1,0)</m>, the work is path dependent.
+            </p>
+
+            <p>
+                The issue here is that the force field <m>\ff(x,y) = \mqty[0 \amp x]</m> has no corresponding potential function.
+                This is made more precise in the following definition.
+            </p>
+
+            <definition xml:id="definition-conservative-vector-fields-and-potentials">
+                <title>Conservative Vector Fields and Potentials</title>
+
+                <idx><h>conservative vector fields</h></idx>
+
+                <idx><h>potentials</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\vb{F}</m> denote a vector field.
+                        If there exists a scalar field <m>f</m> such that <m>\grad f = \vb{F}</m>, then we say that <m>\vb{F}</m> is a <term>conservative vector field</term> and that <m>f</m> is a <term>potential function</term> for <m>\vb{F}</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The vector field <m>\ff</m> seen in <xref ref="figure-sageplot-nonconservative-vector-field" text="type-global" /> above is not conservative.
+                If it were, then it would have a potential function <m>\varphi(x,y)</m> such that <m>\grad\varphi = \ff</m>, which would then imply that <m>\varphi_x = 0</m> and <m>\varphi_y = x</m>.
+                Then
+                <me>\varphi(x, y) = \int\varphi_y\dd{y} = xy + g(x) \implies \varphi_x = y + \dv{g}{x}</me>.
+                This contradicts the condition <m>\varphi_x = 0</m>, so <m>\ff</m> cannot have a potential.
+            </p>
+
+            <p>
+                A necessary for a vector field <m>\ff = \mqty[P \amp Q]</m> to be conservative is for <m>P_y - Q_x</m> to be <m>0</m>.
+                Equivalently, <m>P_y = Q_x</m> in a conservative vector field.
+            </p>
+
+            <example xml:id="example-finding-a-potential-function">
+                <title>Finding a Potential Function</title>
+
+                <statement>
+                    <p>
+                        Let <m>\ff = \mqty[x \amp y]</m>.
+                        Is <m>\ff</m> conservative?
+                    </p>
+                </statement>
+            </example>
         </subsection>
     </section>
 </chapter>
