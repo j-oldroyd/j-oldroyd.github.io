@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-30T07:46:39-04:00       *-->
+<!--*       on 2022-03-30T15:11:34-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -52,7 +52,13 @@
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
+</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -101,7 +107,7 @@
 \newcommand{\limit}[2]{\lim_{#1\to#2}}
 \newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
 \newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\vecm}[1]{\boldsymbol{#1}}
 \newcommand{\ivec}[1]{
 \renewcommand{\arraystretch}{.8}
 \begin{bmatrix}#1\end{bmatrix}
@@ -206,7 +212,100 @@ true);
 \begin{equation*}
 \grad f(x,y,z) = \mqty[\pdv{f}{x} &amp; \pdv{f}{y} &amp; \pdv{f}{z}]\text{.}
 \end{equation*}
-</div></article></section></section></div></main>
+</div></article><p id="p-302">The gradient can also be written in terms of the <em class="emphasis">del</em> operator <span class="process-math">\(\grad\text{,}\)</span> which is defined to be</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\grad = \mqty[\pdv{x} &amp; \pdv{y} &amp; \pdv{z}]
+\end{equation*}
+</div>
+<p class="continuation">in the case of scalar fields on <span class="process-math">\(\RR^3\text{.}\)</span> The gradient vector <span class="process-math">\(\grad f\)</span> is then obtained as the scalar product of the “vector” <span class="process-math">\(\grad\)</span> with the scalar field <span class="process-math">\(f\text{.}\)</span></p>
+<article class="example example-like" id="example-computing-a-gradient-in--rr-3-"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Gradient in <span class="process-math">\(\RR^3\)</span>.</span>
+</h4>
+<p id="p-303">Let <span class="process-math">\(f(x,y,z) = xze^{x-y^2}\text{.}\)</span> Find <span class="process-math">\(\grad f\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-32" id="solution-32"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-32"><div class="solution solution-like">
+<p id="p-304">The gradient is the vector of partial derivatives:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\grad f = \mqty[z(1+x)e^{x-y^2} &amp; -2xyze^{x-y^2} &amp; xe^{x-y^2}]\text{.}
+\end{equation*}
+</div>
+</div></div>
+</div></article><p id="p-305">Sage can also compute gradients of scalar fields using the <code class="code-inline tex2jax_ignore">.gradient()</code> method. When using Sage, be careful to define any relevant variables. Remember that Sage will default to recognizing <code class="code-inline tex2jax_ignore">x</code> as a variable if its value hasn't been otherwise assigned.</p>
+<pre class="ptx-sagecell sagecell-sage" id="sage-26"><script type="text/x-sage">var('x, y, z')
+
+f(x, y, z) = x*z*exp(x - y^2)
+
+f(x, y, z).gradient() # computes the gradient
+</script></pre>
+<p id="p-306">The gradient is a useful tool for finding directional derivatives.</p>
+<article class="theorem theorem-like" id="theorem-gradients-and-directional-derivatives"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Gradients and Directional Derivatives.</span>
+</h4>
+<p id="p-307">Let <span class="process-math">\(f(x,y,z)\)</span> be a continuously differentiable scalar field and let <span class="process-math">\(\vv\in\RR^3\)</span> be a nonzero vector. The directional derivative of <span class="process-math">\(f\)</span> in the direction of <span class="process-math">\(\vv\)</span> is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+D_{\vv}f = \grad f \cdot \frac{\vv}{\norm{\vv}}\text{.}
+\end{equation*}
+</div></article><article class="example example-like" id="example-computing-a-directional-derivative"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Directional Derivative.</span>
+</h4>
+<p id="p-308">Determine if <span class="process-math">\(f(x, y, z) = z^2 - xy\)</span> is increasing or decreasing at the point <span class="process-math">\((0, 2, 0)\)</span> and in the direction of <span class="process-math">\(\vv = \smqty[-1 &amp; 1 &amp; 0]\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-33" id="solution-33"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-33"><div class="solution solution-like">
+<p id="p-309">Since <span class="process-math">\(\grad f = \smqty[-y &amp; -x &amp; 2z]\text{,}\)</span> it follows that</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-18">
+\begin{align*}
+D_{\vv}f(0,2,0) &amp; = \grad f(0, 2, 0) \cdot \frac{\vv}{\norm{\vv}} \\
+&amp; = \mqty[-2 &amp; 0 &amp; 0] \cdot \mqty[-\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0] \\
+&amp; = \frac{2}{\sqrt{2}}
+\end{align*}
+</div>
+<p class="continuation">Since this is positive, the function <span class="process-math">\(f\)</span> is increasing at <span class="process-math">\((0, 2, 0)\)</span> in the direction of <span class="process-math">\(\vv\text{.}\)</span></p>
+</div></div>
+</div></article><p id="p-310">The relationship between gradients and directional derivatives gives the following very important property of the gradient.</p>
+<article class="theorem theorem-like" id="theorem-gradients-and-maximum-rates-of-change"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Gradients and Maximum Rates of Change.</span>
+</h4>
+<p id="p-311">Let <span class="process-math">\(f\)</span> be a continuously differentiable scalar field and suppose that <span class="process-math">\(\grad f\neq\vb{0}\)</span> (so that <span class="process-math">\(\grad f\)</span> is smooth). Then <span class="process-math">\(\grad f\)</span> is parallel to the direction of greatest increase of <span class="process-math">\(f\text{,}\)</span> and the corresponding rate of increase is <span class="process-math">\(\norm{\grad{f}}\text{.}\)</span></p></article><article class="example example-like" id="example-finding-a-heat-flow"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Heat Flow.</span>
+</h4>
+<p id="p-312">Let <span class="process-math">\(T(x,y) = 3x^2 - 2y^2\text{.}\)</span> Find the direction and magnitude of the heat flow at the point <span class="process-math">\((3, 4)\text{.}\)</span></p></article></section><section class="subsection" id="subsection-potential-functions"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Potential Functions</span>
+</h3>
+<p id="p-313">Given a continuous one-dimensional force <span class="process-math">\(f(x)\)</span> defined on some interval <span class="process-math">\([a, b]\text{,}\)</span> we can define a corresponding potential function <span class="process-math">\(U(x)\)</span> by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+U(x) = -\int_{x_0}^x f(t)\dd{t}\text{,}
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(x_0\in[a,b]\)</span> is some previously chosen initial value. With this definition, the work done by <span class="process-math">\(f\)</span> in moving a particle from <span class="process-math">\(x = x_1\)</span> to <span class="process-math">\(x = x_2\)</span> can be written</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+-\Delta U = -(U(x_2) - U(x_1))\text{.}
+\end{equation*}
+</div>
+<p class="continuation">In particular, the work done by <span class="process-math">\(f\)</span> depends only on the initial point <span class="process-math">\(x_1\)</span> and the terminal point <span class="process-math">\(x_2\)</span> and the work done is <em class="emphasis">path independent</em>.</p>
+<p id="p-314">Now let's move to a higher dimensional setting. Say we have the force <span class="process-math">\(\ff(x,y) = \mqty[0 &amp; x]\)</span> and we wish to find the work done as a particle moves from <span class="process-math">\((0, 0)\)</span> to <span class="process-math">\((1,0)\text{.}\)</span> If we plot this force field we see that the vectors increase in magnitude as we move to the right.</p>
+<figure class="figure figure-like" id="figure-sageplot-nonconservative-vector-field"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/sageplot/image-sageplot-nonconservative-vector-field.svg" role="img" class="contained" alt="A plot of \(\ff(x,y) = \mqty[0 &amp; x]\text{.}\)"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.4.7<span class="period">.</span></span><span class="space"> </span>A plot of <span class="process-math">\(\ff(x,y) = \mqty[0 &amp; x]\text{.}\)</span></figcaption></figure><p id="p-315">In the force field above, the work done is now <em class="emphasis">path dependent</em>. To see why, consider two paths from <span class="process-math">\((0,0)\)</span> to <span class="process-math">\((1,0)\text{:}\)</span> <span class="process-math">\(C_1\)</span> given by the top half of the circle <span class="process-math">\((x-\frac{1}{2})^2 + y^2 = \frac{1}{4}\)</span> traversed clockwise and <span class="process-math">\(C_2\)</span> given by the bottom half of the same circle traversed counterclockwise. On <span class="process-math">\(C_1\)</span> the work done will be negative since the path tends to go against <span class="process-math">\(\ff\)</span> more than with <span class="process-math">\(\ff\text{.}\)</span> Likewise, the work will be positive on <span class="process-math">\(C_2\)</span> since this path flows with <span class="process-math">\(\ff\)</span> more than it flows against it. Since the work depends on the path taken between <span class="process-math">\((0,0)\)</span> and <span class="process-math">\((1,0)\text{,}\)</span> the work is path dependent.</p>
+<p id="p-316">The issue here is that the force field <span class="process-math">\(\ff(x,y) = \mqty[0 &amp; x]\)</span> has no corresponding potential function. This is made more precise in the following definition.</p>
+<article class="definition definition-like" id="definition-conservative-vector-fields-and-potentials"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Conservative Vector Fields and Potentials.</span>
+</h4>
+<p id="p-317">Let <span class="process-math">\(\vb{F}\)</span> denote a vector field. If there exists a scalar field <span class="process-math">\(f\)</span> such that <span class="process-math">\(\grad f = \vb{F}\text{,}\)</span> then we say that <span class="process-math">\(\vb{F}\)</span> is a <dfn class="terminology">conservative vector field</dfn> and that <span class="process-math">\(f\)</span> is a <dfn class="terminology">potential function</dfn> for <span class="process-math">\(\vb{F}\text{.}\)</span></p></article><p id="p-318">The vector field <span class="process-math">\(\ff\)</span> seen in <a href="" class="xref" data-knowl="./knowl/figure-sageplot-nonconservative-vector-field.html" title="Figure 3.4.7">Figure 3.4.7</a> above is not conservative. If it were, then it would have a potential function <span class="process-math">\(\varphi(x,y)\)</span> such that <span class="process-math">\(\grad\varphi = \ff\text{,}\)</span> which would then imply that <span class="process-math">\(\varphi_x = 0\)</span> and <span class="process-math">\(\varphi_y = x\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-sageplot-nonconservative-vector-field.html">
+\begin{equation*}
+\varphi(x, y) = \int\varphi_y\dd{y} = xy + g(x) \implies \varphi_x = y + \dv{g}{x}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">This contradicts the condition <span class="process-math">\(\varphi_x = 0\text{,}\)</span> so <span class="process-math">\(\ff\)</span> cannot have a potential.</p>
+<p id="p-319">A necessary for a vector field <span class="process-math">\(\ff = \mqty[P &amp; Q]\)</span> to be conservative is for <span class="process-math">\(P_y - Q_x\)</span> to be <span class="process-math">\(0\text{.}\)</span> Equivalently, <span class="process-math">\(P_y = Q_x\)</span> in a conservative vector field.</p>
+<article class="example example-like" id="example-finding-a-potential-function"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Potential Function.</span>
+</h4>
+<p id="p-320">Let <span class="process-math">\(\ff = \mqty[x &amp; y]\text{.}\)</span> Is <span class="process-math">\(\ff\)</span> conservative?</p></article></section></section></div></main>
 </div>
 </body>
 </html>
