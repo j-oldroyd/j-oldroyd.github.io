@@ -538,32 +538,86 @@
                         <me>\grad f(x,y,z) = \mqty[\pdv{f}{x} &amp; \pdv{f}{y} &amp; \pdv{f}{z}]</me>.
                     </p>
                 </statement>
-
-                <p>
-                    The gradient can also be written in terms of the <em>del</em> operator <m>\grad</m>, which is defined to be
-                    <me>\grad = \mqty[\pdv{x} \amp \pdv{y} \amp \pdv{z}]</me>
-                    in the case of scalar fields on <m>\RR^3</m>.
-                    The gradient vector <m>\grad f</m> is then obtained as the scalar product of the <q>vector</q> <m>\grad</m> with the scalar field <m>f</m>.
-                </p>
-
-                <example xml:id="example-computing-a-gradient-in--rr-3-">
-                    <title>Computing a Gradient in <m>\RR^3</m></title>
-
-                    <statement>
-                        <p>
-                            Let <m>f(x,y,z) = xze^{x-y^2}</m>.
-                            Find <m>\grad f</m>.
-                        </p>
-                    </statement>
-
-                    <solution>
-                        <p>
-                            The gradient is the vector of partial derivatives:
-                            <me>\grad f = \mqty[z(1+x)e^{x-y^2} \amp -2xyze^{x-y^2} \amp xe^{x-y^2}]</me>.
-                        </p>
-                    </solution>
-                </example>
             </definition>
+
+            <p>
+                The gradient can also be written in terms of the <em>del</em> operator <m>\grad</m>, which is defined to be
+                <me>\grad = \mqty[\pdv{x} \amp \pdv{y} \amp \pdv{z}]</me>
+                in the case of scalar fields on <m>\RR^3</m>.
+                The gradient vector <m>\grad f</m> is then obtained as the scalar product of the <q>vector</q> <m>\grad</m> with the scalar field <m>f</m>.
+            </p>
+
+            <example xml:id="example-computing-a-gradient-in--rr-3-">
+                <title>Computing a Gradient in <m>\RR^3</m></title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z) = xze^{x-y^2}</m>.
+                        Find <m>\grad f</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The gradient is the vector of partial derivatives:
+                        <me>\grad f = \mqty[z(1+x)e^{x-y^2} \amp -2xyze^{x-y^2} \amp xe^{x-y^2}]</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Sage can also compute gradients of scalar fields using the <c>.gradient()</c> method.
+                When using Sage, be careful to define any relevant variables.
+                Remember that Sage will default to recognizing <c>x</c> as a variable if its value hasn't been otherwise assigned.
+            </p>
+
+            <sage>
+                <input>
+                    var('x, y, z')
+
+                    f(x, y, z) = x*z*exp(x - y^2)
+
+                    f(x, y, z).gradient() # computes the gradient
+                </input>
+            </sage>
+
+            <p>
+                The gradient is a useful tool for finding directional derivatives.
+            </p>
+
+            <theorem xml:id="theorem-gradients-and-directional-derivatives">
+                <title>Gradients and Directional Derivatives</title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z)</m> be a continuously differentiable scalar field and let <m>\vv\in\RR^3</m> be a nonzero vector.
+                        The directional derivative of <m>f</m> in the direction of <m>\vv</m> is
+                        <me>D_{\vv}f = \grad f \cdot \frac{\vv}{\norm{\vv}}</me>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <example xml:id="example-computing-a-directional-derivative">
+                <title>Computing a Directional Derivative</title>
+
+                <statement>
+                    <p>
+                        Determine if <m>f(x, y, z) = z^2 - xy</m> is increasing or decreasing at the point <m>(0, 2, 0)</m> and in the direction of <m>\vv = \smqty[-1 \amp 1 \amp 0]</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Since <m>\grad f = \smqty[-y \amp -x \amp 2z]</m>, it follows that
+                        <md>
+                            <mrow>D_{\vv}f(0,2,0) \amp = \grad f(0, 2, 0) \cdot \frac{\vv}{\norm{\vv}} </mrow>
+                            <mrow> \amp = \mqty[-2 \amp 0 \amp 0] \cdot \mqty[-\frac{1}{\sqrt{2}} \amp \frac{1}{\sqrt{2}} \amp 0] </mrow>
+                            <mrow> \amp = \frac{2}{\sqrt{2}}</mrow>
+                        </md>
+                        Since this is positive, the function <m>f</m> is increasing at <m>(0, 2, 0)</m> in the direction of <m>\vv</m>.
+                    </p>
+                </solution>
+            </example>
         </subsection>
     </section>
 </chapter>
