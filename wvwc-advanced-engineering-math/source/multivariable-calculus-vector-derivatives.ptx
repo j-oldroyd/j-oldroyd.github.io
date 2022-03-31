@@ -735,4 +735,130 @@
             </example>
         </subsection>
     </section>
+    <section xml:id="section-divergence-and-curl-of-vector-fields">
+        <title>Divergence and Curl of Vector Fields</title>
+
+        <introduction>
+            <p>
+                In <xref ref="section-gradients-and-potentials" text="type-global" /> we reviewed the gradient of scalar field along with the del operator <m>\grad</m>.
+                The gradient, and the del operator in particular, is the tool we use to make sense of how scalar fields <m>f(x, y, z)</m> change.
+                On the other hand, <m>\grad</m> cannot be applied directly to vector fields since we haven't defined how to multiply vectors.
+                However, we do have the notions of dot products and cross products that will allow us to combine <m>\del</m> with vector fields <m>\FF</m>.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-divergence">
+            <title>Divergence</title>
+
+            <p>
+                Let <m>\FF(x, y) = \mqty[P(x, y) &amp; Q(x, y)]</m> denote a vector field in <m>\RR^2</m> and suppose it measures some changing quantity like fluid flow.
+                We would like to measure how the fluid flow is changing at a given point.
+                This can be done using the <em>divergence</em> of the vector field.
+            </p>
+
+            <definition xml:id="definition-divergence">
+                <title>Divergence</title>
+
+                <idx><h>vector fields</h><h>divergence</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF(x, y) = \mqty[P(x, y) &amp; Q(x, y)]</m> be a vector field in <m>\RR^2</m> and suppose that its component functions <m>P</m> and <m>Q</m> are continuously differentiable.
+                        The <term>divergence</term> of <m>\FF</m> is the scalar quantity
+                        <me>\divt\FF = \div\FF = \pdv{P}{x} + \pdv{Q}{y}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The divergence of a vector field provides a measure of how the <q>flow density</q> of the field changes at a certain point.
+                In particular, if <m>\div\FF</m> corresponds to the difference between the outflow and the inflow.
+                If the divergence is positive then the vector field tends to flow out of the given point, and if the divergence is negative the vector field tends to flow into the given point.
+                Any point at which the divergence is positive is called a <em>source</em>, and any point at which the divergence is negative is called a <em>sink</em>.
+            </p>
+
+            <example xml:id="example-estimating-divergence-from-a-graph">
+                <title>Estimating Divergence From a Graph</title>
+
+                <statement>
+                    <p>
+                        Estimate the divergence of the vector field <m>\FF</m> at the point <m>(-1, 0)</m> in the figure below.
+                    </p>
+
+                    <figure xml:id="figure-sage-divergence-estimate">
+                        <caption>A vector field <m>\FF</m>.</caption>
+
+                        <image xml:id="image-sage-divergence-estimate" width="50%">
+                            <description>A vector field <m>\FF</m>.</description>
+
+                            <sageplot>
+                                var('x, y')
+                                F(x, y) = (1, x-y)
+
+                                P = plot_vector_field(F(x, y), (x, -2, 2), (y, -2, 2), color="blue")
+                                P += point((-1, 0), color="black")
+                                P
+                            </sageplot>
+                        </image>
+                    </figure>
+                </statement>
+            </example>
+
+            <example xml:id="example-computing-the-divergence">
+                <title>Computing the Divergence</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.
+                        Find <m>\div\FF</m> and any sources and sinks of <m>\FF</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        By <xref ref="definition-divergence" text="type-global" />,
+                        <me>\div\FF = y</me>.
+                        Therefore any point above the <m>x</m>-axis is a source in the vector field and any point below the <m>x</m>-axis is a sink.
+                    </p>
+
+                    <figure xml:id="figure-sage-source-sink-2d-plot">
+                        <caption>The vector field <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.</caption>
+
+                        <image xml:id="image-sage-source-sink-2d" width="50%">
+                            <description>The vector field <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.</description>
+
+                            <sageplot>
+                                var('x, y')
+                                F(x, y) = (x*y, -sin(x^2))
+                                plot_vector_field(F(x, y), (x, 0, 2), (y, -1, 1), color="blue")
+                            </sageplot>
+                        </image>
+                    </figure>
+                </solution>
+            </example>
+
+            <p>
+                A vector field <m>\FF</m> is said to be <em>incompressible</em>, <em>solenoidal</em> or <em>divergence-free</em> if its divergence is <m>0</m> at all points.
+                This assumption can often be made about slow moving fluid flows.
+            </p>
+
+            <example xml:id="example-determining-if-a-vector-field-is-incompressible">
+                <title>Determining if a Vector Field Is Incompressible</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[y &amp; -x]</m>.
+                        Is <m>\FF</m> an incompressible flow?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We just need to take the divergence of <m>\FF</m>, which is easily seen to be <m>0</m>.
+                        Therefore the flow is incompressible.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
 </chapter>
