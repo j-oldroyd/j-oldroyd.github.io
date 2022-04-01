@@ -865,19 +865,20 @@
             </p>
 
             <example xml:id="example-finding-a-divergence-in--rr-3-">
-              <title>Finding a Divergence in <m>\RR^3</m></title>
-              <statement>
-                <p>
-                  Find the divergence of <m>\FF = x\ii - z\jj + e^{xy}\kk</m>.
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  The divergence is
-                  <me>\div\FF = \pdv{x}(x) + \pdv{y}(-z) + \pdv{z}(e^{xy}) = 1</me>.
-                  Note that since the divergence is positive, <em>every</em> point in <m>\RR^3</m> is a source in this field.
-                </p>
-              </solution>
+                <title>Finding a Divergence in <m>\RR^3</m></title>
+
+                <statement>
+                    <p>
+                        Find the divergence of <m>\FF = x\ii - z\jj + e^{xy}\kk</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The divergence is
+                        <me>\div\FF = \pdv{x}(x) + \pdv{y}(-z) + \pdv{z}(e^{xy}) = 1</me>.
+                        Note that since the divergence is positive, <em>every</em> point in <m>\RR^3</m> is a source in this field.
+                    </p>
+                </solution>
             </example>
 
             <p>
@@ -929,46 +930,72 @@
             </p>
 
             <example xml:id="example-computing-a-curl">
-              <title>Computing a Curl</title>
-              <statement>
-                <p>
-                  Let <m>\FF = \mqty[xy \amp 3 + 2z \amp z]</m>.
-                  Find <m>\curlt\FF</m>.
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Using the determinant formulation of the curl, we get
-                  <me>\curlt\FF = \curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ xy &amp; 3 + 2z &amp; z|</me>
-                  which simplifies to <m>\curlt\FF = \mqty[-2 &amp; 0 &amp; -x]</m>.
-                </p>
+                <title>Computing a Curl</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy \amp 3 + 2z \amp z]</m>.
+                        Find <m>\curlt\FF</m>.
+                    </p>
+                </statement>
+                <solution>
+                  <p>
+                      Using the determinant formulation of the curl, we get
+                      <me>\curlt\FF = \curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ xy &amp; 3 + 2z &amp; z|</me>
+                      which simplifies to <m>\curlt\FF = \mqty[-2 &amp; 0 &amp; -x]</m>.
+                  </p>
               </solution>
-            </example>
+          </example>
 
+          <p>
+              Just as the divergence of a vector field can be interpreted as a measure of the flow <em>through</em> or <em>across</em> a point in a vector field, the curl can be interpreted as a measure of the flow <em>around</em> a point in a vector field.
+              In particular, if <m>\FF</m> is a vector field in <m>\RR^3</m> then <m>\curl\FF</m> gives the axis of rotation around which <m>\FF</m> tends to flow counterclockwise when viewed from above.
+              The magnitude <m>\norm{\curlt\FF}</m> measures the amount of rotation.
+          </p>
+
+          <p>
+              For example, consider the vector field <m>\FF = \mqty[xy &amp; 3 + 2z &amp; z]</m> from <xref ref="example-computing-a-curl" text="type-global" />.
+              At <m>(0, 0, -1)</m> its corresponding curl is <m>\mqty[-2 &amp; 0 &amp; 0]</m>.
+              Therefore the vector field <m>\FF</m> tends to rotate counterclockwise around the point <m>(0, 0, -1)</m> when viewed head-on from the direction of <m>\mqty[-2 &amp; 0 &amp; 0]</m>, i.e., from the direction of the negative <m>x</m>-axis.
+              See the figure below produced using Sage.
+              Be sure to rotate the figure so that you're viewing it from the direction of the negative <m>x</m>-axis!
+          </p>
+
+          <sage>
+            <input>
+                var('x, y, z')
+
+                F(x, y, z) = (x*y, 3 + 2*z, z)
+
+                plot_vector_field3d(F(x, y, z), (x, -1, 1), (y, -1, 1), (z, -2, 0))
+            </input>
+        </sage>
+
+    </subsection>
+
+    <p>
+        Sage is also capable of computing curls and divergeneces of arbitrary vector fields using the <c>function</c> command.
+        This tells Sage to treat a variable as a function of specified variables.
+    </p>
+
+    <example xml:id="example-computing-the-divergence-of-curl">
+        <title>Computing the Divergence of a Curl</title>
+
+        <statement>
             <p>
-                Just as the divergence of a vector field can be interpreted as a measure of the flow <em>through</em> or <em>across</em> a point in a vector field, the curl can be interpreted as a measure of the flow <em>around</em> a point in a vector field.
-                In particular, if <m>\FF</m> is a vector field in <m>\RR^3</m> then <m>\curl\FF</m> gives the axis of rotation around which <m>\FF</m> tends to flow counterclockwise when viewed from above.
-                The magnitude <m>\norm{\curlt\FF}</m> measures the amount of rotation.
+                Let <m>\FF = \mqty[P \amp Q \amp R]</m> and assume that its component functions are continuously differentiable.
+                Compute <m>\div(\curl\FF)</m> by completing the code cell below.
             </p>
-
-            <p>
-                For example, consider the vector field <m>\FF = \mqty[xy &amp; 3 + 2z &amp; z]</m> from <xref ref="example-computing-a-curl" text="type-global" />.
-                At <m>(0, 0, -1)</m> its corresponding curl is <m>\mqty[-2 &amp; 0 &amp; 0]</m>.
-                Therefore the vector field <m>\FF</m> tends to rotate counterclockwise around the point <m>(0, 0, -1)</m> when viewed head-on from the direction of <m>\mqty[-2 &amp; 0 &amp; 0]</m>, i.e., from the direction of the negative <m>x</m>-axis.
-                See the figure below produced using Sage.
-                Be sure to rotate the figure so that you're viewing it from the direction of the negative <m>x</m>-axis!
-            </p>
-
             <sage>
                 <input>
                     var('x, y, z')
 
-                    F(x, y, z) = (x*y, 3 + 2*z, z)
-
-                    plot_vector_field3d(F(x, y, z), (x, -1, 1), (y, -1, 1), (z, -2, 0))
+                    P = function('P')(x, y, z)
+                    Q = function('Q')(x, y, z)
+                    R = function('R')(x, y, z)
                 </input>
             </sage>
-
-        </subsection>
-    </section>
+        </statement>
+    </example>
+</section>
 </chapter>
