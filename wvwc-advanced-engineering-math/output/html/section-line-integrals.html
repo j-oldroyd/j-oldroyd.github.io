@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-04-04T16:32:28-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WVWC-AEM Line Integrals</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-advanced-engineering-math/output/html/external/./wvwc-logo.jpg">
+<meta property="book:title" content="Advanced Engineering Mathematics Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\xxp}{\mathbf{x}^\prime}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\yyp}{\mathbf{y}^\prime}
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\zzp}{\mathbf{z}^\prime}
+\newcommand{\ii}{\mathbf{i}}
+\newcommand{\jj}{\mathbf{j}}
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\uup}{\mathbf{u}^\prime}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vvp}{\mathbf{v}^\prime}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\rr}{\mathbf{r}}
+\newcommand{\rrp}{\mathbf{r}^\prime}
+\newcommand{\ff}{\mathbf{f}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\col}[1]{\operatorname{col}{#1}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\nul}[1]{\operatorname{null}{#1}}
+\newcommand{\spn}[1]{\operatorname{span}{#1}}
+\newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+      }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\del}{\nabla} 
+\renewcommand{\div}{\grad\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\curlt}{\operatorname{curl}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-advanced-engineering-math.html"><span class="title">Advanced Engineering Mathematics Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-multivariable-calculus-vector-derivatives.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-derivatives.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-multivariable-calculus-vector-derivatives.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-derivatives.html" title="Up">Up</a><a class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-linear-algebra.html" data-scroll="part-linear-algebra" class="internal"><span class="codenumber">I</span> <span class="title">Linear Algebra</span></a></li>
+<li class="link">
+<a href="chapter-linear-algebra-matrices.html" data-scroll="chapter-linear-algebra-matrices" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Matrix Algebra</span></a><ul>
+<li><a href="section-matrices-vectors-and-linear-combinations.html" data-scroll="section-matrices-vectors-and-linear-combinations" class="internal">Matrices, Vectors and Linear Combinations</a></li>
+<li><a href="section-matrix-multiplication.html" data-scroll="section-matrix-multiplication" class="internal">Matrix Multiplication</a></li>
+<li><a href="section-systems-of-linear-equations.html" data-scroll="section-systems-of-linear-equations" class="internal">Systems of Linear Equations</a></li>
+<li><a href="section-linear-independence.html" data-scroll="section-linear-independence" class="internal">Linear Independence</a></li>
+<li><a href="section-existence-of-solutions.html" data-scroll="section-existence-of-solutions" class="internal">Existence of Solutions</a></li>
+<li><a href="section-determinants.html" data-scroll="section-determinants" class="internal">Determinants</a></li>
+<li><a href="section-matrix-inverses.html" data-scroll="section-matrix-inverses" class="internal">Matrix Inverses</a></li>
+<li><a href="section--LU-decomposition.html" data-scroll="section--LU-decomposition" class="internal"><span class="process-math">\(LU\)</span> Decomposition</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-eigenvalues-eigenvectors.html" data-scroll="chapter-linear-eigenvalues-eigenvectors" class="internal"><span class="codenumber">2</span> <span class="title">Eigenvalues and Eigenvectors</span></a><ul>
+<li><a href="section-finding-eigenvalues-and-eigenvectors.html" data-scroll="section-finding-eigenvalues-and-eigenvectors" class="internal">Finding Eigenvalues and Eigenvectors</a></li>
+<li><a href="section-eigenvalue-problems.html" data-scroll="section-eigenvalue-problems" class="internal">Eigenvalue Problems</a></li>
+<li><a href="section-orthogonal-transformations.html" data-scroll="section-orthogonal-transformations" class="internal">Orthogonal Transformations</a></li>
+<li><a href="section-diagonalization-of-matrices.html" data-scroll="section-diagonalization-of-matrices" class="internal">Diagonalization of Matrices</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-multivariable-calculus.html" data-scroll="part-multivariable-calculus" class="internal"><span class="codenumber">II</span> <span class="title">Multivariable Calculus</span></a></li>
+<li class="link">
+<a href="chapter-multivariable-calculus-vector-derivatives.html" data-scroll="chapter-multivariable-calculus-vector-derivatives" class="internal"><span class="codenumber">3</span> <span class="title">Vector Derivatives</span></a><ul>
+<li><a href="section-inner-products-and-cross-products.html" data-scroll="section-inner-products-and-cross-products" class="internal">Inner Products and Cross Products</a></li>
+<li><a href="section-vector-functions.html" data-scroll="section-vector-functions" class="internal">Vector Functions</a></li>
+<li><a href="section-arc-length-and-components-of-acceleration.html" data-scroll="section-arc-length-and-components-of-acceleration" class="internal">Arc Length and Components of Acceleration</a></li>
+<li><a href="section-gradients-and-potentials.html" data-scroll="section-gradients-and-potentials" class="internal">Gradients and Potentials</a></li>
+<li><a href="section-divergence-and-curl-of-vector-fields.html" data-scroll="section-divergence-and-curl-of-vector-fields" class="internal">Divergence and Curl of Vector Fields</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-multivariable-calculus-vector-derivatives.html" data-scroll="chapter-multivariable-calculus-vector-derivatives" class="internal"><span class="codenumber">4</span> <span class="title">Vector Integrals</span></a><ul><li><a href="section-line-integrals.html" data-scroll="section-line-integrals" class="active">Line Integrals</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-line-integrals"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.1</span> <span class="title">Line Integrals</span>
+</h2>
+<section class="introduction" id="introduction-9"><p id="p-345">An integral is fundamentally determined by two objects: the integrand and the domain of integration. In this section, we study integrals that involve one-dimensional domains of integration. Such integrals are known as <em class="emphasis">line integrals</em>. We will have a different type of line integral depending on whether our integrand is a scalar field or a vector field.</p></section><section class="subsection" id="subsection-scalar-line-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Scalar Line Integrals</span>
+</h3>
+<p id="p-346">Consider the problem of finding the mass of a wire that follows a path <span class="process-math">\(C\)</span> in either <span class="process-math">\(\RR^2\)</span> or <span class="process-math">\(\RR^3\)</span> given a density function <span class="process-math">\(\rho\text{.}\)</span> As seen in calculus, the mass can be found by integrating the density. This leads to integrals of the form <span class="process-math">\(\int_C \rho\dd{s}\)</span> which are known as <em class="emphasis">(scalar) line integrals</em>.</p>
+<article class="definition definition-like" id="definition-scalar-line-integrals"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Scalar Line Integrals.</span>
+</h4>
+<p id="p-347">Let <span class="process-math">\(C\)</span> be a smooth curve in <span class="process-math">\(\RR^2\)</span> (so <span class="process-math">\(C\)</span> has no cusps, or equivalently, can be parameterized by a smooth vector function). Let <span class="process-math">\(f(x, y)\)</span> denote a function that is continuous on some open set containing <span class="process-math">\(C\text{.}\)</span> The <dfn class="terminology">scalar line integral</dfn> of <span class="process-math">\(f\)</span> over <span class="process-math">\(C\)</span> is given by the limit</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_C f(x, y)\dd{s} = \lim_{\Delta s\to0}\sum_{k=1}^{n}f(x_k, y_k)\Delta s
+\end{equation*}
+</div>
+<p class="continuation">where the points <span class="process-math">\((x_k, y_k)\)</span> are lie on <span class="process-math">\(C\text{,}\)</span> and <span class="process-math">\(\Delta s\)</span> gives the length of the line segment from one such point to the next.</p></article><p id="p-348">Geometrically, we view the line integral <span class="process-math">\(\int_C f(x, y)\dd{s}\)</span> as giving the area between the curve <span class="process-math">\(C\)</span> in the <span class="process-math">\(xy\)</span>-plane and the surface <span class="process-math">\(z = f(x, y)\text{.}\)</span> Although <a href="" class="xref" data-knowl="./knowl/definition-scalar-line-integrals.html" title="Definition 4.1.1: Scalar Line Integrals">Definition 4.1.1</a> assumes that <span class="process-math">\(C\)</span> lies in <span class="process-math">\(\RR^2\text{,}\)</span> the definition can be extended to higher dimensions.</p>
+<p id="p-349">The definition given in <a href="" class="xref" data-knowl="./knowl/definition-scalar-line-integrals.html" title="Definition 4.1.1: Scalar Line Integrals">Definition 4.1.1</a>, while important, will not typically be used for computing line integrals. Instead, we will take another approach using arc length. The differential <span class="process-math">\(\dd{s}\)</span> in the line integral formula corresponds to the arc length function along <span class="process-math">\(C\text{.}\)</span> Therefore we may write</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-scalar-line-integrals.html">
+\begin{equation*}
+\dd{s} = \norm{\rrp(t)}\dd{t}
+\end{equation*}
+</div>
+<p class="continuation">and</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-scalar-line-integrals.html" id="equation-scalar-line-computational">
+\begin{equation}
+\int_C f(x, y)\dd{s} = \int_a^b f(\rr(t))\norm{\rrp(t)}\dd{t}\tag{1}
+\end{equation}
+</div>
+<p class="continuation">for some suitable smooth parameterization <span class="process-math">\(\rr(t), a\leq t\leq b\)</span> of <span class="process-math">\(C\text{.}\)</span></p>
+<article class="example example-like" id="example-computing-a-scalar-line-integral"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Scalar Line Integral.</span>
+</h4>
+<p id="p-350">Compute <span class="process-math">\(\int_C (xy)^{\frac{1}{3}}\dd{s}\)</span> where <span class="process-math">\(C\)</span> is the parabolic segment <span class="process-math">\(y = x^2\)</span> from <span class="process-math">\(x = 0\)</span> to <span class="process-math">\(x = 1\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-38" id="solution-38"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-38"><div class="solution solution-like">
+<p id="p-351">First, we need to parameterize <span class="process-math">\(C\text{.}\)</span> This can be done using <span class="process-math">\(\rr(t) = \mqty[t \amp t^2]\)</span> for <span class="process-math">\(0\leq t\leq 1\text{.}\)</span> <a href="" class="xref" data-knowl="./knowl/equation-scalar-line-computational.html" title="Equation 1">(1)</a> then gives</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-scalar-line-computational.html" id="md-19">
+\begin{align*}
+\int_C (xy)^{\frac{1}{3}}\dd{s} \amp = \int_0^1 t\sqrt{1 + 4t^2}\dd{t} \\
+\amp = \int_1^5\frac{1}{8}\sqrt{u}\dd{u} \\
+\amp = \frac{5^{\frac{3}{2}} - 1}{12} \text{.}
+\end{align*}
+</div>
+</div></div>
+</div></article><p id="p-352">Recall that <a href="" class="xref" data-knowl="./knowl/definition-scalar-line-integrals.html" title="Definition 4.1.1: Scalar Line Integrals">Definition 4.1.1</a> defines scalar line integrals over smooth curves only. If a curve <span class="process-math">\(C\)</span> is <em class="emphasis">piecewise smooth</em>, which means that it can be written as the union of finitely many smooth curves <span class="process-math">\(C_1\)</span> through <span class="process-math">\(C_n\text{,}\)</span> then we can extend <a href="" class="xref" data-knowl="./knowl/definition-scalar-line-integrals.html" title="Definition 4.1.1: Scalar Line Integrals">Definition 4.1.1</a> to <span class="process-math">\(C\)</span> as well. All we need to do is compute the line integral along the smooth components <span class="process-math">\(C_i\)</span> and add them up:</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-scalar-line-integrals.html ./knowl/definition-scalar-line-integrals.html">
+\begin{equation*}
+\int_C f(x, y)\dd{s} = \sum_{i=1}^n \int_{C_i} f(x, y)\dd{s}\text{.}
+\end{equation*}
+</div>
+<article class="example example-like" id="example-computing-a-line-integral-along-a-piecewise-smooth-curve"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Line Integral Along a Piecewise Smooth Curve.</span>
+</h4>
+<p id="p-353">Let <span class="process-math">\(C\)</span> denote the curve consisting of the line segment from <span class="process-math">\((-1, 0)\)</span> to <span class="process-math">\((0, 1)\)</span> followed by the line segment from <span class="process-math">\((0, 1)\)</span> to <span class="process-math">\((1,0)\text{.}\)</span> Find <span class="process-math">\(\int_C (2x - 3y)\dd{s}\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-39" id="solution-39"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-39"><div class="solution solution-like">
+<p id="p-354">We need to decompose <span class="process-math">\(C\)</span> into smooth components. The natural choice is to pick <span class="process-math">\(C_1\)</span> to be the first segment and <span class="process-math">\(C_2\)</span> to be the second segment. These curves are smooth and have the following smooth parameterizations:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-20">
+\begin{align*}
+C_1 : \rr_1(t) \amp = \mqty[t - 1 \amp t], 0\leq t\leq 1 \\
+C_2 : \rr_2(t) \amp = \mqty[t \amp 1-t], 0\leq t\leq 1 \text{.}
+\end{align*}
+</div>
+<p class="continuation">Now we can compute the resulting line integrals:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-21">
+\begin{align*}
+\int_{C_1} (2x - 3y)\dd{s} \amp = \int_0^1 [2(t-1) - 3t]\sqrt{2}\dd{t} \\
+\amp = \int_0^1 (-2 - t)\sqrt{2}\dd{t} \\
+\amp = -\frac{5}{2}\sqrt{2} \text{.}
+\end{align*}
+</div>
+<p class="continuation">Likewise,</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_{C_1} (2x - 3y)\dd{s} = \int_0^1 (5t - 3)\sqrt{2}\dd{t} = -\frac{1}{2}\sqrt{2}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Adding these integrals together, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_C (2x - 3y)\dd{s} = -3\sqrt{2}\text{.}
+\end{equation*}
+</div>
+</div></div>
+</div></article></section></section></div></main>
+</div>
+</body>
+</html>

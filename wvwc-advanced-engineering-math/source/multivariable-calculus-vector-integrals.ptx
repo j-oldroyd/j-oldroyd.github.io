@@ -28,7 +28,113 @@
                 An integral is fundamentally determined by two objects: the integrand and the domain of integration.
                 In this section, we study integrals that involve one-dimensional domains of integration.
                 Such integrals are known as <em>line integrals</em>.
+                We will have a different type of line integral depending on whether our integrand is a scalar field or a vector field.
             </p>
         </introduction>
+
+        <subsection xml:id="subsection-scalar-line-integrals">
+            <title>Scalar Line Integrals</title>
+
+            <p>
+                Consider the problem of finding the mass of a wire that follows a path <m>C</m> in either <m>\RR^2</m> or <m>\RR^3</m> given a density function <m>\rho</m>.
+                As seen in calculus, the mass can be found by integrating the density.
+                This leads to integrals of the form <m>\int_C \rho\dd{s}</m> which are known as <em>(scalar) line integrals</em>.
+            </p>
+
+            <definition xml:id="definition-scalar-line-integrals">
+                <title>Scalar Line Integrals</title>
+
+                <idx><h>line integrals</h><h>scalar fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> be a smooth curve in <m>\RR^2</m> (so <m>C</m> has no cusps, or equivalently, can be parameterized by a smooth vector function).
+                        Let <m>f(x, y)</m> denote a function that is continuous on some open set containing <m>C</m>.
+                        The <term>scalar line integral</term> of <m>f</m> over <m>C</m> is given by the limit
+                        <me>\int_C f(x, y)\dd{s} = \lim_{\Delta s\to0}\sum_{k=1}^{n}f(x_k, y_k)\Delta s</me>
+                        where the points <m>(x_k, y_k)</m> are lie on <m>C</m>, and <m>\Delta s</m> gives the length of the line segment from one such point to the next.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Geometrically, we view the line integral <m>\int_C f(x, y)\dd{s}</m> as giving the area between the curve <m>C</m> in the <m>xy</m>-plane and the surface <m>z = f(x, y)</m>.
+                Although <xref ref="definition-scalar-line-integrals" text="type-global" /> assumes that <m>C</m> lies in <m>\RR^2</m>, the definition can be extended to higher dimensions.
+            </p>
+
+            <p>
+                The definition given in <xref ref="definition-scalar-line-integrals" text="type-global" />, while important, will not typically be used for computing line integrals.
+                Instead, we will take another approach using arc length.
+                The differential <m>\dd{s}</m> in the line integral formula corresponds to the arc length function along <m>C</m>.
+                Therefore we may write
+                <me>\dd{s} = \norm{\rrp(t)}\dd{t}</me>
+                and
+                <men xml:id="equation-scalar-line-computational">\int_C f(x, y)\dd{s} = \int_a^b f(\rr(t))\norm{\rrp(t)}\dd{t}</men>
+                for some suitable smooth parameterization <m>\rr(t), a\leq t\leq b</m> of <m>C</m>.
+            </p>
+
+            <example xml:id="example-computing-a-scalar-line-integral">
+                <title>Computing a Scalar Line Integral</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\int_C (xy)^{\frac{1}{3}}\dd{s}</m> where <m>C</m> is the parabolic segment <m>y = x^2</m> from <m>x = 0</m> to <m>x = 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, we need to parameterize <m>C</m>.
+                        This can be done using <m>\rr(t) = \mqty[t \amp t^2]</m> for <m>0\leq t\leq 1</m>.
+                        <xref ref="equation-scalar-line-computational" text="type-global" /> then gives
+                        <md>
+                            <mrow>\int_C (xy)^{\frac{1}{3}}\dd{s} \amp = \int_0^1 t\sqrt{1 + 4t^2}\dd{t} </mrow>
+                            <mrow> \amp = \int_1^5\frac{1}{8}\sqrt{u}\dd{u} </mrow>
+                            <mrow> \amp = \frac{5^{\frac{3}{2}} - 1}{12} </mrow>
+                        </md>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Recall that <xref ref="definition-scalar-line-integrals" text="type-global" /> defines scalar line integrals over smooth curves only.
+                If a curve <m>C</m> is <em>piecewise smooth</em>, which means that it can be written as the union of finitely many smooth curves <m>C_1</m> through <m>C_n</m>, then we can extend <xref ref="definition-scalar-line-integrals" text="type-global" /> to <m>C</m> as well.
+                All we need to do is compute the line integral along the smooth components <m>C_i</m> and add them up:
+                <me>\int_C f(x, y)\dd{s} = \sum_{i=1}^n \int_{C_i} f(x, y)\dd{s}</me>.
+            </p>
+
+            <example xml:id="example-computing-a-line-integral-along-a-piecewise-smooth-curve">
+                <title>Computing a Line Integral Along a Piecewise Smooth Curve</title>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> denote the curve consisting of the line segment from <m>(-1, 0)</m> to <m>(0, 1)</m> followed by the line segment from <m>(0, 1)</m> to <m>(1,0)</m>.
+                        Find <m>\int_C (2x - 3y)\dd{s}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We need to decompose <m>C</m> into smooth components.
+                        The natural choice is to pick <m>C_1</m> to be the first segment and <m>C_2</m> to be the second segment.
+                        These curves are smooth and have the following smooth parameterizations:
+                        <md>
+                            <mrow>C_1 : \rr_1(t) \amp = \mqty[t - 1 \amp t], 0\leq t\leq 1 </mrow>
+                            <mrow>C_2 : \rr_2(t) \amp = \mqty[t \amp 1-t], 0\leq t\leq 1 </mrow>
+                        </md>.
+                        Now we can compute the resulting line integrals:
+                        <md>
+                            <mrow>\int_{C_1} (2x - 3y)\dd{s} \amp = \int_0^1 [2(t-1) - 3t]\sqrt{2}\dd{t} </mrow>
+                            <mrow> \amp = \int_0^1 (-2 - t)\sqrt{2}\dd{t} </mrow>
+                            <mrow> \amp = -\frac{5}{2}\sqrt{2} </mrow>
+                        </md>.
+                        Likewise,
+                        <me>\int_{C_1} (2x - 3y)\dd{s} = \int_0^1 (5t - 3)\sqrt{2}\dd{t} = -\frac{1}{2}\sqrt{2}</me>.
+                        Adding these integrals together, we get
+                        <me>\int_C (2x - 3y)\dd{s} = -3\sqrt{2}</me>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
     </section>
 </chapter>
