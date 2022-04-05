@@ -938,64 +938,205 @@
                         Find <m>\curlt\FF</m>.
                     </p>
                 </statement>
+
                 <solution>
-                  <p>
-                      Using the determinant formulation of the curl, we get
-                      <me>\curlt\FF = \curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ xy &amp; 3 + 2z &amp; z|</me>
-                      which simplifies to <m>\curlt\FF = \mqty[-2 &amp; 0 &amp; -x]</m>.
-                  </p>
-              </solution>
-          </example>
+                    <p>
+                        Using the determinant formulation of the curl, we get
+                        <me>\curlt\FF = \curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ xy &amp; 3 + 2z &amp; z|</me>
+                        which simplifies to <m>\curlt\FF = \mqty[-2 &amp; 0 &amp; -x]</m>.
+                    </p>
+                </solution>
+            </example>
 
-          <p>
-              Just as the divergence of a vector field can be interpreted as a measure of the flow <em>through</em> or <em>across</em> a point in a vector field, the curl can be interpreted as a measure of the flow <em>around</em> a point in a vector field.
-              In particular, if <m>\FF</m> is a vector field in <m>\RR^3</m> then <m>\curl\FF</m> gives the axis of rotation around which <m>\FF</m> tends to flow counterclockwise when viewed from above.
-              The magnitude <m>\norm{\curlt\FF}</m> measures the amount of rotation.
-          </p>
-
-          <p>
-              For example, consider the vector field <m>\FF = \mqty[xy &amp; 3 + 2z &amp; z]</m> from <xref ref="example-computing-a-curl" text="type-global" />.
-              At <m>(0, 0, -1)</m> its corresponding curl is <m>\mqty[-2 &amp; 0 &amp; 0]</m>.
-              Therefore the vector field <m>\FF</m> tends to rotate counterclockwise around the point <m>(0, 0, -1)</m> when viewed head-on from the direction of <m>\mqty[-2 &amp; 0 &amp; 0]</m>, i.e., from the direction of the negative <m>x</m>-axis.
-              See the figure below produced using Sage.
-              Be sure to rotate the figure so that you're viewing it from the direction of the negative <m>x</m>-axis!
-          </p>
-
-          <sage>
-            <input>
-                var('x, y, z')
-
-                F(x, y, z) = (x*y, 3 + 2*z, z)
-
-                plot_vector_field3d(F(x, y, z), (x, -1, 1), (y, -1, 1), (z, -2, 0))
-            </input>
-        </sage>
-
-    </subsection>
-
-    <p>
-        Sage is also capable of computing curls and divergences of arbitrary vector fields using the <c>function</c> command.
-        This tells Sage to treat a variable as a function of specified variables.
-    </p>
-
-    <example xml:id="example-computing-the-divergence-of-curl">
-        <title>Computing the Divergence of a Curl</title>
-
-        <statement>
             <p>
-                Let <m>\FF = \mqty[P \amp Q \amp R]</m> and assume that its component functions are continuously differentiable.
-                Compute <m>\div(\curl\FF)</m> by completing the code cell below.
+                Just as the divergence of a vector field can be interpreted as a measure of the flow <em>through</em> or <em>across</em> a point in a vector field, the curl can be interpreted as a measure of the flow <em>around</em> a point in a vector field.
+                In particular, if <m>\FF</m> is a vector field in <m>\RR^3</m> then <m>\curl\FF</m> gives the axis of rotation around which <m>\FF</m> tends to flow counterclockwise when viewed from above.
+                The magnitude <m>\norm{\curlt\FF}</m> measures the amount of rotation.
             </p>
+
+            <p>
+                For example, consider the vector field <m>\FF = \mqty[xy &amp; 3 + 2z &amp; z]</m> from <xref ref="example-computing-a-curl" text="type-global" />.
+                At <m>(0, 0, -1)</m> its corresponding curl is <m>\mqty[-2 &amp; 0 &amp; 0]</m>.
+                Therefore the vector field <m>\FF</m> tends to rotate counterclockwise around the point <m>(0, 0, -1)</m> when viewed head-on from the direction of <m>\mqty[-2 &amp; 0 &amp; 0]</m>, i.e., from the direction of the negative <m>x</m>-axis.
+                See the figure below produced using Sage.
+                Be sure to rotate the figure so that you're viewing it from the direction of the negative <m>x</m>-axis!
+            </p>
+
             <sage>
                 <input>
                     var('x, y, z')
 
+                    F(x, y, z) = (x*y, 3 + 2*z, z)
+
+                    plot_vector_field3d(F(x, y, z), (x, -1, 1), (y, -1, 1), (z, -2, 0))
+                </input>
+            </sage>
+
+        </subsection>
+
+        <p>
+            Sage is also capable of computing curls and divergences of arbitrary vector fields using the <c>function</c> command.
+            This tells Sage to treat a variable as a function of specified variables.
+        </p>
+
+        <example xml:id="example-computing-the-divergence-of-curl">
+            <title>Computing the Divergence of a Curl</title>
+
+            <statement>
+                <p>
+                    Let <m>\FF = \mqty[P \amp Q \amp R]</m> and assume that its component functions are continuously differentiable.
+                    Compute <m>\div(\curl\FF)</m> by completing the code cell below.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        P = function('P')(x, y, z)
+                        Q = function('Q')(x, y, z)
+                        R = function('R')(x, y, z)
+                    </input>
+                </sage>
+            </statement>
+        </example>
+    </section>
+
+    <section xml:id="section-sage-examples">
+        <title>Sage Examples</title>
+
+        <p>
+            This section is focused on applying tools provided by Sage to the concepts learned in this chapter.
+            In particular, Sage allows us to avoid tedious algebraic computations in proving general formulas involving the gradient, divergence and curl.
+            The relevant Sage commands are as follows (assuming we are working with fields in <m>\RR^3</m>):
+        </p>
+
+        <listing xml:id="listing-sage-commands-fields-RR3">
+            <caption>Sage commands for scalar and vector fields in <m>\RR^3</m>.</caption>
+
+            <program language="sage">
+                <input>
+                    # declare variables
+                    var('x, y, z')
+
+                    # define an arbitrary scalar field f(x, y, z)
+                    f = function('f')(x, y, z)
+
+                    # define components of an arbitrary vector field F(x, y, z)
                     P = function('P')(x, y, z)
                     Q = function('Q')(x, y, z)
                     R = function('R')(x, y, z)
+
+                    # define an arbitrary vector field
+                    F(x, y, z) = (P, Q, R)
+
+                    # compute gradient of f
+                    f.gradient()
+
+                    # compute div and curl of F
+                    F(x, y, z).div([x, y, z])
+                    F(x, y, z).curl([x, y, z])
                 </input>
-            </sage>
-        </statement>
-    </example>
-</section>
+            </program>
+        </listing>
+
+        <p>
+            You can also make use of the <c>pretty_print()</c> command to provide more readable output.
+        </p>
+
+        <example xml:id="example-proving-the-product-rule-for-gradients">
+            <title>Proving the Product Rule for Gradients</title>
+
+            <statement>
+                <p>
+                    Let <m>f(x,y,z)</m> and <m>g(x, y, z)</m> be differentiable scalar fields in <m>\RR^3</m>.
+                    Prove that <m>\del(fg) = f(\del g) + (\del f) g</m>.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    To prove this using Sage, you can complete the code cell below by filling in the variables <c>lhs</c> and <c>rhs</c> to represent the left hand and right hand sides of the equation
+                    <me>\del(fg) = f(\del g) + (\del f) g</me>.
+                    The final line of code, <c>lhs == rhs</c>, then checks if the two quantities are equal by returning <c>True</c> or <c>False</c>.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        f = function('f')(x, y, z)
+                        g = function('g')(x, y, z)
+
+                        lhs = 1     # replace 1 with ∇(fg)
+                        rhs = 1     # replace 1 with f(∇g) + (∇f)g
+                    </input>
+                </sage>
+            </solution>
+        </example>
+
+        <example xml:id="example-computing-a-laplacian">
+            <title>Computing a Laplacian</title>
+
+            <statement>
+                <p>
+                    The <term>Laplacian</term> of a scalar field <m>f(x, y, z)</m> is the scalar field <m>\del^2 f</m> where <m>\del^2 = \div\del</m>.
+                    In other words,
+                    <me>\del^2 f = \divt(\del f)</me>.
+                    Use the Sage cell below to find formulas for both <m>\del^2 f</m> and <m>\del^2 (fg)</m>.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                    </input>
+                </sage>
+            </statement>
+        </example>
+
+        <example xml:id="example-checking-if-a-vector-field-is-conservative">
+            <title>Checking if a Vector Field is Conservative</title>
+
+            <statement>
+                <p>
+                    Recall that a differentiable vector field <m>\FF</m> is conservative if <m>\curl\FF = \vb{0}</m>.
+                    With this in mind, determine if the vector field given by
+                    <me>\FF = xyz\mqty[xy \amp yz \amp zx]</me>
+                    is conservative using the Sage cell below.
+                </p>
+
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        # define the vector field F
+                        F = x*y*z*vector([x*y, y*z, z*x])
+                    </input>
+                </sage>
+            </statement>
+        </example>
+
+        <example xml:id="example-computing-a-vector-laplacian">
+            <title>Computing a Vector Laplacian</title>
+
+            <statement>
+                <p>
+                    The <term>vector Laplacian</term> of a vector field <m>\FF</m> in <m>\RR^3</m> is the vector field <m>\del^2\FF</m> defined by
+                    <me>\del^2\FF = \del(\div\FF) - \curl(\curl\FF)</me>.
+                    Let <m>\FF = (x^2 + y^2 + z^2)^{-\frac{1}{2}}\mqty[x \amp y\amp z]</m>.
+                    Find <m>\del^2\FF</m> using the Sage cell below.
+                </p>
+
+                <sage>
+                    <input>
+                    </input>
+                </sage>
+            </statement>
+
+            <solution>
+                <p>
+                    The vector Laplacian of <m>\FF</m> is
+                    <me>\del^2\FF = -2(x^2+y^2+z^2)^{-\frac{3}{2}}\mqty[x \amp y \amp z]</me>,
+                    after some simplifying.
+                </p>
+            </solution>
+        </example>
+    </section>
 </chapter>
