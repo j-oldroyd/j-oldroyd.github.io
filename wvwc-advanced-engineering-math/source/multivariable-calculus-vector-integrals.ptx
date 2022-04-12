@@ -67,7 +67,7 @@
 
                 <statement>
                     <p>
-                        Let <m>C</m> be a smooth curve in <m>\RR^n</m>.
+                        Let <m>C</m> be a smooth curve in <m>\RR^2</m>.
                         Let <m>f(x, y)</m> denote a function that is continuous on some open set containing <m>C</m>.
                         The <term>scalar line integral</term> of <m>f</m> over <m>C</m> is given by the limit
                         <me>\int_C f(x, y)\dd{s} = \lim_{\Delta s\to0}\sum_{k=1}^{n}f(x_k, y_k)\Delta s</me>
@@ -151,6 +151,78 @@
                         <me>\int_{C_1} (2x - 3y)\dd{s} = \int_0^1 (5t - 3)\sqrt{2}\dd{t} = -\frac{1}{2}\sqrt{2}</me>.
                         Adding these integrals together, we get
                         <me>\int_C (2x - 3y)\dd{s} = -3\sqrt{2}</me>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-line-integrals-of-vector-fields">
+            <title>Line Integrals of Vector Fields</title>
+
+            <p>
+                Using the scalar line integral in <xref ref="definition-scalar-line-integrals" text="type-global" />, we can also define line integrals of vector fields along smooth and piecewise-smooth curves.
+            </p>
+
+            <definition xml:id="definition-vector-line-integrals">
+                <title>Vector Line Integrals</title>
+
+                <idx><h>line integrals</h><h>vector fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> be a (piecewise) smooth curve and let <m>\FF</m> be a vector field that is continuous on <m>C</m>.
+                        The <term>vector line integral</term> of <m>\FF</m> over <m>C</m> is defined to be
+                        <me>\int_{C}\FF\cdot\TT\dd{s}</me>,
+                        where <m>\TT</m> denotes the unit tangent to <m>C</m> with respect to a previously chosen (piecwise) smooth parameterization of <m>C</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                We interpret the vector line integral as measuring how well the vector field <m>\FF</m> and the curve <m>C</m> align.
+                We also call it the <em>circulation</em> of <m>\FF</m> along <m>C</m>.
+                In physics, <xref ref="definition-vector-line-integrals" text="type-global" /> can also be used to find the work done by a force field <m>\FF</m> on a particle that moves along the curve <m>C</m>.
+            </p>
+
+            <p>
+                The formula in <xref ref="definition-vector-line-integrals" text="type-global" /> can be simplified in much the same way as the original definition of a scalar line integral was in <xref ref="equation-scalar-line-computational" text="type-global" />.
+                First, suppose that <m>C</m> is parameterized by the smooth vector function <m>\rr(t):[a,b]\to\RR^n</m>.
+                Then
+                <md>
+                    <mrow>\FF\cdot\TT\dd{s} \amp = \FF(\rr(t))\cdot\frac{\rrp(t)}{\norm{\rrp(t)}}\norm{\rrp(t)}\dd{t} </mrow>
+                    <mrow> \amp = \FF(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                    <mrow> \amp = \FF\cdot\dd{\rr} </mrow>
+                </md>.
+                Therefore
+                <men xml:id="equation-vector-line-computational">\int_C\FF\cdot\TT\dd{s} = \int_a^b\FF\cdot\dd{\rr}</men>.
+            </p>
+
+            <example xml:id="example-computing-a-circulation">
+                <title>Computing a Circulation</title>
+
+                <statement>
+                    <p>
+                        Find the circulation of <m>\FF = (x^2+y^2)^{-1}\mqty[x \amp y]</m> along the curve <m>C:\rr(t) = \mqty[t \amp 4t], 1\leq t\leq 10</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, note that <m>C</m> is a smooth curve on which <m>\FF</m> is continuous and the line integral of <m>\FF</m> along <m>C</m> is therefore defined.
+                        Bu <xref ref="equation-vector-line-computational" text="type-global" />, it follows that
+                        <me>\int_C\FF\cdot\TT\dd{s} = \int_1^{10}\FF\cdot\dd{\rr}</me>
+                        where
+                        <md>
+                            <mrow>\FF \amp = \FF(\rr(t)) = \frac{1}{17t^2}\mqty[t \amp 4t] </mrow>
+                            <mrow>\dd{\rr} \amp = \rrp(t)\dd{t} = \mqty[1 \amp 4]\dd{t} </mrow>
+                        </md>.
+                        Therefore
+                        <md>
+                            <mrow>\int_1^{10}\FF\cdot\dd{\rr} \amp = \int_1^{10}\frac{1}{17t^2}(t + 16t)\dd{t} </mrow>
+                            <mrow> \amp = \int_1^{10}\frac{1}{t}\dd{t} </mrow>
+                            <mrow> \amp = \ln(10) </mrow>
+                        </md>.
+                        Note that this is greater than <m>0</m>, which indicates that the vector field <m>\FF</m> and the curve <m>C</m> tend to be aligned.
                     </p>
                 </solution>
             </example>
