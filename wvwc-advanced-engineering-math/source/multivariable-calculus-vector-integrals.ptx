@@ -383,7 +383,7 @@
 
             <example xml:id="example-using-the-fundamental-theorem-of-line-integrals">
                 <title>Using the Fundamental Theorem of Line Integrals</title>
-            
+
                 <statement>
                     <p>
                         Let <m>\FF = \mqty[-y \amp -x]</m> and let <m>C:\rr(t), 0\leq t\leq 2\pi</m> where
@@ -391,10 +391,10 @@
                         Find <m>\int_C\FF\cdot\dd{\rr}</m>.
                     </p>
                 </statement>
-            
+
                 <solution>
                     <p>
-                        We could use the computational formula given in Equation <xref ref="equation-vector-line-computational" text="type-global" />, but we'll instead make use of the <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" />.
+                        We could use the computational formula given in Equation <xref ref="equation-vector-line-computational" text="type-global" />, but we'll instead make use of <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" />.
                         To do so, we need to prove that <m>\FF</m> is conservative and then find a corresponding potential function.
                     </p>
 
@@ -420,7 +420,7 @@
 
     <section xml:id="section-green-s-theorem">
         <title>Green's Theorem</title>
-        
+
         <introduction>
             <p>
                 In this section we cover the relationship between line integrals and double integrals.
@@ -432,12 +432,13 @@
 
         <subsection xml:id="subsection-green-s-theorem-for-circulation-integrals">
             <title>Green's Theorem for Circulation Integrals</title>
-            
+
             <p>
                 Given a continuous vector field <m>\FF = \mqty[P \amp Q]</m> in <m>\RR^2</m>, we defined its circulation along a piecewise smooth curve <m>C</m> as
                 <me>\int_C \FF\cdot\TT\dd{s} = \int_{C}\FF\cdot\dd{\rr}</me>.
                 If we write <m>\rr = \mqty[x \amp y]</m>, <m>\dd{x} = x^\prime\dd{t}</m> and <m>\dd{y} = y^\prime\dd{t}</m>, then this formula becomes
                 <me>\int_C\FF\cdot\TT\dd{s} = \int_C P\dd{x} + Q\dd{y}</me>.
+                If <m>C</m> is also a closed curve, then we often replace <m>\int_C</m> with <m>\oint_C</m> to indicate such.
                 Now we can state Green's Theorem.
             </p>
 
@@ -451,7 +452,7 @@
                         Let <m>R</m> denote a simple, closed and bounded region of the plane with piecewise smooth boundary <m>\partial R</m>, oriented counterclockwise.
                         Let <m>\FF = \mqty[P \amp Q]</m> denote a vector field that is continuous over an open set containing <m>R</m>.
                         Then
-                        <me>\int_{\partial R} P\dd{x} + Q\dd{y} = \iint_{R}\left(\pdv{Q}{x} - \pdv{P}{y}\right)\dd{A}</me>.
+                        <me>\oint_{\partial R} P\dd{x} + Q\dd{y} = \iint_{R}\left(\pdv{Q}{x} - \pdv{P}{y}\right)\dd{A}</me>.
                     </p>
                     <aside>
                         <p>
@@ -472,6 +473,124 @@
             <p>
                 Beyond its geometric interpretation, <xref ref="theorem-green-s-theorem-for-circulation-integrals" text="custom">Green's Theorem</xref> is also useful as a generalization of the <xref ref="theorem-fundamental-theorem-of-line-integrals" text="custom">Fundamental Theorem of Line Integrals</xref> for non-conservative vector fields in the plane, as the double integral that appears in the theorem is often easier to evaluate than the line integral it's equal to.
             </p>
+
+            <example xml:id="example-using-green-s-theorem-to-compute-a-circulation-integral">
+                <title>Using Green's Theorem to Compute a Circulation Integral</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\oint_{C}\FF\cdot\dd{\rr}</m> where <m>\FF = \mqty[-3y \amp 3x]</m> and <m>C</m> is the triangle in <m>\RR^2</m> with vertices <m>(0,0), (1,0)</m> and <m>(0,2)</m> traversed exactly once counterclockwise.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First we'll check to see if <m>\FF</m> is conservative as this would greatly simplify our calculations.
+                        Since its curl is <m>6</m>, we see quickly that <m>\FF</m> is not conservative, and so <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" /> and its related consequences do not apply to <m>\FF</m>.
+                        We could resort to computing <m>\oint_C -3y\dd{x} + 3x\dd{y}</m> using Equation <xref ref="equation-vector-line-computational" text="type-global" />, but this would require setting up <em>three</em> separate line integrals since <m>C</m> is piecewise smooth with three smooth components.
+                    </p>
+
+                    <p>
+                        To avoid this, we'll make use of Green's Theorem.
+                        Let <m>R</m> denote the triangle contained with the curve <m>C</m>.
+                        Then
+                        <me>\oint_C -3y\dd{x} + 3x\dd{y} = \iint_{R}6\dd{A} = 6</me>,
+                        where we have used the fact that <me>\iint_{R}\dd{A}</me> is always equal to the area of <m>R</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Green's Theorem can also be applied to clockwise-oriented curves, as long as you take care to multiply your integral by a negative.
+            </p>
+
+            <example xml:id="example-green-s-theorem-and-clockwise-curves">
+                <title>Green's Theorem and Clockwise Curves</title>
+
+                <statement>
+                    <p>
+                        Find <m>\oint_C xy^2\dd{x} + x^3\dd{y}</m> where <m>C</m> is the rectangle with vertices <m>(0,0), (1,0), (0, 3)</m> and <m>(1,3)</m> traversed exactly once <em>clockwise</em>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To use Green's Theorem here, we multiply our integral by a negative.
+                        This has the effect of reversing the orientation of the curve <m>C</m> from clockwise to counterclockwise, allowing us to apply <xref ref="theorem-green-s-theorem-for-circulation-integrals" text="type-global" />:
+                        <me>\oint_C xy^2\dd{x} + x^3\dd{y} = -\int_0^1\int_0^3 (3x^2 - 2xy)\dd{y}\dd{x}</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                An interesting use of Green's Theorem is in the computation of areas.
+                Since the area of a region <m>R</m> is equal to <m>\iint_R\dd{A}</m>, then the area of <m>R</m> can be founded by computing the circulation integral <m>\oint_{\partial R}P\dd{x} + Q\dd{y}</m> of any vector field <m>\FF</m> with a curl exactly equal to <m>1</m>.
+                An easy choice for this is <m>\FF = \frac{1}{2}\mqty[-y \amp x]</m>, which implies that the area of <m>R</m> can be found by computing
+                <me>\frac{1}{2}\oint_{C} x\dd{y} - y\dd{x}</me>.
+            </p>
+
+            <example xml:id="example-area-using-green-s-theorem">
+                <title>Area Using Green's Theorem</title>
+
+                <statement>
+                    <p>
+                        Find the area of an ellipse with major axis <m>4</m> and minor axis <m>2</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Such an ellipse can be given by the parameterization <m>\rr(t) = \mqty[4\cos(t)\amp 2\sin(t)], 0\leq t\leq 2\pi</m>.
+                        This gives
+                        <me>\frac{1}{2}\oint_C x\dd{y} - y\dd{x} = \frac{1}{2}\int_0^{2\pi} (8\cos^2(t) + 8\sin^2(t))\dd{t} = 16\pi</me>
+                        for the area contained within the ellipse.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-green-s-theorem-for-flux-integrals">
+            <title>Green's Theorem for Flux Integrals</title>
+
+            <p>
+                Circulation integrals of the form <m>\int_C P\dd{x} + Q\dd{y}</m> are useful for measuring the flow of a vector field <m>\FF = \mqty[P\amp Q]</m> <em>along</em> a curve <m>C</m>, but to measure the flow across or over <m>C</m> we instead make use of a <em>flux integral</em>.
+            </p>
+
+            <definition xml:id="definition-flux-integral">
+                <title>Flux Integral</title>
+
+                <idx><h>flux integral</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[P \amp Q]</m> be a continuous vector field defined over a piecewise smooth curve <m>C</m> with outward facing normal vector <m>\NN</m>.
+                        The <term>flux</term> of <m>\FF</m> over <m>C</m> is defined to be
+                        <me>\int_C\FF\cdot\NN\dd{s} = \int_C P\dd{y} - Q\dd{x}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                If <m>R</m> is a simple, closed and bounded region in the plane, then the normal vector <m>\NN</m> in <xref ref="definition-flux-integral" text="type-global" /> is always defined to be the outward normal.
+                In particular, if <m>\partial R</m> is oreiented counterclockwise then has unit tangent <m>\TT</m>, then the region <m>R</m> will always lie to the left of <m>\TT</m> and the normal <m>\NN</m> will always point to the right of <m>\TT</m>.
+                This convention makes the flux integral a measure of flow <em>outside</em> of the region <m>R</m>.
+                As net outflow is also measured by the <xref ref="definition-divergence" text="custom">divergence</xref> of a vector field, this suggests the following modification of Green's Theorem.
+            </p>
+
+            <theorem xml:id="theorem-green-s-theorem-for-flux-integrals">
+                <title>Green's Theorem for Flux Integrals</title>
+
+                <idx><h>Green's Theorem</h><h>flux integrals</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>R</m> denote a simple, closed and bounded region of the plane with piecewise smooth boundary <m>\partial R</m>, oriented counterclockwise.
+                        Let <m>\FF = \mqty[P \amp Q]</m> denote a vector field that is continuous over an open set containing <m>R</m>.
+                        Then
+                        <me>\oint_{\partial R} P\dd{y} - Q\dd{x} = \iint_{R}\left(\pdv{P}{x} + \pdv{Q}{y}\right)\dd{A}</me>.
+                    </p>
+                </statement>
+            </theorem>
         </subsection>
     </section>
 </chapter>

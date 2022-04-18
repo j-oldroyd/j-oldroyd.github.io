@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-04-18T14:45:28-04:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WVWC-AEM Path Independence and the Fundamental Theorem of Line Integrals</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-advanced-engineering-math/output/html/external/./wvwc-logo.jpg">
+<meta property="book:title" content="Advanced Engineering Mathematics Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\xxp}{\mathbf{x}^\prime}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\yyp}{\mathbf{y}^\prime}
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\zzp}{\mathbf{z}^\prime}
+\newcommand{\ii}{\mathbf{i}}
+\newcommand{\jj}{\mathbf{j}}
+\newcommand{\kk}{\mathbf{k}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\uup}{\mathbf{u}^\prime}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vvp}{\mathbf{v}^\prime}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\rr}{\mathbf{r}}
+\newcommand{\rrp}{\mathbf{r}^\prime}
+\newcommand{\ff}{\mathbf{f}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\col}[1]{\operatorname{col}{#1}}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\nul}[1]{\operatorname{null}{#1}}
+\newcommand{\spn}[1]{\operatorname{span}{#1}}
+\newcommand{\rowop}[2][]{\overset{#2}{\underset{#1}{\sim}}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+      }
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\del}{\nabla} 
+\renewcommand{\div}{\grad\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\curlt}{\operatorname{curl}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-advanced-engineering-math.html"><span class="title">Advanced Engineering Mathematics Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-line-integrals.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-integrals.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-green-s-theorem.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-line-integrals.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-multivariable-calculus-vector-integrals.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-green-s-theorem.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-linear-algebra.html" data-scroll="part-linear-algebra" class="internal"><span class="codenumber">I</span> <span class="title">Linear Algebra</span></a></li>
+<li class="link">
+<a href="chapter-linear-algebra-matrices.html" data-scroll="chapter-linear-algebra-matrices" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Matrix Algebra</span></a><ul>
+<li><a href="section-matrices-vectors-and-linear-combinations.html" data-scroll="section-matrices-vectors-and-linear-combinations" class="internal">Matrices, Vectors and Linear Combinations</a></li>
+<li><a href="section-matrix-multiplication.html" data-scroll="section-matrix-multiplication" class="internal">Matrix Multiplication</a></li>
+<li><a href="section-systems-of-linear-equations.html" data-scroll="section-systems-of-linear-equations" class="internal">Systems of Linear Equations</a></li>
+<li><a href="section-linear-independence.html" data-scroll="section-linear-independence" class="internal">Linear Independence</a></li>
+<li><a href="section-existence-of-solutions.html" data-scroll="section-existence-of-solutions" class="internal">Existence of Solutions</a></li>
+<li><a href="section-determinants.html" data-scroll="section-determinants" class="internal">Determinants</a></li>
+<li><a href="section-matrix-inverses.html" data-scroll="section-matrix-inverses" class="internal">Matrix Inverses</a></li>
+<li><a href="section--LU-decomposition.html" data-scroll="section--LU-decomposition" class="internal"><span class="process-math">\(LU\)</span> Decomposition</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-eigenvalues-eigenvectors.html" data-scroll="chapter-linear-eigenvalues-eigenvectors" class="internal"><span class="codenumber">2</span> <span class="title">Eigenvalues and Eigenvectors</span></a><ul>
+<li><a href="section-finding-eigenvalues-and-eigenvectors.html" data-scroll="section-finding-eigenvalues-and-eigenvectors" class="internal">Finding Eigenvalues and Eigenvectors</a></li>
+<li><a href="section-eigenvalue-problems.html" data-scroll="section-eigenvalue-problems" class="internal">Eigenvalue Problems</a></li>
+<li><a href="section-orthogonal-transformations.html" data-scroll="section-orthogonal-transformations" class="internal">Orthogonal Transformations</a></li>
+<li><a href="section-diagonalization-of-matrices.html" data-scroll="section-diagonalization-of-matrices" class="internal">Diagonalization of Matrices</a></li>
+</ul>
+</li>
+<li class="link part"><a href="part-multivariable-calculus.html" data-scroll="part-multivariable-calculus" class="internal"><span class="codenumber">II</span> <span class="title">Multivariable Calculus</span></a></li>
+<li class="link">
+<a href="chapter-multivariable-calculus-vector-derivatives.html" data-scroll="chapter-multivariable-calculus-vector-derivatives" class="internal"><span class="codenumber">3</span> <span class="title">Vector Derivatives</span></a><ul>
+<li><a href="section-inner-products-and-cross-products.html" data-scroll="section-inner-products-and-cross-products" class="internal">Inner Products and Cross Products</a></li>
+<li><a href="section-vector-functions.html" data-scroll="section-vector-functions" class="internal">Vector Functions</a></li>
+<li><a href="section-arc-length-and-components-of-acceleration.html" data-scroll="section-arc-length-and-components-of-acceleration" class="internal">Arc Length and Components of Acceleration</a></li>
+<li><a href="section-gradients-and-potentials.html" data-scroll="section-gradients-and-potentials" class="internal">Gradients and Potentials</a></li>
+<li><a href="section-divergence-and-curl-of-vector-fields.html" data-scroll="section-divergence-and-curl-of-vector-fields" class="internal">Divergence and Curl of Vector Fields</a></li>
+<li><a href="section-sage-examples.html" data-scroll="section-sage-examples" class="internal">Sage Examples</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-multivariable-calculus-vector-integrals.html" data-scroll="chapter-multivariable-calculus-vector-integrals" class="internal"><span class="codenumber">4</span> <span class="title">Vector Integrals</span></a><ul>
+<li><a href="section-line-integrals.html" data-scroll="section-line-integrals" class="internal">Line Integrals</a></li>
+<li><a href="section-path-independence-and-the-fundamental-theorem-of-line-integrals.html" data-scroll="section-path-independence-and-the-fundamental-theorem-of-line-integrals" class="active">Path Independence and the Fundamental Theorem of Line Integrals</a></li>
+<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem" class="internal">Green's Theorem</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
+<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-path-independence-and-the-fundamental-theorem-of-line-integrals"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.2</span> <span class="title">Path Independence and the Fundamental Theorem of Line Integrals</span>
+</h2>
+<section class="introduction" id="introduction-10"><p id="p-372">Given a continuous vector field <span class="process-math">\(\FF\)</span> defined over a smooth curve <span class="process-math">\(C:\rr(t), a\leq t\leq b\text{,}\)</span> we can find the corresponding vector line integral using the formula</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_C\FF\cdot\TT\dd{s} = \int_a^b\FF\cdot\dd{\rr}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">If <span class="process-math">\(F(t)\)</span> is an antiderivative of <span class="process-math">\(\FF\cdot\rrp\text{,}\)</span> then the Fundamental Theorem of Calculus implies that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_C\FF\cdot\TT\dd{s} = F(b) - F(a)\text{,}
+\end{equation*}
+</div>
+<p class="continuation">which suggests that the line integral only depends on the endpoints of the curve. Unfortunately this is not guaranteed as line integrals of vector fields are generally <em class="emphasis">path dependent</em>. Our primary goal in this section is to determine the vector fields <span class="process-math">\(\FF\)</span> for which our intuition does hold.</p></section><section class="subsection" id="subsection-path-independence"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Path Independence</span>
+</h3>
+<p id="p-373">Consider the vector field <span class="process-math">\(\FF = \mqty[y \amp -x]\)</span> and the curves</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-25">
+\begin{align*}
+C_1: \amp \rr_1(t) = \mqty[1-t \amp t], 0\leq t\leq 1 \\
+C_2: \amp \rr_2(t) = \mqty[\cos(t) \amp \sin(t)], 0\leq t\leq\frac{\pi}{2} 
+\end{align*}
+</div>
+<p class="continuation">Note that both curves have the same initial and terminal points, however the corresponding line integrals are different:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-26">
+\begin{align*}
+\int_{C_1}\FF\cdot\TT\dd{s} \amp = -1 \\
+\int_{C_2}\FF\cdot\TT\dd{s} \amp = -\frac{\pi}{2} 
+\end{align*}
+</div>
+<p class="continuation">This is an example of <em class="emphasis">path dependence</em>.</p>
+<article class="definition definition-like" id="definition-path-dependence-and-path-independence"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Path Dependence and Path Independence.</span>
+</h4>
+<p id="p-374">Let <span class="process-math">\(\FF\)</span> be a continuous vector field defined on an open set <span class="process-math">\(U\text{.}\)</span> We say that the line integral <span class="process-math">\(\int_C\FF\cdot\TT\dd{s}\)</span> is <dfn class="terminology">path independent</dfn> on <span class="process-math">\(U\)</span> if for any pair of points <span class="process-math">\(A,B\)</span> in <span class="process-math">\(U\)</span> and any pair of piecewise smooth curves <span class="process-math">\(C_1, C_2\)</span> from <span class="process-math">\(A\)</span> to <span class="process-math">\(B\)</span> contained entirely within <span class="process-math">\(U\)</span> we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_{C_1}\FF\cdot\TT\dd{s} = \int_{C_2}\FF\cdot\TT\dd{s}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">In other words, any line integral of <span class="process-math">\(\FF\)</span> along any piecewise smooth path contained within <span class="process-math">\(U\)</span> depends only on the endpoints of the curve <span class="process-math">\(C\text{.}\)</span> Otherwise, we say that <span class="process-math">\(\int_C\FF\cdot\TT\dd{s}\)</span> is <dfn class="terminology">path dependent</dfn>.</p></article><p id="p-375">Graphically, we can see very quickly that line integrals of <span class="process-math">\(\FF = \mqty[y \amp -x]\)</span> above should be path dependent. For instance, consider the following plot of <span class="process-math">\(\FF\)</span> over the unit square <span class="process-math">\([0,1]\times[0,1]\text{:}\)</span></p>
+<figure class="figure figure-like" id="figure-sage-path-dependent-field"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/sageplot/image-sage-path-dependent-field.svg" role="img" class="contained" alt="A plot of the vector field [y, -x]."></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.2<span class="period">.</span></span><span class="space"> </span><span class="process-math">\(\FF = \mqty[y \amp -x]\text{.}\)</span></figcaption></figure><p id="p-376">Let <span class="process-math">\(C_1\)</span> denote the circular arc from <span class="process-math">\((0,1)\)</span> to <span class="process-math">\((1,0)\)</span> and let <span class="process-math">\(C_2\)</span> denote the path piecewise linear path from <span class="process-math">\((0,1)\)</span> to <span class="process-math">\((1,0)\)</span> determined by following the axes. Then <span class="process-math">\(\int_{C_1}\FF\cdot\dd{\rr} &gt; 0\)</span> and <span class="process-math">\(\int_{C_2}\FF\cdot\dd{\rr} = 0\text{.}\)</span> Therefore <span class="process-math">\(\FF\)</span> must be path-dependent.</p></section><section class="subsection" id="subsection-fundamental-theorem-of-line-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Fundamental Theorem of Line Integrals</span>
+</h3>
+<p id="p-377">The argument above also gives us some intuition about precisely which vector fields should be path independent. In particular, it took advantage of the fact that <span class="process-math">\(\FF\)</span> rotates (<span class="process-math">\(\FF\)</span> always rotates clockwise, but what matters is that it rotates at all) to come up with a line integral that is guaranteed to be positive and another line integral that isn't. This suggests that the path independent vector fields should be related to irrotational fields, i.e., fields with zero curl. Such vector fields are also <a href="" class="xref" data-knowl="./knowl/definition-conservative-vector-fields-and-potentials.html" title="Definition 3.4.8: Conservative Vector Fields and Potentials">conservative vector fields</a> if they are defined over a “simply connection domain”. This statement is made precise using the <em class="emphasis">Fundamental Theorem of Line Integrals</em>.</p>
+<article class="theorem theorem-like" id="theorem-fundamental-theorem-of-line-integrals"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Fundamental Theorem of Line Integrals.</span>
+</h4>
+<p id="p-378">Let <span class="process-math">\(\FF\)</span> be a conservative vector field that is continuous over a piecewise smooth curve <span class="process-math">\(C:\rr(t),a\leq t\leq b\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_{C}\FF\cdot\dd{\rr} = f(\rr(b)) - f(\rr(a))
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(f\)</span> denotes a potential function of <span class="process-math">\(\FF\text{.}\)</span></p></article><article class="hiddenproof" id="proof-12"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-12"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-12"><article class="hiddenproof"><p id="p-379">The proof is essentially just applying the Fundamental Theorem of Calculus to <span class="process-math">\(\int_C\FF\cdot\dd{\rr}\text{:}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-27">
+\begin{align*}
+\int_C\FF\cdot\dd{\rr} \amp = \int_a^b \FF(\rr(t))\cdot\rrp(t)\dd{t} \\
+\amp = \int_a^b \del f(\rr(t))\cdot\rrp(t)\dd{t} \\
+\amp = \int_a^b \dv{t} [f(\rr(t))]\dd{t} \\
+\amp = f(\rr(b)) - f(\rr(a)) 
+\end{align*}
+</div></article></div>
+<p id="p-380">The Fundamental Theorem of Line Integrals shows that conservative vector fields are always path-independent. The converse is also (almost) true: if <span class="process-math">\(\FF\)</span> is a path-independent vector field over some simply connected domain, then <span class="process-math">\(\FF\)</span> is conservative within that domain.</p>
+<aside class="aside aside-like" id="aside-12"><p id="p-381">Roughly speaking, a region <span class="process-math">\(U\)</span> in <span class="process-math">\(\RR^n\)</span> is <em class="emphasis">simply connected</em> if it has no holes. A simple example of a region that is not simply connected is the “punctured plane”, which is just <span class="process-math">\(\RR^2\)</span> with the origin removed.</p></aside><article class="example example-like" id="example-using-the-fundamental-theorem-of-line-integrals"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Fundamental Theorem of Line Integrals.</span>
+</h4>
+<p id="p-382">Let <span class="process-math">\(\FF = \mqty[-y \amp -x]\)</span> and let <span class="process-math">\(C:\rr(t), 0\leq t\leq 2\pi\)</span> where</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\rr(t) = \mqty[\sin(t) \amp \cos(t/2)]\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Find <span class="process-math">\(\int_C\FF\cdot\dd{\rr}\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-43" id="solution-43"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-43"><div class="solution solution-like">
+<p id="p-383">We could use the computational formula given in Equation <a href="" class="xref" data-knowl="./knowl/equation-vector-line-computational.html" title="Equation 2">(2)</a>, but we'll instead make use of <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-line-integrals.html" title="Theorem 4.2.3: Fundamental Theorem of Line Integrals">Theorem 4.2.3</a>. To do so, we need to prove that <span class="process-math">\(\FF\)</span> is conservative and then find a corresponding potential function.</p>
+<p id="p-384">To prove that <span class="process-math">\(\FF\)</span> is conservative, note that its curl is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\pdv{Q}{x} - \pdv{P}{y} = 0\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Since <span class="process-math">\(\FF\)</span> is also continuous everywhere, this is enough to guarantee that it's conservative. Now we know that <span class="process-math">\(\FF\)</span> must have a potential function <span class="process-math">\(f\)</span> such that <span class="process-math">\(\del f = \FF\text{.}\)</span> One such possibility is <span class="process-math">\(f(x, y) = -xy\text{.}\)</span> Therefore</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\int_C\FF\cdot\dd{\rr} = f(0, -1) - f(0, 1) = 0\text{.}
+\end{equation*}
+</div>
+</div></div>
+</div></article><p id="p-385">The <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-line-integrals.html" title="Theorem 4.2.3: Fundamental Theorem of Line Integrals">Fundamental Theorem of Line Integrals</a> has another important consequence. If <span class="process-math">\(C\)</span> is a piecewise smooth closed curve (so its initial and terminal points are the same) and <span class="process-math">\(\FF\)</span> is conservative in a region containing <span class="process-math">\(C\text{,}\)</span> then <span class="process-math">\(\int_C\FF\cdot\dd{\rr} = 0\text{.}\)</span> This also has a nice physical interpretation. Recall that circulation integrals can also be viewed as work integrals, and so the result that line integrals of conservative fields over closed curves are always <span class="process-math">\(0\)</span> corresponds to the physical law that the work done by conservative forces along closed curves is <span class="process-math">\(0\)</span> as well.</p></section></section></div></main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
