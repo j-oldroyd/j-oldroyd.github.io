@@ -255,4 +255,166 @@
             </p>
         </subsection>
     </section>
+
+    <section xml:id="section-path-independence-and-the-fundamental-theorem-of-line-integrals">
+        <title>Path Independence and the Fundamental Theorem of Line Integrals</title>
+
+        <introduction>
+            <p>
+                Given a continuous vector field <m>\FF</m> defined over a smooth curve <m>C:\rr(t), a\leq t\leq b</m>, we can find the corresponding vector line integral using the formula
+                <me>\int_C\FF\cdot\TT\dd{s} = \int_a^b\FF\cdot\dd{\rr}</me>.
+                If <m>F(t)</m> is an antiderivative of <m>\FF\cdot\rrp</m>, then the Fundamental Theorem of Calculus implies that
+                <me>\int_C\FF\cdot\TT\dd{s} = F(b) - F(a)</me>,
+                which suggests that the line integral only depends on the endpoints of the curve.
+                Unfortunately this is not guaranteed as line integrals of vector fields are generally <em>path dependent</em>.
+                Our primary goal in this section is to determine the vector fields <m>\FF</m> for which our intuition does hold.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-path-independence">
+            <title>Path Independence</title>
+
+            <p>
+                Consider the vector field <m>\FF = \mqty[y \amp -x]</m> and the curves
+                <md>
+                    <mrow>C_1: \amp \rr_1(t) = \mqty[1-t \amp t], 0\leq t\leq 1 </mrow>
+                    <mrow>C_2: \amp \rr_2(t) = \mqty[\cos(t) \amp \sin(t)], 0\leq t\leq\frac{\pi}{2} </mrow>
+                </md>
+                Note that both curves have the same initial and terminal points, however the corresponding line integrals are different:
+                <md>
+                    <mrow>\int_{C_1}\FF\cdot\TT\dd{s} \amp = -1 </mrow>
+                    <mrow>\int_{C_2}\FF\cdot\TT\dd{s} \amp = -\frac{\pi}{2} </mrow>
+                </md>
+                This is an example of <em>path dependence</em>.
+            </p>
+
+            <definition xml:id="definition-path-dependence-and-path-independence">
+                <title>Path Dependence and Path Independence</title>
+
+                <idx><h>line integrals</h><h>path independence</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a continuous vector field defined on an open set <m>U</m>.
+                        We say that the line integral <m>\int_C\FF\cdot\TT\dd{s}</m> is <term>path independent</term> on <m>U</m> if for any pair of points <m>A,B</m> in <m>U</m> and any pair of piecewise smooth curves <m>C_1, C_2</m> from <m>A</m> to <m>B</m> contained entirely within <m>U</m> we have
+                        <me>\int_{C_1}\FF\cdot\TT\dd{s} = \int_{C_2}\FF\cdot\TT\dd{s}</me>.
+                        In other words, any line integral of <m>\FF</m> along any piecewise smooth path contained within <m>U</m> depends only on the endpoints of the curve <m>C</m>.
+                        Otherwise, we say that <m>\int_C\FF\cdot\TT\dd{s}</m> is <term>path dependent</term>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Graphically, we can see very quickly that line integrals of <m>\FF = \mqty[y \amp -x]</m> above should be path dependent.
+                For instance, consider the following plot of <m>\FF</m> over the unit square <m>[0,1]\times[0,1]</m>:
+            </p>
+            <figure xml:id="figure-sage-path-dependent-field">
+                <caption><m>\FF = \mqty[y \amp -x]</m>.</caption>
+
+                <image xml:id="image-sage-path-dependent-field" width="50%">
+                    <description>A plot of the vector field [y, -x].</description>
+
+                    <sageplot>
+                        var('x y')
+
+                        F = vector([y, -x])
+
+                        plot_vector_field(F, (x, 0, 1), (y, 0, 1), color="blue")
+                    </sageplot>
+                </image>
+            </figure>
+
+            <p>
+                Let <m>C_1</m> denote the circular arc from <m>(0,1)</m> to <m>(1,0)</m> and let <m>C_2</m> denote the path piecewise linear path from <m>(0,1)</m> to <m>(1,0)</m> determined by following the axes.
+                Then <m>\int_{C_1}\FF\cdot\dd{\rr} > 0</m> and <m>\int_{C_2}\FF\cdot\dd{\rr} = 0</m>.
+                Therefore <m>\FF</m> must be path-dependent.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-fundamental-theorem-of-line-integrals">
+            <title>Fundamental Theorem of Line Integrals</title>
+
+            <p>
+                The argument above also gives us some intuition about precisely which vector fields should be path independent.
+                In particular, it took advantage of the fact that <m>\FF</m> rotates (<m>\FF</m> always rotates clockwise, but what matters is that it rotates at all) to come up with a line integral that is guaranteed to be positive and another line integral that isn't.
+                This suggests that the path independent vector fields should be related to irrotational fields, i.e., fields with zero curl.
+                Such vector fields are also <xref ref="definition-conservative-vector-fields-and-potentials" text="custom">conservative vector fields</xref> if they are defined over a <q>simply connection domain</q>.
+                This statement is made precise using the <em>Fundamental Theorem of Line Integrals</em>.
+            </p>
+
+            <theorem xml:id="theorem-fundamental-theorem-of-line-integrals">
+                <title>Fundamental Theorem of Line Integrals</title>
+
+                <idx><h>Fundamental Theorem of Line Integrals</h><see>conservative vector fields</see></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a conservative vector field that is continuous over a piecewise smooth curve <m>C:\rr(t),a\leq t\leq b</m>.
+                        Then
+                        <me>\int_{C}\FF\cdot\dd{\rr} = f(\rr(b)) - f(\rr(a))</me>
+                        where <m>f</m> denotes a potential function of <m>\FF</m>.
+                    </p>
+                </statement>
+
+                <proof>
+                    <p>
+                        The proof is essentially just applying the Fundamental Theorem of Calculus to <m>\int_C\FF\cdot\dd{\rr}</m>:
+                        <md>
+                            <mrow>\int_C\FF\cdot\dd{\rr} \amp = \int_a^b \FF(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                            <mrow> \amp = \int_a^b \del f(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                            <mrow> \amp = \int_a^b \dv{t} [f(\rr(t))]\dd{t} </mrow>
+                            <mrow> \amp = f(\rr(b)) - f(\rr(a)) </mrow>
+                        </md>
+                    </p>
+                </proof>
+            </theorem>
+
+            <p>
+                The Fundamental Theorem of Line Integrals shows that conservative vector fields are always path-independent.
+                The converse is also (almost) true: if <m>\FF</m> is a path-independent vector field over some simply connected domain, then <m>\FF</m> is conservative within that domain.
+            </p>
+
+            <aside>
+                <p>
+                    Roughly speaking, a region <m>U</m> in <m>\RR^n</m> is <em>simply connected</em> if it has no holes.
+                    A simple example of a region that is not simply connected is the <q>punctured plane</q>, which is just <m>\RR^2</m> with the origin removed.
+                </p>
+            </aside>
+
+            <example xml:id="example-using-the-fundamental-theorem-of-line-integrals">
+                <title>Using the Fundamental Theorem of Line Integrals</title>
+            
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[-y \amp -x]</m> and let <m>C:\rr(t), 0\leq t\leq 2\pi</m> where
+                        <me>\rr(t) = \mqty[\sin(t) \amp \cos(t/2)]</me>.
+                        Find <m>\int_C\FF\cdot\dd{\rr}</m>.
+                    </p>
+                </statement>
+            
+                <solution>
+                    <p>
+                        We could use the computational formula given in Equation <xref ref="equation-vector-line-computational" text="type-global" />, but we'll instead make use of the <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" />.
+                        To do so, we need to prove that <m>\FF</m> is conservative and then find a corresponding potential function.
+                    </p>
+
+                    <p>
+                        To prove that <m>\FF</m> is conservative, note that its curl is <me>\pdv{Q}{x} - \pdv{P}{y} = 0</me>.
+                        Since <m>\FF</m> is also continuous everywhere, this is enough to guarantee that it's conservative.
+                        Now we know that <m>\FF</m> must have a potential function <m>f</m> such that <m>\del f = \FF</m>.
+                        One such possibility is <m>f(x, y) = -xy</m>.
+                        Therefore
+                        <me>\int_C\FF\cdot\dd{\rr} = f(0, -1) - f(0, 1) = 0</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                The <xref ref="theorem-fundamental-theorem-of-line-integrals" text="title" /> has another important consequence.
+                If <m>C</m> is a piecewise smooth closed curve (so its initial and terminal points are the same) and <m>\FF</m> is conservative in a region containing <m>C</m>, then <m>\int_C\FF\cdot\dd{\rr} = 0</m>.
+                This also has a nice physical interpretation.
+                Recall that circulation integrals can also be viewed as work integrals, and so the result that line integrals of conservative fields over closed curves are always <m>0</m> corresponds to the physical law that the work done by conservative forces along closed curves is <m>0</m> as well.
+            </p>
+        </subsection>
+    </section>
 </chapter>
