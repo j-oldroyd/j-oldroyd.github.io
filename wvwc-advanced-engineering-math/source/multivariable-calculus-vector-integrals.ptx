@@ -570,6 +570,58 @@
                 </statement>
             </definition>
 
+            <example xml:id="example-computing-a-flux-integral">
+                <title>Computing a Flux Integral</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[x \amp y]</m> and let <m>C</m> denote the line segment from <m>(0,1)</m> to <m>(1,0)</m>.
+                        Find the flux of <m>\FF</m> across <m>C</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To build some intuition, we'll begin by graphing both <m>\FF</m> and <m>C</m>.
+                    </p>
+
+                    <figure xml:id="figure-sage-flux-line-segment">
+                        <caption>The vector field <m>\FF = \mqty[x \amp y]</m> and the line segment <m>C</m>.</caption>
+
+                        <image xml:id="image-sage-flux-line-segment">
+                            <description>The vector field F = [x, y] over the line segment C from (0,1) to (1,0).</description>
+
+                            <sageplot>
+                                var('x y')
+
+                                F = vector([x, y])
+
+                                P1 = plot_vector_field(F, (x, -.5, 1.5), (y, -.5, 1.5), color="blue")
+                                P2 = parametric_plot([x, 1-x], (x, 0, 1), color="black", aspect_ratio="automatic")
+
+                                P = P1 + P2
+                                P
+                            </sageplot>
+                        </image>
+                    </figure>
+
+                    <p>
+                        Since <m>\FF</m> appears to be flowing across <m>C</m> instead of along <m>C</m>, we expect that the flux will be nonzero.
+                        Furthermore, we'll see that the flux should be negative since <m>\FF</m> tends to flow to the left across <m>C</m> relative to the direction of <m>C</m>, whereas the outward normal <m>\mathbf{N}</m> points to the right.
+                    </p>
+
+                    <p>
+                        Now we'll compute the flux using <xref ref="definition-flux-integral" text="type-global" />.
+                        We first need to parameterize <m>C</m>, which we can do using <m>\rr(t) = \mqty[t \amp 1-t], 0\leq t\leq 1</m>. The flux is then
+                        <md>
+                            <mrow>\int_C P\dd{y} - Q\dd{x} \amp = \int_0^1[t(-1) - (1-t)]\dd{t} </mrow>
+                            <mrow> \amp = -1 </mrow>
+                        </md>
+                        Therefore <m>\FF</m> flows <q>into</q> <m>C</m>, relative to its orientation.
+                    </p>
+                </solution>
+            </example>
+
             <p>
                 If <m>R</m> is a simple, closed and bounded region in the plane, then the normal vector <m>\mathbf{N}</m> in <xref ref="definition-flux-integral" text="type-global" /> is always defined to be the outward normal.
                 In particular, if <m>\partial R</m> is oreiented counterclockwise then has unit tangent <m>\TT</m>, then the region <m>R</m> will always lie to the left of <m>\TT</m> and the normal <m>\mathbf{N}</m> will always point to the right of <m>\TT</m>.
@@ -591,6 +643,32 @@
                     </p>
                 </statement>
             </theorem>
+
+            <example xml:id="example-measuring-flux-within-a-region">
+                <title>Measuring Flux Within a Region</title>
+
+                <statement>
+                    <p>
+                        A meteorologist determines that the wind patterns in a certain region are well-represented by the vector field <m>\FF = \mqty[x - 2 \amp x + 1]</m>.
+                        She wants to determine if the boundary of a rectangular plot of land within this region, represented by
+                        <me>R = \{(x, y) : -1\leq x\leq 2, -2 \leq y\leq 2\}</me>,
+                        is suitable for the placement of wind turbines.
+                        How could she make this determination?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        One approach is to see if the flux of <m>\FF</m> over this region is nonzero, which by <xref ref="theorem-green-s-theorem-for-flux-integrals" text="type-global" /> must be equal to the flux of <m>\FF</m> across the boundary.
+                        The flux across the boundary is therefore
+                        <md>
+                            <mrow>\int_{\partial R} \FF\cdot\mathbf{N}\dd{s} \amp = \int_{-1}^{2}\int_{-2}^{2} \dd{y}\dd{x} </mrow>
+                            <mrow> \amp = 12 </mrow>
+                        </md>.
+                        As the flux across the boundary is nonzero, we conclude that it's not unreasonable to place turbines on the boundary of this region.
+                    </p>
+                </solution>
+            </example>
         </subsection>
     </section>
 </chapter>
