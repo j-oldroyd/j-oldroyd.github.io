@@ -674,7 +674,7 @@
 
     <section xml:id="section-surface-integrals">
         <title>Surface Integrals</title>
-        
+
         <introduction>
             <p>
                 In <xref ref="section-line-integrals" text="type-global" /> we computed line integrals in <m>\RR^2</m> and <m>\RR^3</m> by first parameterizing a curve <m>C</m> with a vector function <m>\rr(t)</m> and then using this parameterization to replace the line integral with an integral of the form <m>\int_C f(t)\dd{t}</m>.
@@ -686,7 +686,7 @@
 
         <subsection xml:id="subsection-surfaces-in--rr-3-">
             <title>Surfaces in <m>\RR^3</m></title>
-            
+
             <p>
                 A typical surface in <m>\RR^3</m> can be parameterized by a vector function of the form
                 <me>\rr(u, v) = \mqty[x(u, v) \amp y(u, v) \amp z(u, v)]</me>,
@@ -696,7 +696,7 @@
 
             <example xml:id="example-parameterizing-a-surface-in-RR3">
                 <title>Parameterizing a Surface in <m>\RR^3</m></title>
-            
+
                 <statement>
                     <p>
                         What surface in <m>\RR^3</m> is represented by
@@ -704,7 +704,7 @@
                         where <m>0\leq u\leq2\pi</m> and <m>0\leq v\leq \pi</m>?
                     </p>
                 </statement>
-            
+
                 <solution>
                     <p>
                         If we let
@@ -742,13 +742,13 @@
 
             <example xml:id="example-finding-a-normal-vector">
                 <title>Finding a Normal Vector</title>
-            
+
                 <statement>
                     <p>
                         Find a normal vector to the surface <m>y = x^2</m> at the point <m>(2, 4, -3)</m>.
                     </p>
                 </statement>
-            
+
                 <solution>
                     <p>
                         First, we parameterize our surface by using
@@ -792,6 +792,156 @@
                 Note that this is the <em>negative</em> of the answer we obtained in <xref ref="example-finding-a-normal-vector" text="type-global" />.
                 We will always have two choices for the direction of our normal vector, so going forward we will need to specify which direction we will take.
             </p>
+        </subsection>
+
+        <subsection xml:id="subsection-surface-integrals">
+            <title>Surface Integrals</title>
+
+            <p>
+                Now we are ready to define surface integrals of vector fields.
+                In all that follows, we will assume that <m>D:\rr(u, v), (u,v)\in R</m> is a piecewise-smooth surface (i.e., a surface with finitely many cusps or edges).
+                Unless specifically mentioned otherwise, we will assume that our corresponding normal vector is <m>\mathbf{n}(u, v) = \rr_u\times\rr_v</m>.
+            </p>
+
+            <definition xml:id="definition-surface-integrals-of-vector-fields">
+                <title>Surface Integrals of Vector Fields</title>
+
+                <idx><h>surface integrals</h><h>vector fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a continuous vector field defined over <m>D</m>.
+                        The <term>(flux) surface integral</term> of <m>\FF</m> over <m>D</m> is the quantity <m>\iint_D \FF\cdot\dd{\SS}</m> given by
+                        <me>\iint_D \FF\cdot\dd{\SS} = \iint_{R} \FF(\rr(u, v))\cdot\nn(u, v)\dd{A}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The flux integral <m>\iint_D\FF\cdot\dd{\SS}</m> represents the flow of <m>\FF</m> across the surface <m>D</m> parallel to the normal vector <m>\nn</m>.
+                We will often pick <m>\nn</m> to be the <q>outward</q> direction relative to <m>D</m>, and so the flux integral will measure the flux of <m>\FF</m> out of <m>D</m>.
+            </p>
+
+            <example xml:id="example-computing-a-surface-integral">
+                <title>Computing a Surface Integral</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = e^y\ii + e^x\jj + \kk</m> and let <m>D</m> denote the part of the plane <m>x + y + z = 1</m> restricted to the first octant.
+                        Find <m>\iint_D\FF\cdot\dd{\SS}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We can use Sage to produce a quick plot of <m>x + y + z = 1</m> as below.
+                        However, we must remember that we're only considering the part of this plane in the first octant, and therefore must restrict <m>x, y</m> and <m>z</m> to be nonnegative.
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('x, y')
+                            plot3d(1 - x - y, (x, 0, 1), (y, 0, 1))
+                        </input>
+                    </sage>
+
+                    <p>
+                        We can parameterize this surface using
+                        <md>
+                            <mrow>\rr(u, v) \amp \mqty[u \amp v \amp 1 - u - v] </mrow>
+                            <mrow>0 \amp \leq v\leq 1 - u </mrow>
+                            <mrow>0 \amp \leq u\leq 1 </mrow>
+                        </md>.
+                        This gives us the corresponding normal vector <m>\nn(u, v) = \mqty[1 \amp 1\amp 1]</m>, and so
+                        <md>
+                            <mrow>\iint_D\FF\cdot\dd{\SS} \amp = \int_0^1\int_0^{1-u}\mqty[e^v \amp e^y \amp 1]\cdot\mqty[1 \amp 1\amp 1]\dd{v}\dd{u} </mrow>
+                            <mrow> \amp = \int_0^1\int_0^{1-u}(e^v + e^u + 1)\dd{v}\dd{u} </mrow>
+                            <mrow> \amp = \int_0^1 (e^{1-u} + (1 - u)e^u - u)\dd{u} </mrow>
+                            <mrow> \amp = 2e - \frac{7}{2} </mrow>
+                        </md>.
+                        As this is positive, we view the vector field <m>\FF</m> as flowing <em>out</em> of <m>D</m> relative to the normal vector <m>\nn</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                In <xref ref="example-computing-a-surface-integral" text="type-global" />, we could have set up the surface integral by using the gradient to find our normal vector instead.
+                One possibility is to choose <m>F(x, y, z) = 1 - x - y - z = 0</m> to give our surface, which produces <m>\nn = \mqty[-1 \amp -1 \amp -1]</m>.
+                Therefore we would have
+                <me>\iint_{D}\FF\cdot\dd{\SS} = \int_0^1\int_0^{1-x}(-e^y - e^x - 1)\dd{y}\dd{x} = \frac{7}{2} - 2e</me>.
+                What's happened is that we've inadvertently chosen the opposite direction for our normal vector <m>\nn</m> which flips the sign of our result from the example.
+                Mathematically, there's no reason to prefer <m>\mqty[1 \amp 1\amp 1]</m> over <m>-\mqty[1 \amp 1\amp 1]</m>.
+                This is why it's important to specify an <em>orientation</em> of our surface by choosing the direction of the normal vector.
+            </p>
+
+            <p>
+                In general, we say that a surface is <em>orientable</em> if it has a well-defined <q>inside</q> and <q>outside</q> as determined by selecting some consistent direction for its normal vectors.
+                To illustrate this concept, it's helpful to consider a surface that fails to be orientable.
+                The fundamental example here is the Möbius strip, which is parameterized by
+                <me>\rr(u,v) = \mqty[(1 + u\cos(\frac{v}{2}))\cos(v) \amp (1 + u\cos(\frac{v}{2}))\sin(v) \amp u\sin(\frac{v}{2})]</me>
+                for <m>-\frac{1}{2}\leq u\leq \frac{1}{2}, 0\leq v\leq 2\pi</m>.
+            </p>
+
+            <aside>
+                <p>
+                    This parameterization is adapted from <url href="https://mathworld.wolfram.com/MoebiusStrip.html" visual="mathworld.wolfram.com">MathWorld</url>.
+                </p>
+            </aside>
+
+            <sage>
+                <input>
+                    var('u v')
+
+                    x = cos(v)*(1 + u*cos(v/2))
+                    y = sin(v)*(1 + u*cos(v/2))
+                    z = u*sin(v/2)
+
+                    parametric_plot3d((x, y, z), (u, -1/2, 1/2), (v, 0, 2*pi))
+                </input>
+            </sage>
+
+            <p>
+                The Möbius strip is non-orientable because we can't choose an unambiguous orientation for normal vectors to this surface.
+                This is because any normal vector on the surface can be moved around over the surface in a continuous fashion until it's back at the same position it started but is now in the opposite direction.
+                To see this more precisely, consider the point <m>\rr(0,0) = \mqty[1 \amp 0 \amp 0]</m> on the strip.
+                Then the normal vector can be found by computing <m>\nn(u, v) = \rr_u\times\rr_v</m>, and it can be checked that <m>\nn(0,0) = \mqty[0 \amp 0\amp 1]</m>.
+                On the other hand, it's also true that <m>\rr(0,0) = \rr(0, 2\pi)</m>.
+                However, <m>\nn(0,2\pi) = \mqty[0 \amp 0\amp -1]</m>.
+                Therefore it's impossible for us to select a consistent orientation for this surface.
+            </p>
+
+            <p>
+                We can also compute surface integrals of scalar fields.
+                To do so, we replace <m>\nn(u, v)</m> in the integral with <m>\norm{\nn(u,v)}</m>:
+                <me>\iint_D G(x, y, z)\dd{S} = \iint_{R} G(\rr(u, v))\norm{\rr_u\times\rr_v}\dd{A}</me>.
+                If <m>D: z = f(x, y)</m>, then this expression simplifies down a bit since we can choose <m>\rr(u, v) = \mqty[u \amp v\amp f(u, v)]</m> and therefore
+                <me>\nn(u, v) = \mqty[-\pdv{f}{u} \amp -\pdv{f}{v} \amp 1]</me>.
+                Hence
+                <me>\iint_D G(x, y, z)\dd{S} = \iint_{D} G(x, y, f(x, y)) \sqrt{1 + (f_x)^2 + (f_y)^2}\dd{A}</me>.
+            </p>
+
+            <example xml:id="example-computing-a-scalar-surface-integral">
+                <title>Computing a Scalar Surface Integral</title>
+
+                <statement>
+                    <p>
+                        Find the mass of a thin hemisphere <m>D</m> centered above the origin in <m>\RR^3</m> of radius <m>1</m> and density <m>\rho(x, y, z) = z</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Since mass is just the integral of density, we can compute the mass by finding <m>\iint_D \rho(x, y, z)\dd{S}</m>.
+                        The surface itself is given by the equation <m>z = \sqrt{1 - x^2 - y^2}</m>, and so
+                        <md>
+                            <mrow>\iint_D z\dd{S} \amp = \iint_{D}\sqrt{1 - x^2 - y^2} \sqrt{1 + \frac{x}{1 - x^2 - y^2} + \frac{y^2}{1 - x^2 - y^2}}\dd{A} </mrow>
+                            <mrow> \amp = \iint_D \sqrt{1 - x^2 - y^2 + x^2 + y^2}\dd{A} </mrow>
+                            <mrow> \amp = \iint_D \dd{A} </mrow>
+                            <mrow> \amp = 2\pi </mrow>
+                        </md>.
+                    </p>
+                </solution>
+            </example>
         </subsection>
     </section>
 </chapter>
