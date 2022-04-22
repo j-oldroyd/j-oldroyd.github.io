@@ -671,4 +671,127 @@
             </example>
         </subsection>
     </section>
+
+    <section xml:id="section-surface-integrals">
+        <title>Surface Integrals</title>
+        
+        <introduction>
+            <p>
+                In <xref ref="section-line-integrals" text="type-global" /> we computed line integrals in <m>\RR^2</m> and <m>\RR^3</m> by first parameterizing a curve <m>C</m> with a vector function <m>\rr(t)</m> and then using this parameterization to replace the line integral with an integral of the form <m>\int_C f(t)\dd{t}</m>.
+                In this section we will take a similar approach to define and compute <em>surface integrals</em>.
+                We will primarily deal with surface integrals of vector functions which we interpret as flux integrals.
+                Before we can start defining surface integrals, we need to discuss the parameterization of surfaces.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-surfaces-in--rr-3-">
+            <title>Surfaces in <m>\RR^3</m></title>
+            
+            <p>
+                A typical surface in <m>\RR^3</m> can be parameterized by a vector function of the form
+                <me>\rr(u, v) = \mqty[x(u, v) \amp y(u, v) \amp z(u, v)]</me>,
+                where <m>(u,v)\in R</m> and <m>R</m> is some region of the <m>uv</m>-plane.
+                If a surface <m>D</m> is parameterized by <m>\rr(u, v), (u,v)\in R</m>, we will usually indicate such by writing <m>D : \rr(u, v)</m>.
+            </p>
+
+            <example xml:id="example-parameterizing-a-surface-in-RR3">
+                <title>Parameterizing a Surface in <m>\RR^3</m></title>
+            
+                <statement>
+                    <p>
+                        What surface in <m>\RR^3</m> is represented by
+                        <me>\rr(u, v) = \mqty[\cos(u)\sin(v) \amp \sin(u)\sin(v) \amp \cos(v)]</me>
+                        where <m>0\leq u\leq2\pi</m> and <m>0\leq v\leq \pi</m>?
+                    </p>
+                </statement>
+            
+                <solution>
+                    <p>
+                        If we let
+                        <md>
+                            <mrow>x(u, v) \amp = \cos(u)\sin(v) </mrow>
+                            <mrow>y(u, v) \amp = \sin(u)\sin(v) </mrow>
+                            <mrow>z(u, v) \amp = \cos(v) </mrow>
+                        </md>,
+                        then we see that <m>x^2 + y^2 + z^2 = 1</m>.
+                        This suggests that the surface <m>D:\rr(u, v)</m> is contained within the unit sphere in <m>\RR^3</m>.
+                        In fact, it is the entire unit sphere!
+                        We can verify this using Sage:
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v')
+
+                            x(u, v) = cos(u)*sin(v)
+                            y(u, v) = sin(u)*sin(v)
+                            z(u, v) = cos(v)
+
+                            parametric_plot3d((x(u, v), y(u, v), z(u, v)), (u, 0, 2*pi), (v, 0, pi))
+                        </input>
+                    </sage>
+                </solution>
+            </example>
+
+            <p>
+                We will primarily be interested in using surface integrals to represent and calculate the flux of a vector field <m>\FF</m> over a surface <m>D:\rr(u, v)</m>.
+                As part of this process, we will need to find normal vectors to surfaces (just as we did when finding <xref ref="definition-flux-integral" text="custom">flux integrals across curves</xref>).
+                If <m>D</m> is a smooth surface, or equivalently if <m>\rr(u, v)</m> is differentiable, then finding the normal vector is just a matter of computing <m>\mathbf{n} = \rr_u\times\rr_v</m>.
+                This is because both <m>\rr_u</m> and <m>\rr_v</m> are tangent to the surface <m>D</m>.
+            </p>
+
+            <example xml:id="example-finding-a-normal-vector">
+                <title>Finding a Normal Vector</title>
+            
+                <statement>
+                    <p>
+                        Find a normal vector to the surface <m>y = x^2</m> at the point <m>(2, 4, -3)</m>.
+                    </p>
+                </statement>
+            
+                <solution>
+                    <p>
+                        First, we parameterize our surface by using
+                        <me>\rr(u, v) = \mqty[u \amp u^2 \amp v]</me>.
+                        Then
+                        <me>\rr_u = \mqty[1 \amp 2u \amp 0]\text{ and }\rr_v = \mqty[0 \amp 0 \amp 1]</me>.
+                        Now we can find the normal vector by computing the cross product of these two vectors, either by hand or by using Sage as below:
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v')
+
+                            r_u = vector([1, 2*u, 0])
+                            r_v = vector([0, 0, 1])
+
+                            show(r_u.cross_product(r_v))
+                        </input>
+                    </sage>
+
+                    <p>
+                        Either way, we get the normal vector <m>\mathbf{n}(u, v) = \mqty[2u \amp -1 \amp 0]</m>.
+                        At the point <m>(2, 4, -3)</m>, this becomes <m>\mqty[4 \amp -1 \amp 0]</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                If a surface is given by a Cartesian equation of the form <m>F(x, y, z) = 0</m> as in the last example, then we can also find normal vectors by computing gradients.
+                To see why, suppose that <m>\rr(t)</m> traces out a curve on the surface <m>D : F(x, y, z) = 0</m>.
+                Then <m>F(\rr(t)) = 0</m>.
+                However, by the chain rule we then get
+                <me>0 = \dv{t}(F(\rr(t))) = \del F(\rr(t))\cdot \rrp(t)</me>.
+                Since <m>\rrp</m> is tangent to <m>D</m>, this shows that <m>\del F</m> must be perpendicular to <m>D</m>.
+            </p>
+
+            <p>
+                In the last example, we could choose <m>F(x, y, z) = y - x^2 = 0</m> giving the gradient
+                <me>\del F = \mqty[-2x \amp 1 \amp 0]</me>.
+                At <m>(2, 4, -3)</m>, this becomes <m>\mqty[-4 \amp 1 \amp 0]</m>.
+                Note that this is the <em>negative</em> of the answer we obtained in <xref ref="example-finding-a-normal-vector" text="type-global" />.
+                We will always have two choices for the direction of our normal vector, so going forward we will need to specify which direction we will take.
+            </p>
+        </subsection>
+    </section>
 </chapter>
