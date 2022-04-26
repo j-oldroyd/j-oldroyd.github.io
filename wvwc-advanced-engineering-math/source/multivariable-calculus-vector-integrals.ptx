@@ -944,4 +944,186 @@
             </example>
         </subsection>
     </section>
+
+    <section xml:id="section-the-divergence-theorem-and-applications">
+        <title>The Divergence Theorem and Its Applications</title>
+
+        <introduction>
+            <p>
+                In <xref ref="section-green-s-theorem" text="type-global" />, we discussed <xref ref="theorem-green-s-theorem-for-flux-integrals" text="custom">Green's Theorem for flux integrals</xref>.
+                This result allows us to relate the flux integral of a vector field <m>\FF</m> along the boundary <m>\partial R</m> of a simple, closed and bounded region <m>R</m> in the plane with the double integral of the divergence.
+                We can do something similar in <m>\RR^3</m> by replacing the flux integral with the surface (flux) integral.
+                We will see later that this can be viewed as a kind of <q>integration by parts</q> formula in higher dimensions.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-the-divergence-theorem">
+            <title>The Divergence Theorem</title>
+
+            <p>
+                We begin by stating the Divergence Theorem in <m>\RR^3</m>.
+                Unless we mention otherwise, all surface normal vectors will be assumed to be outward-pointing relative to the region enclosed by the surface.
+            </p>
+
+            <theorem xml:id="theorem-divergence-theorem">
+                <title>Divergence Theorem</title>
+
+                <idx>Divergence Theorem</idx>
+
+                <statement>
+                    <p>
+                        Let <m>T</m> denote a simple, closed and bounded region in <m>\RR^3</m> with piecewise-smooth boundary <m>\partial T</m>.
+                        Let <m>\FF</m> denote a continuously differentiable vector field defined on some open set containing <m>T</m>.
+                        Then
+                        <me>\iint_{\partial T}\FF\cdot\dd{\SS} = \iiint_{T}\div\FF\dd{V}</me>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <p>
+                The triple integral that appears in the Divergence Theorem can be viewed as the <q>net outflow</q> of <m>\FF</m> over the points of <m>T</m>.
+                From this viewpoint, the Divergence Theorem states that this net outflow is exactly equal to the flux of <m>\FF</m> out of the boundary of <m>T</m>.
+            </p>
+
+            <example xml:id="example-flux-out-of-a-hemisphere">
+                <title>Flux Out of a Hemisphere</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\iint_D \FF\cdot\dd{\SS}</m> where
+                        <me>\FF = \mqty[x^3 - y^3 \amp y^3 - z^3 \amp z^3 - x^3]</me>
+                        and <m>D</m> denotes the upper hemisphere of the sphere of radius <m>5</m> centered at the origin.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Using methods from <xref ref="section-surface-integrals" text="type-global" />, we would need to split the piecewise smooth surface <m>D</m> into two smooth components <m>D_1</m> and <m>D_2</m> representing the spherical cap and the base of <m>D</m> respectively.
+                        See the plot produced below.
+                        Note that the plot also indicates that our surface integral should be positive.
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v, x, y, z')
+
+                            F = vector([x^3 - y^3, y^3 - z^3, z^3 - x^3])
+
+                            # spherical cap of D
+                            P = parametric_plot3d((5*cos(u)*sin(v), 5*sin(u)*sin(v), 5*cos(v)), (u, 0, 2*pi), (v, 0, pi/2))
+
+                            # base of D
+                            P += parametric_plot3d((u*cos(v), u*sin(v), 0), (u, 0, 5), (v, 0, 2*pi), color="red")
+
+                            P += plot_vector_field3d(F, (x, -5, 5), (y, -5, 5), (z, 0, 5))
+
+                            P.show()
+                        </input>
+                    </sage>
+
+                    <p>
+                        This is manageable but tedious, so we instead use <xref ref="theorem-divergence-theorem" text="type-global" /> to rewrite the surface integral as a single triple integral,
+                        <me>\iint_D\FF\cdot\dd{\SS} = \iiint_T 3(x^2 + y^2 + z^2)\dd{V}</me>,
+                        where <m>T</m> denotes the region enclosed within the hemisphere.
+                        To evaluate this integral we convert to spherical coordinates:
+                        <md>
+                            <mrow>\iiint_T 3(x^2+y^2+z^2)\dd{V} \amp = 3\int_0^{2\pi}\int_0^{\frac{\pi}{2}}\int_0^5\rho^4\sin(\varphi)\dd{\rho}\dd{\varphi}\dd{\theta} </mrow>
+                            <mrow> \amp =  3750\pi</mrow>
+                        </md>.
+                        Our answer is positive, which is consistent with the graph produced above.
+                    </p>
+                </solution>
+            </example>
+
+            <example xml:id="example-flux-into-a-cube">
+                <title>Flux Into a Cube</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy \amp y^2 z \amp z^3] </m>.
+                        Find the flux of <m>\FF</m> <em>into</em> the unit cube <m>T: 0\leq x, y, z\leq 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        If we try to compute this without using the Divergence Theorem then we would need to compute <em>six</em> separate surface integrals, one for each face of the cube.
+                        If we make use of the Divergence Theorem, this problem becomes much more tractable.
+                        So let <m>T</m> denote the unit cube and the region it encloses.
+                        Then
+                        <md>
+                            <mrow>-\iint_{\partial T} \FF\cdot\dd{\SS} \amp = -\int_0^1\int_0^1\int_0^1 (y + 2yz + 3z^2)\dd{z}\dd{y}\dd{x}</mrow>
+                            <mrow> \amp = -2 </mrow>
+                        </md>.
+                        Therefore <m>\FF</m> tends to flow <em>out</em> of the cube.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-applications-of-the-divergence-theorem">
+            <title>Applications of the Divergence Theorem</title>
+
+            <p>
+                <xref ref="theorem-divergence-theorem" text="type-global" /> leads to several other integral formulas that can be useful in higher dimensions.
+                For our first example, we'll consider what happens if <m>\FF</m> is conservative.
+                If this is the case, then there exists a potential function <m>f</m> for <m>\FF</m>: <m>\del{f} = \FF</m>.
+                Then
+                <md>
+                    <mrow>\div\FF \amp = \div\del{f} = \Delta f</mrow>
+                    <mrow>\FF\cdot\dd{\SS} \amp = \del{f}\cdot\nn\dd{A} </mrow>
+                </md>
+                where <m>\Delta f = f_xx + f_yy</m> is the Laplacian of <m>f</m> and <m>\del{f}\cdot\nn</m> is the <em>normal derivative</em> of <m>f</m>, often denoted by <m>\pdv{f}{n}</m>.
+            </p>
+
+            <example xml:id="example-green-s-first-identity">
+                <title>Green's First Identity</title>
+
+                <statement>
+                    <p>
+                        Let <m>T</m> satisfy the conditions of <xref ref="theorem-divergence-theorem" text="type-global" /> and let <m>f(x, y, z)</m> and <m>g(x, y, z)</m> be twice continuously differentiable functions.
+                        Then
+                        <me>\iiint_T(f\Delta g + \del{f}\cdot\del{g})\dd{V} = \iint_{\partial T} f\pdv{g}{n}\dd{S}</me>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To prove this we'll set <m>\FF = f\del{g}</m>.
+                        Then
+                        <me>\div\FF = \del{f}\cdot\del{g} + f\Delta g</me>
+                        and
+                        <me>\FF\cdot\nn = f(\del{g}\cdot\nn) = f\pdv{g}{n}</me>,
+                        and the Divergence Theorem then implies the result.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Green's First Identity is particularly important for proving a result about <em>harmonic functions</em>, which are scalar functions <m>f</m> such that <m>\Delta f = 0</m>.
+                If we set <m>f = g</m> in the identity where <m>f</m> is harmonic then we get
+                <me>\iiint_T \norm{\del f}^2\dd{V} = \iint_{\partial T}f\pdv{f}{n}\dd{S}</me>.
+                If we also know that <m>f = 0</m> everywhere on <m>\partial T</m>, then this forces <m>\del{f} = \mathbf{0}</m> and furthermore <m>f = 0</m>.
+                This gives us the following result.
+            </p>
+
+            <theorem xml:id="theorem-harmonic-functions-defined-on-boundaries">
+                <title>Harmonic Functions Defined on Boundaries</title>
+
+                <statement>
+                    <p>
+                        Let <m>f</m> and <m>g</m> be two harmonic functions defined on an open set containing the simple, closed and bounded region <m>T</m> with piecewise smooth boundary <m>\partial T</m>.
+                        If <m>f = g</m> on <m>\partial T</m>, then <m>f = g</m> everywhere inside of <m>T</m> as well.
+                    </p>
+                </statement>
+
+                <proof>
+                    Set <m>h = f - g</m> and note that <m>h</m> is harmonic on <m>T</m> and that <m>h = 0</m> on <m>\partial T</m>.
+                    Therefore <m>h = 0</m> inside of <m>T</m> as well, which implies that <m>f = g</m> inside of <m>T</m>.
+                </proof>
+            </theorem>
+
+            
+        </subsection>
+    </section>
 </chapter>
