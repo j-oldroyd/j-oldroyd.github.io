@@ -108,8 +108,99 @@
         <title>Matrix Multiplication</title>
 
         <p>
-            To be completed.
+            In this section we define the product of two matrices.
+            As with matrix addition we can only define the product of two matrices if they have compatible sizes.
+            When we begin using matrices to represent transformations of points, matrix multiplication with correspond to the composition of transformations.
         </p>
+
+        <definition xml:id="definition-matrix-multiplication">
+            <title>Matrix Multiplication</title>
+        
+            <idx>
+                <h>matrices</h>
+                <h>multiplication</h>
+            </idx>
+        
+            <statement>
+                <p>
+                    Let <m>A = [a_{ij}]\in\RR^{m\times p}</m> and <m>B = [b_{ij}]\in\RR^{p\times n}</m>.
+                    The <term>product</term> of <m>A</m> and <m>B</m> is the matrix <m>C = [c_{ij}]\in\RR^{m\times n}</m> with entries given by
+                    <me>c_{ij} = \sum_{k = 1}^{p}a_{ik}b_{kj}</me>.
+                </p>
+            </statement>
+        </definition>
+
+        <p>
+            We have two important and immediate differences between multiplication of scalars and the product defined in <xref ref="definition-matrix-multiplication" text="type-global" />:
+            <ol>
+                <li>The product of two matrices <m>A</m> and <m>B</m> only exists if the number of columns of <m>A</m> is equal to the number of rows of <m>B</m>.</li>
+                <li>Even if <m>AB</m> and <m>BA</m> both exist, it's not necessarily true that <m>AB = BA</m>.</li>
+            </ol>
+        </p>
+
+        <example xml:id="example-finding-a-product-of-matrices">
+            <title>Finding a Product of Matrices</title>
+        
+            <statement>
+                <p>
+                    Let
+                    <me>A = \mqty[1 \amp 2 \\ -1 \amp 3]\text{ and }B = \mqty[1 \amp 3 \amp -1 \\ 0 \amp 2 \amp 0]</me>.
+                    Find <m>AB</m> and <m>BA</m> if possible.
+                </p>
+            </statement>
+        
+            <solution>
+                <p>
+                    The product <m>BA</m> is undefined, but <m>AB</m> exists and is a <m>2\times 3</m> matrix:
+                    <me>AB = \mqty[1 \amp 7 \amp -1 \\ -1 \amp 3 \amp 1]</me>.
+                </p>
+            </solution>
+        </example>
+
+        <p>
+            An important matrix is the <em>identity matrix</em>.
+            This is the matrix <m>I</m> with <m>1</m>s down the diagonal and <m>0</m>s off of the diagonal.
+            We typically denote the <m>n\times n</m> identity matrix by <m>I_n</m>.
+            If <m>A\in\RR^{m\times n}</m>, then
+            <me>I_m A = A = AI_n</me>,
+            so the identity matrix is the matrix multiplication analogue to to <m>1</m>.
+        </p>
+
+        <p>
+            If <m>A</m> is a square matrix, then we can define nonnegative whole number powers of <m>A</m> using repeated multiplication.
+            In particular, if <m>n > 0</m> then <m>A^n</m> is just <m>A</m> multiplied with itself <m>n</m> times.
+            If <m>n = 0</m>, then we define <m>A^0 = I</m>.
+            With this definition, powers of matrices obey the exponent law
+            <me>A^{m+n} = A^m A^n</me>.
+            We will see how and when we can define negative powers of matrices in <xref ref="section-matrix-inverses" text="type-global" />.
+        </p>
+
+        <p>
+            Although matrix multiplication is not the same as scalar multiplication, it still shares some important properties with scalar multiplication.
+        </p>
+
+        <theorem xml:id="theorem-properties-of-matrix-multiplication">
+            <title>Properties of Matrix Multiplication</title>
+
+            <idx>
+                <h>matrices</h>
+                <h>multiplication</h>
+                <h>properties</h>
+            </idx>
+
+            <statement>
+                <p>
+                    Let <m>A, B</m> and <m>C</m> be matrices of compatible sizes and let <m>c\in\RR</m>.
+                    Then
+                    <ol>
+                        <li><m>A(BC) = (AB)C</m>.</li>
+                        <li><m>A(B+C) = AB + AC</m>.</li>
+                        <li><m>(B+C)A = BA + CA</m>.</li>
+                        <li><m>c(AB) = (cA)B = A(cB)</m>.</li>
+                    </ol>
+                </p>
+            </statement>
+        </theorem>
     </section>
 
     <section xml:id="section-systems-of-linear-equations">
