@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-04-25T14:11:03-04:00       *-->
+<!--*       on 2022-04-26T12:27:54-04:00       *-->
 <!--*   A recent stable commit (2020-08-09):   *-->
 <!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
@@ -239,10 +239,20 @@ true);
 <p class="continuation">and <span class="process-math">\(D\)</span> denotes the upper hemisphere of the sphere of radius <span class="process-math">\(5\)</span> centered at the origin.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like">
-<p id="p-439">Using methods from <a href="section-surface-integrals.html" class="internal" title="Section 4.4: Surface Integrals">Section 4.4</a>, we would need to split the piecewise smooth surface <span class="process-math">\(D\)</span> into two smooth components <span class="process-math">\(D_1\)</span> and <span class="process-math">\(D_2\)</span> representing the spherical cap and the base of <span class="process-math">\(D\)</span> respectively. See the plot produced below.</p>
-<pre class="ptx-sagecell hidden-sagecell-sage" id="sage-38"><script type="text/x-sage">var('u, v')
+<p id="p-439">Using methods from <a href="section-surface-integrals.html" class="internal" title="Section 4.4: Surface Integrals">Section 4.4</a>, we would need to split the piecewise smooth surface <span class="process-math">\(D\)</span> into two smooth components <span class="process-math">\(D_1\)</span> and <span class="process-math">\(D_2\)</span> representing the spherical cap and the base of <span class="process-math">\(D\)</span> respectively. See the plot produced below. Note that the plot also indicates that our surface integral should be positive.</p>
+<pre class="ptx-sagecell hidden-sagecell-sage" id="sage-38"><script type="text/x-sage">var('u, v, x, y, z')
 
-parametric_plot3d((5*cos(u)*sin(v), 5*sin(u)*sin(v), 5*cos(v)), (u, 0, 2*pi), (v, 0, pi/2))
+F = vector([x^3 - y^3, y^3 - z^3, z^3 - x^3])
+
+# spherical cap of D
+P = parametric_plot3d((5*cos(u)*sin(v), 5*sin(u)*sin(v), 5*cos(v)), (u, 0, 2*pi), (v, 0, pi/2))
+
+# base of D
+P += parametric_plot3d((u*cos(v), u*sin(v), 0), (u, 0, 5), (v, 0, 2*pi), color="red")
+
+P += plot_vector_field3d(F, (x, -5, 5), (y, -5, 5), (z, 0, 5))
+
+P.show()
 </script></pre>
 <p id="p-440">This is manageable but tedious, so we instead use <a href="" class="xref" data-knowl="./knowl/theorem-divergence-theorem.html" title="Theorem 4.5.1: Divergence Theorem">Theorem 4.5.1</a> to rewrite the surface integral as a single triple integral,</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-divergence-theorem.html">
@@ -250,9 +260,77 @@ parametric_plot3d((5*cos(u)*sin(v), 5*sin(u)*sin(v), 5*cos(v)), (u, 0, 2*pi), (v
 \iint_D\FF\cdot\dd{\SS} = \iiint_T 3(x^2 + y^2 + z^2)\dd{V}\text{,}
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(T\)</span> denotes the region enclosed within the hemisphere.</p>
+<p class="continuation">where <span class="process-math">\(T\)</span> denotes the region enclosed within the hemisphere. To evaluate this integral we convert to spherical coordinates:</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-divergence-theorem.html" id="md-34">
+\begin{align*}
+\iiint_T 3(x^2+y^2+z^2)\dd{V} \amp = 3\int_0^{2\pi}\int_0^{\frac{\pi}{2}}\int_0^5\rho^4\sin(\varphi)\dd{\rho}\dd{\varphi}\dd{\theta} \\
+\amp =  3750\pi\text{.}
+\end{align*}
+</div>
+<p class="continuation">Our answer is positive, which is consistent with the graph produced above.</p>
 </div></div>
-</div></article></section></section></div></main>
+</div></article><article class="example example-like" id="example-flux-into-a-cube"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Flux Into a Cube.</span>
+</h4>
+<p id="p-441">Let <span class="process-math">\(\FF = \mqty[xy \amp y^2 z \amp z^3] \text{.}\)</span> Find the flux of <span class="process-math">\(\FF\)</span> <em class="emphasis">into</em> the unit cube <span class="process-math">\(T: 0\leq x, y, z\leq 1\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
+<p id="p-442">If we try to compute this without using the Divergence Theorem then we would need to compute <em class="emphasis">six</em> separate surface integrals, one for each face of the cube. If we make use of the Divergence Theorem, this problem becomes much more tractable. So let <span class="process-math">\(T\)</span> denote the unit cube and the region it encloses. Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-35">
+\begin{align*}
+-\iint_{\partial T} \FF\cdot\dd{\SS} \amp = -\int_0^1\int_0^1\int_0^1 (y + 2yz + 3z^2)\dd{z}\dd{y}\dd{x}\\
+\amp = -2 \text{.}
+\end{align*}
+</div>
+<p class="continuation">Therefore <span class="process-math">\(\FF\)</span> tends to flow <em class="emphasis">out</em> of the cube.</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-applications-of-the-divergence-theorem"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Applications of the Divergence Theorem</span>
+</h3>
+<p id="p-443"><a href="" class="xref" data-knowl="./knowl/theorem-divergence-theorem.html" title="Theorem 4.5.1: Divergence Theorem">Theorem 4.5.1</a> leads to several other integral formulas that can be useful in higher dimensions. For our first example, we'll consider what happens if <span class="process-math">\(\FF\)</span> is conservative. If this is the case, then there exists a potential function <span class="process-math">\(f\)</span> for <span class="process-math">\(\FF\text{:}\)</span> <span class="process-math">\(\del{f} = \FF\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-divergence-theorem.html" id="md-36">
+\begin{align*}
+\div\FF \amp = \div\del{f} = \Delta f\\
+\FF\cdot\dd{\SS} \amp = \del{f}\cdot\nn\dd{S} 
+\end{align*}
+</div>
+<p class="continuation">where <span class="process-math">\(\Delta f = f_{xx} + f_{yy}\)</span> is the Laplacian of <span class="process-math">\(f\)</span> and <span class="process-math">\(\del{f}\cdot\nn\)</span> is the <em class="emphasis">normal derivative</em> of <span class="process-math">\(f\text{,}\)</span> often denoted by <span class="process-math">\(\pdv{f}{n}\text{.}\)</span></p>
+<article class="example example-like" id="example-green-s-first-identity"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Green's First Identity.</span>
+</h4>
+<p id="p-444">Let <span class="process-math">\(T\)</span> satisfy the conditions of <a href="" class="xref" data-knowl="./knowl/theorem-divergence-theorem.html" title="Theorem 4.5.1: Divergence Theorem">Theorem 4.5.1</a> and let <span class="process-math">\(f(x, y, z)\)</span> and <span class="process-math">\(g(x, y, z)\)</span> be twice continuously differentiable functions. Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-divergence-theorem.html">
+\begin{equation*}
+\iiint_T(f\Delta g + \del{f}\cdot\del{g})\dd{V} = \iint_{\partial T} f\pdv{g}{n}\dd{S}\text{.}
+\end{equation*}
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
+<p id="p-445">To prove this we'll set <span class="process-math">\(\FF = f\del{g}\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\div\FF = \del{f}\cdot\del{g} + f\Delta g
+\end{equation*}
+</div>
+<p class="continuation">and</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\FF\cdot\nn = f(\del{g}\cdot\nn) = f\pdv{g}{n}\text{,}
+\end{equation*}
+</div>
+<p class="continuation">and the Divergence Theorem then implies the result.</p>
+</div></div>
+</div></article><p id="p-446">Green's First Identity is particularly important for proving a result about <em class="emphasis">harmonic functions</em>, which are scalar functions <span class="process-math">\(f\)</span> such that <span class="process-math">\(\Delta f = 0\text{.}\)</span> If we set <span class="process-math">\(f = g\)</span> in the identity where <span class="process-math">\(f\)</span> is harmonic then we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\iiint_T \norm{\del f}^2\dd{V} = \iint_{\partial T}f\pdv{f}{n}\dd{S}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">If we also know that <span class="process-math">\(f = 0\)</span> everywhere on <span class="process-math">\(\partial T\text{,}\)</span> then this forces <span class="process-math">\(\del{f} = \mathbf{0}\)</span> and furthermore <span class="process-math">\(f = 0\text{.}\)</span> This gives us the following result.</p>
+<article class="theorem theorem-like" id="theorem-harmonic-functions-defined-on-boundaries"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Harmonic Functions Defined on Boundaries.</span>
+</h4>
+<p id="p-447">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> be two harmonic functions defined on an open set containing the simple, closed and bounded region <span class="process-math">\(T\)</span> with piecewise smooth boundary <span class="process-math">\(\partial T\text{.}\)</span> If <span class="process-math">\(f = g\)</span> on <span class="process-math">\(\partial T\text{,}\)</span> then <span class="process-math">\(f = g\)</span> everywhere inside of <span class="process-math">\(T\)</span> as well.</p></article><article class="hiddenproof" id="proof-13"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-13"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-13"><article class="hiddenproof">Set <span class="process-math">\(h = f - g\)</span> and note that <span class="process-math">\(h\)</span> is harmonic on <span class="process-math">\(T\)</span> and that <span class="process-math">\(h = 0\)</span> on <span class="process-math">\(\partial T\text{.}\)</span> Therefore <span class="process-math">\(h = 0\)</span> inside of <span class="process-math">\(T\)</span> as well, which implies that <span class="process-math">\(f = g\)</span> inside of <span class="process-math">\(T\text{.}\)</span></article></div></section></section></div></main>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
