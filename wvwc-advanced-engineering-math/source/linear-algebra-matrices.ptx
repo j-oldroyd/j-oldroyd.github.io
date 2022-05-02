@@ -100,6 +100,7 @@
                         <li><m>1A = A</m>.</li>
                         <li><m>0A = \mathbf{0}</m>.</li>
                     </ol>
+                </p>
             </statement>
         </theorem>
     </section>
@@ -207,8 +208,113 @@
         <title>Systems of Linear Equations</title>
 
         <p>
-            To be completed.
+            Consider a rectangular plate that has been heated, with heat sensors placed in a grid fashion as below:
         </p>
+
+        <figure xml:id="figure-tikz-plate-sensors">
+            <caption>Heat sensors placed on a rectangular plate.</caption>
+
+            <image xml:id="image-tikz-plate-sensors">
+                <description>A figure of heat sensors placed along a rectangular plate.</description>
+
+                <latex-image>
+                    \begin{tikzpicture}
+                        \draw[fill=blue!40] (0,0) grid (3,2) rectangle (0,0);
+                        \fill (1,1) circle [radius=2pt] node[above right]{$T_{1}$};
+                        \fill (2,1) circle [radius=2pt] node[above right]{$T_{2}$};
+
+
+                        \fill (0,1) circle [radius=2pt] node[left]{\SI{35}{\celsius}};
+                        \fill (3,1) circle [radius=2pt] node[right]{\SI{30}{\celsius}};
+                        \fill (1,0) circle [radius=2pt] node[below]{\SI{30}{\celsius}};
+                        \fill (2,0) circle [radius=2pt] node[below]{\SI{40}{\celsius}};
+                        \fill (1,2) circle [radius=2pt] node[above]{\SI{10}{\celsius}};
+                        \fill (2,2) circle [radius=2pt] node[above]{\SI{25}{\celsius}};
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+
+        <p>
+            We wish to estimate the temperature of the plate at the points indicated by <m>T_1</m> and <m>T_2</m> using information from the surrounding sensors.
+            It's reasonable to approximate the temperature at these points by taking an average of the surrounding temperatures.
+            This gives us the <em>system</em> of equations
+            <md>
+                <mrow>T_1 \amp = \frac{10 + 35 + 30 + T_2}{4} </mrow>
+                <mrow>T_2 \amp = \frac{25 + T_1 + 40 + 30}{4} </mrow>
+            </md>
+            Both equations are relatively simple since we're not doing anything overly complicated to our unknowns <m>T_1</m> and <m>T_2</m>.
+            In fact, each equation determines a line in <m>\RR^2</m>.
+            This suggests the following terminology.
+        </p>
+
+        <definition xml:id="definition-linear-equations-and-linear-systems">
+            <title>Linear Equations and Linear Systems</title>
+        
+            <idx><h>linear systems</h></idx>
+        
+            <statement>
+                <p>
+                    A <term>linear equation</term> in the variables <m>x_1, x_2, \ldots, x_n</m> is an equation of the form
+                    <me>\sum_{i=1}^n a_i x_i = b</me>,
+                    where <m>a_1, \ldots, a_n, b\in\RR</m> are constants.
+                    A <term>system of linear equations</term>, or a <term>linear system</term>, is a system of equations in which each equation is a linear equation.
+                    A <term>solution</term> of a linear system is a point <m>(s_1, s_2, \ldots, s_n)</m> whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables <m>x_1, x_2,\ldots, x_n</m>.
+                    The set of all solutions of a linear system is the <term>solution set</term>.
+                    A system is <term>inconsistent</term> if its solution set is empty and <term>consistent</term> if its solution set contains at least one point.
+                    A system is <term>homogeneous</term> if it contains no nonzero constant terms, otherwise it is <term>non-homogeneous</term>.
+                    A homogeneous system always has <m>\mathbf{0}</m> as a solution (called the <term>trivial solution</term>), and is therefore always consistent.
+                </p>
+            </statement>
+        </definition>
+
+        <p>
+            The solution set of a linear system in two variables can be viewed as the intersection of a system of lines in the <m>xy</m>-plane.
+            In higher dimensions, we replace lines with planes and <q>hyperplanes</q>.
+        </p>
+
+        <example xml:id="example-determining-if-a-system-is-consistent">
+            <title>Determining if a System Is Consistent</title>
+        
+            <statement>
+                <p>
+                    Is the system
+                    <md>
+                        <mrow>3x_1 + 6x_2 \amp = -3 </mrow>
+                        <mrow>5x_1 + 7x_2 \amp = 10 </mrow>
+                    </md>
+                    consistent?
+                </p>
+            </statement>
+        
+            <solution>
+                <p>
+                    We can try graphing each equation to see if they correspond to intersecting lines.
+                    If we do so, we obtain the following plot:
+                </p>
+                <figure xml:id="figure-tikz-graph-linear-system">
+                    <caption>Graphing a linear system.</caption>
+
+                    <image xml:id="image-tikz-graph-linear-system">
+                        <latex-image>
+                            \begin{tikzpicture}
+                                \begin{axis}[mystyle, xlabel=$x_1$, ylabel=$x_2$]
+                                    \addplot[blue, smooth, thick, domain=-10:10]{-.5 - .5*x};
+                                    \addlegendentry{$3x_1 + 6x_2 = -3$};
+                                    \addplot[red, smooth, thick, domain=-10:10]{(10/7) - (5/7)*x};
+                                    \addlegendentry{$5x_1 + 7x_2 = 10$};
+                                    \addplot[mark=*] coordinates {(9, -5)};
+                                \end{axis}
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
+
+                <p>
+                    Since these lines intersect, the system has a solution.
+                </p>
+            </solution>
+        </example>
     </section>
 
     <section xml:id="section-linear-independence">
