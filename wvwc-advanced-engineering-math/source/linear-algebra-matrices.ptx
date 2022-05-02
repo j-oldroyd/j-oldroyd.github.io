@@ -312,6 +312,80 @@
 
                 <p>
                     Since these lines intersect, the system has a solution.
+                    A solution can also be found algebraically by using the method of elimination.
+                </p>
+            </solution>
+        </example>
+
+        <p>
+            When using elimination to solve a linear system, the variables themselves aren't particularly important.
+            Instead it is the coefficients that determine any solutions.
+            We therefore introduce the use of matrices to express and solve linear systems.
+            In particular, any linear system can be rewritten as the matrix equation <m>A\xx = \bb</m>, where <m>A</m> is the <em>coefficient matrix</em>.
+            The solution process then amount to simplifying the so-called <em>augmented matrix</em> <m>\mqty[A \amp \bb]</m> using a series of <em>row operations</em>.
+        </p>
+
+        <definition xml:id="definition-elementary-row-operations">
+            <title>Elementary Row Operations</title>
+        
+            <idx><h>elementary row operations</h></idx>
+        
+            <statement>
+                <p>
+                    Let <m>A</m> be a matrix.
+                    The <term>elementary row operations</term> are defined as follows:
+                    <ol>
+                        <li>Row replacement: replace one row of <m>A</m> by the sum of itself and a scalar multiple of another row of <m>A</m>.</li>
+                        <li>Interchange: swap two rows.</li>
+                        <li>Scaling: multiply a single row by a nonzero scalar.</li>
+                    </ol>
+                    If we can obtain the matrix <m>B</m> from <m>A</m> by performing a series of elementary row operations, we say that <m>B</m> is <term>row equivalent</term> to <m>A</m> and write <m>A\sim B</m>.
+                </p>
+            </statement>
+        </definition>
+
+        <p>
+            If the augmented matrices of two linear systems are row equivalent, then the systems have the same solution set.
+            This observation will be fundamental primary tool for solving linear systems.
+        </p>
+
+        <example xml:id="example-solving-a-system-by-row-reduction">
+            <title>Solving a System by Row Reduction</title>
+        
+            <statement>
+                <p>
+                    Solve the system
+                    <md>
+                        <mrow>2x_1  -  6x_3 \amp = -8 </mrow>
+                        <mrow>  x_2  + 2x_3 \amp = 3 </mrow>
+                        <mrow>3x_1  + 6x_2  - 2x_3 \amp = -4 </mrow>
+                    </md>
+                </p>
+            </statement>
+        
+            <solution>
+                <p>
+                    First we set up the augmented matrix:
+                    <me>A = \mqty[2 \amp 0 \amp -6 \amp -8 \\ 0 \amp 1 \amp 2 \amp 3 \\ 3 \amp 6 \amp -2 \amp -4]</me>.
+                    Now we reduce this matrix using a sequence of elementary row operations.
+                    This is easily handled using Octave's <c>rref</c> command as shown below.
+                </p>
+
+                <sage language="octave">
+                    <input>
+                        A = [2, 0, -6, -8; 0, 1, 2, 3; 3, 6, -2, -4]
+                        rref(A)
+                    </input>
+                </sage>
+
+                <p>
+                    The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system
+                    <md>
+                        <mrow>x_1 \amp = 2 </mrow>
+                        <mrow>x_2 \amp = -1 </mrow>
+                        <mrow>x_3 \amp = 2 </mrow>
+                    </md>.
+                    The solution of the original system is therefore <m>(2, -1, 2)</m>.
                 </p>
             </solution>
         </example>
