@@ -116,12 +116,12 @@
 
         <definition xml:id="definition-matrix-multiplication">
             <title>Matrix Multiplication</title>
-        
+
             <idx>
                 <h>matrices</h>
                 <h>multiplication</h>
             </idx>
-        
+
             <statement>
                 <p>
                     Let <m>A = [a_{ij}]\in\RR^{m\times p}</m> and <m>B = [b_{ij}]\in\RR^{p\times n}</m>.
@@ -141,7 +141,7 @@
 
         <example xml:id="example-finding-a-product-of-matrices">
             <title>Finding a Product of Matrices</title>
-        
+
             <statement>
                 <p>
                     Let
@@ -149,7 +149,7 @@
                     Find <m>AB</m> and <m>BA</m> if possible.
                 </p>
             </statement>
-        
+
             <solution>
                 <p>
                     The product <m>BA</m> is undefined, but <m>AB</m> exists and is a <m>2\times 3</m> matrix:
@@ -250,9 +250,9 @@
 
         <definition xml:id="definition-linear-equations-and-linear-systems">
             <title>Linear Equations and Linear Systems</title>
-        
+
             <idx><h>linear systems</h></idx>
-        
+
             <statement>
                 <p>
                     A <term>linear equation</term> in the variables <m>x_1, x_2, \ldots, x_n</m> is an equation of the form
@@ -275,7 +275,7 @@
 
         <example xml:id="example-determining-if-a-system-is-consistent">
             <title>Determining if a System Is Consistent</title>
-        
+
             <statement>
                 <p>
                     Is the system
@@ -286,7 +286,7 @@
                     consistent?
                 </p>
             </statement>
-        
+
             <solution>
                 <p>
                     We can try graphing each equation to see if they correspond to intersecting lines.
@@ -327,9 +327,9 @@
 
         <definition xml:id="definition-elementary-row-operations">
             <title>Elementary Row Operations</title>
-        
+
             <idx><h>elementary row operations</h></idx>
-        
+
             <statement>
                 <p>
                     Let <m>A</m> be a matrix.
@@ -351,7 +351,7 @@
 
         <example xml:id="example-solving-a-system-by-row-reduction">
             <title>Solving a System by Row Reduction</title>
-        
+
             <statement>
                 <p>
                     Solve the system
@@ -362,7 +362,7 @@
                     </md>
                 </p>
             </statement>
-        
+
             <solution>
                 <p>
                     First we set up the augmented matrix:
@@ -396,9 +396,49 @@
 
         <introduction>
             <p>
-                To be completed.
+                In algebra you're introduced to the idea of <q>like terms</q>, which are algebraic terms that are similar enough that they can be combined.
+                In matrix algebra we have a similar concept for vectors that are <q>geometrically like terms</q>.
+                A simple example would be the vectors
+                <me>\vv_1 = \mqty[1 \\ 2]\text{ and }\vv_2 = \mqty[-2 \\ -4]</me>.
+                It's clear to see that <m>\vv_2</m> is a scalar multiple of <m>\vv_1</m>, and so <m>\vv_1</m> and <m>\vv_2</m> must lie on the same line through the origin in <m>\RR^2</m>.
+            </p>
+
+            <p>
+                A slightly more complicated example is the collection given by the columns of the matrix
+                <me>A = =\mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1 \amp 0 \amp 2 \amp 5 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \\ 1 \amp -1 \amp 0 \amp 3 \amp 4]</me>.
+                Then it can be checked that
+                <me>\vv_3 = \vv_1 + \vv_2\text{ and } \vv_5 = 5\vv_1 -2\vv_2 - \vv_4</me>,
+                so these columns are in some sense redundant just like the vectors in <m>\RR^2</m> we considered above.
+                We make this idea of redundancy precise using the concept of <em>linear independence</em>.
             </p>
         </introduction>
+
+        <subsection xml:id="subsection-definition-and-examples-of-linear-independence">
+            <title>Definition and Examples of Linear Independence</title>
+
+            <definition xml:id="definition-linear-independence-and-linear-dependence">
+                <title>Linear Independence and Linear Dependence</title>
+
+                <idx><h>linear independence, linear dependence</idx>
+
+                <statement>
+                    <p>
+                        Let <m>S = \qty{\vv_i}_{i=1}^{m}\subseteq\RR^n</m>.
+                        We say that <m>S</m> is <term>linearly independent</term> if <m>\sum_{i=1}^{m}c_i\vv_i = \vb{0}</m> only if <m>c_i = 0</m> for <m>1\leq i\leq m</m>.
+                        Otherwise we say that <m>S</m> is <term>linearly dependent</term>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Intuitively, a set of vectors is linearly dependent if it's redundant in some way, i.e., if at least one of the vectors in the set can be written as a linear combination of the others.
+                To see why, consider once again the matrix
+                <me>A = =\mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1 \amp 0 \amp 2 \amp 5 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \\ 1 \amp -1 \amp 0 \amp 3 \amp 4]</me>.
+                Since <m>\vv_3 = \vv_1 + \vv_2</m> and <m>\vv_5 = 5\vv_1-2\vv_2-\vv_4</m>, then it follows that
+                <me>-6\vv_1 + 2\vv_2 + \vv_3 + \vv_4 + \vv_5 = \vb{0}</me>.
+                Therefore the columns of <m>A</m> form a linearly dependent set.
+            </p>
+        </subsection>
 
         <subsection xml:id="subsection-bases-in--rr-n-">
             <title>Bases in <m>\RR^n</m></title>
