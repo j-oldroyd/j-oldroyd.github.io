@@ -409,7 +409,8 @@
                 Then it can be checked that
                 <me>\vv_3 = \vv_1 + \vv_2\text{ and } \vv_5 = 5\vv_1 -2\vv_2 - \vv_4</me>,
                 so these columns are in some sense redundant just like the vectors in <m>\RR^2</m> we considered above.
-                We make this idea of redundancy precise using the concept of <em>linear independence</em>.
+                In particular, we can write <m>\vv_3</m> as a <em>linear combination</em> of <m>\vv_1</m> and <m>\vv_2</m>, and we can write <m>\vv_5</m> as another linear combination of <m>\vv_1, \vv_2</m> and <m>\vv_4</m>.
+                We make this idea of redundancy more precise using the concept of <em>linear independence</em>.
             </p>
         </introduction>
 
@@ -419,7 +420,7 @@
             <definition xml:id="definition-linear-independence-and-linear-dependence">
                 <title>Linear Independence and Linear Dependence</title>
 
-                <idx><h>linear independence, linear dependence</idx>
+                <idx><h>linear independence, linear dependence</h></idx>
 
                 <statement>
                     <p>
@@ -438,6 +439,78 @@
                 <me>-6\vv_1 + 2\vv_2 + \vv_3 + \vv_4 + \vv_5 = \vb{0}</me>.
                 Therefore the columns of <m>A</m> form a linearly dependent set.
             </p>
+
+            <example xml:id="example-determine-if-a-set-is-linearly-independent">
+                <title>Determine if a Set is Linearly Independent</title>
+
+                <statement>
+                    <p>
+                        Are the vectors <m>\uu=\mqty[1\\2]</m> and <m>\vv = \mqty[-2\\-4]</m> linearly independent?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, note that <m>\vv = -2\uu</m>.
+                        Therefore
+                        <me>2\uu + \vv = \vb{0}</me>
+                        which shows that these vectors are linearly dependent.
+                        In fact, any collection of two vectors is linearly dependent if and only if one of the vectors is a scalar multiple of the other.
+                        This is a useful test to keep in mind!
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                A useful concept for determining if a collection of vectors is linearly independent is that of a <em>pivot column</em>.
+            </p>
+
+            <definition xml:id="definition-pivot-columns">
+                <title>Pivot Columns</title>
+
+                <idx><h>echelon form</h><h>pivot columns</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>A</m> be a matrix.
+                        The <term>pivot columns</term> of <m>A</m> are those columns which contain leading entries in any echelon form of <m>A</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                In the matrix <m>A</m> at the beginning of this section, the columns <m>\vv_1, \vv_2</m> and <m>\vv_4</m> are the pivot columns.
+                It can be seen that they're also linearly independent, and this is no coincidence.
+            </p>
+
+            <definition xml:id="definition-rank-of-a-matrix">
+                <title>Rank of a Matrix</title>
+
+                <idx>rank</idx>
+
+                <statement>
+                    <p>
+                        Let <m>A</m> be a matrix.
+                        The <term>rank</term> of a matrix is the size of the largest linearly independent subset of the columns of <m>A</m>.
+                        This is denoted by <m>\rank{A}</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The rank is closely related to the pivot columns.
+            </p>
+
+            <theorem xml:id="theorem-rank-and-pivot-columns">
+                <title>Rank and Pivot Columns</title>
+
+                <statement>
+                    <p>
+                        Let <m>A</m> be a matrix.
+                        Then <m>\rank{A}</m> is exactly equal to the number of pivot columns of <m>A</m>.
+                    </p>
+                </statement>
+            </theorem>
         </subsection>
 
         <subsection xml:id="subsection-bases-in--rr-n-">
@@ -460,30 +533,6 @@
                 </statement>
             </definition>
         </subsection>
-
-        <definition xml:id="definition-pivot-columns">
-            <title>Pivot Columns</title>
-
-            <idx><h>echelon form</h><h>pivot columns</h></idx>
-
-            <statement>
-                <p>
-                    Let <m>A</m> be a matrix.
-                    The <term>pivot columns</term> of <m>A</m> are those columns which contain leading entries in any echelon form of <m>A</m>.
-                </p>
-            </statement>
-        </definition>
-
-        <theorem xml:id="theorem-rank-and-pivot-columns">
-            <title>Rank and Pivot Columns</title>
-
-            <statement>
-                <p>
-                    Let <m>A</m> be a matrix.
-                    Then <m>\rank{A}</m> is exactly equal to the number of pivot columns of <m>A</m>.
-                </p>
-            </statement>
-        </theorem>
 
         <definition xml:id="definition-column-space">
             <title>Column Space</title>
