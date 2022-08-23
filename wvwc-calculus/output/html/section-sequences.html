@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:26-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,15 +48,21 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
-    // Make *any* div with class 'sagecell-sage' an executable Sage cell
-    // Their results will be linked, only within language type
-    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
-                           linked: true,
-                           languages: ['sage'],
-                           evalButtonText: 'Evaluate (Sage)'});
-});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
 </script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -71,7 +74,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -113,6 +115,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -158,6 +162,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -308,25 +313,25 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-sequences"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">9.1</span> <span class="title">Sequences</span>
 </h2>
-<p id="p-807">In this chapter we'll be using infinite sums of the form <span class="process-math">\(\sum_{k=0}^{\infty}a_k x^k\)</span> to represent functions and compute integrals. In order to make sense of these series, we need to introduce the concept of a sequence and the limit of a sequence.</p>
-<p id="p-808">A <dfn class="terminology">sequence</dfn> is a list of numbers:</p>
-<div class="displaymath process-math">
+<p id="p-817">In this chapter we'll be using infinite sums of the form <span class="process-math">\(\sum_{k=0}^{\infty}a_k x^k\)</span> to represent functions and compute integrals. In order to make sense of these series, we need to introduce the concept of a sequence and the limit of a sequence.</p>
+<p id="p-818">A <dfn class="terminology">sequence</dfn> is a list of numbers:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 (a_{0}, a_{1}, a_{2}, \ldots),
 \end{equation*}
 </div>
-<p class="continuation">often written <span class="process-math">\(\{a_{n}\}_{n=0}^{\infty}\text{.}\)</span> <aside class="aside aside-like" id="aside-14"><p id="p-809">We will often take <span class="process-math">\(n = 0\)</span> as our starting index, but not always.</p></aside> We call <span class="process-math">\(a_{n}\)</span> the <span class="process-math">\(\mathbf{n}^{\textbf{th}}\)</span> term of the sequence, and <span class="process-math">\(n\)</span> itself the <dfn class="terminology">index</dfn>. We can view <span class="process-math">\(n\)</span> as denoting the position of the number <span class="process-math">\(a_n\)</span> within the sequence.</p>
+<p class="continuation">often written <span class="process-math">\(\{a_{n}\}_{n=0}^{\infty}\text{.}\)</span> <aside class="aside aside-like" id="aside-15"><p id="p-819">We will often take <span class="process-math">\(n = 0\)</span> as our starting index, but not always.</p></aside> We call <span class="process-math">\(a_{n}\)</span> the <span class="process-math">\(\mathbf{n}^{\textbf{th}}\)</span> term of the sequence, and <span class="process-math">\(n\)</span> itself the <dfn class="terminology">index</dfn>. We can view <span class="process-math">\(n\)</span> as denoting the position of the number <span class="process-math">\(a_n\)</span> within the sequence.</p>
 <article class="example example-like" id="example-finding-a-formula-for-a-sequence"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Formula for a Sequence.</span>
 </h3>
-<p id="p-810">Given the sequence <span class="process-math">\((a_n)_{n=0}^{\infty} = (1, 2, 4, 8, \ldots)\text{,}\)</span> make a reasonable guess of the value of <span class="process-math">\(a_4\)</span> and the general formula for <span class="process-math">\(a_n\text{.}\)</span></p></article><p id="p-811">Sequences are usually specified in one of two ways: as an <dfn class="terminology">explicit formula</dfn> such as</p>
-<div class="displaymath process-math">
+<p id="p-820">Given the sequence <span class="process-math">\((a_n)_{n=0}^{\infty} = (1, 2, 4, 8, \ldots)\text{,}\)</span> make a reasonable guess of the value of <span class="process-math">\(a_4\)</span> and the general formula for <span class="process-math">\(a_n\text{.}\)</span></p></article><p id="p-821">Sequences are usually specified in one of two ways: as an <dfn class="terminology">explicit formula</dfn> such as</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = \frac{1}{1 - 2n}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">or recursively by means of a <dfn class="terminology">recurrence relation</dfn>, such as</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 F_{n} = F_{n-1} + F_{n-2}, \quad f_{0} = f_{1} = 1.
 \end{equation*}
@@ -335,80 +340,80 @@ F_{n} = F_{n-1} + F_{n-2}, \quad f_{0} = f_{1} = 1.
 <article class="example example-like" id="example-an-alternating-sequence"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">An Alternating Sequence.</span>
 </h3>
-<p id="p-812">Find the first few terms of the sequence <span class="process-math">\(\{\cos(n\pi)\}_{n=2}^{\infty}\text{.}\)</span></p>
+<p id="p-822">Find the first few terms of the sequence <span class="process-math">\(\{\cos(n\pi)\}_{n=2}^{\infty}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-164" id="solution-164"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-164"><div class="solution solution-like"><p id="p-813">This sequence simplifies down to <span class="process-math">\(\{1, -1, 1, -1, 1, \ldots\}\text{.}\)</span></p></div></div>
-</div></article><p id="p-814">Sequences have limits just as functions do.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-165" id="solution-165"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-165"><div class="solution solution-like"><p id="p-823">This sequence simplifies down to <span class="process-math">\(\{1, -1, 1, -1, 1, \ldots\}\text{.}\)</span></p></div></div>
+</div></article><p id="p-824">Sequences have limits just as functions do.</p>
 <article class="definition definition-like" id="definition-limit-of-a-sequence"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">9.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Limit of a Sequence.</span>
 </h3>
-<p id="p-815">A sequence <span class="process-math">\(\{a_{n}\}\)</span> has limit <span class="process-math">\(L\text{,}\)</span> denoted</p>
-<div class="displaymath process-math">
+<p id="p-825">A sequence <span class="process-math">\(\{a_{n}\}\)</span> has limit <span class="process-math">\(L\text{,}\)</span> denoted</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \lim_{n\to\infty}a_{n} = L \quad \text{or} \quad a_{n}\to L\text{,}
 \end{equation*}
 </div>
-<p class="continuation">if <span class="process-math">\(a_{n}\)</span> gets arbitrarily close to <span class="process-math">\(L\)</span> as <span class="process-math">\(n\)</span> increases. If a sequence has a limit, we say the sequence is <dfn class="terminology">convergent</dfn> and <dfn class="terminology">converges</dfn>. Otherwise, we say the sequence is <dfn class="terminology">divergent</dfn> and <dfn class="terminology">diverges</dfn>.</p></article><p id="p-816">Graphically, we can say that a sequence <span class="process-math">\(a_n\)</span> has a limit <span class="process-math">\(L\)</span> if the points <span class="process-math">\((n, a_n)\)</span> become arbitrarily close to the line <span class="process-math">\(y = L\text{:}\)</span> <div class="sagecell-sage" id="sage-5"><script type="text/x-sage"># plot of cos(n)/(n^1.5)
+<p class="continuation">if <span class="process-math">\(a_{n}\)</span> gets arbitrarily close to <span class="process-math">\(L\)</span> as <span class="process-math">\(n\)</span> increases. If a sequence has a limit, we say the sequence is <dfn class="terminology">convergent</dfn> and <dfn class="terminology">converges</dfn>. Otherwise, we say the sequence is <dfn class="terminology">divergent</dfn> and <dfn class="terminology">diverges</dfn>.</p></article><p id="p-826">Graphically, we can say that a sequence <span class="process-math">\(a_n\)</span> has a limit <span class="process-math">\(L\)</span> if the points <span class="process-math">\((n, a_n)\)</span> become arbitrarily close to the line <span class="process-math">\(y = L\text{:}\)</span> <pre class="ptx-sagecell sagecell-sage" id="sage-5"><script type="text/x-sage"># plot of cos(n)/(n^1.5)
 # limit is L = 0
 points([(n, cos(n)/n^(3/2)) for n in range(1, 100)], legend_label = r'$a_n = \frac{\cos(n)}{n}$')
-</script></div> If you run the above code cell, you get some pretty convincing evidence that <span class="process-math">\(\frac{\cos(n)}{n^{3/2}}\to0\)</span> as <span class="process-math">\(n\to\infty\text{.}\)</span></p>
-<p id="p-817">One of the most important sequential limits is the following:</p>
-<div class="displaymath process-math">
+</script></pre> If you run the above code cell, you get some pretty convincing evidence that <span class="process-math">\(\frac{\cos(n)}{n^{3/2}}\to0\)</span> as <span class="process-math">\(n\to\infty\text{.}\)</span></p>
+<p id="p-827">One of the most important sequential limits is the following:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{1}{n^{p}}\to 0\quad\text{as}\quad n\to\infty
 \end{equation*}
 </div>
 <p class="continuation">if <span class="process-math">\(p &gt; 0\text{.}\)</span> Many limits involving sequences with terms that are rational functions of <span class="process-math">\(n\)</span> can be reduced to this form when finding limits.</p>
-<article class="example example-like" id="example-173"><h3 class="heading">
+<article class="example example-like" id="example-175"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.4</span><span class="period">.</span>
 </h3>
-<p id="p-818">Find the limit of the sequence</p>
-<div class="displaymath process-math">
+<p id="p-828">Find the limit of the sequence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = \frac{3n - n^{3}}{5n^{3} + 2n^{2}}.
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-165" id="solution-165"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-165"><div class="solution solution-like">
-<p id="p-819">We can try dividing the numerator and denominator by the highest power of <span class="process-math">\(n\)</span> that appears: <span class="process-math">\(n^{3}\text{.}\)</span> This gives</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-166" id="solution-166"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-166"><div class="solution solution-like">
+<p id="p-829">We can try dividing the numerator and denominator by the highest power of <span class="process-math">\(n\)</span> that appears: <span class="process-math">\(n^{3}\text{.}\)</span> This gives</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = \frac{3n^{-2} - 1}{5 + 2n^{-1}}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Now we can take the limit as <span class="process-math">\(n\to\infty\)</span> to get <span class="process-math">\(a_{n}\to\frac{-1}{5}\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-820">We can also apply Calculus 1 limits to sequences by using the following theorem.</p>
+</div></article><p id="p-830">We can also apply Calculus 1 limits to sequences by using the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-sequential-and-functional-limits"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Sequential and Functional Limits.</span>
 </h3>
-<p id="p-821">Let <span class="process-math">\(f(x)\)</span> be a function and suppose that</p>
-<div class="displaymath process-math">
+<p id="p-831">Let <span class="process-math">\(f(x)\)</span> be a function and suppose that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \lim_{x\to\infty}f(x) = L\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Then</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \lim_{n\to\infty}f(n) = L
 \end{equation*}
 </div>
-<p class="continuation">also.</p></article><p id="p-822">One immediate advantage of <a href="" class="xref" data-knowl="./knowl/theorem-sequential-and-functional-limits.html" title="Theorem 9.1.5: Sequential and Functional Limits">Theorem 9.1.5</a> is that L'Hospital's Rule from <a href="section-l-hospital-s-rule.html" class="internal" title="Section 4.6: L'Hospital's Rule">Section 4.6</a> applies to sequential limits as well, <em class="emphasis">as long as the sequence consists of values from a differentiable function</em>.</p>
+<p class="continuation">also.</p></article><p id="p-832">One immediate advantage of <a href="" class="xref" data-knowl="./knowl/theorem-sequential-and-functional-limits.html" title="Theorem 9.1.5: Sequential and Functional Limits">Theorem 9.1.5</a> is that L'Hospital's Rule from <a href="section-l-hospital-s-rule.html" class="internal" title="Section 4.6: L'Hospital's Rule">Section 4.6</a> applies to sequential limits as well, <em class="emphasis">as long as the sequence consists of values from a differentiable function</em>.</p>
 <article class="example example-like" id="example-finding-a-sequential-limit-using-l-hospital-s-rule"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Finding a Sequential Limit Using L'Hospital's Rule.</span>
 </h3>
-<p id="p-823">Let <span class="process-math">\(a_{n} = n^{2}e^{-n}\text{.}\)</span> Find <span class="process-math">\(\lim_{n\to\infty}a_{n}\text{.}\)</span></p>
+<p id="p-833">Let <span class="process-math">\(a_{n} = n^{2}e^{-n}\text{.}\)</span> Find <span class="process-math">\(\lim_{n\to\infty}a_{n}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-166" id="solution-166"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-166"><div class="solution solution-like">
-<p id="p-824">First, note that <span class="process-math">\(a_{n} = f(n)\)</span> where</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-167" id="solution-167"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-167"><div class="solution solution-like">
+<p id="p-834">First, note that <span class="process-math">\(a_{n} = f(n)\)</span> where</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f(x) = \frac{x^{2}}{e^{x}}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Therefore</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-119">
 \begin{align*}
 \lim_{n\to\infty}a_{n} \amp = \lim_{x\to\infty}\frac{x^{2}}{e^{x}} \\
 \amp = \lim_{x\to\infty}\frac{2x}{e^{x}} \\
@@ -420,43 +425,43 @@ f(x) = \frac{x^{2}}{e^{x}}\text{.}
 </div></article><article class="example example-like" id="example-geometric-sequences"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Geometric Sequences.</span>
 </h3>
-<p id="p-825">A <dfn class="terminology">geometric sequence</dfn> is a sequence of the form</p>
-<div class="displaymath process-math">
+<p id="p-835">A <dfn class="terminology">geometric sequence</dfn> is a sequence of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = ar^{n}.
 \end{equation*}
 </div>
 <p class="continuation">Find <span class="process-math">\(\lim_{n\to\infty}a_{n}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-167" id="solution-167"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-167"><div class="solution solution-like">
-<p id="p-826">This limit depends on whether or not <span class="process-math">\(r\)</span> is in <span class="process-math">\((-1,1]\text{.}\)</span> If <span class="process-math">\(|r| \lt 1\)</span> then <span class="process-math">\(r^{n}\to 0\text{.}\)</span> If <span class="process-math">\(r = 1\)</span> then <span class="process-math">\(r^{n} = 1\)</span> for all <span class="process-math">\(n\text{.}\)</span> Finally, if <span class="process-math">\(r\)</span> is outside of this interval, then <span class="process-math">\(r^{n}\)</span> diverges. Therefore</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-168" id="solution-168"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-168"><div class="solution solution-like">
+<p id="p-836">This limit depends on whether or not <span class="process-math">\(r\)</span> is in <span class="process-math">\((-1,1]\text{.}\)</span> If <span class="process-math">\(|r| \lt 1\)</span> then <span class="process-math">\(r^{n}\to 0\text{.}\)</span> If <span class="process-math">\(r = 1\)</span> then <span class="process-math">\(r^{n} = 1\)</span> for all <span class="process-math">\(n\text{.}\)</span> Finally, if <span class="process-math">\(r\)</span> is outside of this interval, then <span class="process-math">\(r^{n}\)</span> diverges. Therefore</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} \to \begin{cases} 0 \amp \text{ if } -1 \lt r \lt 1 \\ a \amp \text{ if } r = 1 \end{cases}
 \end{equation*}
 </div>
 <p class="continuation">and diverges otherwise.</p>
 </div></div>
-</div></article><p id="p-827">May decimals can be represented using geometric sequences.</p>
+</div></article><p id="p-837">May decimals can be represented using geometric sequences.</p>
 <article class="example example-like" id="example---9--repeating"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.8</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(.9\)</span> Repeating.</span>
 </h3>
-<p id="p-828">Determine the limit of the sequence</p>
-<div class="displaymath process-math">
+<p id="p-838">Determine the limit of the sequence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \{.9, .99, .999, .9999, .99999, \ldots\}\text{.}
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-168" id="solution-168"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-168"><div class="solution solution-like">
-<p id="p-829">It looks like the terms of the sequence are approaching <span class="process-math">\(1\text{,}\)</span> and we can verify this using a geometric sequence. We can write this sequence as</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-169" id="solution-169"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-169"><div class="solution solution-like">
+<p id="p-839">It looks like the terms of the sequence are approaching <span class="process-math">\(1\text{,}\)</span> and we can verify this using a geometric sequence. We can write this sequence as</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = 1 - (.1)^{n}\quad\text{for}\quad n\geq 1\text{.}
 \end{equation*}
 </div>
 <p class="continuation">So the limit of the sequence is</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \lim_{n\to\infty}a_{n} = 1\text{.}
 \end{equation*}
@@ -466,20 +471,20 @@ a_{n} = 1 - (.1)^{n}\quad\text{for}\quad n\geq 1\text{.}
 </div></article><article class="definition definition-like" id="definition-infinite-limits"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">9.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Infinite Limits.</span>
 </h3>
-<p id="p-830">Let <span class="process-math">\(a_{n}\)</span> be a sequence. If the terms of <span class="process-math">\(a_{n}\)</span> grow without bound as <span class="process-math">\(n\)</span> increases, we say that <span class="process-math">\(a_{n}\to\infty\text{.}\)</span> If the terms of <span class="process-math">\(a_{n}\)</span> decrease without bound as <span class="process-math">\(n\)</span> increases, we say that <span class="process-math">\(a_{n}\to-\infty\text{.}\)</span></p></article><article class="example example-like" id="example-limit-of-the-fibonacci-sequence"><h3 class="heading">
+<p id="p-840">Let <span class="process-math">\(a_{n}\)</span> be a sequence. If the terms of <span class="process-math">\(a_{n}\)</span> grow without bound as <span class="process-math">\(n\)</span> increases, we say that <span class="process-math">\(a_{n}\to\infty\text{.}\)</span> If the terms of <span class="process-math">\(a_{n}\)</span> decrease without bound as <span class="process-math">\(n\)</span> increases, we say that <span class="process-math">\(a_{n}\to-\infty\text{.}\)</span></p></article><article class="example example-like" id="example-limit-of-the-fibonacci-sequence"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Limit of the Fibonacci Sequence.</span>
 </h3>
-<p id="p-831">Let <span class="process-math">\(F_{n}\)</span> denote the <span class="process-math">\(n^{\text{th}}\)</span> term of the Fibonacci sequence. Determine <span class="process-math">\(\lim_{n\to\infty}F_{n}\text{.}\)</span> Estimate <span class="process-math">\(\lim_{n\to\infty}\frac{F_{n}}{F_{n-1}}\text{.}\)</span></p>
+<p id="p-841">Let <span class="process-math">\(F_{n}\)</span> denote the <span class="process-math">\(n^{\text{th}}\)</span> term of the Fibonacci sequence. Determine <span class="process-math">\(\lim_{n\to\infty}F_{n}\text{.}\)</span> Estimate <span class="process-math">\(\lim_{n\to\infty}\frac{F_{n}}{F_{n-1}}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-169" id="solution-169"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-169"><div class="solution solution-like"><p id="p-832">One approach to estimate the limit is to graph the ratio <span class="process-math">\(\frac{F_n}{F_{n-1}}\)</span> to see if it approaches a limiting value. A computer system can handle this easily. The values of <span class="process-math">\(\frac{F_n}{F_{n-1}}\)</span> appear to settle in quickly around <span class="process-math">\(L\approx1.6\text{.}\)</span> <aside class="aside aside-like" id="aside-15"><p id="p-833">The actual limiting value is <span class="process-math">\(\varphi = \frac{1+\sqrt{5}}{2}\text{,}\)</span> the <dfn class="terminology">golden ratio</dfn>.</p></aside></p></div></div>
-</div></article><div class="sagecell-sage" id="sage-6"><script type="text/x-sage"># plot of F_n / F_(n-1)
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-170" id="solution-170"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-170"><div class="solution solution-like"><p id="p-842">One approach to estimate the limit is to graph the ratio <span class="process-math">\(\frac{F_n}{F_{n-1}}\)</span> to see if it approaches a limiting value. A computer system can handle this easily. The values of <span class="process-math">\(\frac{F_n}{F_{n-1}}\)</span> appear to settle in quickly around <span class="process-math">\(L\approx1.6\text{.}\)</span> <aside class="aside aside-like" id="aside-16"><p id="p-843">The actual limiting value is <span class="process-math">\(\varphi = \frac{1+\sqrt{5}}{2}\text{,}\)</span> the <dfn class="terminology">golden ratio</dfn>.</p></aside></p></div></div>
+</div></article><pre class="ptx-sagecell sagecell-sage" id="sage-6"><script type="text/x-sage"># plot of F_n / F_(n-1)
 points([(n, fibonacci(n)/fibonacci(n-1)) for n in range(2, 50)])
-</script></div>
-<p id="p-834">To calculate limits, we can use a version of the limit laws.</p>
+</script></pre>
+<p id="p-844">To calculate limits, we can use a version of the limit laws.</p>
 <article class="theorem theorem-like" id="theorem-sequential-limit-laws"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.1.11</span><span class="period">.</span><span class="space"> </span><span class="title">Sequential Limit Laws.</span>
 </h3>
-<p id="p-835">Let <span class="process-math">\(\{a_{n}\}\)</span> and <span class="process-math">\(\{b_{n}\}\)</span> be sequences with <span class="process-math">\(a_{n}\to a\)</span> and <span class="process-math">\(b_{n}\to b\text{.}\)</span> Let <span class="process-math">\(c\)</span> be a constant. Then the following are true:</p>
+<p id="p-845">Let <span class="process-math">\(\{a_{n}\}\)</span> and <span class="process-math">\(\{b_{n}\}\)</span> be sequences with <span class="process-math">\(a_{n}\to a\)</span> and <span class="process-math">\(b_{n}\to b\text{.}\)</span> Let <span class="process-math">\(c\)</span> be a constant. Then the following are true:</p>
 <ol class="decimal">
 <li id="li-82"><p id="p-derived-li-82"><span class="process-math">\(\displaystyle a_{n} + b_{n} \to a + b.\)</span></p></li>
 <li id="li-83"><p id="p-derived-li-83"><span class="process-math">\(\displaystyle ca_{n}\to ca.\)</span></p></li>
@@ -487,20 +492,20 @@ points([(n, fibonacci(n)/fibonacci(n-1)) for n in range(2, 50)])
 <li id="li-85"><p id="p-derived-li-85"><span class="process-math">\(\frac{a_{n}}{b_{n}}\to\frac{a}{b}\)</span> assuming <span class="process-math">\(b\neq 0\text{.}\)</span></p></li>
 <li id="li-86"><p id="p-derived-li-86"><span class="process-math">\(a_{n}^{p}\to a^{p}\)</span> if <span class="process-math">\(a_{n},p \gt 0\text{.}\)</span></p></li>
 <li id="li-87"><p id="p-derived-li-87"><span class="process-math">\(f(a_{n})\to f(a)\)</span> if <span class="process-math">\(f\)</span> is continuous at <span class="process-math">\(a\text{.}\)</span></p></li>
-</ol></article><p id="p-836">Another useful tool for evaluating limits of recursive sequences is the following result: if <span class="process-math">\(\lim_{n\to\infty}a_{n} = L\text{,}\)</span> then <span class="process-math">\(\lim_{n\to\infty}a_{n-1} = L\)</span> also.</p>
+</ol></article><p id="p-846">Another useful tool for evaluating limits of recursive sequences is the following result: if <span class="process-math">\(\lim_{n\to\infty}a_{n} = L\text{,}\)</span> then <span class="process-math">\(\lim_{n\to\infty}a_{n-1} = L\)</span> also.</p>
 <article class="example example-like" id="example-a-limit-from-newton-s-method"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">A Limit from Newton's Method.</span>
 </h3>
-<p id="p-837">Find the limit of the sequence</p>
-<div class="displaymath process-math">
+<p id="p-847">Find the limit of the sequence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 x_{n} = \frac{1}{2}\left(x_{n} + \frac{2}{x_{n}}\right)\quad\text{where}\quad x_{0} = 1\text{.}
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-170" id="solution-170"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-170"><div class="solution solution-like">
-<p id="p-838">First, assume <span class="process-math">\(\lim_{n\to\infty}x_{n} = x\text{.}\)</span> Then taking the limit of both sides of the recurrence relation gives</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-171" id="solution-171"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-171"><div class="solution solution-like">
+<p id="p-848">First, assume <span class="process-math">\(\lim_{n\to\infty}x_{n} = x\text{.}\)</span> Then taking the limit of both sides of the recurrence relation gives</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 x = \frac{1}{2}\left(x + \frac{2}{x}\right)\text{.}
 \end{equation*}
@@ -510,31 +515,31 @@ x = \frac{1}{2}\left(x + \frac{2}{x}\right)\text{.}
 </div></article><article class="example example-like" id="example-a-false-limit"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.13</span><span class="period">.</span><span class="space"> </span><span class="title">A False Limit.</span>
 </h3>
-<p id="p-839">Find the limit of the sequence</p>
-<div class="displaymath process-math">
+<p id="p-849">Find the limit of the sequence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 s_{n} = 3 - s_{n - 1}\quad\text{where}\quad s_{0} = 1\text{.}
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-171" id="solution-171"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-171"><div class="solution solution-like">
-<p id="p-840">If we let <span class="process-math">\(s = \lim_{n\to\infty}s_{n}\)</span> and take the limit of both sides of the recurrence, we get <span class="process-math">\(s = 3 - s\)</span> or just <span class="process-math">\(s = \frac{3}{2}\text{.}\)</span> However, the actual terms of the sequence are given by</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-172" id="solution-172"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-172"><div class="solution solution-like">
+<p id="p-850">If we let <span class="process-math">\(s = \lim_{n\to\infty}s_{n}\)</span> and take the limit of both sides of the recurrence, we get <span class="process-math">\(s = 3 - s\)</span> or just <span class="process-math">\(s = \frac{3}{2}\text{.}\)</span> However, the actual terms of the sequence are given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \{s_{n}\}_{n=0}^{\infty} = \{1, 2, 1, 2, 1, 2, \ldots\}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">which is clearly divergent! The problem here is that we assumed a limit existed in the first place. <em class="emphasis">This is not always valid</em>. So we need to be careful.</p>
 </div></div>
-</div></article><p id="p-841">We can check whether or not a sequence is convergent without actually finding a limit, at least in certain cases.</p>
+</div></article><p id="p-851">We can check whether or not a sequence is convergent without actually finding a limit, at least in certain cases.</p>
 <article class="theorem theorem-like" id="theorem-absolute-value-test"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.1.14</span><span class="period">.</span><span class="space"> </span><span class="title">Absolute Value Test.</span>
 </h3>
-<p id="p-842">Suppose that <span class="process-math">\(\lim_{n\to\infty}|a_{n}| = 0\text{.}\)</span> Then <span class="process-math">\(a_{n}\to0\)</span> as well.</p></article><article class="theorem theorem-like" id="theorem-the-squeeze-theorem-for-sequences"><h3 class="heading">
+<p id="p-852">Suppose that <span class="process-math">\(\lim_{n\to\infty}|a_{n}| = 0\text{.}\)</span> Then <span class="process-math">\(a_{n}\to0\)</span> as well.</p></article><article class="theorem theorem-like" id="theorem-the-squeeze-theorem-for-sequences"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.1.15</span><span class="period">.</span><span class="space"> </span><span class="title">The Squeeze Theorem for Sequences.</span>
 </h3>
-<p id="p-843">Let <span class="process-math">\(\{a_{n}\}, \{b_{n}\}\)</span> and <span class="process-math">\(\{c_{n}\}\)</span> be sequences such that</p>
-<div class="displaymath process-math">
+<p id="p-853">Let <span class="process-math">\(\{a_{n}\}, \{b_{n}\}\)</span> and <span class="process-math">\(\{c_{n}\}\)</span> be sequences such that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} \leq b_{n} \leq c_{n}\text{.}
 \end{equation*}
@@ -542,66 +547,66 @@ a_{n} \leq b_{n} \leq c_{n}\text{.}
 <p class="continuation">If <span class="process-math">\(a_{n},c_{n}\to L\text{,}\)</span> then <span class="process-math">\(b_{n}\to L\text{.}\)</span></p></article><article class="example example-like" id="example-applying-the-squeeze-theorem-and-the-absolute-value-test"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.16</span><span class="period">.</span><span class="space"> </span><span class="title">Applying the Squeeze Theorem and the Absolute Value Test.</span>
 </h3>
-<p id="p-844">Let</p>
-<div class="displaymath process-math">
+<p id="p-854">Let</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = \frac{(-1)^{n}\sin n}{\frac{n}{2}\cos n + n}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Find <span class="process-math">\(\lim_{n\to\infty}a_{n}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-172" id="solution-172"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-172"><div class="solution solution-like">
-<p id="p-845">This sequence is complicated, so we'll try comparing with simpler sequences instead. First, we'll take the absolute value to get rid of the <span class="process-math">\((-1)^{n}\)</span> term:</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-173" id="solution-173"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-173"><div class="solution solution-like">
+<p id="p-855">This sequence is complicated, so we'll try comparing with simpler sequences instead. First, we'll take the absolute value to get rid of the <span class="process-math">\((-1)^{n}\)</span> term:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 |a_{n}| = \frac{|\sin n|}{\left|\frac{n}{2}\cos n + n\right|} = \frac{|\sin n|}{n\left|1 + \frac{1}{2}\cos n\right|}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Now we'll use the fact that <span class="process-math">\(|a_{n}|\geq 0, |\sin n| \leq 1\)</span> and <span class="process-math">\(\left|1 + \frac{1}{2}\cos n\right| \geq \frac{1}{2}\)</span> to write</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 0\leq |a_{n}| \leq \frac{1}{\frac{n}{2}} = \frac{2}{n}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Since <span class="process-math">\(\frac{2}{n}\to 0\text{,}\)</span> this forces <span class="process-math">\(|a_{n}|\text{,}\)</span> and this <span class="process-math">\(a_{n}\text{,}\)</span> to converge to <span class="process-math">\(0\)</span> as well.</p>
 </div></div>
-</div></article><p id="p-846">Another important way to check if a sequence converges is the <dfn class="terminology">Monotone Convergence Theorem</dfn> <a href="" class="xref" data-knowl="./knowl/theorem-monotone-convergence-theorem.html" title="Theorem 9.1.19: Monotone Convergence Theorem">Theorem 9.1.19</a>.</p>
+</div></article><p id="p-856">Another important way to check if a sequence converges is the <dfn class="terminology">Monotone Convergence Theorem</dfn> <a href="" class="xref" data-knowl="./knowl/theorem-monotone-convergence-theorem.html" title="Theorem 9.1.19: Monotone Convergence Theorem">Theorem 9.1.19</a>.</p>
 <article class="definition definition-like" id="definition-monotone-sequences"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">9.1.17</span><span class="period">.</span><span class="space"> </span><span class="title">Monotone Sequences.</span>
 </h3>
-<p id="p-847">Let <span class="process-math">\(\{a_{n}\}\)</span> be a sequence. Then <span class="process-math">\(\{a_{n}\}\)</span> is <dfn class="terminology">increasing</dfn> if <span class="process-math">\(a_{n+1} \gt a_{n}\)</span> for all <span class="process-math">\(n\)</span> and <dfn class="terminology">decreasing</dfn> if <span class="process-math">\(a_{n+1}\lt a_{n} \)</span> for all <span class="process-math">\(n\text{.}\)</span> In either case, we say that the sequence is monotone.</p></article><p id="p-848">If we add one more condition to a monotone sequence, we get a convergent sequence.</p>
+<p id="p-857">Let <span class="process-math">\(\{a_{n}\}\)</span> be a sequence. Then <span class="process-math">\(\{a_{n}\}\)</span> is <dfn class="terminology">increasing</dfn> if <span class="process-math">\(a_{n+1} \gt a_{n}\)</span> for all <span class="process-math">\(n\)</span> and <dfn class="terminology">decreasing</dfn> if <span class="process-math">\(a_{n+1}\lt a_{n} \)</span> for all <span class="process-math">\(n\text{.}\)</span> In either case, we say that the sequence is monotone.</p></article><p id="p-858">If we add one more condition to a monotone sequence, we get a convergent sequence.</p>
 <article class="definition definition-like" id="definition-bounded-sequences"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">9.1.18</span><span class="period">.</span><span class="space"> </span><span class="title">Bounded Sequences.</span>
 </h3>
-<p id="p-849">Let <span class="process-math">\(\{a_{n}\}\)</span> be a sequence. We say that <span class="process-math">\(\{a_{n}\}\)</span> is <dfn class="terminology">bounded</dfn> if there exists some real number <span class="process-math">\(M\)</span> such that <span class="process-math">\(|a_{n}| \leq M\)</span> for all <span class="process-math">\(n\text{.}\)</span></p></article><article class="theorem theorem-like" id="theorem-monotone-convergence-theorem"><h3 class="heading">
+<p id="p-859">Let <span class="process-math">\(\{a_{n}\}\)</span> be a sequence. We say that <span class="process-math">\(\{a_{n}\}\)</span> is <dfn class="terminology">bounded</dfn> if there exists some real number <span class="process-math">\(M\)</span> such that <span class="process-math">\(|a_{n}| \leq M\)</span> for all <span class="process-math">\(n\text{.}\)</span></p></article><article class="theorem theorem-like" id="theorem-monotone-convergence-theorem"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.1.19</span><span class="period">.</span><span class="space"> </span><span class="title">Monotone Convergence Theorem.</span>
 </h3>
-<p id="p-850">Let <span class="process-math">\(\{a_{n}\}\)</span> be a bounded monotone sequence. Then <span class="process-math">\(\{a_{n}\}\)</span> converges.</p></article><article class="example example-like" id="example-applying-the-mct"><h3 class="heading">
+<p id="p-860">Let <span class="process-math">\(\{a_{n}\}\)</span> be a bounded monotone sequence. Then <span class="process-math">\(\{a_{n}\}\)</span> converges.</p></article><article class="example example-like" id="example-applying-the-mct"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.1.20</span><span class="period">.</span><span class="space"> </span><span class="title">Applying the MCT.</span>
 </h3>
-<p id="p-851">Let <span class="process-math">\(\{a_{n}\}\)</span> denote the sequence</p>
-<div class="displaymath process-math">
+<p id="p-861">Let <span class="process-math">\(\{a_{n}\}\)</span> denote the sequence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \{\sqrt{2}, \sqrt{2\sqrt{2}}, \sqrt{2\sqrt{2\sqrt{2}}},\ldots\}
 \end{equation*}
 </div>
 <p class="continuation">Determine if the sequence converges and if so find its limit.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-173" id="solution-173"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-173"><div class="solution solution-like">
-<p id="p-852">First, note that</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-174" id="solution-174"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-174"><div class="solution solution-like">
+<p id="p-862">First, note that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n} = \sqrt{2a_{n-1}}\quad\text{and}\quad a_{1} = \sqrt{2}.
 \end{equation*}
 </div>
 <p class="continuation">To show this converges, we'll use the MCT. To do so, we must show that the sequence is bounded and increasing. To show it's bounded, we'll guess that <span class="process-math">\(a_{n}\lt 2\)</span> for some <span class="process-math">\(n\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n+1} = \sqrt{2a_{n}}\lt \sqrt{2}\sqrt{2} = 2\text{,}
 \end{equation*}
 </div>
 <p class="continuation">implying the claim. Now,</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n+1} = \sqrt{2}\sqrt{a_{n}} \gt \sqrt{a_{n}^{2}} = a_{n}\text{,}
 \end{equation*}

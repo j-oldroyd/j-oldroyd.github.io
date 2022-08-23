@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:18-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -303,76 +310,76 @@ true);
 <section class="subsection" id="subsection-inverse-function-review"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Inverse Function Review</span>
 </h3>
-<p id="p-218">Suppose we want to solve the equation <span class="process-math">\(y = f(x)\)</span> for <span class="process-math">\(x\text{.}\)</span> Then we can only do so unambiguously if <span class="process-math">\(f\)</span> is an <dfn class="terminology">invertible function</dfn>.</p>
+<p id="p-228">Suppose we want to solve the equation <span class="process-math">\(y = f(x)\)</span> for <span class="process-math">\(x\text{.}\)</span> Then we can only do so unambiguously if <span class="process-math">\(f\)</span> is an <dfn class="terminology">invertible function</dfn>.</p>
 <article class="definition definition-like" id="definition-invertible-functions"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Invertible Functions.</span>
 </h4>
-<p id="p-219">A function <span class="process-math">\(f(x)\)</span> is invertible if and only if it is a one-to-one function. That is, <span class="process-math">\(f(x_{1}) = f(x_{2})\)</span> forces <span class="process-math">\(x_{1} = x_{2}\text{.}\)</span></p></article><p id="p-220">Since a function is one-to-one if and only if its graph passes the horizontal line test, the horizontal line test also gives us a useful way to check if a function is invertible.</p>
+<p id="p-229">A function <span class="process-math">\(f(x)\)</span> is invertible if and only if it is a one-to-one function. That is, <span class="process-math">\(f(x_{1}) = f(x_{2})\)</span> forces <span class="process-math">\(x_{1} = x_{2}\text{.}\)</span></p></article><p id="p-230">Since a function is one-to-one if and only if its graph passes the horizontal line test, the horizontal line test also gives us a useful way to check if a function is invertible.</p>
 <article class="example example-like" id="example-exponential-inverse"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.2</span><span class="period">.</span>
 </h4>
-<p id="p-221">Let <span class="process-math">\(f(x) = e^{x}\text{,}\)</span> the natural exponential function introduced in <a href="section-exponential-functions.html" class="internal" title="Section 4.1: Exponential Functions">Section 4.1</a>. Then <span class="process-math">\(f(x)\)</span> is an invertible function, since its graph passes the horizontal line test.</p></article><p id="p-222">If a function <span class="process-math">\(f\)</span> is invertible, then there exists an <dfn class="terminology">inverse function</dfn> <span class="process-math">\(f^{1}\)</span> satisfying the following equations:</p>
-<div class="displaymath process-math">
+<p id="p-231">Let <span class="process-math">\(f(x) = e^{x}\text{,}\)</span> the natural exponential function introduced in <a href="section-exponential-functions.html" class="internal" title="Section 4.1: Exponential Functions">Section 4.1</a>. Then <span class="process-math">\(f(x)\)</span> is an invertible function, since its graph passes the horizontal line test.</p></article><p id="p-232">If a function <span class="process-math">\(f\)</span> is invertible, then there exists an <dfn class="terminology">inverse function</dfn> <span class="process-math">\(f^{1}\)</span> satisfying the following equations:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-24">
 \begin{align*}
 f(f^{-1}(y)) &amp; = y \\
 f^{-1}(f(x)) &amp; = x. 
 \end{align*}
 </div>
 <p class="continuation">Essentially, <span class="process-math">\(f^{-1}\)</span> is the rule that undoes the transformation that <span class="process-math">\(f\)</span> applies to <span class="process-math">\(x\text{.}\)</span> The domain of <span class="process-math">\(f^{-1}\)</span> is the range of <span class="process-math">\(f\)</span> and the range of <span class="process-math">\(f^{-1}\)</span> is the domain of <span class="process-math">\(f\text{.}\)</span> Note that <span class="process-math">\(f^{-1}\neq\frac{1}{f}\text{!.}\)</span></p>
-<p id="p-223">The graph of an inverse function is related to the graph of the original function in a very nice way. To get the graph of <span class="process-math">\(f^{-1}\)</span> from <span class="process-math">\(f\text{,}\)</span> just reflect the graph of <span class="process-math">\(f\)</span> across the line <span class="process-math">\(y=x\text{.}\)</span></p>
+<p id="p-233">The graph of an inverse function is related to the graph of the original function in a very nice way. To get the graph of <span class="process-math">\(f^{-1}\)</span> from <span class="process-math">\(f\text{,}\)</span> just reflect the graph of <span class="process-math">\(f\)</span> across the line <span class="process-math">\(y=x\text{.}\)</span></p>
 <article class="example example-like" id="example-graphing-the-inverse-of-the-natural-exponential"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Graphing the inverse of the natural exponential.</span>
 </h4>
-<p id="p-224">Let <span class="process-math">\(f(x) = e^{x}\text{.}\)</span> Graph <span class="process-math">\(f^{-1}(x)\text{.}\)</span></p>
+<p id="p-234">Let <span class="process-math">\(f(x) = e^{x}\text{.}\)</span> Graph <span class="process-math">\(f^{-1}(x)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
-<p id="p-225">If we graph <span class="process-math">\(e^{x}\)</span> and then rotate the graph across the line <span class="process-math">\(y=x\text{,}\)</span> we get</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-46" id="solution-46"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-46"><div class="solution solution-like">
+<p id="p-235">If we graph <span class="process-math">\(e^{x}\)</span> and then rotate the graph across the line <span class="process-math">\(y=x\text{,}\)</span> we get</p>
 <figure class="figure figure-like" id="figure-exponential"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-exponential.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.4<span class="period">.</span></span><span class="space"> </span>The inverse of <span class="process-math">\(e^{x}\text{.}\)</span></figcaption></figure>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-calculus-with-inverse-functions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Calculus with Inverse Functions</span>
 </h3>
-<p id="p-226">There are two important things to notice about the graph of the inverse function in <a href="" class="xref" data-knowl="./knowl/example-exponential-inverse.html" title="Example 4.2.2">Example 4.2.2</a>: it's continuous and differentiable. This is because the same was true of the original graph, and if we think about it this should be true in general as well since graphing the inverse doesn't add any new gaps or cusps to the graph.</p>
+<p id="p-236">There are two important things to notice about the graph of the inverse function in <a href="" class="xref" data-knowl="./knowl/example-exponential-inverse.html" title="Example 4.2.2">Example 4.2.2</a>: it's continuous and differentiable. This is because the same was true of the original graph, and if we think about it this should be true in general as well since graphing the inverse doesn't add any new gaps or cusps to the graph.</p>
 <article class="theorem theorem-like" id="theorem-continuity-and-differentiability-of-inverses"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Continuity and Differentiability of Inverses.</span>
 </h4>
-<p id="p-227">Let <span class="process-math">\(f(x)\)</span> be a continuous (respectively, differentiable) function. Suppose that <span class="process-math">\(f(x)\)</span> is invertible, and has inverse <span class="process-math">\(f^{-1}(x)\text{.}\)</span> Then <span class="process-math">\(f^{-1}(x)\)</span> is continuous (respectively, differentiable).</p></article><article class="example example-like" id="example-finding-the-derivative-of-an-inverse-function"><h4 class="heading">
+<p id="p-237">Let <span class="process-math">\(f(x)\)</span> be a continuous (respectively, differentiable) function. Suppose that <span class="process-math">\(f(x)\)</span> is invertible, and has inverse <span class="process-math">\(f^{-1}(x)\text{.}\)</span> Then <span class="process-math">\(f^{-1}(x)\)</span> is continuous (respectively, differentiable).</p></article><article class="example example-like" id="example-finding-the-derivative-of-an-inverse-function"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the derivative of an inverse function.</span>
 </h4>
-<p id="p-228">Let <span class="process-math">\(f(x) = \sqrt{x-1}\)</span> and note that <span class="process-math">\(f\)</span> is invertible. Find the derivative of <span class="process-math">\(f^{-1}\text{.}\)</span></p>
+<p id="p-238">Let <span class="process-math">\(f(x) = \sqrt{x-1}\)</span> and note that <span class="process-math">\(f\)</span> is invertible. Find the derivative of <span class="process-math">\(f^{-1}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-46" id="solution-46"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-46"><div class="solution solution-like">
-<p id="p-229">One way to do this is just start by finding <span class="process-math">\(f^{-1}\text{.}\)</span> So we'll set <span class="process-math">\(y = \sqrt{x-1}\text{,}\)</span> solve for <span class="process-math">\(x\)</span> and then switch <span class="process-math">\(x\)</span> and <span class="process-math">\(y\text{.}\)</span> If we do this, we get</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-47" id="solution-47"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-47"><div class="solution solution-like">
+<p id="p-239">One way to do this is just start by finding <span class="process-math">\(f^{-1}\text{.}\)</span> So we'll set <span class="process-math">\(y = \sqrt{x-1}\text{,}\)</span> solve for <span class="process-math">\(x\)</span> and then switch <span class="process-math">\(x\)</span> and <span class="process-math">\(y\text{.}\)</span> If we do this, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y = x^{2} + 1
 \end{equation*}
 </div>
 <p class="continuation">so <span class="process-math">\(f^{-1}(x) = x^{2} + 1\)</span> (and note that the domain of <span class="process-math">\(f^{-1}\)</span> is <span class="process-math">\([0,\infty)\)</span> since this is the range of <span class="process-math">\(f\text{!}\)</span>). Hence</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{}{x}f^{-1}(x) = 2x.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-230">The method used in <a href="" class="xref" data-knowl="./knowl/example-finding-the-derivative-of-an-inverse-function.html" title="Example 4.2.6: Finding the derivative of an inverse function">Example 4.2.6</a> will certainly work in simple cases. But what do we do if we can't (or don't want to) find an explicit formula for the inverse function? The following formula will help us to do this.</p>
+</div></article><p id="p-240">The method used in <a href="" class="xref" data-knowl="./knowl/example-finding-the-derivative-of-an-inverse-function.html" title="Example 4.2.6: Finding the derivative of an inverse function">Example 4.2.6</a> will certainly work in simple cases. But what do we do if we can't (or don't want to) find an explicit formula for the inverse function? The following formula will help us to do this.</p>
 <article class="theorem theorem-like" id="theorem-derivative-of-an-inverse-function"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Derivative of an Inverse Function.</span>
 </h4>
-<p id="p-231">Let <span class="process-math">\(f(x)\)</span> be a differentiable function with inverse <span class="process-math">\(f^{-1}(x)\text{.}\)</span> Assume that <span class="process-math">\(f^{-1}\)</span> is itself differentiable. Then</p>
-<div class="displaymath process-math">
+<p id="p-241">Let <span class="process-math">\(f(x)\)</span> be a differentiable function with inverse <span class="process-math">\(f^{-1}(x)\text{.}\)</span> Assume that <span class="process-math">\(f^{-1}\)</span> is itself differentiable. Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 (f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}.
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-4"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-4"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-4"><article class="hiddenproof"><p id="p-232">First, let <span class="process-math">\(y = f^{-1}(x)\text{,}\)</span> so that we need to find <span class="process-math">\(y'\text{.}\)</span> Then we can say that <span class="process-math">\(f(y) = x\text{.}\)</span> Now differentiate this equation implicitly to get</p>
-<div class="displaymath process-math">
+</div></article><article class="hiddenproof" id="proof-4"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-4"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-4"><article class="hiddenproof"><p id="p-242">First, let <span class="process-math">\(y = f^{-1}(x)\text{,}\)</span> so that we need to find <span class="process-math">\(y'\text{.}\)</span> Then we can say that <span class="process-math">\(f(y) = x\text{.}\)</span> Now differentiate this equation implicitly to get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(y)y' = 1
 \end{equation*}
 </div>
 <p class="continuation">or just</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y' = \frac{1}{f'(y)} = \frac{1}{f'(f^{-1}(x))}.
 \end{equation*}
@@ -380,11 +387,11 @@ y' = \frac{1}{f'(y)} = \frac{1}{f'(f^{-1}(x))}.
 <article class="example example-like" id="example-exponential-inverse-revisited"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential inverse revisited.</span>
 </h4>
-<p id="p-233">Using the fact that the derivative of <span class="process-math">\(e^{x}\)</span> is itself, find the derivative of its inverse.</p>
+<p id="p-243">Using the fact that the derivative of <span class="process-math">\(e^{x}\)</span> is itself, find the derivative of its inverse.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-47" id="solution-47"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-47"><div class="solution solution-like">
-<p id="p-234">Let <span class="process-math">\(f(x) = e^{x}\text{.}\)</span> Then by <a href="" class="xref" data-knowl="./knowl/theorem-derivative-of-an-inverse-function.html" title="Theorem 4.2.7: Derivative of an Inverse Function">Theorem 4.2.7</a> we have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-48" id="solution-48"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-48"><div class="solution solution-like">
+<p id="p-244">Let <span class="process-math">\(f(x) = e^{x}\text{.}\)</span> Then by <a href="" class="xref" data-knowl="./knowl/theorem-derivative-of-an-inverse-function.html" title="Theorem 4.2.7: Derivative of an Inverse Function">Theorem 4.2.7</a> we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-derivative-of-an-inverse-function.html">
 \begin{equation*}
 (f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))} = \frac{1}{f(f^{-1}(x))} = \frac{1}{x}.
 \end{equation*}
@@ -394,23 +401,23 @@ y' = \frac{1}{f'(y)} = \frac{1}{f'(f^{-1}(x))}.
 </div></article><article class="example example-like" id="example-derivative-at-a-point"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Derivative at a point.</span>
 </h4>
-<p id="p-235">Let <span class="process-math">\(f(x) = x^{3} + 3\sin x + 2\cos x\text{.}\)</span> Find <span class="process-math">\((f^{-1})'(2)\)</span></p>
+<p id="p-245">Let <span class="process-math">\(f(x) = x^{3} + 3\sin x + 2\cos x\text{.}\)</span> Find <span class="process-math">\((f^{-1})'(2)\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-48" id="solution-48"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-48"><div class="solution solution-like">
-<p id="p-236">By <a href="" class="xref" data-knowl="./knowl/theorem-derivative-of-an-inverse-function.html" title="Theorem 4.2.7: Derivative of an Inverse Function">Theorem 4.2.7</a>, we know that</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-49" id="solution-49"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-49"><div class="solution solution-like">
+<p id="p-246">By <a href="" class="xref" data-knowl="./knowl/theorem-derivative-of-an-inverse-function.html" title="Theorem 4.2.7: Derivative of an Inverse Function">Theorem 4.2.7</a>, we know that</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-derivative-of-an-inverse-function.html">
 \begin{equation*}
 (f^{-1})'(2) = \frac{1}{f'(f^{-1}(2))}.
 \end{equation*}
 </div>
 <p class="continuation">By inspection, <span class="process-math">\(f(0) = 2\)</span> which means <span class="process-math">\(f^{-1}(2) = 0\text{.}\)</span> Since</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-derivative-of-an-inverse-function.html">
 \begin{equation*}
 f'(x) = 3x^{2} + 3\cos x - 2\sin x,
 \end{equation*}
 </div>
 <p class="continuation">this gives</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-derivative-of-an-inverse-function.html">
 \begin{equation*}
 (f^{-1})'(2) = \frac{1}{f'(f^{-1}(2))} = \frac{1}{f'(0)} = \frac{1}{3}.
 \end{equation*}
@@ -419,16 +426,16 @@ f'(x) = 3x^{2} + 3\cos x - 2\sin x,
 </div></article></section><section class="subsection" id="subsection-logarithms"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Logarithms</span>
 </h3>
-<p id="p-237">Since exponential functions are important in mathematics and its applications, their inverses are important as well. Each exponential function <span class="process-math">\(f(x) = a^{x}\)</span> (<span class="process-math">\(a&gt; 0\)</span>) has an inverse function that we call the <dfn class="terminology">logarithm with base <span class="process-math">\(a\)</span></dfn>, and denote by <span class="process-math">\(f^{-1}(x) = \log_{a}x\text{.}\)</span> The domain of each logarithm is <span class="process-math">\((0,\infty)\)</span> and the range is <span class="process-math">\((-\infty,\infty)\text{.}\)</span> The defining properties of the logarithm function are as follows:</p>
-<div class="displaymath process-math">
+<p id="p-247">Since exponential functions are important in mathematics and its applications, their inverses are important as well. Each exponential function <span class="process-math">\(f(x) = a^{x}\)</span> (<span class="process-math">\(a&gt; 0\)</span>) has an inverse function that we call the <dfn class="terminology">logarithm with base <span class="process-math">\(a\)</span></dfn>, and denote by <span class="process-math">\(f^{-1}(x) = \log_{a}x\text{.}\)</span> The domain of each logarithm is <span class="process-math">\((0,\infty)\)</span> and the range is <span class="process-math">\((-\infty,\infty)\text{.}\)</span> The defining properties of the logarithm function are as follows:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-25">
 \begin{align*}
 \log_{a}a^{x} &amp; = x \\
 a^{\log_{a}x} &amp; = x. 
 \end{align*}
 </div>
 <p class="continuation">Essentially, logarithms and exponentials cancel each other out. To put this another way, <span class="process-math">\(\log_{a}x\)</span> is the <em class="emphasis">exponent</em> needed to turn <span class="process-math">\(a\)</span> into <span class="process-math">\(x\text{.}\)</span></p>
-<p id="p-238">We can say a few things about logarithms just from looking at graphs of exponentials. Suppose that <span class="process-math">\(a&gt;1\text{.}\)</span> Then <span class="process-math">\(\log_{a}x\)</span> is both continuous and differentiable for all <span class="process-math">\(x&gt;0\text{,}\)</span></p>
-<div class="displaymath process-math">
+<p id="p-248">We can say a few things about logarithms just from looking at graphs of exponentials. Suppose that <span class="process-math">\(a&gt;1\text{.}\)</span> Then <span class="process-math">\(\log_{a}x\)</span> is both continuous and differentiable for all <span class="process-math">\(x&gt;0\text{,}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-26">
 \begin{align*}
 \log_{a}1 &amp; = 0 \\
 \lim_{x\to0^{+}}\log_{a}x &amp; = -\infty \\
@@ -436,39 +443,39 @@ a^{\log_{a}x} &amp; = x.
 \end{align*}
 </div>
 <p class="continuation">and the derivative of <span class="process-math">\(\log_{a}x\)</span> approaches <span class="process-math">\(0\)</span> as <span class="process-math">\(x\to\infty\text{.}\)</span></p>
-<p id="p-239">The properties of the exponential listed in <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-exponential-functions.html" title="Theorem 4.1.1: Properties of Exponential Functions">Theorem 4.1.1</a> have corresponding properties for logarithms.</p>
+<p id="p-249">The properties of the exponential listed in <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-exponential-functions.html" title="Theorem 4.1.1: Properties of Exponential Functions">Theorem 4.1.1</a> have corresponding properties for logarithms.</p>
 <article class="theorem theorem-like" id="theorem-properties-of-logarithm-functions"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of Logarithm Functions.</span>
 </h4>
-<p id="p-240">Let <span class="process-math">\(a&gt;0\)</span> with <span class="process-math">\(a\neq1\text{.}\)</span> Let <span class="process-math">\(x,y\)</span> be positive real numbers, and let <span class="process-math">\(r\)</span> be any real number. Then</p>
+<p id="p-250">Let <span class="process-math">\(a&gt;0\)</span> with <span class="process-math">\(a\neq1\text{.}\)</span> Let <span class="process-math">\(x,y\)</span> be positive real numbers, and let <span class="process-math">\(r\)</span> be any real number. Then</p>
 <ul class="disc">
 <li id="li-13"><p id="p-derived-li-13"><span class="process-math">\(\log_{a}1 = 0\)</span> and <span class="process-math">\(\log_{a}a = 1\text{.}\)</span></p></li>
 <li id="li-14"><p id="p-derived-li-14"><span class="process-math">\(\log_{a}(xy) = \log_{a}x + \log_{a}y\text{.}\)</span></p></li>
 <li id="li-15"><p id="p-derived-li-15"><span class="process-math">\(\log_{a}\frac{x}{y} = \log_{a}x - \log_{a}y\text{.}\)</span></p></li>
 <li id="li-16"><p id="p-derived-li-16"><span class="process-math">\(\log_{a}x^{r} = r\log_{a}x\text{.}\)</span></p></li>
-</ul></article><p id="p-241">An important takeaway from <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-logarithm-functions.html" title="Theorem 4.2.10: Properties of Logarithm Functions">Theorem 4.2.10</a> is that logarithms turn the complicated operations of multiplication and division into the simpler operations of addition and subtraction.</p>
-<p id="p-242">Since every exponential function has a corresponding logarithm, the natural exponential function <span class="process-math">\(e^{x}\)</span> has a logarithm as well. We call this inverse the <dfn class="terminology">natural logarithm</dfn> and denote it by <span class="process-math">\(\ln x\text{.}\)</span> Note that <span class="process-math">\(\dv{}{x}\ln x = \frac{1}{x}\)</span> by <a href="" class="xref" data-knowl="./knowl/example-exponential-inverse-revisited.html" title="Example 4.2.8: Exponential inverse revisited">Example 4.2.8</a>.</p>
+</ul></article><p id="p-251">An important takeaway from <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-logarithm-functions.html" title="Theorem 4.2.10: Properties of Logarithm Functions">Theorem 4.2.10</a> is that logarithms turn the complicated operations of multiplication and division into the simpler operations of addition and subtraction.</p>
+<p id="p-252">Since every exponential function has a corresponding logarithm, the natural exponential function <span class="process-math">\(e^{x}\)</span> has a logarithm as well. We call this inverse the <dfn class="terminology">natural logarithm</dfn> and denote it by <span class="process-math">\(\ln x\text{.}\)</span> Note that <span class="process-math">\(\dv{}{x}\ln x = \frac{1}{x}\)</span> by <a href="" class="xref" data-knowl="./knowl/example-exponential-inverse-revisited.html" title="Example 4.2.8: Exponential inverse revisited">Example 4.2.8</a>.</p>
 <article class="example example-like" id="example-simplifying-an-exponential"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Simplifying an exponential.</span>
 </h4>
-<p id="p-243">Simplify <span class="process-math">\(e^{-4\ln x}\)</span> and <span class="process-math">\(e^{x\ln3}\text{.}\)</span></p>
+<p id="p-253">Simplify <span class="process-math">\(e^{-4\ln x}\)</span> and <span class="process-math">\(e^{x\ln3}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-49" id="solution-49"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-49"><div class="solution solution-like">
-<p id="p-244">We'll simplify by using the cancellation property <span class="process-math">\(e^{\ln y} = y\text{.}\)</span> First, we need to put the entire exponent inside of the natural log:</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-50" id="solution-50"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-50"><div class="solution solution-like">
+<p id="p-254">We'll simplify by using the cancellation property <span class="process-math">\(e^{\ln y} = y\text{.}\)</span> First, we need to put the entire exponent inside of the natural log:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 e^{-4\ln x} = e^{\ln x^{-4}} = x^{-4}
 \end{equation*}
 </div>
 <p class="continuation">and</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 e^{x\ln3} = 3^{x}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-245"><a href="" class="xref" data-knowl="./knowl/example-simplifying-an-exponential.html" title="Example 4.2.11: Simplifying an exponential">Example 4.2.11</a> shows us that <em class="emphasis">every</em> exponential function can be written in terms of the natural exponential: <span class="process-math">\(a^{x} = e^{x\ln a}\text{.}\)</span> Similarly, every logarithm can be written in terms of the natural logarithm by using the change of base formula:</p>
-<div class="displaymath process-math">
+</div></article><p id="p-255"><a href="" class="xref" data-knowl="./knowl/example-simplifying-an-exponential.html" title="Example 4.2.11: Simplifying an exponential">Example 4.2.11</a> shows us that <em class="emphasis">every</em> exponential function can be written in terms of the natural exponential: <span class="process-math">\(a^{x} = e^{x\ln a}\text{.}\)</span> Similarly, every logarithm can be written in terms of the natural logarithm by using the change of base formula:</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-simplifying-an-exponential.html">
 \begin{equation*}
 \log_{a}x = \frac{\ln x}{\ln a}.
 \end{equation*}

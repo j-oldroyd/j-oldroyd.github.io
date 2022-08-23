@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:38-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,11 +307,11 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-curl-and-divergence"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">14.5</span> <span class="title">Curl and Divergence</span>
 </h2>
-<section class="introduction" id="introduction-36"><p id="p-1696">In this section we look at two different analogues of the derivative for vector fields. Once we have these versions of the derivative, we'll also be able to state a corresponding version of the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Fundamental Theorem of Calculus</a>, just as the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-line-integrals.html" title="Theorem 14.3.4: Fundamental Theorem of Line Integrals">Fundamental Theorem of Line Integrals</a> corresponds to the gradient.</p></section><section class="subsection" id="subsection-curl"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-36"><p id="p-1706">In this section we look at two different analogues of the derivative for vector fields. Once we have these versions of the derivative, we'll also be able to state a corresponding version of the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Fundamental Theorem of Calculus</a>, just as the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-line-integrals.html" title="Theorem 14.3.4: Fundamental Theorem of Line Integrals">Fundamental Theorem of Line Integrals</a> corresponds to the gradient.</p></section><section class="subsection" id="subsection-curl"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Curl</span>
 </h3>
-<p id="p-1697">In <a href="section-the-fundamental-theorem-for-line-integrals.html" class="internal" title="Section 14.3: The Fundamental Theorem for Line Integrals">Section 14.3</a> we introduced the <span class="process-math">\(\del\)</span> operator, which in <span class="process-math">\(\RR^{3}\)</span> is given by</p>
-<div class="displaymath process-math">
+<p id="p-1707">In <a href="section-the-fundamental-theorem-for-line-integrals.html" class="internal" title="Section 14.3: The Fundamental Theorem for Line Integrals">Section 14.3</a> we introduced the <span class="process-math">\(\del\)</span> operator, which in <span class="process-math">\(\RR^{3}\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-the-fundamental-theorem-for-line-integrals.html">
 \begin{equation*}
 \del = \dotprod{\pdv{}{x}, \pdv{}{y}, \pdv{}{z}}\text{.}
 \end{equation*}
@@ -313,23 +320,23 @@ true);
 <article class="definition definition-like" id="definition-curl-of-a-vector-field-in--rr-3-m-"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">14.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Curl of a Vector Field in <span class="process-math">\(\RR^{3}\)</span>.</span>
 </h4>
-<p id="p-1698">Let <span class="process-math">\(\vb{F} = P\vb{i} + Q\vb{j} + R\vb{k}\)</span> be a vector field in <span class="process-math">\(\RR^{3}\)</span> with continuously differentiable components. The curl of <span class="process-math">\(\vb{F}\)</span> is the vector</p>
-<div class="displaymath process-math">
+<p id="p-1708">Let <span class="process-math">\(\vb{F} = P\vb{i} + Q\vb{j} + R\vb{k}\)</span> be a vector field in <span class="process-math">\(\RR^{3}\)</span> with continuously differentiable components. The curl of <span class="process-math">\(\vb{F}\)</span> is the vector</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \curlt{\vb{F}} = \curl\vb{F} = \parens{\pdv{R}{y} - \pdv{Q}{z}}\vb{i} + \parens{\pdv{P}{z} - \pdv{R}{x}}\vb{j} + \parens{\pdv{Q}{x} - \pdv{P}{y}}\vb{k}\text{.}
 \end{equation*}
-</div></article><p id="p-1699">We've already seen a couple nice properties of curls. First, the curl vector gives the axis of rotation about which <span class="process-math">\(\vb{F}\)</span> tends to rotate counterclockwise when viewed head on, and <span class="process-math">\(\norm{\curl\vb{F}}\)</span> is a measure of the amount of rotation. Second, the curl can be used to determine if a vector field is conservative or not.</p>
+</div></article><p id="p-1709">We've already seen a couple nice properties of curls. First, the curl vector gives the axis of rotation about which <span class="process-math">\(\vb{F}\)</span> tends to rotate counterclockwise when viewed head on, and <span class="process-math">\(\norm{\curl\vb{F}}\)</span> is a measure of the amount of rotation. Second, the curl can be used to determine if a vector field is conservative or not.</p>
 <article class="theorem theorem-like" id="theorem-conservative-vector-fields-in--rr-3-m-"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">14.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Conservative Vector Fields in <span class="process-math">\(\RR^{3}\)</span>.</span>
 </h4>
-<p id="p-1700">Let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on an open set containing the simply connected region <span class="process-math">\(D\text{.}\)</span> Then <span class="process-math">\(\vb{F}\)</span> is conservative if and only if <span class="process-math">\(\curl\vb{F} = \vb{0}\text{.}\)</span></p></article><article class="example example-like" id="example-determining-rotation-in-a-vector-field"><h4 class="heading">
+<p id="p-1710">Let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on an open set containing the simply connected region <span class="process-math">\(D\text{.}\)</span> Then <span class="process-math">\(\vb{F}\)</span> is conservative if and only if <span class="process-math">\(\curl\vb{F} = \vb{0}\text{.}\)</span></p></article><article class="example example-like" id="example-determining-rotation-in-a-vector-field"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Determining Rotation in a Vector Field.</span>
 </h4>
-<p id="p-1701">Suppose the vector field <span class="process-math">\(\vb{F} = \dotprod{1, \sin z, x - yz^{2}}\)</span> represents a swirling fluid. Within this fluid you place a small paddle wheel at the point <span class="process-math">\((1,-2,0)\text{.}\)</span> When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?</p>
+<p id="p-1711">Suppose the vector field <span class="process-math">\(\vb{F} = \dotprod{1, \sin z, x - yz^{2}}\)</span> represents a swirling fluid. Within this fluid you place a small paddle wheel at the point <span class="process-math">\((1,-2,0)\text{.}\)</span> When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-285" id="solution-285"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-285"><div class="solution solution-like">
-<p id="p-1702">First we need to get a measure of the rotation of <span class="process-math">\(\vb{F}\text{,}\)</span> so we compute the curl:</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-286" id="solution-286"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-286"><div class="solution solution-like">
+<p id="p-1712">First we need to get a measure of the rotation of <span class="process-math">\(\vb{F}\text{,}\)</span> so we compute the curl:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \curl\vb{F} = \dotprod{-z^{2} - \cos z, -1, 0}\text{,}
 \end{equation*}
@@ -339,8 +346,8 @@ true);
 </div></article></section><section class="subsection" id="subsection-divergence"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Divergence</span>
 </h3>
-<p id="p-1703">Our second notion of derivative for vector fields is the <dfn class="terminology">divergence</dfn>. If <span class="process-math">\(\vb{F}\)</span> is a continuously differentiable vector field, then we define the divergence of <span class="process-math">\(\vb{F}\)</span> to be the <em class="emphasis">scalar</em> function <span class="process-math">\(\divt\vb{F}\)</span> given by</p>
-<div class="displaymath process-math">
+<p id="p-1713">Our second notion of derivative for vector fields is the <dfn class="terminology">divergence</dfn>. If <span class="process-math">\(\vb{F}\)</span> is a continuously differentiable vector field, then we define the divergence of <span class="process-math">\(\vb{F}\)</span> to be the <em class="emphasis">scalar</em> function <span class="process-math">\(\divt\vb{F}\)</span> given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \divt\vb{F} = \div\vb{F}\text{.}
 \end{equation*}
@@ -349,17 +356,17 @@ true);
 <article class="example example-like" id="example-divergence-on-a-rectangle"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Divergence on a Rectangle.</span>
 </h4>
-<p id="p-1704">Let <span class="process-math">\(\vb{F} = \dotprod{xy, x}\)</span> and let <span class="process-math">\(C\)</span> denote the unit circle, traversed counterclockwise once. Find the divergence of <span class="process-math">\(\vb{F}\)</span> at <span class="process-math">\((-1,0)\)</span> and <span class="process-math">\((0,-1)\text{.}\)</span> Then find the <em class="emphasis">net divergence</em> of <span class="process-math">\(\vb{F}\)</span> through the interior of <span class="process-math">\(C\text{.}\)</span></p>
+<p id="p-1714">Let <span class="process-math">\(\vb{F} = \dotprod{xy, x}\)</span> and let <span class="process-math">\(C\)</span> denote the unit circle, traversed counterclockwise once. Find the divergence of <span class="process-math">\(\vb{F}\)</span> at <span class="process-math">\((-1,0)\)</span> and <span class="process-math">\((0,-1)\text{.}\)</span> Then find the <em class="emphasis">net divergence</em> of <span class="process-math">\(\vb{F}\)</span> through the interior of <span class="process-math">\(C\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-286" id="solution-286"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-286"><div class="solution solution-like">
-<p id="p-1705">At <span class="process-math">\((-1,0)\text{,}\)</span> <span class="process-math">\(\div\vb{F} = y = 0\text{.}\)</span> At this particular point, outflow is balanced with inflow. Likewise, at <span class="process-math">\((0,-1)\)</span> we can see that inflow is greater than outflow.</p>
-<p id="p-1706">We can compute the net divergence as <span class="process-math">\(\iint_{D}\div\vb{F}\,dA\text{,}\)</span> where <span class="process-math">\(D\)</span> is the interior of the unit circle. This is equal to <span class="process-math">\(0\text{,}\)</span> which means the net flow throughout <span class="process-math">\(D\)</span> is <span class="process-math">\(0\text{.}\)</span> By <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Theorem 14.4.5</a>, this is also equal to the net flux across <span class="process-math">\(C\text{.}\)</span></p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-287" id="solution-287"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-287"><div class="solution solution-like">
+<p id="p-1715">At <span class="process-math">\((-1,0)\text{,}\)</span> <span class="process-math">\(\div\vb{F} = y = 0\text{.}\)</span> At this particular point, outflow is balanced with inflow. Likewise, at <span class="process-math">\((0,-1)\)</span> we can see that inflow is greater than outflow.</p>
+<p id="p-1716">We can compute the net divergence as <span class="process-math">\(\iint_{D}\div\vb{F}\,dA\text{,}\)</span> where <span class="process-math">\(D\)</span> is the interior of the unit circle. This is equal to <span class="process-math">\(0\text{,}\)</span> which means the net flow throughout <span class="process-math">\(D\)</span> is <span class="process-math">\(0\text{.}\)</span> By <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Theorem 14.4.5</a>, this is also equal to the net flux across <span class="process-math">\(C\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-laplacian"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Laplacian</span>
 </h3>
-<p id="p-1707">From the divergence we get another useful form of (second) derivative for scalar functions. First, let <span class="process-math">\(f(x,y,z)\)</span> be a differentiable scalar function. Then we can compute its gradient <span class="process-math">\(\grad f\text{.}\)</span> This is a vector field that represents how <span class="process-math">\(f\)</span> changes. Now, since <span class="process-math">\(\grad f\)</span> is a vector field we can also consider its curl and divergence. If <span class="process-math">\(f\)</span> is “nice enough” we know that <span class="process-math">\(\curl(\grad f) = \vb{0}\text{,}\)</span> which is not particularly useful in this case. But if we take the divergence, we get</p>
-<div class="displaymath process-math">
+<p id="p-1717">From the divergence we get another useful form of (second) derivative for scalar functions. First, let <span class="process-math">\(f(x,y,z)\)</span> be a differentiable scalar function. Then we can compute its gradient <span class="process-math">\(\grad f\text{.}\)</span> This is a vector field that represents how <span class="process-math">\(f\)</span> changes. Now, since <span class="process-math">\(\grad f\)</span> is a vector field we can also consider its curl and divergence. If <span class="process-math">\(f\)</span> is “nice enough” we know that <span class="process-math">\(\curl(\grad f) = \vb{0}\text{,}\)</span> which is not particularly useful in this case. But if we take the divergence, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \div(\grad f) = f_{xx} + f_{yy} + f_{zz}\text{.}
 \end{equation*}
@@ -367,21 +374,21 @@ true);
 <article class="definition definition-like" id="definition-laplacian"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">14.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Laplacian.</span>
 </h4>
-<p id="p-1708">Let <span class="process-math">\(f\)</span> be a twice differentiable scalar function on <span class="process-math">\(\RR^{3}\text{.}\)</span> The <dfn class="terminology">Laplacian</dfn> of <span class="process-math">\(f\)</span> is the function</p>
-<div class="displaymath process-math">
+<p id="p-1718">Let <span class="process-math">\(f\)</span> be a twice differentiable scalar function on <span class="process-math">\(\RR^{3}\text{.}\)</span> The <dfn class="terminology">Laplacian</dfn> of <span class="process-math">\(f\)</span> is the function</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \div(\grad f) = \del^{2}f = \Delta f
 \end{equation*}
 </div>
-<p class="continuation">given by <span class="process-math">\(f_{xx} + f_{yy} + f_{zz}\text{.}\)</span></p></article><p id="p-1709"><a href="" class="xref" data-knowl="./knowl/definition-laplacian.html" title="Definition 14.5.5: Laplacian">Definition 14.5.5</a> extends to other dimensions in the obvious way. The Laplacian is useful since it provides a measure of how a function's value at a point differs from the average value at nearby points.</p>
+<p class="continuation">given by <span class="process-math">\(f_{xx} + f_{yy} + f_{zz}\text{.}\)</span></p></article><p id="p-1719"><a href="" class="xref" data-knowl="./knowl/definition-laplacian.html" title="Definition 14.5.5: Laplacian">Definition 14.5.5</a> extends to other dimensions in the obvious way. The Laplacian is useful since it provides a measure of how a function's value at a point differs from the average value at nearby points.</p>
 <article class="example example-like" id="example-laplacians-and-average-values"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Laplacians and Average Values.</span>
 </h4>
-<p id="p-1710">Let <span class="process-math">\(f_{1} = x^{2} + y^{2}\)</span> and let <span class="process-math">\(f_{2} = x^{2} - y^{2}\text{.}\)</span> Let <span class="process-math">\(C\)</span> denote the unit circle traversed once counterclockwise. Find the average values of <span class="process-math">\(f_{i}\)</span> on <span class="process-math">\(C\text{,}\)</span> their specific values at <span class="process-math">\((0,0)\)</span> and the Laplacians at <span class="process-math">\((0,0)\text{.}\)</span></p>
+<p id="p-1720">Let <span class="process-math">\(f_{1} = x^{2} + y^{2}\)</span> and let <span class="process-math">\(f_{2} = x^{2} - y^{2}\text{.}\)</span> Let <span class="process-math">\(C\)</span> denote the unit circle traversed once counterclockwise. Find the average values of <span class="process-math">\(f_{i}\)</span> on <span class="process-math">\(C\text{,}\)</span> their specific values at <span class="process-math">\((0,0)\)</span> and the Laplacians at <span class="process-math">\((0,0)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-287" id="solution-287"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-287"><div class="solution solution-like">
-<p id="p-1711">If we compute the average values, we get</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-288" id="solution-288"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-288"><div class="solution solution-like">
+<p id="p-1721">If we compute the average values, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-241">
 \begin{align*}
 \frac{1}{2\pi}\oint_{C}f_{1}(x,y)\,ds \amp = 1 \\
 \frac{1}{2\pi}\oint_{C}f_{2}(x,y)\,ds \amp = 0 \text{.}
@@ -389,43 +396,43 @@ true);
 </div>
 <p class="continuation">Furthermore, <span class="process-math">\(f_{1}(0,0) = 0 = f_{2}(0,0)\text{.}\)</span> We also have <span class="process-math">\(\Delta f_{1} = 4\)</span> and <span class="process-math">\(\Delta f_{2} = 0\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-1712">To see how the Laplacian can arise, consider the following situation explained in Evans' <em class="emphasis">Partial Differential Equations</em>, <span class="process-math">\(2^{\text{nd}}\)</span> edition. We have some <em class="emphasis">density</em> function <span class="process-math">\(f\text{;}\)</span> this could be mass density, charge density, etc. Now we'll let <span class="process-math">\(\vb{F}\)</span> denote the flux of <span class="process-math">\(f\text{.}\)</span> It's often reasonable to assume that the flux is proportional to the negative of the gradient of <span class="process-math">\(f\text{:}\)</span> <span class="process-math">\(\vb{F} = -a\grad f\)</span> where <span class="process-math">\(a \gt 0\text{.}\)</span> This means that the quantity flows from regions of higher concentration to regions of lower concentration. If <span class="process-math">\(f\)</span> represents a quantity in equilibrium within some region <span class="process-math">\(D\text{,}\)</span> then the net flux across <span class="process-math">\(D\)</span> should be <span class="process-math">\(0\text{.}\)</span> In terms of <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Theorem 14.4.5</a>, we have</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1722">To see how the Laplacian can arise, consider the following situation explained in Evans' <em class="emphasis">Partial Differential Equations</em>, <span class="process-math">\(2^{\text{nd}}\)</span> edition. We have some <em class="emphasis">density</em> function <span class="process-math">\(f\text{;}\)</span> this could be mass density, charge density, etc. Now we'll let <span class="process-math">\(\vb{F}\)</span> denote the flux of <span class="process-math">\(f\text{.}\)</span> It's often reasonable to assume that the flux is proportional to the negative of the gradient of <span class="process-math">\(f\text{:}\)</span> <span class="process-math">\(\vb{F} = -a\grad f\)</span> where <span class="process-math">\(a \gt 0\text{.}\)</span> This means that the quantity flows from regions of higher concentration to regions of lower concentration. If <span class="process-math">\(f\)</span> represents a quantity in equilibrium within some region <span class="process-math">\(D\text{,}\)</span> then the net flux across <span class="process-math">\(D\)</span> should be <span class="process-math">\(0\text{.}\)</span> In terms of <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Theorem 14.4.5</a>, we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-green-s-theorem-for-flux-integrals.html">
 \begin{equation*}
 \iint_{D}\div\vb{F}\,dA = \oint_{\partial D}\vb{F}\cdot\vb{n}\,ds = 0\text{.}
 \end{equation*}
 </div>
-<p id="p-1713">Now we'll make the argument that <span class="process-math">\(\div\vb{F} = 0\)</span> since the above should be true for arbitrary subregions of <span class="process-math">\(D\text{.}\)</span> But</p>
-<div class="displaymath process-math">
+<p id="p-1723">Now we'll make the argument that <span class="process-math">\(\div\vb{F} = 0\)</span> since the above should be true for arbitrary subregions of <span class="process-math">\(D\text{.}\)</span> But</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \div\vb{F} = -a\div(\grad f) = -a\del^{2}f\text{,}
 \end{equation*}
 </div>
 <p class="continuation">which means that <span class="process-math">\(\Delta f = 0\text{.}\)</span></p>
-<p id="p-1714">We say that a function is <dfn class="terminology">harmonic</dfn> if its Laplacian is <span class="process-math">\(0\text{.}\)</span> The equation <span class="process-math">\(\Delta f = 0\)</span> is known as <dfn class="terminology">Laplace's equation</dfn>. Harmonic functions are extremely useful, as they represent quantities in a kind of equilibrium state. If <span class="process-math">\(f\)</span> represents chemical concentration, temperature or electrostatic potential, then Laplace's equation is Fick's law of diffusion, Fourier's law of heat conduction or Ohm's law of electrical conduction, respectively. See Evans text for more.</p>
-<p id="p-1715">Laplacians also appear in certain integral identities.</p>
+<p id="p-1724">We say that a function is <dfn class="terminology">harmonic</dfn> if its Laplacian is <span class="process-math">\(0\text{.}\)</span> The equation <span class="process-math">\(\Delta f = 0\)</span> is known as <dfn class="terminology">Laplace's equation</dfn>. Harmonic functions are extremely useful, as they represent quantities in a kind of equilibrium state. If <span class="process-math">\(f\)</span> represents chemical concentration, temperature or electrostatic potential, then Laplace's equation is Fick's law of diffusion, Fourier's law of heat conduction or Ohm's law of electrical conduction, respectively. See Evans text for more.</p>
+<p id="p-1725">Laplacians also appear in certain integral identities.</p>
 <article class="theorem theorem-like" id="theorem-green-s-first-identity"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">14.5.7</span><span class="period">.</span><span class="space"> </span><span class="title">Green's First Identity.</span>
 </h4>
-<p id="p-1716">Let <span class="process-math">\(D\)</span> denote a simply connected region with piecewise smooth boundary <span class="process-math">\(\partial D\text{.}\)</span> Suppose that <span class="process-math">\(f\)</span> is continuously differentiable and <span class="process-math">\(g\)</span> is twice continuously differentiable on an open domain containing <span class="process-math">\(D\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<p id="p-1726">Let <span class="process-math">\(D\)</span> denote a simply connected region with piecewise smooth boundary <span class="process-math">\(\partial D\text{.}\)</span> Suppose that <span class="process-math">\(f\)</span> is continuously differentiable and <span class="process-math">\(g\)</span> is twice continuously differentiable on an open domain containing <span class="process-math">\(D\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \iint_{D}f\del^{2}g\,dA = \oint_{\partial D}f(\grad g)\dn - \iint_{D}\grad f\cdot \grad g\,dA\text{.}
 \end{equation*}
-</div></article><article class="hiddenproof" id="proof-18"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-18"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-18"><article class="hiddenproof"><p id="p-1717">Since the right hand side involves a flux integral, this suggests that <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Green's Theorem for Flux Integrals</a> may prove useful. Applying this to <span class="process-math">\(\oint_{\partial D}f(\grad g)\dn\)</span> gives</p>
-<div class="displaymath process-math">
+</div></article><article class="hiddenproof" id="proof-18"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-18"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-18"><article class="hiddenproof"><p id="p-1727">Since the right hand side involves a flux integral, this suggests that <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Green's Theorem for Flux Integrals</a> may prove useful. Applying this to <span class="process-math">\(\oint_{\partial D}f(\grad g)\dn\)</span> gives</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-green-s-theorem-for-flux-integrals.html">
 \begin{equation*}
 \oint_{\partial D}f(\grad g)\dn = \iint_{D}\div(f\grad g)\,dA\text{.}
 \end{equation*}
 </div>
-<p id="p-1718">Now, recall that <span class="process-math">\(\div\)</span> is a kind of derivative operator. For this reason, it also satisfies a version of the product rule:</p>
-<div class="displaymath process-math">
+<p id="p-1728">Now, recall that <span class="process-math">\(\div\)</span> is a kind of derivative operator. For this reason, it also satisfies a version of the product rule:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \div(f\grad g) = \grad f\cdot \grad g + f \div(\grad g) = \grad f\cdot\grad g + f\del^{2}g\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Plugging this into the double integral and rearranging proves the result.</p></article></div>
-<aside class="aside aside-like" id="aside-21"><p id="p-1719"><a href="" class="xref" data-knowl="./knowl/theorem-green-s-first-identity.html" title="Theorem 14.5.7: Green's First Identity">Theorem 14.5.7</a> acts as a kind of “integration by parts” in higher dimensions.</p></aside></section><section class="conclusion" id="conclusion-15"><p id="p-1720">SUGGESTED PROBLEMS: 1-9 odd, 10, 11-15 odd.</p></section></section></div></main>
+<aside class="aside aside-like" id="aside-22"><p id="p-1729"><a href="" class="xref" data-knowl="./knowl/theorem-green-s-first-identity.html" title="Theorem 14.5.7: Green's First Identity">Theorem 14.5.7</a> acts as a kind of “integration by parts” in higher dimensions.</p></aside></section><section class="conclusion" id="conclusion-15"><p id="p-1730">SUGGESTED PROBLEMS: 1-9 odd, 10, 11-15 odd.</p></section></section></div></main>
 </div>
 </body>
 </html>

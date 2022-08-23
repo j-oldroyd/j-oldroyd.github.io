@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:20-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,15 +307,15 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-optimization-problems"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">5.4</span> <span class="title">Optimization Problems</span>
 </h2>
-<p id="p-375">Now that we can use derivatives to find local maxima and minima, we can solve <dfn class="terminology">optimization problems</dfn>.</p>
+<p id="p-385">Now that we can use derivatives to find local maxima and minima, we can solve <dfn class="terminology">optimization problems</dfn>.</p>
 <article class="example example-like" id="example-minimizing-a-product"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Minimizing a product.</span>
 </h3>
-<p id="p-376">Find two numbers that differ by <span class="process-math">\(100\)</span> and whose product is a minimum.</p>
+<p id="p-386">Find two numbers that differ by <span class="process-math">\(100\)</span> and whose product is a minimum.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-79" id="solution-79"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-79"><div class="solution solution-like">
-<p id="p-377">Call our numbers <span class="process-math">\(x,y\)</span> and suppose <span class="process-math">\(x &gt; y\text{.}\)</span> Then <span class="process-math">\(x-y = 100\)</span> and we need to choose <span class="process-math">\(x,y\)</span> in such a way that <span class="process-math">\(xy\)</span> is as small as possible. If we replace <span class="process-math">\(x\)</span> with <span class="process-math">\(100+y\text{,}\)</span> then this means we need to minimize</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-80" id="solution-80"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-80"><div class="solution solution-like">
+<p id="p-387">Call our numbers <span class="process-math">\(x,y\)</span> and suppose <span class="process-math">\(x &gt; y\text{.}\)</span> Then <span class="process-math">\(x-y = 100\)</span> and we need to choose <span class="process-math">\(x,y\)</span> in such a way that <span class="process-math">\(xy\)</span> is as small as possible. If we replace <span class="process-math">\(x\)</span> with <span class="process-math">\(100+y\text{,}\)</span> then this means we need to minimize</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f(y) = 100y + y^{2}.
 \end{equation*}
@@ -318,65 +325,65 @@ f(y) = 100y + y^{2}.
 </div></article><article class="example example-like" id="example-minimizing-material-costs"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Minimizing material costs.</span>
 </h3>
-<p id="p-378">A box with an open top and a square base is to be built using material that costs \$5 per square meter. The box must have a volume of <span class="quantity">32000 cm<sup>3</sup></span>. Find the dimensions of the box that will be cheapest to build to these specifications.</p>
+<p id="p-388">A box with an open top and a square base is to be built using material that costs \$5 per square meter. The box must have a volume of <span class="quantity">32000 cm<sup>3</sup></span>. Find the dimensions of the box that will be cheapest to build to these specifications.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-80" id="solution-80"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-80"><div class="solution solution-like">
-<p id="p-379">There are two things we need to do here:</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-81" id="solution-81"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-81"><div class="solution solution-like">
+<p id="p-389">There are two things we need to do here:</p>
 <ol class="decimal">
 <li id="li-24"><p id="p-derived-li-24">Find the quantity to be optimize.</p></li>
 <li id="li-25"><p id="p-derived-li-25">Solve the resulting optimization problem.</p></li>
 </ol>
 <p class="continuation">We need to minimize costs, which means we need to minimize how much material is used to construct this box. Hence we must minimize the surface area of the box. If we let <span class="process-math">\(x\)</span> denote the length of the base of the box and <span class="process-math">\(h\)</span> the height of the box, then the surface area is given by</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 x^{2} + 4xh.
 \end{equation*}
 </div>
 <p class="continuation">Now, we can't minimize this yet because we have too many variables. However, we can solve for <span class="process-math">\(h\)</span> in terms of <span class="process-math">\(x\)</span> by using the volume constraint. Since the volume of the box is <span class="process-math">\(x^{2}h = 32000,\)</span> this gives <span class="process-math">\(h = \frac{32000}{x^{2}}.\)</span> So the quantity we need to minimize is</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f(x) = x^{2} + 4xh = x^{2} + \frac{128000}{x}.
 \end{equation*}
 </div>
-<p id="p-380">To minimize this, we find the critical points by solving <span class="process-math">\(f'(x) = 0\text{.}\)</span> This gives, after some algebra, <span class="process-math">\(x = 40\text{.}\)</span> Now we need to be careful here! We only have a critical point at this step. We need to make an argument now as to why this critical point should be an absolute minimum of <span class="process-math">\(f(x)\text{.}\)</span> One way to do this is by setting up a sign chart for <span class="process-math">\(f'(x)\text{.}\)</span> If we do this, then we see that <span class="process-math">\(f' &lt; 0\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\((0,40)\text{,}\)</span> while <span class="process-math">\(f' &gt; 0\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\((40,\infty)\text{.}\)</span> If we think about what this tells us of the graph of <span class="process-math">\(f(x)\text{,}\)</span> we see that <span class="process-math">\(x=40\)</span> must minimize <span class="process-math">\(f(x)\text{,}\)</span> at least for <span class="process-math">\(x &gt; 0\text{.}\)</span> So the dimensions that minimize the cost of building this box are <span class="process-math">\(40\times40\times20\text{.}\)</span></p>
+<p id="p-390">To minimize this, we find the critical points by solving <span class="process-math">\(f'(x) = 0\text{.}\)</span> This gives, after some algebra, <span class="process-math">\(x = 40\text{.}\)</span> Now we need to be careful here! We only have a critical point at this step. We need to make an argument now as to why this critical point should be an absolute minimum of <span class="process-math">\(f(x)\text{.}\)</span> One way to do this is by setting up a sign chart for <span class="process-math">\(f'(x)\text{.}\)</span> If we do this, then we see that <span class="process-math">\(f' &lt; 0\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\((0,40)\text{,}\)</span> while <span class="process-math">\(f' &gt; 0\)</span> for <span class="process-math">\(x\)</span> in <span class="process-math">\((40,\infty)\text{.}\)</span> If we think about what this tells us of the graph of <span class="process-math">\(f(x)\text{,}\)</span> we see that <span class="process-math">\(x=40\)</span> must minimize <span class="process-math">\(f(x)\text{,}\)</span> at least for <span class="process-math">\(x &gt; 0\text{.}\)</span> So the dimensions that minimize the cost of building this box are <span class="process-math">\(40\times40\times20\text{.}\)</span></p>
 </div></div>
 </div></article><article class="example example-like" id="example-distance-on-an-ellipse"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Distance on an ellipse.</span>
 </h3>
-<p id="p-381">Find the point(s) on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\)</span> that are farthest from the point <span class="process-math">\((1,0)\text{.}\)</span></p>
+<p id="p-391">Find the point(s) on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\)</span> that are farthest from the point <span class="process-math">\((1,0)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-81" id="solution-81"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-81"><div class="solution solution-like">
-<p id="p-382">This is an optimization problem since we're trying to maximize distance. There are two things we need to do:</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-82"><div class="solution solution-like">
+<p id="p-392">This is an optimization problem since we're trying to maximize distance. There are two things we need to do:</p>
 <ol class="decimal">
 <li id="li-26"><p id="p-derived-li-26">Find the function we need to optimize.</p></li>
 <li id="li-27"><p id="p-derived-li-27">Find the extrema.</p></li>
 </ol>
 <p class="continuation">The function we need to optimize is just the distance function. In particular, if <span class="process-math">\((x,y)\)</span> is a point on the ellipse then we need to maximize</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 d = \sqrt{(x-1)^{2} + (y-0)^{2}}.
 \end{equation*}
 </div>
-<p id="p-383">Now, we have a constraint that <span class="process-math">\((x,y)\)</span> must satisfy; namely, this must lie on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\text{.}\)</span> This means that <span class="process-math">\(y^{2} = 4 - 4x^{2}\text{,}\)</span> and if we plug this into our distance function we get</p>
-<div class="displaymath process-math">
+<p id="p-393">Now, we have a constraint that <span class="process-math">\((x,y)\)</span> must satisfy; namely, this must lie on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\text{.}\)</span> This means that <span class="process-math">\(y^{2} = 4 - 4x^{2}\text{,}\)</span> and if we plug this into our distance function we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 d = \sqrt{(x-1)^{2} + (y-0)^{2}} = \sqrt{(x-1)^{2} + 4 - 4x^{2}}.
 \end{equation*}
 </div>
 <p class="continuation">Now here's a trick we can use: maximizing <span class="process-math">\(d\)</span> is the same thing as maximizing <span class="process-math">\(d^{2}\text{,}\)</span> but <span class="process-math">\(d^{2}\)</span> is <em class="emphasis">much</em> nicer to work with algebraically. So instead of maximizing <span class="process-math">\(d\text{,}\)</span> we'll maximize the function</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f(x) = d^{2} = (x-1)^{2} + 4 - 4x^{2}.
 \end{equation*}
 </div>
-<p id="p-384">We'll start by finding it's local extrema, which means we need to find the critical points. These are the solutions of <span class="process-math">\(f'(x) = 0\text{.}\)</span> Since</p>
-<div class="displaymath process-math">
+<p id="p-394">We'll start by finding it's local extrema, which means we need to find the critical points. These are the solutions of <span class="process-math">\(f'(x) = 0\text{.}\)</span> Since</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(x) = 2x - 2 - 8x = -6x - 2,
 \end{equation*}
 </div>
 <p class="continuation">we see that the only critical point is <span class="process-math">\(x = -\frac{1}{3}\text{.}\)</span> Since <span class="process-math">\(f''(x) = -6 &lt; 0\text{,}\)</span> this means that <span class="process-math">\(x = -\frac{1}{3}\)</span> gives us a local maximum of <span class="process-math">\(f(x)\)</span> by the second derivative test. In fact, we can go further: this must be an absolute maximum of <span class="process-math">\(f(x)\text{,}\)</span> since <span class="process-math">\(f(x)\)</span> is always concave down (it's actually a parabola).</p>
-<p id="p-385">So the point on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\)</span> farthest from <span class="process-math">\((1,0)\)</span> has <span class="process-math">\(x\)</span>-coordinate equal to <span class="process-math">\(-\frac{1}{3}\text{.}\)</span> This means that the corresponding <span class="process-math">\(y\)</span>-coordinate is <span class="process-math">\(y = \pm\frac{2\sqrt{5}}{3},\)</span> so the points on the ellipse that are the farthest from <span class="process-math">\((1,0)\)</span> are the points <span class="process-math">\((-\frac{1}{3}, -\frac{2\sqrt{5}}{3}), (-\frac{1}{3}, \frac{2\sqrt{5}}{3}).\)</span></p>
+<p id="p-395">So the point on the ellipse <span class="process-math">\(4x^{2} + y^{2} = 4\)</span> farthest from <span class="process-math">\((1,0)\)</span> has <span class="process-math">\(x\)</span>-coordinate equal to <span class="process-math">\(-\frac{1}{3}\text{.}\)</span> This means that the corresponding <span class="process-math">\(y\)</span>-coordinate is <span class="process-math">\(y = \pm\frac{2\sqrt{5}}{3},\)</span> so the points on the ellipse that are the farthest from <span class="process-math">\((1,0)\)</span> are the points <span class="process-math">\((-\frac{1}{3}, -\frac{2\sqrt{5}}{3}), (-\frac{1}{3}, \frac{2\sqrt{5}}{3}).\)</span></p>
 </div></div>
 </div></article></section></div></main>
 </div>

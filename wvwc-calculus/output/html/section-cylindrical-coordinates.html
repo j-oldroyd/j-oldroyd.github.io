@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:35-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -301,15 +308,15 @@ true);
 <section class="section" id="section-cylindrical-coordinates"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">13.6</span> <span class="title">Triple Integrals in Cylindrical Coordinates</span>
 </h2>
-<p id="p-1546">In <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a>, we saw that introducing a new coordinate system made certain double integrals much easier to work with. The same idea works with triple integrals. The first such system we'll look at is <dfn class="terminology">cylindrical coordinates</dfn>, which are useful for computing triple integrals over cylindrical regions. To convert Cartesian coordinates <span class="process-math">\((x,y,z)\)</span> into cylindrical coordinates <span class="process-math">\((r,\theta,z)\text{,}\)</span> simply replace <span class="process-math">\(x,y\)</span> with polar coordinates, and use <span class="process-math">\(dV = r\,dr\,d\theta\,dz\text{.}\)</span> We leave <span class="process-math">\(z\)</span> alone.</p>
+<p id="p-1556">In <a href="section-polar-coordinates.html" class="internal" title="Section 10.3: Polar Coordinates">Section 10.3</a>, we saw that introducing a new coordinate system made certain double integrals much easier to work with. The same idea works with triple integrals. The first such system we'll look at is <dfn class="terminology">cylindrical coordinates</dfn>, which are useful for computing triple integrals over cylindrical regions. To convert Cartesian coordinates <span class="process-math">\((x,y,z)\)</span> into cylindrical coordinates <span class="process-math">\((r,\theta,z)\text{,}\)</span> simply replace <span class="process-math">\(x,y\)</span> with polar coordinates, and use <span class="process-math">\(dV = r\,dr\,d\theta\,dz\text{.}\)</span> We leave <span class="process-math">\(z\)</span> alone.</p>
 <article class="example example-like" id="example-computing-a-triple-integral-over-a-cylinder"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a triple integral over a cylinder.</span>
 </h3>
-<p id="p-1547">Let <span class="process-math">\(D\)</span> be the cylinder in <span class="process-math">\(\RR^{3}\)</span> with height <span class="process-math">\(2\)</span> and base given by the circle of radius <span class="process-math">\(4\)</span> centered at the origin, restricted to the first and second octants. Let <span class="process-math">\(f(x,y,z) = \frac{z}{1+x^{2}+y^{2}}\text{.}\)</span> Compute <span class="process-math">\(\iiint_{D}f(x,y,z)\,dV\text{.}\)</span></p>
+<p id="p-1557">Let <span class="process-math">\(D\)</span> be the cylinder in <span class="process-math">\(\RR^{3}\)</span> with height <span class="process-math">\(2\)</span> and base given by the circle of radius <span class="process-math">\(4\)</span> centered at the origin, restricted to the first and second octants. Let <span class="process-math">\(f(x,y,z) = \frac{z}{1+x^{2}+y^{2}}\text{.}\)</span> Compute <span class="process-math">\(\iiint_{D}f(x,y,z)\,dV\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-256" id="solution-256"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-256"><div class="solution solution-like">
-<p id="p-1548">Since we're dealing with a cylinder, we'll switch to cylindrical coordinates <span class="process-math">\(r\,dr\,d\theta\,dz\text{:}\)</span></p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-257" id="solution-257"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-257"><div class="solution solution-like">
+<p id="p-1558">Since we're dealing with a cylinder, we'll switch to cylindrical coordinates <span class="process-math">\(r\,dr\,d\theta\,dz\text{:}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-215">
 \begin{align*}
 \iiint_{D}f(x,y,z)\,dV &amp; = \int_{0}^{2}\int_{0}^{\pi}\int_{0}^{4}\frac{r}{1+r^{2}}\,dr\,d\theta\,dz \\
 &amp; = \pi\ln17 
@@ -319,23 +326,23 @@ true);
 </div></article><article class="example example-like" id="example-cylindrical-volume"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Cylindrical Volume.</span>
 </h3>
-<p id="p-1549">Find the volume of the region below the inverted cone <span class="process-math">\(z = 9 - 3\sqrt{x^{2} + y^{2}}\)</span> and in the first and second octants.</p>
+<p id="p-1559">Find the volume of the region below the inverted cone <span class="process-math">\(z = 9 - 3\sqrt{x^{2} + y^{2}}\)</span> and in the first and second octants.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-257" id="solution-257"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-257"><div class="solution solution-like">
-<p id="p-1550">First, let <span class="process-math">\(D\)</span> denote the region in question. Then</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image has-interactive" data-refid="hk-solution-258" id="solution-258"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-258"><div class="solution solution-like">
+<p id="p-1560">First, let <span class="process-math">\(D\)</span> denote the region in question. Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 D = \left\{(x,y,z) : 0\leq z\leq 9 - 3\sqrt{x^{2} + y^{2}}, 0\leq y \leq \sqrt{9 - x^{2}}, -3\leq x\leq 3\right\}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">The graph of this region isn't too difficult to find, especially using resources such as <a class="external" href="https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/" target="_blank">CalcPlot3D</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-10" id="fn-10"><sup> 10 </sup></a>, and is given by <figure class="figure figure-like" id="figure-inverted-cone"><iframe src="https://c3d.libretexts.org/CalcPlot3D/dynamicFigure/index.html?type=z;z=9-3sqrt(x%5E2+y%5E2);visible=true;umin=-3;umax=3;vmin=-3;vmax=3;grid=30;format=normal;alpha=-1;constcol=rgb(255,0,0);view=0;contourcolor=red;fixdomain=true&amp;type=window;hsrmode=3;nomidpts=true;anaglyph=-1;center=4.184650745404618,8.764423369815555,2.3819280286365534,1;focus=0,0,0,1;up=-0.23113448217879629,-0.1508581421590715,0.9611548637406215,1;transparent=false;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=false;gridcolor=rgb(128,128,128);xmin=-3;xmax=3;ymin=-3;ymax=3;zmin=-1;zmax=10;xscale=1;yscale=1;zscale=1;zcmin=0;zcmax=9;zoom=0.307394;xscalefactor=1;yscalefactor=1;zscalefactor=1" id="interactive-inverted-cone" width="540" height="540"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">13.6.3<span class="period">.</span></span><span class="space"> </span><span class="process-math">\(z = 9 - 3\sqrt{x^{2} + y^{2}}\)</span></figcaption></figure> However, this region is much easier to describe in cylindrical coorindates:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 D = \left\{(r,\theta,z) : 0\leq z\leq 9 - 3r, 0\leq r\leq 3, 0\leq \theta\leq \pi\right\}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Hence the volume is</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-216">
 \begin{align*}
 \iiint_{D}\,dV \amp = \int_{0}^{\pi}\int_{0}^{3}\int_{0}^{9-3r}r\,dz\,dr\,d\theta \\
 \amp = \int_{0}^{\pi}\int_{0}^{3}(9r - 3r^{2})\,dr\,d\theta \\
@@ -347,29 +354,29 @@ D = \left\{(r,\theta,z) : 0\leq z\leq 9 - 3r, 0\leq r\leq 3, 0\leq \theta\leq \p
 </div></article><article class="example example-like" id="example-finding-the-volume-of-the-unit-sphere"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">13.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the Volume of the Unit Sphere.</span>
 </h3>
-<p id="p-1551">Find the volume of the unit sphere; that is, the sphere of radius <span class="process-math">\(1\)</span> centered at the origin.</p>
+<p id="p-1561">Find the volume of the unit sphere; that is, the sphere of radius <span class="process-math">\(1\)</span> centered at the origin.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-258" id="solution-258"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-258"><div class="solution solution-like">
-<p id="p-1552">The unit sphere is specified by the inequalities</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-259" id="solution-259"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-259"><div class="solution solution-like">
+<p id="p-1562">The unit sphere is specified by the inequalities</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 -\sqrt{1 - x^{2} - y^{2}} \leq z \leq \sqrt{1 - x^{2} - y^{2}}, -\sqrt{1 - x^{2}} \leq y \leq \sqrt{1 - x^{2}} \qq{and} -1\leq x\leq 1\text{.}
 \end{equation*}
 </div>
 <p class="continuation">It's much easier to describe this region using cylindrical coordinates:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 -\sqrt{1 - r^{2}}\leq z\leq \sqrt{1 - r^{2}}, 0\leq r\leq 1\qq{and} 0\leq \theta\leq 2\pi\text{.}
 \end{equation*}
 </div>
 <p class="continuation">By symmetry, the volume must be</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 2\int_{0}^{2\pi}\int_{0}^{1}\int_{0}^{\sqrt{1 - r^{2}}}r\,dz\,dr\,d\theta = \frac{4}{3}\pi\text{.}
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><div class="hidden-content tex2jax_ignore" id="hk-fn-10"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/</code></div></div>
+</div></article></section><div class="hidden-content tex2jax_ignore" id="hk-fn-10"><div class="fn"><code class="code-inline tex2jax_ignore">www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/</code></div></div>
 </div></main>
 </div>
 </body>

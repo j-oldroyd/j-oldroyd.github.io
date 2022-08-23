@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:33-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,30 +307,30 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-tangent-planes-and-linear-approximations"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">12.4</span> <span class="title">Tangent Planes and Linear Approximations</span>
 </h2>
-<section class="introduction" id="introduction-26"><p id="p-1389">In Calculus I, derivatives are used to find linear approximations to functions of the form <span class="process-math">\(f(x)\text{.}\)</span> We can use partial derivatives to do the same for functions with several independent variables.</p></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-26"><p id="p-1399">In Calculus I, derivatives are used to find linear approximations to functions of the form <span class="process-math">\(f(x)\text{.}\)</span> We can use partial derivatives to do the same for functions with several independent variables.</p></section><section class="subsection" id="subsection-tangent-planes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Tangent Planes</span>
 </h3>
-<p id="p-1390">Recall that if a curve <span class="process-math">\(y=f(x)\)</span> is differentiable at a point <span class="process-math">\(x_{0}\text{,}\)</span> then it has a tangent line passing through <span class="process-math">\((x_{0},f(x_{0})).\)</span> The tangent line can be viewed as a linear approximation of the curve <span class="process-math">\(y=f(x)\)</span> near the point <span class="process-math">\(x_{0}\text{.}\)</span> We can apply a similar ideas to surfaces <span class="process-math">\(z = f(x,y)\text{.}\)</span> It turns out that if we have a surface <span class="process-math">\(z = f(x,y)\)</span> and a point <span class="process-math">\((x_{0},y_{0}, f(x_{0},y_{0}))\)</span> on the surface, then every tangent vector at this point is contained in a single plane called the <dfn class="terminology">tangent plane</dfn>.</p>
-<p id="p-1391">We'd like to find the equation of this plane. First, recall that every plane can be described by an equation of the form</p>
-<div class="displaymath process-math">
+<p id="p-1400">Recall that if a curve <span class="process-math">\(y=f(x)\)</span> is differentiable at a point <span class="process-math">\(x_{0}\text{,}\)</span> then it has a tangent line passing through <span class="process-math">\((x_{0},f(x_{0})).\)</span> The tangent line can be viewed as a linear approximation of the curve <span class="process-math">\(y=f(x)\)</span> near the point <span class="process-math">\(x_{0}\text{.}\)</span> We can apply a similar ideas to surfaces <span class="process-math">\(z = f(x,y)\text{.}\)</span> It turns out that if we have a surface <span class="process-math">\(z = f(x,y)\)</span> and a point <span class="process-math">\((x_{0},y_{0}, f(x_{0},y_{0}))\)</span> on the surface, then every tangent vector at this point is contained in a single plane called the <dfn class="terminology">tangent plane</dfn>.</p>
+<p id="p-1401">We'd like to find the equation of this plane. First, recall that every plane can be described by an equation of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a(x-x_{0})+b(y-y_{0})+c(z-z_{0}) = 0.
 \end{equation*}
 </div>
 <p class="continuation">We can view <span class="process-math">\(x_{0},y_{0}\)</span> and <span class="process-math">\(z_{0} = f(x_{0},y_{0})\)</span> as given, so we just need to find <span class="process-math">\(a,b,c\text{.}\)</span> If we assume that <span class="process-math">\(c\neq 0\text{,}\)</span> then we can rewrite this equation to obtain</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 z-z_{0} = A(x-x_{0}) + B(y-y_{0})
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(A = -\frac{a}{c}\)</span> and <span class="process-math">\(B = -\frac{b}{c}\text{.}\)</span> If we set <span class="process-math">\(y=y_{0}\text{,}\)</span> then we have <span class="process-math">\(z-z_{0} = A(x-x_{0})\text{.}\)</span> This is the equation of a line tangent to the surface and parallel to the <span class="process-math">\(x\)</span>-axis, and so the slope of this line must be</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = f_{x}(x_{0},y_{0})
 \end{equation*}
 </div>
 <p class="continuation">since the slope of a tangent line in the <span class="process-math">\(x\)</span>-direction gives the rate of change in the <span class="process-math">\(x\)</span>-direction. Similarly,</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 B = f_{y}(x_{0},y_{0}).
 \end{equation*}
@@ -332,8 +339,8 @@ B = f_{y}(x_{0},y_{0}).
 <article class="theorem theorem-like" id="theorem-tangent-planes-to-surfaces"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">12.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Tangent Planes to Surfaces.</span>
 </h4>
-<p id="p-1392">Let <span class="process-math">\(z = f(x,y)\)</span> be a surface and suppose that <span class="process-math">\(f\)</span> has continuous partial derivatives at the point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span> Then the tangent plane to the surface <span class="process-math">\(z = f(x,y)\)</span> at the point <span class="process-math">\((x_{0},y_{0})\)</span> is given by</p>
-<div class="displaymath process-math">
+<p id="p-1402">Let <span class="process-math">\(z = f(x,y)\)</span> be a surface and suppose that <span class="process-math">\(f\)</span> has continuous partial derivatives at the point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span> Then the tangent plane to the surface <span class="process-math">\(z = f(x,y)\)</span> at the point <span class="process-math">\((x_{0},y_{0})\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 z - z_{0} = f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},y_{0})(y - y_{0}),
 \end{equation*}
@@ -341,23 +348,23 @@ z - z_{0} = f_{x}(x_{0},y_{0})(x - x_{0}) + f_{y}(x_{0},y_{0})(y - y_{0}),
 <p class="continuation">where <span class="process-math">\(z_{0} = f(x_{0},y_{0})\text{.}\)</span></p></article><article class="example example-like" id="example-approximations-by-tangent-planes"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Approximations by tangent planes.</span>
 </h4>
-<p id="p-1393">Find the tangent plane to <span class="process-math">\(f(x,y) = xe^{xy}\)</span> at the point <span class="process-math">\((2,0,2)\text{.}\)</span> Use this to approximate <span class="process-math">\(f(1.9,0)\)</span></p>
+<p id="p-1403">Find the tangent plane to <span class="process-math">\(f(x,y) = xe^{xy}\)</span> at the point <span class="process-math">\((2,0,2)\text{.}\)</span> Use this to approximate <span class="process-math">\(f(1.9,0)\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-224" id="solution-224"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-224"><div class="solution solution-like">
-<p id="p-1394">The equation of the tangent plane is given by</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-225" id="solution-225"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-225"><div class="solution solution-like">
+<p id="p-1404">The equation of the tangent plane is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 z - 2 = (x - 2) + 4(y - 0)
 \end{equation*}
 </div>
 <p class="continuation">which we can rewrite as</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 z = x + 4y.
 \end{equation*}
 </div>
 <p class="continuation">So at <span class="process-math">\((1.9,0)\text{,}\)</span> we should have</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f(1.9,0)\approx 1.9 + 4(0) = 1.9.
 \end{equation*}
@@ -366,44 +373,44 @@ f(1.9,0)\approx 1.9 + 4(0) = 1.9.
 </div></article></section><section class="subsection" id="subsection-linear-approximations"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Linear Approximations</span>
 </h3>
-<p id="p-1395"><a href="" class="xref" data-knowl="./knowl/example-approximations-by-tangent-planes.html" title="Example 12.4.2: Approximations by tangent planes">Example 12.4.2</a> shows that we can use tangent planes to approximate complicated functions. This leads us to the idea of a linear approximation, or <dfn class="terminology">linearization</dfn> of a function of the form <span class="process-math">\(f(x,y)\text{.}\)</span></p>
+<p id="p-1405"><a href="" class="xref" data-knowl="./knowl/example-approximations-by-tangent-planes.html" title="Example 12.4.2: Approximations by tangent planes">Example 12.4.2</a> shows that we can use tangent planes to approximate complicated functions. This leads us to the idea of a linear approximation, or <dfn class="terminology">linearization</dfn> of a function of the form <span class="process-math">\(f(x,y)\text{.}\)</span></p>
 <article class="definition definition-like" id="definition-linearization"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">12.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization.</span>
 </h4>
-<p id="p-1396">Let <span class="process-math">\(f(x,y)\)</span> be a function for which <span class="process-math">\(f_{x}\)</span> and <span class="process-math">\(f_{y}\)</span> are both continuous at a point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span> Then the linearization of <span class="process-math">\(f(x,y)\)</span> at <span class="process-math">\((x_{0},y_{0})\)</span> is the function <span class="process-math">\(L(x,y)\)</span> given by</p>
-<div class="displaymath process-math">
+<p id="p-1406">Let <span class="process-math">\(f(x,y)\)</span> be a function for which <span class="process-math">\(f_{x}\)</span> and <span class="process-math">\(f_{y}\)</span> are both continuous at a point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span> Then the linearization of <span class="process-math">\(f(x,y)\)</span> at <span class="process-math">\((x_{0},y_{0})\)</span> is the function <span class="process-math">\(L(x,y)\)</span> given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 L(x,y) = f(x_{0},y_{0}) + f_{x}(x_{0},y_{0})(x-x_{0}) + f_{y}(x_{0},y_{0})(y-y_{0}).
 \end{equation*}
-</div></article><p id="p-1397">For well-behaved functions (i.e. functions that have continuous partial derivatives), <span class="process-math">\(L(x,y)\approx f(x,y)\)</span> if <span class="process-math">\((x,y)\)</span> is close to the point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span></p>
+</div></article><p id="p-1407">For well-behaved functions (i.e. functions that have continuous partial derivatives), <span class="process-math">\(L(x,y)\approx f(x,y)\)</span> if <span class="process-math">\((x,y)\)</span> is close to the point <span class="process-math">\((x_{0},y_{0})\text{.}\)</span></p>
 <article class="example example-like" id="example-linearization-of-an-exponential-and-a-sinusoid"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization of an exponential and a sinusoid.</span>
 </h4>
-<p id="p-1398">Let <span class="process-math">\(u(x,t) = 30e^{-t}\sin x\text{.}\)</span> Find the linearization of <span class="process-math">\(u\)</span> at the point <span class="process-math">\((0,\frac{\pi}{2})\text{.}\)</span></p>
+<p id="p-1408">Let <span class="process-math">\(u(x,t) = 30e^{-t}\sin x\text{.}\)</span> Find the linearization of <span class="process-math">\(u\)</span> at the point <span class="process-math">\((0,\frac{\pi}{2})\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-225" id="solution-225"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-225"><div class="solution solution-like">
-<p id="p-1399">By <a href="" class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a>, the linearization is given by</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-226" id="solution-226"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-226"><div class="solution solution-like">
+<p id="p-1409">By <a href="" class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a>, the linearization is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-linearization.html">
 \begin{equation*}
 L(x,y) = 30 - 30(t - 0) = 30(1 - t).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1400"><a href="" class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a> can also be extended to functions with more than two variables.</p>
+</div></article><p id="p-1410"><a href="" class="xref" data-knowl="./knowl/definition-linearization.html" title="Definition 12.4.3: Linearization">Definition 12.4.3</a> can also be extended to functions with more than two variables.</p>
 <article class="example example-like" id="example-linearization-in-three-variables"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">12.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Linearization in three variables.</span>
 </h4>
-<p id="p-1401">Let <span class="process-math">\(f(x,y,z) = xze^{-y^{2}-z^{2}}\text{.}\)</span> Find the linearization <span class="process-math">\(L(x,y,z)\)</span> at the point <span class="process-math">\((-3,\sqrt{\ln2},-\sqrt{\ln3})\text{.}\)</span></p>
+<p id="p-1411">Let <span class="process-math">\(f(x,y,z) = xze^{-y^{2}-z^{2}}\text{.}\)</span> Find the linearization <span class="process-math">\(L(x,y,z)\)</span> at the point <span class="process-math">\((-3,\sqrt{\ln2},-\sqrt{\ln3})\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-226" id="solution-226"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-226"><div class="solution solution-like">
-<p id="p-1402">The formula we need to use now is</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-227" id="solution-227"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-227"><div class="solution solution-like">
+<p id="p-1412">The formula we need to use now is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 L(x,y,z) = f_{x}(-3,\sqrt{\ln2},-\sqrt{\ln3})(x+3) + f_{y}(-3,\sqrt{\ln2},-\sqrt{\ln3})(y - \sqrt{\ln2}) + f_{z}(-3,\sqrt{\ln2},-\sqrt{\ln3})(z + \sqrt{\ln3}).
 \end{equation*}
 </div>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-5"><p id="p-1403">SUGGESTED PROBLEMS: 1, 15, 19</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-5"><p id="p-1413">SUGGESTED PROBLEMS: 1, 15, 19</p></section></section></div></main>
 </div>
 </body>
 </html>

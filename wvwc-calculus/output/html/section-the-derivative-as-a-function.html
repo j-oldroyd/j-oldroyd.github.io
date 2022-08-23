@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:17-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -304,12 +311,12 @@ true);
 <section class="subsection" id="subsection-the-derivative-function"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Derivative Function</span>
 </h3>
-<p id="p-120">There's no reason we can't look at an arbitrary value for <span class="process-math">\(a\)</span> in the definition of <span class="process-math">\(f'(a)\)</span> given in <a href="" class="xref" data-knowl="./knowl/definition-definition-of-the-derivative.html" title="Definition 3.1.6: Definition of the Derivative">Definition 3.1.6</a>. If we do this, we can define the <em class="emphasis">derivative function</em>.</p>
+<p id="p-130">There's no reason we can't look at an arbitrary value for <span class="process-math">\(a\)</span> in the definition of <span class="process-math">\(f'(a)\)</span> given in <a href="" class="xref" data-knowl="./knowl/definition-definition-of-the-derivative.html" title="Definition 3.1.6: Definition of the Derivative">Definition 3.1.6</a>. If we do this, we can define the <em class="emphasis">derivative function</em>.</p>
 <article class="definition definition-like" id="definition-the-derivative-function"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">The Derivative Function.</span>
 </h4>
-<p id="p-121">Let <span class="process-math">\(f(x)\)</span> be a function. The <dfn class="terminology">derivative function</dfn>, or more simply <dfn class="terminology">derivative</dfn>, of <span class="process-math">\(f(x)\)</span> is the function <span class="process-math">\(f'(x)\)</span> defined by</p>
-<div class="displaymath process-math">
+<p id="p-131">Let <span class="process-math">\(f(x)\)</span> be a function. The <dfn class="terminology">derivative function</dfn>, or more simply <dfn class="terminology">derivative</dfn>, of <span class="process-math">\(f(x)\)</span> is the function <span class="process-math">\(f'(x)\)</span> defined by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(x) = \lim_{h\to0}\frac{f(x+h) - f(x)}{h}
 \end{equation*}
@@ -317,11 +324,11 @@ f'(x) = \lim_{h\to0}\frac{f(x+h) - f(x)}{h}
 <p class="continuation">assuming this limit exists. This is also often denoted by <span class="process-math">\(\dv{}{x}(f)\)</span> or <span class="process-math">\(\dv{f}{x}\text{.}\)</span> If this limit exists for all <span class="process-math">\(x\)</span> in some interval <span class="process-math">\(I\text{,}\)</span> we say that <span class="process-math">\(f\)</span> is <dfn class="terminology">differentiable on <span class="process-math">\(I\)</span></dfn>, or more simply <dfn class="terminology">differentiable</dfn> if we do not wish to specify the interval.</p></article><article class="example example-like" id="example-computing-a-derivative"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a derivative.</span>
 </h4>
-<p id="p-122">Compute the derivative of <span class="process-math">\(f(x) = x - 3x^{2}\text{.}\)</span></p>
+<p id="p-132">Compute the derivative of <span class="process-math">\(f(x) = x - 3x^{2}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-23" id="solution-23"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-23"><div class="solution solution-like">
-<p id="p-123">Using <a href="" class="xref" data-knowl="./knowl/definition-the-derivative-function.html" title="Definition 3.2.1: The Derivative Function">Definition 3.2.1</a>, we have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-24" id="solution-24"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-24"><div class="solution solution-like">
+<p id="p-133">Using <a href="" class="xref" data-knowl="./knowl/definition-the-derivative-function.html" title="Definition 3.2.1: The Derivative Function">Definition 3.2.1</a>, we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-the-derivative-function.html" id="md-10">
 \begin{align*}
 f'(x) &amp; = \lim_{h\to0}\frac{[(x+h)-3(x+h)^{2}] - x + 3x^{2}}{h} \\
 &amp; = \lim_{h\to0}\frac{[x+h-3x^{2}-6xh-3h^{2}] - x + 3x^{2}}{h} \\
@@ -331,22 +338,22 @@ f'(x) &amp; = \lim_{h\to0}\frac{[(x+h)-3(x+h)^{2}] - x + 3x^{2}}{h} \\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-124">If <span class="process-math">\(f(x)\)</span> is a function, then its derivative <span class="process-math">\(f'(x)\)</span> (assuming it exists!) is a function that gives the rate of change of <span class="process-math">\(f\)</span> at <span class="process-math">\(x\text{,}\)</span> or equivalently the slope of the tangent line to <span class="process-math">\(f\)</span> at <span class="process-math">\(x\text{.}\)</span></p>
+</div></article><p id="p-134">If <span class="process-math">\(f(x)\)</span> is a function, then its derivative <span class="process-math">\(f'(x)\)</span> (assuming it exists!) is a function that gives the rate of change of <span class="process-math">\(f\)</span> at <span class="process-math">\(x\text{,}\)</span> or equivalently the slope of the tangent line to <span class="process-math">\(f\)</span> at <span class="process-math">\(x\text{.}\)</span></p>
 <article class="example example-like" id="example-sketching-a-derivative"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Sketching a derivative.</span>
 </h4>
-<p id="p-125">A function <span class="process-math">\(g(t)\)</span> is given by the following graph: <figure class="figure figure-like" id="figure-derivative-graph-1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-4.svg" role="img" class="contained"></div>
+<p id="p-135">A function <span class="process-math">\(g(t)\)</span> is given by the following graph: <figure class="figure figure-like" id="figure-derivative-graph-1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-4.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.2.4<span class="period">.</span></span><span class="space"> </span>Graph of <span class="process-math">\(g(t)\text{.}\)</span></figcaption></figure></p>
-<p id="p-126">Sketch <span class="process-math">\(\dv{g}{t}\text{.}\)</span></p>
+<p id="p-136">Sketch <span class="process-math">\(\dv{g}{t}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-24" id="solution-24"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-24"><div class="solution solution-like"><p id="p-127">Remember that <span class="process-math">\(\dv{g}{t}\)</span> represents the slope of <span class="process-math">\(g(t)\text{,}\)</span> so sketching <span class="process-math">\(\dv{g}{t}\)</span> amounts to sketching the different values that the slopes of <span class="process-math">\(g(t)\)</span> can take. We can eyeball these values from <a href="" class="xref" data-knowl="./knowl/figure-derivative-graph-1.html" title="Figure 3.2.4">Figure 3.2.4</a>. A rough sketch of <span class="process-math">\(\dv{g}{t}\text{,}\)</span> added to the original graph, may look like the following: <figure class="figure figure-like" id="figure-derivative-graph-2"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-5.svg" role="img" class="contained"></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-25" id="solution-25"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-25"><div class="solution solution-like"><p id="p-137">Remember that <span class="process-math">\(\dv{g}{t}\)</span> represents the slope of <span class="process-math">\(g(t)\text{,}\)</span> so sketching <span class="process-math">\(\dv{g}{t}\)</span> amounts to sketching the different values that the slopes of <span class="process-math">\(g(t)\)</span> can take. We can eyeball these values from <a href="" class="xref" data-knowl="./knowl/figure-derivative-graph-1.html" title="Figure 3.2.4">Figure 3.2.4</a>. A rough sketch of <span class="process-math">\(\dv{g}{t}\text{,}\)</span> added to the original graph, may look like the following: <figure class="figure figure-like" id="figure-derivative-graph-2"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-5.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.2.5<span class="period">.</span></span><span class="space"> </span>Graph of <span class="process-math">\(g'(t)\text{.}\)</span></figcaption></figure></p></div></div>
-</div></article><p id="p-128">We've mentioned before that continuous functions are functions whose graphs can be drawn without lifting your pencil off of the page. Likewise, differentiable functions are functions whose graphs can be drawn "smoothly", without any sudden movements or cusps, and without drawing a vertical tangent line. If we think about these two concepts, we may suspect that a differentiable function is also continuous. If we can draw a graph smoothly, we certainly can't lift our pencil off the page to draw it. The next theorem makes this precise.</p>
+</div></article><p id="p-138">We've mentioned before that continuous functions are functions whose graphs can be drawn without lifting your pencil off of the page. Likewise, differentiable functions are functions whose graphs can be drawn "smoothly", without any sudden movements or cusps, and without drawing a vertical tangent line. If we think about these two concepts, we may suspect that a differentiable function is also continuous. If we can draw a graph smoothly, we certainly can't lift our pencil off the page to draw it. The next theorem makes this precise.</p>
 <article class="theorem theorem-like" id="theorem-differentiable-functions-are-continuous"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">3.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiable Functions Are Continuous.</span>
 </h4>
-<p id="p-129">Let <span class="process-math">\(f(x)\)</span> be a function that is differentiable at <span class="process-math">\(x=a\text{.}\)</span> Then <span class="process-math">\(f(x)\)</span> is continuous at <span class="process-math">\(x=a\text{.}\)</span></p></article><article class="hiddenproof" id="proof-1"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-1"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-1"><article class="hiddenproof"><p id="p-130">We need to show that <span class="process-math">\(\lim_{x\to a}f(x)\)</span> exists and is equal to <span class="process-math">\(f(a)\text{.}\)</span> To do this, we'll start by considering (somewhat counterintuitively) <span class="process-math">\(\lim_{x\to a}[f(x)-f(a)]\text{:}\)</span></p>
-<div class="displaymath process-math">
+<p id="p-139">Let <span class="process-math">\(f(x)\)</span> be a function that is differentiable at <span class="process-math">\(x=a\text{.}\)</span> Then <span class="process-math">\(f(x)\)</span> is continuous at <span class="process-math">\(x=a\text{.}\)</span></p></article><article class="hiddenproof" id="proof-1"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-1"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-1"><article class="hiddenproof"><p id="p-140">We need to show that <span class="process-math">\(\lim_{x\to a}f(x)\)</span> exists and is equal to <span class="process-math">\(f(a)\text{.}\)</span> To do this, we'll start by considering (somewhat counterintuitively) <span class="process-math">\(\lim_{x\to a}[f(x)-f(a)]\text{:}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-11">
 \begin{align*}
 \lim_{x\to a}[f(x)-f(a)] &amp; = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}(x-a) \\
 &amp; = \lim_{x\to a}f'(a)(x-a) \\
@@ -354,8 +361,8 @@ f'(x) &amp; = \lim_{h\to0}\frac{[(x+h)-3(x+h)^{2}] - x + 3x^{2}}{h} \\
 \end{align*}
 </div>
 <p class="continuation">Note that we are using our alternate definition of the derivative here.</p>
-<p id="p-131">Now we can prove that <span class="process-math">\(\lim_{x\to a}f(x) = f(a)\)</span> as follows:</p>
-<div class="displaymath process-math">
+<p id="p-141">Now we can prove that <span class="process-math">\(\lim_{x\to a}f(x) = f(a)\)</span> as follows:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-12">
 \begin{align*}
 \lim_{x\to a}f(x) &amp; = \lim_{x\to a}[f(x) - f(a) + f(a)] \\
 &amp; = \lim_{x\to a}[f(x)-f(a)] + \lim_{x\to a}f(a) \\
@@ -363,38 +370,38 @@ f'(x) &amp; = \lim_{h\to0}\frac{[(x+h)-3(x+h)^{2}] - x + 3x^{2}}{h} \\
 \end{align*}
 </div>
 <p class="continuation">So <span class="process-math">\(\lim_{x\to a}f(x) = f(a)\text{,}\)</span> which means that <span class="process-math">\(f(x)\)</span> is continuous at <span class="process-math">\(a\text{.}\)</span></p></article></div>
-<p id="p-132">At this point we might think that a continuous function should also be differentiable, but this is not the case.</p>
+<p id="p-142">At this point we might think that a continuous function should also be differentiable, but this is not the case.</p>
 <article class="example example-like" id="example-a-continuous-function-that-is-not-differentiable-at-a-point"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">A continuous function that is not differentiable at a point.</span>
 </h4>
-<p id="p-133">Let <span class="process-math">\(f(x) = |x|\text{.}\)</span> Show that <span class="process-math">\(f\)</span> is <em class="emphasis">not</em> differentiable at <span class="process-math">\(0\text{.}\)</span></p>
+<p id="p-143">Let <span class="process-math">\(f(x) = |x|\text{.}\)</span> Show that <span class="process-math">\(f\)</span> is <em class="emphasis">not</em> differentiable at <span class="process-math">\(0\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-25" id="solution-25"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-25"><div class="solution solution-like">
-<p id="p-134">If we graph <span class="process-math">\(f(x)\)</span> it looks like it shouldn't be differentiable at <span class="process-math">\(0\)</span> because of the cusp. We'll try to prove this mathematically by showing that the limit in <a href="" class="xref" data-knowl="./knowl/definition-the-derivative-function.html" title="Definition 3.2.1: The Derivative Function">Definition 3.2.1</a> doesn't exist if <span class="process-math">\(x=0\text{.}\)</span> First, we'll compute the left hand limit:</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-26" id="solution-26"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-26"><div class="solution solution-like">
+<p id="p-144">If we graph <span class="process-math">\(f(x)\)</span> it looks like it shouldn't be differentiable at <span class="process-math">\(0\)</span> because of the cusp. We'll try to prove this mathematically by showing that the limit in <a href="" class="xref" data-knowl="./knowl/definition-the-derivative-function.html" title="Definition 3.2.1: The Derivative Function">Definition 3.2.1</a> doesn't exist if <span class="process-math">\(x=0\text{.}\)</span> First, we'll compute the left hand limit:</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-the-derivative-function.html">
 \begin{equation*}
 \lim_{h\to0^{-}}\frac{f(0+h)-f(0)}{h} = \lim_{h\to0^{-}}\frac{-h}{h} = -1.
 \end{equation*}
 </div>
 <p class="continuation">Now, the right hand limit:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-the-derivative-function.html">
 \begin{equation*}
 \lim_{h\to0^{+}}\frac{f(0+h)-f(0)}{h} = \lim_{h\to0^{+}}\frac{h}{h} = 1.
 \end{equation*}
 </div>
 <p class="continuation">Since these limits are different, <span class="process-math">\(\lim_{h\to0}\frac{f(0+h)-f(0)}{h}\)</span> does not exist. Hence <span class="process-math">\(f\)</span> is not differentiable at <span class="process-math">\(0\text{.}\)</span></p>
 </div></div>
-</div></article><aside class="aside aside-like" id="aside-7"><p id="p-135">You may think that a continuous function must at least be differentiable "almost everywhere" at this point. After all, how could it be possible to draw a graph without lifting your pencil off the paper that still has a cusp or a vertical tangent line <em class="emphasis">everywhere</em>? Most mathematicians before the <span class="process-math">\(19^{\text{th}}\)</span> century thought this as well, until Weierstrass came up with a function, the <a class="external" href="https://en.wikipedia.org/wiki/Weierstrass_function" target="_blank">Weierstrass function</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-1" id="fn-1"><sup> 1 </sup></a>, that is continuous everywhere but differentiable <em class="emphasis">nowhere</em>.</p></aside></section><section class="subsection" id="subsection-higher-order-derivatives"><h3 class="heading hide-type">
+</div></article><aside class="aside aside-like" id="aside-8"><p id="p-145">You may think that a continuous function must at least be differentiable "almost everywhere" at this point. After all, how could it be possible to draw a graph without lifting your pencil off the paper that still has a cusp or a vertical tangent line <em class="emphasis">everywhere</em>? Most mathematicians before the <span class="process-math">\(19^{\text{th}}\)</span> century thought this as well, until Weierstrass came up with a function, the <a class="external" href="https://en.wikipedia.org/wiki/Weierstrass_function" target="_blank">Weierstrass function</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-1" id="fn-1"><sup> 1 </sup></a>, that is continuous everywhere but differentiable <em class="emphasis">nowhere</em>.</p></aside></section><section class="subsection" id="subsection-higher-order-derivatives"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Higher Order Derivatives</span>
 </h3>
 <article class="example example-like" id="example-acceleration-from-position"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Acceleration from position.</span>
 </h4>
-<p id="p-136">The position of some particle moving in a line is given by <span class="process-math">\(s(t) = 3t-5t^{3}\text{,}\)</span> where <span class="process-math">\(t\)</span> is in seconds and <span class="process-math">\(s\)</span> is in meters. Find <span class="process-math">\(a(t)\text{,}\)</span> the acceleration of the particle at time <span class="process-math">\(t\text{.}\)</span></p>
+<p id="p-146">The position of some particle moving in a line is given by <span class="process-math">\(s(t) = 3t-5t^{3}\text{,}\)</span> where <span class="process-math">\(t\)</span> is in seconds and <span class="process-math">\(s\)</span> is in meters. Find <span class="process-math">\(a(t)\text{,}\)</span> the acceleration of the particle at time <span class="process-math">\(t\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-26" id="solution-26"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-26"><div class="solution solution-like">
-<p id="p-137">Acceleration is the rate of change of velocity, and velocity is the rate of change of position. So we should probably find the velocity first! Let's call it <span class="process-math">\(v(t)\text{.}\)</span> We have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-27" id="solution-27"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-27"><div class="solution solution-like">
+<p id="p-147">Acceleration is the rate of change of velocity, and velocity is the rate of change of position. So we should probably find the velocity first! Let's call it <span class="process-math">\(v(t)\text{.}\)</span> We have</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-13">
 \begin{align*}
 v(t) &amp; = \lim_{h\to0}\frac{s(t+h) - s(t)}{h} \\
 &amp; = \lim_{h\to0}\frac{3(t+h) - 5(t+h)^{3} - 3t + 5t^{3}}{h} \\
@@ -405,32 +412,32 @@ v(t) &amp; = \lim_{h\to0}\frac{s(t+h) - s(t)}{h} \\
 \end{align*}
 </div>
 <p class="continuation">Now we can get the acceleration as well:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a(t) = \lim_{h\to0}\frac{v(t+h) - v(t)}{h} = -30t.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-138">In <a href="" class="xref" data-knowl="./knowl/example-acceleration-from-position.html" title="Example 3.2.8: Acceleration from position">Example 3.2.8</a>, we had to take two derivatives of the original function <span class="process-math">\(s(t)\)</span> in order to get the acceleration <span class="process-math">\(a(t)\text{.}\)</span> In other words, <em class="emphasis">acceleration is the second derivative of position</em>. So <span class="process-math">\(a(t) = \dv{}{t}\dv{s}{t}\text{,}\)</span> which we also write as <span class="process-math">\(\dv[2]{s}{t}\)</span> or <span class="process-math">\(s''(t)\text{.}\)</span> This is an example of a <dfn class="terminology">second-order derivative</dfn>. In general, we have the following definition.</p>
+</div></article><p id="p-148">In <a href="" class="xref" data-knowl="./knowl/example-acceleration-from-position.html" title="Example 3.2.8: Acceleration from position">Example 3.2.8</a>, we had to take two derivatives of the original function <span class="process-math">\(s(t)\)</span> in order to get the acceleration <span class="process-math">\(a(t)\text{.}\)</span> In other words, <em class="emphasis">acceleration is the second derivative of position</em>. So <span class="process-math">\(a(t) = \dv{}{t}\dv{s}{t}\text{,}\)</span> which we also write as <span class="process-math">\(\dv[2]{s}{t}\)</span> or <span class="process-math">\(s''(t)\text{.}\)</span> This is an example of a <dfn class="terminology">second-order derivative</dfn>. In general, we have the following definition.</p>
 <article class="definition definition-like" id="definition-nth-order-derivatives"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.2.9</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(n^{\text{th}}\)</span>-order Derivatives.</span>
 </h4>
-<p id="p-139">Let <span class="process-math">\(f(x)\)</span> be a function. The <dfn class="terminology"><span class="process-math">\(n^{\text{th}}\)</span>-order derivative</dfn> of <span class="process-math">\(f(x)\)</span> is the function obtained by differentiating <span class="process-math">\(f(x)\)</span> <span class="process-math">\(n\)</span> times. This function is denoted by</p>
-<div class="displaymath process-math">
+<p id="p-149">Let <span class="process-math">\(f(x)\)</span> be a function. The <dfn class="terminology"><span class="process-math">\(n^{\text{th}}\)</span>-order derivative</dfn> of <span class="process-math">\(f(x)\)</span> is the function obtained by differentiating <span class="process-math">\(f(x)\)</span> <span class="process-math">\(n\)</span> times. This function is denoted by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f^{(n)}(x)\quad\text{or}\quad\dv[n]{f}{x}.
 \end{equation*}
 </div>
-<p class="continuation">If <span class="process-math">\(n=1, 2\)</span> or <span class="process-math">\(3\text{,}\)</span> we typically write <span class="process-math">\(f'(x), f''(x)\text{,}\)</span> and <span class="process-math">\(f'''(x)\)</span> instead of <span class="process-math">\(f^{(1)}(x), f^{(2)}(x)\)</span> or <span class="process-math">\(f^{(3)}(x)\text{.}\)</span></p></article><p id="p-140">Although it gets more difficult to assign a physical or geometric significance to higher order derivatives, we can still derive meaning from the second derivative. One interpretation of the second derivative is as acceleration, as shown in <a href="" class="xref" data-knowl="./knowl/example-acceleration-from-position.html" title="Example 3.2.8: Acceleration from position">Example 3.2.8</a>, and it turns out there's a nice geometric interpretation as well. Recall that if <span class="process-math">\(f(x)\)</span> is a function then <span class="process-math">\(f'(x)\)</span> represents the slope, or rate of change, of the graph of <span class="process-math">\(f(x)\)</span> at <span class="process-math">\(x\text{.}\)</span> Therefore <span class="process-math">\(f''(x)\)</span> represents the rate of change of the slope, i.e. how quickly the slope is increasing or decreasing. If <span class="process-math">\(f''(x) &gt;0\)</span> then the slope of <span class="process-math">\(f(x)\)</span> should be increasing, leading to a u-shaped graph. Conversely, if <span class="process-math">\(f''(x) &lt;0\)</span> then the slope of <span class="process-math">\(f(x)\)</span> should be decreasing, leading to an upside down u-shaped graph. This leads to the following definition.</p>
+<p class="continuation">If <span class="process-math">\(n=1, 2\)</span> or <span class="process-math">\(3\text{,}\)</span> we typically write <span class="process-math">\(f'(x), f''(x)\text{,}\)</span> and <span class="process-math">\(f'''(x)\)</span> instead of <span class="process-math">\(f^{(1)}(x), f^{(2)}(x)\)</span> or <span class="process-math">\(f^{(3)}(x)\text{.}\)</span></p></article><p id="p-150">Although it gets more difficult to assign a physical or geometric significance to higher order derivatives, we can still derive meaning from the second derivative. One interpretation of the second derivative is as acceleration, as shown in <a href="" class="xref" data-knowl="./knowl/example-acceleration-from-position.html" title="Example 3.2.8: Acceleration from position">Example 3.2.8</a>, and it turns out there's a nice geometric interpretation as well. Recall that if <span class="process-math">\(f(x)\)</span> is a function then <span class="process-math">\(f'(x)\)</span> represents the slope, or rate of change, of the graph of <span class="process-math">\(f(x)\)</span> at <span class="process-math">\(x\text{.}\)</span> Therefore <span class="process-math">\(f''(x)\)</span> represents the rate of change of the slope, i.e. how quickly the slope is increasing or decreasing. If <span class="process-math">\(f''(x) &gt;0\)</span> then the slope of <span class="process-math">\(f(x)\)</span> should be increasing, leading to a u-shaped graph. Conversely, if <span class="process-math">\(f''(x) &lt;0\)</span> then the slope of <span class="process-math">\(f(x)\)</span> should be decreasing, leading to an upside down u-shaped graph. This leads to the following definition.</p>
 <article class="definition definition-like" id="definition-concavity"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">3.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Concavity.</span>
 </h4>
-<p id="p-141">Let <span class="process-math">\(f(x)\)</span> be a function with second derivative <span class="process-math">\(f''(x)\text{.}\)</span> We say that <span class="process-math">\(f(x)\)</span> is <dfn class="terminology">concave up</dfn> (respectively, <dfn class="terminology">concave down</dfn>) on an interval if <span class="process-math">\(f''(x)&gt;0\)</span> (respectively, <span class="process-math">\(f''(x) &lt;0\)</span>) on that interval.</p></article><p id="p-142">So functions that are concave up on an interval tend to be u-shaped on that interval, and functions that are concave down tend to be upside down u-shaped. See <a href="" class="xref" data-knowl="./knowl/figure-concavity-graphs.html" title="Figure 3.2.11">Figure 3.2.11</a>.</p>
+<p id="p-151">Let <span class="process-math">\(f(x)\)</span> be a function with second derivative <span class="process-math">\(f''(x)\text{.}\)</span> We say that <span class="process-math">\(f(x)\)</span> is <dfn class="terminology">concave up</dfn> (respectively, <dfn class="terminology">concave down</dfn>) on an interval if <span class="process-math">\(f''(x)&gt;0\)</span> (respectively, <span class="process-math">\(f''(x) &lt;0\)</span>) on that interval.</p></article><p id="p-152">So functions that are concave up on an interval tend to be u-shaped on that interval, and functions that are concave down tend to be upside down u-shaped. See <a href="" class="xref" data-knowl="./knowl/figure-concavity-graphs.html" title="Figure 3.2.11">Figure 3.2.11</a>.</p>
 <figure class="figure figure-like" id="figure-concavity-graphs"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel top" style="width:50%;"><figure class="figure figure-like" id="subfigure-concave-up"><img src="generated/latex-image/image-6.svg" role="img" class="contained"><figcaption><span class="codenumber">(a)</span><span class="space"> </span><span class="process-math">\(f''(x) &gt; 0\)</span></figcaption></figure></div>
 <div class="sbspanel top" style="width:50%;"><figure class="figure figure-like" id="subfigure-concave-down"><img src="generated/latex-image/image-7.svg" role="img" class="contained"><figcaption><span class="codenumber">(b)</span><span class="space"> </span><span class="process-math">\(f''(x) &lt; 0\)</span></figcaption></figure></div>
 </div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.2.11<span class="period">.</span></span><span class="space"> </span>Concavity</figcaption></figure></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-1"><div class="fn"><code class="code-inline tex2jax_ignore">https://en.wikipedia.org/wiki/Weierstrass_function</code></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.2.11<span class="period">.</span></span><span class="space"> </span>Concavity</figcaption></figure></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-1"><div class="fn"><code class="code-inline tex2jax_ignore">en.wikipedia.org/wiki/Weierstrass_function</code></div></div>
 </div></main>
 </div>
 </body>

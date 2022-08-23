@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:19-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,68 +307,68 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-extreme-values-of-functions"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">5.1</span> <span class="title">Extreme Values of Functions</span>
 </h2>
-<p id="p-329">It's often of interest to determine how large or small some quantity can get.</p>
+<p id="p-339">It's often of interest to determine how large or small some quantity can get.</p>
 <article class="definition definition-like" id="definition-absolute-extrema"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Absolute Extrema.</span>
 </h3>
-<p id="p-330">Let <span class="process-math">\(f(x)\)</span> be a function defined on some domain <span class="process-math">\(D\text{.}\)</span> Let <span class="process-math">\(c\)</span> be in <span class="process-math">\(D\text{.}\)</span> Then</p>
+<p id="p-340">Let <span class="process-math">\(f(x)\)</span> be a function defined on some domain <span class="process-math">\(D\text{.}\)</span> Let <span class="process-math">\(c\)</span> be in <span class="process-math">\(D\text{.}\)</span> Then</p>
 <ul class="disc">
 <li id="li-17"><p id="p-derived-li-17"><span class="process-math">\(f(c)\)</span> is an <dfn class="terminology">absolute maximum</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(D\)</span> if <span class="process-math">\(f(c)\geq f(x)\)</span> for all <span class="process-math">\(x\)</span> in <span class="process-math">\(D\text{.}\)</span></p></li>
 <li id="li-18"><p id="p-derived-li-18"><span class="process-math">\(f(c)\)</span> is an <dfn class="terminology">absolute minimum</dfn> of <span class="process-math">\(f\)</span> on <span class="process-math">\(D\)</span> if <span class="process-math">\(f(c)\leq f(x)\)</span> for all <span class="process-math">\(x\)</span> in <span class="process-math">\(D\text{.}\)</span></p></li>
 </ul>
-<p class="continuation">These values, if they exist, are <dfn class="terminology">extreme values</dfn>.</p></article><article class="example example-like" id="example-74"><h3 class="heading">
+<p class="continuation">These values, if they exist, are <dfn class="terminology">extreme values</dfn>.</p></article><article class="example example-like" id="example-76"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.2</span><span class="period">.</span>
 </h3>
-<p id="p-331">List the extreme values, if any, of the following functions:</p>
+<p id="p-341">List the extreme values, if any, of the following functions:</p>
 <ol class="decimal">
 <li id="li-19"><p id="p-derived-li-19"><span class="process-math">\(f(x) = e^{-x}\text{.}\)</span></p></li>
 <li id="li-20"><p id="p-derived-li-20"><span class="process-math">\(g(x) = x^{2}\text{.}\)</span></p></li>
 <li id="li-21"><p id="p-derived-li-21"><span class="process-math">\(h(x) = \sin x\text{.}\)</span></p></li>
-</ol></article><p id="p-332">Some functions may not have extreme values, but they could have values that are smaller or larger than all other values of the function "nearby".</p>
+</ol></article><p id="p-342">Some functions may not have extreme values, but they could have values that are smaller or larger than all other values of the function "nearby".</p>
 <article class="definition definition-like" id="definition-local-extrema"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Local extrema.</span>
 </h3>
-<p id="p-333">Let <span class="process-math">\(f(x)\)</span> be a function and let <span class="process-math">\(c\)</span> be in the domain of <span class="process-math">\(f\text{.}\)</span> Then</p>
+<p id="p-343">Let <span class="process-math">\(f(x)\)</span> be a function and let <span class="process-math">\(c\)</span> be in the domain of <span class="process-math">\(f\text{.}\)</span> Then</p>
 <ul class="disc">
 <li id="li-22"><p id="p-derived-li-22"><span class="process-math">\(f(c)\)</span> is a <dfn class="terminology">local maximum</dfn> if <span class="process-math">\(f(c)\geq f(x)\)</span> for all <span class="process-math">\(x\)</span> near <span class="process-math">\(c\text{.}\)</span></p></li>
 <li id="li-23"><p id="p-derived-li-23"><span class="process-math">\(f(c)\)</span> is a <dfn class="terminology">local minimum</dfn> if <span class="process-math">\(f(c)\leq f(x)\)</span> for all <span class="process-math">\(x\)</span> near <span class="process-math">\(c\text{.}\)</span></p></li>
 </ul>
-<p class="continuation">Roughly, local maxima correspond to "hilltops" whereas local minima correspond to "valleys" in the graph of <span class="process-math">\(f(x)\text{.}\)</span></p></article><p id="p-334">In general, local extrema and absolute extrema can be different. However, the following theorem does provide a relationship between the two on <em class="emphasis">closed, bounded</em> intervals.</p>
+<p class="continuation">Roughly, local maxima correspond to "hilltops" whereas local minima correspond to "valleys" in the graph of <span class="process-math">\(f(x)\text{.}\)</span></p></article><p id="p-344">In general, local extrema and absolute extrema can be different. However, the following theorem does provide a relationship between the two on <em class="emphasis">closed, bounded</em> intervals.</p>
 <article class="theorem theorem-like" id="theorem-extreme-value-theorem"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Extreme Value Theorem.</span>
 </h3>
-<p id="p-335">Let <span class="process-math">\(f(x)\)</span> be a continuous function defined on the interval <span class="process-math">\([a,b]\)</span> Then <span class="process-math">\(f(x)\)</span> has both an absolute maximum and absolute minimum on <span class="process-math">\([a,b]\text{.}\)</span> Furthermore, these values occur at either an endpoint or a local extrema.</p></article><p id="p-336">What <a href="" class="xref" data-knowl="./knowl/theorem-extreme-value-theorem.html" title="Theorem 5.1.4: Extreme Value Theorem">Theorem 5.1.4</a> tells us is that we can find the extreme values of any continuous function defined on a closed, bounded interval by just checking the function at the endpoint and at its local extrema.</p>
+<p id="p-345">Let <span class="process-math">\(f(x)\)</span> be a continuous function defined on the interval <span class="process-math">\([a,b]\)</span> Then <span class="process-math">\(f(x)\)</span> has both an absolute maximum and absolute minimum on <span class="process-math">\([a,b]\text{.}\)</span> Furthermore, these values occur at either an endpoint or a local extrema.</p></article><p id="p-346">What <a href="" class="xref" data-knowl="./knowl/theorem-extreme-value-theorem.html" title="Theorem 5.1.4: Extreme Value Theorem">Theorem 5.1.4</a> tells us is that we can find the extreme values of any continuous function defined on a closed, bounded interval by just checking the function at the endpoint and at its local extrema.</p>
 <article class="example example-like" id="example-finding-extreme-values"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Finding extreme values.</span>
 </h3>
-<p id="p-337">Let <span class="process-math">\(f(x) = (x^{2}-1)^{2}\text{.}\)</span> Given that <span class="process-math">\(f\)</span> has local extrema at <span class="process-math">\(x=-1,0,1\text{,}\)</span> find the extreme values of <span class="process-math">\(f\)</span> on the interval <span class="process-math">\([\frac{1}{2},6]\text{.}\)</span></p>
+<p id="p-347">Let <span class="process-math">\(f(x) = (x^{2}-1)^{2}\text{.}\)</span> Given that <span class="process-math">\(f\)</span> has local extrema at <span class="process-math">\(x=-1,0,1\text{,}\)</span> find the extreme values of <span class="process-math">\(f\)</span> on the interval <span class="process-math">\([\frac{1}{2},6]\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-71" id="solution-71"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-71"><div class="solution solution-like">
-<p id="p-338"><a href="" class="xref" data-knowl="./knowl/theorem-extreme-value-theorem.html" title="Theorem 5.1.4: Extreme Value Theorem">Theorem 5.1.4</a> tells us that we can find the extreme values by checking local extrema and the endpoints of our interval. Since <span class="process-math">\(x=1\)</span> is the only local extreme value inside of our interval, that's the only one we need to check. We have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-72" id="solution-72"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-72"><div class="solution solution-like">
+<p id="p-348"><a href="" class="xref" data-knowl="./knowl/theorem-extreme-value-theorem.html" title="Theorem 5.1.4: Extreme Value Theorem">Theorem 5.1.4</a> tells us that we can find the extreme values by checking local extrema and the endpoints of our interval. Since <span class="process-math">\(x=1\)</span> is the only local extreme value inside of our interval, that's the only one we need to check. We have</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-extreme-value-theorem.html">
 \begin{equation*}
 f(\frac{1}{2}) = \frac{9}{16}, f(1) = 0\quad\text{and}\quad f(6) = 35^{2}.
 \end{equation*}
 </div>
 <p class="continuation">So the absolute minimum of <span class="process-math">\(f\)</span> on <span class="process-math">\([\frac{1}{2},6]\)</span> is <span class="process-math">\(0\)</span> and the absolute maximum is <span class="process-math">\(35^{2}.\)</span></p>
 </div></div>
-</div></article><p id="p-339">So if we can find where a function has local extrema, then finding absolute extrema won't be too much more difficult. Thankfully, this is relatively straightforward if the function is differentiable.</p>
+</div></article><p id="p-349">So if we can find where a function has local extrema, then finding absolute extrema won't be too much more difficult. Thankfully, this is relatively straightforward if the function is differentiable.</p>
 <article class="theorem theorem-like" id="theorem-fermat-s-theorem"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Fermat's Theorem.</span>
 </h3>
-<p id="p-340">Let <span class="process-math">\(f(x)\)</span> be a function and let <span class="process-math">\(c\)</span> be a local extreme value of <span class="process-math">\(f\text{.}\)</span> If <span class="process-math">\(f'(c)\)</span> exists, then <span class="process-math">\(f'(c) = 0\text{.}\)</span></p></article><p id="p-341">So finding local extrema of <span class="process-math">\(f(x)\)</span> often amounts to finding where <span class="process-math">\(f'(x) = 0\text{,}\)</span> i.e., where it has a root. However, we also need to worry about where <span class="process-math">\(f'(x)\)</span> doesn't exist (just think about <span class="process-math">\(y = |x|\)</span>). This leads to the following definition.</p>
+<p id="p-350">Let <span class="process-math">\(f(x)\)</span> be a function and let <span class="process-math">\(c\)</span> be a local extreme value of <span class="process-math">\(f\text{.}\)</span> If <span class="process-math">\(f'(c)\)</span> exists, then <span class="process-math">\(f'(c) = 0\text{.}\)</span></p></article><p id="p-351">So finding local extrema of <span class="process-math">\(f(x)\)</span> often amounts to finding where <span class="process-math">\(f'(x) = 0\text{,}\)</span> i.e., where it has a root. However, we also need to worry about where <span class="process-math">\(f'(x)\)</span> doesn't exist (just think about <span class="process-math">\(y = |x|\)</span>). This leads to the following definition.</p>
 <article class="definition definition-like" id="definition-critical-points"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Critical Points.</span>
 </h3>
-<p id="p-342">Let <span class="process-math">\(f(x)\)</span> be a differentiable function. The <dfn class="terminology">critical points</dfn> of <span class="process-math">\(f(x)\)</span> are the points where <span class="process-math">\(f'(x) = 0\)</span> or <span class="process-math">\(f'(x)\)</span> does not exist.</p></article><p id="p-343">Our method for finding extreme values on a closed interval will proceed as follows: find all the critical points, and then compare the values of our function at the critical points and the endpoints of the interval.</p>
+<p id="p-352">Let <span class="process-math">\(f(x)\)</span> be a differentiable function. The <dfn class="terminology">critical points</dfn> of <span class="process-math">\(f(x)\)</span> are the points where <span class="process-math">\(f'(x) = 0\)</span> or <span class="process-math">\(f'(x)\)</span> does not exist.</p></article><p id="p-353">Our method for finding extreme values on a closed interval will proceed as follows: find all the critical points, and then compare the values of our function at the critical points and the endpoints of the interval.</p>
 <article class="example example-like" id="example-extreme-values-of-tangent"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Extreme values of tangent.</span>
 </h3>
-<p id="p-344">Let <span class="process-math">\(f(\theta) = \frac{4}{3}\theta - \tan\theta\text{.}\)</span> Find the extreme values of <span class="process-math">\(f\)</span> on the interval <span class="process-math">\([-\frac{\pi}{3},\frac{\pi}{3}]\text{.}\)</span></p>
+<p id="p-354">Let <span class="process-math">\(f(\theta) = \frac{4}{3}\theta - \tan\theta\text{.}\)</span> Find the extreme values of <span class="process-math">\(f\)</span> on the interval <span class="process-math">\([-\frac{\pi}{3},\frac{\pi}{3}]\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-72" id="solution-72"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-72"><div class="solution solution-like">
-<p id="p-345">We need to find the critical points first. We have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-73" id="solution-73"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-73"><div class="solution solution-like">
+<p id="p-355">We need to find the critical points first. We have</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(\theta) = \frac{4}{3} - \sec^{2}\theta.
 \end{equation*}
@@ -371,11 +378,11 @@ f'(\theta) = \frac{4}{3} - \sec^{2}\theta.
 </div></article><article class="example example-like" id="example-dealing-with-a-cusp"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Dealing with a cusp.</span>
 </h3>
-<p id="p-346">Let <span class="process-math">\(g(x) = x^{1/3} - x^{4/3}\text{.}\)</span> Find the absolute extrema of <span class="process-math">\(g\)</span> on <span class="process-math">\([-1,1]\text{.}\)</span></p>
+<p id="p-356">Let <span class="process-math">\(g(x) = x^{1/3} - x^{4/3}\text{.}\)</span> Find the absolute extrema of <span class="process-math">\(g\)</span> on <span class="process-math">\([-1,1]\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-73" id="solution-73"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-73"><div class="solution solution-like">
-<p id="p-347">First, find the critical points of <span class="process-math">\(g\text{:}\)</span></p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-74" id="solution-74"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-74"><div class="solution solution-like">
+<p id="p-357">First, find the critical points of <span class="process-math">\(g\text{:}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 g'(x) = \frac{1}{3}x^{-\frac{2}{3}} - \frac{4}{3}x^{\frac{1}{3}} = \frac{1}{3}x^{-\frac{2}{3}}(1 - 4x).
 \end{equation*}

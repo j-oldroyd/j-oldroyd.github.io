@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:29-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,15 +48,21 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
-    // Make *any* div with class 'sagecell-sage' an executable Sage cell
-    // Their results will be linked, only within language type
-    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
-                           linked: true,
-                           languages: ['sage'],
-                           evalButtonText: 'Evaluate (Sage)'});
-});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
 </script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -71,7 +74,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -113,6 +115,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -158,6 +162,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -311,70 +316,70 @@ true);
 <section class="subsection" id="xyz-coordinates"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title"><span class="process-math">\(xyz\)</span>-coordinates</span>
 </h3>
-<p id="p-1085">We're used to Cartesian coordinates in the plane: each point in the plane can be represented by an <span class="process-math">\(x\)</span>-coordinate and a <span class="process-math">\(y\)</span>-coordinate. This representation is determined by the <dfn class="terminology">coordinate axes</dfn> (the <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes). There's nothing preventing us from doing the same for three dimensions. We'll just need three coordinate axes: the <span class="process-math">\(x\)</span>-, <span class="process-math">\(y\)</span>- and <span class="process-math">\(z\)</span>-axes. We typically view the <span class="process-math">\(xy\)</span>-plane as horizontal, and the <span class="process-math">\(z\)</span>-axis as vertical, but there's no mathematical preference either way.</p>
-<p id="p-1086">Just as the <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes determined the <span class="process-math">\(xy\)</span>-plane, we can also get the <span class="process-math">\(xz\)</span>- and <span class="process-math">\(yz\)</span>-planes. These planes divide space into eight <dfn class="terminology">octants</dfn>. And just as any point in the <span class="process-math">\(xy\)</span>-plane can be represented by measuring along the <span class="process-math">\(x\)</span>-axis and <span class="process-math">\(y\)</span>-axis to get a point <span class="process-math">\((x,y)\text{,}\)</span> we can do the same in space to get a point <span class="process-math">\((x,y,z)\text{.}\)</span> The set of all points like this is denoted by <span class="process-math">\(\RR^{3}\text{,}\)</span> and is the <dfn class="terminology">three-dimensional coordinate system</dfn>.</p>
-<p id="p-1087">Given any point <span class="process-math">\((a,b,c)\)</span> in <span class="process-math">\(\RR^{3}\text{,}\)</span> we can find its <dfn class="terminology">projections</dfn> onto any of the coordinate axes or coordinate planes without too much trouble. The projection onto a line or plane is the point on that line or plane that is closest to the original point <span class="process-math">\((a,b,c)\text{.}\)</span></p>
+<p id="p-1095">We're used to Cartesian coordinates in the plane: each point in the plane can be represented by an <span class="process-math">\(x\)</span>-coordinate and a <span class="process-math">\(y\)</span>-coordinate. This representation is determined by the <dfn class="terminology">coordinate axes</dfn> (the <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes). There's nothing preventing us from doing the same for three dimensions. We'll just need three coordinate axes: the <span class="process-math">\(x\)</span>-, <span class="process-math">\(y\)</span>- and <span class="process-math">\(z\)</span>-axes. We typically view the <span class="process-math">\(xy\)</span>-plane as horizontal, and the <span class="process-math">\(z\)</span>-axis as vertical, but there's no mathematical preference either way.</p>
+<p id="p-1096">Just as the <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-axes determined the <span class="process-math">\(xy\)</span>-plane, we can also get the <span class="process-math">\(xz\)</span>- and <span class="process-math">\(yz\)</span>-planes. These planes divide space into eight <dfn class="terminology">octants</dfn>. And just as any point in the <span class="process-math">\(xy\)</span>-plane can be represented by measuring along the <span class="process-math">\(x\)</span>-axis and <span class="process-math">\(y\)</span>-axis to get a point <span class="process-math">\((x,y)\text{,}\)</span> we can do the same in space to get a point <span class="process-math">\((x,y,z)\text{.}\)</span> The set of all points like this is denoted by <span class="process-math">\(\RR^{3}\text{,}\)</span> and is the <dfn class="terminology">three-dimensional coordinate system</dfn>.</p>
+<p id="p-1097">Given any point <span class="process-math">\((a,b,c)\)</span> in <span class="process-math">\(\RR^{3}\text{,}\)</span> we can find its <dfn class="terminology">projections</dfn> onto any of the coordinate axes or coordinate planes without too much trouble. The projection onto a line or plane is the point on that line or plane that is closest to the original point <span class="process-math">\((a,b,c)\text{.}\)</span></p>
 <article class="example example-like" id="example-projection"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Projection.</span>
 </h4>
-<p id="p-1088">Find the projection of the point <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane.</p>
+<p id="p-1098">Find the projection of the point <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-207" id="solution-207"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-207"><div class="solution solution-like"><p id="p-1089">Here's how we can find the projection of the point <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane. Note that the <span class="process-math">\(yz\)</span>-plane is just the set of all points with <span class="process-math">\(x\)</span>-coordinate equation to <span class="process-math">\(0\text{,}\)</span> so the projection of <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane is the point <span class="process-math">\((0,3,4)\text{.}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-208" id="solution-208"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-208"><div class="solution solution-like"><p id="p-1099">Here's how we can find the projection of the point <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane. Note that the <span class="process-math">\(yz\)</span>-plane is just the set of all points with <span class="process-math">\(x\)</span>-coordinate equation to <span class="process-math">\(0\text{,}\)</span> so the projection of <span class="process-math">\((-1,3,4)\)</span> onto the <span class="process-math">\(yz\)</span>-plane is the point <span class="process-math">\((0,3,4)\text{.}\)</span></p></div></div>
 </div></article><article class="example example-like" id="example-equations-in-space"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Equations in space.</span>
 </h4>
-<p id="p-1090">Sketch <span class="process-math">\(y=1\)</span> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p>
+<p id="p-1100">Sketch <span class="process-math">\(y=1\)</span> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-208" id="solution-208"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-208"><div class="solution solution-like"><p id="p-1091">This is just the set of all points in <span class="process-math">\(\RR^{3}\)</span> of the form <span class="process-math">\((x,1,z)\text{.}\)</span> This forms a <dfn class="terminology">plane</dfn> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p></div></div>
-</div></article><div class="sagecell-sage" id="sage-9"><script type="text/x-sage">x,z = var('x,z')
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-209" id="solution-209"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-209"><div class="solution solution-like"><p id="p-1101">This is just the set of all points in <span class="process-math">\(\RR^{3}\)</span> of the form <span class="process-math">\((x,1,z)\text{.}\)</span> This forms a <dfn class="terminology">plane</dfn> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p></div></div>
+</div></article><pre class="ptx-sagecell sagecell-sage" id="sage-9"><script type="text/x-sage">x,z = var('x,z')
 parametric_plot3d((x,1,z), (x,-4,4), (z,-4,4))
-</script></div>
+</script></pre>
 <article class="example example-like" id="example-more-equations-in-space"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">More equations in space.</span>
 </h4>
-<p id="p-1092">Sketch <span class="process-math">\(x+y=2\)</span> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p>
+<p id="p-1102">Sketch <span class="process-math">\(x+y=2\)</span> in <span class="process-math">\(\RR^{3}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-209" id="solution-209"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-209"><div class="solution solution-like"><p id="p-1093">We can do so as follows. First, sketch <span class="process-math">\(x+y=2\)</span> in the <span class="process-math">\(xy\)</span>-plane, which will just be the line <span class="process-math">\(y = 2-x\text{.}\)</span> Then the surface in <span class="process-math">\(\RR^{3}\)</span> represented by <span class="process-math">\(x+y=2\)</span> is actually the surface consisting of all points directly above and directly below the line <span class="process-math">\(y=2-x\)</span> in the <span class="process-math">\(xy\)</span>-plane.</p></div></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-210" id="solution-210"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-210"><div class="solution solution-like"><p id="p-1103">We can do so as follows. First, sketch <span class="process-math">\(x+y=2\)</span> in the <span class="process-math">\(xy\)</span>-plane, which will just be the line <span class="process-math">\(y = 2-x\text{.}\)</span> Then the surface in <span class="process-math">\(\RR^{3}\)</span> represented by <span class="process-math">\(x+y=2\)</span> is actually the surface consisting of all points directly above and directly below the line <span class="process-math">\(y=2-x\)</span> in the <span class="process-math">\(xy\)</span>-plane.</p></div></div>
 </div></article><article class="example example-like" id="example-intersection-of-a-sphere-and-a-plane"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Intersection of a sphere and a plane.</span>
 </h4>
-<p id="p-1094">Describe the intersection of the sphere given by the equation <span class="process-math">\((x+2)^{2} + (y-3)^{2} + z^{2} = 9\)</span> with the <span class="process-math">\(xz\)</span>-plane.</p>
+<p id="p-1104">Describe the intersection of the sphere given by the equation <span class="process-math">\((x+2)^{2} + (y-3)^{2} + z^{2} = 9\)</span> with the <span class="process-math">\(xz\)</span>-plane.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-210" id="solution-210"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-210"><div class="solution solution-like"><p id="p-1095">We can do this without too much trouble if we remember that the <span class="process-math">\(xz\)</span>-plane is just the set of all points with <span class="process-math">\(y\)</span>-coordinate equal to <span class="process-math">\(0\text{.}\)</span> So the intersection of this sphere with the <span class="process-math">\(xz\)</span>-plane traces out the curve <span class="process-math">\((x+2)^{2} + (0-3)^{2} + z^{2} = 9\)</span> in the <span class="process-math">\(xz\)</span>-plane, which is just the point <span class="process-math">\((-2,0,0)\text{.}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-211" id="solution-211"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-211"><div class="solution solution-like"><p id="p-1105">We can do this without too much trouble if we remember that the <span class="process-math">\(xz\)</span>-plane is just the set of all points with <span class="process-math">\(y\)</span>-coordinate equal to <span class="process-math">\(0\text{.}\)</span> So the intersection of this sphere with the <span class="process-math">\(xz\)</span>-plane traces out the curve <span class="process-math">\((x+2)^{2} + (0-3)^{2} + z^{2} = 9\)</span> in the <span class="process-math">\(xz\)</span>-plane, which is just the point <span class="process-math">\((-2,0,0)\text{.}\)</span></p></div></div>
 </div></article><figure class="figure figure-like" id="figure-sphere-xz-plane-intersection"><iframe src="https://c3d.libretexts.org/CalcPlot3D/dynamicFigure/index.html?type=implicit;equation=(x+2)%5E2+(y-3)%5E2+z%5E2~9;cubes=16;visible=true;fixdomain=true;xmin=-5;xmax=1;ymin=0;ymax=6;zmin=-3;zmax=3;alpha=142;hidemyedges=false;view=0;format=normal;constcol=rgb(255,0,0)&amp;type=implicit;equation=y~0;cubes=16;visible=true;fixdomain=false;xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;alpha=124;hidemyedges=false;view=0;format=normal;constcol=rgb(255,0,0)&amp;type=point;point=(-2,0,0);visible=true;color=rgb(0,0,255);size=4&amp;type=window;hsrmode=0;nomidpts=true;anaglyph=-1;center=9.785420552928016,1.9381426581355918,0.6993909057450174,1;focus=0,0,0,1;up=-0.0788418191491362,0.03859848628809217,0.9961396109027705,1;transparent=false;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=true;gridcolor=rgb(128,128,128);xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;xscale=1;yscale=1;zscale=1;zcmin=-4;zcmax=4;xscalefactor=1;yscalefactor=1;zscalefactor=1;tracemode=0;keep2d=false;zoom=0.385067" id="calcplot3d-sphere-xz-plane-intersection" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.1.5<span class="period">.</span></span><span class="space"> </span>Intersection of the sphere <span class="process-math">\((x+2)^2 + (y-3)^2 + z^2 = 9\)</span> with the <span class="process-math">\(xz\)</span>-plane.</figcaption></figure></section><section class="subsection" id="subsection-the-distance-formula"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Distance Formula</span>
 </h3>
-<p id="p-1096">Recall that the distance between two points <span class="process-math">\(P_{1}(x_{1},y_{1})\)</span> and <span class="process-math">\(P_{2}(x_{2},y_{2})\)</span> in <span class="process-math">\(\RR^{2}\)</span> (the <span class="process-math">\(xy\)</span>-plane) is given by</p>
-<div class="displaymath process-math">
+<p id="p-1106">Recall that the distance between two points <span class="process-math">\(P_{1}(x_{1},y_{1})\)</span> and <span class="process-math">\(P_{2}(x_{2},y_{2})\)</span> in <span class="process-math">\(\RR^{2}\)</span> (the <span class="process-math">\(xy\)</span>-plane) is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-distances-in-space.html">
 \begin{equation*}
 |P_{1}P_{2}| = d(P_{1},P_{2}) = \sqrt{(x_{1}-x_{2})^{2}+(y_{1}-y_{2})^{2}}.
 \end{equation*}
 </div>
-<p id="p-1097">This is proved using the Pythagorean theorem. We can do the same exact thing in <span class="process-math">\(\RR^{3}\text{!}\)</span></p>
+<p id="p-1107">This is proved using the Pythagorean theorem. We can do the same exact thing in <span class="process-math">\(\RR^{3}\text{!}\)</span></p>
 <article class="theorem theorem-like" id="theorem-distances-in-space"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Distances in Space.</span>
 </h4>
-<p id="p-1098">Let <span class="process-math">\(P_{1}(x_{1},y_{1},z_{1})\)</span> and <span class="process-math">\(P_{2}(x_{2},y_{2},z_{2})\)</span> be two points in <span class="process-math">\(\RR^{3}\text{.}\)</span> Then the distance between these two points, <span class="process-math">\(|P_{1}P_{2}| = d(P_{1},P_{2})\text{,}\)</span> is given by</p>
-<div class="displaymath process-math">
+<p id="p-1108">Let <span class="process-math">\(P_{1}(x_{1},y_{1},z_{1})\)</span> and <span class="process-math">\(P_{2}(x_{2},y_{2},z_{2})\)</span> be two points in <span class="process-math">\(\RR^{3}\text{.}\)</span> Then the distance between these two points, <span class="process-math">\(|P_{1}P_{2}| = d(P_{1},P_{2})\text{,}\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 |P_{1}P_{2}| = d(P_{1},P_{2}) = \sqrt{(x_{1}-x_{2})^{2}+(y_{1}-y_{2})^{2} + (z_{1}-z_{2})^{2}}.
 \end{equation*}
 </div></article><article class="example example-like" id="example-computing-distances"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Computing distances.</span>
 </h4>
-<p id="p-1099"><a href="" class="xref" data-knowl="./knowl/theorem-distances-in-space.html" title="Theorem 11.1.6: Distances in Space">Theorem 11.1.6</a> lets us find the distance between the points <span class="process-math">\(P(1,4,-2)\)</span> and <span class="process-math">\(Q(-1,0,2)\)</span> as follows:</p>
-<div class="displaymath process-math">
+<p id="p-1109"><a href="" class="xref" data-knowl="./knowl/theorem-distances-in-space.html" title="Theorem 11.1.6: Distances in Space">Theorem 11.1.6</a> lets us find the distance between the points <span class="process-math">\(P(1,4,-2)\)</span> and <span class="process-math">\(Q(-1,0,2)\)</span> as follows:</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-distances-in-space.html">
 \begin{equation*}
 d(P,Q) = \sqrt{4+16+16} = 6.
 \end{equation*}
-</div></article><p id="p-1100">One important use of the distance formula in <span class="process-math">\(\RR^{3}\)</span> is that it lets us find equations of spheres. The equation of a sphere of radius <span class="process-math">\(r\)</span> and center <span class="process-math">\(C(h,k,l)\)</span> is given by</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1110">One important use of the distance formula in <span class="process-math">\(\RR^{3}\)</span> is that it lets us find equations of spheres. The equation of a sphere of radius <span class="process-math">\(r\)</span> and center <span class="process-math">\(C(h,k,l)\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sqrt{(x-h)^{2}+(y-k)^{2}+(z-l)^{2}} = r,
 \end{equation*}
 </div>
 <p class="continuation">which is more commonly written as</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 (x-h)^{2}+(y-k)^{2}+(z-l)^{2} = r^{2}.
 \end{equation*}
@@ -382,18 +387,18 @@ d(P,Q) = \sqrt{4+16+16} = 6.
 <article class="example example-like" id="example-equation-of-a-sphere"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Equation of a sphere.</span>
 </h4>
-<p id="p-1101">The equation <span class="process-math">\(2x^{2}+2y^{2}+2z^{2} = 8x - 24z + 4\)</span> represents a sphere in <span class="process-math">\(\RR^{3}\text{.}\)</span> To see how, we can rearrange the equation and complete the square to get</p>
-<div class="displaymath process-math">
+<p id="p-1111">The equation <span class="process-math">\(2x^{2}+2y^{2}+2z^{2} = 8x - 24z + 4\)</span> represents a sphere in <span class="process-math">\(\RR^{3}\text{.}\)</span> To see how, we can rearrange the equation and complete the square to get</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-150">
 \begin{align*}
 2x^{2}+2y^{2}+2z^{2} - 8x + 24z = 4 &amp; \Rightarrow x^{2}+y^{2}+z^{2} - 4x + 12z = 2 \\
 &amp; \Rightarrow (x-2)^{2} + y^{2} + (z-6)^{2} = 2 + 4 + 36\\
 &amp; \Rightarrow (x-2)^{2} + y^{2} + (z-6)^{2} = 42.
 \end{align*}
 </div>
-<p id="p-1102">So this equation describes a sphere of radius <span class="process-math">\(\sqrt{42}\)</span> centered at <span class="process-math">\((2,0,6)\text{.}\)</span></p></article><article class="example example-like" id="example-spherical-shells"><h4 class="heading">
+<p id="p-1112">So this equation describes a sphere of radius <span class="process-math">\(\sqrt{42}\)</span> centered at <span class="process-math">\((2,0,6)\text{.}\)</span></p></article><article class="example example-like" id="example-spherical-shells"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Spherical shells.</span>
 </h4>
-<p id="p-1103">We can also use inequalities to describe regions in addition to equalities. For example, <span class="process-math">\(3^2\leq x^{2}+y^{2}+z^{2}\leq 4^2\)</span> describes the region contained between the sphere of radius <span class="process-math">\(3\)</span> and the sphere of radius <span class="process-math">\(4\text{,}\)</span> both centered at the origin.</p></article><figure class="figure figure-like" id="figure-spherical-shells-radii-3-4"><iframe src="https://c3d.libretexts.org/CalcPlot3D/dynamicFigureWCP/index.html?type=implicit;equation=x%5E2+y%5E2+z%5E2~a%5E2;cubes=16;visible=true;fixdomain=false;xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;alpha=-1;hidemyedges=false;view=0;format=normal;constcol=rgb(255,0,0)&amp;type=slider;slider=a;value=3;steps=100;pmin=3;pmax=4;repeat=true;bounce=true;waittime=1;careful=false;noanimate=false;name=-1&amp;type=window;hsrmode=0;nomidpts=false;anaglyph=-1;center=7.6331122627967956,1.981796419405057,6.148827541536563,1;focus=0,0,0,1;up=-0.4299207843228113,-0.37080228549923083,0.8232094413184324,1;transparent=true;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=true;gridcolor=rgb(128,128,128);xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;xscale=1;yscale=1;zscale=1;zcmin=-4;zcmax=4;xscalefactor=1;yscalefactor=1;zscalefactor=1;tracemode=1;tracepoint=-2.945243112740431,3,0,1;keep2d=false;zoom=0.369067" id="calcplot3d-spherical-shells-radii-3-4" width="600" height="400"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.1.10<span class="period">.</span></span><span class="space"> </span>The spherical shells <span class="process-math">\(x^2 + y^2 + z^2 = a^2, 3\leq a\leq 4\text{.}\)</span></figcaption></figure></section></section></div></main>
+<p id="p-1113">We can also use inequalities to describe regions in addition to equalities. For example, <span class="process-math">\(3^2\leq x^{2}+y^{2}+z^{2}\leq 4^2\)</span> describes the region contained between the sphere of radius <span class="process-math">\(3\)</span> and the sphere of radius <span class="process-math">\(4\text{,}\)</span> both centered at the origin.</p></article><figure class="figure figure-like" id="figure-spherical-shells-radii-3-4"><iframe src="https://c3d.libretexts.org/CalcPlot3D/dynamicFigureWCP/index.html?type=implicit;equation=x%5E2+y%5E2+z%5E2~a%5E2;cubes=16;visible=true;fixdomain=false;xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;alpha=-1;hidemyedges=false;view=0;format=normal;constcol=rgb(255,0,0)&amp;type=slider;slider=a;value=3;steps=100;pmin=3;pmax=4;repeat=true;bounce=true;waittime=1;careful=false;noanimate=false;name=-1&amp;type=window;hsrmode=0;nomidpts=false;anaglyph=-1;center=7.6331122627967956,1.981796419405057,6.148827541536563,1;focus=0,0,0,1;up=-0.4299207843228113,-0.37080228549923083,0.8232094413184324,1;transparent=true;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.5;centerypercent=0.5;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=true;gridplanes=true;gridcolor=rgb(128,128,128);xmin=-5;xmax=5;ymin=-5;ymax=5;zmin=-5;zmax=5;xscale=1;yscale=1;zscale=1;zcmin=-4;zcmax=4;xscalefactor=1;yscalefactor=1;zscalefactor=1;tracemode=1;tracepoint=-2.945243112740431,3,0,1;keep2d=false;zoom=0.369067" id="calcplot3d-spherical-shells-radii-3-4" width="600" height="400"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.1.10<span class="period">.</span></span><span class="space"> </span>The spherical shells <span class="process-math">\(x^2 + y^2 + z^2 = a^2, 3\leq a\leq 4\text{.}\)</span></figcaption></figure></section></section></div></main>
 </div>
 </body>
 </html>

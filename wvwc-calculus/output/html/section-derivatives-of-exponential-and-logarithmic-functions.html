@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:18-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -303,12 +310,12 @@ true);
 <section class="subsection" id="subsection-derivatives-of-exponentials"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Derivatives of Exponentials</span>
 </h3>
-<p id="p-246">We've already mentioned that <span class="process-math">\(\dv{}{x}e^{x} = e^{x}\text{,}\)</span> but we've said nothing about differentiating functions such as <span class="process-math">\(3^{x}\)</span> or <span class="process-math">\((\frac{1}{\pi})^{-x}\text{.}\)</span> However, it turns out that we can get these derivatives from the derivative of <span class="process-math">\(e^{x}\)</span> without too much trouble.</p>
+<p id="p-256">We've already mentioned that <span class="process-math">\(\dv{}{x}e^{x} = e^{x}\text{,}\)</span> but we've said nothing about differentiating functions such as <span class="process-math">\(3^{x}\)</span> or <span class="process-math">\((\frac{1}{\pi})^{-x}\text{.}\)</span> However, it turns out that we can get these derivatives from the derivative of <span class="process-math">\(e^{x}\)</span> without too much trouble.</p>
 <article class="theorem theorem-like" id="theorem-derivatives-of-exponential-functions"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Derivatives of Exponential Functions.</span>
 </h4>
-<p id="p-247">Let <span class="process-math">\(a &gt; 0\)</span> and set <span class="process-math">\(f(x) = a^{x}\text{.}\)</span> Then <span class="process-math">\(f'(x) = a^{x}\ln a\text{.}\)</span></p></article><article class="hiddenproof" id="proof-5"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-5"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-5"><article class="hiddenproof"><p id="p-248">To prove this, we need to use what's available to us: the derivative of <span class="process-math">\(e^{x}\text{.}\)</span> From <a href="" class="xref" data-knowl="./knowl/example-simplifying-an-exponential.html" title="Example 4.2.11: Simplifying an exponential">Example 4.2.11</a> we say that <span class="process-math">\(e^{x\ln 3} = 3^{x}\text{.}\)</span> More generally, we can also say that <span class="process-math">\(e^{x\ln a} = a^{x}\text{.}\)</span> Hence</p>
-<div class="displaymath process-math">
+<p id="p-257">Let <span class="process-math">\(a &gt; 0\)</span> and set <span class="process-math">\(f(x) = a^{x}\text{.}\)</span> Then <span class="process-math">\(f'(x) = a^{x}\ln a\text{.}\)</span></p></article><article class="hiddenproof" id="proof-5"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-5"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-5"><article class="hiddenproof"><p id="p-258">To prove this, we need to use what's available to us: the derivative of <span class="process-math">\(e^{x}\text{.}\)</span> From <a href="" class="xref" data-knowl="./knowl/example-simplifying-an-exponential.html" title="Example 4.2.11: Simplifying an exponential">Example 4.2.11</a> we say that <span class="process-math">\(e^{x\ln 3} = 3^{x}\text{.}\)</span> More generally, we can also say that <span class="process-math">\(e^{x\ln a} = a^{x}\text{.}\)</span> Hence</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-simplifying-an-exponential.html" id="md-27">
 \begin{align*}
 \dv{}{x}a^{x} &amp; = \dv{}{x}e^{x\ln a} \\
 &amp; = (\ln a)e^{x\ln a} \\
@@ -318,18 +325,18 @@ true);
 <article class="example example-like" id="example-differentiating-an-exponential"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiating an exponential.</span>
 </h4>
-<p id="p-249">Let <span class="process-math">\(g(t) = 2.6^{3t - \sin t}\text{.}\)</span> Find <span class="process-math">\(g'(t)\text{.}\)</span></p>
+<p id="p-259">Let <span class="process-math">\(g(t) = 2.6^{3t - \sin t}\text{.}\)</span> Find <span class="process-math">\(g'(t)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-50" id="solution-50"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-50"><div class="solution solution-like"><p id="p-250">If we set <span class="process-math">\(u = 3t - \sin t\text{,}\)</span> then <span class="process-math">\(g(t) = g(u) = 2.6^{u}\text{.}\)</span> By the chain rule, <span class="process-math">\(g'(t) = g'(u)\dv{u}{t} = (\ln2.6)2.6^{u}(3-\cos t) = (\ln2.6)2.6^{3t-\sin t}(3-\cos t).\)</span></p></div></div>
-</div></article><p id="p-251">Although we certainly want to know the derivative of <span class="process-math">\(a^{x}\text{,}\)</span> or at least how to find it, most applications involving exponential functions use the natural exponential function <span class="process-math">\(e^{x}\)</span> instead. The derivative of <span class="process-math">\(e^{x}\)</span> is probably the most important derivative in this course.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-51" id="solution-51"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-51"><div class="solution solution-like"><p id="p-260">If we set <span class="process-math">\(u = 3t - \sin t\text{,}\)</span> then <span class="process-math">\(g(t) = g(u) = 2.6^{u}\text{.}\)</span> By the chain rule, <span class="process-math">\(g'(t) = g'(u)\dv{u}{t} = (\ln2.6)2.6^{u}(3-\cos t) = (\ln2.6)2.6^{3t-\sin t}(3-\cos t).\)</span></p></div></div>
+</div></article><p id="p-261">Although we certainly want to know the derivative of <span class="process-math">\(a^{x}\text{,}\)</span> or at least how to find it, most applications involving exponential functions use the natural exponential function <span class="process-math">\(e^{x}\)</span> instead. The derivative of <span class="process-math">\(e^{x}\)</span> is probably the most important derivative in this course.</p>
 <article class="example example-like" id="example-solutions-of-a-differential-equation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Solutions of a differential equation.</span>
 </h4>
-<p id="p-252">Show that <span class="process-math">\(x(t) = Ae^{-t} + Bte^{-t}\)</span> satisfies the differential equation <span class="process-math">\(x'' + 2x' + x = 0\text{,}\)</span> where <span class="process-math">\(A,B\)</span> are arbitrary constants.</p>
+<p id="p-262">Show that <span class="process-math">\(x(t) = Ae^{-t} + Bte^{-t}\)</span> satisfies the differential equation <span class="process-math">\(x'' + 2x' + x = 0\text{,}\)</span> where <span class="process-math">\(A,B\)</span> are arbitrary constants.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-51" id="solution-51"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-51"><div class="solution solution-like">
-<p id="p-253">We need to show that if we compute <span class="process-math">\(x'\)</span> and <span class="process-math">\(x''\)</span> and plug these expressions into the differential equation, this will simplify out to <span class="process-math">\(0\text{.}\)</span> Since</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
+<p id="p-263">We need to show that if we compute <span class="process-math">\(x'\)</span> and <span class="process-math">\(x''\)</span> and plug these expressions into the differential equation, this will simplify out to <span class="process-math">\(0\text{.}\)</span> Since</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-28">
 \begin{align*}
 x' &amp; = -Ae^{-t} +Be^{-t} - Bte^{-t} \\
 x'' &amp; = Ae^{-t} - Be^{-t} - (Be^{-t} - Bte^{-t}) \\
@@ -337,85 +344,85 @@ x'' &amp; = Ae^{-t} - Be^{-t} - (Be^{-t} - Bte^{-t}) \\
 \end{align*}
 </div>
 <p class="continuation">it follows that</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-29">
 \begin{align*}
 x'' + 2x' + x &amp; = (Ae^{-t} - 2Be^{-t} + Bte^{-t}) + 2(-Ae^{-t} + Be^{-t} - Bte^{-r}) + Ae^{-t} + Bte^{-t} \\
 &amp; = 0. 
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-254">Exponential functions often appear in the solutions of differential equations, which are themselves often viewed as mathematical models of physical systems. Hence exponential functions play a significant role in predicting physical quantities, which goes a long way towards justifying their importance.</p></section><section class="subsection" id="subsection-derivatives-of-logarithms"><h3 class="heading hide-type">
+</div></article><p id="p-264">Exponential functions often appear in the solutions of differential equations, which are themselves often viewed as mathematical models of physical systems. Hence exponential functions play a significant role in predicting physical quantities, which goes a long way towards justifying their importance.</p></section><section class="subsection" id="subsection-derivatives-of-logarithms"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Derivatives of Logarithms</span>
 </h3>
-<p id="p-255">Just as we can get the derivative of every exponential function <span class="process-math">\(a^{x}\)</span> just by knowing the derivative of <span class="process-math">\(e^{x}\text{,}\)</span> we can get the derivative of every logarithmic function <span class="process-math">\(\log_{a}x\)</span> just by knowing that <span class="process-math">\(\dv{}{x}\ln x = \frac{1}{x}\text{.}\)</span></p>
+<p id="p-265">Just as we can get the derivative of every exponential function <span class="process-math">\(a^{x}\)</span> just by knowing the derivative of <span class="process-math">\(e^{x}\text{,}\)</span> we can get the derivative of every logarithmic function <span class="process-math">\(\log_{a}x\)</span> just by knowing that <span class="process-math">\(\dv{}{x}\ln x = \frac{1}{x}\text{.}\)</span></p>
 <article class="theorem theorem-like" id="theorem-derivatives-of-logarithmic-functions"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.3.4</span><span class="period">.</span><span class="space"> </span><span class="title">Derivatives of Logarithmic Functions.</span>
 </h4>
-<p id="p-256">Let <span class="process-math">\(a &gt; 0, a\neq 1\)</span> and set <span class="process-math">\(f(x) = \log_{a}x\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<p id="p-266">Let <span class="process-math">\(a &gt; 0, a\neq 1\)</span> and set <span class="process-math">\(f(x) = \log_{a}x\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(x) = \frac{1}{x\ln a}.
 \end{equation*}
 </div></article><article class="example example-like" id="example-differentiating-nested-logarithms"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Differentiating nested logarithms.</span>
 </h4>
-<p id="p-257">Let <span class="process-math">\(f(x) = \log_{2}(\log_{5} x)\text{.}\)</span> Find <span class="process-math">\(f'(x)\text{.}\)</span></p>
+<p id="p-267">Let <span class="process-math">\(f(x) = \log_{2}(\log_{5} x)\text{.}\)</span> Find <span class="process-math">\(f'(x)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
-<p id="p-258">By the chain rule, we have</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like">
+<p id="p-268">By the chain rule, we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 f'(x) = \frac{1}{(\log_{5}x)\ln 2}\dv{}{x}\log_{5}x = \frac{1}{(\log_{5} x)\ln 2}\frac{1}{x\ln 5},
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-259">Logarithms can be used to greatly simplify derivatives involving products, division or exponentiation using a technique known as <dfn class="terminology">logarithmic differentiation</dfn>.</p>
+</div></article><p id="p-269">Logarithms can be used to greatly simplify derivatives involving products, division or exponentiation using a technique known as <dfn class="terminology">logarithmic differentiation</dfn>.</p>
 <article class="example example-like" id="example-a-simple-fraction"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">A simple fraction.</span>
 </h4>
-<p id="p-260">Let <span class="process-math">\(f(x) = \frac{e^{-x}\cos x}{x^{2} + 4x + 4}\text{.}\)</span> Find <span class="process-math">\(f'(x)\text{.}\)</span></p>
+<p id="p-270">Let <span class="process-math">\(f(x) = \frac{e^{-x}\cos x}{x^{2} + 4x + 4}\text{.}\)</span> Find <span class="process-math">\(f'(x)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like">
-<p id="p-261">We can find <span class="process-math">\(f'(x)\)</span> without resorting to logarithms, but this would require using the product, quotient and chain rules. The algebra would be awful. So we'll using logarithms instead! Set <span class="process-math">\(y = f(x)\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
+<p id="p-271">We can find <span class="process-math">\(f'(x)\)</span> without resorting to logarithms, but this would require using the product, quotient and chain rules. The algebra would be awful. So we'll using logarithms instead! Set <span class="process-math">\(y = f(x)\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \ln y = \ln e^{-x} + \ln\cos x - \ln (x^{2} + 4x + 4) = -x + \ln\cos x - 2\ln(x+2).
 \end{equation*}
 </div>
 <p class="continuation">Now we differentiate both sides implicitly to obtain</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{y'}{y} = -1 - \frac{\sin x}{\cos x} - \frac{2}{x+2}.
 \end{equation*}
 </div>
-<p id="p-262">Hence</p>
-<div class="displaymath process-math">
+<p id="p-272">Hence</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y' = y\left(-1 - \tan x - \frac{2}{x+2}\right) = \frac{e^{-x}\cos x}{x^{2} + 4x + 4}\left(-1 - \tan x - \frac{2}{x+2}\right).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-263">Logarithmic differentiation is useful for finding derivatives of expressions containing complicated quotients, products or powers.</p>
+</div></article><p id="p-273">Logarithmic differentiation is useful for finding derivatives of expressions containing complicated quotients, products or powers.</p>
 <article class="example example-like" id="example-a-simple-exponent"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">A simple exponent.</span>
 </h4>
-<p id="p-264">Let <span class="process-math">\(h(z) = z^{z}\text{.}\)</span> Find <span class="process-math">\(h'(z)\text{.}\)</span></p>
+<p id="p-274">Let <span class="process-math">\(h(z) = z^{z}\text{.}\)</span> Find <span class="process-math">\(h'(z)\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
-<p id="p-265">We'll use logarithmic differentiation again to simplify <span class="process-math">\(h\)</span> and remove the exponent. Set <span class="process-math">\(y = h(z)\text{,}\)</span> which gives</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
+<p id="p-275">We'll use logarithmic differentiation again to simplify <span class="process-math">\(h\)</span> and remove the exponent. Set <span class="process-math">\(y = h(z)\text{,}\)</span> which gives</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \ln y = z\ln z.
 \end{equation*}
 </div>
 <p class="continuation">So</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{y'}{y} = \ln z + 1,
 \end{equation*}
 </div>
 <p class="continuation">which means that</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y' = y(\ln z + 1) = z^{z}(\ln z + 1).
 \end{equation*}

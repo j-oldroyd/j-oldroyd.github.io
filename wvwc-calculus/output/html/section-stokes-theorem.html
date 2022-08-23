@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:39-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,8 +307,8 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-stokes-theorem"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">14.8</span> <span class="title">Stokes' Theorem</span>
 </h2>
-<p id="p-1754">Suppose we want to find the circulation of a vector field <span class="process-math">\(\vb{F}\)</span> on a surface <span class="process-math">\(S\text{.}\)</span> If <span class="process-math">\(S\)</span> lies in the plane, then we can use Green's Theorem to say that</p>
-<div class="displaymath process-math">
+<p id="p-1764">Suppose we want to find the circulation of a vector field <span class="process-math">\(\vb{F}\)</span> on a surface <span class="process-math">\(S\text{.}\)</span> If <span class="process-math">\(S\)</span> lies in the plane, then we can use Green's Theorem to say that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \iint_{S}\curlt{\vb{F}}\,dA = \oint_{\partial S}\vb{F}\cdot\vb{T}\,ds\text{.}
 \end{equation*}
@@ -310,8 +317,8 @@ true);
 <article class="theorem theorem-like" id="theorem-stokes-theorem"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">14.8.1</span><span class="period">.</span><span class="space"> </span><span class="title">Stokes' Theorem.</span>
 </h3>
-<p id="p-1755">Let <span class="process-math">\(S\)</span> denote a simple, closed, orientable surface with unit normal <span class="process-math">\(\vb{n}\)</span> and let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on <span class="process-math">\(S\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<p id="p-1765">Let <span class="process-math">\(S\)</span> denote a simple, closed, orientable surface with unit normal <span class="process-math">\(\vb{n}\)</span> and let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on <span class="process-math">\(S\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \oint_{\partial S}\vb{F}\cdot\vb{T}\,ds = \iint_{S}\curl\vb{F}\,d\vb{S}\text{,}
 \end{equation*}
@@ -319,42 +326,42 @@ true);
 <p class="continuation">where <span class="process-math">\(\partial S\)</span> is oriented counterclockwise with respect to <span class="process-math">\(\vb{n}\text{.}\)</span></p></article><article class="example example-like" id="example-circulation-along-a-triangle"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.8.2</span><span class="period">.</span><span class="space"> </span><span class="title">Circulation Along a Triangle.</span>
 </h3>
-<p id="p-1756">Let <span class="process-math">\(C\)</span> denote the triangle formed by the boundary of the plane <span class="process-math">\(x + y+ z = 1\)</span> in the first octant, traversed counterclockwise when viewed from below. Let <span class="process-math">\(\vb{F} = \dotprod{y^{2} + z^{2}, x^{2} + z^{2}, x^{2} + y^{2}}\text{.}\)</span> Find <span class="process-math">\(\oint_{C}\vb{F}\dr\text{.}\)</span></p>
+<p id="p-1766">Let <span class="process-math">\(C\)</span> denote the triangle formed by the boundary of the plane <span class="process-math">\(x + y+ z = 1\)</span> in the first octant, traversed counterclockwise when viewed from below. Let <span class="process-math">\(\vb{F} = \dotprod{y^{2} + z^{2}, x^{2} + z^{2}, x^{2} + y^{2}}\text{.}\)</span> Find <span class="process-math">\(\oint_{C}\vb{F}\dr\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-295" id="solution-295"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-295"><div class="solution solution-like">
-<p id="p-1757">By <a href="" class="xref" data-knowl="./knowl/theorem-stokes-theorem.html" title="Theorem 14.8.1: Stokes' Theorem">Stokes' Theorem</a>, we can write</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-296" id="solution-296"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-296"><div class="solution solution-like">
+<p id="p-1767">By <a href="" class="xref" data-knowl="./knowl/theorem-stokes-theorem.html" title="Theorem 14.8.1: Stokes' Theorem">Stokes' Theorem</a>, we can write</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-stokes-theorem.html">
 \begin{equation*}
 \oint_{C}\vb{F}\dr = \iint_{S}\curl\vb{F}\cdot\vb{n}\,dS
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(S\)</span> is the surface contained by <span class="process-math">\(C\text{.}\)</span> To find <span class="process-math">\(\vb{n}\)</span> we'll parameterize <span class="process-math">\(S\)</span> using</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-stokes-theorem.html">
 \begin{equation*}
 \vb{r}(u,v) = \dotprod{u, v, 1 - u - v}, 0\leq u \leq 1 - v,  0\leq v\leq 1\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Then</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-stokes-theorem.html">
 \begin{equation*}
 \vb{r}_{u}\times\vb{r}_{v} = \dotprod{1, 1, 1}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">Likewise,</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-stokes-theorem.html">
 \begin{equation*}
 \curl\vb{F} = 2\dotprod{y - z, z - x, x - y}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">So</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-stokes-theorem.html">
 \begin{equation*}
 \oint_{C}\vb{F}\dr = \int_{0}^{1}\int_{0}^{1 - v}-2(0)\,du\,dv = 0\text{.}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-1758">An easier way to find a normal vector in the last example would be to use our knowledge from <a href="section-equations-of-lines-and-planes.html" class="internal" title="Section 11.5: Equations of Lines and Planes">Section 11.5</a>. However, the following approach is more general. If <span class="process-math">\(S\)</span> is described by the equation <span class="process-math">\(F(x,y,z) = 0\text{,}\)</span> then <span class="process-math">\(\grad\vb{F}\)</span> is guaranteed to be normal to <span class="process-math">\(S\text{.}\)</span> This is especially useful if <span class="process-math">\(S\)</span> can be described by an equation of the form <span class="process-math">\(z = f(x,y)\text{,}\)</span> as above. To see how, note that</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1768">An easier way to find a normal vector in the last example would be to use our knowledge from <a href="section-equations-of-lines-and-planes.html" class="internal" title="Section 11.5: Equations of Lines and Planes">Section 11.5</a>. However, the following approach is more general. If <span class="process-math">\(S\)</span> is described by the equation <span class="process-math">\(F(x,y,z) = 0\text{,}\)</span> then <span class="process-math">\(\grad\vb{F}\)</span> is guaranteed to be normal to <span class="process-math">\(S\text{.}\)</span> This is especially useful if <span class="process-math">\(S\)</span> can be described by an equation of the form <span class="process-math">\(z = f(x,y)\text{,}\)</span> as above. To see how, note that</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-equations-of-lines-and-planes.html" id="md-250">
 \begin{align*}
 x + y + z \amp = 1 \\
 \amp \implies F(x,y,z) = 1 - x - y - z \\
@@ -364,7 +371,7 @@ x + y + z \amp = 1 \\
 <article class="example example-like" id="example-circulation-along-a-paraboloid"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.8.3</span><span class="period">.</span><span class="space"> </span><span class="title">Circulation Along a Paraboloid.</span>
 </h3>
-<p id="p-1759">Let <span class="process-math">\(\vb{F} = \dotprod{xz, yz, xyz}\)</span> and let <span class="process-math">\(S\)</span> denote the paraboloid <span class="process-math">\(z = x^{2} + y^{2}\)</span> that lies inside the cylinder <span class="process-math">\(x^{2} + y^{2} = 1\text{,}\)</span> oriented upwards. Use Stokes' Theorem to set up the surface integral equal to <span class="process-math">\(\oint_{\partial S}\vb{F}\dr\text{.}\)</span></p></article><p id="p-1760">SUGGESTED PROBLEMS: 1, 3, 5, 7</p></section></div></main>
+<p id="p-1769">Let <span class="process-math">\(\vb{F} = \dotprod{xz, yz, xyz}\)</span> and let <span class="process-math">\(S\)</span> denote the paraboloid <span class="process-math">\(z = x^{2} + y^{2}\)</span> that lies inside the cylinder <span class="process-math">\(x^{2} + y^{2} = 1\text{,}\)</span> oriented upwards. Use Stokes' Theorem to set up the surface integral equal to <span class="process-math">\(\oint_{\partial S}\vb{F}\dr\text{.}\)</span></p></article><p id="p-1770">SUGGESTED PROBLEMS: 1, 3, 5, 7</p></section></div></main>
 </div>
 </body>
 </html>

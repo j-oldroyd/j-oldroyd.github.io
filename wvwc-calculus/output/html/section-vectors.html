@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:30-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -301,50 +308,50 @@ true);
 <section class="section" id="section-vectors"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.2</span> <span class="title">Vectors</span>
 </h2>
-<section class="introduction" id="introduction-18"><p id="p-1104">One of our goals in this chapter is to adequately describe motion in space. A useful way to do this uses the concept of <dfn class="terminology">vector</dfn>, which we think of as a quantity that has both direction and magnitude/length. A simple example would be velocity: velocity in space has a direction and also a magnitude (speed). We will typically denote vectors by using boldface letters such as <span class="process-math">\(\mathbf{x}\)</span> or letters with a bar overhead such as <span class="process-math">\(\bar{x}\text{.}\)</span> We represent vectors as arrows with an <dfn class="terminology">initial point</dfn> and a <dfn class="terminology">terminal point</dfn>:</p>
+<section class="introduction" id="introduction-18"><p id="p-1114">One of our goals in this chapter is to adequately describe motion in space. A useful way to do this uses the concept of <dfn class="terminology">vector</dfn>, which we think of as a quantity that has both direction and magnitude/length. A simple example would be velocity: velocity in space has a direction and also a magnitude (speed). We will typically denote vectors by using boldface letters such as <span class="process-math">\(\mathbf{x}\)</span> or letters with a bar overhead such as <span class="process-math">\(\bar{x}\text{.}\)</span> We represent vectors as arrows with an <dfn class="terminology">initial point</dfn> and a <dfn class="terminology">terminal point</dfn>:</p>
 <figure class="figure figure-like" id="figure-vector-representation"><div class="image-box" style="width: 20%; margin-left: 40%; margin-right: 40%;"><img src="generated/latex-image/image-vector-representation.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.1<span class="period">.</span></span><span class="space"> </span>A vector.</figcaption></figure><p id="p-1105">We say that two vectors <span class="process-math">\(\mathbf{x},\mathbf{y}\)</span> are <dfn class="terminology">equivalent</dfn>, or <dfn class="terminology">equal</dfn>, if they have the same magnitude and direction. We write this as <span class="process-math">\(\mathbf{x} = \mathbf{y}\text{.}\)</span></p></section><section class="subsection" id="subsection-addition-and-scalar-multiplication"><h3 class="heading hide-type">
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.1<span class="period">.</span></span><span class="space"> </span>A vector.</figcaption></figure><p id="p-1115">We say that two vectors <span class="process-math">\(\mathbf{x},\mathbf{y}\)</span> are <dfn class="terminology">equivalent</dfn>, or <dfn class="terminology">equal</dfn>, if they have the same magnitude and direction. We write this as <span class="process-math">\(\mathbf{x} = \mathbf{y}\text{.}\)</span></p></section><section class="subsection" id="subsection-addition-and-scalar-multiplication"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Addition and Scalar Multiplication</span>
 </h3>
-<p id="p-1106">Given two vectors <span class="process-math">\(\mathbf{x} = \overrightarrow{AB},\mathbf{y}=\overrightarrow{BC}\text{,}\)</span> we can add them to get the new vector</p>
-<div class="displaymath process-math">
+<p id="p-1116">Given two vectors <span class="process-math">\(\mathbf{x} = \overrightarrow{AB},\mathbf{y}=\overrightarrow{BC}\text{,}\)</span> we can add them to get the new vector</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-vector-addition.html">
 \begin{equation*}
 \mathbf{x}+\mathbf{y} = \overrightarrow{AC}.
 \end{equation*}
 </div>
-<p id="p-1107">So the vector <span class="process-math">\(\mathbf{x}+\mathbf{y}\)</span> is obtained by moving the tail of <span class="process-math">\(\mathbf{y}\)</span> to the tip of <span class="process-math">\(\mathbf{x}\)</span> and then drawing a vector from the tail of <span class="process-math">\(\mathbf{x}\)</span> to the tip of <span class="process-math">\(\mathbf{y}\text{.}\)</span></p>
+<p id="p-1117">So the vector <span class="process-math">\(\mathbf{x}+\mathbf{y}\)</span> is obtained by moving the tail of <span class="process-math">\(\mathbf{y}\)</span> to the tip of <span class="process-math">\(\mathbf{x}\)</span> and then drawing a vector from the tail of <span class="process-math">\(\mathbf{x}\)</span> to the tip of <span class="process-math">\(\mathbf{y}\text{.}\)</span></p>
 <figure class="figure figure-like" id="figure-vector-addition"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;"><img src="generated/latex-image/image-vector-addition.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.2<span class="period">.</span></span><span class="space"> </span>Vector addition.</figcaption></figure><p id="p-1108">The sum <span class="process-math">\(\mathbf{x}+\mathbf{y}\)</span> of vectors <span class="process-math">\(\mathbf{x},\mathbf{y}\)</span> can be computed using either the <dfn class="terminology">triangle law</dfn>, illustrated above in <a href="" class="xref" data-knowl="./knowl/figure-vector-addition.html" title="Figure 11.2.2">Figure 11.2.2</a>, or the similar <dfn class="terminology">parallelogram law</dfn>. We can also scale vectors using <dfn class="terminology">scalar multiplication</dfn>: if <span class="process-math">\(\alpha\)</span> is a scalar<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-4" id="fn-4"><sup> 4 </sup></a> then <span class="process-math">\(\alpha\mathbf{x}\)</span> is defined to be the vector that has the same direction as <span class="process-math">\(\mathbf{x}\)</span> if <span class="process-math">\(\alpha&gt;0\)</span> and the opposite direction if <span class="process-math">\(\alpha&lt;0\text{,}\)</span> but the magnitude is rescaled by the factor <span class="process-math">\(\alpha\text{.}\)</span></p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.2<span class="period">.</span></span><span class="space"> </span>Vector addition.</figcaption></figure><p id="p-1118">The sum <span class="process-math">\(\mathbf{x}+\mathbf{y}\)</span> of vectors <span class="process-math">\(\mathbf{x},\mathbf{y}\)</span> can be computed using either the <dfn class="terminology">triangle law</dfn>, illustrated above in <a href="" class="xref" data-knowl="./knowl/figure-vector-addition.html" title="Figure 11.2.2">Figure 11.2.2</a>, or the similar <dfn class="terminology">parallelogram law</dfn>. We can also scale vectors using <dfn class="terminology">scalar multiplication</dfn>: if <span class="process-math">\(\alpha\)</span> is a scalar<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-4" id="fn-4"><sup> 4 </sup></a> then <span class="process-math">\(\alpha\mathbf{x}\)</span> is defined to be the vector that has the same direction as <span class="process-math">\(\mathbf{x}\)</span> if <span class="process-math">\(\alpha&gt;0\)</span> and the opposite direction if <span class="process-math">\(\alpha&lt;0\text{,}\)</span> but the magnitude is rescaled by the factor <span class="process-math">\(\alpha\text{.}\)</span></p>
 <article class="example example-like" id="example-vector-subtraction"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">Vector subtraction.</span>
 </h4>
-<p id="p-1109">Using the previous graph, we can compute <span class="process-math">\(2\mathbf{x}-\mathbf{y}\text{.}\)</span> We just need to scale the vectors properly and then add <span class="process-math">\(2\mathbf{x}\)</span> to <span class="process-math">\(-\mathbf{y}\text{.}\)</span></p></article></section><section class="subsection" id="subsection-vector-components"><h3 class="heading hide-type">
+<p id="p-1119">Using the previous graph, we can compute <span class="process-math">\(2\mathbf{x}-\mathbf{y}\text{.}\)</span> We just need to scale the vectors properly and then add <span class="process-math">\(2\mathbf{x}\)</span> to <span class="process-math">\(-\mathbf{y}\text{.}\)</span></p></article></section><section class="subsection" id="subsection-vector-components"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Vector Components</span>
 </h3>
-<p id="p-1110">Although it isn't too hard to add and scale vectors visually, it'll be beneficial to do the same algebraically. We can do so by breaking a vector down into its <dfn class="terminology">components</dfn>. Consider a vector in <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\RR^{2}\text{,}\)</span> and suppose if we move it to the origin then the tip of the vector is at the point <span class="process-math">\((3,-1)\text{.}\)</span> Then the components of <span class="process-math">\(\mathbf{x}\)</span> are <span class="process-math">\(3\)</span> and <span class="process-math">\(-1\text{,}\)</span> and we write</p>
-<div class="displaymath process-math">
+<p id="p-1120">Although it isn't too hard to add and scale vectors visually, it'll be beneficial to do the same algebraically. We can do so by breaking a vector down into its <dfn class="terminology">components</dfn>. Consider a vector in <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\RR^{2}\text{,}\)</span> and suppose if we move it to the origin then the tip of the vector is at the point <span class="process-math">\((3,-1)\text{.}\)</span> Then the components of <span class="process-math">\(\mathbf{x}\)</span> are <span class="process-math">\(3\)</span> and <span class="process-math">\(-1\text{,}\)</span> and we write</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{x} = \dotprod{3,-1}.
 \end{equation*}
 </div>
-<p id="p-1111">Note the use of brackets here, since technically we are saying that the vector <span class="process-math">\(\mathbf{x}\)</span> is distinct from the point <span class="process-math">\((3,-1)\text{,}\)</span> even though they are closely related. We say that the <dfn class="terminology">position vector</dfn> of a point is the vector whose components are the same as the coordinates of the point. Geometrically, the position vector of a point <span class="process-math">\(P\)</span> is the vector with its tail at the origin and its tip at <span class="process-math">\(P\text{.}\)</span></p>
-<p id="p-1112">So any vector in <span class="process-math">\(\RR^{2}\)</span> can be represented using components by <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2}}\text{.}\)</span> Similarly, any vector in <span class="process-math">\(\RR^{3}\)</span> can be represented as <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}}\text{.}\)</span> Once you represent a vector in component form, addition and scalar multiplication is straightforward.</p>
+<p id="p-1121">Note the use of brackets here, since technically we are saying that the vector <span class="process-math">\(\mathbf{x}\)</span> is distinct from the point <span class="process-math">\((3,-1)\text{,}\)</span> even though they are closely related. We say that the <dfn class="terminology">position vector</dfn> of a point is the vector whose components are the same as the coordinates of the point. Geometrically, the position vector of a point <span class="process-math">\(P\)</span> is the vector with its tail at the origin and its tip at <span class="process-math">\(P\text{.}\)</span></p>
+<p id="p-1122">So any vector in <span class="process-math">\(\RR^{2}\)</span> can be represented using components by <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2}}\text{.}\)</span> Similarly, any vector in <span class="process-math">\(\RR^{3}\)</span> can be represented as <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}}\text{.}\)</span> Once you represent a vector in component form, addition and scalar multiplication is straightforward.</p>
 <article class="example example-like" id="example-vector-addition-with-components"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Vector addition with components.</span>
 </h4>
-<p id="p-1113">Let <span class="process-math">\(\mathbf{a} = \dotprod{-2,1,3}\)</span> and <span class="process-math">\(\mathbf{b} = \dotprod{0,2,1}\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<p id="p-1123">Let <span class="process-math">\(\mathbf{a} = \dotprod{-2,1,3}\)</span> and <span class="process-math">\(\mathbf{b} = \dotprod{0,2,1}\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{b}-3\mathbf{a} = \dotprod{6,-1,-8}.
 \end{equation*}
-</div></article><p id="p-1114">Finding magnitudes of vectors can also be done by applying the distance formula from <a href="section-coordinates-in-3-space.html" class="internal" title="Section 11.1: Coordinates in 3-Space">Section 11.1</a> to the components of the vectors. The magnitude of a vector <span class="process-math">\(\mathbf{x}\)</span> is denoted by <span class="process-math">\(|\mathbf{x}|\)</span> or <span class="process-math">\(\norm{\mathbf{x}}\text{.}\)</span> For example, the magnitude of <span class="process-math">\(\mathbf{b}-3\mathbf{a}\)</span> from the previous example is</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1124">Finding magnitudes of vectors can also be done by applying the distance formula from <a href="section-coordinates-in-3-space.html" class="internal" title="Section 11.1: Coordinates in 3-Space">Section 11.1</a> to the components of the vectors. The magnitude of a vector <span class="process-math">\(\mathbf{x}\)</span> is denoted by <span class="process-math">\(|\mathbf{x}|\)</span> or <span class="process-math">\(\norm{\mathbf{x}}\text{.}\)</span> For example, the magnitude of <span class="process-math">\(\mathbf{b}-3\mathbf{a}\)</span> from the previous example is</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-coordinates-in-3-space.html">
 \begin{equation*}
 \norm{\mathbf{b}-3\mathbf{a}} = \sqrt{36+1+64} = \sqrt{101}.
 \end{equation*}
 </div>
-<p id="p-1115">Given a vector <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}},\)</span></p>
-<div class="displaymath process-math">
+<p id="p-1125">Given a vector <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}},\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\mathbf{x}} = \sqrt{x_{1}^{2}+x_{2}^{2}+x_{3}^{2}}.
 \end{equation*}
@@ -352,8 +359,8 @@ true);
 <article class="example example-like" id="example-a-vector-equation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">A vector equation.</span>
 </h4>
-<p id="p-1116">We can use vectors to describe curves and surfaces. For example, let <span class="process-math">\(\mathbf{r} = \dotprod{x,y,z}\)</span> and <span class="process-math">\(\mathbf{r}_{0} = \dotprod{a,b,c}\text{.}\)</span> Let <span class="process-math">\(r\geq0\text{.}\)</span> Then the set of all points <span class="process-math">\((x,y,z)\)</span> that satisfy the equation</p>
-<div class="displaymath process-math">
+<p id="p-1126">We can use vectors to describe curves and surfaces. For example, let <span class="process-math">\(\mathbf{r} = \dotprod{x,y,z}\)</span> and <span class="process-math">\(\mathbf{r}_{0} = \dotprod{a,b,c}\text{.}\)</span> Let <span class="process-math">\(r\geq0\text{.}\)</span> Then the set of all points <span class="process-math">\((x,y,z)\)</span> that satisfy the equation</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\mathbf{r}-\mathbf{r}_{0}} = r
 \end{equation*}
@@ -361,13 +368,13 @@ true);
 <p class="continuation">has a very nice description: it's just the sphere of radius <span class="process-math">\(r\)</span> centered at <span class="process-math">\((a,b,c)\text{.}\)</span></p></article><article class="example example-like" id="example-finding-position-vectors"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Finding components of vectors.</span>
 </h4>
-<p id="p-1117">Consider the points <span class="process-math">\(A(4,0,-2)\)</span> and <span class="process-math">\(B(4,2,1)\text{.}\)</span> We want to find the components of the vector <span class="process-math">\(\overrightarrow{AB}\text{.}\)</span> We can do this by translating <span class="process-math">\(\overrightarrow{AB}\)</span> to the origin, which is done by subtracting from each coordinate of <span class="process-math">\(B\)</span> the corresponding coordinate of <span class="process-math">\(A\text{.}\)</span> So the vector <span class="process-math">\(\overrightarrow{AB}\)</span> is given by</p>
-<div class="displaymath process-math">
+<p id="p-1127">Consider the points <span class="process-math">\(A(4,0,-2)\)</span> and <span class="process-math">\(B(4,2,1)\text{.}\)</span> We want to find the components of the vector <span class="process-math">\(\overrightarrow{AB}\text{.}\)</span> We can do this by translating <span class="process-math">\(\overrightarrow{AB}\)</span> to the origin, which is done by subtracting from each coordinate of <span class="process-math">\(B\)</span> the corresponding coordinate of <span class="process-math">\(A\text{.}\)</span> So the vector <span class="process-math">\(\overrightarrow{AB}\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \overrightarrow{AB} = \dotprod{4-4,2-0,1+2} = \dotprod{0,2,3}.
 \end{equation*}
-</div></article><p id="p-1118">In general, given <span class="process-math">\(A(x_{1},y_{1},z_{1})\)</span> and <span class="process-math">\(B(x_{2},y_{2},z_{2}),\)</span> the vector <span class="process-math">\(\mathbf{x} = \overrightarrow{AB}\)</span> is given by</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1128">In general, given <span class="process-math">\(A(x_{1},y_{1},z_{1})\)</span> and <span class="process-math">\(B(x_{2},y_{2},z_{2}),\)</span> the vector <span class="process-math">\(\mathbf{x} = \overrightarrow{AB}\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-coordinates-in-3-space.html">
 \begin{equation*}
 \mathbf{x} = \dotprod{x_{2}-x_{1},y_{2}-y_{1},z_{2}-z_{1}}.
 \end{equation*}
@@ -375,21 +382,21 @@ true);
 <article class="theorem theorem-like" id="theorem-properties-of-vector-addition-and-scalar-multiplication"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of Vector Addition and Scalar Multiplication.</span>
 </h4>
-<p id="p-1119">Let <span class="process-math">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span> be vectors and let <span class="process-math">\(\alpha,\beta\)</span> be scalars. Then the following are true:</p>
+<p id="p-1129">Let <span class="process-math">\(\mathbf{x},\mathbf{y},\mathbf{z}\)</span> be vectors and let <span class="process-math">\(\alpha,\beta\)</span> be scalars. Then the following are true:</p>
 <ol class="decimal cols2">
-<li id="li-110"><p id="p-1120"><span class="process-math">\(\mathbf{x}+\mathbf{y} = \mathbf{y}+\mathbf{x}\text{.}\)</span></p></li>
-<li id="li-111"><p id="p-1121"><span class="process-math">\(\displaystyle \mathbf{x}+(\mathbf{y}+\mathbf{z}) = (\mathbf{x}+\mathbf{y})+\mathbf{z}.\)</span></p></li>
-<li id="li-112"><p id="p-1122"><span class="process-math">\(\displaystyle \mathbf{x}+\mathbf{0} = \mathbf{x}.\)</span></p></li>
-<li id="li-113"><p id="p-1123"><span class="process-math">\(\displaystyle \mathbf{x}+(-\mathbf{x}) = \mathbf{0}.\)</span></p></li>
-<li id="li-114"><p id="p-1124"><span class="process-math">\(\displaystyle \alpha(\mathbf{x}+\mathbf{y}) = \alpha\mathbf{x}+\alpha\mathbf{y}.\)</span></p></li>
-<li id="li-115"><p id="p-1125"><span class="process-math">\(\displaystyle (\alpha+\beta)\mathbf{x} = \alpha\mathbf{x}+\beta\mathbf{y}\)</span></p></li>
-<li id="li-116"><p id="p-1126"><span class="process-math">\(\displaystyle (\alpha\beta)\mathbf{x} = \alpha(\beta)\mathbf{x}.\)</span></p></li>
-<li id="li-117"><p id="p-1127"><span class="process-math">\(\displaystyle 1\mathbf{x} = \mathbf{x}.\)</span></p></li>
+<li id="li-110"><p id="p-1130"><span class="process-math">\(\mathbf{x}+\mathbf{y} = \mathbf{y}+\mathbf{x}\text{.}\)</span></p></li>
+<li id="li-111"><p id="p-1131"><span class="process-math">\(\displaystyle \mathbf{x}+(\mathbf{y}+\mathbf{z}) = (\mathbf{x}+\mathbf{y})+\mathbf{z}.\)</span></p></li>
+<li id="li-112"><p id="p-1132"><span class="process-math">\(\displaystyle \mathbf{x}+\mathbf{0} = \mathbf{x}.\)</span></p></li>
+<li id="li-113"><p id="p-1133"><span class="process-math">\(\displaystyle \mathbf{x}+(-\mathbf{x}) = \mathbf{0}.\)</span></p></li>
+<li id="li-114"><p id="p-1134"><span class="process-math">\(\displaystyle \alpha(\mathbf{x}+\mathbf{y}) = \alpha\mathbf{x}+\alpha\mathbf{y}.\)</span></p></li>
+<li id="li-115"><p id="p-1135"><span class="process-math">\(\displaystyle (\alpha+\beta)\mathbf{x} = \alpha\mathbf{x}+\beta\mathbf{y}\)</span></p></li>
+<li id="li-116"><p id="p-1136"><span class="process-math">\(\displaystyle (\alpha\beta)\mathbf{x} = \alpha(\beta)\mathbf{x}.\)</span></p></li>
+<li id="li-117"><p id="p-1137"><span class="process-math">\(\displaystyle 1\mathbf{x} = \mathbf{x}.\)</span></p></li>
 </ol></article></section><section class="subsection" id="subsection-basis-vectors-and-unit-vectors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Basis Vectors and Unit Vectors</span>
 </h3>
-<p id="p-1128">Every vector in <span class="process-math">\(\RR^{3}\)</span> can be written using three components: <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}}.\)</span> Each component corresponds to a coordinate axis, and we can rewrite <span class="process-math">\(\mathbf{x}\)</span> as a <dfn class="terminology">linear combination</dfn> of three different vectors, with each vector corresponding to a coordinate axis:</p>
-<div class="displaymath process-math">
+<p id="p-1138">Every vector in <span class="process-math">\(\RR^{3}\)</span> can be written using three components: <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},x_{2},x_{3}}.\)</span> Each component corresponds to a coordinate axis, and we can rewrite <span class="process-math">\(\mathbf{x}\)</span> as a <dfn class="terminology">linear combination</dfn> of three different vectors, with each vector corresponding to a coordinate axis:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{x} = x_{1}\dotprod{1,0,0}+x_{2}\dotprod{0,1,0}+x_{3}\dotprod{0,0,1}.
 \end{equation*}
@@ -397,35 +404,35 @@ true);
 <dfn class="terminology">standard basis vectors</dfn><article class="definition definition-like" id="definition-standard-basis-vectors"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Standard Basis Vectors.</span>
 </h4>
-<p id="p-1129">The standard basis for <span class="process-math">\(\RR^{3}\)</span> is the set <span class="process-math">\(\{\mathbf{i},\mathbf{j},\mathbf{k}\}\text{,}\)</span> where</p>
-<div class="displaymath process-math">
+<p id="p-1139">The standard basis for <span class="process-math">\(\RR^{3}\)</span> is the set <span class="process-math">\(\{\mathbf{i},\mathbf{j},\mathbf{k}\}\text{,}\)</span> where</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{i} = \dotprod{1,0,0},\quad\mathbf{j} = \dotprod{0,1,0}\quad\text{and}\quad\mathbf{k} = \dotprod{0,0,1}.
 \end{equation*}
-</div></article><p id="p-1130">As we've seen, every vector <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\RR^{3}\)</span> can be expressed using only these three vectors. The standard basis has two important properties: it is perpendicular (also called <dfn class="terminology">orthogonal</dfn>) and every vector in the collection has magnitude <span class="process-math">\(1\text{.}\)</span> In other words,</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1140">As we've seen, every vector <span class="process-math">\(\mathbf{x}\)</span> in <span class="process-math">\(\RR^{3}\)</span> can be expressed using only these three vectors. The standard basis has two important properties: it is perpendicular (also called <dfn class="terminology">orthogonal</dfn>) and every vector in the collection has magnitude <span class="process-math">\(1\text{.}\)</span> In other words,</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\mathbf{i}} = \norm{\mathbf{j}} = \norm{\mathbf{k}} = 1.
 \end{equation*}
 </div>
-<p id="p-1131">These vectors are essentially designed to capture the "coordinate directions", and are plotted below.</p>
+<p id="p-1141">These vectors are essentially designed to capture the "coordinate directions", and are plotted below.</p>
 <figure class="figure figure-like" id="figure-standard-basis"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;"><img src="generated/latex-image/image-standard-basis.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.9<span class="period">.</span></span><span class="space"> </span>The standard basis.</figcaption></figure><p id="p-1132">This also leads us to our next definition.</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">11.2.9<span class="period">.</span></span><span class="space"> </span>The standard basis.</figcaption></figure><p id="p-1142">This also leads us to our next definition.</p>
 <article class="definition definition-like" id="definition-unit-vectors"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Unit Vectors.</span>
 </h4>
-<p id="p-1133">A vector <span class="process-math">\(\mathbf{x}\)</span> is a unit vector if <span class="process-math">\(\norm{\mathbf{x}} = 1\text{.}\)</span></p></article><p id="p-1134">Unit vectors are useful if we just need to indicate a direction, and we don't care about magnitude. Every nonzero vector can be rescaled to a unit vector: just divide the vector by its norm.</p>
+<p id="p-1143">A vector <span class="process-math">\(\mathbf{x}\)</span> is a unit vector if <span class="process-math">\(\norm{\mathbf{x}} = 1\text{.}\)</span></p></article><p id="p-1144">Unit vectors are useful if we just need to indicate a direction, and we don't care about magnitude. Every nonzero vector can be rescaled to a unit vector: just divide the vector by its norm.</p>
 <article class="example example-like" id="example-direction-from-one-point-to-another"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Direction from one point to another.</span>
 </h4>
-<p id="p-1135">Consider the points <span class="process-math">\(A(1,2,-1)\)</span> and <span class="process-math">\(B(0,-3,2)\text{.}\)</span> Then we can find the unit vector indicating the direction from <span class="process-math">\(A\)</span> to <span class="process-math">\(B\text{.}\)</span> First, set</p>
-<div class="displaymath process-math">
+<p id="p-1145">Consider the points <span class="process-math">\(A(1,2,-1)\)</span> and <span class="process-math">\(B(0,-3,2)\text{.}\)</span> Then we can find the unit vector indicating the direction from <span class="process-math">\(A\)</span> to <span class="process-math">\(B\text{.}\)</span> First, set</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{x} = \overrightarrow{AB} = \dotprod{-1,-5,3}.
 \end{equation*}
 </div>
-<p id="p-1136">Then the unit vector that gives the direction from <span class="process-math">\(A\)</span> to <span class="process-math">\(B\)</span> is given by</p>
-<div class="displaymath process-math">
+<p id="p-1146">Then the unit vector that gives the direction from <span class="process-math">\(A\)</span> to <span class="process-math">\(B\)</span> is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-151">
 \begin{align*}
 \mathbf{u} &amp; = \frac{\mathbf{x}}{\norm{\mathbf{x}}} \\
 &amp; = \frac{\dotprod{-1,-5,3}}{\sqrt{1+25+9}} \\
@@ -434,47 +441,47 @@ true);
 </div></article><article class="example example-like" id="example-a-vector-equation-for-the-unit-sphere"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">A vector equation for the unit sphere.</span>
 </h4>
-<p id="p-1137">Using the concept of a unit vector, we can very easily describe the unit sphere<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-5" id="fn-5"><sup> 5 </sup></a> using a vector equation. If we set <span class="process-math">\(\mathbf{r} = (x,y,z)\text{,}\)</span> then the unit sphere is just the set of all solutions of</p>
-<div class="displaymath process-math">
+<p id="p-1147">Using the concept of a unit vector, we can very easily describe the unit sphere<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-5" id="fn-5"><sup> 5 </sup></a> using a vector equation. If we set <span class="process-math">\(\mathbf{r} = (x,y,z)\text{,}\)</span> then the unit sphere is just the set of all solutions of</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\mathbf{r}} = 1.
 \end{equation*}
 </div></article></section><section class="subsection" id="subsection-applications"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Applications</span>
 </h3>
-<p id="p-1138">Many physical quantities have both a direction and a magnitude, like velocity, acceleration and forces. Vectors are ideally suited to measure these quantities.</p>
+<p id="p-1148">Many physical quantities have both a direction and a magnitude, like velocity, acceleration and forces. Vectors are ideally suited to measure these quantities.</p>
 <article class="example example-like" id="example-weight-of-a-chain"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Weight of a chain.</span>
 </h4>
-<p id="p-1139">A still chain is fixed to two ends of a level divide. The tension of the chain at each fixed end can be represented by vectors pointing away from the chain. Call these tension forces <span class="process-math">\(\mathbf{T}_{1}\)</span> and <span class="process-math">\(\mathbf{T}_{2}\text{.}\)</span> Suppose we know that each force vector makes an angle of <span class="process-math">\(45^{\circ}\)</span> with the ground on either side of the chain's fixed ends, and that the magnitude of each tension is <span class="quantity">43 N</span>. Then we can use vector addition to find the weight of the chain.</p>
-<p id="p-1140">Let <span class="process-math">\(\mathbf{w}\)</span> denote the weight of the chain considered as a vector (so that it's pointing down). Since the chain is still, its <dfn class="terminology">resultant</dfn><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-6" id="fn-6"><sup> 6 </sup></a> must be <span class="process-math">\(\mathbf{0}\text{.}\)</span> So we can say that</p>
-<div class="displaymath process-math">
+<p id="p-1149">A still chain is fixed to two ends of a level divide. The tension of the chain at each fixed end can be represented by vectors pointing away from the chain. Call these tension forces <span class="process-math">\(\mathbf{T}_{1}\)</span> and <span class="process-math">\(\mathbf{T}_{2}\text{.}\)</span> Suppose we know that each force vector makes an angle of <span class="process-math">\(45^{\circ}\)</span> with the ground on either side of the chain's fixed ends, and that the magnitude of each tension is <span class="quantity">43 N</span>. Then we can use vector addition to find the weight of the chain.</p>
+<p id="p-1150">Let <span class="process-math">\(\mathbf{w}\)</span> denote the weight of the chain considered as a vector (so that it's pointing down). Since the chain is still, its <dfn class="terminology">resultant</dfn><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-6" id="fn-6"><sup> 6 </sup></a> must be <span class="process-math">\(\mathbf{0}\text{.}\)</span> So we can say that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{T}_{1}+\mathbf{T}_{2} + \mathbf{w} = \mathbf{0}
 \end{equation*}
 </div>
-<p id="p-1141">or in other words</p>
-<div class="displaymath process-math">
+<p id="p-1151">or in other words</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \mathbf{w} = -\mathbf{T}_{1}-\mathbf{T}_{2}.
 \end{equation*}
 </div>
-<p id="p-1142">What we need to find is <span class="process-math">\(\norm{\mathbf{w}}\text{,}\)</span> which we can do without too much trouble if we can rewrite the tension vectors in component form. In fact, we have</p>
-<div class="displaymath process-math">
+<p id="p-1152">What we need to find is <span class="process-math">\(\norm{\mathbf{w}}\text{,}\)</span> which we can do without too much trouble if we can rewrite the tension vectors in component form. In fact, we have</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-152">
 \begin{align*}
 \mathbf{T}_{1} &amp; = \dotprod{-\norm{\mathbf{T}_{1}}\cos45^{\circ},\norm{\mathbf{T}_{1}}\sin45^{\circ}} \\
 \mathbf{T}_{2} &amp; = \dotprod{\norm{\mathbf{T}_{2}}\cos45^{\circ},\norm{\mathbf{T}_{2}}\sin45^{\circ}} 
 \end{align*}
 </div>
-<p id="p-1143">So it follows that</p>
-<div class="displaymath process-math">
+<p id="p-1153">So it follows that</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-153">
 \begin{align*}
 \norm{\mathbf{w}} &amp; = \norm{-\mathbf{T}_{1}-\mathbf{T}_{2}} \\
 &amp; = \norm{\dotprod{0,-2\cdot43\frac{\sqrt{2}}{2}}}\\
 &amp; = 43\sqrt{2} 
 \end{align*}
 </div>
-<p id="p-1144">Therefore the chain weighs <span class="process-math">\(43\sqrt{2}\)</span><span class="quantity">N</span>.</p></article><p id="p-1145">SUGGESTED PROBLEMS: 1--17 odd, 23, 25, 27</p></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-4"><div class="fn">In other words, a number.</div></div>
+<p id="p-1154">Therefore the chain weighs <span class="process-math">\(43\sqrt{2}\)</span><span class="quantity">N</span>.</p></article><p id="p-1155">SUGGESTED PROBLEMS: 1--17 odd, 23, 25, 27</p></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-4"><div class="fn">In other words, a number.</div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-5"><div class="fn">The sphere of radius <span class="process-math">\(1\)</span> centered at the origin.</div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-6"><div class="fn">The sum of all forces acting on the chain.</div></div>
 </div></main>

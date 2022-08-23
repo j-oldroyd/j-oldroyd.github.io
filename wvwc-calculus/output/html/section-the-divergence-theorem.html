@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:39-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,23 +307,23 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-the-divergence-theorem"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">14.9</span> <span class="title">The Divergence Theorem</span>
 </h2>
-<p id="p-1761">So far we've considered several different versions of the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Fundamental Theorem of Calculus</a>. There is the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-line-integrals.html" title="Theorem 14.3.4: Fundamental Theorem of Line Integrals">Fundamental Theorem of Line Integrals</a> which applies to the gradient operator <span class="process-math">\(\grad\text{,}\)</span> <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem.html" title="Theorem 14.4.1: Green's Theorem">Green's Theorem</a> which applies to the two-dimensional curl, <a href="" class="xref" data-knowl="./knowl/theorem-stokes-theorem.html" title="Theorem 14.8.1: Stokes' Theorem">Stokes' Theorem</a> which applies to <span class="process-math">\(\curl\text{,}\)</span> and also <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Green's Theorem for Flux Integrals</a> which applies to the two-dimensional divergence. The only remaining generalization is the <dfn class="terminology">divergence theorem</dfn>.</p>
+<p id="p-1771">So far we've considered several different versions of the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-of-calculus.html" title="Theorem 6.4.2: Fundamental Theorem of Calculus">Fundamental Theorem of Calculus</a>. There is the <a href="" class="xref" data-knowl="./knowl/theorem-fundamental-theorem-line-integrals.html" title="Theorem 14.3.4: Fundamental Theorem of Line Integrals">Fundamental Theorem of Line Integrals</a> which applies to the gradient operator <span class="process-math">\(\grad\text{,}\)</span> <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem.html" title="Theorem 14.4.1: Green's Theorem">Green's Theorem</a> which applies to the two-dimensional curl, <a href="" class="xref" data-knowl="./knowl/theorem-stokes-theorem.html" title="Theorem 14.8.1: Stokes' Theorem">Stokes' Theorem</a> which applies to <span class="process-math">\(\curl\text{,}\)</span> and also <a href="" class="xref" data-knowl="./knowl/theorem-green-s-theorem-for-flux-integrals.html" title="Theorem 14.4.5: Green's Theorem for Flux Integrals">Green's Theorem for Flux Integrals</a> which applies to the two-dimensional divergence. The only remaining generalization is the <dfn class="terminology">divergence theorem</dfn>.</p>
 <article class="theorem theorem-like" id="theorem-divergence-theorem"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">14.9.1</span><span class="period">.</span><span class="space"> </span><span class="title">Divergence Theorem.</span>
 </h3>
-<p id="p-1762">Let <span class="process-math">\(E\)</span> be a simple solid region and let <span class="process-math">\(S\)</span> be the boundary surface of <span class="process-math">\(E\)</span> oriented outwards. Let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on <span class="process-math">\(E\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+<p id="p-1772">Let <span class="process-math">\(E\)</span> be a simple solid region and let <span class="process-math">\(S\)</span> be the boundary surface of <span class="process-math">\(E\)</span> oriented outwards. Let <span class="process-math">\(\vb{F}\)</span> denote a continuously differentiable vector field on <span class="process-math">\(E\text{.}\)</span> Then</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \iint_{S}\vb{F}\cdot d\vb{S} = \iiint_{E}\div\vb{F}\,dV\text{.}
 \end{equation*}
 </div></article><article class="example example-like" id="example-flux-across-a-spherical-cap"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.9.2</span><span class="period">.</span><span class="space"> </span><span class="title">Flux across a spherical cap.</span>
 </h3>
-<p id="p-1763">Let <span class="process-math">\(S\)</span> denote the top half of the sphere of radius <span class="process-math">\(5\)</span> centered at the origin. Let <span class="process-math">\(\vb{F} = \dotprod{x^{3} - y^{3}, y^{3} - z^{3}, z^{3} - x^{3}}\text{.}\)</span> Determine if <span class="process-math">\(\vb{F}\)</span> flows out of or into <span class="process-math">\(S\text{.}\)</span></p>
+<p id="p-1773">Let <span class="process-math">\(S\)</span> denote the top half of the sphere of radius <span class="process-math">\(5\)</span> centered at the origin. Let <span class="process-math">\(\vb{F} = \dotprod{x^{3} - y^{3}, y^{3} - z^{3}, z^{3} - x^{3}}\text{.}\)</span> Determine if <span class="process-math">\(\vb{F}\)</span> flows out of or into <span class="process-math">\(S\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-296" id="solution-296"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-296"><div class="solution solution-like">
-<p id="p-1764">We need to calculate the flux integral <span class="process-math">\(\iint_{S}\vb{F}\cdot d\vb{S}\text{,}\)</span> which is made easier using <a href="" class="xref" data-knowl="./knowl/theorem-divergence-theorem.html" title="Theorem 14.9.1: Divergence Theorem">Theorem 14.9.1</a>. If we let <span class="process-math">\(E\)</span> denote the interior of this region, we get</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-297" id="solution-297"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-297"><div class="solution solution-like">
+<p id="p-1774">We need to calculate the flux integral <span class="process-math">\(\iint_{S}\vb{F}\cdot d\vb{S}\text{,}\)</span> which is made easier using <a href="" class="xref" data-knowl="./knowl/theorem-divergence-theorem.html" title="Theorem 14.9.1: Divergence Theorem">Theorem 14.9.1</a>. If we let <span class="process-math">\(E\)</span> denote the interior of this region, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-divergence-theorem.html" id="md-251">
 \begin{align*}
 \iint_{S}\vb{F}\cdot d\vb{S} \amp \iiint_{E}\div\vb{F}\,dV \\
 \amp = \iiint_{E}3(x^{2} + y^{2} + z^{2})\,dV \\
@@ -327,7 +334,7 @@ true);
 </div></article><article class="example example-like" id="example-flux-across-a-cube"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.9.3</span><span class="period">.</span><span class="space"> </span><span class="title">Flux across a cube.</span>
 </h3>
-<p id="p-1765">Let <span class="process-math">\(S\)</span> denote the surface of the unit cube with vertices at <span class="process-math">\((0,0,0)\)</span> and <span class="process-math">\((1,1,1)\)</span> and let <span class="process-math">\(\vb{F} = \dotprod{xy, y^{2}z, z^{3}}\text{.}\)</span> Find <span class="process-math">\(\iint_{S}\vb{F}\cdot\vb{n}\,dS\)</span> where <span class="process-math">\(\vb{n}\)</span> is the <em class="emphasis">inward</em> unit normal to <span class="process-math">\(S\text{.}\)</span></p></article><p id="p-1766">SUGGESTED PROBLEMS: 1, 3, 5, 19.</p></section></div></main>
+<p id="p-1775">Let <span class="process-math">\(S\)</span> denote the surface of the unit cube with vertices at <span class="process-math">\((0,0,0)\)</span> and <span class="process-math">\((1,1,1)\)</span> and let <span class="process-math">\(\vb{F} = \dotprod{xy, y^{2}z, z^{3}}\text{.}\)</span> Find <span class="process-math">\(\iint_{S}\vb{F}\cdot\vb{n}\,dS\)</span> where <span class="process-math">\(\vb{n}\)</span> is the <em class="emphasis">inward</em> unit normal to <span class="process-math">\(S\text{.}\)</span></p></article><p id="p-1776">SUGGESTED PROBLEMS: 1, 3, 5, 19.</p></section></div></main>
 </div>
 </body>
 </html>

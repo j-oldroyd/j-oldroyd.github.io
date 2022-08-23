@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:27-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,8 +307,8 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-power-series"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">9.5</span> <span class="title">Power Series</span>
 </h2>
-<p id="p-957">A <dfn class="terminology">power series</dfn> is a series of the form</p>
-<div class="displaymath process-math">
+<p id="p-967">A <dfn class="terminology">power series</dfn> is a series of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=0}^{\infty}a_{k}x^{k}
 \end{equation*}
@@ -310,52 +317,52 @@ true);
 <article class="example example-like" id="example-examples-of-power-series"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Examples of Power Series.</span>
 </h3>
-<p id="p-958">Determine which of the following are power series:</p>
+<p id="p-968">Determine which of the following are power series:</p>
 <ol class="decimal">
 <li id="li-107"><p id="p-derived-li-107"><span class="process-math">\(\displaystyle \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{k}}{k!}\)</span></p></li>
 <li id="li-108"><p id="p-derived-li-108"><span class="process-math">\(\displaystyle x - \pi x^{4} + x^{6} + \frac{1}{10}x^{100} + \cdots\)</span></p></li>
 <li id="li-109"><p id="p-derived-li-109"><span class="process-math">\(\displaystyle \frac{1}{x^{2}} + \frac{1}{x} + 1 + x + x^{2} + \cdots\)</span></p></li>
-</ol></article><p id="p-959">Power series can also be <em class="emphasis">centered</em> at other numbers. A power series <dfn class="terminology">centered about</dfn> <span class="process-math">\(\mathbf{a}\)</span> is a series of the form</p>
-<div class="displaymath process-math">
+</ol></article><p id="p-969">Power series can also be <em class="emphasis">centered</em> at other numbers. A power series <dfn class="terminology">centered about</dfn> <span class="process-math">\(\mathbf{a}\)</span> is a series of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=0}^{\infty}a_{k}(x - a)^{k}\text{.}
 \end{equation*}
 </div>
-<p id="p-960">An important concern about power series is for which values of <span class="process-math">\(x\)</span> the series will converge. These questions are usually answered using the root or ratio tests.</p>
+<p id="p-970">An important concern about power series is for which values of <span class="process-math">\(x\)</span> the series will converge. These questions are usually answered using the root or ratio tests.</p>
 <article class="example example-like" id="example-convergence-of-a-power-series"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Convergence of a Power Series.</span>
 </h3>
-<p id="p-961">For what values of <span class="process-math">\(x\)</span> does the series</p>
-<div class="displaymath process-math">
+<p id="p-971">For what values of <span class="process-math">\(x\)</span> does the series</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}
 \end{equation*}
 </div>
 <p class="continuation">converge?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-193" id="solution-193"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-193"><div class="solution solution-like">
-<p id="p-962">We'll try the ratio test to check convergence of this series. Doing so, we get</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-194" id="solution-194"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-194"><div class="solution solution-like">
+<p id="p-972">We'll try the ratio test to check convergence of this series. Doing so, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 r = \lim_{k\to\infty}|x|\frac{k+1}{k+2} = |x|\text{.}
 \end{equation*}
 </div>
 <p class="continuation">So the series converges if <span class="process-math">\(|x| \lt 1\)</span> and diverges if <span class="process-math">\(|x| &gt; 1\text{.}\)</span></p>
-<p id="p-963">When <span class="process-math">\(r = |x| = 1\text{,}\)</span> or <span class="process-math">\(x = \pm1\text{,}\)</span> the test fails. So we need to use other methods to determine the convergence or the series at these points. At <span class="process-math">\(x = -1\text{,}\)</span> the series becomes</p>
-<div class="displaymath process-math">
+<p id="p-973">When <span class="process-math">\(r = |x| = 1\text{,}\)</span> or <span class="process-math">\(x = \pm1\text{,}\)</span> the test fails. So we need to use other methods to determine the convergence or the series at these points. At <span class="process-math">\(x = -1\text{,}\)</span> the series becomes</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-alternating-harmonic-series.html">
 \begin{equation*}
 \sum_{k=0}^{\infty}\frac{(-1)^{2k+1}}{k+1} = - \sum_{k=0}^{\infty}\frac{1}{k+1}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">which diverges by the comparison test. At <span class="process-math">\(x = 1\text{,}\)</span> the series reduces to the alternating harmonic series which converges by <a href="" class="xref" data-knowl="./knowl/example-alternating-harmonic-series.html" title="Example 9.4.3: Alternating Harmonic Series">Example 9.4.3</a>.</p>
-<p id="p-964">Therefore this series converges for all <span class="process-math">\(x\)</span> in the interval <span class="process-math">\((-1, 1]\)</span> and diverges otherwise.</p>
+<p id="p-974">Therefore this series converges for all <span class="process-math">\(x\)</span> in the interval <span class="process-math">\((-1, 1]\)</span> and diverges otherwise.</p>
 </div></div>
-</div></article><p id="p-965">In <a href="" class="xref" data-knowl="./knowl/example-convergence-of-a-power-series.html" title="Example 9.5.2: Convergence of a Power Series">Example 9.5.2</a>, the values of <span class="process-math">\(x\)</span> for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the <dfn class="terminology">interval of convergence</dfn> of the series. The “radius” of this interval is called the <dfn class="terminology">radius of convergence</dfn>. In general, we have the following.</p>
+</div></article><p id="p-975">In <a href="" class="xref" data-knowl="./knowl/example-convergence-of-a-power-series.html" title="Example 9.5.2: Convergence of a Power Series">Example 9.5.2</a>, the values of <span class="process-math">\(x\)</span> for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the <dfn class="terminology">interval of convergence</dfn> of the series. The “radius” of this interval is called the <dfn class="terminology">radius of convergence</dfn>. In general, we have the following.</p>
 <article class="theorem theorem-like" id="theorem-convergence-of-power-series"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Convergence of Power Series.</span>
 </h3>
-<p id="p-966">Given a series <span class="process-math">\(\sum_{k=0}^{\infty}a_{k}x^{k}\text{,}\)</span> there exists <span class="process-math">\(R \geq 0\)</span> such that the series converges on the interval <span class="process-math">\((a - R, a + R)\text{.}\)</span> The largest such <span class="process-math">\(R\)</span> is the radius of convergence.</p></article><p id="p-967">For most series we'll consider (i.e., those of the form <span class="process-math">\(\sum a_{k}(x - a)^{k}\)</span>), we can find <span class="process-math">\(R\)</span> using the following formula:</p>
-<div class="displaymath process-math">
+<p id="p-976">Given a series <span class="process-math">\(\sum_{k=0}^{\infty}a_{k}x^{k}\text{,}\)</span> there exists <span class="process-math">\(R \geq 0\)</span> such that the series converges on the interval <span class="process-math">\((a - R, a + R)\text{.}\)</span> The largest such <span class="process-math">\(R\)</span> is the radius of convergence.</p></article><p id="p-977">For most series we'll consider (i.e., those of the form <span class="process-math">\(\sum a_{k}(x - a)^{k}\)</span>), we can find <span class="process-math">\(R\)</span> using the following formula:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 R = \lim_{k\to\infty}\left|\frac{a_{k}}{a_{k+1}}\right|\text{.}
 \end{equation*}
@@ -363,11 +370,11 @@ R = \lim_{k\to\infty}\left|\frac{a_{k}}{a_{k+1}}\right|\text{.}
 <article class="example example-like" id="example-interval-and-radius-of-convergence"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Interval and Radius of Convergence.</span>
 </h3>
-<p id="p-968">Find the interval and radius of convergence of the series <span class="process-math">\(\sum_{k = 0}^{\infty}\frac{(-1)^{2k}(x - \frac{\pi}{2})^{2k}}{(2k)!}\text{.}\)</span></p>
+<p id="p-978">Find the interval and radius of convergence of the series <span class="process-math">\(\sum_{k = 0}^{\infty}\frac{(-1)^{2k}(x - \frac{\pi}{2})^{2k}}{(2k)!}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-194" id="solution-194"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-194"><div class="solution solution-like">
-<p id="p-969">We'll find the radius of convergence first, which is given by</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-195" id="solution-195"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-195"><div class="solution solution-like">
+<p id="p-979">We'll find the radius of convergence first, which is given by</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-124">
 \begin{align*}
 R \amp = \lim_{k\to\infty}\frac{(2k + 2)!}{(2k)!} \\
 \amp = \lim_{k\to\infty} (2k + 2)(2k + 1) \\
@@ -376,33 +383,33 @@ R \amp = \lim_{k\to\infty}\frac{(2k + 2)!}{(2k)!} \\
 </div>
 <p class="continuation">So the radius of convergence is infinite, implying that the interval of convergence is <span class="process-math">\((-\infty,\infty)\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-970">We can also use the root test instead of the ratio test.</p>
+</div></article><p id="p-980">We can also use the root test instead of the ratio test.</p>
 <article class="example example-like" id="example-interval-and-radius-of-convergence-from-root-test"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">9.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Interval and Radius of Convergence from Root Test.</span>
 </h3>
-<p id="p-971">Determine the interval and radius of convergence of</p>
-<div class="displaymath process-math">
+<p id="p-981">Determine the interval and radius of convergence of</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{n = 1}^{\infty} \frac{(-2)^{n}}{\sqrt{n}}(4x + 3)^{n}\text{.}
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-195" id="solution-195"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-195"><div class="solution solution-like">
-<p id="p-972">If we apply the root test to this series, we get</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-196" id="solution-196"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-196"><div class="solution solution-like">
+<p id="p-982">If we apply the root test to this series, we get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 r = \lim_{n\to\infty}\sqrt[n]{\frac{2^{n}|4x + 3|^{n}}{\sqrt{n}}} = \lim_{n\to\infty}\frac{2}{n^{1/2n}}|4x + 3| = 2|4x + 3|\text{.}
 \end{equation*}
 </div>
 <p class="continuation">We need this to be less than <span class="process-math">\(1\text{,}\)</span> which gives</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 2|4x + 3| \lt 1 \Rightarrow -\frac{7}{8} \lt x \lt -\frac{5}{8}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">and so the series converges for all <span class="process-math">\(x\)</span> in <span class="process-math">\((-\frac{7}{8}, -\frac{5}{8})\text{.}\)</span> So the radius of convergence is <span class="process-math">\(\frac{1}{8}\text{.}\)</span></p>
-<p id="p-973">Now we need to check the endpoints. At <span class="process-math">\(x = -\frac{7}{8}\text{,}\)</span> the series becomes <span class="process-math">\(\sum_{n = 1}^{\infty}\frac{1}{\sqrt{n}}\text{,}\)</span> which diverges by the <span class="process-math">\(p\)</span>-series test. At <span class="process-math">\(x = -\frac{5}{8}\text{,}\)</span> the series becomes <span class="process-math">\(\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}}\)</span> which converges by the alternating series test.</p>
-<p id="p-974">Therefore the interval of convergence is <span class="process-math">\((-\frac{7}{8}, -\frac{5}{8}]\text{.}\)</span></p>
+<p id="p-983">Now we need to check the endpoints. At <span class="process-math">\(x = -\frac{7}{8}\text{,}\)</span> the series becomes <span class="process-math">\(\sum_{n = 1}^{\infty}\frac{1}{\sqrt{n}}\text{,}\)</span> which diverges by the <span class="process-math">\(p\)</span>-series test. At <span class="process-math">\(x = -\frac{5}{8}\text{,}\)</span> the series becomes <span class="process-math">\(\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}}\)</span> which converges by the alternating series test.</p>
+<p id="p-984">Therefore the interval of convergence is <span class="process-math">\((-\frac{7}{8}, -\frac{5}{8}]\text{.}\)</span></p>
 </div></div>
 </div></article></section></div></main>
 </div>

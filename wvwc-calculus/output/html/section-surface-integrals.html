@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-25T15:59:39-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,11 +14,11 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
-    useLabelIds: true,
     tagSide: "right",
     tagIndent: ".8em",
     packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
@@ -51,6 +48,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -63,7 +68,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
@@ -105,6 +109,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -150,6 +156,7 @@ true);
 <a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
 <li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
 <li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
+<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
 </ul>
 </li>
 <li class="link">
@@ -300,20 +307,20 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-surface-integrals"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">14.7</span> <span class="title">Surface Integrals</span>
 </h2>
-<p id="p-1741">A <dfn class="terminology">surface integral</dfn> of a function <span class="process-math">\(f(x,y,z)\)</span> over a surface <span class="process-math">\(S\)</span> in <span class="process-math">\(\RR^{3}\)</span> will be an integral of the form</p>
-<div class="displaymath process-math">
+<p id="p-1751">A <dfn class="terminology">surface integral</dfn> of a function <span class="process-math">\(f(x,y,z)\)</span> over a surface <span class="process-math">\(S\)</span> in <span class="process-math">\(\RR^{3}\)</span> will be an integral of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-surface-area.html">
 \begin{equation*}
 \iint_{S}f\,dS\text{.}
 \end{equation*}
 </div>
 <p class="continuation">This integral represents the net accumulation, or “sum”, of <span class="process-math">\(f\)</span> on the surface <span class="process-math">\(S\text{.}\)</span> We use <span class="process-math">\(dS\)</span> to indicate an “infinitesimal surface area” on <span class="process-math">\(S\text{.}\)</span> Since we already know the surface area from <a href="" class="xref" data-knowl="./knowl/definition-surface-area.html" title="Definition 14.6.4: Surface Area">Definition 14.6.4</a>, we can say that</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-surface-area.html">
 \begin{equation*}
 dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 \end{equation*}
 </div>
 <p class="continuation">for some vector function <span class="process-math">\(\vb{r}(u,v)\)</span> that parameterizes <span class="process-math">\(S\text{.}\)</span> Hence</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-surface-area.html">
 \begin{equation*}
 \iint_{S}f\,dS = \iint_{D}f(\vb{r}(u,v))\norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 \end{equation*}
@@ -322,51 +329,51 @@ dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 <article class="example example-like" id="example-mass-of-a-surface"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.7.1</span><span class="period">.</span><span class="space"> </span><span class="title">Mass of a Surface.</span>
 </h3>
-<p id="p-1742">Find the mass of the hemisphere <span class="process-math">\(S\)</span> given by <span class="process-math">\(x^{2} + y^{2} + z^{2} = 4, z\geq 0\)</span> assuming that <span class="process-math">\(\rho(x,y,z) = x^{2}z + y^{2}z\text{.}\)</span></p>
+<p id="p-1752">Find the mass of the hemisphere <span class="process-math">\(S\)</span> given by <span class="process-math">\(x^{2} + y^{2} + z^{2} = 4, z\geq 0\)</span> assuming that <span class="process-math">\(\rho(x,y,z) = x^{2}z + y^{2}z\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-292" id="solution-292"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-292"><div class="solution solution-like">
-<p id="p-1743">We need to compute the surface integral <span class="process-math">\(\iint_{S}\rho\,dS\text{.}\)</span> First, we need to find a vector function that traces out the hemisphere. Using spherical coordinates for inspiration, we can use</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-293" id="solution-293"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-293"><div class="solution solution-like">
+<p id="p-1753">We need to compute the surface integral <span class="process-math">\(\iint_{S}\rho\,dS\text{.}\)</span> First, we need to find a vector function that traces out the hemisphere. Using spherical coordinates for inspiration, we can use</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \vb{r}(\varphi,\theta) = \dotprod{2\sin\varphi\cos\theta, 2\sin\varphi\sin\theta, 2\cos\varphi}
 \end{equation*}
 </div>
 <p class="continuation">with</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-245">
 \begin{align*}
 0\leq \varphi \amp \leq \frac{\pi}{2} \\
 0\leq \theta \amp \leq 2\pi 
 \end{align*}
 </div>
 <p class="continuation">Then</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-246">
 \begin{align*}
 \vb{r}_{\varphi}\times\vb{r}_{\theta} \amp= \left|\begin{array}{ccc} \vb{i} \amp \vb{j} \amp \vb{k} \\ 2\cos\varphi\cos\theta \amp 2\cos\varphi\sin\theta \amp -2\sin\varphi \\ -2\sin\varphi\sin\theta \amp 2\sin\varphi\cos\theta \amp 0\end{array}\right|\\
 \amp= \dotprod{4\sin^{2}\varphi\cos\theta, 4\sin^{2}\varphi\sin\theta, 4\cos\varphi\sin\varphi\cos^{2}\theta + 4\cos\varphi\sin\varphi\sin^{2}\theta}
 \end{align*}
 </div>
 <p class="continuation">Now we need to find the magnitude:</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\vb{r}_{\varphi}\times\vb{r}_{\theta}} = 4\sqrt{\sin^{4}\varphi\cos^{2}\theta + \sin^{4}\varphi\sin^{2}\theta + \cos^{2}\varphi\sin^{2}\varphi} = 4\sin\varphi\text{.}
 \end{equation*}
 </div>
 <p class="continuation">So the mass is</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-247">
 \begin{align*}
 \iint_{S}\rho\,dS \amp = \int_{0}^{2\pi}\int_{0}^{\frac{\pi}{2}}8\sin^{2}\varphi\cos\varphi(4\sin\varphi)\,d\varphi\,d\theta\\
 \amp = \frac{8\pi}{3} \text{.}
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1744">If <span class="process-math">\(S\)</span> is given by the equation <span class="process-math">\(z = g(x,y)\text{,}\)</span> then we can use</p>
-<div class="displaymath process-math">
+</div></article><p id="p-1754">If <span class="process-math">\(S\)</span> is given by the equation <span class="process-math">\(z = g(x,y)\text{,}\)</span> then we can use</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \vb{r}(x,y) = \dotprod{x, y, g(x,y)}
 \end{equation*}
 </div>
 <p class="continuation">to trace out <span class="process-math">\(S\text{.}\)</span> This gives</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \norm{\vb{r}_{x}\times\vb{r}_{y}} = \sqrt{z_{x}^{2} + z_{y}^{2} + 1}\text{.}
 \end{equation*}
@@ -374,11 +381,11 @@ dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 <article class="example example-like" id="example-surface-integral-on-a-cone"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.7.2</span><span class="period">.</span><span class="space"> </span><span class="title">Surface Integral on a Cone.</span>
 </h3>
-<p id="p-1745">Set up the surface integral that gives the average value of <span class="process-math">\(f(x,y,z) = xy + z^{2}\)</span> on the part of the cone <span class="process-math">\(z = \sqrt{x^{2} + y^{2}}\)</span> that lies above the unit circle in the third octant.</p>
+<p id="p-1755">Set up the surface integral that gives the average value of <span class="process-math">\(f(x,y,z) = xy + z^{2}\)</span> on the part of the cone <span class="process-math">\(z = \sqrt{x^{2} + y^{2}}\)</span> that lies above the unit circle in the third octant.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-293" id="solution-293"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-293"><div class="solution solution-like">
-<p id="p-1746">Let <span class="process-math">\(S\)</span> denote the part of the cone in the third octant above the unit circle and let <span class="process-math">\(D\)</span> denote the portion of the unit circle directly under <span class="process-math">\(S\text{.}\)</span> The surface area of this part of the cone is <span class="process-math">\(\frac{\pi}{4}\text{,}\)</span> so the average value of <span class="process-math">\(f\)</span> on this part of the cone is</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-294" id="solution-294"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-294"><div class="solution solution-like">
+<p id="p-1756">Let <span class="process-math">\(S\)</span> denote the part of the cone in the third octant above the unit circle and let <span class="process-math">\(D\)</span> denote the portion of the unit circle directly under <span class="process-math">\(S\text{.}\)</span> The surface area of this part of the cone is <span class="process-math">\(\frac{\pi}{4}\text{,}\)</span> so the average value of <span class="process-math">\(f\)</span> on this part of the cone is</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-248">
 \begin{align*}
 \frac{4}{\pi} \amp \iint_{S}(xy + z^{2})\,dS \\
 \amp = \iint_{D} (xy + x^{2} + y^{2})\sqrt{2}\,dA \\
@@ -386,25 +393,25 @@ dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1747">We can also talk about surface integrals of vector fields. These are higher dimensional versions of flux integrals.</p>
+</div></article><p id="p-1757">We can also talk about surface integrals of vector fields. These are higher dimensional versions of flux integrals.</p>
 <article class="definition definition-like" id="definition-surface-integral-of-a-vector-field"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">14.7.3</span><span class="period">.</span><span class="space"> </span><span class="title">Surface Integral of a Vector Field.</span>
 </h3>
-<p id="p-1748">Let <span class="process-math">\(\vb{F}\)</span> be a continuous vector field on the piecewise smooth, oriented surface <span class="process-math">\(S\text{.}\)</span> Then the <dfn class="terminology">surface integral of <span class="process-math">\(\vb{F}\)</span> over <span class="process-math">\(S\)</span></dfn> is the quantity</p>
-<div class="displaymath process-math">
+<p id="p-1758">Let <span class="process-math">\(\vb{F}\)</span> be a continuous vector field on the piecewise smooth, oriented surface <span class="process-math">\(S\text{.}\)</span> Then the <dfn class="terminology">surface integral of <span class="process-math">\(\vb{F}\)</span> over <span class="process-math">\(S\)</span></dfn> is the quantity</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \iint_{S}\vb{F}\cdot d\vb{S} = \iint_{S}\vb{F}\cdot\vb{n}\,dS
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(\vb{n}\)</span> is chosen the unit normal vector to <span class="process-math">\(S\text{.}\)</span></p></article><p id="p-1749">The surface integral above measures how <span class="process-math">\(\vb{F}\)</span> flows across the surface <span class="process-math">\(S\)</span> in the direction of <span class="process-math">\(\vb{n}\text{.}\)</span> However, we will always have two possible choices for <span class="process-math">\(\vb{n}\text{.}\)</span> If <span class="process-math">\(S\)</span> is orientable, then we know we can specify a consistent choice of direction <span class="process-math">\(\vb{n}\text{.}\)</span> We just need to make sure this is done before computing the integral.</p>
-<p id="p-1750">If <span class="process-math">\(S:\vb{r}(u,v)\text{,}\)</span> we can replace <span class="process-math">\(\vb{n}\)</span> with</p>
-<div class="displaymath process-math">
+<p class="continuation">where <span class="process-math">\(\vb{n}\)</span> is chosen the unit normal vector to <span class="process-math">\(S\text{.}\)</span></p></article><p id="p-1759">The surface integral above measures how <span class="process-math">\(\vb{F}\)</span> flows across the surface <span class="process-math">\(S\)</span> in the direction of <span class="process-math">\(\vb{n}\text{.}\)</span> However, we will always have two possible choices for <span class="process-math">\(\vb{n}\text{.}\)</span> If <span class="process-math">\(S\)</span> is orientable, then we know we can specify a consistent choice of direction <span class="process-math">\(\vb{n}\text{.}\)</span> We just need to make sure this is done before computing the integral.</p>
+<p id="p-1760">If <span class="process-math">\(S:\vb{r}(u,v)\text{,}\)</span> we can replace <span class="process-math">\(\vb{n}\)</span> with</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{\vb{r}_{u}\times\vb{r}_{v}}{\norm{\vb{r}_{u}\times\vb{r}_{v}}}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">which gives</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \iint_{S}\vb{F}\cdot d\vb{S} = \iint_{S}\vb{F}\cdot\vb{r}_{u}\times\vb{r}_{v}\,dA\text{.}
 \end{equation*}
@@ -412,30 +419,30 @@ dS = \norm{\vb{r}_{u}\times\vb{r}_{v}}\,dA
 <article class="example example-like" id="example-flux-Into-a-sphere"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">14.7.4</span><span class="period">.</span><span class="space"> </span><span class="title">Flux Into a Sphere.</span>
 </h3>
-<p id="p-1751">Does <span class="process-math">\(\vb{F} = x\vb{i} - z\vb{j} + y\vb{k}\)</span> tend to flow into the sphere <span class="process-math">\(S: x^{2} + y^{2} + z^{2} = 4\text{?}\)</span></p>
+<p id="p-1761">Does <span class="process-math">\(\vb{F} = x\vb{i} - z\vb{j} + y\vb{k}\)</span> tend to flow into the sphere <span class="process-math">\(S: x^{2} + y^{2} + z^{2} = 4\text{?}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-294" id="solution-294"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-294"><div class="solution solution-like">
-<p id="p-1752">Stealing our work from <a href="" class="xref" data-knowl="./knowl/example-mass-of-a-surface.html" title="Example 14.7.1: Mass of a Surface">Example 14.7.1</a>, we can parameterize <span class="process-math">\(S\)</span> using</p>
-<div class="displaymath process-math">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-295" id="solution-295"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-295"><div class="solution solution-like">
+<p id="p-1762">Stealing our work from <a href="" class="xref" data-knowl="./knowl/example-mass-of-a-surface.html" title="Example 14.7.1: Mass of a Surface">Example 14.7.1</a>, we can parameterize <span class="process-math">\(S\)</span> using</p>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-mass-of-a-surface.html">
 \begin{equation*}
 \vb{r}(\varphi,\theta) = \dotprod{2\sin\varphi\cos\theta, 2\sin\varphi\sin\theta, 2\cos\varphi}
 \end{equation*}
 </div>
 <p class="continuation">which gives</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-mass-of-a-surface.html">
 \begin{equation*}
 \vb{r}_{\varphi}\times\vb{r}_{\theta} = \dotprod{4\sin^{2}\varphi\cos\theta, 4\sin^{2}\varphi\sin\theta, 4\cos\varphi\sin\varphi}\text{.}
 \end{equation*}
 </div>
 <p class="continuation">However, this is <em class="emphasis">not</em> the normal vector we need to use here. Instead, we'll multiply by a negative to get the inward normal. So</p>
-<div class="displaymath process-math">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/example-mass-of-a-surface.html" id="md-249">
 \begin{align*}
 \iint_{S}\vb{F}\cdot d\vb{S} \amp = \iint_{S} \vb{F}\cdot(\vb{r}_{\varphi}\times\vb{r}_{\theta})\,dA \\
 \amp = 8\int_{0}^{\pi}\int_{0}^{2\pi}(\sin^{3}\varphi\cos^{2}\theta + \sin^{2}\varphi\cos\varphi\sin\theta + \sin^{2}\varphi\cos\varphi\sin\theta)\,d\varphi\,d\theta
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-1753">SUGGESTED PROBLEMS: 7, 9, 23, 29.</p></section></div></main>
+</div></article><p id="p-1763">SUGGESTED PROBLEMS: 7, 9, 23, 29.</p></section></div></main>
 </div>
 </body>
 </html>
