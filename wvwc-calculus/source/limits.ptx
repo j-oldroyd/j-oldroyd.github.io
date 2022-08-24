@@ -43,7 +43,7 @@
                         real f(real x) {return x^2;}
 
                         draw(graph(f,-2,2), deepblue);
-                        
+
                         dot((-2,f(-2)), red);
                         draw((-2,0)--(-2,f(-2)), red+dashed);
                         dot((-1,f(-1)), red);
@@ -113,7 +113,7 @@
                 </solution>
             </example>
             <p>
-                To keep ourselves from writing "the limit of <m>f(x)</m> as <m>x</m> approaches some number <m>a</m>" over and over, let's introduce some notation: <m>\lim_{x\to a}f(x)</m>.
+                To keep ourselves from writing "the limit of <m>f(x)</m> as <m>x</m> approaches some number <m>a</m>" over and over, let's introduce some notation: <m>\lim\limits_{x\to a}f(x)</m>.
             </p>
             <example xml:id="example-limit-of-a-piecewise-function">
                 <title>Limit of a piecewise function</title>
@@ -123,7 +123,7 @@
                     </p>
                     <me>f(x) = \begin{cases} \sin x &amp; \text{if $x&lt;0$} \\ \cos x &amp; \text{otherwise} \end{cases}.</me>
                     <p>
-                        Find <m>\lim_{x\to0}f(x)</m>.
+                        Find <m>\lim\limits_{x\to0}f(x)</m>.
                     </p>
                 </statement>
                 <solution>
@@ -131,13 +131,15 @@
                         If we graph this function, we see that at <m>x=0</m> there is a jump in the graph.
                         In particular, if <m>x</m> approaches <m>0</m> from the left then <m>f(x)</m> approaches <m>0</m>, whereas if <m>x</m> approaches <m>0</m> from the right then <m>f(x)</m> approaches <m>1</m>.
                         So this function does not appear to have an unambiguous limit as <m>x</m> approaches <m>0</m>.
-                        Another way to say this: <m>\lim_{x\to0}f(x)</m> <em>does not exist</em>.
+                        Another way to say this: <m>\lim\limits_{x\to0}f(x)</m> <em>does not exist</em>.
                     </p>
                 </solution>
             </example>
             <p>
                 <xref ref="example-limit-of-a-piecewise-function" text="type-global" /> shows us something very important about limits: they depend on the two different ways <m>x</m> can approach a number.
                 So we introduce two new pieces of notation: the <term>left-hand limit</term> <m>\lim_{x\to a^{-}}f(x)</m> will stand for the value <m>f(x)</m> approaches (if any) as <m>x</m> approaches <m>a</m> from the left (i.e. as <m>x</m> increases to <m>a</m>), and <term>the right-hand limit</term> <m>\lim_{x\to a^{+}}f(x)</m> will stand for the value <m>f(x)</m> approaches (if any) as <m>x</m> approaches <m>a</m> from the right (i.e. as <m>x</m> decreases to <m>a</m>).
+                In <xref ref="example-limit-of-a-piecewise-function" text="type-global" />, we would say that
+                <me>\lim_{x\to0^{-}}f(x) = 0\text{ and }\lim_{x\to0^{+}}f(x) = 1</me>.
             </p>
             <p>
                 At this point, we can make a rough definition for the limit of a function.
@@ -179,6 +181,7 @@
                                 }
                                 \begin{tikzpicture}
                                     \begin{axis}[%
+                                        mystyle,
                                         axis x line = center,
                                         axis y line = center,
                                         xtick={-3,...,3},
@@ -189,7 +192,6 @@
                                         ymax = 1.5,
                                         xlabel={$x$},
                                         ylabel={$y$},
-                                        grid=both
                                         ]
                                         \foreach \xStart/\xEnd  in {-3/-1, -1/.5, .5/3} {
                                         \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {MyFunction(x)};
@@ -213,6 +215,10 @@
                     </p>
                 </solution>
             </example>
+            <p>
+                It's important to note that the value of a function at a point <m>x=a</m> is in general <em>completely independent</em> of the value of <m>\lim_{x\to a}f(x)</m>, i.e., we can't always expect <m>\lim_{x\to a}f(x)</m> to be equal to <m>f(a)</m>.
+                Functions for which this is true, however, are known as <em>continuous functions</em> and will be very important in <xref ref="section-continuity" text="type-global" /> and beyond.
+            </p>
         </subsection>
     </section>
     <section xml:id="section-computing-limits">
