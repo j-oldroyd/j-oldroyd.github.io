@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:43-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -61,7 +67,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -91,6 +96,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -202,28 +209,28 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-first-order-linear-odes"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.4</span> <span class="title">First-Order Linear ODEs</span>
 </h2>
-<section class="introduction" id="introduction-5"><p id="p-76">In this section we introduce a new type of ODE that we can solve, in addition to separable ODEs and "simple" ODEs of the form <span class="process-math">\(y'=f(x)\text{.}\)</span> The ODEs that we'll consider in this section are <dfn class="terminology">first-order linear ODEs</dfn>.</p>
+<section class="introduction" id="introduction-5"><p id="p-73">In this section we introduce a new type of ODE that we can solve, in addition to separable ODEs and "simple" ODEs of the form <span class="process-math">\(y^\prime=f(x)\text{.}\)</span> The ODEs that we'll consider in this section are <dfn class="terminology">first-order linear ODEs</dfn>.</p>
 <article class="definition definition-like" id="definition-first-order-linear-odes"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">First-Order Linear ODEs.</span>
 </h3>
-<p id="p-77">A first-order ODE is said to be linear if it can be written in the following form:</p>
+<p id="p-74">A first-order ODE is said to be linear if it can be written in the following form:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{y}{x} + P(x)y = Q(x).
 \end{equation*}
-</div></article><p id="p-78">We've actually seen such an ODE all the way back in <a href="" class="xref" data-knowl="./knowl/example-an-ivp-modeling-a-falling-object.html" title="Example 1.1.8: An IVP modeling a falling object">Example 1.1.8</a>. The ODE that we came up with in that problem can be rewritten as a first-order linear ODE with the right substitution (say, <span class="process-math">\(u = y'\)</span>). Our first goal in this section is then to figure out how to solve these ODEs.</p>
-<p id="p-79">Note that this section corresponds to Section 1.5 from the text.</p></section><section class="subsection" id="subsection-integrating-factors"><h3 class="heading hide-type">
+</div></article><p id="p-75">We've actually seen such an ODE all the way back in <a href="" class="xref" data-knowl="./knowl/example-an-ivp-modeling-a-falling-object.html" title="Example 1.1.8: An IVP modeling a falling object">Example 1.1.8</a>. The ODE that we came up with in that problem can be rewritten as a first-order linear ODE with the right substitution (say, <span class="process-math">\(u = y^\prime\)</span>). Our first goal in this section is then to figure out how to solve these ODEs.</p>
+<p id="p-76">Note that this section corresponds to Section 1.5 from the text.</p></section><section class="subsection" id="subsection-integrating-factors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Integrating Factors</span>
 </h3>
-<p id="p-80">To get a sense of how to solve first-order linear ODEs, we'll try some relatively simple examples first.</p>
+<p id="p-77">To get a sense of how to solve first-order linear ODEs, we'll try some relatively simple examples first.</p>
 <article class="example example-like" id="example-solving-a-first-order-linear-ode"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a first-order linear ODE.</span>
 </h4>
-<p id="p-81">Find the general solution of <span class="process-math">\(\dv{y}{x}+2y = x\text{.}\)</span></p>
+<p id="p-78">Find the general solution of <span class="process-math">\(\dv{y}{x}+2y = x\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-13" id="solution-13"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-13"><div class="solution solution-like">
-<p id="p-82">First, note that the ODE is indeed a first-order linear ODE since it takes the form given in <a href="" class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.4.1: First-Order Linear ODEs">Definition 1.4.1</a>. If we stare at the ODE for a bit, we might think that the left hand side looks like something we'd get after using the product rule. Just compare <span class="process-math">\((fg)' = fg'+f'g\)</span> with <span class="process-math">\(\dv{y}{x}+2y\text{,}\)</span> and it appears that the unknown function <span class="process-math">\(y\)</span> is taking the place of <span class="process-math">\(g\)</span> in the product rule formula. If we could just figure out what the function <span class="process-math">\(f\)</span> is supposed to be, then we could drastically simplify the left hand side of the ODE.</p>
-<p id="p-83">Unfortunately, there is no such function <span class="process-math">\(f\)</span> that works here. If there were, we'd have to have <span class="process-math">\(f'=2\)</span> and <span class="process-math">\(f=2x\text{,}\)</span> and clearly we aren't multiplying <span class="process-math">\(\dv{y}{x}\)</span> by <span class="process-math">\(2x\)</span> in the ODE. But we can pull a dirty trick here! We'll multiply through the ODE by <span class="process-math">\(e^{2x}\)</span> to get the new ODE</p>
+<p id="p-79">First, note that the ODE is indeed a first-order linear ODE since it takes the form given in <a href="" class="xref" data-knowl="./knowl/definition-first-order-linear-odes.html" title="Definition 1.4.1: First-Order Linear ODEs">Definition 1.4.1</a>. If we stare at the ODE for a bit, we might think that the left hand side looks like something we'd get after using the product rule. Just compare <span class="process-math">\((fg)^\prime = fg^\prime +f^\prime g\)</span> with <span class="process-math">\(\dv{y}{x}+2y\text{,}\)</span> and it appears that the unknown function <span class="process-math">\(y\)</span> is taking the place of <span class="process-math">\(g\)</span> in the product rule formula. If we could just figure out what the function <span class="process-math">\(f\)</span> is supposed to be, then we could drastically simplify the left hand side of the ODE.</p>
+<p id="p-80">Unfortunately, there is no such function <span class="process-math">\(f\)</span> that works here. If there were, we'd have to have <span class="process-math">\(f^\prime=2\)</span> and <span class="process-math">\(f=2x\text{,}\)</span> and clearly we aren't multiplying <span class="process-math">\(\dv{y}{x}\)</span> by <span class="process-math">\(2x\)</span> in the ODE. But we can pull a dirty trick here! We'll multiply through the ODE by <span class="process-math">\(e^{2x}\)</span> to get the new ODE</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 e^{2x}\dv{y}{x}+2e^{2x}y = xe^{2x}.
@@ -235,7 +242,7 @@ e^{2x}\dv{y}{x}+2e^{2x}y = xe^{2x}.
 e^{2x}\dv{y}{x}+2e^{2x}y = \dv{}{x}[e^{2x}y].
 \end{equation*}
 </div>
-<p id="p-84">So we can rewrite the entire ODE as</p>
+<p id="p-81">So we can rewrite the entire ODE as</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{}{x}[e^{2x}y] = xe^{2x}.
@@ -249,20 +256,20 @@ e^{2x}y = \frac{1}{2}xe^{2x} - \frac{1}{4}e^{2x}+C.
 </div>
 <p class="continuation">The explicit solution would be <span class="process-math">\(y = \frac{1}{2}x - \frac{1}{4} + Ce^{-2x}\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-85">The function <span class="process-math">\(e^{2x}\)</span> that we used in <a href="" class="xref" data-knowl="./knowl/example-solving-a-first-order-linear-ode.html" title="Example 1.4.2: Solving a first-order linear ODE">Example 1.4.2</a> is called an <dfn class="terminology">integrating factor</dfn>. Integrating factors are our primary tool in solving first-order linear ODEs. In general, to solve a first-order linear ODE <span class="process-math">\(y' +P(x)y=Q(x)\)</span> the first thing you must do is to multiply through it by the integrating factor <span class="process-math">\(e^{\int P(x)\,dx}\text{.}\)</span></p>
+</div></article><p id="p-82">The function <span class="process-math">\(e^{2x}\)</span> that we used in <a href="" class="xref" data-knowl="./knowl/example-solving-a-first-order-linear-ode.html" title="Example 1.4.2: Solving a first-order linear ODE">Example 1.4.2</a> is called an <dfn class="terminology">integrating factor</dfn>. Integrating factors are our primary tool in solving first-order linear ODEs. In general, to solve a first-order linear ODE <span class="process-math">\(y^\prime +P(x)y=Q(x)\)</span> the first thing you must do is to multiply through it by the integrating factor <span class="process-math">\(e^{\int P(x)\,dx}\text{.}\)</span></p>
 <article class="example example-like" id="example-solving-a-first-order-linear-ode-in-disguise"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a first-order linear ODE in disguise.</span>
 </h4>
-<p id="p-86">Solve the second-order ODE given by</p>
+<p id="p-83">Solve the second-order ODE given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-tx''+\frac{t}{1+t^{2}}x' = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}
+tx''+\frac{t}{1+t^{2}}x^\prime = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}
 \end{equation*}
 </div>
-<p class="continuation">with initial conditions <span class="process-math">\(x(0) = x'(0) = -1.\)</span></p>
+<p class="continuation">with initial conditions <span class="process-math">\(x(0) = x^\prime(0) = -1.\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-14" id="solution-14"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-14"><div class="solution solution-like">
-<p id="p-87">Even though this is a second-order ODE, we can rewrite it as a first-order ODE using the substitution <span class="process-math">\(u = x'\text{.}\)</span> Then the ODE becomes</p>
+<p id="p-84">Even though this is a second-order ODE, we can rewrite it as a first-order ODE using the substitution <span class="process-math">\(u = x^\prime\text{.}\)</span> Then the ODE becomes</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-first-order-linear-odes.html">
 \begin{equation*}
 tu+\frac{t}{1+t^{2}}u = \frac{2t^{2}}{(1+t^{2})^{2}}e^{-\tan^{-1}t}.
@@ -280,7 +287,7 @@ u+\frac{1}{1+t^{2}}u = \frac{2t}{(1+t^{2})^{2}}e^{-\tan^{-1}t}.
 e^{\int \frac{1}{1+t^{2}}\,dt} = e^{\tan^{-1}t}.
 \end{equation*}
 </div>
-<p id="p-88">Now we multiply through the ODE by this integrating factor and rewrite the left hand side using the product rule to get</p>
+<p id="p-85">Now we multiply through the ODE by this integrating factor and rewrite the left hand side using the product rule to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{}{t}[e^{\tan^{-1}t}u] = \frac{2t}{(1+t^{2})^{2}}.
@@ -295,13 +302,13 @@ e^{\tan^{-1}t}u = -\frac{1}{1+t^{2}}+C,
 <p class="continuation">which becomes</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-x' = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}+Ce^{-\tan^{-1}t}.
+x^\prime = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}+Ce^{-\tan^{-1}t}.
 \end{equation*}
 </div>
-<p id="p-89">If we plug in the initial condition <span class="process-math">\(x'(0) = -1\text{,}\)</span> this forces <span class="process-math">\(C=0\text{.}\)</span> Hence</p>
+<p id="p-86">If we plug in the initial condition <span class="process-math">\(x^\prime (0) = -1\text{,}\)</span> this forces <span class="process-math">\(C=0\text{.}\)</span> Hence</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-x' = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}.
+x^\prime = -\frac{e^{-\tan^{-1}t}}{1+t^{2}}.
 \end{equation*}
 </div>
 <p class="continuation">Now we integrate one last time to get <span class="process-math">\(x\text{:}\)</span></p>
@@ -320,8 +327,8 @@ x = e^{-\tan^{-1}t}-2.
 </div></article></section><section class="subsection" id="subsection-applications"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Applications</span>
 </h3>
-<p id="p-90">A common application of first-order linear ODEs is in modeling "mixture" problems. Suppose we have a tank which contains a solution (mixture of solute and solvent, such as salt and water). Some amount of solution is also flowing into and out of the tank. We want to measure the amount of solute in the tank at time <span class="process-math">\(t\text{,}\)</span> call this amount <span class="process-math">\(x(t)\text{.}\)</span> Then <span class="process-math">\(x(t)\)</span> will change depending on how the solute flows into and out of the tank, making it a prime target for a differential equation.</p>
-<p id="p-91">If we set</p>
+<p id="p-87">A common application of first-order linear ODEs is in modeling "mixture" problems. Suppose we have a tank which contains a solution (mixture of solute and solvent, such as salt and water). Some amount of solution is also flowing into and out of the tank. We want to measure the amount of solute in the tank at time <span class="process-math">\(t\text{,}\)</span> call this amount <span class="process-math">\(x(t)\text{.}\)</span> Then <span class="process-math">\(x(t)\)</span> will change depending on how the solute flows into and out of the tank, making it a prime target for a differential equation.</p>
+<p id="p-88">If we set</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-5">
 \begin{align*}
 c_{i} &amp; =\text{concentration of solute flowing in} \\
@@ -336,7 +343,7 @@ r_{o} &amp; = \text{rate solution is flowing out}
 \dv{x}{t} = r_{i}c_{i} - r_{o}c_{o} = r_{i}c_{i} - r_{0}\frac{x(t)}{V(t)}
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(V(t)\)</span> is the volume of solution in the tank at time <span class="process-math">\(t\text{.}\)</span> <aside class="aside aside-like" id="aside-5"><p id="p-92">We assume that <span class="process-math">\(c_{i},r_{i},r_{o}\)</span> are all constant.</p></aside> Furthermore, if we let <span class="process-math">\(V_{0} = V(0)\)</span> denote the initial volume of the solution in the tank then we can say that <span class="process-math">\(V(t) = V_{0} + (r_{i}-r_{0})t.\)</span> Hence the amount of solute <span class="process-math">\(x(t)\)</span> obeys the first-order linear ODE</p>
+<p class="continuation">where <span class="process-math">\(V(t)\)</span> is the volume of solution in the tank at time <span class="process-math">\(t\text{.}\)</span> <aside class="aside aside-like" id="aside-5"><p id="p-89">We assume that <span class="process-math">\(c_{i},r_{i},r_{o}\)</span> are all constant.</p></aside> Furthermore, if we let <span class="process-math">\(V_{0} = V(0)\)</span> denote the initial volume of the solution in the tank then we can say that <span class="process-math">\(V(t) = V_{0} + (r_{i}-r_{0})t.\)</span> Hence the amount of solute <span class="process-math">\(x(t)\)</span> obeys the first-order linear ODE</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{x}{t} = r_{i}c_{i} - \frac{r_{o}}{V_{0}+(r_{i}-r_{o})t}x.
@@ -345,10 +352,10 @@ r_{o} &amp; = \text{rate solution is flowing out}
 <article class="example example-like" id="example-salt-in-a-tank"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Salt in a tank.</span>
 </h4>
-<p id="p-93">A tank contains <span class="quantity">100 L</span> of a solution consisting of <span class="quantity">50 kg</span> of salt dissolved in water. Solution containing <span class="quantity">1 <sup>kg</sup>⁄<sub>L</sub></span> of salt is pumped into the tank at a rate of <span class="quantity">2 <sup>L</sup>⁄<sub>min</sub></span> and the well-mixed solution is pumped out at the rate of <span class="quantity">3 <sup>L</sup>⁄<sub>min</sub></span>. How much salt will be in the tank after <span class="process-math">\(t\)</span> minutes?</p>
+<p id="p-90">A tank contains <span class="quantity">100 L</span> of a solution consisting of <span class="quantity">50 kg</span> of salt dissolved in water. Solution containing <span class="quantity">1 <sup>kg</sup>⁄<sub>L</sub></span> of salt is pumped into the tank at a rate of <span class="quantity">2 <sup>L</sup>⁄<sub>min</sub></span> and the well-mixed solution is pumped out at the rate of <span class="quantity">3 <sup>L</sup>⁄<sub>min</sub></span>. How much salt will be in the tank after <span class="process-math">\(t\)</span> minutes?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-15" id="solution-15"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-15"><div class="solution solution-like">
-<p id="p-94">Let <span class="process-math">\(x(t)\)</span> denote the amount of salt in the tank after <span class="process-math">\(t\)</span> minutes, so <span class="process-math">\(x(0) = 50\text{.}\)</span> Then</p>
+<p id="p-91">Let <span class="process-math">\(x(t)\)</span> denote the amount of salt in the tank after <span class="process-math">\(t\)</span> minutes, so <span class="process-math">\(x(0) = 50\text{.}\)</span> Then</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{x}{t} = r_{i}c_{i}-r_{o}c_{o} = 2\cdot1-3\frac{x}{100-t}.
@@ -366,7 +373,7 @@ r_{o} &amp; = \text{rate solution is flowing out}
 \dv{}{t}[(100-t)^{-3}x] = 2(100-t)^{-3}.
 \end{equation*}
 </div>
-<p id="p-95">Now we can integrate both sides to get</p>
+<p id="p-92">Now we can integrate both sides to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 (100-t)^{-3}x = (100-t)^{-2}+C
@@ -374,7 +381,7 @@ r_{o} &amp; = \text{rate solution is flowing out}
 </div>
 <p class="continuation">or just <span class="process-math">\(x = 100-t+C(100-t)^{3}\text{.}\)</span> Finally, the initial condition can be used to show that <span class="process-math">\(C = -\frac{1}{20000}\text{,}\)</span> so <span class="process-math">\(x = 100-t - \frac{1}{20000}(100-t)^{3}\text{.}\)</span></p>
 </div></div>
-</div></article></section><section class="conclusion" id="conclusion-4"><p id="p-96">SUGGESTED PROBLEMS: 3-11 odd, 31, 33.</p></section></section></div></main>
+</div></article></section></section></div></main>
 </div>
 </body>
 </html>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:42-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -61,7 +67,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -91,6 +96,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -222,22 +229,22 @@ true);
 <article class="example example-like" id="example-verifying-solutions"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Verifying solutions.</span>
 </h4>
-<p id="p-12">Is <span class="process-math">\(y = 5e^{x^{2}}\)</span> a solution of the ODE <span class="process-math">\(y' = 2xy\text{?}\)</span></p>
+<p id="p-12">Is <span class="process-math">\(y = 5e^{x^{2}}\)</span> a solution of the ODE <span class="process-math">\(y^\prime= 2xy\text{?}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-1" id="solution-1"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-1"><div class="solution solution-like">
 <p id="p-13">At this point we don't know how to solve differential equations, but that doesn't mean we can't <em class="emphasis">check</em> solutions of differential equations. To do so, we just plug <span class="process-math">\(5e^{x^{2}}\)</span> wherever <span class="process-math">\(y\)</span> shows up in the ODE and see if the resulting equation is true. So we have</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-1">
 \begin{align*}
-y' &amp; = 2xy \\
-(5e^{x^{2}})' &amp; = 2x(5e^{x^{2}}) \text{ after substituting }y = 5e^{x^{2}}\\
+y^\prime &amp; = 2xy \\
+(5e^{x^{2}})^\prime &amp; = 2x(5e^{x^{2}}) \text{ after substituting }y = 5e^{x^{2}}\\
 10xe^{x^{2}} &amp; = 10xe^{x^{2}} \text{ after simplifying} 
 \end{align*}
 </div>
 <p class="continuation">This is a true statement, so <span class="process-math">\(y = 5e^{x^{2}}\)</span> satisfies the ODE. Hence <span class="process-math">\(5e^{x^{2}}\)</span> is a solution of the ODE.</p>
 </div></div>
-</div></article><p id="p-14">In <a href="" class="xref" data-knowl="./knowl/example-verifying-solutions.html" title="Example 1.1.3: Verifying solutions">Example 1.1.3</a>, <span class="process-math">\(y = 5e^{x^{2}}\)</span> is not the only solution of <span class="process-math">\(y' = 2xy\text{.}\)</span> You can check that <span class="process-math">\(y = 3e^{x^{2}}\)</span> and <span class="process-math">\(y = -10e^{x^{2}}\)</span> are also solutions. In fact, <em class="emphasis">any</em> function of the form <span class="process-math">\(Ce^{x^{2}}\)</span> where <span class="process-math">\(C\)</span> is a constant is a solution of <span class="process-math">\(y' = 2xy\text{.}\)</span> See <a href="" class="xref" data-knowl="./knowl/figure-family-of-solutions.html" title="Figure 1.1.4">Figure 1.1.4</a>.</p>
+</div></article><p id="p-14">In <a href="" class="xref" data-knowl="./knowl/example-verifying-solutions.html" title="Example 1.1.3: Verifying solutions">Example 1.1.3</a>, <span class="process-math">\(y = 5e^{x^{2}}\)</span> is not the only solution of <span class="process-math">\(y^\prime = 2xy\text{.}\)</span> You can check that <span class="process-math">\(y = 3e^{x^{2}}\)</span> and <span class="process-math">\(y = -10e^{x^{2}}\)</span> are also solutions. In fact, <em class="emphasis">any</em> function of the form <span class="process-math">\(Ce^{x^{2}}\)</span> where <span class="process-math">\(C\)</span> is a constant is a solution of <span class="process-math">\(y^\prime = 2xy\text{.}\)</span> See <a href="" class="xref" data-knowl="./knowl/figure-family-of-solutions.html" title="Figure 1.1.4">Figure 1.1.4</a>.</p>
 <figure class="figure figure-like" id="figure-family-of-solutions"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><div class="asymptote-box" style="padding-top: 59.5013654037427%"><iframe src="generated/asymptote/image-1.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.4<span class="period">.</span></span><span class="space"> </span>A family of solutions of <span class="process-math">\(y' = 2xy\text{.}\)</span></figcaption></figure><p id="p-15">Solutions of ODEs that depend on arbitrary constants, such as <span class="process-math">\(y = Ce^{x^{2}}\)</span> above, are called <dfn class="terminology">general solutions</dfn>. Solutions of ODEs that do not depend on arbitrary constants, such as <span class="process-math">\(y = 5e^{x^{2}}\text{,}\)</span> are called <dfn class="terminology">particular solutions</dfn>.</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.4<span class="period">.</span></span><span class="space"> </span>A family of solutions of <span class="process-math">\(y^\prime = 2xy\text{.}\)</span></figcaption></figure><p id="p-15">Solutions of ODEs that depend on arbitrary constants, such as <span class="process-math">\(y = Ce^{x^{2}}\)</span> above, are called <dfn class="terminology">general solutions</dfn>. Solutions of ODEs that do not depend on arbitrary constants, such as <span class="process-math">\(y = 5e^{x^{2}}\text{,}\)</span> are called <dfn class="terminology">particular solutions</dfn>.</p>
 <article class="example example-like" id="example-a-trigonometric-sol"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">A trigonometric solution.</span>
 </h4>
@@ -261,7 +268,7 @@ x'' = -9(A\cos(3t)+B\sin(3t)) = -9x,
 <p id="p-21">Solve the IVP <span class="process-math">\(\dv{y}{x} = -xe^{-x^{2}}, y(0)=1\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-3" id="solution-3"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-3"><div class="solution solution-like">
-<p id="p-22">We need to find a function <span class="process-math">\(y\)</span> that satisfies two different constraints: <span class="process-math">\(y' = -xe^{-x^{2}}\)</span> and <span class="process-math">\(y(0)=1\text{.}\)</span> We'll start with the first one, which we actually know how to do from Calculus I. If <span class="process-math">\(y' = -xe^{-x^{2}}\text{,}\)</span> then</p>
+<p id="p-22">We need to find a function <span class="process-math">\(y\)</span> that satisfies two different constraints: <span class="process-math">\(y^\prime = -xe^{-x^{2}}\)</span> and <span class="process-math">\(y(0)=1\text{.}\)</span> We'll start with the first one, which we actually know how to do from Calculus I. If <span class="process-math">\(y^\prime = -xe^{-x^{2}}\text{,}\)</span> then</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y = \int -xe^{-x^{2}}\,dx = \frac{1}{2}e^{-x^{2}}+C.
@@ -332,8 +339,7 @@ F_{G}+F_{R} = 0.5\dv[2]{y}{t}
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-33">One quick note about the IVP in <a href="" class="xref" data-knowl="./knowl/example-an-ivp-modeling-a-falling-object.html" title="Example 1.1.8: An IVP modeling a falling object">Example 1.1.8</a> The differential equation was second-order, but there was only one corresponding initial condition. As we'll see later, this is not enough to find a unique solution to this IVP. For most IVPs we'll solve, we'll need as many initial conditions as the order of the ODE. Something to look forward to.</p></section><section class="conclusion" id="conclusion-1"><p id="p-34">Now that we have a rough idea of what an ODE and an IVP actually are, we can move on to solving them. In the next section, we'll look at a method that we can use to visualize ODEs and their solutions and another method that can be used to approximate solutions of ODEs.</p>
-<p id="p-35">SUGGESTED PROBLEMS: 1-13 odd</p></section></section></div></main>
+</div></article><p id="p-33">One quick note about the IVP in <a href="" class="xref" data-knowl="./knowl/example-an-ivp-modeling-a-falling-object.html" title="Example 1.1.8: An IVP modeling a falling object">Example 1.1.8</a> The differential equation was second-order, but there was only one corresponding initial condition. As we'll see later, this is not enough to find a unique solution to this IVP. For most IVPs we'll solve, we'll need as many initial conditions as the order of the ODE. Something to look forward to.</p></section><section class="conclusion" id="conclusion-1"><p id="p-34">Now that we have a rough idea of what an ODE and an IVP actually are, we can move on to solving them. In the next section, we'll look at a method that we can use to visualize ODEs and their solutions and another method that can be used to approximate solutions of ODEs.</p></section></section></div></main>
 </div>
 </body>
 </html>

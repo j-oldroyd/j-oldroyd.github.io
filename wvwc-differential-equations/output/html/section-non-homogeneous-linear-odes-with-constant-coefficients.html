@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:44-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
 // Their results will be linked, only within language type
@@ -67,7 +73,6 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -97,6 +102,8 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -208,11 +215,11 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-non-homogeneous-linear-odes-with-constant-coefficients"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">3.2</span> <span class="title">Non-homogeneous Linear ODEs with Constant Coefficients</span>
 </h2>
-<p id="p-289">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution <span class="process-math">\(y_{c}\)</span> and then a corresponding particular solution <span class="process-math">\(y_{p}\text{.}\)</span> The general solution was then <span class="process-math">\(y=y_{c}+y_{p}\text{.}\)</span> <span class="process-math">\(y_{c}\)</span> was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find <span class="process-math">\(y_{p}\text{.}\)</span> Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</p>
+<p id="p-285">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution <span class="process-math">\(y_{c}\)</span> and then a corresponding particular solution <span class="process-math">\(y_{p}\text{.}\)</span> The general solution was then <span class="process-math">\(y=y_{c}+y_{p}\text{.}\)</span> <span class="process-math">\(y_{c}\)</span> was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find <span class="process-math">\(y_{p}\text{.}\)</span> Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</p>
 <article class="example example-like" id="example-46"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.1</span><span class="period">.</span>
 </h3>
-<p id="p-290">Find the general solution of</p>
+<p id="p-286">Find the general solution of</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y^{(3)}-y' = \sinh 2x.
@@ -220,14 +227,14 @@ y^{(3)}-y' = \sinh 2x.
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-43" id="solution-43"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-43"><div class="solution solution-like">
-<p id="p-291">The general solution takes the form <span class="process-math">\(y = y_{c}+y_{p}\text{,}\)</span> where <span class="process-math">\(y_{c}\)</span> is a solution of the associated homogeneous equation <span class="process-math">\(y^{(3)}-y'=0\)</span> and <span class="process-math">\(y_{p}\)</span> is a single solution of the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\text{.}\)</span> Since the characteristic equation of <span class="process-math">\(y^{(3)}-y'=0\)</span> is <span class="process-math">\(r^{3}-r=0\text{,}\)</span> we get</p>
+<p id="p-287">The general solution takes the form <span class="process-math">\(y = y_{c}+y_{p}\text{,}\)</span> where <span class="process-math">\(y_{c}\)</span> is a solution of the associated homogeneous equation <span class="process-math">\(y^{(3)}-y'=0\)</span> and <span class="process-math">\(y_{p}\)</span> is a single solution of the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\text{.}\)</span> Since the characteristic equation of <span class="process-math">\(y^{(3)}-y'=0\)</span> is <span class="process-math">\(r^{3}-r=0\text{,}\)</span> we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{c} = c_{1}+c_{2}e^{x}+c_{3}e^{-x} = c_{1}+A\cosh x+B\sinh x.
 \end{equation*}
 </div>
 <p class="continuation">Now we'll find <span class="process-math">\(y_{p}\text{.}\)</span> Since the right hand side of the ODE is <span class="process-math">\(\sinh 2x\text{,}\)</span> a good initial guess would be <span class="process-math">\(y_{p} = C\sinh 2x\text{.}\)</span> However, when we take this guess and plug it into the ODE, we'll start seeing terms involving <span class="process-math">\(\cosh 2x\)</span> as well (since <span class="process-math">\(\frac{d}{dx}\sinh 2x = 2\cosh 2x\)</span>) so this means we'll want to include <span class="process-math">\(\cosh 2x\)</span> into our guess for <span class="process-math">\(y_{p}\)</span> also. So we'll modify our guess to be <span class="process-math">\(y_{p} = C\cosh 2x+D\sinh 2x\text{.}\)</span></p>
-<p id="p-292">Since our guess for <span class="process-math">\(y_{p}\)</span> doesn't overlap with <span class="process-math">\(y_{c}\text{,}\)</span> we can proceed with plugging our guess into the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\)</span> and equating coefficients, just as we did before.</p>
+<p id="p-288">Since our guess for <span class="process-math">\(y_{p}\)</span> doesn't overlap with <span class="process-math">\(y_{c}\text{,}\)</span> we can proceed with plugging our guess into the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\)</span> and equating coefficients, just as we did before.</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-23">
 \begin{align*}
 \sinh 2x \amp= y^{(3)}_{p}-y'_{p}\\
@@ -242,19 +249,19 @@ y = c_{1}+A\cosh x+B\sinh x+\frac{1}{6}\cosh2x.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-293">Just as before, we also need to worry about overlaps.</p>
+</div></article><p id="p-289">Just as before, we also need to worry about overlaps.</p>
 <article class="example example-like" id="example-47"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.2</span><span class="period">.</span>
 </h3>
-<p id="p-294">Find the appropriate form of <span class="process-math">\(x_{p}\)</span> for the ODE</p>
+<p id="p-290">Find the appropriate form of <span class="process-math">\(x_{p}\)</span> for the ODE</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t} = 5t-3t^{2}+e^{-t}\cos2t-3t\sin2t.
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
-<p id="p-295">We need to find <span class="process-math">\(x_{c}\)</span> first since <span class="process-math">\(x_{p}\)</span> will change depending on <span class="process-math">\(x_{c}\text{.}\)</span> Since the characteristic equation of the associated homogeneous ODE <span class="process-math">\(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\)</span> is</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
+<p id="p-291">We need to find <span class="process-math">\(x_{c}\)</span> first since <span class="process-math">\(x_{p}\)</span> will change depending on <span class="process-math">\(x_{c}\text{.}\)</span> Since the characteristic equation of the associated homogeneous ODE <span class="process-math">\(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\)</span> is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 r^{7}+8r^{5}+16r^{3} = 0\quad\text{or}\quad r^{3}(r^{2}+4)^{2}=0,
@@ -266,7 +273,7 @@ r^{7}+8r^{5}+16r^{3} = 0\quad\text{or}\quad r^{3}(r^{2}+4)^{2}=0,
 x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 \end{equation*}
 </div>
-<p id="p-296">Now we come up with a guess for <span class="process-math">\(x_{p}\)</span> using the right hand side of the original ODE and dividing it into ``components:''</p>
+<p id="p-292">Now we come up with a guess for <span class="process-math">\(x_{p}\)</span> using the right hand side of the original ODE and dividing it into ``components:''</p>
 <figure class="table table-like" id="table-6"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component</td>
@@ -285,14 +292,14 @@ x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(-3t\sin2t\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\parens{C_{6}t+C_{7}}\cos2t+\parens{C_{8}t+C_{9}}\sin2t\)</span></td>
 </tr>
-</table></div></figure><p id="p-297">However, we now have a problem with overlaps between <span class="process-math">\(x_{p}\)</span> and <span class="process-math">\(x_{c}\text{.}\)</span> The guess corresponding to the first component overlaps with <span class="process-math">\(x_{c}\text{,}\)</span> so we need to multiply it by <span class="process-math">\(t^{3}\)</span> to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by <span class="process-math">\(t^{2}\text{.}\)</span> Therefore, our guess for <span class="process-math">\(x_{p}\)</span> should be</p>
+</table></div></figure><p id="p-293">However, we now have a problem with overlaps between <span class="process-math">\(x_{p}\)</span> and <span class="process-math">\(x_{c}\text{.}\)</span> The guess corresponding to the first component overlaps with <span class="process-math">\(x_{c}\text{,}\)</span> so we need to multiply it by <span class="process-math">\(t^{3}\)</span> to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by <span class="process-math">\(t^{2}\text{.}\)</span> Therefore, our guess for <span class="process-math">\(x_{p}\)</span> should be</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 x_{p} = C_{1}t^{5}+C_{2}t^{4}+C_{3}t^{3}+e^{-t}\brackets{C_{4}\cos2t+C_{5}\sin2t}+(C_{6}t^{3}+C_{7}t^{2})\cos2t+(C_{8}t^{3}+C_{9}t^{2})\sin2t.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-298">The method of undetermined coefficients applied to the ODE</p>
+</div></article><p id="p-294">The method of undetermined coefficients applied to the ODE</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)   
@@ -329,15 +336,15 @@ a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)
 </table></div></figure><article class="example example-like" id="example-48"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.5</span><span class="period">.</span>
 </h3>
-<p id="p-299">Find the general solution of</p>
+<p id="p-295">Find the general solution of</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y^{(3)}-2y''+3y'= x+e^{-3x}\sin x
 \end{equation*}
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
-<p id="p-300">We begin by finding <span class="process-math">\(y_{c}\text{.}\)</span> Since the characteristic equation of the corresponding homogeneous ODE is <span class="process-math">\(r^{3}-2r^{2}+3r=0\text{,}\)</span> we get <span class="process-math">\(r=-0,\frac{2\pm\sqrt{4-12}}{2}\)</span> or just <span class="process-math">\(r=0,1\pm i\sqrt{2}\text{.}\)</span> So</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
+<p id="p-296">We begin by finding <span class="process-math">\(y_{c}\text{.}\)</span> Since the characteristic equation of the corresponding homogeneous ODE is <span class="process-math">\(r^{3}-2r^{2}+3r=0\text{,}\)</span> we get <span class="process-math">\(r=-0,\frac{2\pm\sqrt{4-12}}{2}\)</span> or just <span class="process-math">\(r=0,1\pm i\sqrt{2}\text{.}\)</span> So</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
@@ -358,7 +365,7 @@ y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\sin x\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\brackets{C_{3}\cos x+C_{4}\sin x}\)</span></td>
 </tr>
-</table></div></figure><p id="p-301">So our initial guess for <span class="process-math">\(y_{p}\)</span> is given by <span class="process-math">\(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\)</span> Plugging this into the ODE into a CAS such as Maple or Sage gives</p>
+</table></div></figure><p id="p-297">So our initial guess for <span class="process-math">\(y_{p}\)</span> is given by <span class="process-math">\(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\)</span> Plugging this into the ODE into a CAS such as Maple or Sage gives</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-24">
 \begin{align*}
 x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
@@ -381,7 +388,7 @@ x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 C_{1} = \frac{1}{6},C_{2} = \frac{2}{9},C_{3} = -\frac{41}{3530},C_{4}=-\frac{43}{3530}.
 \end{equation*}
 </div>
-<p id="p-302">So the general solution of the ODE is</p>
+<p id="p-298">So the general solution of the ODE is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y = y_{c}+y_{p} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x) +\frac{1}{6}x^{2}+\frac{2}{9}x-\frac{e^{-3x}}{3530}\brackets{41\cos x+43\sin x}.

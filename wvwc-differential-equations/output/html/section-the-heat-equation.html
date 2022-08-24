@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:47-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -61,7 +67,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -91,6 +96,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -202,16 +209,16 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-the-heat-equation"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">8.4</span> <span class="title">The Heat Equation</span>
 </h2>
-<section class="introduction" id="introduction-22"><p id="p-741">The last equation we will look at is the <dfn class="terminology">heat equation</dfn>, which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the <span class="process-math">\(x\)</span>-axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the <span class="process-math">\(x\)</span>-direction only. With these assumptions, the temperature <span class="process-math">\(u(x,t)\)</span> of the bar at position <span class="process-math">\(x\)</span> and time <span class="process-math">\(t\)</span> satisfies the PDE</p>
+<section class="introduction" id="introduction-22"><p id="p-737">The last equation we will look at is the <dfn class="terminology">heat equation</dfn>, which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the <span class="process-math">\(x\)</span>-axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the <span class="process-math">\(x\)</span>-direction only. With these assumptions, the temperature <span class="process-math">\(u(x,t)\)</span> of the bar at position <span class="process-math">\(x\)</span> and time <span class="process-math">\(t\)</span> satisfies the PDE</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-117">
 \begin{align*}
 \pdv{u}{t} \amp = c^{2}\pdv[2]{u}{x} \text{.}
 \end{align*}
 </div>
-<p id="p-742">This is called the <dfn class="terminology">one-dimensional heat equation</dfn>.</p></section><section class="subsection" id="subsection-bar-with-ends-fixed-at-"><h3 class="heading hide-type">
+<p id="p-738">This is called the <dfn class="terminology">one-dimensional heat equation</dfn>.</p></section><section class="subsection" id="subsection-bar-with-ends-fixed-at-"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Bar with ends fixed at <span class="process-math">\(0\)</span></span>
 </h3>
-<p id="p-743">We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature <span class="process-math">\(0\text{.}\)</span> If we're given an initial temperature distribution <span class="process-math">\(f(x)\text{,}\)</span> then <span class="process-math">\(u(x,t)\)</span> is the solution of the boundary value problem</p>
+<p id="p-739">We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature <span class="process-math">\(0\text{.}\)</span> If we're given an initial temperature distribution <span class="process-math">\(f(x)\text{,}\)</span> then <span class="process-math">\(u(x,t)\)</span> is the solution of the boundary value problem</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-wave-equation-and-separation-of-variables.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/equation-odes-from-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/heat-equation-initial-condition.html ./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" id="mdn-9">
 \begin{align}
 u_{t} \amp = c^{2}u_{xx} \tag{6}\\
@@ -219,21 +226,21 @@ u(0,t) = u(L,t) \amp = 0 \tag{7}\\
 u(x,0) \amp = f(x) \text{.}\tag{8}
 \end{align}
 </div>
-<p id="p-744">We can solve this boundary value problem using separation of variables, much as we did in <a href="section-wave-equation-and-separation-of-variables.html" class="internal" title="Section 8.2: The Wave Equation and Separation of Variables">Section 8.2</a>. So to start, we assume that <span class="process-math">\(u(x,t) = X(x)T(t)\text{.}\)</span> If we plug this into the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6">(6)</a>, then we get</p>
+<p id="p-740">We can solve this boundary value problem using separation of variables, much as we did in <a href="section-wave-equation-and-separation-of-variables.html" class="internal" title="Section 8.2: The Wave Equation and Separation of Variables">Section 8.2</a>. So to start, we assume that <span class="process-math">\(u(x,t) = X(x)T(t)\text{.}\)</span> If we plug this into the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6">(6)</a>, then we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-wave-equation-and-separation-of-variables.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/equation-odes-from-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/heat-equation-initial-condition.html ./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" id="equation-odes-from-heat-equation">
 \begin{equation}
 \frac{T'}{c^{2}T} = \frac{X''}{X} = k.\tag{9}
 \end{equation}
 </div>
-<p id="p-745">Now we have three separate cases to consider for <span class="process-math">\(k\text{:}\)</span> <span class="process-math">\(k\gt0, k=0\)</span> or <span class="process-math">\(k\lt0\text{.}\)</span> Just as with the wave equation, the only case that doesn't lead to trivial solutions is <span class="process-math">\(k=-\mu^{2}\lt0\text{.}\)</span> In this case <a href="" class="xref" data-knowl="./knowl/equation-odes-from-heat-equation.html" title="Equation 9">(9)</a> leads to the two ODEs given by</p>
+<p id="p-741">Now we have three separate cases to consider for <span class="process-math">\(k\text{:}\)</span> <span class="process-math">\(k\gt0, k=0\)</span> or <span class="process-math">\(k\lt0\text{.}\)</span> Just as with the wave equation, the only case that doesn't lead to trivial solutions is <span class="process-math">\(k=-\mu^{2}\lt0\text{.}\)</span> In this case <a href="" class="xref" data-knowl="./knowl/equation-odes-from-heat-equation.html" title="Equation 9">(9)</a> leads to the two ODEs given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-wave-equation-and-separation-of-variables.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/equation-odes-from-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/heat-equation-initial-condition.html ./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" id="md-118">
 \begin{align*}
 X''+\mu^{2}X \amp = 0 \\
 T'+c^{2}\mu^{2}T \amp = 0 \text{.}
 \end{align*}
 </div>
-<p id="p-746">The boundary conditions in <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 7">(7)</a> force <span class="process-math">\(X(0) = X(L) = 0\text{,}\)</span> and the only nontrivial solutions of <span class="process-math">\(X''+\mu^{2}X = 0\)</span> occur when <span class="process-math">\(\mu = \frac{n\pi}{L}\text{.}\)</span> So we get the solutions <span class="process-math">\(X = X_{n} = \sin\frac{n\pi}{L}x\text{,}\)</span> just as with the wave equation.</p>
-<p id="p-747">For the second ODE, we readily solve it to obtain <span class="process-math">\(T = T_{n} = b_{n}e^{-\lambda_{n}^{2}t}\)</span> where <span class="process-math">\(\lambda_{n} = c\frac{n\pi}{L}\)</span> as before. So every function</p>
+<p id="p-742">The boundary conditions in <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 7">(7)</a> force <span class="process-math">\(X(0) = X(L) = 0\text{,}\)</span> and the only nontrivial solutions of <span class="process-math">\(X''+\mu^{2}X = 0\)</span> occur when <span class="process-math">\(\mu = \frac{n\pi}{L}\text{.}\)</span> So we get the solutions <span class="process-math">\(X = X_{n} = \sin\frac{n\pi}{L}x\text{,}\)</span> just as with the wave equation.</p>
+<p id="p-743">For the second ODE, we readily solve it to obtain <span class="process-math">\(T = T_{n} = b_{n}e^{-\lambda_{n}^{2}t}\)</span> where <span class="process-math">\(\lambda_{n} = c\frac{n\pi}{L}\)</span> as before. So every function</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html">
 \begin{equation*}
 u_{n}(x,t) = X_{n}T_{n} = b_{n}\sin\frac{n\pi}{L}xe^{-\lambda_{n}^{2}t}
@@ -245,11 +252,11 @@ u_{n}(x,t) = X_{n}T_{n} = b_{n}\sin\frac{n\pi}{L}xe^{-\lambda_{n}^{2}t}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}.
 \end{equation*}
 </div>
-<p id="p-748">Finally, if we plug in <span class="process-math">\(t=0\)</span> and use the initial condition <span class="process-math">\(u(x,0) = f(x)\text{,}\)</span> we get <span class="process-math">\(f(x) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x\text{.}\)</span> This is just the Fourier series of the odd extension of <span class="process-math">\(f(x)\text{,}\)</span> which lets us find <span class="process-math">\(b_{n}\text{.}\)</span> We summarize all of this in the following theorem.</p>
+<p id="p-744">Finally, if we plug in <span class="process-math">\(t=0\)</span> and use the initial condition <span class="process-math">\(u(x,0) = f(x)\text{,}\)</span> we get <span class="process-math">\(f(x) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x\text{.}\)</span> This is just the Fourier series of the odd extension of <span class="process-math">\(f(x)\text{,}\)</span> which lets us find <span class="process-math">\(b_{n}\text{.}\)</span> We summarize all of this in the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-solution-of-the-heat-equation-with-fixed-temperature"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">8.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solution of the Heat Equation with Fixed Temperature.</span>
 </h4>
-<p id="p-749">The solution of the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6">(6)</a> satisfying the boundary conditions <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 7">(7)</a> and initial condition <a href="" class="xref" data-knowl="./knowl/heat-equation-initial-condition.html" title="Equation 8">(8)</a> is given by</p>
+<p id="p-745">The solution of the heat equation <a href="" class="xref" data-knowl="./knowl/equation-one-dimensional-heat-equation.html" title="Equation 6">(6)</a> satisfying the boundary conditions <a href="" class="xref" data-knowl="./knowl/heat-equation-boundary-conditions-fixed-temperature.html" title="Equation 7">(7)</a> and initial condition <a href="" class="xref" data-knowl="./knowl/heat-equation-initial-condition.html" title="Equation 8">(8)</a> is given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-one-dimensional-heat-equation.html ./knowl/heat-equation-boundary-conditions-fixed-temperature.html ./knowl/heat-equation-initial-condition.html" id="heat-equation-fixed-ends-solution">
 \begin{equation}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin\frac{n\pi}{L}x e^{-\lambda^{2}_{n}t}\tag{10}
@@ -264,17 +271,17 @@ b_{n} \amp = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}x\,dx \tag{11}\\
 </div></article><article class="example example-like" id="example-sinusoidal-initial-temperature"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">8.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Sinusoidal initial temperature.</span>
 </h4>
-<p id="p-750">Consider a thin metal bar of length <span class="process-math">\(\pi\)</span> placed on the <span class="process-math">\(x\)</span>-axis, with one end at <span class="process-math">\(x=0\)</span> and the other at <span class="process-math">\(x=\pi\text{.}\)</span> Assuming that <span class="process-math">\(c=1\)</span> and that the initial temperature is <span class="process-math">\(f(x) = 30\sin x\)</span> for <span class="process-math">\(0\leq x\leq\pi\text{,}\)</span> find the temperature distribution using <a href="" class="xref" data-knowl="./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" title="Theorem 8.4.1: Solution of the Heat Equation with Fixed Temperature">Theorem 8.4.1</a>.</p>
+<p id="p-746">Consider a thin metal bar of length <span class="process-math">\(\pi\)</span> placed on the <span class="process-math">\(x\)</span>-axis, with one end at <span class="process-math">\(x=0\)</span> and the other at <span class="process-math">\(x=\pi\text{.}\)</span> Assuming that <span class="process-math">\(c=1\)</span> and that the initial temperature is <span class="process-math">\(f(x) = 30\sin x\)</span> for <span class="process-math">\(0\leq x\leq\pi\text{,}\)</span> find the temperature distribution using <a href="" class="xref" data-knowl="./knowl/theorem-solution-of-the-heat-equation-with-fixed-temperature.html" title="Theorem 8.4.1: Solution of the Heat Equation with Fixed Temperature">Theorem 8.4.1</a>.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-102" id="solution-102"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-102"><div class="solution solution-like">
-<p id="p-751">The temperature is the function <span class="process-math">\(u(x,t)\)</span> given by</p>
+<p id="p-747">The temperature is the function <span class="process-math">\(u(x,t)\)</span> given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 u(x,t) = \sum_{n=1}^{\infty}b_{n}\sin(n x)e^{-n^{2}t},
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(b_{n}\)</span> is the <span class="process-math">\(n^{\th}\)</span> coefficient of the Fourier series of the odd extension of <span class="process-math">\(f(x)\text{.}\)</span> The odd extension of <span class="process-math">\(f(x)\)</span> is <span class="process-math">\(30\sin x\text{.}\)</span> Furthermore, the Fourier series of <span class="process-math">\(30\sin x\)</span> is clearly just <span class="process-math">\(30\sin x\text{.}\)</span></p>
-<p id="p-752">So in other words,</p>
+<p id="p-748">So in other words,</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 b_{n} = \begin{cases} 30 \amp n=1 \\ 0 \amp otherwise.\end{cases}

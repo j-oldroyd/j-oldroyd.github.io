@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:44-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -61,7 +67,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -91,6 +96,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -202,11 +209,11 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-solutions-of-nonhomogeneous-equations"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.4</span> <span class="title">Solutions of Non-homogeneous Equations</span>
 </h2>
-<section class="introduction" id="introduction-10"><p id="p-228">In this section we'll deal with non-homogeneous equations and finding their solutions. This will help us to model systems involving an external force.</p>
-<aside class="aside aside-like" id="aside-9"><p id="p-229">This section corresponds to Section 2.7 of the text.</p></aside></section><section class="subsection" id="subsection-the-method-of-undetermined-coefficients"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-10"><p id="p-224">In this section we'll deal with non-homogeneous equations and finding their solutions. This will help us to model systems involving an external force.</p>
+<aside class="aside aside-like" id="aside-9"><p id="p-225">This section corresponds to Section 2.7 of the text.</p></aside></section><section class="subsection" id="subsection-the-method-of-undetermined-coefficients"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Method of Undetermined Coefficients</span>
 </h3>
-<p id="p-230">Consider the non-homogeneous linear ODE with constant coefficients given by</p>
+<p id="p-226">Consider the non-homogeneous linear ODE with constant coefficients given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="equation-non-homogeneous">
 \begin{equation}
 ay'' + by' + cy = f(x).\tag{4}
@@ -216,17 +223,17 @@ ay'' + by' + cy = f(x).\tag{4}
 <article class="theorem theorem-like" id="theorem-solution-of-non-homogeneous-equations"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solution of Non-homogeneous Equations.</span>
 </h4>
-<p id="p-231">Consider the ODE given in <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. Let <span class="process-math">\(y_{c}\)</span> (the <dfn class="terminology">complementary solution</dfn>) denote the solution of the <dfn class="terminology">associated homogeneous equation</dfn></p>
+<p id="p-227">Consider the ODE given in <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. Let <span class="process-math">\(y_{c}\)</span> (the <dfn class="terminology">complementary solution</dfn>) denote the solution of the <dfn class="terminology">associated homogeneous equation</dfn></p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-non-homogeneous.html ./knowl/equation-non-homogeneous.html ./knowl/equation-non-homogeneous.html">
 \begin{equation*}
 ay'' + by' + cy = 0
 \end{equation*}
 </div>
-<p class="continuation">and let <span class="process-math">\(y_{p}\)</span> (the <dfn class="terminology">particular solution</dfn>) denote a single solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. Then the general solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a> is given by <span class="process-math">\(y = y_{c} + y_{p}\text{.}\)</span></p></article><p id="p-232"><a href="" class="xref" data-knowl="./knowl/theorem-solution-of-non-homogeneous-equations.html" title="Theorem 2.4.1: Solution of Non-homogeneous Equations">Theorem 2.4.1</a> shows that to solve <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>, we only need to solve the associated homogeneous equation (which we're quite used to by now!) and find a <em class="emphasis">single</em> solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. The method we will use is the <dfn class="terminology">method of undetermined coefficients</dfn>, which we'll demonstrate by example.</p>
+<p class="continuation">and let <span class="process-math">\(y_{p}\)</span> (the <dfn class="terminology">particular solution</dfn>) denote a single solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. Then the general solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a> is given by <span class="process-math">\(y = y_{c} + y_{p}\text{.}\)</span></p></article><p id="p-228"><a href="" class="xref" data-knowl="./knowl/theorem-solution-of-non-homogeneous-equations.html" title="Theorem 2.4.1: Solution of Non-homogeneous Equations">Theorem 2.4.1</a> shows that to solve <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>, we only need to solve the associated homogeneous equation (which we're quite used to by now!) and find a <em class="emphasis">single</em> solution of <a href="" class="xref" data-knowl="./knowl/equation-non-homogeneous.html" title="Equation 4">(4)</a>. The method we will use is the <dfn class="terminology">method of undetermined coefficients</dfn>, which we'll demonstrate by example.</p>
 <article class="example example-like" id="example-using-the-method-of-undetermined-coefficients"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Method of Undetermined Coefficients.</span>
 </h4>
-<p id="p-233">Find the general solution of the ODE given by</p>
+<p id="p-229">Find the general solution of the ODE given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y'' - y' - 2y = 3x + 4.
@@ -234,15 +241,15 @@ y'' - y' - 2y = 3x + 4.
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-32" id="solution-32"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-32"><div class="solution solution-like">
-<p id="p-234">To find the general solution we need to do two things: find the complementary solution <span class="process-math">\(y_{c}\)</span> of the associated homogeneous equation and find a single particular solution <span class="process-math">\(y_{p}\)</span> of the given ODE. We already know how to find <span class="process-math">\(y_{c},\)</span><aside class="aside aside-like" id="aside-10"><p id="p-235">The characteristic equation of the ODE is <span class="process-math">\((r + 1)(r - 2)\text{.}\)</span></p></aside> which is just</p>
+<p id="p-230">To find the general solution we need to do two things: find the complementary solution <span class="process-math">\(y_{c}\)</span> of the associated homogeneous equation and find a single particular solution <span class="process-math">\(y_{p}\)</span> of the given ODE. We already know how to find <span class="process-math">\(y_{c},\)</span><aside class="aside aside-like" id="aside-10"><p id="p-231">The characteristic equation of the ODE is <span class="process-math">\((r + 1)(r - 2)\text{.}\)</span></p></aside> which is just</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{c} = c_{1}e^{x} + c_{2}e^{-2x}.
 \end{equation*}
 </div>
 <p class="continuation">Once we can find a single particular solution <span class="process-math">\(y_{p}\)</span> we'll be finished.</p>
-<p id="p-236">If we stare that the ODE, then we see that <span class="process-math">\(y\)</span> and its derivatives must cancel each other and leave a polynomial. So it's reasonable to guess that a polynomial might be a solution of the ODE, or equivalently, <span class="process-math">\(y_{p}\)</span> <em class="emphasis">should be a polynomial</em>. Since the degree<aside class="aside aside-like" id="aside-11"><p id="p-237">Recall that the degree of a polynomial is just the highest power of the variable in the polynomial.</p></aside> of the right hand side is <span class="process-math">\(1\text{,}\)</span> then <span class="process-math">\(y_{p}\)</span> should probably be degree <span class="process-math">\(1\)</span> as well. This means that <span class="process-math">\(y_{p} = A_{1}x + A_{2}\)</span> for some constants <span class="process-math">\(A_{1},A_{2}\text{.}\)</span></p>
-<p id="p-238">To find these constants (<dfn class="terminology">undetermined coefficients</dfn>), we plug our guess into the ODE to get</p>
+<p id="p-232">If we stare that the ODE, then we see that <span class="process-math">\(y\)</span> and its derivatives must cancel each other and leave a polynomial. So it's reasonable to guess that a polynomial might be a solution of the ODE, or equivalently, <span class="process-math">\(y_{p}\)</span> <em class="emphasis">should be a polynomial</em>. Since the degree<aside class="aside aside-like" id="aside-11"><p id="p-233">Recall that the degree of a polynomial is just the highest power of the variable in the polynomial.</p></aside> of the right hand side is <span class="process-math">\(1\text{,}\)</span> then <span class="process-math">\(y_{p}\)</span> should probably be degree <span class="process-math">\(1\)</span> as well. This means that <span class="process-math">\(y_{p} = A_{1}x + A_{2}\)</span> for some constants <span class="process-math">\(A_{1},A_{2}\text{.}\)</span></p>
+<p id="p-234">To find these constants (<dfn class="terminology">undetermined coefficients</dfn>), we plug our guess into the ODE to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 0 - A_{1} - 2A_{1}x - 2A_{2} = 3x + 4.
@@ -262,11 +269,11 @@ y = y_{c} + y_{p} = c_{1}e^{x} + c_{2}e^{-2x} - \frac{3}{2}x + \frac{5}{4}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-239">Note that in <a href="" class="xref" data-knowl="./knowl/example-using-the-method-of-undetermined-coefficients.html" title="Example 2.4.2: Using the Method of Undetermined Coefficients">Example 2.4.2</a>, we didn't need any initial conditions to find <span class="process-math">\(y_{p}\text{.}\)</span> This means that if a non-homogeneous ODE like the one in <a href="" class="xref" data-knowl="./knowl/example-using-the-method-of-undetermined-coefficients.html" title="Example 2.4.2: Using the Method of Undetermined Coefficients">Example 2.4.2</a> represents some physical system, then the initial configuration of that system <em class="emphasis">has no effect on <span class="process-math">\(y_{p}\)</span></em>. We will see soon that particular solutions correspond to external forces on a system, like gravity, whereas complementary solutions correspond to internal forces in a system, such as the spring force.</p>
+</div></article><p id="p-235">Note that in <a href="" class="xref" data-knowl="./knowl/example-using-the-method-of-undetermined-coefficients.html" title="Example 2.4.2: Using the Method of Undetermined Coefficients">Example 2.4.2</a>, we didn't need any initial conditions to find <span class="process-math">\(y_{p}\text{.}\)</span> This means that if a non-homogeneous ODE like the one in <a href="" class="xref" data-knowl="./knowl/example-using-the-method-of-undetermined-coefficients.html" title="Example 2.4.2: Using the Method of Undetermined Coefficients">Example 2.4.2</a> represents some physical system, then the initial configuration of that system <em class="emphasis">has no effect on <span class="process-math">\(y_{p}\)</span></em>. We will see soon that particular solutions correspond to external forces on a system, like gravity, whereas complementary solutions correspond to internal forces in a system, such as the spring force.</p>
 <article class="example example-like" id="example-36"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.3</span><span class="period">.</span>
 </h4>
-<p id="p-240">Find the general solution of</p>
+<p id="p-236">Find the general solution of</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y'' - 2y' + y = x - \sin(2x).
@@ -274,13 +281,13 @@ y'' - 2y' + y = x - \sin(2x).
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-33" id="solution-33"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-33"><div class="solution solution-like">
-<p id="p-241">The general solution will take the form <span class="process-math">\(y = y_{c} + y_{p}\text{.}\)</span> Once again, we find <span class="process-math">\(y_{c}\)</span> by solving the characteristic equation to get</p>
+<p id="p-237">The general solution will take the form <span class="process-math">\(y = y_{c} + y_{p}\text{.}\)</span> Once again, we find <span class="process-math">\(y_{c}\)</span> by solving the characteristic equation to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{c} = c_{1}x + c_{2}xe^{x}.
 \end{equation*}
 </div>
-<p id="p-242">Now we can make a guess as to what <span class="process-math">\(y_{p}\)</span> should be, once again based on the right hand side of the ODE. If we want to differentiate <span class="process-math">\(y_{p}\)</span> and obtain <span class="process-math">\(x - \sin(2x)\text{,}\)</span> then <span class="process-math">\(y_{p}\)</span> should include both an <span class="process-math">\(x\)</span> term and a <span class="process-math">\(\sin(2x)\)</span> term. If we make the guess that <span class="process-math">\(y_{p} = A_{1}x + A_{2}\sin(2x)\text{,}\)</span> then we get</p>
+<p id="p-238">Now we can make a guess as to what <span class="process-math">\(y_{p}\)</span> should be, once again based on the right hand side of the ODE. If we want to differentiate <span class="process-math">\(y_{p}\)</span> and obtain <span class="process-math">\(x - \sin(2x)\text{,}\)</span> then <span class="process-math">\(y_{p}\)</span> should include both an <span class="process-math">\(x\)</span> term and a <span class="process-math">\(\sin(2x)\)</span> term. If we make the guess that <span class="process-math">\(y_{p} = A_{1}x + A_{2}\sin(2x)\text{,}\)</span> then we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-17">
 \begin{align*}
 A_{1}x - 2A_{1} \amp = x \\
@@ -288,7 +295,7 @@ A_{1}x - 2A_{1} \amp = x \\
 \end{align*}
 </div>
 <p class="continuation">This forces <span class="process-math">\(A_{1} = 1\)</span> <em class="emphasis">and</em> <span class="process-math">\(A_{1} = 0\text{,}\)</span> as well as <span class="process-math">\(A_{2} = \frac{1}{3}\)</span> <em class="emphasis">and</em> <span class="process-math">\(A_{2} = 0\text{.}\)</span> Obviously, this is a problem!</p>
-<p id="p-243">What happened here is we didn't give our guess for <span class="process-math">\(y_{p}\)</span> enough flexibility. We know we want <span class="process-math">\(y_{p}\)</span> to involve <span class="process-math">\(x\)</span> and <span class="process-math">\(\sin(2x)\text{,}\)</span> but as soon as we plug this into the ODE and start differentiating constant terms and cosine terms will begin to appear, and <em class="emphasis">we need to account for these as well</em>. So we'll update our guess for <span class="process-math">\(y_{p}\text{,}\)</span> and assume</p>
+<p id="p-239">What happened here is we didn't give our guess for <span class="process-math">\(y_{p}\)</span> enough flexibility. We know we want <span class="process-math">\(y_{p}\)</span> to involve <span class="process-math">\(x\)</span> and <span class="process-math">\(\sin(2x)\text{,}\)</span> but as soon as we plug this into the ODE and start differentiating constant terms and cosine terms will begin to appear, and <em class="emphasis">we need to account for these as well</em>. So we'll update our guess for <span class="process-math">\(y_{p}\text{,}\)</span> and assume</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{p} = A_{1}x + A_{2} + A_{3}\cos(2x) + A_{4}\sin(2x).
@@ -322,7 +329,7 @@ c_{1}e^{x} + c_{2}xe^{x} + x + 2 - \frac{4}{25}\cos(2x) + \frac{3}{25}\sin(2x).
 </div></article><article class="example example-like" id="example-method-of-undetermined-coefficients-with-overlap"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Method of Undetermined Coefficients with Overlap.</span>
 </h4>
-<p id="p-244">Find the solution <span class="process-math">\(y(x)\)</span>m&gt; of the IVP</p>
+<p id="p-240">Find the solution <span class="process-math">\(y(x)\)</span>m&gt; of the IVP</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y''+9y = 3\cos(3x),\quad y(0) = 1,y'(0) = -1
@@ -330,14 +337,14 @@ y''+9y = 3\cos(3x),\quad y(0) = 1,y'(0) = -1
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-34" id="solution-34"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-34"><div class="solution solution-like">
-<p id="p-245">We can start this example the same way we've done the previous ones. First, we find <span class="process-math">\(y_{c}\)</span> by solving <span class="process-math">\(y''+9y=0\text{.}\)</span> So</p>
+<p id="p-241">We can start this example the same way we've done the previous ones. First, we find <span class="process-math">\(y_{c}\)</span> by solving <span class="process-math">\(y''+9y=0\text{.}\)</span> So</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{c} = c_{1}\cos(3x)+c_{2}\sin(3x).
 \end{equation*}
 </div>
 <p class="continuation">Now we find <span class="process-math">\(y_{p}\text{.}\)</span> Since the RHS of the ODE is <span class="process-math">\(3\cos(3x)\text{,}\)</span> we'll guess that <span class="process-math">\(y_{p} = A\cos(3x)+B\sin(3x)\text{.}\)</span> However, this will cause us problems! Since <span class="process-math">\(\cos(3x),\sin(3x)\)</span> are both solutions of the corresponding homogeneous ODE, then plugging <span class="process-math">\(y_{p}\)</span> into <span class="process-math">\(y''+9y\)</span> will just give <span class="process-math">\(0\)</span> again, instead of <span class="process-math">\(3\cos(3x)\text{.}\)</span></p>
-<p id="p-246">The problem here is that our guess for <span class="process-math">\(y_{p}\)</span> overlaps with <span class="process-math">\(y_{c}\text{.}\)</span> To fix this, we'll multiply our guess for <span class="process-math">\(y_{p}\)</span> by the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> that removes the overlap. In this case, we'll just multiply by <span class="process-math">\(x\)</span> to get</p>
+<p id="p-242">The problem here is that our guess for <span class="process-math">\(y_{p}\)</span> overlaps with <span class="process-math">\(y_{c}\text{.}\)</span> To fix this, we'll multiply our guess for <span class="process-math">\(y_{p}\)</span> by the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> that removes the overlap. In this case, we'll just multiply by <span class="process-math">\(x\)</span> to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y_{p} = x[A\cos(3x)+B\sin(3x)]
@@ -362,7 +369,7 @@ y_{p} = x\left[\frac{1}{2}\sin(3x)\right],
 y = y_{c}+y_{p} = c_{1}\cos(3x)+c_{2}\sin(3x) + \frac{x}{2}\sin(3x).
 \end{equation*}
 </div>
-<p id="p-247">To find the solution of the IVP, we just plug in the initial conditions. Since <span class="process-math">\(y(0) = 1\text{,}\)</span> this gives</p>
+<p id="p-243">To find the solution of the IVP, we just plug in the initial conditions. Since <span class="process-math">\(y(0) = 1\text{,}\)</span> this gives</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 1 = c_{1}.
@@ -387,13 +394,13 @@ y = \cos(3x)-\frac{1}{3}\sin(3x)+\frac{x}{2}\sin(3x).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-248">What we did in <a href="" class="xref" data-knowl="./knowl/example-method-of-undetermined-coefficients-with-overlap.html" title="Example 2.4.4: Method of Undetermined Coefficients with Overlap">Example 2.4.4</a> will work in general: if <span class="process-math">\(y_{c}\)</span> and the initial guess for <span class="process-math">\(y_{p}\)</span> overlap, i.e. contain linearly dependent terms, then we multiply <span class="process-math">\(y_{p}\)</span> by the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> (or the appropriate independent variable) that removes the overlap.</p>
+</div></article><p id="p-244">What we did in <a href="" class="xref" data-knowl="./knowl/example-method-of-undetermined-coefficients-with-overlap.html" title="Example 2.4.4: Method of Undetermined Coefficients with Overlap">Example 2.4.4</a> will work in general: if <span class="process-math">\(y_{c}\)</span> and the initial guess for <span class="process-math">\(y_{p}\)</span> overlap, i.e. contain linearly dependent terms, then we multiply <span class="process-math">\(y_{p}\)</span> by the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> (or the appropriate independent variable) that removes the overlap.</p>
 <article class="example example-like" id="example-determining-the-appropriate-form-of-the-particular-solution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Determining the Appropriate Form of the Particular Solution.</span>
 </h4>
-<p id="p-249">Consider the ODE <span class="process-math">\(x'' + 4x' + 4 = 3t^{3} - t + t^{2}\sin(2t) + 3e^{-2t}.\)</span> Find the correct guess for <span class="process-math">\(x_{p}\text{.}\)</span></p>
+<p id="p-245">Consider the ODE <span class="process-math">\(x'' + 4x' + 4 = 3t^{3} - t + t^{2}\sin(2t) + 3e^{-2t}.\)</span> Find the correct guess for <span class="process-math">\(x_{p}\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-35" id="solution-35"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-35"><div class="solution solution-like"><p id="p-250">Before we can do anything with <span class="process-math">\(x_{p}\text{,}\)</span> we need to find the complementary solution <span class="process-math">\(x_{c}\text{.}\)</span> This is given by <span class="process-math">\(x_{c} = c_{1}e^{-2t} + c_{2}te^{-2t}.\)</span> Now we can try to guess an appropriate form for <span class="process-math">\(x_{p}\)</span> using the right hand side of the ODE. Each "component" of the right hand side contributes to our guess for <span class="process-math">\(x_{p}\)</span> as follows: <figure class="table table-like" id="table-3"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.4.6<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-35" id="solution-35"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-35"><div class="solution solution-like"><p id="p-246">Before we can do anything with <span class="process-math">\(x_{p}\text{,}\)</span> we need to find the complementary solution <span class="process-math">\(x_{c}\text{.}\)</span> This is given by <span class="process-math">\(x_{c} = c_{1}e^{-2t} + c_{2}te^{-2t}.\)</span> Now we can try to guess an appropriate form for <span class="process-math">\(x_{p}\)</span> using the right hand side of the ODE. Each "component" of the right hand side contributes to our guess for <span class="process-math">\(x_{p}\)</span> as follows: <figure class="table table-like" id="table-3"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.4.6<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">component</td>
 <td class="l m b3 r0 l0 t3 lines">contribution to <span class="process-math">\(x_{p}\)</span>
@@ -412,7 +419,7 @@ y = \cos(3x)-\frac{1}{3}\sin(3x)+\frac{x}{2}\sin(3x).
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(Ke^{-2t}\)</span></td>
 </tr>
 </table></div></figure> But now we have a problem, since <span class="process-math">\(Ke^{-2t}\)</span> overlaps with <span class="process-math">\(x_{c}\text{.}\)</span> So we multiply by <span class="process-math">\(t^{2}\)</span> to remove the overlap, and hence <span class="process-math">\(x_{p} = At^{3} + Bt^{2} + Ct + D + (Et^{2} + Ft + G)\cos(2t) + (Ht^{2} + It + J)\sin(2t) + 3e^{-2t} + Kt^{2}e^{-2t}.\)</span></p></div></div>
-</div></article></section><section class="conclusion" id="conclusion-6"><p id="p-251">SUGGESTED PROBLEMS: 1, 3, 5, 11</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-3"><p id="p-247">SUGGESTED PROBLEMS: 1, 3, 5, 11</p></section></section></div></main>
 </div>
 </body>
 </html>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:47-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
 // Their results will be linked, only within language type
@@ -67,7 +73,6 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -97,6 +102,8 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -208,20 +215,20 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="chapter" id="partial-differential-equations"><h2 class="heading">
 <span class="type">Chapter</span> <span class="codenumber">8</span> <span class="title">Partial Differential Equations</span>
 </h2>
-<section class="introduction" id="introduction-21"><p id="p-681">Consider a rod that's recently been pulled out of the oven and is now cooling in a room. Let <span class="process-math">\(T(t)\)</span> denote the temperature of the rod at time <span class="process-math">\(t\text{,}\)</span> where <span class="process-math">\(t\)</span> represents the amount of time since the rod was pulled out of the oven. Then we can model <span class="process-math">\(T(t)\)</span> by using Newton's Law of Cooling, which states that</p>
+<section class="introduction" id="introduction-21"><p id="p-677">Consider a rod that's recently been pulled out of the oven and is now cooling in a room. Let <span class="process-math">\(T(t)\)</span> denote the temperature of the rod at time <span class="process-math">\(t\text{,}\)</span> where <span class="process-math">\(t\)</span> represents the amount of time since the rod was pulled out of the oven. Then we can model <span class="process-math">\(T(t)\)</span> by using Newton's Law of Cooling, which states that</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{dT}{dt} = -k(T-A),
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(k\)</span> is a positive constant and <span class="process-math">\(A\)</span> represents the ambient temperature of the room. This is an ordinary differential equation since it involves only one independent variable (<span class="process-math">\(t\)</span>).</p>
-<p id="p-682">This works just fine as a simple model of the temperature of the rod, but in reality the situation is likely to be more complicated. For instance, the temperature of the rod will likely vary over the surface of the rod at any given time <span class="process-math">\(t\text{.}\)</span> So it's reasonable to assume that the temperature of the rod should depend on <em class="emphasis">two</em> variables, say, <span class="process-math">\(x\)</span> (position on the rod) and <span class="process-math">\(t\)</span> (time). So the temperature of the rod would be more accurately described by a function <span class="process-math">\(u(x,t)\text{.}\)</span> In fact, as we will see later, the temperature <span class="process-math">\(u(x,t)\)</span> can be described by the <dfn class="terminology">heat equation</dfn>:</p>
+<p id="p-678">This works just fine as a simple model of the temperature of the rod, but in reality the situation is likely to be more complicated. For instance, the temperature of the rod will likely vary over the surface of the rod at any given time <span class="process-math">\(t\text{.}\)</span> So it's reasonable to assume that the temperature of the rod should depend on <em class="emphasis">two</em> variables, say, <span class="process-math">\(x\)</span> (position on the rod) and <span class="process-math">\(t\)</span> (time). So the temperature of the rod would be more accurately described by a function <span class="process-math">\(u(x,t)\text{.}\)</span> In fact, as we will see later, the temperature <span class="process-math">\(u(x,t)\)</span> can be described by the <dfn class="terminology">heat equation</dfn>:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{\partial u}{\partial t} = \frac{\partial^{2}u}{\partial x^{2}}.
 \end{equation*}
 </div>
-<p id="p-683">This is an example of a <dfn class="terminology">partial differential equation</dfn>.</p></section><nav class="summary-links"><ul>
+<p id="p-679">This is an example of a <dfn class="terminology">partial differential equation</dfn>.</p></section><nav class="summary-links"><ul>
 <li><a href="section-basic-concepts.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Basic Concepts</span></a></li>
 <li><a href="section-wave-equation-and-separation-of-variables.html" class="internal"><span class="codenumber">8.2</span> <span class="title">The Wave Equation and Separation of Variables</span></a></li>
 <li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" class="internal"><span class="codenumber">8.3</span> <span class="title">d'Alembert's Solution of the Wave Equation</span></a></li>

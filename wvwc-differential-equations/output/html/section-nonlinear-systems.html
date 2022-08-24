@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-03-28T15:57:45-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -16,7 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
 <meta property="book:title" content="Differential Equations Lecture Notes">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>window.MathJax = {
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
@@ -49,6 +47,14 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
@@ -61,7 +67,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\require{physics}\newcommand{\RR}{\mathbb{R}}
@@ -91,6 +96,8 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
@@ -203,7 +210,7 @@ true);
 <section class="section" id="section-nonlinear-systems"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">4.4</span> <span class="title">Nonlinear Systems</span>
 </h2>
-<section class="introduction" id="introduction-14"><p id="p-405">Now we apply phase plane methods to study <dfn class="terminology">nonlinear autonomous systems</dfn>, <aside class="aside aside-like" id="aside-16"><p id="p-406"><em class="emphasis">Autonomous</em> just means we can write the system without explicitly referring to the independent variable <span class="process-math">\(t\text{.}\)</span></p></aside> which for systems involving two ODEs take the form</p>
+<section class="introduction" id="introduction-14"><p id="p-401">Now we apply phase plane methods to study <dfn class="terminology">nonlinear autonomous systems</dfn>, <aside class="aside aside-like" id="aside-16"><p id="p-402"><em class="emphasis">Autonomous</em> just means we can write the system without explicitly referring to the independent variable <span class="process-math">\(t\text{.}\)</span></p></aside> which for systems involving two ODEs take the form</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-48">
 \begin{align*}
 y'_{1} \amp = f_{1}(y_{1},y_{2})\\
@@ -211,14 +218,14 @@ y'_{2} \amp = f_{2}(y_{1},y_{2})\text{.}
 \end{align*}
 </div>
 <p class="continuation">where <span class="process-math">\(y_{i} = y_{i}(t)\text{.}\)</span></p>
-<p id="p-407">We can also write such a system as a vector equation:</p>
+<p id="p-403">We can also write such a system as a vector equation:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="equation-nonlinear-system">
 \begin{equation}
 \vec{y}' = \vec{f}(\vec{y})\text{.}\tag{7}
 \end{equation}
 </div>
 <p class="continuation">although not as a matrix ODE (if <span class="process-math">\(f_{i}\)</span> are nonlinear).</p>
-<p id="p-408">Just as in the previous sections, the <dfn class="terminology">phase plane</dfn> is still the <span class="process-math">\(y_{1}y_{2}-plane\text{,}\)</span> <dfn class="terminology">trajectories</dfn> are still the solutions <span class="process-math">\(\vec{y}\)</span> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> (represented as curves in the phase plane), and the <dfn class="terminology">phase portrait</dfn> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> is the set of all trajectories in the phase plane. We call a point <span class="process-math">\(P\)</span> in the phase plane a <dfn class="terminology">critical point</dfn> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> if it is a solution of the same system. Equivalently, the critical points of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> are precisely those points <span class="process-math">\((y_{1},y_{2})\)</span> for which</p>
+<p id="p-404">Just as in the previous sections, the <dfn class="terminology">phase plane</dfn> is still the <span class="process-math">\(y_{1}y_{2}-plane\text{,}\)</span> <dfn class="terminology">trajectories</dfn> are still the solutions <span class="process-math">\(\vec{y}\)</span> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> (represented as curves in the phase plane), and the <dfn class="terminology">phase portrait</dfn> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> is the set of all trajectories in the phase plane. We call a point <span class="process-math">\(P\)</span> in the phase plane a <dfn class="terminology">critical point</dfn> of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> if it is a solution of the same system. Equivalently, the critical points of <a href="" class="xref" data-knowl="./knowl/equation-nonlinear-system.html" title="Equation 7">(7)</a> are precisely those points <span class="process-math">\((y_{1},y_{2})\)</span> for which</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-nonlinear-system.html ./knowl/equation-nonlinear-system.html ./knowl/equation-nonlinear-system.html ./knowl/equation-nonlinear-system.html">
 \begin{equation*}
 f_{1}(y_{1},y_{2}) = 0\quad\text{and}\quad f_{2}(y_{1},y_{2}) = 0.  
@@ -227,10 +234,10 @@ f_{1}(y_{1},y_{2}) = 0\quad\text{and}\quad f_{2}(y_{1},y_{2}) = 0.
 <article class="example example-like" id="example-67"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.4.1</span><span class="period">.</span>
 </h3>
-<p id="p-409">Express the <em class="emphasis">pendulum equation</em> <span class="process-math">\(\theta''+\frac{g}{l}\sin\theta=0\text{,}\)</span> where <span class="process-math">\(\theta=\theta(t)\)</span> represents the angular displacement of a pendulum from the vertical, as a nonlinear system <span class="process-math">\(\vecm{\theta}' = \vec{f}(\vecm{\theta})\)</span> and then find its critical points.</p>
+<p id="p-405">Express the <em class="emphasis">pendulum equation</em> <span class="process-math">\(\theta''+\frac{g}{l}\sin\theta=0\text{,}\)</span> where <span class="process-math">\(\theta=\theta(t)\)</span> represents the angular displacement of a pendulum from the vertical, as a nonlinear system <span class="process-math">\(\vecm{\theta}' = \vec{f}(\vecm{\theta})\)</span> and then find its critical points.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-64" id="solution-64"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-64"><div class="solution solution-like">
-<p id="p-410">First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set</p>
+<p id="p-406">First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \theta_{1} = \theta\quad\text{and}\quad\theta_{2} = \theta_{1}' = \theta'\text{.}
@@ -249,17 +256,17 @@ f_{1}(y_{1},y_{2}) = 0\quad\text{and}\quad f_{2}(y_{1},y_{2}) = 0.
 \vecm{\theta} = \begin{bmatrix}\theta_{1} \\ \theta_{2}\end{bmatrix}\quad\text{and}\quad \vec{f}(\vecm{\theta}) = \begin{bmatrix}\theta_{2} \\ -\frac{g}{l}\sin\theta_{2}\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-411">Now we need to find the critical points <span class="process-math">\(\vecm{\theta}\)</span> in the <span class="process-math">\(\theta_{1}\theta_{2}\)</span>-plane that make <span class="process-math">\(\vec{f}(\vecm{\theta}) = \vec{0}\text{.}\)</span> So we need <span class="process-math">\(\theta_{2} = 0\)</span> and <span class="process-math">\(\theta_{1} = \pm k\pi\)</span> for <span class="process-math">\(k=0,\pm1,\pm2,\dots\text{.}\)</span> So the critical points of this system are all points of the form <span class="process-math">\((\pm k\pi,0)\text{.}\)</span></p>
+<p id="p-407">Now we need to find the critical points <span class="process-math">\(\vecm{\theta}\)</span> in the <span class="process-math">\(\theta_{1}\theta_{2}\)</span>-plane that make <span class="process-math">\(\vec{f}(\vecm{\theta}) = \vec{0}\text{.}\)</span> So we need <span class="process-math">\(\theta_{2} = 0\)</span> and <span class="process-math">\(\theta_{1} = \pm k\pi\)</span> for <span class="process-math">\(k=0,\pm1,\pm2,\dots\text{.}\)</span> So the critical points of this system are all points of the form <span class="process-math">\((\pm k\pi,0)\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-classification-of-critical-points-and-linearization"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Classification of Critical Points and Linearization</span>
 </h3>
-<p id="p-412">Critical points of systems are important because they can represent long-term behavior of a system. For example, if we have a first-order system representing the population of two species, and it turns out the the origin is asymptotically stable, then this suggests that both species could be driven to extinction. So we want to classify critical points for nonlinear systems in addition to what we have already for linear systems; unfortunately, nonlinear systems are often difficult, if not outright impossible, to solve exactly.</p>
-<p id="p-413">Thankfully, in many cases we can approximate a nonlinear system <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\)</span> with critical points <span class="process-math">\(P_{i}\)</span> by a suitably chosen linear system <span class="process-math">\(\vec{y}' = A\vec{y}\)</span> at each critical point <span class="process-math">\(P_{i}\text{;}\)</span> we call such a system the <dfn class="terminology">linearization</dfn> at <span class="process-math">\(P_{i}\text{.}\)</span></p>
+<p id="p-408">Critical points of systems are important because they can represent long-term behavior of a system. For example, if we have a first-order system representing the population of two species, and it turns out the the origin is asymptotically stable, then this suggests that both species could be driven to extinction. So we want to classify critical points for nonlinear systems in addition to what we have already for linear systems; unfortunately, nonlinear systems are often difficult, if not outright impossible, to solve exactly.</p>
+<p id="p-409">Thankfully, in many cases we can approximate a nonlinear system <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\)</span> with critical points <span class="process-math">\(P_{i}\)</span> by a suitably chosen linear system <span class="process-math">\(\vec{y}' = A\vec{y}\)</span> at each critical point <span class="process-math">\(P_{i}\text{;}\)</span> we call such a system the <dfn class="terminology">linearization</dfn> at <span class="process-math">\(P_{i}\text{.}\)</span></p>
 <article class="definition definition-like" id="definition-the-jacobian-of-a-nonlinear-system"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">The Jacobian of a Nonlinear System.</span>
 </h4>
-<p id="p-414">Let</p>
+<p id="p-410">Let</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1} \\ y_{2}\end{bmatrix}\quad\text{and}\quad\vec{f}(\vec{y}) = \begin{bmatrix}f_{1}(y_{1},y_{2}) \\ f_{2}(y_{1},y_{2})\end{bmatrix}.
@@ -270,7 +277,7 @@ f_{1}(y_{1},y_{2}) = 0\quad\text{and}\quad f_{2}(y_{1},y_{2}) = 0.
 \begin{equation*}
 J(y_{1},y_{2}) = \begin{bmatrix}\pdv{f_{1}}{y_{1}} \amp  \pdv{f_{1}}{y_{2}} \\ \pdv{f_{2}}{y_{1}} \amp  \pdv{f_{2}}{y_{2}}\end{bmatrix}.
 \end{equation*}
-</div></article><p id="p-415">The linearization of <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\)</span> at the point <span class="process-math">\(P = (p_{1},p_{2})\)</span> is the linear system <span class="process-math">\(\vec{y}' = A\vec{y}\text{,}\)</span> where</p>
+</div></article><p id="p-411">The linearization of <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\)</span> at the point <span class="process-math">\(P = (p_{1},p_{2})\)</span> is the linear system <span class="process-math">\(\vec{y}' = A\vec{y}\text{,}\)</span> where</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = J(p_{1},p_{2}).
@@ -279,10 +286,10 @@ A = J(p_{1},p_{2}).
 <article class="example example-like" id="example-68"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.4.3</span><span class="period">.</span>
 </h4>
-<p id="p-416">Find the linearization of the pendulum system <span class="process-math">\(\vecm{\theta}' = \vec{f}(\vecm{\theta})\)</span> at the critical point <span class="process-math">\((0,0)\text{.}\)</span></p>
+<p id="p-412">Find the linearization of the pendulum system <span class="process-math">\(\vecm{\theta}' = \vec{f}(\vecm{\theta})\)</span> at the critical point <span class="process-math">\((0,0)\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-65" id="solution-65"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-65"><div class="solution solution-like">
-<p id="p-417">For this system, we have <span class="process-math">\(f_{1}(\theta_{1},\theta_{2}) = \theta_{2}\)</span> and <span class="process-math">\(f_{2}(\theta_{1},\theta_{2}) = -\frac{g}{l}\sin\theta_{1}\text{.}\)</span> The Jacobian is then given by</p>
+<p id="p-413">For this system, we have <span class="process-math">\(f_{1}(\theta_{1},\theta_{2}) = \theta_{2}\)</span> and <span class="process-math">\(f_{2}(\theta_{1},\theta_{2}) = -\frac{g}{l}\sin\theta_{1}\text{.}\)</span> The Jacobian is then given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 J(\theta_{1},\theta_{2}) = \begin{bmatrix}0 \amp  1 \\ -\frac{g}{l}\cos\theta_{1} \amp  0\end{bmatrix}.
@@ -295,21 +302,21 @@ A = J(0,0) = \begin{bmatrix}0 \amp  1 \\ -\frac{g}{l} \amp  0\end{bmatrix}.
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-418">The linearization of a nonlinear system isn't just useful for approximating the nonlinear system. It's also incredibly useful for classifying the critical points of a nonlinear system; for the most part, the eigenvalues of the matrix <span class="process-math">\(A\)</span> from the linearization also classify the critical points of the system <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\text{.}\)</span></p>
+</div></article><p id="p-414">The linearization of a nonlinear system isn't just useful for approximating the nonlinear system. It's also incredibly useful for classifying the critical points of a nonlinear system; for the most part, the eigenvalues of the matrix <span class="process-math">\(A\)</span> from the linearization also classify the critical points of the system <span class="process-math">\(\vec{y}' = \vec{f}(\vec{y})\text{.}\)</span></p>
 <article class="example example-like" id="example-69"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.4.4</span><span class="period">.</span>
 </h4>
-<p id="p-419">Find and classify the critical points of the nonlinear system</p>
+<p id="p-415">Find and classify the critical points of the nonlinear system</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-50">
 \begin{align*}
 \dv{x}{t} \amp = x - y - x^{2} + xy \\
 \dv{y}{t} \amp = -x^{2} - y \text{.}
 \end{align*}
 </div>
-<aside class="aside aside-like" id="aside-17"><p id="p-420">This example taken from <a class="external" href="https://www.math.uci.edu/~ndonalds/math3d/nonlinear.pdf" target="_blank">here.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-1" id="fn-1"><sup> 1 </sup></a></p></aside><div class="solutions">
+<aside class="aside aside-like" id="aside-17"><p id="p-416">This example taken from <a class="external" href="https://www.math.uci.edu/~ndonalds/math3d/nonlinear.pdf" target="_blank">here.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-1" id="fn-1"><sup> 1 </sup></a></p></aside><div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-66" id="solution-66"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-66"><div class="solution solution-like">
-<p id="p-421">The critical points occur at <span class="process-math">\(x' = y' = 0\text{.}\)</span> If we set <span class="process-math">\(x' = y'\)</span> and solve the resulting equation, we get <span class="process-math">\(x = 0\)</span> or <span class="process-math">\(y = -1\text{.}\)</span> If <span class="process-math">\(x = 0\text{,}\)</span> then <span class="process-math">\(x' = -y\text{,}\)</span> and for this to be <span class="process-math">\(0\)</span> we must have <span class="process-math">\(y = 0\text{.}\)</span> We can verify that <span class="process-math">\(x = y = 0\)</span> makes <span class="process-math">\(y' = 0\)</span> as well, so the origin is a critical point. Similarly, <span class="process-math">\(y = -1\)</span> forces <span class="process-math">\(x = \pm1\text{,}\)</span> and we can verify that <span class="process-math">\(x' = y' = 0\)</span> at <span class="process-math">\((-1,-1)\)</span> and <span class="process-math">\((1,-1)\text{.}\)</span> So we have three critical points to check.</p>
-<p id="p-422">To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have</p>
+<p id="p-417">The critical points occur at <span class="process-math">\(x' = y' = 0\text{.}\)</span> If we set <span class="process-math">\(x' = y'\)</span> and solve the resulting equation, we get <span class="process-math">\(x = 0\)</span> or <span class="process-math">\(y = -1\text{.}\)</span> If <span class="process-math">\(x = 0\text{,}\)</span> then <span class="process-math">\(x' = -y\text{,}\)</span> and for this to be <span class="process-math">\(0\)</span> we must have <span class="process-math">\(y = 0\text{.}\)</span> We can verify that <span class="process-math">\(x = y = 0\)</span> makes <span class="process-math">\(y' = 0\)</span> as well, so the origin is a critical point. Similarly, <span class="process-math">\(y = -1\)</span> forces <span class="process-math">\(x = \pm1\text{,}\)</span> and we can verify that <span class="process-math">\(x' = y' = 0\)</span> at <span class="process-math">\((-1,-1)\)</span> and <span class="process-math">\((1,-1)\text{.}\)</span> So we have three critical points to check.</p>
+<p id="p-418">To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 J(x,y) = \begin{bmatrix} 1 - 2x + y \amp x - 1 \\ -2x \amp -1\end{bmatrix}\text{.}
@@ -335,11 +342,11 @@ J(1,-1) = \begin{bmatrix} -2 \amp 0 \\ -2 \amp -1\end{bmatrix}\text{,}
 </div>
 <p class="continuation">which has eigenvalues <span class="process-math">\(-2,-1\text{.}\)</span> Hence <span class="process-math">\((1,-1)\)</span> is an asymptotically stable node.</p>
 </div></div>
-</div></article><p id="p-423">We can also use nonlinear systems to get more accurate population models.</p>
+</div></article><p id="p-419">We can also use nonlinear systems to get more accurate population models.</p>
 <article class="example example-like" id="example-70"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.4.5</span><span class="period">.</span>
 </h4>
-<p id="p-424">Predator-prey populations can be modeled using the Lotka-Volterra model. Let <span class="process-math">\(y_{1}(t)\)</span> denote the population of a prey species at time <span class="process-math">\(t\)</span> and let <span class="process-math">\(y_{2}(t)\)</span> denote the population of a predator species at time <span class="process-math">\(t\text{.}\)</span> Then the Lotka-Volterra model says that</p>
+<p id="p-420">Predator-prey populations can be modeled using the Lotka-Volterra model. Let <span class="process-math">\(y_{1}(t)\)</span> denote the population of a prey species at time <span class="process-math">\(t\)</span> and let <span class="process-math">\(y_{2}(t)\)</span> denote the population of a predator species at time <span class="process-math">\(t\text{.}\)</span> Then the Lotka-Volterra model says that</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-51">
 \begin{align*}
 y'_{1} \amp = ay_{1}-by_{1}y_{2}\\
@@ -349,7 +356,7 @@ y'_{2} \amp = ky_{1}y_{2} - ly_{2}\text{,}
 <p class="continuation">where <span class="process-math">\(a,b,k,l&gt;0\text{.}\)</span> Find and classify the critical points of this system.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-67" id="solution-67"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-67"><div class="solution solution-like">
-<p id="p-425">The critical points are the points <span class="process-math">\((y_{1},y_{2})\)</span> that satisfy the equations</p>
+<p id="p-421">The critical points are the points <span class="process-math">\((y_{1},y_{2})\)</span> that satisfy the equations</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 ay_{1}-by_{1}y_{2} = 0\quad\text{and}\quad ky_{1}y_{2} - ly_{2} = 0.
@@ -362,7 +369,7 @@ y_{1}(a-by_{2}) = 0\quad\text{and}\quad y_{2}(ky_{1}-l) = 0.
 \end{equation*}
 </div>
 <p class="continuation">This has solutions <span class="process-math">\(y_{1} = y_{2} = 0\)</span> and <span class="process-math">\(y_{1} = \frac{l}{k},y_{2} = \frac{a}{b}\text{.}\)</span> So the critical points are <span class="process-math">\((0,0)\)</span> and <span class="process-math">\((\frac{l}{k},\frac{a}{b})\text{.}\)</span></p>
-<p id="p-426">To classify these critical points we need to linearize the system, so we'll compute the Jacobian of</p>
+<p id="p-422">To classify these critical points we need to linearize the system, so we'll compute the Jacobian of</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \vec{f}(\vec{y}) = \begin{bmatrix}ay_{1}-by_{1}y_{2} \\ ky_{1}y_{2} - ly_{2}\end{bmatrix}
@@ -374,14 +381,14 @@ y_{1}(a-by_{2}) = 0\quad\text{and}\quad y_{2}(ky_{1}-l) = 0.
 J(y_{1},y_{2}) = \begin{bmatrix}a-by_{2} \amp  -by_{1} \\ ky_{2} \amp  ky_{1} - l\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-427">At <span class="process-math">\((0,0)\text{,}\)</span> we get</p>
+<p id="p-423">At <span class="process-math">\((0,0)\text{,}\)</span> we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = \begin{bmatrix}a \amp  0 \\ 0 \amp  -l\end{bmatrix}\text{,}
 \end{equation*}
 </div>
 <p class="continuation">which has eigenvalues <span class="process-math">\(\lambda=a,-l\text{.}\)</span> So the origin is an saddle point of the original system. In particular, there exist trajectories heading into the origin, so it's possible for both species to go extinct in this case.</p>
-<p id="p-428">Now we'll classify the second critical point <span class="process-math">\((\frac{l}{k},\frac{a}{b})\text{.}\)</span> The Jacobian at this point gives us the matrix</p>
+<p id="p-424">Now we'll classify the second critical point <span class="process-math">\((\frac{l}{k},\frac{a}{b})\text{.}\)</span> The Jacobian at this point gives us the matrix</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 A = J(\frac{l}{k},\frac{a}{b}) = \begin{bmatrix}0 \amp  -\frac{bl}{k} \\ \frac{ak}{b} \amp  0\end{bmatrix}\text{.}
@@ -389,7 +396,7 @@ A = J(\frac{l}{k},\frac{a}{b}) = \begin{bmatrix}0 \amp  -\frac{bl}{k} \\ \frac{a
 </div>
 <p class="continuation">This matrix has characteristic equation <span class="process-math">\(\lambda^{2} + al = 0\text{,}\)</span> and so has eigenvalues <span class="process-math">\(\lambda=\pm i\sqrt{al}\text{.}\)</span> Since the eigenvalues are pure imaginary, this suggests that <span class="process-math">\((\frac{l}{k},\frac{a}{b})\)</span> is a center, which is indeed the case. In particular, trajectories near this critical point <em class="emphasis">must be periodic</em>.</p>
 </div></div>
-</div></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-1"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.math.uci.edu/~ndonalds/math3d/nonlinear.pdf</code></div></div>
+</div></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-1"><div class="fn"><code class="code-inline tex2jax_ignore">www.math.uci.edu/~ndonalds/math3d/nonlinear.pdf</code></div></div>
 </div></main>
 </div>
 </body>
