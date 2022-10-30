@@ -216,7 +216,7 @@ true);
 <p id="p-568">To be specific, let <span class="process-math">\(f(t)\)</span> be a force that acts only from <span class="process-math">\(t=a\)</span> to <span class="process-math">\(t=b\)</span> (and is otherwise <span class="process-math">\(0\)</span>). Then the <dfn class="terminology">impulse</dfn> of the force <span class="process-math">\(f(t)\)</span> over the interval <span class="process-math">\([a,b]\)</span> is given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-p = \Int{a}{b}f(t)\dd{t}.
+p = \int_{a}^{b}f(t)\dd{t}.
 \end{equation*}
 </div>
 <p class="continuation">We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous <em class="emphasis">unit impulse</em>; any other impulse we can get by multiplication by a constant.</p>
@@ -229,7 +229,7 @@ p = \Int{a}{b}f(t)\dd{t}.
 <p class="continuation">But this is impossible for any function, since</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\Int{0}{0}d(t)\dd{t} = 0.
+\int_{0}^{0}d(t)\dd{t} = 0.
 \end{equation*}
 </div>
 <p class="continuation">However, we can approximate the <em class="emphasis">idea</em> of an instantaneous unit impulse by defining</p>
@@ -247,7 +247,7 @@ d_{\varepsilon}(t) =
 <p id="p-570">Then for any <span class="process-math">\(\varepsilon\text{,}\)</span> we have</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\Int{-\frac{\varepsilon}{2}}{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1.
+\int_{-\frac{\varepsilon}{2}}^{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1.
 \end{equation*}
 </div>
 <p class="continuation"><span class="process-math">\(d_{\varepsilon}(t)\)</span> is a completely valid function, and if we send <span class="process-math">\(\varepsilon\to0\)</span> then it becomes a better and better approximation to an instantaneous unit impulse. Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.</p>
@@ -275,7 +275,7 @@ d_{\varepsilon}(t) =
 <p id="p-575">The most important property of the Dirac delta is that</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\Int{\alpha}{\beta}\delta(t-a)\dd{t} = 
+\int_{\alpha}^{\beta}\delta(t-a)\dd{t} = 
 \begin{cases}
 1 \amp\text{if }\alpha\leq a\leq\beta \\
 0 \amp\text{otherwise.}  
@@ -289,11 +289,14 @@ d_{\varepsilon}(t) =
 <p id="p-577">Let <span class="process-math">\(g(t)\)</span> be a continuous function and let <span class="process-math">\(\alpha\leq a\leq\beta\text{.}\)</span> Then</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\Int{\alpha}{\beta}g(t)\delta(t-a)\dd{t} = g(a)
+\int_{\alpha}^{\beta}g(t)\delta(t-a)\dd{t} = g(a)
 \end{equation*}
 </div></article><article class="hiddenproof" id="proof-3"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-3"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-3"><article class="hiddenproof"><p id="p-578">We treat <span class="process-math">\(\delta(t)\)</span> as a function and perform the above integration:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-84">
 \begin{align*}
+\int_{\alpha}^{\beta}g(t)\delta(t-a)\dd{t} &amp;= \int_{a}^{a}g(t)\delta(t-a)\dd{t}\\
+&amp;= g(a)\int_{a}^{a}\delta(t-a)\dd{t}\\
+&amp;= g(a)
 \end{align*}
 </div></article></div>
 <p id="p-579">The above theorem gives us another interpretation of the Dirac delta: it's a “sampling function”. When integrated against another function <span class="process-math">\(g(t)\)</span> over an interval containing <span class="process-math">\(a\text{,}\)</span> <span class="process-math">\(\delta(t-a)\)</span> will pick out the value <span class="process-math">\(g(a)\text{.}\)</span> We can use this to find the Laplace transform of the Dirac delta.</p>
@@ -306,8 +309,8 @@ d_{\varepsilon}(t) =
 <p id="p-581">We use the definition of the Laplace transform:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-85">
 \begin{align*}
-\Laplace{\delta(t-a)} \amp= \int_{0}^{\infty}\delta(t-a)e^{-st}\,dt\\
-\amp= e^{-as}\text{.}
+\Laplace{\delta(t-a)} &amp;= \int_{0}^{\infty}\delta(t-a)e^{-st}\,dt\\
+&amp;= e^{-as}\text{.}
 \end{align*}
 </div>
 <p class="continuation">In particular, <span class="process-math">\(\Laplace{\delta(t)} = 1\text{.}\)</span></p>
@@ -331,7 +334,7 @@ mx''+kx = f(t)
 <p class="continuation">where <span class="process-math">\(f(t)\)</span> is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form <span class="process-math">\(c\delta(t)\text{.}\)</span> And since it provides an impulse of <span class="process-math">\(3\text{,}\)</span> we can pick <span class="process-math">\(f(t) = 3\delta(t)\text{.}\)</span> As the mass is initially at rest, <span class="process-math">\(x\)</span> satisfies the IVP</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-x''+9x = 3\delta(t)\qq{where}x(0) = x'(0) = 0.
+x''+9x = 3\delta(t)\qq{where}x(0) = x^{\prime}(0) = 0.
 \end{equation*}
 </div>
 <p class="continuation">To solve this, we take the Laplace transform of the IVP to get</p>
@@ -358,7 +361,7 @@ X(s) = \frac{3}{s^{2}+9}.
 <p id="p-587">This time, the IVP we must solve is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-x''+9x = 3\delta(t-4)\qq{where}x(0)=x'(0)=0.
+x''+9x = 3\delta(t-4)\qq{where}x(0)=x^{\prime}(0)=0.
 \end{equation*}
 </div>
 <p class="continuation">If we take Laplace transforms and solve for <span class="process-math">\(X(s)\)</span> we get</p>
@@ -384,11 +387,11 @@ x(t) = u(t-4)\sin[3(t-4)].
 <p id="p-589">The IVP we need to solve now is</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-86">
 \begin{align*}
-x''+9x \amp= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
-\amp= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
+x''+9x &amp;= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
+&amp;= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
 \end{align*}
 </div>
-<p class="continuation">where <span class="process-math">\(x(0) = x'(0) = 0\text{.}\)</span> So once more we take Laplace transforms to get</p>
+<p class="continuation">where <span class="process-math">\(x(0) = x^{\prime}(0) = 0\text{.}\)</span> So once more we take Laplace transforms to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
@@ -403,11 +406,11 @@ X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
 <p class="continuation">The displacement is then given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-87">
 \begin{align*}
-x(t) \amp= \iLaplace{X(s)}\\
-\amp= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
-\amp= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
-\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
-\amp= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
+x(t) &amp;= \iLaplace{X(s)}\\
+&amp;= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
+&amp;= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
+&amp;= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
+&amp;= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
 \end{align*}
 </div>
 <p class="continuation">Each time the hammer strikes the mass, a factor of <span class="process-math">\(\sin3t\)</span> is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.</p>
