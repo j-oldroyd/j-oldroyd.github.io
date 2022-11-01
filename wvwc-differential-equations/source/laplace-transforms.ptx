@@ -163,10 +163,24 @@
         </solution>
       </example>
       <p>
+        We can verify the result of <xref ref="example-the-unit-step-function" text="type-global" /> using Sage as below:
+        <sage>
+          <input>
+            var('s, t')
+
+            # define function to take the Laplace transform of
+            f = piecewise([((-oo,3),0), ((3,oo),1)])
+
+            # take the Laplace transform, going from t domain to s domain
+            show(f.laplace(t,s))
+          </input>
+        </sage>
+      </p>
+      <p>
         Some other important Laplace transforms are given below:
         <md>
           <mrow>\Laplace{e^{at}} &amp;= \frac{1}{s-a}</mrow>
-          <mrow>\Laplace{\sin(\omega t)} &amp;= \frac{k}{s^{2}+\omega^{2}}</mrow>
+          <mrow>\Laplace{\sin(\omega t)} &amp;= \frac{\omega}{s^{2}+\omega^{2}}</mrow>
           <mrow>\Laplace{\cos(\omega t)} &amp;= \frac{s}{s^{2}+\omega^{2}}</mrow>
         </md>.
       </p>
@@ -256,7 +270,7 @@
       <sage>
         <input>
           var('s t') # specify variables
-          inverse_laplace(4/(s^2 + 2*s + 3), s, t)
+          show(inverse_laplace(4/(s^2 + 2*s + 3), s, t))
         </input>
       </sage>
     </subsection>

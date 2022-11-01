@@ -338,29 +338,37 @@ u(t) =
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-532">Some other important Laplace transforms are given below:</p>
+</div></article><p id="p-532">We can verify the result of <a href="" class="xref" data-knowl="./knowl/example-the-unit-step-function.html" title="Example 6.1.7: The Unit Step Function">Example 6.1.7</a> using Sage as below: <pre class="ptx-sagecell sagecell-sage" id="sage-10"><script type="text/x-sage">var('s, t')
+
+# define function to take the Laplace transform of
+f = piecewise([((-oo,3),0), ((3,oo),1)])
+
+# take the Laplace transform, going from t domain to s domain
+show(f.laplace(t,s))
+</script></pre></p>
+<p id="p-533">Some other important Laplace transforms are given below:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-75">
 \begin{align*}
 \Laplace{e^{at}} &amp;= \frac{1}{s-a}\\
-\Laplace{\sin(\omega t)} &amp;= \frac{k}{s^{2}+\omega^{2}}\\
+\Laplace{\sin(\omega t)} &amp;= \frac{\omega}{s^{2}+\omega^{2}}\\
 \Laplace{\cos(\omega t)} &amp;= \frac{s}{s^{2}+\omega^{2}}\text{.}
 \end{align*}
 </div></section><section class="subsection" id="subsection-the-inverse-laplace-transform-m-s--shifting"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Inverse Laplace Transform; <span class="process-math">\(s\)</span>-shifting</span>
 </h3>
-<p id="p-533">An important theorem regarding Laplace transforms is the following:</p>
+<p id="p-534">An important theorem regarding Laplace transforms is the following:</p>
 <article class="theorem theorem-like" id="theorem-uniqueness-of-inverse-laplace"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Uniqueness of Laplace Transforms.</span>
 </h4>
-<p id="p-534">Suppose <span class="process-math">\(f(t)\)</span> and <span class="process-math">\(g(t)\)</span> have respective Laplace transforms <span class="process-math">\(F(s)\)</span> and <span class="process-math">\(G(s)\text{.}\)</span> If <span class="process-math">\(F(s) = G(s)\)</span> for all <span class="process-math">\(s\gt c\)</span> (for some constant <span class="process-math">\(c\)</span>) and <span class="process-math">\(f(t)\)</span> and <span class="process-math">\(g(t)\)</span> are piecewise continuous, then <span class="process-math">\(f(t) = g(t)\)</span> on the interval <span class="process-math">\([0,\infty)\text{.}\)</span></p></article><p id="p-535">The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.</p>
+<p id="p-535">Suppose <span class="process-math">\(f(t)\)</span> and <span class="process-math">\(g(t)\)</span> have respective Laplace transforms <span class="process-math">\(F(s)\)</span> and <span class="process-math">\(G(s)\text{.}\)</span> If <span class="process-math">\(F(s) = G(s)\)</span> for all <span class="process-math">\(s\gt c\)</span> (for some constant <span class="process-math">\(c\)</span>) and <span class="process-math">\(f(t)\)</span> and <span class="process-math">\(g(t)\)</span> are piecewise continuous, then <span class="process-math">\(f(t) = g(t)\)</span> on the interval <span class="process-math">\([0,\infty)\text{.}\)</span></p></article><p id="p-536">The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.</p>
 <article class="definition definition-like" id="definition-inverse-laplace"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Inverse Laplace Transform.</span>
 </h4>
-<p id="p-536">The <dfn class="terminology">inverse Laplace transform</dfn> of a function <span class="process-math">\(F(s)\text{,}\)</span> denoted <span class="process-math">\(\mathcal{L}^{-1}\left\{F(s)\right\}\text{,}\)</span> is a function <span class="process-math">\(f(t)\)</span> such that <span class="process-math">\(\Laplace{f(t)} = F(s)\text{.}\)</span></p></article><p id="p-537">Just like the Laplace transform, the inverse Laplace transform is <dfn class="terminology">linear</dfn>.</p>
+<p id="p-537">The <dfn class="terminology">inverse Laplace transform</dfn> of a function <span class="process-math">\(F(s)\text{,}\)</span> denoted <span class="process-math">\(\mathcal{L}^{-1}\left\{F(s)\right\}\text{,}\)</span> is a function <span class="process-math">\(f(t)\)</span> such that <span class="process-math">\(\Laplace{f(t)} = F(s)\text{.}\)</span></p></article><p id="p-538">Just like the Laplace transform, the inverse Laplace transform is <dfn class="terminology">linear</dfn>.</p>
 <article class="example example-like" id="example-finding-inverse-laplace"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Finding an Inverse Transform.</span>
 </h4>
-<p id="p-538">A continuous function <span class="process-math">\(f(t)\)</span> has Laplace transform</p>
+<p id="p-539">A continuous function <span class="process-math">\(f(t)\)</span> has Laplace transform</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 F(s) = \frac{3s}{s^{2}+5} + \frac{7}{s^{3}}.
@@ -368,7 +376,7 @@ F(s) = \frac{3s}{s^{2}+5} + \frac{7}{s^{3}}.
 </div>
 <p class="continuation">Find <span class="process-math">\(f(t)\text{.}\)</span></p>
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-82"><div class="solution solution-like">
-<p id="p-539">We can find <span class="process-math">\(f(t)\)</span> by taking the inverse Laplace transform of each term in <span class="process-math">\(F(s)\text{:}\)</span></p>
+<p id="p-540">We can find <span class="process-math">\(f(t)\)</span> by taking the inverse Laplace transform of each term in <span class="process-math">\(F(s)\text{:}\)</span></p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-76">
 \begin{align*}
 \iLaplace{\frac{3s}{s^{2}+5}} &amp;= 3\iLaplace{\frac{s}{s^{2}+5}} = 3\cos(\sqrt{5}t)\\
@@ -384,7 +392,7 @@ f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}.
 </div></div></article><article class="theorem theorem-like" id="theorem--s--shifting"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.1.11</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(s\)</span>-shifting.</span>
 </h4>
-<p id="p-540">Suppose that <span class="process-math">\(f(t)\)</span> has Laplace transform <span class="process-math">\(F(s)\text{,}\)</span> defined for <span class="process-math">\(s\gt k\)</span> for some <span class="process-math">\(k\text{.}\)</span> Then</p>
+<p id="p-541">Suppose that <span class="process-math">\(f(t)\)</span> has Laplace transform <span class="process-math">\(F(s)\text{,}\)</span> defined for <span class="process-math">\(s\gt k\)</span> for some <span class="process-math">\(k\text{.}\)</span> Then</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \Laplace{e^{at}f(t)} = F(s-a)\qq{or equivalently} \iLaplace{F(s-a)} = e^{at}f(t).
@@ -393,7 +401,7 @@ f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}.
 <p class="continuation">In other words, multiplication by an exponential <span class="process-math">\(e^{at}\)</span> in the <em class="emphasis">time domain</em> corresponds to translation by <span class="process-math">\(a\)</span> in the <em class="emphasis">frequency domain</em>.</p></article><article class="example example-like" id="example-inverse-laplace-with-frequency-shifting"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Inverse Laplace with Frequency Shifting.</span>
 </h4>
-<p id="p-541">A function <span class="process-math">\(f(t)\)</span> has Laplace transform</p>
+<p id="p-542">A function <span class="process-math">\(f(t)\)</span> has Laplace transform</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 F(s) = \frac{4}{s^{2}+2s+3}.
@@ -402,7 +410,7 @@ F(s) = \frac{4}{s^{2}+2s+3}.
 <p class="continuation">Find <span class="process-math">\(f(t)\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-83" id="solution-83"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-83"><div class="solution solution-like">
-<p id="p-542">We'll start by completing the square on the denominator of <span class="process-math">\(F(s)\)</span> to see if we can make it look like <span class="process-math">\((s-a)^{2}+\omega^{2}\)</span> for some <span class="process-math">\(a,\omega\text{:}\)</span></p>
+<p id="p-543">We'll start by completing the square on the denominator of <span class="process-math">\(F(s)\)</span> to see if we can make it look like <span class="process-math">\((s-a)^{2}+\omega^{2}\)</span> for some <span class="process-math">\(a,\omega\text{:}\)</span></p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}.
@@ -415,9 +423,9 @@ f(t) = \frac{4}{\sqrt{2}}e^{-t}\sin(\sqrt{2}t).
 \end{equation*}
 </div>
 </div></div>
-</div></article><p id="p-543">The following Sage cell verifies the computation in <a href="" class="xref" data-knowl="./knowl/example-inverse-laplace-with-frequency-shifting.html" title="Example 6.1.12: Inverse Laplace with Frequency Shifting">Example 6.1.12</a>.</p>
-<pre class="ptx-sagecell sagecell-sage" id="sage-10"><script type="text/x-sage">var('s t') # specify variables
-inverse_laplace(4/(s^2 + 2*s + 3), s, t)
+</div></article><p id="p-544">The following Sage cell verifies the computation in <a href="" class="xref" data-knowl="./knowl/example-inverse-laplace-with-frequency-shifting.html" title="Example 6.1.12: Inverse Laplace with Frequency Shifting">Example 6.1.12</a>.</p>
+<pre class="ptx-sagecell sagecell-sage" id="sage-11"><script type="text/x-sage">var('s t') # specify variables
+show(inverse_laplace(4/(s^2 + 2*s + 3), s, t))
 </script></pre></section></section></div></main>
 </div>
 </body>
