@@ -380,7 +380,7 @@
     <sage>
       <input>
         Y(s) = 10/((s+1) * (s^2+9))
-        Y(s).partial_fraction_decomposition()
+        show(Y(s).partial_fraction_decomposition())
       </input>
     </sage>
     <p>
@@ -408,7 +408,7 @@
           <p>
             Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <m>\widetilde{Y}(s)</m> of <m>\widetilde{y}(t)</m>.
             Using our initial conditions and a bit of algebra, we get
-            <me>\widetilde{Y}(s) = \frac{-11s-3s}{s^2-2s-3}.</me>
+            <me>\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}.</me>
             At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get
             <me>\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.</me>
           </p>
@@ -420,6 +420,20 @@
           </p>
         </solution>
     </example>
+    <sage>
+      <input>
+        var('s,t')
+
+        # modified Laplace transform from above example
+        Y(s) = (-3*s-11)/(s^2 - 2*s - 3)
+
+        # solution of modified ODE
+        f(t) = inverse_laplace(Y(s), s, t)
+
+        # translate to solution of original ODE
+        show(f(t-4))
+      </input>
+    </sage>
   </section>
   <section xml:id="section-unit-step-functions-and-time-shifting">
     <title>Unit Step Functions and Time Shifting</title>

@@ -343,7 +343,7 @@ y(t) &amp; = \iLaplace{Y(s)}\\
 </div>
 </div></div>
 </div></article><pre class="ptx-sagecell sagecell-sage" id="sage-12"><script type="text/x-sage">Y(s) = 10/((s+1) * (s^2+9))
-Y(s).partial_fraction_decomposition()
+show(Y(s).partial_fraction_decomposition())
 </script></pre>
 <p id="p-553">One restriction of the Laplace transform approach as we've developed it is that it requires initial conditions at <span class="process-math">\(t=0\text{.}\)</span> If initial conditions are instead given at some other <span class="process-math">\(t=t_0\text{,}\)</span> then we need to adjust our approach in order to continue to use <a href="" class="xref" data-knowl="./knowl/theorem-laplace-transforms-of-derivatives.html" title="Theorem 6.2.1: Laplace Transforms of Derivatives">Theorem 6.2.1</a> and its counterpart for second derivatives. We'll demonstrate this by example.</p>
 <article class="example example-like" id="example-solving-an-ivp-with-shifted-initial-conditions"><h3 class="heading">
@@ -373,7 +373,7 @@ y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17.
 <p id="p-556">Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <span class="process-math">\(\widetilde{Y}(s)\)</span> of <span class="process-math">\(\widetilde{y}(t)\text{.}\)</span> Using our initial conditions and a bit of algebra, we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\widetilde{Y}(s) = \frac{-11s-3s}{s^2-2s-3}.
+\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}.
 \end{equation*}
 </div>
 <p class="continuation">At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get</p>
@@ -390,7 +390,17 @@ y(t) = -5e^{3(t-4)} + 2e^{-(t-4)}
 </div>
 <p class="continuation">as the solution of our IVP.</p>
 </div></div>
-</div></article></section></div></main>
+</div></article><pre class="ptx-sagecell sagecell-sage" id="sage-13"><script type="text/x-sage">var('s,t')
+
+# modified Laplace transform from above example
+Y(s) = (-3*s-11)/(s^2 - 2*s - 3)
+
+# solution of modified ODE
+f(t) = inverse_laplace(Y(s), s, t)
+
+# translate to solution of original ODE
+show(f(t-4))
+</script></pre></section></div></main>
 </div>
 </body>
 </html>
