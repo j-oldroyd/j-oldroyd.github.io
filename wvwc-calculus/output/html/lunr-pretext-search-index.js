@@ -1932,12 +1932,12 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.1",
   "title": "Areas Under Curves",
-  "body": "Areas Under Curves \n            We know how to find areas of simple shapes, such as rectangles, triangles and circles.\n            But how can we find the area of a more complicated shape?\n            Say, for example, the area under   from   to  ?\n            Well, if we don't know it exactly then we can at least approximate it using a shape we do know.\n            For example, using rectangles.\n         right endpoints \n            Now, if we add up the areas of these rectangles we get an approximation for the area under the graph.\n            Call these areas  .\n            So the area under the graph of   from   to   is about \n             \n         \n            There's nothing stopping us from going further here.\n            For example, we pick   rectangles, each with base length   and heights determined by right endpoints as above, then the area   of all of the rectangles will be an approximation (in fact, an overestimate) of the area of  .\n            The bases of these rectangles are given by \n             \n            So the areas of these rectangles are\n             \n            Adding these up, we get\n             \n            or just\n             \n            So if we sent   to  , we should get the exact area.\n            In other words, the area under   from   to   is given by\n             \n         \n            Actually finding this limit requires some trickery.\n            It's not at all obvious, but we can write \n             \n            Hence\n             \n            So the exact area under   from   to   is  .\n            Note that this matches up with our intuition from the last chapter: the area should be equal to the net change of an antiderivative.\n            In this case, an antiderivative of   is  , and the net change of   from   to   is exactly  .\n         \n            The process we used above for   can be carried out for any continuous function.\n            If we have a function defined on the interval  , we can approximate the area under the graph by using rectangles.\n            First, we split   into   different subintervals  , each of width   and where\n             \n            The approximate area under the graph of   from   to   is then\n             \n            We can now define the area under a graph of a continuous function.\n            Again, the idea is to approximate the graph with more and more rectangles.\n         Area area sample points sigma notation Evaluating a sum \n                    Determine  \n                 \n                    We start at   and finish at  .\n                    Plugging all of these values in for  , we get the following table:\n                     Table of values for  \n                    So we can say that\n                     \n                 Using sigma notation \n                    Use sigma notation to write the sum of all squares from   to  .\n                 \n                    We need to start at   and stop at  .\n                    So the first component of this sum using sigma notation looks like  .\n                    Now we just need to figure out what goes inside of it.\n                    Since we're adding squares of numbers, we'll just put   inside of this sum.\n                    Hence the sum of all squares from   to   can be denoted\n                     \n                 \n            Sigma notation has some useful properties, since it's just another way to write sums.\n         Properties of Sigma Notation \n                    Let   and let  .\n                    Let   be a constant.\n                    Then the following are true:\n                     \n                    In other words, we can break sigma notation up over addition and subtraction, and we can move constants outside of it.\n                 Areas using sigma notation \n                    Write down a limit that gives the area under   from   to   using sigma notation.\n                 \n                    First, note that we can rewrite   using sigma notation as\n                     \n                    We know what   is, so we just need to identify   and  .\n                      isn't too bad here, it's just\n                     \n                    The   are a little more complicated, but we'll still use right endpoints to find them.\n                    So we have\n                     \n                    In general,\n                     \n                    for  .\n                 \n                    Now we have everything we need to write our limit.\n                    Hence the area under   from   to   is given by\n                     \n                 \n            Just as the problem of finding the slope of a tangent line can be viewed as a rate of change problem, the problem of finding areas can be viewed as an  accumulation problem .\n         Finding work done \n                    In physics, the work done by a constant force   on some particle that moves a displacement   is given by the formula\n                     \n                    How should we define the work done by a variable force?\n                 \n                    The main idea here is to treat the variable force as the combination of several constant forces.\n                    To be specific, let   denote our force (which depends on position  ) and suppose it acts on a particle moving from   to  .\n                      itself may not be constant, but if we break   up into   subintervals of the form   each of length  , then   should be nearly constant on each subinterval.\n                    So we can pick points   from each subinterval and say that   for all   in  .\n                 \n                    Now we can approximate the work done by   as the particle moves through the subinterval  .\n                    The work done should be about equal to  .\n                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by \n                     \n                    which suggests that we should define the exact work done to be \n                     \n                 \n            Note that   was not written in terms of finding areas, but still involved the limit from  .\n            This tells us that the ideas in this section have a wider use than in just finding areas under curves.\n         "
+  "body": "Areas Under Curves \n            We know how to find areas of simple shapes, such as rectangles, triangles and circles.\n            But how can we find the area of a more complicated shape?\n            Say, for example, the area under   from   to  ?\n            Well, if we don't know it exactly then we can at least approximate it using a shape we do know.\n            For example, using rectangles.\n         right endpoints \n            Now, if we add up the areas of these rectangles we get an approximation for the area under the graph.\n            Call these areas  .\n            So the area under the graph of   from   to   is about\n             \n         \n            There's nothing stopping us from going further here.\n            For example, we pick   rectangles, each with base length   and heights determined by right endpoints as above, then the area   of all of the rectangles will be an approximation (in fact, an overestimate) of the area of  .\n            The bases of these rectangles are given by\n             \n            So the areas of these rectangles are\n             \n            Adding these up, we get\n             \n            or just\n             \n            So if we sent   to  , we should get the exact area.\n            In other words, the area under   from   to   is given by\n             \n         \n            Actually finding this limit requires some trickery.\n            It's not at all obvious, but we can write\n             \n            Hence\n             \n            So the exact area under   from   to   is  .\n            Note that this matches up with our intuition from the last chapter: the area should be equal to the net change of an antiderivative.\n            In this case, an antiderivative of   is  , and the net change of   from   to   is exactly  .\n         \n            The process we used above for   can be carried out for any continuous function.\n            If we have a function defined on the interval  , we can approximate the area under the graph by using rectangles.\n            First, we split   into   different subintervals  , each of width   and where\n             \n            The approximate area under the graph of   from   to   is then\n             \n            We can now define the area under a graph of a continuous function.\n            Again, the idea is to approximate the graph with more and more rectangles.\n         Area area sample points sigma notation Evaluating a sum \n                    Determine  \n                 \n                    We start at   and finish at  .\n                    Plugging all of these values in for  , we get the following table:\n                     Table of values for  \n                    So we can say that\n                     \n                 Using sigma notation \n                    Use sigma notation to write the sum of all squares from   to  .\n                 \n                    We need to start at   and stop at  .\n                    So the first component of this sum using sigma notation looks like  .\n                    Now we just need to figure out what goes inside of it.\n                    Since we're adding squares of numbers, we'll just put   inside of this sum.\n                    Hence the sum of all squares from   to   can be denoted\n                     \n                 \n            Sigma notation has some useful properties, since it's just another way to write sums.\n         Properties of Sigma Notation \n                    Let   and let  .\n                    Let   be a constant.\n                    Then the following are true:\n                     \n                    In other words, we can break sigma notation up over addition and subtraction, and we can move constants outside of it.\n                 Areas using sigma notation \n                    Write down a limit that gives the area under   from   to   using sigma notation.\n                 \n                    First, note that we can rewrite   using sigma notation as\n                     \n                    We know what   is, so we just need to identify   and  .\n                      isn't too bad here, it's just\n                     \n                    The   are a little more complicated, but we'll still use right endpoints to find them.\n                    So we have\n                     \n                    In general,\n                     \n                    for  .\n                 \n                    Now we have everything we need to write our limit.\n                    Hence the area under   from   to   is given by\n                     \n                 \n            Just as the problem of finding the slope of a tangent line can be viewed as a rate of change problem, the problem of finding areas can be viewed as an  accumulation problem .\n         Finding work done \n                    In physics, the work done by a constant force   on some particle that moves a displacement   is given by the formula\n                     \n                    How should we define the work done by a variable force?\n                 \n                    The main idea here is to treat the variable force as the combination of several constant forces.\n                    To be specific, let   denote our force (which depends on position  ) and suppose it acts on a particle moving from   to  .\n                      itself may not be constant, but if we break   up into   subintervals of the form   each of length  , then   should be nearly constant on each subinterval.\n                    So we can pick points   from each subinterval and say that   for all   in  .\n                 \n                    Now we can approximate the work done by   as the particle moves through the subinterval  .\n                    The work done should be about equal to  .\n                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by\n                     \n                    which suggests that we should define the exact work done to be\n                     \n                 \n            Note that   was not written in terms of finding areas, but still involved the limit from  .\n            This tells us that the ideas in this section have a wider use than in just finding areas under curves.\n         "
 },
 {
-  "id": "p-434",
+  "id": "p-439",
   "level": "2",
-  "url": "section-areas-under-curves.html#p-434",
+  "url": "section-areas-under-curves.html#p-439",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1953,18 +1953,18 @@ var ptx_lunr_docs = [
   "body": "Area area "
 },
 {
-  "id": "p-440",
+  "id": "p-445",
   "level": "2",
-  "url": "section-areas-under-curves.html#p-440",
+  "url": "section-areas-under-curves.html#p-445",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "sample points "
 },
 {
-  "id": "p-441",
+  "id": "p-446",
   "level": "2",
-  "url": "section-areas-under-curves.html#p-441",
+  "url": "section-areas-under-curves.html#p-446",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2013,7 +2013,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "6.1.7",
   "title": "Finding work done.",
-  "body": "Finding work done \n                    In physics, the work done by a constant force   on some particle that moves a displacement   is given by the formula\n                     \n                    How should we define the work done by a variable force?\n                 \n                    The main idea here is to treat the variable force as the combination of several constant forces.\n                    To be specific, let   denote our force (which depends on position  ) and suppose it acts on a particle moving from   to  .\n                      itself may not be constant, but if we break   up into   subintervals of the form   each of length  , then   should be nearly constant on each subinterval.\n                    So we can pick points   from each subinterval and say that   for all   in  .\n                 \n                    Now we can approximate the work done by   as the particle moves through the subinterval  .\n                    The work done should be about equal to  .\n                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by \n                     \n                    which suggests that we should define the exact work done to be \n                     \n                 "
+  "body": "Finding work done \n                    In physics, the work done by a constant force   on some particle that moves a displacement   is given by the formula\n                     \n                    How should we define the work done by a variable force?\n                 \n                    The main idea here is to treat the variable force as the combination of several constant forces.\n                    To be specific, let   denote our force (which depends on position  ) and suppose it acts on a particle moving from   to  .\n                      itself may not be constant, but if we break   up into   subintervals of the form   each of length  , then   should be nearly constant on each subinterval.\n                    So we can pick points   from each subinterval and say that   for all   in  .\n                 \n                    Now we can approximate the work done by   as the particle moves through the subinterval  .\n                    The work done should be about equal to  .\n                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by\n                     \n                    which suggests that we should define the exact work done to be\n                     \n                 "
 },
 {
   "id": "section-the-definite-integral",
@@ -2022,32 +2022,32 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.2",
   "title": "The Definite Integral",
-  "body": "The Definite Integral partition Riemann sum The Definite Integral definite integral of   from   to  integrable \n            We can use   to rewrite our area definition: the area under   from   to   is defined to be the definite integral of   on  , assuming it exists.\n            For a function to be integrable, the particular partition of   that we use  cannot affect the limit  in  .\n            This gives us a great deal of freedom in approximating the definite integral\/area under a curve: when choosing sample points, we can use left endpoints; right endpoints; midpoints and more.\n            However, if   is integrable then we lose nothing by just using right endpoints and subintervals of equal length, as in  .\n         Integrability of Piecewise Continuous Functions \n                    Let   be a piecewise function on   with finitely many jump discontinuities.\n                    Then   is integrable on  .\n                 Expressing work done \n                    A particle moving from   to   is acted upon by the force  .\n                    Find the work done by the force on this particle.\n                 \n                    Using  , we see that the work done should be\n                     \n                    which we can rewrite as \n                     \n                    So work is a definite integral.\n                 \n                    In this case, we can also find the work done.\n                    Since the definite integral represents area, and the definite integral of   exists (since this is continuous), then we can say that\n                     \n                 A radical integral \n                    Determine  .\n                 \n                    We won't be able to solve this integral algebraically until Calculus 2, but we can solve it geometrically instead.\n                    If we graph  , we get the upper half of the circle of radius   centered at the origin.\n                    So the integral given must be exactly one-fourth the area of this circle, so\n                     \n                 \n            Since the definite integral is defined as a limit of sums, it shares many properties with sums.\n            In particular, we have the following version of  \n         Properties of the Definite Integral \n                    Let   and   be integrable on   and let   be a constant.\n                    Let   be any number in  .\n                    Then the following are true:\n                     \n                    In other words, we can break definite integrals up over addition and subtraction, and we can move constants outside of it.\n                 midpoint rule Midpoint Rule \n                    Let   be a continuous function.\n                    Then\n                     \n                    where\n                     \n                    Note that this rule calls for evenly dividing   into a partition   where each subinterval has equal length  .\n                 Approximating an integral \n                    Approximate   using Riemann sums with  .\n                 \n                    For this integral, we have\n                     \n                    We will have different estimates using left endpoints, right endpoints and midpoints.\n                    Using left endpoints, we have\n                     \n                    Using midpoints, we have\n                     \n                    Using right endpoints, we have\n                     \n                 \n                    Geometrically, we see that\n                     \n                    The exact value of this integral is actually  , and we see that  , the midpoint estimate, is clearly the best approximation to the integral in this case.\n                 More Properties of the Definite Integral \n                    Let   be integrable functions on  .\n                    Then\n                     If   on  , then  . If   on  , then  . \n                 "
+  "body": "The Definite Integral partition \n            The partition and sample points selected are now used to determine a sum that represents an approximation to the area under the curve:\n             \n            Geometrically, this sum represents the areas of multiple rectangles added together.\n            Since these sums are essential for what follows, we will give them a name.\n         Riemann Sum Riemann sum Riemann sum \n            Although this can be more complicated than our definition in  , it still approximates the area under   from   to  .\n            And as each subinterval in this partition gets smaller (i.e. as   or equivalently as  ), then this approximation should become exact, at least if   is  nice enough  (see   for a more precise statement).\n         The Definite Integral definite integral of   from   to  integrable \n            We can use   to rewrite our area definition: the area under   from   to   is defined to be the definite integral of   on  , assuming it exists.\n            For a function to be integrable, the particular partition of   that we use  cannot affect the limit  in  .\n            This gives us a great deal of freedom in approximating the definite integral\/area under a curve: when choosing sample points, we can use left endpoints; right endpoints; midpoints and more.\n            However, if   is integrable then we lose nothing by just using right endpoints and subintervals of equal length, as in  .\n         Integrability of Piecewise Continuous Functions \n                    Let   be a bounded, piecewise continuous function on   with finitely many jump discontinuities.\n                    Then   is integrable on  .\n                    In particular, continuous functions are always integrable on bounded, closed intervals.\n                 \n            All of the functions that we will work with will be piecewise continuous, and many important quantities in mathematics and its applications can be represented by bounded, piecewise continuous functions.\n            Definite integrals of such quantities therefore exist and are often used as a measure of  accumulation. \n            In particular,   can be generalized to provide the following definition of work done by a force.\n         Work work work Expressing work done \n                    A particle moving from   to   is acted upon by the force  .\n                    Find the work done by the force on this particle.\n                 \n                    Using  , we see that the work done should be\n                     \n                    Since the definite integral represents area, and the definite integral of   exists (since this is continuous), then we can say that\n                     \n                 \n            In   we used the connection between definite integrals and areas to find the work done.\n            For the moment, this is our only method for calculating definite integrals.\n            We will develop other methods starting in  , but the connection between definite integrals and areas is an important one that we will make use of frequently.\n         A radical integral \n                    Determine  .\n                 \n                    We won't be able to solve this integral algebraically until Calculus 2, but we can solve it geometrically instead.\n                    If we graph  , we get the upper half of the circle of radius   centered at the origin.\n                    So the integral given must be exactly one-fourth the area of this circle, so\n                     \n                 \n            Since the definite integral is defined as a limit of sums, it shares many properties with sums.\n            In particular, we have the following version of  \n         Properties of the Definite Integral \n                    Let   and   be integrable on   and let   be a constant.\n                    Let   be any number in  .\n                    Then the following are true:\n                     \n                    In other words, we can break definite integrals up over addition and subtraction, and we can move constants outside of it.\n                 midpoint rule Midpoint Rule \n                    Let   be a continuous function.\n                    Then\n                     \n                    where\n                     .\n                    Note that this rule calls for evenly dividing   into a partition   where each subinterval has equal length  .\n                 left endpoint rule right endpoint rule Approximating an integral \n                    Approximate   using Riemann sums with  .\n                 \n                    For this integral, we have\n                     \n                    We will have different estimates using left endpoints, right endpoints and midpoints.\n                    Using left endpoints, we have\n                     \n                    Using midpoints, we have\n                     \n                    Using right endpoints, we have\n                     \n                 \n                    Geometrically, we see that\n                     \n                    The exact value of this integral is actually  , and we see that  , the midpoint estimate, is clearly the best approximation to the integral in this case.\n                 \n            The geometric interpretation of definite integrals as areas also suggests the following formulas.\n            These can be useful for simplifying and estimating certain definite integrals.\n         More Properties of the Definite Integral \n                    Let   be integrable functions on  .\n                    Then\n                     If   on  , then  . If   on  , then  . \n                 "
 },
 {
-  "id": "p-456",
+  "id": "p-461",
   "level": "2",
-  "url": "section-the-definite-integral.html#p-456",
+  "url": "section-the-definite-integral.html#p-461",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "partition "
 },
 {
-  "id": "p-457",
+  "id": "definition-riemann-sum",
   "level": "2",
-  "url": "section-the-definite-integral.html#p-457",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "Riemann sum "
+  "url": "section-the-definite-integral.html#definition-riemann-sum",
+  "type": "Definition",
+  "number": "6.2.1",
+  "title": "Riemann Sum.",
+  "body": "Riemann Sum Riemann sum Riemann sum "
 },
 {
   "id": "definition-the-definite-integral",
   "level": "2",
   "url": "section-the-definite-integral.html#definition-the-definite-integral",
   "type": "Definition",
-  "number": "6.2.1",
+  "number": "6.2.2",
   "title": "The Definite Integral.",
   "body": "The Definite Integral definite integral of   from   to  integrable "
 },
@@ -2056,25 +2056,34 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-the-definite-integral.html#theorem-integrability-of-piecewise-continuous-functions",
   "type": "Theorem",
-  "number": "6.2.2",
+  "number": "6.2.3",
   "title": "Integrability of Piecewise Continuous Functions.",
-  "body": "Integrability of Piecewise Continuous Functions \n                    Let   be a piecewise function on   with finitely many jump discontinuities.\n                    Then   is integrable on  .\n                 "
+  "body": "Integrability of Piecewise Continuous Functions \n                    Let   be a bounded, piecewise continuous function on   with finitely many jump discontinuities.\n                    Then   is integrable on  .\n                    In particular, continuous functions are always integrable on bounded, closed intervals.\n                 "
+},
+{
+  "id": "definition-work",
+  "level": "2",
+  "url": "section-the-definite-integral.html#definition-work",
+  "type": "Definition",
+  "number": "6.2.4",
+  "title": "Work.",
+  "body": "Work work work "
 },
 {
   "id": "example-expressing-work-done",
   "level": "2",
   "url": "section-the-definite-integral.html#example-expressing-work-done",
   "type": "Example",
-  "number": "6.2.3",
+  "number": "6.2.5",
   "title": "Expressing work done.",
-  "body": "Expressing work done \n                    A particle moving from   to   is acted upon by the force  .\n                    Find the work done by the force on this particle.\n                 \n                    Using  , we see that the work done should be\n                     \n                    which we can rewrite as \n                     \n                    So work is a definite integral.\n                 \n                    In this case, we can also find the work done.\n                    Since the definite integral represents area, and the definite integral of   exists (since this is continuous), then we can say that\n                     \n                 "
+  "body": "Expressing work done \n                    A particle moving from   to   is acted upon by the force  .\n                    Find the work done by the force on this particle.\n                 \n                    Using  , we see that the work done should be\n                     \n                    Since the definite integral represents area, and the definite integral of   exists (since this is continuous), then we can say that\n                     \n                 "
 },
 {
   "id": "example-a-radical-integral",
   "level": "2",
   "url": "section-the-definite-integral.html#example-a-radical-integral",
   "type": "Example",
-  "number": "6.2.4",
+  "number": "6.2.6",
   "title": "A radical integral.",
   "body": "A radical integral \n                    Determine  .\n                 \n                    We won't be able to solve this integral algebraically until Calculus 2, but we can solve it geometrically instead.\n                    If we graph  , we get the upper half of the circle of radius   centered at the origin.\n                    So the integral given must be exactly one-fourth the area of this circle, so\n                     \n                 "
 },
@@ -2083,14 +2092,14 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-the-definite-integral.html#theorem-properties-of-the-definite-integral",
   "type": "Theorem",
-  "number": "6.2.5",
+  "number": "6.2.7",
   "title": "Properties of the Definite Integral.",
   "body": "Properties of the Definite Integral \n                    Let   and   be integrable on   and let   be a constant.\n                    Let   be any number in  .\n                    Then the following are true:\n                     \n                    In other words, we can break definite integrals up over addition and subtraction, and we can move constants outside of it.\n                 "
 },
 {
-  "id": "p-468",
+  "id": "p-477",
   "level": "2",
-  "url": "section-the-definite-integral.html#p-468",
+  "url": "section-the-definite-integral.html#p-477",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2101,16 +2110,25 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-the-definite-integral.html#definition-midpoint-rule",
   "type": "Definition",
-  "number": "6.2.6",
+  "number": "6.2.8",
   "title": "Midpoint Rule.",
-  "body": "Midpoint Rule \n                    Let   be a continuous function.\n                    Then\n                     \n                    where\n                     \n                    Note that this rule calls for evenly dividing   into a partition   where each subinterval has equal length  .\n                 "
+  "body": "Midpoint Rule \n                    Let   be a continuous function.\n                    Then\n                     \n                    where\n                     .\n                    Note that this rule calls for evenly dividing   into a partition   where each subinterval has equal length  .\n                 "
+},
+{
+  "id": "p-479",
+  "level": "2",
+  "url": "section-the-definite-integral.html#p-479",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "left endpoint rule right endpoint rule "
 },
 {
   "id": "example-approximating-an-integral",
   "level": "2",
   "url": "section-the-definite-integral.html#example-approximating-an-integral",
   "type": "Example",
-  "number": "6.2.7",
+  "number": "6.2.9",
   "title": "Approximating an integral.",
   "body": "Approximating an integral \n                    Approximate   using Riemann sums with  .\n                 \n                    For this integral, we have\n                     \n                    We will have different estimates using left endpoints, right endpoints and midpoints.\n                    Using left endpoints, we have\n                     \n                    Using midpoints, we have\n                     \n                    Using right endpoints, we have\n                     \n                 \n                    Geometrically, we see that\n                     \n                    The exact value of this integral is actually  , and we see that  , the midpoint estimate, is clearly the best approximation to the integral in this case.\n                 "
 },
@@ -2119,7 +2137,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-the-definite-integral.html#theorem-more-properties-of-the-definite-integral",
   "type": "Theorem",
-  "number": "6.2.8",
+  "number": "6.2.10",
   "title": "More Properties of the Definite Integral.",
   "body": "More Properties of the Definite Integral \n                    Let   be integrable functions on  .\n                    Then\n                     If   on  , then  . If   on  , then  . \n                 "
 },
@@ -2160,9 +2178,9 @@ var ptx_lunr_docs = [
   "body": "Area under a rational function \n                    Find the area under   from   to  .\n                 \n                    The area is just the definite integral, which is\n                     \n                 "
 },
 {
-  "id": "p-483",
+  "id": "p-495",
   "level": "2",
-  "url": "section-evaluating-integrals.html#p-483",
+  "url": "section-evaluating-integrals.html#p-495",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2259,9 +2277,9 @@ var ptx_lunr_docs = [
   "body": "Substitution \n            By  , we know that integration and differentiation are inverse operations.\n            This means that differentiation rules, such as the chain rule and product rule, have corresponding  integration  rules.\n            In this section we look at the integration rule corresponding to the chain rule, known as  -substitution, and in Calculus 2 you'll see the integration rule corresponding to the product rule.\n         -substitution -Substitution \n                    Let   be a differentiable function whose range is an interval  .\n                    Let   be a continuous function on  .\n                    Then \n                     \n                 \n            Solving an integral   by  -substitution typically proceeds as follows:\n             Choose some substitution   to simplify your integral. Your choice for   will most likely be an \"inside function\". Rewrite your integral in terms of   and   instead of   and  . Solve the resulting integral in terms of   if possible, and then rewrite your answer in terms of the original variable  . \n         A simple substitution \n                    Determine   by using the substitution  .\n                 \n                    We need to rewrite the integral in terms of  .\n                    An easy way to start is to replace   with  :\n                     \n                    However,  we can't integrate yet .\n                    This is because the integral needs to be written entirely in terms of   and  ; no terms involving  , including  , can remain.\n                    to rewrite   in terms of  , we'll find   and then \"solve\" for  :\n                     \n                    So our integral turns into\n                     \n                    The last step is to replace   with  , and so\n                     \n                    We can also check this by differentiating.\n                 Simplifying an integral with substitution \n                    Determine  .\n                 \n                    We can find   without too much trouble, but this integral is more complicated.\n                    However, we can use  -substitution to get our integral into this form.\n                    So we'll let  .\n                    Then  , which means   and so\n                     \n                 \n             -substitution is often useful if one part of an integral can be written as the derivative of another part of the integral.\n         Integral of tangent \n                    Find the general antiderivative of  .\n                 \n                    We need to find  .\n                    If we rewrite   in terms of sine and cosine, we get\n                     \n                    It's not obvious, but we can solve this using  -substitution since   looks a lot like the derivative of  .\n                    So we'll let  , giving   or just  .\n                    This simplifies our integral to\n                     \n                    Since  , this shows that the general antiderivative of   is\n                     \n                    Note that    would not work  in this example, at least not without some nasty algebra.\n                 \n            We can also use  -substitution to find definite integrals.\n         Integrating with a natural log \n                    Determine  .\n                 \n                    This integral looks awful, but the integrand contains   and its derivative  , which suggests that the substitution   might simplify things.\n                    So let  .\n                    Then  , or  , and the integral becomes\n                     \n                 \n            In the last example we had to be careful about our limits of integration since they applied to   but not  .\n            We can simplify the process a little by converting the   limits to   limits, as shown in the next example.\n         Area under  \n                    Find the area under the graph of   from   to  .\n                 \n                    The area is given by  .\n                    We can solve this by  -substitution.\n                    Let  , our inside function.\n                    Then  , so   and our integral turns into\n                     \n                    Now we change the limits to be in terms of  , giving us   and  .\n                    So the area is just\n                     \n                 "
 },
 {
-  "id": "p-509",
+  "id": "p-521",
   "level": "2",
-  "url": "section-substitution.html#p-509",
+  "url": "section-substitution.html#p-521",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2448,9 +2466,9 @@ var ptx_lunr_docs = [
   "body": "Integrating Secant Cubed \n                        Determine  .\n                     \n                        We're dealing with an odd power of secant, so splitting off a factor of   won't help here.\n                        We also lack a   term, so splitting off a factor of   is tricky as well.\n                        We'll try integrating by parts instead, with\n                         \n                        This gives\n                     \n                        Therefore\n                         \n                     "
 },
 {
-  "id": "p-575",
+  "id": "p-587",
   "level": "2",
-  "url": "section-trigonometric-integrals-and-substitution.html#p-575",
+  "url": "section-trigonometric-integrals-and-substitution.html#p-587",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2547,18 +2565,18 @@ var ptx_lunr_docs = [
   "body": "Improper Integrals escape velocity \n                As we'll see later, work is also the integral of force, so let's examine the force on the object.\n                If we neglect air resistance and assume that the only force acting on the object is gravity, then the force exerted on the object is given by\n                 \n                where   is the mass of the Earth,   is still the mass of the object,   is the distance from the center of mass of the Earth to the center of mass of the object, and   is the gravitational constant.\n                Now assume that the Earth is a sphere of radius  , and that the object has enough velocity to move it a distance of   units from the surface of the Earth.\n                Then the total work done in moving the object this distance is\n                 \n                Now let's think about should happen if the object is at escape velocity.\n                In this case, theoretically at least, there should be no limit to the distance the object can travel if given enough time.\n                So what's the total work done?\n             \n                Let's try to compute  \n                We get\n                 \n                Note that this is still an underestimate for the total work theoretically done, since   can increase without bound.\n                So let's send   to   and see what we get:\n                 \n             \n                So, to summarize, the total work   should be\n                 \n                or just\n                 \n                 We can solve this equation for  , and so the escape velocity should be\n                 \n                As a neat bonus, this shows that the escape velocity only depends on  , the mass of the Earth   and the \"radius\" of the Earth  .\n                Plugging in values for these figures, we get   meters per second, or   kilometers per second.\n             improper integral Improper Integrals over Infinite Intervals \n                First, a definition.\n             Type 1 Improper Integral convergent divergent \n                        Finally, if both   and   are convergent, then we define\n                         \n                     A Divergent Integral \n                        Determine if   is convergent or divergent.\n                     \n                        By definition, we have\n                         \n                        Hence the integral is divergent.\n                     \n                In  , note that   as  .\n                However, it doesn't go to    fast enough  for the integral to converge.\n             \n                        Is   convergent?\n                     \n                The convergence of   depends on the value of  .\n             Integral  -test \n                        The integral   converges if and only if  .\n                     Area Under a Graph \n                        Find the area under  .\n                     \n                        The area under   is given by  .\n                        To evaluate this integral, we must split it into two improper integrals:\n                         \n                     \n                        At this point, we can use  -substitution to find each integral, using   and  .\n                        So we get\n                         \n                     \n                        Hence the area under   is   (which might not be so surprising if you graph  ).\n                     Radioactive Decay \n                        A radioactive substance undergoes decay, and has mass   at time   given by\n                         \n                        for some  .\n                        The  expected lifetime  of a particle is given by\n                         \n                        Find this value.\n                     \n                        We can solve this using integration by parts.\n                        Doing so, we get\n                         \n                        This can be verified using the code cell below.\n                     A Probability Distribution probability distribution \n              We have\n               .\n            So this isn't a probability distribution.\n             Another Laplace Transform Laplace transform Improper Integrals with Discontinuous Integrands \n                The second type of improper integral we'll consider involves integrands with \"divide-by-zero\" problems.\n             Type 2 Improper Integral \n                        If   is continuous on   and is discontinuous at  , then\n                         \n                        assuming this limit exists.\n                     \n                        If   is continuous on   and is discontinuous at  , then\n                         \n                        assuming this limit exists.\n                     \n                        If   is at   where  , then\n                         \n                        assuming these integrals are convergent.\n                     Logarithmic Discontinuity \n                        Determine if   is convergent.\n                     \n                        This integral is improper since   is discontinuous at  .\n                        To evaluate it, we'll use limits:\n                         \n                        where we used the fact that   as   by L'Hopital's Rule.\n                     Another Integral  -Test \n                        For what values of   is the integral   convergent?\n                     \n                        We could try to compute this as is, but we can save ourselves some work by making use of  .\n                        First, we'll use the substitution  .\n                        Then   and\n                         \n                        Therefore\n                         \n                        which we know converges if and only if  .\n                        Hence the original integral converges if and only if  .\n                     Comparison Tests for Improper Integrals direct comparison test convergence tests integrals direct comparison test Direct Comparison Test \n                        Suppose that   and   are continuous functions and that\n                         \n                        for  , for some real number  .\n                        Then if   converges, so goes  .\n                        Likewise, if   diverges, then so does  .\n                     \n                        Does   converge?\n                     \n                        This integrand looks pretty awful.\n                        However, we can say that\n                         \n                        Since\n                         \n                          implies that the original integral must converge as well.\n                        Note that we don't know  what  it converges to, only that it does.\n                     The Gaussian Integral \n                        Show that the integral   is convergent.\n                     \n                        We can do this by breaking the integral into two parts:\n                         \n                        If   is between   and  , then  .\n                        On the other hand, if  , then  .\n                        Therefore\n                         \n                        Hence the original integral must also be convergent.\n                        It's value is actually known, and SymPy can be used to compute the integral, as below.\n                     limit comparison test convergence tests integrals limit comparison test Limit Comparison Test \n                        Let   and   be positive, continuous functions on   for some constant  .\n                        If\n                         \n                        exists and is positive, then the integrals\n                         \n                        must both converge or both diverge.\n                     \n                        Determine if   converges.\n                     \n                        The integrand is awful again, but if   is very large then we can say that\n                         \n                        Since   converges, this suggests that maybe the original integral does as well.\n                        We can prove this using  .\n                     \n                        In fact, we have\n                         \n                        Since this limit exists and is positive, then the original integral must also converge by the Limit Comparison Test.\n                     "
 },
 {
-  "id": "p-605",
+  "id": "p-617",
   "level": "2",
-  "url": "section-improper-integrals.html#p-605",
+  "url": "section-improper-integrals.html#p-617",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "escape velocity "
 },
 {
-  "id": "p-609",
+  "id": "p-621",
   "level": "2",
-  "url": "section-improper-integrals.html#p-609",
+  "url": "section-improper-integrals.html#p-621",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2664,9 +2682,9 @@ var ptx_lunr_docs = [
   "body": "Another Integral  -Test \n                        For what values of   is the integral   convergent?\n                     \n                        We could try to compute this as is, but we can save ourselves some work by making use of  .\n                        First, we'll use the substitution  .\n                        Then   and\n                         \n                        Therefore\n                         \n                        which we know converges if and only if  .\n                        Hence the original integral converges if and only if  .\n                     "
 },
 {
-  "id": "p-636",
+  "id": "p-648",
   "level": "2",
-  "url": "section-improper-integrals.html#p-636",
+  "url": "section-improper-integrals.html#p-648",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2700,9 +2718,9 @@ var ptx_lunr_docs = [
   "body": "The Gaussian Integral \n                        Show that the integral   is convergent.\n                     \n                        We can do this by breaking the integral into two parts:\n                         \n                        If   is between   and  , then  .\n                        On the other hand, if  , then  .\n                        Therefore\n                         \n                        Hence the original integral must also be convergent.\n                        It's value is actually known, and SymPy can be used to compute the integral, as below.\n                     "
 },
 {
-  "id": "p-642",
+  "id": "p-654",
   "level": "2",
-  "url": "section-improper-integrals.html#p-642",
+  "url": "section-improper-integrals.html#p-654",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2781,9 +2799,9 @@ var ptx_lunr_docs = [
   "body": "Volumes solids of revolution \n      As an example, consider  .\n      To generate the solid of revolution on the right, we take the graph of   and rotate it about the  -axis, creating a three-dimensional region.\n     Generating a solid of revolution. \n      To find the volume of such a region, the idea is to find the  area  of a general cross-section of the region, which by design should be a function of   alone, say  .\n      Then, roughly,   should represent the volume of a small cross-section of the solid, and so the integral   should give us the volume of the region.\n      This entire argument can be made precise using Riemann sums as in the previous section, and so we get the following: the solid   from   to   whose cross-sections (with respect to the  -axis) have area   has volume given by\n       \n     Finding the Volume of a Sphere \n          Find the volume of a sphere of radius  .\n         \n          To begin, let's assume that the sphere is centered at the origin.\n          Then each cross section perpendicular to the  -axis is just a circle with radius  .\n          Hence each cross-sectional area is given by  , which means the volume of the sphere should be\n           \n         \n      Again, the idea for finding the volumes of these regions is to determine the cross-sectional areas perpendicular to the  -axis (or whatever the axis of rotation happens to be) and then integrate.\n     \n          Find the volume of the region obtained by rotating the graph of   from   to   about the line  .\n         \n          As is almost always the case, a good way to start is by graphing the region to get a rough idea of what it looks like.\n          Doing so, we see that each of the cross-sections are circles.\n          But this is to be expected, since the region is a solid of revolution.\n          Given   between   and  , the area of the corresponding cross-section is given by\n           \n          Hence the volume of this region should be\n           \n         \n      The previous problems involved finding volumes by using disks since disks were natural cross-sections.\n      The next example instead uses washers as cross-sections instead.\n      Although the formula we get for the volume is slightly different, it's still essentially integrating the areas of the cross-sections.\n     \n          Find the volume of the solid obtained by rotating the region bounded by  ,   and   about the line  .\n         \n          Since the axis of rotation is  , we want to look at cross-sections perpendicular to this line, i.e., parallel to the  -axis.\n          Each such cross-section will look like a washer, and hence its area will involve the inner radius and outer radius of the washer.\n          Since the radii are measured in terms of horizontal distance, we'll need to find   in terms of  .\n          Doing so, we see that the inner radius is given by   while the outer radius is given by  .\n          Therefore the volume of the region is given by\n           \n         "
 },
 {
-  "id": "p-661",
+  "id": "p-673",
   "level": "2",
-  "url": "section-volumes.html#p-661",
+  "url": "section-volumes.html#p-673",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2898,9 +2916,9 @@ var ptx_lunr_docs = [
   "body": "The Circumference of a Circle \n          Find the circumference of a circle of radius  .\n         \n          To find the circumference of this circle, we need to find an equation whose graph is the circle, or at least part of it.\n          One choice is   for  .\n          Since this gives the top half of a circle, the circumference is then\n           \n         "
 },
 {
-  "id": "p-692",
+  "id": "p-704",
   "level": "2",
-  "url": "section-arc-length.html#p-692",
+  "url": "section-arc-length.html#p-704",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2979,18 +2997,18 @@ var ptx_lunr_docs = [
   "body": "Applications to Physics and Engineering \n        The primary use of integrals in physics and engineering is to measure the accumulation of continuously varying quantities.\n        The running theme in this section:\n       Measure the accumulation of some quantity by approximating it as a (finite) sum of \"small\" values. Improve the approximation by taking more and more values. Introduce a limit to make the approximation exact, resulting in an integral. Work work force \n        So with this definition, work is proportional to the magnitude of the force   as well as the displacement   over which the force acts.\n        If   is measured in units of\n         \n        or more simply\n         ,\n        and   is measured in units of\n         \n        the   takes on units of\n         \n        or just\n         .\n       Hooke's Law \n        As you might guess from this section's running theme, we'll start by  approximating  the work done by measuring work in small displacements as the particle moves from   to  .\n        Over small enough intervals, even variable forces will look almost constant, which makes   a reasonable estimate of the work done (on this small interval!).\n        So let's start by breaking up   into   smaller subintervals\n         \n        where  , and let   be the width of each subinterval.\n        Now choose sample points   from each subinterval.\n        Once again, if   is small enough, then the work done by the force over   should be approximately\n         \n       \n        This is the approximate work for one subinterval, so adding in the approximations from the other subintervals also provides an estimate of the total work   done by   over  .\n        That is,\n         \n        As  , the approximation becomes exact.\n        Therefore\n         \n       A mass attached to a spring spring force \n            Since equilibrium occurs at  , the work done should be\n             \n           restoring force Moments and Centers of Mass \n        Consider a system of two point masses   connected by a rod of negligible mass (so we can assume that the mass of the system is just  ).\n        These masses are located at the points   on the  -axis.\n        The rod is then placed upon a fulcrum at the point  , as shown below:\n       Rod on a fulcrum. \n        Our goal is to find the center of mass of the rod.\n       \n        Suppose that the first mass is   units away from the fulcrum, and that the second mass is   units away.\n        Archimedes' Law of the Lever states that the rod will balance if  .\n        Since   and   (since   are positive!), we can rewrite this as\n         \n        which simplifies down to\n         \n        Hence   is the location of the center of mass of the rod if this equation is true!\n       moment of the system about the origin \n            Consider the following system of three point masses   at positions   given as follows:\n           Three point masses. \n            Find the following:\n             The moment of the system about the origin.  The center of mass. \n           The moment of the system about the origin is defined to be\n               \n              So the moment is  .  The center of mass is just the moment divided by the total mass   of the system:\n               \n              So the center of mass of the rod is at the point  . moment of the system about the  -axis \n          This can be thought of as tendency of the system to rotate  about  the  -axis.\n          Increasing the mass or the distance from the  -axis increases this tendency.\n         moment of the system about the  -axis \n              Four point masses   are located in the plane at the points   and  .\n\n               Find the moments of the system about the  -axis and the  -axis. Find the center of mass of this system. \n             The moment about the  -axis is\n               \n               Similarly, the moment about the  -axis is given by\n               The center of mass is the point   where\n               \n              and   is the total mass of the system.\n             }\n\n       centroid A lamina in  . \n        To find the centroid of this lamina we will break it up into (vertical) approximating rectangles  , each of which has width   and centroid  :\n       Breaking the lamina into subrectangles. \n        Then the lamina may be approximated by a system of point masses  , with   located at the centroid rectangle   and having the mass of the corresponding rectangle.\n        To find the center of mass of the lamina, we will approximate it with the center of mass of the system of point masses.\n       \n        To do so, we will need:\n         \n       \n        Consider a single rectangle  :\n       A single rectangle. \n        Then we have\n         \n       \n        We can now fill in the following table:\n       Moments and center of mass System of point masses Lamina \n        The center of mass for this lamina is then the point   where\n         \n       "
 },
 {
-  "id": "p-714",
+  "id": "p-726",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-714",
+  "url": "section-applications-to-physics-and-engineering.html#p-726",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "work force "
 },
 {
-  "id": "p-716",
+  "id": "p-728",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-716",
+  "url": "section-applications-to-physics-and-engineering.html#p-728",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3006,9 +3024,9 @@ var ptx_lunr_docs = [
   "body": "A mass attached to a spring spring force \n            Since equilibrium occurs at  , the work done should be\n             \n           "
 },
 {
-  "id": "p-721",
+  "id": "p-733",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-721",
+  "url": "section-applications-to-physics-and-engineering.html#p-733",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3024,9 +3042,9 @@ var ptx_lunr_docs = [
   "body": "Rod on a fulcrum. "
 },
 {
-  "id": "p-725",
+  "id": "p-737",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-725",
+  "url": "section-applications-to-physics-and-engineering.html#p-737",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3042,18 +3060,18 @@ var ptx_lunr_docs = [
   "body": "\n            Consider the following system of three point masses   at positions   given as follows:\n           Three point masses. \n            Find the following:\n             The moment of the system about the origin.  The center of mass. \n           The moment of the system about the origin is defined to be\n               \n              So the moment is  .  The center of mass is just the moment divided by the total mass   of the system:\n               \n              So the center of mass of the rod is at the point  . "
 },
 {
-  "id": "p-732",
+  "id": "p-744",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-732",
+  "url": "section-applications-to-physics-and-engineering.html#p-744",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "moment of the system about the  -axis "
 },
 {
-  "id": "p-734",
+  "id": "p-746",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-734",
+  "url": "section-applications-to-physics-and-engineering.html#p-746",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3069,9 +3087,9 @@ var ptx_lunr_docs = [
   "body": "\n              Four point masses   are located in the plane at the points   and  .\n\n               Find the moments of the system about the  -axis and the  -axis. Find the center of mass of this system. \n             The moment about the  -axis is\n               \n               Similarly, the moment about the  -axis is given by\n               The center of mass is the point   where\n               \n              and   is the total mass of the system.\n             "
 },
 {
-  "id": "p-741",
+  "id": "p-753",
   "level": "2",
-  "url": "section-applications-to-physics-and-engineering.html#p-741",
+  "url": "section-applications-to-physics-and-engineering.html#p-753",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3168,9 +3186,9 @@ var ptx_lunr_docs = [
   "body": "initial value problem "
 },
 {
-  "id": "p-764",
+  "id": "p-776",
   "level": "2",
-  "url": "section-differential-equations.html#p-764",
+  "url": "section-differential-equations.html#p-776",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3186,18 +3204,18 @@ var ptx_lunr_docs = [
   "body": "Solving a separable ODE \n            Solve the IVP given by  .\n           \n            The first step to solving this IVP is to solve the ODE  .\n            It may not look like it at first, but this ODE is separable since we can rewrite it as  .\n            To solve this ODE, we need to move the   terms to the left hand side of the equation and the   terms to the right hand side.\n            We'll abuse notation a little bit to do so by rewriting   and treating   as a fraction, but it won't get us into too much trouble here:\n           implicit form explicit form "
 },
 {
-  "id": "p-771",
+  "id": "p-783",
   "level": "2",
-  "url": "section-differential-equations.html#p-771",
+  "url": "section-differential-equations.html#p-783",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "natural growth equation "
 },
 {
-  "id": "p-772",
+  "id": "p-784",
   "level": "2",
-  "url": "section-differential-equations.html#p-772",
+  "url": "section-differential-equations.html#p-784",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3222,9 +3240,9 @@ var ptx_lunr_docs = [
   "body": "Population Explosion \n                    A population has   members at time   years with a death rate of   and a birth rate of  , where   denotes the population after   years.\n                    Find   and determine if this is a reasonable population model.\n                 \n                    If we assume that the population obeys the general growth equation, then we get\n                     \n                    This ODE is separable, and we can therefore solve it to get\n                     \n                 \n                    So we have a solution, and it can be shown that the solution is unique.\n                    But if you stare at this for a bit, you might see that it has a divide-by-zero problem.\n                    In particular,\n                     \n                    In other words, the population becomes infinite in about two weeks!\n                 "
 },
 {
-  "id": "p-778",
+  "id": "p-790",
   "level": "2",
-  "url": "section-differential-equations.html#p-778",
+  "url": "section-differential-equations.html#p-790",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3240,9 +3258,9 @@ var ptx_lunr_docs = [
   "body": "Long-Term Behavior of Logistic Growth \n                    What is the long-term population of a species that grows according to the logistic equation  ?\n                 \n                    Using the fact that\n                     \n                    we have\n                     \n                    So the population should eventually level out at  .\n                 "
 },
 {
-  "id": "p-781",
+  "id": "p-793",
   "level": "2",
-  "url": "section-differential-equations.html#p-781",
+  "url": "section-differential-equations.html#p-793",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3258,18 +3276,18 @@ var ptx_lunr_docs = [
   "body": "Population Growth in the USA \n                    In millions, the population of the USA in 1990 was   and was growing at a rate of   per year.\n                    In 2012, the population was   and was growing at a rate of   per year.\n                    Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of  .\n                 \n                    Let   denote the population of the USA (in millions), where   is the number of years after 1990.\n                    Then\n                     \n                    and\n                     \n                    So we need to find   and  .\n                 \n                    When  , we have   and  .\n                    Similarly, when   we have   and  .\n                    Therefore\n                     \n                    Solving this system gives us   and  .\n                    Hence\n                     \n                 \n                    This model estimates the population in 2017 to be\n                     \n                    which is about a   error.\n                    Note also that this model predicts the carrying capacity of the USA to be  .\n                 "
 },
 {
-  "id": "p-786",
+  "id": "p-798",
   "level": "2",
-  "url": "section-differential-equations.html#p-786",
+  "url": "section-differential-equations.html#p-798",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "autonomous ODEs "
 },
 {
-  "id": "p-787",
+  "id": "p-799",
   "level": "2",
-  "url": "section-differential-equations.html#p-787",
+  "url": "section-differential-equations.html#p-799",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3339,9 +3357,9 @@ var ptx_lunr_docs = [
   "body": "Sequences \n        In this chapter we'll be using infinite sums of the form   to represent functions and compute integrals.\n        In order to make sense of these series, we need to introduce the concept of a sequence and the limit of a sequence.\n       sequence index Finding a Formula for a Sequence \n            Given the sequence  , make a reasonable guess of the value of   and the general formula for  .\n           explicit formula recurrence relation An Alternating Sequence \n            Find the first few terms of the sequence  .\n           \n            This sequence simplifies down to  .\n           \n        Sequences have limits just as functions do.\n       Limit of a Sequence convergent converges divergent diverges \n        Graphically, we can say that a sequence   has a limit   if the points   become arbitrarily close to the line  :\n         \n        If you run the above code cell, you get some pretty convincing evidence that   as  .\n       \n        One of the most important sequential limits is the following:\n         \n        if  .\n        Many limits involving sequences with terms that are rational functions of   can be reduced to this form when finding limits.\n       \n            Find the limit of the sequence\n             \n           \n            We can try dividing the numerator and denominator by the highest power of   that appears:  .\n            This gives\n             .\n            Now we can take the limit as   to get  .\n           \n        We can also apply Calculus 1 limits to sequences by using the following theorem.\n       Sequential and Functional Limits \n            Let   be a function and suppose that\n             .\n            Then\n             \n            also.\n           \n        One immediate advantage of   is that L'Hospital's Rule from   applies to sequential limits as well,  as long as the sequence consists of values from a differentiable function .\n       Finding a Sequential Limit Using L'Hospital's Rule \n            Let  .\n            Find  .\n           \n            First, note that   where\n             .\n            Therefore\n           .\n         Geometric Sequences geometric sequence \n            This limit depends on whether or not   is in  .\n            If   then  .\n            If   then   for all  .\n            Finally, if   is outside of this interval, then   diverges.\n            Therefore\n             \n            and diverges otherwise.\n           \n        May decimals can be represented using geometric sequences.\n        Repeating \n            Determine the limit of the sequence\n             .\n           \n            It looks like the terms of the sequence are approaching  , and we can verify this using a geometric sequence.\n            We can write this sequence as\n             .\n            So the limit of the sequence is\n             .\n            Note that this suggests the (true!) statement that  .\n           Infinite Limits \n            Let   be a sequence.\n            If the terms of   grow without bound as   increases, we say that  .\n            If the terms of   decrease without bound as   increases, we say that  .\n           Limit of the Fibonacci Sequence \n            Let   denote the   term of the Fibonacci sequence.\n            Determine  .\n            Estimate  .\n           golden ratio \n        To calculate limits, we can use a version of the limit laws.\n       Sequential Limit Laws \n            Let   and   be sequences with   and  .\n            Let   be a constant.\n            Then the following are true:\n           \n               \n             \n               \n             \n               \n             \n                assuming  .\n             \n                if  .\n             \n                if   is continuous at  .\n             \n        Another useful tool for evaluating limits of recursive sequences is the following result: if  , then   also.\n       A Limit from Newton's Method \n            Find the limit of the sequence\n             .\n           \n            First, assume  .\n            Then taking the limit of both sides of the recurrence relation gives\n             .\n            Solving for  , we get  , which simplifies to  .\n           A False Limit \n            Find the limit of the sequence\n             .\n           \n            If we let   and take the limit of both sides of the recurrence, we get   or just  .\n            However, the actual terms of the sequence are given by\n             ,\n            which is clearly divergent!\n            The problem here is that we assumed a limit existed in the first place.\n             This is not always valid .\n            So we need to be careful.\n           \n        We can check whether or not a sequence is convergent without actually finding a limit, at least in certain cases.\n       Absolute Value Test \n            Suppose that  .\n            Then   as well.\n           The Squeeze Theorem for Sequences \n            Let   and   be sequences such that\n             .\n            If  , then  .\n           Applying the Squeeze Theorem and the Absolute Value Test \n            Let\n             .\n            Find  .\n           \n            This sequence is complicated, so we'll try comparing with simpler sequences instead.\n            First, we'll take the absolute value to get rid of the   term:\n             .\n            Now we'll use the fact that   and   to write\n             .\n            Since  , this forces  , and this  , to converge to   as well.\n           Monotone Convergence Theorem Monotone Sequences increasing decreasing \n        If we add one more condition to a monotone sequence, we get a convergent sequence.\n       Bounded Sequences bounded Monotone Convergence Theorem \n            Let   be a bounded monotone sequence.\n            Then   converges.\n           Applying the MCT \n            Let   denote the sequence\n             \n            Determine if the sequence converges and if so find its limit.\n           \n            First, note that\n             \n            To show this converges, we'll use the MCT.\n            To do so, we must show that the sequence is bounded and increasing.\n            To show it's bounded, we'll guess that   for some  .\n            Then\n             ,\n            implying the claim.\n            Now,\n             ,\n            showing the sequence is increasing.\n            Hence it's convergent by the MCT.\n            The limit is equal to  .\n           "
 },
 {
-  "id": "p-819",
+  "id": "p-831",
   "level": "2",
-  "url": "section-sequences.html#p-819",
+  "url": "section-sequences.html#p-831",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3357,9 +3375,9 @@ var ptx_lunr_docs = [
   "body": "Finding a Formula for a Sequence \n            Given the sequence  , make a reasonable guess of the value of   and the general formula for  .\n           "
 },
 {
-  "id": "p-822",
+  "id": "p-834",
   "level": "2",
-  "url": "section-sequences.html#p-822",
+  "url": "section-sequences.html#p-834",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3501,9 +3519,9 @@ var ptx_lunr_docs = [
   "body": "Applying the Squeeze Theorem and the Absolute Value Test \n            Let\n             .\n            Find  .\n           \n            This sequence is complicated, so we'll try comparing with simpler sequences instead.\n            First, we'll take the absolute value to get rid of the   term:\n             .\n            Now we'll use the fact that   and   to write\n             .\n            Since  , this forces  , and this  , to converge to   as well.\n           "
 },
 {
-  "id": "p-857",
+  "id": "p-869",
   "level": "2",
-  "url": "section-sequences.html#p-857",
+  "url": "section-sequences.html#p-869",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3555,9 +3573,9 @@ var ptx_lunr_docs = [
   "body": "Series \n        Consider the number  .\n        This number is irrational and so cannot be represented as a rational number  .\n        This leads to the question of what we mean by  ?\n        Or in particular, how can we actually make sense of  , or represent it?\n       series Infinite Series \n            An infinite series is a sum of the form\n             \n            where   is a sequence.\n           \n        Infinite series are useful for representing (and computing) irrational numbers (which includes almost all numbers).\n       Guessing Sums \n            Guess the sums of the following series:\n             \n                 \n               \n                 \n               \n                 \n               \n           \n            We have the following:\n             \n                 \n               \n                 \n               \n                 \n                  For this last sum we have an issue: there's no sensible way to define this sum.\n                  We can say that   or   by grouping terms differently.\n                 \n               \n           \n        We can determine what the value of a series should be by using limits.\n       Partial Sums and Convergence partial sum converges diverges \n        Using  , we can say that the sum   diverges, since its sequence of partial sums is  .\n        The same is true for the first series in  , but the second series converges.\n       Determining Convergence of a Series \n            Does the series   converge?\n           \n            We'll look at the sequence of partial sums.\n            We have\n             \n            and so on.\n            It looks like the sequence of partial sums approaches  , so we guess that the series equals the same.\n           geometric series Geometric Series \n            A series   is a geometric series if   for some constants   and  .\n            Equivalently, the terms of the series form a geometric sequence (see  ).\n           \n        Geometric series are useful because it's straightforward to find their values.\n        To see how, let   be a geometric series and let   denote the corresponding sequence of partial sums.\n        Then\n         \n        which gives\n         .\n        We can solve this for   to get\n         .\n       \n        At this point, we can find the limit of the partial sums using  .\n        Therefore   converges to   if   and diverges otherwise.\n       \n        As a quick example of this result, we can find the value of   since this series is geometric.\n        To do so, we must determine   and   for this sum.\n        Since\n         ,\n        we have   and   also.\n        Hence the series sums to  .\n       Computing a Geometric Series \n            Determine the value of   if it exists.\n           \n            Since this series contains terms being raised to the   power, we suspect it may be geometric.\n            If we write out the first several terms, we get\n             ,\n            so at each step we're dividing by  .\n            This series is therefore a geometric series with   and  .\n            Since  , this series converges.\n            The value of this series is\n             .\n           \n        We can also find   and   without writing out the first few terms of the series.\n       Finding   and  \n            Determine the value of  .\n           \n            We can rewrite the series as\n             .\n            This is a geometric series with\n             .\n            Since  , the series diverges.\n            repeating \n            Prove that   using geometric series.\n           \n            First, we need to write   as a geometric series.\n            We can do so as follows:\n             ,\n            and so we see that\n             .\n            This is a geometric series with   and   (and so is convergent!), and so\n             .\n           Writing a Decimal as a Fraction \n            Rewrite the decimal   as a fraction  .\n           \n            First, it's a mathematical fact that any repeating decimal can be written as a rational number so we know that we can actually write   as a fraction.\n            We'll do so by rewriting the decimal as a geometric series:\n             ,\n            which is a geometric series with   and  .\n            This series is also convergent, and has sum\n             .\n           telescoping series Telescoping Logarithms \n            Find  .\n           \n            If we write out the first few terms, we get\n             \n            so it looks like many of these terms cancel each other out.\n            To be precise about this, we'll find the partial sums of this series and then consider their limit:\n             ,\n            which goes to   as  .\n            So the series diverges.\n           \n        Not every series is obviously a telescoping series.\n       Rewriting a Telescoping Series \n            Find  .\n           \n            It's not obvious at all that the series is telescoping, even if we write out a few terms.\n            However, if we try partial fractions on   we obtain (see SageMath cell below)\n             .\n            So\n             .\n           \n            The   partial sum is\n             ,\n            and so  .\n            Hence  .\n           \n        The next series is important despite diverging.\n       The Harmonic Series harmonic series \n            The idea here (which will return later) is to compare this series with a simpler one that we know diverges.\n            We'll do so by looking at a specific set of partial sums:\n             \n            and in general\n             .\n           \n            So it follows that\n             .\n            Hence the harmonic series is divergent.\n           \n        A useful test for divergence of a series involves the long-term behavior of the terms of the series.\n       Divergence Test \n            Consider the series  .\n            If  , then   diverges.\n           contrapositive \n        Note that   cannot be used to prove  convergence , only divergence.\n        For example, the terms of the harmonic series go to   but the series itself diverges.\n       Using the Divergence Test \n            Determine if   diverges.\n           \n            Since   (in fact, it doesn't exist at all), the series must diverge.\n           \n        Series, or rather the summation symbol  , obey many of the same laws as integrals: they split over sums and we may pull constants out.\n       Splitting a Sum \n              Find the value of  .\n             "
 },
 {
-  "id": "p-865",
+  "id": "p-877",
   "level": "2",
-  "url": "section-series.html#p-865",
+  "url": "section-series.html#p-877",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3600,9 +3618,9 @@ var ptx_lunr_docs = [
   "body": "Determining Convergence of a Series \n            Does the series   converge?\n           \n            We'll look at the sequence of partial sums.\n            We have\n             \n            and so on.\n            It looks like the sequence of partial sums approaches  , so we guess that the series equals the same.\n           "
 },
 {
-  "id": "p-876",
+  "id": "p-888",
   "level": "2",
-  "url": "section-series.html#p-876",
+  "url": "section-series.html#p-888",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3654,9 +3672,9 @@ var ptx_lunr_docs = [
   "body": "Writing a Decimal as a Fraction \n            Rewrite the decimal   as a fraction  .\n           \n            First, it's a mathematical fact that any repeating decimal can be written as a rational number so we know that we can actually write   as a fraction.\n            We'll do so by rewriting the decimal as a geometric series:\n             ,\n            which is a geometric series with   and  .\n            This series is also convergent, and has sum\n             .\n           "
 },
 {
-  "id": "p-890",
+  "id": "p-902",
   "level": "2",
-  "url": "section-series.html#p-890",
+  "url": "section-series.html#p-902",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3726,18 +3744,18 @@ var ptx_lunr_docs = [
   "body": "The Integral and Comparison Tests Convergence Tests convergence test The Integral Test integral test Integral Test \n                    Suppose that   is a positive, decreasing function on   and let  .\n                    Then\n                     \n                    must both converge or both diverge.\n                   \n                Remember that the Integral Test usually  cannot  determine the value of a series.\n                It can only be used to determine convergence.\n               Determining Convergence Using the Integral Test \n                    Determine if the series   converges or diverges.\n                   \n                    We can use the Integral Test here since   is positive and decreasing.\n                    If we define  , then  .\n                    Now we'll compute  :\n                     .\n                    Since the integral converges, so does the series.\n                    In fact, the value of the series is\n                     .\n                   The Alternating Harmonic Series alternating harmonic series \n                    Since   is neither decreasing nor positive, the Integral Test doesn't apply here.\n                   \n              An important corollary to   is that the integral  -test from   applies to series as well.\n             Series  -Test \n                    The series   converges if and only if  .\n                   Comparison Tests convergence tests series direct comparison test Comparison Test \n                    Let   and   be series with  positive  terms.\n                    Then\n                     \n                         If   and   converges, then so does  . \n                       \n                         If   and   diverges, then so does  . \n                       \n                   Using the Comparison Test \n                    Show that   diverges.\n                   \n              Sometimes using the Comparison Test requires a little ingenuity.\n             A Little Ingenuity \n                    Show that   converges.\n                   Limit Comparison Test convergence tests series limit comparison test Limit Comparison Test \n                  Suppose that   and   are both series with positive terms, and suppose\n                   \n                  exists.\n                  Then\n                   \n                       if  , then either both series converge or both series diverge. \n                     \n                       if   and   converges, then so does  . \n                     \n                       if   and   diverges, then so does  . \n                     \n                 \n              The quantity   in   can be thought of as the relative size of   as compared to  .\n             A Little Less Ingenuity \n                    Show that   converges.\n                   \n                    We saw previously that\n                     ,\n                    which suggests comparing the original series with the  -series  .\n                    If we let   and  , then we see that\n                     .\n                    By   and  , the original series converges.\n                   \n              The Limit Comparison Test works very well with series containing terms given by a ratio of powers, in conjunction with the  -series Test.\n             Radical Powers of  \n                    Does\n                     \n                    converge or diverge?\n                   \n                    The series diverges by comparison with  .\n                   "
 },
 {
-  "id": "p-909",
+  "id": "p-921",
   "level": "2",
-  "url": "section-the-integral-and-comparison-tests.html#p-909",
+  "url": "section-the-integral-and-comparison-tests.html#p-921",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "convergence test "
 },
 {
-  "id": "p-910",
+  "id": "p-922",
   "level": "2",
-  "url": "section-the-integral-and-comparison-tests.html#p-910",
+  "url": "section-the-integral-and-comparison-tests.html#p-922",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3816,9 +3834,9 @@ var ptx_lunr_docs = [
   "body": "A Little Ingenuity \n                    Show that   converges.\n                   "
 },
 {
-  "id": "p-925",
+  "id": "p-937",
   "level": "2",
-  "url": "section-the-integral-and-comparison-tests.html#p-925",
+  "url": "section-the-integral-and-comparison-tests.html#p-937",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3861,9 +3879,9 @@ var ptx_lunr_docs = [
   "body": "Other Convergence Tests Alternating Series alternating series Alternating Series Test remainder \n              Note that   is  not  the same as  .\n             An Alternating Series with Roots \n                    Does\n                      converge or diverge?\n                   \n                    Let  .\n                    Then   is decreasing, and  , so the series converges.\n                   Alternating Harmonic Series \n                    Show that the Alternating Harmonic Series   converges, and determine a value of   for which   is within   of the actual value of  .\n                   \n                    Since the Alternating Harmonic Series is an alternating series with  , and because these terms decrease to  , the sum must converge.\n                    However, we do not yet know  what  it converges to yet.\n\n                    Now let   denote the   partial sum.\n                    Then we know the error between   and   is at most\n                     .\n                    To make this less than  , we must have  .\n                   \n              The Alternating Harmonic Series is also a useful example to illustrate the following definitions.\n             Absolute and Conditional Convergence absolutely convergent conditionally convergent \n              The Alternating Harmonic Series is an example of a conditionally convergent series.\n              There are two important consequences of  :\n               \n                   Absolutely convergent series are also convergent series. \n                 \n                   For conditionally convergent series,  order matters . \n                 \n             Convergence of a Series Involving Sine \n                    Determine if\n                     \n                    converges or diverges.\n                   \n                    If we take the absolute value of each term, then we get\n                     .\n                    Since   is a geometric series with  , then\n                     \n                    must converge by  .\n                   \n                    Hence the original series is absolutely convergent, and so also convergent.\n                   Ratio Test \n              Geometric series are among the easiest to sum and determine convergence for.\n              So it's useful to try to compare an arbitrary series with a geometric series.\n              The main idea is to look at the long-term behavior of  ratios  of consecutive terms.\n             Ratio Test \n                    Let   be an infinite series and let\n                     .\n                    Then\n                     \n                         If   the series converges absolutely. \n                       \n                         If   the series diverges. \n                       \n                         If   the test fails. \n                       \n                   Using the Ratio Test \n                    Does\n                     \n                    converge or diverge?\n                   \n                    Since\n                     ,\n                    the series diverges by  .\n                   \n              The ratio test works well with series whose terms involve factorials or powers involving  .\n             Factorials over Powers \n                    Show that   converges.\n                   \n                    Since  , we have\n                     .\n                    We can find this limit using L'Hospital's Rule (see  ) since this limit is the indeterminate form  .\n                    So set  .\n                    Then\n                     .\n                    Therefore  , which means that the series converges by the ratio test.\n                   Root Test \n              The root test is similar to the ratio test in that it compares a given series with an appropriate geometric series to determine if the original converges.\n             Root Test \n                    Let   be an infinite series and let\n                     .\n                    Then\n                     \n                         If   the series converges absolutely. \n                       \n                         If   the series diverges. \n                       \n                         If   the test fails. \n                       \n                   A   Power \n                    Show that   diverges.\n                   A Series with Rational Terms \n                    Does   converge or diverge?\n                   "
 },
 {
-  "id": "p-936",
+  "id": "p-948",
   "level": "2",
-  "url": "section-other-convergence-tests.html#p-936",
+  "url": "section-other-convergence-tests.html#p-948",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3978,9 +3996,9 @@ var ptx_lunr_docs = [
   "body": "Power Series power series coefficients Examples of Power Series \n                Determine which of the following are power series:\n                 \n                     \n                   \n                     \n                   \n                     \n                   \n               centered about \n          An important concern about power series is for which values of   the series will converge.\n          These questions are usually answered using the root or ratio tests.\n         Convergence of a Power Series \n                For what values of   does the series\n                 \n                converge?\n               \n                We'll try the ratio test to check convergence of this series.\n                Doing so, we get\n                 .\n                So the series converges if   and diverges if  .\n               \n                When  , or  , the test fails.\n                So we need to use other methods to determine the convergence or the series at these points.\n                At  , the series becomes\n                 ,\n                which diverges by the comparison test.\n                At  , the series reduces to the alternating harmonic series which converges by  .\n               \n                Therefore this series converges for all   in the interval   and diverges otherwise.\n               interval of convergence radius of convergence Convergence of Power Series \n                 Given a series  , there exists   such that the series converges on the interval  .\n                 The largest such   is the radius of convergence.\n                \n          For most series we'll consider (i.e., those of the form  ), we can find   using the following formula:\n           .\n         Interval and Radius of Convergence \n                Find the interval and radius of convergence of the series  .\n               \n                We'll find the radius of convergence first, which is given by\n                 .\n                So the radius of convergence is infinite, implying that the interval of convergence is  .\n               \n          We can also use the root test instead of the ratio test.\n         Interval and Radius of Convergence from Root Test \n                Determine the interval and radius of convergence of\n                 .\n               \n                If we apply the root test to this series, we get\n                 .\n                We need this to be less than  , which gives\n                 ,\n                and so the series converges for all   in  .\n                So the radius of convergence is  .\n               \n                Now we need to check the endpoints.\n                At  , the series becomes  , which diverges by the  -series test.\n                At  , the series becomes   which converges by the alternating series test.\n               \n                Therefore the interval of convergence is  .\n               "
 },
 {
-  "id": "p-968",
+  "id": "p-980",
   "level": "2",
-  "url": "section-power-series.html#p-968",
+  "url": "section-power-series.html#p-980",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -3996,9 +4014,9 @@ var ptx_lunr_docs = [
   "body": "Examples of Power Series \n                Determine which of the following are power series:\n                 \n                     \n                   \n                     \n                   \n                     \n                   \n               "
 },
 {
-  "id": "p-970",
+  "id": "p-982",
   "level": "2",
-  "url": "section-power-series.html#p-970",
+  "url": "section-power-series.html#p-982",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4014,9 +4032,9 @@ var ptx_lunr_docs = [
   "body": "Convergence of a Power Series \n                For what values of   does the series\n                 \n                converge?\n               \n                We'll try the ratio test to check convergence of this series.\n                Doing so, we get\n                 .\n                So the series converges if   and diverges if  .\n               \n                When  , or  , the test fails.\n                So we need to use other methods to determine the convergence or the series at these points.\n                At  , the series becomes\n                 ,\n                which diverges by the comparison test.\n                At  , the series reduces to the alternating harmonic series which converges by  .\n               \n                Therefore this series converges for all   in the interval   and diverges otherwise.\n               "
 },
 {
-  "id": "p-976",
+  "id": "p-988",
   "level": "2",
-  "url": "section-power-series.html#p-976",
+  "url": "section-power-series.html#p-988",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4113,9 +4131,9 @@ var ptx_lunr_docs = [
   "body": "Taylor's Formula Taylor series "
 },
 {
-  "id": "p-1001",
+  "id": "p-1013",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1001",
+  "url": "section-taylor-and-maclaurin-series.html#p-1013",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4140,9 +4158,9 @@ var ptx_lunr_docs = [
   "body": "Taylor Series from the Exponential \n                Assuming that   equals its Taylor series, find the Maclaurin series for  .\n                Also, find the   derivative of   at  .\n               \n                We could use   to find the Maclaurin series for  , but it's far, far easier to use the series for  :\n                 .\n               \n                It turns out that this lets us find derivatives at   incredibly quickly.\n                If we let  , then it follows that   is the coefficient of   in the power series for  .\n                Therefore\n                 .\n               "
 },
 {
-  "id": "p-1008",
+  "id": "p-1020",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1008",
+  "url": "section-taylor-and-maclaurin-series.html#p-1020",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4176,9 +4194,9 @@ var ptx_lunr_docs = [
   "body": "Computing a Definite Integral \n                Use power series to find  , and find an approximation within   of the exact value.\n               \n                Using the power series for   from  , we have\n                 .\n                This is an alternating series, so by the alternating series test the partial sum   is always within\n                 \n                of the exact value.\n                So if we want to get enough terms of the series to be within   of the exact value, we need to pick   so that\n                 ,\n                which occurs at  .\n                So\n                 .\n                This is within about   of the exact value.\n               "
 },
 {
-  "id": "p-1018",
+  "id": "p-1030",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1018",
+  "url": "section-taylor-and-maclaurin-series.html#p-1030",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4203,9 +4221,9 @@ var ptx_lunr_docs = [
   "body": "Parametric Equations trajectory parametric equations parametric curves \n      produce the following parametric curve in the  -plane.\n     The graph of   for  . \n      Note that the parametric curve above has a  starting point  and an  ending point , determined by the interval of values for  .\n      When plotting parametric curves, we'll often specify a corresponding interval of values for  .\n      This curve can also be plotted relatively painlessly with SymPy, as below:\n     scalars \n      Plotting points and plugging them into parametric equations can be tedious.\n      Another way to describe a parametric curve is to eliminate parameters.\n     Eliminating parameters \n          Rewrite the parametric equations\n         \n        as a single  Cartesian  equation, i.e., eliminate the parameter  .\n       \n          First, solve for   in the second equation to get  .\n          If we plug this into the first equation, we get an equation in   and   alone:\n         \n          We can see from this equation that the original parametric equations should trace out a rightward opening parabola.\n          Note however that this equation tells us nothing about which portion of the parabola is traced out.\n         Parameterizing a Line Segment \n          Give a set of parametric equations and a corresponding interval that trace out the line segment starting at   and ending at  .\n         \n          First, we'll try to figure out what our equations should look like.\n          We know that   starts at   and   starts at   on this segment, so a reasonable guess is\n           \n          for some unknown constants   and  .\n          To find   and  , we'll specify the interval of values we want   to range over.\n          To make things easier, let's fix   between   and  .\n          Then at   we need to have\n           \n          which gives   and  .\n          Therefore the line segment is parameterized by\n           .\n         \n          We can also rewrite these equations in terms of the starting and ending values of   and  .\n          In particular, we have\n           .\n          To see why this works, note that the second term in each equation vanishes at  , leaving the starting value for each coordinate.\n          Likewise, the first term in each equation vanishes at  , leaving the terminal value for each coordinate.\n          Expanding the equations gives the previous result.\n          Note that this method only works if you select   as your interval of values for  .\n         \n      Parametric equations are especially useful for tracing movement along a curve that is not the graph of a function, like a circle.\n      In particular, a circle of radius   centered at   is traced out by the parametric equations\n       \n      over the interval  .\n     Parametric Equations for Motion on a Circle \n          Find parametric equations and a corresponding interval of values for   that describe a particle moving along a circle of radius   centered at   and starting at   moving  clockwise  three times around the circle.\n         \n          This problem has a lot to unpack, but we know the basic form of our equations will be\n           .\n          Since we want to start at  , we can let   be our starting value.\n          And since we want to move around the circle   times, we'll let   vary from   to  .\n          Finally, to get clockwise motion we need to replace   with  , getting\n           \n          for  .\n         Parametric Equations for an Ellipse \n          Find parametric equations for the ellipse\n           .\n         \n          These equations will look much like the parametric equations for a circle:\n           \n          for  .\n         "
 },
 {
-  "id": "p-1022",
+  "id": "p-1034",
   "level": "2",
-  "url": "section-parametric-equations.html#p-1022",
+  "url": "section-parametric-equations.html#p-1034",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4221,9 +4239,9 @@ var ptx_lunr_docs = [
   "body": "The graph of   for  . "
 },
 {
-  "id": "p-1025",
+  "id": "p-1037",
   "level": "2",
-  "url": "section-parametric-equations.html#p-1025",
+  "url": "section-parametric-equations.html#p-1037",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4311,9 +4329,9 @@ var ptx_lunr_docs = [
   "body": "Polar Coordinates Introducing Polar Coordinates Cartesian rectangular \n        A circle can be described as the set of all points some fixed distance   from a given point, and we can specify any point on the circle by using an angle  :\n       Using distance and angle to specify a point. polar plane radial coordinate  pole angular coordinate polar axis The polar plane. \n        In polar coordinates, positive   correspond to counterclockwise direction, and negative   correspond to clockwise direction.\n        We also allow for   to be negative: this just means go in the direction opposite of  .\n       Plotting polar coordinates \n          Suppose we want to plot the points   and  \n          We can do so in the polar plane by remembering that the first coordinate is distance from the pole, and the second coordinate is direction from the polar axis.\n          If we plot these points, we see that   and   actually represent the same point. This is typical of polar coordinates: every point has, in general, infinitely many representations.\n         The plot from  . Converting Coordinates \n        If we want to use polar coordinates, then it'd be helpful to know how to convert between Cartesian (rectangular) coordinates and polar coordinates.\n        The following diagram will help us to make these conversions.\n       Converting between Cartesian and polar coordinates. So in terms of  , we have \n        Going in the other direction, the Pythagorean theorem tells us that  , while  .\n       Converting polar to Cartesian Suppose we want to convert the point   in polar coordinates to Cartesian coordinates  . Then we have and so the Cartesian point is  Converting Cartesian to polar Suppose we now want to convert the point   in Cartesian coordinates to polar coordinates. Then finding   is relatively straightforward:  Finding   requires a bit more care. We know that   has to satisfy  . One choice that makes this work is  . However, this is incorrect! Whatever   is needs to be consistent with the fact that our point lies in the second quadrant. So we'll pick   instead. Hence one way to write the point in polar coordinates is given by  Converting equations Consider the polar equation  . We can convert this into a Cartesian equation using the above formulas. In particular, we use   and  . So   and the equation becomes Polar Curves Now we move on to graphing polar equations. Graphs of constants in polar coordinates In Cartesian coordinates, the graphs of   and   give horizontal and vertical lines, respectively. In polar coordinates, the graphs of   and   have simple descriptions as well. The graph of   is just the set of all points   units away from the pole, so it's just a circle of radius   centered at the pole. Likewise, the graph of   is the set of all points that make an angle of   with the polar axis, so it's just a line through the pole. Graphs from Cartesian equations In some cases it's beneficial to convert a polar equation to a Cartesian equation. The Cartesian equation may have a recognizable form that helps us to identify the corresponding polar graph. For example, suppose we want to describe the graph of   for some constant  . Then we can convert it to a Cartesian equation, in particular If we complete the square, we get  , which describes a circle centered at   (in the  -plane) and with radius  . In the polar plane, this is a circle of radius   centered at   Similarly,   describes a circle of radius   centered at  . Another circle Suppose we want to graph  . From the previous example, we know that this will be a circle of radius   centered at  . See the following figure. The circle from  . Cartesian to Polar Method \n        Graphing polar equations can be tricky, because it's easy to miss aspects of the graph unless you're careful.\n        A useful method for graphing polar equations involves treating them as Cartesian equations first to get a better sense of how the graph behaves.\n       Three leaf rose \n          Suppose we want to graph  .\n          We don't know what this looks like in the polar plane yet, but we have a pretty good idea of how it looks when treated as a Cartesian equation in the  -plane (which we view as different from the polar plane!):\n         The graph of   as a Cartesian equation. \n          So we see that at   goes from   to  ,   decreases from   to  , hitting   along the way at  .\n          to  . \n          Now, as   goes from   to     will go from   to  , hitting   at  :\n          to  . \n          Continuing in this manner lets us complete the graph:\n         The graph of   in the polar plane. \n        SUGGESTED PROBLEMS: 1, 3, 11, 23, 37\n       "
 },
 {
-  "id": "p-1048",
+  "id": "p-1060",
   "level": "2",
-  "url": "section-polar-coordinates.html#p-1048",
+  "url": "section-polar-coordinates.html#p-1060",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4329,9 +4347,9 @@ var ptx_lunr_docs = [
   "body": "Using distance and angle to specify a point. "
 },
 {
-  "id": "p-1050",
+  "id": "p-1062",
   "level": "2",
-  "url": "section-polar-coordinates.html#p-1050",
+  "url": "section-polar-coordinates.html#p-1062",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4527,27 +4545,27 @@ var ptx_lunr_docs = [
   "body": "Coordinates in 3-Space -coordinates coordinate axes octants three-dimensional coordinate system projections Projection \n            Find the projection of the point   onto the  -plane.\n           \n            Here's how we can find the projection of the point   onto the  -plane.\n            Note that the  -plane is just the set of all points with  -coordinate equation to  , so the projection of   onto the  -plane is the point  .\n           Equations in space \n            Sketch   in  .\n           plane More equations in space \n            Sketch   in  .\n           \n            We can do so as follows.\n            First, sketch   in the  -plane, which will just be the line  .\n            Then the surface in   represented by   is actually the surface consisting of all points directly above and directly below the line   in the  -plane.\n           Intersection of a sphere and a plane \n            Describe the intersection of the sphere given by the equation   with the  -plane.\n           \n            We can do this without too much trouble if we remember that the  -plane is just the set of all points with  -coordinate equal to  .\n            So the intersection of this sphere with the  -plane traces out the curve   in the  -plane, which is just the point  .\n           Intersection of the sphere   with the  -plane. The Distance Formula \n        Recall that the distance between two points   and   in   (the  -plane) is given by\n       \n        This is proved using the Pythagorean theorem. We can do the same exact thing in  !\n       Distances in Space distance formula three dimensions \n            Let   and   be two points in  .\n            Then the distance between these two points,  , is given by\n             \n           Computing distances \n            lets us find the distance between the points   and   as follows:\n         \n        One important use of the distance formula in   is that it lets us find equations of spheres.\n        The equation of a sphere of radius   and center   is given by\n         \n        which is more commonly written as\n         \n       Equation of a sphere \n          The equation   represents a sphere in  . To see how, we can rearrange the equation and complete the square to get\n         \n          So this equation describes a sphere of radius   centered at  .\n         Spherical shells \n          We can also use inequalities to describe regions in addition to equalities. For example,   describes the region contained between the sphere of radius   and the sphere of radius  , both centered at the origin.\n         The spherical shells  . "
 },
 {
-  "id": "p-1096",
+  "id": "p-1108",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1096",
+  "url": "section-coordinates-in-3-space.html#p-1108",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "coordinate axes "
 },
 {
-  "id": "p-1097",
+  "id": "p-1109",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1097",
+  "url": "section-coordinates-in-3-space.html#p-1109",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "octants three-dimensional coordinate system "
 },
 {
-  "id": "p-1098",
+  "id": "p-1110",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1098",
+  "url": "section-coordinates-in-3-space.html#p-1110",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4653,9 +4671,9 @@ var ptx_lunr_docs = [
   "body": "Vectors vector initial point terminal point A vector. equivalent equal Addition and Scalar Multiplication \n        Given two vectors  , we can add them to get the new vector\n       \n        So the vector   is obtained by moving the tail of   to the tip of   and then drawing a vector from the tail of   to the tip of  .\n       Vector addition. triangle law parallelogram law scalar multiplication Vector subtraction \n        Using the previous graph, we can compute  . We just need to scale the vectors properly and then add   to  .\n       Vector Components components position vector \n      So any vector in   can be represented using components by  .\n      Similarly, any vector in   can be represented as  .\n      Once you represent a vector in component form, addition and scalar multiplication is straightforward.\n     Vector addition with components \n        Let   and  . Then\n       \n      Finding magnitudes of vectors can also be done by applying the distance formula from   to the components of the vectors.\n      The magnitude of a vector   is denoted by   or  .\n      For example, the magnitude of   from the previous example is\n       \n     \n      Given a vector  \n       \n     A vector equation \n        We can use vectors to describe curves and surfaces. For example, let   and  . Let  . Then the set of all points   that satisfy the equation\n         \n        has a very nice description: it's just the sphere of radius   centered at  .\n       Finding components of vectors \n        Consider the points   and  . We want to find the components of the vector  . We can do this by translating   to the origin, which is done by subtracting from each coordinate of   the corresponding coordinate of  . So the vector   is given by\n       \n      In general, given   and   the vector   is given by\n     Properties of Vector Addition and Scalar Multiplication vectors properties of vector addition and scalar multiplication \n          Let   be vectors and let   be scalars. Then the following are true:\n         \n             .\n           \n             \n           \n             \n           \n             \n           \n             \n           \n             \n           .\n           \n             \n           \n             \n           Basis Vectors and Unit Vectors linear combination \n    These vectors are important enough that we'll give them a name: the  standard basis vectors .\n     Standard Basis Vectors vectors standard basis \n          The standard basis for   is the set  , where\n         orthogonal \n      These vectors are essentially designed to capture the \"coordinate directions\", and are plotted below.\n     The standard basis. \n      This also leads us to our next definition.\n     Unit Vectors vectors unit vectors \n          A vector   is a unit vector if  .\n         \n      Unit vectors are useful if we just need to indicate a direction, and we don't care about magnitude. Every nonzero vector can be rescaled to a unit vector: just divide the vector by its norm.\n     Direction from one point to another \n        Consider the points   and  . Then we can find the unit vector indicating the direction from   to  . First, set\n       \n        Then the unit vector that gives the direction from   to   is given by\n       A vector equation for the unit sphere \n        Using the concept of a unit vector, we can very easily describe the unit sphere The sphere of radius   centered at the origin.  using a vector equation. If we set  , then the unit sphere is just the set of all solutions of\n       Applications \n      Many physical quantities have both a direction and a magnitude, like velocity, acceleration and forces. Vectors are ideally suited to measure these quantities.\n     Weight of a chain \n        A still chain is fixed to two ends of a level divide. The tension of the chain at each fixed end can be represented by vectors pointing away from the chain. Call these tension forces   and  . Suppose we know that each force vector makes an angle of   with the ground on either side of the chain's fixed ends, and that the magnitude of each tension is  43 . Then we can use vector addition to find the weight of the chain.\n       resultant \n        or in other words\n       \n        What we need to find is  , which we can do without too much trouble if we can rewrite the tension vectors in component form. In fact, we have\n       \n        So it follows that\n       \n        Therefore the chain weighs  .\n       \n      SUGGESTED PROBLEMS: 1--17 odd, 23, 25, 27\n     "
 },
 {
-  "id": "p-1115",
+  "id": "p-1127",
   "level": "2",
-  "url": "section-vectors.html#p-1115",
+  "url": "section-vectors.html#p-1127",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4671,9 +4689,9 @@ var ptx_lunr_docs = [
   "body": "A vector. "
 },
 {
-  "id": "p-1116",
+  "id": "p-1128",
   "level": "2",
-  "url": "section-vectors.html#p-1116",
+  "url": "section-vectors.html#p-1128",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4689,9 +4707,9 @@ var ptx_lunr_docs = [
   "body": "Vector addition. "
 },
 {
-  "id": "p-1119",
+  "id": "p-1131",
   "level": "2",
-  "url": "section-vectors.html#p-1119",
+  "url": "section-vectors.html#p-1131",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4707,18 +4725,18 @@ var ptx_lunr_docs = [
   "body": "Vector subtraction \n        Using the previous graph, we can compute  . We just need to scale the vectors properly and then add   to  .\n       "
 },
 {
-  "id": "p-1121",
+  "id": "p-1133",
   "level": "2",
-  "url": "section-vectors.html#p-1121",
+  "url": "section-vectors.html#p-1133",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "components "
 },
 {
-  "id": "p-1122",
+  "id": "p-1134",
   "level": "2",
-  "url": "section-vectors.html#p-1122",
+  "url": "section-vectors.html#p-1134",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4761,9 +4779,9 @@ var ptx_lunr_docs = [
   "body": "Properties of Vector Addition and Scalar Multiplication vectors properties of vector addition and scalar multiplication \n          Let   be vectors and let   be scalars. Then the following are true:\n         \n             .\n           \n             \n           \n             \n           \n             \n           \n             \n           \n             \n           .\n           \n             \n           \n             \n           "
 },
 {
-  "id": "p-1139",
+  "id": "p-1151",
   "level": "2",
-  "url": "section-vectors.html#p-1139",
+  "url": "section-vectors.html#p-1151",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4779,9 +4797,9 @@ var ptx_lunr_docs = [
   "body": "Standard Basis Vectors vectors standard basis \n          The standard basis for   is the set  , where\n         "
 },
 {
-  "id": "p-1141",
+  "id": "p-1153",
   "level": "2",
-  "url": "section-vectors.html#p-1141",
+  "url": "section-vectors.html#p-1153",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4860,9 +4878,9 @@ var ptx_lunr_docs = [
   "body": "The Dot Product dot product definition dot product "
 },
 {
-  "id": "p-1162",
+  "id": "p-1174",
   "level": "2",
-  "url": "section-the-dot-product.html#p-1162",
+  "url": "section-the-dot-product.html#p-1174",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4941,9 +4959,9 @@ var ptx_lunr_docs = [
   "body": "The vectors   and  . "
 },
 {
-  "id": "p-1186",
+  "id": "p-1198",
   "level": "2",
-  "url": "section-the-dot-product.html#p-1186",
+  "url": "section-the-dot-product.html#p-1198",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4995,9 +5013,9 @@ var ptx_lunr_docs = [
   "body": "The Cross Product cross product Definition and Properties of the Cross Product cross product definition The Cross Product \n          Let   and  . Then the cross product of   with   is the new vector   given by\n         Cross product of basis vectors \n        Let's start by computing   using the definition. If we do so, we have\n       \n        On the other hand, we also have  . This points out the very important fact that  order matters for cross products .\n       determinants Another cross product \n            is useful to use if you're dealing with vectors that aren't as simple as the basis vectors  . For example, let   and  . Then\n         \n          Remember that we said the cross product is our tool for finding perpendicular vectors. So it might be nice if we made sure it actually did that. As a quick check, we'll compute   and  , with these vectors coming from  . If we do so, we obtain\n         \n          Since these dot products are zero, this means that both   and   are perpendicular to the cross product  . This is also true in general.\n         Orthogonality of the Cross Product cross product orthogonality \n                is always orthogonal to both   and  .\n             right-hand rule \n          We would also like to know the magnitude of the cross product. We can just compute it using   and find the magnitude using our usual formula. If we do so, we obtain (after a lot of simplifying!)\n         \n          which reduces to the following result.\n         Magnitude of the Cross Product cross product magnitude \n              Let   denote the acute angle between the vectors   and  , so that  . Then\n             \n          So in particular, two nonzero vectors   and   are parallel (i.e. have  ) if and only if  .\n         Testing collinearity collinear \n            then we can say that all three points lie on the same line if and only if   and   are parallel to each other. So we'll compute their cross product to get  . Since these vectors are parallel, then the three given points must lie on the same line.\n           \n          Another important property of the magnitude of the cross product is the following:   is exactly equal to the area of the parallelogram determined by   and  .\n         Area of a triangle \n            Suppose that we want the area of the triangle with vertices   and  . To start, we need to find vectors that determine the triangle. We can use\n           \n            Now, the triangle determined by   and   is precisely half of the parallelogram determined by these same vectors, so the area of this triangle is equal to  . We can use Sage as in the cell below to find the cross product of these vectors. Doing so, we get   So the area of the triangle with vertices   and   is\n           Properties of the Cross Product cross product properties \n              Let   be vectors and   a scalar. Then the following properties are true:\n             scalar triple product scalar triple product Geometry of the Scalar Triple Product \n              Let   and   be vectors in  . Then   is equal to the volume of the parallelepiped determined by   and  .\n             Testing if vectors are coplanar coplanar \n            these vectors are  not  coplanar.\n           Another way to compute cross products \n            Using   and the facts that\n           \n            gives us another way to compute cross products that doesn't involve determinants. As an example, let   and   Then\n           Torque torque Torque torque \n              The torque   of a force   acting at a position   is defined to be the vector \n             \n          As one example of torque, consider a wrench applied to a bolt. The force is exerted at the end of the wrench, and the torque is a vector that's parallel to the axis of rotation of the bolt. The torque is greater if the force is applied at a direction perpendicular (or nearly so) to that of the wrench, and smaller if the force is nearly parallel to the direction of the wrench. As a quick check, the torque is   if the force is exactly parallel to the direction of the wrench, which makes sense: if we're pushing or pulling the wrench, the bolt won't rotate at all.\n         Torque and hex keys \n            A hex key (Allen wrench) with a short arm of length  27  and a long arm length of  154  is applied to a screw, with the short arm attached to the screw. To turn the screw, a force of  0.5  is applied to the long arm of the hex key turning the screw clockwise, and is exactly perpendicular to both the short arm and long arm of the hex key. We want to find the torque of this force on the screw.\n           \n            One way we can do this is to imagine the screw sitting at the origin, and the hex key is (initially) in the  -plane. Note that once the force is applied, it will begin to rotate the hex key out of the  -plane. Now, the torque is defined by\n           \n            where   is the vector from the screw to the point where the force   is applied. We can find   without too much trouble: it's  . To find the force  , note that it's perpendicular to both the long arm and short arm of the screw. So a starting guess would be\n           \n            Such a force would turn the screw clockwise, but it has the wrong magnitude. So we need to adjust it a bit:  . So the torque is given by\n           \n          SUGGESTED PROBLEMS: 1-19 odd, 29, 41\n         "
 },
 {
-  "id": "p-1197",
+  "id": "p-1209",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1197",
+  "url": "section-the-cross-product.html#p-1209",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5022,9 +5040,9 @@ var ptx_lunr_docs = [
   "body": "Cross product of basis vectors \n        Let's start by computing   using the definition. If we do so, we have\n       \n        On the other hand, we also have  . This points out the very important fact that  order matters for cross products .\n       "
 },
 {
-  "id": "p-1201",
+  "id": "p-1213",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1201",
+  "url": "section-the-cross-product.html#p-1213",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5049,9 +5067,9 @@ var ptx_lunr_docs = [
   "body": "Orthogonality of the Cross Product cross product orthogonality \n                is always orthogonal to both   and  .\n             "
 },
 {
-  "id": "p-1206",
+  "id": "p-1218",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1206",
+  "url": "section-the-cross-product.html#p-1218",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5094,9 +5112,9 @@ var ptx_lunr_docs = [
   "body": "Properties of the Cross Product cross product properties \n              Let   be vectors and   a scalar. Then the following properties are true:\n             "
 },
 {
-  "id": "p-1217",
+  "id": "p-1229",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1217",
+  "url": "section-the-cross-product.html#p-1229",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5130,9 +5148,9 @@ var ptx_lunr_docs = [
   "body": "Another way to compute cross products \n            Using   and the facts that\n           \n            gives us another way to compute cross products that doesn't involve determinants. As an example, let   and   Then\n           "
 },
 {
-  "id": "p-1223",
+  "id": "p-1235",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1223",
+  "url": "section-the-cross-product.html#p-1235",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5220,9 +5238,9 @@ var ptx_lunr_docs = [
   "body": "\n            A plane in   is uniquely determined by specifying a single point for it to pass through and a direction for it to face.\n           "
 },
 {
-  "id": "p-1249",
+  "id": "p-1261",
   "level": "2",
-  "url": "section-equations-of-lines-and-planes.html#p-1249",
+  "url": "section-equations-of-lines-and-planes.html#p-1261",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5274,9 +5292,9 @@ var ptx_lunr_docs = [
   "body": "Cylinders and Quadric Surfaces cylinders quadric surfaces Cylinders cylinders definition Cylinders \n              A cylinder is the collection of all lines parallel to a given line and passing through some plane curve.\n             \n          A basic example of a cylinder is the set of all lines passing through the unit circle in the  -plane and parallel to the  -axis.\n          In  , this is just the graph of  .\n          The graph of this cylinder is provided below.\n         The cylinder  \n          For our purposes, equations that give a cylinder will often be missing a variable.\n         A sinusoidal cylinder \n            Consider the equation   in  .\n            This equation is missing the variable  , which suggests that the graph of this equation should be a cylinder.\n            However, it's not going to look like the cylinders we may be used to at this point.\n            In fact, this is just the set of all lines passing through the curve   in the  -plane and parallel to the  -axis. It's graph is given below.\n           The cylinder  Another cylinder \n            Consider the cylinder given by the set of all lines passing through the plane curve   in the  -plane and parallel to the line in   defined by the equation\n           \n            What does this cylinder look like? Well, we can view it as essentially a \"sheet\" of lines cutting through the  -plane at the line  .\n            If we try to imagine this, then this suggests that this cylinder should probably be a plane!\n            In fact, this cylinder is exactly the plane containing the point   and parallel to the line   given above.\n            As the line itself is parallel to the  -plane, the resulting cylinder is just the  -plane.\n           Quadric Surfaces quadric surface trace An ellipsoid \n            Consider the equation\n           \n            If we want to graph this, we can graph a few of it's traces to get an idea of what it looks like. Let's graph traces parallel the  -plane to start. This means we'll set   equal to different constants. For  , we get the equation\n           \n            which we rewrite as\n           \n            This is an ellipse in the  -plane, with minor axis   and major axis  . We can graph another trace, say in the  -plane, we get\n           ellipsoid Region between surfaces \n            Suppose we want to sketch the region between the surface   and the cylinder   for  .\n            First, we can graph  .\n            If we look at the horizontal traces of this surface, we get circles of varying radii.\n            As   increases, the radii of these circles increase as well.\n            This surface is just a cone!\n            So we're describing the region of this cone bounded between   and  , and contained inside the cylinder  .\n           The region contained between   and  "
 },
 {
-  "id": "p-1265",
+  "id": "p-1277",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1265",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1277",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5328,18 +5346,18 @@ var ptx_lunr_docs = [
   "body": "Another cylinder \n            Consider the cylinder given by the set of all lines passing through the plane curve   in the  -plane and parallel to the line in   defined by the equation\n           \n            What does this cylinder look like? Well, we can view it as essentially a \"sheet\" of lines cutting through the  -plane at the line  .\n            If we try to imagine this, then this suggests that this cylinder should probably be a plane!\n            In fact, this cylinder is exactly the plane containing the point   and parallel to the line   given above.\n            As the line itself is parallel to the  -plane, the resulting cylinder is just the  -plane.\n           "
 },
 {
-  "id": "p-1272",
+  "id": "p-1284",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1272",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1284",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "quadric surface "
 },
 {
-  "id": "p-1273",
+  "id": "p-1285",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1273",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1285",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5382,9 +5400,9 @@ var ptx_lunr_docs = [
   "body": "Vector Functions vector function space curves component functions Limits with Space Curves \n          We can take limits with vector functions just as we can with regular functions.\n         \n          Let  . Then\n         \n          In other words, if you want to take the limit of a vector function you can just take the limits of the component functions.\n         Limit of a vector function \n            Let\n           \n            Suppose we want to find  . Then we just need to take the limit of each component. So\n           continuous A horiztonal helix \n            Let  , and suppose we want to sketch this function. One way to do so is to plug in values for   and connect the resulting points with a curve, but we can also do the following to get an idea of what this looks like. First, note that we have   and  . So  , which means that this looks like the unit circle in the  -plane, traced  clockwise . Since we also have  , this curve moves farther along the  -axis as   increases. If we trace this out, we get a helix (see the below plot). We can also see from the graph that it has no jumps or gaps, so   is continuous everywhere.\n           Finding vector functions \n            Consider the cylinder   and the surface  , and suppose we want to trace out there intersection with a vector function. Here's how we can do this. First, we'll come up with the   and   components of  . Since  , this suggests that we should take\n           \n            So that's two down, one to go. To get  , we just need to use the equation  . So\n           \n            So our vector function is\n           \n            This is also plotted below.\n           Derivatives with Space Curves \n          Now that we know how to take limits with vector functions, we can take derivatives as well.\n         Derivatives of Vector Functions vector functions derivatives derivative differentiable tangent vector unit tangent \n          We also have the usual ideas from Calculus I and physics regarding motion: velocity is the derivative of position and acceleration is the derivative of velocity.\n         Velocity on a saddle \n            A particle moves counterclockwise along the \"saddle\"  . We want its velocity at  . First, find   to get\n           \n            At  , we have the velocity vector\n           \n            So at the point  , the space curve is parallel to the vector  . In other words, the particle is moving in this direction at  .\n           Motion along the saddle traced by   in  Tangents on a circle \n            A particle moves along the circle   in the  -plane, counterclockwise and with an angular frequency of  5\\pi . Then we can assume that its position is described by\n           \n            Suppose we want to find the direction this particle is going at any given moment. Then we can just find the unit tangent vector  :\n           \n          We also have derivative rules for vector functions, based off of the familiar formulas from Calculus I.\n         Vector Derivative Rules vector functions derivative rules \n              Let   and   be differentiable vector functions,   be a scalar and let   be a differentiable (scalar) function. Then the following formulas hold:\n             Integrals with Space Curves \n          We can also integrate vector functions without too much trouble. Just as taking the derivative of a vector function reduces down to differentiating each component, integrating a vector function reduces down to integrating each component. If   then\n         \n          SUGGESTED PROBLEMS: 1, 3, 5, 7, 17, 21, 23, 37, 41, 45, 59, 61\n         "
 },
 {
-  "id": "p-1280",
+  "id": "p-1292",
   "level": "2",
-  "url": "section-vector-functions.html#p-1280",
+  "url": "section-vector-functions.html#p-1292",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5400,9 +5418,9 @@ var ptx_lunr_docs = [
   "body": "Limit of a vector function \n            Let\n           \n            Suppose we want to find  . Then we just need to take the limit of each component. So\n           "
 },
 {
-  "id": "p-1286",
+  "id": "p-1298",
   "level": "2",
-  "url": "section-vector-functions.html#p-1286",
+  "url": "section-vector-functions.html#p-1298",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5436,9 +5454,9 @@ var ptx_lunr_docs = [
   "body": "Derivatives of Vector Functions vector functions derivatives derivative differentiable "
 },
 {
-  "id": "p-1295",
+  "id": "p-1307",
   "level": "2",
-  "url": "section-vector-functions.html#p-1295",
+  "url": "section-vector-functions.html#p-1307",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5499,9 +5517,9 @@ var ptx_lunr_docs = [
   "body": "Arc length of a helix \n            Suppose we want to find the arc length of the helix   from   to  . Then this is given by\n           "
 },
 {
-  "id": "p-1309",
+  "id": "p-1321",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1309",
+  "url": "section-arc-length-and-curvature.html#p-1321",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5517,9 +5535,9 @@ var ptx_lunr_docs = [
   "body": "Reparametrizing a space curve \n            Suppose we're given the space curve\n           \n            which starts at  , (so   starts at  ) and we want to find the point that is   units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function  :\n           \n            Since  , we get  . So\n           \n            reparametrizes the space curve   in terms of arc length. So the point on the curve that is   units along in the positive direction is given by\n           "
 },
 {
-  "id": "p-1315",
+  "id": "p-1327",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1315",
+  "url": "section-arc-length-and-curvature.html#p-1327",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5571,9 +5589,9 @@ var ptx_lunr_docs = [
   "body": "Using the alternative formula \n              Let  . We'll make use of   to find   We have\n             \n              and so\n             "
 },
 {
-  "id": "p-1328",
+  "id": "p-1340",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1328",
+  "url": "section-arc-length-and-curvature.html#p-1340",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5598,9 +5616,9 @@ var ptx_lunr_docs = [
   "body": "Unit normal on a circle \n              Find the unit normal vector of the curve given by  .\n             \n              If we think of a particle moving along  , then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve,   should point towards the origin. To prove this, we'll use the formula above to find the unit normal:\n             \n              So  . So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.\n             "
 },
 {
-  "id": "p-1334",
+  "id": "p-1346",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1334",
+  "url": "section-arc-length-and-curvature.html#p-1346",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5634,9 +5652,9 @@ var ptx_lunr_docs = [
   "body": "Motion of a projectile \n            A projectile is fired out of a cannon with an initial speed of  200  to the west and with an angle of elevation of  . If the particle was fired from a raised platform that is  50  off level ground, where does the particle land?\n           \n            First, we'll assume that   points northward and   points straight up. Let's assume that the platform is directly above the origin. If we let   denote the position (in meters) of the particle at time   (in seconds), then we can say that  . We also have\n           \n            We can integrate up to find the position  :\n           \n            where   is an arbitrary constant vector. To find it, we'll use our initial condition on  :\n           \n            So  . Integrating once more to get the position, we have\n           .\n           \n            So  .\n           \n            To find where the particle lands, we just set the third component equal to zero and solve for   to get\n           \n            We need to choose the positive value for  , and if we do so we see that when the projectile hits ground it's at position   So the projectile is a little over  3.5  to the west.\n           "
 },
 {
-  "id": "p-1346",
+  "id": "p-1358",
   "level": "2",
-  "url": "section-motion-in-space.html#p-1346",
+  "url": "section-motion-in-space.html#p-1358",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5805,9 +5823,9 @@ var ptx_lunr_docs = [
   "body": "Partial derivatives on the unit sphere \n                    Let  .\n                    Where is   equal to  ?\n                 \n                    We can find this algebraically, but we'll try to answer this geometrically instead.\n                    First, note that   is actually the top half of the unit sphere.\n                    If we're trying to find where   is zero, then we need to find where this surface is \"flat\" when moving in the   direction.\n                    If we think about this a bit, this should only occur when  , i.e. along the  -axis.\n                    At any other location on the unit sphere, moving in the  -direction on the unit sphere requires going uphill or downhill, which means   at these locations.\n                 "
 },
 {
-  "id": "p-1391",
+  "id": "p-1403",
   "level": "2",
-  "url": "section-partial-derivatives.html#p-1391",
+  "url": "section-partial-derivatives.html#p-1403",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5832,9 +5850,9 @@ var ptx_lunr_docs = [
   "body": "Clairaut's Theorem \n                    Suppose that   is defined on a disk   that contains the point  .\n                    If   and   are both continuous on  , then\n                     \n                    In other words, the mixed partials are equal to each other wherever they happen to be continuous.\n                 "
 },
 {
-  "id": "p-1396",
+  "id": "p-1408",
   "level": "2",
-  "url": "section-partial-derivatives.html#p-1396",
+  "url": "section-partial-derivatives.html#p-1408",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5859,9 +5877,9 @@ var ptx_lunr_docs = [
   "body": "Tangent Planes and Linear Approximations \n                In Calculus I, derivatives are used to find linear approximations to functions of the form  .\n                We can use partial derivatives to do the same for functions with several independent variables.\n             Tangent Planes tangent plane \n                We'd like to find the equation of this plane.\n                First, recall that every plane can be described by an equation of the form\n                 \n                We can view   and   as given, so we just need to find  .\n                If we assume that  , then we can rewrite this equation to obtain\n                 \n                where   and  .\n                If we set  , then we have  .\n                This is the equation of a line tangent to the surface and parallel to the  -axis, and so the slope of this line must be\n                 \n                since the slope of a tangent line in the  -direction gives the rate of change in the  -direction.\n                Similarly, \n                 \n                Putting all of this together gives the following theorem.\n             Tangent Planes to Surfaces tangent planes \n                        Let   be a surface and suppose that   has continuous partial derivatives at the point  .\n                        Then the tangent plane to the surface   at the point   is given by\n                         \n                        where  .\n                     Approximations by tangent planes \n                        Find the tangent plane to   at the point  .\n                        Use this to approximate  \n                     \n                        The equation of the tangent plane is given by\n                         \n                        which we can rewrite as \n                         \n                        So at  , we should have\n                         \n                     Linear Approximations linearization linearization Linearization \n                        Let   be a function for which   and   are both continuous at a point  .\n                        Then the linearization of   at   is the function   given by\n                         \n                     \n                For well-behaved functions (i.e. functions that have continuous partial derivatives),   if   is close to the point  .\n             Linearization of an exponential and a sinusoid \n                        Let  .\n                        Find the linearization of   at the point  .\n                     \n                        By  , the linearization is given by\n                         \n                     \n                  can also be extended to functions with more than two variables.\n             Linearization in three variables \n                        Let  .\n                        Find the linearization   at the point  .\n                     \n                        The formula we need to use now is\n                         \n                     \n                SUGGESTED PROBLEMS: 1, 15, 19\n             "
 },
 {
-  "id": "p-1401",
+  "id": "p-1413",
   "level": "2",
-  "url": "section-tangent-planes-and-linear-approximations.html#p-1401",
+  "url": "section-tangent-planes-and-linear-approximations.html#p-1413",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5886,9 +5904,9 @@ var ptx_lunr_docs = [
   "body": "Approximations by tangent planes \n                        Find the tangent plane to   at the point  .\n                        Use this to approximate  \n                     \n                        The equation of the tangent plane is given by\n                         \n                        which we can rewrite as \n                         \n                        So at  , we should have\n                         \n                     "
 },
 {
-  "id": "p-1406",
+  "id": "p-1418",
   "level": "2",
-  "url": "section-tangent-planes-and-linear-approximations.html#p-1406",
+  "url": "section-tangent-planes-and-linear-approximations.html#p-1418",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6030,9 +6048,9 @@ var ptx_lunr_docs = [
   "body": "Computing a directional derivative \n                        Let  .\n                        Find the directional derivative of   in the direction of   at the point  .\n                     normalize "
 },
 {
-  "id": "p-1435",
+  "id": "p-1447",
   "level": "2",
-  "url": "section-directional-derivatives-and-gradients.html#p-1435",
+  "url": "section-directional-derivatives-and-gradients.html#p-1447",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6111,9 +6129,9 @@ var ptx_lunr_docs = [
   "body": "Derivatives at a Local Maximum or Minimum \n                        Suppose that   is differentiable, and has a local maximum or minimum at  .\n                        Then \n                         \n                     "
 },
 {
-  "id": "p-1452",
+  "id": "p-1464",
   "level": "2",
-  "url": "section-extreme-values.html#p-1452",
+  "url": "section-extreme-values.html#p-1464",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6129,9 +6147,9 @@ var ptx_lunr_docs = [
   "body": "Critical points of an exponential \n                        Let  .\n                        Find its critical points.\n                     \n                        Find the critical points by solving   and  .\n                        Since \n                         \n                        then   forces  .\n                        Similarly, since\n                         \n                        then   forces   or  .\n                        So the only points that satisfy  both    and   are  \n                        So these must be our critical points.\n                     "
 },
 {
-  "id": "p-1455",
+  "id": "p-1467",
   "level": "2",
-  "url": "section-extreme-values.html#p-1455",
+  "url": "section-extreme-values.html#p-1467",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6210,9 +6228,9 @@ var ptx_lunr_docs = [
   "body": "Constrained Optimization Using Contours \n              Estimate the minimum and maximum values of   subject to the constraint  .\n             \n              The constraint is represented as a contour plot of  .\n              We can compare this with contours of  , and any point where there two contours intersect is a point for which the constraint is satisfied.\n             An interactive contour plot of   and  . \n                Using these contours, we see that the maximum value of   subject to   appears to be  , while the minimum value of   subject to   appears to be  .\n               "
 },
 {
-  "id": "p-1477",
+  "id": "p-1489",
   "level": "2",
-  "url": "section-lagrange-multipliers.html#p-1477",
+  "url": "section-lagrange-multipliers.html#p-1489",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6354,9 +6372,9 @@ var ptx_lunr_docs = [
   "body": "Double Integrals in Polar Coordinates \n      Recall that the double integral was defined by first setting up a rectangular grid.\n      The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense.\n      If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward.\n      However, polar coordinates from   work very nicely with circular regions.\n      So we want to find out how to set up double integrals using polar coordinates.\n     area element \n      Let   represent the area of one of these sectors.\n      If we let   denote the distance from the origin to one sector,   the length of a sector and   the angle spanned by a sector, then we can say that\n       \n      If we assume that   and   are both small (which means the polar grid in   is very fine), then\n       \n      So\n       .\n      As   and   approach  , this becomes more exact, and we get\n       .\n     double integrals polar coordinates Double Integrals in Polar Coordinates \n          Let   be a continuous function.\n          Then\n           \n          and limits are chosen using polar coordinates.\n         Integrating over a circular sector \n          Find\n           \n         \n          If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant.\n          So we'll switch to polar coordinates to solve this integral:\n           \n         Gaussian integral The Gaussian Integral \n          We have\n           \n         \n        First, let  .\n        We'll show that  .\n        We have\n         \n        Since  , this gives\n         \n       Volume of a sphere \n          Find the volume of a sphere of radius  .\n         \n          First, we can center the sphere at the origin without loss of generality.\n          Such a sphere is given by  .\n          If we solve for  , we get\n           \n          Let   denote the disk of radius   in the  -plane centered at the origin.\n          Then the volume of the sphere is\n           \n         \n      SUGGESTED PROBLEMS: 5, 13, 23\n     "
 },
 {
-  "id": "p-1522",
+  "id": "p-1534",
   "level": "2",
-  "url": "section-double-integrals-in-polar-coordinates.html#p-1522",
+  "url": "section-double-integrals-in-polar-coordinates.html#p-1534",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6381,9 +6399,9 @@ var ptx_lunr_docs = [
   "body": "Integrating over a circular sector \n          Find\n           \n         \n          If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant.\n          So we'll switch to polar coordinates to solve this integral:\n           \n         "
 },
 {
-  "id": "p-1527",
+  "id": "p-1539",
   "level": "2",
-  "url": "section-double-integrals-in-polar-coordinates.html#p-1527",
+  "url": "section-double-integrals-in-polar-coordinates.html#p-1539",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6435,9 +6453,9 @@ var ptx_lunr_docs = [
   "body": "Mass of a triangular plate \n            Find the mass of the plate contained in the triangular region   bounded by lines   and  , given that the density is  .\n           \n            The mass is\n             \n           "
 },
 {
-  "id": "p-1536",
+  "id": "p-1548",
   "level": "2",
-  "url": "section-applications-of-double-integrals.html#p-1536",
+  "url": "section-applications-of-double-integrals.html#p-1548",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6462,9 +6480,9 @@ var ptx_lunr_docs = [
   "body": "Triple Integrals \n      In  , we have\n       \n      This represents the area under   and over  .\n      Furthermore,   gives the length of  .\n      In  , we have\n       \n      This represents the volume under   and above the region  , where  .\n      Furthermore,   gives the area of  .\n     triple integral triple integrals rectangular coordinates Triple Integrals over a Rectangle integrable \n      For a double integral in rectangular coordinates, we have   or  .\n      Similarly, for a triple integral in rectangular coordinates we have six different choices for  :\n       Absolute values on the disk \n      Just as we can view   as an infinitesimal length and   as an infinitesimal area,   represents an infinitesimal volume.\n     \n      Our main use for   will be to recognize a triple integral \"in the wild,\" but we won't actually use it to compute integrals.\n      For this purpose, we still use Fubini's Theorem.\n     Fubini's Theorem triple integrals Fubini's Theorem for Triple Integrals \n          Suppose   is a continuous function on the closed and bounded region   in  .\n          Then   can be computed as an iterated integral, and the answer does not depend on the choice of  .\n         A triple integral over a rectangular prism \n          Compute  , where\n           \n         \n          We'll integrate using  .\n          Then we have\n           \n         \n      An unfortunate side effect of increasing the dimension for our integral is that we lose a little bit of geometric intuition.\n      For instance,   is indeed calculating a \"volume,\" but the volume in question is for a four dimensional region (the graph of   over the rectangular prism).\n      We can only really visualize the \"base\" of this region, which served as our region of integration in  .\n      Even so, the triple integral can still tell us important things about functions of three variables.\n     Finding an average value \n          Find the average value of the function   over the region   given in  .\n         \n          First, let   denote the volume of  .\n          Then the average value of   over   is just\n           \n         \n      We can also compute triple integrals over more general regions.\n     Volume using triple integrals \n          Find the volume of the region bounded by the cylinder   and the planes   and  .\n         \n          If we let   denote this region, then its volume is given by  .\n          The volume is then\n           \n         \n      When setting up limits for triple integrals, say using  , then the limits on the innermost integral are typically functions of   and  , the limits on the middle integral are functions of   and the limits on the outermost integral are constant.\n      We can also change the order of integration to make an integral more tractable.\n     Changing the order of integration \n          Compute  .\n         \n          This looks awful to integrate with respect to   first, so we'll try changing the order of integration.\n            looks easiest, so let's try using   instead.\n          If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals.\n          So\n           \n         \n      SUGGESTED PROBLEMS: 5, 11, 13, 19, 25, 29\n     "
 },
 {
-  "id": "p-1541",
+  "id": "p-1553",
   "level": "2",
-  "url": "section-triple-integrals.html#p-1541",
+  "url": "section-triple-integrals.html#p-1553",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6543,9 +6561,9 @@ var ptx_lunr_docs = [
   "body": "Triple Integrals in Cylindrical Coordinates cylindrical coordinates Computing a triple integral over a cylinder \n          Let   be the cylinder in   with height   and base given by the circle of radius   centered at the origin, restricted to the first and second octants.\n          Let  .\n          Compute  .\n         \n          Since we're dealing with a cylinder, we'll switch to cylindrical coordinates  :\n           \n         Cylindrical Volume \n          Find the volume of the region below the inverted cone   and in the first and second octants.\n         \n          First, let   denote the region in question.\n          Then\n           .\n          The graph of this region isn't too difficult to find, especially using resources such as  CalcPlot3D , and is given by\n           \n          However, this region is much easier to describe in cylindrical coorindates:\n           .\n\n          Hence the volume is\n           .\n         Finding the Volume of the Unit Sphere \n          Find the volume of the unit sphere; that is, the sphere of radius   centered at the origin.\n         \n          The unit sphere is specified by the inequalities\n           .\n          It's much easier to describe this region using cylindrical coordinates:\n           .\n          By symmetry, the volume must be\n           .\n         "
 },
 {
-  "id": "p-1557",
+  "id": "p-1569",
   "level": "2",
-  "url": "section-cylindrical-coordinates.html#p-1557",
+  "url": "section-cylindrical-coordinates.html#p-1569",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6588,9 +6606,9 @@ var ptx_lunr_docs = [
   "body": "Triple Integrals in Spherical Coordinates spherical coordinates \n      Just as any point   in   can be represented as a point   in polar coordinates, we can represent any point   in   using the spherical coordinates  .\n      Here,   is distance from the origin,   is the angle the point makes with the  -axis and   is the angle the point makes with the  -axis.\n      In general,\n       .\n        corresponds to a point on the positive  -axis, while   corresponds to a point on the negative  -axis.\n     \n      Using triangles, we have the conversion formulas\n       .\n      Note that\n       .\n     \n      Just as constant limits in Cartesian coordinates correspond to rectangular regions of integration, constant limits in spherical coordinates give rise to spherical regions of integration.\n     Sketching a Spherical Region \n          Sketch the region determined by the spherical inequalities\n           .\n         \n      If we wish to compute integrals using spherical coordinates, then we must alter   just as we did in  .\n      In particular, we use\n       .\n     Volume of the Unit Sphere \n          Find the volume of the unit sphere  .\n         \n          The volume of   can be found using the triple integral  .\n          Because of the spherical region of integration, this is best found using spherical coordinates.\n          So\n           .\n         \n      The integrand can also suggest a transformation to spherical coordinates.\n      In particular, integrands depending on   are often made easier by converting to spherical.\n     Average Value Inside of the Unit Sphere \n          Let  .\n          Find the average value of   over the unit sphere.\n         \n          By definition, the average value of   is given by\n           .\n          We'll follow the same strategy we used in   to compute this integral.\n          If we convert to spherical coordinates, we get\n           .\n         \n          So the average value of   over   is  .\n         "
 },
 {
-  "id": "p-1564",
+  "id": "p-1576",
   "level": "2",
-  "url": "section-triple-integrals-in-spherical-coordinates.html#p-1564",
+  "url": "section-triple-integrals-in-spherical-coordinates.html#p-1576",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6741,9 +6759,9 @@ var ptx_lunr_docs = [
   "body": "A Vector Field in  \n            Sketch\n             .\n           \n            An interactive sketch from  CalcPlot3D  is given below:\n             A vector field in  -space. \n           \n            The vector field rotates about the  -axis in the counterclockwise direction, flowing upwards if   and flowing downwards if  .\n           "
 },
 {
-  "id": "p-1607",
+  "id": "p-1619",
   "level": "2",
-  "url": "section-vector-fields.html#p-1607",
+  "url": "section-vector-fields.html#p-1619",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6759,18 +6777,18 @@ var ptx_lunr_docs = [
   "body": "Particle Trapped in a Velocity Field \n            At time   seconds, a particle is at position  .\n            The particle is within the velocity field\n             .\n            Estimate the particle's position at   seconds.\n           \n            Since the particle starts at  , its velocity at time   is given by\n             .\n            Hence the displacement of the particle from   to   seconds should be approximately\n             ,\n            which gives the new position as roughly\n             .\n           "
 },
 {
-  "id": "p-1610",
+  "id": "p-1622",
   "level": "2",
-  "url": "section-vector-fields.html#p-1610",
+  "url": "section-vector-fields.html#p-1622",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "integral curve streamlines field lines "
 },
 {
-  "id": "p-1611",
+  "id": "p-1623",
   "level": "2",
-  "url": "section-vector-fields.html#p-1611",
+  "url": "section-vector-fields.html#p-1623",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6786,9 +6804,9 @@ var ptx_lunr_docs = [
   "body": "Gradient Field for Gravitational Potential \n              Find the gradient field associated to\n               .\n             \n              We can find the gradient field right away:\n               .\n             "
 },
 {
-  "id": "p-1614",
+  "id": "p-1626",
   "level": "2",
-  "url": "section-vector-fields.html#p-1614",
+  "url": "section-vector-fields.html#p-1626",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6804,9 +6822,9 @@ var ptx_lunr_docs = [
   "body": "Line Integrals \n        In this section we move on to computing integrals over curves in   and  .\n       Scalar Line Integrals \n        Suppose we wish to find the mass of a wire given by a curve   in the  -plane.\n        If the density is a constant   then this is simple: the mass is just   where   denotes the length of the wire.\n       scalar line integral line integrals scalar Scalar Line Integral \n              Suppose that   is a smooth curve in   and that the function   is continuous on  .\n              The scalar line integral of   along   is the number   defined to be\n               .\n             \n                An analogous definition holds for curves in  .\n                We can also replace the assumption that   is smooth with the assumption that   is  rectifiable , which (roughly) means it has a well-defined length.\n               \n        Geometrically,   represents the area under   and above  .\n       \n        If   is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral.\n        Note that   can be viewed as representing an  infinitesimal length  along the curve  .\n        If   is traced out by the parametric equations\n         ,\n        then the length of   from   to   is given by the  arc length function \n         .\n        See   and  .\n        Thus\n         ,\n        and we can write\n         .\n       \n        If we view   as being traced out by a vector function  , then we can write this formula even more compactly:\n         .\n       Computing a Scalar Line Integral \n            Compute  , where   is the segment of the parabola   from   to  .\n           \n            The curve   is traced out by the vector function   for  .\n            Therefore\n             \n           \n        Line integrals along piecewise smooth curves can be found without too much trouble.\n       Integrating Along Line Segments \n            Find   where   denotes the line segment from   to   followed by the segment from   to  .\n           \n            We find this by breaking   down as the union of two smooth curves   and  , where\n             \n            Then\n             .\n           \n        We can also compute scalar line integrals in  .\n       Average Value on a Circle \n            Let   and let\n             .\n            Find the average value of   on  .\n           \n            The average value of   on   is given by\n             \n            where\n             \n            and\n             .\n            Therefore   has an average value of   on  .\n           Vector Field Line Integrals \n        Suppose we have a  force field    in   and some particle that is acted upon by the force.\n        The particle has a trajectory given by a curve  .\n         Trajectory in a force field. \n       \n        We want to determine how the trajectory of the particle aligns with the forcefield  .\n        We can do this by picking an arbitrary point along  , finding the unit tangent   at this point, and then comparing the direction of   and that of   by computing the dot product  .\n        This is a measure of how   and   align at a specific point, and integrating this along   should tell us how   and   align overall.\n       line integrals vector fields Line Integral of a Vector Field line integral of   over  circulation integral \n        To find line integrals of vector fields, we proceed as follows.\n        Suppose that  .\n        Then\n         .\n        We can also write this as\n         ,\n        assuming that  .\n       \n        In addition to measuring how well   and   align, vector field line integrals can also represent work done.\n       Flow Along a Circle \n            Let   denote the segment of the parabola   traversed once from   to  , and let\n             .\n            Does   tend to flow with or against  ?\n           \n            If we graph   and  , we get the following:\n             Flow over  . \n           \n              suggests that   flows with  , and we can verify this by computing  :\n             .\n            Since the result is positive, this tells us that   tends to flow with  .\n           A Nonconservative Force \n            Let   denote a force field.\n            Is the force   conservative?\n           \n            Here we are using the physical definition of a conservative force, namely that the work done must be  path independent .\n            So we'll choose two paths between two points and find the work done on each path.\n            Let the first path,  , denote the top half of the unit circle traversed counterclockwise.\n            Similarly, let the second path,  , denote the bottom half of the unit circle traversed clockwise.\n            Then both paths have the same initial and terminal points.\n           \n            From  , it appears as though  , which suggests that the vector field is path dependent.\n             A rotating force field. \n            To verify this, we'll compute the appropriate line integrals.\n           \n            For  , the total circulation is\n             .\n            Likewise, the circulation of   along   is\n             .\n           \n            Since the work done by   between the points   and   clearly depends on the path taken between the points, this means that   is path dependent and, therefore, not conservative.\n           \n        We can also compute vector field line integrals in   with essentially the same formula.\n       Circulation in  \n            Find the circulation of   along\n             .\n           \n            We have\n             .\n            Since the circulation is positive, this also shows that   tends to flow with  .\n           Flux Integrals \n        The circulation integral in   is useful for measuring how much a vector field flows along a given curve.\n        Now, we want to measure how a vector field flows  across  a curve, at least in  .\n       \n        Given a smooth curve   with unit tangent  , recall that   measures how well a vector field   and   align at a point on  .\n        By integrating this, we get a measure along the entire curve.\n        So if we want to get a sense of how   flows across  , we can do so by looking at a single point and then integrating along the curve again.\n       outward unit normal flux integral line integrals flux integral Flux Integral flux integral of   across  \n        At this point it may be helpful to introduce some new notation.\n        If   is a closed curve, then we often denote line integrals involving   with   instead of  .\n       Flux Across the Unit Circle \n            Let   and let   denote the unit circle, traversed exactly once counterclockwise.\n            What is  ?\n           \n            We should have  .\n           \n        In order to actually compute flux integrals, we need to write   using  .\n        So suppose that   is traced out by the vector function  .\n        Then   must be perpendicular to the unit tangent\n         \n        or equivalently  .\n        Our primary tool for finding perpendicular vectors, the cross product, only applies in  .\n        So to find   we'll (temporarily) move everything into  .\n        Now we need to find a vector orthogonal to   that also lies in the  -plane.\n        This can be done by computing\n         .\n       \n        At this point we need to decide which direction we want our normal vector to go.\n        We'll usually choose the first option if   is traversed counterclockwise and the second option otherwise.\n        Assuming counterclockwise orientation, we have\n         .\n        Now moving back down to  , we can write the outward unit normal as\n         .\n       \n        Therefore\n         .\n       Verifying the Flux \n            Compute the flux integral in  .\n           \n            We have\n             .\n           \n        SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.\n       "
 },
 {
-  "id": "p-1618",
+  "id": "p-1630",
   "level": "2",
-  "url": "section-line-integrals.html#p-1618",
+  "url": "section-line-integrals.html#p-1630",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6894,9 +6912,9 @@ var ptx_lunr_docs = [
   "body": "Circulation in  \n            Find the circulation of   along\n             .\n           \n            We have\n             .\n            Since the circulation is positive, this also shows that   tends to flow with  .\n           "
 },
 {
-  "id": "p-1651",
+  "id": "p-1663",
   "level": "2",
-  "url": "section-line-integrals.html#p-1651",
+  "url": "section-line-integrals.html#p-1663",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6939,9 +6957,9 @@ var ptx_lunr_docs = [
   "body": "The Fundamental Theorem for Line Integrals \n        From  , we know that integrals and derivatives are closely related:\n         .\n        We want to extend this result to line integrals of vector fields over curves.\n        In particular, we want to prove a relationship of the form\n         \n        where   and   are the endpoints of the curve  .\n        This is the content of the main result in this section:  .\n       Path Independence open, simply connected domain closed boundary \n        The mathematical definition of a conservative vector field is that it's the gradient of some scalar function.\n       conservative vector field mathematical definition Conservative Vector Fields (Mathematical Definition) conservative path independence vector fields path independence Path Independence \n            A vector field   is path independent on a domain   if\n             \n            for any piecewise smooth paths in   with the same endpoints.\n            Equivalently,   is path independent if\n             \n            for any piecewise smooth closed curve   in  .\n           Conservative Vector Fields (Physical Definition) \n            Let   denote a (vector) force field.\n            We say that   is conservative on a domain   if   is path independent on  .\n           \n        In physical terms,   says that the work done by a conservative force   on a particle moving along a path depends only on the initial and terminal points of the path.\n        Equivalently, the work done on a closed path must always be  .\n       \n        These two definitions are related by  .\n       line integrals Fundamental Theorem of Line Integrals Fundamental Theorem of Line Integrals \n            Suppose that   is a conservative vector field (in the sense of  ) with continuous components on an open simply connected region  .\n            Then   is path independent.\n            Furthermore, if   and   is a curve in   with initial point   and terminal point  , then\n             .\n           An Awful Example \n            Let   and let   be the path in the  -plane composed of the line segment from   to   followed by the circular arc from   to   followed by the logarithmic arc   from   to  .\n            Find  .\n           \n              is piecewise smooth and consists of the components\n             .\n            To find  , we can find   for   and add the resulting values.\n            So let's do that!\n             .\n            Similarly,\n             \n            and  finally \n             .\n            Putting this all together, we get\n             .\n           \n            Now let's compare this approach with using  .\n            Since  ,   is conservative by definition.\n            Hence   applies, and (setting  ) we get\n             .\n           Using Potential to Find Work Done \n          Let   be a force field and let   denote the parabolic arc   from   to  .\n          Find the work done by   along  .\n         \n          The work done is just  .\n          Note that  , and so the work done is just\n           \n          by  .\n         Conservative Vector Fields \n          shows that line integrals involving conservative vector fields are straightforward to evaluate if we know a corresponding potential function.\n        So now we want to do two things:\n         \n             Given a vector field  , determine if it's conservative. \n           \n         \n             Given a conservative vector field  , determine a potential function  . \n           \n       \n        For the first, we can use our intuition that conservative vector fields shouldn't rotate.\n        So let's assume that   is a (differentiable) vector field on   and let   be a point in the plane.\n        We can estimate the rotation, or  circulation , of   at   by constructing a rectangle with length   and height   at   and measuring how   flows counterclockwise around the rectangle.\n        If we do so, then we can estimate the circulation along each side as follows:\n         .\n        Therefore the total circulation near   should be about\n         .\n        If we divide by   to normalize, then we can say that the circulation is about\n         .\n       Conservative Vector Fields are Irrotational \n            Let   be a continuously differentiable vector field on an open simply connected region in  .\n            Then   is conservative on this region if and only if\n             .\n           Finding a Line Integral \n            Let   and let   denote the ellipse\n             .\n            Find  .\n           \n            We can parameterize   and then compute   as in  , but we'll first check if   is conservative.\n            Since  , it follows that   is conservative.\n            Hence  .\n           curl Testing a Vector Field in  \n            Let  .\n            Determine if   is conservative.\n           This is taken from Example 2 on page 1165 of  Thomas' Calculus ,   edition. \n            We need to check if  .\n            So we compute this like a cross product, giving  .\n            Hence the vector field is irrotational and therefore conservative.\n           \n        So now we have a good test for if a vector field is conservative.\n        Next, we want to be able to find a corresponding potential function to a conservative vector field.\n       \n        Consider the vector field   from  .\n        We know this is conservative, so there must exist a corresponding potential function   such that  .\n        To find this, we start by noting that whatever   is, its partial derivatives must be the components of  .\n        In particular,\n         .\n        Now we look at   to pin down  :\n         ,\n        and so  .\n        Finally,\n         \n        and so  .\n        Therefore a potential function for   is\n         .\n       Line Integral Along an Elliptical Arc \n            Compute  , where\n             .\n           \n            First, we'll check if   is conservative.\n            If it is, we can use  .\n            Since  ,\n            we see that   is in fact conservative.\n           \n            Now we need to find a potential function  .\n            Since  , we can integrate with respect to   to get\n             .\n            Now differentiate with respect to   to get\n             .\n            Hence a potential function for   is  , and so\n             .\n           \n        SUGGESTED PROBLEMS:3-13 odd, 19, 21\n       "
 },
 {
-  "id": "p-1663",
+  "id": "p-1675",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1663",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1675",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6957,9 +6975,9 @@ var ptx_lunr_docs = [
   "body": "conservative vector field mathematical definition Conservative Vector Fields (Mathematical Definition) conservative "
 },
 {
-  "id": "p-1667",
+  "id": "p-1679",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1667",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1679",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7029,9 +7047,9 @@ var ptx_lunr_docs = [
   "body": "Finding a Line Integral \n            Let   and let   denote the ellipse\n             .\n            Find  .\n           \n            We can parameterize   and then compute   as in  , but we'll first check if   is conservative.\n            Since  , it follows that   is conservative.\n            Hence  .\n           "
 },
 {
-  "id": "p-1685",
+  "id": "p-1697",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1685",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1697",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7110,9 +7128,9 @@ var ptx_lunr_docs = [
   "body": "Green's Theorem flux integrals Green's Theorem for Flux Integrals \n          Let  ,   and   satisfy the same hypotheses as in  .\n          Then\n           .\n         "
 },
 {
-  "id": "p-1704",
+  "id": "p-1716",
   "level": "2",
-  "url": "section-green-s-theorem.html#p-1704",
+  "url": "section-green-s-theorem.html#p-1716",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7137,9 +7155,9 @@ var ptx_lunr_docs = [
   "body": "Curl and Divergence \n        In this section we look at two different analogues of the derivative for vector fields.\n        Once we have these versions of the derivative, we'll also be able to state a corresponding version of the  , just as the   corresponds to the gradient.\n       Curl curl vector fields curl in  Curl of a Vector Field in  \n            Let   be a vector field in   with continuously differentiable components.\n            The curl of   is the vector\n             .\n           \n        We've already seen a couple nice properties of curls.\n        First, the curl vector gives the axis of rotation about which   tends to rotate counterclockwise when viewed head on, and   is a measure of the amount of rotation.\n        Second, the curl can be used to determine if a vector field is conservative or not.\n       Conservative Vector Fields in  \n            Let   denote a continuously differentiable vector field on an open set containing the simply connected region  .\n            Then   is conservative if and only if  .\n           Determining Rotation in a Vector Field \n            Suppose the vector field   represents a swirling fluid.\n            Within this fluid you place a small paddle wheel at the point  .\n            When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?\n           \n            First we need to get a measure of the rotation of  , so we compute the curl:\n             ,\n            which is just   at our point.\n            This provides the axis around which the paddle wheel rotates counterclockwise.\n            And since  , the paddle wheel does not appear to rotate at all when viewed from above.\n           Divergence divergence incompressible solenoidal Divergence on a Rectangle \n            Let   and let   denote the unit circle, traversed counterclockwise once.\n            Find the divergence of   at   and  .\n            Then find the  net divergence  of   through the interior of  .\n           \n            At  ,  .\n            At this particular point, outflow is balanced with inflow.\n            Likewise, at   we can see that inflow is greater than outflow.\n           \n            We can compute the net divergence as  , where   is the interior of the unit circle.\n            This is equal to  , which means the net flow throughout   is  .\n            By  , this is also equal to the net flux across  .\n           Laplacian \n        From the divergence we get another useful form of (second) derivative for scalar functions.\n        First, let   be a differentiable scalar function.\n        Then we can compute its gradient  .\n        This is a vector field that represents how   changes.\n        Now, since   is a vector field we can also consider its curl and divergence.\n        If   is  nice enough  we know that  , which is not particularly useful in this case.\n        But if we take the divergence, we get\n         .\n       Laplacian Laplacian Laplacian \n          extends to other dimensions in the obvious way.\n        The Laplacian is useful since it provides a measure of how a function's value at a point differs from the average value at nearby points.\n       Laplacians and Average Values \n            Let   and let  .\n            Let   denote the unit circle traversed once counterclockwise.\n            Find the average values of   on  , their specific values at   and the Laplacians at  .\n           \n            If we compute the average values, we get\n             .\n            Furthermore,  .\n            We also have   and  .\n           \n        To see how the Laplacian can arise, consider the following situation explained in Evans'  Partial Differential Equations ,   edition.\n        We have some  density  function  ; this could be mass density, charge density, etc.\n        Now we'll let   denote the flux of  .\n        It's often reasonable to assume that the flux is proportional to the negative of the gradient of  :   where  .\n        This means that the quantity flows from regions of higher concentration to regions of lower concentration.\n        If   represents a quantity in equilibrium within some region  , then the net flux across   should be  .\n        In terms of  , we have\n         .\n       \n        Now we'll make the argument that   since the above should be true for arbitrary subregions of  .\n        But\n         ,\n        which means that  .\n       harmonic Laplace's equation \n        Laplacians also appear in certain integral identities.\n       Green's First Identity Green's First Identity \n            Let   denote a simply connected region with piecewise smooth boundary  .\n            Suppose that   is continuously differentiable and   is twice continuously differentiable on an open domain containing  .\n            Then\n             .\n           \n            Since the right hand side involves a flux integral, this suggests that   may prove useful.\n            Applying this to   gives\n             .\n           \n            Now, recall that   is a kind of derivative operator.\n            For this reason, it also satisfies a version of the product rule:\n             .\n            Plugging this into the double integral and rearranging proves the result.\n           \n            acts as a kind of  integration by parts  in higher dimensions.\n         \n        SUGGESTED PROBLEMS: 1-9 odd, 10, 11-15 odd.\n       "
 },
 {
-  "id": "p-1708",
+  "id": "p-1720",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1708",
+  "url": "section-curl-and-divergence.html#p-1720",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7173,9 +7191,9 @@ var ptx_lunr_docs = [
   "body": "Determining Rotation in a Vector Field \n            Suppose the vector field   represents a swirling fluid.\n            Within this fluid you place a small paddle wheel at the point  .\n            When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?\n           \n            First we need to get a measure of the rotation of  , so we compute the curl:\n             ,\n            which is just   at our point.\n            This provides the axis around which the paddle wheel rotates counterclockwise.\n            And since  , the paddle wheel does not appear to rotate at all when viewed from above.\n           "
 },
 {
-  "id": "p-1714",
+  "id": "p-1726",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1714",
+  "url": "section-curl-and-divergence.html#p-1726",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7209,9 +7227,9 @@ var ptx_lunr_docs = [
   "body": "Laplacians and Average Values \n            Let   and let  .\n            Let   denote the unit circle traversed once counterclockwise.\n            Find the average values of   on  , their specific values at   and the Laplacians at  .\n           \n            If we compute the average values, we get\n             .\n            Furthermore,  .\n            We also have   and  .\n           "
 },
 {
-  "id": "p-1725",
+  "id": "p-1737",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1725",
+  "url": "section-curl-and-divergence.html#p-1737",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7254,9 +7272,9 @@ var ptx_lunr_docs = [
   "body": "Parameterizing a Cylinder \n            Find a vector function   that traces out the portion of the cylinder   contained in the seventh octant.\n           \n            The presence of   in the equation defining this surface suggests something like polar coordinates, except for the  -plane instead of the  -plane.\n            So let   and  .\n            Then   on our surface, and we can parameterize it using\n             .\n            To place this in the correct octant, we must provide limits for   and  :\n             .\n           "
 },
 {
-  "id": "p-1740",
+  "id": "p-1752",
   "level": "2",
-  "url": "section-parametric-surfaces-and-areas.html#p-1740",
+  "url": "section-parametric-surfaces-and-areas.html#p-1752",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7290,9 +7308,9 @@ var ptx_lunr_docs = [
   "body": "Area of a Cone \n            Find the area of the part of the cone   bounded by   and   in the first octant.\n           \n            First, we parameterize the cone using\n             .\n            This gives\n             ,\n            and so the area of the conical segment is\n             .\n           "
 },
 {
-  "id": "p-1748",
+  "id": "p-1760",
   "level": "2",
-  "url": "section-parametric-surfaces-and-areas.html#p-1748",
+  "url": "section-parametric-surfaces-and-areas.html#p-1760",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7308,9 +7326,9 @@ var ptx_lunr_docs = [
   "body": "Surface Integrals surface integral orientable Mass of a Surface \n          Find the mass of the hemisphere   given by   assuming that  .\n         \n          We need to compute the surface integral  .\n          First, we need to find a vector function that traces out the hemisphere.\n          Using spherical coordinates for inspiration, we can use\n           \n          with\n           \n          Then\n           \n          Now we need to find the magnitude:\n           .\n          So the mass is\n           .\n         \n      If   is given by the equation  , then we can use\n       \n      to trace out  .\n      This gives\n       .\n     Surface Integral on a Cone \n          Set up the surface integral that gives the average value of   on the part of the cone   that lies above the unit circle in the third octant.\n         \n          Let   denote the part of the cone in the third octant above the unit circle and let   denote the portion of the unit circle directly under  .\n          The surface area of this part of the cone is  , so the average value of   on this part of the cone is\n           \n         \n      We can also talk about surface integrals of vector fields.\n      These are higher dimensional versions of flux integrals.\n     Surface Integral of a Vector Field surface integral of   over  \n      The surface integral above measures how   flows across the surface   in the direction of  .\n      However, we will always have two possible choices for  .\n      If   is orientable, then we know we can specify a consistent choice of direction  .\n      We just need to make sure this is done before computing the integral.\n     \n      If  , we can replace   with\n       ,\n      which gives\n       .\n     Flux Into a Sphere \n          Does   tend to flow into the sphere  ?\n         \n          Stealing our work from  , we can parameterize   using\n           \n          which gives\n           .\n          However, this is  not  the normal vector we need to use here.\n          Instead, we'll multiply by a negative to get the inward normal.\n          So\n           \n         \n      SUGGESTED PROBLEMS: 7, 9, 23, 29.\n     "
 },
 {
-  "id": "p-1752",
+  "id": "p-1764",
   "level": "2",
-  "url": "section-surface-integrals.html#p-1752",
+  "url": "section-surface-integrals.html#p-1764",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7362,9 +7380,9 @@ var ptx_lunr_docs = [
   "body": "Stokes' Theorem Stokes' Theorem Stokes' Theorem \n          Let   denote a simple, closed, orientable surface with unit normal   and let   denote a continuously differentiable vector field on  .\n          Then\n           ,\n          where   is oriented counterclockwise with respect to  .\n         Circulation Along a Triangle \n          Let   denote the triangle formed by the boundary of the plane   in the first octant, traversed counterclockwise when viewed from below.\n          Let  .\n          Find  .\n         \n          By  , we can write\n           \n          where   is the surface contained by  .\n          To find   we'll parameterize   using\n           .\n          Then\n           .\n          Likewise,\n           .\n          So\n           .\n         \n      An easier way to find a normal vector in the last example would be to use our knowledge from  .\n      However, the following approach is more general.\n      If   is described by the equation  , then   is guaranteed to be normal to  .\n      This is especially useful if   can be described by an equation of the form  , as above.\n      To see how, note that\n       .\n     Circulation Along a Paraboloid \n          Let   and let   denote the paraboloid   that lies inside the cylinder  , oriented upwards.\n          Use Stokes' Theorem to set up the surface integral equal to  .\n         \n      SUGGESTED PROBLEMS: 1, 3, 5, 7\n     "
 },
 {
-  "id": "p-1765",
+  "id": "p-1777",
   "level": "2",
-  "url": "section-stokes-theorem.html#p-1765",
+  "url": "section-stokes-theorem.html#p-1777",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7407,9 +7425,9 @@ var ptx_lunr_docs = [
   "body": "The Divergence Theorem divergence theorem Divergence Theorem \n          Let   be a simple solid region and let   be the boundary surface of   oriented outwards.\n          Let   denote a continuously differentiable vector field on  .\n          Then\n           .\n         Flux across a spherical cap \n          Let   denote the top half of the sphere of radius   centered at the origin.\n          Let  .\n          Determine if   flows out of or into  .\n         \n          We need to calculate the flux integral  , which is made easier using  .\n          If we let   denote the interior of this region, we get\n           \n         Flux across a cube \n          Let   denote the surface of the unit cube with vertices at   and   and let  .\n          Find   where   is the  inward  unit normal to  .\n         \n      SUGGESTED PROBLEMS: 1, 3, 5, 19.\n     "
 },
 {
-  "id": "p-1772",
+  "id": "p-1784",
   "level": "2",
-  "url": "section-the-divergence-theorem.html#p-1772",
+  "url": "section-the-divergence-theorem.html#p-1784",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",

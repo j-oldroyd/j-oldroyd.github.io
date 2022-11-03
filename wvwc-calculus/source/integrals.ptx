@@ -14,8 +14,40 @@
     <title>Integrals</title>
     <introduction>
         <p>
-            If a function is continuous, then we can always find its antiderivative via integration.
-            The goal of this chapter is to introduce and refine this concept.
+            By now we have a pretty good idea of how to calculate derivatives and what they represent.
+            In particular, we've seen that <m>f^{\prime}(x)</m> tells us how quickly <m>f(x)</m> is changing at a given point.
+            However, we don't yet have a good intuition for the meaning of the <em>antiderivative</em> of a function aside from a rough interpretation as the inverse of differentiation.
+        </p>
+        <p>
+            To help develop some intuition for what the antiderivative represents, consider a continuous function <m>f(x)</m> defined over some interval <m>[a,b]</m>.
+            Now let <m>A(t)</m> denote the area between <m>f(x)</m> from <m>x = a</m> to <m>x = t</m>, where <m>a\leq t\leq b</m>.
+            Then it appears that
+            <me>A(x+h) - A(x)\approx hf(x)</me>
+            for small values of <m>h</m>.
+            If we let <m>h\to 0</m>, then the above equation suggests that <m>A^{\prime}(x) = f(x)</m>.
+            In other words, <em>the area function is an antiderivative of <m>f(x)</m></em>!
+        </p>
+        <p>
+            Going forward this will be our primary geometric interpretation of an antiderivative, but we need to address two issues to make the above intuition legitimate:
+            <ul>
+                <li>
+                    <p>
+                        What exactly <em>is</em> the area under a general curve <m>y = f(x)</m>?
+                        We can find the areas of simple shapes such as rectangles, triangles and circles without issue, but we haven't even defined what the area of a more complicated region should be.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        What is the precise relationship between antiderivatives and areas?
+                        Our intuition above suggests that antiderivatives should be related to areas, but as we saw in <xref ref="theorem-general-antiderivatives" text="type-global" /> a function can have infinitely many antiderivatives.
+                        Which one represents the area under the curve?
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            The first issue will be addressed in <xref ref="section-the-definite-integral" text="type-global" />, where we use the concept of a <xref ref="definition-riemann-sum" text="custom">Riemann sum</xref> to give a precise meaning to the notion of area under a curve, which we identify as a <xref ref="definition-the-definite-integral" text="custom">definite integral</xref>.
+            The second issue will be addressed in <xref ref="section-the-fundamental-theorem-of-calculus" text="type-global" /> and forms the content of <xref ref="theorem-fundamental-theorem-of-calculus" text="title" />.
         </p>
     </introduction>
     <section xml:id="section-areas-under-curves">
@@ -28,7 +60,7 @@
             For example, using rectangles.
         </p>
         <p>
-            A simple way to divide the graph of <m>y=x^{3}</m> using rectangles is to pick several equally spaced points in the interval <m>[0,1]</m>, say 
+            A simple way to divide the graph of <m>y=x^{3}</m> using rectangles is to pick several equally spaced points in the interval <m>[0,1]</m>, say
             <me>x_{0} = 1, x_{1} = \frac{1}{3}, x_{2} = \frac{2}{3}, \quad\text{and}\quad x_{3} = 1,</me>
             and then draw rectangles using these points to determine the base of each rectangle and the height of the graph above the points to determine the height of each rectangle.
             In particular, we will have three rectangles; the first with base <m>[0,\frac{1}{3}]</m>, the second with base <m>[\frac{1}{3},\frac{2}{3}]</m> and the third with base <m>[\frac{2}{3},1]</m>.
@@ -39,13 +71,13 @@
         <p>
             Now, if we add up the areas of these rectangles we get an approximation for the area under the graph.
             Call these areas <m>A_{1},A_{2},A_{3}</m>.
-            So the area under the graph of <m>y = x^{3}</m> from <m>x=0</m> to <m>x=1</m> is about 
+            So the area under the graph of <m>y = x^{3}</m> from <m>x=0</m> to <m>x=1</m> is about
             <me>A_{1} + A_{2} + A_{3} = \frac{4}{9}.</me>
         </p>
         <p>
             There's nothing stopping us from going further here.
             For example, we pick <m>n</m> rectangles, each with base length <m>\frac{1}{n}</m> and heights determined by right endpoints as above, then the area <m>R_{n}</m> of all of the rectangles will be an approximation (in fact, an overestimate) of the area of <m>y = x^{3}</m>.
-            The bases of these rectangles are given by 
+            The bases of these rectangles are given by
             <me>[0,\frac{1}{n}], [\frac{1}{n},\frac{2}{n}],\ldots,[\frac{n-1}{n},\frac{n}{n}].</me>
             So the areas of these rectangles are
             <me>\frac{1}{n}\left(\frac{1}{n}\right)^{3}, \frac{1}{n}\left(\frac{2}{n}\right)^{3},\ldots,\frac{1}{n}\left(\frac{n-1}{n}\right)^{3}, \frac{1}{n}\left(\frac{n}{n}\right)^{3}.</me>
@@ -59,7 +91,7 @@
         </p>
         <p>
             Actually finding this limit requires some trickery.
-            It's not at all obvious, but we can write 
+            It's not at all obvious, but we can write
             <me>1^{3} + 2^{3} + \cdots + n^{3} = \left[\frac{n(n+1)}{2}\right]^{2}.</me>
             Hence
             <md>
@@ -99,7 +131,7 @@
             </statement>
         </definition>
         <p>
-            Although the previous definition used right endpoints to find the height of each rectangle, this doesn't have to be the case. 
+            Although the previous definition used right endpoints to find the height of each rectangle, this doesn't have to be the case.
             We can use left endpoints, midpoints or any other <term>sample points</term> <m>x_{1}^{*}, x_{2}^{*},\ldots,x_{n}^{*}</m>, where each <m>x_{i}^{*}</m> is a point in the interval <m>[x_{i-1},x_{i}].</m>
         </p>
         <p>
@@ -257,9 +289,9 @@
                 <p>
                     Now we can approximate the work done by <m>F</m> as the particle moves through the subinterval <m>[x_{i-1},x_{i}]</m>.
                     The work done should be about equal to <me>F(x_{i}^{*})\Delta x</me>.
-                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by 
+                    Now, if we add up these estimates for each subinterval, we see that the total work done should be approximated by
                     <me>\sum_{i=1}^{n}F(x_{i}^{*})\Delta x,</me>
-                    which suggests that we should define the exact work done to be 
+                    which suggests that we should define the exact work done to be
                     <me>W = \lim_{n\to\infty}\sum_{i=1}^{n}F(x_{i}^{*})\Delta x.</me>
                 </p>
             </solution>
@@ -273,18 +305,35 @@
         <title>The Definite Integral</title>
         <p>
             The process used in <xref ref="section-areas-under-curves" text="type-global" /> can be generalized quite a bit.
-            Start with a function <m>f(x)</m> defined on some interval <m>[a,b]</m>, and divide <m>[a,b]</m> into <m>n</m> subintervals 
+            Start with a function <m>f(x)</m> defined on some interval <m>[a,b]</m>, and divide <m>[a,b]</m> into <m>n</m> subintervals
             <me>[x_{0},x_{1}], [x_{1},x_{2}],\ldots,[x_{n-1},x_{n}]</me>
-            where <m>x_{0} = a, x_{n} = b</m> and each subinterval has length <m>\Delta x_{i}</m> (i.e. <me>\Delta x_{i} = x_{i} - x_{i-1}</me>).
+            where <m>x_{0} = a, x_{n} = b</m> and each subinterval has length <m>\Delta x_{k}</m> (i.e. <m>\Delta x_{k} = x_{k} - x_{k-1}</m>).
             This is known as a <term>partition</term> of <m>[a,b]</m>.
             Then we can choose sample points <m>x_{1}^{*}</m> from <m>[x_{0},x_{1}]</m>, <m>x_{2}^{*}</m> from <m>[x_{1},x_{2}]</m>, all the way up to <m>x_{n}^{*}</m> from <m>[x_{n-1},x_{n}]</m>.
-            Note that the only restriction we're placing on the sample point <m>x_{i}^{*}</m> is that is must come from the interval <m>[x_{i-1},x_{i}]</m>, but it may be <em>any</em> point in this interval.
+            Note that the only restriction we're placing on the sample point <m>x_{k}^{*}</m> is that is must come from the interval <m>[x_{k-1},x_{k}]</m>, but it may be <em>any</em> point in this interval.
         </p>
         <p>
-            Using all of this, we can define the <term>Riemann sum</term> associated to <m>f</m> on this partition:
-            <me>\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i}.</me>
+            The partition and sample points selected are now used to determine a sum that represents an approximation to the area under the curve:
+            <me>\sum_{i=1}^{n}f(x_{k}^{*})\Delta x_{k}.</me>
+            Geometrically, this sum represents the areas of multiple rectangles added together.
+            Since these sums are essential for what follows, we will give them a name.
+        </p>
+        <definition xml:id="definition-riemann-sum">
+            <title>Riemann Sum</title>
+            <idx>Riemann sum</idx>
+            <statement>
+                <p>
+                    Let <m>a,b\in\RR</m> with <m>a \lt b</m> and let <m>f(x)</m> be a function defined on the interval <m>[a,b]</m>.
+                    Let <m>P = \{x_k\}_{k=0}^{n}</m> be a partition of <m>[a,b]</m> and choose corresponding sample points <m>x_{k}^{*}\in[x_{k-1},x_{k}]</m> for <m>1\leq k\leq n</m>.
+                    Then a <term>Riemann sum</term> is a sum of the form
+                    <me>\sum_{k=1}^{n}f(x_{k}^{*})\Delta x_{k}</me>
+                    where <m>\Delta x_k = x_{k} - x_{k-1}</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
             Although this can be more complicated than our definition in <xref ref="definition-area" text="type-global" />, it still approximates the area under <m>f(x)</m> from <m>x=a</m> to <m>x=b</m>.
-            And as each subinterval in this partition gets smaller (i.e. as <m>\Delta x_{i}\to0</m> or equivalently as <m>n\to\infty</m>), then this approximation should become exact, at least if <m>f(x)</m> is nice enough.
+            And as each subinterval in this partition gets smaller (i.e. as <m>\Delta x_{k}\to0</m> or equivalently as <m>n\to\infty</m>), then this approximation should become exact, at least if <m>f(x)</m> is <q>nice enough</q> (see <xref ref="theorem-integrability-of-piecewise-continuous-functions" text="type-global" /> for a more precise statement).
         </p>
         <definition xml:id="definition-the-definite-integral">
             <title>The Definite Integral</title>
@@ -292,7 +341,7 @@
                 <p>
                     Let <m>f(x)</m> be a function defined on <m>[a,b]</m>.
                     Then the <term>definite integral of <m>f(x)</m> from <m>a</m> to <m>b</m></term> is the number
-                    <me>\int_{a}^{b}f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i},</me>
+                    <me>\int_{a}^{b}f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^{n}f(x_{k}^{*})\Delta x_{k},</me>
                     provided that the limit exists (and that <m>\Delta x_{i}\to0</m>).
                     If this limit exists, we say that <m>f(x)</m> is <term>integrable</term> on <m>[a,b]</m>.
                 </p>
@@ -308,11 +357,28 @@
             <title>Integrability of Piecewise Continuous Functions</title>
             <statement>
                 <p>
-                    Let <m>f(x)</m> be a piecewise function on <m>[a,b]</m> with finitely many jump discontinuities.
+                    Let <m>f(x)</m> be a bounded, piecewise continuous function on <m>[a,b]</m> with finitely many jump discontinuities.
                     Then <m>f</m> is integrable on <m>[a,b]</m>.
+                    In particular, continuous functions are always integrable on bounded, closed intervals.
                 </p>
             </statement>
         </theorem>
+        <p>
+            All of the functions that we will work with will be piecewise continuous, and many important quantities in mathematics and its applications can be represented by bounded, piecewise continuous functions.
+            Definite integrals of such quantities therefore exist and are often used as a measure of <q>accumulation.</q>
+            In particular, <xref ref="example-finding-work-done" text="type-global" /> can be generalized to provide the following definition of work done by a force.
+        </p>
+        <definition xml:id="definition-work">
+            <title>Work</title>
+            <idx>work</idx>
+            <statement>
+                <p>
+                    Let <m>F(x)</m> denote the force acting on a particle over <m>[a,b]</m>.
+                    The <term>work</term> done by the force <m>F(x)</m> on the particle as it moves from <m>x = a</m> to <m>x = b</m> is defined to be
+                    <me>W = \int_{a}^{b}F(x)\dd{x}</me>.
+                </p>
+            </statement>
+        </definition>
         <example xml:id="example-expressing-work-done">
             <title>Expressing work done</title>
             <statement>
@@ -323,19 +389,18 @@
             </statement>
             <solution>
                 <p>
-                    Using <xref ref="example-finding-work-done" text="type-global" />, we see that the work done should be
-                    <me>W = \lim_{n\to\infty}\sum_{i=1}^{n}3x_{i}^{*}\cdot\frac{4}{n}</me>
-                    which we can rewrite as 
+                    Using <xref ref="definition-work" text="type-global" />, we see that the work done should be
                     <me>W = \int_{-1}^{3}3x\,dx.</me>
-                    So work is a definite integral.
-                </p>
-                <p>
-                    In this case, we can also find the work done.
                     Since the definite integral represents area, and the definite integral of <m>3x</m> exists (since this is continuous), then we can say that
                     <me>W = \int_{-1}^{3}3x\,dx = \frac{1}{2}(1)(-3) + \frac{1}{2}(3)(9) = 12.</me>
                 </p>
             </solution>
         </example>
+        <p>
+            In <xref ref="example-expressing-work-done" text="type-global" /> we used the connection between definite integrals and areas to find the work done.
+            For the moment, this is our only method for calculating definite integrals.
+            We will develop other methods starting in <xref ref="section-the-fundamental-theorem-of-calculus" text="type-global" />, but the connection between definite integrals and areas is an important one that we will make use of frequently.
+        </p>
         <example xml:id="example-a-radical-integral">
             <title>A radical integral</title>
             <statement>
@@ -375,11 +440,11 @@
             </statement>
         </theorem>
         <p>
-            Computing integrals in practice often involves setting up and approximating Riemann sums, i.e. sums of the form <m>\sum_{i=1}^{n}f(x_{i}^{*})\Delta x_{i}</m>.
-            These sums depend on how we choose the sample points <m>x_{i}^{*}</m> from each interval <m>[x_{i-1},x_{i}]</m>.
-            We've mostly worked with <m>x_{i}^{*} = x_{i}</m>, or right endpoints.
-            We could also choose <m>x_{i}^{*} = x_{i-1}</m>, using left endpoints.
-            However, it's often more accurate to use <em>midpoints</em>: <m>x_{i}^{*} = \frac{x_{i-1}+x_{i}}{2}</m>.
+            Computing integrals in practice often involves setting up and approximating <xref ref="definition-riemann-sum" text="custom">Riemann sums</xref>.
+            These sums depend on how we choose the sample points <m>x_{k}^{*}</m> from each interval <m>[x_{k-1},x_{k}]</m>.
+            We've mostly worked with <m>x_{k}^{*} = x_{k}</m>, or right endpoints.
+            We could also choose <m>x_{k}^{*} = x_{k-1}</m>, using left endpoints.
+            However, it's often more accurate to use <em>midpoints</em>: <m>x_{k}^{*} = \frac{x_{k-1}+x_{k}}{2}</m>.
             The reason for this is that if we choose midpoints of intervals as our sample points, these tend to be less affected than either endpoint if the function is increasing or decreasing.
             In particular, we have the <term>midpoint rule</term>.
         </p>
@@ -389,16 +454,31 @@
                 <p>
                     Let <m>f(x)</m> be a continuous function.
                     Then
-                    <me>\int_{a}^{b}f(x)\,dx \approx M_{n} = \sum_{i=1}^{n}f(x_{i}^{*})\Delta x</me>
+                    <me>\int_{a}^{b}f(x)\,dx \approx M_{n} = \sum_{k=1}^{n}f(x_{k}^{*})\Delta x</me>
                     where
                     <md>
-                        <mrow>x_{i}^{*} &amp; = \frac{x_{i-1}+x_{i}}{2} </mrow>
-                        <mrow>\Delta x &amp; = \frac{b-a}{n}. </mrow>
-                    </md>
-                    Note that this rule calls for evenly dividing <m>[a,b]</m> into a partition <m>[x_{i-1},x_{i}]</m> where each subinterval has equal length <m>\Delta x</m>.
+                        <mrow>x_{k}^{*} &amp; = \frac{x_{k-1}+x_{k}}{2} </mrow>
+                        <mrow>\Delta x &amp; = \frac{b-a}{n} </mrow>
+                    </md>.
+                    Note that this rule calls for evenly dividing <m>[a,b]</m> into a partition <m>[x_{k-1},x_{k}]</m> where each subinterval has equal length <m>\Delta x</m>.
                 </p>
             </statement>
         </definition>
+        <p>
+            Replacing the midpoints in <xref ref="definition-midpoint-rule" text="type-global" /> with corresponding left endpoints (respectively, right endpoints) gives the <term>left endpoint rule</term> (respectively, the <term>right endpoint rule</term>).
+            Together with the midpoint rule, these approximations are
+            <md>
+                <mrow>L_n \amp = \sum_{k=1}^{n} f(x_{k-1})\Delta x</mrow>
+                <mrow>M_n \amp = \sum_{k=1}^{n}f\left(\frac{x_{k-1} + x_{k}}{2})\Delta x </mrow>
+                <mrow>R_n \amp = \sum_{k=1}^{n} f(x_{k})\Delta x </mrow>
+            </md>.
+            <aside>
+                <p>
+                    Careful!
+                    In general, <m>M_n \neq \frac{L_n + R_n}{2}</m>.
+                </p>
+            </aside>
+        </p>
         <example xml:id="example-approximating-an-integral">
             <title>Approximating an integral</title>
             <statement>
@@ -410,7 +490,7 @@
                 <p>
                     For this integral, we have
                     <md>
-                        <mrow>\Delta n &amp; = \frac{3-1}{4} = \frac{1}{2} </mrow>
+                        <mrow>\Delta x &amp; = \frac{3-1}{4} = \frac{1}{2} </mrow>
                         <mrow>x_{0} &amp; = 1 </mrow>
                         <mrow>x_{1} &amp; = \frac{3}{2} </mrow>
                         <mrow>x_{2} &amp; = 2 </mrow>
@@ -432,6 +512,10 @@
                 </p>
             </solution>
         </example>
+        <p>
+            The geometric interpretation of definite integrals as areas also suggests the following formulas.
+            These can be useful for simplifying and estimating certain definite integrals.
+        </p>
         <theorem xml:id="theorem-more-properties-of-the-definite-integral">
             <title>More Properties of the Definite Integral</title>
             <statement>
