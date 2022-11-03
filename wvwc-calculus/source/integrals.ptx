@@ -20,7 +20,50 @@
         </p>
         <p>
             To help develop some intuition for what the antiderivative represents, consider a continuous function <m>f(x)</m> defined over some interval <m>[a,b]</m>.
-            Now let <m>A(t)</m> denote the area between <m>f(x)</m> from <m>x = a</m> to <m>x = t</m>, where <m>a\leq t\leq b</m>.
+            Now let <m>A(t)</m> denote the area between <m>f(x)</m> and the <m>x</m>-axis from <m>x = a</m> to <m>x = t</m>, where <m>a\leq t\leq b</m>:
+        </p>
+        <figure xml:id="figure-area-function-graph">
+            <caption>A graph of <m>f(x)</m> and its corresponding area function.</caption>
+            <image xml:id="image-area-function-graph" width="50%">
+                <description>An image of a function and its corresponding area function on a closed interval.</description>
+                <latex-image>
+                    \begin{tikzpicture}
+                        \begin{axis}[%
+                            myaxis,
+                            xmin = 0,
+                            xmax = 5,
+                            ymin = 0,
+                            ymax = 7,
+                            xtick = {1, 4},
+                            xticklabels = {$a$, $b$},
+                            extra x tick style = {grid = none},
+                            extra x ticks = {3.1},
+                            extra x tick labels = {$t$},
+                            yticklabels = \empty,
+                            ]
+                            \addplot[myplot, -, domain=1:4, name path = f]{x + .125*x^2} node[pos=0.5, above, sloped] {$f(x)$};
+
+                            \path[name path=axis] (axis cs:1,0) -- (axis cs:4,0);
+
+                            % the below is adapted from https://tex.stackexchange.com/questions/164991/pgfplots-how-to-fill-bounded-area-under-a-curve-using-addplot-and-fill
+                            \addplot[%
+                                    thick,
+                                    color=blue,
+                                    fill=blue, 
+                                    fill opacity=0.05
+                                ]
+                                fill between[
+                                    of=f and axis,
+                                    soft clip={domain=1:3.1},
+                                ];
+
+                            \node at (axis cs:2.5, 1.5) {$A(t)$};
+                        \end{axis}
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
             Then it appears that
             <me>A(x+h) - A(x)\approx hf(x)</me>
             for small values of <m>h</m>.
