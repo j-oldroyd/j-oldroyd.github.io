@@ -25,6 +25,7 @@
       \newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
       \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
       \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+      \newcommand{\dd}[2][]{\, d^{#1} #2\ }
       \newcommand{\abs}[1]{\left| #1 \right|}
       \newcommand{\norm}[1]{\left\| #1 \right\|}
       \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
@@ -42,16 +43,30 @@
       \newcommand{\dr}{\cdot d\vb{r}}
       \newcommand{\dn}{\cdot\vb{n}\,ds}
     </macros>
-    <latex-preamble>
-      \usepackage{physics}
-    </latex-preamble>
     <latex-image-preamble>
       <!-- \usepackage{siunitx} -->
       \usepackage{pgfplots}
       \usepackage{tikz-qtree}
       \pgfplotsset{compat=newest}
-      \usetikzlibrary{decorations.markings,decorations.pathreplacing,arrows,calc,patterns,shapes.geometric, positioning}
+      \usetikzlibrary{%
+        angles,
+        arrows,
+        backgrounds,
+        calc,
+        decorations.pathmorphing,
+        decorations.markings,
+        decorations.pathreplacing,
+        graphs,
+        graphs.standard,
+        intersections,
+        patterns,
+        positioning,
+        quotes,
+        shapes.geometric,
+      }
       \usepgfplotslibrary{fillbetween}
+
+      \definecolor{darkgreen}{rgb}{0.125,0.5,0.169}
 
       % Functions for point mass examples in 7.6
       \pgfmathdeclarefunction{curvei}{1}{%
@@ -61,43 +76,87 @@
       \pgfmathparse{-0.03*(#1)*(#1-6)*(#1-18)}%
       }
 
+      % my axis/plot settings; partially inspired by ORCCA calc manual
+      \pgfplotsset{
+              myplot/.style={% primary style for curves
+                color=blue,
+                mark=none,
+                line width=1pt,
+                &lt;-&gt;,
+                solid,
+                samples=100
+                },
+              myaxis/.style={% primary style for axes
+                view={120}{30},
+                axis lines=center,
+                axis line style={shorten &gt;=-10pt, shorten &lt;=-10pt, &lt;-&gt;},
+                axis equal image,
+                xlabel={$x$}, xlabel style={at=(current axis.right of origin), anchor=west, xshift=10pt},
+                ylabel={$y$}, ylabel style={at=(current axis.above origin), anchor=south, yshift=10pt},
+                xmin = -7, xmax = 7,
+                ymin = -7, ymax = 7,
+                grid = both,
+                grid style={line width=.1pt, draw=gray!30},
+                major grid style={line width=.2pt,draw=gray!60},
+                % grid = minor,
+                % grid=major,
+                % grid style = {solid,gray!40},
+                % minor xtick = {-7,-6,...,7},
+                % minor ytick = {-7,-6,...,7},
+                xtick={\pgfkeysvalueof{/pgfplots/xmin},...,\pgfkeysvalueof{/pgfplots/xmax}},
+                ytick={\pgfkeysvalueof{/pgfplots/ymin},...,\pgfkeysvalueof{/pgfplots/ymax}},
+                minor tick num=1,
+                tick label style={font=\footnotesize},
+                scale only axis,  % only scale axes when specifying height/width
+                legend cell align=left,
+                vector/.style={-stealth,blue,very thick}
+                , 
+                vector guide/.style={dashed,red,thick}
+                },
+              numberline/.style={% style for drawing numberline
+                axis x line = center,
+                axis y line = none,
+                axis line style={shorten &gt;=-10pt, shorten &lt;=-10pt, &lt;-&gt;},
+                xlabel={$x$}, xlabel style={at=(current axis.right of origin), anchor=west, xshift=10pt},
+                ymin=0,
+                ymax=0},
+              mypolarplot/.style={%PGFPlots polaraxis settings
+                clip=false, % needed for double line (last \addplot command)
+                domain=0:360, % plot full cycle
+                samples=180, % number of samples; can be locally adjusted
+                grid=both, % display major and minor grids
+                major grid style={gray!70}, 
+                minor grid style={gray!20}, 
+                minor x tick num=3, % 3 minor x ticks between majors
+                minor y tick num=1, % 1 minor y tick between majors
+                xtick={0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330},
+                xticklabels={%
+                $0$,
+                $\frac{\pi}{6}$,
+                $\frac{ \pi}{4}$,
+                $\frac{\pi}{3}$,
+                $\frac{ \pi}{2}$,
+                $\frac{2\pi}{3}$,
+                $\frac{3\pi}{4}$,
+                $\frac{5\pi}{6}$,
+                $\pi$,
+                $\frac{7\pi}{6}$,
+                $\frac{5\pi}{4}$,
+                $\frac{4\pi}{3}$,
+                $\frac{3\pi}{2}$,
+                $\frac{5\pi}{3}$,
+                $\frac{7\pi}{4}$,
+                $\frac{11\pi}{6}$
+                },
+                yticklabel style={anchor=north}, % move label position
+                },
+            }
 
-      % These are the TikZ-PGFPlots settings I need.
-      % Partially inspired by ORCCA Calc 1 lab manual.
-      \pgfplotsset{myplot/.style={color=blue,mark=none,line width=1pt,&lt;-&gt;,solid,samples=100}} % primary style for curves
-      \pgfplotsset{mystyle/.style={%
-      view={120}{30},
-      axis lines=center,
-      axis line style={&lt;-&gt;, shorten >=-3mm},
-      xlabel={$x$}, xlabel style={at=(current axis.right of origin), anchor=west},
-      ylabel={$y$}, ylabel style={at=(current axis.above origin), anchor=south},
-      xmin = -7, xmax = 7,
-      ymin = -7, ymax = 7,
-      grid = both,
-      grid = minor,
-      grid style = {solid,gray!40},
-      minor xtick = {-7,-6,...,7},
-      minor ytick = {-7,-6,...,7},
-      tick label style={font=\footnotesize},
-      scale only axis,  % only scale axes when specifying height/width
-      legend cell align=left,
-      vector/.style={-stealth,blue,very thick}
-      , 
-      vector guide/.style={dashed,red,thick}
-      }}
-
-      \pgfplotsset{numberline/.style={%
-      axis x line = center,
-      axis y line = none,
-      xlabel = {$x$},
-      ymin=0,
-      ymax=0}}
-
-      \tikzset{
-      jumpdot/.style={mark=*,solid,only marks},
-      excl/.append style={jumpdot,fill=white},
-      incl/.append style={jumpdot,fill=black},
-      }
+            \tikzset{%
+              jumpdot/.style={mark=*,solid},
+              excl/.append style={jumpdot,fill=white},
+              incl/.append style={jumpdot,fill=black},
+            }
     </latex-image-preamble>
   </docinfo>
 
