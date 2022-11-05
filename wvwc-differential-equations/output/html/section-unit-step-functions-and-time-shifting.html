@@ -8,11 +8,13 @@
 <html lang="en-US">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Unit Step Functions and Time Shifting</title>
+<title>WVWC-DE Unit Step Functions and Time Shifting</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
   tex: {
@@ -82,20 +84,37 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-\renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\dd}[2][]{\, d^{#1} #2\ }
-\newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
-\newcommand{\Int}[2]{\int_{#1}^{#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -103,9 +122,9 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href=""></a><div class="title-container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline"></p>
+<p class="byline">Jesse Oldroyd</p>
 </div>
 <div class="searchbox"><div class="searchwidget">
 <input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
@@ -142,6 +161,13 @@ true);
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
 <li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
 <li class="link">
 <a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
@@ -214,13 +240,13 @@ true);
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-unit-step-functions-and-time-shifting"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.3</span> <span class="title">Unit Step Functions and Time Shifting</span>
 </h2>
-<p id="p-558">The <dfn class="terminology">unit step function</dfn> or <dfn class="terminology">Heaviside function</dfn> is the function <span class="process-math">\(u(t)\)</span> defined by</p>
+<p id="p-563">The <dfn class="terminology">unit step function</dfn> or <dfn class="terminology">Heaviside function</dfn> is the function <span class="process-math">\(u(t)\)</span> defined by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 u(t) = \begin{cases}
@@ -239,7 +265,7 @@ u(t-a) = \begin{cases}
 \end{equation*}
 </div>
 <p class="continuation">for any <span class="process-math">\(a\text{.}\)</span></p>
-<p id="p-559">Recall that <a href="" class="xref" data-knowl="./knowl/theorem--s--shifting.html" title="Theorem 6.1.11: s-shifting">Theorem 6.1.11</a> tells us how to deal with translation in the frequency domain:</p>
+<p id="p-564">Recall that <a href="" class="xref" data-knowl="./knowl/theorem--s--shifting.html" title="Theorem 6.1.11: s-shifting">Theorem 6.1.11</a> tells us how to deal with translation in the frequency domain:</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem--s--shifting.html">
 \begin{equation*}
 \Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t).
@@ -249,7 +275,7 @@ u(t-a) = \begin{cases}
 <article class="theorem theorem-like" id="theorem-time-shifting-of-laplace-transforms"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Time Shifting of Laplace Transforms.</span>
 </h3>
-<p id="p-560">Let <span class="process-math">\(f(t)\)</span> denote a piecewise continuous function with Laplace transform <span class="process-math">\(F(s)\text{.}\)</span> Let <span class="process-math">\(a\geq0\text{.}\)</span> Then <span class="process-math">\(\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)\text{,}\)</span> or equivalently <span class="process-math">\(\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)\text{.}\)</span></p></article><article class="hiddenproof" id="proof-2"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-2"><h3 class="heading"><span class="type">Proof<span class="period">.</span></span></h3></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-2"><article class="hiddenproof"><p id="p-561">To compute this we need to rely on the definition of the Laplace transform:</p>
+<p id="p-565">Let <span class="process-math">\(f(t)\)</span> denote a piecewise continuous function with Laplace transform <span class="process-math">\(F(s)\text{.}\)</span> Let <span class="process-math">\(a\geq0\text{.}\)</span> Then <span class="process-math">\(\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)\text{,}\)</span> or equivalently <span class="process-math">\(\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)\text{.}\)</span></p></article><article class="hiddenproof" id="proof-2"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-2"><h3 class="heading"><span class="type">Proof<span class="period">.</span></span></h3></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-2"><article class="hiddenproof"><p id="p-566">To compute this we need to rely on the definition of the Laplace transform:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-81">
 \begin{align*}
 \Laplace{u(t-a)f(t-a)} &amp;= \int_{0}^{\infty}u(t-a)f(t-a)e^{-st}\,dt\\
@@ -259,14 +285,14 @@ u(t-a) = \begin{cases}
 &amp;= e^{-as}F(s)\text{.}
 \end{align*}
 </div></article></div>
-<p id="p-562">The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in <a href="" class="xref" data-knowl="./knowl/example-motivating-laplace.html" title="Example 6.1.1: Motivating the Laplace Transform">Example 6.1.1</a>.</p>
+<p id="p-567">The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in <a href="" class="xref" data-knowl="./knowl/example-motivating-laplace.html" title="Example 6.1.1: Motivating the Laplace Transform">Example 6.1.1</a>.</p>
 <article class="example example-like" id="example-ivp-with-discontinuous-forcing-function"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">IVP with Discontinuous Forcing Function.</span>
 </h3>
-<p id="p-563">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time <span class="process-math">\(t=0\text{,}\)</span> a machine is turned on and applies an external force of <span class="process-math">\(\cos2t\)</span> to the mass. At time <span class="process-math">\(t=2\pi\)</span> the machine is turned off and the external force disappears. Let <span class="process-math">\(x(t)\)</span> be the displacement of the mass at time <span class="process-math">\(t\text{.}\)</span> What is an ODE that models the motion of the mass?</p>
+<p id="p-568">A mass of <span class="quantity">1 </span> is attached to a spring that is held <span class="quantity">1 m</span> to the right of its equilibrium position by a force of <span class="quantity">4 N</span>. Beginning at time <span class="process-math">\(t=0\text{,}\)</span> a machine is turned on and applies an external force of <span class="process-math">\(\cos2t\)</span> to the mass. At time <span class="process-math">\(t=2\pi\)</span> the machine is turned off and the external force disappears. Let <span class="process-math">\(x(t)\)</span> be the displacement of the mass at time <span class="process-math">\(t\text{.}\)</span> What is an ODE that models the motion of the mass?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-88" id="solution-88"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-88"><div class="solution solution-like">
-<p id="p-564">By Hooke's Law and Newton's Second Law, we have</p>
+<p id="p-569">By Hooke's Law and Newton's Second Law, we have</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 mx''+kx = F_{E}(t)
@@ -300,7 +326,7 @@ F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t.
 x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0.
 \end{equation*}
 </div>
-<p id="p-565">If we take Laplace transforms, this becomes</p>
+<p id="p-570">If we take Laplace transforms, this becomes</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},
@@ -333,7 +359,7 @@ X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s
 X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.
 \end{equation*}
 </div>
-<p id="p-566">So the solution of the IVP is</p>
+<p id="p-571">So the solution of the IVP is</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-83">
 \begin{align*}
 x(t) &amp;= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens\left(1-e^{-2\pi s}}\right)\\
@@ -341,7 +367,7 @@ x(t) &amp;= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-567">Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <a href="" class="xref" data-knowl="./knowl/example-ivp-with-discontinuous-forcing-function.html" title="Example 6.3.2: IVP with Discontinuous Forcing Function">Example 6.3.2</a> are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. <em class="alert">Be careful to place matching brackets and parentheses as appropriate</em> when using the <code class="code-inline tex2jax_ignore">piecewise</code> command in Sage to construct a piecewise function.</p>
+</div></article><p id="p-572">Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <a href="" class="xref" data-knowl="./knowl/example-ivp-with-discontinuous-forcing-function.html" title="Example 6.3.2: IVP with Discontinuous Forcing Function">Example 6.3.2</a> are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. <em class="alert">Be careful to place matching brackets and parentheses as appropriate</em> when using the <code class="code-inline tex2jax_ignore">piecewise</code> command in Sage to construct a piecewise function.</p>
 <pre class="ptx-sagecell sagecell-sage" id="sage-14"><script type="text/x-sage"># declare meaningful variables for Laplace transform
 var('s t')
 

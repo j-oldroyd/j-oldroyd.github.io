@@ -8,11 +8,13 @@
 <html lang="en-US">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Forced Oscillations and Resonance</title>
+<title>WVWC-DE Forced Oscillations and Resonance</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
   tex: {
@@ -82,20 +84,37 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-\renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\dd}[2][]{\, d^{#1} #2\ }
-\newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
-\newcommand{\Int}[2]{\int_{#1}^{#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -103,9 +122,9 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href=""></a><div class="title-container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline"></p>
+<p class="byline">Jesse Oldroyd</p>
 </div>
 <div class="searchbox"><div class="searchwidget">
 <input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
@@ -142,6 +161,13 @@ true);
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
 <li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
 <li class="link">
 <a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
@@ -214,17 +240,17 @@ true);
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-forced-oscillations-and-resonance"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">2.5</span> <span class="title">Forced Oscillations and Resonance</span>
 </h2>
-<section class="introduction" id="introduction-11"><p id="p-246">In this section we will develop models for certain systems under the influence of a periodic, external force. The presence of an external force leads to non-homogeneous models, and we will use the techniques we developed in <a href="section-solutions-of-nonhomogeneous-equations.html" class="internal" title="Section 2.4: Solutions of Non-homogeneous Equations">Section 2.4</a> to deal with these systems.</p></section><aside class="aside aside-like" id="aside-12"><p id="p-247">This section corresponds to Section 2.8 of the text.</p></aside><section class="subsection" id="subsection-undamped-systems"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-11"><p id="p-251">In this section we will develop models for certain systems under the influence of a periodic, external force. The presence of an external force leads to non-homogeneous models, and we will use the techniques we developed in <a href="section-solutions-of-nonhomogeneous-equations.html" class="internal" title="Section 2.4: Solutions of Non-homogeneous Equations">Section 2.4</a> to deal with these systems.</p></section><aside class="aside aside-like" id="aside-12"><p id="p-252">This section corresponds to Section 2.8 of the text.</p></aside><section class="subsection" id="subsection-undamped-systems"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Undamped Systems</span>
 </h3>
-<p id="p-248">Consider the spring-mass system set up as in <a href="" class="xref" data-knowl="./knowl/figure-spring-mass-system.html" title="Figure 2.3.1">Figure 2.3.1</a>. Then we know that the displacement <span class="process-math">\(x(t)\)</span> satisfies <span class="process-math">\(x'' + \omega_{0}^{2}x = 0\text{,}\)</span> where <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span></p>
-<p id="p-249">Now suppose that an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\)</span> also acts on the mass. Then the ODE that models the displacement <span class="process-math">\(x(t)\)</span> is</p>
+<p id="p-253">Consider the spring-mass system set up as in <a href="" class="xref" data-knowl="./knowl/figure-spring-mass-system.html" title="Figure 2.3.1">Figure 2.3.1</a>. Then we know that the displacement <span class="process-math">\(x(t)\)</span> satisfies <span class="process-math">\(x'' + \omega_{0}^{2}x = 0\text{,}\)</span> where <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span></p>
+<p id="p-254">Now suppose that an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\)</span> also acts on the mass. Then the ODE that models the displacement <span class="process-math">\(x(t)\)</span> is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 x'' + \omega_{0}^{2}x = \frac{F_{0}}{m}\cos(\omega t).
@@ -241,10 +267,10 @@ x_{p} &amp;= \begin{cases} \frac{F_{0}}{m(\omega_{0}^{2} - \omega^{2})} \cos(\om
 <article class="example example-like" id="example-determining-resonance"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Determining Resonance.</span>
 </h4>
-<p id="p-250">An object with mass <span class="quantity">2 kg</span> is attached to a spring and is held <span class="quantity">1 m</span> to the right of the spring's equilibrium position by a force of <span class="quantity">8 N</span> At time <span class="process-math">\(t = 0\)</span> seconds the mass is set in motion with an initial velocity of <span class="quantity">2 <sup>m</sup>⁄<sub>s</sub></span> to the left. Suppose an external force <span class="process-math">\(F_{E} = 3\cos(2t)\)</span> acts on the mass as well. Will the spring eventually break?</p>
+<p id="p-255">An object with mass <span class="quantity">2 kg</span> is attached to a spring and is held <span class="quantity">1 m</span> to the right of the spring's equilibrium position by a force of <span class="quantity">8 N</span> At time <span class="process-math">\(t = 0\)</span> seconds the mass is set in motion with an initial velocity of <span class="quantity">2 <sup>m</sup>⁄<sub>s</sub></span> to the left. Suppose an external force <span class="process-math">\(F_{E} = 3\cos(2t)\)</span> acts on the mass as well. Will the spring eventually break?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-36" id="solution-36"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-36"><div class="solution solution-like"><p id="p-251">We can answer this question by determining if resonance is present in this system. The external frequency is <span class="process-math">\(\omega = 2\text{,}\)</span> and the internal frequency is <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span> Since <span class="process-math">\(k = 8\)</span> and <span class="process-math">\(m = 2\text{,}\)</span> we have <span class="process-math">\(\omega_{0} = \sqrt{\frac{8}{2}} = 2\text{,}\)</span> and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.</p></div></div>
-</div></article><aside class="aside aside-like" id="aside-13"><p id="p-252">It's not too hard to solve for <span class="process-math">\(x(t)\)</span> exactly here to get</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-36" id="solution-36"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-36"><div class="solution solution-like"><p id="p-256">We can answer this question by determining if resonance is present in this system. The external frequency is <span class="process-math">\(\omega = 2\text{,}\)</span> and the internal frequency is <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\text{.}\)</span> Since <span class="process-math">\(k = 8\)</span> and <span class="process-math">\(m = 2\text{,}\)</span> we have <span class="process-math">\(\omega_{0} = \sqrt{\frac{8}{2}} = 2\text{,}\)</span> and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.</p></div></div>
+</div></article><aside class="aside aside-like" id="aside-13"><p id="p-257">It's not too hard to solve for <span class="process-math">\(x(t)\)</span> exactly here to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-forced-oscillations-and-resonance-aside-determining-resonance.html">
 \begin{equation*}
 x(t) = \frac{1}{4}\cos(2t) - \sin(2t) + \frac{3}{8}t\sin(2t).
@@ -254,7 +280,7 @@ x(t) = \frac{1}{4}\cos(2t) - \sin(2t) + \frac{3}{8}t\sin(2t).
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.5.2<span class="period">.</span></span><span class="space"> </span>A plot of the motion of the mass in <a href="" class="xref" data-knowl="./knowl/example-determining-resonance.html" title="Example 2.5.1: Determining Resonance">Example 2.5.1</a>.</figcaption></figure></section><section class="subsection" id="subsection-damped-systems"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Damped Systems</span>
 </h3>
-<p id="p-253">Now we'll take a look at forced, damped systems. Suppose a mass <span class="process-math">\(m\)</span> is fixed to a spring with spring force <span class="process-math">\(F_{S} = -kx\text{,}\)</span> and is acted upon by a dashpot with force <span class="process-math">\(F_{R} = -cx^\prime\text{,}\)</span> where <span class="process-math">\(c,k \gt 0\)</span> and <span class="process-math">\(x\)</span> represents the displacement of the mass at time <span class="process-math">\(t\text{.}\)</span> If the mass is still acted upon by an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\text{,}\)</span> then by Newton's Second Law the displacement <span class="process-math">\(x\)</span> must satisfy</p>
+<p id="p-258">Now we'll take a look at forced, damped systems. Suppose a mass <span class="process-math">\(m\)</span> is fixed to a spring with spring force <span class="process-math">\(F_{S} = -kx\text{,}\)</span> and is acted upon by a dashpot with force <span class="process-math">\(F_{R} = -cx^\prime\text{,}\)</span> where <span class="process-math">\(c,k \gt 0\)</span> and <span class="process-math">\(x\)</span> represents the displacement of the mass at time <span class="process-math">\(t\text{.}\)</span> If the mass is still acted upon by an external force <span class="process-math">\(F_{E} = F_{0}\cos(\omega t)\text{,}\)</span> then by Newton's Second Law the displacement <span class="process-math">\(x\)</span> must satisfy</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/subsection-free-damped-motion.html">
 \begin{equation*}
 mx'' + cx^\prime + kx = F_{0}\cos(\omega t).
@@ -267,7 +293,7 @@ x_{p} = \frac{m(\omega_{0}^{2} - \omega^{2})F_{0}}{m^{2}(\omega_{0}^{2} - \omega
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(\omega_{0} = \sqrt{\frac{k}{m}}\)</span> as usual.</p>
-<p id="p-254">Since <span class="process-math">\(x_{c}\)</span> will always approach <span class="process-math">\(0\)</span> in these situations, as time goes on the position is determined increasingly by <span class="process-math">\(x_{p}\text{.}\)</span> We call <span class="process-math">\(x_{c}\)</span> the <dfn class="terminology">transient solution</dfn> and <span class="process-math">\(x_{p}\)</span> the <dfn class="terminology">steady-state solution</dfn>. Note that resonance is impossible in this system since <span class="process-math">\(x_{c}\)</span> and <span class="process-math">\(x_{p}\)</span> can never overlap (assuming the external force is still a sinusoid). Therefore the smallest amount of damping prevents the mass from going out of control.</p>
+<p id="p-259">Since <span class="process-math">\(x_{c}\)</span> will always approach <span class="process-math">\(0\)</span> in these situations, as time goes on the position is determined increasingly by <span class="process-math">\(x_{p}\text{.}\)</span> We call <span class="process-math">\(x_{c}\)</span> the <dfn class="terminology">transient solution</dfn> and <span class="process-math">\(x_{p}\)</span> the <dfn class="terminology">steady-state solution</dfn>. Note that resonance is impossible in this system since <span class="process-math">\(x_{c}\)</span> and <span class="process-math">\(x_{p}\)</span> can never overlap (assuming the external force is still a sinusoid). Therefore the smallest amount of damping prevents the mass from going out of control.</p>
 <pre class="ptx-sagecell sagecell-sage" id="sage-3"><script type="text/x-sage"># Set variables
 t = var('t')
 m, c, k, F0, omega, omega_0 = var('m c k F0 omega omega_0')
@@ -287,10 +313,10 @@ pretty_print(P.substitute(k == m*(omega_0)^2))
 <article class="example example-like" id="example-steady-state-approximation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Steady-State Approximation.</span>
 </h4>
-<p id="p-255">An object of mass <span class="quantity">3 kg</span> is fixed to both a spring and a dashpot with respective forces <span class="process-math">\(F_{S} = -9x\)</span> and <span class="process-math">\(F_{R} = -2x^\prime\text{,}\)</span> where <span class="process-math">\(x\)</span> is the displacement of the mass in meters and <span class="process-math">\(x = 0\)</span> is the equilibrium position. An external force <span class="process-math">\(F_{E} = 5\cos(\sqrt{3}t)\)</span> is also applied to the mass, where <span class="process-math">\(t\)</span> is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately <span class="quantity">7 s</span> ago. What will be the approximate position of the mass in <span class="quantity">40 s</span>?</p>
+<p id="p-260">An object of mass <span class="quantity">3 kg</span> is fixed to both a spring and a dashpot with respective forces <span class="process-math">\(F_{S} = -9x\)</span> and <span class="process-math">\(F_{R} = -2x^\prime\text{,}\)</span> where <span class="process-math">\(x\)</span> is the displacement of the mass in meters and <span class="process-math">\(x = 0\)</span> is the equilibrium position. An external force <span class="process-math">\(F_{E} = 5\cos(\sqrt{3}t)\)</span> is also applied to the mass, where <span class="process-math">\(t\)</span> is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately <span class="quantity">7 s</span> ago. What will be the approximate position of the mass in <span class="quantity">40 s</span>?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-37" id="solution-37"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-37"><div class="solution solution-like">
-<p id="p-256">We know that the position will look like <span class="process-math">\(x = x_{c} + x_{p}\)</span> where <span class="process-math">\(x_{c}\to0\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution <span class="process-math">\(x_{p}\text{.}\)</span> Since</p>
+<p id="p-261">We know that the position will look like <span class="process-math">\(x = x_{c} + x_{p}\)</span> where <span class="process-math">\(x_{c}\to0\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution <span class="process-math">\(x_{p}\text{.}\)</span> Since</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \omega = \omega_{0} = \sqrt{3}, \quad F_{0} = 5\quad\text{and}\quad c = 2,
@@ -304,7 +330,7 @@ x_{p} = \frac{5}{6}\sqrt{3}\sin(\sqrt{3}t).
 </div>
 <p class="continuation">So after <span class="quantity">40 s</span> more seconds the mass should be around <span class="process-math">\(x_{p}(47)\text{,}\)</span> or about <span class="quantity">-0.388 m</span>.</p>
 </div></div>
-</div></article><p id="p-257">In fact, the actual initial conditions used in <a href="" class="xref" data-knowl="./knowl/example-steady-state-approximation.html" title="Example 2.5.3: Steady-State Approximation">Example 2.5.3</a> were <span class="process-math">\(x(0) = 1\)</span> and <span class="process-math">\(x^\prime(0) = -2\text{.}\)</span> The corresponding exact solution is</p>
+</div></article><p id="p-262">In fact, the actual initial conditions used in <a href="" class="xref" data-knowl="./knowl/example-steady-state-approximation.html" title="Example 2.5.3: Steady-State Approximation">Example 2.5.3</a> were <span class="process-math">\(x(0) = 1\)</span> and <span class="process-math">\(x^\prime(0) = -2\text{.}\)</span> The corresponding exact solution is</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/example-steady-state-approximation.html">
 \begin{equation*}
 x = e^{-\frac{t}{3}}\left[\cos\frac{\sqrt{26}}{3}t - \frac{25}{52}\sin\frac{\sqrt{26}}{3}t\right] + \frac{5}{6}\sqrt{3}\sin(\sqrt{3}t).

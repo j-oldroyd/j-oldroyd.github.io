@@ -12,30 +12,39 @@
 </head>
 <body class="ignore-math">
 <h4 class="heading"><span class="type">Paragraph</span></h4>
-<p>So this is our goal: find some function <span class="process-math">\(d(t)\)</span> that has an instantaneous unit impulse at the point <span class="process-math">\(t=0\text{.}\)</span> In other words, we want to find a function <span class="process-math">\(d(t)\)</span> such that</p>
+<p>If we take Laplace transforms, this becomes</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\int_{0}^{0}d(t)\,dt = 1
+s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},
 \end{equation*}
 </div>
-<p class="continuation">But this is impossible for any function, since</p>
+<p class="continuation">where</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{align*}
+\Laplace{F_{E}(t)} &amp;= \Laplace{u(t)\cos3t} - \Laplace{u(t-2\pi)\cos3t}\\
+&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi)+6\pi)}\\
+&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi))}\\
+&amp;= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}\text{.}
+\end{align*}
+</div>
+<p class="continuation">So</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\int_{0}^{0}d(t)\dd{t} = 0.
+s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}.
 \end{equation*}
 </div>
-<p class="continuation">However, we can approximate the <em class="emphasis">idea</em> of an instantaneous unit impulse by defining</p>
+<p class="continuation">If we solve this for <span class="process-math">\(X(s)\text{,}\)</span> we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-d_{\varepsilon}(t) = 
-\begin{cases}
-\frac{1}{\varepsilon} \amp\text{if }-\frac{\varepsilon}{2}\leq t\leq \frac{\varepsilon}{2} \\
-0 \amp\text{otherwise}  
-\end{cases}.
+X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},
 \end{equation*}
 </div>
-<p class="continuation"><figure class="figure figure-like"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/latex-image/image-18.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.1<span class="period">.</span></span><span class="space"> </span>Approximating the instantaneous unit impulse.</figcaption></figure></p>
-<span class="incontext"><a href="section-dirac-delta-functions.html#p-570" class="internal">in-context</a></span>
+<p class="continuation">and if we simplify this using partial fractions this becomes</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.
+\end{equation*}
+</div>
+<span class="incontext"><a href="section-unit-step-functions-and-time-shifting.html#p-570" class="internal">in-context</a></span>
 </body>
 </html>

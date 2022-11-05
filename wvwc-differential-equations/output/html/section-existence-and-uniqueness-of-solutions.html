@@ -8,11 +8,13 @@
 <html lang="en-US">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Existence and Uniqueness of Solutions</title>
+<title>WVWC-DE Existence and Uniqueness of Solutions</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
   tex: {
@@ -76,20 +78,37 @@ window.MathJax = {
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-\renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\dd}[2][]{\, d^{#1} #2\ }
-\newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
-\newcommand{\Int}[2]{\int_{#1}^{#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -97,9 +116,9 @@ window.MathJax = {
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href=""></a><div class="title-container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline"></p>
+<p class="byline">Jesse Oldroyd</p>
 </div>
 <div class="searchbox"><div class="searchwidget">
 <input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
@@ -136,6 +155,13 @@ true);
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
 <li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
 <li class="link">
 <a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
@@ -208,59 +234,59 @@ true);
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-existence-and-uniqueness-of-solutions"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.5</span> <span class="title">Existence and Uniqueness of Solutions</span>
 </h2>
-<section class="introduction" id="introduction-6"><p id="p-93">This section corresponds to Section 1.7 from the text.</p></section><section class="subsection" id="subsection-existence-and-uniqueness-theorem"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-6"><p id="p-98">This section corresponds to Section 1.7 from the text.</p></section><section class="subsection" id="subsection-existence-and-uniqueness-theorem"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Existence and Uniqueness Theorem</span>
 </h3>
-<p id="p-94">There are two important questions we need to consider when developing a mathematical model using differential equations (i.e. IVPs):</p>
+<p id="p-99">There are two important questions we need to consider when developing a mathematical model using differential equations (i.e. IVPs):</p>
 <ol class="decimal">
-<li id="li-9"><p id="p-derived-li-9">Does the initial value problem have a solution? (Existence).</p></li>
-<li id="li-10"><p id="p-derived-li-10">If it has a solution, is the solution unique? (Uniqueness).</p></li>
+<li id="li-11"><p id="p-derived-li-11">Does the initial value problem have a solution? (Existence).</p></li>
+<li id="li-12"><p id="p-derived-li-12">If it has a solution, is the solution unique? (Uniqueness).</p></li>
 </ol>
 <p class="continuation">Ideally, the answer to both of these questions will be yes.</p>
 <article class="example example-like" id="example-the-answer-is-no"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">The answer is no.</span>
 </h4>
-<p id="p-95">Does <span class="process-math">\(x\dv{y}{x} = \sqrt[3]{y},y(1) = 0\)</span> have a unique solution?</p>
+<p id="p-100">Does <span class="process-math">\(x\dv{y}{x} = \sqrt[3]{y},y(1) = 0\)</span> have a unique solution?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-16" id="solution-16"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-16"><div class="solution solution-like"><p id="p-96">We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that <span class="process-math">\(y = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\text{.}\)</span> On the other hand, we can also eyeball a second solution: <span class="process-math">\(y=0\text{.}\)</span> So this IVP has <em class="emphasis">two</em> different solutions: <span class="process-math">\(y_{1} = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\)</span> and <span class="process-math">\(y_{2} = 0\text{.}\)</span></p></div></div>
-</div></article><p id="p-97">Clearly, IVPs don't always have unique solutions. Sometimes it's difficult to determine precisely when an IVP can have a unique solution, but most of the cases we'll care about in this class will fall under the following theorem.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-16" id="solution-16"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-16"><div class="solution solution-like"><p id="p-101">We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that <span class="process-math">\(y = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\text{.}\)</span> On the other hand, we can also eyeball a second solution: <span class="process-math">\(y=0\text{.}\)</span> So this IVP has <em class="emphasis">two</em> different solutions: <span class="process-math">\(y_{1} = \left(\frac{2}{3}\ln x\right)^{\frac{3}{2}}\)</span> and <span class="process-math">\(y_{2} = 0\text{.}\)</span></p></div></div>
+</div></article><p id="p-102">Clearly, IVPs don't always have unique solutions. Sometimes it's difficult to determine precisely when an IVP can have a unique solution, but most of the cases we'll care about in this class will fall under the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-existence-and-uniqueness-theorem"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Existence and Uniqueness Theorem.</span>
 </h4>
-<p id="p-98">Consider the IVP given by <span class="process-math">\(\dv{y}{x} = f(x,y), y(x_{0}) = y_{0}\text{.}\)</span> If <span class="process-math">\(f(x,y)\)</span> is bounded and continuous within some rectangle in the plane containing <span class="process-math">\((x_{0},y_{0})\text{,}\)</span> then the IVP has at least one solution. If in addition <span class="process-math">\(f_{y}(x,y)\)</span> is also bounded and continuous within some rectangle containing <span class="process-math">\((x_{0},y_{0})\text{,}\)</span> then the IVP has a unique solution.</p></article><p id="p-99">If we go back to <a href="" class="xref" data-knowl="./knowl/example-the-answer-is-no.html" title="Example 1.5.1: The answer is no">Example 1.5.1</a>, then we see that <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> has something to say about the IVP in that example. In that example, we had <span class="process-math">\(f(x,y) = \sqrt[3]{y}, f_{y}(x,y) = \frac{1}{3}y^{-\frac{2}{3}}\)</span> and <span class="process-math">\((x_{0},y_{0}) = (1,0)\text{.}\)</span> Let's draw a rectangle around this point: <figure class="figure figure-like" id="figure-existence-and-uniqueness-1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-6.svg" role="img" class="contained"></div>
+<p id="p-103">Consider the IVP given by <span class="process-math">\(\dv{y}{x} = f(x,y), y(x_{0}) = y_{0}\text{.}\)</span> If <span class="process-math">\(f(x,y)\)</span> is bounded and continuous within some rectangle in the plane containing <span class="process-math">\((x_{0},y_{0})\text{,}\)</span> then the IVP has at least one solution. If in addition <span class="process-math">\(f_{y}(x,y)\)</span> is also bounded and continuous within some rectangle containing <span class="process-math">\((x_{0},y_{0})\text{,}\)</span> then the IVP has a unique solution.</p></article><p id="p-104">If we go back to <a href="" class="xref" data-knowl="./knowl/example-the-answer-is-no.html" title="Example 1.5.1: The answer is no">Example 1.5.1</a>, then we see that <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> has something to say about the IVP in that example. In that example, we had <span class="process-math">\(f(x,y) = \sqrt[3]{y}, f_{y}(x,y) = \frac{1}{3}y^{-\frac{2}{3}}\)</span> and <span class="process-math">\((x_{0},y_{0}) = (1,0)\text{.}\)</span> Let's draw a rectangle around this point: <figure class="figure figure-like" id="figure-existence-and-uniqueness-1"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-6.svg" role="img" class="contained"></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.5.3<span class="period">.</span></span><span class="space"> </span></figcaption></figure></p>
-<p id="p-100">Now <span class="process-math">\(f\)</span> is continuous and <span class="process-math">\(-\frac{1}{2}\leq y\leq\frac{3}{2}\)</span> within this rectangle, so</p>
+<p id="p-105">Now <span class="process-math">\(f\)</span> is continuous and <span class="process-math">\(-\frac{1}{2}\leq y\leq\frac{3}{2}\)</span> within this rectangle, so</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-existence-and-uniqueness-theorem.html">
 \begin{equation*}
 -\sqrt[3]{\frac{1}{2}}\leq f(x,y)\leq\sqrt[3]{\frac{3}{2}}
 \end{equation*}
 </div>
 <p class="continuation">everywhere inside of this triangle. So <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> guarantees <em class="emphasis">at least one</em> solution of the IVP, and indeed there is at least one solution. However, the problem with uniqueness stems from the fact that <span class="process-math">\(f_{y}\)</span> has a divide-by-zero problem inside this rectangle. Furthermore, it's impossible to draw a rectangle around <span class="process-math">\((1,0)\)</span> that avoids this divide-by-zero problem. Hence there is no guarantee of uniqueness.</p>
-<p id="p-101">On the other hand, if we changed the initial condition to <span class="process-math">\(y(1) = 0.000001\)</span> then we would be guaranteed a unique solution. Moving that initial condition off of the <span class="process-math">\(x\)</span>-axis is all we need to do to guarantee uniqueness.</p></section><section class="subsection" id="subsection-picard-iteration"><h3 class="heading hide-type">
+<p id="p-106">On the other hand, if we changed the initial condition to <span class="process-math">\(y(1) = 0.000001\)</span> then we would be guaranteed a unique solution. Moving that initial condition off of the <span class="process-math">\(x\)</span>-axis is all we need to do to guarantee uniqueness.</p></section><section class="subsection" id="subsection-picard-iteration"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Picard Iteration</span>
 </h3>
-<p id="p-102">Now that we know of a way to determine whether or not certain ODEs have solutions, we'd like a method for actually finding these solutions. We've seen a few different methods for solving specific first-order ODEs, but what we'll do now is discuss a method that works for a large class of first-order ODEs. The only catch is that it may take us an infinite amount of time to get the solution.</p>
-<p id="p-103">Consider the IVP <span class="process-math">\(\dv{y}{x} = f(x,y), y(x_{0}) = y_{0}\text{.}\)</span> We can rewrite this differential equation as an <dfn class="terminology">integral equation</dfn>:</p>
+<p id="p-107">Now that we know of a way to determine whether or not certain ODEs have solutions, we'd like a method for actually finding these solutions. We've seen a few different methods for solving specific first-order ODEs, but what we'll do now is discuss a method that works for a large class of first-order ODEs. The only catch is that it may take us an infinite amount of time to get the solution.</p>
+<p id="p-108">Consider the IVP <span class="process-math">\(\dv{y}{x} = f(x,y), y(x_{0}) = y_{0}\text{.}\)</span> We can rewrite this differential equation as an <dfn class="terminology">integral equation</dfn>:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y(x) = y_{0} + \int_{x_{0}}^{x}f(t,y(t))\,dt.
 \end{equation*}
 </div>
 <p class="continuation">It looks quite a bit different, but solutions of this integral equation are also solutions of the corresponding differential equation. Our goal now is to approximate a solution to this integral equation.</p>
-<p id="p-104">To start, let's make a guess as to what the solution of our IVP should be. To keep things simple we'll start with a constant function, say <span class="process-math">\(\phi_{0}(x) = y_{0}\)</span> so that we at least satisfy the initial condition. Now this guess may not be a good match for the solution of the IVP away from the initial condition, so we'll adjust the guess using the integral equation to get the new function <span class="process-math">\(\phi_{1}\text{:}\)</span></p>
+<p id="p-109">To start, let's make a guess as to what the solution of our IVP should be. To keep things simple we'll start with a constant function, say <span class="process-math">\(\phi_{0}(x) = y_{0}\)</span> so that we at least satisfy the initial condition. Now this guess may not be a good match for the solution of the IVP away from the initial condition, so we'll adjust the guess using the integral equation to get the new function <span class="process-math">\(\phi_{1}\text{:}\)</span></p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \phi_{1}(x) = y_{0} + \int_{x_{0}}^{x}f(t,\phi_{0})\,dt.
 \end{equation*}
 </div>
 <p class="continuation">Now <span class="process-math">\(\phi_{1}\)</span> may not be a great approximation either away from the initial condition, but we can adjust it using the integral equation just like we did to <span class="process-math">\(\phi_{0}\text{.}\)</span></p>
-<p id="p-105">The method described in the previous paragraph is <dfn class="terminology">Picard's Method</dfn>. In general, the <span class="process-math">\(n^{\text{th}}\)</span> iteration of Picard's Method is given by</p>
+<p id="p-110">The method described in the previous paragraph is <dfn class="terminology">Picard's Method</dfn>. In general, the <span class="process-math">\(n^{\text{th}}\)</span> iteration of Picard's Method is given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-existence-and-uniqueness-theorem.html">
 \begin{equation*}
 \phi_{n}(x) = y_{0}+\int_{x_{0}}^{x}f(t,\phi_{n-1}(t))\,dt,

@@ -8,11 +8,13 @@
 <html lang="en-US">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Power Series Method</title>
+<title>WVWC-DE Power Series Method</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
   tex: {
@@ -76,20 +78,37 @@ window.MathJax = {
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-\renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\dd}[2][]{\, d^{#1} #2\ }
-\newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
-\newcommand{\Int}[2]{\int_{#1}^{#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -97,9 +116,9 @@ window.MathJax = {
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href=""></a><div class="title-container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline"></p>
+<p class="byline">Jesse Oldroyd</p>
 </div>
 <div class="searchbox"><div class="searchwidget">
 <input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
@@ -136,6 +155,13 @@ true);
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
 <li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
 <li class="link">
 <a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
@@ -208,14 +234,14 @@ true);
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-power-series-method"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">5.1</span> <span class="title">Power Series Method</span>
 </h2>
-<p id="p-422">In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, <span class="process-math">\(x-1,x^{2},3-x^{5}\)</span>) it can be very straightforward, but for others (such as <span class="process-math">\(e^{-x^{2}}\)</span>) it can be impossible. <aside class="aside aside-like" id="aside-18"><p id="p-423">At least, it can be impossible to integrate certain functions in terms of more ``everyday'' functions that we're used to.</p></aside></p>
-<p id="p-424">So we'd like to see if there's a way to write complicated functions <span class="process-math">\(f(x)\)</span> in terms of simpler functions <span class="process-math">\(1,x,x^{2},\dots\text{.}\)</span> To see how, let <span class="process-math">\(f(x)\)</span> be a function. Our goal is to write it in the form</p>
+<p id="p-427">In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, <span class="process-math">\(x-1,x^{2},3-x^{5}\)</span>) it can be very straightforward, but for others (such as <span class="process-math">\(e^{-x^{2}}\)</span>) it can be impossible. <aside class="aside aside-like" id="aside-18"><p id="p-428">At least, it can be impossible to integrate certain functions in terms of more ``everyday'' functions that we're used to.</p></aside></p>
+<p id="p-429">So we'd like to see if there's a way to write complicated functions <span class="process-math">\(f(x)\)</span> in terms of simpler functions <span class="process-math">\(1,x,x^{2},\dots\text{.}\)</span> To see how, let <span class="process-math">\(f(x)\)</span> be a function. Our goal is to write it in the form</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="equation-power-series-at-zero">
 \begin{equation}
 f(x) = c_{0}+c_{1}x+c_{2}x^{2}+c_{3}x^{3}+\dots = \sum_{k=0}^{\infty}c_{k}x^{k}\tag{8}
@@ -225,8 +251,8 @@ f(x) = c_{0}+c_{1}x+c_{2}x^{2}+c_{3}x^{3}+\dots = \sum_{k=0}^{\infty}c_{k}x^{k}\
 <article class="definition definition-like" id="definition-power-series"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Power Series.</span>
 </h3>
-<p id="p-425">A <dfn class="terminology">power series</dfn> is a series (that is, an infinite sum) of the form <span class="process-math">\(\sum_{k=0}^{\infty}c_{k}x^{k}\text{.}\)</span> Since a power series is in general an infinite sum, it may not make sense for all values of <span class="process-math">\(x\text{.}\)</span> The power series is said to <dfn class="terminology">converge</dfn> on some interval <span class="process-math">\(I\)</span> if the sum exists for each <span class="process-math">\(x\)</span> in <span class="process-math">\(I\text{.}\)</span></p></article><p id="p-426">A power series doesn't have to start at <span class="process-math">\(k=0\text{,}\)</span> but <em class="emphasis">it may not contain any negative powers of <span class="process-math">\(x\)</span></em>.</p>
-<p id="p-427">The question now is, how do we find the right values of the coefficients <span class="process-math">\(c_{k}\)</span> to make <a href="" class="xref" data-knowl="./knowl/equation-power-series-at-zero.html" title="Equation 8">(8)</a> true? If we look at the equation, we can solve for <span class="process-math">\(c_{0}\)</span> very easily: just set <span class="process-math">\(x=0\)</span> to make all other terms disappear:</p>
+<p id="p-430">A <dfn class="terminology">power series</dfn> is a series (that is, an infinite sum) of the form <span class="process-math">\(\sum_{k=0}^{\infty}c_{k}x^{k}\text{.}\)</span> Since a power series is in general an infinite sum, it may not make sense for all values of <span class="process-math">\(x\text{.}\)</span> The power series is said to <dfn class="terminology">converge</dfn> on some interval <span class="process-math">\(I\)</span> if the sum exists for each <span class="process-math">\(x\)</span> in <span class="process-math">\(I\text{.}\)</span></p></article><p id="p-431">A power series doesn't have to start at <span class="process-math">\(k=0\text{,}\)</span> but <em class="emphasis">it may not contain any negative powers of <span class="process-math">\(x\)</span></em>.</p>
+<p id="p-432">The question now is, how do we find the right values of the coefficients <span class="process-math">\(c_{k}\)</span> to make <a href="" class="xref" data-knowl="./knowl/equation-power-series-at-zero.html" title="Equation 8">(8)</a> true? If we look at the equation, we can solve for <span class="process-math">\(c_{0}\)</span> very easily: just set <span class="process-math">\(x=0\)</span> to make all other terms disappear:</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-power-series-at-zero.html">
 \begin{equation*}
 f(0) = c_{0} + c_{1}\cdot0+\dots = c_{0}.
@@ -254,7 +280,7 @@ f^{(3)}(0) &amp;= 3\cdot2\cdot1c_{3}
 \end{align*}
 </div>
 <p class="continuation">and so <span class="process-math">\(c_{3} = \frac{f^{(3)}(0)}{3\cdot2\cdot1}\text{.}\)</span></p>
-<p id="p-428">In general, to get the coefficient <span class="process-math">\(c_{k}\)</span> of <span class="process-math">\(x^{k}\)</span> in the power series of <span class="process-math">\(f(x)\text{,}\)</span> we have the following equation:</p>
+<p id="p-433">In general, to get the coefficient <span class="process-math">\(c_{k}\)</span> of <span class="process-math">\(x^{k}\)</span> in the power series of <span class="process-math">\(f(x)\text{,}\)</span> we have the following equation:</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-power-series-at-zero.html" id="equation-power-series-coefficients-at-zero">
 \begin{equation}
 c_{k} = \frac{f^{(k)}(0)}{k\cdot(k-1)\cdot\dots\cdot2\cdot1} = \frac{f^{(k)}(0)}{k!}.\tag{9}
@@ -263,10 +289,10 @@ c_{k} = \frac{f^{(k)}(0)}{k\cdot(k-1)\cdot\dots\cdot2\cdot1} = \frac{f^{(k)}(0)}
 <article class="example example-like" id="example-series-exponential"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.2</span><span class="period">.</span>
 </h3>
-<p id="p-429">Find a power series for <span class="process-math">\(e^{x}\text{.}\)</span></p>
+<p id="p-434">Find a power series for <span class="process-math">\(e^{x}\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-68" id="solution-68"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-68"><div class="solution solution-like">
-<p id="p-430">Any power series for <span class="process-math">\(f(x) = e^{x}\)</span> looks like <span class="process-math">\(\sum_{k=0}^{\infty}c_{k}x^{k}\text{,}\)</span> where</p>
+<p id="p-435">Any power series for <span class="process-math">\(f(x) = e^{x}\)</span> looks like <span class="process-math">\(\sum_{k=0}^{\infty}c_{k}x^{k}\text{,}\)</span> where</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 c_{k} = \frac{f^{(k)}(0)}{k!}.
@@ -286,7 +312,7 @@ c_{k} = \frac{e^{0}}{k!} = \frac{1}{k!}
 </div>
 <p class="continuation">It turns out the <span class="process-math">\(f(x) = e^{x}\)</span> equals its power series for <em class="emphasis">all</em> values of <span class="process-math">\(x\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-431">The above power series was written in terms of powers of <span class="process-math">\(x\text{,}\)</span> but this doesn't have to be the case. We can also write power series in terms of powers of <span class="process-math">\(x-a\text{,}\)</span> where <span class="process-math">\(a\)</span> is some constant. A power series of the form</p>
+</div></article><p id="p-436">The above power series was written in terms of powers of <span class="process-math">\(x\text{,}\)</span> but this doesn't have to be the case. We can also write power series in terms of powers of <span class="process-math">\(x-a\text{,}\)</span> where <span class="process-math">\(a\)</span> is some constant. A power series of the form</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=0}^{\infty}c_{k}(x-a)^{k}
@@ -301,10 +327,10 @@ c_{k} = \frac{f^{(k)}(a)}{k!}.
 <article class="example example-like" id="example-series-sin-pi-over-2"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.3</span><span class="period">.</span>
 </h3>
-<p id="p-432">Find the power series for <span class="process-math">\(g(t) = \sin t\)</span> centered at <span class="process-math">\(a = \frac{\pi}{2}\text{.}\)</span></p>
+<p id="p-437">Find the power series for <span class="process-math">\(g(t) = \sin t\)</span> centered at <span class="process-math">\(a = \frac{\pi}{2}\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-69" id="solution-69"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-69"><div class="solution solution-like">
-<p id="p-433">A power series centered at <span class="process-math">\(a = \frac{\pi}{2}\)</span> will look like</p>
+<p id="p-438">A power series centered at <span class="process-math">\(a = \frac{\pi}{2}\)</span> will look like</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=0}^{\infty}c_{k}\parens{t-\frac{\pi}{2}}^{k}
@@ -333,7 +359,7 @@ g^{(3)}(t) &amp;= -\cos t &amp;\Rightarrow g^{(3)}(\frac{\pi}{2}) = 0\text{.}
 </div>
 <p class="continuation">Just as with <span class="process-math">\(e^{x}\text{,}\)</span> <span class="process-math">\(\sin t\)</span> is equal to its power series everywhere.</p>
 </div></div>
-</div></article><p id="p-434">More functions in terms of power series:</p>
+</div></article><p id="p-439">More functions in terms of power series:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-56">
 \begin{align*}
 \frac{1}{1-x} &amp;= \sum_{n=0}^{\infty}x^{n} &amp; &amp;= 1 + x + x^{2} + x^{3} + \cdots\\
@@ -346,10 +372,10 @@ e^{x} &amp;= \sum_{n=0}^{\infty}\frac{x^{n}}{n!} &amp; &amp;= 1 + x + \frac{x^{2
 <article class="example example-like" id="example-series-integral"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.4</span><span class="period">.</span>
 </h3>
-<p id="p-435">Find <span class="process-math">\(\displaystyle\int_{0}^{1}e^{x^{2}}\dd{x}\text{.}\)</span></p>
+<p id="p-440">Find <span class="process-math">\(\displaystyle\int_{0}^{1}e^{x^{2}}\dd{x}\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-70" id="solution-70"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-70"><div class="solution solution-like">
-<p id="p-436">We can't integrate <span class="process-math">\(e^{x^{2}}\)</span> using elementary functions <aside class="aside aside-like" id="aside-19"><p id="p-437">We can use a function known as the <dfn class="terminology">error function</dfn>.</p></aside> but this is straightforward to integrate using power series:</p>
+<p id="p-441">We can't integrate <span class="process-math">\(e^{x^{2}}\)</span> using elementary functions <aside class="aside aside-like" id="aside-19"><p id="p-442">We can use a function known as the <dfn class="terminology">error function</dfn>.</p></aside> but this is straightforward to integrate using power series:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-57">
 \begin{align*}
 \int_{0}^{1}e^{x^{2}}\dd{x} &amp;= \int_{0}^{1}\sum_{n=0}^{\infty}\frac{x^{2n}}{n!}\dd{x}\\
@@ -358,21 +384,21 @@ e^{x} &amp;= \sum_{n=0}^{\infty}\frac{x^{n}}{n!} &amp; &amp;= 1 + x + \frac{x^{2
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-438">The following theorem can be used to determine when a power series converges (that is, when the series makes sense).</p>
+</div></article><p id="p-443">The following theorem can be used to determine when a power series converges (that is, when the series makes sense).</p>
 <article class="theorem theorem-like" id="theorem-finding-radius-convergence"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.5</span><span class="period">.</span>
 </h3>
-<p id="p-439">Given the power series <span class="process-math">\(\sum_{n=0}^{\infty}c_{n}x^{n}\text{,}\)</span> define the number <span class="process-math">\(\rho\)</span> by the limit</p>
+<p id="p-444">Given the power series <span class="process-math">\(\sum_{n=0}^{\infty}c_{n}x^{n}\text{,}\)</span> define the number <span class="process-math">\(\rho\)</span> by the limit</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \rho = \limit{n}{\infty}\left|\frac{c_{n}}{c_{n+1}}\right|.
 \end{equation*}
 </div>
-<p class="continuation">Suppose the limit exists or is infinite. Then <span class="process-math">\(\rho\)</span> is the radius of converengence of the series: if <span class="process-math">\(\rho\neq0\)</span> then the series converges for <span class="process-math">\(|x|\lt\rho\)</span> and diverges for <span class="process-math">\(|x|\gt\rho\text{.}\)</span> If <span class="process-math">\(\rho=0\)</span> then the series converges only at <span class="process-math">\(x=0\text{.}\)</span></p></article><p id="p-440">Our main use of power series will be in solving differential equations.</p>
+<p class="continuation">Suppose the limit exists or is infinite. Then <span class="process-math">\(\rho\)</span> is the radius of converengence of the series: if <span class="process-math">\(\rho\neq0\)</span> then the series converges for <span class="process-math">\(|x|\lt\rho\)</span> and diverges for <span class="process-math">\(|x|\gt\rho\text{.}\)</span> If <span class="process-math">\(\rho=0\)</span> then the series converges only at <span class="process-math">\(x=0\text{.}\)</span></p></article><p id="p-445">Our main use of power series will be in solving differential equations.</p>
 <article class="example example-like" id="example-series-solve-first-order-linear"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.6</span><span class="period">.</span>
 </h3>
-<p id="p-441">Solve the ODE given by</p>
+<p id="p-446">Solve the ODE given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{y}{x} = 4y.
@@ -380,7 +406,7 @@ e^{x} &amp;= \sum_{n=0}^{\infty}\frac{x^{n}}{n!} &amp; &amp;= 1 + x + \frac{x^{2
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-71" id="solution-71"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-71"><div class="solution solution-like">
-<p id="p-442">We could easily solve this using Chapter 1 methods, but we'll use power series to practice. To start, we assume that the solution <span class="process-math">\(y\)</span> can be written as a power series:</p>
+<p id="p-447">We could easily solve this using Chapter 1 methods, but we'll use power series to practice. To start, we assume that the solution <span class="process-math">\(y\)</span> can be written as a power series:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y = \sum_{n=0}^{\infty}c_{n}x^{n}.
@@ -399,7 +425,7 @@ y = \sum_{n=0}^{\infty}c_{n}x^{n}.
 \sum_{n=1}^{\infty}nc_{n}x^{n-1} = 4\sum_{n=0}^{\infty}c_{n}x^{n}\text{.}
 \end{equation*}
 </div>
-<p id="p-443">We need to find the values of the coefficients <span class="process-math">\(c_{n}\text{;}\)</span> we do this by equating coefficients on both sides of the equation. We want to write both series in terms of <span class="process-math">\(x^{n}\)</span> so that we can do this, so we need to shift the summation on the left: we replace <span class="process-math">\(n\)</span> with <span class="process-math">\(n+1\)</span> inside the sum and decrease the limit of summation <span class="process-math">\(n=1\)</span> to <span class="process-math">\(n=0\)</span> to get</p>
+<p id="p-448">We need to find the values of the coefficients <span class="process-math">\(c_{n}\text{;}\)</span> we do this by equating coefficients on both sides of the equation. We want to write both series in terms of <span class="process-math">\(x^{n}\)</span> so that we can do this, so we need to shift the summation on the left: we replace <span class="process-math">\(n\)</span> with <span class="process-math">\(n+1\)</span> inside the sum and decrease the limit of summation <span class="process-math">\(n=1\)</span> to <span class="process-math">\(n=0\)</span> to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{n=0}^{\infty}(n+1)c_{n+1}x^{n} = \sum_{n=0}^{\infty}4c_{n}x^{n}\text{.}
@@ -411,7 +437,7 @@ y = \sum_{n=0}^{\infty}c_{n}x^{n}.
 (n+1)c_{n+1} = 4c_{n}\qq{or} c_{n+1} = \frac{4}{n+1}c_{n}.
 \end{equation*}
 </div>
-<p id="p-444">This is known as a <dfn class="terminology">recurrence relation</dfn>. It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each <span class="process-math">\(c_{n}\)</span> looks like. To see how, we plug several values for <span class="process-math">\(n\)</span> into this recurrence relation to try to determine a pattern:</p>
+<p id="p-449">This is known as a <dfn class="terminology">recurrence relation</dfn>. It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each <span class="process-math">\(c_{n}\)</span> looks like. To see how, we plug several values for <span class="process-math">\(n\)</span> into this recurrence relation to try to determine a pattern:</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-59">
 \begin{align*}
 c_{1} &amp;= \frac{4}{2}c_{0}\\
@@ -425,7 +451,7 @@ c_{3} &amp;= \frac{4}{4}c_{2} = \frac{4^{3}}{4\cdot3\cdot2}c_{0}
 c_{n} = \frac{4^{n}}{n!}c_{0}
 \end{equation*}
 </div>
-<p class="continuation">for each <span class="process-math">\(n\text{.}\)</span> <aside class="aside aside-like" id="aside-20"><p id="p-445">We can't solve for <span class="process-math">\(c_{0}\)</span> without specifying an initial condition of some kind.</p></aside> So the solution <span class="process-math">\(y\)</span> is</p>
+<p class="continuation">for each <span class="process-math">\(n\text{.}\)</span> <aside class="aside aside-like" id="aside-20"><p id="p-450">We can't solve for <span class="process-math">\(c_{0}\)</span> without specifying an initial condition of some kind.</p></aside> So the solution <span class="process-math">\(y\)</span> is</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-60">
 \begin{align*}
 y &amp;= \sum_{n=0}^{\infty}c_{n}x^{n}\\
@@ -435,20 +461,20 @@ y &amp;= \sum_{n=0}^{\infty}c_{n}x^{n}\\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-446">To solve the above ODE we used the following steps:</p>
+</div></article><p id="p-451">To solve the above ODE we used the following steps:</p>
 <ol class="decimal">
-<li id="li-25"><p id="p-447">Write <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\text{.}\)</span></p></li>
-<li id="li-26"><p id="p-448">Use the ODE to build a recurrence relation for the coefficients <span class="process-math">\(c_{n}\text{.}\)</span></p></li>
-<li id="li-27"><p id="p-449">Find an explicit description of the coefficients.</p></li>
-<li id="li-28"><p id="p-450">Identify <span class="process-math">\(y\)</span> as the power series of some function.</p></li>
+<li id="li-27"><p id="p-452">Write <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\text{.}\)</span></p></li>
+<li id="li-28"><p id="p-453">Use the ODE to build a recurrence relation for the coefficients <span class="process-math">\(c_{n}\text{.}\)</span></p></li>
+<li id="li-29"><p id="p-454">Find an explicit description of the coefficients.</p></li>
+<li id="li-30"><p id="p-455">Identify <span class="process-math">\(y\)</span> as the power series of some function.</p></li>
 </ol>
 <article class="example example-like" id="example-75"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.7</span><span class="period">.</span>
 </h3>
-<p id="p-451">Use power series to solve the ODE <span class="process-math">\(y^\prime+2xy=0\text{.}\)</span></p>
+<p id="p-456">Use power series to solve the ODE <span class="process-math">\(y^\prime+2xy=0\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-72" id="solution-72"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-72"><div class="solution solution-like">
-<p id="p-452">We will solve this using the steps listed above. First, assume <span class="process-math">\(y = \sum_{k=0}^{\infty}c_{k}x^{k}\text{.}\)</span> Now plug this guess for <span class="process-math">\(y\)</span> into the ODE to get</p>
+<p id="p-457">We will solve this using the steps listed above. First, assume <span class="process-math">\(y = \sum_{k=0}^{\infty}c_{k}x^{k}\text{.}\)</span> Now plug this guess for <span class="process-math">\(y\)</span> into the ODE to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{k=1}^{\infty}kc_{k}x^{k-1} = -\sum_{k=0}^{\infty}2c_{k}x^{k+1}.
@@ -474,7 +500,7 @@ y &amp;= \sum_{n=0}^{\infty}c_{n}x^{n}\\
 </td>
 </tr>
 </table></div>
-<p id="p-453">So we get</p>
+<p id="p-458">So we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{n=0}^{\infty}(n+1)c_{n+1}x^{n} = \sum_{n=1}^{\infty}(-2)c_{n-1}x^{n} = 0.
@@ -486,14 +512,14 @@ y &amp;= \sum_{n=0}^{\infty}c_{n}x^{n}\\
 c_{n+1} = -\frac{2}{n+1}c_{n-1}\qq{for }.
 \end{equation*}
 </div>
-<p id="p-454">Since this <dfn class="terminology">two-step recurrence relation</dfn> is only valid for <span class="process-math">\(n\geq1\text{,}\)</span> it places no restrictions on any constant terms of the series. We'll need to determine these separately. To do so, write out the first couple terms of the sums in the previous equation:</p>
+<p id="p-459">Since this <dfn class="terminology">two-step recurrence relation</dfn> is only valid for <span class="process-math">\(n\geq1\text{,}\)</span> it places no restrictions on any constant terms of the series. We'll need to determine these separately. To do so, write out the first couple terms of the sums in the previous equation:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 c_{1}+2c_{2}x+\dots = -2c_{0}x -2c_{1}x^{2}+\cdots
 \end{equation*}
 </div>
 <p class="continuation">This tells us that <span class="process-math">\(c_{1} = 0\text{.}\)</span> Again, we can't get this information from the recurrence relation!</p>
-<p id="p-455">Now we try to find an explicit formula for <span class="process-math">\(c_{n}\text{.}\)</span> Because this is a two-step recurrence, we will write out the coefficients in two columns, one for odd <span class="process-math">\(n\)</span> and one for even <span class="process-math">\(n\text{:}\)</span></p>
+<p id="p-460">Now we try to find an explicit formula for <span class="process-math">\(c_{n}\text{.}\)</span> Because this is a two-step recurrence, we will write out the coefficients in two columns, one for odd <span class="process-math">\(n\)</span> and one for even <span class="process-math">\(n\text{:}\)</span></p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-61">
 \begin{align*}
 c_{2} &amp;= -\frac{2}{2}c_{0} &amp; c_{3} &amp;= -\frac{2}{3}c_{1} = 0\\
@@ -508,7 +534,7 @@ c_{2k} = \frac{(-1)^{k}}{k!}c_{0}\qq{and}c_{2k+1} = 0
 \end{equation*}
 </div>
 <p class="continuation">for every <span class="process-math">\(k\text{.}\)</span></p>
-<p id="p-456">Now we plug this into our power series for <span class="process-math">\(y\)</span> to get</p>
+<p id="p-461">Now we plug this into our power series for <span class="process-math">\(y\)</span> to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-62">
 \begin{align*}
 y &amp;= \sum_{k=0}^{\infty}c_{k}x^{k}\\
@@ -519,11 +545,11 @@ y &amp;= \sum_{k=0}^{\infty}c_{k}x^{k}\\
 \end{align*}
 </div>
 </div></div>
-</div></article><p id="p-457">Now that we have an idea of how to solve differential equations using power series, it can be useful to know when this method is actually valid, i.e., when power series solutions exist. We will be particularly concerned with solutions of second-order linear ODEs.</p>
+</div></article><p id="p-462">Now that we have an idea of how to solve differential equations using power series, it can be useful to know when this method is actually valid, i.e., when power series solutions exist. We will be particularly concerned with solutions of second-order linear ODEs.</p>
 <article class="theorem theorem-like" id="theorem-existence-of-series-solutions"><h3 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Existence of Series Solutions.</span>
 </h3>
-<p id="p-458">Consider the differential equation</p>
+<p id="p-463">Consider the differential equation</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y'' + P(x)y^\prime + Q(x)y = R(x)\text{.}
@@ -532,7 +558,7 @@ y'' + P(x)y^\prime + Q(x)y = R(x)\text{.}
 <p class="continuation">If <span class="process-math">\(P(x), Q(x)\)</span> and <span class="process-math">\(R(x)\)</span> are <dfn class="terminology">analytic</dfn> at a point <span class="process-math">\(x_{0}\text{,}\)</span> then every solution is also analytic at <span class="process-math">\(x_{0}\text{.}\)</span></p></article><article class="example example-like" id="example-a-legendre-equation"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">A Legendre Equation.</span>
 </h3>
-<p id="p-459">Show that</p>
+<p id="p-464">Show that</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 (1 - x^{2})y'' - 2xy^\prime + 2y = 0
@@ -541,14 +567,14 @@ y'' + P(x)y^\prime + Q(x)y = R(x)\text{.}
 <p class="continuation">has a series solution centered at <span class="process-math">\(0\)</span> and then find the solution up to the coefficient of <span class="process-math">\(x^{6}\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-73" id="solution-73"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-73"><div class="solution solution-like">
-<p id="p-460">First, note that the equation can be rewritten</p>
+<p id="p-465">First, note that the equation can be rewritten</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y'' - \frac{2x}{1 - x^{2}}y^\prime + \frac{2}{1 - x^{2}}y = 0\text{,}
 \end{equation*}
 </div>
 <p class="continuation">so we are guaranteed a series solution centered at <span class="process-math">\(x = 0\text{.}\)</span> Furthermore, this solution has radius of convergence at least <span class="process-math">\(R = 1\text{.}\)</span></p>
-<p id="p-461">To find the solution, we return to the original equation and substitute <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\)</span> to get</p>
+<p id="p-466">To find the solution, we return to the original equation and substitute <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\)</span> to get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \sum_{n\geq0}n(n-1)c_{n}x^{n-2} - \sum_{n\geq0}n(n-1)c_{n}x^{n} - \sum_{n\geq0}2nc_{n}x^{n} + \sum_{n\geq0}2c_{n}x^{n} = 0
@@ -567,7 +593,7 @@ c_{n+2} = \frac{n-1}{n+1}c_{n}\quad\text{for}\quad n\geq2\text{.}
 \end{equation*}
 </div>
 <p class="continuation">This recurrence is valid for <span class="process-math">\(n\geq0\text{.}\)</span></p>
-<p id="p-462">Now we can use the recurrence to list the first several terms of the solution:</p>
+<p id="p-467">Now we can use the recurrence to list the first several terms of the solution:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 y = c_{1}x + c_{0}(1 - x^{2} - \frac{1}{3}x^{4} - \frac{1}{5}x^{6} - \cdots)

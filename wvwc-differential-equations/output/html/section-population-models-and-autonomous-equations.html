@@ -8,11 +8,13 @@
 <html lang="en-US">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Population Models and Autonomous Equations</title>
+<title>WVWC-DE Population Models and Autonomous Equations</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
+<meta property="book:author" content="Jesse Oldroyd">
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
   tex: {
@@ -76,20 +78,37 @@ window.MathJax = {
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \renewcommand{\th}{\text{th}}
-\renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
 \newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
 \newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\dd}[2][]{\, d^{#1} #2\ }
-\newcommand{\qq}[1]{\quad\text{#1}\quad}
-\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
-\newcommand{\Int}[2]{\int_{#1}^{#2}}
-\newcommand{\Laplace}[1]{\mathcal{L}\left\{#1\right\}}
-\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\left\{#1\right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
-\renewcommand{\vecm}[1]{\boldsymbol{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
 \newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
@@ -97,9 +116,9 @@ window.MathJax = {
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href=""></a><div class="title-container">
+<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
 <h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline"></p>
+<p class="byline">Jesse Oldroyd</p>
 </div>
 <div class="searchbox"><div class="searchwidget">
 <input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
@@ -136,6 +155,13 @@ true);
 </div></nav></header><div class="page">
 <div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
 <nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
+<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
 <li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
 <li class="link">
 <a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
@@ -208,7 +234,7 @@ true);
 <li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
 <li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
 <li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-1.html" data-scroll="colophon-1" class="internal"><span class="title">Colophon</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
 </ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
 </div></div>
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="section-population-models-and-autonomous-equations"><h2 class="heading hide-type">
@@ -217,8 +243,8 @@ true);
 <section class="subsection" id="subsection-population-equations"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Population Equations</span>
 </h3>
-<p id="p-106">Suppose we're monitoring the population of some species, and let's denote the population at time <span class="process-math">\(t\)</span> by <span class="process-math">\(P(t)\text{.}\)</span> An obvious question to consider is how that population will change over time. Mathematically, this means we want to obtain information on <span class="process-math">\(\dv{P}{t}\)</span> and then use it to estimate <span class="process-math">\(P(t)\text{.}\)</span></p>
-<p id="p-107">A simple model for <span class="process-math">\(\dv{P}{t}\)</span> is to assume it depends only on the birth rate <span class="process-math">\(\beta\)</span> and death rate <span class="process-math">\(\delta\)</span> of the species in question. Then we can write</p>
+<p id="p-111">Suppose we're monitoring the population of some species, and let's denote the population at time <span class="process-math">\(t\)</span> by <span class="process-math">\(P(t)\text{.}\)</span> An obvious question to consider is how that population will change over time. Mathematically, this means we want to obtain information on <span class="process-math">\(\dv{P}{t}\)</span> and then use it to estimate <span class="process-math">\(P(t)\text{.}\)</span></p>
+<p id="p-112">A simple model for <span class="process-math">\(\dv{P}{t}\)</span> is to assume it depends only on the birth rate <span class="process-math">\(\beta\)</span> and death rate <span class="process-math">\(\delta\)</span> of the species in question. Then we can write</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-natural-growth.html" id="equation-natural-growth">
 \begin{equation}
 \dv{P}{t} = (\beta - \delta)P.\tag{1}
@@ -231,11 +257,11 @@ P(t) = P_{0}e^{(\beta - \delta)t},
 \end{equation*}
 </div>
 <p class="continuation">where <span class="process-math">\(P_{0}\)</span> represents the "initial population", or population at time <span class="process-math">\(t = 0\text{.}\)</span> We call <a href="" class="xref" data-knowl="./knowl/equation-natural-growth.html" title="Equation 1">(1)</a> the <dfn class="terminology">natural growth equation</dfn>.</p>
-<p id="p-108">The natural growth equation is simple, but it's probably too simple to be useful expect in certain scenarios (such as measuring half-life). To get a more flexible model, we can generalize <a href="" class="xref" data-knowl="./knowl/equation-natural-growth.html" title="Equation 1">(1)</a> by assuming that the birth and death rates are actually functions of time. This gives us the <dfn class="terminology">general population equation</dfn>.</p>
+<p id="p-113">The natural growth equation is simple, but it's probably too simple to be useful expect in certain scenarios (such as measuring half-life). To get a more flexible model, we can generalize <a href="" class="xref" data-knowl="./knowl/equation-natural-growth.html" title="Equation 1">(1)</a> by assuming that the birth and death rates are actually functions of time. This gives us the <dfn class="terminology">general population equation</dfn>.</p>
 <article class="definition definition-like" id="definition-general-population-equation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">General Population Equation.</span>
 </h4>
-<p id="p-109">The general population equation for a population <span class="process-math">\(P(t)\)</span> is given by</p>
+<p id="p-114">The general population equation for a population <span class="process-math">\(P(t)\)</span> is given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = (\beta(t) - \delta(t))P.
@@ -243,10 +269,10 @@ P(t) = P_{0}e^{(\beta - \delta)t},
 </div></article><article class="example example-like" id="example-population-explosion"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.2</span><span class="period">.</span><span class="space"> </span><span class="title">Population Explosion.</span>
 </h4>
-<p id="p-110">A population has <span class="process-math">\(100\)</span> members at time <span class="process-math">\(t = 0\)</span> years with a death rate of <span class="process-math">\(.25P\)</span> and a birth rate of <span class="process-math">\(.5P\text{,}\)</span> where <span class="process-math">\(P(t)\)</span> denotes the population after <span class="process-math">\(t\)</span> years. Find <span class="process-math">\(P(t)\)</span> and determine if this is a reasonable population model.</p>
+<p id="p-115">A population has <span class="process-math">\(100\)</span> members at time <span class="process-math">\(t = 0\)</span> years with a death rate of <span class="process-math">\(.25P\)</span> and a birth rate of <span class="process-math">\(.5P\text{,}\)</span> where <span class="process-math">\(P(t)\)</span> denotes the population after <span class="process-math">\(t\)</span> years. Find <span class="process-math">\(P(t)\)</span> and determine if this is a reasonable population model.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-17" id="solution-17"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-17"><div class="solution solution-like">
-<p id="p-111">If we assume that the population obeys the general growth equation, then we get</p>
+<p id="p-116">If we assume that the population obeys the general growth equation, then we get</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 P^\prime = .25P^{2}, P(0) = 100.
@@ -258,7 +284,7 @@ P^\prime = .25P^{2}, P(0) = 100.
 P(t) = \frac{100}{1 - 25t}.
 \end{equation*}
 </div>
-<p id="p-112">So we have a solution, and furthermore <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> guarantees that the solution is unique. But if you stare at this for a bit, you might see that it has a divide-by-zero problem. In particular,</p>
+<p id="p-117">So we have a solution, and furthermore <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> guarantees that the solution is unique. But if you stare at this for a bit, you might see that it has a divide-by-zero problem. In particular,</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-existence-and-uniqueness-theorem.html">
 \begin{equation*}
 \lim_{t\to(\frac{1}{25})^{+}}P(t) = \infty.
@@ -269,7 +295,7 @@ P(t) = \frac{100}{1 - 25t}.
 </div></article></section><section class="subsection" id="subsection-the-logistic-equation"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Logistic Equation</span>
 </h3>
-<p id="p-113"><a href="" class="xref" data-knowl="./knowl/example-population-explosion.html" title="Example 1.6.2: Population Explosion">Example 1.6.2</a> shows that we need to be more careful with our assumptions on population growth. One relatively simple assumption we can make is to assume that the birth rate <span class="process-math">\(\beta(t)\)</span> decreases as population <span class="process-math">\(P\)</span> increases. This makes sense in the physical world as well: as population increases, existing and finite resources (such as food) must be shared between more and more members of the population. Since there's less to go around, we should expect growth to slow down. In particular, let's assume that</p>
+<p id="p-118"><a href="" class="xref" data-knowl="./knowl/example-population-explosion.html" title="Example 1.6.2: Population Explosion">Example 1.6.2</a> shows that we need to be more careful with our assumptions on population growth. One relatively simple assumption we can make is to assume that the birth rate <span class="process-math">\(\beta(t)\)</span> decreases as population <span class="process-math">\(P\)</span> increases. This makes sense in the physical world as well: as population increases, existing and finite resources (such as food) must be shared between more and more members of the population. Since there's less to go around, we should expect growth to slow down. In particular, let's assume that</p>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/example-population-explosion.html" id="md-6">
 \begin{align*}
 \beta(t) &amp; = \beta_{0} - \beta_{1}P \\
@@ -282,7 +308,7 @@ P(t) = \frac{100}{1 - 25t}.
 \dv{P}{t} = (\beta_{0} - \beta_{1}P - \delta_{0})P.
 \end{equation*}
 </div>
-<p id="p-114">With a little algebra, we get the <dfn class="terminology">logistic equation</dfn>:</p>
+<p id="p-119">With a little algebra, we get the <dfn class="terminology">logistic equation</dfn>:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = kP(M-P)
@@ -298,10 +324,10 @@ P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},
 <article class="example example-like" id="example-long-term-behavior-of-logistic-growth"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Long-Term Behavior of Logistic Growth.</span>
 </h4>
-<p id="p-115">What is the long-term population of a species that grows according to the logistic equation <span class="process-math">\(\dv{P}{t} = kP(M-P)\text{?}\)</span></p>
+<p id="p-120">What is the long-term population of a species that grows according to the logistic equation <span class="process-math">\(\dv{P}{t} = kP(M-P)\text{?}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-18" id="solution-18"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-18"><div class="solution solution-like">
-<p id="p-116">Using the fact that</p>
+<p id="p-121">Using the fact that</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},
@@ -315,14 +341,14 @@ P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}},
 </div>
 <p class="continuation">So the population should eventually level out at <span class="process-math">\(M\text{.}\)</span></p>
 </div></div>
-</div></article><p id="p-117">In the logistic equation <span class="process-math">\(P^\prime = kP(M-P)\text{,}\)</span> the value <span class="process-math">\(M\)</span> is the <dfn class="terminology">carrying capacity</dfn>, and denotes the maximum sustainable population according to the model.</p>
+</div></article><p id="p-122">In the logistic equation <span class="process-math">\(P^\prime = kP(M-P)\text{,}\)</span> the value <span class="process-math">\(M\)</span> is the <dfn class="terminology">carrying capacity</dfn>, and denotes the maximum sustainable population according to the model.</p>
 <article class="example example-like" id="example-population-growth-in-the-usa"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.4</span><span class="period">.</span><span class="space"> </span><span class="title">Population Growth in the USA.</span>
 </h4>
-<p id="p-118">In millions, the population of the USA in 1990 was <span class="process-math">\(250\)</span> and was growing at a rate of <span class="process-math">\(3.1\)</span> per year. In 2012, the population was <span class="process-math">\(314\)</span> and was growing at a rate of <span class="process-math">\(2.3\)</span> per year. Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of <span class="process-math">\(325.7\text{.}\)</span></p>
+<p id="p-123">In millions, the population of the USA in 1990 was <span class="process-math">\(250\)</span> and was growing at a rate of <span class="process-math">\(3.1\)</span> per year. In 2012, the population was <span class="process-math">\(314\)</span> and was growing at a rate of <span class="process-math">\(2.3\)</span> per year. Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of <span class="process-math">\(325.7\text{.}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-19" id="solution-19"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-19"><div class="solution solution-like">
-<p id="p-119">Let <span class="process-math">\(P(t)\)</span> denote the population of the USA (in millions), where <span class="process-math">\(t\)</span> is the number of years after 1990. Then</p>
+<p id="p-124">Let <span class="process-math">\(P(t)\)</span> denote the population of the USA (in millions), where <span class="process-math">\(t\)</span> is the number of years after 1990. Then</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = kP(M-P)
@@ -335,7 +361,7 @@ P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}}.
 \end{equation*}
 </div>
 <p class="continuation">So we need to find <span class="process-math">\(k\)</span> and <span class="process-math">\(M\text{.}\)</span></p>
-<p id="p-120">When <span class="process-math">\(t = 0\text{,}\)</span> we have <span class="process-math">\(P^\prime = 3.1\)</span> and <span class="process-math">\(P = 250\text{.}\)</span> Similarly, when <span class="process-math">\(t = 22\)</span> we have <span class="process-math">\(P^\prime = 2.3\)</span> and <span class="process-math">\(P = 314\text{.}\)</span> Therefore</p>
+<p id="p-125">When <span class="process-math">\(t = 0\text{,}\)</span> we have <span class="process-math">\(P^\prime = 3.1\)</span> and <span class="process-math">\(P = 250\text{.}\)</span> Similarly, when <span class="process-math">\(t = 22\)</span> we have <span class="process-math">\(P^\prime = 2.3\)</span> and <span class="process-math">\(P = 314\text{.}\)</span> Therefore</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-7">
 \begin{align*}
 3.1 &amp; = 250k(M - 250) \\
@@ -348,7 +374,7 @@ P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}}.
 P(t) = \frac{101600}{250 + 156.4e^{-.03t}}.
 \end{equation*}
 </div>
-<p id="p-121">This model estimates the population in 2017 to be</p>
+<p id="p-126">This model estimates the population in 2017 to be</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 P(27) = 317.9,
@@ -359,37 +385,37 @@ P(27) = 317.9,
 </div></article></section><section class="subsection" id="section-stability-of-solutions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Stability of Solutions</span>
 </h3>
-<p id="p-122">The logistic equation</p>
+<p id="p-127">The logistic equation</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = kP(M-P)
 \end{equation*}
 </div>
 <p class="continuation">is a particularly nice separable ODE since the right hand side depends only on the unknown function <span class="process-math">\(P\text{.}\)</span> So we can write <span class="process-math">\(P^\prime = f(P)\text{,}\)</span> where <span class="process-math">\(f(P) = kP(M-P)\text{.}\)</span> ODEs like this (where the independent variable does not appear explicitly) are called <dfn class="terminology">autonomous ODEs</dfn>.</p>
-<p id="p-123">Autonomous ODEs like <span class="process-math">\(\dv{x}{t} = f(x)\)</span> are useful because the behavior of their solutions can be determined <em class="emphasis">qualitatively</em>, without actually solving the ODE. This is done by looking for the constant solutions of the ODE, that is, solutions of the form <span class="process-math">\(x = c\text{.}\)</span> For any such solution, we must have <span class="process-math">\(f(c) = 0\)</span> as well. These solutions (i.e., the solutions of <span class="process-math">\(f(x) = 0\)</span>) are called the <dfn class="terminology">critical points</dfn> or <dfn class="terminology">equilibrium solutions</dfn> of the ODE. These solutions completely determine the long-term behavior of <em class="emphasis">every other solution</em>.</p>
+<p id="p-128">Autonomous ODEs like <span class="process-math">\(\dv{x}{t} = f(x)\)</span> are useful because the behavior of their solutions can be determined <em class="emphasis">qualitatively</em>, without actually solving the ODE. This is done by looking for the constant solutions of the ODE, that is, solutions of the form <span class="process-math">\(x = c\text{.}\)</span> For any such solution, we must have <span class="process-math">\(f(c) = 0\)</span> as well. These solutions (i.e., the solutions of <span class="process-math">\(f(x) = 0\)</span>) are called the <dfn class="terminology">critical points</dfn> or <dfn class="terminology">equilibrium solutions</dfn> of the ODE. These solutions completely determine the long-term behavior of <em class="emphasis">every other solution</em>.</p>
 <article class="example example-like" id="example-finding-equilibrium-solutions"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Finding Equilibrium Solutions.</span>
 </h4>
-<p id="p-124">Find the equilibrium solutions of <span class="process-math">\(\dv{x}{t} = -x^{2} + 7x - 10\text{.}\)</span></p>
+<p id="p-129">Find the equilibrium solutions of <span class="process-math">\(\dv{x}{t} = -x^{2} + 7x - 10\text{.}\)</span></p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-20" id="solution-20"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-20"><div class="solution solution-like"><p id="p-125">We need to solve the equation <span class="process-math">\(-x^{2} + 7x - 10 = 0\text{.}\)</span> Thankfully, we can factor this to get <span class="process-math">\((2-x)(x-5) = 0\text{,}\)</span> and so the equilibrium solutions are <span class="process-math">\(x = 2,5\text{.}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-20" id="solution-20"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-20"><div class="solution solution-like"><p id="p-130">We need to solve the equation <span class="process-math">\(-x^{2} + 7x - 10 = 0\text{.}\)</span> Thankfully, we can factor this to get <span class="process-math">\((2-x)(x-5) = 0\text{,}\)</span> and so the equilibrium solutions are <span class="process-math">\(x = 2,5\text{.}\)</span></p></div></div>
 </div></article><article class="definition definition-like" id="definition-stability-critial-points"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.6.6</span><span class="period">.</span><span class="space"> </span><span class="title">Stability of Solutions.</span>
 </h4>
-<p id="p-126">A critical point is <dfn class="terminology">stable</dfn> if solutions that start "near" the point stay near it. A critical point is <dfn class="terminology">unstable</dfn> if solutions that start "near" the point can diverge away from it.</p></article><article class="example example-like" id="example-determining-the-stability-of-solutions"><h4 class="heading">
+<p id="p-131">A critical point is <dfn class="terminology">stable</dfn> if solutions that start "near" the point stay near it. A critical point is <dfn class="terminology">unstable</dfn> if solutions that start "near" the point can diverge away from it.</p></article><article class="example example-like" id="example-determining-the-stability-of-solutions"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Determining the Stability of Solutions.</span>
 </h4>
-<p id="p-127">What are the stable critical points of <span class="process-math">\(\dv{x}{t} = -x^{2} + 7x - 10\text{?}\)</span></p>
+<p id="p-132">What are the stable critical points of <span class="process-math">\(\dv{x}{t} = -x^{2} + 7x - 10\text{?}\)</span></p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-21" id="solution-21"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-21"><div class="solution solution-like">
-<p id="p-128">We already know that the critical points are <span class="process-math">\(x = 2, 5\text{.}\)</span> We can determine their stability by making use of a <dfn class="terminology">phase diagram</dfn>, which is essentially a sign chart for <span class="process-math">\(f(x) = -x^{2} + 7x - 10\text{:}\)</span></p>
+<p id="p-133">We already know that the critical points are <span class="process-math">\(x = 2, 5\text{.}\)</span> We can determine their stability by making use of a <dfn class="terminology">phase diagram</dfn>, which is essentially a sign chart for <span class="process-math">\(f(x) = -x^{2} + 7x - 10\text{:}\)</span></p>
 <figure class="figure figure-like" id="figure-7"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-7.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.8<span class="period">.</span></span><span class="space"> </span>The phase diagram for <span class="process-math">\(x^\prime = f(x).\)</span></figcaption></figure><p id="p-129">This shows us that solutions that begin near <span class="process-math">\(x = 2\)</span> tend to move away from <span class="process-math">\(x = 2\text{,}\)</span> which solutions near <span class="process-math">\(x = 5\)</span> tend to move towards <span class="process-math">\(x = 5\text{.}\)</span> So <span class="process-math">\(x = 2\)</span> is unstable and <span class="process-math">\(x = 5\)</span> is stable.</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.8<span class="period">.</span></span><span class="space"> </span>The phase diagram for <span class="process-math">\(x^\prime = f(x).\)</span></figcaption></figure><p id="p-134">This shows us that solutions that begin near <span class="process-math">\(x = 2\)</span> tend to move away from <span class="process-math">\(x = 2\text{,}\)</span> which solutions near <span class="process-math">\(x = 5\)</span> tend to move towards <span class="process-math">\(x = 5\text{.}\)</span> So <span class="process-math">\(x = 2\)</span> is unstable and <span class="process-math">\(x = 5\)</span> is stable.</p>
 </div></div>
 </div></article><article class="example example-like" id="example-determining-a-sustainable-population"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">Determining a Sustainable Population.</span>
 </h4>
-<p id="p-130">Consider a population of fish that obeys the logistic equation</p>
+<p id="p-135">Consider a population of fish that obeys the logistic equation</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = 2P(30 - P)
@@ -398,14 +424,14 @@ P(27) = 317.9,
 <p class="continuation">where <span class="process-math">\(P(t)\)</span> is the population of fish (in thousands) after <span class="process-math">\(t\)</span> years. Suppose that the population is also harvested at some rate <span class="process-math">\(h\)</span> (in thousands per year). What is the maximum sustainable rate of harvesting?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-22" id="solution-22"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-22"><div class="solution solution-like">
-<p id="p-131">To account for the harvesting, we need to modify the ODE:</p>
+<p id="p-136">To account for the harvesting, we need to modify the ODE:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \dv{P}{t} = 2P(30 - P) - h.
 \end{equation*}
 </div>
 <p class="continuation">The harvesting will be sustainable as long as the population does not become extinct. To determine this long term behavior, we'll find the critical points and set up a phase diagram.</p>
-<p id="p-132">The critical points are given by</p>
+<p id="p-137">The critical points are given by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 P = 15 \pm \sqrt{3600 - 8h}
@@ -413,8 +439,8 @@ P = 15 \pm \sqrt{3600 - 8h}
 </div>
 <p class="continuation">by the quadratic formula. We now have three cases to consider: <span class="process-math">\(3600 - 8h \lt 0, 3600 - 8h = 0, 3600 - 8h \gt 0.\)</span> In terms of <span class="process-math">\(h\text{,}\)</span> these reduce to <span class="process-math">\(h \lt 450, h = 450, h \gt 450\text{.}\)</span></p>
 <ol class="decimal">
-<li id="li-11">
-<p id="p-133">In the first case, if <span class="process-math">\(h \lt 450\)</span> then we have two positive, real critical points:</p>
+<li id="li-13">
+<p id="p-138">In the first case, if <span class="process-math">\(h \lt 450\)</span> then we have two positive, real critical points:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 0 \lt c_{1} \lt 15 \lt c_{2} \lt 75.
@@ -422,32 +448,32 @@ P = 15 \pm \sqrt{3600 - 8h}
 </div>
 <p class="continuation">The phase diagram for this situation is</p>
 <figure class="figure figure-like" id="figure-8"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-8.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.10<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-134">So we see that <span class="process-math">\(c_{1}\)</span> is unstable while <span class="process-math">\(c_{2}\)</span> is stable. In particular, as long as <span class="process-math">\(P\geq c_{1} = 15 - \sqrt{3600 - 8h}\text{,}\)</span> then the rate of harvesting is sustainable.</p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.10<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-139">So we see that <span class="process-math">\(c_{1}\)</span> is unstable while <span class="process-math">\(c_{2}\)</span> is stable. In particular, as long as <span class="process-math">\(P\geq c_{1} = 15 - \sqrt{3600 - 8h}\text{,}\)</span> then the rate of harvesting is sustainable.</p>
 </li>
-<li id="li-12">
-<p id="p-135">Now assume that <span class="process-math">\(h = 450\text{.}\)</span> Then we have only one equilibrium solution: <span class="process-math">\(c = 15\text{.}\)</span> The corresponding phase diagram is</p>
+<li id="li-14">
+<p id="p-140">Now assume that <span class="process-math">\(h = 450\text{.}\)</span> Then we have only one equilibrium solution: <span class="process-math">\(c = 15\text{.}\)</span> The corresponding phase diagram is</p>
 <figure class="figure figure-like" id="figure-9"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/image-9.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.11<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-136">We interpret the phase diagram as follows: if <span class="process-math">\(P\)</span> is less than <p id="p-137">15,000</p> then the population will collapse to extinction. Otherwise, the population will stabilize at <span class="process-math">\(15,000\text{.}\)</span> This type of critical point is often called <dfn class="terminology">semi-stable.</dfn></p>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.6.11<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-141">We interpret the phase diagram as follows: if <span class="process-math">\(P\)</span> is less than <p id="p-142">15,000</p> then the population will collapse to extinction. Otherwise, the population will stabilize at <span class="process-math">\(15,000\text{.}\)</span> This type of critical point is often called <dfn class="terminology">semi-stable.</dfn></p>
 </li>
-<li id="li-13"><p id="p-138">Finally, consider the case <span class="process-math">\(h \gt 450\text{.}\)</span> Then we have no (real) critical points. Since imaginary populations don't make sense in this model, there is no sustainable population. No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than <span class="process-math">\(450\text{.}\)</span></p></li>
+<li id="li-15"><p id="p-143">Finally, consider the case <span class="process-math">\(h \gt 450\text{.}\)</span> Then we have no (real) critical points. Since imaginary populations don't make sense in this model, there is no sustainable population. No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than <span class="process-math">\(450\text{.}\)</span></p></li>
 </ol>
-<p id="p-139">By the above, the largest sustainable harvesting rate is <span class="process-math">\(h = 450,\)</span> as long as <span class="process-math">\(P_{0}\geq 15\text{.}\)</span></p>
+<p id="p-144">By the above, the largest sustainable harvesting rate is <span class="process-math">\(h = 450,\)</span> as long as <span class="process-math">\(P_{0}\geq 15\text{.}\)</span></p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-linear-stability-analysis"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Linear Stability Analysis</span>
 </h3>
-<p id="p-140">Given the autonomous ODE <span class="process-math">\(\dv{x}{t} = f(x)\text{,}\)</span> we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram. We can go a step further and actually qualify the growth of solutions that are "near" equilibrium solutions. In particular, we have the following theorem.</p>
+<p id="p-145">Given the autonomous ODE <span class="process-math">\(\dv{x}{t} = f(x)\text{,}\)</span> we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram. We can go a step further and actually qualify the growth of solutions that are "near" equilibrium solutions. In particular, we have the following theorem.</p>
 <article class="theorem theorem-like" id="theorem-linear-stability-analysis"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">1.6.12</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Stability Analysis.</span>
 </h4>
-<p id="p-141">Suppose <span class="process-math">\(\dv{x}{t} = f(x)\)</span> where <span class="process-math">\(f(x)\)</span> is continuously differentiable, and let <span class="process-math">\(x^{*}\)</span> denote a critical point/equilibrium solution of the ODE. If <span class="process-math">\(f^\prime (x^{*}) \lt 0\text{,}\)</span> then <span class="process-math">\(x^{*}\)</span> is stable and solutions near <span class="process-math">\(x^{*}\)</span> will move exponentially towards <span class="process-math">\(x^{*}\text{.}\)</span> If <span class="process-math">\(f^\prime (x^{*}) \gt 0\text{,}\)</span> then <span class="process-math">\(x^{*}\)</span> is unstable and solutions near <span class="process-math">\(x^{*}\)</span> will move exponentially away from <span class="process-math">\(x^{*}\text{.}\)</span> If <span class="process-math">\(f^\prime (x^{*}) = 0\text{,}\)</span> then more advanced methods are required.</p></article><article class="example example-like" id="example-classifying-the-critical-points-of-the-logistic-equation"><h4 class="heading">
+<p id="p-146">Suppose <span class="process-math">\(\dv{x}{t} = f(x)\)</span> where <span class="process-math">\(f(x)\)</span> is continuously differentiable, and let <span class="process-math">\(x^{*}\)</span> denote a critical point/equilibrium solution of the ODE. If <span class="process-math">\(f^\prime (x^{*}) \lt 0\text{,}\)</span> then <span class="process-math">\(x^{*}\)</span> is stable and solutions near <span class="process-math">\(x^{*}\)</span> will move exponentially towards <span class="process-math">\(x^{*}\text{.}\)</span> If <span class="process-math">\(f^\prime (x^{*}) \gt 0\text{,}\)</span> then <span class="process-math">\(x^{*}\)</span> is unstable and solutions near <span class="process-math">\(x^{*}\)</span> will move exponentially away from <span class="process-math">\(x^{*}\text{.}\)</span> If <span class="process-math">\(f^\prime (x^{*}) = 0\text{,}\)</span> then more advanced methods are required.</p></article><article class="example example-like" id="example-classifying-the-critical-points-of-the-logistic-equation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.6.13</span><span class="period">.</span><span class="space"> </span><span class="title">Classifying the Critical Points of the Logistic Equation.</span>
 </h4>
-<p id="p-142">Classify the critical points of the logistic equation as stable or unstable.</p>
+<p id="p-147">Classify the critical points of the logistic equation as stable or unstable.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-23" id="solution-23"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-23"><div class="solution solution-like">
-<p id="p-143">Recall that the logistic equation is given by <span class="process-math">\(P^\prime = kP(M-P) = f(P)\)</span> for (we'll assume) positive constants <span class="process-math">\(k,M\text{.}\)</span> From here, we clearly see that the critical points are <span class="process-math">\(P = 0\)</span> and <span class="process-math">\(P = M\)</span> (which makes sense from a population standpoint!). We could set up a phase diagram to determine stability, but we'll use <a href="" class="xref" data-knowl="./knowl/theorem-linear-stability-analysis.html" title="Theorem 1.6.12: Linear Stability Analysis">Theorem 1.6.12</a> instead.</p>
-<p id="p-144">Since <span class="process-math">\(f^\prime (P) = k(M-P) - kP\text{,}\)</span> we see that</p>
+<p id="p-148">Recall that the logistic equation is given by <span class="process-math">\(P^\prime = kP(M-P) = f(P)\)</span> for (we'll assume) positive constants <span class="process-math">\(k,M\text{.}\)</span> From here, we clearly see that the critical points are <span class="process-math">\(P = 0\)</span> and <span class="process-math">\(P = M\)</span> (which makes sense from a population standpoint!). We could set up a phase diagram to determine stability, but we'll use <a href="" class="xref" data-knowl="./knowl/theorem-linear-stability-analysis.html" title="Theorem 1.6.12: Linear Stability Analysis">Theorem 1.6.12</a> instead.</p>
+<p id="p-149">Since <span class="process-math">\(f^\prime (P) = k(M-P) - kP\text{,}\)</span> we see that</p>
 <div class="displaymath process-math" data-contains-math-knowls="" id="md-8">
 \begin{align*}
 f^\prime (0) &amp; = kM \gt 0\\
