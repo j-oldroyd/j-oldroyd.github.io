@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!--********************************************************************
-
-*********************************************************************-->
-<!-- This file was originally part of the book     -->
-<!-- (as copied on 2015/07/12)                     -->
-<!--                                               -->
-<!--   Abstract Algebra: Theory and Applications   -->
-<!--                                               -->
-<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
-
 <chapter xml:id="laplace-transforms" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Laplace Transforms</title>
   <section xml:id="section-the-laplace-transform">
@@ -53,6 +43,7 @@
       </p>
       <definition xml:id="definition-the-laplace-transform">
         <title>The Laplace Transform</title>
+        <idx><h>Laplace transforms</h></idx>
         <statement>
           <p>
             Let <m>f(t)</m> be defined for <m>t\geq0</m>. The <term>Laplace transform</term> of <m>f</m> is a function <m>F(s)</m>, or <m>\mathcal{L}\left\{ f(t) \right\}</m>, defined by
@@ -591,40 +582,63 @@
           d_{\varepsilon}(t) = 
           \begin{cases}
           \frac{1}{\varepsilon} \amp\text{if }-\frac{\varepsilon}{2}\leq t\leq \frac{\varepsilon}{2} \\
-          0 \amp\text{otherwise}  
+          0 \amp\text{otherwise}
           \end{cases}.
         </me>
-        <figure xml:id="figure-approximation-unit-impulse">
-          <image>
-            <latex-image>
-              \begin{tikzpicture}[scale=0.7]
+      </p>
+      <figure xml:id="figure-dirac-delta-functions-approximation-unit-impulse">
+        <caption>Approximating the instantaneous unit impulse.</caption>
+        <image xml:id="image-dirac-delta-functions-approximation-unit-impulse" width="50%">
+          <description>A plot of approximations to an instantaneous unit impulse.</description>
+          <latex-image>
+            \begin{tikzpicture}
               \begin{axis}[
               myaxis,
-              enlargelimits=false,
               legend cell align=left,
               xlabel = {$t$},
-              ymin = -.5,
-              ymax = 1.5
+              xtick = {-.5, .5},
+              xticklabels = {$-\frac{\varepsilon}{2}$, $\frac{\varepsilon}{2}$},
+              ytick = {1},
+              yticklabels = {$\frac{1}{\varepsilon}$},
+              yticklabel style = {yshift=10pt},
+              xmin = -2, xmax = 2,
+              ymin = 0, ymax = 2,
+              grid = none,
               ]
-              \addplot[domain=-.5:.5,thick,samples=200,blue]{1};
+              \addplot[name path = f1, domain=-.5:.5,thick,samples=200,blue]{1};
               \addplot[domain=-2.5:-.5,thick,samples=200,blue]{0};
               \addplot[domain=.5:2.5,thick,samples=200,blue]{0};
-              \addlegendentry{$d_{\varepsilon}(t)$}
+              \addlegendentry{$d_{\varepsilon}(t)$};
+              \path[name path = axis] (axis cs: -.5, 0) -- (axis cs: .5, 0);
+
+              % the below is adapted from https://tex.stackexchange.com/questions/164991/pgfplots-how-to-fill-bounded-area-under-a-curve-using-addplot-and-fill
+              \addplot[%
+                      thick,
+                      color=blue,
+                      fill=blue, 
+                      fill opacity=0.05
+                  ]
+                  fill between[
+                      of=f1 and axis,
+                      soft clip={domain = -.5:.5},
+                  ];
               \end{axis}
-              \end{tikzpicture}
-            </latex-image>
-          </image>
-          <caption>Approximating the instantaneous unit impulse.</caption>
-        </figure>
-      </p>
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
       <p>
-        Then for any <m>\varepsilon</m>, we have
-        <me>\int_{-\frac{\varepsilon}{2}}^{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1.</me>
-        <m>d_{\varepsilon}(t)</m> is a completely valid function, and if we send <m>\varepsilon\to0</m> then it becomes a better and better approximation to an instantaneous unit impulse.
+        As indicated in <xref ref="figure-dirac-delta-functions-approximation-unit-impulse" text="type-global" /> below, this function is defined so that the area under the graph is <m>1</m> regardless of the value of <m>\varepsilon</m>.
+        Therefore
+        <me>\int_{-\frac{\varepsilon}{2}}^{\frac{\varepsilon}{2}}d_{\varepsilon}(t)\dd{t} = 1</me>
+        for all <m>\varepsilon > 0</m>.
+        Although the instantaneous unit impulse we tried to define earlier can't actually be a function, <m>d_{\varepsilon}(t)</m> is a completely valid function for all positive <m>\varepsilon</m>.
+        Furthermore, if we send <m>\varepsilon\to0</m> then it becomes a better and better approximation to an ideal instantaneous unit impulse.
         Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.
       </p>
       <definition xml:id="definition-dirac-delta">
         <title>The Dirac Delta Function</title>
+        <idx><h>Dirac delta function</h></idx>
         <statement>
           <p>
             The <term>Dirac delta function</term>, denoted by the symbol <m>\delta(t)</m>, is <q>defined</q> by the equation
@@ -633,14 +647,14 @@
         </statement>
       </definition>
       <p>
-        The Dirac delta function is, of course, not an actual function.
-        <aside>
-          <p>
-            The Dirac delta is actually an example of a <term>generalized function</term>, or <term>tempered distribution</term>.
-          </p>
-        </aside>
-        But it's still useful as a mathematical formulation of an instantaneous force with unit impulse at <m>t=0</m>.
+        The Dirac delta function is, of course, not an actual function, but it's still useful as a mathematical formulation of an instantaneous force with unit impulse at <m>t=0</m>.
+        And this expression is often perfectly valid to work with inside of integrals due to the <xref ref="theorem-sifting-property" text="custom">sampling property</xref> discussed below.
       </p>
+      <aside>
+        <p>
+          The Dirac delta is actually an example of a <term>generalized function</term>, or <term>tempered distribution</term>.
+        </p>
+      </aside>
       <p>
         We can also take translations of the Dirac delta, which we view as a <q>function</q> <m>\delta(t-a)</m> defined piecewise by
         <me>
@@ -650,22 +664,23 @@
           0 \amp\text{if }t\neq a
           \end{cases}.
         </me>
-        We represent this graphically as an arrow:
-        <figure xml:id-figure-dirac-delta-plot="">
-          <image>
-            <latex-image>
-              \begin{tikzpicture}
+        We can represent this graphically as an arrow (see <xref ref="figure-dirac-delta-plot" text="type-global" />).
+      </p>
+      <figure xml:id ="figure-dirac-delta-plot">
+        <caption>A plot of the Dirac delta function.</caption>
+        <image xml:id="image-dirac-delta-plot" width = "50%">
+          <description>A plot of the Dirac delta function.</description>
+          <latex-image>
+            \begin{tikzpicture}
               \draw (-3,0)--(3,0);
               \draw[->,ultra thick, blue] (0,0)--(0,1) node[above,black]{$\delta(t)$};
               \draw[->,ultra thick, blue] (2.5,0)--(2.5,1) node[above,black]{$\delta(t-a)$};
               \node at (0,0) [below]{$t=0$};
               \node at (2.5,0) [below]{$t=a$};
-              \end{tikzpicture}
-            </latex-image>
-          </image>
-          <caption>A plot of the Dirac delta function.</caption>
-        </figure>
-      </p>
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
       <p>
         The most important property of the Dirac delta is that
         <me>
@@ -675,12 +690,13 @@
           0 \amp\text{otherwise.}  
           \end{cases}
         </me>
-      </p>
-      <p>
-        We also have the important theorem formula for continuous functions.
+        This property can be generalized to products involving the Dirac delta and continuous functions.
+        Very roughly, if <m>\delta(t - a)</m> represents an arrow with an <q>area</q> of <m>1</m> concentrated at <m>t = a</m>, then <m>\delta(t - a)g(t)</m> represents an arrow with area <m>g(a)</m> concentrated at <m>t = a</m>.
+        This <term>sampling property</term> is stated more precisely as <xref ref="theorem-sifting-property" text="type-global" />.
       </p>
       <theorem xml:id="theorem-sifting-property">
-        <title>Sifting Property</title>
+        <title>Sampling Property of the Dirac Delta</title>
+        <idx><h>Dirac delta function</h><h>sampling</h></idx>
         <statement>
           <p>
             Let <m>g(t)</m> be a continuous function and let <m>\alpha\leq a\leq\beta</m>. Then
@@ -699,9 +715,9 @@
         </proof>
       </theorem>
       <p>
-        The above theorem gives us another interpretation of the Dirac delta: it's a <q>sampling function</q>.
+        The above theorem gives us another interpretation of the Dirac delta: it's a <q>sampling function.</q>
         When integrated against another function <m>g(t)</m> over an interval containing <m>a</m>, <m>\delta(t-a)</m> will pick out the value <m>g(a)</m>.
-        We can use this to find the Laplace transform of the Dirac delta.
+        We can use this to quickly find the Laplace transform of the Dirac delta.
       </p>
       <example xml:id="example-laplace-transform-of-the-dirac-delta-function">
         <title>Laplace Transform of the Dirac Delta Function</title>
@@ -725,21 +741,23 @@
     <subsection xml:id="subsection-dirac-delta-models">
       <title>Dirac Delta Models</title>
       <p>
-        We use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.
+        We will primarily use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.
+        Although this is not strictly realistic since such forces are still imparted over some interval of time, treating the force as instantaneous often simplifies computations.
       </p>
       <example xml:id="example-ivp-with-impulse">
         <title>IVP with Impulse</title>
         <statement>
           <p>
-            An object of mass <m>m=1</m>, at rest, is attached to a spring with spring constant <m>k=9</m>. 
+            An object of mass <m>m=1</m>, at rest, is attached to a spring with spring constant <m>k=9</m>.
             At time <m>t=0</m>, the a hammer strikes the mass providing an impulse of <m>3</m> and setting the mass in motion. What is the displacement <m>x(t)</m>?
           </p>
         </statement>
         <solution>
           <p>
-            <m>x(t)</m> satisfies the ODE
+            The displacement <m>x(t)</m> satisfies the ODE
             <me>mx''+kx = f(t)</me>
-            where <m>f(t)</m> is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form <m>c\delta(t)</m>. And since it provides an impulse of <m>3</m>, we can pick <m>f(t) = 3\delta(t)</m>.
+            where <m>f(t)</m> is the external force.
+            Since the hammer strikes quickly, we can model it as an instantaneous force of the form <m>c\delta(t)</m>. And since it provides an impulse of <m>3</m>, we can pick <m>f(t) = 3\delta(t)</m>.
             As the mass is initially at rest, <m>x</m> satisfies the IVP
             <me>x''+9x = 3\delta(t)\qq{where}x(0) = x^{\prime}(0) = 0.</me>
             To solve this, we take the Laplace transform of the IVP to get
@@ -759,7 +777,7 @@
         <title>Time-delayed Strike</title>
         <statement>
           <p>
-            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time <m>t=4</m>. 
+            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time <m>t=4</m>.
             What is the displacement <m>x(t)</m>?
           </p>
         </statement>
@@ -769,40 +787,43 @@
             <me>x''+9x = 3\delta(t-4)\qq{where}x(0)=x^{\prime}(0)=0.</me>
             If we take Laplace transforms and solve for <m>X(s)</m> we get
             <me>X(s) = \frac{3e^{-4s}}{s^{2}+9}</me>
-            and so, using our table, we see that
-            <me>x(t) = u(t-4)\sin[3(t-4)].</me>
+            and so
+            <me>x(t) = u(t-4)\sin[3(t-4)]</me>.
+            This function is plotted in <xref ref="figure-dirac-delta-functions-time-delay" text="type-global" /> below.
+            Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at <m>t = 4</m>.
           </p>
+          <figure xml:id="figure-dirac-delta-functions-time-delay">
+            <caption>Time-delayed hammer strike in <xref ref="example-time-delay" text="type-global" /></caption>
+            <image xml:id="image-dirac-delta-functions-time-delay">
+              <description>A plot of the displacement of a spring-mass system with time-delayed hammer strike.</description>
+              <latex-image>
+                \begin{tikzpicture}
+                  \begin{axis}[%
+                      myaxis,
+                      legend cell align=left,
+                      xlabel = {$t$},
+                      xmin = 0, xmax = 10,
+                      ymin = -2, ymax = 2,
+                      ]
+                    \addplot[domain=0:4,thick,samples=200,blue]{0};
+                    \addplot[domain=4:10,thick,samples=200,blue]{sin(deg(3*x-12))};
+                    \addlegendentry{$x(t)$};
+
+                    % code adapted from https://tex.stackexchange.com/questions/286183/place-arrow-and-text-at-specific-point-in-a-pgfplot
+                    \draw [-latex, shorten >=1pt] (3, 0.5) node[left]{hammer hits} to[out=350,in=120] (4, 0);
+                  \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
         </solution>
       </example>
-      <figure xml:id="figure-time-delay">
-        <image>
-          <latex-image>
-            \begin{tikzpicture}[scale=0.7]
-            \begin{axis}[
-            enlargelimits=false,
-            legend cell align=left,
-            axis x line = middle,
-            xlabel = $t$,
-            xmin = -1,
-            axis y line = center
-            ]
-            \addplot[domain=0:4,thick,samples=200,blue]{0};
-            \addplot[domain=4:9,thick,samples=200,blue]{sin(deg(3*x-12))};
-            \addlegendentry{$x(t)$}
-            \end{axis}
-            \end{tikzpicture}
-          </latex-image>
-          <caption>
-            Time-delayed hammer strikes in <xref ref="example-time-delay" text="type-global" />
-          </caption>
-        </image>
-      </figure>
 
       <example xml:id="example-resonance-with-an-impulse-train">
         <title>Resonance with an Impulse Train</title>
         <statement>
           <p>
-            Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every <m>\frac{2\pi}{3}</m> seconds, starting at <m>t=0</m>.
+            Once again we consider the spring-mass system used above in <xref ref="example-time-delay" text="type-global" />, but now we suppose that the mass is struck with the hammer once every <m>\frac{2\pi}{3}</m> seconds, starting at <m>t=0</m>.
             Find <m>x(t)</m>.
           </p>
         </statement>
@@ -817,7 +838,7 @@
             So once more we take Laplace transforms to get
             <me>s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}</me>
             and so
-            <me>X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}</me>
+            <me>X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}</me>.
             The displacement is then given by
             <md>
               <mrow>x(t) &amp;= \iLaplace{X(s)}</mrow>
@@ -828,33 +849,54 @@
             </md>.
             Each time the hammer strikes the mass, a factor of <m>\sin3t</m> is added to the displacement.
             The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.
-            This is demonstrated in <xref ref="figure-laplace-impulse-train-resonance" text="type-global" /> below.
+            This is clearly demonstrated in the figure below.
           </p>
+          <figure xml:id="figure-laplace-impulse-train-resonance">
+            <caption>The displacement <m>x(t)</m> and resonance with the impulse train.</caption>
+            <image xml:id="image-laplace-impulse-train-resonance" width="50%">
+              <description>A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.</description>
+              <latex-image>
+                \begin{tikzpicture}
+                  \begin{axis}[%
+                    myaxis,
+                    xmin = 0,
+                    ymin=-5, ymax=5,
+                    xlabel = {$t$},
+                    ylabel = {$x$},
+                    ]
+                    \addplot[domain=0:2*pi/3,thick,samples=200,blue]{sin(deg(3*x))};
+                    \addplot[domain=2*pi/3:4*pi/3,thick,samples=200,blue]{2*sin(deg(3*x))};
+                    \addplot[domain=4*pi/3:6*pi/3,thick,samples=200,blue]{3*sin(deg(3*x))};
+                    \addplot[domain=6*pi/3:8*pi/3,thick,samples=200,blue]{4*sin(deg(3*x))};
+                    \addlegendentry{$x(t)$};
+                  \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
         </solution>
       </example>
-      <figure xml:id="figure-laplace-impulse-train-resonance">
-        <caption>The position <m>x(t)</m> from <xref ref="example-resonance-with-an-impulse-train" text="type-global" />.</caption>
-        <image xml:id="image-laplace-impulse-train-resonance" width="50%">
-          <latex-image>
-            \begin{tikzpicture}
-            \begin{axis}[%
-            myaxis,
-            xmin = 0,
-            ymin=-5, ymax=5,
-            xlabel = {$t$},
-            ylabel = {$x$},
-            ]
-            \addplot[domain=0:2*pi/3,thick,samples=200,blue]{sin(deg(3*x))};
-            \addplot[domain=2*pi/3:4*pi/3,thick,samples=200,blue]{2*sin(deg(3*x))};
-            \addplot[domain=4*pi/3:6*pi/3,thick,samples=200,blue]{3*sin(deg(3*x))};
-            \addplot[domain=6*pi/3:8*pi/3,thick,samples=200,blue]{4*sin(deg(3*x))};
-            \addlegendentry{$x(t)$};
-            \end{axis}
-            \end{tikzpicture}
-          </latex-image>
-        </image>
-      </figure>
     </subsection>
+    <p>
+      The Dirac delta function is also important mathematically in determining the behavior of certain systems.
+      For example, consider the system determined by the IVP
+      <me>x'' + 9x = f(t)\text{ where }x(0) = x^{\prime}(0) = 0.</me>
+      We can imagine that the ODE is a mathematical <q>machine</q> that converts the input <m>f(t)</m> into an output, or response, <m>x(t)</m>.
+      Using Laplace transforms it's not difficult to determine <m>X(s)</m>:
+      <me>X(s) = \frac{1}{s^2 + 9}F(s)</me>.
+      So we see that the Laplace transform of the response is related to the Laplace transform of the input by <m>G(s) = \frac{1}{s^2 + 9}</m>.
+      This function is the <term>transfer function</term> of the system and determines all possible responses.
+    </p>
+    <p>
+      Now here's the connection with the Dirac delta.
+      If we replace <m>f(t)</m> with <m>\delta(t)</m> to get the system <m>x'' + 9x = \delta(t)</m> and take Laplace transforms, we get
+      <me>X(s) = \frac{1}{s^2 + 9}</me>.
+      In other words, the transfer function is just the Laplace transform of the solution of <m>x'' + 9x = \delta(t)</m>.
+      We call the solution the <term>impulse reponse</term> of the system.
+      In this case, the impulse response is <m>g(t) = \frac{1}{3}\sin(3t)</m>.
+      Since the corresponding transfer function determines the form of <m>X(s)</m> for all responses <m>x(t)</m>, the impulse reponse must determine the form of all responses in the time domain.
+      We will see precisely how in the next section by introducing the concept of a <xref ref="definition-convolution-of-functions" text="custom">convolution</xref>.
+    </p>
   </section>
   <section xml:id="section-convolution-products">
     <title>Convolution Products</title>
@@ -870,6 +912,7 @@
     </p>
     <definition xml:id="definition-convolution-of-functions">
       <title>Convolution of Functions</title>
+      <idx><h>convolutions</h></idx>
       <statement>
         <p>
           Let <m>f</m> and <m>g</m> be piecewise continuous functions.
@@ -884,8 +927,9 @@
       In general, we will only take convolutions of functions in the time domain.
     </p>
     <p>
-      Convolutions are important because they act as <q>smoothing operators</q>.
+      It's difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as <q>smoothing operators</q>.
       If you have a <q>rough</q> (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation.
+      We will see another interpretation of the convolution at the end of this section.
     </p>
     <example xml:id="example-convolution-with-unit-step">
       <title>Convolution with Unit Step</title>
@@ -913,13 +957,14 @@
     </p>
     <theorem xml:id="theorem-convolution-transform">
       <title>Convolution Theorem</title>
+      <idx><h>Laplace transforms</h><h>Convolution Theorem</h></idx>
       <statement>
         <p>
           The Laplace transform distributes over convolution.
           In other words, if <m>f</m> and <m>g</m> are piecewise continuous functions, then
-          <me>\Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}.</me>
+          <me>\Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}</me>.
           Equivalently, if we write <m>F(s) = \Laplace{f(t)}</m> and <m>G(s) = \Laplace{g(t)}</m>, then
-          <me>\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau).</me>
+          <me>\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)</me>.
         </p>
       </statement>
     </theorem>
@@ -931,7 +976,7 @@
       <title>Using the Convolution Theorem</title>
       <statement>
         <p>
-          Let 
+          Let
           <me>F(s) = \frac{1}{s(s^{2}+4)}.</me>
           Find <m>f(t) = \iLaplace{F(s)}</m>.
         </p>
@@ -993,20 +1038,21 @@
       There are a couple of interesting things happening in the last example.
       In particular, we were able to write the solution <m>x(t)</m> in terms of <m>f(t)</m> as
       <me>x(t) = g(t)\ast f(t)</me>.
-      In these terms, we can view <m>f(t)</m> as the input into a particular system (whose behavior is determined by the ODE) and the solution <m>x(t)</m> is the corresponding output.
-      This relationship is even easier to write in the frequency domain: the frequency input <m>F(s)</m> is turned into the frequency output <m>X(s)</m> by means of the <term>transfer function</term> <m>G(s)</m>:
+      In these terms, we can recognize <m>g(t)</m> as the impulse response of the system discussed at the end of <xref ref="section-dirac-delta-functions" text="type-global" />.
+      Therefore the response of this system to the input <m>f(t)</m> is related to the impulse response by a convolution:
+      <me>x(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{\tau}</me>.
+      Essentially, this convolution integral tells us how to construct the response <m>x(t)</m> using only information about the input <m>f(t)</m> and the impulse response <m>g(t)</m> from the <q>past and present.</q>
+      Recall that this relationship is even easier to write in the frequency domain: the frequency input <m>F(s)</m> is turned into the frequency output <m>X(s)</m> by means of the transfer function <m>G(s) = \Laplace{g(t)}</m>:
       <me>X(s) = G(s)F(s)</me>.
     </p>
     <p>
-      The importance of the transfer function in applications is that it encodes <em>all possible outputs</em> the system is capable of producing.
       There are multiple ways to find the transfer function, assuming that all initial conditions are <m>0</m>.
       First, if <m>F(s)</m> is the input and <m>X(s)</m> is some measured output (once again, in the frequency domain), then the transfer function <m>G(s)</m> satisfies
       <me>G(s) = \frac{X(s)}{F(s)}</me>,
       and this quantity is independent of the particular choice of <m>F(s)</m>.
-      In particular, we can replace the time domain input <m>f(t)</m> with <m>\delta(t)</m>.
+      We can also replace the time domain input <m>f(t)</m> with <m>\delta(t)</m> as discussed in <xref ref="section-dirac-delta-functions" text="type-global" /> to determine the impulse response directly.
       In this case, the corresponding output in the frequency domain is
       <me>X(s) = G(s)\Laplace{\delta(t)} = G(s)</me>.
-      For this reason, the inverse transform of the transfer function is also known as the <term>impulse response</term> of the system.
     </p>
   </section>
 </chapter>
