@@ -1788,7 +1788,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.1",
   "title": "The Laplace Transform",
-  "body": "The Laplace Transform Definition and Basic Properties \n          Motivating the Laplace Transform\n         \n            A mass of  1  is attached to a spring that is held  1  to the right of its equilibrium position by a force of  4 .\n            Beginning at time  , a machine is turned on and applies an external force of   to the mass.\n            At time   the machine is turned off and the external force disappears.\n            Let   be the displacement of the mass at time  .\n            What is an ODE that models the motion of the mass?\n           \n            We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have\n             \n            where   is the external force at time  . Since  ,   and\n             \n            the motion of the mass satisfies the ODE\n             \n           \n        For the above example we could try to solve it as we did in Chapter 3: first by finding the complementary solution   (which isn't a problem) and then by finding the particular solution   corresponding to  .\n        However, finding   will not be possible using our previous methods since the function   is not differentiable everywhere (nor continuous everywhere).\n        We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.\n       The Laplace Transform Laplace transform time domain frequency domain \n        One reason we care about the Laplace transform is that it lets us deal with solving linear ODEs involving discontinuous functions.\n        This is something we will begin to look at in the next section.\n       Computing a Laplace Transform \n            Compute  .\n           Computing the Laplace of  \n            Compute the Laplace transform of  .\n           \n            We compute the Laplace transform   using the definition:\n             .\n           \n        In general,\n         \n        if   is a whole number.\n       linear transformation Linearity of the Laplace Transform \n            Let   and   be constants and suppose   and   are functions with respective Laplace transforms   and  . Then\n             \n           Computing the Transform of a Polynomial \n            Compute  .\n           \n            We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that\n             \n            so\n             .\n           \n        Another benefit is that the Laplace transform works well with some discontinuous functions.\n       The Unit Step Function unit step function \n            Note that we are computing a  translation  of the usual unit step function.\n            We still compute   using the definition of the Laplace transform:\n             .\n           \n        We can verify the result of   using Sage as below:\n         \n       \n        Some other important Laplace transforms are given below:\n         .\n       The Inverse Laplace Transform;  -shifting \n        An important theorem regarding Laplace transforms is the following:\n       Uniqueness of Laplace Transforms \n            Suppose   and   have respective Laplace transforms   and  .\n            If   for all   (for some constant  ) and   and   are piecewise continuous, then   on the interval  .\n           \n        The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.\n       Inverse Laplace Transform inverse Laplace transform linear Finding an Inverse Transform \n            A continuous function   has Laplace transform\n             \n            Find  .\n           \n              We can find   by taking the inverse Laplace transform of each term in  :\n               .\n              So\n               \n             -shifting \n            Suppose that   has Laplace transform  , defined for   for some  .\n            Then\n             \n            In other words, multiplication by an exponential   in the  time domain  corresponds to translation by   in the  frequency domain .\n           Inverse Laplace with Frequency Shifting \n            A function   has Laplace transform\n             \n            Find  .\n           \n            We'll start by completing the square on the denominator of   to see if we can make it look like   for some  :\n             \n            This looks an  awful  lot like the transform of  .\n            Since we have   instead of  , this tells us that\n             \n           \n        The following Sage cell verifies the computation in  .\n       "
+  "body": "The Laplace Transform Definition and Basic Properties \n          Motivating the Laplace Transform\n         \n            A mass of  1  is attached to a spring that is held  1  to the right of its equilibrium position by a force of  4 .\n            Beginning at time  , a machine is turned on and applies an external force of   to the mass.\n            At time   the machine is turned off and the external force disappears.\n            Let   be the displacement of the mass at time  .\n            What is an ODE that models the motion of the mass?\n           \n            We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have\n             \n            where   is the external force at time  . Since  ,   and\n             \n            the motion of the mass satisfies the ODE\n             \n           \n        For the above example we could try to solve it as we did in Chapter 3: first by finding the complementary solution   (which isn't a problem) and then by finding the particular solution   corresponding to  .\n        However, finding   will not be possible using our previous methods since the function   is not differentiable everywhere (nor continuous everywhere).\n        We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.\n       The Laplace Transform Laplace transforms Laplace transform time domain frequency domain \n        One reason we care about the Laplace transform is that it lets us deal with solving linear ODEs involving discontinuous functions.\n        This is something we will begin to look at in the next section.\n       Computing a Laplace Transform \n            Compute  .\n           Computing the Laplace of  \n            Compute the Laplace transform of  .\n           \n            We compute the Laplace transform   using the definition:\n             .\n           \n        In general,\n         \n        if   is a whole number.\n       linear transformation Linearity of the Laplace Transform \n            Let   and   be constants and suppose   and   are functions with respective Laplace transforms   and  . Then\n             \n           Computing the Transform of a Polynomial \n            Compute  .\n           \n            We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that\n             \n            so\n             .\n           \n        Another benefit is that the Laplace transform works well with some discontinuous functions.\n       The Unit Step Function unit step function \n            Note that we are computing a  translation  of the usual unit step function.\n            We still compute   using the definition of the Laplace transform:\n             .\n           \n        We can verify the result of   using Sage as below:\n         \n       \n        Some other important Laplace transforms are given below:\n         .\n       The Inverse Laplace Transform;  -shifting \n        An important theorem regarding Laplace transforms is the following:\n       Uniqueness of Laplace Transforms \n            Suppose   and   have respective Laplace transforms   and  .\n            If   for all   (for some constant  ) and   and   are piecewise continuous, then   on the interval  .\n           \n        The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.\n       Inverse Laplace Transform inverse Laplace transform linear Finding an Inverse Transform \n            A continuous function   has Laplace transform\n             \n            Find  .\n           \n              We can find   by taking the inverse Laplace transform of each term in  :\n               .\n              So\n               \n             -shifting \n            Suppose that   has Laplace transform  , defined for   for some  .\n            Then\n             \n            In other words, multiplication by an exponential   in the  time domain  corresponds to translation by   in the  frequency domain .\n           Inverse Laplace with Frequency Shifting \n            A function   has Laplace transform\n             \n            Find  .\n           \n            We'll start by completing the square on the denominator of   to see if we can make it look like   for some  :\n             \n            This looks an  awful  lot like the transform of  .\n            Since we have   instead of  , this tells us that\n             \n           \n        The following Sage cell verifies the computation in  .\n       "
 },
 {
   "id": "example-motivating-laplace",
@@ -1806,7 +1806,7 @@ var ptx_lunr_docs = [
   "type": "Definition",
   "number": "6.1.2",
   "title": "The Laplace Transform.",
-  "body": "The Laplace Transform Laplace transform time domain frequency domain "
+  "body": "The Laplace Transform Laplace transforms Laplace transform time domain frequency domain "
 },
 {
   "id": "example-computing-a-laplace-transform",
@@ -2013,7 +2013,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.4",
   "title": "Dirac Delta Functions",
-  "body": "Dirac Delta Functions Impulses \n        Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous.\n        Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.\n       impulse \n        So this is our goal: find some function   that has an instantaneous unit impulse at the point  .\n        In other words, we want to find a function   such that\n         \n        But this is impossible for any function, since\n         \n        However, we can approximate the  idea  of an instantaneous unit impulse by defining\n         \n         Approximating the instantaneous unit impulse. \n       \n        Then for any  , we have\n         \n          is a completely valid function, and if we send   then it becomes a better and better approximation to an instantaneous unit impulse.\n        Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.\n       The Dirac Delta Function Dirac delta function generalized function tempered distribution \n        We can also take translations of the Dirac delta, which we view as a  function    defined piecewise by\n         \n        We represent this graphically as an arrow:\n         A plot of the Dirac delta function. \n       \n        The most important property of the Dirac delta is that\n         \n       \n        We also have the important theorem formula for continuous functions.\n       Sifting Property \n            Let   be a continuous function and let  . Then\n             \n           \n            We treat   as a function and perform the above integration:\n             \n           \n        The above theorem gives us another interpretation of the Dirac delta: it's a  sampling function .\n        When integrated against another function   over an interval containing  ,   will pick out the value  .\n        We can use this to find the Laplace transform of the Dirac delta.\n       Laplace Transform of the Dirac Delta Function \n            Compute  , where  .\n           \n            We use the definition of the Laplace transform:\n             .\n            In particular,  .\n           Dirac Delta Models \n        We use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.\n       IVP with Impulse \n            An object of mass  , at rest, is attached to a spring with spring constant  . \n            At time  , the a hammer strikes the mass providing an impulse of   and setting the mass in motion. What is the displacement  ?\n           \n              satisfies the ODE\n             \n            where   is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form  . And since it provides an impulse of  , we can pick  .\n            As the mass is initially at rest,   satisfies the IVP\n             \n            To solve this, we take the Laplace transform of the IVP to get\n             \n            or just\n             \n            So  .\n           \n        Note that the above solution does not appear to satisfy our initial conditions.\n        However, since we assumed the impulse acted instantaneously at time  , this is really the same as assuming that the mass had an initial velocity.\n        Now we look at what happens if we delay the hammer strike.\n       Time-delayed Strike \n            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time  . \n            What is the displacement  ?\n           \n            This time, the IVP we must solve is\n             \n            If we take Laplace transforms and solve for   we get\n             \n            and so, using our table, we see that\n             \n           \n            Time-delayed hammer strikes in  \n           Resonance with an Impulse Train \n            Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every   seconds, starting at  .\n            Find  .\n           \n            The IVP we need to solve now is\n             \n            where  .\n            So once more we take Laplace transforms to get\n             \n            and so\n             \n            The displacement is then given by\n             .\n            Each time the hammer strikes the mass, a factor of   is added to the displacement.\n            The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.\n            This is demonstrated in   below.\n           The position   from  . "
+  "body": "Dirac Delta Functions Impulses \n        Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous.\n        Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.\n       impulse \n        So this is our goal: find some function   that has an instantaneous unit impulse at the point  .\n        In other words, we want to find a function   such that\n         \n        But this is impossible for any function, since\n         \n        However, we can approximate the  idea  of an instantaneous unit impulse by defining\n         \n       Approximating the instantaneous unit impulse. A plot of approximations to an instantaneous unit impulse. \n        As indicated in  , this function is defined so that the area under the graph is   regardless of the value of  .\n        Therefore\n         \n        for all  .\n        Although the instantaneous unit impulse we tried to define earlier can't actually be a function,   is a completely valid function for all positive  .\n        Furthermore, if we send   then it becomes a better and better approximation to an ideal instantaneous unit impulse.\n        Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.\n       The Dirac Delta Function Dirac delta function Dirac delta function \n        The Dirac delta function is, of course, not an actual function, but it's still useful as a mathematical formulation of an instantaneous force with unit impulse at  .\n        And this expression is often perfectly valid to work with inside of integrals due to the  sampling property  discussed below.\n       generalized function tempered distribution \n        We can also take translations of the Dirac delta, which we view as a  function    defined piecewise by\n         \n        We can represent this graphically as an arrow (see  ).\n       A plot of the Dirac delta function. A plot of the Dirac delta function. sampling property Sampling Property of the Dirac Delta Dirac delta function sampling \n            Let   be a continuous function and let  . Then\n             \n           \n            We treat   as a function and perform the above integration:\n             \n           \n        The above theorem gives us another interpretation of the Dirac delta: it's a  sampling function. \n        When integrated against another function   over an interval containing  ,   will pick out the value  .\n        We can use this to quickly find the Laplace transform of the Dirac delta.\n       Laplace Transform of the Dirac Delta Function \n            Compute  , where  .\n           \n            We use the definition of the Laplace transform:\n             .\n            In particular,  .\n           Dirac Delta Models \n        We will primarily use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts.\n        Although this is not strictly realistic since such forces are still imparted over some interval of time, treating the force as instantaneous often simplifies computations.\n       IVP with Impulse \n            An object of mass  , at rest, is attached to a spring with spring constant  .\n            At time  , the a hammer strikes the mass providing an impulse of   and setting the mass in motion. What is the displacement  ?\n           \n            The displacement   satisfies the ODE\n             \n            where   is the external force.\n            Since the hammer strikes quickly, we can model it as an instantaneous force of the form  . And since it provides an impulse of  , we can pick  .\n            As the mass is initially at rest,   satisfies the IVP\n             \n            To solve this, we take the Laplace transform of the IVP to get\n             \n            or just\n             \n            So  .\n           \n        Note that the above solution does not appear to satisfy our initial conditions.\n        However, since we assumed the impulse acted instantaneously at time  , this is really the same as assuming that the mass had an initial velocity.\n        Now we look at what happens if we delay the hammer strike.\n       Time-delayed Strike \n            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time  .\n            What is the displacement  ?\n           \n            This time, the IVP we must solve is\n             \n            If we take Laplace transforms and solve for   we get\n             \n            and so\n             .\n            This function is plotted in   below.\n            Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at  .\n           Displacement influenced by a time-delayed hammer strike. A plot of the displacement of a spring-mass system with time-delayed hammer strike. Resonance with an Impulse Train \n            Once again we consider the spring-mass system used above in  , but now we suppose that the mass is struck with the hammer once every   seconds, starting at  .\n            Find  .\n           \n            The IVP we need to solve now is\n             \n            where  .\n            So once more we take Laplace transforms to get\n             \n            and so\n             .\n            The displacement is then given by\n             .\n            Each time the hammer strikes the mass, a factor of   is added to the displacement.\n            The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.\n            This is clearly demonstrated in the figure below.\n           The displacement   and resonance with the impulse train. A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions. transfer function impulse reponse "
 },
 {
   "id": "p-574",
@@ -2025,13 +2025,13 @@ var ptx_lunr_docs = [
   "body": "impulse "
 },
 {
-  "id": "figure-approximation-unit-impulse",
+  "id": "figure-dirac-delta-functions-approximation-unit-impulse",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#figure-approximation-unit-impulse",
+  "url": "section-dirac-delta-functions.html#figure-dirac-delta-functions-approximation-unit-impulse",
   "type": "Figure",
   "number": "6.4.1",
   "title": "",
-  "body": "Approximating the instantaneous unit impulse. "
+  "body": "Approximating the instantaneous unit impulse. A plot of approximations to an instantaneous unit impulse. "
 },
 {
   "id": "definition-dirac-delta",
@@ -2040,25 +2040,34 @@ var ptx_lunr_docs = [
   "type": "Definition",
   "number": "6.4.2",
   "title": "The Dirac Delta Function.",
-  "body": "The Dirac Delta Function Dirac delta function "
+  "body": "The Dirac Delta Function Dirac delta function Dirac delta function "
 },
 {
-  "id": "p-578",
+  "id": "p-579",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-578",
+  "url": "section-dirac-delta-functions.html#p-579",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "generalized function tempered distribution "
 },
 {
-  "id": "figure-19",
+  "id": "figure-dirac-delta-plot",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#figure-19",
+  "url": "section-dirac-delta-functions.html#figure-dirac-delta-plot",
   "type": "Figure",
   "number": "6.4.3",
   "title": "",
-  "body": "A plot of the Dirac delta function. "
+  "body": "A plot of the Dirac delta function. A plot of the Dirac delta function. "
+},
+{
+  "id": "p-581",
+  "level": "2",
+  "url": "section-dirac-delta-functions.html#p-581",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "sampling property "
 },
 {
   "id": "theorem-sifting-property",
@@ -2066,8 +2075,8 @@ var ptx_lunr_docs = [
   "url": "section-dirac-delta-functions.html#theorem-sifting-property",
   "type": "Theorem",
   "number": "6.4.4",
-  "title": "Sifting Property.",
-  "body": "Sifting Property \n            Let   be a continuous function and let  . Then\n             \n           \n            We treat   as a function and perform the above integration:\n             \n           "
+  "title": "Sampling Property of the Dirac Delta.",
+  "body": "Sampling Property of the Dirac Delta Dirac delta function sampling \n            Let   be a continuous function and let  . Then\n             \n           \n            We treat   as a function and perform the above integration:\n             \n           "
 },
 {
   "id": "example-laplace-transform-of-the-dirac-delta-function",
@@ -2085,7 +2094,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "6.4.6",
   "title": "IVP with Impulse.",
-  "body": "IVP with Impulse \n            An object of mass  , at rest, is attached to a spring with spring constant  . \n            At time  , the a hammer strikes the mass providing an impulse of   and setting the mass in motion. What is the displacement  ?\n           \n              satisfies the ODE\n             \n            where   is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form  . And since it provides an impulse of  , we can pick  .\n            As the mass is initially at rest,   satisfies the IVP\n             \n            To solve this, we take the Laplace transform of the IVP to get\n             \n            or just\n             \n            So  .\n           "
+  "body": "IVP with Impulse \n            An object of mass  , at rest, is attached to a spring with spring constant  .\n            At time  , the a hammer strikes the mass providing an impulse of   and setting the mass in motion. What is the displacement  ?\n           \n            The displacement   satisfies the ODE\n             \n            where   is the external force.\n            Since the hammer strikes quickly, we can model it as an instantaneous force of the form  . And since it provides an impulse of  , we can pick  .\n            As the mass is initially at rest,   satisfies the IVP\n             \n            To solve this, we take the Laplace transform of the IVP to get\n             \n            or just\n             \n            So  .\n           "
 },
 {
   "id": "example-time-delay",
@@ -2094,16 +2103,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "6.4.7",
   "title": "Time-delayed Strike.",
-  "body": "Time-delayed Strike \n            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time  . \n            What is the displacement  ?\n           \n            This time, the IVP we must solve is\n             \n            If we take Laplace transforms and solve for   we get\n             \n            and so, using our table, we see that\n             \n           "
-},
-{
-  "id": "figure-time-delay",
-  "level": "2",
-  "url": "section-dirac-delta-functions.html#figure-time-delay",
-  "type": "Figure",
-  "number": "6.4.8",
-  "title": "",
-  "body": "\n            Time-delayed hammer strikes in  \n           "
+  "body": "Time-delayed Strike \n            Consider the spring-mass system above, but suppose now that the hammer hits the mass at time  .\n            What is the displacement  ?\n           \n            This time, the IVP we must solve is\n             \n            If we take Laplace transforms and solve for   we get\n             \n            and so\n             .\n            This function is plotted in   below.\n            Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at  .\n           Displacement influenced by a time-delayed hammer strike. A plot of the displacement of a spring-mass system with time-delayed hammer strike. "
 },
 {
   "id": "example-resonance-with-an-impulse-train",
@@ -2112,16 +2112,25 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "6.4.9",
   "title": "Resonance with an Impulse Train.",
-  "body": "Resonance with an Impulse Train \n            Once again we consider the spring-mass system used above, but now we suppose that the mass is struck with the hammer once every   seconds, starting at  .\n            Find  .\n           \n            The IVP we need to solve now is\n             \n            where  .\n            So once more we take Laplace transforms to get\n             \n            and so\n             \n            The displacement is then given by\n             .\n            Each time the hammer strikes the mass, a factor of   is added to the displacement.\n            The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.\n            This is demonstrated in   below.\n           "
+  "body": "Resonance with an Impulse Train \n            Once again we consider the spring-mass system used above in  , but now we suppose that the mass is struck with the hammer once every   seconds, starting at  .\n            Find  .\n           \n            The IVP we need to solve now is\n             \n            where  .\n            So once more we take Laplace transforms to get\n             \n            and so\n             .\n            The displacement is then given by\n             .\n            Each time the hammer strikes the mass, a factor of   is added to the displacement.\n            The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance.\n            This is clearly demonstrated in the figure below.\n           The displacement   and resonance with the impulse train. A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions. "
 },
 {
-  "id": "figure-laplace-impulse-train-resonance",
+  "id": "p-595",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#figure-laplace-impulse-train-resonance",
-  "type": "Figure",
-  "number": "6.4.10",
+  "url": "section-dirac-delta-functions.html#p-595",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
   "title": "",
-  "body": "The position   from  . "
+  "body": "transfer function "
+},
+{
+  "id": "p-596",
+  "level": "2",
+  "url": "section-dirac-delta-functions.html#p-596",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "impulse reponse "
 },
 {
   "id": "section-convolution-products",
@@ -2130,7 +2139,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.5",
   "title": "Convolution Products",
-  "body": "Convolution Products \n      Consider the function   in the frequency domain   defined by\n       \n      This does not match a Laplace transform on our table.\n      If we wanted to find the inverse transform  , we would have to use partial fractions to find it.\n      However,   is easily seen to be the  product  of two recognizable transforms:\n       \n      What we would like to do is find a way to determine inverse transforms of products of transforms.\n      To do this, we need to define the  convolution  of two functions.\n     Convolution of Functions convolution \n      Note that   lies in the time domain instead of the frequency domain.\n      In general, we will only take convolutions of functions in the time domain.\n     \n      Convolutions are important because they act as  smoothing operators .\n      If you have a  rough  (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation.\n     Convolution with Unit Step \n          Compute  , where   is the unit step function.\n         \n          By definition,\n           \n         \n      One important property of convolutions is that they are  commutative : that is,   for any piecewise continuous functions   and  .\n      Another important property of convolutions is that they tend to work well with integral transforms.\n      In particular, we have the following theorem.\n     Convolution Theorem \n          The Laplace transform distributes over convolution.\n          In other words, if   and   are piecewise continuous functions, then\n           \n          Equivalently, if we write   and  , then\n           \n         \n      One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain.\n      Let's return to the example we started with.\n     Using the Convolution Theorem \n          Let \n           \n          Find  .\n         \n          We will use   to express the inverse transform:\n           \n         Solving IVPs with the Convolution Theorem \n          Let   be a function of  .\n          Solve the IVP\n           \n          for   in terms of the function  .\n         \n          We're trying to find the solution   for arbitrary  , which is something we definitely would not have been able to do in Chapter 3.\n          We will do so using Laplace transforms and  .\n          So we start by taking the Laplace transform of the ODE to get\n           \n          where   and  .\n          Now we solve for   to get\n           \n          where\n           \n            tells us then that\n           \n          where\n           \n          Therefore the solution of the ODE in terms of the function   is given by\n           .\n         transfer function impulse response "
+  "body": "Convolution Products \n      Consider the function   in the frequency domain   defined by\n       \n      This does not match a Laplace transform on our table.\n      If we wanted to find the inverse transform  , we would have to use partial fractions to find it.\n      However,   is easily seen to be the  product  of two recognizable transforms:\n       \n      What we would like to do is find a way to determine inverse transforms of products of transforms.\n      To do this, we need to define the  convolution  of two functions.\n     Convolution of Functions convolutions convolution \n      Note that   lies in the time domain instead of the frequency domain.\n      In general, we will only take convolutions of functions in the time domain.\n     \n      It's difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as  smoothing operators .\n      If you have a  rough  (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation.\n      We will see another interpretation of the convolution at the end of this section.\n     Convolution with Unit Step \n          Compute  , where   is the unit step function.\n         \n          By definition,\n           \n         \n      One important property of convolutions is that they are  commutative : that is,   for any piecewise continuous functions   and  .\n      Another important property of convolutions is that they tend to work well with integral transforms.\n      In particular, we have the following theorem.\n     Convolution Theorem Laplace transforms Convolution Theorem \n          The Laplace transform distributes over convolution.\n          In other words, if   and   are piecewise continuous functions, then\n           .\n          Equivalently, if we write   and  , then\n           .\n         \n      One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain.\n      Let's return to the example we started with.\n     Using the Convolution Theorem \n          Let\n           \n          Find  .\n         \n          We will use   to express the inverse transform:\n           \n         Solving IVPs with the Convolution Theorem \n          Let   be a function of  .\n          Solve the IVP\n           \n          for   in terms of the function  .\n         \n          We're trying to find the solution   for arbitrary  , which is something we definitely would not have been able to do in Chapter 3.\n          We will do so using Laplace transforms and  .\n          So we start by taking the Laplace transform of the ODE to get\n           \n          where   and  .\n          Now we solve for   to get\n           \n          where\n           \n            tells us then that\n           \n          where\n           \n          Therefore the solution of the ODE in terms of the function   is given by\n           .\n         \n      There are a couple of interesting things happening in the last example.\n      In particular, we were able to write the solution   in terms of   as\n       .\n      In these terms, we can recognize   as the impulse response of the system discussed at the end of  .\n      Therefore the response of this system to the input   is related to the impulse response by a convolution:\n       .\n      Essentially, this convolution integral tells us how to construct the response   using only information about the input   and the impulse response   from the  past and present. \n      Recall that this relationship is even easier to write in the frequency domain: the frequency input   is turned into the frequency output   by means of the transfer function  :\n       .\n     \n      There are multiple ways to find the transfer function, assuming that all initial conditions are  .\n      First, if   is the input and   is some measured output (once again, in the frequency domain), then the transfer function   satisfies\n       ,\n      and this quantity is independent of the particular choice of  .\n      We can also replace the time domain input   with   as discussed in   to determine the impulse response directly.\n      In this case, the corresponding output in the frequency domain is\n       .\n     "
 },
 {
   "id": "definition-convolution-of-functions",
@@ -2139,7 +2148,7 @@ var ptx_lunr_docs = [
   "type": "Definition",
   "number": "6.5.1",
   "title": "Convolution of Functions.",
-  "body": "Convolution of Functions convolution "
+  "body": "Convolution of Functions convolutions convolution "
 },
 {
   "id": "example-convolution-with-unit-step",
@@ -2157,7 +2166,7 @@ var ptx_lunr_docs = [
   "type": "Theorem",
   "number": "6.5.3",
   "title": "Convolution Theorem.",
-  "body": "Convolution Theorem \n          The Laplace transform distributes over convolution.\n          In other words, if   and   are piecewise continuous functions, then\n           \n          Equivalently, if we write   and  , then\n           \n         "
+  "body": "Convolution Theorem Laplace transforms Convolution Theorem \n          The Laplace transform distributes over convolution.\n          In other words, if   and   are piecewise continuous functions, then\n           .\n          Equivalently, if we write   and  , then\n           .\n         "
 },
 {
   "id": "example-using-the-convolution-theorem",
@@ -2166,7 +2175,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "6.5.4",
   "title": "Using the Convolution Theorem.",
-  "body": "Using the Convolution Theorem \n          Let \n           \n          Find  .\n         \n          We will use   to express the inverse transform:\n           \n         "
+  "body": "Using the Convolution Theorem \n          Let\n           \n          Find  .\n         \n          We will use   to express the inverse transform:\n           \n         "
 },
 {
   "id": "example-solving-ivps-with-the-convolution-theorem",
@@ -2176,24 +2185,6 @@ var ptx_lunr_docs = [
   "number": "6.5.5",
   "title": "Solving IVPs with the Convolution Theorem.",
   "body": "Solving IVPs with the Convolution Theorem \n          Let   be a function of  .\n          Solve the IVP\n           \n          for   in terms of the function  .\n         \n          We're trying to find the solution   for arbitrary  , which is something we definitely would not have been able to do in Chapter 3.\n          We will do so using Laplace transforms and  .\n          So we start by taking the Laplace transform of the ODE to get\n           \n          where   and  .\n          Now we solve for   to get\n           \n          where\n           \n            tells us then that\n           \n          where\n           \n          Therefore the solution of the ODE in terms of the function   is given by\n           .\n         "
-},
-{
-  "id": "p-609",
-  "level": "2",
-  "url": "section-convolution-products.html#p-609",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "transfer function "
-},
-{
-  "id": "p-610",
-  "level": "2",
-  "url": "section-convolution-products.html#p-610",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "impulse response "
 },
 {
   "id": "section-fourier-series",
@@ -2214,9 +2205,9 @@ var ptx_lunr_docs = [
   "body": "A periodic function. A periodic function. "
 },
 {
-  "id": "p-615",
+  "id": "p-616",
   "level": "2",
-  "url": "section-fourier-series.html#p-615",
+  "url": "section-fourier-series.html#p-616",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2232,9 +2223,9 @@ var ptx_lunr_docs = [
   "body": "Periodic Functions Functions periodic \n            Let   be a real function defined for all  . We say that   is a periodic function if there exists a positive number   such that\n             \n            for all  .\n           "
 },
 {
-  "id": "p-618",
+  "id": "p-619",
   "level": "2",
-  "url": "section-fourier-series.html#p-618",
+  "url": "section-fourier-series.html#p-619",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2250,9 +2241,9 @@ var ptx_lunr_docs = [
   "body": "Trigonometric Series Series trigonometric coefficients "
 },
 {
-  "id": "p-620",
+  "id": "p-621",
   "level": "2",
-  "url": "section-fourier-series.html#p-620",
+  "url": "section-fourier-series.html#p-621",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2322,9 +2313,9 @@ var ptx_lunr_docs = [
   "body": "Fourier Series of  \n          Let   for   and have period  .\n          We can find its Fourier series using  .\n          If we do so, we get\n           \n          So the Fourier series of   is given by\n           .\n         "
 },
 {
-  "id": "p-634",
+  "id": "p-635",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-634",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-635",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2340,9 +2331,9 @@ var ptx_lunr_docs = [
   "body": "Even and Odd Functions Even and odd functions \n            Let   be a function.\n            We say that   is\n             \n           "
 },
 {
-  "id": "p-637",
+  "id": "p-638",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-637",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-638",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2385,9 +2376,9 @@ var ptx_lunr_docs = [
   "body": "Complex Fourier Series and Parseval's Identity \n        Although we have a decent formula for Fourier series (see  ), it's a little unwieldy due to the different expressions for   and  .\n        We can fix this, perhaps surprisingly, by using complex exponentials and Euler's formula.\n       Complex Fourier Series \n        First, recall  Euler's formula , which allows us to rewrite complex exponentials in terms of sine and cosine.\n       complex Fourier series Complex Fourier Series Fourier series complex form \n            Let   be a piecewise smooth function with period  .\n            Then the complex Fourier series of   is given by\n             \n            where\n             \n            This Fourier series converges to   wherever   is continuous.\n           \n            We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine.\n            In particular, the relation we will use is the following:\n             \n            So if we set   equal to a complex Fourier series and integrate both sides against   for   from   to  , we get\n             \n            where the last equality follows from the orthogonality relation we just proved.\n            Therefore\n             \n           Complex Fourier Series of Exponential Function \n          Let   on   and suppose that   is periodic with period  .\n          We want to find the complex Fourier series for  .\n          We can do this by finding the correct coefficients  :\n           \n          So we have\n           \n          for  , since this is where   has discontinuities.\n         \n        Although the complex Fourier series can be easier to compute in some cases, there may be cases where we'd like to go back to the real Fourier series. The following formula lets us do so.\n       Real Fourier Series from Complex Fourier Series Fourier series convert complex to real \n            Suppose   has the complex Fourier series\n             \n            Then the corresponding coefficients   and   for the real Fourier series\n             \n            are given by\n             \n           \n        The real Fourier series corresponding to the complex Fourier series for   from   has coefficients\n         \n        Either way, we get the following Fourier series.\n       Parseval's Identity Parseval's identity Parseval's Identity Fourier series Parseval's identity \n            Let   denote a piecewise-differentiable (real-valued) function on   with real Fourier coefficients   and complex Fourier coefficients  .\n            If   exists and is finite, then\n             \n           \n        One of the great strengths of this identity is that it allows potentially complicated sums to be computed using integrals instead.\n       The Basel Problem Basel problem \n          In the early   century, one of the most renowned problems in mathematics was the Basel problem, which asked for the value of\n           \n          Euler was the first person to show that the sum is actually   and it was this solution that made him famous Or at least math famous.  in the first place.\n          We can solve this by using Parseval's identity.\n          To do so, let   for  .\n          Then with a little bit of work we can find the (real) Fourier coefficients:\n           \n          By Parseval's identity, it then follows that\n           \n          which simplifies down to\n           \n          In other words,  \n         "
 },
 {
-  "id": "p-644",
+  "id": "p-645",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-644",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-645",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2421,9 +2412,9 @@ var ptx_lunr_docs = [
   "body": "Real Fourier Series from Complex Fourier Series Fourier series convert complex to real \n            Suppose   has the complex Fourier series\n             \n            Then the corresponding coefficients   and   for the real Fourier series\n             \n            are given by\n             \n           "
 },
 {
-  "id": "p-651",
+  "id": "p-652",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-651",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-652",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2457,9 +2448,9 @@ var ptx_lunr_docs = [
   "body": "Approximation by Trigonometric Polynomials trigonometric polynomial of degree  \n      We can also consider approximating   with other trigonometric polynomials of degree  , say\n       .\n      We'd like to know how good the approximation is.\n      To do this, we need to define a measure of error.\n     Square Error square error \n      It turns out that if we are approximating   by trigonometric polynomials  , then the square error takes a specific form.\n     Square Error Formula \n          Let   be a function of period   with Fourier coefficients   and  , and let\n           \n          be a degree   trigonometric polynomial.\n          Then\n           .\n          The error   takes this minimum value if  .\n         Error from a Trigonometric Polynomial \n          Define   for   as in  , and recall that the Fourier series is given by\n           .\n          Find the trigonometric polynomial of degree   that best approximates   and give the corresponding error.\n         \n          The trigonometric polynomial of degree   that best approximates   is\n           .\n          The corresponding square error is\n           \n         Bessel's inequality Applying Bessel's Inequality \n          Let\n           .\n          Apply Bessel's inequality to this function.\n          What does Parseval's Identity say?\n         \n          If we find the Fourier coefficients of  , we get\n           .\n          By Bessel's inequality, we know that\n           \n          for any  .\n          As  , Parseval's gives the identity\n           .\n         "
 },
 {
-  "id": "p-655",
+  "id": "p-656",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-655",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-656",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2493,9 +2484,9 @@ var ptx_lunr_docs = [
   "body": "Error from a Trigonometric Polynomial \n          Define   for   as in  , and recall that the Fourier series is given by\n           .\n          Find the trigonometric polynomial of degree   that best approximates   and give the corresponding error.\n         \n          The trigonometric polynomial of degree   that best approximates   is\n           .\n          The corresponding square error is\n           \n         "
 },
 {
-  "id": "p-662",
+  "id": "p-663",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-662",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-663",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2520,9 +2511,9 @@ var ptx_lunr_docs = [
   "body": "The Fourier Transform \n      If   is a periodic function with period  , then we know how to find its Fourier series, both real and complex.\n      But what do we do if our function   is not periodic?\n      Can we still get a similar representation?\n     \n      Let   be some piecewise-differentiable function, not necessarily periodic.\n      Then we can't find it's Fourier series.\n      However, we can truncate the graph of  , and replace it with a periodic function that is equal to   on some interval  .\n      Then we can find the Fourier series of  this  function, which by   is given by   where\n       \n      So we can write\n       \n      wherever   is continuous on  .\n     Fourier transform Absolutely Integrable Functions Absolutely Integrable Functions \n          Let   be a piecewise continuous function.\n          Then   is absolutely integrable if  \n         The Fourier Transform Fourier Transform definition \n          Let   be an absolutely integrable piecewise continuous function.\n          The Fourier transform of   is the function   defined by\n           \n          We often write   to denote the Fourier transform as well.\n         Fourier transform of a piecewise exponential \n        Let   for   and   otherwise.\n        Then the Fourier transform of   is\n         \n       frequency domain frequency content inverse Fourier transform The Inverse Fourier Transform Fourier Transform inverse transform \n          The inverse Fourier transform of   is\n           \n         Fourier Inversion Theorem Fourier Transform inversion theorem \n          Let   be an absolutely integrable, piecewise differentiable function.\n          Then   wherever   is continuous.\n         Inverse Fourier transform of a step function \n        Define   by\n         \n        Then we can find the inverse transform using  :\n         \n       \n      The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if   are constants and   are functions, then\n       \n      and\n       \n      The Fourier transform also works well with derivatives.\n     Fourier Transforms and Derivatives Fourier Transform transforms fo derivatives \n          Let   be differentiable with derivative  .\n          Suppose that both   and   are absolutely integrable.\n          Then\n           \n         \n      Fourier transforms also behave well with another type of convolution.\n     Convolution Theorem Fourier Transform convolution theorem \n          Suppose that   are piecewise continuous, bounded and absolutely integrable.\n          Define   by\n           \n          Then  \n         "
 },
 {
-  "id": "p-667",
+  "id": "p-668",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-667",
+  "url": "section-the-fourier-transform.html#p-668",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2556,9 +2547,9 @@ var ptx_lunr_docs = [
   "body": "Fourier transform of a piecewise exponential \n        Let   for   and   otherwise.\n        Then the Fourier transform of   is\n         \n       "
 },
 {
-  "id": "p-671",
+  "id": "p-672",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-671",
+  "url": "section-the-fourier-transform.html#p-672",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2619,9 +2610,9 @@ var ptx_lunr_docs = [
   "body": "Basic Concepts Partial derivatives and PDEs partial derivatives Partial derivatives Partial derivatives \n            Let   denote a function depending on the variables  .\n            Then the partial derivative of   with respect to   is found by differentiating   while treating   as a constant.\n            The partial derivative of   with respect to   is denoted by\n             \n            The partial derivative of   with respect to   is found similarly, and is likewise denoted by\n             \n           order Partial differential equations Definition Partial differential equation \n            A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function   that depends on two or more independent variables, usually thought of as time and position.\n            The highest derivative appearing in a PDE is called the order of the PDE.\n           boundary value problems boundary conditions Linear homogeneous PDEs and the superposition principle linear PDEs homogeneous solution Solution of the heat equation \n            Let  .\n            Show that this is a solution of the boundary value problem\n             \n           \n            To do so, we need to compute the partial derivatives of  \n           .\n           \n            So we see that  , which means that   is a solution of  .\n            Now it remains to show that   satisfies the boundary conditions, which we can do without too much trouble.\n           superposition principle Superposition principle partial differential equations Superposition principle \n            Let   and   denote arbitrary constants, and suppose that   and   are both solutions of the same linear homogeneous PDE.\n            Then\n             \n            is also a solution of the same PDE.\n           \n        The superposition principle is incredibly useful since it allows us to find general solutions of PDEs, which makes solving linear homogeneous PDEs somewhat tractable. If a PDE fails to be linear or homogeneous, the superposition principle is not guaranteed to hold.\n       Failure of the superposition principle \n            Consider the PDE given by\n             \n            This PDE fails to be linear because the second term involves multiplying   with its derivative  .\n            However, it's not too hard to check that   is a solution of the PDE, since if we plug this function into the PDE we get\n             .\n            However, the closely related function   is  not  a solution of the same PDE, since\n             \n            So the superposition principle does not hold for this PDE.\n           Important PDEs \n        As mentioned in the introduction, PDEs are useful for modeling quantities that depend on multiple independent variables.\n        We finish this section by listing several of the simplest and most studied PDEs.\n        where  . This is called the  heat  or  diffusion equation . This equation is used for modeling the spread of a quantity, such as how temperature diffuses along a rod.  where  . This is called the  wave equation , and is used for modeling vibrating motion, such as that along a plucked string. Laplacian \n        With this viewpoint, we can assign physical reasoning to the heat and wave equations:\n         \n             \n              The heat equation states that the time rate of change of the temperature is proportional to the difference between the temperature at   and the average values of nearby temperatures.\n              If the nearby average temperature is greater (i.e., the Laplacian is positive), then the temperature will increase.\n             \n           \n             \n              The wave equation states that the acceleration of the wave height is proportional to the difference between the height of the wave at   and the average height at nearby points.\n              If the nearby average height is greater (i.e., the Laplacian is positive), then the wave height will accelerate upwards.\n             \n           \n       \n        Our goal in the next section will be to determine how to solve PDEs such as these.\n       "
 },
 {
-  "id": "p-682",
+  "id": "p-683",
   "level": "2",
-  "url": "section-basic-concepts.html#p-682",
+  "url": "section-basic-concepts.html#p-683",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2637,9 +2628,9 @@ var ptx_lunr_docs = [
   "body": "Partial derivatives Partial derivatives \n            Let   denote a function depending on the variables  .\n            Then the partial derivative of   with respect to   is found by differentiating   while treating   as a constant.\n            The partial derivative of   with respect to   is denoted by\n             \n            The partial derivative of   with respect to   is found similarly, and is likewise denoted by\n             \n           "
 },
 {
-  "id": "p-684",
+  "id": "p-685",
   "level": "2",
-  "url": "section-basic-concepts.html#p-684",
+  "url": "section-basic-concepts.html#p-685",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2655,18 +2646,18 @@ var ptx_lunr_docs = [
   "body": "Partial differential equations Definition Partial differential equation \n            A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function   that depends on two or more independent variables, usually thought of as time and position.\n            The highest derivative appearing in a PDE is called the order of the PDE.\n           "
 },
 {
-  "id": "p-686",
+  "id": "p-687",
   "level": "2",
-  "url": "section-basic-concepts.html#p-686",
+  "url": "section-basic-concepts.html#p-687",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary value problems boundary conditions "
 },
 {
-  "id": "p-687",
+  "id": "p-688",
   "level": "2",
-  "url": "section-basic-concepts.html#p-687",
+  "url": "section-basic-concepts.html#p-688",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2682,9 +2673,9 @@ var ptx_lunr_docs = [
   "body": "Solution of the heat equation \n            Let  .\n            Show that this is a solution of the boundary value problem\n             \n           \n            To do so, we need to compute the partial derivatives of  \n           .\n           \n            So we see that  , which means that   is a solution of  .\n            Now it remains to show that   satisfies the boundary conditions, which we can do without too much trouble.\n           "
 },
 {
-  "id": "p-691",
+  "id": "p-692",
   "level": "2",
-  "url": "section-basic-concepts.html#p-691",
+  "url": "section-basic-concepts.html#p-692",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2709,9 +2700,9 @@ var ptx_lunr_docs = [
   "body": "Failure of the superposition principle \n            Consider the PDE given by\n             \n            This PDE fails to be linear because the second term involves multiplying   with its derivative  .\n            However, it's not too hard to check that   is a solution of the PDE, since if we plug this function into the PDE we get\n             .\n            However, the closely related function   is  not  a solution of the same PDE, since\n             \n            So the superposition principle does not hold for this PDE.\n           "
 },
 {
-  "id": "p-696",
+  "id": "p-697",
   "level": "2",
-  "url": "section-basic-concepts.html#p-696",
+  "url": "section-basic-concepts.html#p-697",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2727,27 +2718,27 @@ var ptx_lunr_docs = [
   "body": "The Wave Equation and Separation of Variables separation of variables \n      Consider a one-dimensional string of length   that vibrates in the vertical direction.\n      The vertical displacement of such a string depends on the horizontal position along the string,  , and the time  .\n      So let   denote the vertical displacement of the string at position   and at time  .\n      If we assume that the string has constant density and that the force of gravity of the string is negligible, then   satisfies the wave equation\n       \n      for some constant  .\n     boundary conditions .\n     initial conditions .\n     \n      Our goal will be to find   subject to these conditions.\n      To start, assume that  \n      If we plug this into  , then we get \n        If we assume that   are both nonzero, then we can rewrite this to get\n         \n        This may not look that helpful, but it actually places some serious restrictions on   and  .\n        The left hand side of this equation only depends on   whereas the right hand side depends only on  .\n        So the only way for this equation to be true for  all    is if both sides are constant:\n         \n        for some  .\n        This now gives us two separate  ordinary  differential equations for   and  : .\n         \n          We can add a few more restrictions to these ODEs to help us solve them.\n          Note that the boundary conditions   force either   or   for all  , which leads to  .\n          So to avoid this trivial solution, we'll set  .\n         \n          We'll solve   first since we have extra information to use.\n          So to start, suppose that   and write   for some nonzero  .\n          Then   becomes   and has solution given by\n           \n         \n          Now,   forces  , so we get  .\n          However, since   as well, we get  .\n          But the only way to solve this is to set   since   only if  .\n          So in other words, if we assume that  , then the only way to solve   is to set  , which also forces  .\n          Obviously, this isn't very useful.\n          Similarly, if we assume that   then we get the same problem.\n          So let's assume that   for some nonzero  .\n          Then   becomes  , which has solution\n         \n        The condition   forces  , and the second boundary condition   forces  .\n        We want to avoid setting   equal to   since this would give us   again, so we'll set   instead.\n         This  tells us that   for some integer  , or just  .\n        So nontrivial solutions of   that satisfy the boundary conditions   can occur only if   where   and  .\n        For each choice of   (ignoring sign), we get the solution  .\n       \n        Now we move on to solving  , but we still need to keep the condition   for  .\n        If we do so, then   becomes  , which has solutions given by\n         \n      where  .\n     \n      So this means that every function of the form\n       \n      is a solution of   subject to the boundary conditions  .\n      It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.\n     \n      However, this does  not  guarantee that we can solve for the initial conditions in  .\n      To give ourselves as general a solution as possible, we will guess that the solution to the wave equation is actually a linear combination of all possible  .\n      That is, we'll say that\n     \n      Now we'll use the initial conditions to actually determine  .\n      To start, note that we must have\n       \n       This is a Fourier series , and in particular it's the Fourier series of the odd extension of   with period  .\n       See  . \n      So it follows that\n     \n      Similarly, we must have\n       \n      This is the Fourier series for the odd extension of   with period  .\n      Therefore\n       \n      or just\n       \n     \n      We can put all of this together into the following theorem.\n     Wave equation solution Solution of the Wave Equation \n          The solution of the wave equation   with boundary conditions   and initial conditions   is given by\n           \n          where\n           \n          and   for  .\n         A string with fixed ends \n          A string at rest has unit length, and is fixed at both ends.\n          Suppose that the string is now stretched into the triangular shape given by the graph of\n           \n          The string is then released at time  .\n          Given  , find the function   that models the vertical displacement of the string at position   at time  .\n         \n          We can model   as the solution of the wave equation\n           \n          with boundary conditions   and initial conditions\n           \n          We can find   from  .\n         \n          Using the Sage cell below, we get\n           \n          and since   this forces   as well.\n          Hence the solution is\n           \n         "
 },
 {
-  "id": "p-701",
+  "id": "p-702",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-701",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-702",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "separation of variables "
 },
 {
-  "id": "p-703",
+  "id": "p-704",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-703",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-704",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary conditions "
 },
 {
-  "id": "p-704",
+  "id": "p-705",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-704",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-705",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2826,18 +2817,18 @@ var ptx_lunr_docs = [
   "body": "The Heat Equation heat equation .\n       one-dimensional heat equation Bar with ends fixed at  \n        We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature  .\n        If we're given an initial temperature distribution  , then   is the solution of the boundary value problem\n       .\n       \n        We can solve this boundary value problem using separation of variables, much as we did in  .\n        So to start, we assume that  .\n        If we plug this into the heat equation  , then we get\n       \n        Now we have three separate cases to consider for  :   or  .\n        Just as with the wave equation, the only case that doesn't lead to trivial solutions is  .\n        In this case   leads to the two ODEs given by\n       .\n       \n        The boundary conditions in   force  , and the only nontrivial solutions of   occur when  .\n        So we get the solutions  , just as with the wave equation.\n       \n        For the second ODE, we readily solve it to obtain   where   as before.\n        So every function\n         \n        is a solution of   that satisfies the boundary equations  .\n        In order to satisfy the arbitrary initial condition  , we take an infinite sum of the functions   to get\n       \n        Finally, if we plug in   and use the initial condition  , we get  .\n        This is just the Fourier series of the odd extension of  , which lets us find  .\n        We summarize all of this in the following theorem.\n       Heat equation fixed ends Solution of the Heat Equation with Fixed Temperature \n            The solution of the heat equation   satisfying the boundary conditions   and initial condition   is given by\n             \n            where\n             \n           Sinusoidal initial temperature \n            Consider a thin metal bar of length   placed on the  -axis, with one end at   and the other at  .\n            Assuming that   and that the initial temperature is   for  , find the temperature distribution using  .\n           \n            The temperature is the function   given by\n             \n            where   is the   coefficient of the Fourier series of the odd extension of  .\n            The odd extension of   is  .\n            Furthermore, the Fourier series of   is clearly just  .\n           \n            So in other words,\n             \n            Hence\n             \n           "
 },
 {
-  "id": "p-739",
+  "id": "p-740",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-739",
+  "url": "section-the-heat-equation.html#p-740",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "heat equation "
 },
 {
-  "id": "p-740",
+  "id": "p-741",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-740",
+  "url": "section-the-heat-equation.html#p-741",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
