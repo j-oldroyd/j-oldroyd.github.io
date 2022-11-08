@@ -434,9 +434,67 @@
                 <p>
                     Using <xref ref="definition-work" text="type-global" />, we see that the work done should be
                     <me>W = \int_{-1}^{3}3x\,dx.</me>
-                    Since the definite integral represents area, and the definite integral of <m>3x</m> exists (since this is continuous), then we can say that
+                    Since the definite integral represents area, and the definite integral of <m>3x</m> exists (since this is continuous), then we can see from <xref ref="figure-expressing-work-done" text="type-global" /> that
                     <me>W = \int_{-1}^{3}3x\,dx = \frac{1}{2}(1)(-3) + \frac{1}{2}(3)(9) = 12.</me>
                 </p>
+                <aside>
+                    <p>
+                        Note that regions underneath the <m>x</m>-axis correspond to negative areas!
+                    </p>
+                </aside>
+                <figure xml:id="figure-expressing-work-done">
+                    <caption>A graph of the force <m>F(x) = 3x</m> and shaded areas corresponding to work.</caption>
+                    <image xml:id="image-expressing-work-done" width="50%">
+                        <description>A graph of a function representing force and shaded areas representing work.</description>
+                        <latex-image>
+                            \begin{tikzpicture}
+                                \begin{axis}[%
+                                    myaxis,
+                                    xmin = -2,
+                                    xmax = 4,
+                                    ymin = -4,
+                                    ymax = 10,
+                                    legend pos = south east,
+                                    % xtick = {1, 4},
+                                    % xticklabels = {$a$, $b$},
+                                    % extra x tick style = {grid = none},
+                                    % extra x ticks = {3.1},
+                                    % extra x tick labels = {$t$},
+                                    % yticklabels = \empty,
+                                    ]
+                                    \addplot[myplot, -, domain=-2:4, name path = f]{3*x};
+                                    \addlegendentry{$F(x)$}
+
+                                    \path[name path=axis] (axis cs:-1,0) -- (axis cs:3,0);
+
+                                    % the below is adapted from https://tex.stackexchange.com/questions/164991/pgfplots-how-to-fill-bounded-area-under-a-curve-using-addplot-and-fill
+                                    \addplot[%
+                                            thick,
+                                            color=red,
+                                            fill=red, 
+                                            fill opacity=0.40
+                                        ]
+                                        fill between[
+                                            of=f and axis,
+                                            soft clip={domain=-1:0},
+                                        ];
+
+                                    \addplot[%
+                                            thick,
+                                            color=blue,
+                                            fill=blue, 
+                                            fill opacity=0.40
+                                        ]
+                                        fill between[
+                                            of=f and axis,
+                                            soft clip={domain=0:3},
+                                        ];
+
+                                \end{axis}
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
             </solution>
         </example>
         <p>
@@ -454,10 +512,53 @@
             <solution>
                 <p>
                     We won't be able to solve this integral algebraically until Calculus 2, but we can solve it geometrically instead.
-                    If we graph <m>y = \sqrt{4-x^{2}}</m>, we get the upper half of the circle of radius <m>2</m> centered at the origin.
+                    If we graph <m>y = \sqrt{4-x^{2}}</m>, we get the upper half of the circle of radius <m>2</m> centered at the origin, as seen in <xref ref="figure-radical-definite-integral" text="type-global" />.
                     So the integral given must be exactly one-fourth the area of this circle, so
                     <me>\int_{0}^{2}\sqrt{4-x^{2}}\,dx = \frac{1}{4}\pi(2^{2}) = \pi.</me>
                 </p>
+                <figure xml:id="figure-radical-definite-integral">
+                    <caption>The graph of <m>y = \sqrt{4 - x^2}</m>.</caption>
+                    <image xml:id="image-radical-definite-integral" width="50%">
+                        <description>The graph of the top half of the circle of radius two centered at the origin.</description>
+                        <latex-image>
+                            \begin{tikzpicture}
+                                \begin{axis}[%
+                                    myaxis,
+                                    xmin = -2.5,
+                                    xmax = 2.5,
+                                    xtick = {-2, -1, 0, 1, 2},
+                                    ymin = -.5,
+                                    ymax = 2.5,
+                                    ytick = {0, 1, 2},
+                                    yticklabel style = {anchor=south east},
+                                    % xtick = {1, 4},
+                                    % xticklabels = {$a$, $b$},
+                                    % extra x tick style = {grid = none},
+                                    % extra x ticks = {3.1},
+                                    % extra x tick labels = {$t$},
+                                    % yticklabels = \empty,
+                                    ]
+                                    \addplot[myplot, -, domain=-2:2, name path = f]{sqrt(4 - x^2)};
+
+                                    \path[name path=axis] (axis cs:-2,0) -- (axis cs:2,0);
+
+                                    % the below is adapted from https://tex.stackexchange.com/questions/164991/pgfplots-how-to-fill-bounded-area-under-a-curve-using-addplot-and-fill
+                                    \addplot[%
+                                            thick,
+                                            color=blue,
+                                            fill=blue, 
+                                            fill opacity=0.40
+                                        ]
+                                        fill between[
+                                            of=f and axis,
+                                            soft clip={domain=0:2},
+                                        ];
+
+                                \end{axis}
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
             </solution>
         </example>
         <p>
@@ -556,6 +657,54 @@
             </solution>
         </example>
         <p>
+            As <m>n</m> gets larger, ideally the approximations produced by the midpoint and endpoint rules become more exact.
+            The figure below is adapted from an example by Marshall Hampton located at <url href="https://wiki.sagemath.org/interact/calculus#Numerical_integrals_with_the_midpoint_rule" visual="wiki.sagemath.org/interact/calculus"/> and approximates integrals of the form <m>\int_a^b f(x)\dd{x}</m>.
+            This makes use of the computer algebra system Sage which is itself based on the Python language.
+        </p>
+        <figure xml:id="figure-interactive-numerical-integral">
+            <caption>Numerical integrals using the midpoint, left endpoint and right endpoint rules</caption>
+            <interactive xml:id="interactive-numerical-integral" platform="sage" width="100%" aspect="4:5">
+                <slate surface="sage">
+                var('x')
+                @interact
+                def riemann(n = slider(1,100,1,4), rule = selector(['Midpoint', 'Left endpoint', 'Right endpoint'], buttons = True), f = input_box(default = "sin(3*x)", type = str, width=40), a = input_box(default = "0", type = str, width=6), b = input_box(default = "pi", type = str,width=6)):
+                    #sage_eval used to allow for input of 'pi'
+                    a = N(sage_eval(a))
+                    b = N(sage_eval(b))
+                    func = sage_eval(f, locals={'x':x})
+                    dx = (b-a)/n
+
+                    if rule == 'Midpoint':
+                        xVals = [q*dx+dx/2 + a for q in range(n)]
+                    elif rule == 'Left endpoint':
+                        xVals = [a + q*dx for q in range(n)]
+                    elif rule == 'Right endpoint':
+                        xVals = [a + q*dx for q in range(1, n+1)]
+
+                    yVals = [func(x=x_val) for x_val in xVals]
+                    rects = Graphics()
+
+                    for q in range(n):
+                        xm = xVals[q]
+                        ym = yVals[q]
+
+                        if rule == 'Midpoint':
+                            rects = rects + line([[xm-dx/2,0],[xm-dx/2,ym],[xm+dx/2,ym],[xm+dx/2,0]], rgbcolor = (1,0,0)) + point((xm,ym), rgbcolor = (1,0,0))
+                        elif rule == 'Left endpoint':
+                            rects = rects + line([[xm,0],[xm,ym],[xm+dx,ym],[xm+dx,0]], rgbcolor = (1,0,0)) + point((xm,ym), rgbcolor = (1,0,0))
+                        elif rule == 'Right endpoint':
+                            rects = rects + line([[xm-dx,0],[xm-dx,ym],[xm,ym],[xm,0]], rgbcolor = (1,0,0)) + point((xm,ym), rgbcolor = (1,0,0))
+
+                    min_y = min(0, find_local_minimum(func,a,b)[0])
+                    max_y = max(0, find_local_maximum(func,a,b)[0])
+                    pretty_print(html('&lt;h3&gt;Numerical integrals with the midpoint, left endpoint and right endpoint rules&lt;/h3&gt;'))
+                    print("\n\nSage numerical answer: " + str(integral_numerical(func,a,b,max_points = 200)[0]))
+                    print(rule + " estimated answer: " + str(RDF(dx*sum([yVals[q] for q in range(n)]))))
+                    show(plot(func,a,b) + rects, xmin = a, xmax = b, ymin = min_y, ymax = max_y,figsize=5)
+                </slate>
+            </interactive>
+        </figure>
+        <p>
             The geometric interpretation of definite integrals as areas also suggests the following formulas.
             These can be useful for simplifying and estimating certain definite integrals.
         </p>
@@ -585,7 +734,7 @@
             <statement>
                 <p>
                     Let <m>f(x)</m> be continuous on <m>[a,b]</m> and let <m>F(x)</m> be a single antiderivative of <m>f(x)</m> on this interval.
-                    Then 
+                    Then
                     <me>\int_{a}^{b}f(x)\,dx = F(a) - F(b).</me>
                 </p>
             </statement>
@@ -598,12 +747,12 @@
                         <mrow> &amp; = F(x_{n}) - F(x_{n-1}) + F(x_{n-1}) - F(x_{n-2}) + \cdots + F(x_{1}) - F(x_{0}) </mrow>
                         <mrow> &amp; = \sum_{i=1}^{n}[F(x_{i}) - F(x_{i-1})]. </mrow>
                     </md>
-                    By the Mean Value Theorem, we can rewrite each term in the sum using <m>F'</m>:
-                    <me>F(x_{i}) - F(x_{i-1}) = F'(x_{i}^{*})(x_{i} - x_{i-1})</me>
+                    By the Mean Value Theorem, we can rewrite each term in the sum using <m>F^{\prime}</m>:
+                    <me>F(x_{i}) - F(x_{i-1}) = F^{\prime}(x_{i}^{*})(x_{i} - x_{i-1})</me>
                     where <m>x_{i}^{*}</m> is just some point in <m>[x_{i-1},x_{i}]</m>.
                     So we have
                     <md>
-                        <mrow>F(b) - F(a) &amp; = \sum_{i=1}^{n}F'(x_{i}^{*})(x_{i} - x_{i-1}) </mrow>
+                        <mrow>F(b) - F(a) &amp; = \sum_{i=1}^{n}F^{\prime}(x_{i}^{*})(x_{i} - x_{i-1}) </mrow>
                         <mrow> &amp; = \sum_{i=1}^{n}f(x_{i}^{*})\Delta x. </mrow>
                     </md>
                     If we now send <m>n\to\infty</m> (i.e,, <m>\Delta x\to 0</m>), then the above becomes
@@ -619,8 +768,8 @@
             <title>Modeling a population</title>
             <statement>
                 <p>
-                    A honeybee population starts with <m>100</m> members and grows at a rate of <m>n'(t)</m> per week.
-                    Find the total population after <m>15</m> weeks in terms of <m>n'(t)</m>.
+                    A honeybee population starts with <m>100</m> members and grows at a rate of <m>n^{\prime}(t)</m> per week.
+                    Find the total population after <m>15</m> weeks in terms of <m>n^{\prime}(t)</m>.
                 </p>
             </statement>
             <solution>
@@ -628,7 +777,7 @@
                     The total population after <m>15 weeks</m> should be given by
                     <md>
                         <mrow>(\text{total population}) &amp; = (\text{initial population}) + (\text{net change}) </mrow>
-                        <mrow> &amp; = 100 + \int_{0}^{15}n'(t)\,dt </mrow>
+                        <mrow> &amp; = 100 + \int_{0}^{15}n^{\prime}(t)\,dt </mrow>
                     </md>
                 </p>
             </solution>
@@ -758,7 +907,7 @@
         </example>
         <p>
             There's one important thing to take away from the previous example.
-            The function <m>g(x) = \int_{1}^{x}f(t)\,dt</m> turned out to be an antiderivative of <m>f(x)</m>, so in particular <m>g'(x) = f(x)</m>.
+            The function <m>g(x) = \int_{1}^{x}f(t)\,dt</m> turned out to be an antiderivative of <m>f(x)</m>, so in particular <m>g^{\prime}(x) = f(x)</m>.
             This is not a coincidence.
         </p>
         <theorem xml:id="theorem-fundamental-theorem-of-calculus">
@@ -769,7 +918,7 @@
                 </p>
                 <ol>
                     <li>Define <m>g(x) = \int_{a}^{x}f(t)\,dt</m> for <m>x</m> in <m>[a,x]</m>.
-                    Then <m>g'(x) = f(x)</m>, i.e., <m>g</m> is an antiderivative of <m>f</m>.</li>
+                    Then <m>g^{\prime}(x) = f(x)</m>, i.e., <m>g</m> is an antiderivative of <m>f</m>.</li>
                     <li>Let <m>F</m> be a particular antiderivative of <m>f</m>.
                     Then <m>\int_{a}^{b}f(x)\,dx = F(b) - F(a).</m></li>
                 </ol>
@@ -783,7 +932,7 @@
                     Now, if <m>h</m> is small and if <m>x\leq t\leq x+h</m>, then <m>\int_{x}^{x+h}f(t)\,dt</m> should be approximately equal to <m>f(x)h</m> since <m>f</m> is continuous.
                     Therefore
                     <me>\lim_{h\to0}\frac{g(x+h)-g(x)}{h} = \lim_{h\to0}\frac{f(x)h}{h} = f(x),</me>
-                    and so <m>g'(x) = f(x)</m>.
+                    and so <m>g^{\prime}(x) = f(x)</m>.
                 </p>
             </proof>
         </theorem>
@@ -804,8 +953,8 @@
             <solution>
                 <p>
                     By the Fundamental Theorem of Calculus, we have
-                    <me>erf'(x) = \frac{2}{\sqrt{\pi}}e^{-x^{2}}.</me>
-                    Note that <m>\erf'(x)\to0</m> as <m>x\to\infty</m>, which suggests that the error function "levels out" as <m>x</m> increases, which is in fact true.
+                    <me>erf^{\prime}(x) = \frac{2}{\sqrt{\pi}}e^{-x^{2}}.</me>
+                    Note that <m>\erf^{\prime}(x)\to0</m> as <m>x\to\infty</m>, which suggests that the error function "levels out" as <m>x</m> increases, which is in fact true.
                 </p>
             </solution>
         </example>
@@ -814,14 +963,14 @@
             <statement>
                 <p>
                     Let <m>f(x) = \int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt.</m>
-                    Find <m>f'(x)</m>.
+                    Find <m>f^{\prime}(x)</m>.
                 </p>
             </statement>
             <solution>
                 <p>
                     We have
                     <md>
-                        <mrow>f'(x) &amp; = \dv{}{x}\int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt </mrow>
+                        <mrow>f^{\prime}(x) &amp; = \dv{}{x}\int_{\sin x}^{1}\sqrt{t^{2} + e^{-t}}\,dt </mrow>
                         <mrow> &amp; = -\dv{}{x}\int_{1}^{\sin x}\sqrt{t^{2} + e^{-t}}\,dt </mrow>
                         <mrow> &amp; = -\sqrt{\sin^{2}x+e^{-\sin x}}\cos x. </mrow>
                     </md>
@@ -851,9 +1000,9 @@
                 <p>
                     To minimize <m>C(t)</m>, we'll start by finding its critical points.
                     Assuming that each of these functions is differentiable, we have
-                    <me>C'(t) = -\frac{1}{t^{2}}\int_{0}^{t}[f(s)+g(s)]\,ds + \frac{f(t) + g(t)}{t}</me>
+                    <me>C^{\prime}(t) = -\frac{1}{t^{2}}\int_{0}^{t}[f(s)+g(s)]\,ds + \frac{f(t) + g(t)}{t}</me>
                     which reduces to
-                    <me>C'(t) = -\frac{1}{t}C(t) + \frac{f(t) + g(t)}{t}.</me>
+                    <me>C^{\prime}(t) = -\frac{1}{t}C(t) + \frac{f(t) + g(t)}{t}.</me>
                     So the critical points occur at any value <m>t = T</m> for which <m>C(T) = f(T) + g(T)</m>, i.e., the cost per month due to depreciation and maintenance equals the rate of depreciation plus the rate of maintenance costs.
                 </p>
                 <p>
@@ -879,12 +1028,12 @@
         <p>
             To see how the chain rule leads to an integration rule, suppose we have an expression <m>F(g(x))</m> where <m>F,g</m> are differentiable.
             Then the chain rule says that
-            <m>\dv{}{x}F(g(x)) = F'(g(x))g'(x).</m>
-            Now, write <m>F' = f</m> and make the substitution <m>u = g(x)</m>.
+            <m>\dv{}{x}F(g(x)) = F^{\prime}(g(x))g^{\prime}(x).</m>
+            Now, write <m>F^{\prime} = f</m> and make the substitution <m>u = g(x)</m>.
             Then we get
-            <me>f(g(x))g'(x) = f(u)\dv{u}{x}.</me>
+            <me>f(g(x))g^{\prime}(x) = f(u)\dv{u}{x}.</me>
             Now we can integrate both sides of this equation with respect to <m>x</m> to get
-            <me>\int f(g(x))g'(x)\,dx = \int f(u)\dv{u}{x}\,dx = \int f(u)\,du.</me>
+            <me>\int f(g(x))g^{\prime}(x)\,dx = \int f(u)\dv{u}{x}\,dx = \int f(u)\,du.</me>
             This method is known as <term><m>u</m>-substitution</term>.
         </p>
         <theorem xml:id="theorem--u--substitution">
@@ -894,7 +1043,7 @@
                     Let <m>u = g(x)</m> be a differentiable function whose range is an interval <m>I</m>.
                     Let <m>f(x)</m> be a continuous function on <m>I</m>.
                     Then 
-                    <me>\int f(g(x))g'(x)\,dx = \int f(u)\,du.</me>
+                    <me>\int f(g(x))g^{\prime}(x)\,dx = \int f(u)\,du.</me>
                 </p>
             </statement>
         </theorem>
