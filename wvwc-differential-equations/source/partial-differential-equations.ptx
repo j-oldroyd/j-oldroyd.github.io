@@ -23,9 +23,11 @@
       This works just fine as a simple model of the temperature of the rod, but in reality the situation is likely to be more complicated.
       For instance, the temperature of the rod will likely vary over the surface of the rod at any given time <m>t</m>. So it's reasonable to assume that the temperature of the rod should depend on <em>two</em> variables, say, <m>x</m> (position on the rod) and <m>t</m> (time).
       So the temperature of the rod would be more accurately described by a function <m>u(x,t)</m>.
-      In fact, as we will see later, the temperature <m>u(x,t)</m> can be described by the <term>heat equation</term>:
+      In fact, as we will see later, the temperature <m>u(x,t)</m> can be described by the <term>heat equation</term>.
     </p>
-    <me>\frac{\partial u}{\partial t} = \frac{\partial^{2}u}{\partial x^{2}}.</me>
+    <me>
+      \frac{\partial u}{\partial t} = \frac{\partial^{2}u}{\partial x^{2}}
+    </me>.
     <p>
       This is an example of a <term>partial differential equation</term>.
     </p>
@@ -35,7 +37,7 @@
     <subsection xml:id="subsection-partial-derivatives-and-pdes">
       <title>Partial derivatives and PDEs</title>
       <p>
-        Given some quantity <m>u(x)</m> that depends solely on the variable <m>x</m>, <m>\frac{du}{dx} = u'(x)</m> represents the rate of change of <m>u</m> with respect to <m>x</m>.
+        Given some quantity <m>u(x)</m> that depends solely on the variable <m>x</m>, <m>\frac{du}{dx} = u^{\prime}(x)</m> represents the rate of change of <m>u</m> with respect to <m>x</m>.
         More generally, given some quantity <m>u(x,t)</m> that depends on <m>x,t</m>, we can attempt to find the rate of change of <m>u</m> with respect to each of the variables <m>x,t</m>.
         This idea leads to <term>partial derivatives</term>.
       </p>
@@ -195,9 +197,9 @@
       The vertical displacement of such a string depends on the horizontal position along the string, <m>x</m>, and the time <m>t</m>.
       So let <m>u(x,t)</m> denote the vertical displacement of the string at position <m>x</m> and at time <m>t</m>.
       If we assume that the string has constant density and that the force of gravity of the string is negligible, then <m>u(x,t)</m> satisfies the wave equation
-      <mdn>
-        <mrow xml:id="equation-wave-equation">\frac{\partial^{2}u}{\partial t^{2}} \amp = c^{2}\frac{\partial^{2}u}{\partial x^{2}} </mrow>
-      </mdn>
+      <men xml:id="equation-wave-pde">
+        \frac{\partial^{2}u}{\partial t^{2}} = c^{2}\frac{\partial^{2}u}{\partial x^{2}}
+      </men>
       for some constant <m>c</m>.
     </p>
     <p>
@@ -216,7 +218,7 @@
     <p>
       Our goal will be to find <m>u(x,t)</m> subject to these conditions.
       To start, assume that <m>u(x,t) = X(x)T(t).</m>
-      If we plug this into <xref ref="equation-wave-equation" text="type-global" />, then we get</p>
+      If we plug this into <xref ref="equation-wave-pde" text="type-global" />, then we get</p>
       <me>X(x)T''(t) = c^{2}X''(x)T(t).</me>
       <p>
         If we assume that <m>X(x),T(t)</m> are both nonzero, then we can rewrite this to get
@@ -273,7 +275,7 @@
     <p>
       So this means that every function of the form
       <me>u_{n}(x,t) = X_{n}T_{n} = \sin\frac{n\pi}{L}x\left(b_{n}\cos\lambda_{n}t+b^{*}_{n}\sin\lambda_{n}t\right)</me>
-      is a solution of <xref ref="equation-wave-equation" text="type-global" /> subject to the boundary conditions <xref ref="equation-boundary-conditions" text="type-global" />.
+      is a solution of <xref ref="equation-wave-pde" text="type-global" /> subject to the boundary conditions <xref ref="equation-boundary-conditions" text="type-global" />.
       It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.
     </p>
     <p>
@@ -308,7 +310,7 @@
       <title>Solution of the Wave Equation</title>
       <statement>
         <p>
-          The solution of the wave equation <xref ref="equation-wave-equation" text="type-global" /> with boundary conditions <xref ref="equation-boundary-conditions" /> and initial conditions <xref ref="equation-initial-condition" /> is given by
+          The solution of the wave equation <xref ref="equation-wave-pde" text="type-global" /> with boundary conditions <xref ref="equation-boundary-conditions" /> and initial conditions <xref ref="equation-initial-condition" /> is given by
           <me>u(x,t) = \sum_{n=1}^{\infty}\sin\frac{n\pi}{L}x(b_{n}\cos\lambda_{n}t+b^{*}_{b}\sin\lambda_{n}t),</me>
           where
           <me>b_{n} = \frac{2}{L}\int_{0}^{L}f(x)\sin\frac{n\pi}{L}\,dx\text{ and }b^{*}_{n} = \frac{2}{cn\pi}\int_{0}^{L}g(x)\sin\frac{n\pi}{L}x\,dx</me>
@@ -527,9 +529,9 @@
         We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the <m>x</m>-direction only.
         With these assumptions, the temperature <m>u(x,t)</m> of the bar at position <m>x</m> and time <m>t</m> satisfies the PDE
       </p>
-      <md>
-        <mrow>\pdv{u}{t} \amp = c^{2}\pdv[2]{u}{x} </mrow>
-      </md>.
+      <men xml:id="equation-heat-pde">
+        \pdv{u}{t} = c^{2}\pdv[2]{u}{x}
+      </men>.
       <p>
         This is called the <term>one-dimensional heat equation</term>.
       </p>
@@ -558,7 +560,7 @@
       </p>
       <md>
         <mrow>X''+\mu^{2}X \amp = 0 </mrow>
-        <mrow>T'+c^{2}\mu^{2}T \amp = 0 </mrow>
+        <mrow>T^{\prime}+c^{2}\mu^{2}T \amp = 0 </mrow>
       </md>.
       <p>
         The boundary conditions in <xref ref="heat-equation-boundary-conditions-fixed-temperature" /> force <m>X(0) = X(L) = 0</m>, and the only nontrivial solutions of <m>X''+\mu^{2}X = 0</m> occur when <m>\mu = \frac{n\pi}{L}</m>.

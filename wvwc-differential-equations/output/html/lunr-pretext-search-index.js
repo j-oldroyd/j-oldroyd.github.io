@@ -2193,57 +2193,84 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "7.1",
   "title": "Fourier Series",
-  "body": "Fourier Series \n        The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects.\n        A fundamental example of this idea comes from the field of linear algebra in the form of  orthonormal bases .\n        Knowing an orthonormal basis for a vector space   can greatly simplify linear algebra in that vector space.\n        In this section, we'll do something similar with periodic functions.\n       Periodic Functions \n        Consider the function   given by the following graph:\n       A periodic function. A periodic function. \n        This function can be plotted using the following code:\n       periodic functions Periodic Functions Functions periodic \n            Let   be a real function defined for all  . We say that   is a periodic function if there exists a positive number   such that\n             \n            for all  .\n           \n          and  \n         \n          Let   be any integer. Then the functions   and   are both periodic and have period   since\n           \n          The periodic nature of these functions can also be seen from their graphs:\n         \n         \n       trigonometric series Trigonometric Series and Fourier Series Trigonometric Series Series trigonometric coefficients orthogonality relations Orthogonality Relations Orthogonality relations \n            Let   be whole numbers with  .\n            Then\n             \n            and\n             .\n           \n        We can verify   using a computer algebra system.\n        Proving it is a little bit more work, but can be done using trigonometric identities or Euler's formula.\n       \n          will be our primary tool for expressing a function   as a trigonometric series.\n        To see how, suppose that we have\n         \n        If this equation were true, then we should be able to integrate both sides of it and get another true equation.\n        Since   suggests that integrals involving   simplify very nicely, we'll try to integrate both sides of the equation against   from   to   for some  .\n        If we do this, we get\n         \n        This lets us solve for  !\n        We have\n         \n        Similarly,\n         \n        These formulas are useful enough that we'll place them together in a theorem.\n       Fourier Series Coefficients Fourier series Coefficients \n            Let   be a periodic function with period  .\n            Then the Fourier coefficients of   are given by\n             \n           The Fourier series of  \n          Define   for  .\n          To find its Fourier series, we can just use the previous formulas to find the values of the coefficients   for  .\n          We know that\n           \n          As nasty as these are, the first two are actually very easy to compute.\n          Here's why:   and   are both  odd  functions, and the integral of any odd function in an interval that is symmetric about   is always   (since the areas cancel out).\n          So   for all  .\n          The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that\n           \n          If we plug in the limits of integration and simplify (again, computers are handy for this!), we get\n           \n          So the Fourier series for   is given by\n           \n         \n        A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function  ?\n        Are they actually equal?\n        If we use the following code (adapted from  here ) to compare the partial sums\n         \n        of the Fourier series with  , then it looks like the partial sums get closer and closer if we choose larger values of  .\n       \n        In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer. In fact, the convergence of Fourier series for what one might consider to be the more \"well-behaved\" functions in mathematics was an open question until the 1960s. See  Carleson's Theorem . \n        However, for many of the functions we care about in this course we have the following theorem.\n       Fourier Series of Piecewise Continuous Functions Fourier series convergence \n            Let   be a piecewise continuous function on the interval  , and suppose that it's also periodic with period  , and is differentiable everywhere that it's continuous.\n            Then the Fourier series of   converges to   except at the points where   is discontinuous.\n           "
+  "body": "Fourier Series periodic functions Periodic Functions \n        Consider the function   given by the following graph:\n       A periodic function. The graph of a periodic function. periodic functions Periodic Functions periodic functions -periodic (fundamental) period \n          Constant functions are examples of periodic functions with  no  fundamental period.\n         \n         Periods of Sine and Cosine \n         \n          Let   be any positive integer.\n          Then the functions   and   are both  -periodic which follows from the corresponding addition formulas\n           .\n          The period, in particular, is  .\n          The periodic nature of these functions can also be seen from their graphs:\n         \n         \n         Graphs of   and  . An image showing the periodic nature of sine and cosine. \n       \n        The graph in   was produced by graphing\n         \n        In general, the (finite) sum of functions of the form   where   are integers is also  -periodic.\n        In particular, we have the following result.\n       Periods of Sums of Sinusoids \n              Let   and   where  .\n              Suppose that   where   represents the reduced fraction of  .\n              Then   has period given by\n               .\n             Finding Periods of Sums of Sinusoids \n              Find the periods of   and  .\n             \n              For   we have  , which in lowest terms is  .\n              Therefore the period is  .\n              For  , we have   which is already in lowest terms.\n              Therefore its period is  .\n             Trigonometric Series and Fourier Series \n        One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written as a sum of sinusoids using  trigonometric polynomials  and  trigonometric series .\n       Trigonometric Polynomials and Series trigonometric polynomials and series trigonometric polynomial trigonometric series coefficients orthogonality relations Orthogonality Relations Orthogonality relations \n            Let   be whole numbers with  .\n            Then\n             .\n            Furthermore,\n             \n            and\n             .\n           \n        We can verify   using a computer algebra system as below.\n        Proving it is a little bit more work, but can be done using trigonometric identities or  .\n       Fourier series Fourier Series Coefficients Fourier series Coefficients \n            Let   be a periodic function with period  .\n            Then the Fourier coefficients of   are given by\n             \n           \n        Note that the formulas in   tell us what the coefficients of a Fourier series representation of   must be if such a representation existed, but as yet there is no guarantee that a function actually equals its Fourier series.\n        Also, since   is assumed to be  -periodic we can also integrate over   instead without changing the values of the coefficients.\n       The Fourier series of  \n          Define   for  .\n          To find its Fourier series, we can just use the previous formulas to find the values of the coefficients   for  .\n          We know that\n           \n          As nasty as these are, the first two are actually very easy to compute.\n          Here's why:   and   are both  odd  functions, and the integral of any odd function in an interval that is symmetric about   is always   (since the areas cancel out).\n          So   for all  .\n          The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that\n           \n          If we plug in the limits of integration and simplify (again, computers are handy for this!), we get\n           \n          So the Fourier series for   is given by\n           \n         \n        A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function  ?\n        Are they actually equal?\n        If we use the following code (adapted from  here ) to compare the partial sums\n         \n        of the Fourier series with  , then it looks like the partial sums get closer and closer if we choose larger values of  .\n       \n        In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer. In fact, the convergence of Fourier series for what one might consider to be the more \"well-behaved\" functions in mathematics was an open question until the 1960s. See  Carleson's Theorem . \n        However, for many of the functions we care about in this course we have the following theorem.\n       Fourier Series of Piecewise Continuous Functions Fourier series convergence \n            Let   be a piecewise continuous function on the interval  , and suppose that it's also periodic with period  , and is differentiable everywhere that it's continuous.\n            Then the Fourier series of   converges to   except at the points where   is discontinuous.\n           "
 },
 {
-  "id": "figure-sageplot-periodic-function",
+  "id": "p-613",
   "level": "2",
-  "url": "section-fourier-series.html#figure-sageplot-periodic-function",
-  "type": "Figure",
-  "number": "7.1.1",
-  "title": "",
-  "body": "A periodic function. A periodic function. "
-},
-{
-  "id": "p-616",
-  "level": "2",
-  "url": "section-fourier-series.html#p-616",
+  "url": "section-fourier-series.html#p-613",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "periodic functions "
 },
 {
-  "id": "definition-periodic-functions",
+  "id": "figure-fourier-periodic-function",
   "level": "2",
-  "url": "section-fourier-series.html#definition-periodic-functions",
-  "type": "Definition",
-  "number": "7.1.2",
-  "title": "Periodic Functions.",
-  "body": "Periodic Functions Functions periodic \n            Let   be a real function defined for all  . We say that   is a periodic function if there exists a positive number   such that\n             \n            for all  .\n           "
+  "url": "section-fourier-series.html#figure-fourier-periodic-function",
+  "type": "Figure",
+  "number": "7.1.1",
+  "title": "",
+  "body": "A periodic function. The graph of a periodic function. "
 },
 {
-  "id": "p-619",
+  "id": "p-615",
   "level": "2",
-  "url": "section-fourier-series.html#p-619",
+  "url": "section-fourier-series.html#p-615",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "trigonometric series "
+  "body": "periodic functions "
 },
 {
-  "id": "definition-trigonometric-series",
+  "id": "definition-fourier-periodic-functions",
   "level": "2",
-  "url": "section-fourier-series.html#definition-trigonometric-series",
+  "url": "section-fourier-series.html#definition-fourier-periodic-functions",
   "type": "Definition",
-  "number": "7.1.3",
-  "title": "Trigonometric Series.",
-  "body": "Trigonometric Series Series trigonometric coefficients "
+  "number": "7.1.2",
+  "title": "Periodic Functions.",
+  "body": "Periodic Functions periodic functions -periodic (fundamental) period "
 },
 {
-  "id": "p-621",
+  "id": "figure-fourier-period-sine-cosine",
   "level": "2",
-  "url": "section-fourier-series.html#p-621",
+  "url": "section-fourier-series.html#figure-fourier-period-sine-cosine",
+  "type": "Figure",
+  "number": "7.1.3",
+  "title": "",
+  "body": "Graphs of   and  . An image showing the periodic nature of sine and cosine. "
+},
+{
+  "id": "theorem-fourier-periodic-periods-of-sums-of-sinusoids",
+  "level": "2",
+  "url": "section-fourier-series.html#theorem-fourier-periodic-periods-of-sums-of-sinusoids",
+  "type": "Theorem",
+  "number": "7.1.4",
+  "title": "Periods of Sums of Sinusoids.",
+  "body": "Periods of Sums of Sinusoids \n              Let   and   where  .\n              Suppose that   where   represents the reduced fraction of  .\n              Then   has period given by\n               .\n             "
+},
+{
+  "id": "example-fourier-periodic-finding-periods-of-sums-of-sinusoids",
+  "level": "2",
+  "url": "section-fourier-series.html#example-fourier-periodic-finding-periods-of-sums-of-sinusoids",
+  "type": "Example",
+  "number": "7.1.5",
+  "title": "Finding Periods of Sums of Sinusoids.",
+  "body": "Finding Periods of Sums of Sinusoids \n              Find the periods of   and  .\n             \n              For   we have  , which in lowest terms is  .\n              Therefore the period is  .\n              For  , we have   which is already in lowest terms.\n              Therefore its period is  .\n             "
+},
+{
+  "id": "definition-fourier-periodic-trigonometric-polynomial-series",
+  "level": "2",
+  "url": "section-fourier-series.html#definition-fourier-periodic-trigonometric-polynomial-series",
+  "type": "Definition",
+  "number": "7.1.6",
+  "title": "Trigonometric Polynomials and Series.",
+  "body": "Trigonometric Polynomials and Series trigonometric polynomials and series trigonometric polynomial trigonometric series coefficients "
+},
+{
+  "id": "p-625",
+  "level": "2",
+  "url": "section-fourier-series.html#p-625",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2254,16 +2281,25 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-fourier-series.html#theorem-orthogonality-relations",
   "type": "Theorem",
-  "number": "7.1.4",
+  "number": "7.1.7",
   "title": "Orthogonality Relations.",
-  "body": "Orthogonality Relations Orthogonality relations \n            Let   be whole numbers with  .\n            Then\n             \n            and\n             .\n           "
+  "body": "Orthogonality Relations Orthogonality relations \n            Let   be whole numbers with  .\n            Then\n             .\n            Furthermore,\n             \n            and\n             .\n           "
+},
+{
+  "id": "p-628",
+  "level": "2",
+  "url": "section-fourier-series.html#p-628",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "Fourier series "
 },
 {
   "id": "theorem-fourier-series-coefficients",
   "level": "2",
   "url": "section-fourier-series.html#theorem-fourier-series-coefficients",
   "type": "Theorem",
-  "number": "7.1.5",
+  "number": "7.1.8",
   "title": "Fourier Series Coefficients.",
   "body": "Fourier Series Coefficients Fourier series Coefficients \n            Let   be a periodic function with period  .\n            Then the Fourier coefficients of   are given by\n             \n           "
 },
@@ -2272,7 +2308,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-fourier-series.html#example-fourier-series-of-x-cubed",
   "type": "Example",
-  "number": "7.1.6",
+  "number": "7.1.9",
   "title": "The Fourier series of <span class=\"process-math\">\\(x^{3}\\)<\/span>.",
   "body": "The Fourier series of  \n          Define   for  .\n          To find its Fourier series, we can just use the previous formulas to find the values of the coefficients   for  .\n          We know that\n           \n          As nasty as these are, the first two are actually very easy to compute.\n          Here's why:   and   are both  odd  functions, and the integral of any odd function in an interval that is symmetric about   is always   (since the areas cancel out).\n          So   for all  .\n          The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that\n           \n          If we plug in the limits of integration and simplify (again, computers are handy for this!), we get\n           \n          So the Fourier series for   is given by\n           \n         "
 },
@@ -2281,7 +2317,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-fourier-series.html#theorem-pointwise-convergence-of-fourier-series",
   "type": "Theorem",
-  "number": "7.1.7",
+  "number": "7.1.10",
   "title": "Fourier Series of Piecewise Continuous Functions.",
   "body": "Fourier Series of Piecewise Continuous Functions Fourier series convergence \n            Let   be a piecewise continuous function on the interval  , and suppose that it's also periodic with period  , and is differentiable everywhere that it's continuous.\n            Then the Fourier series of   converges to   except at the points where   is discontinuous.\n           "
 },
@@ -2313,9 +2349,9 @@ var ptx_lunr_docs = [
   "body": "Fourier Series of  \n          Let   for   and have period  .\n          We can find its Fourier series using  .\n          If we do so, we get\n           \n          So the Fourier series of   is given by\n           .\n         "
 },
 {
-  "id": "p-635",
+  "id": "p-640",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-635",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-640",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2331,9 +2367,9 @@ var ptx_lunr_docs = [
   "body": "Even and Odd Functions Even and odd functions \n            Let   be a function.\n            We say that   is\n             \n           "
 },
 {
-  "id": "p-638",
+  "id": "p-643",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-638",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-643",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2376,9 +2412,9 @@ var ptx_lunr_docs = [
   "body": "Complex Fourier Series and Parseval's Identity \n        Although we have a decent formula for Fourier series (see  ), it's a little unwieldy due to the different expressions for   and  .\n        We can fix this, perhaps surprisingly, by using complex exponentials and Euler's formula.\n       Complex Fourier Series \n        First, recall  Euler's formula , which allows us to rewrite complex exponentials in terms of sine and cosine.\n       complex Fourier series Complex Fourier Series Fourier series complex form \n            Let   be a piecewise smooth function with period  .\n            Then the complex Fourier series of   is given by\n             \n            where\n             \n            This Fourier series converges to   wherever   is continuous.\n           \n            We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine.\n            In particular, the relation we will use is the following:\n             \n            So if we set   equal to a complex Fourier series and integrate both sides against   for   from   to  , we get\n             \n            where the last equality follows from the orthogonality relation we just proved.\n            Therefore\n             \n           Complex Fourier Series of Exponential Function \n          Let   on   and suppose that   is periodic with period  .\n          We want to find the complex Fourier series for  .\n          We can do this by finding the correct coefficients  :\n           \n          So we have\n           \n          for  , since this is where   has discontinuities.\n         \n        Although the complex Fourier series can be easier to compute in some cases, there may be cases where we'd like to go back to the real Fourier series. The following formula lets us do so.\n       Real Fourier Series from Complex Fourier Series Fourier series convert complex to real \n            Suppose   has the complex Fourier series\n             \n            Then the corresponding coefficients   and   for the real Fourier series\n             \n            are given by\n             \n           \n        The real Fourier series corresponding to the complex Fourier series for   from   has coefficients\n         \n        Either way, we get the following Fourier series.\n       Parseval's Identity Parseval's identity Parseval's Identity Fourier series Parseval's identity \n            Let   denote a piecewise-differentiable (real-valued) function on   with real Fourier coefficients   and complex Fourier coefficients  .\n            If   exists and is finite, then\n             \n           \n        One of the great strengths of this identity is that it allows potentially complicated sums to be computed using integrals instead.\n       The Basel Problem Basel problem \n          In the early   century, one of the most renowned problems in mathematics was the Basel problem, which asked for the value of\n           \n          Euler was the first person to show that the sum is actually   and it was this solution that made him famous Or at least math famous.  in the first place.\n          We can solve this by using Parseval's identity.\n          To do so, let   for  .\n          Then with a little bit of work we can find the (real) Fourier coefficients:\n           \n          By Parseval's identity, it then follows that\n           \n          which simplifies down to\n           \n          In other words,  \n         "
 },
 {
-  "id": "p-645",
+  "id": "p-650",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-645",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-650",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2412,9 +2448,9 @@ var ptx_lunr_docs = [
   "body": "Real Fourier Series from Complex Fourier Series Fourier series convert complex to real \n            Suppose   has the complex Fourier series\n             \n            Then the corresponding coefficients   and   for the real Fourier series\n             \n            are given by\n             \n           "
 },
 {
-  "id": "p-652",
+  "id": "p-657",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-652",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-657",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2448,9 +2484,9 @@ var ptx_lunr_docs = [
   "body": "Approximation by Trigonometric Polynomials trigonometric polynomial of degree  \n      We can also consider approximating   with other trigonometric polynomials of degree  , say\n       .\n      We'd like to know how good the approximation is.\n      To do this, we need to define a measure of error.\n     Square Error square error \n      It turns out that if we are approximating   by trigonometric polynomials  , then the square error takes a specific form.\n     Square Error Formula \n          Let   be a function of period   with Fourier coefficients   and  , and let\n           \n          be a degree   trigonometric polynomial.\n          Then\n           .\n          The error   takes this minimum value if  .\n         Error from a Trigonometric Polynomial \n          Define   for   as in  , and recall that the Fourier series is given by\n           .\n          Find the trigonometric polynomial of degree   that best approximates   and give the corresponding error.\n         \n          The trigonometric polynomial of degree   that best approximates   is\n           .\n          The corresponding square error is\n           \n         Bessel's inequality Applying Bessel's Inequality \n          Let\n           .\n          Apply Bessel's inequality to this function.\n          What does Parseval's Identity say?\n         \n          If we find the Fourier coefficients of  , we get\n           .\n          By Bessel's inequality, we know that\n           \n          for any  .\n          As  , Parseval's gives the identity\n           .\n         "
 },
 {
-  "id": "p-656",
+  "id": "p-661",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-656",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-661",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2484,9 +2520,9 @@ var ptx_lunr_docs = [
   "body": "Error from a Trigonometric Polynomial \n          Define   for   as in  , and recall that the Fourier series is given by\n           .\n          Find the trigonometric polynomial of degree   that best approximates   and give the corresponding error.\n         \n          The trigonometric polynomial of degree   that best approximates   is\n           .\n          The corresponding square error is\n           \n         "
 },
 {
-  "id": "p-663",
+  "id": "p-668",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-663",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-668",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2511,9 +2547,9 @@ var ptx_lunr_docs = [
   "body": "The Fourier Transform \n      If   is a periodic function with period  , then we know how to find its Fourier series, both real and complex.\n      But what do we do if our function   is not periodic?\n      Can we still get a similar representation?\n     \n      Let   be some piecewise-differentiable function, not necessarily periodic.\n      Then we can't find it's Fourier series.\n      However, we can truncate the graph of  , and replace it with a periodic function that is equal to   on some interval  .\n      Then we can find the Fourier series of  this  function, which by   is given by   where\n       \n      So we can write\n       \n      wherever   is continuous on  .\n     Fourier transform Absolutely Integrable Functions Absolutely Integrable Functions \n          Let   be a piecewise continuous function.\n          Then   is absolutely integrable if  \n         The Fourier Transform Fourier Transform definition \n          Let   be an absolutely integrable piecewise continuous function.\n          The Fourier transform of   is the function   defined by\n           \n          We often write   to denote the Fourier transform as well.\n         Fourier transform of a piecewise exponential \n        Let   for   and   otherwise.\n        Then the Fourier transform of   is\n         \n       frequency domain frequency content inverse Fourier transform The Inverse Fourier Transform Fourier Transform inverse transform \n          The inverse Fourier transform of   is\n           \n         Fourier Inversion Theorem Fourier Transform inversion theorem \n          Let   be an absolutely integrable, piecewise differentiable function.\n          Then   wherever   is continuous.\n         Inverse Fourier transform of a step function \n        Define   by\n         \n        Then we can find the inverse transform using  :\n         \n       \n      The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if   are constants and   are functions, then\n       \n      and\n       \n      The Fourier transform also works well with derivatives.\n     Fourier Transforms and Derivatives Fourier Transform transforms fo derivatives \n          Let   be differentiable with derivative  .\n          Suppose that both   and   are absolutely integrable.\n          Then\n           \n         \n      Fourier transforms also behave well with another type of convolution.\n     Convolution Theorem Fourier Transform convolution theorem \n          Suppose that   are piecewise continuous, bounded and absolutely integrable.\n          Define   by\n           \n          Then  \n         "
 },
 {
-  "id": "p-668",
+  "id": "p-673",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-668",
+  "url": "section-the-fourier-transform.html#p-673",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2547,9 +2583,9 @@ var ptx_lunr_docs = [
   "body": "Fourier transform of a piecewise exponential \n        Let   for   and   otherwise.\n        Then the Fourier transform of   is\n         \n       "
 },
 {
-  "id": "p-672",
+  "id": "p-677",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-672",
+  "url": "section-the-fourier-transform.html#p-677",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2610,9 +2646,9 @@ var ptx_lunr_docs = [
   "body": "Basic Concepts Partial derivatives and PDEs partial derivatives Partial derivatives Partial derivatives \n            Let   denote a function depending on the variables  .\n            Then the partial derivative of   with respect to   is found by differentiating   while treating   as a constant.\n            The partial derivative of   with respect to   is denoted by\n             \n            The partial derivative of   with respect to   is found similarly, and is likewise denoted by\n             \n           order Partial differential equations Definition Partial differential equation \n            A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function   that depends on two or more independent variables, usually thought of as time and position.\n            The highest derivative appearing in a PDE is called the order of the PDE.\n           boundary value problems boundary conditions Linear homogeneous PDEs and the superposition principle linear PDEs homogeneous solution Solution of the heat equation \n            Let  .\n            Show that this is a solution of the boundary value problem\n             \n           \n            To do so, we need to compute the partial derivatives of  \n           .\n           \n            So we see that  , which means that   is a solution of  .\n            Now it remains to show that   satisfies the boundary conditions, which we can do without too much trouble.\n           superposition principle Superposition principle partial differential equations Superposition principle \n            Let   and   denote arbitrary constants, and suppose that   and   are both solutions of the same linear homogeneous PDE.\n            Then\n             \n            is also a solution of the same PDE.\n           \n        The superposition principle is incredibly useful since it allows us to find general solutions of PDEs, which makes solving linear homogeneous PDEs somewhat tractable. If a PDE fails to be linear or homogeneous, the superposition principle is not guaranteed to hold.\n       Failure of the superposition principle \n            Consider the PDE given by\n             \n            This PDE fails to be linear because the second term involves multiplying   with its derivative  .\n            However, it's not too hard to check that   is a solution of the PDE, since if we plug this function into the PDE we get\n             .\n            However, the closely related function   is  not  a solution of the same PDE, since\n             \n            So the superposition principle does not hold for this PDE.\n           Important PDEs \n        As mentioned in the introduction, PDEs are useful for modeling quantities that depend on multiple independent variables.\n        We finish this section by listing several of the simplest and most studied PDEs.\n        where  . This is called the  heat  or  diffusion equation . This equation is used for modeling the spread of a quantity, such as how temperature diffuses along a rod.  where  . This is called the  wave equation , and is used for modeling vibrating motion, such as that along a plucked string. Laplacian \n        With this viewpoint, we can assign physical reasoning to the heat and wave equations:\n         \n             \n              The heat equation states that the time rate of change of the temperature is proportional to the difference between the temperature at   and the average values of nearby temperatures.\n              If the nearby average temperature is greater (i.e., the Laplacian is positive), then the temperature will increase.\n             \n           \n             \n              The wave equation states that the acceleration of the wave height is proportional to the difference between the height of the wave at   and the average height at nearby points.\n              If the nearby average height is greater (i.e., the Laplacian is positive), then the wave height will accelerate upwards.\n             \n           \n       \n        Our goal in the next section will be to determine how to solve PDEs such as these.\n       "
 },
 {
-  "id": "p-683",
+  "id": "p-688",
   "level": "2",
-  "url": "section-basic-concepts.html#p-683",
+  "url": "section-basic-concepts.html#p-688",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2628,9 +2664,9 @@ var ptx_lunr_docs = [
   "body": "Partial derivatives Partial derivatives \n            Let   denote a function depending on the variables  .\n            Then the partial derivative of   with respect to   is found by differentiating   while treating   as a constant.\n            The partial derivative of   with respect to   is denoted by\n             \n            The partial derivative of   with respect to   is found similarly, and is likewise denoted by\n             \n           "
 },
 {
-  "id": "p-685",
+  "id": "p-690",
   "level": "2",
-  "url": "section-basic-concepts.html#p-685",
+  "url": "section-basic-concepts.html#p-690",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2646,18 +2682,18 @@ var ptx_lunr_docs = [
   "body": "Partial differential equations Definition Partial differential equation \n            A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function   that depends on two or more independent variables, usually thought of as time and position.\n            The highest derivative appearing in a PDE is called the order of the PDE.\n           "
 },
 {
-  "id": "p-687",
+  "id": "p-692",
   "level": "2",
-  "url": "section-basic-concepts.html#p-687",
+  "url": "section-basic-concepts.html#p-692",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary value problems boundary conditions "
 },
 {
-  "id": "p-688",
+  "id": "p-693",
   "level": "2",
-  "url": "section-basic-concepts.html#p-688",
+  "url": "section-basic-concepts.html#p-693",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2673,9 +2709,9 @@ var ptx_lunr_docs = [
   "body": "Solution of the heat equation \n            Let  .\n            Show that this is a solution of the boundary value problem\n             \n           \n            To do so, we need to compute the partial derivatives of  \n           .\n           \n            So we see that  , which means that   is a solution of  .\n            Now it remains to show that   satisfies the boundary conditions, which we can do without too much trouble.\n           "
 },
 {
-  "id": "p-692",
+  "id": "p-697",
   "level": "2",
-  "url": "section-basic-concepts.html#p-692",
+  "url": "section-basic-concepts.html#p-697",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2700,9 +2736,9 @@ var ptx_lunr_docs = [
   "body": "Failure of the superposition principle \n            Consider the PDE given by\n             \n            This PDE fails to be linear because the second term involves multiplying   with its derivative  .\n            However, it's not too hard to check that   is a solution of the PDE, since if we plug this function into the PDE we get\n             .\n            However, the closely related function   is  not  a solution of the same PDE, since\n             \n            So the superposition principle does not hold for this PDE.\n           "
 },
 {
-  "id": "p-697",
+  "id": "p-702",
   "level": "2",
-  "url": "section-basic-concepts.html#p-697",
+  "url": "section-basic-concepts.html#p-702",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2718,27 +2754,27 @@ var ptx_lunr_docs = [
   "body": "The Wave Equation and Separation of Variables separation of variables \n      Consider a one-dimensional string of length   that vibrates in the vertical direction.\n      The vertical displacement of such a string depends on the horizontal position along the string,  , and the time  .\n      So let   denote the vertical displacement of the string at position   and at time  .\n      If we assume that the string has constant density and that the force of gravity of the string is negligible, then   satisfies the wave equation\n       \n      for some constant  .\n     boundary conditions .\n     initial conditions .\n     \n      Our goal will be to find   subject to these conditions.\n      To start, assume that  \n      If we plug this into  , then we get \n        If we assume that   are both nonzero, then we can rewrite this to get\n         \n        This may not look that helpful, but it actually places some serious restrictions on   and  .\n        The left hand side of this equation only depends on   whereas the right hand side depends only on  .\n        So the only way for this equation to be true for  all    is if both sides are constant:\n         \n        for some  .\n        This now gives us two separate  ordinary  differential equations for   and  : .\n         \n          We can add a few more restrictions to these ODEs to help us solve them.\n          Note that the boundary conditions   force either   or   for all  , which leads to  .\n          So to avoid this trivial solution, we'll set  .\n         \n          We'll solve   first since we have extra information to use.\n          So to start, suppose that   and write   for some nonzero  .\n          Then   becomes   and has solution given by\n           \n         \n          Now,   forces  , so we get  .\n          However, since   as well, we get  .\n          But the only way to solve this is to set   since   only if  .\n          So in other words, if we assume that  , then the only way to solve   is to set  , which also forces  .\n          Obviously, this isn't very useful.\n          Similarly, if we assume that   then we get the same problem.\n          So let's assume that   for some nonzero  .\n          Then   becomes  , which has solution\n         \n        The condition   forces  , and the second boundary condition   forces  .\n        We want to avoid setting   equal to   since this would give us   again, so we'll set   instead.\n         This  tells us that   for some integer  , or just  .\n        So nontrivial solutions of   that satisfy the boundary conditions   can occur only if   where   and  .\n        For each choice of   (ignoring sign), we get the solution  .\n       \n        Now we move on to solving  , but we still need to keep the condition   for  .\n        If we do so, then   becomes  , which has solutions given by\n         \n      where  .\n     \n      So this means that every function of the form\n       \n      is a solution of   subject to the boundary conditions  .\n      It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.\n     \n      However, this does  not  guarantee that we can solve for the initial conditions in  .\n      To give ourselves as general a solution as possible, we will guess that the solution to the wave equation is actually a linear combination of all possible  .\n      That is, we'll say that\n     \n      Now we'll use the initial conditions to actually determine  .\n      To start, note that we must have\n       \n       This is a Fourier series , and in particular it's the Fourier series of the odd extension of   with period  .\n       See  . \n      So it follows that\n     \n      Similarly, we must have\n       \n      This is the Fourier series for the odd extension of   with period  .\n      Therefore\n       \n      or just\n       \n     \n      We can put all of this together into the following theorem.\n     Wave equation solution Solution of the Wave Equation \n          The solution of the wave equation   with boundary conditions   and initial conditions   is given by\n           \n          where\n           \n          and   for  .\n         A string with fixed ends \n          A string at rest has unit length, and is fixed at both ends.\n          Suppose that the string is now stretched into the triangular shape given by the graph of\n           \n          The string is then released at time  .\n          Given  , find the function   that models the vertical displacement of the string at position   at time  .\n         \n          We can model   as the solution of the wave equation\n           \n          with boundary conditions   and initial conditions\n           \n          We can find   from  .\n         \n          Using the Sage cell below, we get\n           \n          and since   this forces   as well.\n          Hence the solution is\n           \n         "
 },
 {
-  "id": "p-702",
+  "id": "p-707",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-702",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-707",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "separation of variables "
 },
 {
-  "id": "p-704",
+  "id": "p-709",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-704",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-709",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary conditions "
 },
 {
-  "id": "p-705",
+  "id": "p-710",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-705",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-710",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2817,18 +2853,18 @@ var ptx_lunr_docs = [
   "body": "The Heat Equation heat equation .\n       one-dimensional heat equation Bar with ends fixed at  \n        We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature  .\n        If we're given an initial temperature distribution  , then   is the solution of the boundary value problem\n       .\n       \n        We can solve this boundary value problem using separation of variables, much as we did in  .\n        So to start, we assume that  .\n        If we plug this into the heat equation  , then we get\n       \n        Now we have three separate cases to consider for  :   or  .\n        Just as with the wave equation, the only case that doesn't lead to trivial solutions is  .\n        In this case   leads to the two ODEs given by\n       .\n       \n        The boundary conditions in   force  , and the only nontrivial solutions of   occur when  .\n        So we get the solutions  , just as with the wave equation.\n       \n        For the second ODE, we readily solve it to obtain   where   as before.\n        So every function\n         \n        is a solution of   that satisfies the boundary equations  .\n        In order to satisfy the arbitrary initial condition  , we take an infinite sum of the functions   to get\n       \n        Finally, if we plug in   and use the initial condition  , we get  .\n        This is just the Fourier series of the odd extension of  , which lets us find  .\n        We summarize all of this in the following theorem.\n       Heat equation fixed ends Solution of the Heat Equation with Fixed Temperature \n            The solution of the heat equation   satisfying the boundary conditions   and initial condition   is given by\n             \n            where\n             \n           Sinusoidal initial temperature \n            Consider a thin metal bar of length   placed on the  -axis, with one end at   and the other at  .\n            Assuming that   and that the initial temperature is   for  , find the temperature distribution using  .\n           \n            The temperature is the function   given by\n             \n            where   is the   coefficient of the Fourier series of the odd extension of  .\n            The odd extension of   is  .\n            Furthermore, the Fourier series of   is clearly just  .\n           \n            So in other words,\n             \n            Hence\n             \n           "
 },
 {
-  "id": "p-740",
+  "id": "p-745",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-740",
+  "url": "section-the-heat-equation.html#p-745",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "heat equation "
 },
 {
-  "id": "p-741",
+  "id": "p-746",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-741",
+  "url": "section-the-heat-equation.html#p-746",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
