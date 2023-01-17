@@ -10,6 +10,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
 </head>
-<body class="ignore-math"><div class="solution solution-like"><div class="para">This problem can be solved by diagonalizing <span class="process-math">\(G\text{:}\)</span> if <span class="process-math">\(G = UDU^T\)</span> then we can define <span class="process-math">\(F\)</span> by using the rows of <span class="process-math">\(U\sqrt{D}\text{.}\)</span> <aside class="aside aside-like"><div class="para">If <span class="process-math">\(D\)</span> is diagonal with nonnegative entries, then we can define <span class="process-math">\(\sqrt{D}\)</span> to be the matrix obtained by taking the square root of each entry of <span class="process-math">\(D\text{.}\)</span> It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues. If we diagonalize <span class="process-math">\(G\)</span> and find it has negative eigenvalues, then it cannot be a Gram matrix.</div></aside> So we'll diagonalize <span class="process-math">\(G\)</span> with the help of the Octave cell below. Doing so, we see that the eigenvalues of <span class="process-math">\(G\)</span> are in fact nonnegative and so <span class="process-math">\(U\sqrt{D}\)</span> will only contain real values. Furthermore, <span class="process-math">\(U\)</span> only has <span class="process-math">\(3\)</span> nonzero columns since <span class="process-math">\(G\)</span> only has three nonzero eigenvalues. By removing the zero column from <span class="process-math">\(U\sqrt{D}\text{,}\)</span> we obtain a <span class="process-math">\(4\times3\)</span> matrix which we define to be <span class="process-math">\(F^T\text{.}\)</span> Then <span class="process-math">\(F^TF = G\text{.}\)</span>
-</div></div></body>
+<body class="ignore-math"><div class="solution solution-like">
+<div class="para logical">
+<div class="para">By <a href="" class="xref" data-knowl="./knowl/theorem-diagonalization-and-eigenbases.html" title="Theorem 2.4.4: Diagonalization and Eigenbases">Theorem 2.4.4</a>, <span class="process-math">\(A\)</span> is diagonalizble if and only if <span class="process-math">\(A\)</span> has an eigenbasis. Using Octave we quickly see that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_1 = 0, \lambda_2 = \lambda_3 = 3\text{.}\)</span> Now we need to <span class="process-math">\(\smqty[A - 0I &amp; \vb{0}]\)</span> and <span class="process-math">\(\smqty[A - 3I &amp; \vb{0}]\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-diagonalization-and-eigenbases.html">
+\begin{equation*}
+\mqty[A&amp;\vb{0}] \sim \mqty[1 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]\text{ and }\mqty[A-3I &amp; \vb{0}] \sim \mqty[1 &amp; 1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]\text{.}
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-diagonalization-and-eigenbases.html">
+\begin{equation*}
+\nul(A) = \spn{\qty{\mqty[1\\1\\1]}}\text{ and }\nul(A-3I) = \spn{\left\{\mqty[-1\\1\\0],\mqty[-1\\0\\1]\right\}}\text{.}
+\end{equation*}
+</div>
+</div> <div class="para logical">
+<div class="para">Now we have everything we need to diagonalize <span class="process-math">\(A\text{.}\)</span> Define</div>
+<div class="displaymath process-math">
+\begin{equation*}
+P = \mqty[1 &amp; -1 &amp; -1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1]\text{ and }D = \mqty[0 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 3]\text{.}
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(A = PDP^{-1}\text{.}\)</span>
+</div>
+</div>
+</div></body>
 </html>

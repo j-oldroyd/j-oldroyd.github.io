@@ -296,6 +296,7 @@ true);
 <li>
 <div class="toc-item"><a href="section-linear-independence.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Linear Independence</span></a></div>
 <ul class="structural">
+<li><div class="toc-item"><a href="section-linear-independence.html#subsection-span" class="internal"><span class="title">Span</span></a></div></li>
 <li><div class="toc-item"><a href="section-linear-independence.html#subsection-definition-and-examples-of-linear-independence" class="internal"><span class="title">Definition and Examples of Linear Independence</span></a></div></li>
 <li><div class="toc-item"><a href="section-linear-independence.html#subsection-bases-in--rr-n-" class="internal"><span class="title">Bases in <span class="process-math">\(\RR^n\)</span></span></a></div></li>
 </ul>
@@ -437,11 +438,11 @@ true);
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section--LU-decomposition"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">1.8</span> <span class="title"><span class="process-math">\(LU\)</span> Decomposition</span>
 </h2>
-<div class="para" id="p-139">The approach we used in <a href="" class="xref" data-knowl="./knowl/theorem-invertible-matrix-algorithm.html" title="Theorem 1.7.12: Invertible Matrix Algorithm">Theorem 1.7.12</a> also gives us a useful way to <em class="emphasis">factor</em> matrices. As with polynomials, the goal in factoring a matrix <span class="process-math">\(A\)</span> is to write it as the product of simpler matrices. The factorization we'll look at in this section is the <span class="process-math">\(LU\)</span> decomposition, which we demonstrate first by an example.</div>
+<div class="para" id="p-143">The approach we used in <a href="" class="xref" data-knowl="./knowl/theorem-invertible-matrix-algorithm.html" title="Theorem 1.7.12: Invertible Matrix Algorithm">Theorem 1.7.12</a> also gives us a useful way to <em class="emphasis">factor</em> matrices. As with polynomials, the goal in factoring a matrix <span class="process-math">\(A\)</span> is to write it as the product of simpler matrices. The factorization we'll look at in this section is the <span class="process-math">\(LU\)</span> decomposition, which we demonstrate first by an example.</div>
 <article class="example example-like" id="example--lu--factorization"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.8.1</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(LU\)</span> Factorization.</span>
 </h3>
-<div class="para logical" id="p-140">
+<div class="para logical" id="p-144">
 <div class="para">Let</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -460,7 +461,7 @@ A = \mqty[3 &amp; 2 &amp; -1 \\ -2 &amp; 4 &amp; 4 \\ 3 &amp; 1 &amp; 2]\text{.}
 U = \mqty[3 &amp; 2 &amp; -1 \\ 0 &amp; \frac{16}{3} &amp; \frac{10}{3} \\ 0 &amp; 0 &amp; \frac{29}{8}]
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-141">
+</div> <div class="para logical" id="p-145">
 <div class="para">Now, we also saw in the last section that row operations correspond to multiplication by elementary matrices. In this case, <span class="process-math">\(U = E_{23}E_{13}E_{12}A\)</span> where</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -481,7 +482,7 @@ E_{12}^{-1}E_{13}^{-1}E_{23}^{-1} = \mqty[1 &amp; 0 &amp; 0 \\ -\frac{2}{3} &amp
 </div>
 <div class="para">This matrix is lower triangular, and we denote it by <span class="process-math">\(L\text{.}\)</span> Thus we have the factorization <span class="process-math">\(A = LU\text{.}\)</span>
 </div>
-</div></article><div class="para" id="p-142">We can verify the factorization in <a href="" class="xref" data-knowl="./knowl/example--lu--factorization.html" title="Example 1.8.1: LU Factorization">Example 1.8.1</a> using Octave as below: <pre class="ptx-sagecell sagecell-octave" id="sage-7"><script type="text/x-sage">A = [3,2,-1;-2,4,4;3,1,2];
+</div></article><div class="para" id="p-146">We can verify the factorization in <a href="" class="xref" data-knowl="./knowl/example--lu--factorization.html" title="Example 1.8.1: LU Factorization">Example 1.8.1</a> using Octave as below: <pre class="ptx-sagecell sagecell-octave" id="sage-7"><script type="text/x-sage">A = [3,2,-1;-2,4,4;3,1,2];
 L = [1,0,0;-2/3,1,0;1,-3/16,1];
 U = [3,2,-1;0,16/3,10/3;0,0,29/8];
 L*U
@@ -490,11 +491,11 @@ L*U
 L1*U1
 </script></pre>
 </div>
-<div class="para" id="p-143">The matrix factorization <span class="process-math">\(A = LU\)</span> demonstrated above can always be computes (reordering the rows of <span class="process-math">\(A\)</span> if necessary). In this factorization, <span class="process-math">\(L\)</span> is lower triangular with <span class="process-math">\(1\)</span>s along the diagonal and <span class="process-math">\(U\)</span> is an echelon form of <span class="process-math">\(A\)</span> (and therefore upper triangular if <span class="process-math">\(A\)</span> is square). This form has several advantages. First, if <span class="process-math">\(A\)</span> is square then <span class="process-math">\(\det(A) = \det(L)\det(U) = \det(U)\text{,}\)</span> and the determinant of <span class="process-math">\(U\)</span> is very easy to find. Second, this form lets us solve systems more quickly.</div>
+<div class="para" id="p-147">The matrix factorization <span class="process-math">\(A = LU\)</span> demonstrated above can always be computes (reordering the rows of <span class="process-math">\(A\)</span> if necessary). In this factorization, <span class="process-math">\(L\)</span> is lower triangular with <span class="process-math">\(1\)</span>s along the diagonal and <span class="process-math">\(U\)</span> is an echelon form of <span class="process-math">\(A\)</span> (and therefore upper triangular if <span class="process-math">\(A\)</span> is square). This form has several advantages. First, if <span class="process-math">\(A\)</span> is square then <span class="process-math">\(\det(A) = \det(L)\det(U) = \det(U)\text{,}\)</span> and the determinant of <span class="process-math">\(U\)</span> is very easy to find. Second, this form lets us solve systems more quickly.</div>
 <article class="example example-like" id="example-solving-a-system-with-lu--factorization"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">1.8.2</span><span class="period">.</span><span class="space"> </span><span class="title">Solving a System with <span class="process-math">\(LU\)</span> factorization.</span>
 </h3>
-<div class="para logical" id="p-144">
+<div class="para logical" id="p-148">
 <div class="para">Let</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -505,20 +506,20 @@ A = \mqty[-1 &amp; -7 &amp; -3 \\ 2 &amp; 15 &amp; 6 \\ 1 &amp; 3 &amp; 2]\text{
 </div>
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-17" id="solution-17"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-17"><div class="solution solution-like">
-<div class="para logical" id="p-145">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-18" id="solution-18"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-18"><div class="solution solution-like">
+<div class="para logical" id="p-149">
 <div class="para">We can find <span class="process-math">\(L\)</span> and <span class="process-math">\(U\)</span> by reducing <span class="process-math">\(A\)</span> to an echelon form. One possibility is</div>
 <div class="displaymath process-math">
 \begin{equation*}
 L = \mqty[1 &amp; 0 &amp; 0 \\ -2 &amp; 1 &amp; 0 \\ -1 &amp; -4 &amp; 1]\text{ and }U = \mqty[-1 &amp; -7 &amp; -3 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; -1].
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-146">
+</div> <div class="para logical" id="p-150">
 <div class="para">Now we can solve <span class="process-math">\(A\vb{x} = \vb{b}\)</span> in two steps:</div>
 <ol class="decimal">
-<li id="li-35"><div class="para" id="p-147">Solve <span class="process-math">\(L\vb{y} = \vb{b}\)</span> for <span class="process-math">\(\vb{y}\text{.}\)</span>
+<li id="li-35"><div class="para" id="p-151">Solve <span class="process-math">\(L\vb{y} = \vb{b}\)</span> for <span class="process-math">\(\vb{y}\text{.}\)</span>
 </div></li>
-<li id="li-36"><div class="para" id="p-148">Solve <span class="process-math">\(U\vb{x} = \vb{y}\)</span> for <span class="process-math">\(\vb{x}\text{.}\)</span>
+<li id="li-36"><div class="para" id="p-152">Solve <span class="process-math">\(U\vb{x} = \vb{y}\)</span> for <span class="process-math">\(\vb{x}\text{.}\)</span>
 </div></li>
 </ol>
 <div class="para">Solving the first equation by reducing <span class="process-math">\(\smqty[L &amp; \vb{b}]\)</span> produces</div>
@@ -535,7 +536,7 @@ L = \mqty[1 &amp; 0 &amp; 0 \\ -2 &amp; 1 &amp; 0 \\ -1 &amp; -4 &amp; 1]\text{ 
 </div>
 </div>
 </div></div>
-</div></article><div class="para" id="p-149">The process in <a href="" class="xref" data-knowl="./knowl/example-solving-a-system-with-lu--factorization.html" title="Example 1.8.2: Solving a System with LU factorization">Example 1.8.2</a> produces the same exact answer that row reduction would if applied to <span class="process-math">\(\smqty[A &amp; \vb{b}]\text{,}\)</span> or if <span class="process-math">\(A^{-1}\)</span> were found and multiplied to <span class="process-math">\(\vb{b}\text{.}\)</span> However, computing and using the <span class="process-math">\(LU\)</span> factorization can be more stable numerically than either Gaussian elimination or computing the inverse.</div></section></div>
+</div></article><div class="para" id="p-153">The process in <a href="" class="xref" data-knowl="./knowl/example-solving-a-system-with-lu--factorization.html" title="Example 1.8.2: Solving a System with LU factorization">Example 1.8.2</a> produces the same exact answer that row reduction would if applied to <span class="process-math">\(\smqty[A &amp; \vb{b}]\text{,}\)</span> or if <span class="process-math">\(A^{-1}\)</span> were found and multiplied to <span class="process-math">\(\vb{b}\text{.}\)</span> However, computing and using the <span class="process-math">\(LU\)</span> factorization can be more stable numerically than either Gaussian elimination or computing the inverse.</div></section></div>
 <div class="ptx-content-footer">
 <a class="previous-button button" href="section-matrix-inverses.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="chapter-linear-eigenvalues-eigenvectors.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
 </div></main>

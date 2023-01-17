@@ -402,20 +402,62 @@
                 <me>\vv_1 = \mqty[1 \\ 2]\text{ and }\vv_2 = \mqty[-2 \\ -4]</me>.
                 It's clear to see that <m>\vv_2</m> is a scalar multiple of <m>\vv_1</m>, and so <m>\vv_1</m> and <m>\vv_2</m> must lie on the same line through the origin in <m>\RR^2</m>.
             </p>
-
             <p>
                 A slightly more complicated example is the collection given by the columns of the matrix
-                <me>A = =\mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1 \amp 0 \amp 2 \amp 5 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \\ 1 \amp -1 \amp 0 \amp 3 \amp 4]</me>.
+                <me>A = \mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1 \amp 0 \amp 2 \amp 5 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \\ 1 \amp -1 \amp 0 \amp 3 \amp 4]</me>.
                 Then it can be checked that
                 <me>\vv_3 = \vv_1 + \vv_2\text{ and } \vv_5 = 5\vv_1 -2\vv_2 - \vv_4</me>,
                 so these columns are in some sense redundant just like the vectors in <m>\RR^2</m> we considered above.
                 In particular, we can write <m>\vv_3</m> as a <em>linear combination</em> of <m>\vv_1</m> and <m>\vv_2</m>, and we can write <m>\vv_5</m> as another linear combination of <m>\vv_1, \vv_2</m> and <m>\vv_4</m>.
-                We make this idea of redundancy more precise using the concept of <em>linear independence</em>.
+                We make this idea of redundancy more precise using the concepts of a <em>span</em> and <em>linear independence</em>.
             </p>
         </introduction>
 
+        <subsection xml:id="subsection-span">
+            <title>Span</title>
+            <p>
+                The <term>span</term> of a collection of vectors is the set of all possible linear combinations of vectors in the set.
+                In symbols,
+                <me>\spn{S} = \{\sum_{k=1}^n c_i\vv_i : c_i\in\RR\text{ and }\vv_i\in S\}</me>.
+                One reason to consider spans of sets is because these are relatively simple geometric objects: the span of a single vector is either a point or a line; the span of two vectors is either a point, a line or a plane; and so on.
+            </p>
+
+            <example xml:id="example-finding-a-span">
+                <title>Finding a Span</title>
+                <statement>
+                    <p>
+                        Find the span of the set <m>\{\ivec{1\\-1}\}</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        By definition, the span is the set of all possible linear combinations of vectors in this set.
+                        Since the set only has one vector, any linear combination would therefore look like <m>\lambda\ivec{1\\-1}</m> for some scalar <m>\lambda</m>.
+                        The span of the set must then be the line in <m>\RR^2</m> passing through the origin and the point <m>(1,-1)</m>, i.e., the line <m>y = -x</m>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
         <subsection xml:id="subsection-definition-and-examples-of-linear-independence">
             <title>Definition and Examples of Linear Independence</title>
+            <p>
+                When working with spans of collections of vectors, it's often useful to recognize any linear combinations that are already present in the set.
+                For example, let
+                <me>\uu_1 = \mqty[1\\2\\0], \uu_2 = \mqty[-2 \\ -4\\1]\text{ and }\uu_3 = \mqty[0 \\ 0 \\ 1]</me>
+                and consider the set <m>S = \{\uu_1, \uu_2, \uu_3\}</m>.
+                If you stare at this for a bit you might notice that
+                <me>\uu_3 = 2\uu_1 + \uu_2</me>,
+                in other words, <m>\uu_3</m> is a linear combination of <m>\uu_1</m> and <m>\uu_2</m>.
+                It then follows that <m>\spn{S} = \spn\{\uu_1, \uu_2\}</m>.
+                In particular,
+                <me>\spn{S} = \{\lambda\uu_1 + \mu\uu_2 : \lambda,\mu\in\RR\}</me>
+                which is a parametric description of the plane in <m>\RR^3</m> containing the origin and the points <m>(1,2,0)</m> and <m>(-2,-4,1)</m>.
+                The fact that <m>\uu_3</m> also lies in the span implies that the point <m>(0,0,1)</m> is on the plane as well.
+                The collection <m>S</m> here is one of our first examples of a linearly dependent set.
+                To help motivate the definition below, note that the linear combination <m>2\uu_1 + \uu_2 = \uu_3</m> can be rearranged to <m>2\uu_1 + \uu_2 - \uu_3 = \mathbf{0}</m>.
+                Expressions such as this are also called <em>linear dependence relations</em>.
+            </p>
 
             <definition xml:id="definition-linear-independence-and-linear-dependence">
                 <title>Linear Independence and Linear Dependence</title>
@@ -432,8 +474,7 @@
             </definition>
 
             <p>
-                Intuitively, a set of vectors is linearly dependent if it's redundant in some way, i.e., if at least one of the vectors in the set can be written as a linear combination of the others.
-                To see why, consider once again the matrix
+                As another example of a linearly dependent set, consider once again the matrix
                 <me>A = =\mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1 \amp 0 \amp 2 \amp 5 \\ 0 \amp 1 \amp 1 \amp -2 \amp 0 \\ 1 \amp -1 \amp 0 \amp 3 \amp 4]</me>.
                 Since <m>\vv_3 = \vv_1 + \vv_2</m> and <m>\vv_5 = 5\vv_1-2\vv_2-\vv_4</m>, then it follows that
                 <me>-6\vv_1 + 2\vv_2 + \vv_3 + \vv_4 + \vv_5 = \vb{0}</me>.
@@ -445,7 +486,7 @@
 
                 <statement>
                     <p>
-                        Are the vectors <m>\uu=\mqty[1\\2]</m> and <m>\vv = \mqty[-2\\-4]</m> linearly independent?
+                        Are the vectors <m>\uu=\mqty[2\\2]</m> and <m>\vv = \mqty[-2\\-4]</m> linearly independent?
                     </p>
                 </statement>
 

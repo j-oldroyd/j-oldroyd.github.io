@@ -10,13 +10,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
 </head>
-<body class="ignore-math"><div class="solution solution-like"><div class="para logical">
-<div class="para">The formula in <a href="" class="xref" data-knowl="./knowl/definition-determinant-of-a-matrix.html" title="Definition 1.6.1: Determinant of a Matrix">Definition 1.6.1</a> states that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/definition-determinant-of-a-matrix.html">
+<body class="ignore-math"><div class="solution solution-like">
+<div class="para logical">
+<div class="para">We need to find the solution set of <span class="process-math">\(A\vb{x} = \vb{0}\)</span> which we've done before. The Octave code cell below can be used to solve this system, giving the reduced echelon form for the augmented matrix <span class="process-math">\(\mqty[A &amp; \vb{0}]\)</span> to be</div>
+<div class="displaymath process-math">
 \begin{equation*}
-\det(A) = 2\mqty|5 &amp; -2 \\ 6 &amp; 3| - (-6)\mqty|3 &amp; -2 \\ 1 &amp; 3| + 4\mqty|3 &amp; 5 \\ 1 &amp; 6|
+\mqty[1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 1 &amp; -2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0].
 \end{equation*}
 </div>
-<div class="para">which simplifies to <span class="process-math">\(172\text{.}\)</span> This can be confirmed in the Octave cell below.</div>
-</div></div></body>
+<div class="para">Therefore any solution <span class="process-math">\(\vb{x}\in\RR^5\)</span> of <span class="process-math">\(A\vb{x}=\vb{0}\)</span> must look like</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\vb{x} = \mqty[x_1\\x_2\\x_3\\x_4\\x_5] = \mqty[-x_5\\-x_3+2x_4\\x_3\\x_4\\x_5] = x_3\mqty[0\\-1\\1\\0\\0] + x_4\mqty[0\\2\\0\\1\\0] + x_5\mqty[-1\\0\\0\\0\\1].
+\end{equation*}
+</div>
+</div> <div class="para logical">
+<div class="para">Note that the above shows that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\nul{A} = \spn{\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}}
+\end{equation*}
+</div>
+<div class="para">Since these vectors are also linearly independent, it follows that the set</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}
+\end{equation*}
+</div>
+<div class="para">is in fact a basis for <span class="process-math">\(\nul{A}\)</span> and <span class="process-math">\(\dim{\nul{A}} = 3\text{.}\)</span>
+</div>
+</div>
+</div></body>
 </html>

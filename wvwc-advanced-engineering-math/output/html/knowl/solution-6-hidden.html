@@ -12,33 +12,20 @@
 </head>
 <body class="ignore-math"><div class="solution solution-like">
 <div class="para logical">
-<div class="para">We need to find the solution set of <span class="process-math">\(A\vb{x} = \vb{0}\)</span> which we've done before. The Octave code cell below can be used to solve this system, giving the reduced echelon form for the augmented matrix <span class="process-math">\(\mqty[A &amp; \vb{0}]\)</span> to be</div>
+<div class="para">Reducing to an echelon form is enough to determine if the system is consistent and find the number of solutions it has. Using Octave to find the reduced echelon form (see the code cell immediately after this example), we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\mqty[1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 1 &amp; -2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0].
+\begin{bmatrix} 1 &amp; 0 &amp; \frac{3}{5} &amp; 2 \\ 0 &amp; 1 &amp; 0 &amp; -1\end{bmatrix}.
 \end{equation*}
 </div>
-<div class="para">Therefore any solution <span class="process-math">\(\vb{x}\in\RR^5\)</span> of <span class="process-math">\(A\vb{x}=\vb{0}\)</span> must look like</div>
+</div> <div class="para">From the reduced echelon form above, we see that the system must be consistent since the rank of the coefficient matrix is equal to the rank of the augmented matrix. Equivalently, the last column is not a pivot column. Furthermore, there are infinitely many solutions since the rank of the coefficient matrix is less than the total number of columns.</div> <div class="para logical">
+<div class="para">The solution set itself can be written in vector notation as</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vb{x} = \mqty[x_1\\x_2\\x_3\\x_4\\x_5] = \mqty[-x_5\\-x_3+2x_4\\x_3\\x_4\\x_5] = x_3\mqty[0\\-1\\1\\0\\0] + x_4\mqty[0\\2\\0\\1\\0] + x_5\mqty[-1\\0\\0\\0\\1].
+\begin{bmatrix}x \\ y \\ z\end{bmatrix} = \begin{bmatrix}2 \\ -1 \\ 0\end{bmatrix} + z\begin{bmatrix}-\frac{3}{5} \\ 0 \\ 1\end{bmatrix}.
 \end{equation*}
 </div>
-</div> <div class="para logical">
-<div class="para">Note that the above shows that</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\nul{A} = \spn{\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}}
-\end{equation*}
-</div>
-<div class="para">Since these vectors are also linearly independent, it follows that the set</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\qty{\mqty[0\\-1\\1\\0\\0], \mqty[0\\2\\0\\1\\0], \mqty[-1\\0\\0\\0\\1]}
-\end{equation*}
-</div>
-<div class="para">is in fact a basis for <span class="process-math">\(\nul{A}\)</span> and <span class="process-math">\(\dim{\nul{A}} = 3\text{.}\)</span>
-</div>
+<div class="para">This, again, is verified below.</div>
 </div>
 </div></body>
 </html>

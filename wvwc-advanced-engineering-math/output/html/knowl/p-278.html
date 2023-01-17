@@ -13,11 +13,26 @@
 <body class="ignore-math">
 <h5 class="heading"><span class="type">Paragraph</span></h5>
 <div class="para logical">
-<div class="para">Let <span class="process-math">\(f(x)\)</span> be a function that is analytic at <span class="process-math">\(0\)</span> and whose series representation at <span class="process-math">\(0\)</span> has interval of convergence <span class="process-math">\(I\text{.}\)</span> Let <span class="process-math">\(A\)</span> be a diagonalizable matrix diagonalized by <span class="process-math">\(P\)</span> and <span class="process-math">\(D\)</span> with eigenvalues contained in <span class="process-math">\(I\text{.}\)</span> Then</div>
+<div class="para">By definition,</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f(A) = Pf(D)P^{-1}\text{.}
+e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots\text{,}
 \end{equation*}
+</div>
+<div class="para">so we can find <span class="process-math">\(e^A\)</span> by looking at the powers of <span class="process-math">\(A\text{.}\)</span> In this case,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^2 = \mqty[0 &amp; 0 &amp; 4 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0]\text{ and }A^3 = A^4 = \ldots = \mqty[0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0]\text{.}
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+e^A = I + A + \frac{1}{2}A^2 = \mqty[1 &amp; 2 &amp; 5 \\ 0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 1]\text{.}
+\end{equation*}
+</div>
+<div class="para">This can be verified using the command <code class="code-inline tex2jax_ignore">expm</code> in Octave as below. <aside class="aside aside-like"><div class="para">You want to be careful to use <code class="code-inline tex2jax_ignore">expm(A)</code> to compute <span class="process-math">\(e^A\)</span> in Octave, as this actually finds the matrix exponential. If you instead use <code class="code-inline tex2jax_ignore">exp(A)</code>, this just computes the matrix obtained by raising <span class="process-math">\(e\)</span> to each entry of <span class="process-math">\(A\text{,}\)</span> which in general is <em class="emphasis">not</em> equal to <span class="process-math">\(e^A\text{.}\)</span>
+</div></aside>
 </div>
 </div>
 <span class="incontext"><a href="section-diagonalization-of-matrices.html#p-278" class="internal">in-context</a></span>
