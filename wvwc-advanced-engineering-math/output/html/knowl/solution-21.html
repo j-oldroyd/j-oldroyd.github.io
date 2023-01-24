@@ -12,34 +12,40 @@
 </head>
 <body class="ignore-math">
 <div class="solution solution-like">
-<h4 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">2.1.7.1</span><span class="period">.</span>
-</h4>
+<h3 class="heading">
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">2.1.3.1</span><span class="period">.</span>
+</h3>
 <div class="para logical">
-<div class="para">We need to compute the characteristic polynomial <span class="process-math">\(\det(A-\lambda I)\text{.}\)</span> Now,</div>
-<div class="displaymath process-math">
-\begin{equation*}
-A - \lambda I = \mqty[4 - \lambda &amp; -2 &amp; 3 \\ 0 &amp; -1-\lambda &amp; 3 \\ -1 &amp; 2 &amp; -2 - \lambda],
-\end{equation*}
-</div>
-<div class="para">so</div>
+<div class="para">
+<span class="process-math">\(-2\)</span> is an eigenvalue of <span class="process-math">\(Q\)</span> if and only if the equation <span class="process-math">\(Q\vb{x} = -2\vb{x}\)</span> has a <em class="emphasis">nonzero</em> solution. Rearranging this equation, we can say that <span class="process-math">\(-2\)</span> is an eigenvalue of <span class="process-math">\(Q\)</span> if and only if <span class="process-math">\((Q+2I)\vb{x} = \vb{0}\)</span> has a nontrivial solution. So we'll row reduce the augmented matrix <span class="process-math">\(\mqty[Q+2I &amp; \vb{0}]\)</span> to see if the system has free variables:</div>
 <div class="displaymath process-math">
 \begin{align*}
-\det(A-\lambda I) &amp;= (4-\lambda)\mqty|-1-\lambda &amp; 3 \\ 2 &amp; -2-\lambda| - \mqty|-2 &amp; 3 \\ -1-\lambda &amp; 3|\\
-&amp;= (4-\lambda)\qty[(-1-\lambda)(-2-\lambda)-6] - \qty[-6-(-3-3\lambda)]\\
-&amp;= (4-\lambda)(-4+3\lambda+\lambda^{2}) - (-3+3\lambda)\\
-&amp;= (4-\lambda)(\lambda+4)(\lambda-1)+3(1-\lambda)\\
-&amp;= (\lambda-1)\qty[(4-\lambda)(\lambda+4)-3]\\
-&amp;= (\lambda-1)(13-\lambda^{2})
+\mqty[2 &amp; -1 &amp; -1 &amp; 0 \\ -1 &amp; 2 &amp; -1 &amp; 0 \\ -1 &amp; -1 &amp; 2 &amp; 0] &amp;\sim\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 2 &amp; -1 &amp; -1 &amp; 0 \\ -1 &amp; -1 &amp; 2 &amp; 0]\\
+&amp;\rowop[2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 3 &amp; -3 &amp; 0 \\ 0 &amp; -3 &amp; 3 &amp; 0]\\
+&amp;\sim\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]
 \end{align*}
 </div>
-<div class="para">The solutions of the characteristic equation</div>
+<div class="para">so there are free variables and it follows that <span class="process-math">\(-2\)</span> is indeed an eigenvalue of <span class="process-math">\(Q\text{.}\)</span>
+</div>
+</div> <div class="para logical">
+<div class="para">To find an eigenvector, we just need to find a nontrivial solution of <span class="process-math">\((Q+2I)\vb{x} = \vb{0}\)</span>---equivalently, a nonzero vector in <span class="process-math">\(\nul(Q+2I)\)</span>---so we'll continue row reducing:</div>
+<div class="displaymath process-math">
+\begin{align*}
+\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0] &amp;\rowop{-2R_{2}+R_{1}}\mqty[-1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]\\
+&amp;\sim\mqty[1 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]
+\end{align*}
+</div>
+<div class="para">So</div>
 <div class="displaymath process-math">
 \begin{equation*}
-(\lambda-1)(13-\lambda^{2}) = 0
+\nul(Q+2I) = \spn{\mqty[1 \\ 1 \\ 1]}
 \end{equation*}
 </div>
-<div class="para">are given by <span class="process-math">\(\lambda = 1,\pm\sqrt{13}\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(1,-\sqrt{13}\)</span> and <span class="process-math">\(\sqrt{3}\text{.}\)</span>
+<div class="para">and a single eigenvector of <span class="process-math">\(Q\)</span> is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mqty[1 \\ 1 \\ 1].
+\end{equation*}
 </div>
 </div>
 </div>

@@ -9,21 +9,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
+<script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
+</script>
 </head>
 <body class="ignore-math">
 <div class="solution solution-like">
 <h4 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">4.4.5.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">4.4.4.1</span><span class="period">.</span>
 </h4>
-<div class="para logical">
-<div class="para">Since mass is just the integral of density, we can compute the mass by finding <span class="process-math">\(\iint_D \rho(x, y, z)\dd{S}\text{.}\)</span> The surface itself is given by the equation <span class="process-math">\(z = \sqrt{1 - x^2 - y^2}\text{,}\)</span> and so</div>
+<div class="para">We can use Sage to produce a quick plot of <span class="process-math">\(x + y + z = 1\)</span> as below. However, we must remember that we're only considering the part of this plane in the first octant, and therefore must restrict <span class="process-math">\(x, y\)</span> and <span class="process-math">\(z\)</span> to be nonnegative.</div> <pre class="ptx-sagecell sagecell-sage" id="sage-38"><script type="text/x-sage">var('x, y')
+plot3d(1 - x - y, (x, 0, 1), (y, 0, 1))
+</script></pre> <div class="para logical">
+<div class="para">We can parameterize this surface using</div>
 <div class="displaymath process-math">
 \begin{align*}
-\iint_D z\dd{S} \amp = \iint_{D}\sqrt{1 - x^2 - y^2} \sqrt{1 + \frac{x}{1 - x^2 - y^2} + \frac{y^2}{1 - x^2 - y^2}}\dd{A} \\
-\amp = \iint_D \sqrt{1 - x^2 - y^2 + x^2 + y^2}\dd{A} \\
-\amp = \iint_D \dd{A} \\
-\amp = 2\pi \text{.}
+\rr(u, v) \amp =  \mqty[u \amp v \amp 1 - u - v] \\
+0 \amp \leq v\leq 1 - u \\
+0 \amp \leq u\leq 1 \text{.}
 \end{align*}
+</div>
+<div class="para">This gives us the corresponding normal vector <span class="process-math">\(\nn(u, v) = \mqty[1 \amp 1\amp 1]\text{,}\)</span> and so</div>
+<div class="displaymath process-math">
+\begin{align*}
+\iint_D\FF\cdot\dd{\SS} \amp = \int_0^1\int_0^{1-u}\mqty[e^v \amp e^y \amp 1]\cdot\mqty[1 \amp 1\amp 1]\dd{v}\dd{u} \\
+\amp = \int_0^1\int_0^{1-u}(e^v + e^u + 1)\dd{v}\dd{u} \\
+\amp = \int_0^1 (e^{1-u} + (1 - u)e^u - u)\dd{u} \\
+\amp = 2e - \frac{7}{2} \text{.}
+\end{align*}
+</div>
+<div class="para">As this is positive, we view the vector field <span class="process-math">\(\FF\)</span> as flowing <em class="emphasis">out</em> of <span class="process-math">\(D\)</span> relative to the normal vector <span class="process-math">\(\nn\text{.}\)</span>
 </div>
 </div>
 </div>

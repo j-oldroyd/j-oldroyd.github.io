@@ -58,7 +58,19 @@ window.MathJax = {
     )}
   },
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
+                       linked: true,
+                       languages: ['sage'],
+                       evalButtonText: 'Evaluate (Sage)'});
+</script><script>// Make *any* pre with class 'sagecell-octave' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({inputLocation: 'pre.sagecell-octave',
+                       linked: true,
+                       languages: ['octave'],
+                       evalButtonText: 'Evaluate (Octave)'});
+</script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.2/pretext_search.js"></script><link href="https://pretextbook.org/css/0.6/pretext_search.css" rel="stylesheet" type="text/css">
 <script>js_version = 0.2</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.2/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.2/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.2/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -553,8 +565,36 @@ A = =\mqty[\vv_1 \amp \vv_2 \amp \vv_3 \amp \vv_4 \amp \vv_5] = \mqty[ 1 \amp -1
 </ol>
 </div></article></section><article class="definition definition-like" id="definition-column-space"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Column Space.</span>
-</h3>  <div class="para" id="p-50">The <dfn class="terminology">column space</dfn> of a matrix <span class="process-math">\(A\)</span> is the span of the columns of <span class="process-math">\(A\text{.}\)</span> Equivalently, the column space is the set of all vectors of the form <span class="process-math">\(A\vb{x}\text{.}\)</span> The column space of <span class="process-math">\(A\)</span> is denoted by <span class="process-math">\(\col{A}\text{.}\)</span>
-</div></article></section></div>
+</h3>  <div class="para" id="p-50">The <dfn class="terminology">column space</dfn> of a matrix <span class="process-math">\(A\)</span> is the span of the columns of <span class="process-math">\(A\text{.}\)</span> Equivalently, the column space is the set of all vectors of the form <span class="process-math">\(A\vb{x}\text{.}\)</span> The column space of <span class="process-math">\(A\)</span> is denoted by <span class="process-math">\(\col{A}\text{.}\)</span> <aside class="aside aside-like" id="aside-1"><div class="para" id="p-51">The <em class="emphasis">row space</em> of a matrix is defined similarly.</div></aside>
+</div></article><div class="para" id="p-52">The column space of an <span class="process-math">\(m\times n\)</span> matrix <span class="process-math">\(A\)</span> consists of all vectors of the form <span class="process-math">\(A\xx\)</span> where <span class="process-math">\(\xx\in\RR^n\text{.}\)</span> This is because the product <span class="process-math">\(A\xx\)</span> can be written as a linear combination of the columns of <span class="process-math">\(A\text{,}\)</span> and all linear combinations of the columns appear in this manner. Therefore the column space also relates to consistency of systems. In particular, the linear system <span class="process-math">\(A\xx = \bb\)</span> is consistent if and only if <span class="process-math">\(\bb\in\col{A}\text{.}\)</span>
+</div>
+<article class="example example-like" id="example-dimension-and-basis-of-the-column-space"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Dimension and Basis of the Column Space.</span>
+</h3>
+<div class="para logical" id="p-53">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A = \mqty[0 \amp 1 \amp 0 \amp 2 \\ -1 \amp 0 \amp -4 \amp 2 \\ 0 \amp 4 \amp 0 \amp -1]\text{.}
+\end{equation*}
+</div>
+<div class="para">Find <span class="process-math">\(\dim\col{A}\)</span> and a basis for the column space of <span class="process-math">\(A\text{.}\)</span>
+</div>
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-6" id="solution-6"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-6"><div class="solution solution-like"><div class="para logical" id="p-54">
+<div class="para">We can answer this question completely by identifying the pivot columns of <span class="process-math">\(A\text{.}\)</span> By row reduction (see the Octave code below, for example), we see that an echelon form of <span class="process-math">\(A\)</span> is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mqty[1 \amp 0 \amp 4 \amp 0 \\ 0 \amp 1 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 1]\text{.}
+\end{equation*}
+</div>
+<div class="para">This shows that the first, second and fourth columns of <span class="process-math">\(A\)</span> are pivot columns. Therefore these columns also form a basis of <span class="process-math">\(\col{A}\)</span> and <span class="process-math">\(\dim\col{A} = \rank{A} = 3\text{.}\)</span>
+</div>
+</div></div></div>
+</div></article><pre class="ptx-sagecell sagecell-octave" id="sage-3"><script type="text/x-sage">A = [0, 1, 0, 2; -1, 0, -4, 2; 0, 4, 0, -1]
+rref(A)
+</script></pre></section></div>
 <div class="ptx-content-footer">
 <a class="previous-button button" href="section-systems-of-linear-equations.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="section-existence-of-solutions.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
 </div></main>

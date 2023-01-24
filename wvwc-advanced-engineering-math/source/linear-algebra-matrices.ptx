@@ -544,7 +544,6 @@
 
             <theorem xml:id="theorem-rank-and-pivot-columns">
                 <title>Rank and Pivot Columns</title>
-
                 <statement>
                     <p>
                         Let <m>A</m> be a matrix.
@@ -559,9 +558,7 @@
 
             <definition xml:id="definition-basis-of--rr-n-">
                 <title>Basis of <m>\RR^n</m></title>
-
                 <idx><h>basis</h></idx>
-
                 <statement>
                     <p>
                         Let <m>\mathcal{B} = \qty{\vb{b}_1,\ldots,\vb{b}_n}</m> denote a subset of vectors in <m>\RR^n</m>.
@@ -577,22 +574,58 @@
 
         <definition xml:id="definition-column-space">
             <title>Column Space</title>
-
             <idx>column space</idx>
-
             <statement>
                 <p>
                     The <term>column space</term> of a matrix <m>A</m> is the span of the columns of <m>A</m>.
                     Equivalently, the column space is the set of all vectors of the form <m>A\vb{x}</m>.
                     The column space of <m>A</m> is denoted by <m>\col{A}</m>.
+                    <aside>
+                        <p>
+                            The <em>row space</em> of a matrix is defined similarly.
+                        </p>
+                    </aside>
                 </p>
             </statement>
         </definition>
+
+        <p>
+            The column space of an <m>m\times n</m> matrix <m>A</m> consists of all vectors of the form <m>A\xx</m> where <m>\xx\in\RR^n</m>.
+            This is because the product <m>A\xx</m> can be written as a linear combination of the columns of <m>A</m>, and all linear combinations of the columns appear in this manner.
+            Therefore the column space also relates to consistency of systems.
+            In particular, the linear system <m>A\xx = \bb</m> is consistent if and only if <m>\bb\in\col{A}</m>.
+        </p>
+
+        <example xml:id="example-dimension-and-basis-of-the-column-space">
+            <title>Dimension and Basis of the Column Space</title>
+            <statement>
+                <p>
+                    Let
+                    <me>A = \mqty[0 \amp 1 \amp 0 \amp 2 \\ -1 \amp 0 \amp -4 \amp 2 \\ 0 \amp 4 \amp 0 \amp -1]</me>.
+                    Find <m>\dim\col{A}</m> and a basis for the column space of <m>A</m>.
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We can answer this question completely by identifying the pivot columns of <m>A</m>.
+                    By row reduction (see the Octave code below, for example), we see that an echelon form of <m>A</m> is given by
+                    <me>\mqty[1 \amp 0 \amp 4 \amp 0 \\ 0 \amp 1 \amp 0 \amp 0 \\ 0 \amp 0 \amp 0 \amp 1]</me>.
+                    This shows that the first, second and fourth columns of <m>A</m> are pivot columns.
+                    Therefore these columns also form a basis of <m>\col{A}</m> and <m>\dim\col{A} = \rank{A} = 3</m>.
+                </p>
+            </solution>
+        </example>
+
+        <sage language="octave">
+            <input>
+                A = [0, 1, 0, 2; -1, 0, -4, 2; 0, 4, 0, -1]
+                rref(A)
+            </input>
+        </sage>
     </section>
 
     <section xml:id="section-existence-of-solutions">
         <title>Existence of Solutions</title>
-
         <p>
             Recall that any linear system may be expressed as a matrix equation of the form <m>A\vb{x} = \vb{b}</m>.
             Based on our previous work, we can make the following observations.

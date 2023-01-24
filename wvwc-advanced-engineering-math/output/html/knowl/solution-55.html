@@ -20,30 +20,26 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 <body class="ignore-math">
 <div class="solution solution-like">
 <h4 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">4.4.2.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">4.4.1.1</span><span class="period">.</span>
 </h4>
 <div class="para logical">
-<div class="para">First, we parameterize our surface by using</div>
+<div class="para">If we let</div>
 <div class="displaymath process-math">
-\begin{equation*}
-\rr(u, v) = \mqty[u \amp u^2 \amp v]\text{.}
-\end{equation*}
+\begin{align*}
+x(u, v) \amp = \cos(u)\sin(v) \\
+y(u, v) \amp = \sin(u)\sin(v) \\
+z(u, v) \amp = \cos(v) \text{,}
+\end{align*}
 </div>
-<div class="para">Then</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\rr_u = \mqty[1 \amp 2u \amp 0]\text{ and }\rr_v = \mqty[0 \amp 0 \amp 1]\text{.}
-\end{equation*}
-</div>
-<div class="para">Now we can find the normal vector by computing the cross product of these two vectors, either by hand or by using Sage as below:</div>
+<div class="para">then we see that <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{.}\)</span> This suggests that the surface <span class="process-math">\(D:\rr(u, v)\)</span> is contained within the unit sphere in <span class="process-math">\(\RR^3\text{.}\)</span> In fact, it is the entire unit sphere! We can verify this using Sage:</div>
 </div> <pre class="ptx-sagecell sagecell-sage" id="sage-36"><script type="text/x-sage">var('u, v')
 
-r_u = vector([1, 2*u, 0])
-r_v = vector([0, 0, 1])
+x(u, v) = cos(u)*sin(v)
+y(u, v) = sin(u)*sin(v)
+z(u, v) = cos(v)
 
-show(r_u.cross_product(r_v))
-</script></pre> <div class="para">Either way, we get the normal vector <span class="process-math">\(\mathbf{n}(u, v) = \mqty[2u \amp -1 \amp 0]\text{.}\)</span> At the point <span class="process-math">\((2, 4, -3)\text{,}\)</span> this becomes <span class="process-math">\(\mqty[4 \amp -1 \amp 0]\text{.}\)</span>
-</div>
+parametric_plot3d((x(u, v), y(u, v), z(u, v)), (u, 0, 2*pi), (v, 0, pi))
+</script></pre>
 </div>
 <span class="incontext"><a href="section-surface-integrals.html#solution-55" class="internal">in-context</a></span>
 </body>
