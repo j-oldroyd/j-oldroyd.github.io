@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2023-03-17T10:56:25-04:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
 <!--********************************************-->
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WVWC-CALC The Cross Product</title>
@@ -18,20 +15,38 @@
 <meta property="og:image" content="https://j-oldroyd.github.io/wvwc-calculus/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Calculus Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script>window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    useLabelIds: true,
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
   },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
             document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
                 var display = !!node.type.match(/; *mode=display/);
                 var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
@@ -41,41 +56,197 @@
                 math.end = {node: text, delim: '', n: 0};
                 doc.math.push(math);
             });
-        }, '']
-    },
+        },
+        ""
+      ]
+    }
   },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
   },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "https://pretextbook.org/js/lib"
+    }
   },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>$(function () {
-    // Make *any* div with class 'sagecell-sage' an executable Sage cell
-    // Their results will be linked, only within language type
-    sagecell.makeSagecell({inputLocation: 'div.sagecell-sage',
-                           linked: true,
-                           languages: ['sage'],
-                           evalButtonText: 'Evaluate (Sage)'});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
 });
-</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
-</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.7/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.3</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.3/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.3/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.3/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.7/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/setcolors.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" class="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms" class="searchterms"></span>
+</h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="name">Index</span></a><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="avatarbutton" class="avatarbutton name">You!</span><div id="preferences_menu_holder" class="preferences_menu_holder hidden"><ol id="preferences_menu" class="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden avatar">
+<li data-val="You!" tabindex="-1">
+<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+<li data-val="😺" tabindex="-1">
+<span id="the😺" class="avatarcheck"></span>😺</li>
+<li data-val="👤" tabindex="-1">
+<span id="the👤" class="avatarcheck"></span>👤</li>
+<li data-val="👽" tabindex="-1">
+<span id="the👽" class="avatarcheck"></span>👽</li>
+<li data-val="🐶" tabindex="-1">
+<span id="the🐶" class="avatarcheck"></span>🐶</li>
+<li data-val="🐼" tabindex="-1">
+<span id="the🐼" class="avatarcheck"></span>🐼</li>
+<li data-val="🌈" tabindex="-1">
+<span id="the🌈" class="avatarcheck"></span>🌈</li>
+</ol>
+</li>
+<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fontfamily">
+<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
+<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
+<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+</ol>
+</li>
+<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fonts">
+<li>Size</li>
+<li><span id="thesize">12</span></li>
+<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
+<li>Width</li>
+<li><span id="thewdth">100</span></li>
+<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+<li>Weight</li>
+<li><span id="thewght">400</span></li>
+<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+<li>Letter spacing</li>
+<li>
+<span id="thelspace">0</span><span class="byunits">/200</span>
+</li>
+<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+<li>Word spacing</li>
+<li>
+<span id="thewspace">0</span><span class="byunits">/50</span>
+</li>
+<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
+<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
+<li>Line Spacing</li>
+<li>
+<span id="theheight">135</span><span class="byunits">/100</span>
+</li>
+<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
+<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
+</ol>
+</li>
+<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden atmosphere">
+<li data-val="default" tabindex="-1">
+<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+<li data-val="pastel" tabindex="-1">
+<span id="thepastel" class="atmospherecheck"></span>pastel</li>
+<li data-val="darktwilight" tabindex="-1">
+<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+<li data-val="dark" tabindex="-1">
+<span id="thedark" class="atmospherecheck"></span>dark</li>
+<li data-val="darkmidnight" tabindex="-1">
+<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
+</ol>
+</li>
+<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden ruler">
+<li data-val="none" tabindex="-1">
+<span id="thenone" class="rulercheck">✔️</span>none</li>
+<li data-val="underline" tabindex="-1">
+<span id="theunderline" class="rulercheck"></span>underline</li>
+<li data-val="lunderline" tabindex="-1">
+<span id="thelunderline" class="rulercheck"></span>L-underline</li>
+<li data-val="greybar" tabindex="-1">
+<span id="thegreybar" class="rulercheck"></span>grey bar</li>
+<li data-val="lightbox" tabindex="-1">
+<span id="thelightbox" class="rulercheck"></span>light box</li>
+<li data-val="sunrise" tabindex="-1">
+<span id="thesunrise" class="rulercheck"></span>sunrise</li>
+<li data-val="sunriseunderline" tabindex="-1">
+<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
+<li class="moveQ">Motion by:</li>
+<li data-val="mouse" tabindex="-1">
+<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+<li data-val="arrow" tabindex="-1">
+<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+<li data-val="eye" tabindex="-1">
+<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
+</ol>
+</li>
+</ol></div></button><span class="treebuttons"><a class="previous-button button" href="section-the-dot-product.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="vectors-space-geometry.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="section-equations-of-lines-and-planes.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" class="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -115,233 +286,497 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
-<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
-<h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline">Jesse Oldroyd</p>
-</div>
-</div></div>
-<nav id="primary-navbar" class="navbar"><div class="container">
-<div class="navbar-top-buttons">
-<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
-<script>
-var ggbApp = new GGBApplet({"appName": "graphing",
-    "width": 330,
-    "height": 600,
-    "showToolBar": true,
-    "showAlgebraInput": true,
-    "perspective": "G/A",
-    "algebraInputPosition": "bottom",
-    "scaleContainerClass": "calculator-container",
-    "allowUpscale": true,
-    "autoHeight": true,
-    "disableAutoScale": false},
-true);
-</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-the-dot-product.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="vectors-space-geometry.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-equations-of-lines-and-planes.html" title="Next">Next</a></span>
-</div>
-</div>
-<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
-<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-the-dot-product.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="vectors-space-geometry.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-equations-of-lines-and-planes.html" title="Next">Next</a>
-</div>
-</div></nav></header><div class="page">
-<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
-<nav id="toc"><ul>
-<li class="link frontmatter">
-<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
-<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
-<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
-<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 parts"><ul class="structural">
+<li>
+<div class="toc-item"><a href="front.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li><div class="toc-item"><a href="author-bio-JEO.html" class="internal"><span class="title">Author Biography</span></a></div></li>
+<li><div class="toc-item"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li>
 </ul>
 </li>
-<li class="link part"><a href="part-differential.html" data-scroll="part-differential" class="internal"><span class="codenumber">I</span> <span class="title">Differential Calculus</span></a></li>
-<li class="link">
-<a href="functions.html" data-scroll="functions" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a><ul>
-<li><a href="section-function-review.html" data-scroll="section-function-review" class="internal">Function Review</a></li>
-<li><a href="section-types-of-functions.html" data-scroll="section-types-of-functions" class="internal">Types of Functions</a></li>
-<li><a href="section-trigonometric-functions.html" data-scroll="section-trigonometric-functions" class="internal">Trigonometric Functions</a></li>
+<li>
+<div class="toc-item"><a href="part-differential.html" class="internal"><span class="codenumber">I</span> <span class="title">Differential Calculus</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="functions.html" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-function-review.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Function Review</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-types-of-functions.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Types of Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-types-of-functions.html#subsection-linear-functions" class="internal"><span class="title">Linear Functions</span></a></div></li>
+<li><div class="toc-item"><a href="section-types-of-functions.html#subsection-polynomial-functions" class="internal"><span class="title">Polynomial Functions</span></a></div></li>
+<li><div class="toc-item"><a href="section-types-of-functions.html#subsection-algebraic-functions" class="internal"><span class="title">Algebraic Functions</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="limits.html" data-scroll="limits" class="internal"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a><ul>
-<li><a href="section-the-limit-of-a-function.html" data-scroll="section-the-limit-of-a-function" class="internal">The Limit of a Function</a></li>
-<li><a href="section-computing-limits.html" data-scroll="section-computing-limits" class="internal">Computing Limits</a></li>
-<li><a href="section-continuity.html" data-scroll="section-continuity" class="internal">Continuity</a></li>
-<li><a href="section-limits-involving-infinity.html" data-scroll="section-limits-involving-infinity" class="internal">Limits Involving Infinity</a></li>
+<li>
+<div class="toc-item"><a href="section-trigonometric-functions.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Trigonometric Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-trigonometric-functions.html#subsection-angles-and-terminal-points" class="internal"><span class="title">Angles and Terminal Points</span></a></div></li>
+<li><div class="toc-item"><a href="section-trigonometric-functions.html#subsection-the-trigonometric-functions" class="internal"><span class="title">The Trigonometric Functions</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="derivatives.html" data-scroll="derivatives" class="internal"><span class="codenumber">3</span> <span class="title">Derivatives</span></a><ul>
-<li><a href="section-the-definition-of-the-derivative.html" data-scroll="section-the-definition-of-the-derivative" class="internal">The Definition of the Derivative</a></li>
-<li><a href="section-the-derivative-as-a-function.html" data-scroll="section-the-derivative-as-a-function" class="internal">The Derivative as a Function</a></li>
-<li><a href="section-differentiation-formulas.html" data-scroll="section-differentiation-formulas" class="internal">Differentiation Formulas</a></li>
-<li><a href="section-the-chain-rule.html" data-scroll="section-the-chain-rule" class="internal">The Chain Rule</a></li>
-<li><a href="section-implicit-differentiation.html" data-scroll="section-implicit-differentiation" class="internal">Implicit Differentiation</a></li>
-<li><a href="section-related-rates.html" data-scroll="section-related-rates" class="internal">Related Rates</a></li>
-<li><a href="section-linear-approximations.html" data-scroll="section-linear-approximations" class="internal">Linear Approximations</a></li>
 </ul>
 </li>
-<li class="link">
-<a href="inverse-functions.html" data-scroll="inverse-functions" class="internal"><span class="codenumber">4</span> <span class="title">Inverse Functions</span></a><ul>
-<li><a href="section-exponential-functions.html" data-scroll="section-exponential-functions" class="internal">Exponential Functions</a></li>
-<li><a href="section-logarithms.html" data-scroll="section-logarithms" class="internal">Logarithms</a></li>
-<li><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" data-scroll="section-derivatives-of-exponential-and-logarithmic-functions" class="internal">Derivatives of Exponential and Logarithmic Functions</a></li>
-<li><a href="section-exponential-models.html" data-scroll="section-exponential-models" class="internal">Exponential Models</a></li>
-<li><a href="section-inverse-trigonometric-functions.html" data-scroll="section-inverse-trigonometric-functions" class="internal">Inverse Trigonometric Functions</a></li>
+<li>
+<div class="toc-item"><a href="limits.html" class="internal"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-the-limit-of-a-function.html" class="internal"><span class="codenumber">2.1</span> <span class="title">The Limit of a Function</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-the-limit-of-a-function.html#subsection-motivating-limits" class="internal"><span class="title">Motivating Limits</span></a></div></li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-computing-limits.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Computing Limits</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-computing-limits.html#subsection-the-limit-laws" class="internal"><span class="title">The Limit Laws</span></a></div></li></ul>
+</li>
+<li><div class="toc-item"><a href="section-continuity.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Continuity</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-limits-involving-infinity.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Limits Involving Infinity</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-limits-involving-infinity.html#subsection-limits-involving-vertical-asymptotes" class="internal"><span class="title">Limits Involving Vertical Asymptotes</span></a></div></li>
+<li><div class="toc-item"><a href="section-limits-involving-infinity.html#subsection-limits-at-infinity" class="internal"><span class="title">Limits at Infinity</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="applications-differentiation.html" data-scroll="applications-differentiation" class="internal"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a><ul>
-<li><a href="section-l-hospital-s-rule.html" data-scroll="section-l-hospital-s-rule" class="internal">L'Hospital's Rule</a></li>
-<li><a href="section-extreme-values-of-functions.html" data-scroll="section-extreme-values-of-functions" class="internal">Extreme Values of Functions</a></li>
-<li><a href="section-the-mean-value-theorem.html" data-scroll="section-the-mean-value-theorem" class="internal">The Mean Value Theorem</a></li>
-<li><a href="section-derivatives-and-graphs.html" data-scroll="section-derivatives-and-graphs" class="internal">Derivatives and Graphs</a></li>
-<li><a href="section-optimization-problems.html" data-scroll="section-optimization-problems" class="internal">Optimization Problems</a></li>
-<li><a href="section-newton-s-method.html" data-scroll="section-newton-s-method" class="internal">Newton's Method</a></li>
-<li><a href="section-antiderivatives.html" data-scroll="section-antiderivatives" class="internal">Antiderivatives</a></li>
 </ul>
 </li>
-<li class="link part"><a href="part-integral.html" data-scroll="part-integral" class="internal"><span class="codenumber">II</span> <span class="title">Integral Calculus</span></a></li>
-<li class="link">
-<a href="integrals.html" data-scroll="integrals" class="internal"><span class="codenumber">6</span> <span class="title">Integrals</span></a><ul>
-<li><a href="section-areas-under-curves.html" data-scroll="section-areas-under-curves" class="internal">Areas Under Curves</a></li>
-<li><a href="section-the-definite-integral.html" data-scroll="section-the-definite-integral" class="internal">The Definite Integral</a></li>
-<li><a href="section-evaluating-integrals.html" data-scroll="section-evaluating-integrals" class="internal">Evaluating Integrals</a></li>
-<li><a href="section-the-fundamental-theorem-of-calculus.html" data-scroll="section-the-fundamental-theorem-of-calculus" class="internal">The Fundamental Theorem of Calculus</a></li>
-<li><a href="section-substitution.html" data-scroll="section-substitution" class="internal">Substitution</a></li>
+<li>
+<div class="toc-item"><a href="derivatives.html" class="internal"><span class="codenumber">3</span> <span class="title">Derivatives</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-the-definition-of-the-derivative.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Definition of the Derivative</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-definition-of-the-derivative.html#subsection-tangent-lines" class="internal"><span class="title">Tangent Lines</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-definition-of-the-derivative.html#subsection-the-derivative" class="internal"><span class="title">The Derivative</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="techniques-of-integration.html" data-scroll="techniques-of-integration" class="internal"><span class="codenumber">7</span> <span class="title">Techniques of Integration</span></a><ul>
-<li><a href="section-integration-by-parts.html" data-scroll="section-integration-by-parts" class="internal">Integration by Parts</a></li>
-<li><a href="section-trigonometric-integrals-and-substitution.html" data-scroll="section-trigonometric-integrals-and-substitution" class="internal">Trigonometric Integrals and Substitution</a></li>
-<li><a href="section-partial-fractions.html" data-scroll="section-partial-fractions" class="internal">Partial Fractions</a></li>
-<li><a href="section-improper-integrals.html" data-scroll="section-improper-integrals" class="internal">Improper Integrals</a></li>
+<li>
+<div class="toc-item"><a href="section-the-derivative-as-a-function.html" class="internal"><span class="codenumber">3.2</span> <span class="title">The Derivative as a Function</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-derivative-as-a-function.html#subsection-the-derivative-function" class="internal"><span class="title">The Derivative Function</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-derivative-as-a-function.html#subsection-higher-order-derivatives" class="internal"><span class="title">Higher Order Derivatives</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="applications-of-integration.html" data-scroll="applications-of-integration" class="internal"><span class="codenumber">8</span> <span class="title">Applications of Integration</span></a><ul>
-<li><a href="section-areas-between-curves.html" data-scroll="section-areas-between-curves" class="internal">Areas Between Curves</a></li>
-<li><a href="section-volumes.html" data-scroll="section-volumes" class="internal">Volumes</a></li>
-<li><a href="section-volumes-by-cylindrical-shells.html" data-scroll="section-volumes-by-cylindrical-shells" class="internal">Volumes by Cylindrical Shells</a></li>
-<li><a href="section-arc-length.html" data-scroll="section-arc-length" class="internal">Arc Length</a></li>
-<li><a href="section-area-of-a-surface-of-revolution.html" data-scroll="section-area-of-a-surface-of-revolution" class="internal">Area of a Surface of Revolution</a></li>
-<li><a href="section-applications-to-physics-and-engineering.html" data-scroll="section-applications-to-physics-and-engineering" class="internal">Applications to Physics and Engineering</a></li>
-<li><a href="section-differential-equations.html" data-scroll="section-differential-equations" class="internal">Differential Equations</a></li>
+<li>
+<div class="toc-item"><a href="section-differentiation-formulas.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Differentiation Formulas</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-differentiation-formulas.html#subsection-the-power-rule-and-trigonometric-derivatives" class="internal"><span class="title">The Power Rule and Trigonometric Derivatives</span></a></div></li>
+<li><div class="toc-item"><a href="section-differentiation-formulas.html#subsection-derivatives-of-sums-and-constant-multiples" class="internal"><span class="title">Derivatives of Sums and Constant Multiples</span></a></div></li>
+<li><div class="toc-item"><a href="section-differentiation-formulas.html#subsection-product-rule-quotient-rule" class="internal"><span class="title">Product Rule and Quotient Rule</span></a></div></li>
+<li><div class="toc-item"><a href="section-differentiation-formulas.html#subsection-the-quotient-rule" class="internal"><span class="title">The Quotient Rule</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="series.html" data-scroll="series" class="internal"><span class="codenumber">9</span> <span class="title">Series</span></a><ul>
-<li><a href="section-sequences.html" data-scroll="section-sequences" class="internal">Sequences</a></li>
-<li><a href="section-series.html" data-scroll="section-series" class="internal">Series</a></li>
-<li><a href="section-the-integral-and-comparison-tests.html" data-scroll="section-the-integral-and-comparison-tests" class="internal">The Integral and Comparison Tests</a></li>
-<li><a href="section-other-convergence-tests.html" data-scroll="section-other-convergence-tests" class="internal">Other Convergence Tests</a></li>
-<li><a href="section-power-series.html" data-scroll="section-power-series" class="internal">Power Series</a></li>
-<li><a href="section-representing-functions-as-power-series.html" data-scroll="section-representing-functions-as-power-series" class="internal">Representing Functions as Power Series</a></li>
-<li><a href="section-taylor-and-maclaurin-series.html" data-scroll="section-taylor-and-maclaurin-series" class="internal">Taylor and Maclaurin Series</a></li>
+<li><div class="toc-item"><a href="section-the-chain-rule.html" class="internal"><span class="codenumber">3.4</span> <span class="title">The Chain Rule</span></a></div></li>
+<li><div class="toc-item"><a href="section-implicit-differentiation.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Implicit Differentiation</span></a></div></li>
+<li><div class="toc-item"><a href="section-related-rates.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Related Rates</span></a></div></li>
+<li><div class="toc-item"><a href="section-linear-approximations.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Linear Approximations</span></a></div></li>
 </ul>
 </li>
-<li class="link part"><a href="part-multivariable.html" data-scroll="part-multivariable" class="internal"><span class="codenumber">III</span> <span class="title">Multivariable Calculus</span></a></li>
-<li class="link">
-<a href="parametric-equations-polar-coordinates.html" data-scroll="parametric-equations-polar-coordinates" class="internal"><span class="codenumber">10</span> <span class="title">Parametric Equations and Polar Coordinates</span></a><ul>
-<li><a href="section-parametric-equations.html" data-scroll="section-parametric-equations" class="internal">Parametric Equations</a></li>
-<li><a href="section-calculus-and-parametric-curves.html" data-scroll="section-calculus-and-parametric-curves" class="internal">Calculus and Parametric Curves</a></li>
-<li><a href="section-polar-coordinates.html" data-scroll="section-polar-coordinates" class="internal">Polar Coordinates</a></li>
-<li><a href="section-calculus-and-polar-coordinates.html" data-scroll="section-calculus-and-polar-coordinates" class="internal">Calculus and Polar Coordinates</a></li>
+<li>
+<div class="toc-item"><a href="inverse-functions.html" class="internal"><span class="codenumber">4</span> <span class="title">Inverse Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-exponential-functions.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Exponential Functions</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-logarithms.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Logarithms</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-logarithms.html#subsection-inverse-function-review" class="internal"><span class="title">Inverse Function Review</span></a></div></li>
+<li><div class="toc-item"><a href="section-logarithms.html#subsection-calculus-with-inverse-functions" class="internal"><span class="title">Calculus with Inverse Functions</span></a></div></li>
+<li><div class="toc-item"><a href="section-logarithms.html#subsection-logarithms" class="internal"><span class="title">Logarithms</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="vectors-space-geometry.html" data-scroll="vectors-space-geometry" class="internal"><span class="codenumber">11</span> <span class="title">Vectors and Euclidean Space</span></a><ul>
-<li><a href="section-coordinates-in-3-space.html" data-scroll="section-coordinates-in-3-space" class="internal">Coordinates in 3-Space</a></li>
-<li><a href="section-vectors.html" data-scroll="section-vectors" class="internal">Vectors</a></li>
-<li><a href="section-the-dot-product.html" data-scroll="section-the-dot-product" class="internal">The Dot Product</a></li>
-<li><a href="section-the-cross-product.html" data-scroll="section-the-cross-product" class="active">The Cross Product</a></li>
-<li><a href="section-equations-of-lines-and-planes.html" data-scroll="section-equations-of-lines-and-planes" class="internal">Equations of Lines and Planes</a></li>
-<li><a href="section-cylinders-and-quadric-surfaces.html" data-scroll="section-cylinders-and-quadric-surfaces" class="internal">Cylinders and Quadric Surfaces</a></li>
-<li><a href="section-vector-functions.html" data-scroll="section-vector-functions" class="internal">Vector Functions</a></li>
-<li><a href="section-arc-length-and-curvature.html" data-scroll="section-arc-length-and-curvature" class="internal">Arc Length and Curvature</a></li>
-<li><a href="section-motion-in-space.html" data-scroll="section-motion-in-space" class="internal">Motion in Space</a></li>
+<li>
+<div class="toc-item"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Derivatives of Exponential and Logarithmic Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html#subsection-derivatives-of-exponentials" class="internal"><span class="title">Derivatives of Exponentials</span></a></div></li>
+<li><div class="toc-item"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html#subsection-derivatives-of-logarithms" class="internal"><span class="title">Derivatives of Logarithms</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="partial-derivatives.html" data-scroll="partial-derivatives" class="internal"><span class="codenumber">12</span> <span class="title">Partial Derivatives</span></a><ul>
-<li><a href="section-functions-of-several-independent-variables.html" data-scroll="section-functions-of-several-independent-variables" class="internal">Functions of Several Independent Variables</a></li>
-<li><a href="section-limits-and-continuity.html" data-scroll="section-limits-and-continuity" class="internal">Limits and Continuity</a></li>
-<li><a href="section-partial-derivatives.html" data-scroll="section-partial-derivatives" class="internal">Partial Derivatives</a></li>
-<li><a href="section-tangent-planes-and-linear-approximations.html" data-scroll="section-tangent-planes-and-linear-approximations" class="internal">Tangent Planes and Linear Approximations</a></li>
-<li><a href="section-the-chain-rule-in-several-variables.html" data-scroll="section-the-chain-rule-in-several-variables" class="internal">The Chain Rule in Several Variables</a></li>
-<li><a href="section-directional-derivatives-and-gradients.html" data-scroll="section-directional-derivatives-and-gradients" class="internal">Directional Derivatives and Gradients</a></li>
-<li><a href="section-extreme-values.html" data-scroll="section-extreme-values" class="internal">Extreme Values</a></li>
-<li><a href="section-lagrange-multipliers.html" data-scroll="section-lagrange-multipliers" class="internal">Lagrange Multipliers</a></li>
+<li>
+<div class="toc-item"><a href="section-exponential-models.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Exponential Models</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-exponential-models.html#subsection-exponential-growth" class="internal"><span class="title">Exponential Growth</span></a></div></li>
+<li><div class="toc-item"><a href="section-exponential-models.html#subsection-exponential-decay" class="internal"><span class="title">Exponential Decay</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="multiple-integrals.html" data-scroll="multiple-integrals" class="internal"><span class="codenumber">13</span> <span class="title">Multiple Integrals</span></a><ul>
-<li><a href="section-double-integrals-over-rectangles.html" data-scroll="section-double-integrals-over-rectangles" class="internal">Double Integrals over Rectangles</a></li>
-<li><a href="section-double-integrals-over-general-regions.html" data-scroll="section-double-integrals-over-general-regions" class="internal">Double Integrals over General Regions</a></li>
-<li><a href="section-double-integrals-in-polar-coordinates.html" data-scroll="section-double-integrals-in-polar-coordinates" class="internal">Double Integrals in Polar Coordinates</a></li>
-<li><a href="section-applications-of-double-integrals.html" data-scroll="section-applications-of-double-integrals" class="internal">Applications of Double Integrals</a></li>
-<li><a href="section-triple-integrals.html" data-scroll="section-triple-integrals" class="internal">Triple Integrals</a></li>
-<li><a href="section-cylindrical-coordinates.html" data-scroll="section-cylindrical-coordinates" class="internal">Triple Integrals in Cylindrical Coordinates</a></li>
-<li><a href="section-triple-integrals-in-spherical-coordinates.html" data-scroll="section-triple-integrals-in-spherical-coordinates" class="internal">Triple Integrals in Spherical Coordinates</a></li>
-<li><a href="section-change-of-variables.html" data-scroll="section-change-of-variables" class="internal">Change of Variables</a></li>
+<li><div class="toc-item"><a href="section-inverse-trigonometric-functions.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Inverse Trigonometric Functions</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="vector-calculus.html" data-scroll="vector-calculus" class="internal"><span class="codenumber">14</span> <span class="title">Vector Calculus</span></a><ul>
-<li><a href="section-vector-fields.html" data-scroll="section-vector-fields" class="internal">Vector Fields</a></li>
-<li><a href="section-line-integrals.html" data-scroll="section-line-integrals" class="internal">Line Integrals</a></li>
-<li><a href="section-the-fundamental-theorem-for-line-integrals.html" data-scroll="section-the-fundamental-theorem-for-line-integrals" class="internal">The Fundamental Theorem for Line Integrals</a></li>
-<li><a href="section-green-s-theorem.html" data-scroll="section-green-s-theorem" class="internal">Green's Theorem</a></li>
-<li><a href="section-curl-and-divergence.html" data-scroll="section-curl-and-divergence" class="internal">Curl and Divergence</a></li>
-<li><a href="section-parametric-surfaces-and-areas.html" data-scroll="section-parametric-surfaces-and-areas" class="internal">Parametric Surfaces and Areas</a></li>
-<li><a href="section-surface-integrals.html" data-scroll="section-surface-integrals" class="internal">Surface Integrals</a></li>
-<li><a href="section-stokes-theorem.html" data-scroll="section-stokes-theorem" class="internal">Stokes' Theorem</a></li>
-<li><a href="section-the-divergence-theorem.html" data-scroll="section-the-divergence-theorem" class="internal">The Divergence Theorem</a></li>
+<li>
+<div class="toc-item"><a href="applications-differentiation.html" class="internal"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-l-hospital-s-rule.html" class="internal"><span class="codenumber">5.1</span> <span class="title">L’Hospital’s Rule</span></a></div></li>
+<li><div class="toc-item"><a href="section-extreme-values-of-functions.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Extreme Values of Functions</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-the-mean-value-theorem.html" class="internal"><span class="codenumber">5.3</span> <span class="title">The Mean Value Theorem</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-mean-value-theorem.html#subsection-rolle-s-theorem" class="internal"><span class="title">Rolle’s Theorem</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-mean-value-theorem.html#subsection-the-mean-value-theorem" class="internal"><span class="title">The Mean Value Theorem</span></a></div></li>
 </ul>
 </li>
-<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
-<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
-</div></div>
-<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-the-cross-product"><h2 class="heading hide-type">
+<li><div class="toc-item"><a href="section-derivatives-and-graphs.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Derivatives and Graphs</span></a></div></li>
+<li><div class="toc-item"><a href="section-optimization-problems.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Optimization Problems</span></a></div></li>
+<li><div class="toc-item"><a href="section-newton-s-method.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Newton’s Method</span></a></div></li>
+<li><div class="toc-item"><a href="section-antiderivatives.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Antiderivatives</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="part-integral.html" class="internal"><span class="codenumber">II</span> <span class="title">Integral Calculus</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="integrals.html" class="internal"><span class="codenumber">6</span> <span class="title">Integrals</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-areas-under-curves.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Areas Under Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-definite-integral.html" class="internal"><span class="codenumber">6.2</span> <span class="title">The Definite Integral</span></a></div></li>
+<li><div class="toc-item"><a href="section-evaluating-integrals.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Evaluating Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-fundamental-theorem-of-calculus.html" class="internal"><span class="codenumber">6.4</span> <span class="title">The Fundamental Theorem of Calculus</span></a></div></li>
+<li><div class="toc-item"><a href="section-substitution.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Substitution</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="techniques-of-integration.html" class="internal"><span class="codenumber">7</span> <span class="title">Techniques of Integration</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-integration-by-parts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Integration by Parts</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-trigonometric-integrals-and-substitution.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Trigonometric Integrals and Substitution</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-trigonometric-integrals-and-substitution.html#subsection-integrals-involving-powers-of-sine-and-cosine" class="internal"><span class="title">Integrals Involving Powers of Sine and Cosine</span></a></div></li>
+<li><div class="toc-item"><a href="section-trigonometric-integrals-and-substitution.html#subsection-integrals-involving-powers-of-secant-and-tangent" class="internal"><span class="title">Integrals Involving Powers of Secant and Tangent</span></a></div></li>
+<li><div class="toc-item"><a href="section-trigonometric-integrals-and-substitution.html#subsection-trigonometric-substitutions" class="internal"><span class="title">Trigonometric Substitutions</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-partial-fractions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Partial Fractions</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-improper-integrals.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Improper Integrals</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-improper-integrals.html#subsection-improper-integrals-over-infinite-intervals" class="internal"><span class="title">Improper Integrals over Infinite Intervals</span></a></div></li>
+<li><div class="toc-item"><a href="section-improper-integrals.html#subsection-improper-integrals-with-discontinuous-integrands" class="internal"><span class="title">Improper Integrals with Discontinuous Integrands</span></a></div></li>
+<li><div class="toc-item"><a href="section-improper-integrals.html#subsection-comparison-tests-for-improper-integrals" class="internal"><span class="title">Comparison Tests for Improper Integrals</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="applications-of-integration.html" class="internal"><span class="codenumber">8</span> <span class="title">Applications of Integration</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-areas-between-curves.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Areas Between Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-volumes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Volumes</span></a></div></li>
+<li><div class="toc-item"><a href="section-volumes-by-cylindrical-shells.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Volumes by Cylindrical Shells</span></a></div></li>
+<li><div class="toc-item"><a href="section-arc-length.html" class="internal"><span class="codenumber">8.4</span> <span class="title">Arc Length</span></a></div></li>
+<li><div class="toc-item"><a href="section-area-of-a-surface-of-revolution.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Area of a Surface of Revolution</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-applications-to-physics-and-engineering.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Applications to Physics and Engineering</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-applications-to-physics-and-engineering.html#subsection-work" class="internal"><span class="title">Work</span></a></div></li>
+<li><div class="toc-item"><a href="section-applications-to-physics-and-engineering.html#subsection-moments-and-centers-of-mass" class="internal"><span class="title">Moments and Centers of Mass</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-differential-equations.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Differential Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-basic-concepts" class="internal"><span class="title">Basic Concepts</span></a></div></li>
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-separable-equations" class="internal"><span class="title">Separable Equations</span></a></div></li>
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-population-equations" class="internal"><span class="title">Population Equations</span></a></div></li>
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-the-logistic-equation" class="internal"><span class="title">The Logistic Equation</span></a></div></li>
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-stability-of-solutions" class="internal"><span class="title">Stability of Solutions</span></a></div></li>
+<li><div class="toc-item"><a href="section-differential-equations.html#subsection-linear-stability-analysis" class="internal"><span class="title">Linear Stability Analysis</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="series.html" class="internal"><span class="codenumber">9</span> <span class="title">Series</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-sequences.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Sequences</span></a></div></li>
+<li><div class="toc-item"><a href="section-series.html" class="internal"><span class="codenumber">9.2</span> <span class="title">Series</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-the-integral-and-comparison-tests.html" class="internal"><span class="codenumber">9.3</span> <span class="title">The Integral and Comparison Tests</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-integral-and-comparison-tests.html#subsection-the-integral-test" class="internal"><span class="title">The Integral Test</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-integral-and-comparison-tests.html#subsection-comparison-tests" class="internal"><span class="title">Comparison Tests</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-other-convergence-tests.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Other Convergence Tests</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-other-convergence-tests.html#subsection-alternating-series" class="internal"><span class="title">Alternating Series</span></a></div></li>
+<li><div class="toc-item"><a href="section-other-convergence-tests.html#subsection-ratio-test" class="internal"><span class="title">Ratio Test</span></a></div></li>
+<li><div class="toc-item"><a href="section-other-convergence-tests.html#subsection-root-test" class="internal"><span class="title">Root Test</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-power-series.html" class="internal"><span class="codenumber">9.5</span> <span class="title">Power Series</span></a></div></li>
+<li><div class="toc-item"><a href="section-representing-functions-as-power-series.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Representing Functions as Power Series</span></a></div></li>
+<li><div class="toc-item"><a href="section-taylor-and-maclaurin-series.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Taylor and Maclaurin Series</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="part-multivariable.html" class="internal"><span class="codenumber">III</span> <span class="title">Multivariable Calculus</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="parametric-equations-polar-coordinates.html" class="internal"><span class="codenumber">10</span> <span class="title">Parametric Equations and Polar Coordinates</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-parametric-equations.html" class="internal"><span class="codenumber">10.1</span> <span class="title">Parametric Equations</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-calculus-and-parametric-curves.html" class="internal"><span class="codenumber">10.2</span> <span class="title">Calculus and Parametric Curves</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-calculus-and-parametric-curves.html#subsection-tangent-lines-parametric-curves" class="internal"><span class="title">Tangent Lines to Parametric Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-calculus-and-parametric-curves.html#subsection-area-under-parametric-curves" class="internal"><span class="title">Area Under Parametric Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-calculus-and-parametric-curves.html#subsection-arc-length-parametric-curves" class="internal"><span class="title">Arc Length of Parametric Curves</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-polar-coordinates.html" class="internal"><span class="codenumber">10.3</span> <span class="title">Polar Coordinates</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-polar-coordinates.html#subsection-introducing-polar-coordinates" class="internal"><span class="title">Introducing Polar Coordinates</span></a></div></li>
+<li><div class="toc-item"><a href="section-polar-coordinates.html#subsection-converting-coordinates" class="internal"><span class="title">Converting Coordinates</span></a></div></li>
+<li><div class="toc-item"><a href="section-polar-coordinates.html#subsection-polar-curves" class="internal"><span class="title">Polar Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-polar-coordinates.html#subsection-cartesian-to-polar-method" class="internal"><span class="title">Cartesian to Polar Method</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-calculus-and-polar-coordinates.html" class="internal"><span class="codenumber">10.4</span> <span class="title">Calculus and Polar Coordinates</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-calculus-and-polar-coordinates.html#subsection-areas-of-polar-curves" class="internal"><span class="title">Areas of Polar Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-calculus-and-polar-coordinates.html#subsection-arc-length-in-polar-coordinates" class="internal"><span class="title">Arc Length in Polar Coordinates</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="vectors-space-geometry.html" class="internal"><span class="codenumber">11</span> <span class="title">Vectors and Euclidean Space</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-coordinates-in-3-space.html" class="internal"><span class="codenumber">11.1</span> <span class="title">Coordinates in 3-Space</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-coordinates-in-3-space.html#xyz-coordinates" class="internal"><span class="title"><span class="process-math">\(xyz\)</span>-coordinates</span></a></div></li>
+<li><div class="toc-item"><a href="section-coordinates-in-3-space.html#subsection-the-distance-formula" class="internal"><span class="title">The Distance Formula</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-vectors.html" class="internal"><span class="codenumber">11.2</span> <span class="title">Vectors</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-vectors.html#subsection-addition-and-scalar-multiplication" class="internal"><span class="title">Addition and Scalar Multiplication</span></a></div></li>
+<li><div class="toc-item"><a href="section-vectors.html#subsection-vector-components" class="internal"><span class="title">Vector Components</span></a></div></li>
+<li><div class="toc-item"><a href="section-vectors.html#subsection-basis-vectors-and-unit-vectors" class="internal"><span class="title">Basis Vectors and Unit Vectors</span></a></div></li>
+<li><div class="toc-item"><a href="section-vectors.html#subsection-applications" class="internal"><span class="title">Applications</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-the-dot-product.html" class="internal"><span class="codenumber">11.3</span> <span class="title">The Dot Product</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-dot-product.html#subsection-definition-and-properties-of-the-dot-product" class="internal"><span class="title">Definition and Properties of the Dot Product</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-dot-product.html#subsection-projections" class="internal"><span class="title">Projections</span></a></div></li>
+</ul>
+</li>
+<li class="active">
+<div class="toc-item"><a href="section-the-cross-product.html" class="internal"><span class="codenumber">11.4</span> <span class="title">The Cross Product</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-cross-product.html#subsection-definition-and-properties-of-the-cross-product" class="internal"><span class="title">Definition and Properties of the Cross Product</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-cross-product.html#subsection-torque" class="internal"><span class="title">Torque</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">11.5</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-equations-of-lines-and-planes.html#subsection-equations-of-lines" class="internal"><span class="title">Equations of Lines</span></a></div></li>
+<li><div class="toc-item"><a href="section-equations-of-lines-and-planes.html#subsection-equations-of-planes" class="internal"><span class="title">Equations of Planes</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-cylinders-and-quadric-surfaces.html" class="internal"><span class="codenumber">11.6</span> <span class="title">Cylinders and Quadric Surfaces</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-cylinders-and-quadric-surfaces.html#subsection-cylinders" class="internal"><span class="title">Cylinders</span></a></div></li>
+<li><div class="toc-item"><a href="section-cylinders-and-quadric-surfaces.html#subsection-quadric-surfaces" class="internal"><span class="title">Quadric Surfaces</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-vector-functions.html" class="internal"><span class="codenumber">11.7</span> <span class="title">Vector Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-vector-functions.html#limits-with-space-curves" class="internal"><span class="title">Limits with Space Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-vector-functions.html#subsection-derivatives-with-space-curves" class="internal"><span class="title">Derivatives with Space Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-vector-functions.html#subsection-integrals-with-space-curves" class="internal"><span class="title">Integrals with Space Curves</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-arc-length-and-curvature.html" class="internal"><span class="codenumber">11.8</span> <span class="title">Arc Length and Curvature</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-arc-length-and-curvature.html#subsection-arc-length" class="internal"><span class="title">Arc Length</span></a></div></li>
+<li><div class="toc-item"><a href="section-arc-length-and-curvature.html#subsection-curvature" class="internal"><span class="title">Curvature</span></a></div></li>
+<li><div class="toc-item"><a href="section-arc-length-and-curvature.html#subsection-normal-and-binormal-vectors" class="internal"><span class="title">Normal and Binormal Vectors</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-motion-in-space.html" class="internal"><span class="codenumber">11.9</span> <span class="title">Motion in Space</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="partial-derivatives.html" class="internal"><span class="codenumber">12</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-functions-of-several-independent-variables.html" class="internal"><span class="codenumber">12.1</span> <span class="title">Functions of Several Independent Variables</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-functions-of-several-independent-variables.html#subsection-functions-of-two-variables" class="internal"><span class="title">Functions of Two Variables</span></a></div></li>
+<li><div class="toc-item"><a href="section-functions-of-several-independent-variables.html#subsection-contour-plots" class="internal"><span class="title">Contour Plots</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-limits-and-continuity.html" class="internal"><span class="codenumber">12.2</span> <span class="title">Limits and Continuity</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-limits-and-continuity.html#subsection-limits" class="internal"><span class="title">Limits</span></a></div></li>
+<li><div class="toc-item"><a href="section-limits-and-continuity.html#subsection-continuous-functions" class="internal"><span class="title">Continuous Functions</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-partial-derivatives.html" class="internal"><span class="codenumber">12.3</span> <span class="title">Partial Derivatives</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-tangent-planes-and-linear-approximations.html" class="internal"><span class="codenumber">12.4</span> <span class="title">Tangent Planes and Linear Approximations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-tangent-planes-and-linear-approximations.html#subsection-tangent-planes" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+<li><div class="toc-item"><a href="section-tangent-planes-and-linear-approximations.html#subsection-linear-approximations" class="internal"><span class="title">Linear Approximations</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-the-chain-rule-in-several-variables.html" class="internal"><span class="codenumber">12.5</span> <span class="title">The Chain Rule in Several Variables</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-directional-derivatives-and-gradients.html" class="internal"><span class="codenumber">12.6</span> <span class="title">Directional Derivatives and Gradients</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-directional-derivatives-and-gradients.html#subsection-the-directional-derivative" class="internal"><span class="title">The Directional Derivative</span></a></div></li>
+<li><div class="toc-item"><a href="section-directional-derivatives-and-gradients.html#subsection-gradients" class="internal"><span class="title">Gradients</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-extreme-values.html" class="internal"><span class="codenumber">12.7</span> <span class="title">Extreme Values</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-extreme-values.html#subsection-local-maxima-and-minima" class="internal"><span class="title">Local Maxima and Minima</span></a></div></li>
+<li><div class="toc-item"><a href="section-extreme-values.html#subsection-absolute-maxima-and-minima" class="internal"><span class="title">Absolute Maxima and Minima</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-lagrange-multipliers.html" class="internal"><span class="codenumber">12.8</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="multiple-integrals.html" class="internal"><span class="codenumber">13</span> <span class="title">Multiple Integrals</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-double-integrals-over-rectangles.html" class="internal"><span class="codenumber">13.1</span> <span class="title">Double Integrals over Rectangles</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-double-integrals-over-rectangles.html#subsection-riemann-sums" class="internal"><span class="title">Riemann Sums</span></a></div></li>
+<li><div class="toc-item"><a href="section-double-integrals-over-rectangles.html#subsection-fubini-s-theorem" class="internal"><span class="title">Fubini’s Theorem</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-double-integrals-over-general-regions.html" class="internal"><span class="codenumber">13.2</span> <span class="title">Double Integrals over General Regions</span></a></div></li>
+<li><div class="toc-item"><a href="section-double-integrals-in-polar-coordinates.html" class="internal"><span class="codenumber">13.3</span> <span class="title">Double Integrals in Polar Coordinates</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-applications-of-double-integrals.html" class="internal"><span class="codenumber">13.4</span> <span class="title">Applications of Double Integrals</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-applications-of-double-integrals.html#subsection-mass" class="internal"><span class="title">Mass</span></a></div></li></ul>
+</li>
+<li><div class="toc-item"><a href="section-triple-integrals.html" class="internal"><span class="codenumber">13.5</span> <span class="title">Triple Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-cylindrical-coordinates.html" class="internal"><span class="codenumber">13.6</span> <span class="title">Triple Integrals in Cylindrical Coordinates</span></a></div></li>
+<li><div class="toc-item"><a href="section-triple-integrals-in-spherical-coordinates.html" class="internal"><span class="codenumber">13.7</span> <span class="title">Triple Integrals in Spherical Coordinates</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-change-of-variables.html" class="internal"><span class="codenumber">13.8</span> <span class="title">Change of Variables</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-change-of-variables.html#subsection-change-of-variables-in-double-integrals" class="internal"><span class="title">Change of Variables in Double Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-change-of-variables.html#subsection-change" class="internal"><span class="title">Change of Variables in Triple Integrals</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="vector-calculus.html" class="internal"><span class="codenumber">14</span> <span class="title">Vector Calculus</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-vector-fields.html" class="internal"><span class="codenumber">14.1</span> <span class="title">Vector Fields</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-vector-fields.html#subsection-vector-fields-in--rr-2-m-and--rr-3-m-" class="internal"><span class="title">Vector Fields in <span class="process-math">\(\RR^{2}\)</span> and <span class="process-math">\(\RR^{3}\)</span></span></a></div></li>
+<li><div class="toc-item"><a href="section-vector-fields.html#subsection-gradient-fields-and-potential-functions" class="internal"><span class="title">Gradient Fields and Potential Functions</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-line-integrals.html" class="internal"><span class="codenumber">14.2</span> <span class="title">Line Integrals</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-line-integrals.html#subsection-scalar-line-integrals" class="internal"><span class="title">Scalar Line Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-line-integrals.html#subsection-vector-field-line-integrals" class="internal"><span class="title">Vector Field Line Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-line-integrals.html#subsection-flux-integrals" class="internal"><span class="title">Flux Integrals</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-the-fundamental-theorem-for-line-integrals.html" class="internal"><span class="codenumber">14.3</span> <span class="title">The Fundamental Theorem for Line Integrals</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-fundamental-theorem-for-line-integrals.html#subsection-path-independence" class="internal"><span class="title">Path Independence</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-fundamental-theorem-for-line-integrals.html#subsection-conservative-vector-fields" class="internal"><span class="title">Conservative Vector Fields</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-green-s-theorem.html" class="internal"><span class="codenumber">14.4</span> <span class="title">Green’s Theorem</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-curl-and-divergence.html" class="internal"><span class="codenumber">14.5</span> <span class="title">Curl and Divergence</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-curl-and-divergence.html#subsection-curl" class="internal"><span class="title">Curl</span></a></div></li>
+<li><div class="toc-item"><a href="section-curl-and-divergence.html#subsection-divergence" class="internal"><span class="title">Divergence</span></a></div></li>
+<li><div class="toc-item"><a href="section-curl-and-divergence.html#subsection-laplacian" class="internal"><span class="title">Laplacian</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-parametric-surfaces-and-areas.html" class="internal"><span class="codenumber">14.6</span> <span class="title">Parametric Surfaces and Areas</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-parametric-surfaces-and-areas.html#subsection-parameterizing-surfaces" class="internal"><span class="title">Parameterizing Surfaces</span></a></div></li>
+<li><div class="toc-item"><a href="section-parametric-surfaces-and-areas.html#subsection-tangent-planes-vectors" class="internal"><span class="title">Tangent Planes from Space Curves</span></a></div></li>
+<li><div class="toc-item"><a href="section-parametric-surfaces-and-areas.html#subsection-surface-areas" class="internal"><span class="title">Surface Areas</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-surface-integrals.html" class="internal"><span class="codenumber">14.7</span> <span class="title">Surface Integrals</span></a></div></li>
+<li><div class="toc-item"><a href="section-stokes-theorem.html" class="internal"><span class="codenumber">14.8</span> <span class="title">Stokes’ Theorem</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-divergence-theorem.html" class="internal"><span class="codenumber">14.9</span> <span class="title">The Divergence Theorem</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li><div class="toc-item"><a href="index-1.html" class="internal"><span class="title">Index</span></a></div></li>
+<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-the-cross-product"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">11.4</span> <span class="title">The Cross Product</span>
 </h2>
-<section class="introduction" id="introduction-19"><p id="p-1223">The dot product, and in particular <a href="" class="xref" data-knowl="./knowl/theorem-geometry-of-the-dot-product.html" title="Theorem 11.3.5: Geometry of the Dot Product">Theorem 11.3.5</a>, gives us a good way to tell if two vectors are perpendicular. However, it says nothing about how to <em class="emphasis">construct</em> perpendicular vectors. The next vector operation, the <dfn class="terminology">cross product</dfn>, is the tool we'll use for that goal.</p></section><section class="subsection" id="subsection-definition-and-properties-of-the-cross-product"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-19"><div class="para" id="p-1223">The dot product, and in particular <a href="" class="xref" data-knowl="./knowl/theorem-geometry-of-the-dot-product.html" title="Theorem 11.3.5: Geometry of the Dot Product">Theorem 11.3.5</a>, gives us a good way to tell if two vectors are perpendicular. However, it says nothing about how to <em class="emphasis">construct</em> perpendicular vectors. The next vector operation, the <dfn class="terminology">cross product</dfn>, is the tool we’ll use for that goal.</div></section><section class="subsection" id="subsection-definition-and-properties-of-the-cross-product"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Definition and Properties of the Cross Product</span>
 </h3>
 <article class="definition definition-like" id="definition-the-cross-product"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">The Cross Product.</span>
-</h4>
-<p id="p-1224">Let <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},y_{1},z_{1}}\)</span> and <span class="process-math">\(\mathbf{y} = \dotprod{x_{2},y_{2},z_{2}}\text{.}\)</span> Then the cross product of <span class="process-math">\(\mathbf{x}\)</span> with <span class="process-math">\(\mathbf{y}\)</span> is the new vector <span class="process-math">\(\mathbf{x}\times\mathbf{y}\)</span> given by</p>
+</h4>  <div class="para" id="p-1224">Let <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},y_{1},z_{1}}\)</span> and <span class="process-math">\(\mathbf{y} = \dotprod{x_{2},y_{2},z_{2}}\text{.}\)</span> Then the cross product of <span class="process-math">\(\mathbf{x}\)</span> with <span class="process-math">\(\mathbf{y}\)</span> is the new vector <span class="process-math">\(\mathbf{x}\times\mathbf{y}\)</span> given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{x}\times\mathbf{y} = \dotprod{y_{1}z_{2}-z_{1}y_{2}, z_{1}x_{2}-x_{1}z_{2}, x_{1}y_{2} - y_{1}x_{2}}.
 \end{equation*}
 </div></article><article class="example example-like" id="example-cross-product-of-basis-vectors"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Cross product of basis vectors.</span>
-</h4>
-<p id="p-1225">Let's start by computing <span class="process-math">\(\mathbf{i}\times\mathbf{k}\)</span> using the definition. If we do so, we have</p>
+</h4> <div class="para" id="p-1225">Let’s start by computing <span class="process-math">\(\mathbf{i}\times\mathbf{k}\)</span> using the definition. If we do so, we have</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{i}\times\mathbf{k} = \dotprod{0,-1,0} = -\mathbf{j}.
 \end{equation*}
 </div>
-<p id="p-1226">On the other hand, we also have <span class="process-math">\(\mathbf{k}\times\mathbf{i} = \mathbf{j}\text{.}\)</span> This points out the very important fact that <em class="emphasis">order matters for cross products</em>.</p></article><p id="p-1227">This formula is a lot to remember, so it's beneficial to find another way to express it. One way is by using <dfn class="terminology">determinants</dfn>. In particular, if <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},y_{1},z_{1}}\)</span> and <span class="process-math">\(\mathbf{y} = \dotprod{x_{2},y_{2},z_{2}}\text{,}\)</span> then</p>
-<div class="displaymath process-math">
+<div class="para" id="p-1226">On the other hand, we also have <span class="process-math">\(\mathbf{k}\times\mathbf{i} = \mathbf{j}\text{.}\)</span> This points out the very important fact that <em class="emphasis">order matters for cross products</em>.</div></article><div class="para" id="p-1227">This formula is a lot to remember, so it’s beneficial to find another way to express it. One way is by using <dfn class="terminology">determinants</dfn>. In particular, if <span class="process-math">\(\mathbf{x} = \dotprod{x_{1},y_{1},z_{1}}\)</span> and <span class="process-math">\(\mathbf{y} = \dotprod{x_{2},y_{2},z_{2}}\text{,}\)</span> then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-cross-product-determinant.html ./knowl/equation-cross-product-determinant.html ./knowl/definition-the-cross-product.html ./knowl/theorem-properties-of-the-cross-product.html" id="equation-cross-product-determinant">
 \begin{equation}
 \mathbf{x}\times\mathbf{y} = \left|\begin{array}{ccc}
-\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ x_{1} &amp; y_{1} &amp; z_{1} \\ x_{2} &amp; y_{2} &amp; z_{2} \end{array}\right|\label{equation-cross-product-determinant}\tag{2}
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ x_{1} &amp; y_{1} &amp; z_{1} \\ x_{2} &amp; y_{2} &amp; z_{2} \end{array}\right|\tag{2}
 \end{equation}
 </div>
 <article class="example example-like" id="example-another-cross-product"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Another cross product.</span>
-</h4>
-<p id="p-1228"><a href="" class="xref" data-knowl="./knowl/equation-cross-product-determinant.html" title="Equation 2">(2)</a> is useful to use if you're dealing with vectors that aren't as simple as the basis vectors <span class="process-math">\(\mathbf{i},\mathbf{j},\mathbf{k}\text{.}\)</span> For example, let <span class="process-math">\(\mathbf{a} = \dotprod{-1,2,0}\)</span> and <span class="process-math">\(\mathbf{b} = \dotprod{2,4,1}\text{.}\)</span> Then</p>
-<div class="displaymath process-math">
+</h4> <div class="para" id="p-1228">
+<a href="" class="xref" data-knowl="./knowl/equation-cross-product-determinant.html" title="Equation 2">(2)</a> is useful to use if you’re dealing with vectors that aren’t as simple as the basis vectors <span class="process-math">\(\mathbf{i},\mathbf{j},\mathbf{k}\text{.}\)</span> For example, let <span class="process-math">\(\mathbf{a} = \dotprod{-1,2,0}\)</span> and <span class="process-math">\(\mathbf{b} = \dotprod{2,4,1}\text{.}\)</span> Then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-cross-product-determinant.html" id="md-156">
 \begin{align*}
 \mathbf{a}\times\mathbf{b} &amp; = \left|\begin{array}{ccc}
 \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
@@ -351,92 +786,92 @@ true);
 &amp; = 2\mathbf{i}+\mathbf{j}-8\mathbf{k}\\
 &amp; = \dotprod{2,1,-8}. 
 \end{align*}
-</div></article><p id="p-1229">Remember that we said the cross product is our tool for finding perpendicular vectors. So it might be nice if we made sure it actually did that. As a quick check, we'll compute <span class="process-math">\(\mathbf{a}\cdot(\mathbf{a}\times\mathbf{b})\)</span> and <span class="process-math">\(\mathbf{b}\cdot(\mathbf{a}\times\mathbf{b})\text{,}\)</span> with these vectors coming from <a href="" class="xref" data-knowl="./knowl/equation-cross-product-determinant.html" title="Equation 2">(2)</a>. If we do so, we obtain</p>
-<div class="displaymath process-math">
+</div></article><div class="para" id="p-1229">Remember that we said the cross product is our tool for finding perpendicular vectors. So it might be nice if we made sure it actually did that. As a quick check, we’ll compute <span class="process-math">\(\mathbf{a}\cdot(\mathbf{a}\times\mathbf{b})\)</span> and <span class="process-math">\(\mathbf{b}\cdot(\mathbf{a}\times\mathbf{b})\text{,}\)</span> with these vectors coming from <a href="" class="xref" data-knowl="./knowl/equation-cross-product-determinant.html" title="Equation 2">(2)</a>. If we do so, we obtain</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-cross-product-determinant.html ./knowl/equation-cross-product-determinant.html ./knowl/definition-the-cross-product.html ./knowl/theorem-properties-of-the-cross-product.html" id="md-157">
 \begin{align*}
 \mathbf{a}\cdot(\mathbf{a}\times\mathbf{b}) &amp; = -2 + 2 = 0 \\
 \mathbf{b}\cdot(\mathbf{a}\times\mathbf{b}) &amp; = 4 + 4 - 8 = 0 
 \end{align*}
 </div>
-<p id="p-1230">Since these dot products are zero, this means that both <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\)</span> are perpendicular to the cross product <span class="process-math">\(\mathbf{a}\times\mathbf{b}\text{.}\)</span> This is also true in general.</p>
+<div class="para" id="p-1230">Since these dot products are zero, this means that both <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\)</span> are perpendicular to the cross product <span class="process-math">\(\mathbf{a}\times\mathbf{b}\text{.}\)</span> This is also true in general.</div>
 <article class="theorem theorem-like" id="theorem-orthogonality-of-the-cross-product"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Orthogonality of the Cross Product.</span>
 </h4>
-<p id="p-1231"><span class="process-math">\(\mathbf{a}\times\mathbf{b}\)</span> is always orthogonal to both <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{.}\)</span></p></article><p id="p-1232">So the cross product always produces orthogonal vectors. To determine the direction of the cross product <span class="process-math">\(\mathbf{a}\times\mathbf{b}\text{,}\)</span> we use the <dfn class="terminology">right-hand rule</dfn>: sweep your right hand from <span class="process-math">\(\mathbf{a}\)</span> to <span class="process-math">\(\mathbf{b}\)</span> and stick your thumb up. Then <span class="process-math">\(\mathbf{a}\times\mathbf{b}\)</span> is parallel to your thumb.</p>
-<p id="p-1233">We would also like to know the magnitude of the cross product. We can just compute it using <a href="" class="xref" data-knowl="./knowl/definition-the-cross-product.html" title="Definition 11.4.1: The Cross Product">Definition 11.4.1</a> and find the magnitude using our usual formula. If we do so, we obtain (after a lot of simplifying!)</p>
-<div class="displaymath process-math">
+<div class="para" id="p-1231">
+<span class="process-math">\(\mathbf{a}\times\mathbf{b}\)</span> is always orthogonal to both <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{.}\)</span>
+</div></article><div class="para" id="p-1232">So the cross product always produces orthogonal vectors. To determine the direction of the cross product <span class="process-math">\(\mathbf{a}\times\mathbf{b}\text{,}\)</span> we use the <dfn class="terminology">right-hand rule</dfn>: sweep your right hand from <span class="process-math">\(\mathbf{a}\)</span> to <span class="process-math">\(\mathbf{b}\)</span> and stick your thumb up. Then <span class="process-math">\(\mathbf{a}\times\mathbf{b}\)</span> is parallel to your thumb.</div>
+<div class="para" id="p-1233">We would also like to know the magnitude of the cross product. We can just compute it using <a href="" class="xref" data-knowl="./knowl/definition-the-cross-product.html" title="Definition 11.4.1: The Cross Product">Definition 11.4.1</a> and find the magnitude using our usual formula. If we do so, we obtain (after a lot of simplifying!)</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-cross-product-determinant.html ./knowl/equation-cross-product-determinant.html ./knowl/definition-the-cross-product.html ./knowl/theorem-properties-of-the-cross-product.html">
 \begin{equation*}
 \norm{\mathbf{a}\times\mathbf{b}}^{2} = \norm{\mathbf{a}}^{2}\norm{\mathbf{b}}^{2}\sin^{2}\theta,
 \end{equation*}
 </div>
-<p id="p-1234">which reduces to the following result.</p>
+<div class="para" id="p-1234">which reduces to the following result.</div>
 <article class="theorem theorem-like" id="theorem-magnitude-of-the-cross-product"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Magnitude of the Cross Product.</span>
 </h4>
-<p id="p-1235">Let <span class="process-math">\(\theta\)</span> denote the acute angle between the vectors <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{,}\)</span> so that <span class="process-math">\(0\leq\theta\leq\pi\text{.}\)</span> Then</p>
+<div class="para" id="p-1235">Let <span class="process-math">\(\theta\)</span> denote the acute angle between the vectors <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{,}\)</span> so that <span class="process-math">\(0\leq\theta\leq\pi\text{.}\)</span> Then</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \norm{\mathbf{a}\times\mathbf{b}} = \norm{\mathbf{a}}\norm{\mathbf{b}}\sin\theta.
 \end{equation*}
-</div></article><p id="p-1236">So in particular, two nonzero vectors <span class="process-math">\(\mathbf{x}\)</span> and <span class="process-math">\(\mathbf{y}\)</span> are parallel (i.e. have <span class="process-math">\(\theta=0\)</span>) if and only if <span class="process-math">\(\mathbf{a}\times\mathbf{b} = \mathbf{0}\text{.}\)</span></p>
+</div></article><div class="para" id="p-1236">So in particular, two nonzero vectors <span class="process-math">\(\mathbf{x}\)</span> and <span class="process-math">\(\mathbf{y}\)</span> are parallel (i.e. have <span class="process-math">\(\theta=0\)</span>) if and only if <span class="process-math">\(\mathbf{a}\times\mathbf{b} = \mathbf{0}\text{.}\)</span>
+</div>
 <article class="example example-like" id="example-testing-collinearity"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Testing collinearity.</span>
-</h4>
-<p id="p-1237">We say that three points <span class="process-math">\(P,Q\)</span> and <span class="process-math">\(R\)</span> are <dfn class="terminology">collinear</dfn> if they all lie on the same line. Suppose we want to check if the points <span class="process-math">\(P(-2,0,1), Q(-1,2,4)\)</span> and <span class="process-math">\(R(1,6,10)\)</span> are collinear or not. How can we do so? If we start by defining</p>
+</h4> <div class="para" id="p-1237">We say that three points <span class="process-math">\(P,Q\)</span> and <span class="process-math">\(R\)</span> are <dfn class="terminology">collinear</dfn> if they all lie on the same line. Suppose we want to check if the points <span class="process-math">\(P(-2,0,1), Q(-1,2,4)\)</span> and <span class="process-math">\(R(1,6,10)\)</span> are collinear or not. How can we do so? If we start by defining</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{u} = \vec{PQ} = \dotprod{1,2,3}\quad\text{and}\quad \mathbf{v} = \vec{QR} = \dotprod{2,4,6},
 \end{equation*}
 </div>
-<p id="p-1238">then we can say that all three points lie on the same line if and only if <span class="process-math">\(\mathbf{u}\)</span> and <span class="process-math">\(\mathbf{v}\)</span> are parallel to each other. So we'll compute their cross product to get <span class="process-math">\(\mathbf{u}\times\mathbf{v} = \mathbf{0}\text{.}\)</span> Since these vectors are parallel, then the three given points must lie on the same line.</p></article><p id="p-1239">Another important property of the magnitude of the cross product is the following: <span class="process-math">\(\norm{\mathbf{a}\times\mathbf{b}}\)</span> is exactly equal to the area of the parallelogram determined by <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{.}\)</span></p>
+<div class="para" id="p-1238">then we can say that all three points lie on the same line if and only if <span class="process-math">\(\mathbf{u}\)</span> and <span class="process-math">\(\mathbf{v}\)</span> are parallel to each other. So we’ll compute their cross product to get <span class="process-math">\(\mathbf{u}\times\mathbf{v} = \mathbf{0}\text{.}\)</span> Since these vectors are parallel, then the three given points must lie on the same line.</div></article><div class="para" id="p-1239">Another important property of the magnitude of the cross product is the following: <span class="process-math">\(\norm{\mathbf{a}\times\mathbf{b}}\)</span> is exactly equal to the area of the parallelogram determined by <span class="process-math">\(\mathbf{a}\)</span> and <span class="process-math">\(\mathbf{b}\text{.}\)</span>
+</div>
 <article class="example example-like" id="example-areas-of-triangles"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">Area of a triangle.</span>
-</h4>
-<p id="p-1240">Suppose that we want the area of the triangle with vertices <span class="process-math">\(P(1,2,-1), Q(2,0,0)\)</span> and <span class="process-math">\(R(1,-1,-2)\text{.}\)</span> To start, we need to find vectors that determine the triangle. We can use</p>
+</h4> <div class="para" id="p-1240">Suppose that we want the area of the triangle with vertices <span class="process-math">\(P(1,2,-1), Q(2,0,0)\)</span> and <span class="process-math">\(R(1,-1,-2)\text{.}\)</span> To start, we need to find vectors that determine the triangle. We can use</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{u} = \vec{PQ} = \dotprod{1,-2,1}\quad\text{and}\quad\mathbf{v} = \vec{PR} = \dotprod{0,-3,-1}.
 \end{equation*}
 </div>
-<p id="p-1241">Now, the triangle determined by <span class="process-math">\(\mathbf{u}\)</span> and <span class="process-math">\(\mathbf{v}\)</span> is precisely half of the parallelogram determined by these same vectors, so the area of this triangle is equal to <span class="process-math">\(\frac{1}{2}\norm{\mathbf{u}\times\mathbf{v}}\text{.}\)</span> We can use Sage as in the cell below to find the cross product of these vectors. Doing so, we get <span class="process-math">\(\mathbf{u}\times\mathbf{v} = \dotprod{5,1,-3}.\)</span> So the area of the triangle with vertices <span class="process-math">\(P,Q\)</span> and <span class="process-math">\(R\)</span> is</p>
-<div class="displaymath process-math">
+<div class="para" id="p-1241">Now, the triangle determined by <span class="process-math">\(\mathbf{u}\)</span> and <span class="process-math">\(\mathbf{v}\)</span> is precisely half of the parallelogram determined by these same vectors, so the area of this triangle is equal to <span class="process-math">\(\frac{1}{2}\norm{\mathbf{u}\times\mathbf{v}}\text{.}\)</span> We can use Sage as in the cell below to find the cross product of these vectors. Doing so, we get <span class="process-math">\(\mathbf{u}\times\mathbf{v} = \dotprod{5,1,-3}.\)</span> So the area of the triangle with vertices <span class="process-math">\(P,Q\)</span> and <span class="process-math">\(R\)</span> is</div>
+<div class="displaymath process-math" id="md-158">
 \begin{align*}
 \operatorname{area} \triangle PQR &amp; = \frac{1}{2}\norm{\mathbf{u}\times\mathbf{v}} \\
 &amp; = \frac{1}{2}\norm{\dotprod{5,1,-3}} \\
 &amp; = \frac{1}{2}\sqrt{35}. 
 \end{align*}
-</div></article><div class="sagecell-sage" id="sage-14"><script type="text/x-sage">u = vector([1,-2,1])
+</div></article><pre class="ptx-sagecell sagecell-sage" id="sage-14"><script type="text/x-sage">u = vector([1,-2,1])
 v = vector([0,-3,-1])
 u.cross_product(v)
-</script></div>
+</script></pre>
 <article class="theorem theorem-like" id="theorem-properties-of-the-cross-product"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of the Cross Product.</span>
 </h4>
-<p id="p-1242">Let <span class="process-math">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span> be vectors and <span class="process-math">\(c\)</span> a scalar. Then the following properties are true:</p>
-<ol class="decimal cols2">
-<li id="li-128"><p id="p-derived-li-128"><span class="process-math">\(\displaystyle \mathbf{a}\times\mathbf{b} = -\mathbf{b}\times\mathbf{a}\)</span></p></li>
-<li id="li-129"><p id="p-derived-li-129"><span class="process-math">\(\displaystyle (c\mathbf{a})\times\mathbf{b} = c(\mathbf{a}\times\mathbf{b}) = \mathbf{a}\times(c\mathbf{b})\)</span></p></li>
-<li id="li-130"><p id="p-derived-li-130"><span class="process-math">\(\displaystyle \mathbf{a}\times(\mathbf{b}+\mathbf{c}) = \mathbf{a}\times\mathbf{b}+\mathbf{a}\times\mathbf{c}\)</span></p></li>
-<li id="li-131"><p id="p-derived-li-131"><span class="process-math">\(\displaystyle (\mathbf{a}+\mathbf{b})\times\mathbf{c} = \mathbf{a}\times\mathbf{c}+\mathbf{b}\times\mathbf{c}\)</span></p></li>
-<li id="li-132"><p id="p-derived-li-132"><span class="process-math">\(\displaystyle \mathbf{a}\cdot(\mathbf{b}\times\mathbf{c}) = (\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}\)</span></p></li>
-</ol></article><p id="p-1243">The last item above is an important relationship between the cross product and dot product called the <dfn class="terminology">scalar triple product</dfn>. There is an important geometric significance to this new product.</p>
+<div class="para" id="p-1242">Let <span class="process-math">\(\mathbf{a},\mathbf{b},\mathbf{c}\)</span> be vectors and <span class="process-math">\(c\)</span> a scalar. Then the following properties are true:</div> <ol class="decimal cols2">
+<li id="li-128"><div class="para" id="p-derived-li-128"><span class="process-math">\(\displaystyle \mathbf{a}\times\mathbf{b} = -\mathbf{b}\times\mathbf{a}\)</span></div></li>
+<li id="li-129"><div class="para" id="p-derived-li-129"><span class="process-math">\(\displaystyle (c\mathbf{a})\times\mathbf{b} = c(\mathbf{a}\times\mathbf{b}) = \mathbf{a}\times(c\mathbf{b})\)</span></div></li>
+<li id="li-130"><div class="para" id="p-derived-li-130"><span class="process-math">\(\displaystyle \mathbf{a}\times(\mathbf{b}+\mathbf{c}) = \mathbf{a}\times\mathbf{b}+\mathbf{a}\times\mathbf{c}\)</span></div></li>
+<li id="li-131"><div class="para" id="p-derived-li-131"><span class="process-math">\(\displaystyle (\mathbf{a}+\mathbf{b})\times\mathbf{c} = \mathbf{a}\times\mathbf{c}+\mathbf{b}\times\mathbf{c}\)</span></div></li>
+<li id="li-132"><div class="para" id="p-derived-li-132"><span class="process-math">\(\displaystyle \mathbf{a}\cdot(\mathbf{b}\times\mathbf{c}) = (\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}\)</span></div></li>
+</ol></article><div class="para" id="p-1243">The last item above is an important relationship between the cross product and dot product called the <dfn class="terminology">scalar triple product</dfn>. There is an important geometric significance to this new product.</div>
 <article class="theorem theorem-like" id="theorem-geometry-of-the-scalar-triple-product"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">11.4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Geometry of the Scalar Triple Product.</span>
 </h4>
-<p id="p-1244">Let <span class="process-math">\(\mathbf{a},\mathbf{b}\)</span> and <span class="process-math">\(\mathbf{c}\)</span> be vectors in <span class="process-math">\(\RR^{3}\text{.}\)</span> Then <span class="process-math">\(|\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})|\)</span> is equal to the volume of the parallelepiped determined by <span class="process-math">\(\mathbf{a},\mathbf{b}\)</span> and <span class="process-math">\(\mathbf{c}\text{.}\)</span></p></article><article class="example example-like" id="example-testing-if-vectors-are-coplanar"><h4 class="heading">
+<div class="para" id="p-1244">Let <span class="process-math">\(\mathbf{a},\mathbf{b}\)</span> and <span class="process-math">\(\mathbf{c}\)</span> be vectors in <span class="process-math">\(\RR^{3}\text{.}\)</span> Then <span class="process-math">\(|\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})|\)</span> is equal to the volume of the parallelepiped determined by <span class="process-math">\(\mathbf{a},\mathbf{b}\)</span> and <span class="process-math">\(\mathbf{c}\text{.}\)</span>
+</div></article><article class="example example-like" id="example-testing-if-vectors-are-coplanar"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">Testing if vectors are coplanar.</span>
-</h4>
-<p id="p-1245">We say that three vectors <span class="process-math">\(\mathbf{u},\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> are <dfn class="terminology">coplanar</dfn> if they can all lie in a single plane. For example, <span class="process-math">\(\mathbf{i},\mathbf{k}\)</span> and <span class="process-math">\(\dotprod{-4,0,56}\)</span> are coplanar since they lie in the <span class="process-math">\(xz\)</span>-plane, but <span class="process-math">\(\mathbf{i},\mathbf{j}\)</span> and <span class="process-math">\(\mathbf{k}\)</span> are not coplanar. Suppose we're given <span class="process-math">\(\mathbf{u} = \dotprod{-3,2,1},\mathbf{v} = \dotprod{1,2,0}\)</span> and <span class="process-math">\(\mathbf{w} = \dotprod{1,1,1}\text{.}\)</span> These vectors are coplanar if and only if the parallelepiped determined by these vectors has zero volume (i.e. is flat). Since</p>
+</h4> <div class="para" id="p-1245">We say that three vectors <span class="process-math">\(\mathbf{u},\mathbf{v}\)</span> and <span class="process-math">\(\mathbf{w}\)</span> are <dfn class="terminology">coplanar</dfn> if they can all lie in a single plane. For example, <span class="process-math">\(\mathbf{i},\mathbf{k}\)</span> and <span class="process-math">\(\dotprod{-4,0,56}\)</span> are coplanar since they lie in the <span class="process-math">\(xz\)</span>-plane, but <span class="process-math">\(\mathbf{i},\mathbf{j}\)</span> and <span class="process-math">\(\mathbf{k}\)</span> are not coplanar. Suppose we’re given <span class="process-math">\(\mathbf{u} = \dotprod{-3,2,1},\mathbf{v} = \dotprod{1,2,0}\)</span> and <span class="process-math">\(\mathbf{w} = \dotprod{1,1,1}\text{.}\)</span> These vectors are coplanar if and only if the parallelepiped determined by these vectors has zero volume (i.e. is flat). Since</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{u}\cdot(\mathbf{v}\times\mathbf{w}) = -9,
 \end{equation*}
 </div>
-<p id="p-1246">these vectors are <em class="emphasis">not</em> coplanar.</p></article><article class="example example-like" id="example-another-way-to-compute-cross-products"><h4 class="heading">
+<div class="para" id="p-1246">these vectors are <em class="emphasis">not</em> coplanar.</div></article><article class="example example-like" id="example-another-way-to-compute-cross-products"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Another way to compute cross products.</span>
-</h4>
-<p id="p-1247">Using <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-the-cross-product.html" title="Theorem 11.4.8: Properties of the Cross Product">Theorem 11.4.8</a> and the facts that</p>
-<div class="displaymath process-math">
+</h4> <div class="para" id="p-1247">Using <a href="" class="xref" data-knowl="./knowl/theorem-properties-of-the-cross-product.html" title="Theorem 11.4.8: Properties of the Cross Product">Theorem 11.4.8</a> and the facts that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-properties-of-the-cross-product.html" id="md-159">
 \begin{align*}
 \mathbf{i}\times\mathbf{j} &amp; = \mathbf{k} \\
 \mathbf{j}\times\mathbf{k} &amp; = \mathbf{i} \\
@@ -444,8 +879,8 @@ u.cross_product(v)
 \mathbf{a}\times\mathbf{a} &amp; = \mathbf{0} 
 \end{align*}
 </div>
-<p id="p-1248">gives us another way to compute cross products that doesn't involve determinants. As an example, let <span class="process-math">\(\mathbf{u} = \dotprod{1,4,-3}\)</span> and <span class="process-math">\(\mathbf{v} = \dotprod{0,2,1}.\)</span> Then</p>
-<div class="displaymath process-math">
+<div class="para" id="p-1248">gives us another way to compute cross products that doesn’t involve determinants. As an example, let <span class="process-math">\(\mathbf{u} = \dotprod{1,4,-3}\)</span> and <span class="process-math">\(\mathbf{v} = \dotprod{0,2,1}.\)</span> Then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-properties-of-the-cross-product.html" id="md-160">
 \begin{align*}
 \mathbf{u}\times\mathbf{v} &amp; = (\mathbf{i}+4\mathbf{j}-3\mathbf{k})\times(2\mathbf{j}+\mathbf{k}) \\
 &amp; = 2\mathbf{i}\times\mathbf{j} + \mathbf{i}\times\mathbf{k} +8\mathbf{j}\times\mathbf{j} + 4\mathbf{j}\times\mathbf{k} - 6\mathbf{k}\times\mathbf{j} -3\mathbf{k}\times\mathbf{k} \\
@@ -455,40 +890,43 @@ u.cross_product(v)
 </div></article></section><section class="subsection" id="subsection-torque"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Torque</span>
 </h3>
-<p id="p-1249">Consider a force <span class="process-math">\(\mathbf{F}\)</span> acting on a rigid body at some position <span class="process-math">\(\mathbf{r}\text{.}\)</span> This force applies a turning affect to the body, that we measure by <dfn class="terminology">torque</dfn>.</p>
+<div class="para" id="p-1249">Consider a force <span class="process-math">\(\mathbf{F}\)</span> acting on a rigid body at some position <span class="process-math">\(\mathbf{r}\text{.}\)</span> This force applies a turning affect to the body, that we measure by <dfn class="terminology">torque</dfn>.</div>
 <article class="definition definition-like" id="definition-torque"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">11.4.12</span><span class="period">.</span><span class="space"> </span><span class="title">Torque.</span>
-</h4>
-<p id="p-1250">The torque <span class="process-math">\(\boldsymbol{\tau}\)</span> of a force <span class="process-math">\(\mathbf{F}\)</span> acting at a position <span class="process-math">\(\mathbf{r}\)</span> is defined to be the vector</p>
+</h4>  <div class="para" id="p-1250">The torque <span class="process-math">\(\boldsymbol{\tau}\)</span> of a force <span class="process-math">\(\mathbf{F}\)</span> acting at a position <span class="process-math">\(\mathbf{r}\)</span> is defined to be the vector</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}.
 \end{equation*}
-</div></article><p id="p-1251">As one example of torque, consider a wrench applied to a bolt. The force is exerted at the end of the wrench, and the torque is a vector that's parallel to the axis of rotation of the bolt. The torque is greater if the force is applied at a direction perpendicular (or nearly so) to that of the wrench, and smaller if the force is nearly parallel to the direction of the wrench. As a quick check, the torque is <span class="process-math">\(\mathbf{0}\)</span> if the force is exactly parallel to the direction of the wrench, which makes sense: if we're pushing or pulling the wrench, the bolt won't rotate at all.</p>
+</div></article><div class="para" id="p-1251">As one example of torque, consider a wrench applied to a bolt. The force is exerted at the end of the wrench, and the torque is a vector that’s parallel to the axis of rotation of the bolt. The torque is greater if the force is applied at a direction perpendicular (or nearly so) to that of the wrench, and smaller if the force is nearly parallel to the direction of the wrench. As a quick check, the torque is <span class="process-math">\(\mathbf{0}\)</span> if the force is exactly parallel to the direction of the wrench, which makes sense: if we’re pushing or pulling the wrench, the bolt won’t rotate at all.</div>
 <article class="example example-like" id="example-torque-and-hex-keys"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">11.4.13</span><span class="period">.</span><span class="space"> </span><span class="title">Torque and hex keys.</span>
-</h4>
-<p id="p-1252">A hex key (Allen wrench) with a short arm of length <span class="quantity">27 mm</span> and a long arm length of <span class="quantity">154 mm</span> is applied to a screw, with the short arm attached to the screw. To turn the screw, a force of <span class="quantity">0.5 N</span> is applied to the long arm of the hex key turning the screw clockwise, and is exactly perpendicular to both the short arm and long arm of the hex key. We want to find the torque of this force on the screw.</p>
-<p id="p-1253">One way we can do this is to imagine the screw sitting at the origin, and the hex key is (initially) in the <span class="process-math">\(xy\)</span>-plane. Note that once the force is applied, it will begin to rotate the hex key out of the <span class="process-math">\(xy\)</span>-plane. Now, the torque is defined by</p>
+</h4> <div class="para" id="p-1252">A hex key (Allen wrench) with a short arm of length <span class="quantity">27 mm</span> and a long arm length of <span class="quantity">154 mm</span> is applied to a screw, with the short arm attached to the screw. To turn the screw, a force of <span class="quantity">0.5 N</span> is applied to the long arm of the hex key turning the screw clockwise, and is exactly perpendicular to both the short arm and long arm of the hex key. We want to find the torque of this force on the screw.</div> <div class="para" id="p-1253">One way we can do this is to imagine the screw sitting at the origin, and the hex key is (initially) in the <span class="process-math">\(xy\)</span>-plane. Note that once the force is applied, it will begin to rotate the hex key out of the <span class="process-math">\(xy\)</span>-plane. Now, the torque is defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}
 \end{equation*}
 </div>
-<p id="p-1254">where <span class="process-math">\(\mathbf{r}\)</span> is the vector from the screw to the point where the force <span class="process-math">\(\mathbf{F}\)</span> is applied. We can find <span class="process-math">\(\mathbf{r}\)</span> without too much trouble: it's <span class="process-math">\(\mathbf{r} = \dotprod{.027,.154,0}\text{.}\)</span> To find the force <span class="process-math">\(\mathbf{F}\text{,}\)</span> note that it's perpendicular to both the long arm and short arm of the screw. So a starting guess would be</p>
+<div class="para" id="p-1254">where <span class="process-math">\(\mathbf{r}\)</span> is the vector from the screw to the point where the force <span class="process-math">\(\mathbf{F}\)</span> is applied. We can find <span class="process-math">\(\mathbf{r}\)</span> without too much trouble: it’s <span class="process-math">\(\mathbf{r} = \dotprod{.027,.154,0}\text{.}\)</span> To find the force <span class="process-math">\(\mathbf{F}\text{,}\)</span> note that it’s perpendicular to both the long arm and short arm of the screw. So a starting guess would be</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \mathbf{F} = \dotprod{.027,0,0}\times\dotprod{0,.154,0} = \dotprod{0,0,.042}.
 \end{equation*}
 </div>
-<p id="p-1255">Such a force would turn the screw clockwise, but it has the wrong magnitude. So we need to adjust it a bit: <span class="process-math">\(\mathbf{F} = \dotprod{0,0,.5}\text{.}\)</span> So the torque is given by</p>
-<div class="displaymath process-math">
+<div class="para" id="p-1255">Such a force would turn the screw clockwise, but it has the wrong magnitude. So we need to adjust it a bit: <span class="process-math">\(\mathbf{F} = \dotprod{0,0,.5}\text{.}\)</span> So the torque is given by</div>
+<div class="displaymath process-math" id="md-161">
 \begin{align*}
 \mathbf{\tau} &amp;= \mathbf{r}\times\mathbf{F} \\
 &amp; = \dotprod{.027,.154,0}\times\dotprod{0,0,.5} \\
 &amp; = \dotprod{.154,-.027,0}. 
 \end{align*}
-</div></article></section><section class="conclusion" id="conclusion-1"><p id="p-1256">SUGGESTED PROBLEMS: 1-19 odd, 29, 41</p></section></section></div></main>
+</div></article></section><section class="conclusion" id="conclusion-1"><div class="para" id="p-1256">SUGGESTED PROBLEMS: 1-19 odd, 29, 41</div></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="section-the-dot-product.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="section-equations-of-lines-and-planes.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png"></a>
 </div>
 </body>
 </html>
