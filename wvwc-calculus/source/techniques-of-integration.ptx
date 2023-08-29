@@ -882,17 +882,14 @@
                 </solution>
             </example>
             <sage>
-                <input language="python">
-                    from sympy import *
-                    init_printing()
+                <input>
+                    # Set variables.
+                    var('k,t')
 
                     # We need to assume that k is positive for the integral to converge.
-                    # This will also make SymPy assume that t is positive, but that's not a problem for us
-                    # since we're integrating over [0,oo).
-                    k,t = symbols('k t', positive=True)
-                    m = k*t*exp(-k*t)
+                    assume(k > 0)
 
-                    m.integrate((t, 0, oo))
+                    show(integral(k*exp(-k*t), t, 0, oo))
                 </input>
             </sage>
         </subsection>
@@ -1061,18 +1058,13 @@
                             <mrow> &amp; \lt \infty.</mrow>
                         </md>
                         Hence the original integral must also be convergent.
-                        It's value is actually known, and SymPy can be used to compute the integral, as below.
+                        It's value is actually known (see <xref ref="theorem-the-gaussian-integral" text="type-global" />), and Sage can also be used to compute its value as below.
                     </p>
                 </solution>
             </example>
             <sage>
-                <input language="python">
-                    # Computing the Gaussian with SymPy.
-                    import sympy as sp
-                    sp.init_printing()
-
-                    x = sp.Symbol('x')
-                    sp.integrate(sp.exp(-x**2), (x, 0, oo))
+                <input>
+                    integral(exp(-x^2), x, 0, oo) # Gaussian integral
                 </input>
             </sage>
             <p>
