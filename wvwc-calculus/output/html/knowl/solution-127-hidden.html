@@ -12,41 +12,39 @@
 </head>
 <body class="ignore-math"><div class="solution solution-like">
 <div class="para logical">
-<div class="para">Before setting up partial fractions, we should simplify the integrand as much as possible. Here, we can use long division since the degree of the numerator is greater than or equal to the degree of the denominator. Doing so, we get</div>
+<div class="para">First, we can simplify:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\frac{2y^{4}}{y^{3} - y^{2} + y - 1} = 2y + 2 + \frac{2}{y^{3} - y^{2} + y - 1}.
+\frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}} = \frac{x + 5}{x(x^{2} + 3)}.
 \end{equation*}
 </div>
-<div class="para">We can integrate the first two terms on the right hand side easily, but we’ll use partial fractions to rewrite the fraction:</div>
+<div class="para">Now that we’ve factored the denominator, we can attempt to find the partial fraction decomposition. So assume that</div>
 <div class="displaymath process-math">
-\begin{align*}
-\frac{2}{y^{3} - y^{2} + y - 1} &amp; = \frac{2}{y^{2}(y - 1) + (y - 1)} \\
-&amp; = \frac{2}{y^{2}(y - 1)} \\
-&amp; = \frac{A_{1}}{y} + \frac{A_{2}}{y^{2}} + \frac{A_{3}}{y - 1} 
-\end{align*}
+\begin{equation*}
+\frac{x + 5}{x(x^{2} + 3)} = \frac{A_{1}}{x} + \frac{A_{2}x + A_{3}}{x^{2} + 3}
+\end{equation*}
+</div>
+<div class="para">Note the linear term <span class="process-math">\(A_{2}x + A_{3}\)</span> above the quadratic!</div>
+</div> <div class="para logical">
+<div class="para">The rest of this computation goes like it did before. If we clear fractions, we get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x + 5 = A_{1}(x^{2} + 3) + A_{2}x^{2} + A_{3}x.
+\end{equation*}
+</div>
+<div class="para">If we plug in <span class="process-math">\(x = 0\text{,}\)</span> we obtain <span class="process-math">\(A_{1} = \frac{5}{3}\text{.}\)</span> At this point, we could plug in <span class="process-math">\(x = \sqrt{3}i\)</span> (which would be okay!) or differentiate both sides, but it might be easier to take the following approach: expand the right hand side and collect like terms to get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x + 5 = (A_{1} + A_{2})x^{2} + A_{3}x + 3A_{1}.
+\end{equation*}
 </div>
 </div> <div class="para logical">
-<div class="para">Now clear fractions to get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-2 = A_{1}y(y-1) + A_{2}(y-1) + A_{3}y^{2}.
-\end{equation*}
-</div>
-<div class="para">Setting <span class="process-math">\(y = 0\)</span> gives <span class="process-math">\(A_{2} = -2\text{,}\)</span> and setting <span class="process-math">\(y = 1\)</span> gives <span class="process-math">\(A_{3} = 2\text{.}\)</span> To find <span class="process-math">\(A_{1}\text{,}\)</span> we can expand the right hand side to write</div>
-<div class="displaymath process-math">
-\begin{equation*}
-2 = A_{1}y^{2} - A_{1}y + A_{2}y - A_{2} + A_{3}y^{2}.
-\end{equation*}
-</div>
-<div class="para">Hence <span class="process-math">\(A_{1} = -A_{3} = -2\text{.}\)</span>
-</div>
-</div> <div class="para logical">
-<div class="para">Therefore</div>
+<div class="para">For the right hand side to equal the left hand side, <span class="process-math">\(A_{1} + A_{2}\)</span> <em class="emphasis">must be zero</em>. Hence <span class="process-math">\(A_{2} = -A_{1} = -\frac{5}{3}\text{.}\)</span> Similarly, <span class="process-math">\(A_{3}\)</span> <em class="emphasis">must equal one</em>. Therefore</div>
 <div class="displaymath process-math">
 \begin{align*}
-\int\frac{2y^{4}}{y^{3} - y^{2} + y - 1}\,dy &amp; = \int\left[2y + 2 - \frac{2}{y} - \frac{2}{y^{2}} + \frac{2}{y - 1}\right]\,dy  \\
-&amp; = y^{2} + 2y - 2\ln|y| + \frac{2}{y} + 2\ln|y-1| + C. 
+\int\frac{x^{3} + 5x^{2}}{x^{5} + 3x^{3}}\,dx &amp; = \int\left[\frac{5/3}{x} + \frac{1 - \frac{5}{3}x}{x^{2} + 3}\right]\,dx \\
+&amp; = \frac{5}{3}\int\frac{1}{x}\,dx + \int\frac{1}{x^{2} + 3}\,dx - \frac{5}{3}\int\frac{x}{x^{2} + 3}\,dx \\
+&amp; = \frac{5}{3}\ln|x| + \frac{1}{\sqrt{3}}\tan^{-1}\frac{x}{\sqrt{3}} - \frac{5}{6}\ln(x^{2} + 3). 
 \end{align*}
 </div>
 </div>

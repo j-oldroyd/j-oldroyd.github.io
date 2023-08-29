@@ -87,7 +87,17 @@ window.MathJax = {
     )}
   }
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.7/pretext_search.css" rel="stylesheet" type="text/css">
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.7/pretext_search.css" rel="stylesheet" type="text/css">
 <script>js_version = 0.3</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.3/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.3/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.3/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -812,10 +822,21 @@ true);
 \end{align*}
 </div>
 </div></div>
+</div></article><div class="para" id="p-588">Trying to evaluate integrals of higher even powers of sine and cosine quickly becomes tedious and is a job best left to computer algebra systems (like Sage).</div>
+<article class="example example-like" id="example-using-sage-to-simplify-half-angle-expansion"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Using Sage to Simplify Half-Angle Expansion.</span>
+</h4>
+<div class="para" id="p-589">Evaluate <span class="process-math">\(\int \cos^8(x)\dd{x}\text{.}\)</span>
+</div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-120" id="solution-120"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-120"><div class="solution solution-like">
+<div class="para" id="p-590">We will need to use the half-angle identity for cosine three times before we can integrate. To help us do this we will make use of the <code class="code-inline tex2jax_ignore">.trig_reduce()</code> method in Sage:</div> <pre class="ptx-sagecell hidden-sagecell-sage" id="sage-6"><script type="text/x-sage">(cos(x)^8).trig_reduce().show()
+</script></pre> <div class="para" id="p-591">We can integrate this without too much trouble now (or even let Sage do the integral for us!).</div>
+</div></div>
 </div></article></section><section class="subsection" id="subsection-integrals-involving-powers-of-secant-and-tangent"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Integrals Involving Powers of Secant and Tangent</span>
 </h3>
-<div class="para logical" id="p-588">
+<div class="para logical" id="p-592">
 <div class="para">In contrast to those involving sine and cosine, all of the integrals here involving secant and tangent are solvable using substitution. Generally, we’ll attack these problems by separating a factor of <span class="process-math">\(\sec^{2}x\)</span> (in which case we use <span class="process-math">\(u = \tan x\)</span>) or a factor of <span class="process-math">\(\sec x\tan x\)</span> (in which case we use <span class="process-math">\(u = \sec x\)</span>). This will often be done using the <em class="emphasis">Pythagorean identity</em>
 </div>
 <div class="displaymath process-math">
@@ -832,20 +853,20 @@ true);
 </div>
 </div>
 <article class="example example-like" id="example-integrating-a-power-of-tangent"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating a Power of Tangent.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating a Power of Tangent.</span>
 </h4>
-<div class="para" id="p-589">Determine <span class="process-math">\(\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}}\tan^{6}w\,dw\text{.}\)</span>
+<div class="para" id="p-593">Determine <span class="process-math">\(\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}}\tan^{6}w\,dw\text{.}\)</span>
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-120" id="solution-120"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-120"><div class="solution solution-like">
-<div class="para logical" id="p-590">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-121" id="solution-121"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-121"><div class="solution solution-like">
+<div class="para logical" id="p-594">
 <div class="para">Our goal is to separate a factor of either <span class="process-math">\(\sec^{2}w\)</span> or <span class="process-math">\(\sec w\tan w\)</span> to serve as our <span class="process-math">\(du\text{.}\)</span> Since neither appears, we’ll use the Pythagorean identity to introduce a <span class="process-math">\(\sec^{2}w\)</span> into our integral:</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}}\tan^{6}w\,dw = \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}}\tan^{4}w\sec^{2}w\,dw - \int_{-\frac{\pi}{4}}^{\frac{\pi}{4}}\tan^{4}w\,dw.
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-591">
+</div> <div class="para logical" id="p-595">
 <div class="para">At this point the first integral can be solved using substitution, but the second integral needs to be rewritten again. However, the same trick we applied before works here too: just use the Pythagorean identity to introduce a factor of <span class="process-math">\(\sec^{2}w\text{.}\)</span> This gives</div>
 <div class="displaymath process-math" id="md-75">
 \begin{align*}
@@ -863,13 +884,13 @@ true);
 </div>
 </div></div>
 </div></article><article class="example example-like" id="example-integrating-a-product-of-tangent-and-secant"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating a Product of Tangent and Secant.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating a Product of Tangent and Secant.</span>
 </h4>
-<div class="para" id="p-592">Determine <span class="process-math">\(\int\tan x\sec^{3} x\,dx\)</span>
+<div class="para" id="p-596">Determine <span class="process-math">\(\int\tan x\sec^{3} x\,dx\)</span>
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-121" id="solution-121"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-121"><div class="solution solution-like">
-<div class="para" id="p-593">Here, we see that we can separate a factor of <span class="process-math">\(\tan x\sec x\)</span> from the integrand, so we’ll do that and use <span class="process-math">\(u = \sec x\text{:}\)</span>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-122" id="solution-122"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-122"><div class="solution solution-like">
+<div class="para" id="p-597">Here, we see that we can separate a factor of <span class="process-math">\(\tan x\sec x\)</span> from the integrand, so we’ll do that and use <span class="process-math">\(u = \sec x\text{:}\)</span>
 </div>
 <div class="displaymath process-math" id="md-76">
 \begin{align*}
@@ -879,22 +900,22 @@ true);
 \end{align*}
 </div>
 </div></div>
-</div></article><div class="para logical" id="p-594">
+</div></article><div class="para logical" id="p-598">
 <div class="para">In general, try to follow the guidelines below when integrating products of secant and tangent:</div>
 <ul class="disc">
 <li id="li-50"><div class="para" id="p-derived-li-50">If the power of secant is <em class="emphasis">even</em>, then separate a factor of <span class="process-math">\(\sec^{2}x\)</span> and use <span class="process-math">\(u = \tan x\text{,}\)</span> along with the Pythagorean identity if necessary.</div></li>
 <li id="li-51"><div class="para" id="p-derived-li-51">If the power of tangent is <em class="emphasis">odd</em>, then separate a factor of <span class="process-math">\(\sec x\tan x\)</span> and use <span class="process-math">\(u = \sec x\text{,}\)</span> along with the Pythagorean identity if necessary.</div></li>
 </ul>
 </div>
-<div class="para" id="p-595">Now, for an example that does not fall into the above guidelines.</div>
+<div class="para" id="p-599">Now, for an example that does not fall into the above guidelines.</div>
 <article class="example example-like" id="example-integrating-secant-cubed"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating Secant Cubed.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Integrating Secant Cubed.</span>
 </h4>
-<div class="para" id="p-596">Determine <span class="process-math">\(\int\sec^{3}x\,dx\text{.}\)</span>
+<div class="para" id="p-600">Determine <span class="process-math">\(\int\sec^{3}x\,dx\text{.}\)</span>
 </div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-122" id="solution-122"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-122"><div class="solution solution-like">
-<div class="para logical" id="p-597">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-123" id="solution-123"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-123"><div class="solution solution-like">
+<div class="para logical" id="p-601">
 <div class="para">We’re dealing with an odd power of secant, so splitting off a factor of <span class="process-math">\(\sec^{2}x\)</span> won’t help here. We also lack a <span class="process-math">\(\tan x\)</span> term, so splitting off a factor of <span class="process-math">\(\sec x\tan x\)</span> is tricky as well. We’ll try integrating by parts instead, with</div>
 <div class="displaymath process-math" id="md-77">
 \begin{align*}
@@ -911,7 +932,7 @@ dv &amp; = \sec^{2}x\,dx &amp; v &amp; = \tan x
 &amp; = \sec x\tan x - \int\sec^{3}x\,dx + \ln|\sec x + \tan x| 
 \end{align*}
 </div>
-<div class="para logical" id="p-598">
+<div class="para logical" id="p-602">
 <div class="para">Therefore</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -923,7 +944,7 @@ dv &amp; = \sec^{2}x\,dx &amp; v &amp; = \tan x
 </div></article></section><section class="subsection" id="subsection-trigonometric-substitutions"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Trigonometric Substitutions</span>
 </h3>
-<div class="para logical" id="p-599">
+<div class="para logical" id="p-603">
 <div class="para">An ellipse with horizontal axis length <span class="process-math">\(a\)</span> and vertical axis length <span class="process-math">\(b\)</span> centered at the origin is given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -939,7 +960,7 @@ dv &amp; = \sec^{2}x\,dx &amp; v &amp; = \tan x
 </div>
 <div class="para">This integral is difficult to solve due to the square root in the integrand; it’s tough to imagine what an antiderivative might be. So what we’ll try to do is to use a "reverse substitution" that simplifies the square root.</div>
 </div>
-<div class="para logical" id="p-600">
+<div class="para logical" id="p-604">
 <div class="para">To do so, notice that the Pythagorean identity gives <span class="process-math">\(\cos^{2}\theta = 1 - \sin^{2}\theta\text{.}\)</span> Taking the square root of the left hand side is much easier here than taking a root of the right hand side. So we’ll try that substitution here: let</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/example-integrating-even-powers-of-cosine.html" id="md-79">
 \begin{align*}
@@ -967,8 +988,8 @@ dx &amp; = a\cos\theta\,d\theta
 \end{equation*}
 </div>
 </div>
-<div class="para" id="p-601">This method is known as <dfn class="terminology">trigonometric substitution</dfn>, and is useful for simplifying radicals. <a href="" class="xref" data-knowl="./knowl/table-trig-substitutions.html" title="Table 7.2.7: Trigonometric substitutions">Table 7.2.7</a> shows the various substitutions that can be used.</div>
-<figure class="table table-like" id="table-trig-substitutions"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">7.2.7<span class="period">.</span></span><span class="space"> </span>Trigonometric substitutions</figcaption><div class="tabular-box natural-width"><table class="tabular">
+<div class="para" id="p-605">This method is known as <dfn class="terminology">trigonometric substitution</dfn>, and is useful for simplifying radicals. <a href="" class="xref" data-knowl="./knowl/table-trig-substitutions.html" title="Table 7.2.8: Trigonometric substitutions">Table 7.2.8</a> shows the various substitutions that can be used.</div>
+<figure class="table table-like" id="table-trig-substitutions"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">7.2.8<span class="period">.</span></span><span class="space"> </span>Trigonometric substitutions</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="c m b1 r0 l0 t3 lines">radical</td>
 <td class="c m b1 r0 l0 t3 lines">substitution</td>
@@ -990,20 +1011,20 @@ dx &amp; = a\cos\theta\,d\theta
 <td class="c m b3 r0 l0 t0 lines"><span class="process-math">\(\sec^{2}\theta = 1+\tan^{2}\theta\)</span></td>
 </tr>
 </table></div></figure><article class="example example-like" id="example-an-exponential-integral"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">An Exponential Integral.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">An Exponential Integral.</span>
 </h4>
-<div class="para" id="p-602">Determine <span class="process-math">\(\displaystyle\int\frac{e^{t}}{(4 + e^{2t})^{3/2}}\,dt.\)</span>
-</div> <aside class="aside aside-like" id="aside-15"><div class="para" id="p-603">This is adapted from <em class="emphasis">Thomas’ Calculus, <span class="process-math">\(11^{\text{th}}\)</span> edition, exercise 30 on page 591.</em>
+<div class="para" id="p-606">Determine <span class="process-math">\(\displaystyle\int\frac{e^{t}}{(4 + e^{2t})^{3/2}}\,dt.\)</span>
+</div> <aside class="aside aside-like" id="aside-15"><div class="para" id="p-607">This is adapted from <em class="emphasis">Thomas’ Calculus, <span class="process-math">\(11^{\text{th}}\)</span> edition, exercise 30 on page 591.</em>
 </div></aside><div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-123" id="solution-123"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-123"><div class="solution solution-like">
-<div class="para logical" id="p-604">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-124" id="solution-124"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-124"><div class="solution solution-like">
+<div class="para logical" id="p-608">
 <div class="para">Even though this integral involves only exponentials, we can simplify it using trigonometric substitution due to the presence of the radical. First, we’ll use <span class="process-math">\(u\)</span>-substitution to rewrite the integral into a form more suitable for trigonometric substitution: with <span class="process-math">\(u = e^{t}\)</span> and <span class="process-math">\(du = e^{t}\,dt\text{,}\)</span> we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \int\frac{e^{t}}{(4 + e^{2t})^{3/2}}\,dt = \int\frac{du}{(4 + u^{2})^{3/2}}.
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-605">
+</div> <div class="para logical" id="p-609">
 <div class="para">The appearance of <span class="process-math">\(4 + u^{2}\)</span> in the denominator suggests that we use a tangent substitution, namely, <span class="process-math">\(u = 2\tan\theta\text{.}\)</span> Then <span class="process-math">\(du = 2\sec^{2}\theta\,d\theta\text{,}\)</span> and we get</div>
 <div class="displaymath process-math" id="md-81">
 \begin{align*}

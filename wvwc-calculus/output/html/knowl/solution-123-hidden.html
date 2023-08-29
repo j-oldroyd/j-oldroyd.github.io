@@ -12,27 +12,27 @@
 </head>
 <body class="ignore-math"><div class="solution solution-like">
 <div class="para logical">
-<div class="para">Even though this integral involves only exponentials, we can simplify it using trigonometric substitution due to the presence of the radical. First, we’ll use <span class="process-math">\(u\)</span>-substitution to rewrite the integral into a form more suitable for trigonometric substitution: with <span class="process-math">\(u = e^{t}\)</span> and <span class="process-math">\(du = e^{t}\,dt\text{,}\)</span> we get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\int\frac{e^{t}}{(4 + e^{2t})^{3/2}}\,dt = \int\frac{du}{(4 + u^{2})^{3/2}}.
-\end{equation*}
-</div>
-</div> <div class="para logical">
-<div class="para">The appearance of <span class="process-math">\(4 + u^{2}\)</span> in the denominator suggests that we use a tangent substitution, namely, <span class="process-math">\(u = 2\tan\theta\text{.}\)</span> Then <span class="process-math">\(du = 2\sec^{2}\theta\,d\theta\text{,}\)</span> and we get</div>
+<div class="para">We’re dealing with an odd power of secant, so splitting off a factor of <span class="process-math">\(\sec^{2}x\)</span> won’t help here. We also lack a <span class="process-math">\(\tan x\)</span> term, so splitting off a factor of <span class="process-math">\(\sec x\tan x\)</span> is tricky as well. We’ll try integrating by parts instead, with</div>
 <div class="displaymath process-math">
 \begin{align*}
-\int\frac{du}{(4 + u^{2})^{3/2}} &amp; = \int\frac{2\sec^{2}\theta}{4^{3/2}(1 + \tan^{2}\theta)^{3/2}}\,d\theta \\
-&amp; = \frac{1}{4}\int\cos\theta\,d\theta \\
-&amp; = \frac{1}{4}\sin\theta + C \\
-&amp; = \frac{1}{4}\sin\arctan\frac{u}{2} + C \\
-&amp; = \frac{1}{4}\sin\arctan\frac{e^{t}}{2} + C 
+u &amp; = \sec x &amp; du &amp; = \sec x\tan x\,dx\\
+dv &amp; = \sec^{2}x\,dx &amp; v &amp; = \tan x 
 \end{align*}
 </div>
-<div class="para">Using triangles, we can simplify this further to get</div>
+<div class="para">This gives</div>
+</div>
+<div class="displaymath process-math">
+\begin{align*}
+\int\sec^{3}x\,dx &amp; = \sec x\tan x - \int \sec x\tan^{2}x\,dx \\
+&amp; = \sec x\tan x - \int\sec^{3}x\,dx + \int\sec x\,dx \\
+&amp; = \sec x\tan x - \int\sec^{3}x\,dx + \ln|\sec x + \tan x| 
+\end{align*}
+</div>
+<div class="para logical">
+<div class="para">Therefore</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\int\frac{e^{t}}{(4 + e^{2t})^{3/2}}\,dt = \frac{e^{t}}{4\sqrt{4 + e^{2t}}} + C.
+\int\sec^{3}x\,dx = \frac{1}{2}(\sec x\tan x + \ln|\sec x + \tan x|) + C.
 \end{equation*}
 </div>
 </div>

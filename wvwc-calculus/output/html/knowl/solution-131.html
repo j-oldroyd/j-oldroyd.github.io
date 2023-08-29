@@ -13,18 +13,27 @@
 <body class="ignore-math">
 <div class="solution solution-like">
 <h4 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">7.4.6.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">7.4.5.1</span><span class="period">.</span>
 </h4>
 <div class="para logical">
-<div class="para">We can solve this using integration by parts. Doing so, we get</div>
+<div class="para">The area under <span class="process-math">\(f(x)\)</span> is given by <span class="process-math">\(\int_{-\infty}^{\infty}xe^{-x^{2}}\text{.}\)</span> To evaluate this integral, we must split it into two improper integrals:</div>
 <div class="displaymath process-math">
 \begin{align*}
-k\int_{0}^{\infty}te^{-kt}\,dt &amp; = -\lim_{b\to\infty}\left[te^{-kt} + \frac{1}{k}e^{-kt}\right]_{0}^{b} \\
-&amp; = \frac{1}{k} 
+\int_{-\infty}^{\infty}xe^{-x^{2}}\,dx &amp; = \int_{-\infty}^{0}xe^{-x^{2}}\,dx + \int_{0}^{\infty}xe^{-x^{2}}\,dx \\
+&amp; = \lim_{a\to\-\infty}\int_{a}^{0}xe^{-x^{2}}\,dx + \lim_{b\to\infty}\int_{0}^{b}xe^{-x^{2}}\,dx 
 \end{align*}
 </div>
-<div class="para">This can be verified using the code cell below.</div>
+</div> <div class="para logical">
+<div class="para">At this point, we can use <span class="process-math">\(u\)</span>-substitution to find each integral, using <span class="process-math">\(u = -x^{2}\)</span> and <span class="process-math">\(du = -2x\,dx\text{.}\)</span> So we get</div>
+<div class="displaymath process-math">
+\begin{align*}
+\lim_{a\to\-\infty}\int_{a}^{0}xe^{-x^{2}}\,dx + \lim_{b\to\infty}\int_{0}^{b}xe^{-x^{2}} &amp; = \lim_{a\to\-\infty}\int_{-a^{2}}^{0}\frac{-e^{u}}{2}\,du + \lim_{b\to\infty}\int_{0}^{-b^{2}}\frac{-e^{u}}{2}\,du \\
+&amp; = \lim_{a\to-\infty}\left[-\frac{1}{2} + \frac{e^{-a^{2}}}{2}\right] + \lim_{b\to\infty}\left[-\frac{e^{-b^{2}}}{2} + \frac{1}{2}\right]\\
+&amp; = \lim_{a\to\infty}\frac{e^{-a^{2}}}{2} - \lim_{b\to\infty}\frac{e^{-b^{2}}}{2} \\
+&amp; = 0. 
+\end{align*}
 </div>
+</div> <div class="para">Hence the area under <span class="process-math">\(f(x)\)</span> is <span class="process-math">\(0\)</span> (which might not be so surprising if you graph <span class="process-math">\(f(x)\)</span>).</div>
 </div>
 <span class="incontext"><a href="section-improper-integrals.html#solution-131" class="internal">in-context</a></span>
 </body>
