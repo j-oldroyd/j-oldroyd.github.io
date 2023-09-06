@@ -5,7 +5,7 @@
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
 <!--********************************************-->
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WVWC-DE Non-homogeneous Linear ODEs with Constant Coefficients</title>
@@ -15,20 +15,38 @@
 <meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
   },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
             document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
                 var display = !!node.type.match(/; *mode=display/);
                 var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
@@ -38,47 +56,197 @@ window.MathJax = {
                 math.end = {node: text, delim: '', n: 0};
                 doc.math.push(math);
             });
-        }, '']
-    },
+        },
+        ""
+      ]
+    }
   },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
   },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "https://pretextbook.org/js/lib"
+    }
   },
-  startup: {
+  "startup": {
     pageReady() {
       return MathJax.startup.defaultPageReady().then(function () {
       console.log("in ready function");
       rsMathReady();
       }
     )}
-},
+  }
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
 // Their results will be linked, only within language type
-sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
-                       linked: true,
-                       languages: ['sage'],
-                       evalButtonText: 'Evaluate (Sage)'});
-</script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
-<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
-</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.7/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.3</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.3/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.3/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.3/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.7/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/setcolors.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" class="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms" class="searchterms"></span>
+</h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="name">Index</span></a><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="avatarbutton" class="avatarbutton name">You!</span><div id="preferences_menu_holder" class="preferences_menu_holder hidden"><ol id="preferences_menu" class="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden avatar">
+<li data-val="You!" tabindex="-1">
+<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+<li data-val="😺" tabindex="-1">
+<span id="the😺" class="avatarcheck"></span>😺</li>
+<li data-val="👤" tabindex="-1">
+<span id="the👤" class="avatarcheck"></span>👤</li>
+<li data-val="👽" tabindex="-1">
+<span id="the👽" class="avatarcheck"></span>👽</li>
+<li data-val="🐶" tabindex="-1">
+<span id="the🐶" class="avatarcheck"></span>🐶</li>
+<li data-val="🐼" tabindex="-1">
+<span id="the🐼" class="avatarcheck"></span>🐼</li>
+<li data-val="🌈" tabindex="-1">
+<span id="the🌈" class="avatarcheck"></span>🌈</li>
+</ol>
+</li>
+<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fontfamily">
+<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
+<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
+<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+</ol>
+</li>
+<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fonts">
+<li>Size</li>
+<li><span id="thesize">12</span></li>
+<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
+<li>Width</li>
+<li><span id="thewdth">100</span></li>
+<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+<li>Weight</li>
+<li><span id="thewght">400</span></li>
+<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+<li>Letter spacing</li>
+<li>
+<span id="thelspace">0</span><span class="byunits">/200</span>
+</li>
+<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+<li>Word spacing</li>
+<li>
+<span id="thewspace">0</span><span class="byunits">/50</span>
+</li>
+<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
+<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
+<li>Line Spacing</li>
+<li>
+<span id="theheight">135</span><span class="byunits">/100</span>
+</li>
+<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
+<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
+</ol>
+</li>
+<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden atmosphere">
+<li data-val="default" tabindex="-1">
+<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+<li data-val="pastel" tabindex="-1">
+<span id="thepastel" class="atmospherecheck"></span>pastel</li>
+<li data-val="darktwilight" tabindex="-1">
+<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+<li data-val="dark" tabindex="-1">
+<span id="thedark" class="atmospherecheck"></span>dark</li>
+<li data-val="darkmidnight" tabindex="-1">
+<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
+</ol>
+</li>
+<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden ruler">
+<li data-val="none" tabindex="-1">
+<span id="thenone" class="rulercheck">✔️</span>none</li>
+<li data-val="underline" tabindex="-1">
+<span id="theunderline" class="rulercheck"></span>underline</li>
+<li data-val="lunderline" tabindex="-1">
+<span id="thelunderline" class="rulercheck"></span>L-underline</li>
+<li data-val="greybar" tabindex="-1">
+<span id="thegreybar" class="rulercheck"></span>grey bar</li>
+<li data-val="lightbox" tabindex="-1">
+<span id="thelightbox" class="rulercheck"></span>light box</li>
+<li data-val="sunrise" tabindex="-1">
+<span id="thesunrise" class="rulercheck"></span>sunrise</li>
+<li data-val="sunriseunderline" tabindex="-1">
+<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
+<li class="moveQ">Motion by:</li>
+<li data-val="mouse" tabindex="-1">
+<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+<li data-val="arrow" tabindex="-1">
+<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+<li data-val="eye" tabindex="-1">
+<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
+</ol>
+</li>
+</ol></div></button><span class="treebuttons"><a class="previous-button button" href="section-homogeneous-linear-odes-with-constant-coefficients.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="higher-order-linear-odes.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="systems-of-odes.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" class="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -121,191 +289,309 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \definecolor{fillinmathshade}{gray}{0.9}
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
-<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
-<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline">Jesse Oldroyd</p>
-</div>
-<div class="searchbox"><div class="searchwidget">
-<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
-</div></div>
-<div id="searchresultsplaceholder" style="display: none">
-<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
-</h2>
-<ol id="searchresults"></ol>
-</div>
-</div></div>
-<nav id="primary-navbar" class="navbar"><div class="container">
-<div class="navbar-top-buttons">
-<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
-<script>
-var ggbApp = new GGBApplet({"appName": "graphing",
-    "width": 330,
-    "height": 600,
-    "showToolBar": true,
-    "showAlgebraInput": true,
-    "perspective": "G/A",
-    "algebraInputPosition": "bottom",
-    "scaleContainerClass": "calculator-container",
-    "allowUpscale": true,
-    "autoHeight": true,
-    "disableAutoScale": false},
-true);
-</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-homogeneous-linear-odes-with-constant-coefficients.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="higher-order-linear-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="systems-of-odes.html" title="Next">Next</a></span>
-</div>
-</div>
-<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
-<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-homogeneous-linear-odes-with-constant-coefficients.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="higher-order-linear-odes.html" title="Up">Up</a><a class="next-button button toolbar-item" href="systems-of-odes.html" title="Next">Next</a>
-</div>
-</div></nav></header><div class="page">
-<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
-<nav id="toc"><ul>
-<li class="link frontmatter">
-<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
-<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
-<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
-<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 parts"><ul class="structural">
+<li>
+<div class="toc-item"><a href="front.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li><div class="toc-item"><a href="author-bio-JEO.html" class="internal"><span class="title">Author Biography</span></a></div></li>
+<li><div class="toc-item"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li>
 </ul>
 </li>
-<li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations" class="internal">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields" class="internal">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution" class="internal">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes" class="internal">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions" class="internal">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations" class="internal">Population Models and Autonomous Equations</a></li>
+<li>
+<div class="toc-item"><a href="part-odes.html" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="intro-to-odes.html" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-ordinary-differential-equations.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-ordinary-differential-equations.html#subsection-basic-concepts-for-odes" class="internal"><span class="title">Basic Concepts</span></a></div></li>
+<li><div class="toc-item"><a href="section-ordinary-differential-equations.html#subsection-mathematical-models" class="internal"><span class="title">Mathematical Models</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes" class="internal">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients" class="internal">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models" class="internal">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations" class="internal">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance" class="internal">Forced Oscillations and Resonance</a></li>
+<li>
+<div class="toc-item"><a href="section-direction-fields.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Direction Fields</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-direction-fields.html#subsection-direction-fields-and-solution-curves" class="internal"><span class="title">Direction Fields and Solution Curves</span></a></div></li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-separable-odes-and-substitution.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Separable ODEs and Substitution</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-separable-odes-and-substitution.html#subsection-separable-odes" class="internal"><span class="title">Separable ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-separable-odes-and-substitution.html#subsection-substitution-methods" class="internal"><span class="title">Substitution Methods</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients" class="internal">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients" class="active">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li>
+<div class="toc-item"><a href="section-first-order-linear-odes.html" class="internal"><span class="codenumber">1.4</span> <span class="title">First-Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-first-order-linear-odes.html#subsection-integrating-factors" class="internal"><span class="title">Integrating Factors</span></a></div></li>
+<li><div class="toc-item"><a href="section-first-order-linear-odes.html#subsection-applications" class="internal"><span class="title">Applications</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models" class="internal">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane" class="internal">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability" class="internal">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems" class="internal">Nonlinear Systems</a></li>
+<li>
+<div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Existence and Uniqueness of Solutions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-existence-and-uniqueness-theorem" class="internal"><span class="title">Existence and Uniqueness Theorem</span></a></div></li>
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-picard-iteration" class="internal"><span class="title">Picard Iteration</span></a></div></li>
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-euler-s-method" class="internal"><span class="title">Euler’s Method</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method" class="internal">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials" class="internal">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method" class="internal">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation" class="internal">Bessel's Equation</a></li>
+<li>
+<div class="toc-item"><a href="section-population-models-and-autonomous-equations.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Population Models and Autonomous Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-population-equations" class="internal"><span class="title">Population Equations</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-the-logistic-equation" class="internal"><span class="title">The Logistic Equation</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#section-stability-of-solutions" class="internal"><span class="title">Stability of Solutions</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-linear-stability-analysis" class="internal"><span class="title">Linear Stability Analysis</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform" class="internal">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems" class="internal">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting" class="internal">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions" class="internal">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products" class="internal">Convolution Products</a></li>
 </ul>
 </li>
-<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series" class="internal">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions" class="internal">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity" class="internal">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials" class="internal">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform" class="internal">The Fourier Transform</a></li>
+<li>
+<div class="toc-item"><a href="linear-odes-constant-coefficients.html" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-second-order-linear-odes.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Second-Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-second-order-linear-odes.html#subsection-types-of-linear-odes" class="internal"><span class="title">Types of Linear ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-second-order-linear-odes.html#subsection-solutions-of-second-order-linear-ODEs" class="internal"><span class="title">Solutions of Second-Order Linear ODEs</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts" class="internal">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables" class="internal">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation" class="internal">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation" class="internal">The Heat Equation</a></li>
+<li><div class="toc-item"><a href="section-homogeneous-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Homogeneous ODEs with Constant Coefficients</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-spring-mass-models.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Spring-Mass Models</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-spring-mass-models.html#subsection-free-undamped-motion" class="internal"><span class="title">Free Undamped Motion</span></a></div></li>
+<li><div class="toc-item"><a href="section-spring-mass-models.html#subsection-free-damped-motion" class="internal"><span class="title">Free Damped Motion</span></a></div></li>
 </ul>
 </li>
-<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
-<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
-</div></div>
-<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-non-homogeneous-linear-odes-with-constant-coefficients"><h2 class="heading hide-type">
+<li>
+<div class="toc-item"><a href="section-solutions-of-nonhomogeneous-equations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Solutions of Non-homogeneous Equations</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-solutions-of-nonhomogeneous-equations.html#subsection-the-method-of-undetermined-coefficients" class="internal"><span class="title">The Method of Undetermined Coefficients</span></a></div></li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-forced-oscillations-and-resonance.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Forced Oscillations and Resonance</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-forced-oscillations-and-resonance.html#subsection-undamped-systems" class="internal"><span class="title">Undamped Systems</span></a></div></li>
+<li><div class="toc-item"><a href="section-forced-oscillations-and-resonance.html#subsection-damped-systems" class="internal"><span class="title">Damped Systems</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="higher-order-linear-odes.html" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Homogeneous Linear ODEs with Constant Coefficients</span></a></div></li>
+<li class="active"><div class="toc-item"><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Non-homogeneous Linear ODEs with Constant Coefficients</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="systems-of-odes.html" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-systems-of-odes-as-models.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Systems of ODEs as Models</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Constant Coefficient Systems and the Phase Plane</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solutions-of--vec-x-a-vec-x-m-" class="internal"><span class="title">Solutions of <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span></span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-finding-eigenvalues-and-eigenvectors" class="internal"><span class="title">Finding Eigenvalues and Eigenvectors</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solving-matrix-odes" class="internal"><span class="title">Solving Matrix ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-applications-of-matrix-odes" class="internal"><span class="title">Applications of Matrix ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-the-phase-plane" class="internal"><span class="title">The Phase Plane</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-criteria-for-critical-points-stability.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Criteria for Critical Points; Stability</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-nonlinear-systems.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Nonlinear Systems</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-nonlinear-systems.html#subsection-classification-of-critical-points-and-linearization" class="internal"><span class="title">Classification of Critical Points and Linearization</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="series-solutions.html" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-power-series-method.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Power Series Method</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Legendre’s Equation and Legendre Polynomials</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-solving-the-legendre-equation" class="internal"><span class="title">Solving the Legendre Equation</span></a></div></li>
+<li><div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-legendre-polynomials" class="internal"><span class="title">Legendre Polynomials</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-frobenius-method.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Frobenius Method</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-frobenius-method.html#subsection-regular-points-and-singular-points" class="internal"><span class="title">Regular Points and Singular Points</span></a></div></li>
+<li><div class="toc-item"><a href="section-frobenius-method.html#subsection-solutions-at-singular-points-and-indicial-equations" class="internal"><span class="title">Solutions at Singular Points and Indicial Equations</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-bessel-s-equation.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Bessel’s Equation</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-bessel-functions-for-integer--nu-" class="internal"><span class="title">Bessel Functions for Integer <span class="process-math">\(\nu\)</span></span></a></div></li>
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-bessel-functions-of-the-first-kind-for-nonnegative-order" class="internal"><span class="title">Bessel Functions of the First Kind for Nonnegative Order</span></a></div></li>
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-general-solution-of-bessel-s-equation" class="internal"><span class="title">General Solution of Bessel’s Equation</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="laplace-transforms.html" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-the-laplace-transform.html" class="internal"><span class="codenumber">6.1</span> <span class="title">The Laplace Transform</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-laplace-transform.html#subsection-definition-and-basic-properties" class="internal"><span class="title">Definition and Basic Properties</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-laplace-transform.html#subsection-the-inverse-laplace-transform-m-s--shifting" class="internal"><span class="title">The Inverse Laplace Transform; <span class="process-math">\(s\)</span>-shifting</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-transformation-of-initial-value-problems.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Transformation of Initial Value Problems</span></a></div></li>
+<li><div class="toc-item"><a href="section-unit-step-functions-and-time-shifting.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Unit Step Functions and Time Shifting</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-dirac-delta-functions.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Dirac Delta Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-dirac-delta-functions.html#subsection-impulses" class="internal"><span class="title">Impulses</span></a></div></li>
+<li><div class="toc-item"><a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="internal"><span class="title">Dirac Delta Models</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-convolution-products.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Convolution Products</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="part-pdes.html" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="fourier-analysis.html" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-fourier-series.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Fourier Series</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-fourier-series.html#subsection-fourier-periodic-functions" class="internal"><span class="title">Periodic Functions</span></a></div></li>
+<li><div class="toc-item"><a href="section-fourier-series.html#subsection-fourier-periodic-trigonometric-and-fourier-series" class="internal"><span class="title">Trigonometric Series and Fourier Series</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Functions of Arbitrary Period; Even and Odd Extensions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html#subsection-fourier-series-of-functions-of-arbitrary-period" class="internal"><span class="title">Fourier Series of Functions of Arbitrary Period</span></a></div></li>
+<li><div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html#subsection-even-and-odd-extensions" class="internal"><span class="title">Even and Odd Extensions</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Complex Fourier Series and Parseval’s Identity</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html#subsection-complex-fourier-series" class="internal"><span class="title">Complex Fourier Series</span></a></div></li>
+<li><div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html#subsection-parseval-s-identity" class="internal"><span class="title">Parseval’s Identity</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-approximation-by-trigonometric-polynomials.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Approximation by Trigonometric Polynomials</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-fourier-transform.html" class="internal"><span class="codenumber">7.5</span> <span class="title">The Fourier Transform</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="partial-differential-equations.html" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-basic-concepts.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Basic Concepts</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-partial-derivatives-and-pdes" class="internal"><span class="title">Partial derivatives and PDEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-linear-homogeneous-pdes-and-the-superposition-principle" class="internal"><span class="title">Linear homogeneous PDEs and the superposition principle</span></a></div></li>
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-important-pdes" class="internal"><span class="title">Important PDEs</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-wave-equation-and-separation-of-variables.html" class="internal"><span class="codenumber">8.2</span> <span class="title">The Wave Equation and Separation of Variables</span></a></div></li>
+<li><div class="toc-item"><a href="section-d-alembert-s-solution-of-the-wave-equation.html" class="internal"><span class="codenumber">8.3</span> <span class="title">d’Alembert’s Solution of the Wave Equation</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-the-heat-equation.html" class="internal"><span class="codenumber">8.4</span> <span class="title">The Heat Equation</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-the-heat-equation.html#subsection-bar-with-ends-fixed-at-" class="internal"><span class="title">Bar with ends fixed at <span class="process-math">\(0\)</span></span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li><div class="toc-item"><a href="index-1.html" class="internal"><span class="title">Index</span></a></div></li>
+<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-non-homogeneous-linear-odes-with-constant-coefficients"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">3.2</span> <span class="title">Non-homogeneous Linear ODEs with Constant Coefficients</span>
 </h2>
-<p id="p-287">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution <span class="process-math">\(y_{c}\)</span> and then a corresponding particular solution <span class="process-math">\(y_{p}\text{.}\)</span> The general solution was then <span class="process-math">\(y=y_{c}+y_{p}\text{.}\)</span> <span class="process-math">\(y_{c}\)</span> was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find <span class="process-math">\(y_{p}\text{.}\)</span> Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</p>
-<article class="example example-like" id="example-46"><h3 class="heading">
+<div class="para" id="p-292">For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution <span class="process-math">\(y_{c}\)</span> and then a corresponding particular solution <span class="process-math">\(y_{p}\text{.}\)</span> The general solution was then <span class="process-math">\(y=y_{c}+y_{p}\text{.}\)</span> <span class="process-math">\(y_{c}\)</span> was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find <span class="process-math">\(y_{p}\text{.}\)</span> Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.</div>
+<article class="example example-like" id="example-47"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.1</span><span class="period">.</span>
 </h3>
-<p id="p-288">Find the general solution of</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-293">
+<div class="para">Find the general solution of</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y^{(3)}-y' = \sinh 2x.
 \end{equation*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-43" id="solution-43"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-43"><div class="solution solution-like">
-<p id="p-289">The general solution takes the form <span class="process-math">\(y = y_{c}+y_{p}\text{,}\)</span> where <span class="process-math">\(y_{c}\)</span> is a solution of the associated homogeneous equation <span class="process-math">\(y^{(3)}-y'=0\)</span> and <span class="process-math">\(y_{p}\)</span> is a single solution of the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\text{.}\)</span> Since the characteristic equation of <span class="process-math">\(y^{(3)}-y'=0\)</span> is <span class="process-math">\(r^{3}-r=0\text{,}\)</span> we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
+<div class="para logical" id="p-294">
+<div class="para">The general solution takes the form <span class="process-math">\(y = y_{c}+y_{p}\text{,}\)</span> where <span class="process-math">\(y_{c}\)</span> is a solution of the associated homogeneous equation <span class="process-math">\(y^{(3)}-y'=0\)</span> and <span class="process-math">\(y_{p}\)</span> is a single solution of the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\text{.}\)</span> Since the characteristic equation of <span class="process-math">\(y^{(3)}-y'=0\)</span> is <span class="process-math">\(r^{3}-r=0\text{,}\)</span> we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y_{c} = c_{1}+c_{2}e^{x}+c_{3}e^{-x} = c_{1}+A\cosh x+B\sinh x.
 \end{equation*}
 </div>
-<p class="continuation">Now we'll find <span class="process-math">\(y_{p}\text{.}\)</span> Since the right hand side of the ODE is <span class="process-math">\(\sinh 2x\text{,}\)</span> a good initial guess would be <span class="process-math">\(y_{p} = C\sinh 2x\text{.}\)</span> However, when we take this guess and plug it into the ODE, we'll start seeing terms involving <span class="process-math">\(\cosh 2x\)</span> as well (since <span class="process-math">\(\frac{d}{dx}\sinh 2x = 2\cosh 2x\)</span>) so this means we'll want to include <span class="process-math">\(\cosh 2x\)</span> into our guess for <span class="process-math">\(y_{p}\)</span> also. So we'll modify our guess to be <span class="process-math">\(y_{p} = C\cosh 2x+D\sinh 2x\text{.}\)</span></p>
-<p id="p-290">Since our guess for <span class="process-math">\(y_{p}\)</span> doesn't overlap with <span class="process-math">\(y_{c}\text{,}\)</span> we can proceed with plugging our guess into the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\)</span> and equating coefficients, just as we did before.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-23">
+<div class="para">Now we’ll find <span class="process-math">\(y_{p}\text{.}\)</span> Since the right hand side of the ODE is <span class="process-math">\(\sinh 2x\text{,}\)</span> a good initial guess would be <span class="process-math">\(y_{p} = C\sinh 2x\text{.}\)</span> However, when we take this guess and plug it into the ODE, we’ll start seeing terms involving <span class="process-math">\(\cosh 2x\)</span> as well (since <span class="process-math">\(\frac{d}{dx}\sinh 2x = 2\cosh 2x\)</span>) so this means we’ll want to include <span class="process-math">\(\cosh 2x\)</span> into our guess for <span class="process-math">\(y_{p}\)</span> also. So we’ll modify our guess to be <span class="process-math">\(y_{p} = C\cosh 2x+D\sinh 2x\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-295">
+<div class="para">Since our guess for <span class="process-math">\(y_{p}\)</span> doesn’t overlap with <span class="process-math">\(y_{c}\text{,}\)</span> we can proceed with plugging our guess into the original ODE <span class="process-math">\(y^{(3)}-y'=\sinh 2x\)</span> and equating coefficients, just as we did before.</div>
+<div class="displaymath process-math" id="md-24">
 \begin{align*}
 \sinh 2x \amp= y^{(3)}_{p}-y'_{p}\\
 \amp= \parens{8C\sinh2x+8D\cosh2x}-\parens{2C\sinh2x+2D\cosh2x}\\
 \amp= 6C\sinh2x+6D\cosh2x.
 \end{align*}
 </div>
-<p class="continuation">So we get <span class="process-math">\(C = \frac{1}{6}\)</span> and <span class="process-math">\(D=0\text{,}\)</span> which means that <span class="process-math">\(y_{p} = \frac{1}{6}\cosh2x\text{.}\)</span> When solving for <span class="process-math">\(y_{p}\text{,}\)</span> always remember to plug the values you find back into the guess for <span class="process-math">\(y_{p}\)</span> that you used! So the general solution of the ODE is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">So we get <span class="process-math">\(C = \frac{1}{6}\)</span> and <span class="process-math">\(D=0\text{,}\)</span> which means that <span class="process-math">\(y_{p} = \frac{1}{6}\cosh2x\text{.}\)</span> When solving for <span class="process-math">\(y_{p}\text{,}\)</span> always remember to plug the values you find back into the guess for <span class="process-math">\(y_{p}\)</span> that you used! So the general solution of the ODE is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y = c_{1}+A\cosh x+B\sinh x+\frac{1}{6}\cosh2x.
 \end{equation*}
 </div>
+</div>
 </div></div>
-</div></article><p id="p-291">Just as before, we also need to worry about overlaps.</p>
-<article class="example example-like" id="example-47"><h3 class="heading">
+</div></article><div class="para" id="p-296">Just as before, we also need to worry about overlaps.</div>
+<article class="example example-like" id="example-48"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.2</span><span class="period">.</span>
 </h3>
-<p id="p-292">Find the appropriate form of <span class="process-math">\(x_{p}\)</span> for the ODE</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-297">
+<div class="para">Find the appropriate form of <span class="process-math">\(x_{p}\)</span> for the ODE</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t} = 5t-3t^{2}+e^{-t}\cos2t-3t\sin2t.
 \end{equation*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-44" id="solution-44"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-44"><div class="solution solution-like">
-<p id="p-293">We need to find <span class="process-math">\(x_{c}\)</span> first since <span class="process-math">\(x_{p}\)</span> will change depending on <span class="process-math">\(x_{c}\text{.}\)</span> Since the characteristic equation of the associated homogeneous ODE <span class="process-math">\(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
+<div class="para logical" id="p-298">
+<div class="para">We need to find <span class="process-math">\(x_{c}\)</span> first since <span class="process-math">\(x_{p}\)</span> will change depending on <span class="process-math">\(x_{c}\text{.}\)</span> Since the characteristic equation of the associated homogeneous ODE <span class="process-math">\(\dv[7]{x}{t}+8\dv[5]{x}{t}+16\dv[3]{x}{t}=0\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 r^{7}+8r^{5}+16r^{3} = 0\quad\text{or}\quad r^{3}(r^{2}+4)^{2}=0,
 \end{equation*}
 </div>
-<p class="continuation">we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 \end{equation*}
 </div>
-<p id="p-294">Now we come up with a guess for <span class="process-math">\(x_{p}\)</span> using the right hand side of the original ODE and dividing it into ``components:''</p>
-<figure class="table table-like" id="table-6"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+</div> <div class="para" id="p-299">Now we come up with a guess for <span class="process-math">\(x_{p}\)</span> using the right hand side of the original ODE and dividing it into ``components:’’</div> <figure class="table table-like" id="table-6"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component</td>
 <td class="l m b3 r0 l0 t3 lines">Contribution to <span class="process-math">\(x_{p}\)</span>
@@ -323,20 +609,25 @@ x_{c} = c_{1}+c_{2}t+c_{3}t^{2}+A\cos2t+B\sin2t + t\brackets{C\cos2t+D\sin2t}.
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(-3t\sin2t\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(\parens{C_{6}t+C_{7}}\cos2t+\parens{C_{8}t+C_{9}}\sin2t\)</span></td>
 </tr>
-</table></div></figure><p id="p-295">However, we now have a problem with overlaps between <span class="process-math">\(x_{p}\)</span> and <span class="process-math">\(x_{c}\text{.}\)</span> The guess corresponding to the first component overlaps with <span class="process-math">\(x_{c}\text{,}\)</span> so we need to multiply it by <span class="process-math">\(t^{3}\)</span> to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by <span class="process-math">\(t^{2}\text{.}\)</span> Therefore, our guess for <span class="process-math">\(x_{p}\)</span> should be</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</table></div></figure> <div class="para logical" id="p-300">
+<div class="para">However, we now have a problem with overlaps between <span class="process-math">\(x_{p}\)</span> and <span class="process-math">\(x_{c}\text{.}\)</span> The guess corresponding to the first component overlaps with <span class="process-math">\(x_{c}\text{,}\)</span> so we need to multiply it by <span class="process-math">\(t^{3}\)</span> to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by <span class="process-math">\(t^{2}\text{.}\)</span> Therefore, our guess for <span class="process-math">\(x_{p}\)</span> should be</div>
+<div class="displaymath process-math">
 \begin{equation*}
 x_{p} = C_{1}t^{5}+C_{2}t^{4}+C_{3}t^{3}+e^{-t}\brackets{C_{4}\cos2t+C_{5}\sin2t}+(C_{6}t^{3}+C_{7}t^{2})\cos2t+(C_{8}t^{3}+C_{9}t^{2})\sin2t.
 \end{equation*}
 </div>
+</div>
 </div></div>
-</div></article><p id="p-296">The method of undetermined coefficients applied to the ODE</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div></article><div class="para logical" id="p-301">
+<div class="para">The method of undetermined coefficients applied to the ODE</div>
+<div class="displaymath process-math">
 \begin{equation*}
 a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)   
 \end{equation*}
 </div>
-<p class="continuation">can be summarized by the following table. Note that <span class="process-math">\(x^m\)</span> is the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> required to remove any overlaps with <span class="process-math">\(y_{c}\text{.}\)</span></p>
+<div class="para">can be summarized by the following table. Note that <span class="process-math">\(x^m\)</span> is the <em class="emphasis">smallest</em> power of <span class="process-math">\(x\)</span> required to remove any overlaps with <span class="process-math">\(y_{c}\text{.}\)</span>
+</div>
+</div>
 <figure class="table table-like" id="table-7"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.4<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component of <span class="process-math">\(f(x)\)</span>
@@ -364,25 +655,29 @@ a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\dots+a_{1}y'+a_{0}y = f(x)
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((c_{k}x^{k}+\dots+c_{1}x+c_{0})e^{ax}\cosh bx\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(x^{m}e^{ax}\brackets{(C_{k}x^{k}+\dots+C_{1}x+C_{0})\cosh bx+(D_{k}x^{k}+\dots+D_{1}x+D_{0})\sinh bx}\)</span></td>
 </tr>
-</table></div></figure><article class="example example-like" id="example-48"><h3 class="heading">
+</table></div></figure><article class="example example-like" id="example-49"><h3 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.2.5</span><span class="period">.</span>
 </h3>
-<p id="p-297">Find the general solution of</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-302">
+<div class="para">Find the general solution of</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y^{(3)}-2y''+3y'= x+e^{-3x}\sin x
 \end{equation*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-45" id="solution-45"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-45"><div class="solution solution-like">
-<p id="p-298">We begin by finding <span class="process-math">\(y_{c}\text{.}\)</span> Since the characteristic equation of the corresponding homogeneous ODE is <span class="process-math">\(r^{3}-2r^{2}+3r=0\text{,}\)</span> we get <span class="process-math">\(r=-0,\frac{2\pm\sqrt{4-12}}{2}\)</span> or just <span class="process-math">\(r=0,1\pm i\sqrt{2}\text{.}\)</span> So</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-46" id="solution-46"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-46"><div class="solution solution-like">
+<div class="para logical" id="p-303">
+<div class="para">We begin by finding <span class="process-math">\(y_{c}\text{.}\)</span> Since the characteristic equation of the corresponding homogeneous ODE is <span class="process-math">\(r^{3}-2r^{2}+3r=0\text{,}\)</span> we get <span class="process-math">\(r=-0,\frac{2\pm\sqrt{4-12}}{2}\)</span> or just <span class="process-math">\(r=0,1\pm i\sqrt{2}\text{.}\)</span> So</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
 \end{equation*}
 </div>
-<p class="continuation">Now we can set up <span class="process-math">\(y_{p}\text{:}\)</span></p>
-<figure class="table table-like" id="table-8"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.6<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<div class="para">Now we can set up <span class="process-math">\(y_{p}\text{:}\)</span>
+</div>
+</div> <figure class="table table-like" id="table-8"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.2.6<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Component</td>
 <td class="l m b3 r0 l0 t3 lines">Contribution to <span class="process-math">\(y_{p}\)</span>
@@ -396,16 +691,17 @@ y_{c} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x).
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\sin x\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(e^{-3x}\brackets{C_{3}\cos x+C_{4}\sin x}\)</span></td>
 </tr>
-</table></div></figure><p id="p-299">So our initial guess for <span class="process-math">\(y_{p}\)</span> is given by <span class="process-math">\(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\)</span> Plugging this into the ODE into a CAS such as Maple or Sage gives</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-24">
+</table></div></figure> <div class="para logical" id="p-304">
+<div class="para">So our initial guess for <span class="process-math">\(y_{p}\)</span> is given by <span class="process-math">\(y_{p} = C_{1}x^{2}+C_{2}x+C_{3}e^{-3x}\cos x+C_{4}e^{-3x}\sin x\text{.}\)</span> Plugging this into the ODE into a CAS such as Maple or Sage gives</div>
+<div class="displaymath process-math" id="md-25">
 \begin{align*}
 x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 \amp= 6C_{1}x+(3C_{2}-4C_{1}) \\
 \amp\quad + \parens{-43C_{3}+41C_{4}}e^{-3x}\cos x+\parens{-41C_{3}-43C_{4}}e^{-3x}\sin x
 \end{align*}
 </div>
-<p class="continuation">This gives us the system of equations</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-25">
+<div class="para">This gives us the system of equations</div>
+<div class="displaymath process-math" id="md-26">
 \begin{align*}
 6C_{1}  \amp=  1\\
 3C_{2}-4C_{1} \amp=  0\\
@@ -413,17 +709,19 @@ x+e^{-3x}\sin x \amp= y^{(3)}_{p}-2y''_{p}+3y'_{p}\\
 -41C_{3}-43C_{4}  \amp= 1
 \end{align*}
 </div>
-<p class="continuation">which we can solve using Sage to get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">which we can solve using Sage to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 C_{1} = \frac{1}{6},C_{2} = \frac{2}{9},C_{3} = -\frac{41}{3530},C_{4}=-\frac{43}{3530}.
 \end{equation*}
 </div>
-<p id="p-300">So the general solution of the ODE is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-305">
+<div class="para">So the general solution of the ODE is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 y = y_{c}+y_{p} = c_{1}+e^{x}(A\cos\sqrt{2}x+B\sin\sqrt{2}x) +\frac{1}{6}x^{2}+\frac{2}{9}x-\frac{e^{-3x}}{3530}\brackets{41\cos x+43\sin x}.
 \end{equation*}
+</div>
 </div>
 </div></div>
 </div></article><pre class="ptx-sagecell sagecell-sage" id="sage-4"><script type="text/x-sage"># Set variables
@@ -436,7 +734,13 @@ eqn3 = -43*c3 + 41*c4
 eqn4 = -41*c3 - 43*c4
 
 solve([eqn1 == 1, eqn2 == 0, eqn3 == 0, eqn4 == 1], c1, c2, c3, c4)
-</script></pre></section></div></main>
+</script></pre></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="section-homogeneous-linear-odes-with-constant-coefficients.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="systems-of-odes.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png"></a>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
 <!--********************************************-->
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WVWC-DE Constant Coefficient Systems and the Phase Plane</title>
@@ -15,20 +15,38 @@
 <meta property="og:image" content="https://j-oldroyd.github.io/wvwc-differential-equations/output/html/external/./wvwc-logo.jpg">
 <meta property="book:title" content="Differential Equations Lecture Notes">
 <meta property="book:author" content="Jesse Oldroyd">
-<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
   },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
-    renderActions: {
-        findScript: [10, function (doc) {
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
             document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
                 var display = !!node.type.match(/; *mode=display/);
                 var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
@@ -38,47 +56,197 @@ window.MathJax = {
                 math.end = {node: text, delim: '', n: 0};
                 doc.math.push(math);
             });
-        }, '']
-    },
+        },
+        ""
+      ]
+    }
   },
-  chtml: {
-    scale: 0.88,
-    mtextInheritFont: true
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
   },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "https://pretextbook.org/js/lib"
+    }
   },
-  startup: {
+  "startup": {
     pageReady() {
       return MathJax.startup.defaultPageReady().then(function () {
       console.log("in ready function");
       rsMathReady();
       }
     )}
-},
+  }
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
 // Their results will be linked, only within language type
-sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
-                       linked: true,
-                       languages: ['sage'],
-                       evalButtonText: 'Evaluate (Sage)'});
-</script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
-<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
-</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/colors_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.7/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.3</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.3/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.3/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.3/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.7/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.7/setcolors.css" rel="stylesheet" type="text/css">
 </head>
-<body class="pretext-book ignore-math has-toc has-sidebar-left">
-<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" class="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms" class="searchterms"></span>
+</h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="name">Index</span></a><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="avatarbutton" class="avatarbutton name">You!</span><div id="preferences_menu_holder" class="preferences_menu_holder hidden"><ol id="preferences_menu" class="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden avatar">
+<li data-val="You!" tabindex="-1">
+<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+<li data-val="😺" tabindex="-1">
+<span id="the😺" class="avatarcheck"></span>😺</li>
+<li data-val="👤" tabindex="-1">
+<span id="the👤" class="avatarcheck"></span>👤</li>
+<li data-val="👽" tabindex="-1">
+<span id="the👽" class="avatarcheck"></span>👽</li>
+<li data-val="🐶" tabindex="-1">
+<span id="the🐶" class="avatarcheck"></span>🐶</li>
+<li data-val="🐼" tabindex="-1">
+<span id="the🐼" class="avatarcheck"></span>🐼</li>
+<li data-val="🌈" tabindex="-1">
+<span id="the🌈" class="avatarcheck"></span>🌈</li>
+</ol>
+</li>
+<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fontfamily">
+<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
+<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
+<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+</ol>
+</li>
+<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fonts">
+<li>Size</li>
+<li><span id="thesize">12</span></li>
+<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
+<li>Width</li>
+<li><span id="thewdth">100</span></li>
+<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+<li>Weight</li>
+<li><span id="thewght">400</span></li>
+<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+<li>Letter spacing</li>
+<li>
+<span id="thelspace">0</span><span class="byunits">/200</span>
+</li>
+<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+<li>Word spacing</li>
+<li>
+<span id="thewspace">0</span><span class="byunits">/50</span>
+</li>
+<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
+<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
+<li>Line Spacing</li>
+<li>
+<span id="theheight">135</span><span class="byunits">/100</span>
+</li>
+<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
+<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
+</ol>
+</li>
+<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden atmosphere">
+<li data-val="default" tabindex="-1">
+<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+<li data-val="pastel" tabindex="-1">
+<span id="thepastel" class="atmospherecheck"></span>pastel</li>
+<li data-val="darktwilight" tabindex="-1">
+<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+<li data-val="dark" tabindex="-1">
+<span id="thedark" class="atmospherecheck"></span>dark</li>
+<li data-val="darkmidnight" tabindex="-1">
+<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
+</ol>
+</li>
+<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden ruler">
+<li data-val="none" tabindex="-1">
+<span id="thenone" class="rulercheck">✔️</span>none</li>
+<li data-val="underline" tabindex="-1">
+<span id="theunderline" class="rulercheck"></span>underline</li>
+<li data-val="lunderline" tabindex="-1">
+<span id="thelunderline" class="rulercheck"></span>L-underline</li>
+<li data-val="greybar" tabindex="-1">
+<span id="thegreybar" class="rulercheck"></span>grey bar</li>
+<li data-val="lightbox" tabindex="-1">
+<span id="thelightbox" class="rulercheck"></span>light box</li>
+<li data-val="sunrise" tabindex="-1">
+<span id="thesunrise" class="rulercheck"></span>sunrise</li>
+<li data-val="sunriseunderline" tabindex="-1">
+<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
+<li class="moveQ">Motion by:</li>
+<li data-val="mouse" tabindex="-1">
+<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+<li data-val="arrow" tabindex="-1">
+<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+<li data-val="eye" tabindex="-1">
+<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
+</ol>
+</li>
+</ol></div></button><span class="treebuttons"><a class="previous-button button" href="section-systems-of-odes-as-models.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="systems-of-odes.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="section-criteria-for-critical-points-stability.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" class="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -121,453 +289,607 @@ sagecell.makeSagecell({inputLocation: 'pre.sagecell-sage',
 \definecolor{fillinmathshade}{gray}{0.9}
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
-<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
-<a id="logo-link" href="" target="_blank"><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
-<h1 class="heading"><a href="wvwc-differential-equations.html"><span class="title">Differential Equations Lecture Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
-<p class="byline">Jesse Oldroyd</p>
-</div>
-<div class="searchbox"><div class="searchwidget">
-<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
-</div></div>
-<div id="searchresultsplaceholder" style="display: none">
-<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
-</h2>
-<ol id="searchresults"></ol>
-</div>
-</div></div>
-<nav id="primary-navbar" class="navbar"><div class="container">
-<div class="navbar-top-buttons">
-<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
-<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
-<script>
-var ggbApp = new GGBApplet({"appName": "graphing",
-    "width": 330,
-    "height": 600,
-    "showToolBar": true,
-    "showAlgebraInput": true,
-    "perspective": "G/A",
-    "algebraInputPosition": "bottom",
-    "scaleContainerClass": "calculator-container",
-    "allowUpscale": true,
-    "autoHeight": true,
-    "disableAutoScale": false},
-true);
-</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-systems-of-odes-as-models.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="systems-of-odes.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-criteria-for-critical-points-stability.html" title="Next">Next</a></span>
-</div>
-</div>
-<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
-<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-systems-of-odes-as-models.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="systems-of-odes.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-criteria-for-critical-points-stability.html" title="Next">Next</a>
-</div>
-</div></nav></header><div class="page">
-<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
-<nav id="toc"><ul>
-<li class="link frontmatter">
-<a href="front.html" data-scroll="front" class="internal"><span class="title">Front Matter</span></a><ul>
-<li><a href="front-colophon.html" data-scroll="front-colophon" class="internal">Colophon</a></li>
-<li><a href="author-bio-JEO.html" data-scroll="author-bio-JEO" class="internal">Author Biography</a></li>
-<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 parts"><ul class="structural">
+<li>
+<div class="toc-item"><a href="front.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li><div class="toc-item"><a href="author-bio-JEO.html" class="internal"><span class="title">Author Biography</span></a></div></li>
+<li><div class="toc-item"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li>
 </ul>
 </li>
-<li class="link part"><a href="part-odes.html" data-scroll="part-odes" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></li>
-<li class="link">
-<a href="intro-to-odes.html" data-scroll="intro-to-odes" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a><ul>
-<li><a href="section-ordinary-differential-equations.html" data-scroll="section-ordinary-differential-equations" class="internal">Ordinary Differential Equations</a></li>
-<li><a href="section-direction-fields.html" data-scroll="section-direction-fields" class="internal">Direction Fields</a></li>
-<li><a href="section-separable-odes-and-substitution.html" data-scroll="section-separable-odes-and-substitution" class="internal">Separable ODEs and Substitution</a></li>
-<li><a href="section-first-order-linear-odes.html" data-scroll="section-first-order-linear-odes" class="internal">First-Order Linear ODEs</a></li>
-<li><a href="section-existence-and-uniqueness-of-solutions.html" data-scroll="section-existence-and-uniqueness-of-solutions" class="internal">Existence and Uniqueness of Solutions</a></li>
-<li><a href="section-population-models-and-autonomous-equations.html" data-scroll="section-population-models-and-autonomous-equations" class="internal">Population Models and Autonomous Equations</a></li>
+<li>
+<div class="toc-item"><a href="part-odes.html" class="internal"><span class="codenumber">I</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="intro-to-odes.html" class="internal"><span class="codenumber">1</span> <span class="title">Introduction to Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-ordinary-differential-equations.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-ordinary-differential-equations.html#subsection-basic-concepts-for-odes" class="internal"><span class="title">Basic Concepts</span></a></div></li>
+<li><div class="toc-item"><a href="section-ordinary-differential-equations.html#subsection-mathematical-models" class="internal"><span class="title">Mathematical Models</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="linear-odes-constant-coefficients.html" data-scroll="linear-odes-constant-coefficients" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a><ul>
-<li><a href="section-second-order-linear-odes.html" data-scroll="section-second-order-linear-odes" class="internal">Second-Order Linear ODEs</a></li>
-<li><a href="section-homogeneous-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-odes-with-constant-coefficients" class="internal">Homogeneous ODEs with Constant Coefficients</a></li>
-<li><a href="section-spring-mass-models.html" data-scroll="section-spring-mass-models" class="internal">Spring-Mass Models</a></li>
-<li><a href="section-solutions-of-nonhomogeneous-equations.html" data-scroll="section-solutions-of-nonhomogeneous-equations" class="internal">Solutions of Non-homogeneous Equations</a></li>
-<li><a href="section-forced-oscillations-and-resonance.html" data-scroll="section-forced-oscillations-and-resonance" class="internal">Forced Oscillations and Resonance</a></li>
+<li>
+<div class="toc-item"><a href="section-direction-fields.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Direction Fields</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-direction-fields.html#subsection-direction-fields-and-solution-curves" class="internal"><span class="title">Direction Fields and Solution Curves</span></a></div></li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-separable-odes-and-substitution.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Separable ODEs and Substitution</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-separable-odes-and-substitution.html#subsection-separable-odes" class="internal"><span class="title">Separable ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-separable-odes-and-substitution.html#subsection-substitution-methods" class="internal"><span class="title">Substitution Methods</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="higher-order-linear-odes.html" data-scroll="higher-order-linear-odes" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a><ul>
-<li><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-homogeneous-linear-odes-with-constant-coefficients" class="internal">Homogeneous Linear ODEs with Constant Coefficients</a></li>
-<li><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" data-scroll="section-non-homogeneous-linear-odes-with-constant-coefficients" class="internal">Non-homogeneous Linear ODEs with Constant Coefficients</a></li>
+<li>
+<div class="toc-item"><a href="section-first-order-linear-odes.html" class="internal"><span class="codenumber">1.4</span> <span class="title">First-Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-first-order-linear-odes.html#subsection-integrating-factors" class="internal"><span class="title">Integrating Factors</span></a></div></li>
+<li><div class="toc-item"><a href="section-first-order-linear-odes.html#subsection-applications" class="internal"><span class="title">Applications</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="systems-of-odes.html" data-scroll="systems-of-odes" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a><ul>
-<li><a href="section-systems-of-odes-as-models.html" data-scroll="section-systems-of-odes-as-models" class="internal">Systems of ODEs as Models</a></li>
-<li><a href="section-constant-coefficient-systems-and-the-phase-plane.html" data-scroll="section-constant-coefficient-systems-and-the-phase-plane" class="active">Constant Coefficient Systems and the Phase Plane</a></li>
-<li><a href="section-criteria-for-critical-points-stability.html" data-scroll="section-criteria-for-critical-points-stability" class="internal">Criteria for Critical Points; Stability</a></li>
-<li><a href="section-nonlinear-systems.html" data-scroll="section-nonlinear-systems" class="internal">Nonlinear Systems</a></li>
+<li>
+<div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Existence and Uniqueness of Solutions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-existence-and-uniqueness-theorem" class="internal"><span class="title">Existence and Uniqueness Theorem</span></a></div></li>
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-picard-iteration" class="internal"><span class="title">Picard Iteration</span></a></div></li>
+<li><div class="toc-item"><a href="section-existence-and-uniqueness-of-solutions.html#subsection-euler-s-method" class="internal"><span class="title">Euler’s Method</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="series-solutions.html" data-scroll="series-solutions" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a><ul>
-<li><a href="section-power-series-method.html" data-scroll="section-power-series-method" class="internal">Power Series Method</a></li>
-<li><a href="section-legendre-s-equation-and-legendre-polynomials.html" data-scroll="section-legendre-s-equation-and-legendre-polynomials" class="internal">Legendre's Equation and Legendre Polynomials</a></li>
-<li><a href="section-frobenius-method.html" data-scroll="section-frobenius-method" class="internal">Frobenius Method</a></li>
-<li><a href="section-bessel-s-equation.html" data-scroll="section-bessel-s-equation" class="internal">Bessel's Equation</a></li>
+<li>
+<div class="toc-item"><a href="section-population-models-and-autonomous-equations.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Population Models and Autonomous Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-population-equations" class="internal"><span class="title">Population Equations</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-the-logistic-equation" class="internal"><span class="title">The Logistic Equation</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#section-stability-of-solutions" class="internal"><span class="title">Stability of Solutions</span></a></div></li>
+<li><div class="toc-item"><a href="section-population-models-and-autonomous-equations.html#subsection-linear-stability-analysis" class="internal"><span class="title">Linear Stability Analysis</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="laplace-transforms.html" data-scroll="laplace-transforms" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a><ul>
-<li><a href="section-the-laplace-transform.html" data-scroll="section-the-laplace-transform" class="internal">The Laplace Transform</a></li>
-<li><a href="section-transformation-of-initial-value-problems.html" data-scroll="section-transformation-of-initial-value-problems" class="internal">Transformation of Initial Value Problems</a></li>
-<li><a href="section-unit-step-functions-and-time-shifting.html" data-scroll="section-unit-step-functions-and-time-shifting" class="internal">Unit Step Functions and Time Shifting</a></li>
-<li><a href="section-dirac-delta-functions.html" data-scroll="section-dirac-delta-functions" class="internal">Dirac Delta Functions</a></li>
-<li><a href="section-convolution-products.html" data-scroll="section-convolution-products" class="internal">Convolution Products</a></li>
 </ul>
 </li>
-<li class="link part"><a href="part-pdes.html" data-scroll="part-pdes" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></li>
-<li class="link">
-<a href="fourier-analysis.html" data-scroll="fourier-analysis" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a><ul>
-<li><a href="section-fourier-series.html" data-scroll="section-fourier-series" class="internal">Fourier Series</a></li>
-<li><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" data-scroll="section-functions-of-arbitrary-period-even-and-odd-extensions" class="internal">Functions of Arbitrary Period; Even and Odd Extensions</a></li>
-<li><a href="section-complex-fourier-series-and-parsevals-identity.html" data-scroll="section-complex-fourier-series-and-parsevals-identity" class="internal">Complex Fourier Series and Parseval's Identity</a></li>
-<li><a href="section-approximation-by-trigonometric-polynomials.html" data-scroll="section-approximation-by-trigonometric-polynomials" class="internal">Approximation by Trigonometric Polynomials</a></li>
-<li><a href="section-the-fourier-transform.html" data-scroll="section-the-fourier-transform" class="internal">The Fourier Transform</a></li>
+<li>
+<div class="toc-item"><a href="linear-odes-constant-coefficients.html" class="internal"><span class="codenumber">2</span> <span class="title">Linear ODEs with Constant Coefficients</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-second-order-linear-odes.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Second-Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-second-order-linear-odes.html#subsection-types-of-linear-odes" class="internal"><span class="title">Types of Linear ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-second-order-linear-odes.html#subsection-solutions-of-second-order-linear-ODEs" class="internal"><span class="title">Solutions of Second-Order Linear ODEs</span></a></div></li>
 </ul>
 </li>
-<li class="link">
-<a href="partial-differential-equations.html" data-scroll="partial-differential-equations" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a><ul>
-<li><a href="section-basic-concepts.html" data-scroll="section-basic-concepts" class="internal">Basic Concepts</a></li>
-<li><a href="section-wave-equation-and-separation-of-variables.html" data-scroll="section-wave-equation-and-separation-of-variables" class="internal">The Wave Equation and Separation of Variables</a></li>
-<li><a href="section-d-alembert-s-solution-of-the-wave-equation.html" data-scroll="section-d-alembert-s-solution-of-the-wave-equation" class="internal">d'Alembert's Solution of the Wave Equation</a></li>
-<li><a href="section-the-heat-equation.html" data-scroll="section-the-heat-equation" class="internal">The Heat Equation</a></li>
+<li><div class="toc-item"><a href="section-homogeneous-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Homogeneous ODEs with Constant Coefficients</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-spring-mass-models.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Spring-Mass Models</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-spring-mass-models.html#subsection-free-undamped-motion" class="internal"><span class="title">Free Undamped Motion</span></a></div></li>
+<li><div class="toc-item"><a href="section-spring-mass-models.html#subsection-free-damped-motion" class="internal"><span class="title">Free Damped Motion</span></a></div></li>
 </ul>
 </li>
-<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Back Matter</span></a></li>
-<li class="link"><a href="appendix-gfdl.html" data-scroll="appendix-gfdl" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></li>
-<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
-<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
-</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
-</div></div>
-<main class="main"><div id="content" class="pretext-content"><section class="section" id="section-constant-coefficient-systems-and-the-phase-plane"><h2 class="heading hide-type">
+<li>
+<div class="toc-item"><a href="section-solutions-of-nonhomogeneous-equations.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Solutions of Non-homogeneous Equations</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-solutions-of-nonhomogeneous-equations.html#subsection-the-method-of-undetermined-coefficients" class="internal"><span class="title">The Method of Undetermined Coefficients</span></a></div></li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-forced-oscillations-and-resonance.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Forced Oscillations and Resonance</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-forced-oscillations-and-resonance.html#subsection-undamped-systems" class="internal"><span class="title">Undamped Systems</span></a></div></li>
+<li><div class="toc-item"><a href="section-forced-oscillations-and-resonance.html#subsection-damped-systems" class="internal"><span class="title">Damped Systems</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="higher-order-linear-odes.html" class="internal"><span class="codenumber">3</span> <span class="title">Higher Order Linear ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-homogeneous-linear-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Homogeneous Linear ODEs with Constant Coefficients</span></a></div></li>
+<li><div class="toc-item"><a href="section-non-homogeneous-linear-odes-with-constant-coefficients.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Non-homogeneous Linear ODEs with Constant Coefficients</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="systems-of-odes.html" class="internal"><span class="codenumber">4</span> <span class="title">Systems of Ordinary Differential Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-systems-of-odes-as-models.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Systems of ODEs as Models</span></a></div></li>
+<li class="active">
+<div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Constant Coefficient Systems and the Phase Plane</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solutions-of--vec-x-a-vec-x-m-" class="internal"><span class="title">Solutions of <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span></span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-finding-eigenvalues-and-eigenvectors" class="internal"><span class="title">Finding Eigenvalues and Eigenvectors</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-solving-matrix-odes" class="internal"><span class="title">Solving Matrix ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-applications-of-matrix-odes" class="internal"><span class="title">Applications of Matrix ODEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-constant-coefficient-systems-and-the-phase-plane.html#subsection-the-phase-plane" class="internal"><span class="title">The Phase Plane</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-criteria-for-critical-points-stability.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Criteria for Critical Points; Stability</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-nonlinear-systems.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Nonlinear Systems</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-nonlinear-systems.html#subsection-classification-of-critical-points-and-linearization" class="internal"><span class="title">Classification of Critical Points and Linearization</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="series-solutions.html" class="internal"><span class="codenumber">5</span> <span class="title">Series Solutions of ODEs</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-power-series-method.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Power Series Method</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Legendre’s Equation and Legendre Polynomials</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-solving-the-legendre-equation" class="internal"><span class="title">Solving the Legendre Equation</span></a></div></li>
+<li><div class="toc-item"><a href="section-legendre-s-equation-and-legendre-polynomials.html#subsection-legendre-polynomials" class="internal"><span class="title">Legendre Polynomials</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-frobenius-method.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Frobenius Method</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-frobenius-method.html#subsection-regular-points-and-singular-points" class="internal"><span class="title">Regular Points and Singular Points</span></a></div></li>
+<li><div class="toc-item"><a href="section-frobenius-method.html#subsection-solutions-at-singular-points-and-indicial-equations" class="internal"><span class="title">Solutions at Singular Points and Indicial Equations</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-bessel-s-equation.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Bessel’s Equation</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-bessel-functions-for-integer--nu-" class="internal"><span class="title">Bessel Functions for Integer <span class="process-math">\(\nu\)</span></span></a></div></li>
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-bessel-functions-of-the-first-kind-for-nonnegative-order" class="internal"><span class="title">Bessel Functions of the First Kind for Nonnegative Order</span></a></div></li>
+<li><div class="toc-item"><a href="section-bessel-s-equation.html#subsection-general-solution-of-bessel-s-equation" class="internal"><span class="title">General Solution of Bessel’s Equation</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="laplace-transforms.html" class="internal"><span class="codenumber">6</span> <span class="title">Laplace Transforms</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-the-laplace-transform.html" class="internal"><span class="codenumber">6.1</span> <span class="title">The Laplace Transform</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-the-laplace-transform.html#subsection-definition-and-basic-properties" class="internal"><span class="title">Definition and Basic Properties</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-laplace-transform.html#subsection-the-inverse-laplace-transform-m-s--shifting" class="internal"><span class="title">The Inverse Laplace Transform; <span class="process-math">\(s\)</span>-shifting</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-transformation-of-initial-value-problems.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Transformation of Initial Value Problems</span></a></div></li>
+<li><div class="toc-item"><a href="section-unit-step-functions-and-time-shifting.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Unit Step Functions and Time Shifting</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-dirac-delta-functions.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Dirac Delta Functions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-dirac-delta-functions.html#subsection-impulses" class="internal"><span class="title">Impulses</span></a></div></li>
+<li><div class="toc-item"><a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="internal"><span class="title">Dirac Delta Models</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-convolution-products.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Convolution Products</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="part-pdes.html" class="internal"><span class="codenumber">II</span> <span class="title">Partial Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="fourier-analysis.html" class="internal"><span class="codenumber">7</span> <span class="title">Fourier Analysis</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-fourier-series.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Fourier Series</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-fourier-series.html#subsection-fourier-periodic-functions" class="internal"><span class="title">Periodic Functions</span></a></div></li>
+<li><div class="toc-item"><a href="section-fourier-series.html#subsection-fourier-periodic-trigonometric-and-fourier-series" class="internal"><span class="title">Trigonometric Series and Fourier Series</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Functions of Arbitrary Period; Even and Odd Extensions</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html#subsection-fourier-series-of-functions-of-arbitrary-period" class="internal"><span class="title">Fourier Series of Functions of Arbitrary Period</span></a></div></li>
+<li><div class="toc-item"><a href="section-functions-of-arbitrary-period-even-and-odd-extensions.html#subsection-even-and-odd-extensions" class="internal"><span class="title">Even and Odd Extensions</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Complex Fourier Series and Parseval’s Identity</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html#subsection-complex-fourier-series" class="internal"><span class="title">Complex Fourier Series</span></a></div></li>
+<li><div class="toc-item"><a href="section-complex-fourier-series-and-parsevals-identity.html#subsection-parseval-s-identity" class="internal"><span class="title">Parseval’s Identity</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-approximation-by-trigonometric-polynomials.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Approximation by Trigonometric Polynomials</span></a></div></li>
+<li><div class="toc-item"><a href="section-the-fourier-transform.html" class="internal"><span class="codenumber">7.5</span> <span class="title">The Fourier Transform</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="partial-differential-equations.html" class="internal"><span class="codenumber">8</span> <span class="title">Partial Differential Equations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="section-basic-concepts.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Basic Concepts</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-partial-derivatives-and-pdes" class="internal"><span class="title">Partial derivatives and PDEs</span></a></div></li>
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-linear-homogeneous-pdes-and-the-superposition-principle" class="internal"><span class="title">Linear homogeneous PDEs and the superposition principle</span></a></div></li>
+<li><div class="toc-item"><a href="section-basic-concepts.html#subsection-important-pdes" class="internal"><span class="title">Important PDEs</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="section-wave-equation-and-separation-of-variables.html" class="internal"><span class="codenumber">8.2</span> <span class="title">The Wave Equation and Separation of Variables</span></a></div></li>
+<li><div class="toc-item"><a href="section-d-alembert-s-solution-of-the-wave-equation.html" class="internal"><span class="codenumber">8.3</span> <span class="title">d’Alembert’s Solution of the Wave Equation</span></a></div></li>
+<li>
+<div class="toc-item"><a href="section-the-heat-equation.html" class="internal"><span class="codenumber">8.4</span> <span class="title">The Heat Equation</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="section-the-heat-equation.html#subsection-bar-with-ends-fixed-at-" class="internal"><span class="title">Bar with ends fixed at <span class="process-math">\(0\)</span></span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li><div class="toc-item"><a href="index-1.html" class="internal"><span class="title">Index</span></a></div></li>
+<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-constant-coefficient-systems-and-the-phase-plane"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">4.2</span> <span class="title">Constant Coefficient Systems and the Phase Plane</span>
 </h2>
-<section class="introduction" id="introduction-13"><aside class="aside aside-like" id="aside-15"><p id="p-329">This section corresponds to Section 4.3 of the text.</p></aside></section><section class="subsection" id="subsection-solutions-of--vec-x-a-vec-x-m-"><h3 class="heading hide-type">
+<section class="introduction" id="introduction-13"><aside class="aside aside-like" id="aside-15"><div class="para" id="p-334">This section corresponds to Section 4.3 of the text.</div></aside></section><section class="subsection" id="subsection-solutions-of--vec-x-a-vec-x-m-"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Solutions of <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span></span>
 </h3>
 <article class="theorem theorem-like" id="theorem-solutions-of-systems"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Solutions of Systems.</span>
 </h4>
-<p id="p-330">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> constant matrix, and suppose that <span class="process-math">\(A\)</span> has <span class="process-math">\(n\)</span> linearly independent eigenvectors <span class="process-math">\(\vec{x}_{1},\dots,\vec{x}_{n}\)</span> with corresponding eigenvalues <span class="process-math">\(\lambda_{1},\dots,\lambda_{1}\text{.}\)</span> Then the general solution of <span class="process-math">\(\vec{x}^\prime=A\vec{x}\)</span> is given by</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-335">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> constant matrix, and suppose that <span class="process-math">\(A\)</span> has <span class="process-math">\(n\)</span> linearly independent eigenvectors <span class="process-math">\(\vec{x}_{1},\dots,\vec{x}_{n}\)</span> with corresponding eigenvalues <span class="process-math">\(\lambda_{1},\dots,\lambda_{1}\text{.}\)</span> Then the general solution of <span class="process-math">\(\vec{x}^\prime=A\vec{x}\)</span> is given by</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \sum_{i=1}^{n}c_{i}e^{\lambda_{i}t}\vec{x}_{i}.
 \end{equation*}
-</div></article><article class="example example-like" id="example-54"><h4 class="heading">
+</div>
+</div></article><article class="example example-like" id="example-55"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.2</span><span class="period">.</span>
 </h4>
-<p id="p-331">Find the general solution of the system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-31">
+<div class="para logical" id="p-336">
+<div class="para">Find the general solution of the system</div>
+<div class="displaymath process-math" id="md-32">
 \begin{align*}
 x_{1}^\prime  &amp; = x_{1}-\frac{1}{2}x_{2}-\frac{1}{2}x_{3}\\
 x^\prime_{2}  &amp; =  -\frac{1}{2}x_{1}+x_{2}-\frac{1}{2}x_{3}\\
 x^\prime_{3}  &amp; =  -\frac{1}{2}x_{1}-\frac{1}{2}x_{2}+x_{3}
 \end{align*}
 </div>
-<p class="continuation">given that</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">given that</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}_{1} = \begin{bmatrix}1\\1\\1\end{bmatrix},\vec{x}_{2} = \begin{bmatrix}-1\\1\\0\end{bmatrix}\quad\text{and}\quad\vec{x}_{3} = \begin{bmatrix}-\frac{1}{2}\\-\frac{1}{2}\\1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">are eigenvectors of the matrix</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">are eigenvectors of the matrix</div>
+<div class="displaymath process-math">
 \begin{equation*}
 G = \begin{bmatrix}1 &amp;  -\frac{1}{2}  &amp;  -\frac{1}{2}\\-\frac{1}{2}  &amp;  1 &amp;  -\frac{1}{2} \\ -\frac{1}{2}  &amp;  -\frac{1}{2}  &amp;    1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">with corresponding eigenvalues <span class="process-math">\(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\text{.}\)</span></p>
+<div class="para">with corresponding eigenvalues <span class="process-math">\(\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}\text{.}\)</span>
+</div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-51" id="solution-51"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-51"><div class="solution solution-like">
-<p id="p-332">First, note that the system we need to solve is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = G\vec{x}\text{.}\)</span> If we can show that <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\)</span> are linearly independent, then we can use <a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> to find the general solution of the system. So we'll compute their Wronskian:</p>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-solutions-of-systems.html" id="md-32">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
+<div class="para logical" id="p-337">
+<div class="para">First, note that the system we need to solve is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = G\vec{x}\text{.}\)</span> If we can show that <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}\)</span> are linearly independent, then we can use <a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> to find the general solution of the system. So we’ll compute their Wronskian:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-solutions-of-systems.html" id="md-33">
 \begin{align*}
 W(\vec{x}_{1},\vec{x}_{2},\vec{x}_{3}) &amp; = \begin{vmatrix} 1  &amp;  -1  &amp;  -\frac{1}{2} \\ 1 &amp;  1 &amp;  -\frac{1}{2} \\ 1 &amp;  0 &amp;  1\end{vmatrix}\\
 &amp; = 1+\frac{3}{2}+\frac{1}{2}\\
 &amp; = 3
 \end{align*}
 </div>
-<p id="p-333">Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-33">
+</div> <div class="para logical" id="p-338">
+<div class="para">Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by</div>
+<div class="displaymath process-math" id="md-34">
 \begin{align*}
 \vec{x} &amp; = c_{1}e^{0t}\vec{x}_{1}+c_{2}e^{3t/2}\vec{x}_{2}+c_{3}e^{3t/2}\vec{x}_{3}\\
 &amp; = \begin{bmatrix}c_{1}-c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{2}e^{3t/2}-\frac{1}{2}c_{3}e^{3t/2} \\ c_{1}+c_{3}e^{3t/2}\end{bmatrix}
 \end{align*}
 </div>
-<p class="continuation">or just</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-34">
+<div class="para">or just</div>
+<div class="displaymath process-math" id="md-35">
 \begin{align*}
 x_{1} &amp; = c_{1}-\parens{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
 x_{2} &amp; = c_{1}+\parens{c_{2}-\frac{1}{2}c_{3}}e^{3t/2}\\
 x_{3} &amp; = c_{1}+c_{3}e^{3t/2}
 \end{align*}
 </div>
+</div>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-finding-eigenvalues-and-eigenvectors"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Finding Eigenvalues and Eigenvectors</span>
 </h3>
-<p id="p-334"><a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.</p>
-<p id="p-335">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix and suppose that <span class="process-math">\(\vec{v}\)</span> is an eigenvector with corresponding eigenvalue <span class="process-math">\(\lambda\text{.}\)</span> Then</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para" id="p-339">
+<a href="" class="xref" data-knowl="./knowl/theorem-solutions-of-systems.html" title="Theorem 4.2.1: Solutions of Systems">Theorem 4.2.1</a> shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it’s important for us to know how to find these.</div>
+<div class="para logical" id="p-340">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix and suppose that <span class="process-math">\(\vec{v}\)</span> is an eigenvector with corresponding eigenvalue <span class="process-math">\(\lambda\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A\vec{v} = \lambda\vec{v}.
 \end{equation*}
 </div>
-<p class="continuation">We can rearrange this to get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">We can rearrange this to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A\vec{v}-\lambda\vec{v} = (A-\lambda I)\vec{v} = \vec{0}
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(I\)</span> is the identity matrix. Since <span class="process-math">\(\vec{v}\neq\vec{0}\)</span> (since it's an eigenvector!), linear algebra tells us that <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span> This gives us the following theorem.</p>
+<div class="para">where <span class="process-math">\(I\)</span> is the identity matrix. Since <span class="process-math">\(\vec{v}\neq\vec{0}\)</span> (since it’s an eigenvector!), linear algebra tells us that <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span> This gives us the following theorem.</div>
+</div>
 <article class="theorem theorem-like" id="theorem-theorem-eigenvalues-from-characteristic-equation"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span>
 </h4>
-<p id="p-336">The eigenvalues of a square matrix <span class="process-math">\(A\)</span> are the solutions of the equation <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span></p></article><article class="definition definition-like" id="definition-characteristic-equation"><h4 class="heading">
+<div class="para" id="p-341">The eigenvalues of a square matrix <span class="process-math">\(A\)</span> are the solutions of the equation <span class="process-math">\(\det(A-\lambda I) = 0\text{.}\)</span>
+</div></article><article class="definition definition-like" id="definition-characteristic-equation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span>
 </h4>
-<p id="p-337"><span class="process-math">\(\det(A-\lambda I)=0\)</span> is called the <dfn class="terminology">characteristic equation</dfn> of the matrix <span class="process-math">\(A\text{.}\)</span></p></article><article class="example example-like" id="example-55"><h4 class="heading">
+<div class="para" id="p-342">
+<span class="process-math">\(\det(A-\lambda I)=0\)</span> is called the <dfn class="terminology">characteristic equation</dfn> of the matrix <span class="process-math">\(A\text{.}\)</span>
+</div></article><article class="example example-like" id="example-56"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.5</span><span class="period">.</span>
 </h4>
-<p id="p-338">Find the eigenvalues of the matrix <span class="process-math">\(A = \begin{bmatrix}1&amp; 4\\1&amp; 1\end{bmatrix}\text{.}\)</span></p>
+<div class="para" id="p-343">Find the eigenvalues of the matrix <span class="process-math">\(A = \begin{bmatrix}1&amp; 4\\1&amp; 1\end{bmatrix}\text{.}\)</span>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-52" id="solution-52"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-52"><div class="solution solution-like">
-<p id="p-339">First, we need to set up the characteristic equation of <span class="process-math">\(A\text{.}\)</span> Since</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like"><div class="para logical" id="p-344">
+<div class="para">First, we need to set up the characteristic equation of <span class="process-math">\(A\text{.}\)</span> Since</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A-\lambda I = \begin{bmatrix}1-\lambda &amp;  4 \\ 1 &amp;  1-\lambda\end{bmatrix},
 \end{equation*}
 </div>
-<p class="continuation">we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \det(A-\lambda I) = (1-\lambda)^{2} - 4 = \lambda^{2}-2\lambda+3
 \end{equation*}
 </div>
-<p class="continuation">so the characteristic equation of <span class="process-math">\(A\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">so the characteristic equation of <span class="process-math">\(A\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \lambda^{2}-2\lambda+3 = 0
 \end{equation*}
 </div>
-<p class="continuation">which has solutions <span class="process-math">\(\lambda_{1} = -1,\lambda_{2} = 3\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(-1,3\text{.}\)</span></p>
-</div></div>
-</div></article><p id="p-340">A useful fact to remember is that the eigenvalues of a ``triangular'' matrix are just the diagonal entries.</p>
-<article class="example example-like" id="example-56"><h4 class="heading">
+<div class="para">which has solutions <span class="process-math">\(\lambda_{1} = -1,\lambda_{2} = 3\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(-1,3\text{.}\)</span>
+</div>
+</div></div></div>
+</div></article><div class="para" id="p-345">A useful fact to remember is that the eigenvalues of a ``triangular’’ matrix are just the diagonal entries.</div>
+<article class="example example-like" id="example-57"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span>
 </h4>
-<p id="p-341">Let</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-346">
+<div class="para">Let</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix}1 &amp;  3 &amp;  -4 &amp;  5 \\ 0 &amp;  3 &amp;  -2 &amp;  -2 \\ 0 &amp;  0 &amp;  1 &amp;  10^{50\pi-300} \\ 0 &amp;  0 &amp;  0 &amp;  0\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Find the eigenvalues of <span class="process-math">\(A\text{.}\)</span></p>
+<div class="para">Find the eigenvalues of <span class="process-math">\(A\text{.}\)</span>
+</div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-53" id="solution-53"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-53"><div class="solution solution-like"><p id="p-342"><span class="process-math">\(A\)</span> is a triangular matrix since everything below the main diagonal is <span class="process-math">\(0\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(1,3,1,0\text{.}\)</span></p></div></div>
-</div></article><article class="example example-like" id="example-57"><h4 class="heading">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like"><div class="para" id="p-347">
+<span class="process-math">\(A\)</span> is a triangular matrix since everything below the main diagonal is <span class="process-math">\(0\text{.}\)</span> So the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(1,3,1,0\text{.}\)</span>
+</div></div></div>
+</div></article><article class="example example-like" id="example-58"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span>
 </h4>
-<p id="p-343">Find eigenvectors of <span class="process-math">\(A = \begin{bmatrix}1 &amp;  4 \\ 1 &amp;  1\end{bmatrix}\)</span> corresponding to the eigenvalues <span class="process-math">\(\lambda_{1} = -1\)</span> and <span class="process-math">\(\lambda_{2} = 3\text{.}\)</span></p>
+<div class="para" id="p-348">Find eigenvectors of <span class="process-math">\(A = \begin{bmatrix}1 &amp;  4 \\ 1 &amp;  1\end{bmatrix}\)</span> corresponding to the eigenvalues <span class="process-math">\(\lambda_{1} = -1\)</span> and <span class="process-math">\(\lambda_{2} = 3\text{.}\)</span>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-54" id="solution-54"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-54"><div class="solution solution-like">
-<p id="p-344">Suppose that <span class="process-math">\(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda\text{.}\)</span> Then we know that</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
+<div class="para logical" id="p-349">
+<div class="para">Suppose that <span class="process-math">\(\vec{v} = \begin{bmatrix} v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda\text{.}\)</span> Then we know that</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \begin{bmatrix}1 &amp;  4 \\ 1 &amp;  1\end{bmatrix}\vec{v} = \lambda\vec{v} \Rightarrow \begin{bmatrix}v_{1}+4v_{2} \\ v_{1} + v_{2}\end{bmatrix} = \begin{bmatrix} \lambda v_{1} \\ \lambda v_{2} \end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">This tells us that if <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then its entries need to satisfy</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="equation-eigenvector-relation">
+<div class="para">This tells us that if <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2} \end{bmatrix}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then its entries need to satisfy</div>
+<div class="displaymath process-math" id="equation-eigenvector-relation">
 \begin{align}
 v_{1}+4v_{2}&amp; =\lambda v_{1}\notag\\
 v_{1}+v_{2} &amp; = \lambda v_{2}\notag
 \end{align}
 </div>
-<p class="continuation">which boils down to</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-35">
+<div class="para">which boils down to</div>
+<div class="displaymath process-math" id="md-36">
 \begin{align*}
 (1-\lambda)v_{1}+4v_{2} &amp; = 0\\
 v_{1} + (1-\lambda)v_{2} &amp; = 0.
 \end{align*}
 </div>
-<p id="p-345">Now set <span class="process-math">\(\lambda = -1\)</span> to get the system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-36">
+</div> <div class="para logical" id="p-350">
+<div class="para">Now set <span class="process-math">\(\lambda = -1\)</span> to get the system</div>
+<div class="displaymath process-math" id="md-37">
 \begin{align*}
 2v_{1} + 4v_{2} &amp; = 0\\
 v_{1} + 2v_{2} &amp; = 0
 \end{align*}
 </div>
-<p class="continuation">and so <span class="process-math">\(v_{1} = -2v_{2}\text{.}\)</span> We don't really care about what the entries of <span class="process-math">\(\vec{v}\)</span> look like so long as <span class="process-math">\(\vec{v}\)</span> is an eigenvector, so we can pick <span class="process-math">\(v_{1},v_{2}\)</span> however we want, just so long as they satisfy this relation (and are not both <span class="process-math">\(0\text{!}\)</span>). So pick <span class="process-math">\(v_{2} = 1\text{,}\)</span> which forces <span class="process-math">\(v_{1} = -2\text{.}\)</span> Then</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">and so <span class="process-math">\(v_{1} = -2v_{2}\text{.}\)</span> We don’t really care about what the entries of <span class="process-math">\(\vec{v}\)</span> look like so long as <span class="process-math">\(\vec{v}\)</span> is an eigenvector, so we can pick <span class="process-math">\(v_{1},v_{2}\)</span> however we want, just so long as they satisfy this relation (and are not both <span class="process-math">\(0\text{!}\)</span>). So pick <span class="process-math">\(v_{2} = 1\text{,}\)</span> which forces <span class="process-math">\(v_{1} = -2\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}-2\\1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">is an eigenvector of <span class="process-math">\(A\)</span> corresponding to the eigenvalue <span class="process-math">\(\lambda_{1} = -1\text{.}\)</span></p>
-<p id="p-346">To find an eigenvector for <span class="process-math">\(\lambda_{2} = 3\)</span> we just set <span class="process-math">\(\lambda  = 3\)</span> and run through the same process:</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-37">
+<div class="para">is an eigenvector of <span class="process-math">\(A\)</span> corresponding to the eigenvalue <span class="process-math">\(\lambda_{1} = -1\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-351">
+<div class="para">To find an eigenvector for <span class="process-math">\(\lambda_{2} = 3\)</span> we just set <span class="process-math">\(\lambda  = 3\)</span> and run through the same process:</div>
+<div class="displaymath process-math" id="md-38">
 \begin{align*}
 -2v_{1}+4v_{2} &amp; = 0\\
 v_{1} - 2v_{2} &amp; = 0
 \end{align*}
 </div>
-<p class="continuation">The second equation simplifies to <span class="process-math">\(v_{1} = 2v_{2}\text{,}\)</span> so one eigenvector for <span class="process-math">\(\lambda_{2}\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">The second equation simplifies to <span class="process-math">\(v_{1} = 2v_{2}\text{,}\)</span> so one eigenvector for <span class="process-math">\(\lambda_{2}\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}2 \\ 1\end{bmatrix}.
 \end{equation*}
+</div>
 </div>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-solving-matrix-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Solving Matrix ODEs</span>
 </h3>
-<p id="p-347">We now have the tools we need to begin solving matrix ODEs. Recall that if <span class="process-math">\(A\)</span> is an <span class="process-math">\(n\times n\)</span> matrix with constant entries, and if <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\ldots,\vec{x}_{n}\)</span> are <span class="process-math">\(n\)</span> linearly independent solutions of the matrix ODE <span class="process-math">\(\vec{x}^\prime=A\vec{x}\text{,}\)</span> then the general solution of the matrix ODE is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-352">
+<div class="para">We now have the tools we need to begin solving matrix ODEs. Recall that if <span class="process-math">\(A\)</span> is an <span class="process-math">\(n\times n\)</span> matrix with constant entries, and if <span class="process-math">\(\vec{x}_{1},\vec{x}_{2},\ldots,\vec{x}_{n}\)</span> are <span class="process-math">\(n\)</span> linearly independent solutions of the matrix ODE <span class="process-math">\(\vec{x}^\prime=A\vec{x}\text{,}\)</span> then the general solution of the matrix ODE is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \sum_{k=1}^{n}c_{k}\vec{x}_{k}.
 \end{equation*}
 </div>
-<p class="continuation">Furthermore, if <span class="process-math">\(\lambda\)</span> is an eigenvalue of <span class="process-math">\(A\)</span> with eigenvector <span class="process-math">\(\vec{v}\text{,}\)</span> then <span class="process-math">\(e^{\lambda t}\vec{v}\)</span> is a solution of <span class="process-math">\(\vec{x}^\prime=A\vec{x}\text{.}\)</span> So solving the matrix ODE <span class="process-math">\(\vec{x}^\prime=A\vec{x}\)</span> requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:</p>
+<div class="para">Furthermore, if <span class="process-math">\(\lambda\)</span> is an eigenvalue of <span class="process-math">\(A\)</span> with eigenvector <span class="process-math">\(\vec{v}\text{,}\)</span> then <span class="process-math">\(e^{\lambda t}\vec{v}\)</span> is a solution of <span class="process-math">\(\vec{x}^\prime=A\vec{x}\text{.}\)</span> So solving the matrix ODE <span class="process-math">\(\vec{x}^\prime=A\vec{x}\)</span> requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:</div>
+</div>
 <article class="theorem theorem-like" id="theorem-linear-independence-distinct-eigenvalues"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.2.8</span><span class="period">.</span>
 </h4>
-<p id="p-348">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix with constant entries. If the eigenvalues <span class="process-math">\(\lambda_{1},\ldots,\lambda_{n}\)</span> of <span class="process-math">\(A\)</span> are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if <span class="process-math">\(\vec{v}_{i}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda_{i}\)</span> then the eigenvectors <span class="process-math">\(\vec{v}_{1},\ldots,\vec{v}_{n}\)</span> are linearly independent.</p></article><article class="example example-like" id="example-58"><h4 class="heading">
+<div class="para" id="p-353">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix with constant entries. If the eigenvalues <span class="process-math">\(\lambda_{1},\ldots,\lambda_{n}\)</span> of <span class="process-math">\(A\)</span> are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if <span class="process-math">\(\vec{v}_{i}\)</span> is an eigenvector corresponding to <span class="process-math">\(\lambda_{i}\)</span> then the eigenvectors <span class="process-math">\(\vec{v}_{1},\ldots,\vec{v}_{n}\)</span> are linearly independent.</div></article><article class="example example-like" id="example-59"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span>
 </h4>
-<p id="p-349">Solve the matrix ODE given by <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span> where</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-354">
+<div class="para">Solve the matrix ODE given by <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span> where</div>
+<div class="displaymath process-math">
 \begin{equation*}
 A = \begin{bmatrix}1&amp; 4\\1&amp; 1\end{bmatrix}.
 \end{equation*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-55" id="solution-55"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-55"><div class="solution solution-like">
-<p id="p-350">We already have everything we need. We know that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1}=-1\)</span> and <span class="process-math">\(\lambda_{2}=3\)</span> and some corresponding eigenvectors are</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-56" id="solution-56"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-56"><div class="solution solution-like"><div class="para logical" id="p-355">
+<div class="para">We already have everything we need. We know that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1}=-1\)</span> and <span class="process-math">\(\lambda_{2}=3\)</span> and some corresponding eigenvectors are</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{v}_{2} = \begin{bmatrix}2\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE:</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE:</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}_{1} = e^{\lambda_{1}t}\vec{v}_{1} = e^{-t}\begin{bmatrix}-2\\1\end{bmatrix}\qq{and} \vec{x}_{2} = e^{\lambda_{2}t}\vec{v}_{2} = e^{3t}\begin{bmatrix}2\\1\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">So the general solution of the matrix ODE is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">So the general solution of the matrix ODE is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}\vec{x}_{1} + c_{2}\vec{x}_{2} = c_{1}e^{-t}\begin{bmatrix}-2\\1\end{bmatrix} + c_{2}e^{3t}\begin{bmatrix}2\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Note that the choice of eigenvector <em class="emphasis">doesn't matter</em>. Just so long as we find some particular eigenvector for each distinct eigenvalue.</p>
-</div></div>
-</div></article><article class="example example-like" id="example-59"><h4 class="heading">
+<div class="para">Note that the choice of eigenvector <em class="emphasis">doesn’t matter</em>. Just so long as we find some particular eigenvector for each distinct eigenvalue.</div>
+</div></div></div>
+</div></article><article class="example example-like" id="example-60"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span>
 </h4>
-<p id="p-351">Solve the first-order system given by</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-38">
+<div class="para logical" id="p-356">
+<div class="para">Solve the first-order system given by</div>
+<div class="displaymath process-math" id="md-39">
 \begin{align*}
 x_{1}^\prime &amp; = x_{1} - 5x_{2}\\
 x_{2}^\prime &amp; = x_{1} - x_{2}
 \end{align*}
 </div>
-<p class="continuation">where <span class="process-math">\(x_{1}\)</span> and <span class="process-math">\(x_{2}\)</span> are functions of <span class="process-math">\(t\text{.}\)</span></p>
+<div class="para">where <span class="process-math">\(x_{1}\)</span> and <span class="process-math">\(x_{2}\)</span> are functions of <span class="process-math">\(t\text{.}\)</span>
+</div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-56" id="solution-56"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-56"><div class="solution solution-like">
-<p id="p-352">First, note that this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span> where</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-57" id="solution-57"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-57"><div class="solution solution-like"><div class="para logical" id="p-357">
+<div class="para">First, note that this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\)</span> where</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 &amp;  -5 \\ 1 &amp;  -1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">To solve this system we need to find the eigenvalues and eigenvectors of <span class="process-math">\(A\text{,}\)</span> and then use these to build our general solution.</p>
+<div class="para">To solve this system we need to find the eigenvalues and eigenvectors of <span class="process-math">\(A\text{,}\)</span> and then use these to build our general solution.</div>
 <ol class="decimal">
 <li id="li-22">
-<p id="p-353">Find the eigenvalues.</p>
-<p id="p-354">We find the eigenvalues of <span class="process-math">\(A\)</span> by solving the characteristic equation <span class="process-math">\(\det(A - \lambda I) = 0\)</span> for <span class="process-math">\(\lambda\text{.}\)</span> Since <span class="process-math">\(\det(A - \lambda I) = \lambda^{2}+4\text{,}\)</span> we see that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1} = -2i\)</span> and <span class="process-math">\(\lambda_{2} = 2i\text{.}\)</span> The fact that these eigenvalues are complex is <em class="emphasis">not</em> a problem. They're still distinct, so our method will work.</p>
+<div class="para" id="p-358">Find the eigenvalues.</div>
+<div class="para" id="p-359">We find the eigenvalues of <span class="process-math">\(A\)</span> by solving the characteristic equation <span class="process-math">\(\det(A - \lambda I) = 0\)</span> for <span class="process-math">\(\lambda\text{.}\)</span> Since <span class="process-math">\(\det(A - \lambda I) = \lambda^{2}+4\text{,}\)</span> we see that the eigenvalues of <span class="process-math">\(A\)</span> are <span class="process-math">\(\lambda_{1} = -2i\)</span> and <span class="process-math">\(\lambda_{2} = 2i\text{.}\)</span> The fact that these eigenvalues are complex is <em class="emphasis">not</em> a problem. They’re still distinct, so our method will work.</div>
 </li>
 <li id="li-23">
-<p id="p-355">Find corresponding eigenvectors.</p>
-<p id="p-356">Set <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}\text{.}\)</span> Then <span class="process-math">\(A\vec{v} = \lambda\vec{v}\)</span> implies that</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-39">
+<div class="para" id="p-360">Find corresponding eigenvectors.</div>
+<div class="para logical" id="p-361">
+<div class="para">Set <span class="process-math">\(\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}\text{.}\)</span> Then <span class="process-math">\(A\vec{v} = \lambda\vec{v}\)</span> implies that</div>
+<div class="displaymath process-math" id="md-40">
 \begin{align*}
 v_{1} - 5v_{2}  &amp; =  \lambda v_{1}\\
 v_{1} -v_{2}  &amp; =  \lambda v_{2}
 \end{align*}
 </div>
-<p class="continuation">or just</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-40">
+<div class="para">or just</div>
+<div class="displaymath process-math" id="md-41">
 \begin{align*}
 (1-\lambda)v_{1} - 5v_{2} &amp; =0\\
 v_{1} - (1+\lambda)v_{2} &amp; = 0.
 \end{align*}
 </div>
-<p class="continuation">Setting <span class="process-math">\(\lambda=-2i\)</span> in the second equation gives <span class="process-math">\(v_{1} = (1-2i)v_{2}\text{,}\)</span> so an eigenvector of <span class="process-math">\(A\)</span> corresponding to <span class="process-math">\(\lambda_{1} = -2i\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">Setting <span class="process-math">\(\lambda=-2i\)</span> in the second equation gives <span class="process-math">\(v_{1} = (1-2i)v_{2}\text{,}\)</span> so an eigenvector of <span class="process-math">\(A\)</span> corresponding to <span class="process-math">\(\lambda_{1} = -2i\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}1-2i \\ 1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Similarly, an eigenvector corresponding to <span class="process-math">\(\lambda_{2}=2i\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">Similarly, an eigenvector corresponding to <span class="process-math">\(\lambda_{2}=2i\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{2} = \begin{bmatrix}1+2i\\1\end{bmatrix}.
 \end{equation*}
 </div>
+</div>
 </li>
 <li id="li-24">
-<p id="p-357">Find the general solution.</p>
-<p id="p-358">At this step it is easy to construct the solution of the matrix ODE. It's just</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para" id="p-362">Find the general solution.</div>
+<div class="para logical" id="p-363">
+<div class="para">At this step it is easy to construct the solution of the matrix ODE. It’s just</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{\lambda_{1}t}\vec{v}_{1} + c_{2}e^{\lambda_{2}t}\vec{v}_{2} = \begin{bmatrix}c_{1}e^{-2it}(1-2i)+c_{2}e^{2it}(1+2i) \\ c_{1}e^{-2it}+c_{2}e^{2it}\end{bmatrix}.
 \end{equation*}
 </div>
+</div>
 </li>
 </ol>
-</div></div>
-</div></article><article class="example example-like" id="example-60"><h4 class="heading">
+</div></div></div>
+</div></article><article class="example example-like" id="example-61"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span>
 </h4>
-<p id="p-359">Solve the first-order system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-41">
+<div class="para logical" id="p-364">
+<div class="para">Solve the first-order system</div>
+<div class="displaymath process-math" id="md-42">
 \begin{align*}
 \dv{x_{1}}{t} &amp; = 3x_{1}+x_{3}\\
 \dv{x_{2}}{t} &amp; = 9x_{1}-x_{2}+2x_{3}\\
 \dv{x_{3}}{t} &amp; = -9x_{1} + 4x_{2} - x_{3}
 \end{align*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-57" id="solution-57"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-57"><div class="solution solution-like">
-<p id="p-360">As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-58" id="solution-58"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-58"><div class="solution solution-like">
+<div class="para logical" id="p-365">
+<div class="para">As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}^\prime = \begin{bmatrix}3 &amp;  0 &amp;  1 \\ 9 &amp;  -1 &amp;  2 \\ -9 &amp;  4 &amp;  -1\end{bmatrix}\vec{x} = A\vec{x}.
 \end{equation*}
 </div>
-<p id="p-361">To find the eigenvalues we must solve the characteristic equation <span class="process-math">\(\det(A-\lambda I)=0\text{.}\)</span> However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of <span class="process-math">\(A\)</span> as well as the corresponding eigenvectors. So we see that the eigenvalues are given by</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-366">
+<div class="para">To find the eigenvalues we must solve the characteristic equation <span class="process-math">\(\det(A-\lambda I)=0\text{.}\)</span> However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of <span class="process-math">\(A\)</span> as well as the corresponding eigenvectors. So we see that the eigenvalues are given by</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \lambda_{1} = 3, \quad\lambda_{2} = -1 - i\quad\text{and}\quad\lambda_{3} = -1 + i,
 \end{equation*}
 </div>
-<p class="continuation">while the corresponding eigenvectors are given by</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">while the corresponding eigenvectors are given by</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix}, \quad\vec{v}_{2} = \begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix}\quad\text{and}\vec{v}_{3} = \begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}
 \end{equation*}
 </div>
-<p id="p-362">We now have everything we need for the general solution of the matrix ODE. It's just</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-367">
+<div class="para">We now have everything we need for the general solution of the matrix ODE. It’s just</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{3t}\begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix} + c_{2}e^{(-1 - i)t}\begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix} + c_{3}e^{(-1 + i)t}\begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}.
 \end{equation*}
+</div>
 </div>
 </div></div>
 </div></article><pre class="ptx-sagecell sagecell-sage" id="sage-5"><script type="text/x-sage"># Define our matrix
@@ -580,143 +902,162 @@ pretty_print(M.eigenvectors_right())
 </script></pre></section><section class="subsection" id="subsection-applications-of-matrix-odes"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">Applications of Matrix ODEs</span>
 </h3>
-<p id="p-363">Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.</p>
-<article class="example example-like" id="example-61"><h4 class="heading">
+<div class="para" id="p-368">Now we use matrix ODEs to model physical systems. The methods we’ve developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.</div>
+<article class="example example-like" id="example-62"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span>
 </h4>
-<p id="p-364">Two brine tanks are set up as in <a href="" class="xref" data-knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of <span class="process-math">\(r_{1}\text{,}\)</span> well-mixed solution flows from Tank 1 to Tank 2 at a rate of <span class="process-math">\(r_{2}\)</span> and well-mixed solution flows out of Tank 2 at a rate of <span class="process-math">\(r_{3}\text{.}\)</span> Suppose that <span class="process-math">\(r_{1}, r_{2}\)</span> and  <span class="process-math">\(r_{3}\)</span> are <span class="quantity">5 <sup>gal</sup>⁄<sub>min</sub></span>, the volume of solution in Tank 1 is <span class="quantity">10 gal</span> and the volume of solution in Tank 2 is <span class="quantity">7 gal</span>. Suppose Tank 1 has <span class="quantity">5 lb</span> of salt at time <span class="process-math">\(t=0\)</span> and Tank 2 has <span class="quantity">2 lb</span> of salt at time <span class="process-math">\(t=0\text{.}\)</span> How much salt is in each tank at time <span class="process-math">\(t\text{?}\)</span></p>
+<div class="para" id="p-369">Two brine tanks are set up as in <a href="" class="xref" data-knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of <span class="process-math">\(r_{1}\text{,}\)</span> well-mixed solution flows from Tank 1 to Tank 2 at a rate of <span class="process-math">\(r_{2}\)</span> and well-mixed solution flows out of Tank 2 at a rate of <span class="process-math">\(r_{3}\text{.}\)</span> Suppose that <span class="process-math">\(r_{1}, r_{2}\)</span> and  <span class="process-math">\(r_{3}\)</span> are <span class="quantity">5 <sup>gal</sup>⁄<sub>min</sub></span>, the volume of solution in Tank 1 is <span class="quantity">10 gal</span> and the volume of solution in Tank 2 is <span class="quantity">7 gal</span>. Suppose Tank 1 has <span class="quantity">5 lb</span> of salt at time <span class="process-math">\(t=0\)</span> and Tank 2 has <span class="quantity">2 lb</span> of salt at time <span class="process-math">\(t=0\text{.}\)</span> How much salt is in each tank at time <span class="process-math">\(t\text{?}\)</span>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-58" id="solution-58"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-58"><div class="solution solution-like">
-<p id="p-365">To start, let <span class="process-math">\(x_{1}(t)\)</span> denote the amount of salt in Tank 1 at time <span class="process-math">\(t\)</span> and <span class="process-math">\(x_{2}(t)\)</span> denote the amount of salt in Tank 2 at time <span class="process-math">\(t\text{,}\)</span> where <span class="process-math">\(t\)</span> is in minutes. Then from Section 4.1, we know that</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-42">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-59" id="solution-59"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-59"><div class="solution solution-like">
+<div class="para logical" id="p-370">
+<div class="para">To start, let <span class="process-math">\(x_{1}(t)\)</span> denote the amount of salt in Tank 1 at time <span class="process-math">\(t\)</span> and <span class="process-math">\(x_{2}(t)\)</span> denote the amount of salt in Tank 2 at time <span class="process-math">\(t\text{,}\)</span> where <span class="process-math">\(t\)</span> is in minutes. Then from Section 4.1, we know that</div>
+<div class="displaymath process-math" id="md-43">
 \begin{align*}
 x^\prime_{1} &amp; = -\frac{1}{2}x_{1}\\
 x^\prime_{2} &amp; = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 \end{align*}
 </div>
-<p class="continuation">If we set</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">If we set</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \qq{and} A = \begin{bmatrix}-\frac{1}{2} &amp;  0 \\ \frac{1}{2} &amp;  -\frac{5}{7}\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">then this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\text{.}\)</span> To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation <span class="process-math">\(\det(A-\lambda I) = 0\)</span> or use Maple, but it's easier to note that <span class="process-math">\(A\)</span> is a triangular matrix. So the eigenvalues are just <span class="process-math">\(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</span></p>
-<p id="p-366">Now we find eigenvectors. So let</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">then this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\text{.}\)</span> To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation <span class="process-math">\(\det(A-\lambda I) = 0\)</span> or use Maple, but it’s easier to note that <span class="process-math">\(A\)</span> is a triangular matrix. So the eigenvalues are just <span class="process-math">\(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-371">
+<div class="para">Now we find eigenvectors. So let</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">If <span class="process-math">\(\vec{v}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then we know <span class="process-math">\(A\vec{v} = \lambda\vec{v}\text{,}\)</span> which gives the system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-43">
+<div class="para">If <span class="process-math">\(\vec{v}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then we know <span class="process-math">\(A\vec{v} = \lambda\vec{v}\text{,}\)</span> which gives the system</div>
+<div class="displaymath process-math" id="md-44">
 \begin{align*}
 (-\frac{1}{2}-\lambda)v_{1} &amp; = 0\\
 \frac{1}{2}v_{1} + (-\frac{5}{7}-\lambda)v_{2} &amp; = 0
 \end{align*}
 </div>
-<p class="continuation">If we set <span class="process-math">\(\lambda=-\frac{1}{2}\text{,}\)</span> then we just get <span class="process-math">\(v_{1} = \frac{3}{14}v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{1} = -\frac{1}{2}\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">If we set <span class="process-math">\(\lambda=-\frac{1}{2}\text{,}\)</span> then we just get <span class="process-math">\(v_{1} = \frac{3}{14}v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{1} = -\frac{1}{2}\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-367">Similarly, if we set <span class="process-math">\(\lambda=-\frac{5}{7}\)</span> we get <span class="process-math">\(v_{1} = 0\text{,}\)</span> but no restrictions on <span class="process-math">\(v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{2} = -\frac{5}{7}\)</span> is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-372">
+<div class="para">Similarly, if we set <span class="process-math">\(\lambda=-\frac{5}{7}\)</span> we get <span class="process-math">\(v_{1} = 0\text{,}\)</span> but no restrictions on <span class="process-math">\(v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{2} = -\frac{5}{7}\)</span> is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-368">The general solution of our matrix ODE is then</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-373">
+<div class="para">The general solution of our matrix ODE is then</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}
 \end{equation*}
 </div>
-<p id="p-369">But we're not done yet, since we have the initial conditions <span class="process-math">\(x_{1}(0) = 5\)</span> and <span class="process-math">\(x_{2}(0) = 2\text{,}\)</span> or in terms of our matrix ODE</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-374">
+<div class="para">But we’re not done yet, since we have the initial conditions <span class="process-math">\(x_{1}(0) = 5\)</span> and <span class="process-math">\(x_{2}(0) = 2\text{,}\)</span> or in terms of our matrix ODE</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">We can use this to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> If we set <span class="process-math">\(t=0\text{,}\)</span> then we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">We can use this to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> If we set <span class="process-math">\(t=0\text{,}\)</span> then we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">so <span class="process-math">\(c_{2} = \frac{5}{3}\)</span> and <span class="process-math">\(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</span></p>
-<p id="p-370">So the solution of the matrix ODE (and hence the original system) is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">so <span class="process-math">\(c_{2} = \frac{5}{3}\)</span> and <span class="process-math">\(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-375">
+<div class="para">So the solution of the matrix ODE (and hence the original system) is</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}
 \end{equation*}
 </div>
-<p class="continuation">The amount of salt in the first tank, <span class="process-math">\(x_{1}\text{,}\)</span> is given by the top entry and the amount of salt in the second tank, <span class="process-math">\(x_{2}\text{,}\)</span> is given by the bottom entry.</p>
+<div class="para">The amount of salt in the first tank, <span class="process-math">\(x_{1}\text{,}\)</span> is given by the top entry and the amount of salt in the second tank, <span class="process-math">\(x_{2}\text{,}\)</span> is given by the bottom entry.</div>
+</div>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-the-phase-plane"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber"></span> <span class="title">The Phase Plane</span>
 </h3>
-<p id="p-371">Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="mdn-2">
+<div class="para logical" id="p-376">
+<div class="para">Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system</div>
+<div class="displaymath process-math" id="mdn-2">
 \begin{align}
 y^\prime_{1}  &amp; =  a_{11}y_{1} + a_{12}y_{2}\tag{6}\\
 y^\prime_{2}  &amp; =  a_{21}y_{1}+  a_{22}y_{2}\notag
 \end{align}
 </div>
-<p class="continuation">or</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">or</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}^\prime = A\vec{y}\quad\text{where}\quad A = \begin{bmatrix}a_{11}  &amp;  a_{12}  \\  a_{21}  &amp;  a_{22}\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-372">The solution of this looks like <span class="process-math">\(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\)</span> As <span class="process-math">\(t\)</span> varies, <span class="process-math">\(\vec{y}(t)\)</span> will trace out a curve in the <span class="process-math">\(y_{1}y_{2}\)</span>-plane, which we call the <dfn class="terminology">trajectory</dfn>. The <span class="process-math">\(y_{1}y_{2}\)</span>-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 6">(6)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 6">(6)</a> without actually solving the system.</p>
+</div>
+<div class="para" id="p-377">The solution of this looks like <span class="process-math">\(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\)</span> As <span class="process-math">\(t\)</span> varies, <span class="process-math">\(\vec{y}(t)\)</span> will trace out a curve in the <span class="process-math">\(y_{1}y_{2}\)</span>-plane, which we call the <dfn class="terminology">trajectory</dfn>. The <span class="process-math">\(y_{1}y_{2}\)</span>-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 6">(6)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 6">(6)</a> without actually solving the system.</div>
 <article class="example example-like" id="example-sketch-phase-portrait"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span>
 </h4>
-<p id="p-373">Sketch a phase portrait for the system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-44">
+<div class="para logical" id="p-378">
+<div class="para">Sketch a phase portrait for the system</div>
+<div class="displaymath process-math" id="md-45">
 \begin{align*}
 \dv{y_{1}}{t}  &amp; =  2y_{1} - 3y_{2}\\
 \dv{y_{2}}{t}  &amp; =  -2y_{1} + y_{2}.
 \end{align*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-59" id="solution-59"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-59"><div class="solution solution-like">
-<p id="p-374">First, note that we can rewrite the system as <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> using</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-60" id="solution-60"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-60"><div class="solution solution-like">
+<div class="para logical" id="p-379">
+<div class="para">First, note that we can rewrite the system as <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> using</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}2 &amp;  -3 \\-2 &amp;  1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">Now, we can view <span class="process-math">\(\vec{y}\)</span> as corresponding to a point in the phase plane. Hence <span class="process-math">\(\vec{y}^\prime\)</span> corresponds to a \emph{tangent} at the point <span class="process-math">\(\vec{y}\text{.}\)</span> For example, let's find the tangent at the point <span class="process-math">\(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{:}\)</span></p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">Now, we can view <span class="process-math">\(\vec{y}\)</span> as corresponding to a point in the phase plane. Hence <span class="process-math">\(\vec{y}^\prime\)</span> corresponds to a \emph{tangent} at the point <span class="process-math">\(\vec{y}\text{.}\)</span> For example, let’s find the tangent at the point <span class="process-math">\(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 &amp;  -3 \\ -2 &amp;  1\end{bmatrix}\begin{bmatrix}2\\2\end{bmatrix} = \begin{bmatrix}-2 \\ -2\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-375">So at the point <span class="process-math">\((2,2)\)</span> in the phase plane, the trajectory should be heading in the direction of the point <span class="process-math">\((-2,-2)\)</span> from the origin. Similarly, if we let <span class="process-math">\(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\)</span> then we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical" id="p-380">
+<div class="para">So at the point <span class="process-math">\((2,2)\)</span> in the phase plane, the trajectory should be heading in the direction of the point <span class="process-math">\((-2,-2)\)</span> from the origin. Similarly, if we let <span class="process-math">\(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\)</span> then we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 &amp;  -3 \\ -2 &amp;  1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix} = \begin{bmatrix}-3 \\ 1\end{bmatrix}.
 \end{equation*}
 </div>
-<p class="continuation">So the trajectory going through <span class="process-math">\((0,1)\)</span> in the phase plane should be heading in the direction of <span class="process-math">\((-3,1)\)</span> viewed from the origin.</p>
-<p id="p-376">Plotting other points in the phase plane like this, we get <a href="" class="xref" data-knowl="./knowl/figure-sketch-phase-portrait.html" title="Figure 4.2.14">Figure 4.2.14</a>. One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions <span class="process-math">\(y_{1}(0) = y_{2}(0)\text{,}\)</span> appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is</p>
+<div class="para">So the trajectory going through <span class="process-math">\((0,1)\)</span> in the phase plane should be heading in the direction of <span class="process-math">\((-3,1)\)</span> viewed from the origin.</div>
+</div> <div class="para logical" id="p-381">
+<div class="para">Plotting other points in the phase plane like this, we get <a href="" class="xref" data-knowl="./knowl/figure-sketch-phase-portrait.html" title="Figure 4.2.14">Figure 4.2.14</a>. One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions <span class="process-math">\(y_{1}(0) = y_{2}(0)\text{,}\)</span> appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-sketch-phase-portrait.html">
 \begin{equation*}
 \vec{y} = c_{1}e^{4t}\begin{bmatrix}-3\\2\end{bmatrix}+c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}.
 \end{equation*}
 </div>
-<p id="p-377">If <span class="process-math">\(\vec{y}\)</span> lies on the line <span class="process-math">\(y_{2} = y_{1}\text{,}\)</span> then <span class="process-math">\(c_{1}\)</span> has to equal <span class="process-math">\(0\text{,}\)</span> which follows from the fact that <span class="process-math">\(\begin{bmatrix}-3\\2\end{bmatrix}\)</span> and <span class="process-math">\(\begin{bmatrix}1\\1\end{bmatrix}\)</span> are linearly independent. So trajectories that lie on the line <span class="process-math">\(y_{2} = y_{1}\)</span> must take the form <span class="process-math">\(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\)</span> and every solution of this form goes to <span class="process-math">\(\vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> <em class="emphasis">Every other trajectory</em> will move away from the origin as <span class="process-math">\(t\to\infty\text{,}\)</span> although the trajectories that lie on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\)</span> will travel to the origin as <span class="process-math">\(t\to-\infty\)</span> (i.e. ``backwards in time''):</p>
+</div> <div class="para" id="p-382">If <span class="process-math">\(\vec{y}\)</span> lies on the line <span class="process-math">\(y_{2} = y_{1}\text{,}\)</span> then <span class="process-math">\(c_{1}\)</span> has to equal <span class="process-math">\(0\text{,}\)</span> which follows from the fact that <span class="process-math">\(\begin{bmatrix}-3\\2\end{bmatrix}\)</span> and <span class="process-math">\(\begin{bmatrix}1\\1\end{bmatrix}\)</span> are linearly independent. So trajectories that lie on the line <span class="process-math">\(y_{2} = y_{1}\)</span> must take the form <span class="process-math">\(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\)</span> and every solution of this form goes to <span class="process-math">\(\vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> <em class="emphasis">Every other trajectory</em> will move away from the origin as <span class="process-math">\(t\to\infty\text{,}\)</span> although the trajectories that lie on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\)</span> will travel to the origin as <span class="process-math">\(t\to-\infty\)</span> (i.e. ``backwards in time’’):</div>
 </div></div>
-</div></article><figure class="figure figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095274936148%"><iframe src="generated/asymptote/image-15.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><p id="p-378">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</p>
+</div></article><figure class="figure figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095275624142%"><iframe src="generated/asymptote/image-15.html" class="asymptote"></iframe></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><div class="para" id="p-383">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</div>
 <pre class="ptx-sagecell sagecell-sage" id="sage-6"><script type="text/x-sage">var('y1 y2') # define from system variables
 VF=plot_vector_field([2*y1 - 3*y2,-2*y1 + y2],[y1,-2,2],[y2,-2,2]) # creates plot of phase portrait from system
 show(VF) # shows the plot
 </script></pre>
-<p id="p-379">Note that <span class="process-math">\(\vec{y}=\vec{0}\)</span> is <em class="emphasis">always</em> a solution of <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> This is because <span class="process-math">\(\vec{0}^\prime=A\vec{0} = \vec{0}\text{.}\)</span> We call <span class="process-math">\(\vec{y} = \vec{0}\)</span> the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> In the next section, we will be concerned with the behavior of trajectories of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix <span class="process-math">\(A\text{.}\)</span></p>
-<p id="p-380">We will classify the behavior of trajectories at the critical point <span class="process-math">\(\vec{x} = \vec{0}\)</span> into five different cases:</p>
+<div class="para" id="p-384">Note that <span class="process-math">\(\vec{y}=\vec{0}\)</span> is <em class="emphasis">always</em> a solution of <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> This is because <span class="process-math">\(\vec{0}^\prime=A\vec{0} = \vec{0}\text{.}\)</span> We call <span class="process-math">\(\vec{y} = \vec{0}\)</span> the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> In the next section, we will be concerned with the behavior of trajectories of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix <span class="process-math">\(A\text{.}\)</span>
+</div>
+<div class="para" id="p-385">We will classify the behavior of trajectories at the critical point <span class="process-math">\(\vec{x} = \vec{0}\)</span> into five different cases:</div>
 <figure class="table table-like" id="table-9"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">4.2.15<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Classification</td>
@@ -748,64 +1089,80 @@ show(VF) # shows the plot
 <td class="l m b3 r0 l0 t0 lines">Trajectories spiral inwards or outwards from <span class="process-math">\(\vec{0}\)</span>
 </td>
 </tr>
-</table></div></figure><p id="p-381"><span class="process-math">\(\vec{0}\)</span> was a saddle point in <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a> since there were incoming trajectories on the line <span class="process-math">\(y_{2} = y_{1}\)</span> and outgoing trajectories on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</span></p>
+</table></div></figure><div class="para" id="p-386">
+<span class="process-math">\(\vec{0}\)</span> was a saddle point in <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a> since there were incoming trajectories on the line <span class="process-math">\(y_{2} = y_{1}\)</span> and outgoing trajectories on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</span>
+</div>
 <article class="example example-like" id="example-stability-equilibrium-solution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span>
 </h4>
-<p id="p-382">Using a phase portrait, determine the type of critical point that <span class="process-math">\(\vec{y} = \vec{0}\)</span> is for the matrix ODE <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> where</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical" id="p-387">
+<div class="para">Using a phase portrait, determine the type of critical point that <span class="process-math">\(\vec{y} = \vec{0}\)</span> is for the matrix ODE <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> where</div>
+<div class="displaymath process-math">
 \begin{equation*}
 \vec{y} = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}3 &amp;  4 \\ -4 &amp;  3\end{bmatrix}.
 \end{equation*}
 </div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-60" id="solution-60"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-60"><div class="solution solution-like">
-<p id="p-383">As seen in <a href="" class="xref" data-knowl="./knowl/figure-classify-stability-using-phase-portrait.html" title="Figure 4.2.17">Figure 4.2.17</a>, every (nonzero) trajectory will spiral outward from <span class="process-math">\(\vec{y} = \vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> so <span class="process-math">\(\vec{0}\)</span> is a spiral point of this system. To see why, we only need to look at the eigenvalues of <span class="process-math">\(A\text{,}\)</span> which we find to be</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-61" id="solution-61"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-61"><div class="solution solution-like">
+<div class="para logical" id="p-388">
+<div class="para">As seen in <a href="" class="xref" data-knowl="./knowl/figure-classify-stability-using-phase-portrait.html" title="Figure 4.2.17">Figure 4.2.17</a>, every (nonzero) trajectory will spiral outward from <span class="process-math">\(\vec{y} = \vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> so <span class="process-math">\(\vec{0}\)</span> is a spiral point of this system. To see why, we only need to look at the eigenvalues of <span class="process-math">\(A\text{,}\)</span> which we find to be</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-classify-stability-using-phase-portrait.html">
 \begin{equation*}
 \lambda_{1} = 3+4i,\lambda_{2} = 3-4i.
 \end{equation*}
 </div>
-<p class="continuation">This means that the general solution of <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> must look like</p>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-classify-stability-using-phase-portrait.html" id="md-45">
+<div class="para">This means that the general solution of <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> must look like</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-classify-stability-using-phase-portrait.html" id="md-46">
 \begin{align*}
 \vec{y} &amp; = c_{1}e^{(3+4i)t}\vec{y}_{1} + c_{2}e^{(3-4i)t}\vec{y}_{2}\\
 &amp; = e^{3t}\brackets{c_{1}e^{4it}\vec{y}_{1}+c_{2}e^{-4it}\vec{y}_{2}}\\
 &amp; = e^{3t}\brackets{(\cos4t)\vec{x}_{1}+(\sin4t)\vec{x}_{2}}\text{.}
 \end{align*}
 </div>
-<p id="p-384">The real part of the eigenvalues leads to the ``growth term'' of <span class="process-math">\(e^{3t}\)</span> appearing in the solution, which causes the trajectories to diverge as <span class="process-math">\(t\to\infty\text{.}\)</span> The imaginary part of the eigenvalues leads to the ``oscillating terms'' of <span class="process-math">\(\cos4t,\sin4t\)</span> appearing in the solution, which gives the trajectories their spiral motion.</p>
+</div> <div class="para" id="p-389">The real part of the eigenvalues leads to the ``growth term’’ of <span class="process-math">\(e^{3t}\)</span> appearing in the solution, which causes the trajectories to diverge as <span class="process-math">\(t\to\infty\text{.}\)</span> The imaginary part of the eigenvalues leads to the ``oscillating terms’’ of <span class="process-math">\(\cos4t,\sin4t\)</span> appearing in the solution, which gives the trajectories their spiral motion.</div>
 </div></div>
-</div></article><figure class="figure figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095278913223%"><iframe src="generated/asymptote/image-16.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a href="" class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><p id="p-385">In general, the eigenvalues of the matrix <span class="process-math">\(A\)</span> in the system <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> will determine the type of critical point that <span class="process-math">\(\vec{0}\)</span> is for the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span></p>
-<article class="example example-like" id="example-64"><h4 class="heading">
+</div></article><figure class="figure figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095279654244%"><iframe src="generated/asymptote/image-16.html" class="asymptote"></iframe></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a href="" class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><div class="para" id="p-390">In general, the eigenvalues of the matrix <span class="process-math">\(A\)</span> in the system <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> will determine the type of critical point that <span class="process-math">\(\vec{0}\)</span> is for the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span>
+</div>
+<article class="example example-like" id="example-65"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.18</span><span class="period">.</span>
 </h4>
-<p id="p-386">What kind of critical point is <span class="process-math">\(\vec{y} = \vec{0}\)</span> for the system</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-46">
+<div class="para logical" id="p-391">
+<div class="para">What kind of critical point is <span class="process-math">\(\vec{y} = \vec{0}\)</span> for the system</div>
+<div class="displaymath process-math" id="md-47">
 \begin{align*}
 y^\prime_{1} &amp; = -4y_{2}\\
 y^\prime_{2}  &amp; =  4y_{1}
 \end{align*}
 </div>
-<p class="continuation">where <span class="process-math">\(y_{i} = y_{i}(t)\text{?}\)</span></p>
+<div class="para">where <span class="process-math">\(y_{i} = y_{i}(t)\text{?}\)</span>
+</div>
+</div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-61" id="solution-61"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-61"><div class="solution solution-like">
-<p id="p-387">We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories <span class="process-math">\(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \)</span> if we can find a relationship between <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span> To do so, we “cross-multiply” the system to get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-62" id="solution-62"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-62"><div class="solution solution-like">
+<div class="para logical" id="p-392">
+<div class="para">We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories <span class="process-math">\(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \)</span> if we can find a relationship between <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span> To do so, we “cross-multiply” the system to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 4y_{1}y^\prime_{1} = -4y_{2}y^\prime_{2} \quad\text{or}\quad 4y_{1}\dd{y_{1}} = -4y_{2}\dd{y_{2}}.
 \end{equation*}
 </div>
-<p class="continuation">So we can integrate this to get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">So we can integrate this to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
 2y_{1}^{2} = -2y_{2}^{2}+C\qq{or}y_{1}^{2}+y_{2}^{2} = C_{1}.
 \end{equation*}
 </div>
-<p id="p-388">This is the equation of a circle of radius <span class="process-math">\(\sqrt{C_{1}}\text{,}\)</span> and so every trajectory <span class="process-math">\(\vec{y}\)</span> for this system will be a circle centered at <span class="process-math">\(\vec{0}\text{.}\)</span> Hence <span class="process-math">\(\vec{0}\)</span> is a center.</p>
+</div> <div class="para" id="p-393">This is the equation of a circle of radius <span class="process-math">\(\sqrt{C_{1}}\text{,}\)</span> and so every trajectory <span class="process-math">\(\vec{y}\)</span> for this system will be a circle centered at <span class="process-math">\(\vec{0}\text{.}\)</span> Hence <span class="process-math">\(\vec{0}\)</span> is a center.</div>
 </div></div>
-</div></article></section></section></div></main>
+</div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="section-systems-of-odes-as-models.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="section-criteria-for-critical-points-stability.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png"></a>
 </div>
 </body>
 </html>

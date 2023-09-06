@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
 <!--*                                          *-->
@@ -11,12 +11,123 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math"><div class="solution solution-like">
-<p>Using <a href="" class="xref" data-knowl="./knowl/equation-bessel-function-first-kind.html" title="Equation 20">(20)</a>, we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-bessel-function-first-kind.html">
+<div class="para logical">
+<div class="para">If we divide through the ODE by <span class="process-math">\(x^{2}\)</span> we get a divide-by-zero problem at <span class="process-math">\(x=0\text{,}\)</span> so <span class="process-math">\(x=0\)</span> is a singular point. However, for this ODE we have</div>
+<div class="displaymath process-math">
 \begin{align*}
-J_{0}(x) &amp; = \sum_{k\geq0}\frac{(-1)^{k}}{2^{2k}(k!)^{2}}x^{2k} &amp;= 1 - \frac{1}{4}x^{2} + \frac{1}{16(4)}x^{4} - \cdots\\
-J_{1}(x) &amp; = x\sum_{k\geq0}\frac{(-1)^{k}}{2^{2k + 1}k!(1 + k)!}x^{2k} &amp;= \frac{1}{2}x - \frac{1}{8(2)}x^{3} + \cdots\text{.}
+p(x) &amp;= 1\\
+q(x) &amp;= x^{2}-\frac{1}{4}
 \end{align*}
+</div>
+<div class="para">so <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> both have power series representations centered at <span class="process-math">\(0\)</span> (namely, themselves!). This means we can use the method of Frobenius to find a solution of the form <span class="process-math">\(y = x^r\sum_{n=0}^{\infty}c_n x^n\text{.}\)</span>
+</div>
+</div> <div class="para logical">
+<div class="para">The first step is to set up and solve the indicial equation, which in this case is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+r(r-1)+r-\frac{1}{4} = 0.
+\end{equation*}
+</div>
+<div class="para">We solve this algebraically for <span class="process-math">\(r\)</span> to get the roots <span class="process-math">\(r_{1}=\frac{1}{2}\)</span> and <span class="process-math">\(r_{2}=-\frac{1}{2}\text{.}\)</span> Since <span class="process-math">\(r_{1}-r_{2} = 1\)</span> is an integer, we are guaranteed a solution based on <span class="process-math">\(r_{1} = \frac{1}{2}\)</span> and a second solution based on <span class="process-math">\(r_{2} = -\frac{1}{2}\)</span> and the logarithm. So we make the guess</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y = x^{\frac{1}{2}}\sum_{n\geq0}^{}c_{n}x^{n} = \sum_{n\geq0}^{}c_{n}x^{n+\frac{1}{2}}.
+\end{equation*}
+</div>
+<div class="para">Now we plug this into the ODE to get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{n\geq0}c_{n}(n+\frac{1}{2})(n-\frac{1}{2})x^{n+\frac{1}{2}} + \sum_{n\geq0}c_{n}(n+\frac{1}{2})x^{n+\frac{1}{2}} 
++ \sum_{n\geq0}c_{n}x^{n+\frac{5}{2}} - \sum_{n\geq0}\frac{1}{4}c_{n}x^{n+\frac{1}{2}}
+\end{equation*}
+</div>
+<div class="para">or just</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{n\geq0}^{}\left[(n+\frac{1}{2})(n-\frac{1}{2})+(n+\frac{1}{2})-\frac{1}{4}\right]c_{n}x^{n+\frac{1}{2}} 
++\sum_{n\geq2}^{}c_{n-2}x^{n+\frac{1}{2}}=0.
+\end{equation*}
+</div>
+<div class="para">which simplifies to</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{n\geq0} n(n+1)c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
+\end{equation*}
+</div>
+<div class="para">So the recurrence relation the coefficients <span class="process-math">\(c_{n}\)</span> need to satisfy is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_{n} = -\frac{1}{n(n+1)}c_{n-2}\quad\text{for}\quad n\geq2.
+\end{equation*}
+</div>
+</div> <div class="para logical">
+<div class="para">The recurrence relation will tell us <em class="emphasis">nothing</em> about <span class="process-math">\(c_{0},c_{1}\text{,}\)</span> so to see if there are any restrictions on <span class="process-math">\(c_{0},c_{1}\)</span> we separate the <span class="process-math">\(n=0\)</span> and <span class="process-math">\(n=1\)</span> terms from the summation to get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+0c_{0}x^{\frac{1}{2}}+2c_{1}x^{\frac{3}{2}}+\sum_{n\geq2}^{}\left[n(n+1)c_{n}+c_{n-2}\right]x^{n+\frac{1}{2}}=0
+\end{equation*}
+</div>
+<div class="para">This equation places no restrictions at all on <span class="process-math">\(c_{0}\text{,}\)</span> but it does force <span class="process-math">\(c_{1} = 0\)</span> since we need the <span class="process-math">\(x^{\frac{3}{2}}\)</span> term to disappear to make this equation true. This tells us that we can ignore the coefficients <span class="process-math">\(c_{n}\)</span> with odd index, since they will all disappear.</div>
+</div> <div class="para logical">
+<div class="para">Now we’ll try to find a pattern in the remaining coefficients:</div>
+<div class="displaymath process-math">
+\begin{align*}
+c_{2} &amp;= -\frac{1}{2\cdot3}c_{0}\\
+c_{4} &amp;= -\frac{1}{4\cdot5}c_{2} = \frac{(-1)^{2}}{5!}c_{0}\\
+c_{6} &amp;= -\frac{1}{6\cdot7}c_{4} = \frac{(-1)^{3}}{7!}c_{0}
+\end{align*}
+</div>
+<div class="para">and in general</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_{2n} = \frac{(-1)^{n}}{(2n+1)!}c_{0}.
+\end{equation*}
+</div>
+<div class="para">So the solution of this ODE is given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y = \sum_{n\geq0}c_{2n}x^{2n+\frac{1}{2}} = \sum_{n\geq0}\frac{(-1)^{n}}{(2n+1)!}c_{0}x^{2n+\frac{1}{2}},
+\end{equation*}
+</div>
+<div class="para">which is actually just</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y = c_{0}\frac{\sin x}{\sqrt{x}}
+\end{equation*}
+</div>
+</div> <div class="para logical">
+<div class="para">Technically, this isn’t the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a> that the second solution must be of the form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{equation*}
+y_2 = k\frac{\sin(x)}{\sqrt{x}}\ln(x) + x^{-\frac{1}{2}}\sum_{n\geq0}C_n x^n.
+\end{equation*}
+</div>
+<div class="para">Plugging this into the original ODE (and using a computer algebra system such as Sage), we get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{equation*}
+{\left(C_{3} + 20 \, C_{5}\right)} x^{\frac{9}{2}} + {\left(C_{2} + 12 \, C_{4}\right)} x^{\frac{7}{2}} + {\left(C_{1} + 6 \, C_{3}\right)} x^{\frac{5}{2}} + {\left(C_{0} + 2 \, C_{2}\right)} x^{\frac{3}{2}} + 2 \, k \sqrt{x} \cos\left(x\right) - \frac{k \sin\left(x\right)}{\sqrt{x}} = 0
+\end{equation*}
+</div>
+<div class="para">after truncating the expansion up to the <span class="process-math">\(n=5\)</span> term. This allows us (theoretically) to solve for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\text{.}\)</span> In fact, we get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{align*}
+k &amp;= 0\\
+C_{2n} &amp;= \frac{(-1)^n}{(2n)!}C_0\\
+C_{2n+1} &amp;= \frac{(-1)^n}{(2n+1)!}C_1
+\end{align*}
+</div>
+<div class="para">and so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{equation*}
+y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right].
+\end{equation*}
+</div>
+<div class="para">Since the second series corresponds to a multiple of <span class="process-math">\(y_1 = \frac{\sin(x)}{\sqrt{x}}\text{,}\)</span> we can safely set <span class="process-math">\(C_1 = 0\)</span> and get <span class="process-math">\(y_2 = C_0\frac{\cos(x)}{\sqrt{x}}\text{.}\)</span> Therefore the general solution of the ODE is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{equation*}
+y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}.
+\end{equation*}
+</div>
 </div>
 </div></body>
 </html>

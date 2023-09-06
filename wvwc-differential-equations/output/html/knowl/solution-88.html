@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
 <!--*                                          *-->
@@ -13,83 +13,45 @@
 <body class="ignore-math">
 <div class="solution solution-like">
 <h3 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">6.3.2.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">6.2.5.1</span><span class="period">.</span>
 </h3>
-<p>By Hooke's Law and Newton's Second Law, we have</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para logical">
+<div class="para">We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at <span class="process-math">\(0\)</span> we can’t do so right away. The trick here is to shift the initial conditions <em class="emphasis">back</em> to <span class="process-math">\(0\)</span> as follows. First, we define a new function <span class="process-math">\(\widetilde{y}\)</span> by</div>
+<div class="displaymath process-math">
 \begin{equation*}
-mx''+kx = F_{E}(t)
+\widetilde{y}(t) = y(t+4)
 \end{equation*}
 </div>
-<p class="continuation">where <span class="process-math">\(F_{E}\)</span> is the external force at time <span class="process-math">\(t\text{.}\)</span> Since <span class="process-math">\(m = 1\text{,}\)</span> <span class="process-math">\(k = 4\)</span> and</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">where <span class="process-math">\(y(t)\)</span> is the solution we seek. Then it follows that</div>
+<div class="displaymath process-math">
 \begin{equation*}
-F_{E}(t) = 
-\begin{cases}
-\cos3t \amp\text{if }0\leq t\lt 2\pi\\
-0 \amp\text{if }t\geq2\pi  
-\end{cases}
+\widetilde{y}'' - 2\widetilde{y}^\prime - 3\widetilde{y} = 0
 \end{equation*}
 </div>
-<p class="continuation">the motion of the mass satisfies the IVP</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">and <span class="process-math">\(\widetilde{y}(0) = y(4) = -3\)</span> and <span class="process-math">\(\widetilde{y}^\prime(0) = y^\prime(4) = -17\text{.}\)</span> So the Laplace transform method applies to solving for <span class="process-math">\(\widetilde{y}\)</span> in this modified IVP.</div>
+</div> <div class="para logical">
+<div class="para">Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <span class="process-math">\(\widetilde{Y}(s)\)</span> of <span class="process-math">\(\widetilde{y}(t)\text{.}\)</span> Using our initial conditions and a bit of algebra, we get</div>
+<div class="displaymath process-math">
 \begin{equation*}
-x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0.
+\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}.
 \end{equation*}
 </div>
-<p class="continuation">We can rewrite <span class="process-math">\(F_{E}(t)\)</span> as follows:</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+<div class="para">At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
-F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t.
+\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.
 \end{equation*}
 </div>
-<p class="continuation">So the IVP we need to solve is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
+</div> <div class="para logical">
+<div class="para">The final step is to convert our answer from <span class="process-math">\(\widetilde{y}\)</span> to <span class="process-math">\(y\)</span> by making the substitution <span class="process-math">\(t\mapsto t-4\)</span> in <span class="process-math">\(\widetilde{y}\text{.}\)</span> This gives</div>
+<div class="displaymath process-math">
 \begin{equation*}
-x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0.
+y(t) = -5e^{3(t-4)} + 2e^{-(t-4)}
 \end{equation*}
 </div>
-<p>If we take Laplace transforms, this becomes</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{equation*}
-s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},
-\end{equation*}
-</div>
-<p class="continuation">where</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{align*}
-\Laplace{F_{E}(t)} &amp;= \Laplace{u(t)\cos3t} - \Laplace{u(t-2\pi)\cos3t}\\
-&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi)+6\pi)}\\
-&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi))}\\
-&amp;= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}\text{.}
-\end{align*}
-</div>
-<p class="continuation">So</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{equation*}
-s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}.
-\end{equation*}
-</div>
-<p class="continuation">If we solve this for <span class="process-math">\(X(s)\text{,}\)</span> we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{equation*}
-X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},
-\end{equation*}
-</div>
-<p class="continuation">and if we simplify this using partial fractions this becomes</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{equation*}
-X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.
-\end{equation*}
-</div>
-<p>So the solution of the IVP is</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{align*}
-x(t) &amp;= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens\left(1-e^{-2\pi s}}\right)\\
-&amp;= \cos2t + \frac{1}{5}\left(\cos2t-\cos3t\right) - \frac{1}{5}\left(u(t-2\pi)\cos[2(t-2\pi)] - u(t-2\pi)\cos[3(t-2\pi)]\right)\text{.}
-\end{align*}
+<div class="para">as the solution of our IVP.</div>
 </div>
 </div>
-<span class="incontext"><a href="section-unit-step-functions-and-time-shifting.html#solution-88" class="internal">in-context</a></span>
+<span class="incontext"><a href="section-transformation-of-initial-value-problems.html#solution-88" class="internal">in-context</a></span>
 </body>
 </html>
