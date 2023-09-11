@@ -7,7 +7,7 @@ var ptx_lunr_docs = [
   "type": "Colophon",
   "number": "",
   "title": "Colophon",
-  "body": "  Annual Edition 2022  j-oldroyd.github.io\/wvwc-differential-equations  copyright  "
+  "body": "  Annual Edition 2023  j-oldroyd.github.io\/wvwc-differential-equations  copyright  "
 },
 {
   "id": "author-bio-JEO",
