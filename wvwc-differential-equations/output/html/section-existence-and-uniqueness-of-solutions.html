@@ -87,7 +87,19 @@ window.MathJax = {
     )}
   }
 };
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.8/pretext_search.css" rel="stylesheet" type="text/css">
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "linkKey": "linked-sage",
+  "autoeval": false,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.3/pretext_search.js"></script><link href="https://pretextbook.org/css/0.8/pretext_search.css" rel="stylesheet" type="text/css">
 <script>js_version = 0.3</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.3/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.3/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.3/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -119,7 +131,7 @@ window.MathJax = {
 <div id="searchempty" class="searchempty"><span>No results.</span></div>
 <ol id="searchresults" class="searchresults"></ol>
 </div>
-</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span><span class="name">Index</span></a><span class="nav-other-controls"><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="icon material-symbols-outlined" aria-hidden="true">&#xea5f;</span><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span><span class="name">Index</span></a><span class="nav-other-controls"><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="icon material-symbols-outlined" aria-hidden="true">&#xea5f;</span><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
 <script>
 var ggbApp = new GGBApplet({"appName": "graphing",
     "width": 330,
@@ -587,15 +599,47 @@ y(x) = y_{0} + \int_{x_{0}}^{x}f(t,y(t))\,dt.
 \dv{\phi_{n}}{x} = f(x,\phi_{n-1}), \phi_{n}(x_{0}) = y_{0}
 \end{equation*}
 </div>
-<div class="para">for all <span class="process-math">\(n\geq1\text{.}\)</span> This method doesn’t always work, but if <span class="process-math">\(f(x,y)\)</span> satisfies the conditions given in <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> then this method will (after potentially infinitely many steps) provide a solution to the IVP.</div>
-</div></section><section class="subsection" id="subsection-euler-s-method"><h3 class="heading hide-type">
+<div class="para">for all <span class="process-math">\(n\geq1\text{.}\)</span> This method doesn’t always work, but if <span class="process-math">\(f(x,y)\)</span> satisfies the conditions given in <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a> then this method will (after potentially infinitely many steps) provide a solution to the IVP. Since the computations involved are quite tedious, it’s best to use a CAS if possible.</div>
+</div>
+<article class="example example-like" id="example-using-sage-to-compute-picard-iterates"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Using Sage to Compute Picard Iterates.</span>
+</h4>
+<div class="para logical" id="p-111">
+<div class="para">Consider the initial value problem given by</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y^\prime = x + y^2, y(1) = -1\text{.}
+\end{equation*}
+</div>
+<div class="para">We want to approximate the solution by using Picard iteration (note that the differential equation is neither separable nor linear!). We do this with the Sage cell below:</div>
+</div> <pre class="ptx-sagecell sagecell-sage" id="sage-3"><script type="text/x-sage"># We need to tell Sage that y is a variable.
+var('t,y')
+
+# Now we define f(x,y) and our initial conditions.
+f(x, y) = x + y^2
+x0, y0 = 1, -1
+
+# We will also decide how many Picard iterates we want.
+# The below computes 3 iterates, but you're welcome
+# to change n. However, things get very complicated
+# very quickly for this example!
+n = 3
+
+# Define iterates.
+yn(x) = y0
+for k in range(n):
+    yn(x) = y0 + integral(f(t, yn(x=t)), t, x0, x)
+
+# Display n^th iterate.
+show(yn(x))
+</script></pre></article></section><section class="subsection" id="subsection-euler-s-method"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Euler’s Method</span>
 </h3>
-<div class="para" id="p-111">The Picard iteration approach can be useful for finding series approximations of the solution of an ODE. If a more numerical approach is desired, then <em class="emphasis">Euler’s method</em> might be useful. Euler’s method can be thought of as an algorithmic version of tracing a solution curve through a direction field (see <a href="section-direction-fields.html" class="internal" title="Section 1.2: Direction Fields">Section 1.2</a>).</div>
+<div class="para" id="p-112">The Picard iteration approach can be useful for finding series approximations of the solution of an ODE. If a more numerical approach is desired, then <em class="emphasis">Euler’s method</em> might be useful. Euler’s method can be thought of as an algorithmic version of tracing a solution curve through a direction field (see <a href="section-direction-fields.html" class="internal" title="Section 1.2: Direction Fields">Section 1.2</a>).</div>
 <article class="algorithm theorem-like" id="algorithm-euler-s-method"><h4 class="heading">
-<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">1.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Method.</span>
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">1.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Method.</span>
 </h4>
-<div class="para logical" id="p-112">
+<div class="para logical" id="p-113">
 <div class="para">Consider the initial value problem</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -609,12 +653,12 @@ x_n \amp = x_{n-1} + h \\
 y_n \amp = y_{n-1} + hf(x_{n-1}, y_{n-1}) \text{.}
 \end{align*}
 </div>
-</div></article><div class="para" id="p-113">For Euler’s method, the general rule of thumb is as follows: the smaller <span class="process-math">\(h\)</span> is, the better the approximation. However, one should expect degrading performance as the method moves farther from the initial condition <span class="process-math">\((x_0, y_0)\text{.}\)</span>
+</div></article><div class="para" id="p-114">For Euler’s method, the general rule of thumb is as follows: the smaller <span class="process-math">\(h\)</span> is, the better the approximation. However, one should expect degrading performance as the method moves farther from the initial condition <span class="process-math">\((x_0, y_0)\text{.}\)</span>
 </div>
 <article class="example example-like" id="example-euler-s-method-applied-to-nonlinear-ode"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Method Applied to Nonlinear ODE.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.5.6</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Method Applied to Nonlinear ODE.</span>
 </h4>
-<div class="para logical" id="p-114">
+<div class="para logical" id="p-115">
 <div class="para">Let <span class="process-math">\(y(x)\)</span> denote the solution of the IVP given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -626,11 +670,54 @@ y^\prime = x + y^2, y(0) = 1\text{.}
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-17" id="solution-17"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-17"><div class="solution solution-like">
-<div class="para" id="p-115">First, note that we are justified in saying the solution exists at all by <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a>. Euler’s method now produces the following approximations:</div> <div class="tabular-box natural-width"><table class="tabular"><tr>
+<div class="para" id="p-116">First, note that we are justified in saying the solution exists at all by <a href="" class="xref" data-knowl="./knowl/theorem-existence-and-uniqueness-theorem.html" title="Theorem 1.5.2: Existence and Uniqueness Theorem">Theorem 1.5.2</a>. Euler’s method now produces the following approximations:</div> <div class="tabular-box natural-width"><table class="tabular">
+<tr>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(n\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(x_n\)</span></td>
 <td class="l m b3 r0 l0 t0 lines"><span class="process-math">\(y_n\)</span></td>
-</tr></table></div>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(0.5\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(1.5\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(2.875\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(1.5\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(7.508\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(4\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(36.441\)</span></td>
+</tr>
+</table></div> <div class="para" id="p-117">Such computations are best performed using a CAS, such as the Sage code below:</div> <pre class="ptx-sagecell hidden-sagecell-sage" id="sage-4"><script type="text/x-sage"># Define y to be a variable in case this hasn't
+# been done.
+var('y')
+
+# Define starting parameters and f(x,y).
+xn, yn, h = 0, 1, 0.5
+f(x,y) = x + y^2
+
+# To get to x = 2 we need n = 4 steps.
+n = 4
+
+# Compute Euler's method approximations.
+for k in range(n):
+    xn, yn = xn + h, yn + h*f(xn, yn)
+
+show((xn, yn))
+</script></pre>
 </div></div>
 </div></article></section></section></div>
 <div class="ptx-content-footer">
