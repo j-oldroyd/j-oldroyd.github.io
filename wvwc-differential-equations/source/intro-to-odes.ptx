@@ -1003,7 +1003,47 @@
                 <me>\dv{\phi_{n}}{x} = f(x,\phi_{n-1}), \phi_{n}(x_{0}) = y_{0}</me>
                 for all <m>n\geq1</m>.
                 This method doesn't always work, but if <m>f(x,y)</m> satisfies the conditions given in <xref ref="theorem-existence-and-uniqueness-theorem" text="type-global" /> then this method will (after potentially infinitely many steps) provide a solution to the IVP.
+                Since the computations involved are quite tedious, it's best to use a CAS if possible.
             </p>
+            <example xml:id="example-using-sage-to-compute-picard-iterates">
+                <title>Using Sage to Compute Picard Iterates</title>
+            
+                <statement>
+                    <p>
+                        Consider the initial value problem given by
+                        <me>y^\prime = x + y^2, y(1) = -1</me>.
+                        We want to approximate the solution by using Picard iteration (note that the differential equation is neither separable nor linear!).
+                        We do this with the Sage cell below:
+                    </p>
+                    <sage>
+                        <input>
+                            # We need to tell Sage that y is a variable.
+                            var('t,y')
+
+                            # Now we define f(x,y) and our initial conditions.
+                            f(x, y) = x + y^2
+                            x0, y0 = 1, -1
+
+                            # We will also decide how many Picard iterates we want.
+                            # The below computes 3 iterates, but you're welcome
+                            # to change n. However, things get very complicated
+                            # very quickly for this example!
+                            n = 3
+
+                            # Define iterates.
+                            yn(x) = y0
+                            for k in range(n):
+                                yn(x) = y0 + integral(f(t, yn(x=t)), t, x0, x)
+
+                            # Display n^th iterate.
+                            show(yn(x))
+                        </input>
+                        <output>
+                            1/4400*x^11 + 1/400*x^10 + 1/720*x^9 - 9/160*x^8 - 1/56*x^7 + 77/100*x^6 - 191/200*x^5 - 399/80*x^4 + 4741/240*x^3 - 497/16*x^2 + 10201/400*x - 5517209/554400
+                        </output>
+                    </sage>
+                </statement>
+            </example>
         </subsection>
         <subsection xml:id="subsection-euler-s-method">
             <title>Euler's Method</title>
@@ -1046,9 +1086,98 @@
                     </p>
                     <tabular>
                         <row bottom="major">
-                            <cell><m>n</m></cell><cell><m>x_n</m></cell><cell><m>y_n</m></cell>
+                            <cell>
+                                <m>n</m>
+                            </cell>
+                            <cell>
+                                <m>x_n</m>
+                            </cell>
+                            <cell>
+                                <m>y_n</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>
+                                <m>0</m>
+                            </cell>
+                            <cell>
+                                <m>0</m>
+                            </cell>
+                            <cell>
+                                <m>1</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>
+                                <m>1</m>
+                            </cell>
+                            <cell>
+                                <m>0.5</m>
+                            </cell>
+                            <cell>
+                                <m>1.5</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>
+                                <m>2</m>
+                            </cell>
+                            <cell>
+                                <m>1</m>
+                            </cell>
+                            <cell>
+                                <m>2.875</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>
+                                <m>3</m>
+                            </cell>
+                            <cell>
+                                <m>1.5</m>
+                            </cell>
+                            <cell>
+                                <m>7.508</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>
+                                <m>4</m>
+                            </cell>
+                            <cell>
+                                <m>2</m>
+                            </cell>
+                            <cell>
+                                <m>36.441</m>
+                            </cell>
                         </row>
                     </tabular>
+                    <p>
+                        Such computations are best performed using a CAS, such as the Sage code below:
+                    </p>
+                    <sage>
+                        <input>
+                            # Define y to be a variable in case this hasn't
+                            # been done.
+                            var('y')
+
+                            # Define starting parameters and f(x,y).
+                            xn, yn, h = 0, 1, 0.5
+                            f(x,y) = x + y^2
+
+                            # To get to x = 2 we need n = 4 steps.
+                            n = 4
+
+                            # Compute Euler's method approximations.
+                            for k in range(n):
+                                xn, yn = xn + h, yn + h*f(xn, yn)
+
+                            show((xn, yn))
+                        </input>
+                        <output>
+                            (2.00000000000000, 36.4414367675781)
+                        </output>
+                    </sage>
                 </solution>
             </example>
         </subsection>

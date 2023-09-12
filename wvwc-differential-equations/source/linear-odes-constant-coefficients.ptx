@@ -542,9 +542,26 @@
           </p>
         </aside>
         Then we get
-        <me>x = \cos\varphi\cos\omega_{0}t + \sin\varphi\sin\omega_{0}t = \cos(\omega_{0}t - \varphi).</me>
+        <me>x = C(\cos\varphi\cos\omega_{0}t + \sin\varphi\sin\omega_{0}t) = C\cos(\omega_{0}t - \varphi).</me>
         <m>C</m> is the <term>amplitude</term> of the wave <m>x</m>, <m>\omega_{0}</m> is the <term>circular frequency</term>, <m>T = \frac{2\pi}{\omega_{0}}</m> is the <term>period</term> of motion and <m>\varphi</m> is the <term>phase</term>.
+        The interactive Sage code below demonstrates the affect of each of the amplitude, frequency and phase on the wave <m>y = C\cos(\omega_0t-\varphi)</m>.
       </p>
+      <figure xml:id="figure-interactive-cosine-wave">
+          <caption>Sinusoidal wave with varying amplitude, frequency and phase</caption>
+          <interactive xml:id="interactive-cosine-wave" platform="sage" width="100%" aspect="4:5">
+              <slate surface="sage">
+              var('x')
+              @interact
+              def cosine_wave(C = slider(0,5,0.25, 1, label="amplitude"), w0 = slider(0, 6*pi, pi/4, 1, label="circular frequency"), phi = slider(0, 6*pi, pi/4, 0, label="phase")):
+                  f(x) = round(C, ndigits=3)*cos(w0*x-phi)
+                  pretty_print(html('&lt;h3&gt;Cosine wave with varying parameters&lt;/h3&gt;'))
+                  show(f(x))
+                  # print("\n\nSage numerical answer: " + str(integral_numerical(func,a,b,max_points = 200)[0]))
+                  # print(rule + " estimated answer: " + str(RDF(dx*sum([yVals[q] for q in range(n)]))))
+                  show(plot(f(x), xmin = 0, xmax = 4*pi, ymin = -5, ymax = 5,figsize=5, legend_label=r'$y = C\cos(\omega_0 x-\phi)$') + plot(cos(x), xmin = 0, xmax = 4*pi, ymin = -5, ymax = 5, color="red", legend_label=r'$y = \cos(x)$'))
+              </slate>
+          </interactive>
+      </figure>
       <example xml:id="example-another-spring-mass-system">
         <title>Another spring-mass system</title>
         <statement>

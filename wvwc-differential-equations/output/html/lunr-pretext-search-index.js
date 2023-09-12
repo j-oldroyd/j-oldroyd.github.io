@@ -322,7 +322,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.5",
   "title": "Existence and Uniqueness of Solutions",
-  "body": " Existence and Uniqueness of Solutions   This section corresponds to Section 1.7 from the text.    Existence and Uniqueness Theorem  There are two important questions we need to consider when developing a mathematical model using differential equations (i.e. IVPs):  Does the initial value problem have a solution? (Existence).  If it has a solution, is the solution unique? (Uniqueness).  Ideally, the answer to both of these questions will be yes.   The answer is no   Does have a unique solution?    We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that . On the other hand, we can also eyeball a second solution: . So this IVP has two different solutions: and .    Clearly, IVPs don't always have unique solutions. Sometimes it's difficult to determine precisely when an IVP can have a unique solution, but most of the cases we'll care about in this class will fall under the following theorem.   Existence and Uniqueness Theorem  first-order ODEs existence and uniqueness   Consider the IVP given by . If is bounded and continuous within some rectangle in the plane containing , then the IVP has at least one solution. If in addition is also bounded and continuous within some rectangle containing , then the IVP has a unique solution.    If we go back to , then we see that has something to say about the IVP in that example. In that example, we had and . Let's draw a rectangle around this point:       Now is continuous and within this rectangle, so everywhere inside of this triangle. So guarantees at least one solution of the IVP, and indeed there is at least one solution. However, the problem with uniqueness stems from the fact that has a divide-by-zero problem inside this rectangle. Furthermore, it's impossible to draw a rectangle around that avoids this divide-by-zero problem. Hence there is no guarantee of uniqueness.  On the other hand, if we changed the initial condition to then we would be guaranteed a unique solution. Moving that initial condition off of the -axis is all we need to do to guarantee uniqueness.    Picard Iteration  Now that we know of a way to determine whether or not certain ODEs have solutions, we'd like a method for actually finding these solutions. We've seen a few different methods for solving specific first-order ODEs, but what we'll do now is discuss a method that works for a large class of first-order ODEs. The only catch is that it may take us an infinite amount of time to get the solution.  Consider the IVP . We can rewrite this differential equation as an integral equation : It looks quite a bit different, but solutions of this integral equation are also solutions of the corresponding differential equation. Our goal now is to approximate a solution to this integral equation.  To start, let's make a guess as to what the solution of our IVP should be. To keep things simple we'll start with a constant function, say so that we at least satisfy the initial condition. Now this guess may not be a good match for the solution of the IVP away from the initial condition, so we'll adjust the guess using the integral equation to get the new function : Now may not be a great approximation either away from the initial condition, but we can adjust it using the integral equation just like we did to .  The method described in the previous paragraph is Picard's Method . In general, the iteration of Picard's Method is given by and the first iterate is the constant function It may seem strange to consider these functions as approximate solutions of the IVP in question, but each iterate actually solves an IVP very similar to the one that we care about, . In particular, for all . This method doesn't always work, but if satisfies the conditions given in then this method will (after potentially infinitely many steps) provide a solution to the IVP.    Euler's Method  The Picard iteration approach can be useful for finding series approximations of the solution of an ODE. If a more numerical approach is desired, then Euler's method might be useful. Euler's method can be thought of as an algorithmic version of tracing a solution curve through a direction field (see ).   Euler's Method   Consider the initial value problem The equations defining Euler's method for a given step size are .    For Euler's method, the general rule of thumb is as follows: the smaller is, the better the approximation. However, one should expect degrading performance as the method moves farther from the initial condition .   Euler's Method Applied to Nonlinear ODE   Let denote the solution of the IVP given by . Estimate using Euler's method with a step size of .    First, note that we are justified in saying the solution exists at all by . Euler's method now produces the following approximations:          "
+  "body": " Existence and Uniqueness of Solutions   This section corresponds to Section 1.7 from the text.    Existence and Uniqueness Theorem  There are two important questions we need to consider when developing a mathematical model using differential equations (i.e. IVPs):  Does the initial value problem have a solution? (Existence).  If it has a solution, is the solution unique? (Uniqueness).  Ideally, the answer to both of these questions will be yes.   The answer is no   Does have a unique solution?    We can find a solution to this IVP by treating the ODE as separable. If we do so, we find that . On the other hand, we can also eyeball a second solution: . So this IVP has two different solutions: and .    Clearly, IVPs don't always have unique solutions. Sometimes it's difficult to determine precisely when an IVP can have a unique solution, but most of the cases we'll care about in this class will fall under the following theorem.   Existence and Uniqueness Theorem  first-order ODEs existence and uniqueness   Consider the IVP given by . If is bounded and continuous within some rectangle in the plane containing , then the IVP has at least one solution. If in addition is also bounded and continuous within some rectangle containing , then the IVP has a unique solution.    If we go back to , then we see that has something to say about the IVP in that example. In that example, we had and . Let's draw a rectangle around this point:       Now is continuous and within this rectangle, so everywhere inside of this triangle. So guarantees at least one solution of the IVP, and indeed there is at least one solution. However, the problem with uniqueness stems from the fact that has a divide-by-zero problem inside this rectangle. Furthermore, it's impossible to draw a rectangle around that avoids this divide-by-zero problem. Hence there is no guarantee of uniqueness.  On the other hand, if we changed the initial condition to then we would be guaranteed a unique solution. Moving that initial condition off of the -axis is all we need to do to guarantee uniqueness.    Picard Iteration  Now that we know of a way to determine whether or not certain ODEs have solutions, we'd like a method for actually finding these solutions. We've seen a few different methods for solving specific first-order ODEs, but what we'll do now is discuss a method that works for a large class of first-order ODEs. The only catch is that it may take us an infinite amount of time to get the solution.  Consider the IVP . We can rewrite this differential equation as an integral equation : It looks quite a bit different, but solutions of this integral equation are also solutions of the corresponding differential equation. Our goal now is to approximate a solution to this integral equation.  To start, let's make a guess as to what the solution of our IVP should be. To keep things simple we'll start with a constant function, say so that we at least satisfy the initial condition. Now this guess may not be a good match for the solution of the IVP away from the initial condition, so we'll adjust the guess using the integral equation to get the new function : Now may not be a great approximation either away from the initial condition, but we can adjust it using the integral equation just like we did to .  The method described in the previous paragraph is Picard's Method . In general, the iteration of Picard's Method is given by and the first iterate is the constant function It may seem strange to consider these functions as approximate solutions of the IVP in question, but each iterate actually solves an IVP very similar to the one that we care about, . In particular, for all . This method doesn't always work, but if satisfies the conditions given in then this method will (after potentially infinitely many steps) provide a solution to the IVP. Since the computations involved are quite tedious, it's best to use a CAS if possible.   Using Sage to Compute Picard Iterates   Consider the initial value problem given by . We want to approximate the solution by using Picard iteration (note that the differential equation is neither separable nor linear!). We do this with the Sage cell below:       Euler's Method  The Picard iteration approach can be useful for finding series approximations of the solution of an ODE. If a more numerical approach is desired, then Euler's method might be useful. Euler's method can be thought of as an algorithmic version of tracing a solution curve through a direction field (see ).   Euler's Method   Consider the initial value problem The equations defining Euler's method for a given step size are .    For Euler's method, the general rule of thumb is as follows: the smaller is, the better the approximation. However, one should expect degrading performance as the method moves farther from the initial condition .   Euler's Method Applied to Nonlinear ODE   Let denote the solution of the IVP given by . Estimate using Euler's method with a step size of .    First, note that we are justified in saying the solution exists at all by . Euler's method now produces the following approximations:                                                                      Such computations are best performed using a CAS, such as the Sage code below:      "
 },
 {
   "id": "example-the-answer-is-no",
@@ -370,11 +370,20 @@ var ptx_lunr_docs = [
   "body": "Picard's Method "
 },
 {
+  "id": "example-using-sage-to-compute-picard-iterates",
+  "level": "2",
+  "url": "section-existence-and-uniqueness-of-solutions.html#example-using-sage-to-compute-picard-iterates",
+  "type": "Example",
+  "number": "1.5.4",
+  "title": "Using Sage to Compute Picard Iterates.",
+  "body": " Using Sage to Compute Picard Iterates   Consider the initial value problem given by . We want to approximate the solution by using Picard iteration (note that the differential equation is neither separable nor linear!). We do this with the Sage cell below:    "
+},
+{
   "id": "algorithm-euler-s-method",
   "level": "2",
   "url": "section-existence-and-uniqueness-of-solutions.html#algorithm-euler-s-method",
   "type": "Algorithm",
-  "number": "1.5.4",
+  "number": "1.5.5",
   "title": "Euler’s Method.",
   "body": " Euler's Method   Consider the initial value problem The equations defining Euler's method for a given step size are .   "
 },
@@ -383,9 +392,9 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-existence-and-uniqueness-of-solutions.html#example-euler-s-method-applied-to-nonlinear-ode",
   "type": "Example",
-  "number": "1.5.5",
+  "number": "1.5.6",
   "title": "Euler’s Method Applied to Nonlinear ODE.",
-  "body": " Euler's Method Applied to Nonlinear ODE   Let denote the solution of the IVP given by . Estimate using Euler's method with a step size of .    First, note that we are justified in saying the solution exists at all by . Euler's method now produces the following approximations:        "
+  "body": " Euler's Method Applied to Nonlinear ODE   Let denote the solution of the IVP given by . Estimate using Euler's method with a step size of .    First, note that we are justified in saying the solution exists at all by . Euler's method now produces the following approximations:                                                                      Such computations are best performed using a CAS, such as the Sage code below:    "
 },
 {
   "id": "section-population-models-and-autonomous-equations",
@@ -397,18 +406,18 @@ var ptx_lunr_docs = [
   "body": " Population Models and Autonomous Equations   Population Equations  Suppose we're monitoring the population of some species, and let's denote the population at time by . An obvious question to consider is how that population will change over time. Mathematically, this means we want to obtain information on and then use it to estimate .  A simple model for is to assume it depends only on the birth rate and death rate of the species in question. Then we can write If we assume that are constants, then this equation is separable and we can solve it to obtain where represents the \"initial population\", or population at time . We call the natural growth equation .  The natural growth equation is simple, but it's probably too simple to be useful expect in certain scenarios (such as measuring half-life). To get a more flexible model, we can generalize by assuming that the birth and death rates are actually functions of time. This gives us the general population equation .   General Population Equation   The general population equation for a population is given by      Population Explosion   A population has members at time years with a death rate of and a birth rate of , where denotes the population after years. Find and determine if this is a reasonable population model.    If we assume that the population obeys the general growth equation, then we get This ODE is separable, and we can therefore solve it to get   So we have a solution, and furthermore guarantees that the solution is unique. But if you stare at this for a bit, you might see that it has a divide-by-zero problem. In particular, In other words, the population becomes infinite in about two weeks!      The Logistic Equation   shows that we need to be more careful with our assumptions on population growth. One relatively simple assumption we can make is to assume that the birth rate decreases as population increases. This makes sense in the physical world as well: as population increases, existing and finite resources (such as food) must be shared between more and more members of the population. Since there's less to go around, we should expect growth to slow down. In particular, let's assume that where and are all positive constants. Then the population equation for this scenario becomes   With a little algebra, we get the logistic equation : for constants and . This equation is separable, and can be solved using partial fractions to obtain where . In order to verify the reasonableness of our logistic model, let's see what happens to the population as time increases.   Long-Term Behavior of Logistic Growth   What is the long-term population of a species that grows according to the logistic equation ?    Using the fact that we have So the population should eventually level out at .    In the logistic equation , the value is the carrying capacity , and denotes the maximum sustainable population according to the model.   Population Growth in the USA   In millions, the population of the USA in 1990 was and was growing at a rate of per year. In 2012, the population was and was growing at a rate of per year. Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of .    Let denote the population of the USA (in millions), where is the number of years after 1990. Then and So we need to find and .  When , we have and . Similarly, when we have and . Therefore Solving this system gives us and . Hence   This model estimates the population in 2017 to be which is about a error. Note also that this model predicts the carrying capacity of the USA to be .      Stability of Solutions  The logistic equation is a particularly nice separable ODE since the right hand side depends only on the unknown function . So we can write , where . ODEs like this (where the independent variable does not appear explicitly) are called autonomous ODEs .  Autonomous ODEs like are useful because the behavior of their solutions can be determined qualitatively , without actually solving the ODE. This is done by looking for the constant solutions of the ODE, that is, solutions of the form . For any such solution, we must have as well. These solutions (i.e., the solutions of ) are called the critical points or equilibrium solutions of the ODE. These solutions completely determine the long-term behavior of every other solution .   Finding Equilibrium Solutions   Find the equilibrium solutions of .    We need to solve the equation . Thankfully, we can factor this to get , and so the equilibrium solutions are .     Stability of Solutions   A critical point is stable if solutions that start \"near\" the point stay near it. A critical point is unstable if solutions that start \"near\" the point can diverge away from it.     Determining the Stability of Solutions   What are the stable critical points of ?    We already know that the critical points are . We can determine their stability by making use of a phase diagram , which is essentially a sign chart for :   The phase diagram for      This shows us that solutions that begin near tend to move away from , which solutions near tend to move towards . So is unstable and is stable.     Determining a Sustainable Population   Consider a population of fish that obeys the logistic equation where is the population of fish (in thousands) after years. Suppose that the population is also harvested at some rate (in thousands per year). What is the maximum sustainable rate of harvesting?    To account for the harvesting, we need to modify the ODE: The harvesting will be sustainable as long as the population does not become extinct. To determine this long term behavior, we'll find the critical points and set up a phase diagram.  The critical points are given by by the quadratic formula. We now have three cases to consider: In terms of , these reduce to .    In the first case, if then we have two positive, real critical points: The phase diagram for this situation is       So we see that is unstable while is stable. In particular, as long as , then the rate of harvesting is sustainable.    Now assume that . Then we have only one equilibrium solution: . The corresponding phase diagram is       We interpret the phase diagram as follows: if is less than 15,000 then the population will collapse to extinction. Otherwise, the population will stabilize at . This type of critical point is often called semi-stable.     Finally, consider the case . Then we have no (real) critical points. Since imaginary populations don't make sense in this model, there is no sustainable population. No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than .    By the above, the largest sustainable harvesting rate is as long as .      Linear Stability Analysis  Given the autonomous ODE , we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram. We can go a step further and actually qualify the growth of solutions that are \"near\" equilibrium solutions. In particular, we have the following theorem.   Linear Stability Analysis   Suppose where is continuously differentiable, and let denote a critical point\/equilibrium solution of the ODE. If , then is stable and solutions near will move exponentially towards . If , then is unstable and solutions near will move exponentially away from . If , then more advanced methods are required.     Classifying the Critical Points of the Logistic Equation   Classify the critical points of the logistic equation as stable or unstable.    Recall that the logistic equation is given by for (we'll assume) positive constants . From here, we clearly see that the critical points are and (which makes sense from a population standpoint!). We could set up a phase diagram to determine stability, but we'll use instead.  Since , we see that Hence is unstable, while is stable.     "
 },
 {
-  "id": "p-117",
+  "id": "p-119",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-117",
+  "url": "section-population-models-and-autonomous-equations.html#p-119",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "natural growth equation "
 },
 {
-  "id": "p-118",
+  "id": "p-120",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-118",
+  "url": "section-population-models-and-autonomous-equations.html#p-120",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -433,9 +442,9 @@ var ptx_lunr_docs = [
   "body": " Population Explosion   A population has members at time years with a death rate of and a birth rate of , where denotes the population after years. Find and determine if this is a reasonable population model.    If we assume that the population obeys the general growth equation, then we get This ODE is separable, and we can therefore solve it to get   So we have a solution, and furthermore guarantees that the solution is unique. But if you stare at this for a bit, you might see that it has a divide-by-zero problem. In particular, In other words, the population becomes infinite in about two weeks!   "
 },
 {
-  "id": "p-124",
+  "id": "p-126",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-124",
+  "url": "section-population-models-and-autonomous-equations.html#p-126",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -451,9 +460,9 @@ var ptx_lunr_docs = [
   "body": " Long-Term Behavior of Logistic Growth   What is the long-term population of a species that grows according to the logistic equation ?    Using the fact that we have So the population should eventually level out at .   "
 },
 {
-  "id": "p-127",
+  "id": "p-129",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-127",
+  "url": "section-population-models-and-autonomous-equations.html#p-129",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -469,18 +478,18 @@ var ptx_lunr_docs = [
   "body": " Population Growth in the USA   In millions, the population of the USA in 1990 was and was growing at a rate of per year. In 2012, the population was and was growing at a rate of per year. Assuming that the population of the USA grows logistically, estimate the population of the USA in 2017 and compare it to the current estimate of .    Let denote the population of the USA (in millions), where is the number of years after 1990. Then and So we need to find and .  When , we have and . Similarly, when we have and . Therefore Solving this system gives us and . Hence   This model estimates the population in 2017 to be which is about a error. Note also that this model predicts the carrying capacity of the USA to be .   "
 },
 {
-  "id": "p-132",
+  "id": "p-134",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-132",
+  "url": "section-population-models-and-autonomous-equations.html#p-134",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "autonomous ODEs "
 },
 {
-  "id": "p-133",
+  "id": "p-135",
   "level": "2",
-  "url": "section-population-models-and-autonomous-equations.html#p-133",
+  "url": "section-population-models-and-autonomous-equations.html#p-135",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -568,9 +577,9 @@ var ptx_lunr_docs = [
   "body": " Types of second-order ODEs  Consider the following ODEs:  is linear but nonhomogeneous.  is nonlinear.  is linear and homogeneous.    "
 },
 {
-  "id": "p-160",
+  "id": "p-162",
   "level": "2",
-  "url": "section-second-order-linear-odes.html#p-160",
+  "url": "section-second-order-linear-odes.html#p-162",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -640,9 +649,9 @@ var ptx_lunr_docs = [
   "body": " Linear independence of sine and cosine   Show that and are linearly independent.    Since is not constant, this means that and must be linearly independent.   "
 },
 {
-  "id": "p-180",
+  "id": "p-182",
   "level": "2",
-  "url": "section-second-order-linear-odes.html#p-180",
+  "url": "section-second-order-linear-odes.html#p-182",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -739,9 +748,9 @@ var ptx_lunr_docs = [
   "body": " Spring-mass system revisited   An object of mass 4 is attached to a horizontal, frictionless spring. Suppose the spring constant is given by . The mass is held 3 to the right of the spring's equilibrium position, and is then released at time where is in seconds. Find the displacement of the mass.    We know from that the second-order ODE given by provides a model for , but now we are in a position to solve it. The characteristic equation of this ODE is , which has roots . The imaginary roots are not a problem , and in fact provide significant information about the motion of the mass, as we'll soon see. The general solution of the ODE is   The initial conditions are and , which give the equations The second equation implies that , and applying this to the first equation now gives . Hence the displacement of the mass is given by    "
 },
 {
-  "id": "p-200",
+  "id": "p-202",
   "level": "2",
-  "url": "section-homogeneous-odes-with-constant-coefficients.html#p-200",
+  "url": "section-homogeneous-odes-with-constant-coefficients.html#p-202",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -781,7 +790,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.3",
   "title": "Spring-Mass Models",
-  "body": " Spring-Mass Models   In this section we examine a common application of second-order ODEs: modeling movement in a spring-mass system. We will look at two different types of motion: undamped and damped. Note that this section corresponds to Section 2.4 of the text.    Free Undamped Motion  Suppose we have a mass attached to a spring as in the following diagram:      A spring-mass system.   If we let denote the displacement of the mass from the spring's equilibrium position and let denote the force of the spring on the mass (see , and assume that no other force is acting on the mass, then we know from that satisfies the second-order ODE given by If we set , we can rewrite this to get   One thing we can notice right away about solutions of is that they should all be periodic (see ), which, of course, makes sense!. To see why, note that the roots of the characteristic equation are , which means that the solutions may be written in the form which we can rewrite as using Euler's Formula. Hence every solution of is a sinusoidal wave.  We can go even further by making use of some clever algebra and the appropriate trigonometric formulas if we assume that (i.e. and are not both  ): Now set and define implicitly by and .  There are infinitely many choices for here, but we can select a unique one if we make the extra restriction that .  Then we get  is the amplitude of the wave , is the circular frequency , is the period of motion and is the phase .   Another spring-mass system   An object with a mass of 5 is fixed to a spring and a force of 10 holds the mass 5 to the left of the spring's equilibrium position. If the object is released, how long will it take for the mass to return to its original position? And what is the position of the mass?    Let denote the position of the mass seconds after being released, so that and . We could find the time it takes for the mass to return to its starting position by first finding , but a quicker way is to just find the period of . To do this, we must find the circular frequency . Thankfully, half of the work is done for us (we know ), so we only need the value of which itself comes from Hooke's Law.  Call the spring force and recall that . We know that it takes a force of 10 to hold the mass still at . The spring force must precisely counterbalance this force in order for the mass to remain still as it's held, which means that since pulls the mass to the right. Therefore and so , which gives . This means that the period of motion is   To find , we'll use the fact that it can be written as . Since (because the mass can never go more than five meters from the equilibrium position) and we already know that , we just need to find . We can just make use of the initial condition to get this: and so we can choose . Hence      You may be troubled by the fact that we only explicitly used the first initial condition in this example. However, the second condition was actually used implicitly: it allowed us to assume that the amplitude was as opposed to another number. If , finding would have been a little trickier.     Free Damped Motion  Now we look at how the motion of a mass attached to a spring is altered if the motion is damped , say, by a dashpot. See .      A damped spring-mass system.   Now in addition to the spring force , we must also worry about the force of the dashpot on the mass. is always going to act against the velocity of the mass, so for simplicity we assume that for some . Using as usual in conjunction with Newton's Second Law gives us the second-order ODE   This ODE is homogeneous and has constant coefficients so we may solve it using the method of characteristic equations. The characteristic equation of this ODE is The roots of this equation are The behavior of this system therefore depends on the quantity , and so we have three cases to consider.     .  In this case, the characteristic equation has two real roots, and so the solution has the form Now, and are both negative since (remember that we're assuming that and are positive!). This means that as . There is no oscillation present in the motion of the mass in this case since the mass never passes through , so we call this overdamped motion .     .  In this case, the characteristic equation has a repeated (real) root, and so the solution takes the form This mass can pass through only once, at . Once it does, the mass will \"turn around\" soon afterwards and beginning moving back to , as in the first case. We call this type of motion critically damped , since it's right on the border between overdamped motion and oscillating motion.     .  In this case the characteristic equation has two distinct complex roots of the form , where In particular, the real part of these roots is always negative. The solution in this case takes the form after applying Euler's formula. As in the previous two cases, as . However, oscillation is now present in the system for all time! We call this motion underdamped , since the damping term is not strong enough to cancel out the oscillation present in the system. Note that the real part contributes to the \"amplitude\" of the motion, while the imaginary part represents the angular frequency of the motion. The ordinary frequency of the motion is given by .     A Spring-Dashpot System   Suppose that an object of mass is attached to both a spring and a dashpot. The mass is held meter to the left of the spring's equilibrium position . The force of the spring on the mass is and the force of the dashpot on the mass is , where is the displacement of the mass. At time , the mass is released. Find .    The ODE that models the motion of this mass is and the roots of the corresponding characteristic equation are We can already see that the motion must be underdamped since we have complex roots, and the position itself is given by   Now we can use the initial conditions and to find and . Doing so, we quickly get and . Hence     As mentioned previously, the exponential term in from serves to dampen the motion of the spring. This is illustrated in .      An exponential term damping motion.    "
+  "body": " Spring-Mass Models   In this section we examine a common application of second-order ODEs: modeling movement in a spring-mass system. We will look at two different types of motion: undamped and damped. Note that this section corresponds to Section 2.4 of the text.    Free Undamped Motion  Suppose we have a mass attached to a spring as in the following diagram:      A spring-mass system.   If we let denote the displacement of the mass from the spring's equilibrium position and let denote the force of the spring on the mass (see , and assume that no other force is acting on the mass, then we know from that satisfies the second-order ODE given by If we set , we can rewrite this to get   One thing we can notice right away about solutions of is that they should all be periodic (see ), which, of course, makes sense!. To see why, note that the roots of the characteristic equation are , which means that the solutions may be written in the form which we can rewrite as using Euler's Formula. Hence every solution of is a sinusoidal wave.  We can go even further by making use of some clever algebra and the appropriate trigonometric formulas if we assume that (i.e. and are not both  ): Now set and define implicitly by and .  There are infinitely many choices for here, but we can select a unique one if we make the extra restriction that .  Then we get  is the amplitude of the wave , is the circular frequency , is the period of motion and is the phase . The interactive Sage code below demonstrates the affect of each of the amplitude, frequency and phase on the wave .   Sinusoidal wave with varying amplitude, frequency and phase     Another spring-mass system   An object with a mass of 5 is fixed to a spring and a force of 10 holds the mass 5 to the left of the spring's equilibrium position. If the object is released, how long will it take for the mass to return to its original position? And what is the position of the mass?    Let denote the position of the mass seconds after being released, so that and . We could find the time it takes for the mass to return to its starting position by first finding , but a quicker way is to just find the period of . To do this, we must find the circular frequency . Thankfully, half of the work is done for us (we know ), so we only need the value of which itself comes from Hooke's Law.  Call the spring force and recall that . We know that it takes a force of 10 to hold the mass still at . The spring force must precisely counterbalance this force in order for the mass to remain still as it's held, which means that since pulls the mass to the right. Therefore and so , which gives . This means that the period of motion is   To find , we'll use the fact that it can be written as . Since (because the mass can never go more than five meters from the equilibrium position) and we already know that , we just need to find . We can just make use of the initial condition to get this: and so we can choose . Hence      You may be troubled by the fact that we only explicitly used the first initial condition in this example. However, the second condition was actually used implicitly: it allowed us to assume that the amplitude was as opposed to another number. If , finding would have been a little trickier.     Free Damped Motion  Now we look at how the motion of a mass attached to a spring is altered if the motion is damped , say, by a dashpot. See .      A damped spring-mass system.   Now in addition to the spring force , we must also worry about the force of the dashpot on the mass. is always going to act against the velocity of the mass, so for simplicity we assume that for some . Using as usual in conjunction with Newton's Second Law gives us the second-order ODE   This ODE is homogeneous and has constant coefficients so we may solve it using the method of characteristic equations. The characteristic equation of this ODE is The roots of this equation are The behavior of this system therefore depends on the quantity , and so we have three cases to consider.     .  In this case, the characteristic equation has two real roots, and so the solution has the form Now, and are both negative since (remember that we're assuming that and are positive!). This means that as . There is no oscillation present in the motion of the mass in this case since the mass never passes through , so we call this overdamped motion .     .  In this case, the characteristic equation has a repeated (real) root, and so the solution takes the form This mass can pass through only once, at . Once it does, the mass will \"turn around\" soon afterwards and beginning moving back to , as in the first case. We call this type of motion critically damped , since it's right on the border between overdamped motion and oscillating motion.     .  In this case the characteristic equation has two distinct complex roots of the form , where In particular, the real part of these roots is always negative. The solution in this case takes the form after applying Euler's formula. As in the previous two cases, as . However, oscillation is now present in the system for all time! We call this motion underdamped , since the damping term is not strong enough to cancel out the oscillation present in the system. Note that the real part contributes to the \"amplitude\" of the motion, while the imaginary part represents the angular frequency of the motion. The ordinary frequency of the motion is given by .     A Spring-Dashpot System   Suppose that an object of mass is attached to both a spring and a dashpot. The mass is held meter to the left of the spring's equilibrium position . The force of the spring on the mass is and the force of the dashpot on the mass is , where is the displacement of the mass. At time , the mass is released. Find .    The ODE that models the motion of this mass is and the roots of the corresponding characteristic equation are We can already see that the motion must be underdamped since we have complex roots, and the position itself is given by   Now we can use the initial conditions and to find and . Doing so, we quickly get and . Hence     As mentioned previously, the exponential term in from serves to dampen the motion of the spring. This is illustrated in .      An exponential term damping motion.    "
 },
 {
   "id": "figure-spring-mass-system",
@@ -793,20 +802,29 @@ var ptx_lunr_docs = [
   "body": "    A spring-mass system.  "
 },
 {
-  "id": "p-213",
+  "id": "p-215",
   "level": "2",
-  "url": "section-spring-mass-models.html#p-213",
+  "url": "section-spring-mass-models.html#p-215",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "amplitude circular frequency period phase "
 },
 {
+  "id": "figure-interactive-cosine-wave",
+  "level": "2",
+  "url": "section-spring-mass-models.html#figure-interactive-cosine-wave",
+  "type": "Figure",
+  "number": "2.3.2",
+  "title": "",
+  "body": " Sinusoidal wave with varying amplitude, frequency and phase   "
+},
+{
   "id": "example-another-spring-mass-system",
   "level": "2",
   "url": "section-spring-mass-models.html#example-another-spring-mass-system",
   "type": "Example",
-  "number": "2.3.2",
+  "number": "2.3.3",
   "title": "Another spring-mass system.",
   "body": " Another spring-mass system   An object with a mass of 5 is fixed to a spring and a force of 10 holds the mass 5 to the left of the spring's equilibrium position. If the object is released, how long will it take for the mass to return to its original position? And what is the position of the mass?    Let denote the position of the mass seconds after being released, so that and . We could find the time it takes for the mass to return to its starting position by first finding , but a quicker way is to just find the period of . To do this, we must find the circular frequency . Thankfully, half of the work is done for us (we know ), so we only need the value of which itself comes from Hooke's Law.  Call the spring force and recall that . We know that it takes a force of 10 to hold the mass still at . The spring force must precisely counterbalance this force in order for the mass to remain still as it's held, which means that since pulls the mass to the right. Therefore and so , which gives . This means that the period of motion is   To find , we'll use the fact that it can be written as . Since (because the mass can never go more than five meters from the equilibrium position) and we already know that , we just need to find . We can just make use of the initial condition to get this: and so we can choose . Hence    "
 },
@@ -815,18 +833,9 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-spring-mass-models.html#figure-damped-spring",
   "type": "Figure",
-  "number": "2.3.3",
+  "number": "2.3.4",
   "title": "",
   "body": "    A damped spring-mass system.  "
-},
-{
-  "id": "p-224",
-  "level": "2",
-  "url": "section-spring-mass-models.html#p-224",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "overdamped motion "
 },
 {
   "id": "p-226",
@@ -835,12 +844,21 @@ var ptx_lunr_docs = [
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "critically damped "
+  "body": "overdamped motion "
 },
 {
   "id": "p-228",
   "level": "2",
   "url": "section-spring-mass-models.html#p-228",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "critically damped "
+},
+{
+  "id": "p-230",
+  "level": "2",
+  "url": "section-spring-mass-models.html#p-230",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -851,7 +869,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-spring-mass-models.html#example-a-spring-dashpot-system",
   "type": "Example",
-  "number": "2.3.4",
+  "number": "2.3.5",
   "title": "A Spring-Dashpot System.",
   "body": " A Spring-Dashpot System   Suppose that an object of mass is attached to both a spring and a dashpot. The mass is held meter to the left of the spring's equilibrium position . The force of the spring on the mass is and the force of the dashpot on the mass is , where is the displacement of the mass. At time , the mass is released. Find .    The ODE that models the motion of this mass is and the roots of the corresponding characteristic equation are We can already see that the motion must be underdamped since we have complex roots, and the position itself is given by   Now we can use the initial conditions and to find and . Doing so, we quickly get and . Hence    "
 },
@@ -860,7 +878,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-spring-mass-models.html#figure-damped-motion",
   "type": "Figure",
-  "number": "2.3.5",
+  "number": "2.3.6",
   "title": "",
   "body": "    An exponential term damping motion.  "
 },
@@ -883,9 +901,9 @@ var ptx_lunr_docs = [
   "body": " Solution of Non-homogeneous Equations   Consider the ODE given in . Let (the complementary solution ) denote the solution of the associated homogeneous equation  and let (the particular solution ) denote a single solution of . Then the general solution of is given by .   "
 },
 {
-  "id": "p-237",
+  "id": "p-239",
   "level": "2",
-  "url": "section-solutions-of-nonhomogeneous-equations.html#p-237",
+  "url": "section-solutions-of-nonhomogeneous-equations.html#p-239",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -901,9 +919,9 @@ var ptx_lunr_docs = [
   "body": " Using the Method of Undetermined Coefficients   Find the general solution of the ODE given by     To find the general solution we need to do two things: find the complementary solution of the associated homogeneous equation and find a single particular solution of the given ODE. We already know how to find The characteristic equation of the ODE is . which is just Once we can find a single particular solution we'll be finished.  If we stare that the ODE, then we see that and its derivatives must cancel each other and leave a polynomial. So it's reasonable to guess that a polynomial might be a solution of the ODE, or equivalently,  should be a polynomial . Since the degree Recall that the degree of a polynomial is just the highest power of the variable in the polynomial. of the right hand side is , then should probably be degree as well. This means that for some constants .  To find these constants ( undetermined coefficients ), we plug our guess into the ODE to get The only way for this equation to be true is for So and . Hence the general solution of the ODE is    "
 },
 {
-  "id": "example-37",
+  "id": "example-38",
   "level": "2",
-  "url": "section-solutions-of-nonhomogeneous-equations.html#example-37",
+  "url": "section-solutions-of-nonhomogeneous-equations.html#example-38",
   "type": "Example",
   "number": "2.4.3",
   "title": "",
@@ -937,9 +955,9 @@ var ptx_lunr_docs = [
   "body": " Forced Oscillations and Resonance   In this section we will develop models for certain systems under the influence of a periodic, external force. The presence of an external force leads to non-homogeneous models, and we will use the techniques we developed in to deal with these systems.    This section corresponds to Section 2.8 of the text.    Undamped Systems  Consider the spring-mass system set up as in . Then we know that the displacement satisfies , where .  Now suppose that an external force also acts on the mass. Then the ODE that models the displacement is The solution of this ODE is then , where Systems where the external frequency  is equal to the internal frequency  are said to be in resonance . Without a damping force, the mass in such systems will move wildly out of control gets arbitrarily large as .   Determining Resonance   An object with mass  2   is attached to a spring and is held  1   to the right of the spring's equilibrium position by a force of  8   At time seconds the mass is set in motion with an initial velocity of  2    to the left. Suppose an external force acts on the mass as well. Will the spring eventually break?    We can answer this question by determining if resonance is present in this system. The external frequency is , and the internal frequency is . Since and , we have , and so the frequencies match. Hence the system is in resonance, and we can expect the spring to eventually break.     It's not too hard to solve for exactly here to get Graphing this, we get the figure produced in .       A plot of the motion of the mass in .     Damped Systems  Now we'll take a look at forced, damped systems. Suppose a mass is fixed to a spring with spring force , and is acted upon by a dashpot with force , where and represents the displacement of the mass at time . If the mass is still acted upon by an external force , then by Newton's Second Law the displacement must satisfy The solution is given by , where is found as in and goes to as . With a little help from a computer algebra system such as Sage (see below), we see that where as usual.  Since will always approach in these situations, as time goes on the position is determined increasingly by . We call the transient solution and the steady-state solution . Note that resonance is impossible in this system since and can never overlap (assuming the external force is still a sinusoid). Therefore the smallest amount of damping prevents the mass from going out of control.    Steady-State Approximation   An object of mass  3   is fixed to both a spring and a dashpot with respective forces and , where is the displacement of the mass in meters and is the equilibrium position. An external force is also applied to the mass, where is in seconds. The mass was set in motion with an unknown speed and unknown velocity approximately  7   ago. What will be the approximate position of the mass in  40   ?    We know that the position will look like where as , but we can't find the exact form of the transient solution without knowing the initial conditions. So we'll assume that we can estimate the position of the mass using the steady-state solution . Since we get So after  40   more seconds the mass should be around , or about  -0.388   .    In fact, the actual initial conditions used in were and . The corresponding exact solution is The exact value of is within several millionths of the approximation .   "
 },
 {
-  "id": "p-259",
+  "id": "p-261",
   "level": "2",
-  "url": "section-forced-oscillations-and-resonance.html#p-259",
+  "url": "section-forced-oscillations-and-resonance.html#p-261",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -964,9 +982,9 @@ var ptx_lunr_docs = [
   "body": "    A plot of the motion of the mass in .  "
 },
 {
-  "id": "p-264",
+  "id": "p-266",
   "level": "2",
-  "url": "section-forced-oscillations-and-resonance.html#p-264",
+  "url": "section-forced-oscillations-and-resonance.html#p-266",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1027,9 +1045,9 @@ var ptx_lunr_docs = [
   "body": " Finding a Basis Set of Solutions   Find the general solution of where is a function of .    Just as we did for second order ODEs, we'll solve this by finding the characteristic equation. To get the characteristic equation, we replace derivatives of with powers of to get Now we need to solve this equation. It can factor (notice that is a solution and then divide by ) as and so This means that the functions are all solutions of the original ODE. If we can show that they're also linearly independent, then this will imply that the general solution of the ODE is given by To do this, we just compute the Wronskian of these functions:   Since the Wronskian is nonzero, and are in fact linearly independent, and so the general solution of this ODE is    "
 },
 {
-  "id": "example-43",
+  "id": "example-44",
   "level": "2",
-  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-43",
+  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-44",
   "type": "Example",
   "number": "3.1.5",
   "title": "",
@@ -1045,18 +1063,18 @@ var ptx_lunr_docs = [
   "body": " Characteristic Equation with Repeated Roots   Find the general solution of where is a function of .    The characteristic equation is so . One solution of the ODE will be , and a second solution will be . But since is a repeated root, it does not provide a third linearly independent solution . So we'll use the same trick we used before and multiply by to get a third solution: . It can be verified that is in fact a solution of the ODE, and is also linearly independent from . Therefore the general solution of the ODE is    "
 },
 {
-  "id": "example-45",
+  "id": "example-46",
   "level": "2",
-  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-45",
+  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-46",
   "type": "Example",
   "number": "3.1.7",
   "title": "",
   "body": "  A linear, homogeneous ODE with constant coefficients (and independent variable ) has characteristic equation given by What is the general solution of the ODE?    We'll set up a table listing each root, its multiplicity and its contribution to the general solution:     Root  Multiplicity  Contribution                         So the general solution of this ODE is   "
 },
 {
-  "id": "example-46",
+  "id": "example-47",
   "level": "2",
-  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-46",
+  "url": "section-homogeneous-linear-odes-with-constant-coefficients.html#example-47",
   "type": "Example",
   "number": "3.1.9",
   "title": "",
@@ -1072,18 +1090,18 @@ var ptx_lunr_docs = [
   "body": " Non-homogeneous Linear ODEs with Constant Coefficients  For second order ODEs that were nonhomogeneous, linear and had constant coefficients, we found their general solution by first finding the complementary solution and then a corresponding particular solution . The general solution was then . was found by solving the corresponding homogeneous equation and we used the method of undetermined coefficients to find . Although we are now looking at higher order ODEs, the method of undetermined coefficients remains unchanged.    Find the general solution of     The general solution takes the form , where is a solution of the associated homogeneous equation and is a single solution of the original ODE . Since the characteristic equation of is , we get Now we'll find . Since the right hand side of the ODE is , a good initial guess would be . However, when we take this guess and plug it into the ODE, we'll start seeing terms involving as well (since ) so this means we'll want to include into our guess for also. So we'll modify our guess to be .  Since our guess for doesn't overlap with , we can proceed with plugging our guess into the original ODE and equating coefficients, just as we did before. So we get and , which means that . When solving for , always remember to plug the values you find back into the guess for that you used! So the general solution of the ODE is     Just as before, we also need to worry about overlaps.    Find the appropriate form of for the ODE     We need to find first since will change depending on . Since the characteristic equation of the associated homogeneous ODE is we get   Now we come up with a guess for using the right hand side of the original ODE and dividing it into ``components:''     Component  Contribution to                  However, we now have a problem with overlaps between and . The guess corresponding to the first component overlaps with , so we need to multiply it by to remove the overlap. Similarly, the guess corresponding to the third component overlaps, so we must multiply it by . Therefore, our guess for should be     The method of undetermined coefficients applied to the ODE can be summarized by the following table. Note that is the smallest power of required to remove any overlaps with .     Component of  Contribution to                           Find the general solution of     We begin by finding . Since the characteristic equation of the corresponding homogeneous ODE is , we get or just . So Now we can set up :     Component  Contribution to             So our initial guess for is given by . Plugging this into the ODE into a CAS such as Maple or Sage gives This gives us the system of equations which we can solve using Sage to get   So the general solution of the ODE is      "
 },
 {
-  "id": "example-47",
+  "id": "example-48",
   "level": "2",
-  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-47",
+  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-48",
   "type": "Example",
   "number": "3.2.1",
   "title": "",
   "body": "  Find the general solution of     The general solution takes the form , where is a solution of the associated homogeneous equation and is a single solution of the original ODE . Since the characteristic equation of is , we get Now we'll find . Since the right hand side of the ODE is , a good initial guess would be . However, when we take this guess and plug it into the ODE, we'll start seeing terms involving as well (since ) so this means we'll want to include into our guess for also. So we'll modify our guess to be .  Since our guess for doesn't overlap with , we can proceed with plugging our guess into the original ODE and equating coefficients, just as we did before. So we get and , which means that . When solving for , always remember to plug the values you find back into the guess for that you used! So the general solution of the ODE is    "
 },
 {
-  "id": "example-48",
+  "id": "example-49",
   "level": "2",
-  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-48",
+  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-49",
   "type": "Example",
   "number": "3.2.2",
   "title": "",
@@ -1099,9 +1117,9 @@ var ptx_lunr_docs = [
   "body": "   Component of  Contribution to                        "
 },
 {
-  "id": "example-49",
+  "id": "example-50",
   "level": "2",
-  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-49",
+  "url": "section-non-homogeneous-linear-odes-with-constant-coefficients.html#example-50",
   "type": "Example",
   "number": "3.2.5",
   "title": "",
@@ -1162,9 +1180,9 @@ var ptx_lunr_docs = [
   "body": " Matrix-Vector Product   Let be the matrix and let . Then their product  is the vector defined to be The  identity matrix is the matrix . A scalar is just a constant. To multiply a scalar with a matrix , just multiply every element of with .   "
 },
 {
-  "id": "example-51",
+  "id": "example-52",
   "level": "2",
-  "url": "section-systems-of-odes-as-models.html#example-51",
+  "url": "section-systems-of-odes-as-models.html#example-52",
   "type": "Example",
   "number": "4.1.6",
   "title": "",
@@ -1198,18 +1216,18 @@ var ptx_lunr_docs = [
   "body": " Vector-Valued Functions   A vector-valued function is a vector whose elements are functions. If each of the functions in a vector depends on the variable , we often write to denote this. The derivative of a vector-valued function is the new vector-valued function .   "
 },
 {
-  "id": "example-53",
+  "id": "example-54",
   "level": "2",
-  "url": "section-systems-of-odes-as-models.html#example-53",
+  "url": "section-systems-of-odes-as-models.html#example-54",
   "type": "Example",
   "number": "4.1.10",
   "title": "",
   "body": "  Write the system as a matrix ODE.    We need to find a matrix and vector to let us rewrite this system. The matrix is formed from the coefficients of on the right hand side of the system: The vector is just made up of the dependent variables : With these terms, the original system of ODEs is equivalent to the single matrix ODE    "
 },
 {
-  "id": "example-54",
+  "id": "example-55",
   "level": "2",
-  "url": "section-systems-of-odes-as-models.html#example-54",
+  "url": "section-systems-of-odes-as-models.html#example-55",
   "type": "Example",
   "number": "4.1.11",
   "title": "",
@@ -1252,9 +1270,9 @@ var ptx_lunr_docs = [
   "body": " Solutions of Systems   Let be an constant matrix, and suppose that has linearly independent eigenvectors with corresponding eigenvalues . Then the general solution of is given by    "
 },
 {
-  "id": "example-55",
+  "id": "example-56",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-55",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-56",
   "type": "Example",
   "number": "4.2.2",
   "title": "",
@@ -1279,27 +1297,27 @@ var ptx_lunr_docs = [
   "body": "   is called the characteristic equation of the matrix .   "
 },
 {
-  "id": "example-56",
+  "id": "example-57",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-56",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-57",
   "type": "Example",
   "number": "4.2.5",
   "title": "",
   "body": "  Find the eigenvalues of the matrix .    First, we need to set up the characteristic equation of . Since we get so the characteristic equation of is which has solutions . So the eigenvalues of are .   "
 },
 {
-  "id": "example-57",
+  "id": "example-58",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-57",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-58",
   "type": "Example",
   "number": "4.2.6",
   "title": "",
   "body": "  Let Find the eigenvalues of .     is a triangular matrix since everything below the main diagonal is . So the eigenvalues of are .   "
 },
 {
-  "id": "example-58",
+  "id": "example-59",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-58",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-59",
   "type": "Example",
   "number": "4.2.7",
   "title": "",
@@ -1315,45 +1333,45 @@ var ptx_lunr_docs = [
   "body": "  Let be an matrix with constant entries. If the eigenvalues of are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if is an eigenvector corresponding to then the eigenvectors are linearly independent.   "
 },
 {
-  "id": "example-59",
+  "id": "example-60",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-59",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-60",
   "type": "Example",
   "number": "4.2.9",
   "title": "",
   "body": "  Solve the matrix ODE given by where     We already have everything we need. We know that the eigenvalues of are and and some corresponding eigenvectors are Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE: So the general solution of the matrix ODE is Note that the choice of eigenvector doesn't matter . Just so long as we find some particular eigenvector for each distinct eigenvalue.   "
 },
 {
-  "id": "example-60",
+  "id": "example-61",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-60",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-61",
   "type": "Example",
   "number": "4.2.10",
   "title": "",
   "body": "  Solve the first-order system given by where and are functions of .    First, note that this system is equivalent to the matrix ODE where To solve this system we need to find the eigenvalues and eigenvectors of , and then use these to build our general solution.   Find the eigenvalues.  We find the eigenvalues of by solving the characteristic equation for . Since , we see that the eigenvalues of are and . The fact that these eigenvalues are complex is not a problem. They're still distinct, so our method will work.    Find corresponding eigenvectors.  Set . Then implies that or just Setting in the second equation gives , so an eigenvector of corresponding to is Similarly, an eigenvector corresponding to is    Find the general solution.  At this step it is easy to construct the solution of the matrix ODE. It's just       "
 },
 {
-  "id": "example-61",
+  "id": "example-62",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-61",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-62",
   "type": "Example",
   "number": "4.2.11",
   "title": "",
   "body": "  Solve the first-order system     As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is   To find the eigenvalues we must solve the characteristic equation . However, we can also use Sage (see code cell after this example). This produces a list containing the eigenvalues of as well as the corresponding eigenvectors. So we see that the eigenvalues are given by while the corresponding eigenvectors are given by   We now have everything we need for the general solution of the matrix ODE. It's just    "
 },
 {
-  "id": "example-62",
+  "id": "example-63",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-62",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-63",
   "type": "Example",
   "number": "4.2.12",
   "title": "",
   "body": "  Two brine tanks are set up as in . Fresh water flows into the tank at a rate of , well-mixed solution flows from Tank 1 to Tank 2 at a rate of and well-mixed solution flows out of Tank 2 at a rate of . Suppose that and are 5 , the volume of solution in Tank 1 is 10 and the volume of solution in Tank 2 is 7 . Suppose Tank 1 has 5 of salt at time and Tank 2 has 2 of salt at time . How much salt is in each tank at time ?    To start, let denote the amount of salt in Tank 1 at time and denote the amount of salt in Tank 2 at time , where is in minutes. Then from Section 4.1, we know that If we set then this system is equivalent to the matrix ODE . To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation or use Maple, but it's easier to note that is a triangular matrix. So the eigenvalues are just .  Now we find eigenvectors. So let If is an eigenvector for , then we know , which gives the system If we set , then we just get . So an eigenvector corresponding to is   Similarly, if we set we get , but no restrictions on . So an eigenvector corresponding to is   The general solution of our matrix ODE is then   But we're not done yet, since we have the initial conditions and , or in terms of our matrix ODE We can use this to find and . If we set , then we get so and .  So the solution of the matrix ODE (and hence the original system) is The amount of salt in the first tank, , is given by the top entry and the amount of salt in the second tank, , is given by the bottom entry.   "
 },
 {
-  "id": "p-377",
+  "id": "p-379",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-377",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-379",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1378,9 +1396,9 @@ var ptx_lunr_docs = [
   "body": "    The phase portrait from .  "
 },
 {
-  "id": "p-384",
+  "id": "p-386",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-384",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-386",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1414,9 +1432,9 @@ var ptx_lunr_docs = [
   "body": "    The phase portrait for .  "
 },
 {
-  "id": "example-65",
+  "id": "example-66",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-65",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-66",
   "type": "Example",
   "number": "4.2.18",
   "title": "",
@@ -1441,27 +1459,27 @@ var ptx_lunr_docs = [
   "body": "   Name  Conditions on    Node  Real, same sign    Saddle point  Real, opposite sign    Center  Pure imaginary    Spiral point  Complex, not pure imaginary    Eigenvalue conditions for stability.  "
 },
 {
-  "id": "p-396",
+  "id": "p-398",
   "level": "2",
-  "url": "section-criteria-for-critical-points-stability.html#p-396",
+  "url": "section-criteria-for-critical-points-stability.html#p-398",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "stable unstable stable and attractive asymptotically stable "
 },
 {
-  "id": "example-66",
+  "id": "example-67",
   "level": "2",
-  "url": "section-criteria-for-critical-points-stability.html#example-66",
+  "url": "section-criteria-for-critical-points-stability.html#example-67",
   "type": "Example",
   "number": "4.3.2",
   "title": "",
   "body": "  Let denote a matrix ODE where is a constant matrix. What conditions on the eigenvalues of will give an asymptotically stable critical point at ?    Let denote a nonzero solution of the matrix ODE (and therefore a trajectory). Then in order for to be asymptotically stable, we need as . Let denote the eigenvalues of . Then will have the form   This will go to as if either or if each exponential goes to as . Since we assume , this means we need for as . This means that the real part of each eigenvalue must be negative. This is because the real part of each eigenvalue determines the growth of : if , then . So is asymptotically stable if the real parts of both eigenvalues are negative.   "
 },
 {
-  "id": "example-67",
+  "id": "example-68",
   "level": "2",
-  "url": "section-criteria-for-critical-points-stability.html#example-67",
+  "url": "section-criteria-for-critical-points-stability.html#example-68",
   "type": "Example",
   "number": "4.3.3",
   "title": "",
@@ -1477,36 +1495,36 @@ var ptx_lunr_docs = [
   "body": " Nonlinear Systems   Now we apply phase plane methods to study nonlinear autonomous systems ,   Autonomous just means we can write the system without explicitly referring to the independent variable .  which for systems involving two ODEs take the form . where .  We can also write such a system as a vector equation: . although not as a matrix ODE (if are nonlinear).  Just as in the previous sections, the phase plane is still the , trajectories are still the solutions of (represented as curves in the phase plane), and the phase portrait of is the set of all trajectories in the phase plane. We call a point in the phase plane a critical point of if it is a solution of the same system. Equivalently, the critical points of are precisely those points for which     Express the pendulum equation  , where represents the angular displacement of a pendulum from the vertical, as a nonlinear system and then find its critical points.    First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set . Then the ODE turns into the system , which we can also write as using   Now we need to find the critical points in the -plane that make . So we need and for . So the critical points of this system are all points of the form .      Classification of Critical Points and Linearization  Critical points of systems are important because they can represent long-term behavior of a system. For example, if we have a first-order system representing the population of two species, and it turns out the the origin is asymptotically stable, then this suggests that both species could be driven to extinction. So we want to classify critical points for nonlinear systems in addition to what we have already for linear systems; unfortunately, nonlinear systems are often difficult, if not outright impossible, to solve exactly.  Thankfully, in many cases we can approximate a nonlinear system with critical points by a suitably chosen linear system at each critical point ; we call such a system the linearization at .   The Jacobian of a Nonlinear System   Let The Jacobian of is the matrix given by     The linearization of at the point is the linear system , where     Find the linearization of the pendulum system at the critical point .    For this system, we have and . The Jacobian is then given by So to get the linearization we need to set     The linearization of a nonlinear system isn't just useful for approximating the nonlinear system. It's also incredibly useful for classifying the critical points of a nonlinear system; for the most part, the eigenvalues of the matrix from the linearization also classify the critical points of the system .    Find and classify the critical points of the nonlinear system .   This example taken from here.      The critical points occur at . If we set and solve the resulting equation, we get or . If , then , and for this to be we must have . We can verify that makes as well, so the origin is a critical point. Similarly, forces , and we can verify that at and . So we have three critical points to check.  To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have . At , we get . The eigenvalues are and , meaning that this critical point is a saddle point. At we get which has eigenvalues . Hence should be a spiral point. Finally, at we get , which has eigenvalues . Hence is an asymptotically stable node.    We can also use nonlinear systems to get more accurate population models.    Predator-prey populations can be modeled using the Lotka-Volterra model. Let denote the population of a prey species at time and let denote the population of a predator species at time . Then the Lotka-Volterra model says that , where . Find and classify the critical points of this system.    The critical points are the points that satisfy the equations Equivalently, we need This has solutions and . So the critical points are and .  To classify these critical points we need to linearize the system, so we'll compute the Jacobian of to get   At , we get , which has eigenvalues . So the origin is an saddle point of the original system. In particular, there exist trajectories heading into the origin, so it's possible for both species to go extinct in this case.  Now we'll classify the second critical point . The Jacobian at this point gives us the matrix . This matrix has characteristic equation , and so has eigenvalues . Since the eigenvalues are pure imaginary, this suggests that is a center, which is indeed the case. In particular, trajectories near this critical point must be periodic .     "
 },
 {
-  "id": "p-408",
+  "id": "p-410",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-408",
+  "url": "section-nonlinear-systems.html#p-410",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "nonlinear autonomous systems "
 },
 {
-  "id": "p-411",
+  "id": "p-413",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-411",
+  "url": "section-nonlinear-systems.html#p-413",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "phase plane trajectories phase portrait critical point "
 },
 {
-  "id": "example-68",
+  "id": "example-69",
   "level": "2",
-  "url": "section-nonlinear-systems.html#example-68",
+  "url": "section-nonlinear-systems.html#example-69",
   "type": "Example",
   "number": "4.4.1",
   "title": "",
   "body": "  Express the pendulum equation  , where represents the angular displacement of a pendulum from the vertical, as a nonlinear system and then find its critical points.    First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set . Then the ODE turns into the system , which we can also write as using   Now we need to find the critical points in the -plane that make . So we need and for . So the critical points of this system are all points of the form .   "
 },
 {
-  "id": "p-416",
+  "id": "p-418",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-416",
+  "url": "section-nonlinear-systems.html#p-418",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1522,27 +1540,27 @@ var ptx_lunr_docs = [
   "body": " The Jacobian of a Nonlinear System   Let The Jacobian of is the matrix given by    "
 },
 {
-  "id": "example-69",
+  "id": "example-70",
   "level": "2",
-  "url": "section-nonlinear-systems.html#example-69",
+  "url": "section-nonlinear-systems.html#example-70",
   "type": "Example",
   "number": "4.4.3",
   "title": "",
   "body": "  Find the linearization of the pendulum system at the critical point .    For this system, we have and . The Jacobian is then given by So to get the linearization we need to set    "
 },
 {
-  "id": "example-70",
+  "id": "example-71",
   "level": "2",
-  "url": "section-nonlinear-systems.html#example-70",
+  "url": "section-nonlinear-systems.html#example-71",
   "type": "Example",
   "number": "4.4.4",
   "title": "",
   "body": "  Find and classify the critical points of the nonlinear system .   This example taken from here.      The critical points occur at . If we set and solve the resulting equation, we get or . If , then , and for this to be we must have . We can verify that makes as well, so the origin is a critical point. Similarly, forces , and we can verify that at and . So we have three critical points to check.  To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have . At , we get . The eigenvalues are and , meaning that this critical point is a saddle point. At we get which has eigenvalues . Hence should be a spiral point. Finally, at we get , which has eigenvalues . Hence is an asymptotically stable node.   "
 },
 {
-  "id": "example-71",
+  "id": "example-72",
   "level": "2",
-  "url": "section-nonlinear-systems.html#example-71",
+  "url": "section-nonlinear-systems.html#example-72",
   "type": "Example",
   "number": "4.4.5",
   "title": "",
@@ -1576,9 +1594,9 @@ var ptx_lunr_docs = [
   "body": "  Find a power series for .    Any power series for looks like , where Since is its own derivative, for all choices of . So and the power series for is It turns out the equals its power series for all values of .   "
 },
 {
-  "id": "p-441",
+  "id": "p-443",
   "level": "2",
-  "url": "section-power-series-method.html#p-441",
+  "url": "section-power-series-method.html#p-443",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1621,9 +1639,9 @@ var ptx_lunr_docs = [
   "body": "  Solve the ODE given by     We could easily solve this using Chapter 1 methods, but we'll use power series to practice. To start, we assume that the solution can be written as a power series: The next step is to plug this into the ODE. Since we get the equation .  We need to find the values of the coefficients ; we do this by equating coefficients on both sides of the equation. We want to write both series in terms of so that we can do this, so we need to shift the summation on the left: we replace with inside the sum and decrease the limit of summation to to get . Now we can equate coefficients: for , we have   This is known as a recurrence relation . It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each looks like. To see how, we plug several values for into this recurrence relation to try to determine a pattern: and in general it appears that for each .  We can't solve for without specifying an initial condition of some kind.  So the solution is .   "
 },
 {
-  "id": "example-76",
+  "id": "example-77",
   "level": "2",
-  "url": "section-power-series-method.html#example-76",
+  "url": "section-power-series-method.html#example-77",
   "type": "Example",
   "number": "5.1.7",
   "title": "",
@@ -1657,18 +1675,18 @@ var ptx_lunr_docs = [
   "body": " Legendre's Equation and Legendre Polynomials   An important differential equation in applications is the Legendre equation given by . Our first example of this equation (with ) was examined in . By this example, we see that has a series solution centered at with radius of convergence at least . Therefore the power series method is appropriate.    Solving the Legendre Equation  We'll proceed as we did in , altering the last sum as necessary to get which gives (after a bit of algebra, once again) .  This recurrence is valid for , and allows us to write out the solution in terms of the parameter and the arbitrary constants and : where .  Note that and form a basis of solutions ( ) of the Legendre equation, which means that must also be the general solution.    Legendre Polynomials  Our solution of simplifies greatly if happens to be an integer. In particular, if is a nonnegative integer then . If is even then the solution given in becomes a polynomial: . Likewise, if is odd then given in becomes a polynomial instead: .  By choosing and judiciously, we can guarantee that the polynomials (if is even) or (if is odd) are precisely equal to at . Doing so gives us the Legendre polynomials  , defined more precisely in : .  These polynomials satisfy several nice properties, but one of the most important characteristics they have is that forms an orthogonal set of polynomials on the interval . This means that if . It can also be shown that if . This property allows us to express any polynomial as a finite sum of Legendre polynomials in a computationally efficient manner. Furthermore, if we allow infinite series then we can use Legendre polynomials to express and continuous function on .  For actually computing Legendre polynomials, instead of using we often use Rodrigues' formula  or Bonnet's recurrence  . Either recurrence is simple to program into a CAS, as seen in the Sage cell below:    "
 },
 {
-  "id": "p-473",
+  "id": "p-475",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-473",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-475",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Legendre equation "
 },
 {
-  "id": "p-478",
+  "id": "p-480",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-478",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-480",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1702,18 +1720,18 @@ var ptx_lunr_docs = [
   "body": " Existence of Series Solution  Existence of Series Solutions   Suppose that is a regular point of the differential equation . Then the ODE has two linearly independent solutions of the form The radius of convergence is at least as large as the distance from to the nearest singular point of the ODE.   "
 },
 {
-  "id": "example-78",
+  "id": "example-79",
   "level": "2",
-  "url": "section-frobenius-method.html#example-78",
+  "url": "section-frobenius-method.html#example-79",
   "type": "Example",
   "number": "5.3.3",
   "title": "",
   "body": "  Find the general solution, as a power series in powers of , for the ODE .    The first thing we will do is make sure that the ODE actually has a power series solution at . To do this, we need to show that is a regular point of the ODE. So we need to find and and check that they (or their power series) make sense at . If we divide through the ODE by we obtain so . Since both of these exist at , it follows that is a regular point of the ODE. Therefore the ODE has a power series solution at (that is, in powers of ). Since and both have singular points at , it follows that the radius of convergence of the power series solution is at least .   Here, we're using the formula    We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand and using their own power series, and this would greatly complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form , or just for short. Now we plug this into the ODE to get which simplifies to or just   Now we can collect like terms, and combine everything on the left hand side into one sum: For this sum to be each of the coefficients must be , so we must have We can solve this for to get a recurrence relation for these coefficients: so   We need to find a pattern for the coefficients. Since this is a two-step relation, we'll set up two columns: one column for even and one column for odd : . So it appears that .  Therefore the general solution of the ODE is    "
 },
 {
-  "id": "example-79",
+  "id": "example-80",
   "level": "2",
-  "url": "section-frobenius-method.html#example-79",
+  "url": "section-frobenius-method.html#example-80",
   "type": "Example",
   "number": "5.3.4",
   "title": "",
@@ -1756,18 +1774,18 @@ var ptx_lunr_docs = [
   "body": " Bessel's Equation   As with Legendre's Equation , another important differential equation in applications is Bessel's equation : , where . By , this equation has a series solution at of the form where is a solution of the indicial equation , or just . In particular, there we're guaranteed a series solution by setting , since this is the larger root. Note that is actually a Bessel equation with parameter .  Let . Then we can plug this into to obtain , which gives . Since this only gives us data about , we should go back to to see if we can say anything about or . In fact, we get . Hence our series solution only contains even-indexed coefficients. Rewriting the recurrence to reflect this, we get     Bessel Functions for Integer  Now we consider what happens to solutions given by if is a nonnegative integer. To simplify matters (somewhat...), we add the restriction that . This allows us to write more simply as The resulting series is known as the Bessel function of the first kind of order .   Finding and   Find the zeroth order and first order Bessel functions of the first kind.    Using , we get .    These functions are important enough that they are built-in to most computer algebra systems. Using Sage, we get the following plots:   As we can see, these functions oscillate and tend towards . A useful (asymptotic) approximation is given by , as shown below.   Approximating a Bessel function.        Bessel Functions of the First Kind for Nonnegative Order  Now we try to find a formula for assuming . To do so, we need to make sense of expressions like . Thankfully, we can do so using the Gamma function .   Gamma Function  Gamma function   The Gamma function is the function given by .    An important property of the Gamma function is the following: . If we replace with an integer , we get . It turns out that we can replace in with , giving . Note that the asymptotic expansion in holds for noninteger as well.    General Solution of Bessel's Equation  Since is second-order, we need a second linearly independent solution to get the general solution. If is not an integer then we can find the second solution very quickly: . However, if is an integer then it turns out that , and so fails to be linearly independent from .  It turns out that a second, linearly independent solution is given as follows: .   "
 },
 {
-  "id": "p-514",
+  "id": "p-516",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-514",
+  "url": "section-bessel-s-equation.html#p-516",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Bessel's equation "
 },
 {
-  "id": "p-516",
+  "id": "p-518",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-516",
+  "url": "section-bessel-s-equation.html#p-518",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1846,9 +1864,9 @@ var ptx_lunr_docs = [
   "body": " Computing the Laplace of   Compute the Laplace transform of .    We compute the Laplace transform using the definition: .   "
 },
 {
-  "id": "p-535",
+  "id": "p-537",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-535",
+  "url": "section-the-laplace-transform.html#p-537",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1900,9 +1918,9 @@ var ptx_lunr_docs = [
   "body": " Inverse Laplace Transform   The inverse Laplace transform of a function , denoted , is a function such that .   "
 },
 {
-  "id": "p-548",
+  "id": "p-550",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-548",
+  "url": "section-the-laplace-transform.html#p-550",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1999,9 +2017,9 @@ var ptx_lunr_docs = [
   "body": " Unit Step Functions and Time Shifting  The unit step function or Heaviside function is the function defined by Note also that for any .  Recall that tells us how to deal with translation in the frequency domain: A similar result is true for -shifting.   Time Shifting of Laplace Transforms   Let denote a piecewise continuous function with Laplace transform . Let . Then , or equivalently .    To compute this we need to rely on the definition of the Laplace transform: .    The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in .   IVP with Discontinuous Forcing Function   A mass of 1 is attached to a spring that is held 1 to the right of its equilibrium position by a force of 4 . Beginning at time , a machine is turned on and applies an external force of to the mass. At time the machine is turned off and the external force disappears. Let be the displacement of the mass at time . What is an ODE that models the motion of the mass?    By Hooke's Law and Newton's Second Law, we have where is the external force at time . Since , and the motion of the mass satisfies the IVP We can rewrite as follows: So the IVP we need to solve is   If we take Laplace transforms, this becomes where . So If we solve this for , we get and if we simplify this using partial fractions this becomes   So the solution of the IVP is .    Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. Be careful to place matching brackets and parentheses as appropriate when using the piecewise command in Sage to construct a piecewise function.   "
 },
 {
-  "id": "p-568",
+  "id": "p-570",
   "level": "2",
-  "url": "section-unit-step-functions-and-time-shifting.html#p-568",
+  "url": "section-unit-step-functions-and-time-shifting.html#p-570",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2035,9 +2053,9 @@ var ptx_lunr_docs = [
   "body": " Dirac Delta Functions   Impulses  Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.  To be specific, let be a force that acts only from to (and is otherwise ). Then the impulse of the force over the interval is given by We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous unit impulse ; any other impulse we can get by multiplication by a constant.  So this is our goal: find some function that has an instantaneous unit impulse at the point . In other words, we want to find a function such that But this is impossible for any function, since However, we can approximate the idea of an instantaneous unit impulse by defining    Approximating the instantaneous unit impulse.   A plot of approximations to an instantaneous unit impulse.     As indicated in , this function is defined so that the area under the graph is regardless of the value of . Therefore for all . Although the instantaneous unit impulse we tried to define earlier can't actually be a function, is a completely valid function for all positive . Furthermore, if we send then it becomes a better and better approximation to an ideal instantaneous unit impulse. Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.   The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation     The Dirac delta function is, of course, not an actual function, but it's still useful as a mathematical formulation of an instantaneous force with unit impulse at . And this expression is often perfectly valid to work with inside of integrals due to the sampling property discussed below.   The Dirac delta is actually an example of a generalized function , or tempered distribution .   We can also take translations of the Dirac delta, which we view as a function  defined piecewise by We can represent this graphically as an arrow (see ).   A plot of the Dirac delta function.   A plot of the Dirac delta function.     The most important property of the Dirac delta is that This property can be generalized to products involving the Dirac delta and continuous functions. Very roughly, if represents an arrow with an area of concentrated at , then represents an arrow with area concentrated at . This sampling property is stated more precisely as .   Sampling Property of the Dirac Delta  Dirac delta function sampling   Let be a continuous function and let . Then     We treat as a function and perform the above integration:     The above theorem gives us another interpretation of the Dirac delta: it's a sampling function. When integrated against another function over an interval containing , will pick out the value . We can use this to quickly find the Laplace transform of the Dirac delta.   Laplace Transform of the Dirac Delta Function   Compute , where .    We use the definition of the Laplace transform: . In particular, .      Dirac Delta Models  We will primarily use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts. Although this is not strictly realistic since such forces are still imparted over some interval of time, treating the force as instantaneous often simplifies computations.   IVP with Impulse   An object of mass , at rest, is attached to a spring with spring constant . At time , the a hammer strikes the mass providing an impulse of and setting the mass in motion. What is the displacement ?    The displacement satisfies the ODE where is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form . And since it provides an impulse of , we can pick . As the mass is initially at rest, satisfies the IVP To solve this, we take the Laplace transform of the IVP to get or just So .    Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time , this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.   Time-delayed Strike   Consider the spring-mass system above, but suppose now that the hammer hits the mass at time . What is the displacement ?    This time, the IVP we must solve is If we take Laplace transforms and solve for we get and so . This function is plotted in below. Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at .   Displacement influenced by a time-delayed hammer strike.   A plot of the displacement of a spring-mass system with time-delayed hammer strike.        Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.        The Dirac delta function is also important mathematically in determining the behavior of certain systems. For example, consider the system determined by the IVP We can imagine that the ODE is a mathematical machine that converts the input into an output, or response, . Using Laplace transforms it's not difficult to determine : . So we see that the Laplace transform of the response is related to the Laplace transform of the input by . This function is the transfer function of the system and determines all possible responses.  Now here's the connection with the Dirac delta. If we replace with to get the system and take Laplace transforms, we get . In other words, the transfer function is just the Laplace transform of the solution of . We call the solution the impulse reponse of the system. In this case, the impulse response is . Since the corresponding transfer function determines the form of for all responses , the impulse reponse must determine the form of all responses in the time domain. We will see precisely how in the next section by introducing the concept of a convolution .  "
 },
 {
-  "id": "p-579",
+  "id": "p-581",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-579",
+  "url": "section-dirac-delta-functions.html#p-581",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2062,9 +2080,9 @@ var ptx_lunr_docs = [
   "body": " The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation    "
 },
 {
-  "id": "p-584",
+  "id": "p-586",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-584",
+  "url": "section-dirac-delta-functions.html#p-586",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2080,9 +2098,9 @@ var ptx_lunr_docs = [
   "body": " A plot of the Dirac delta function.   A plot of the Dirac delta function.    "
 },
 {
-  "id": "p-586",
+  "id": "p-588",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-586",
+  "url": "section-dirac-delta-functions.html#p-588",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2134,18 +2152,18 @@ var ptx_lunr_docs = [
   "body": " Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.      "
 },
 {
-  "id": "p-600",
+  "id": "p-602",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-600",
+  "url": "section-dirac-delta-functions.html#p-602",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "transfer function "
 },
 {
-  "id": "p-601",
+  "id": "p-603",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-601",
+  "url": "section-dirac-delta-functions.html#p-603",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2215,9 +2233,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series   The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of orthonormal bases . Knowing an orthonormal basis for a vector space can greatly simplify linear algebra in that vector space. In this section we'll do something similar with periodic functions , which are functions whose values repeat themselves.    Periodic Functions  Consider the function given by the following graph:   A periodic function.   The graph of a periodic function.      If we look at the graph, we see that it repeats itself if we wait long enough (approximately every six units). Functions that have this property are called periodic functions .   Periodic Functions  periodic functions   Let be a real function defined for all . We say that is a periodic function if there exists a positive number such that for all . In this case we say that is -periodic . The (fundamental) period of is the smallest positive value of for which is -periodic, assuming this value exists.     Constant functions are examples of periodic functions with no fundamental period.    Periods of Sine and Cosine  Let be any positive integer. Then the functions and are both -periodic which follows from the corresponding addition formulas . The period, in particular, is . The periodic nature of these functions can also be seen from their graphs:    Graphs of and .   An image showing the periodic nature of sine and cosine.      The graph in was produced by graphing In general, the (finite) sum of functions of the form where are integers is also -periodic. In particular, we have the following result.   Periods of Sums of Sinusoids   Let and where . Suppose that where represents the reduced fraction of . Then has period given by .     Finding Periods of Sums of Sinusoids   Find the periods of and .    For we have , which in lowest terms is . Therefore the period is . For , we have which is already in lowest terms. Therefore its period is .      Trigonometric Series and Fourier Series  One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written as a sum of sinusoids using trigonometric polynomials and trigonometric series .   Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .    Our primary goal in this section is to take a function of period and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that and we'll look at what the coefficients of the series need to be to make this equation true. To do this, we'll need the so-called orthogonality relations for .   Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .    We can verify using a computer algebra system as below. Proving it is a little bit more work, but can be done using trigonometric identities or .    will be our primary tool for expressing a function as a trigonometric series. To see how, suppose that we have If this equation were true, then we should be able to integrate both sides of it and get another true equation. Since suggests that integrals involving simplify very nicely, we'll try to integrate both sides of the equation against from to for some . If we do this, we get This lets us solve for ! We have Similarly, The trigonometric series resulting from these coefficients is known as the Fourier series of . These formulas are useful enough that we'll place them together in a theorem.   Fourier Series Coefficients  Fourier series Coefficients   Let be a periodic function with period . Then the Fourier coefficients of are given by     Note that the formulas in tell us what the coefficients of a Fourier series representation of must be if such a representation existed, but as yet there is no guarantee that a function actually equals its Fourier series. Also, since is assumed to be -periodic we can also integrate over instead without changing the values of the coefficients.   The Fourier series of  Define for . To find its Fourier series, we can just use the previous formulas to find the values of the coefficients for . We know that As nasty as these are, the first two are actually very easy to compute. Here's why: and are both odd functions, and the integral of any odd function in an interval that is symmetric about is always (since the areas cancel out). So for all . The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that If we plug in the limits of integration and simplify (again, computers are handy for this!), we get So the Fourier series for is given by    A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function ? Are they actually equal? If we use the following code (adapted from here ) to compare the partial sums of the Fourier series with , then it looks like the partial sums get closer and closer if we choose larger values of .   In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer. In fact, the convergence of Fourier series for what one might consider to be the more \"well-behaved\" functions in mathematics was an open question until the 1960s. See Carleson's Theorem . However, for many of the functions we care about in this course we have the following theorem.   Fourier Series of Piecewise Continuous Functions  Fourier series convergence   Let be a piecewise continuous function on the interval , and suppose that it's also periodic with period , and is differentiable everywhere that it's continuous. Then the Fourier series of converges to except at the points where is discontinuous.     "
 },
 {
-  "id": "p-618",
+  "id": "p-620",
   "level": "2",
-  "url": "section-fourier-series.html#p-618",
+  "url": "section-fourier-series.html#p-620",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2233,9 +2251,9 @@ var ptx_lunr_docs = [
   "body": " A periodic function.   The graph of a periodic function.     "
 },
 {
-  "id": "p-620",
+  "id": "p-622",
   "level": "2",
-  "url": "section-fourier-series.html#p-620",
+  "url": "section-fourier-series.html#p-622",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2287,9 +2305,9 @@ var ptx_lunr_docs = [
   "body": " Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .   "
 },
 {
-  "id": "p-630",
+  "id": "p-632",
   "level": "2",
-  "url": "section-fourier-series.html#p-630",
+  "url": "section-fourier-series.html#p-632",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2305,9 +2323,9 @@ var ptx_lunr_docs = [
   "body": " Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .   "
 },
 {
-  "id": "p-633",
+  "id": "p-635",
   "level": "2",
-  "url": "section-fourier-series.html#p-633",
+  "url": "section-fourier-series.html#p-635",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2368,9 +2386,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series of  Let for and have period . We can find its Fourier series using . If we do so, we get So the Fourier series of is given by .  "
 },
 {
-  "id": "p-645",
+  "id": "p-647",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-645",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-647",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2386,9 +2404,9 @@ var ptx_lunr_docs = [
   "body": " Even and Odd Functions  Even and odd functions   Let be a function. We say that is    "
 },
 {
-  "id": "p-648",
+  "id": "p-650",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-648",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-650",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2431,9 +2449,9 @@ var ptx_lunr_docs = [
   "body": " Complex Fourier Series and Parseval's Identity   Although we have a decent formula for Fourier series (see ), it's a little unwieldy due to the different expressions for and . We can fix this, perhaps surprisingly, by using complex exponentials and Euler's formula.    Complex Fourier Series  First, recall Euler's formula , which allows us to rewrite complex exponentials in terms of sine and cosine.  We can use to rewrite the Fourier series in . Our goal now is to find a complex Fourier series  for functions with period . We will also include the statement of in this new context.   Complex Fourier Series  Fourier series complex form   Let be a piecewise smooth function with period . Then the complex Fourier series of is given by where This Fourier series converges to wherever is continuous.    We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine. In particular, the relation we will use is the following: So if we set equal to a complex Fourier series and integrate both sides against for from to , we get where the last equality follows from the orthogonality relation we just proved. Therefore      Complex Fourier Series of Exponential Function  Let on and suppose that is periodic with period . We want to find the complex Fourier series for . We can do this by finding the correct coefficients : So we have for , since this is where has discontinuities.   Although the complex Fourier series can be easier to compute in some cases, there may be cases where we'd like to go back to the real Fourier series. The following formula lets us do so.   Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by     The real Fourier series corresponding to the complex Fourier series for from has coefficients Either way, we get the following Fourier series.     Parseval's Identity  One of the most important identities in mathematics is Parseval's identity , which we state next.   Parseval's Identity  Fourier series Parseval's identity   Let denote a piecewise-differentiable (real-valued) function on with real Fourier coefficients and complex Fourier coefficients . If exists and is finite, then     One of the great strengths of this identity is that it allows potentially complicated sums to be computed using integrals instead.   The Basel Problem  Basel problem  In the early century, one of the most renowned problems in mathematics was the Basel problem, which asked for the value of Euler was the first person to show that the sum is actually and it was this solution that made him famous Or at least math famous. in the first place. We can solve this by using Parseval's identity. To do so, let for . Then with a little bit of work we can find the (real) Fourier coefficients: By Parseval's identity, it then follows that which simplifies down to In other words,     "
 },
 {
-  "id": "p-655",
+  "id": "p-657",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-655",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-657",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2467,9 +2485,9 @@ var ptx_lunr_docs = [
   "body": " Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by    "
 },
 {
-  "id": "p-662",
+  "id": "p-664",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-662",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-664",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2503,9 +2521,9 @@ var ptx_lunr_docs = [
   "body": " Approximation by Trigonometric Polynomials  If a function has a Fourier series and is equal to its Fourier series, i.e., , then the partial sums of the Fourier series should be good approximations of : . Such a sum is a trigonometric polynomial of degree .  We can also consider approximating with other trigonometric polynomials of degree , say . We'd like to know how good the approximation is. To do this, we need to define a measure of error.   Square Error   Given a function of period  and approximation , we define the square error to be , assuming these are real-valued functions.    It turns out that if we are approximating by trigonometric polynomials , then the square error takes a specific form.   Square Error Formula   Let be a function of period with Fourier coefficients and , and let be a degree trigonometric polynomial. Then . The error takes this minimum value if .     Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is     Since the square error is a positive value, it follows that . This is known as Bessel's inequality . states that this inequality becomes equality if we let .   Applying Bessel's Inequality   Let . Apply Bessel's inequality to this function. What does Parseval's Identity say?    If we find the Fourier coefficients of , we get . By Bessel's inequality, we know that for any . As , Parseval's gives the identity .    "
 },
 {
-  "id": "p-666",
+  "id": "p-668",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-666",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-668",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2539,9 +2557,9 @@ var ptx_lunr_docs = [
   "body": " Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is    "
 },
 {
-  "id": "p-673",
+  "id": "p-675",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-673",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-675",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2566,9 +2584,9 @@ var ptx_lunr_docs = [
   "body": " The Fourier Transform  If is a periodic function with period , then we know how to find its Fourier series, both real and complex. But what do we do if our function is not periodic? Can we still get a similar representation?  Let be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of , and replace it with a periodic function that is equal to on some interval . Then we can find the Fourier series of this function, which by is given by where So we can write wherever is continuous on .  The idea now is that the larger that gets, this expression can be used to represent for more and more values of . So we want to see what happens to this as . First, we'll clean this up a little bit by writing and , so that . Then if is in and is continuous at , then we can say As awful as this looks, we can relate this to a Riemann sum! As  , we can replace with the new variable and this expression becomes This leads to the definition of the Fourier transform . But first we need another definition.   Absolutely Integrable Functions  Absolutely Integrable Functions   Let be a piecewise continuous function. Then is absolutely integrable if      The Fourier Transform  Fourier Transform definition   Let be an absolutely integrable piecewise continuous function. The Fourier transform of is the function defined by We often write to denote the Fourier transform as well.     Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is    As with the Laplace transform, the Fourier transform of a function is said to be in the frequency domain . In fact, the magnitude of represents the frequency content of the function (thought of as a signal) at the frequency . It's also a quick jump to get the inverse Fourier transform .   The Inverse Fourier Transform  Fourier Transform inverse transform   The inverse Fourier transform of is      Fourier Inversion Theorem  Fourier Transform inversion theorem   Let be an absolutely integrable, piecewise differentiable function. Then wherever is continuous.     Inverse Fourier transform of a step function  Define by Then we can find the inverse transform using :    The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if are constants and are functions, then and The Fourier transform also works well with derivatives.   Fourier Transforms and Derivatives  Fourier Transform transforms fo derivatives   Let be differentiable with derivative . Suppose that both and are absolutely integrable. Then     Fourier transforms also behave well with another type of convolution.   Convolution Theorem  Fourier Transform convolution theorem   Suppose that are piecewise continuous, bounded and absolutely integrable. Define by Then     "
 },
 {
-  "id": "p-678",
+  "id": "p-680",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-678",
+  "url": "section-the-fourier-transform.html#p-680",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2602,9 +2620,9 @@ var ptx_lunr_docs = [
   "body": " Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is   "
 },
 {
-  "id": "p-682",
+  "id": "p-684",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-682",
+  "url": "section-the-fourier-transform.html#p-684",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2665,9 +2683,9 @@ var ptx_lunr_docs = [
   "body": " Basic Concepts   Partial derivatives and PDEs  Given some quantity that depends solely on the variable , represents the rate of change of with respect to . More generally, given some quantity that depends on , we can attempt to find the rate of change of with respect to each of the variables . This idea leads to partial derivatives .   Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by     From here we can define higher order partial derivatives, such as or The order of each of these partial derivatives is and , respectively.   Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.    Just as ODEs in practice typically appear as initial value problems, PDEs can appear as boundary value problems . Boundary value problems involve conditions of the form These are examples of boundary conditions . In other words, boundary conditions can represent initial data at infinitely many points, as opposed to finitely many points like we had for our IVPs.    Linear homogeneous PDEs and the superposition principle  We will mostly be concerned with linear PDEs , which are PDEs where the only thing we're allowed to do to the function and its derivatives is multiply it by a constant. A linear PDE is homogeneous if every term contains the function or one of its derivatives. A solution of a PDE is a function that satisfies the PDE.   Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.    Just as with linear homogeneous ODEs, PDEs that are linear and homogeneous satisfy the superposition principle .   Superposition principle partial differential equations  Superposition principle   Let and denote arbitrary constants, and suppose that and are both solutions of the same linear homogeneous PDE. Then is also a solution of the same PDE.    The superposition principle is incredibly useful since it allows us to find general solutions of PDEs, which makes solving linear homogeneous PDEs somewhat tractable. If a PDE fails to be linear or homogeneous, the superposition principle is not guaranteed to hold.   Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.      Important PDEs  As mentioned in the introduction, PDEs are useful for modeling quantities that depend on multiple independent variables. We finish this section by listing several of the simplest and most studied PDEs.   where . This is called the heat or diffusion equation . This equation is used for modeling the spread of a quantity, such as how temperature diffuses along a rod.  where . This is called the wave equation , and is used for modeling vibrating motion, such as that along a plucked string.   In both PDEs above, the expression is an example of the Laplacian of . The Laplacian of a function at a point is a measure of how differs from the average value of at nearby . In particular, the Laplacian is positive at if tends to be less than nearby averages; the Laplacian is negative at if tends to be greater than nearby averages; and the Laplacian at is if is in equilibrium with its nearby averages.  With this viewpoint, we can assign physical reasoning to the heat and wave equations:   The heat equation states that the time rate of change of the temperature is proportional to the difference between the temperature at and the average values of nearby temperatures. If the nearby average temperature is greater (i.e., the Laplacian is positive), then the temperature will increase.    The wave equation states that the acceleration of the wave height is proportional to the difference between the height of the wave at and the average height at nearby points. If the nearby average height is greater (i.e., the Laplacian is positive), then the wave height will accelerate upwards.     Our goal in the next section will be to determine how to solve PDEs such as these.   "
 },
 {
-  "id": "p-693",
+  "id": "p-695",
   "level": "2",
-  "url": "section-basic-concepts.html#p-693",
+  "url": "section-basic-concepts.html#p-695",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2683,9 +2701,9 @@ var ptx_lunr_docs = [
   "body": " Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by    "
 },
 {
-  "id": "p-695",
+  "id": "p-697",
   "level": "2",
-  "url": "section-basic-concepts.html#p-695",
+  "url": "section-basic-concepts.html#p-697",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2701,18 +2719,18 @@ var ptx_lunr_docs = [
   "body": " Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.   "
 },
 {
-  "id": "p-697",
+  "id": "p-699",
   "level": "2",
-  "url": "section-basic-concepts.html#p-697",
+  "url": "section-basic-concepts.html#p-699",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary value problems boundary conditions "
 },
 {
-  "id": "p-698",
+  "id": "p-700",
   "level": "2",
-  "url": "section-basic-concepts.html#p-698",
+  "url": "section-basic-concepts.html#p-700",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2728,9 +2746,9 @@ var ptx_lunr_docs = [
   "body": " Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.   "
 },
 {
-  "id": "p-702",
+  "id": "p-704",
   "level": "2",
-  "url": "section-basic-concepts.html#p-702",
+  "url": "section-basic-concepts.html#p-704",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2755,9 +2773,9 @@ var ptx_lunr_docs = [
   "body": " Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.   "
 },
 {
-  "id": "p-707",
+  "id": "p-709",
   "level": "2",
-  "url": "section-basic-concepts.html#p-707",
+  "url": "section-basic-concepts.html#p-709",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2773,27 +2791,27 @@ var ptx_lunr_docs = [
   "body": " The Wave Equation and Separation of Variables  The main difficulty in solving PDEs (even linear ones) as compared with ODEs is that any solution of a PDE typically depends on more than one variable. Adding this extra degree of freedom into the problem greatly complicates matters. However, we can make this problem more reasonable by assuming that our solution depends on each variable separately . That is, we'll assume that the function we want to find, satisfies the constraint . This technique is known as separation of variables .  Consider a one-dimensional string of length that vibrates in the vertical direction. The vertical displacement of such a string depends on the horizontal position along the string, , and the time . So let denote the vertical displacement of the string at position and at time . If we assume that the string has constant density and that the force of gravity of the string is negligible, then satisfies the wave equation for some constant .  Suppose that the string is also subject to the boundary conditions   . In other words, the string is held fixed at both ends. We'll also suppose that we know the initial position of the string and the initial velocity of the string, represented by the initial conditions   . Our goal will be to find subject to these conditions. To start, assume that If we plug this into , then we get   If we assume that are both nonzero, then we can rewrite this to get This may not look that helpful, but it actually places some serious restrictions on and . The left hand side of this equation only depends on whereas the right hand side depends only on . So the only way for this equation to be true for all  is if both sides are constant: for some . This now gives us two separate ordinary differential equations for and :  . We can add a few more restrictions to these ODEs to help us solve them. Note that the boundary conditions force either or for all , which leads to . So to avoid this trivial solution, we'll set .  We'll solve first since we have extra information to use. So to start, suppose that and write for some nonzero . Then becomes and has solution given by   Now, forces , so we get . However, since as well, we get . But the only way to solve this is to set since only if . So in other words, if we assume that , then the only way to solve is to set , which also forces . Obviously, this isn't very useful. Similarly, if we assume that then we get the same problem. So let's assume that for some nonzero . Then becomes , which has solution   The condition forces , and the second boundary condition forces . We want to avoid setting equal to since this would give us again, so we'll set instead. This tells us that for some integer , or just . So nontrivial solutions of that satisfy the boundary conditions can occur only if where and . For each choice of (ignoring sign), we get the solution .  Now we move on to solving , but we still need to keep the condition for . If we do so, then becomes , which has solutions given by where .  So this means that every function of the form is a solution of subject to the boundary conditions . It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.  However, this does not guarantee that we can solve for the initial conditions in . To give ourselves as general a solution as possible, we will guess that the solution to the wave equation is actually a linear combination of all possible . That is, we'll say that   Now we'll use the initial conditions to actually determine . To start, note that we must have  This is a Fourier series , and in particular it's the Fourier series of the odd extension of with period . See . So it follows that   Similarly, we must have This is the Fourier series for the odd extension of with period . Therefore or just   We can put all of this together into the following theorem.   Wave equation solution  Solution of the Wave Equation   The solution of the wave equation with boundary conditions and initial conditions is given by where and for .     A string with fixed ends   A string at rest has unit length, and is fixed at both ends. Suppose that the string is now stretched into the triangular shape given by the graph of The string is then released at time . Given , find the function that models the vertical displacement of the string at position at time .    We can model as the solution of the wave equation with boundary conditions and initial conditions We can find from .  Using the Sage cell below, we get and since this forces as well. Hence the solution is      "
 },
 {
-  "id": "p-712",
-  "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-712",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "separation of variables "
-},
-{
   "id": "p-714",
   "level": "2",
   "url": "section-wave-equation-and-separation-of-variables.html#p-714",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
+  "body": "separation of variables "
+},
+{
+  "id": "p-716",
+  "level": "2",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-716",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
   "body": "boundary conditions "
 },
 {
-  "id": "p-715",
+  "id": "p-717",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-715",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-717",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2872,18 +2890,18 @@ var ptx_lunr_docs = [
   "body": " The Heat Equation   The last equation we will look at is the heat equation , which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the -axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the -direction only. With these assumptions, the temperature of the bar at position and time satisfies the PDE  . This is called the one-dimensional heat equation .    Bar with ends fixed at  We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature . If we're given an initial temperature distribution , then is the solution of the boundary value problem  . We can solve this boundary value problem using separation of variables, much as we did in . So to start, we assume that . If we plug this into the heat equation , then we get   Now we have three separate cases to consider for : or . Just as with the wave equation, the only case that doesn't lead to trivial solutions is . In this case leads to the two ODEs given by  . The boundary conditions in force , and the only nontrivial solutions of occur when . So we get the solutions , just as with the wave equation.  For the second ODE, we readily solve it to obtain where as before. So every function is a solution of that satisfies the boundary equations . In order to satisfy the arbitrary initial condition , we take an infinite sum of the functions to get   Finally, if we plug in and use the initial condition , we get . This is just the Fourier series of the odd extension of , which lets us find . We summarize all of this in the following theorem.   Heat equation fixed ends  Solution of the Heat Equation with Fixed Temperature   The solution of the heat equation satisfying the boundary conditions and initial condition is given by where      Sinusoidal initial temperature   Consider a thin metal bar of length placed on the -axis, with one end at and the other at . Assuming that and that the initial temperature is for , find the temperature distribution using .    The temperature is the function given by where is the coefficient of the Fourier series of the odd extension of . The odd extension of is . Furthermore, the Fourier series of is clearly just .  So in other words, Hence      "
 },
 {
-  "id": "p-750",
+  "id": "p-752",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-750",
+  "url": "section-the-heat-equation.html#p-752",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "heat equation "
 },
 {
-  "id": "p-751",
+  "id": "p-753",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-751",
+  "url": "section-the-heat-equation.html#p-753",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
