@@ -7,7 +7,7 @@ var ptx_lunr_docs = [
   "type": "Colophon",
   "number": "",
   "title": "Colophon",
-  "body": "  Annual Edition 2023  j-oldroyd.github.io\/wvwc-differential-equations  copyright  "
+  "body": "  Annual Edition 2023     copyright  "
 },
 {
   "id": "author-bio-JEO",
@@ -2958,6 +2958,7 @@ var ptx_lunr_idx = lunr(function () {
   this.ref('id')
   this.field('title')
   this.field('body')
+  this.metadataWhitelist = ['position']
 
   ptx_lunr_docs.forEach(function (doc) {
     this.add(doc)
