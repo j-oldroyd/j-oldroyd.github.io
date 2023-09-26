@@ -13,30 +13,29 @@
 <body class="ignore-math">
 <div class="solution solution-like">
 <h4 class="heading">
-<span class="type">Solution</span><span class="space"> </span><span class="codenumber">8.7.9.1</span><span class="period">.</span>
+<span class="type">Solution</span><span class="space"> </span><span class="codenumber">8.7.7.1</span><span class="period">.</span>
 </h4>
 <div class="para logical">
-<div class="para">If we assume that the population obeys the general growth equation, then we get</div>
+<div class="para">First, note that our solution will be of the form <span class="process-math">\(x(t)\text{.}\)</span> To find it, we will separate variables and then integrate:</div>
 <div class="displaymath process-math">
-\begin{equation*}
-P^\prime = .25P^{2}, P(0) = 100.
-\end{equation*}
-</div>
-<div class="para">This ODE is separable, and we can therefore solve it to get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-P(t) = \frac{100}{1 - 25t}.
-\end{equation*}
+\begin{align*}
+\dv{x}{t} = 2tx(1-x) \amp \implies \frac{1}{x(1-x)}\dd{x} = 2t\dd{t}\\
+\amp \implies \int\frac{\dd{x}}{x(1-x)} = \int 2t\dd{t} \\
+\amp \implies \ln(\abs{x}) - \ln(\abs{1-x}) = t^2+C \\
+\amp \implies \ln(\frac{x}{1-x}) = t^2+C \text{.}
+\end{align*}
 </div>
 </div> <div class="para logical">
-<div class="para">So we have a solution, and it can be shown that the solution is unique. But if you stare at this for a bit, you might see that it has a divide-by-zero problem. In particular,</div>
+<div class="para">At this point we have an implicit solution of our ODE, and we just need to solve for <span class="process-math">\(x\)</span> to get the explicit solution. We do so by eliminating the natural logarithm and then rearranging:</div>
 <div class="displaymath process-math">
-\begin{equation*}
-\lim_{t\to(\frac{1}{25})^{+}}P(t) = \infty.
-\end{equation*}
+\begin{align*}
+\ln(\abs{\frac{x}{1-x}}) = t^2+C \amp \implies \frac{x}{1-x} = C_1e^{t^2} \\
+\amp \implies x = C_1e^{t^2}(1-x) \\
+\amp \implies x(1 + C_1e^{t^2}) = C_1e^{t^2}\\
+\amp \implies x = \frac{C_1e^{t^2}}{1 + C_1e^{t^2}} \text{.}
+\end{align*}
 </div>
-<div class="para">In other words, the population becomes infinite in about two weeks!</div>
-</div>
+</div> <aside class="aside aside-like"><div class="para">Note that if this were an IVP, it would be easiest to find the value of the arbitrary constant immediately after integrating.</div></aside>
 </div>
 <span class="incontext"><a href="section-differential-equations.html#solution-162" class="internal">in-context</a></span>
 </body>

@@ -1150,13 +1150,76 @@
           </row>
         </tabular>
       </table>
+
       <p>
         The center of mass for this lamina is then the point <m>(\overline{x},\overline{y})</m> where
-        <md>
-          <mrow>\overline{x} \amp= \frac{M_{y}}{m} = \frac{\int_{a}^{b}x[f(x)-g(x)]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
-          <mrow>\overline{y} \amp= \frac{M_{x}}{m} = \frac{1}{2}\frac{\int_{a}^{b}[f(x)^{2}-g(x)^{2}]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
-        </md>
+        <mdn>
+          <mrow xml:id="centroid-two-dimensional-region-x">\overline{x} \amp= \frac{M_{y}}{m} = \frac{\int_{a}^{b}x[f(x)-g(x)]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
+          <mrow xml:id="centroid-two-dimensional-region-y">\overline{y} \amp= \frac{M_{x}}{m} = \frac{1}{2}\frac{\int_{a}^{b}[f(x)^{2}-g(x)^{2}]\,dx}{\int_{a}^{b}[f(x)-g(x)]\,dx}</mrow>
+        </mdn>
       </p>
+
+      <example xml:id="example-centroid-parabolic-lamina">
+        <title>Finding the centroid of a region contained by parabolas</title>
+
+        <statement>
+            <p>
+                Let <m>R</m> denote the region in the <m>xy</m>-plane contained by <m>y = x^2</m> and <m>y = 4-x^2</m>.
+                Find the centroid of <m>R</m>.
+            </p>
+        </statement>
+
+        <solution>
+          <p>
+            We begin by plotting the region <m>R</m>, which is given in
+          </p>
+          <figure xml:id="figure-centroid-parabolic-lamina">
+            <caption>A parabolic lamina in <m>\RR^2</m></caption>
+            <image xml:id="image-centroid-parabolic-lamina" width="75%">
+              <description>
+                <p>
+                  A graph displaying a lamina bounded by two parabolic curves.
+                  The lamina is called <m>R</m>.
+                </p>
+              </description>
+              <latex-image xml:id="latex-image-centroid-parabolic-lamina"><![CDATA[
+                \begin{tikzpicture}
+                % Tikz drawings from Gonzalo Medina on tex.stackexchange.
+                \begin{axis}[
+                myaxis,
+                xmin = -2,
+                xmax = 2,
+                ymin = -1,
+                ymax = 4,
+                axis on top
+                ]
+
+                \addplot[name path = A,thick,no marks,red!70!black,samples=200]   
+                {4-x^2};
+                \addlegendentry{$f(x) = 4-x^2$};
+                \addplot[name path = B,thick,no marks,cyan,samples=200] 
+                {x^2};
+                \addlegendentry{$g(x) = x^2$};
+
+                \node [above] at (.5, 2) {$R$};
+
+                % We need to define sqrt(2) as a macro since apparently
+                % PGFPlots cannot evaluate this within a command. See:
+                % https://tex.stackexchange.com/a/122429/60075
+
+                \pgfmathsetmacro\rootTwo{-sqrt(2)};
+                \addplot[cyan!60,fill opacity=0.4] 
+                fill between[of=A and B,soft clip={domain=-\rootTwo:\rootTwo}];
+                \end{axis}
+                \end{tikzpicture}]]>
+              </latex-image>
+            </image>
+          </figure>
+          <p>
+              The <m>x</m>-coordinate of the centroid is given by the formula in <xref ref="centroid-two-dimensional-region-x" text="type-global" />, but life is a bit easier for us if we make use of the symmetry of this region about the <m>y</m>-axis.
+          </p>
+        </solution>
+      </example>
     </subsection>
   </section>
   <section xml:id="section-differential-equations">
@@ -1552,13 +1615,15 @@
         </example>
         <definition xml:id="definition-stability-critial-points">
             <title>Stability of Solutions</title>
+
             <statement>
                 <p>
-                    A critical point is <term>stable</term> if solutions that start "near" the point stay near it.
-                    A critical point is <term>unstable</term> if solutions that start "near" the point can diverge away from it.
+                  A critical point is <term>stable</term> if solutions that start "near" the point stay near it.
+                  A critical point is <term>unstable</term> if solutions that start "near" the point can diverge away from it.
                 </p>
             </statement>
         </definition>
+
         <example xml:id="example-determining-the-stability-of-solutions">
             <title>Determining the Stability of Solutions</title>
             <statement>
@@ -1571,31 +1636,31 @@
                     We already know that the critical points are <m>x = 2, 5</m>.
                     We can determine their stability by making use of a <term>phase diagram</term>, which is essentially a sign chart for <m>f(x) = -x^{2} + 7x - 10</m>:
                 </p>
-                    <figure xml:id="figure-phase-diagram">
-                        <caption>The phase diagram for <m>x^\prime = f(x).</m></caption>
-                        <image xml:id="image-phase-diagram" width="50%">
-                            <latex-image xml:id="latex-image-phase-diagram"><![CDATA[
-                            \begin{tikzpicture}
-                                % draw the line
-                                \draw (-1,0) -- (7,0);
+                <figure xml:id="figure-phase-diagram">
+                  <caption>The phase diagram for <m>x^\prime = f(x).</m></caption>
+                  <image xml:id="image-phase-diagram" width="50%">
+                    <latex-image xml:id="latex-image-phase-diagram"><![CDATA[
+                      \begin{tikzpicture}
+                        % draw the line
+                        \draw (-1,0) -- (7,0);
 
-                                % draw arrows on line 
-                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
-                                \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
-                                \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
-                                \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
-                            
-                                % draw the ticks at critical points
-                                \foreach \x in {2,5}
-                                    \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+                        % draw arrows on line 
+                        \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                        \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
+                        \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
+                        \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
+                    
+                        % draw the ticks at critical points
+                        \foreach \x in {2,5}
+                            \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
 
-                                % label the signs
-                                \node[yshift=.5cm] at (1,0){$f(x)<0$};
-                                \node[yshift=.5cm] at (3.5,0){$f(x)>0$};
-                                \node[yshift=.5cm] at (6,0){$f(x)<0$};
-                            \end{tikzpicture}]]>
-                        </latex-image>
-                    </image>
+                        % label the signs
+                        \node[yshift=.5cm] at (1,0){$f(x)<0$};
+                        \node[yshift=.5cm] at (3.5,0){$f(x)>0$};
+                        \node[yshift=.5cm] at (6,0){$f(x)<0$};
+                      \end{tikzpicture}]]>
+                    </latex-image>
+                  </image>
                 </figure>
                 <p>
                     This shows us that solutions that begin near <m>x = 2</m> tend to move away from <m>x = 2</m>, which solutions near <m>x = 5</m> tend to move towards <m>x = 5</m>.
