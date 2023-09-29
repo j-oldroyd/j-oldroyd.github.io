@@ -1260,6 +1260,7 @@
       <definition xml:id="definition-differential-equations">
         <title>Differential Equations</title>
         <idx><h>differential equations</h><h>definition</h></idx>
+
         <statement>
           <p>
             A <term>differential equation</term> is an equation relating some function with its derivatives.
@@ -1286,12 +1287,14 @@
 
       <example xml:id="example-the-spring-equation">
         <title>The Spring Equation</title>
+
         <statement>
           <p>
             Consider an object of mass <m>m</m> attached to a spring, and suppose that the spring force <m>F_{S}</m> is the only force acting on the mass.
             Assuming that Hooke's Law describes the spring force, find a differential equation modeling the motion of the mass.
           </p>
         </statement>
+
         <solution>
           <p>
             Recall that Hooke's Law says that <m>F_{S} = -kx</m>, where <m>k</m> is a positive constant and <m>x</m> is the displacement of the mass from equilibrium.
@@ -1308,6 +1311,7 @@
       <definition xml:id="definition-solution-of-a-differential-equation">
         <title>Solution of a Differential Equation</title>
         <idx><h>differential equations</h><h>solution</h></idx>
+
         <statement>
           <p>
             A function is a <term>solution</term> of a differential equation if it satisfies the differential equation.
@@ -1321,11 +1325,13 @@
 
       <example xml:id="example-verifying-solutions">
         <title>Verifying solutions</title>
+
         <statement>
           <p>
             Is <m>y = 5e^{x^{2}}</m> a solution of the ODE <m>y^\prime = 2xy</m>?
           </p>
         </statement>
+
         <solution>
           <p>
             At this point we don't know how to solve differential equations, but that doesn't mean we can't <em>check</em> solutions of differential equations.
@@ -1360,6 +1366,7 @@
         </statement>
       </definition>
     </subsection>
+
     <subsection xml:id="subsection-separable-equations">
       <title>Separable Equations</title>
 
@@ -1377,11 +1384,13 @@
 
       <example xml:id="example-solving-a-separable-ode">
         <title>Solving a separable ODE involving arctangent</title>
+
         <statement>
           <p>
             Solve the IVP given by <m>y^\prime = x+4xy^{2}, y(0)=1</m>.
           </p>
         </statement>
+
         <solution>
           <p>
             The first step to solving this IVP is to solve the ODE <m>y^\prime = x+4xy^{2}</m>.
@@ -1402,17 +1411,20 @@
             <me>\tan^{-1}(2) = C_{1}.</me>
             So the implicit solution of this IVP is given by
             <me>\tan^{-1}(2y) = x^{2}+\tan^{-1}(2).</me>
+            <aside>
+              <p>
+                We can also find an <em>explicit</em> form of the solution by solving for <m>y</m>:
+                <me>y = \frac{1}{2}\tan(x^{2} + \tan^{-1}2).</me>
+              </p>
+            </aside>
           </p>
+
         </solution>
       </example>
 
-      <p>
-        In <xref ref="example-solving-a-separable-ode" text="type-global" />, we can also find an <em>explicit</em> form of the solution by solving for <m>y</m>:
-        <me>y = \frac{1}{2}\tan(x^{2} + \tan^{-1}2).</me>
-      </p>
-
       <example xml:id="example-finding-an-explicit-solution-of-a-separable-ode">
         <title>Finding an explicit solution of a separable ODE</title>
+
         <statement>
           <p>
             Find the explicit solution of the ODE given by
@@ -1420,9 +1432,10 @@
             Assume that <m>0 \lt x \lt 1</m>.
           </p>
         </statement>
+
         <solution>
           <p>
-            First, note that our solution will be of the form <m>x(t)</m>.
+            Note that our solution will be of the form <m>x(t)</m>.
             To find it, we will separate variables and then integrate:
             <md>
               <mrow> \dv{x}{t} = 2tx(1-x) \amp \implies \frac{1}{x(1-x)}\dd{x} = 2t\dd{t}</mrow>
@@ -1449,6 +1462,43 @@
             </p>
           </aside>
         </solution>
+      </example>
+
+      <p>
+        It is occasionally difficult to determine if an ODE of the form
+        <me>\dv{y}{x} = f(x, y)</me>
+        is separable or not.
+        Thankfully, there is an algebraic method available that determines whether or not an ODE is separable and, if so, provides a factorization.
+        This method works by first finding some point <m>(x_0, y_0)</m> such that <m>f(x_0,y_0) \neq 0</m>.
+        Then we define
+        <men xml:id="equation-differential-equations-separability-condition">
+          F(x) = \frac{f(x, y_0)}{f(x_0,y_0)}\text{ and }G(y) = f(x_0, y)
+        </men>.
+        If <m>f(x,y) = F(x)G(y)</m> then the ODE is separable and <m>F(x)G(y)</m> provides a factorization of <m>f(x,y)</m>.
+        If <m>f(x,y)\neq F(x)G(y)</m> then the equation is not separable.
+      </p>
+
+      <example xml:id="example-determining-separability-of-an-ode">
+          <title>Determining Separability of an ODE</title>
+
+          <statement>
+            <p>
+              Determine if the ODE given by
+              <me>y^\prime = x^3y^2 - 2xy + 2x^3y - xy^2</me>
+              is separable.
+            </p>
+          </statement>
+
+          <solution>
+            <p>
+              Let
+              <me>f(x, y) = x^3y^2 - 2xy + 2x^3y - xy^2</me>
+              and note that <m>f(2, 1) = 18\neq 0</m>.
+              Using <xref ref="equation-differential-equations-separability-condition" text="hybrid" />, define
+              <me>F(x) = \frac{f(x,1)}{f(2,1)} = \frac{3x^3-3x}{18}\text{ and } G(y) = f(2,y) = 6y^2+12y</me>.
+              It can be checked that <m>F(x)G(y) = f(x, y)</m> and so the equation is separable.
+            </p>
+          </solution>
       </example>
     </subsection>
 
