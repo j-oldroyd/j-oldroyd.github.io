@@ -193,6 +193,145 @@
       Vectors with this property will turn out to be the key to solving our systems of ODEs.
     </p>
 
+    <p>
+      <em>Any</em> linear system can be written as an equivalent first-order system or matrix ODE.
+    </p>
+
+    <example xml:id="example-systems-odes-interconnected-spring-mass-system">
+        <title>Interconnected spring-mass system</title>
+
+        <statement>
+          <p>
+              Consider a spring mass system with two masses arranged as follows:
+          </p>
+
+          <figure xml:id="figure-systems-odes-interconnected-spring-mass-system">
+            <caption>A spring-mass system with interconnected masses</caption>
+            <image xml:id="image-systems-odes-interconnected-spring-mass-system" width="80%">
+              <description>
+                <p>
+                  A diagram representing two masses connected horizontally by springs.
+                </p>
+              </description>
+
+              <latex-image xml:id="latex-image-systems-odes-interconnected-spring-mass-system">
+                \begin{tikzpicture}
+                % Stolen shamelessly from stackexchange.
+
+                % This determines how the spring will look.
+                \tikzstyle{spring}=[decorate,decoration={coil,pre length=0.3cm,post
+                length=0.3cm,segment length=3,amplitude=1.5mm}]
+
+                \tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum
+                width=0.75cm,minimum height=0.3cm]
+
+                % This draws the blocks.
+                \node[draw,outer sep=0pt,thick] (M1) [minimum width=1cm, minimum height=1cm] {$m_1$};
+                \node[draw,outer sep=0pt,thick, right=of M1, xshift=2cm] (M2) [minimum width=1cm, minimum height=1cm] {$m_2$};
+
+                % This draws the springs.
+                \draw[spring] ($(M1.west) - (4,0)$) -- ($(M1.west)$) node [midway,yshift=.5cm] {$k_1$};
+                \draw[spring] ($(M1.east)$) -- ($(M2.west)$) node [midway,yshift=.5cm] {$k_2$};
+
+                % This draws the walls and floor.
+                \draw[thick] ($(M1.south west) - (4,0)$) -- ($(M1.north west) + (-4,.5)$);
+                \draw[thick] ($(M1.south west) - (4,0)$) -- ($(M1.south west) + (4,0)$);
+
+                \draw[thick] ($(M2.south east)$) -- ($(M2.south east) + (4,0)$);
+                \draw[thick] ($(M2.south east) + (4,0)$) -- ($(M2.north east) + (4,.5)$);
+
+                % This draws the equilibrium positions.
+                \draw[dashed] ($(M1.south west)-(2,.5)$) -- ($(M1.south west) - (2,-.5)$) node [below, yshift=-1cm,align=left] {\footnotesize Equilibrium\\ \footnotesize position};
+                \draw[dashed] ($(M2.south west)-(2,.5)$) -- ($(M2.south west) - (2,-.5)$) node [below, yshift=-1cm,align=left] {\footnotesize Equilibrium\\ \footnotesize position}; 
+
+                % This illustrates displacements.
+                \draw [decorate,decoration={brace,amplitude=5pt,mirror},yshift=-2pt]
+                ($(M1.south west)-(2,0)$) -- ($(M1.south west)$) node [black,midway,yshift=-10pt] {$x_1$};
+                \draw [decorate,decoration={brace,amplitude=5pt,mirror},yshift=-2pt]
+                ($(M2.south west)-(2,0)$) -- ($(M2.south west)$) node [black,midway,yshift=-10pt] {$x_2$};
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
+
+          <p>
+            Determine a first-order system that the displacements <m>x_1</m> and <m>x_2</m> must satisfy.
+          </p>
+        </statement>
+
+        <solution>
+            <p>
+                From <xref ref="section-spring-mass-models" text="type-global" /> we know how to model a spring-mass system with a single mass using <xref ref="theorem-hooke-s-law" custom="Hooke's Law" /> and Newton's Second Law.
+                We will apply this same analysis to the displacements <m>x_1</m> and <m>x_2</m> individually.
+            </p>
+
+            <p>
+              To begin, we will analyze the forces acting on the first mass.
+              Here there are two forces to consider: the force caused by the motion of <m>m_1</m> and the force caused by the motion of <m>m_2</m>.
+              Likewise, the second mass is also influenced by two forces.
+              We arrange these in the following table:
+            </p>
+
+            <table xml:id="table-systems-odes-interconnected-spring-mass-system">
+              <tabular top="major">
+                <row bottom="major">
+                  <cell>mass</cell>
+                  <cell>forces</cell>
+                </row>
+                <row>
+                  <cell><m>m_1</m></cell>
+                  <cell><m>-k_1x_1, -k_2x_1, k_2x_2</m></cell>
+                </row>
+                <row>
+                  <cell><m>m_2</m></cell>
+                  <cell><m>k_2x_1, -k_2x_2</m></cell>
+                </row>
+              </tabular>
+            </table>
+
+            <p>
+              Now we can apply Newton's Second Law to get the <em>second</em>-order system
+              <md>
+                <mrow>m_1x_1'' \amp = -k_1x_1 - k_2x_1 + k_2x_2 </mrow>
+                <mrow>m_2x_2'' \amp = k_2x_1 - k_2x_2 </mrow>
+              </md>.
+              At this point we can introduce new dependent variables <m>u_1, u_2, u_3</m> and <m>u_4</m> to get an equivalent first-order system.
+            </p>
+
+            <p>
+              Although this type of system is new, the solutions behave as expected.
+              In particular, both <m>x_1</m> and <m>x_2</m> display periodic motion as can be seen by the Sage example below.
+            </p>
+
+            <sage>
+              <input>
+                # Define our independent variable
+                var('t')
+
+                # Define the dependent variables as functions of t
+                x1 = function('x_1')(t)
+                x2 = function('x_2')(t)
+
+                # System parameters
+                m1, m2 = 1, 1
+                k1, k2 = 4, 4
+
+                # Define the equations in our system
+                # If you wish to solve the corresponding first-order system,
+                # you will need to specify four equations.
+                de1 = m1*diff(x1, t, 2) == -(k1+k2)*x1 + k2*x2
+                de2 = m2*diff(x1, t, 2) == k2*x1 - k2*x2
+
+                # Display the (general) solution of this system
+                # Note that the solution depends on initial conditions which
+                # were NOT provided. In particular, D_0(x)(0) represents an
+                # iniital condition of the form x'(0)
+                show(desolve_system([de1, de2], [x1, x2]))
+              </input>
+            </sage>
+        </solution>
+    </example>
+
     <definition xml:id="definition-eigenvectors-and-eigenvalues">
       <title>Eigenvectors and eigenvalues</title>
       <idx><h>matrices</h><h>eigenvalues and eigenvectors</h></idx>
@@ -224,6 +363,7 @@
 
     <p>
       Since we will be looking at systems of ODEs which involve functions, we will need to define vector-valued functions.
+      These objects will represent the solutions of our systems.
     </p>
 
     <definition xml:id="definition-vector-valued-function">
@@ -232,7 +372,7 @@
 
       <notation>
         <usage>
-          <m>\mathbf{x}(t)</m>
+          <m>\vec{x}(t)</m>
         </usage>
         <description>
           a vector whose elements are functions
@@ -266,8 +406,8 @@
         <p>
           Write the system
           <md>
-            <mrow>      x^\prime_{1}  &amp; = -\frac{1}{2}x_{1}</mrow>
-            <mrow>      x^\prime_{2}  &amp; = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}</mrow>
+            <mrow>x^\prime_{1}  &amp; = -\frac{1}{2}x_{1}</mrow>
+            <mrow>x^\prime_{2}  &amp; = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}</mrow>
           </md>
           as a matrix ODE.
         </p>
@@ -341,6 +481,15 @@
 
     <definition xml:id="definition-wronskian-of-vectors">
       <idx><h>Wronskian</h><h>vectors</h></idx>
+
+      <notation>
+        <usage>
+          <m>W(\vec{x_1}, \vec{x_2}, \ldots, \vec{x_n})</m>
+        </usage>
+        <description>
+          the Wronskian of <m>n</m> vectors
+        </description>
+      </notation>
 
       <statement>
         <p>

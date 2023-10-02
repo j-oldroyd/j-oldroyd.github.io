@@ -10,42 +10,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
 </head>
-<body class="ignore-math"><div class="solution solution-like">
-<div class="para logical">
-<div class="para">We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at <span class="process-math">\(0\)</span> we can’t do so right away. The trick here is to shift the initial conditions <em class="emphasis">back</em> to <span class="process-math">\(0\)</span> as follows. First, we define a new function <span class="process-math">\(\widetilde{y}\)</span> by</div>
+<body class="ignore-math"><div class="solution solution-like"><div class="para logical">
+<div class="para">We begin by taking the Laplace transform of both sides to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\widetilde{y}(t) = y(t+4)
+s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}
 \end{equation*}
 </div>
-<div class="para">where <span class="process-math">\(y(t)\)</span> is the solution we seek. Then it follows that</div>
+<div class="para">or just</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\widetilde{y}'' - 2\widetilde{y}^\prime - 3\widetilde{y} = 0
+s^{2}Y(s) + 9Y(s) = \frac{10}{s+1}.
 \end{equation*}
 </div>
-<div class="para">and <span class="process-math">\(\widetilde{y}(0) = y(4) = -3\)</span> and <span class="process-math">\(\widetilde{y}^\prime(0) = y^\prime(4) = -17\text{.}\)</span> So the Laplace transform method applies to solving for <span class="process-math">\(\widetilde{y}\)</span> in this modified IVP.</div>
-</div> <div class="para logical">
-<div class="para">Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <span class="process-math">\(\widetilde{Y}(s)\)</span> of <span class="process-math">\(\widetilde{y}(t)\text{.}\)</span> Using our initial conditions and a bit of algebra, we get</div>
+<div class="para">So</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}.
+Y(s) = \frac{10}{(s+1)(s^{2}+9)}.
 \end{equation*}
 </div>
-<div class="para">At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get</div>
+<div class="para">By partial fractions, this becomes</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.
+Y(s) = \frac{1-s}{s^{2}+9} + \frac{1}{s+1} = \frac{1}{s^{2}+9} - \frac{s}{s^{2}+9} + \frac{1}{s+1},
 \end{equation*}
 </div>
-</div> <div class="para logical">
-<div class="para">The final step is to convert our answer from <span class="process-math">\(\widetilde{y}\)</span> to <span class="process-math">\(y\)</span> by making the substitution <span class="process-math">\(t\mapsto t-4\)</span> in <span class="process-math">\(\widetilde{y}\text{.}\)</span> This gives</div>
+<div class="para">so the solution of the ODE is</div>
 <div class="displaymath process-math">
-\begin{equation*}
-y(t) = -5e^{3(t-4)} + 2e^{-(t-4)}
-\end{equation*}
+\begin{align*}
+y(t) &amp; = \iLaplace{Y(s)}\\
+&amp;= \frac{1}{3}\sin3t -\cos3t + e^{-t}\text{.}
+\end{align*}
 </div>
-<div class="para">as the solution of our IVP.</div>
-</div>
-</div></body>
+</div></div></body>
 </html>
