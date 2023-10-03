@@ -1478,7 +1478,7 @@
         If <m>f(x,y)\neq F(x)G(y)</m> then the equation is not separable.
       </p>
 
-      <example xml:id="example-determining-separability-of-an-ode">
+      <example xml:id="example-determining-separability-of-an-ode-sage">
           <title>Determining Separability of an ODE</title>
 
           <statement>
@@ -1497,6 +1497,54 @@
               Using <xref ref="equation-differential-equations-separability-condition" text="hybrid" />, define
               <me>F(x) = \frac{f(x,1)}{f(2,1)} = \frac{3x^3-3x}{18}\text{ and } G(y) = f(2,y) = 6y^2+12y</me>.
               It can be checked that <m>F(x)G(y) = f(x, y)</m> and so the equation is separable.
+            </p>
+
+            <p>
+              The solution of this differential equation can now be found using the methods of this section.
+              In particular, using Sage and the <c>desolve</c> command we get the following:
+            </p>
+
+            <sage>
+              <input>
+                # Define y as a function of x
+                y = function('y')(x)
+
+                # Define the differential equation to solve
+                de = diff(y, x) == x^3*y^2-2*x*y+2*x^3*y-x*y^2
+
+                # Solve the equation for y
+                f = desolve(de, y)
+                f
+              </input>
+              <output>
+                -1/2*log(y(x) + 2) + 1/2*log(y(x)) == 1/4*x^4 - 1/2*x^2 + _C
+              </output>
+            </sage>
+
+            <p>
+              With a little bit of work, we can also convince Sage to turn this implicit solution into an explicit solution by solving for <m>y</m>.
+              The heavy lifting here is done by the <c>.log_simplify()</c> and <c>.solve()</c> methods.
+              In order to help Sage with simplifying the logarithms, we will clear fractions first.
+              This prevents any radicals from appearing inside of the logarithms after simplification and makes solving for <m>y</m> easier.:
+            </p>
+
+            <sage>
+              <input>
+                # Be sure to run the previous cell before this one!
+                # Now clear fractions in front of the logs in f
+                g = 2*f
+
+                # Now we simplify and solve
+                g.log_simplify().solve(y)
+              </input>
+              <output>
+                [y(x) == -2*e^(1/2*x^4 - x^2 + 2*_C)/(e^(1/2*x^4 - x^2 + 2*_C) - 1)]
+              </output>
+            </sage>
+
+            <p>
+              Therefore the explicit solution of our equation is
+              <me>y\left(x\right) = -\frac{2 \, e^{\left(\frac{1}{2} \, x^{4} - x^{2} + 2 \, C\right)}}{e^{\left(\frac{1}{2} \, x^{4} - x^{2} + 2 \, C\right)} - 1}</me>.
             </p>
           </solution>
       </example>
@@ -1533,7 +1581,9 @@
 
       <definition xml:id="definition-general-population-equation">
         <title>General Population Equation</title>
+
         <idx><h>population models</h><h>general population equation</h></idx>
+
         <statement>
           <p>
             The <term>general population equation</term> for a population <m>P(t)</m> is given by
@@ -1544,12 +1594,14 @@
 
       <example xml:id="example-population-explosion">
         <title>Population Explosion</title>
+
         <statement>
           <p>
             A population has <m>100</m> members at time <m>t = 0</m> years with a death rate of <m>.25P</m> and a birth rate of <m>.5P</m>, where <m>P(t)</m> denotes the population after <m>t</m> years.
             Find <m>P(t)</m> and determine if this is a reasonable population model.
           </p>
         </statement>
+
         <solution>
           <p>
             If we assume that the population obeys the general growth equation, then we get
@@ -1599,6 +1651,7 @@
 
       <example xml:id="example-long-term-behavior-of-logistic-growth">
         <title>Long-Term Behavior of Logistic Growth</title>
+
         <statement>
           <p>
             What is the long-term population of a species that grows according to the logistic equation <m>\dv{P}{t} = kP(M-P)</m>?
@@ -1622,6 +1675,7 @@
 
       <example xml:id="example-population-growth-in-the-usa">
         <title>Population growth in the USA</title>
+
         <statement>
           <p>
             In millions, the population of the USA in 1990 was <m>250</m> and was growing at a rate of <m>3.1</m> per year.
@@ -1639,6 +1693,7 @@
             <me>P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}}.</me>
             So we need to find <m>k</m> and <m>M</m>.
           </p>
+
           <p>
             When <m>t = 0</m>, we have <m>P^\prime = 3.1</m> and <m>P = 250</m>.
             Similarly, when <m>t = 22</m> we have <m>P^\prime = 2.3</m> and <m>P = 314</m>.
@@ -1663,63 +1718,143 @@
     </subsection>
 
     <subsection xml:id="subsection-stability-of-solutions">
+      <title>Stability of Solutions</title>
+
+      <p>
+        The logistic equation
+        <me>\dv{P}{t} = kP(M-P)</me>
+        is a particularly nice separable ODE since the right hand side depends only on the unknown function <m>P</m>.
+        So we can write <m>P^\prime = f(P)</m>, where <m>f(P) = kP(M-P)</m>.
+        ODEs like this (where the independent variable does not appear explicitly) are called <term>autonomous ODEs</term>.
+      </p>
+
+      <p>
+        Autonomous ODEs like <m>\dv{x}{t} = f(x)</m> are useful because the behavior of their solutions can be determined <em>qualitatively</em>, without actually solving the ODE.
+        This is done by looking for the constant solutions of the ODE, that is, solutions of the form <m>x = c</m>.
+        For any such solution, we must have <m>f(c) = 0</m> as well.
+        These solutions (i.e., the solutions of <m>f(x) = 0</m>) are called the <term>critical points</term> or <term>equilibrium solutions</term> of the ODE.
+        These solutions completely determine the long-term behavior of <em>every other solution</em>.
+      </p>
+
+      <example xml:id="example-finding-equilibrium-solutions">
+        <title>Finding Equilibrium Solutions</title>
+
+        <statement>
+          <p>
+            Find the equilibrium solutions of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We need to solve the equation <m>-x^{2} + 7x - 10 = 0</m>.
+            Thankfully, we can factor this to get <m>(2-x)(x-5) = 0</m>, and so the equilibrium solutions are <m>x = 2,5</m>.
+          </p>
+        </solution>
+      </example>
+
+      <definition xml:id="definition-stability-critial-points">
         <title>Stability of Solutions</title>
-        <p>
-            The logistic equation
-            <me>\dv{P}{t} = kP(M-P)</me>
-            is a particularly nice separable ODE since the right hand side depends only on the unknown function <m>P</m>.
-            So we can write <m>P^\prime = f(P)</m>, where <m>f(P) = kP(M-P)</m>.
-            ODEs like this (where the independent variable does not appear explicitly) are called <term>autonomous ODEs</term>.
-        </p>
-        <p>
-            Autonomous ODEs like <m>\dv{x}{t} = f(x)</m> are useful because the behavior of their solutions can be determined <em>qualitatively</em>, without actually solving the ODE.
-            This is done by looking for the constant solutions of the ODE, that is, solutions of the form <m>x = c</m>.
-            For any such solution, we must have <m>f(c) = 0</m> as well.
-            These solutions (i.e., the solutions of <m>f(x) = 0</m>) are called the <term>critical points</term> or <term>equilibrium solutions</term> of the ODE.
-            These solutions completely determine the long-term behavior of <em>every other solution</em>.
-        </p>
-        <example xml:id="example-finding-equilibrium-solutions">
-            <title>Finding Equilibrium Solutions</title>
-            <statement>
-                <p>
-                    Find the equilibrium solutions of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>.
-                </p>
-            </statement>
-            <solution>
-                <p>
-                    We need to solve the equation <m>-x^{2} + 7x - 10 = 0</m>.
-                    Thankfully, we can factor this to get <m>(2-x)(x-5) = 0</m>, and so the equilibrium solutions are <m>x = 2,5</m>.
-                </p>
-            </solution>
-        </example>
-        <definition xml:id="definition-stability-critial-points">
-            <title>Stability of Solutions</title>
 
-            <statement>
-                <p>
-                  A critical point is <term>stable</term> if solutions that start "near" the point stay near it.
-                  A critical point is <term>unstable</term> if solutions that start "near" the point can diverge away from it.
-                </p>
-            </statement>
-        </definition>
+        <statement>
+          <p>
+            A critical point is <term>stable</term> if solutions that start "near" the point stay near it.
+            A critical point is <term>unstable</term> if solutions that start "near" the point can diverge away from it.
+          </p>
+        </statement>
+      </definition>
 
-        <example xml:id="example-determining-the-stability-of-solutions">
-            <title>Determining the Stability of Solutions</title>
-            <statement>
-                <p>
-                    What are the stable critical points of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>?
-                </p>
-            </statement>
-            <solution>
-                <p>
-                    We already know that the critical points are <m>x = 2, 5</m>.
-                    We can determine their stability by making use of a <term>phase diagram</term>, which is essentially a sign chart for <m>f(x) = -x^{2} + 7x - 10</m>:
-                </p>
-                <figure xml:id="figure-phase-diagram">
-                  <caption>The phase diagram for <m>x^\prime = f(x).</m></caption>
-                  <image xml:id="image-phase-diagram" width="50%">
-                    <latex-image xml:id="latex-image-phase-diagram"><![CDATA[
-                      \begin{tikzpicture}
+      <example xml:id="example-determining-the-stability-of-solutions">
+        <title>Determining the Stability of Solutions</title>
+
+        <statement>
+          <p>
+            What are the stable critical points of <m>\dv{x}{t} = -x^{2} + 7x - 10</m>?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            We already know that the critical points are <m>x = 2, 5</m>.
+            We can determine their stability by making use of a <term>phase diagram</term>, which is essentially a sign chart for <m>f(x) = -x^{2} + 7x - 10</m>:
+          </p>
+
+          <figure xml:id="figure-phase-diagram">
+            <caption>The phase diagram for <m>x^\prime = f(x).</m></caption>
+
+            <image xml:id="image-phase-diagram" width="50%">
+              <latex-image xml:id="latex-image-phase-diagram"><![CDATA[
+                \begin{tikzpicture}
+                  % draw the line
+                  \draw (-1,0) -- (7,0);
+
+                  % draw arrows on line 
+                  \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                  \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
+                  \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
+                  \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
+              
+                  % draw the ticks at critical points
+                  \foreach \x in {2,5}
+                      \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+
+                  % label the signs
+                  \node[yshift=.5cm] at (1,0){$f(x)<0$};
+                  \node[yshift=.5cm] at (3.5,0){$f(x)>0$};
+                  \node[yshift=.5cm] at (6,0){$f(x)<0$};
+                \end{tikzpicture}]]>
+              </latex-image>
+            </image>
+          </figure>
+
+          <p>
+            This shows us that solutions that begin near <m>x = 2</m> tend to move away from <m>x = 2</m>, which solutions near <m>x = 5</m> tend to move towards <m>x = 5</m>.
+            So <m>x = 2</m> is unstable and <m>x = 5</m> is stable.
+          </p>
+        </solution>
+      </example>
+
+      <example xml:id="example-determining-a-sustainable-population">
+        <title>Determining a Sustainable Population</title>
+
+        <statement>
+          <p>
+            Consider a population of fish that obeys the logistic equation
+            <me>\dv{P}{t} = 2P(30 - P)</me>
+            where <m>P(t)</m> is the population of fish (in thousands) after <m>t</m> years.
+            Suppose that the population is also harvested at some rate <m>h</m> (in thousands per year).
+            What is the maximum sustainable rate of harvesting?
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            To account for the harvesting, we need to modify the ODE:
+            <me>\dv{P}{t} = 2P(30 - P) - h.</me>
+            The harvesting will be sustainable as long as the population does not become extinct.
+            To determine this long term behavior, we'll find the critical points and set up a phase diagram.
+          </p>
+
+          <p>
+            The critical points are given by
+            <me>P = 15 \pm \sqrt{3600 - 8h}</me>
+            by the quadratic formula.
+            We now have three cases to consider: <m>3600 - 8h \lt 0, 3600 - 8h = 0, 3600 - 8h \gt 0.</m>
+            In terms of <m>h</m>, these reduce to <m>h \lt 450, h = 450, h \gt 450</m>.
+          </p>
+
+          <ol>
+            <li>
+              <p>
+                In the first case, if <m>h \lt 450</m> then we have two positive, real critical points:
+                <me>0 \lt c_{1} \lt 15 \lt c_{2} \lt 75.</me>
+                The phase diagram for this situation is
+              </p>
+
+              <figure xml:id="figure-population-phase-diagram-lt-450">
+                <image xml:id="image-population-phase-diagram-lt-450" width="50%">
+                  <latex-image xml:id="latex-image-population-phase-diagram-lt-450"><![CDATA[
+                    \begin{tikzpicture}
                         % draw the line
                         \draw (-1,0) -- (7,0);
 
@@ -1730,180 +1865,129 @@
                         \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
                     
                         % draw the ticks at critical points
-                        \foreach \x in {2,5}
-                            \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+                        \draw[xshift=0 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=0$};
+                        \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{1}$};
+                        \draw[xshift=3.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+                        \draw[xshift=5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{2}$};
+                        \draw[xshift=6.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=75$};
 
                         % label the signs
-                        \node[yshift=.5cm] at (1,0){$f(x)<0$};
-                        \node[yshift=.5cm] at (3.5,0){$f(x)>0$};
-                        \node[yshift=.5cm] at (6,0){$f(x)<0$};
-                      \end{tikzpicture}]]>
-                    </latex-image>
-                  </image>
-                </figure>
-                <p>
-                    This shows us that solutions that begin near <m>x = 2</m> tend to move away from <m>x = 2</m>, which solutions near <m>x = 5</m> tend to move towards <m>x = 5</m>.
-                    So <m>x = 2</m> is unstable and <m>x = 5</m> is stable.
-                </p>
-            </solution>
-        </example>
-        <example xml:id="example-determining-a-sustainable-population">
-            <title>Determining a Sustainable Population</title>
-            <statement>
-                <p>
-                    Consider a population of fish that obeys the logistic equation
-                    <me>\dv{P}{t} = 2P(30 - P)</me>
-                    where <m>P(t)</m> is the population of fish (in thousands) after <m>t</m> years.
-                    Suppose that the population is also harvested at some rate <m>h</m> (in thousands per year).
-                    What is the maximum sustainable rate of harvesting?
-                </p>
-            </statement>
-            <solution>
-                <p>
-                    To account for the harvesting, we need to modify the ODE:
-                    <me>\dv{P}{t} = 2P(30 - P) - h.</me>
-                    The harvesting will be sustainable as long as the population does not become extinct.
-                    To determine this long term behavior, we'll find the critical points and set up a phase diagram.
-                </p>
-                <p>
-                    The critical points are given by
-                    <me>P = 15 \pm \sqrt{3600 - 8h}</me>
-                    by the quadratic formula.
-                    We now have three cases to consider: <m>3600 - 8h \lt 0, 3600 - 8h = 0, 3600 - 8h \gt 0.</m>
-                    In terms of <m>h</m>, these reduce to <m>h \lt 450, h = 450, h \gt 450</m>.
-                </p>
-                <ol>
-                    <li>
-                    <p>
-                        In the first case, if <m>h \lt 450</m> then we have two positive, real critical points:
-                        <me>0 \lt c_{1} \lt 15 \lt c_{2} \lt 75.</me>
-                        The phase diagram for this situation is
-                    </p>
-                    <figure xml:id="figure-population-phase-diagram-lt-450">
-                        <image xml:id="image-population-phase-diagram-lt-450" width="50%">
-                            <latex-image xml:id="latex-image-population-phase-diagram-lt-450"><![CDATA[
-                            \begin{tikzpicture}
-                                % draw the line
-                                \draw (-1,0) -- (7,0);
+                        \node[yshift=.5cm] at (0,0){$\dv{P}{t}<0$};
+                        \node[yshift=.5cm] at (3.5,0){$\dv{P}{t}>0$};
+                        \node[yshift=.5cm] at (6.5,0){$\dv{P}{t}<0$};
+                    \end{tikzpicture}]]>
+                  </latex-image>
+                </image>
+                <caption>Phase diagram for <m>h \lt 450</m>.</caption>
+              </figure>
 
-                                % draw arrows on line 
-                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
-                                \draw[ultra thick,color=blue,->] (2,0) -- (3,0);
-                                \draw[ultra thick,color=blue,->] (4,0) -- (5,0);
-                                \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
-                            
-                                % draw the ticks at critical points
-                                \draw[xshift=0 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=0$};
-                                \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{1}$};
-                                \draw[xshift=3.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
-                                \draw[xshift=5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{2}$};
-                                \draw[xshift=6.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=75$};
+              <p>
+                So we see that <m>c_{1}</m> is unstable while <m>c_{2}</m> is stable.
+                In particular, as long as <m>P\geq c_{1} = 15 - \sqrt{3600 - 8h}</m>, then the rate of harvesting is sustainable.
+              </p>
+            </li>
 
-                                % label the signs
-                                \node[yshift=.5cm] at (0,0){$\dv{P}{t}<0$};
-                                \node[yshift=.5cm] at (3.5,0){$\dv{P}{t}>0$};
-                                \node[yshift=.5cm] at (6.5,0){$\dv{P}{t}<0$};
-                            \end{tikzpicture}]]>
-                        </latex-image>
-                    </image>
-                    <caption>Phase diagram for <m>h \lt 450</m>.</caption>
-                </figure>
-                <p>
-                    So we see that <m>c_{1}</m> is unstable while <m>c_{2}</m> is stable.
-                    In particular, as long as <m>P\geq c_{1} = 15 - \sqrt{3600 - 8h}</m>, then the rate of harvesting is sustainable.
-                </p>
-                </li>
-                <li>
-                    <p>
-                        Now assume that <m>h = 450</m>.
-                        Then we have only one equilibrium solution: <m>c = 15</m>.
-                        The corresponding phase diagram is
-                    </p>
-                        <figure xml:id="figure-phase-diagram-equal-450">
-                            <image xml:id="image-phase-diagram-equal-450" width="50%">
-                                <latex-image xml:id="latex-image-phase-diagram-equal-450"><![CDATA[
-                                \begin{tikzpicture}
-                                % draw the line
-                                \draw (0,0) -- (4,0);
+            <li>
+              <p>
+                Now assume that <m>h = 450</m>.
+                Then we have only one equilibrium solution: <m>c = 15</m>.
+                The corresponding phase diagram is
+              </p>
 
-                                % draw arrows on line 
-                                \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
-                                \draw[ultra thick,color=blue,<-] (2,0) -- (3,0);
-                            
-                                % draw the ticks at critical points
-                                \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+              <figure xml:id="figure-phase-diagram-equal-450">
+                <image xml:id="image-phase-diagram-equal-450" width="50%">
+                  <latex-image xml:id="latex-image-phase-diagram-equal-450"><![CDATA[
+                    \begin{tikzpicture}
+                    % draw the line
+                    \draw (0,0) -- (4,0);
 
-                                % label the signs
-                                \node[yshift=.5cm] at (1,0){$\dv{P}{t}<0$};
-                                \node[yshift=.5cm] at (3,0){$\dv{P}{t}<0$};
-                                \end{tikzpicture}
-                                ]]>
-                            </latex-image>
-                        </image>
-                        <caption>Phase diagram for <m>h</m> = 450.</caption>
-                    </figure>
-                    <p>
-                        We interpret the phase diagram as follows: if <m>P</m> is less than <p>15,000</p> then the population will collapse to extinction.
-                        Otherwise, the population will stabilize at <m>15,000</m>.
-                        This type of critical point is often called <term>semi-stable.</term>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        Finally, consider the case <m>h \gt 450</m>.
-                        Then we have no (real) critical points.
-                        Since imaginary populations don't make sense in this model, there is no sustainable population.
-                        No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than <m>450</m>.
-                    </p>
-                </li>
-            </ol>
-            <p>
-                By the above, the largest sustainable harvesting rate is <m>h = 450,</m> as long as <m>P_{0}\geq 15</m>.
-            </p>
-            </solution>
-        </example>
+                    % draw arrows on line 
+                    \draw[ultra thick,color=blue,<-] (1,0) -- (2,0);
+                    \draw[ultra thick,color=blue,<-] (2,0) -- (3,0);
+                
+                    % draw the ticks at critical points
+                    \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+
+                    % label the signs
+                    \node[yshift=.5cm] at (1,0){$\dv{P}{t}<0$};
+                    \node[yshift=.5cm] at (3,0){$\dv{P}{t}<0$};
+                    \end{tikzpicture}
+                    ]]>
+                  </latex-image>
+                </image>
+                <caption>Phase diagram for <m>h</m> = 450.</caption>
+              </figure>
+
+              <p>
+                  We interpret the phase diagram as follows: if <m>P</m> is less than <p>15,000</p> then the population will collapse to extinction.
+                  Otherwise, the population will stabilize at <m>15,000</m>.
+                  This type of critical point is often called <term>semi-stable.</term>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                  Finally, consider the case <m>h \gt 450</m>.
+                  Then we have no (real) critical points.
+                  Since imaginary populations don't make sense in this model, there is no sustainable population.
+                  No matter how large the initial population, it will eventually go extinct if harvested at a rate greater than <m>450</m>.
+              </p>
+            </li>
+          </ol>
+
+          <p>
+              By the above, the largest sustainable harvesting rate is <m>h = 450,</m> as long as <m>P_{0}\geq 15</m>.
+          </p>
+        </solution>
+      </example>
     </subsection>
+
     <subsection xml:id="subsection-linear-stability-analysis">
+      <title>Linear Stability Analysis</title>
+
+      <p>
+          Given the autonomous ODE <m>\dv{x}{t} = f(x)</m>, we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram.
+          We can go a step further and actually qualify the growth of solutions that are "near" equilibrium solutions.
+          In particular, we have the following theorem.
+      </p>
+
+      <theorem xml:id="theorem-linear-stability-analysis">
         <title>Linear Stability Analysis</title>
-        <p>
-            Given the autonomous ODE <m>\dv{x}{t} = f(x)</m>, we saw above that we can qualify the behavior of equilibrium solutions by setting up a phase diagram.
-            We can go a step further and actually qualify the growth of solutions that are "near" equilibrium solutions.
-            In particular, we have the following theorem.
-        </p>
-        <theorem xml:id="theorem-linear-stability-analysis">
-            <title>Linear Stability Analysis</title>
-            <statement>
-                <p>
-                    Suppose <m>\dv{x}{t} = f(x)</m> where <m>f(x)</m> is continuously differentiable, and let <m>x^{*}</m> denote a critical point/equilibrium solution of the ODE.
-                    If <m>f^\prime(x^{*}) \lt 0</m>, then <m>x^{*}</m> is stable and solutions near <m>x^{*}</m> will move exponentially towards <m>x^{*}</m>.
-                    If <m>f^\prime(x^{*}) \gt 0</m>, then <m>x^{*}</m> is unstable and solutions near <m>x^{*}</m> will move exponentially away from <m>x^{*}</m>.
-                    If <m>f^\prime(x^{*}) = 0</m>, then more advanced methods are required.
-                </p>
-            </statement>
-        </theorem>
-        <example xml:id="example-classifying-the-critical-points-of-the-logistic-equation">
-            <title>Classifying the Critical Points of the Logistic Equation</title>
-            <statement>
-                <p>
-                    Classify the critical points of the logistic equation as stable or unstable.
-                </p>
-            </statement>
-            <solution>
-                <p>
-                    Recall that the logistic equation is given by <m>P^\prime = kP(M-P) = f(P)</m> for (we'll assume) positive constants <m>k,M</m>.
-                    From here, we clearly see that the critical points are <m>P = 0</m> and <m>P = M</m> (which makes sense from a population standpoint!).
-                    We could set up a phase diagram to determine stability, but we'll use <xref ref="theorem-linear-stability-analysis" text="type-global" /> instead.
-                </p>
-                <p>
-                    Since <m>f^\prime(P) = k(M-P) - kP</m>, we see that
-                    <md>
-                        <mrow>f^\prime(0) &amp; = kM \gt 0</mrow>
-                        <mrow>f^\prime(M) &amp; = -kM \lt 0 </mrow>
-                    </md>
-                    Hence <m>P = 0</m> is unstable, while <m>P = M</m> is stable.
-                </p>
-            </solution>
-        </example>
+
+        <statement>
+          <p>
+              Suppose <m>\dv{x}{t} = f(x)</m> where <m>f(x)</m> is continuously differentiable, and let <m>x^{*}</m> denote a critical point/equilibrium solution of the ODE.
+              If <m>f^\prime(x^{*}) \lt 0</m>, then <m>x^{*}</m> is stable and solutions near <m>x^{*}</m> will move exponentially towards <m>x^{*}</m>.
+              If <m>f^\prime(x^{*}) \gt 0</m>, then <m>x^{*}</m> is unstable and solutions near <m>x^{*}</m> will move exponentially away from <m>x^{*}</m>.
+            If <m>f^\prime(x^{*}) = 0</m>, then more advanced methods are required.
+          </p>
+        </statement>
+      </theorem>
+
+      <example xml:id="example-classifying-the-critical-points-of-the-logistic-equation">
+        <title>Classifying the Critical Points of the Logistic Equation</title>
+
+        <statement>
+          <p>
+            Classify the critical points of the logistic equation as stable or unstable.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Recall that the logistic equation is given by <m>P^\prime = kP(M-P) = f(P)</m> for (we'll assume) positive constants <m>k,M</m>.
+            From here, we clearly see that the critical points are <m>P = 0</m> and <m>P = M</m> (which makes sense from a population standpoint!).
+            We could set up a phase diagram to determine stability, but we'll use <xref ref="theorem-linear-stability-analysis" text="type-global" /> instead.
+          </p>
+          <p>
+            Since <m>f^\prime(P) = k(M-P) - kP</m>, we see that
+            <md>
+              <mrow>f^\prime(0) &amp; = kM \gt 0</mrow>
+              <mrow>f^\prime(M) &amp; = -kM \lt 0 </mrow>
+            </md>
+            Hence <m>P = 0</m> is unstable, while <m>P = M</m> is stable.
+          </p>
+        </solution>
+      </example>
     </subsection>
   </section>
 </chapter>
