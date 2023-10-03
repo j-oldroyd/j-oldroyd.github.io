@@ -9,6 +9,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
+<script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "linkKey": "linked-sage",
+  "autoeval": false,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script>
 </head>
 <body class="ignore-math">
 <div class="solution solution-like">
@@ -16,7 +29,7 @@
 <span class="type">Solution</span><span class="space"> </span><span class="codenumber">8.7.12.1</span><span class="period">.</span>
 </h4>
 <div class="para logical">
-<div class="para">Let <span class="process-math">\(P(t)\)</span> denote the population of the USA (in millions), where <span class="process-math">\(t\)</span> is the number of years after 1990. Then</div>
+<div class="para">Let <span class="process-math">\(P(t)\)</span> denote the population of the USA (in millions), where <span class="process-math">\(t\)</span> is the number of years after 2010. Then</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \dv{P}{t} = kP(M-P)
@@ -31,27 +44,43 @@ P(t) = \frac{MP_{0}}{P_{0} + (M - P_{0})e^{-kMt}}.
 <div class="para">So we need to find <span class="process-math">\(k\)</span> and <span class="process-math">\(M\text{.}\)</span>
 </div>
 </div> <div class="para logical">
-<div class="para">When <span class="process-math">\(t = 0\text{,}\)</span> we have <span class="process-math">\(P^\prime = 3.1\)</span> and <span class="process-math">\(P = 250\text{.}\)</span> Similarly, when <span class="process-math">\(t = 22\)</span> we have <span class="process-math">\(P^\prime = 2.3\)</span> and <span class="process-math">\(P = 314\text{.}\)</span> Therefore</div>
+<div class="para">When <span class="process-math">\(t = 0\text{,}\)</span> we have <span class="process-math">\(P^\prime = 2.3\)</span> and <span class="process-math">\(P = 309.3\text{.}\)</span> Similarly, when <span class="process-math">\(t = 10\)</span> we have <span class="process-math">\(P^\prime = 1.2\)</span> and <span class="process-math">\(P = 329.5\text{.}\)</span> Therefore</div>
 <div class="displaymath process-math">
 \begin{align*}
-3.1 \amp = 250k(M - 250) \\
-2.3 \amp = 314k(M - 314) \text{.}
+2.3 \amp = 309.3k(M - 309.3) \\
+1.2 \amp = 329.5k(M - 329.5) \text{.}
 \end{align*}
 </div>
-<div class="para">Solving this system gives us <span class="process-math">\(k\approx.00008\)</span> and <span class="process-math">\(M \approx 406.4\text{.}\)</span> Hence</div>
-<div class="displaymath process-math">
+<div class="para">We need to solve this system to find <span class="process-math">\(k\)</span> and <span class="process-math">\(M\)</span> so we can finish setting up our model. This is easily accomplished with Sage’s <code class="code-inline tex2jax_ignore">solve</code> command:</div>
+</div> <pre class="ptx-sagecell sagecell-sage" id="sage-16"><script type="text/x-sage"># Tell Sage that k, M are variables
+var('k, M')
+
+# Set up equations to solve
+eq1 = 2.3 == 309.3*k*(M - 309.3)
+eq2 = 1.2 == 329.5*k*(M - 329.5)
+
+# Solve the system for k, M
+solve([eq1, eq2], k, M)
+</script></pre> <div class="para logical">
+<div class="para">Therefore</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-applications-integration-logistic-ode-solution.html">
 \begin{equation*}
-P(t) = \frac{101600}{250 + 156.4e^{-.03t}}.
+k\approx 0.00019\text{ and }M\approx348.8887\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical">
-<div class="para">This model estimates the population in 2017 to be</div>
-<div class="displaymath process-math">
+<div class="para">We can now plug these values into <a href="" class="xref" data-knowl="./knowl/equation-applications-integration-logistic-ode-solution.html" title="Equation 8.7.4">(8.7.4)</a> to get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-applications-integration-logistic-ode-solution.html">
 \begin{equation*}
-P(27) = 317.9,
+P(t) \approx \frac{107911}{39.5887 \, e^{\left(-0.06553 \, t\right)} + 309.3}\text{.}
 \end{equation*}
 </div>
-<div class="para">which is about a <span class="process-math">\(2\%\)</span> error. Note also that this model predicts the carrying capacity of the USA to be <span class="process-math">\(406.4\text{.}\)</span>
+<div class="para">Our population estimate in the year <span class="process-math">\(2023\)</span> is then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-applications-integration-logistic-ode-solution.html">
+\begin{equation*}
+P(13) \approx 330.8
+\end{equation*}
+</div>
+<div class="para">This has a relative error of about <span class="process-math">\(1\%\text{.}\)</span>
 </div>
 </div>
 </div>

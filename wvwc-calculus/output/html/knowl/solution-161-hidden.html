@@ -9,6 +9,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex, nofollow">
+<script>// Make *any* pre with class 'sagecell-sage' an executable Sage cell
+// Their results will be linked, only within language type
+sagecell.makeSagecell({
+  "inputLocation": "pre.sagecell-sage",
+  "linked": true,
+  "linkKey": "linked-sage",
+  "autoeval": false,
+  "languages": [
+    "sage"
+  ],
+  "evalButtonText": "Evaluate (Sage)"
+});
+</script>
 </head>
 <body class="ignore-math"><div class="solution solution-like">
 <div class="para logical">
@@ -43,6 +56,15 @@ y = \frac{1}{2}\tan(x^{2} + \tan^{-1}2).
 \end{equation*}
 </div>
 </div></aside></div>
-</div>
+</div> <div class="para">Note that we can also make use of Sage’s <code class="code-inline tex2jax_ignore">desolve</code> command to find the solution of this IVP. We will need to specify the initial condition by using the <code class="code-inline tex2jax_ignore">ics</code> argument:</div> <pre class="ptx-sagecell sagecell-sage" id="sage-13"><script type="text/x-sage"># Define y as a function of x
+y = function('y')(x)
+
+# Define the differential equation
+de = diff(y, x) == x + 4*x*y^2
+
+# Solve the equation and display the result
+f = desolve(de, y, ics=[0, 1])
+show(f)
+</script></pre>
 </div></body>
 </html>
