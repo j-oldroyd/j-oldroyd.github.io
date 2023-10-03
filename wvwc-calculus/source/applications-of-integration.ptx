@@ -1867,6 +1867,45 @@
         </solution>
       </example>
 
+      <p>
+        We can also determine phase diagrams graphically.
+        For instance, consider the phase diagram depicted in <xref ref="figure-phase-diagram" text="type-global" />.
+        The direction of each arrow is determined by the sign of the derivative <m>x^\prime</m>, i.e., the sign of <m>f(x) = -x^2 + 7x - 10</m>.
+        This is easily determined by just graphing <m>f(x)</m> on the phase diagram like so:
+      </p>
+
+      <figure xml:id="figure-applications-integration-phase-diagram-graphically">
+        <caption>Constructing a phase diagram using the graph of <m>x^\prime=f(x)</m></caption>
+
+        <image xml:id="image-applications-integration-phase-diagram-graphically" width="50%">
+          <latex-image xml:id="latex-image-applications-integration-phase-diagram-graphically">
+            \begin{tikzpicture}
+              % draw the line
+              \draw (-1,0) -- (7,0);
+
+              % draw arrows on line 
+              \draw[ultra thick,color=blue,\lt-] (1,0) -- (2,0);
+              \draw[ultra thick,color=blue,-\gt] (2,0) -- (3,0);
+              \draw[ultra thick,color=blue,-\gt] (4,0) -- (5,0);
+              \draw[ultra thick,color=blue,\lt-] (5,0) -- (6,0);
+
+              % draw the ticks at critical points
+              \foreach \x in {2,5}
+                  \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+
+              % Draw parabola
+              \draw[black, dashed] plot[smooth, domain=1.8:5.2] (\x, {-\x*\x+7*\x-10});
+              \node[left] at (3, 2){$f(x)$};
+
+              % label the signs
+              \node[yshift=.5cm] at (1,0){$f(x)\lt0$};
+              \node[yshift=.5cm] at (3.5,0){$f(x)\gt0$};
+              \node[yshift=.5cm] at (6,0){$f(x)\lt0$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+
       <example xml:id="example-determining-a-sustainable-population">
         <title>Determining a Sustainable Population</title>
 
