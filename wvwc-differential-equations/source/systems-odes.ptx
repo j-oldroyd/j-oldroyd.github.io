@@ -464,8 +464,10 @@
     </p>
 
     <definition xml:id="definition-linear-independence-of-vectors">
-      <idx><h>linear independence</h><h>vectors</h></idx>
       <title>Linear Independence of Vectors</title>
+
+      <idx><h>linear independence</h><h>vectors</h></idx>
+
       <statement>
         <p>
           Let <m>\vec{x}_{1},\dots,\vec{x}_{n}</m> denote a collection of vectors.
@@ -558,6 +560,7 @@
             with corresponding eigenvalues <m>\lambda_{1} = 0,\lambda_{2} = \lambda_{3} = \frac{3}{2}</m>.
           </p>
         </statement>
+
         <solution>
           <p>
             First, note that the system we need to solve is equivalent to the matrix ODE <m>\vec{x}^\prime = G\vec{x}</m>.
@@ -569,6 +572,7 @@
               <mrow>&amp; = 3</mrow>.
             </md>
           </p>
+
           <p>
             Since the Wronskian is nonzero, these eigenvectors are linearly independent.
             Therefore the general solution of the system is given by
@@ -647,6 +651,30 @@
       </example>
 
       <p>
+        These computations are easily verified by Sage or MATLAB/Octave.
+        Sage can provide exact answers but the code is somewhat cumbersome.
+        MATLAB on the other hand is designed for performing matrix computations and therefore its code for finding eigenvalues is simpler.
+        We only need to use the <c>eig</c> command:
+      </p>
+
+      <sage language="octave">
+        <input>
+          % Define the matrix
+          A = [1, 1; 1, 4];
+
+          % Compute the eigenvalues of A
+          eig(A)
+        </input>
+
+        <output>
+          ans =
+
+              3.0000
+             -1.0000
+        </output>
+      </sage>
+
+      <p>
         A useful fact to remember is that the eigenvalues of a <q>triangular</q> matrix are just the diagonal entries.
       </p>
 
@@ -668,6 +696,10 @@
           </p>
         </solution>
       </example>
+
+      <p>
+        Once we have the eigenvalues of a matrix, we can find their corresponding eigenvectors.
+      </p>
 
       <example xml:id="example-system-odes-finding-eigenvectors-2x2">
         <title>Finding eigenvectors for a <m>2\times2</m> matrix</title>
@@ -720,6 +752,35 @@
           </p>
         </solution>
       </example>
+
+      <p>
+        Of course, all of this can be done in Sage or MATLAB/Octave as well.
+        If we use MATLAB/Octave, then the <c>eig</c> command once again does the heavy lifting for us.
+        Each column of the matrix <m>U</m> produced below is an eigenvector of <m>A</m>.
+      </p>
+
+      <sage language="octave">
+        <input>
+          # Define A
+          A = [1, 4; 1, 1];
+
+          # Compute eigenvectors
+          [U, V] = eig(A)
+        </input>
+
+        <output>
+          U =
+
+              0.8944   -0.8944
+              0.4472    0.4472
+
+
+          V =
+
+              3.0000         0
+                   0   -1.0000
+        </output>
+      </sage>
 
       <p>
         Looking forward to <xref ref="theorem-linear-independence-distinct-eigenvalues" text="type-global" />, note that the eigenvectors we found in <xref ref="example-system-odes-finding-eigenvectors-2x2" text="type-global" /> are linearly indepednent.
