@@ -11,8 +11,42 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<h3 class="heading"><span class="type">Paragraph</span></h3>
-<div class="para">Although it’s important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <a href="" class="xref" data-knowl="./knowl/example-ivp-with-discontinuous-forcing-function.html" title="Example 6.3.2: IVP with Discontinuous Forcing Function">Example 6.3.2</a> are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. <em class="alert">Be careful to place matching brackets and parentheses as appropriate</em> when using the <code class="code-inline tex2jax_ignore">piecewise</code> command in Sage to construct a piecewise function.</div>
+<h4 class="heading"><span class="type">Paragraph</span></h4>
+<div class="para logical">
+<div class="para">If we take Laplace transforms, this becomes</div>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},
+\end{equation*}
+</div>
+<div class="para">where</div>
+<div class="displaymath process-math">
+\begin{align*}
+\Laplace{F_{E}(t)} &amp;= \Laplace{u(t)\cos3t} - \Laplace{u(t-2\pi)\cos3t}\\
+&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi)+6\pi)}\\
+&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi))}\\
+&amp;= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}\text{.}
+\end{align*}
+</div>
+<div class="para">So</div>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}.
+\end{equation*}
+</div>
+<div class="para">If we solve this for <span class="process-math">\(X(s)\text{,}\)</span> we get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},
+\end{equation*}
+</div>
+<div class="para">and if we simplify this using partial fractions this becomes</div>
+<div class="displaymath process-math">
+\begin{equation*}
+X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.
+\end{equation*}
+</div>
+</div>
 <span class="incontext"><a href="section-unit-step-functions-and-time-shifting.html#p-596" class="internal">in-context</a></span>
 </body>
 </html>

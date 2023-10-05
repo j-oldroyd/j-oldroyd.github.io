@@ -175,6 +175,7 @@ true);
 \newcommand{\divt}{\operatorname{div}}
 \newcommand{\del}{\nabla}
 \newcommand{\vecm}[1]{\boldsymbol{#1}}
+\renewcommand{\vec}[1]{\vecm{#1}}
 \newcommand{\vb}[1]{\mathbf{#1}}
 \newcommand{\Sum}[2]{\sum_{#1}^{#2}}
 \newcommand{\Int}[2]{\int_{#1}^{#2}}
@@ -848,8 +849,8 @@ M.eigenvectors_right()
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Applications of Matrix ODEs</span>
 </h3>
 <div class="para" id="p-387">Now we use matrix ODEs to model physical systems. The methods we’ve developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.</div>
-<article class="example example-like" id="example-64"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span>
+<article class="example example-like" id="example-system-odes-brine-tanks-model-solution"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Determining salt concentration in connected tank system.</span>
 </h4>
 <div class="para" id="p-388">Two brine tanks are set up as in <a href="" class="xref" data-knowl="./knowl/figure-interconnected-tanks.html" title="Figure 4.1.3">Figure 4.1.3</a>. Fresh water flows into the tank at a rate of <span class="process-math">\(r_{1}\text{,}\)</span> well-mixed solution flows from Tank 1 to Tank 2 at a rate of <span class="process-math">\(r_{2}\)</span> and well-mixed solution flows out of Tank 2 at a rate of <span class="process-math">\(r_{3}\text{.}\)</span> Suppose that <span class="process-math">\(r_{1}, r_{2}\)</span> and  <span class="process-math">\(r_{3}\)</span> are <span class="quantity">5 <sup>gal</sup>⁄<sub>min</sub></span>, the volume of solution in Tank 1 is <span class="quantity">10 gal</span> and the volume of solution in Tank 2 is <span class="quantity">7 gal</span>. Suppose Tank 1 has <span class="quantity">5 lb</span> of salt at time <span class="process-math">\(t=0\)</span> and Tank 2 has <span class="quantity">2 lb</span> of salt at time <span class="process-math">\(t=0\text{.}\)</span> How much salt is in each tank at time <span class="process-math">\(t\text{?}\)</span>
 </div>
@@ -869,13 +870,14 @@ x^\prime_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 \vec{x} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \qq{and} A = \begin{bmatrix}-\frac{1}{2} \amp  0 \\ \frac{1}{2} \amp  -\frac{5}{7}\end{bmatrix}
 \end{equation*}
 </div>
-<div class="para">then this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\text{.}\)</span> To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation <span class="process-math">\(\det(A-\lambda I) = 0\)</span> or use Maple, but it’s easier to note that <span class="process-math">\(A\)</span> is a triangular matrix. So the eigenvalues are just <span class="process-math">\(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</span>
+<div class="para">then this system is equivalent to the matrix ODE <span class="process-math">\(\vec{x}^\prime = A\vec{x}\text{.}\)</span>
 </div>
-</div> <div class="para logical" id="p-390">
-<div class="para">Now we find eigenvectors. So let</div>
+</div> <div class="para" id="p-390">To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation <span class="process-math">\(\det(A-\lambda I) = 0\)</span> or use technology, but it’s easier to note that <span class="process-math">\(A\)</span> is a triangular matrix. So the eigenvalues are just <span class="process-math">\(\lambda_{1} = -\frac{1}{2},\lambda_{2} = -\frac{5}{7}\text{.}\)</span>
+</div> <div class="para logical" id="p-391">
+<div class="para">Now we find corresponding eigenvectors. So let</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}.
+\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 <div class="para">If <span class="process-math">\(\vec{v}\)</span> is an eigenvector for <span class="process-math">\(\lambda\text{,}\)</span> then we know <span class="process-math">\(A\vec{v} = \lambda\vec{v}\text{,}\)</span> which gives the system</div>
@@ -888,34 +890,33 @@ x^\prime_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 <div class="para">If we set <span class="process-math">\(\lambda=-\frac{1}{2}\text{,}\)</span> then we just get <span class="process-math">\(v_{1} = \frac{3}{14}v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{1} = -\frac{1}{2}\)</span> is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}.
-\end{equation*}
-</div>
-</div> <div class="para logical" id="p-391">
-<div class="para">Similarly, if we set <span class="process-math">\(\lambda=-\frac{5}{7}\)</span> we get <span class="process-math">\(v_{1} = 0\text{,}\)</span> but no restrictions on <span class="process-math">\(v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{2} = -\frac{5}{7}\)</span> is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}.
+\vec{v}_{1} = \begin{bmatrix}3\\14\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 </div> <div class="para logical" id="p-392">
-<div class="para">The general solution of our matrix ODE is then</div>
+<div class="para">Similarly, if we set <span class="process-math">\(\lambda=-\frac{5}{7}\)</span> we get <span class="process-math">\(v_{1} = 0\text{,}\)</span> but no restrictions on <span class="process-math">\(v_{2}\text{.}\)</span> So an eigenvector corresponding to <span class="process-math">\(\lambda_{2} = -\frac{5}{7}\)</span> is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}
+\vec{v}_{2} = \begin{bmatrix}0\\1\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 </div> <div class="para logical" id="p-393">
+<div class="para">We can now write down the general solution of the matrix ODE:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\vec{x} = c_{1}e^{-\frac{5t}{7}}\begin{bmatrix}0\\1\end{bmatrix} + c_{2}e^{-\frac{t}{2}}\begin{bmatrix}3\\14\end{bmatrix} = \begin{bmatrix}3c_{2}e^{-\frac{t}{2}} \\ c_{1}e^{-\frac{5t}{7}}+14c_{2}e^{-\frac{t}{2}}\end{bmatrix}\text{.}
+\end{equation*}
+</div>
 <div class="para">But we’re not done yet, since we have the initial conditions <span class="process-math">\(x_{1}(0) = 5\)</span> and <span class="process-math">\(x_{2}(0) = 2\text{,}\)</span> or in terms of our matrix ODE</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}.
+\vec{x}(0) = \begin{bmatrix}5\\2\end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="para">We can use this to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> If we set <span class="process-math">\(t=0\text{,}\)</span> then we get</div>
+<div class="para">We can use this to find <span class="process-math">\(c_{1}\)</span> and <span class="process-math">\(c_{2}\text{.}\)</span> If we set <span class="process-math">\(t=0\)</span> then we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}
+\begin{bmatrix}3c_{2} \\ c_{1} + 14c_{2}\end{bmatrix} = \begin{bmatrix}5\\2\end{bmatrix}\text{,}
 \end{equation*}
 </div>
 <div class="para">so <span class="process-math">\(c_{2} = \frac{5}{3}\)</span> and <span class="process-math">\(c_{1} = 2 - 14\frac{5}{3} = -\frac{64}{3}\text{.}\)</span>
@@ -924,7 +925,7 @@ x^\prime_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 <div class="para">So the solution of the matrix ODE (and hence the original system) is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}
+\vec{x} = \begin{bmatrix}5e^{-\frac{t}{2}} \\ -\frac{64}{3}e^{-\frac{5t}{7}}+\frac{70}{3}e^{-\frac{t}{2}}\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 <div class="para">The amount of salt in the first tank, <span class="process-math">\(x_{1}\text{,}\)</span> is given by the top entry and the amount of salt in the second tank, <span class="process-math">\(x_{2}\text{,}\)</span> is given by the bottom entry.</div>
@@ -934,7 +935,15 @@ x^\prime_{2} \amp = \frac{1}{2}x_{1}-\frac{5}{7}x_{2}
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The Phase Plane</span>
 </h3>
 <div class="para logical" id="p-395">
-<div class="para">Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system</div>
+<div class="para">Just as we were able to plot direction fields for first-order ODEs, we can do something similar for <em class="emphasis">autonomous</em> first-order systems with two equations and constant coefficients. These are precisely the systems that can be written as a matrix ODE:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\vec{y}^\prime = A\vec{y}\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="para logical" id="p-396">
+<div class="para">Consider the first-order system</div>
 <div class="displaymath process-math" id="mdn-2">
 \begin{align}
 y^\prime_{1}  \amp =  a_{11}y_{1} + a_{12}y_{2}\tag{4.1}\\
@@ -944,15 +953,15 @@ y^\prime_{2}  \amp =  a_{21}y_{1}+  a_{22}y_{2}\notag
 <div class="para">or</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{y}^\prime = A\vec{y}\quad\text{where}\quad A = \begin{bmatrix}a_{11}  \amp  a_{12}  \\  a_{21}  \amp  a_{22}\end{bmatrix}.
+\vec{y}^\prime = A\vec{y}\quad\text{where}\quad A = \begin{bmatrix}a_{11}  \amp  a_{12}  \\  a_{21}  \amp  a_{22}\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 </div>
-<div class="para" id="p-396">The solution of this looks like <span class="process-math">\(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\)</span> As <span class="process-math">\(t\)</span> varies, <span class="process-math">\(\vec{y}(t)\)</span> will trace out a curve in the <span class="process-math">\(y_{1}y_{2}\)</span>-plane, which we call the <dfn class="terminology">trajectory</dfn>. The <span class="process-math">\(y_{1}y_{2}\)</span>-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.1">(4.1)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.1">(4.1)</a> without actually solving the system.</div>
+<div class="para" id="p-397">The solution of this looks like <span class="process-math">\(\vec{y}(t) = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\text{.}\)</span> As <span class="process-math">\(t\)</span> varies, <span class="process-math">\(\vec{y}(t)\)</span> will trace out a curve in the <span class="process-math">\(y_{1}y_{2}\)</span>-plane, which we call the <dfn class="terminology">trajectory</dfn>. The <span class="process-math">\(y_{1}y_{2}\)</span>-plane is called the <dfn class="terminology">phase plane</dfn>, and the collection of all trajectories of the system <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.1">(4.1)</a> is called the <dfn class="terminology">phase portrait</dfn>. The phase portrait of a system provides us with a way to study the behavior of solutions of <a href="" class="xref" data-knowl="./knowl/equation-2-by-2-system.html" title="Equation 4.1">(4.1)</a> without actually solving the system.</div>
 <article class="example example-like" id="example-sketch-phase-portrait"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">Sketching a phase portrait.</span>
 </h4>
-<div class="para logical" id="p-397">
+<div class="para logical" id="p-398">
 <div class="para">Sketch a phase portrait for the system</div>
 <div class="displaymath process-math" id="md-46">
 \begin{align*}
@@ -963,47 +972,57 @@ y^\prime_{2}  \amp =  a_{21}y_{1}+  a_{22}y_{2}\notag
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-61" id="solution-61"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-61"><div class="solution solution-like">
-<div class="para logical" id="p-398">
+<div class="para logical" id="p-399">
 <div class="para">First, note that we can rewrite the system as <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> using</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{y} = \begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}2 \amp  -3 \\-2 \amp  1\end{bmatrix}.
+\vec{y} = \begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}2 \amp  -3 \\-2 \amp  1\end{bmatrix}\text{.}
 \end{equation*}
 </div>
-<div class="para">Now, we can view <span class="process-math">\(\vec{y}\)</span> as corresponding to a point in the phase plane. Hence <span class="process-math">\(\vec{y}^\prime\)</span> corresponds to a \emph{tangent} at the point <span class="process-math">\(\vec{y}\text{.}\)</span> For example, let’s find the tangent at the point <span class="process-math">\(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{:}\)</span>
+<div class="para">Now, we can view <span class="process-math">\(\vec{y}\)</span> as corresponding to a point in the phase plane. Hence <span class="process-math">\(\vec{y}^\prime\)</span> corresponds to a <em class="emphasis">tangent</em> of a trajectory passing through the point <span class="process-math">\(\vec{y}\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-400">
+<div class="para">For example, let’s find the tangent at the point <span class="process-math">\(\vec{y} = \begin{bmatrix}2\\2\end{bmatrix}\text{.}\)</span> The tangent is given by the corresponding <span class="process-math">\(\vec{y}^\prime\)</span> at this point which is just <span class="process-math">\(A\vec{y}\text{:}\)</span>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}2\\2\end{bmatrix} = \begin{bmatrix}-2 \\ -2\end{bmatrix}.
+\vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}2\\2\end{bmatrix} = \begin{bmatrix}-2 \\ -2\end{bmatrix}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-399">
-<div class="para">So at the point <span class="process-math">\((2,2)\)</span> in the phase plane, the trajectory should be heading in the direction of the point <span class="process-math">\((-2,-2)\)</span> from the origin. Similarly, if we let <span class="process-math">\(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\)</span> then we get</div>
+<div class="para">So at the point <span class="process-math">\((2,2)\)</span> in the phase plane, the trajectory should be heading in the same direction as that of the point <span class="process-math">\((-2,-2)\)</span> relative to the origin. In other words, the tangent vector would point two units left and two units down from the point <span class="process-math">\((2,2)\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-401">
+<div class="para">Similarly, if we let <span class="process-math">\(\vec{y} = \begin{bmatrix}0\\1\end{bmatrix}\)</span> then we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix} = \begin{bmatrix}-3 \\ 1\end{bmatrix}.
+\vec{y}^\prime = A\vec{y} = \begin{bmatrix}2 \amp  -3 \\ -2 \amp  1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix} = \begin{bmatrix}-3 \\ 1\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 <div class="para">So the trajectory going through <span class="process-math">\((0,1)\)</span> in the phase plane should be heading in the direction of <span class="process-math">\((-3,1)\)</span> viewed from the origin.</div>
-</div> <div class="para logical" id="p-400">
+</div> <div class="para logical" id="p-402">
 <div class="para">Plotting other points in the phase plane like this, we get <a href="" class="xref" data-knowl="./knowl/figure-sketch-phase-portrait.html" title="Figure 4.2.14">Figure 4.2.14</a>. One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions <span class="process-math">\(y_{1}(0) = y_{2}(0)\text{,}\)</span> appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-sketch-phase-portrait.html">
 \begin{equation*}
-\vec{y} = c_{1}e^{4t}\begin{bmatrix}-3\\2\end{bmatrix}+c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}.
+\vec{y} = c_{1}e^{4t}\begin{bmatrix}-3\\2\end{bmatrix}+c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para" id="p-401">If <span class="process-math">\(\vec{y}\)</span> lies on the line <span class="process-math">\(y_{2} = y_{1}\text{,}\)</span> then <span class="process-math">\(c_{1}\)</span> has to equal <span class="process-math">\(0\text{,}\)</span> which follows from the fact that <span class="process-math">\(\begin{bmatrix}-3\\2\end{bmatrix}\)</span> and <span class="process-math">\(\begin{bmatrix}1\\1\end{bmatrix}\)</span> are linearly independent. So trajectories that lie on the line <span class="process-math">\(y_{2} = y_{1}\)</span> must take the form <span class="process-math">\(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\)</span> and every solution of this form goes to <span class="process-math">\(\vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> <em class="emphasis">Every other trajectory</em> will move away from the origin as <span class="process-math">\(t\to\infty\text{,}\)</span> although the trajectories that lie on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\)</span> will travel to the origin as <span class="process-math">\(t\to-\infty\)</span> (i.e. ``backwards in time’’):</div>
+</div> <div class="para" id="p-403">If <span class="process-math">\(\vec{y}\)</span> lies on the line <span class="process-math">\(y_{2} = y_{1}\text{,}\)</span> then <span class="process-math">\(c_{1}\)</span> has to equal <span class="process-math">\(0\text{,}\)</span> which follows from the fact that <span class="process-math">\(\begin{bmatrix}-3\\2\end{bmatrix}\)</span> and <span class="process-math">\(\begin{bmatrix}1\\1\end{bmatrix}\)</span> are linearly independent. So trajectories that lie on the line <span class="process-math">\(y_{2} = y_{1}\)</span> must take the form <span class="process-math">\(\vec{y} = c_{2}e^{-t}\begin{bmatrix}1\\1\end{bmatrix}\text{,}\)</span> and every solution of this form goes to <span class="process-math">\(\vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{.}\)</span> <em class="emphasis">Every other trajectory</em> will move away from the origin as <span class="process-math">\(t\to\infty\text{,}\)</span> although the trajectories that lie on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\)</span> will travel to the origin as <span class="process-math">\(t\to-\infty\)</span> (i.e. ``backwards in time’’):</div>
 </div></div>
-</div></article><figure class="figure figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095279654244%"><iframe src="generated/asymptote/image-16.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</figcaption></figure><div class="para" id="p-402">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a>.</div>
-<pre class="ptx-sagecell sagecell-sage" id="sage-12"><script type="text/x-sage">var('y1 y2') # define from system variables
-VF=plot_vector_field([2*y1 - 3*y2,-2*y1 + y2],[y1,-2,2],[y2,-2,2]) # creates plot of phase portrait from system
-show(VF) # shows the plot
+</div></article><figure class="figure figure-like" id="figure-sketch-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095275624142%"><iframe src="generated/asymptote/image-sketch-phase-portrait.html" class="asymptote"></iframe></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.14<span class="period">.</span></span><span class="space"> </span>The phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13: Sketching a phase portrait">Example 4.2.13</a>.</figcaption></figure><div class="para" id="p-404">Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the <code class="code-inline tex2jax_ignore">plot_vector_field</code> command to sketch the phase portrait from <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13: Sketching a phase portrait">Example 4.2.13</a>.</div>
+<pre class="ptx-sagecell sagecell-sage" id="sage-12"><script type="text/x-sage"># Define variables
+var('y1 y2')
+
+# Create phase portrait for system
+VF=plot_vector_field([2*y1 - 3*y2,-2*y1 + y2],[y1,-2,2],[y2,-2,2])
+
+# Display the plot
+show(VF)
 </script></pre>
-<div class="para" id="p-403">Note that <span class="process-math">\(\vec{y}=\vec{0}\)</span> is <em class="emphasis">always</em> a solution of <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> This is because <span class="process-math">\(\vec{0}^\prime=A\vec{0} = \vec{0}\text{.}\)</span> We call <span class="process-math">\(\vec{y} = \vec{0}\)</span> the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> In the next section, we will be concerned with the behavior of trajectories of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix <span class="process-math">\(A\text{.}\)</span>
+<div class="para" id="p-405">Note that <span class="process-math">\(\vec{y}=\vec{0}\)</span> is <em class="emphasis">always</em> a solution of <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> This is because <span class="process-math">\(\vec{0}^\prime=A\vec{0} = \vec{0}\text{.}\)</span> We call <span class="process-math">\(\vec{y} = \vec{0}\)</span> the <dfn class="terminology">equilibrium solution</dfn> or <dfn class="terminology">critical point</dfn> of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span> In the next section, we will be concerned with the behavior of trajectories of the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix <span class="process-math">\(A\text{.}\)</span>
 </div>
-<div class="para" id="p-404">We will classify the behavior of trajectories at the critical point <span class="process-math">\(\vec{x} = \vec{0}\)</span> into five different cases:</div>
-<figure class="table table-like" id="table-10"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">4.2.15<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<div class="para" id="p-406">We will classify the behavior of trajectories at the critical point <span class="process-math">\(\vec{x} = \vec{0}\)</span> into five different cases:</div>
+<figure class="table table-like" id="table-systems-ode-critical-point-types"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">4.2.15<span class="period">.</span></span><span class="space"> </span>Types of critical points</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b3 r0 l0 t3 lines">Classification</td>
 <td class="l m b3 r0 l0 t3 lines">Behavior at <span class="process-math">\(\vec{0}\)</span>
@@ -1034,27 +1053,27 @@ show(VF) # shows the plot
 <td class="l m b3 r0 l0 t0 lines">Trajectories spiral inwards or outwards from <span class="process-math">\(\vec{0}\)</span>
 </td>
 </tr>
-</table></div></figure><div class="para" id="p-405">
-<span class="process-math">\(\vec{0}\)</span> was a saddle point in <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13">Example 4.2.13</a> since there were incoming trajectories on the line <span class="process-math">\(y_{2} = y_{1}\)</span> and outgoing trajectories on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</span>
+</table></div></figure><div class="para" id="p-407">
+<span class="process-math">\(\vec{0}\)</span> was a saddle point in <a href="" class="xref" data-knowl="./knowl/example-sketch-phase-portrait.html" title="Example 4.2.13: Sketching a phase portrait">Example 4.2.13</a> since there were incoming trajectories on the line <span class="process-math">\(y_{2} = y_{1}\)</span> and outgoing trajectories on the line <span class="process-math">\(y_{2} = -\frac{2}{3}y_{1}\text{.}\)</span>
 </div>
 <article class="example example-like" id="example-stability-equilibrium-solution"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span>
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.16</span><span class="period">.</span><span class="space"> </span><span class="title">Classifying a critical point using a phase portrait.</span>
 </h4>
-<div class="para logical" id="p-406">
+<div class="para logical" id="p-408">
 <div class="para">Using a phase portrait, determine the type of critical point that <span class="process-math">\(\vec{y} = \vec{0}\)</span> is for the matrix ODE <span class="process-math">\(\vec{y}^\prime=A\vec{y}\)</span> where</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vec{y} = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}3 \amp  4 \\ -4 \amp  3\end{bmatrix}.
+\vec{y} = \begin{bmatrix}y_{1}(t) \\ y_{2}(t)\end{bmatrix}\quad\text{and}\quad A = \begin{bmatrix}3 \amp  4 \\ -4 \amp  3\end{bmatrix}\text{.}
 \end{equation*}
 </div>
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-62" id="solution-62"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-62"><div class="solution solution-like">
-<div class="para logical" id="p-407">
+<div class="para logical" id="p-409">
 <div class="para">As seen in <a href="" class="xref" data-knowl="./knowl/figure-classify-stability-using-phase-portrait.html" title="Figure 4.2.17">Figure 4.2.17</a>, every (nonzero) trajectory will spiral outward from <span class="process-math">\(\vec{y} = \vec{0}\)</span> as <span class="process-math">\(t\to\infty\text{,}\)</span> so <span class="process-math">\(\vec{0}\)</span> is a spiral point of this system. To see why, we only need to look at the eigenvalues of <span class="process-math">\(A\text{,}\)</span> which we find to be</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/figure-classify-stability-using-phase-portrait.html">
 \begin{equation*}
-\lambda_{1} = 3+4i,\lambda_{2} = 3-4i.
+\lambda_{1} = 3+4i,\lambda_{2} = 3-4i\text{.}
 \end{equation*}
 </div>
 <div class="para">This means that the general solution of <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> must look like</div>
@@ -1065,15 +1084,15 @@ show(VF) # shows the plot
 \amp = e^{3t}\brackets{(\cos4t)\vec{x}_{1}+(\sin4t)\vec{x}_{2}}\text{.}
 \end{align*}
 </div>
-</div> <div class="para" id="p-408">The real part of the eigenvalues leads to the ``growth term’’ of <span class="process-math">\(e^{3t}\)</span> appearing in the solution, which causes the trajectories to diverge as <span class="process-math">\(t\to\infty\text{.}\)</span> The imaginary part of the eigenvalues leads to the ``oscillating terms’’ of <span class="process-math">\(\cos4t,\sin4t\)</span> appearing in the solution, which gives the trajectories their spiral motion.</div>
+</div> <div class="para" id="p-410">The real part of the eigenvalues leads to the ``growth term’’ of <span class="process-math">\(e^{3t}\)</span> appearing in the solution, which causes the trajectories to diverge as <span class="process-math">\(t\to\infty\text{.}\)</span> The imaginary part of the eigenvalues leads to the ``oscillating terms’’ of <span class="process-math">\(\cos4t,\sin4t\)</span> appearing in the solution, which gives the trajectories their spiral motion.</div>
 </div></div>
-</div></article><figure class="figure figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095275624142%"><iframe src="generated/asymptote/image-17.html" class="asymptote"></iframe></div></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a href="" class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16">Example 4.2.16</a>.</figcaption></figure><div class="para" id="p-409">In general, the eigenvalues of the matrix <span class="process-math">\(A\)</span> in the system <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> will determine the type of critical point that <span class="process-math">\(\vec{0}\)</span> is for the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span>
+</div></article><figure class="figure figure-like" id="figure-classify-stability-using-phase-portrait"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><div class="asymptote-box" style="padding-top: 100.095279654244%"><iframe src="generated/asymptote/image-classify-stability-using-phase-portrait.html" class="asymptote"></iframe></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.2.17<span class="period">.</span></span><span class="space"> </span>The phase portrait for <a href="" class="xref" data-knowl="./knowl/example-stability-equilibrium-solution.html" title="Example 4.2.16: Classifying a critical point using a phase portrait">Example 4.2.16</a>.</figcaption></figure><div class="para" id="p-411">In general, the eigenvalues of the matrix <span class="process-math">\(A\)</span> in the system <span class="process-math">\(\vec{y}^\prime = A\vec{y}\)</span> will determine the type of critical point that <span class="process-math">\(\vec{0}\)</span> is for the system <span class="process-math">\(\vec{y}^\prime=A\vec{y}\text{.}\)</span>
 </div>
-<article class="example example-like" id="example-67"><h4 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.18</span><span class="period">.</span>
+<article class="example example-like" id="example-systems-odes-classifying-trajectories-algebraically"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.18</span><span class="period">.</span><span class="space"> </span><span class="title">Classifying trajectories algebraically.</span>
 </h4>
-<div class="para logical" id="p-410">
+<div class="para logical" id="p-412">
 <div class="para">What kind of critical point is <span class="process-math">\(\vec{y} = \vec{0}\)</span> for the system</div>
 <div class="displaymath process-math" id="md-48">
 \begin{align*}
@@ -1086,20 +1105,20 @@ y^\prime_{2}  \amp =  4y_{1}
 </div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-63" id="solution-63"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-63"><div class="solution solution-like">
-<div class="para logical" id="p-411">
+<div class="para logical" id="p-413">
 <div class="para">We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories <span class="process-math">\(\vec{y} = \begin{bmatrix} y_{1} \\ y_{2} \end{bmatrix} \)</span> if we can find a relationship between <span class="process-math">\(y_{1}\)</span> and <span class="process-math">\(y_{2}\text{.}\)</span> To do so, we “cross-multiply” the system to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-4y_{1}y^\prime_{1} = -4y_{2}y^\prime_{2} \quad\text{or}\quad 4y_{1}\dd{y_{1}} = -4y_{2}\dd{y_{2}}.
+4y_{1}y^\prime_{1} = -4y_{2}y^\prime_{2} \quad\text{or}\quad 4y_{1}\dd{y_{1}} = -4y_{2}\dd{y_{2}}\text{.}
 \end{equation*}
 </div>
 <div class="para">So we can integrate this to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-2y_{1}^{2} = -2y_{2}^{2}+C\qq{or}y_{1}^{2}+y_{2}^{2} = C_{1}.
+2y_{1}^{2} = -2y_{2}^{2}+C\qq{or}y_{1}^{2}+y_{2}^{2} = C_{1}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para" id="p-412">This is the equation of a circle of radius <span class="process-math">\(\sqrt{C_{1}}\text{,}\)</span> and so every trajectory <span class="process-math">\(\vec{y}\)</span> for this system will be a circle centered at <span class="process-math">\(\vec{0}\text{.}\)</span> Hence <span class="process-math">\(\vec{0}\)</span> is a center.</div>
+</div> <div class="para" id="p-414">This is the equation of a circle of radius <span class="process-math">\(\sqrt{C_{1}}\text{,}\)</span> and so every trajectory <span class="process-math">\(\vec{y}\)</span> for this system will be a circle centered at <span class="process-math">\(\vec{0}\text{.}\)</span> Hence <span class="process-math">\(\vec{0}\)</span> is a center.</div>
 </div></div>
 </div></article></section></section></div>
 <div class="ptx-content-footer">
