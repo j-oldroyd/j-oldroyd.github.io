@@ -1267,7 +1267,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.2",
   "title": "Constant Coefficient Systems and the Phase Plane",
-  "body": " Constant Coefficient Systems and the Phase Plane   The content in this section represents a higher-dimensional analog of the content in .    Solutions of  A system of ODEs involving only constant coefficients can be rewritten as a matrix ODE of the form where is a constant matrix. Such a system can be solved using exponentials.   Solutions of Systems   Let be an constant matrix, and suppose that has linearly independent eigenvectors with corresponding eigenvalues . Then the general solution of is given by       Find the general solution of the system given that are eigenvectors of the matrix with corresponding eigenvalues .    First, note that the system we need to solve is equivalent to the matrix ODE . If we can show that are linearly independent, then we can use to find the general solution of the system. So we'll compute their Wronskian:   Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by or just       Finding Eigenvalues and Eigenvectors   shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.  Let be an matrix and suppose that is an eigenvector with corresponding eigenvalue . Then . We can rearrange this to get where is the identity matrix. Since (since it's an eigenvector!), linear algebra tells us that . This gives us the following theorem.    The eigenvalues of a square matrix are the solutions of the equation .       is called the characteristic equation of the matrix .     Finding eigenvalues of a matrix   Find the eigenvalues of the matrix .    First, we need to set up the characteristic equation of . Since , we get so the characteristic equation of is which has solutions . So the eigenvalues of are .    These computations are easily verified by Sage or MATLAB\/Octave. Sage can provide exact answers but the code is somewhat cumbersome. MATLAB on the other hand is designed for performing matrix computations and therefore its code for finding eigenvalues is simpler. We only need to use the eig command:   A useful fact to remember is that the eigenvalues of a triangular matrix are just the diagonal entries.   Finding the eigenvalues of a triangular matrix   Let . Find the eigenvalues of .     is a triangular matrix since everything below the main diagonal is . Therefore the eigenvalues of are .    Once we have the eigenvalues of a matrix, we can find their corresponding eigenvectors.   Finding eigenvectors for a matrix   Find eigenvectors of corresponding to the eigenvalues and .    Suppose that is an eigenvector corresponding to . Then we know that . This tells us that if is an eigenvector for , then its entries need to satisfy which boils down to   Now set to get the system and so . We don't really care about what the entries of look like so long as is an eigenvector, so we can pick however we want, just so long as they satisfy this relation (and are not both !). So pick , which forces . Then is an eigenvector of corresponding to the eigenvalue .  To find an eigenvector for we just set and run through the same process: The second equation simplifies to , so one eigenvector for is     Of course, all of this can be done in Sage or MATLAB\/Octave as well. If we use MATLAB\/Octave, then the eig command once again does the heavy lifting for us. Each column of the matrix produced below is an eigenvector of .   Looking forward to , note that the eigenvectors we found in are linearly indepednent. This can be verified by computing the Wronskian as done using Sage below:   You may have noticed that the matrix constructed in the Sage cell here is actually flipped : the eigenvectors are appearing as the rows instead of the columns. It turns out that this causes no problems for us since turning rows into columns (or columns into rows) has no affect on the determinant. Therefore the Wronskian is unchanged.      Solving Matrix ODEs  We now have the tools we need to begin solving matrix ODEs. Recall that if is an matrix with constant entries, and if are linearly independent solutions of the matrix ODE , then the general solution of the matrix ODE is . Furthermore, if is an eigenvalue of with eigenvector , then is a solution of . So solving the matrix ODE requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:    Let be an matrix with constant entries. If the eigenvalues of are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if is an eigenvector corresponding to then the eigenvectors are linearly independent.     Solving a matrix ODE   Solve the matrix ODE given by where .    We already have everything we need. We know that the eigenvalues of are and from , and likewise some corresponding eigenvectors are thanks to . Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE: . So the general solution of the matrix ODE is .  Note that the choice of eigenvector doesn't matter . We only need to find enough linearly independent eigenvectors for each distinct eigenvalue.      Solve the first-order system given by where and are functions of .    First, note that this system is equivalent to the matrix ODE where To solve this system we need to find the eigenvalues and eigenvectors of , and then use these to build our general solution.   Find the eigenvalues.  We find the eigenvalues of by solving the characteristic equation for . Since , we see that the eigenvalues of are and . The fact that these eigenvalues are complex is not a problem. They're still distinct, so our method will work.    Find corresponding eigenvectors.  Set . Then implies that or just Setting in the second equation gives , so an eigenvector of corresponding to is Similarly, an eigenvector corresponding to is    Find the general solution.  At this step it is easy to construct the solution of the matrix ODE. It's just         Solving a system of three differential equations   Solve the first-order system     As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is   To find the eigenvalues we must solve the characteristic equation . However, we can also use Sage (see code cell after this example).   This produces a list containing the eigenvalues of as well as the corresponding eigenvectors. So we see that the eigenvalues are given by while the corresponding eigenvectors are given by   We now have everything we need for the general solution of the matrix ODE. It's just       Applications of Matrix ODEs  Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.    Two brine tanks are set up as in . Fresh water flows into the tank at a rate of , well-mixed solution flows from Tank 1 to Tank 2 at a rate of and well-mixed solution flows out of Tank 2 at a rate of . Suppose that and are 5 , the volume of solution in Tank 1 is 10 and the volume of solution in Tank 2 is 7 . Suppose Tank 1 has 5 of salt at time and Tank 2 has 2 of salt at time . How much salt is in each tank at time ?    To start, let denote the amount of salt in Tank 1 at time and denote the amount of salt in Tank 2 at time , where is in minutes. Then from Section 4.1, we know that If we set then this system is equivalent to the matrix ODE . To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation or use Maple, but it's easier to note that is a triangular matrix. So the eigenvalues are just .  Now we find eigenvectors. So let If is an eigenvector for , then we know , which gives the system If we set , then we just get . So an eigenvector corresponding to is   Similarly, if we set we get , but no restrictions on . So an eigenvector corresponding to is   The general solution of our matrix ODE is then   But we're not done yet, since we have the initial conditions and , or in terms of our matrix ODE We can use this to find and . If we set , then we get so and .  So the solution of the matrix ODE (and hence the original system) is The amount of salt in the first tank, , is given by the top entry and the amount of salt in the second tank, , is given by the bottom entry.      The Phase Plane  Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system or   The solution of this looks like . As varies, will trace out a curve in the -plane, which we call the trajectory . The -plane is called the phase plane , and the collection of all trajectories of the system is called the phase portrait . The phase portrait of a system provides us with a way to study the behavior of solutions of without actually solving the system.    Sketch a phase portrait for the system     First, note that we can rewrite the system as using Now, we can view as corresponding to a point in the phase plane. Hence corresponds to a \\emph{tangent} at the point . For example, let's find the tangent at the point :   So at the point in the phase plane, the trajectory should be heading in the direction of the point from the origin. Similarly, if we let then we get So the trajectory going through in the phase plane should be heading in the direction of viewed from the origin.  Plotting other points in the phase plane like this, we get . One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions , appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is   If lies on the line , then has to equal , which follows from the fact that and are linearly independent. So trajectories that lie on the line must take the form , and every solution of this form goes to as . Every other trajectory will move away from the origin as , although the trajectories that lie on the line will travel to the origin as (i.e. ``backwards in time''):        The phase portrait from .   Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the plot_vector_field command to sketch the phase portrait from .   Note that is always a solution of . This is because . We call the equilibrium solution or critical point of the system . In the next section, we will be concerned with the behavior of trajectories of the system near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix .  We will classify the behavior of trajectories at the critical point into five different cases:     Classification  Behavior at    Improper node  Every trajectory except two has the same limiting tangent at    Proper node  For every direction there exists trajectory with limiting tangent    Saddle point  Two incoming trajectories, two outgoing trajectories; all others bypass    Center  is enclosed by infinitely many closed (repeating) trajectories    Spiral point  Trajectories spiral inwards or outwards from      was a saddle point in since there were incoming trajectories on the line and outgoing trajectories on the line .    Using a phase portrait, determine the type of critical point that is for the matrix ODE where     As seen in , every (nonzero) trajectory will spiral outward from as , so is a spiral point of this system. To see why, we only need to look at the eigenvalues of , which we find to be This means that the general solution of must look like .  The real part of the eigenvalues leads to the ``growth term'' of appearing in the solution, which causes the trajectories to diverge as . The imaginary part of the eigenvalues leads to the ``oscillating terms'' of appearing in the solution, which gives the trajectories their spiral motion.        The phase portrait for .   In general, the eigenvalues of the matrix in the system will determine the type of critical point that is for the system .    What kind of critical point is for the system where ?    We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories if we can find a relationship between and . To do so, we cross-multiply the system to get So we can integrate this to get   This is the equation of a circle of radius , and so every trajectory for this system will be a circle centered at . Hence is a center.     "
+  "body": " Constant Coefficient Systems and the Phase Plane   The content in this section represents a higher-dimensional analog of the content in .    Solutions of  A system of ODEs involving only constant coefficients can be rewritten as a matrix ODE of the form where is a constant matrix. Such a system can be solved using exponentials.   Solutions of Systems   Let be an constant matrix, and suppose that has linearly independent eigenvectors with corresponding eigenvalues . Then the general solution of is given by       Find the general solution of the system given that are eigenvectors of the matrix with corresponding eigenvalues .    First, note that the system we need to solve is equivalent to the matrix ODE . If we can show that are linearly independent, then we can use to find the general solution of the system. So we'll compute their Wronskian:   Since the Wronskian is nonzero, these eigenvectors are linearly independent. Therefore the general solution of the system is given by or just       Finding Eigenvalues and Eigenvectors   shows that solving systems of first-order ODEs comes down to finding eigenvalues and eigenvectors of the corresponding matrix ODE. So it's important for us to know how to find these.  Let be an matrix and suppose that is an eigenvector with corresponding eigenvalue . Then . We can rearrange this to get where is the identity matrix. Since (since it's an eigenvector!), linear algebra tells us that . This gives us the following theorem.    The eigenvalues of a square matrix are the solutions of the equation .       is called the characteristic equation of the matrix .     Finding eigenvalues of a matrix   Find the eigenvalues of the matrix .    First, we need to set up the characteristic equation of . Since , we get so the characteristic equation of is which has solutions . So the eigenvalues of are .    These computations are easily verified by Sage or MATLAB\/Octave. Sage can provide exact answers but the code is somewhat cumbersome. MATLAB on the other hand is designed for performing matrix computations and therefore its code for finding eigenvalues is simpler. We only need to use the eig command:   A useful fact to remember is that the eigenvalues of a triangular matrix are just the diagonal entries.   Finding the eigenvalues of a triangular matrix   Let . Find the eigenvalues of .     is a triangular matrix since everything below the main diagonal is . Therefore the eigenvalues of are .    Once we have the eigenvalues of a matrix, we can find their corresponding eigenvectors.   Finding eigenvectors for a matrix   Find eigenvectors of corresponding to the eigenvalues and .    Suppose that is an eigenvector corresponding to . Then we know that . This tells us that if is an eigenvector for , then its entries need to satisfy which boils down to   Now set to get the system and so . We don't really care about what the entries of look like so long as is an eigenvector, so we can pick however we want, just so long as they satisfy this relation (and are not both !). So pick , which forces . Then is an eigenvector of corresponding to the eigenvalue .  To find an eigenvector for we just set and run through the same process: The second equation simplifies to , so one eigenvector for is     Of course, all of this can be done in Sage or MATLAB\/Octave as well. If we use MATLAB\/Octave, then the eig command once again does the heavy lifting for us. Each column of the matrix produced below is an eigenvector of .   Looking forward to , note that the eigenvectors we found in are linearly indepednent. This can be verified by computing the Wronskian as done using Sage below:   You may have noticed that the matrix constructed in the Sage cell here is actually flipped : the eigenvectors are appearing as the rows instead of the columns. It turns out that this causes no problems for us since turning rows into columns (or columns into rows) has no affect on the determinant. Therefore the Wronskian is unchanged.      Solving Matrix ODEs  We now have the tools we need to begin solving matrix ODEs. Recall that if is an matrix with constant entries, and if are linearly independent solutions of the matrix ODE , then the general solution of the matrix ODE is . Furthermore, if is an eigenvalue of with eigenvector , then is a solution of . So solving the matrix ODE requires finding enough eigenvectors and eigenvalues. A useful theorem is the following:    Let be an matrix with constant entries. If the eigenvalues of are distinct (that is, none are repeated) then eigenvectors associated with different eigenvalues are linearly independent. That is, if is an eigenvector corresponding to then the eigenvectors are linearly independent.     Solving a matrix ODE   Solve the matrix ODE given by where .    We already have everything we need. We know that the eigenvalues of are and from , and likewise some corresponding eigenvectors are thanks to . Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE: . So the general solution of the matrix ODE is .  Note that the choice of eigenvector doesn't matter . We only need to find enough linearly independent eigenvectors for each distinct eigenvalue.     Solving a first-order system with two equations   Solve the first-order system given by where and are functions of .    First, note that this system is equivalent to the matrix ODE where . To solve this system we need to find the eigenvalues and eigenvectors of , and then use these to build our general solution.   Find the eigenvalues.  We find the eigenvalues of by solving the characteristic equation for . Since , we see that the eigenvalues of are and . The fact that these eigenvalues are complex is not a problem. They're still distinct, so our method will work.    Find corresponding eigenvectors.  Set . Then implies that or just Setting in the second equation gives , so an eigenvector of corresponding to is . Similarly, an eigenvector corresponding to is .    Find the general solution.  At this step it is easy to construct the solution of the matrix ODE. It's just         Solving a system of three differential equations   Solve the first-order system     As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is .  To find the eigenvalues we must solve the characteristic equation . However, we can also use Sage to perform this task.   We could also use MATLAB\/Octave, but the resulting eigenvectors wouldn't look as nice as the output provided by Sage. This is because MATLAB's eig command produces normalized output which often involves dividing entries by square roots.    This produces a list containing the eigenvalues of as well as the corresponding eigenvectors. So we see that the eigenvalues are given by , while the corresponding eigenvectors are given by .  We now have everything we need for the general solution of the matrix ODE. It's just .      Applications of Matrix ODEs  Now we use matrix ODEs to model physical systems. The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems. Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables). The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.    Two brine tanks are set up as in . Fresh water flows into the tank at a rate of , well-mixed solution flows from Tank 1 to Tank 2 at a rate of and well-mixed solution flows out of Tank 2 at a rate of . Suppose that and are 5 , the volume of solution in Tank 1 is 10 and the volume of solution in Tank 2 is 7 . Suppose Tank 1 has 5 of salt at time and Tank 2 has 2 of salt at time . How much salt is in each tank at time ?    To start, let denote the amount of salt in Tank 1 at time and denote the amount of salt in Tank 2 at time , where is in minutes. Then from Section 4.1, we know that If we set then this system is equivalent to the matrix ODE . To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation or use Maple, but it's easier to note that is a triangular matrix. So the eigenvalues are just .  Now we find eigenvectors. So let If is an eigenvector for , then we know , which gives the system If we set , then we just get . So an eigenvector corresponding to is   Similarly, if we set we get , but no restrictions on . So an eigenvector corresponding to is   The general solution of our matrix ODE is then   But we're not done yet, since we have the initial conditions and , or in terms of our matrix ODE We can use this to find and . If we set , then we get so and .  So the solution of the matrix ODE (and hence the original system) is The amount of salt in the first tank, , is given by the top entry and the amount of salt in the second tank, , is given by the bottom entry.      The Phase Plane  Just as we were able to plot direction fields for first-order ODEs, we can do something similar for first-order systems with two equations. Consider the first-order system or   The solution of this looks like . As varies, will trace out a curve in the -plane, which we call the trajectory . The -plane is called the phase plane , and the collection of all trajectories of the system is called the phase portrait . The phase portrait of a system provides us with a way to study the behavior of solutions of without actually solving the system.    Sketch a phase portrait for the system     First, note that we can rewrite the system as using Now, we can view as corresponding to a point in the phase plane. Hence corresponds to a \\emph{tangent} at the point . For example, let's find the tangent at the point :   So at the point in the phase plane, the trajectory should be heading in the direction of the point from the origin. Similarly, if we let then we get So the trajectory going through in the phase plane should be heading in the direction of viewed from the origin.  Plotting other points in the phase plane like this, we get . One thing we can see from this is that trajectories that lie on the line, equivalently, those with initial conditions , appear to approach the origin while all others move away from the origin. We can see why this is by looking at the general solution of the original system, which is   If lies on the line , then has to equal , which follows from the fact that and are linearly independent. So trajectories that lie on the line must take the form , and every solution of this form goes to as . Every other trajectory will move away from the origin as , although the trajectories that lie on the line will travel to the origin as (i.e. ``backwards in time''):        The phase portrait from .   Vector fields can also be plotted easily using SageMath. The code cell below demonstrates the use of the plot_vector_field command to sketch the phase portrait from .   Note that is always a solution of . This is because . We call the equilibrium solution or critical point of the system . In the next section, we will be concerned with the behavior of trajectories of the system near the equilibrium solution. One thing we will see is that the behavior is determined in large part by the eigenvalues of the matrix .  We will classify the behavior of trajectories at the critical point into five different cases:     Classification  Behavior at    Improper node  Every trajectory except two has the same limiting tangent at    Proper node  For every direction there exists trajectory with limiting tangent    Saddle point  Two incoming trajectories, two outgoing trajectories; all others bypass    Center  is enclosed by infinitely many closed (repeating) trajectories    Spiral point  Trajectories spiral inwards or outwards from      was a saddle point in since there were incoming trajectories on the line and outgoing trajectories on the line .    Using a phase portrait, determine the type of critical point that is for the matrix ODE where     As seen in , every (nonzero) trajectory will spiral outward from as , so is a spiral point of this system. To see why, we only need to look at the eigenvalues of , which we find to be This means that the general solution of must look like .  The real part of the eigenvalues leads to the ``growth term'' of appearing in the solution, which causes the trajectories to diverge as . The imaginary part of the eigenvalues leads to the ``oscillating terms'' of appearing in the solution, which gives the trajectories their spiral motion.        The phase portrait for .   In general, the eigenvalues of the matrix in the system will determine the type of critical point that is for the system .    What kind of critical point is for the system where ?    We could sketch the phase portrait for this system, but we can also determine the behavior of the trajectories if we can find a relationship between and . To do so, we cross-multiply the system to get So we can integrate this to get   This is the equation of a circle of radius , and so every trajectory for this system will be a circle centered at . Hence is a center.     "
 },
 {
   "id": "theorem-solutions-of-matrix-odes-constant-coefficients",
@@ -1351,13 +1351,13 @@ var ptx_lunr_docs = [
   "body": " Solving a matrix ODE   Solve the matrix ODE given by where .    We already have everything we need. We know that the eigenvalues of are and from , and likewise some corresponding eigenvectors are thanks to . Since the eigenvalues are distinct it follows that these eigenvectors are linearly independent (we could also check this using the Wronskian). We can therefore build two linearly independent solutions to the matrix ODE: . So the general solution of the matrix ODE is .  Note that the choice of eigenvector doesn't matter . We only need to find enough linearly independent eigenvectors for each distinct eigenvalue.   "
 },
 {
-  "id": "example-62",
+  "id": "example-systems-odes-solving-system-two-equations",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-62",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#example-systems-odes-solving-system-two-equations",
   "type": "Example",
   "number": "4.2.10",
-  "title": "",
-  "body": "  Solve the first-order system given by where and are functions of .    First, note that this system is equivalent to the matrix ODE where To solve this system we need to find the eigenvalues and eigenvectors of , and then use these to build our general solution.   Find the eigenvalues.  We find the eigenvalues of by solving the characteristic equation for . Since , we see that the eigenvalues of are and . The fact that these eigenvalues are complex is not a problem. They're still distinct, so our method will work.    Find corresponding eigenvectors.  Set . Then implies that or just Setting in the second equation gives , so an eigenvector of corresponding to is Similarly, an eigenvector corresponding to is    Find the general solution.  At this step it is easy to construct the solution of the matrix ODE. It's just       "
+  "title": "Solving a first-order system with two equations.",
+  "body": " Solving a first-order system with two equations   Solve the first-order system given by where and are functions of .    First, note that this system is equivalent to the matrix ODE where . To solve this system we need to find the eigenvalues and eigenvectors of , and then use these to build our general solution.   Find the eigenvalues.  We find the eigenvalues of by solving the characteristic equation for . Since , we see that the eigenvalues of are and . The fact that these eigenvalues are complex is not a problem. They're still distinct, so our method will work.    Find corresponding eigenvectors.  Set . Then implies that or just Setting in the second equation gives , so an eigenvector of corresponding to is . Similarly, an eigenvector corresponding to is .    Find the general solution.  At this step it is easy to construct the solution of the matrix ODE. It's just       "
 },
 {
   "id": "example-systems-odes-3x3-system",
@@ -1366,7 +1366,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "4.2.11",
   "title": "Solving a system of three differential equations.",
-  "body": " Solving a system of three differential equations   Solve the first-order system     As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is   To find the eigenvalues we must solve the characteristic equation . However, we can also use Sage (see code cell after this example).   This produces a list containing the eigenvalues of as well as the corresponding eigenvectors. So we see that the eigenvalues are given by while the corresponding eigenvectors are given by   We now have everything we need for the general solution of the matrix ODE. It's just    "
+  "body": " Solving a system of three differential equations   Solve the first-order system     As long as this system has distinct eigenvalues the above method will work. Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is .  To find the eigenvalues we must solve the characteristic equation . However, we can also use Sage to perform this task.   We could also use MATLAB\/Octave, but the resulting eigenvectors wouldn't look as nice as the output provided by Sage. This is because MATLAB's eig command produces normalized output which often involves dividing entries by square roots.    This produces a list containing the eigenvalues of as well as the corresponding eigenvectors. So we see that the eigenvalues are given by , while the corresponding eigenvectors are given by .  We now have everything we need for the general solution of the matrix ODE. It's just .   "
 },
 {
   "id": "example-64",
@@ -1378,9 +1378,9 @@ var ptx_lunr_docs = [
   "body": "  Two brine tanks are set up as in . Fresh water flows into the tank at a rate of , well-mixed solution flows from Tank 1 to Tank 2 at a rate of and well-mixed solution flows out of Tank 2 at a rate of . Suppose that and are 5 , the volume of solution in Tank 1 is 10 and the volume of solution in Tank 2 is 7 . Suppose Tank 1 has 5 of salt at time and Tank 2 has 2 of salt at time . How much salt is in each tank at time ?    To start, let denote the amount of salt in Tank 1 at time and denote the amount of salt in Tank 2 at time , where is in minutes. Then from Section 4.1, we know that If we set then this system is equivalent to the matrix ODE . To solve this, we find the eigenvalues and corresponding eigenvectors. To find the eigenvalues, we could solve the characteristic equation or use Maple, but it's easier to note that is a triangular matrix. So the eigenvalues are just .  Now we find eigenvectors. So let If is an eigenvector for , then we know , which gives the system If we set , then we just get . So an eigenvector corresponding to is   Similarly, if we set we get , but no restrictions on . So an eigenvector corresponding to is   The general solution of our matrix ODE is then   But we're not done yet, since we have the initial conditions and , or in terms of our matrix ODE We can use this to find and . If we set , then we get so and .  So the solution of the matrix ODE (and hence the original system) is The amount of salt in the first tank, , is given by the top entry and the amount of salt in the second tank, , is given by the bottom entry.   "
 },
 {
-  "id": "p-395",
+  "id": "p-396",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-395",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-396",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1405,9 +1405,9 @@ var ptx_lunr_docs = [
   "body": "    The phase portrait from .  "
 },
 {
-  "id": "p-402",
+  "id": "p-403",
   "level": "2",
-  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-402",
+  "url": "section-constant-coefficient-systems-and-the-phase-plane.html#p-403",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1468,9 +1468,9 @@ var ptx_lunr_docs = [
   "body": "   Name  Conditions on    Node  Real, same sign    Saddle point  Real, opposite sign    Center  Pure imaginary    Spiral point  Complex, not pure imaginary    Eigenvalue conditions for stability.  "
 },
 {
-  "id": "p-414",
+  "id": "p-415",
   "level": "2",
-  "url": "section-criteria-for-critical-points-stability.html#p-414",
+  "url": "section-criteria-for-critical-points-stability.html#p-415",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1504,18 +1504,18 @@ var ptx_lunr_docs = [
   "body": " Nonlinear Systems   Now we apply phase plane methods to study nonlinear autonomous systems ,   Autonomous just means we can write the system without explicitly referring to the independent variable .  which for systems involving two ODEs take the form . where .  We can also write such a system as a vector equation: . although not as a matrix ODE (if are nonlinear).  Just as in the previous sections, the phase plane is still the , trajectories are still the solutions of (represented as curves in the phase plane), and the phase portrait of is the set of all trajectories in the phase plane. We call a point in the phase plane a critical point of if it is a solution of the same system. Equivalently, the critical points of are precisely those points for which     Express the pendulum equation  , where represents the angular displacement of a pendulum from the vertical, as a nonlinear system and then find its critical points.    First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set . Then the ODE turns into the system , which we can also write as using   Now we need to find the critical points in the -plane that make . So we need and for . So the critical points of this system are all points of the form .      Classification of Critical Points and Linearization  Critical points of systems are important because they can represent long-term behavior of a system. For example, if we have a first-order system representing the population of two species, and it turns out the the origin is asymptotically stable, then this suggests that both species could be driven to extinction. So we want to classify critical points for nonlinear systems in addition to what we have already for linear systems; unfortunately, nonlinear systems are often difficult, if not outright impossible, to solve exactly.  Thankfully, in many cases we can approximate a nonlinear system with critical points by a suitably chosen linear system at each critical point ; we call such a system the linearization at .   The Jacobian of a Nonlinear System   Let The Jacobian of is the matrix given by     The linearization of at the point is the linear system , where     Find the linearization of the pendulum system at the critical point .    For this system, we have and . The Jacobian is then given by So to get the linearization we need to set     The linearization of a nonlinear system isn't just useful for approximating the nonlinear system. It's also incredibly useful for classifying the critical points of a nonlinear system; for the most part, the eigenvalues of the matrix from the linearization also classify the critical points of the system .    Find and classify the critical points of the nonlinear system .   This example taken from here.      The critical points occur at . If we set and solve the resulting equation, we get or . If , then , and for this to be we must have . We can verify that makes as well, so the origin is a critical point. Similarly, forces , and we can verify that at and . So we have three critical points to check.  To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point. First, we have . At , we get . The eigenvalues are and , meaning that this critical point is a saddle point. At we get which has eigenvalues . Hence should be a spiral point. Finally, at we get , which has eigenvalues . Hence is an asymptotically stable node.    We can also use nonlinear systems to get more accurate population models.    Predator-prey populations can be modeled using the Lotka-Volterra model. Let denote the population of a prey species at time and let denote the population of a predator species at time . Then the Lotka-Volterra model says that , where . Find and classify the critical points of this system.    The critical points are the points that satisfy the equations Equivalently, we need This has solutions and . So the critical points are and .  To classify these critical points we need to linearize the system, so we'll compute the Jacobian of to get   At , we get , which has eigenvalues . So the origin is an saddle point of the original system. In particular, there exist trajectories heading into the origin, so it's possible for both species to go extinct in this case.  Now we'll classify the second critical point . The Jacobian at this point gives us the matrix . This matrix has characteristic equation , and so has eigenvalues . Since the eigenvalues are pure imaginary, this suggests that is a center, which is indeed the case. In particular, trajectories near this critical point must be periodic .     "
 },
 {
-  "id": "p-426",
+  "id": "p-427",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-426",
+  "url": "section-nonlinear-systems.html#p-427",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "nonlinear autonomous systems "
 },
 {
-  "id": "p-429",
+  "id": "p-430",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-429",
+  "url": "section-nonlinear-systems.html#p-430",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1531,9 +1531,9 @@ var ptx_lunr_docs = [
   "body": "  Express the pendulum equation  , where represents the angular displacement of a pendulum from the vertical, as a nonlinear system and then find its critical points.    First, we have to rewrite the pendulum ODE as a first order system. We can do this without too much trouble as follows: set . Then the ODE turns into the system , which we can also write as using   Now we need to find the critical points in the -plane that make . So we need and for . So the critical points of this system are all points of the form .   "
 },
 {
-  "id": "p-434",
+  "id": "p-435",
   "level": "2",
-  "url": "section-nonlinear-systems.html#p-434",
+  "url": "section-nonlinear-systems.html#p-435",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1603,9 +1603,9 @@ var ptx_lunr_docs = [
   "body": "  Find a power series for .    Any power series for looks like , where Since is its own derivative, for all choices of . So and the power series for is It turns out the equals its power series for all values of .   "
 },
 {
-  "id": "p-459",
+  "id": "p-460",
   "level": "2",
-  "url": "section-power-series-method.html#p-459",
+  "url": "section-power-series-method.html#p-460",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1684,18 +1684,18 @@ var ptx_lunr_docs = [
   "body": " Legendre's Equation and Legendre Polynomials   An important differential equation in applications is the Legendre equation given by . Our first example of this equation (with ) was examined in . By this example, we see that has a series solution centered at with radius of convergence at least . Therefore the power series method is appropriate.    Solving the Legendre Equation  We'll proceed as we did in , altering the last sum as necessary to get which gives (after a bit of algebra, once again) .  This recurrence is valid for , and allows us to write out the solution in terms of the parameter and the arbitrary constants and : where .  Note that and form a basis of solutions ( ) of the Legendre equation, which means that must also be the general solution.    Legendre Polynomials  Our solution of simplifies greatly if happens to be an integer. In particular, if is a nonnegative integer then . If is even then the solution given in becomes a polynomial: . Likewise, if is odd then given in becomes a polynomial instead: .  By choosing and judiciously, we can guarantee that the polynomials (if is even) or (if is odd) are precisely equal to at . Doing so gives us the Legendre polynomials  , defined more precisely in : .  These polynomials satisfy several nice properties, but one of the most important characteristics they have is that forms an orthogonal set of polynomials on the interval . This means that if . It can also be shown that if . This property allows us to express any polynomial as a finite sum of Legendre polynomials in a computationally efficient manner. Furthermore, if we allow infinite series then we can use Legendre polynomials to express and continuous function on .  For actually computing Legendre polynomials, instead of using we often use Rodrigues' formula  or Bonnet's recurrence  . Either recurrence is simple to program into a CAS, as seen in the Sage cell below:    "
 },
 {
-  "id": "p-491",
+  "id": "p-492",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-491",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-492",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Legendre equation "
 },
 {
-  "id": "p-496",
+  "id": "p-497",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-496",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-497",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1783,18 +1783,18 @@ var ptx_lunr_docs = [
   "body": " Bessel's Equation   As with Legendre's Equation , another important differential equation in applications is Bessel's equation : , where . By , this equation has a series solution at of the form where is a solution of the indicial equation , or just . In particular, there we're guaranteed a series solution by setting , since this is the larger root. Note that is actually a Bessel equation with parameter .  Let . Then we can plug this into to obtain , which gives . Since this only gives us data about , we should go back to to see if we can say anything about or . In fact, we get . Hence our series solution only contains even-indexed coefficients. Rewriting the recurrence to reflect this, we get     Bessel Functions for Integer  Now we consider what happens to solutions given by if is a nonnegative integer. To simplify matters (somewhat...), we add the restriction that . This allows us to write more simply as The resulting series is known as the Bessel function of the first kind of order .   Finding and   Find the zeroth order and first order Bessel functions of the first kind.    Using , we get .    These functions are important enough that they are built-in to most computer algebra systems. Using Sage, we get the following plots:   As we can see, these functions oscillate and tend towards . A useful (asymptotic) approximation is given by , as shown below.   Approximating a Bessel function.        Bessel Functions of the First Kind for Nonnegative Order  Now we try to find a formula for assuming . To do so, we need to make sense of expressions like . Thankfully, we can do so using the Gamma function .   Gamma Function  Gamma function   The Gamma function is the function given by .    An important property of the Gamma function is the following: . If we replace with an integer , we get . It turns out that we can replace in with , giving . Note that the asymptotic expansion in holds for noninteger as well.    General Solution of Bessel's Equation  Since is second-order, we need a second linearly independent solution to get the general solution. If is not an integer then we can find the second solution very quickly: . However, if is an integer then it turns out that , and so fails to be linearly independent from .  It turns out that a second, linearly independent solution is given as follows: .   "
 },
 {
-  "id": "p-532",
+  "id": "p-533",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-532",
+  "url": "section-bessel-s-equation.html#p-533",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Bessel's equation "
 },
 {
-  "id": "p-534",
+  "id": "p-535",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-534",
+  "url": "section-bessel-s-equation.html#p-535",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1873,9 +1873,9 @@ var ptx_lunr_docs = [
   "body": " Computing the Laplace of   Compute the Laplace transform of .    We compute the Laplace transform using the definition: .   "
 },
 {
-  "id": "p-553",
+  "id": "p-554",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-553",
+  "url": "section-the-laplace-transform.html#p-554",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1927,9 +1927,9 @@ var ptx_lunr_docs = [
   "body": " Inverse Laplace Transform   The inverse Laplace transform of a function , denoted , is a function such that .   "
 },
 {
-  "id": "p-566",
+  "id": "p-567",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-566",
+  "url": "section-the-laplace-transform.html#p-567",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2026,9 +2026,9 @@ var ptx_lunr_docs = [
   "body": " Unit Step Functions and Time Shifting  The unit step function or Heaviside function is the function defined by Note also that for any .  Recall that tells us how to deal with translation in the frequency domain: A similar result is true for -shifting.   Time Shifting of Laplace Transforms   Let denote a piecewise continuous function with Laplace transform . Let . Then , or equivalently .    To compute this we need to rely on the definition of the Laplace transform: .    The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in .   IVP with Discontinuous Forcing Function   A mass of 1 is attached to a spring that is held 1 to the right of its equilibrium position by a force of 4 . Beginning at time , a machine is turned on and applies an external force of to the mass. At time the machine is turned off and the external force disappears. Let be the displacement of the mass at time . What is an ODE that models the motion of the mass?    By Hooke's Law and Newton's Second Law, we have where is the external force at time . Since , and the motion of the mass satisfies the IVP We can rewrite as follows: So the IVP we need to solve is   If we take Laplace transforms, this becomes where . So If we solve this for , we get and if we simplify this using partial fractions this becomes   So the solution of the IVP is .    Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. Be careful to place matching brackets and parentheses as appropriate when using the piecewise command in Sage to construct a piecewise function.   "
 },
 {
-  "id": "p-586",
+  "id": "p-587",
   "level": "2",
-  "url": "section-unit-step-functions-and-time-shifting.html#p-586",
+  "url": "section-unit-step-functions-and-time-shifting.html#p-587",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2062,9 +2062,9 @@ var ptx_lunr_docs = [
   "body": " Dirac Delta Functions   Impulses  Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.  To be specific, let be a force that acts only from to (and is otherwise ). Then the impulse of the force over the interval is given by We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous unit impulse ; any other impulse we can get by multiplication by a constant.  So this is our goal: find some function that has an instantaneous unit impulse at the point . In other words, we want to find a function such that But this is impossible for any function, since However, we can approximate the idea of an instantaneous unit impulse by defining    Approximating the instantaneous unit impulse.   A plot of approximations to an instantaneous unit impulse.     As indicated in , this function is defined so that the area under the graph is regardless of the value of . Therefore for all . Although the instantaneous unit impulse we tried to define earlier can't actually be a function, is a completely valid function for all positive . Furthermore, if we send then it becomes a better and better approximation to an ideal instantaneous unit impulse. Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.   The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation     The Dirac delta function is, of course, not an actual function, but it's still useful as a mathematical formulation of an instantaneous force with unit impulse at . And this expression is often perfectly valid to work with inside of integrals due to the sampling property discussed below.   The Dirac delta is actually an example of a generalized function , or tempered distribution .   We can also take translations of the Dirac delta, which we view as a function  defined piecewise by We can represent this graphically as an arrow (see ).   A plot of the Dirac delta function.   A plot of the Dirac delta function.     The most important property of the Dirac delta is that This property can be generalized to products involving the Dirac delta and continuous functions. Very roughly, if represents an arrow with an area of concentrated at , then represents an arrow with area concentrated at . This sampling property is stated more precisely as .   Sampling Property of the Dirac Delta  Dirac delta function sampling   Let be a continuous function and let . Then     We treat as a function and perform the above integration:     The above theorem gives us another interpretation of the Dirac delta: it's a sampling function. When integrated against another function over an interval containing , will pick out the value . We can use this to quickly find the Laplace transform of the Dirac delta.   Laplace Transform of the Dirac Delta Function   Compute , where .    We use the definition of the Laplace transform: . In particular, .      Dirac Delta Models  We will primarily use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts. Although this is not strictly realistic since such forces are still imparted over some interval of time, treating the force as instantaneous often simplifies computations.   IVP with Impulse   An object of mass , at rest, is attached to a spring with spring constant . At time , the a hammer strikes the mass providing an impulse of and setting the mass in motion. What is the displacement ?    The displacement satisfies the ODE where is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form . And since it provides an impulse of , we can pick . As the mass is initially at rest, satisfies the IVP To solve this, we take the Laplace transform of the IVP to get or just So .    Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time , this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.   Time-delayed Strike   Consider the spring-mass system above, but suppose now that the hammer hits the mass at time . What is the displacement ?    This time, the IVP we must solve is If we take Laplace transforms and solve for we get and so . This function is plotted in below. Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at .   Displacement influenced by a time-delayed hammer strike.   A plot of the displacement of a spring-mass system with time-delayed hammer strike.        Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.        The Dirac delta function is also important mathematically in determining the behavior of certain systems. For example, consider the system determined by the IVP We can imagine that the ODE is a mathematical machine that converts the input into an output, or response, . Using Laplace transforms it's not difficult to determine : . So we see that the Laplace transform of the response is related to the Laplace transform of the input by . This function is the transfer function of the system and determines all possible responses.  Now here's the connection with the Dirac delta. If we replace with to get the system and take Laplace transforms, we get . In other words, the transfer function is just the Laplace transform of the solution of . We call the solution the impulse reponse of the system. In this case, the impulse response is . Since the corresponding transfer function determines the form of for all responses , the impulse reponse must determine the form of all responses in the time domain. We will see precisely how in the next section by introducing the concept of a convolution .  "
 },
 {
-  "id": "p-597",
+  "id": "p-598",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-597",
+  "url": "section-dirac-delta-functions.html#p-598",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2089,9 +2089,9 @@ var ptx_lunr_docs = [
   "body": " The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation    "
 },
 {
-  "id": "p-602",
+  "id": "p-603",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-602",
+  "url": "section-dirac-delta-functions.html#p-603",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2107,9 +2107,9 @@ var ptx_lunr_docs = [
   "body": " A plot of the Dirac delta function.   A plot of the Dirac delta function.    "
 },
 {
-  "id": "p-604",
+  "id": "p-605",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-604",
+  "url": "section-dirac-delta-functions.html#p-605",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2161,18 +2161,18 @@ var ptx_lunr_docs = [
   "body": " Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.      "
 },
 {
-  "id": "p-618",
+  "id": "p-619",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-618",
+  "url": "section-dirac-delta-functions.html#p-619",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "transfer function "
 },
 {
-  "id": "p-619",
+  "id": "p-620",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-619",
+  "url": "section-dirac-delta-functions.html#p-620",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2242,9 +2242,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series   The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of orthonormal bases . Knowing an orthonormal basis for a vector space can greatly simplify linear algebra in that vector space. In this section we'll do something similar with periodic functions , which are functions whose values repeat themselves.    Periodic Functions  Consider the function given by the following graph:   A periodic function.   The graph of a periodic function.      If we look at the graph, we see that it repeats itself if we wait long enough (approximately every six units). Functions that have this property are called periodic functions .   Periodic Functions  periodic functions   Let be a real function defined for all . We say that is a periodic function if there exists a positive number such that for all . In this case we say that is -periodic . The (fundamental) period of is the smallest positive value of for which is -periodic, assuming this value exists.     Constant functions are examples of periodic functions with no fundamental period.    Periods of Sine and Cosine  Let be any positive integer. Then the functions and are both -periodic which follows from the corresponding addition formulas . The period, in particular, is . The periodic nature of these functions can also be seen from their graphs:    Graphs of and .   An image showing the periodic nature of sine and cosine.      The graph in was produced by graphing In general, the (finite) sum of functions of the form where are integers is also -periodic. In particular, we have the following result.   Periods of Sums of Sinusoids   Let and where . Suppose that where represents the reduced fraction of . Then has period given by .     Finding Periods of Sums of Sinusoids   Find the periods of and .    For we have , which in lowest terms is . Therefore the period is . For , we have which is already in lowest terms. Therefore its period is .      Trigonometric Series and Fourier Series  One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written as a sum of sinusoids using trigonometric polynomials and trigonometric series .   Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .    Our primary goal in this section is to take a function of period and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that and we'll look at what the coefficients of the series need to be to make this equation true. To do this, we'll need the so-called orthogonality relations for .   Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .    We can verify using a computer algebra system as below. Proving it is a little bit more work, but can be done using trigonometric identities or .    will be our primary tool for expressing a function as a trigonometric series. To see how, suppose that we have If this equation were true, then we should be able to integrate both sides of it and get another true equation. Since suggests that integrals involving simplify very nicely, we'll try to integrate both sides of the equation against from to for some . If we do this, we get This lets us solve for ! We have Similarly, The trigonometric series resulting from these coefficients is known as the Fourier series of . These formulas are useful enough that we'll place them together in a theorem.   Fourier Series Coefficients  Fourier series Coefficients   Let be a periodic function with period . Then the Fourier coefficients of are given by     Note that the formulas in tell us what the coefficients of a Fourier series representation of must be if such a representation existed, but as yet there is no guarantee that a function actually equals its Fourier series. Also, since is assumed to be -periodic we can also integrate over instead without changing the values of the coefficients.   The Fourier series of  Define for . To find its Fourier series, we can just use the previous formulas to find the values of the coefficients for . We know that As nasty as these are, the first two are actually very easy to compute. Here's why: and are both odd functions, and the integral of any odd function in an interval that is symmetric about is always (since the areas cancel out). So for all . The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that If we plug in the limits of integration and simplify (again, computers are handy for this!), we get So the Fourier series for is given by    A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function ? Are they actually equal? If we use the following code (adapted from here ) to compare the partial sums of the Fourier series with , then it looks like the partial sums get closer and closer if we choose larger values of .   In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer. In fact, the convergence of Fourier series for what one might consider to be the more \"well-behaved\" functions in mathematics was an open question until the 1960s. See Carleson's Theorem . However, for many of the functions we care about in this course we have the following theorem.   Fourier Series of Piecewise Continuous Functions  Fourier series convergence   Let be a piecewise continuous function on the interval , and suppose that it's also periodic with period , and is differentiable everywhere that it's continuous. Then the Fourier series of converges to except at the points where is discontinuous.     "
 },
 {
-  "id": "p-636",
+  "id": "p-637",
   "level": "2",
-  "url": "section-fourier-series.html#p-636",
+  "url": "section-fourier-series.html#p-637",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2260,9 +2260,9 @@ var ptx_lunr_docs = [
   "body": " A periodic function.   The graph of a periodic function.     "
 },
 {
-  "id": "p-638",
+  "id": "p-639",
   "level": "2",
-  "url": "section-fourier-series.html#p-638",
+  "url": "section-fourier-series.html#p-639",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2314,9 +2314,9 @@ var ptx_lunr_docs = [
   "body": " Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .   "
 },
 {
-  "id": "p-648",
+  "id": "p-649",
   "level": "2",
-  "url": "section-fourier-series.html#p-648",
+  "url": "section-fourier-series.html#p-649",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2332,9 +2332,9 @@ var ptx_lunr_docs = [
   "body": " Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .   "
 },
 {
-  "id": "p-651",
+  "id": "p-652",
   "level": "2",
-  "url": "section-fourier-series.html#p-651",
+  "url": "section-fourier-series.html#p-652",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2395,9 +2395,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series of  Let for and have period . We can find its Fourier series using . If we do so, we get So the Fourier series of is given by .  "
 },
 {
-  "id": "p-663",
+  "id": "p-664",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-663",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-664",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2413,9 +2413,9 @@ var ptx_lunr_docs = [
   "body": " Even and Odd Functions  Even and odd functions   Let be a function. We say that is    "
 },
 {
-  "id": "p-666",
+  "id": "p-667",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-666",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-667",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2458,9 +2458,9 @@ var ptx_lunr_docs = [
   "body": " Complex Fourier Series and Parseval's Identity   Although we have a decent formula for Fourier series (see ), it's a little unwieldy due to the different expressions for and . We can fix this, perhaps surprisingly, by using complex exponentials and Euler's formula.    Complex Fourier Series  First, recall Euler's formula , which allows us to rewrite complex exponentials in terms of sine and cosine.  We can use to rewrite the Fourier series in . Our goal now is to find a complex Fourier series  for functions with period . We will also include the statement of in this new context.   Complex Fourier Series  Fourier series complex form   Let be a piecewise smooth function with period . Then the complex Fourier series of is given by where This Fourier series converges to wherever is continuous.    We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine. In particular, the relation we will use is the following: So if we set equal to a complex Fourier series and integrate both sides against for from to , we get where the last equality follows from the orthogonality relation we just proved. Therefore      Complex Fourier Series of Exponential Function  Let on and suppose that is periodic with period . We want to find the complex Fourier series for . We can do this by finding the correct coefficients : So we have for , since this is where has discontinuities.   Although the complex Fourier series can be easier to compute in some cases, there may be cases where we'd like to go back to the real Fourier series. The following formula lets us do so.   Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by     The real Fourier series corresponding to the complex Fourier series for from has coefficients Either way, we get the following Fourier series.     Parseval's Identity  One of the most important identities in mathematics is Parseval's identity , which we state next.   Parseval's Identity  Fourier series Parseval's identity   Let denote a piecewise-differentiable (real-valued) function on with real Fourier coefficients and complex Fourier coefficients . If exists and is finite, then     One of the great strengths of this identity is that it allows potentially complicated sums to be computed using integrals instead.   The Basel Problem  Basel problem  In the early century, one of the most renowned problems in mathematics was the Basel problem, which asked for the value of Euler was the first person to show that the sum is actually and it was this solution that made him famous Or at least math famous. in the first place. We can solve this by using Parseval's identity. To do so, let for . Then with a little bit of work we can find the (real) Fourier coefficients: By Parseval's identity, it then follows that which simplifies down to In other words,     "
 },
 {
-  "id": "p-673",
+  "id": "p-674",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-673",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-674",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2494,9 +2494,9 @@ var ptx_lunr_docs = [
   "body": " Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by    "
 },
 {
-  "id": "p-680",
+  "id": "p-681",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-680",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-681",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2530,9 +2530,9 @@ var ptx_lunr_docs = [
   "body": " Approximation by Trigonometric Polynomials  If a function has a Fourier series and is equal to its Fourier series, i.e., , then the partial sums of the Fourier series should be good approximations of : . Such a sum is a trigonometric polynomial of degree .  We can also consider approximating with other trigonometric polynomials of degree , say . We'd like to know how good the approximation is. To do this, we need to define a measure of error.   Square Error   Given a function of period  and approximation , we define the square error to be , assuming these are real-valued functions.    It turns out that if we are approximating by trigonometric polynomials , then the square error takes a specific form.   Square Error Formula   Let be a function of period with Fourier coefficients and , and let be a degree trigonometric polynomial. Then . The error takes this minimum value if .     Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is     Since the square error is a positive value, it follows that . This is known as Bessel's inequality . states that this inequality becomes equality if we let .   Applying Bessel's Inequality   Let . Apply Bessel's inequality to this function. What does Parseval's Identity say?    If we find the Fourier coefficients of , we get . By Bessel's inequality, we know that for any . As , Parseval's gives the identity .    "
 },
 {
-  "id": "p-684",
+  "id": "p-685",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-684",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-685",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2566,9 +2566,9 @@ var ptx_lunr_docs = [
   "body": " Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is    "
 },
 {
-  "id": "p-691",
+  "id": "p-692",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-691",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-692",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2593,9 +2593,9 @@ var ptx_lunr_docs = [
   "body": " The Fourier Transform  If is a periodic function with period , then we know how to find its Fourier series, both real and complex. But what do we do if our function is not periodic? Can we still get a similar representation?  Let be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of , and replace it with a periodic function that is equal to on some interval . Then we can find the Fourier series of this function, which by is given by where So we can write wherever is continuous on .  The idea now is that the larger that gets, this expression can be used to represent for more and more values of . So we want to see what happens to this as . First, we'll clean this up a little bit by writing and , so that . Then if is in and is continuous at , then we can say As awful as this looks, we can relate this to a Riemann sum! As  , we can replace with the new variable and this expression becomes This leads to the definition of the Fourier transform . But first we need another definition.   Absolutely Integrable Functions  Absolutely Integrable Functions   Let be a piecewise continuous function. Then is absolutely integrable if      The Fourier Transform  Fourier Transform definition   Let be an absolutely integrable piecewise continuous function. The Fourier transform of is the function defined by We often write to denote the Fourier transform as well.     Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is    As with the Laplace transform, the Fourier transform of a function is said to be in the frequency domain . In fact, the magnitude of represents the frequency content of the function (thought of as a signal) at the frequency . It's also a quick jump to get the inverse Fourier transform .   The Inverse Fourier Transform  Fourier Transform inverse transform   The inverse Fourier transform of is      Fourier Inversion Theorem  Fourier Transform inversion theorem   Let be an absolutely integrable, piecewise differentiable function. Then wherever is continuous.     Inverse Fourier transform of a step function  Define by Then we can find the inverse transform using :    The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if are constants and are functions, then and The Fourier transform also works well with derivatives.   Fourier Transforms and Derivatives  Fourier Transform transforms fo derivatives   Let be differentiable with derivative . Suppose that both and are absolutely integrable. Then     Fourier transforms also behave well with another type of convolution.   Convolution Theorem  Fourier Transform convolution theorem   Suppose that are piecewise continuous, bounded and absolutely integrable. Define by Then     "
 },
 {
-  "id": "p-696",
+  "id": "p-697",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-696",
+  "url": "section-the-fourier-transform.html#p-697",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2629,9 +2629,9 @@ var ptx_lunr_docs = [
   "body": " Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is   "
 },
 {
-  "id": "p-700",
+  "id": "p-701",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-700",
+  "url": "section-the-fourier-transform.html#p-701",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2692,9 +2692,9 @@ var ptx_lunr_docs = [
   "body": " Basic Concepts   Partial derivatives and PDEs  Given some quantity that depends solely on the variable , represents the rate of change of with respect to . More generally, given some quantity that depends on , we can attempt to find the rate of change of with respect to each of the variables . This idea leads to partial derivatives .   Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by     From here we can define higher order partial derivatives, such as or The order of each of these partial derivatives is and , respectively.   Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.    Just as ODEs in practice typically appear as initial value problems, PDEs can appear as boundary value problems . Boundary value problems involve conditions of the form These are examples of boundary conditions . In other words, boundary conditions can represent initial data at infinitely many points, as opposed to finitely many points like we had for our IVPs.    Linear homogeneous PDEs and the superposition principle  We will mostly be concerned with linear PDEs , which are PDEs where the only thing we're allowed to do to the function and its derivatives is multiply it by a constant. A linear PDE is homogeneous if every term contains the function or one of its derivatives. A solution of a PDE is a function that satisfies the PDE.   Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.    Just as with linear homogeneous ODEs, PDEs that are linear and homogeneous satisfy the superposition principle .   Superposition principle partial differential equations  Superposition principle   Let and denote arbitrary constants, and suppose that and are both solutions of the same linear homogeneous PDE. Then is also a solution of the same PDE.    The superposition principle is incredibly useful since it allows us to find general solutions of PDEs, which makes solving linear homogeneous PDEs somewhat tractable. If a PDE fails to be linear or homogeneous, the superposition principle is not guaranteed to hold.   Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.      Important PDEs  As mentioned in the introduction, PDEs are useful for modeling quantities that depend on multiple independent variables. We finish this section by listing several of the simplest and most studied PDEs.   where . This is called the heat or diffusion equation . This equation is used for modeling the spread of a quantity, such as how temperature diffuses along a rod.  where . This is called the wave equation , and is used for modeling vibrating motion, such as that along a plucked string.   In both PDEs above, the expression is an example of the Laplacian of . The Laplacian of a function at a point is a measure of how differs from the average value of at nearby . In particular, the Laplacian is positive at if tends to be less than nearby averages; the Laplacian is negative at if tends to be greater than nearby averages; and the Laplacian at is if is in equilibrium with its nearby averages.  With this viewpoint, we can assign physical reasoning to the heat and wave equations:   The heat equation states that the time rate of change of the temperature is proportional to the difference between the temperature at and the average values of nearby temperatures. If the nearby average temperature is greater (i.e., the Laplacian is positive), then the temperature will increase.    The wave equation states that the acceleration of the wave height is proportional to the difference between the height of the wave at and the average height at nearby points. If the nearby average height is greater (i.e., the Laplacian is positive), then the wave height will accelerate upwards.     Our goal in the next section will be to determine how to solve PDEs such as these.   "
 },
 {
-  "id": "p-711",
+  "id": "p-712",
   "level": "2",
-  "url": "section-basic-concepts.html#p-711",
+  "url": "section-basic-concepts.html#p-712",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2710,9 +2710,9 @@ var ptx_lunr_docs = [
   "body": " Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by    "
 },
 {
-  "id": "p-713",
+  "id": "p-714",
   "level": "2",
-  "url": "section-basic-concepts.html#p-713",
+  "url": "section-basic-concepts.html#p-714",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2728,18 +2728,18 @@ var ptx_lunr_docs = [
   "body": " Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.   "
 },
 {
-  "id": "p-715",
+  "id": "p-716",
   "level": "2",
-  "url": "section-basic-concepts.html#p-715",
+  "url": "section-basic-concepts.html#p-716",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary value problems boundary conditions "
 },
 {
-  "id": "p-716",
+  "id": "p-717",
   "level": "2",
-  "url": "section-basic-concepts.html#p-716",
+  "url": "section-basic-concepts.html#p-717",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2755,9 +2755,9 @@ var ptx_lunr_docs = [
   "body": " Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.   "
 },
 {
-  "id": "p-720",
+  "id": "p-721",
   "level": "2",
-  "url": "section-basic-concepts.html#p-720",
+  "url": "section-basic-concepts.html#p-721",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2782,9 +2782,9 @@ var ptx_lunr_docs = [
   "body": " Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.   "
 },
 {
-  "id": "p-725",
+  "id": "p-726",
   "level": "2",
-  "url": "section-basic-concepts.html#p-725",
+  "url": "section-basic-concepts.html#p-726",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2800,27 +2800,27 @@ var ptx_lunr_docs = [
   "body": " The Wave Equation and Separation of Variables  The main difficulty in solving PDEs (even linear ones) as compared with ODEs is that any solution of a PDE typically depends on more than one variable. Adding this extra degree of freedom into the problem greatly complicates matters. However, we can make this problem more reasonable by assuming that our solution depends on each variable separately . That is, we'll assume that the function we want to find, satisfies the constraint . This technique is known as separation of variables .  Consider a one-dimensional string of length that vibrates in the vertical direction. The vertical displacement of such a string depends on the horizontal position along the string, , and the time . So let denote the vertical displacement of the string at position and at time . If we assume that the string has constant density and that the force of gravity of the string is negligible, then satisfies the wave equation for some constant .  Suppose that the string is also subject to the boundary conditions   . In other words, the string is held fixed at both ends. We'll also suppose that we know the initial position of the string and the initial velocity of the string, represented by the initial conditions   . Our goal will be to find subject to these conditions. To start, assume that If we plug this into , then we get   If we assume that are both nonzero, then we can rewrite this to get This may not look that helpful, but it actually places some serious restrictions on and . The left hand side of this equation only depends on whereas the right hand side depends only on . So the only way for this equation to be true for all  is if both sides are constant: for some . This now gives us two separate ordinary differential equations for and :  . We can add a few more restrictions to these ODEs to help us solve them. Note that the boundary conditions force either or for all , which leads to . So to avoid this trivial solution, we'll set .  We'll solve first since we have extra information to use. So to start, suppose that and write for some nonzero . Then becomes and has solution given by   Now, forces , so we get . However, since as well, we get . But the only way to solve this is to set since only if . So in other words, if we assume that , then the only way to solve is to set , which also forces . Obviously, this isn't very useful. Similarly, if we assume that then we get the same problem. So let's assume that for some nonzero . Then becomes , which has solution   The condition forces , and the second boundary condition forces . We want to avoid setting equal to since this would give us again, so we'll set instead. This tells us that for some integer , or just . So nontrivial solutions of that satisfy the boundary conditions can occur only if where and . For each choice of (ignoring sign), we get the solution .  Now we move on to solving , but we still need to keep the condition for . If we do so, then becomes , which has solutions given by where .  So this means that every function of the form is a solution of subject to the boundary conditions . It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.  However, this does not guarantee that we can solve for the initial conditions in . To give ourselves as general a solution as possible, we will guess that the solution to the wave equation is actually a linear combination of all possible . That is, we'll say that   Now we'll use the initial conditions to actually determine . To start, note that we must have  This is a Fourier series , and in particular it's the Fourier series of the odd extension of with period . See . So it follows that   Similarly, we must have This is the Fourier series for the odd extension of with period . Therefore or just   We can put all of this together into the following theorem.   Wave equation solution  Solution of the Wave Equation   The solution of the wave equation with boundary conditions and initial conditions is given by where and for .     A string with fixed ends   A string at rest has unit length, and is fixed at both ends. Suppose that the string is now stretched into the triangular shape given by the graph of The string is then released at time . Given , find the function that models the vertical displacement of the string at position at time .    We can model as the solution of the wave equation with boundary conditions and initial conditions We can find from .  Using the Sage cell below, we get and since this forces as well. Hence the solution is      "
 },
 {
-  "id": "p-730",
+  "id": "p-731",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-730",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-731",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "separation of variables "
 },
 {
-  "id": "p-732",
+  "id": "p-733",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-732",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-733",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary conditions "
 },
 {
-  "id": "p-733",
+  "id": "p-734",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-733",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-734",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2899,18 +2899,18 @@ var ptx_lunr_docs = [
   "body": " The Heat Equation   The last equation we will look at is the heat equation , which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the -axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the -direction only. With these assumptions, the temperature of the bar at position and time satisfies the PDE  . This is called the one-dimensional heat equation .    Bar with ends fixed at  We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature . If we're given an initial temperature distribution , then is the solution of the boundary value problem  . We can solve this boundary value problem using separation of variables, much as we did in . So to start, we assume that . If we plug this into the heat equation , then we get   Now we have three separate cases to consider for : or . Just as with the wave equation, the only case that doesn't lead to trivial solutions is . In this case leads to the two ODEs given by  . The boundary conditions in force , and the only nontrivial solutions of occur when . So we get the solutions , just as with the wave equation.  For the second ODE, we readily solve it to obtain where as before. So every function is a solution of that satisfies the boundary equations . In order to satisfy the arbitrary initial condition , we take an infinite sum of the functions to get   Finally, if we plug in and use the initial condition , we get . This is just the Fourier series of the odd extension of , which lets us find . We summarize all of this in the following theorem.   Heat equation fixed ends  Solution of the Heat Equation with Fixed Temperature   The solution of the heat equation satisfying the boundary conditions and initial condition is given by where      Sinusoidal initial temperature   Consider a thin metal bar of length placed on the -axis, with one end at and the other at . Assuming that and that the initial temperature is for , find the temperature distribution using .    The temperature is the function given by where is the coefficient of the Fourier series of the odd extension of . The odd extension of is . Furthermore, the Fourier series of is clearly just .  So in other words, Hence      "
 },
 {
-  "id": "p-768",
+  "id": "p-769",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-768",
+  "url": "section-the-heat-equation.html#p-769",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "heat equation "
 },
 {
-  "id": "p-769",
+  "id": "p-770",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-769",
+  "url": "section-the-heat-equation.html#p-770",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
