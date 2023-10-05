@@ -13,16 +13,23 @@
 <body class="ignore-math">
 <h3 class="heading"><span class="type">Paragraph</span></h3>
 <div class="para logical">
-<div class="para">There are multiple ways to find the transfer function, assuming that all initial conditions are <span class="process-math">\(0\text{.}\)</span> First, if <span class="process-math">\(F(s)\)</span> is the input and <span class="process-math">\(X(s)\)</span> is some measured output (once again, in the frequency domain), then the transfer function <span class="process-math">\(G(s)\)</span> satisfies</div>
+<div class="para">There are a couple of interesting things happening in the last example. In particular, we were able to write the solution <span class="process-math">\(x(t)\)</span> in terms of <span class="process-math">\(f(t)\)</span> as</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-dirac-delta-functions.html">
 \begin{equation*}
-G(s) = \frac{X(s)}{F(s)}\text{,}
+x(t) = g(t)\ast f(t)\text{.}
 \end{equation*}
 </div>
-<div class="para">and this quantity is independent of the particular choice of <span class="process-math">\(F(s)\text{.}\)</span> We can also replace the time domain input <span class="process-math">\(f(t)\)</span> with <span class="process-math">\(\delta(t)\)</span> as discussed in <a href="section-dirac-delta-functions.html" class="internal" title="Section 6.4: Dirac Delta Functions">Section 6.4</a> to determine the impulse response directly. In this case, the corresponding output in the frequency domain is</div>
+<div class="para">In these terms, we can recognize <span class="process-math">\(g(t)\)</span> as the impulse response of the system discussed at the end of <a href="section-dirac-delta-functions.html" class="internal" title="Section 6.4: Dirac Delta Functions">Section 6.4</a>. Therefore the response of this system to the input <span class="process-math">\(f(t)\)</span> is related to the impulse response by a convolution:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-dirac-delta-functions.html">
 \begin{equation*}
-X(s) = G(s)\Laplace{\delta(t)} = G(s)\text{.}
+x(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{\tau}\text{.}
+\end{equation*}
+</div>
+<div class="para">Essentially, this convolution integral tells us how to construct the response <span class="process-math">\(x(t)\)</span> using only information about the input <span class="process-math">\(f(t)\)</span> and the impulse response <span class="process-math">\(g(t)\)</span> from the “past and present.” Recall that this relationship is even easier to write in the frequency domain: the frequency input <span class="process-math">\(F(s)\)</span> is turned into the frequency output <span class="process-math">\(X(s)\)</span> by means of the transfer function <span class="process-math">\(G(s) = \Laplace{g(t)}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-dirac-delta-functions.html">
+\begin{equation*}
+X(s) = G(s)F(s)\text{.}
 \end{equation*}
 </div>
 </div>

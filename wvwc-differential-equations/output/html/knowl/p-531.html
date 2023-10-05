@@ -11,35 +11,41 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<h3 class="heading"><span class="type">Paragraph</span></h3>
+<h5 class="heading"><span class="type">Paragraph</span></h5>
 <div class="para logical">
-<div class="para">As with Legendre’s Equation <a href="" class="xref" data-knowl="./knowl/equation-legendre-ode.html" title="Equation 5.3">(5.3)</a>, another important differential equation in applications is <dfn class="terminology">Bessel’s equation</dfn>:</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-legendre-ode.html ./knowl/theorem-method-of-frobenius.html ./knowl/example-using-method-of-frobenius.html">
-\begin{equation}
-x^{2}y'' + xy^\prime + (x^{2} - \nu^{2})y = 0\text{,}\tag{5.9}
-\end{equation}
-</div>
-<div class="para">where <span class="process-math">\(\nu \geq 0\text{.}\)</span> By <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a>, this equation has a series solution at <span class="process-math">\(x = 0\)</span> of the form</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-legendre-ode.html ./knowl/theorem-method-of-frobenius.html ./knowl/example-using-method-of-frobenius.html">
+<div class="para">Technically, this isn’t the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a> that the second solution must be of the form</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
 \begin{equation*}
-y = x^{r}\sum_{k\geq0}c_{k}x^{k}
+y_2 = k\frac{\sin(x)}{\sqrt{x}}\ln(x) + x^{-\frac{1}{2}}\sum_{n\geq0}C_n x^n.
 \end{equation*}
 </div>
-<div class="para">where <span class="process-math">\(r\)</span> is a solution of the indicial equation</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-legendre-ode.html ./knowl/theorem-method-of-frobenius.html ./knowl/example-using-method-of-frobenius.html">
+<div class="para">Plugging this into the original ODE (and using a computer algebra system such as Sage), we get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
 \begin{equation*}
-r(r - 1) + r - \nu^{2} = 0\text{,}
+{\left(C_{3} + 20 \, C_{5}\right)} x^{\frac{9}{2}} + {\left(C_{2} + 12 \, C_{4}\right)} x^{\frac{7}{2}} + {\left(C_{1} + 6 \, C_{3}\right)} x^{\frac{5}{2}} + {\left(C_{0} + 2 \, C_{2}\right)} x^{\frac{3}{2}} + 2 \, k \sqrt{x} \cos\left(x\right) - \frac{k \sin\left(x\right)}{\sqrt{x}} = 0
 \end{equation*}
 </div>
-<div class="para">or just</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-legendre-ode.html ./knowl/theorem-method-of-frobenius.html ./knowl/example-using-method-of-frobenius.html">
+<div class="para">after truncating the expansion up to the <span class="process-math">\(n=5\)</span> term. This allows us (theoretically) to solve for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\text{.}\)</span> In fact, we get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{align*}
+k &amp;= 0\\
+C_{2n} &amp;= \frac{(-1)^n}{(2n)!}C_0\\
+C_{2n+1} &amp;= \frac{(-1)^n}{(2n+1)!}C_1
+\end{align*}
+</div>
+<div class="para">and so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
 \begin{equation*}
-r = \pm\nu\text{.}
+y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right].
 \end{equation*}
 </div>
-<div class="para">In particular, there we’re guaranteed a series solution by setting <span class="process-math">\(r = \nu\text{,}\)</span> since this is the larger root. Note that <a href="" class="xref" data-knowl="./knowl/example-using-method-of-frobenius.html" title="Example 5.3.7: Using the Method of Frobenius">Example 5.3.7</a> is actually a Bessel equation with parameter <span class="process-math">\(\nu = \frac{1}{2}\text{.}\)</span>
+<div class="para">Since the second series corresponds to a multiple of <span class="process-math">\(y_1 = \frac{\sin(x)}{\sqrt{x}}\text{,}\)</span> we can safely set <span class="process-math">\(C_1 = 0\)</span> and get <span class="process-math">\(y_2 = C_0\frac{\cos(x)}{\sqrt{x}}\text{.}\)</span> Therefore the general solution of the ODE is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+\begin{equation*}
+y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}.
+\end{equation*}
 </div>
 </div>
-<span class="incontext"><a href="section-bessel-s-equation.html#p-531" class="internal">in-context</a></span>
+<span class="incontext"><a href="section-frobenius-method.html#p-531" class="internal">in-context</a></span>
 </body>
 </html>

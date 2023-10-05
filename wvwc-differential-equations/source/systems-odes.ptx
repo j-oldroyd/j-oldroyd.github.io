@@ -865,7 +865,9 @@
         </solution>
       </example>
 
-      <example>
+      <example xml:id="example-systems-odes-solving-system-two-equations">
+        <title>Solving a first-order system with two equations</title>
+
         <statement>
           <p>
             Solve the first-order system given by
@@ -876,24 +878,30 @@
             where <m>x_{1}</m> and <m>x_{2}</m> are functions of <m>t</m>.
           </p>
         </statement>
+
         <solution>
           <p>
             First, note that this system is equivalent to the matrix ODE <m>\vec{x}^\prime = A\vec{x}</m> where
-            <me>
-              \vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 &amp;  -5 \\ 1 &amp;  -1\end{bmatrix}.
-            </me>
+            <me>\vec{x} = \begin{bmatrix}x_{1} \\ x_{2}\end{bmatrix}\qq{and} A = \begin{bmatrix}1 &amp;  -5 \\ 1 &amp;  -1\end{bmatrix}</me>.
             To solve this system we need to find the eigenvalues and eigenvectors of <m>A</m>, and then use these to build our general solution.
             <ol>
               <li>
-                <p>Find the eigenvalues.</p>
+                <p>
+                  Find the eigenvalues.
+                </p>
+
                 <p>
                   We find the eigenvalues of <m>A</m> by solving the characteristic equation <m>\det(A - \lambda I) = 0</m> for <m>\lambda</m>.
                   Since <m>\det(A - \lambda I) = \lambda^{2}+4</m>, we see that the eigenvalues of <m>A</m> are <m>\lambda_{1} = -2i</m> and <m>\lambda_{2} = 2i</m>.
                   The fact that these eigenvalues are complex is <em>not</em> a problem. They're still distinct, so our method will work.
                 </p>
               </li>
+
               <li>
-                <p>Find corresponding eigenvectors.</p>
+                <p>
+                  Find corresponding eigenvectors.
+                </p>
+
                 <p>
                   Set <m>\vec{v} = \begin{bmatrix}v_{1} \\ v_{2}\end{bmatrix}</m>.
                   Then <m>A\vec{v} = \lambda\vec{v}</m> implies that
@@ -907,27 +915,31 @@
                     <mrow>v_{1} - (1+\lambda)v_{2} &amp; = 0.</mrow>
                   </md>
                   Setting <m>\lambda=-2i</m> in the second equation gives <m>v_{1} = (1-2i)v_{2}</m>, so an eigenvector of <m>A</m> corresponding to <m>\lambda_{1} = -2i</m> is
-                  <me>
-                    \vec{v} = \begin{bmatrix}1-2i \\ 1\end{bmatrix}.
-                  </me>
+                  <me>\vec{v} = \begin{bmatrix}1-2i \\ 1\end{bmatrix}</me>.
                   Similarly, an eigenvector corresponding to <m>\lambda_{2}=2i</m> is
-                  <me>
-                    \vec{v}_{2} = \begin{bmatrix}1+2i\\1\end{bmatrix}.
-                  </me>
+                  <me>\vec{v}_{2} = \begin{bmatrix}1+2i\\1\end{bmatrix}</me>.
                 </p>
               </li>
-              <li><p> Find the general solution.</p>
-              <p>
-                At this step it is easy to construct the solution of the matrix ODE.
-                It's just
-                <me>\vec{x} = c_{1}e^{\lambda_{1}t}\vec{v}_{1} + c_{2}e^{\lambda_{2}t}\vec{v}_{2} = \begin{bmatrix}c_{1}e^{-2it}(1-2i)+c_{2}e^{2it}(1+2i) \\ c_{1}e^{-2it}+c_{2}e^{2it}\end{bmatrix}.</me>
+
+              <li>
+                <p>
+                  Find the general solution.
+                </p>
+
+                <p>
+                  At this step it is easy to construct the solution of the matrix ODE.
+                  It's just
+                  <me>\vec{x} = c_{1}e^{\lambda_{1}t}\vec{v}_{1} + c_{2}e^{\lambda_{2}t}\vec{v}_{2} = \begin{bmatrix}c_{1}e^{-2it}(1-2i)+c_{2}e^{2it}(1+2i) \\ c_{1}e^{-2it}+c_{2}e^{2it}\end{bmatrix}.</me>
                 </p>
               </li>
             </ol>
           </p>
         </solution>
       </example>
-      <example>
+
+      <example xml:id="example-systems-odes-3x3-system">
+        <title>Solving a system of three differential equations</title>
+
         <statement>
           <p>
             Solve the first-order system
@@ -938,57 +950,75 @@
             </md>
           </p>
         </statement>
+
         <solution>
           <p>
             As long as this system has distinct eigenvalues the above method will work.
             Once again we rewrite the system as a matrix ODE; in this case, the matrix ODE we must solve is
-            <me>
-              \vec{x}^\prime = \begin{bmatrix}3 &amp;  0 &amp;  1 \\ 9 &amp;  -1 &amp;  2 \\ -9 &amp;  4 &amp;  -1\end{bmatrix}\vec{x} = A\vec{x}.
-            </me>
+            <me>\vec{x}^\prime = \begin{bmatrix}3 &amp;  0 &amp;  1 \\ 9 &amp;  -1 &amp;  2 \\ -9 &amp;  4 &amp;  -1\end{bmatrix}\vec{x} = A\vec{x}</me>.
           </p>
+
           <p>
             To find the eigenvalues we must solve the characteristic equation <m>\det(A-\lambda I)=0</m>.
-            However, we can also use Sage (see code cell after this example).
+            However, we can also use Sage to perform this task.
+          </p>
+
+          <aside>
+            <p>
+              We could also use MATLAB/Octave, but the resulting eigenvectors wouldn't look as nice as the output provided by Sage.
+              This is because MATLAB's <c>eig</c> command produces <term>normalized</term> output which often involves dividing entries by square roots.
+            </p>
+          </aside>
+
+          <sage>
+            <input>
+              # Define our matrix
+              M = matrix([ [3, 0, 1],
+              [9, -1, 2],
+              [-9, 4, -1]] )
+
+              # Finds eigenvectors, corresponding eigenvalues and "algebraic multiplicty".
+              M.eigenvectors_right()
+            </input>
+
+            <output>
+              [(3,
+                [
+                (1, 9/4, 0)
+                ],
+                1),
+               (-1 - 1*I, [(1, 2 + 1*I, -4 - 1*I)], 1),
+               (-1 + 1*I, [(1, 2 - 1*I, -4 + 1*I)], 1)]
+             </output>
+          </sage>
+
+          <p>
             This produces a list containing the eigenvalues of <m>A</m> as well as the corresponding eigenvectors.
             So we see that the eigenvalues are given by
-            <me>
-              \lambda_{1} = 3, \quad\lambda_{2} = -1 - i\quad\text{and}\quad\lambda_{3} = -1 + i,
-            </me>
+            <me>\lambda_{1} = 3, \quad\lambda_{2} = -1 - i\quad\text{and}\quad\lambda_{3} = -1 + i</me>,
             while the corresponding eigenvectors are given by
-            <me>
-              \vec{v}_{1} = \begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix}, \quad\vec{v}_{2} = \begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix}\quad\text{and}\vec{v}_{3} = \begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}
-            </me>
+            <me>\vec{v}_{1} = \begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix}, \quad\vec{v}_{2} = \begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix}\quad\text{and}\vec{v}_{3} = \begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}</me>.
           </p>
+
           <p>
             We now have everything we need for the general solution of the matrix ODE.
             It's just
-            <me>
-              \vec{x} = c_{1}e^{3t}\begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix} + c_{2}e^{(-1 - i)t}\begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix} + c_{3}e^{(-1 + i)t}\begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}.
-            </me>
+            <me>\vec{x} = c_{1}e^{3t}\begin{bmatrix}1 \\ \frac{9}{4} \\ 0\end{bmatrix} + c_{2}e^{(-1 - i)t}\begin{bmatrix} 1 \\ 2 + i \\ -4 - i \end{bmatrix} + c_{3}e^{(-1 + i)t}\begin{bmatrix} 1 \\ 2 - i \\ -4 + i \end{bmatrix}</me>.
           </p>
         </solution>
       </example>
-      <sage>
-        <input>
-          # Define our matrix
-          M = matrix([ [3, 0, 1],
-          [9, -1, 2],
-          [-9, 4, -1]] )
-
-          # Finds eigenvectors, corresponding eigenvalues and "algebraic multiplicty".
-          pretty_print(M.eigenvectors_right())
-        </input>
-      </sage>
     </subsection>
 
     <subsection xml:id="subsection-applications-of-matrix-odes">
       <title>Applications of Matrix ODEs</title>
+
       <p>
         Now we use matrix ODEs to model physical systems.
         The methods we've developed for solving matrix ODEs will then let us come up with descriptions for such systems.
         Recall that we introduced systems of ODEs (and then matrix ODEs) to model quantities that depended on time (an independent variable) and each other (dependent variables).
         The physical systems we will consider will be ones where the quantities of interest depend on each other in some way.
       </p>
+
       <example>
         <statement>
           <p>
