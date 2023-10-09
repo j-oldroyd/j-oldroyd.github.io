@@ -25,7 +25,7 @@ var ptx_lunr_docs = [
   "type": "Preface",
   "number": "",
   "title": "Preface",
-  "body": " This document was created to serve as lecture notes for the Differential Equations course at West Virginia Wesleyan College. These notes are divided into two parts.   The first part, Ordinary Differential Equations , introduces differential equations in one variable along with methods for their solution and several applications.    The next part, Partial Differential Equations , introduces Fourier series and differential equations in several variables, building up to solving the heat and wave equations.     This document is very much in progress and therefore typos and other errors are to be expected. If you find any, I would appreciate you letting me know by contacting me by email.  "
+  "body": " This document was created to serve as lecture notes for the Differential Equations course at West Virginia Wesleyan College. These notes are divided into two parts.   The first part, Ordinary Differential Equations , introduces differential equations in one variable along with methods for their solution and several applications.    The next part, Partial Differential Equations , introduces Fourier series and differential equations in several variables, building up to solving the heat and wave equations.   You can find a PDF version of these notes here .  This document is very much in progress and therefore typos and other errors are to be expected. If you find any, I would appreciate you letting me know by contacting me by email.  "
 },
 {
   "id": "section-ordinary-differential-equations",
