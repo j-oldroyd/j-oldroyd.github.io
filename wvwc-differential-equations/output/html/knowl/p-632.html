@@ -11,21 +11,39 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<h4 class="heading"><span class="type">Paragraph</span></h4>
+<h5 class="heading"><span class="type">Paragraph</span></h5>
 <div class="para logical">
-<div class="para">The Laplace transform distributes over convolution. In other words, if <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are piecewise continuous functions, then</div>
+<div class="para">The IVP we need to solve now is</div>
+<div class="displaymath process-math">
+\begin{align*}
+x''+9x &amp;= 3\delta(t)+3\delta(t-\frac{2\pi}{3}) + 3\delta(t-\frac{4\pi}{3}) +\cdots\\
+&amp;= 3\Sum{n=0}{\infty}\delta(t-\frac{2\pi n}{3})
+\end{align*}
+</div>
+<div class="para">where <span class="process-math">\(x(0) = x^{\prime}(0) = 0\text{.}\)</span> So once more we take Laplace transforms to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}\text{.}
+s^{2}X(s)+9X(s) = 3\Sum{n=0}{\infty}\Laplace{\delta(t-\frac{2\pi n}{3})} = 3\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}
 \end{equation*}
 </div>
-<div class="para">Equivalently, if we write <span class="process-math">\(F(s) = \Laplace{f(t)}\)</span> and <span class="process-math">\(G(s) = \Laplace{g(t)}\text{,}\)</span> then</div>
+<div class="para">and so</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)\text{.}
+X(s) = \frac{3}{s^{2}+9}\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}\text{.}
 \end{equation*}
 </div>
+<div class="para">The displacement is then given by</div>
+<div class="displaymath process-math">
+\begin{align*}
+x(t) &amp;= \iLaplace{X(s)}\\
+&amp;= \iLaplace{\frac{3}{s^{2}+9}\cdot\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}s}}\\
+&amp;= \iLaplace{\Sum{n=0}{\infty}e^{-\frac{2\pi n}{3}}\frac{3}{s^{2}+9}}\\
+&amp;= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin[3(t-\frac{2\pi n}{3})]\\
+&amp;= \Sum{n=0}{\infty}u(t-\frac{2\pi n}{3})\sin3t\text{.}
+\end{align*}
 </div>
-<span class="incontext"><a href="section-convolution-products.html#p-632" class="internal">in-context</a></span>
+<div class="para">Each time the hammer strikes the mass, a factor of <span class="process-math">\(\sin3t\)</span> is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.</div>
+</div>
+<span class="incontext"><a href="section-dirac-delta-functions.html#p-632" class="internal">in-context</a></span>
 </body>
 </html>
