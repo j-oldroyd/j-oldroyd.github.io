@@ -13,38 +13,13 @@
 <body class="ignore-math">
 <h5 class="heading"><span class="type">Paragraph</span></h5>
 <div class="para logical">
-<div class="para">Technically, this isn’t the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a> that the second solution must be of the form</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+<div class="para">The recurrence relation will tell us <em class="emphasis">nothing</em> about <span class="process-math">\(c_{0},c_{1}\text{,}\)</span> so to see if there are any restrictions on <span class="process-math">\(c_{0},c_{1}\)</span> we separate the <span class="process-math">\(n=0\)</span> and <span class="process-math">\(n=1\)</span> terms from the summation to get</div>
+<div class="displaymath process-math">
 \begin{equation*}
-y_2 = k\frac{\sin(x)}{\sqrt{x}}\ln(x) + x^{-\frac{1}{2}}\sum_{n\geq0}C_n x^n.
+0c_{0}x^{\frac{1}{2}}+2c_{1}x^{\frac{3}{2}}+\sum_{n\geq2}^{}\left[n(n+1)c_{n}+c_{n-2}\right]x^{n+\frac{1}{2}}=0
 \end{equation*}
 </div>
-<div class="para">Plugging this into the original ODE (and using a computer algebra system such as Sage), we get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
-\begin{equation*}
-{\left(C_{3} + 20 \, C_{5}\right)} x^{\frac{9}{2}} + {\left(C_{2} + 12 \, C_{4}\right)} x^{\frac{7}{2}} + {\left(C_{1} + 6 \, C_{3}\right)} x^{\frac{5}{2}} + {\left(C_{0} + 2 \, C_{2}\right)} x^{\frac{3}{2}} + 2 \, k \sqrt{x} \cos\left(x\right) - \frac{k \sin\left(x\right)}{\sqrt{x}} = 0
-\end{equation*}
-</div>
-<div class="para">after truncating the expansion up to the <span class="process-math">\(n=5\)</span> term. This allows us (theoretically) to solve for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\text{.}\)</span> In fact, we get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
-\begin{align*}
-k &amp;= 0\\
-C_{2n} &amp;= \frac{(-1)^n}{(2n)!}C_0\\
-C_{2n+1} &amp;= \frac{(-1)^n}{(2n+1)!}C_1
-\end{align*}
-</div>
-<div class="para">and so</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
-\begin{equation*}
-y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right].
-\end{equation*}
-</div>
-<div class="para">Since the second series corresponds to a multiple of <span class="process-math">\(y_1 = \frac{\sin(x)}{\sqrt{x}}\text{,}\)</span> we can safely set <span class="process-math">\(C_1 = 0\)</span> and get <span class="process-math">\(y_2 = C_0\frac{\cos(x)}{\sqrt{x}}\text{.}\)</span> Therefore the general solution of the ODE is</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
-\begin{equation*}
-y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}.
-\end{equation*}
-</div>
+<div class="para">This equation places no restrictions at all on <span class="process-math">\(c_{0}\text{,}\)</span> but it does force <span class="process-math">\(c_{1} = 0\)</span> since we need the <span class="process-math">\(x^{\frac{3}{2}}\)</span> term to disappear to make this equation true. This tells us that we can ignore the coefficients <span class="process-math">\(c_{n}\)</span> with odd index, since they will all disappear.</div>
 </div>
 <span class="incontext"><a href="section-frobenius-method.html#p-546" class="internal">in-context</a></span>
 </body>
