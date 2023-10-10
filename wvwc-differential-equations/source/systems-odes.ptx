@@ -1195,21 +1195,42 @@
             real ymin=-2, ymax=2;
             real eps=.2;
 
+            //incoming and outgoing trajectories
+            real f_in(real x) {return x;}
+            real f_out(real x) {return -(2/3)*x;}
+
+            //nullclines
+            real y1(real x) {return (2/3)*x;}
+            real y2(real x) {return 2*x;}
+
             //plot annotations
             arrowbar axisarrow = Arrow(TeXHead);
-            Label xlabel = Label("$x$", position = EndPoint, align = E);
-            Label ylabel = Label("$y$", position = EndPoint, align = N);
+            Label xlabel = Label("$y_1$", position = EndPoint, align = 2E);
+            Label ylabel = Label("$y_2$", position = EndPoint, align = 2N);
 
             xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(), L=xlabel, arrow=axisarrow);
             yaxis(XEquals(0),ymin - eps,ymax + eps, RightTicks(), L = ylabel, arrow = axisarrow);
 
             path vector(pair z) {return (0,0) -- unit((2z.x - 3z.y,-2z.x + z.y));}
 
-            add(vectorfield(vector,a,b,20,deepgreen+0.4bp));
+            //graph phase portrait, trajectories and nullclines
+            add(vectorfield(vector,a,b,15,deepcyan+0.2bp));
+            draw(graph(f_in,xmin,xmax),blue,"$y_2=y_1$");
+            draw(graph(f_out,xmin-eps,xmax+eps),red,"$y_2=-\frac{2}{3}y_1$");
+            draw(graph(y1,xmin,xmax),deepmagenta,"$\dot{y_1}=0$");
+            draw(graph(y2,xmin/2,xmax/2),deepmagenta,"$\dot{y_2}=0$");
+
+            //draw labels
+            label(rotate(45)*Label("$y_2=y_1$"), (1, f_in(1)), SE, blue);
+            label(rotate(-atan(2/3)*(180/pi))*"$y_2=-\frac{2}{3}y_1$", (1, f_out(1)), NE, red);
+            label(rotate(atan(2/3)*(180/pi))*"$\dot{y_1}=0$", (.5, y1(.5)), SE, deepmagenta);
+            label(rotate(atan(2)*(180/pi))*"$\dot{y_2}=0$", (.55, y2(.55)), SE, deepmagenta);
+
+            //attach(legend(),truepoint(E),10E,UnFill);
           </asymptote>
         </image>
 
-        <caption>The phase portrait from <xref ref="example-sketch-phase-portrait" text="type-global" />.</caption>
+        <caption>The phase portrait from <xref ref="example-sketch-phase-portrait" text="type-global" />. The blue line represents the two incoming trajectories at <m>\vec{0}</m> and the red line represents two outgoing trajectories at <m>\vec{0}</m>.</caption>
       </figure>
 
       <p>
@@ -1279,7 +1300,7 @@
       </table>
 
       <p>
-        <m>\vec{0}</m> was a saddle point in <xref ref="example-sketch-phase-portrait" text="type-global" /> since there were incoming trajectories on the line <m>y_{2} = y_{1}</m> and outgoing trajectories on the line <m>y_{2} = -\frac{2}{3}y_{1}</m>.
+        <m>\vec{0}</m> was a saddle point in <xref ref="example-sketch-phase-portrait" text="type-global" /> since there were incoming trajectories on the line <m>y_{2} = y_{1}</m> and outgoing trajectories on the line <m>y_{2} = -\frac{2}{3}y_{1}</m> as indicated in <xref ref="figure-sketch-phase-portrait" text="type-global" />.
       </p>
 
       <example xml:id="example-stability-equilibrium-solution">
@@ -1329,15 +1350,15 @@
 
             //plot annotations
             arrowbar axisarrow = Arrow(TeXHead);
-            Label xlabel = Label("$x$", position = EndPoint, align = E);
-            Label ylabel = Label("$y$", position = EndPoint, align = N);
+            Label xlabel = Label("$y_1$", position = EndPoint, align = 2E);
+            Label ylabel = Label("$y_2$", position = EndPoint, align = 2N);
 
             xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(), L=xlabel, arrow=axisarrow);
             yaxis(XEquals(0),ymin - eps,ymax + eps, RightTicks(), L = ylabel, arrow = axisarrow);
 
             path vector(pair z) {return (0,0) -- unit((3z.x + 4z.y,-4z.x + 3z.y));}
 
-            add(vectorfield(vector,a,b,20,deepgreen+0.4bp));
+            add(vectorfield(vector,a,b,15,deepcyan+0.2bp));
           </asymptote>
         </image>
         <caption>The phase portrait for <xref ref="example-stability-equilibrium-solution" text="type-global" />.</caption>
