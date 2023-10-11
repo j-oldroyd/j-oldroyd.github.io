@@ -1739,13 +1739,79 @@
 
         <solution>
           <p>
-            The critical points occur at <m>x^\prime = y^\prime = 0</m>.
-            If we set <m>x^\prime = y^\prime</m> and solve the resulting equation, we get <m>x = 0</m> or <m>y = -1</m>.
-            If <m>x = 0</m>, then <m>x^\prime = -y</m>, and for this to be <m>0</m> we must have <m>y = 0</m>.
-            We can verify that <m>x = y = 0</m> makes <m>y^\prime = 0</m> as well, so the origin is a critical point.
-            Similarly, <m>y = -1</m> forces <m>x = \pm1</m>, and we can verify that <m>x^\prime = y^\prime = 0</m> at <m>(-1,-1)</m> and <m>(1,-1)</m>.
-            So we have three critical points to check.
+            The critical points occur at intersections between the nullclines <m>\dot{x}=0</m> and <m>\dot{y}=0</m>.
+            The equations of the nullclines for <m>\dot{x}=0</m> are
+            <md>
+              <mrow>x \amp = 1 </mrow>
+              <mrow>y \amp = x </mrow>
+            </md>,
+            while the equation of the nullcline <m>\dot{y}=0</m> is
+            <me>y = -x^2</me>.
+            Hence there are three critical points for this system as seen in <xref ref="figure-classify-critical-points" text="type-global" />.
+            In particular, these points are <m>(0,0), (-1,-1)</m> and <m>(1,-1)</m>.
           </p>
+
+          <figure xml:id="figure-classify-critical-points">
+            <image xml:id="image-classify-critical-points" width="50%">
+              <asymptote>
+                import graph;
+                import fontsize;
+                size(200);
+                defaultpen(fontsize(9pt));
+
+                real eps=.1;
+
+                real xmin=-2, xmax=2;
+                real ymin=-2, ymax=2;
+                pair a=(xmin,ymin);
+                pair b=(xmax,ymax);
+
+                //incoming and outgoing trajectories
+                //real f_in(real x) {return x;}
+                //real f_out(real x) {return -(2/3)*x;}
+
+                //nullclines
+                real xdot1(real x) {return x;}
+                real ydot1(real x) {return -x^2;}
+                 //define and add curve
+                pair xdot2(real y) {
+                  return (1, y);
+                }
+
+                path curveC = graph(xdot2, ymin, ymax, operator ..); // "operator .." is for bezier; 0≤t≤2
+                Label Lx1 = Label("$\dot{x}=0$", deepmagenta, position=Relative(0.65), align=W);
+                Label Lx2 = Label("$\dot{x}=0$", deepmagenta, position=Relative(0.6), align=E);
+                Label Ly = Label("$\dot{y}=0$", deepblue, position=Relative(0.25), align=E);
+                draw(graph(xdot1,xmin,xmax), deepmagenta, L=rotate(45)*Lx1);
+                draw(graph(ydot1,xmin,xmax), deepblue, L=rotate(degrees(atan(2.2)))*Ly);
+                draw(curveC, deepmagenta+0.6bp, L = rotate(-90)*Lx2);
+
+                //plot annotations
+                arrowbar axisarrow = Arrow(TeXHead);
+                Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+
+                path vector(pair z) {return (0,0) -- ((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 - z.y));}
+
+                //graph phase portrait
+                add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
+
+                //Crop picture
+                limits((-2,-2),(2,2),Crop);
+
+                //graph critical points
+                dot((0, 0));
+                dot((-1, -1));
+                dot((1,-1));
+                //label("$(1,-1)$", (-1,-1), SE);
+
+                //label axes
+                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+                label("$0$", (0,0), SE);
+              </asymptote>
+            </image>
+          </figure>
 
           <p>
             To determine the behavior of solutions at these critical points, we'll find the Jacobian at each point.
@@ -1779,26 +1845,21 @@
                 //real y1(real x) {return (2/3)*x;}
                 //real y2(real x) {return 2*x;}
 
-                //plot annotations
-                arrowbar axisarrow = Arrow(TeXHead);
-                Label xlabel = Label("$x$", position = EndPoint, align = 2E);
-                Label ylabel = Label("$y$", position = EndPoint, align = 2N);
-
-                path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
+                path vector(pair z) {return (0,0) -- ((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
 
                 //graph critical point
                 dot((0, 0));
+                label("$(0,0)$", (0,0), SE);
 
                 //label axes
-                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
-                label("$0$", (0,0), SE);
+                xaxis("$x$",BottomTop,LeftTicks);
+                yaxis("$y$",LeftRight,RightTicks(trailingzero));
               </asymptote>
             </image>
-            <caption>The phase portrait at <m>\vec{0}</m></caption>
+            <caption>The phase portrait at <m>(0,0)</m></caption>
           </figure>
 
           <p>
@@ -1817,8 +1878,8 @@
                 defaultpen(fontsize(9pt));
 
                 real eps=.05;
-                real xmin=-1.5, xmax=.5;
-                real ymin=-1.5, ymax=.5;
+                real xmin=-1.5, xmax=-.5;
+                real ymin=-1.5, ymax=-.5;
 
                 pair a=(xmin,ymin);
                 pair b=(xmax,ymax);
@@ -1832,11 +1893,11 @@
                 //real y2(real x) {return 2*x;}
 
                 //plot annotations
-                arrowbar axisarrow = Arrow(TeXHead);
-                Label xlabel = Label("$x$", position = EndPoint, align = 2E);
-                Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+                //arrowbar axisarrow = Arrow(TeXHead);
+                //Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                //Label ylabel = Label("$y$", position = EndPoint, align = 2N);
 
-                path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
+                path vector(pair z) {return (0,0) -- ((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
@@ -1846,9 +1907,8 @@
                 label("$(-1,-1)$", (-1,-1), SE);
 
                 //label axes
-                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
-                label("$0$", (0,0), SE);
+                xaxis("$x$",BottomTop,LeftTicks);
+                yaxis("$y$",LeftRight,RightTicks(trailingzero));
               </asymptote>
             </image>
             <caption>The phase portrait at <m>(-1,-1)</m></caption>
@@ -1870,8 +1930,8 @@
                 defaultpen(fontsize(9pt));
 
                 real eps=.05;
-                real xmin=-.5, xmax=1.5;
-                real ymin=-1.5, ymax=.5;
+                real xmin=.5, xmax=1.5;
+                real ymin=-1.5, ymax=-.5;
 
                 pair a=(xmin,ymin);
                 pair b=(xmax,ymax);
@@ -1885,11 +1945,11 @@
                 //real y2(real x) {return 2*x;}
 
                 //plot annotations
-                arrowbar axisarrow = Arrow(TeXHead);
-                Label xlabel = Label("$x$", position = EndPoint, align = 2E);
-                Label ylabel = Label("$y$", position = EndPoint, align = 2N);
+                //arrowbar axisarrow = Arrow(TeXHead);
+                //Label xlabel = Label("$x$", position = EndPoint, align = 2E);
+                //Label ylabel = Label("$y$", position = EndPoint, align = 2N);
 
-                path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
+                path vector(pair z) {return (0,0) -- ((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 - z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
@@ -1899,9 +1959,8 @@
                 label("$(1,-1)$", (1,-1), SE);
 
                 //label axes
-                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
-                label("$0$", (0,0), SE);
+                xaxis("$x$",BottomTop,LeftTicks);
+                yaxis("$y$",LeftRight,RightTicks(trailingzero));
               </asymptote>
             </image>
             <caption>The phase portrait at <m>(1,-1)</m></caption>
