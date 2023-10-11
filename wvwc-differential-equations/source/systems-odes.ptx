@@ -1208,17 +1208,14 @@
             Label xlabel = Label("$y_1$", position = EndPoint, align = 2E);
             Label ylabel = Label("$y_2$", position = EndPoint, align = 2N);
 
-            xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(), L=xlabel, arrow=axisarrow);
-            yaxis(XEquals(0),ymin - eps,ymax + eps, RightTicks(), L = ylabel, arrow = axisarrow);
-
             path vector(pair z) {return (0,0) -- unit((2z.x - 3z.y,-2z.x + z.y));}
 
             //graph phase portrait, trajectories and nullclines
             add(vectorfield(vector,a,b,15,deepcyan+0.2bp));
-            draw(graph(f_in,xmin,xmax),blue,"$y_2=y_1$");
-            draw(graph(f_out,xmin-eps,xmax+eps),red,"$y_2=-\frac{2}{3}y_1$");
-            draw(graph(y1,xmin,xmax),deepmagenta,"$\dot{y_1}=0$");
-            draw(graph(y2,xmin/2,xmax/2),deepmagenta,"$\dot{y_2}=0$");
+            draw(graph(f_in,xmin,xmax),blue);
+            draw(graph(f_out,xmin-eps,xmax+eps),red);
+            draw(graph(y1,xmin,xmax),deepmagenta);
+            draw(graph(y2,xmin/2,xmax/2),deepmagenta);
 
             //draw labels
             label(rotate(45)*Label("$y_2=y_1$"), (1, f_in(1)), SE, blue);
@@ -1226,7 +1223,10 @@
             label(rotate(atan(2/3)*(180/pi))*"$\dot{y_1}=0$", (.5, y1(.5)), SE, deepmagenta);
             label(rotate(atan(2)*(180/pi))*"$\dot{y_2}=0$", (.55, y2(.55)), SE, deepmagenta);
 
-            //attach(legend(),truepoint(E),10E,UnFill);
+            //label axes and origin
+            xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+            yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+            label("$0$", (0,0), SE);
           </asymptote>
         </image>
 
@@ -1327,8 +1327,8 @@
           </p>
 
           <p>
-            The real part of the eigenvalues leads to the ``growth term'' of <m>e^{3t}</m> appearing in the solution, which causes the trajectories to diverge as <m>t\to\infty</m>.
-            The imaginary part of the eigenvalues leads to the ``oscillating terms'' of <m>\cos4t,\sin4t</m> appearing in the solution, which gives the trajectories their spiral motion.
+            The real part of the eigenvalues leads to the <q>growth term</q> of <m>e^{3t}</m> appearing in the solution, which causes the trajectories to diverge as <m>t\to\infty</m>.
+            The imaginary part of the eigenvalues leads to the <q>oscillating terms</q> of <m>\cos4t,\sin4t</m> appearing in the solution, which gives the trajectories their spiral motion.
           </p>
         </solution>
       </example>
@@ -1353,12 +1353,14 @@
             Label xlabel = Label("$y_1$", position = EndPoint, align = 2E);
             Label ylabel = Label("$y_2$", position = EndPoint, align = 2N);
 
-            xaxis(YEquals(0),xmin - eps,xmax + eps, LeftTicks(), L=xlabel, arrow=axisarrow);
-            yaxis(XEquals(0),ymin - eps,ymax + eps, RightTicks(), L = ylabel, arrow = axisarrow);
-
             path vector(pair z) {return (0,0) -- unit((3z.x + 4z.y,-4z.x + 3z.y));}
 
             add(vectorfield(vector,a,b,15,deepcyan+0.2bp));
+
+            //label axes
+            xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+            yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+            label("$0$", (0,0), SE);
           </asymptote>
         </image>
         <caption>The phase portrait for <xref ref="example-stability-equilibrium-solution" text="type-global" />.</caption>
@@ -1755,7 +1757,7 @@
           </p>
 
           <figure xml:id="figure-classify-critical-points-linearization-0-0">
-            <image xml:id="image-classify-critical-points-lienarization-0-0" width="50%">
+            <image xml:id="image-classify-critical-points-linearization-0-0" width="50%">
               <asymptote>
                 import graph;
                 import fontsize;
@@ -1782,13 +1784,18 @@
                 Label xlabel = Label("$x$", position = EndPoint, align = 2E);
                 Label ylabel = Label("$y$", position = EndPoint, align = 2N);
 
-                xaxis(YZero,xmin,xmax, ticks=RightTicks(), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin,ymax, RightTicks(trailingzero), L = ylabel, arrow = axisarrow);
-
                 path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
+
+                //graph critical point
+                dot((0, 0));
+
+                //label axes
+                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+                label("$0$", (0,0), SE);
               </asymptote>
             </image>
             <caption>The phase portrait at <m>\vec{0}</m></caption>
@@ -1802,7 +1809,7 @@
           </p>
 
           <figure xml:id="figure-classify-critical-points-linearization-neg1-neg1">
-            <image xml:id="image-classify-critical-points-lienarization-neg1-neg1" width="50%">
+            <image xml:id="image-classify-critical-points-linearization-neg1-neg1" width="50%">
               <asymptote>
                 import graph;
                 import fontsize;
@@ -1829,13 +1836,19 @@
                 Label xlabel = Label("$x$", position = EndPoint, align = 2E);
                 Label ylabel = Label("$y$", position = EndPoint, align = 2N);
 
-                xaxis(YZero,xmin,xmax, ticks=RightTicks(), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin,ymax, RightTicks(trailingzero), L = ylabel, arrow = axisarrow);
-
                 path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
+
+                //graph critical point
+                dot((-1, -1));
+                label("$(-1,-1)$", (-1,-1), SE);
+
+                //label axes
+                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+                label("$0$", (0,0), SE);
               </asymptote>
             </image>
             <caption>The phase portrait at <m>(-1,-1)</m></caption>
@@ -1849,7 +1862,7 @@
           </p>
 
           <figure xml:id="figure-classify-critical-points-linearization-1-neg1">
-            <image xml:id="image-classify-critical-points-lienarization-1-neg1" width="50%">
+            <image xml:id="image-classify-critical-points-linearization-1-neg1" width="50%">
               <asymptote>
                 import graph;
                 import fontsize;
@@ -1876,13 +1889,19 @@
                 Label xlabel = Label("$x$", position = EndPoint, align = 2E);
                 Label ylabel = Label("$y$", position = EndPoint, align = 2N);
 
-                xaxis(YZero,xmin,xmax, ticks=RightTicks(), L=xlabel, arrow=axisarrow);
-                yaxis(XZero,ymin,ymax, RightTicks(trailingzero), L = ylabel, arrow = axisarrow);
-
                 path vector(pair z) {return (0,0) -- unit((z.x - z.y-z.x*z.x + z.x*z.y,-z.x^2 +- z.y));}
 
                 //graph phase portrait
                 add(vectorfield(vector,a,b,20,deepcyan+0.2bp));
+
+                //graph critical point
+                dot((1, -1));
+                label("$(1,-1)$", (1,-1), SE);
+
+                //label axes
+                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+                label("$0$", (0,0), SE);
               </asymptote>
             </image>
             <caption>The phase portrait at <m>(1,-1)</m></caption>
