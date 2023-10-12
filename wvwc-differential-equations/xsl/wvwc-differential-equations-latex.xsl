@@ -33,7 +33,7 @@ along with PreTeXt.  If not, see <http://www.gnu.org/licenses/>.
 >
 
 <!-- Override specific tenplates of the standard conversion -->
-<xsl:import pretext-href="pretext-latex.xsl"/>
+<xsl:import href="./core/pretext-latex.xsl"/>
 
 <!-- Intend output for rendering by pdflatex -->
 <xsl:output method="text" />
