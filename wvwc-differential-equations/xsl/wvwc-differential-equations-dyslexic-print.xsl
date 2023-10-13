@@ -88,9 +88,10 @@ along with PreTeXt.  If not, see <http://www.gnu.org/licenses/>.
 <!-- is necessary, but it seems to not be              -->
 <xsl:template match="&THEOREM-LIKE;|&AXIOM-LIKE;" mode="tcb-style">
     <xsl:text>enhanced, title engine=path, colback=red!8!white, &#xa;</xsl:text>
-    <xsl:text>colframe=blue!75!black,coltitle=blue!10!white,fonttitle=\bfseries\sffamily,&#xa;</xsl:text>
+    <xsl:text>fonttitle=\sffamily &#xa;</xsl:text>
+    <!-- <xsl:text>colframe=blue!75!black,coltitle=blue!10!white,fonttitle=\sffamily,&#xa;</xsl:text> -->
     <!-- <xsl:text>colframe=red!75!black, coltitle=blue!50!black,fonttitle=\bfseries,&#xa;</xsl:text> -->
-    <xsl:text>title style={left color=blue!15!black, right color=blue!45!black}, </xsl:text>
+    <!-- <xsl:text>title style={left color=blue!15!black, right color=blue!45!black}, </xsl:text> -->
 </xsl:template>
 
 <!-- DEFINITION-LIKE: "definition"   -->
