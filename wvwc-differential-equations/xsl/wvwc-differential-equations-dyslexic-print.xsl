@@ -33,9 +33,20 @@ along with PreTeXt.  If not, see <http://www.gnu.org/licenses/>.
 >
 
 <!-- Override specific templates of the standard conversion -->
-<!-- <xsl:import href="./core/pretext-latex.xsl"/> -->
 <xsl:import href="pretext-latex-dyslexic-font.xsl"/>
 
+<!-- Change background color of pages based on https://www.cs.cmu.edu/~jbigham/pubs/pdfs/2017/colors.pdf and similar-->
+<xsl:param name="latex.preamble.late">
+    <xsl:text>% Code for changing background color of page&#xa;</xsl:text>
+    <xsl:text>% based on dyslexia best practices&#xa;</xsl:text>
+    <xsl:text>% see https://www.cs.cmu.edu/~jbigham/pubs/pdfs/2017/colors.pdf&#xa;</xsl:text>
+    <xsl:text>\definecolor{pageBGcolor}{HTML}{fffbf0}&#xa;</xsl:text>
+    <xsl:text>\usepackage{ocg-p,tikz,eso-pic}&#xa;</xsl:text>
+    <xsl:text>\AddToShipoutPictureBG&#xa;</xsl:text>
+    <xsl:text>{\begin{ocg}[printocg=never]{backgroundcolor}{oc1}{1}&#xa;</xsl:text>
+    <xsl:text>\tikz[overlay,remember picture]\fill[pageBGcolor](current page.north east) rectangle (current page.south west);&#xa;</xsl:text>
+    <xsl:text>\end{ocg}}&#xa;</xsl:text>
+</xsl:param>
 <!-- Intend output for rendering by pdflatex -->
 <xsl:output method="text" />
 
