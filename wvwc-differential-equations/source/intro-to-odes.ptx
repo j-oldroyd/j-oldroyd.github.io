@@ -519,21 +519,32 @@
                           </p>
                           <figure xml:id="figure-dirfield1">
                             <caption>Direction field for <m>x^\prime = x(1-x)</m></caption>
-                            <image width="50%">
+                            <image xml:id="image-dirfield1" width="50%">
                               <asymptote>
                                 import graph;
                                 import slopefield;
 
+                                real eps=0.2;
+
                                 //This gives the size of the figure.
                                 size(200);
 
+                                //plot annotations
+                                arrowbar axisarrow = Arrow(TeXHead);
+                                Label xlabel = Label("$t$", position = EndPoint, align = 2E);
+                                Label ylabel = Label("$x$", position = EndPoint, align = 2N);
+
                                 //This is to draw the slope field.
                                 real func1(real x, real y) {return y*(1-y);}
-                                add(slopefield(func1,(-3,-3),(3,3),20,deepgreen));
+                                real xmin=-3, xmax=3;
+                                real ymin=-3, ymax=3;
 
-                                //This draws the axes.
-                                xaxis("$t$",xmin=-3,xmax=3.3,fontsize(11pt),LeftTicks,ArcArrow(SimpleHead));
-                                yaxis("$x$",ymin=-3,ymax=3.3,fontsize(11pt),RightTicks,ArcArrow(SimpleHead));
+                                add(slopefield(func1,(-3,-3),(3,3),15,deepcyan+0.3bp));
+
+                                //label axes and origin
+                                xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+                                yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+                                label("$0$", (0,0), SE);
                               </asymptote>
                             </image>
                           </figure>
@@ -581,7 +592,7 @@
                             So if we start at this point and trace a curve that flows with the direction field, we get the following solution curve:
                           </p>
                           <figure xml:id="figure-solcurve1">
-                            <image width="50%">
+                            <image xml:id="image-solncurve1" width="50%">
                               <asymptote>
                                 import graph;
                                 import slopefield;
@@ -589,7 +600,7 @@
                                 defaultpen(fontsize(9pt));
                                 size(200);
 
-                                eps=0.05;
+                                real eps=0.2;
 
                                 //plot annotations
                                 arrowbar axisarrow = Arrow(TeXHead);
@@ -601,13 +612,13 @@
                                 real xmin=-3, xmax=3;
                                 real ymin=-3, ymax=3;
 
-                                add(slopefield(func1,(xmin,ymin),(xmax,ymax),20,deepgreen+0.4bp));
+                                add(slopefield(func1,(xmin,ymin),(xmax,ymax),15,deepcyan+0.3bp));
 
                                 pair C=(0,0.5);
                                 draw(curve(C,func1,(xmin,ymin),(xmax,ymax)),deepblue+1bp);
 
-                                label("$(0,\frac{1}{2})$",C,NE,UnFill);
-                                dot(C,UnFill);
+                                label("$(0,\frac{1}{2})$",C,NW+W,opacity(0.1));
+                                dot(C);
 
                                 //label axes and origin
                                 xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
@@ -638,7 +649,9 @@
                         The Fundamental Theorem of Calculus guarantees that the solution <m>y</m> is given by <m>y = \int f(x)\,dx</m>.
                       </p>
                       <aside>
-                        Rather, the Fundamental Theorem of Calculus guarantees that the solution will be <m>y=\int f(x)\,dx</m> as long as <m>f</m> is a continuous function.
+                        <p>
+                          Rather, the Fundamental Theorem of Calculus guarantees that the solution will be <m>y=\int f(x)\,dx</m> as long as <m>f</m> is a continuous function.
+                        </p>
                       </aside>
                       <p>
                         Another type of ODE that is relatively straightforward to solve is the <term>separable ODE</term>, which is a first-order ODE that can be written in the form
@@ -1454,7 +1467,7 @@
 
                             % draw the ticks at critical points
                             \foreach \x in {2,5}
-                            \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$x=\the\numexpr\x$};
+                            \draw[xshift=\x cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$x=\the\numexpr\x$};
 
                             % label the signs
                             \node[yshift=.5cm] at (1,0){$f(x)<0$};
@@ -1516,11 +1529,11 @@
                               \draw[ultra thick,color=blue,<-] (5,0) -- (6,0);
 
                               % draw the ticks at critical points
-                              \draw[xshift=0 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=0$};
-                              \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{1}$};
-                              \draw[xshift=3.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
-                              \draw[xshift=5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=c_{2}$};
-                              \draw[xshift=6.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=75$};
+                              \draw[xshift=0 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=0$};
+                              \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=c_{1}$};
+                              \draw[xshift=3.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=15$};
+                              \draw[xshift=5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=c_{2}$};
+                              \draw[xshift=6.5 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=75$};
 
                               % label the signs
                               \node[yshift=.5cm] at (0,0){$\dv{P}{t}<0$};
@@ -1553,7 +1566,7 @@
                             \draw[ultra thick,color=blue,<-] (2,0) -- (3,0);
 
                             % draw the ticks at critical points
-                            \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm,fill=white]{$P=15$};
+                            \draw[xshift=2 cm] (0pt,5pt) -- (0pt,-2pt) node[yshift=-.4cm]{$P=15$};
 
                             % label the signs
                             \node[yshift=.5cm] at (1,0){$\dv{P}{t}<0$};

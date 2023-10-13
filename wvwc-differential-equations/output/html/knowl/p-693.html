@@ -13,24 +13,26 @@
 <body class="ignore-math">
 <h5 class="heading"><span class="type">Paragraph</span></h5>
 <div class="para logical">
-<div class="para">Let <span class="process-math">\(f(x) = e^{2x}\)</span> on <span class="process-math">\(-\pi&lt;x&lt;\pi\)</span> and suppose that <span class="process-math">\(f(x)\)</span> is periodic with period <span class="process-math">\(2\pi\text{.}\)</span> We want to find the complex Fourier series for <span class="process-math">\(f(x)\text{.}\)</span> We can do this by finding the correct coefficients <span class="process-math">\(c_{k}\text{:}\)</span>
-</div>
-<div class="displaymath process-math">
-\begin{align*}
-c_{k} \amp = \frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{k\pi}{L}x}\,dx\\
-\amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}e^{2x}e^{-ikx}\,dx \\
-\amp = \frac{1}{2\pi}\int_{-\pi}^{\pi}e^{(2-ik)x}\,dx \\
-\amp = \frac{(-1)^{k}\sinh2\pi}{\pi(2-ik)} \\
-\amp = \frac{(-1)^{k}\sinh2\pi(2+ik)}{\pi(4+k^{2})}
-\end{align*}
-</div>
-<div class="para">So we have</div>
+<div class="para">We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine. In particular, the relation we will use is the following:</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f(x) = \sum_{k=-\infty}^{\infty}\frac{(-1)^{k}(2+ik)\sinh2\pi}{\pi(4+k^{2})}e^{ikx}
+\int_{-L}^{L}e^{i\frac{(m+n)\pi}{L}x}\,dx = \begin{cases} 2L \amp m=-n \\ 0 \amp \text{otherwise.}\end{cases}
 \end{equation*}
 </div>
-<div class="para">for <span class="process-math">\(x\neq k\pi\text{,}\)</span> since this is where <span class="process-math">\(f(x)\)</span> has discontinuities.</div>
+<div class="para">So if we set <span class="process-math">\(f(x)\)</span> equal to a complex Fourier series and integrate both sides against <span class="process-math">\(e^{-i\frac{n\pi}{L}x}\)</span> for <span class="process-math">\(x\)</span> from <span class="process-math">\(-L\)</span> to <span class="process-math">\(L\text{,}\)</span> we get</div>
+<div class="displaymath process-math">
+\begin{align*}
+\int_{-L}^{L}f(x)e^{-i\frac{n\pi}{L}x}\,dx \amp = \int_{-L}^{L}\sum_{k=-\infty}^{\infty}c_{k}e^{i\frac{k\pi}{L}x}e^{-i\frac{n\pi}{L}x}\,dx \\
+\amp= \sum_{k=-\infty}^{\infty}c_{k}\int_{-L}^{L}e^{i\frac{(k-n)\pi}{L}x}\,dx\\
+\amp= 2Lc_{n}
+\end{align*}
+</div>
+<div class="para">where the last equality follows from the orthogonality relation we just proved. Therefore</div>
+<div class="displaymath process-math">
+\begin{equation*}
+c_{n} = \frac{1}{2L}\int_{-L}^{L}f(x)e^{-i\frac{n\pi}{L}x}\,dx.
+\end{equation*}
+</div>
 </div>
 <span class="incontext"><a class="internal" href="section-complex-fourier-series-and-parsevals-identity.html#p-693">in-context</a></span>
 </body>
