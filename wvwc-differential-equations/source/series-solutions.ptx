@@ -517,9 +517,93 @@
         It can also be shown that
         <me>\int_{-1}^{1}P_{m}(x)P_{n}(x)\,dx = \frac{2}{2n+1}</me>
         if <m>m = n</m>.
+      </p>
+      <p>
         This property allows us to express <em>any</em> polynomial as a finite sum of Legendre polynomials in a computationally efficient manner.
         Furthermore, if we allow infinite series then we can use Legendre polynomials to express any continuous function defined on <m>[-1,1]</m>.
+        In particular, if <m>f(x)</m> is continuous on <m>[-1,1]</m> then
+        <me>f(x) = \sum_{n=0}^{\infty}c_nP_n(x)</me>
+        where
+        <me>c_n = \frac{2n+1}{2}\int_{-1}^{1}f(x)P_{n}(x)\dd{x}</me>.
       </p>
+      <p>
+        This is demonstrated in <xref ref="figure-series-solutions-legendre-series-approx" text="type-global" /> for the function
+        <me>f(x) = \begin{cases}e^{-x^{-2}} \amp\text{if }x\neq 0 \\ 0 \amp\text{if }x=0\end{cases}</me>.
+        This approximation is particularly interesting since we've already seen that <m>f(x)</m> is not analytic.
+        Hence <m>f(x)</m> has no power series representation at <m>x=0</m> but it still has a Legendre series.
+      </p>
+      <figure xml:id="figure-series-solutions-legendre-series-approx">
+        <caption>Legendre series approximation for <m>f(x)</m></caption>
+        <image xml:id="image-series-solutions-legendre-series-approx">
+          <description>
+            <p>
+              A plot containing the function <m>f(x)</m> and the corresponding Legendre series up to the fourth-order term.
+            </p>
+          </description>
+          <asymptote>
+            import graph;
+            import fontsize;
+            import gsl;
+            size(400);
+            defaultpen(fontsize(9pt));
+
+            pair a=(-2,-2);
+            pair b=(2,2);
+
+            real xmin=-1, xmax=1;
+            real ymin=-0, ymax=0.5;
+            real eps=0;
+
+            //exponential function
+            real f(real x) {return x==0 ? 0 : exp(-1/x^2);}
+
+            //Legendre polynomials
+            real P0(real x) {return Pl(0, x);}
+            real P2(real x) {return Pl(2, x);}
+            real P4(real x) {return Pl(4, x);}
+
+            //Legendre polynomials Pl(n, x) multiplied by f
+            real L0(real x) {return f(x)*Pl(0, x);}
+            real L2(real x) {return f(x)*Pl(2, x);}
+            real L4(real x) {return f(x)*Pl(4, x);}
+
+            real c0(real x) {return (1/2)*simpson(L0,-1,1)*P0(x);}
+            real c2(real x) {return (5/2)*simpson(L2,-1,1)*P2(x);}
+            real c4(real x) {return (9/2)*simpson(L4,-1,1)*P4(x);}
+
+            //Legendre series approximation of f
+            real S0(real x) {return c0(x);}
+            real S2(real x) {return c0(x)+c2(x);}
+            real S4(real x) {return c0(x)+c2(x)+c4(x);}
+
+            //plot annotations
+            arrowbar axisarrow = Arrow(TeXHead);
+            Label xlabel = Label("$x$", position = EndPoint, align = S);
+            Label ylabel = Label("$y$", position = EndPoint, align = E);
+            //Label Lf = Label("$f(x)$", deepblue, position=Relative(0.65), align=W);
+
+            //graph
+            draw(graph(f, xmin, xmax), deepblue, "$y=f(x)$");
+            draw(graph(S0, xmin, xmax), red+dotted, "$y=c_0P_0(x)$");
+            draw(graph(S2, xmin, xmax), red+dashed, "$y=\sum_{n=0}^2 c_n P_n(x)$");
+            draw(graph(S4, xmin, xmax), brown, "$y=\sum_{n=0}^4 c_n P_n(x)$");
+
+            //draw labels
+            attach(legend(),point(E),20E);
+            //label axes and origin
+            xaxis(YZero,xmin-eps,xmax+eps, LeftTicks(NoZeroFormat), L=xlabel, arrow=axisarrow);
+            yaxis(XZero,ymin-eps,ymax+eps, RightTicks(NoZeroFormat), L=ylabel, arrow=axisarrow);
+            label("$0$", (0,0), SE);
+          </asymptote>
+        </image>
+      </figure>
+      <aside>
+        <p>
+          Note that we don't need to include the odd Legendre polynomials in <xref ref="figure-series-solutions-legendre-series-approx" text="type-global" />.
+          Since <m>f(x)</m> is an <xref ref="definition-even-and-odd-functions" text="custom">even function</xref>, its integral against any odd function over <m>[-1,1]</m> must be <m>0</m>.
+          Hence the odd degree polynomials contribute nothing to the corresponding Legendre series.
+        </p>
+      </aside>
       <p>
         For actually computing Legendre polynomials, instead of using <xref ref="equation-legendre-poly" text="type-global" /> we often use <em>Rodrigues' formula</em>
         <men xml:id="equation-rodrigues"> P_{n}(x) = \frac{1}{2^{n}n!}\dv[n]{}{x}[(x^{2} - 1)^{n}]</men>
