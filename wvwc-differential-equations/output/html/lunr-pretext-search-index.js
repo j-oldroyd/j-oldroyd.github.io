@@ -1600,7 +1600,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "5.1",
   "title": "Power Series Method",
-  "body": " Power Series Method   Since power series form the basis of our solution strategy in this chapter, we begin by reviewing some important concepts related to power series and their convergence.    Review of Power Series  In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, ) it can be very straightforward, but for others (such as ) it can be impossible.   At least, it can be impossible to integrate certain functions in terms of the everyday , or elementary functions that we're used to.   Power series were introduced in calculus to allow us to write complicated functions in terms of simpler functions . In particular, our goal is to write in the form where the coefficients are all constants.   Power series  power series   A power series (centered at ) is a series (that is, an infinite sum) of the form . The power series is said to converge on some interval if the sum exists for each in .     A power series doesn't have to start at , but it may not contain any negative powers of .   The question, now, is to determine the values of the coefficients to make true. If we look at the equation we see that we can solve for very easily. All that we need to do is to set in to make all of the other terms disappear: .  We can use a similar approach to solve for by plugging in , but we need to get rid of the power of attached to it. This is done by taking the derivative of and then setting : . The same trick works for : so . Let's try this one more time to get : and so .  In general, to get the coefficient of in the power series of , we have the following equation: .   Power series for   Find a power series for .    Any power series for looks like , where . Since is its own derivative, for all choices of . So and the power series for is . It turns out the equals its power series for all values of .    The above power series was written in terms of powers of , but this doesn't have to be the case. We can also write power series in terms of powers of , where is some constant. A power series of the form is said to be centered at . For such a series, the formula for the is given by .   Power series for at   Find the power series for centered at .    A power series centered at will look like where . To find these values, we need to compute the derivatives of and evaluate them at : . So the power series centered at is Just as with , is equal to its power series everywhere.    The following power series are used quite often: Viewing a function as a power series can be extremely beneficial; if you have a power series expression for some function, it is extremely easy to do calculus with it.   Integrating a series   Find .    We can't integrate using elementary functions but this is straightforward to integrate using power series: .   We can also write the integral of in terms of the error function : .     Calculations involving power series are only valid where the series converges. The following theorem can be used to determine when a power series converges.   power series radius of convergence  Finding the radius of convergence   Given the power series , define the number by the limit . Suppose the limit exists or is infinite. Then is the radius of converengence of the series: if then the series converges for and diverges for . If then the series converges only at .   If then convergence at the endpoints of the interval of convergence is not guaranteed and must be checked separately using some appropriate convergence test.       Solving Differential Equations with Power Series  We now turn to the main topic of this chapter: solving differential equations with power series. This power series method is quite general and can theoretically be used whenever the functions involved are analytic, but we will primarily consider second-order linear ODEs that are homogeneous and have polynomial coefficients.   Solving a first-order differential equation with series   Solve the ODE given by .    We could easily solve this using methods from , but we'll use power series instead to see how this method works. To start, we assume that the solution can be written as a power series: . See for the justification behind this step.  The next step is to plug the ansatz into the ODE. Since we get the equation .  We need to find the values of the coefficients ; we will do this by equating coefficients on both sides of . We want to write both series in terms of so that we can equate coefficients, so we need to shift the summation on the left: we replace with inside the sum and decrease the limit of summation to to get . Now we can equate coefficients: for , we have .  The equation is a recurrence relation for the coefficients . It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each looks like. To see how, we plug several values for into this recurrence relation to try to determine a pattern: and in general it appears that for each .   We can't use either or to find the initial constant . This must be given by an initial condition of some kind.   Now that we've determined the form of the coefficients , we can write down the solution : .    To solve the above ODE we used the following steps:   Write .    Use the ODE to build a recurrence relation for the coefficients .    Find an explicit description of the coefficients.    Identify as the power series of some function.      Solving a first-order ODE with variable coefficients   Use power series to solve the ODE .    We will solve this using the steps listed above. First, assume . Now plug this guess for into the ODE to get .  As in we want to equate coefficients to build a recurrence relation, so we need to rewrite these sums so that the same power of appears on both sides. We do this by shifting the sums, but we need to remember to shift the limits of each sum as well:   Changing limits of summation    Sum  Index  Limit               So we get . Hence a recurrence relation for is which is valid for .  Since this two-step recurrence relation is only valid for , it places no restrictions on or . However, the original ODE was first-order! So we should only expect to have one arbitrary constant in our solution, which suggests that one of or must be zero. To determine which constant must vanish, we write out the first couple terms of the sums in and compare terms: . This tells us that . Again, we can't get this information from the recurrence relation!  Now we try to find an explicit formula for . Because this is a two-step recurrence, we will write out the coefficients in two columns, one for odd and one for even : . So it appears that for every .  Now we plug this into our power series for to get .    Now that we have an idea of how to solve differential equations using power series, it can be useful to know when this method is actually valid, i.e., when power series solutions exist. We will be particularly concerned with solutions of second-order linear ODEs.   Existence of Series Solutions  power series existence of series solution   Consider the differential equation . If and are analytic at a point , then every solution is also analytic at .     A Legendre Equation   Show that has a series solution centered at and then find the solution up to the coefficient of .    First, note that the equation can be rewritten , so we are guaranteed a series solution centered at . Furthermore, this solution has radius of convergence at least .  To find the solution, we return to the original equation and substitute to get which becomes . After a little algebra, we get the recurrence relation . This recurrence is valid for .  Now we can use the recurrence to list the first several terms of the solution: In fact, .   In the last equation, has been substituted for .      "
+  "body": " Power Series Method   Since power series form the basis of our solution strategy in this chapter, we begin by reviewing some important concepts related to power series and their convergence.    Review of Power Series  In calculus, it's important to know how to differentiate and integrate functions. For some functions (say, ) it can be very straightforward, but for others (such as ) it can be impossible.   At least, it can be impossible to integrate certain functions in terms of the everyday , or elementary functions that we're used to.   Power series were introduced in calculus to allow us to write complicated functions in terms of simpler functions . In particular, our goal is to write in the form where the coefficients are all constants.   Power series  power series   A power series (centered at ) is a series (that is, an infinite sum) of the form . The power series is said to converge on some interval if the sum exists for each in .     A power series doesn't have to start at , but it may not contain any negative powers of .   The question, now, is to determine the values of the coefficients to make true. If we look at the equation we see that we can solve for very easily. All that we need to do is to set in to make all of the other terms disappear: .  We can use a similar approach to solve for by plugging in , but we need to get rid of the power of attached to it. This is done by taking the derivative of and then setting : . The same trick works for : so . Let's try this one more time to get : and so .  In general, to get the coefficient of in the power series of , we have the following equation: .   Power series of   Find a power series for the exponential function .    Any power series for looks like , where . Since is its own derivative, for all choices of . So and the power series for is . It turns out the equals its power series for all values of .    The above power series was written in terms of powers of , but this doesn't have to be the case. We can also write power series in terms of powers of , where is some constant. A power series of the form is said to be centered at . For such a series, the formula for the is given by .   Power series of at   Find the power series for centered at .    A power series centered at will look like where . To find these values, we need to compute the derivatives of and evaluate them at : . So the power series centered at is Just as with , is equal to its power series everywhere.    The following power series are used quite often: Viewing a function as a power series can be extremely beneficial; if you have a power series expression for some function, it (usually) makes the related calculus operations such as differentiation and integration trivial to perform.   Integrating a series   Find .    We can't integrate using elementary functions but this is straightforward to integrate using power series: .   We can also write the integral of in terms of the error function : .     Calculations involving power series are only valid where the series converges. The following theorem can be used to determine when a power series converges.   power series radius of convergence  Finding the radius of convergence   Given the power series , define the number by the limit . Suppose the limit exists or is infinite. Then is the radius of converengence of the series: if then the series converges for and diverges for . If then the series converges only at .   If then convergence at the endpoints of the interval of convergence is not guaranteed and must be checked separately using some appropriate convergence test.     It must be noted that convergence of the power series of some function does not guarantee that can be represented by its power series. For instance, consider the function given by . This has the power series representation at since for all integers with . However, except at , so this power series representation is not very useful for representing despite the fact that it converges for all .  In general, if has the power series representation  and if this series converges to for all in some interval centered at , then we say that the function is analytic at . The previous paragraph shows that is not analytic at . Thankfully, most of the functions we'll consider are in fact analytic.    Solving Differential Equations with Power Series  We now turn to the main topic of this chapter: solving differential equations with power series. This power series method is quite general and can theoretically be used whenever the functions involved in the differential equation are analytic, but we will primarily consider second-order linear ODEs that are homogeneous and have polynomial coefficients.   Note that polynomials are automatically analytic since they're already power series. Hence a polynomial is its own power series representation.    Solving a first-order differential equation with series   Solve the ODE given by .    We could easily solve this using methods from , but we'll use power series instead to see how this method works. To start, we assume that the solution can be written as a power series: . See for the justification behind this step.  The next step is to plug the ansatz into the ODE. Since we get the equation .  We need to find the values of the coefficients ; we will do this by equating coefficients on both sides of . We want to write both series in terms of so that we can equate coefficients, so we need to shift the summation on the left: we replace with inside the sum and decrease the limit of summation to to get . Now we can equate coefficients: for , we have .  The equation is a recurrence relation for the coefficients . It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each looks like. To see how, we plug several values for into this recurrence relation to try to determine a pattern: and in general it appears that for each .   We can't use either or to find the initial constant . This must be given by an initial condition of some kind.   Now that we've determined the form of the coefficients , we can write down the solution : .    The power series method generally works as we utilized it in . In general, the power series method to solve ODEs consists of the following procedure:   Write .    Use the ODE to build a recurrence relation for the coefficients .    Find an explicit description of the coefficients.    Identify as the power series of some function.      Solving a first-order ODE with variable coefficients   Use power series to solve the ODE .    We will solve this using the steps listed above. First, assume . Now plug this guess for into the ODE to get .  As in we want to equate coefficients to build a recurrence relation, so we need to rewrite these sums so that the same power of appears on both sides. We do this by shifting the sums, but we need to remember to shift the limits of each sum as well:   Changing limits of summation    Sum  Index  Limit               So we get . Hence a recurrence relation for is which is valid for .  Since this two-step recurrence relation is only valid for , it places no restrictions on or . However, the original ODE was first-order! So we should only expect to have one arbitrary constant in our solution, which suggests that one of or must be zero. To determine which constant must vanish, we write out the first couple terms of the sums in and compare terms: . This tells us that . Again, we can't get this information from the recurrence relation!  Now we try to find an explicit formula for . Because this is a two-step recurrence, we will write out the coefficients in two columns, one for odd and one for even : . So it appears that for every .  Now we plug this into our power series for to get .    Now that we have an idea of how to solve differential equations using power series, it can be useful to know when this method is actually valid, i.e., when power series solutions exist. We will be particularly concerned with solutions of second-order linear ODEs of the form .   Existence of Series Solutions  power series existence of series solution   Consider the differential equation given by . If and are analytic at a point , then every solution of is also analytic at .     A Legendre Equation   Show that has a series solution centered at and then find the solution up to the coefficient of .    First, note that the equation can be rewritten , so we are guaranteed a series solution centered at . Furthermore, this solution has radius of convergence at least .  To find the solution, we return to the original equation and substitute to get which becomes . After a little algebra, we get the recurrence relation . This recurrence is valid for .  Now we can use the recurrence to list the first several terms of the solution: In fact, .   In the last equation, has been substituted for .      "
 },
 {
   "id": "series-solution-definition-power-series-centered-at-0",
@@ -1617,8 +1617,8 @@ var ptx_lunr_docs = [
   "url": "section-power-series-method.html#example-series-exponential",
   "type": "Example",
   "number": "5.1.2",
-  "title": "Power series for <span class=\"process-math\">\\(e^x\\)<\/span>.",
-  "body": " Power series for   Find a power series for .    Any power series for looks like , where . Since is its own derivative, for all choices of . So and the power series for is . It turns out the equals its power series for all values of .   "
+  "title": "Power series of <span class=\"process-math\">\\(e^x\\)<\/span>.",
+  "body": " Power series of   Find a power series for the exponential function .    Any power series for looks like , where . Since is its own derivative, for all choices of . So and the power series for is . It turns out the equals its power series for all values of .   "
 },
 {
   "id": "p-472",
@@ -1635,8 +1635,8 @@ var ptx_lunr_docs = [
   "url": "section-power-series-method.html#example-series-sin-pi-over-2",
   "type": "Example",
   "number": "5.1.3",
-  "title": "Power series for <span class=\"process-math\">\\(\\sin(t)\\)<\/span> at <span class=\"process-math\">\\(a = \\frac{\\pi}{2}\\)<\/span>.",
-  "body": " Power series for at   Find the power series for centered at .    A power series centered at will look like where . To find these values, we need to compute the derivatives of and evaluate them at : . So the power series centered at is Just as with , is equal to its power series everywhere.   "
+  "title": "Power series of <span class=\"process-math\">\\(\\sin(t)\\)<\/span> at <span class=\"process-math\">\\(a = \\frac{\\pi}{2}\\)<\/span>.",
+  "body": " Power series of at   Find the power series for centered at .    A power series centered at will look like where . To find these values, we need to compute the derivatives of and evaluate them at : . So the power series centered at is Just as with , is equal to its power series everywhere.   "
 },
 {
   "id": "example-series-integral",
@@ -1655,6 +1655,15 @@ var ptx_lunr_docs = [
   "number": "5.1.5",
   "title": "Finding the radius of convergence.",
   "body": " power series radius of convergence  Finding the radius of convergence   Given the power series , define the number by the limit . Suppose the limit exists or is infinite. Then is the radius of converengence of the series: if then the series converges for and diverges for . If then the series converges only at .   If then convergence at the endpoints of the interval of convergence is not guaranteed and must be checked separately using some appropriate convergence test.    "
+},
+{
+  "id": "p-483",
+  "level": "2",
+  "url": "section-power-series-method.html#p-483",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "analytic "
 },
 {
   "id": "example-series-solve-first-order-linear",
@@ -1681,7 +1690,7 @@ var ptx_lunr_docs = [
   "type": "Theorem",
   "number": "5.1.9",
   "title": "Existence of Series Solutions.",
-  "body": " Existence of Series Solutions  power series existence of series solution   Consider the differential equation . If and are analytic at a point , then every solution is also analytic at .   "
+  "body": " Existence of Series Solutions  power series existence of series solution   Consider the differential equation given by . If and are analytic at a point , then every solution of is also analytic at .   "
 },
 {
   "id": "example-a-legendre-equation",
@@ -1699,21 +1708,21 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "5.2",
   "title": "Legendre’s Equation and Legendre Polynomials",
-  "body": " Legendre's Equation and Legendre Polynomials   An important differential equation in applications is the Legendre equation given by . Our first example of this equation (with ) was examined in . By this example, we see that has a series solution centered at with radius of convergence at least . Therefore the power series method is appropriate.    Solving the Legendre Equation  We'll proceed as we did in , altering the last sum as necessary to get which gives (after a bit of algebra, once again) .  This recurrence is valid for , and allows us to write out the solution in terms of the parameter and the arbitrary constants and : where .  Note that and form a basis of solutions ( ) of the Legendre equation, which means that must also be the general solution.    Legendre Polynomials  Our solution of simplifies greatly if happens to be an integer. In particular, if is a nonnegative integer then . If is even then the solution given in becomes a polynomial: . Likewise, if is odd then given in becomes a polynomial instead: .  By choosing and judiciously, we can guarantee that the polynomials (if is even) or (if is odd) are precisely equal to at . Doing so gives us the Legendre polynomials  , defined more precisely in : .  These polynomials satisfy several nice properties, but one of the most important characteristics they have is that forms an orthogonal set of polynomials on the interval . This means that if . It can also be shown that if . This property allows us to express any polynomial as a finite sum of Legendre polynomials in a computationally efficient manner. Furthermore, if we allow infinite series then we can use Legendre polynomials to express and continuous function on .  For actually computing Legendre polynomials, instead of using we often use Rodrigues' formula  or Bonnet's recurrence  . Either recurrence is simple to program into a CAS, as seen in the Sage cell below:    "
+  "body": " Legendre's Equation and Legendre Polynomials  Legendre's Equation   An important differential equation in applications is the Legendre equation given by . Our first example of this equation (with ) was examined in . By this example, we see that has a series solution centered at with radius of convergence at least . Therefore the power series method is appropriate.    Solving the Legendre Equation  We'll proceed as we did in , altering the last sum as necessary to get which gives (after a bit of algebra, once again) .  This recurrence is valid for , and allows us to write out the solution in terms of the parameter and the arbitrary constants and : where .  Note that and form a basis of solutions ( ) of the Legendre equation, which means that must also be the general solution.    Legendre Polynomials  Our solution of simplifies greatly if happens to be an integer. In particular, if is a nonnegative integer then . If is even then the solution given in becomes a polynomial: . Likewise, if is odd then given in becomes a polynomial instead: .  By choosing and judiciously, we can guarantee that the polynomials (if is even) or (if is odd) are precisely equal to at . Doing so gives us the Legendre polynomials  , defined more precisely in : .  These polynomials satisfy several nice properties, but one of the most important characteristics they have is that forms an orthogonal set of polynomials on the interval . This means that if . It can also be shown that if . This property allows us to express any polynomial as a finite sum of Legendre polynomials in a computationally efficient manner. Furthermore, if we allow infinite series then we can use Legendre polynomials to express any continuous function defined on .  For actually computing Legendre polynomials, instead of using we often use Rodrigues' formula  or Bonnet's recurrence  . Either recurrence is simple to program into a CAS, as seen in the Sage cell below:    "
 },
 {
-  "id": "p-509",
+  "id": "p-512",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-509",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-512",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Legendre equation "
 },
 {
-  "id": "p-514",
+  "id": "p-517",
   "level": "2",
-  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-514",
+  "url": "section-legendre-s-equation-and-legendre-polynomials.html#p-517",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1726,7 +1735,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "5.3",
   "title": "Frobenius Method",
-  "body": " Frobenius Method   This section corresponds to Section 5.3 of the text.    Regular Points and Singular Points  Recall that a homogeneous, linear second order ODE has the form We can rewrite this in the form As we saw at the end of , the usefulness of the power series method depends on the behavior of and at the point we're centering our series solution at.   Regular Points and Singular Points  regular and singular points   A point is called a regular point if and both have power series expansions at . If is not a regular point we call it a singular point .    Regular points of an ODE are nice because of the following theorem:   Existence of Series Solution  Existence of Series Solutions   Suppose that is a regular point of the differential equation . Then the ODE has two linearly independent solutions of the form The radius of convergence is at least as large as the distance from to the nearest singular point of the ODE.    In other words, the power series method works at regular points.     Find the general solution, as a power series in powers of , for the ODE .    The first thing we will do is make sure that the ODE actually has a power series solution at . To do this, we need to show that is a regular point of the ODE. So we need to find and and check that they (or their power series) make sense at . If we divide through the ODE by we obtain so . Since both of these exist at , it follows that is a regular point of the ODE. Therefore the ODE has a power series solution at (that is, in powers of ). Since and both have singular points at , it follows that the radius of convergence of the power series solution is at least .   Here, we're using the formula    We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand and using their own power series, and this would greatly complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form , or just for short. Now we plug this into the ODE to get which simplifies to or just   Now we can collect like terms, and combine everything on the left hand side into one sum: For this sum to be each of the coefficients must be , so we must have We can solve this for to get a recurrence relation for these coefficients: so   We need to find a pattern for the coefficients. Since this is a two-step relation, we'll set up two columns: one column for even and one column for odd : . So it appears that .  Therefore the general solution of the ODE is        Solutions at Singular Points and Indicial Equations  We've seen several examples showing the effectiveness of the power series method at regular points, but the situation becomes more complicated at singular points. At these points, we may not be guaranteed a power series solution.    Attempt to solve the ODE .    We start, just as we did before, by assuming the solution is a power series: . If we plug this into the ODE and simplify somewhat, we get the equation So it follows that so the recurrence relation shows that so the solution would have to be . This is certainly a solution, but it can't be the general solution. What this tells us is that the general solution of this ODE cannot be written as a power series.    The reason we couldn't find a solution of the form was because is a singular point of the ODE. If we divide through by we get and it's obvious that the coefficients have a divide by problem at .  Our goal is to find a way of dealing with situations where is a singular point of the ODE We know, in general, that we won't be able to find a power series solution ; intuitively, a power series solution is too ``nice'' to be a solution of this ODE if is a singular point. To fix this, we change our guess for to or, equivalently, Here, can be any number (real or complex!), so in general  will not be a power series .  Recall that a power series, by definition, has only nonnegative whole number powers of .  We lose a little bit by no longer assuming that is a power series, but this expression may be flexible enough to lead to a solution of the ODE if is a singular point.  Our goal now is to find the value of based on the ODE and the coefficient functions and . To do so, we will plug into the ODE and attempt to get some conditions on . First, note that so when we plug these into the ODE we get Now combine everything into one sum to get So for this equation to be true, we need to have for every and every . Since we are trying to find , we'll pick values for and . In particular, if we assume that and exist at we can pick to get (we can assume that ). This equation tells us how to find .   Indicial Equation  indicial equation   Suppose that is a singular point of the ODE but that and have well-defined power series at (i.e. and make sense). The indicial equation is given by     What we've shown is that if is a solution of the ODE then must be a root of the indicial equation. In fact, we can say more.   Method of Frobenius  Method of Frobenius   Consider the ODE Let be (real) roots of the indicial equation .   There is a solution of the ODE of the form .    If is not equal to an integer, then there exists a second linearly independent solution of the form .    If , there exists a second linearly independent solution of the form .    If is a nonzero integer, there exists a second linearly independent solution of the form .        Using the Method of Frobenius   Find a series solution centered at of the ODE     If we divide through the ODE by we get a divide-by-zero problem at , so is a singular point. However, for this ODE we have so and both have power series representations centered at (namely, themselves!). This means we can use the method of Frobenius to find a solution of the form .  The first step is to set up and solve the indicial equation, which in this case is given by We solve this algebraically for to get the roots and . Since is an integer, we are guaranteed a solution based on and a second solution based on and the logarithm. So we make the guess Now we plug this into the ODE to get or just which simplifies to So the recurrence relation the coefficients need to satisfy is   The recurrence relation will tell us nothing about , so to see if there are any restrictions on we separate the and terms from the summation to get This equation places no restrictions at all on , but it does force since we need the term to disappear to make this equation true. This tells us that we can ignore the coefficients with odd index, since they will all disappear.  Now we'll try to find a pattern in the remaining coefficients: and in general So the solution of this ODE is given by which is actually just   Technically, this isn't the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from that the second solution must be of the form Plugging this into the original ODE (and using a computer algebra system such as Sage), we get after truncating the expansion up to the term. This allows us (theoretically) to solve for and the coefficients . In fact, we get and so Since the second series corresponds to a multiple of , we can safely set and get . Therefore the general solution of the ODE is      "
+  "body": " Frobenius Method   The power series method is guaranteed to work if the coefficient functions in are analytic. However, there are important examples of ODEs where this property fails (see , which is used in the study of vibrating membranes). To solve ODEs where analyticity fails, we can sometimes use the method of Frobenius .    Regular Points and Singular Points  Recall that a homogeneous, linear second order ODE has the form We can rewrite this in the form As we saw at the end of , the usefulness of the power series method depends on the behavior of and at the point we're centering our series solution at.   Regular Points and Singular Points  regular and singular points   A point is called a regular point if and both have power series expansions at . If is not a regular point we call it a singular point .    Regular points of an ODE are nice because of the following theorem:   Existence of Series Solution  Existence of Series Solutions   Suppose that is a regular point of the differential equation . Then the ODE has two linearly independent solutions of the form The radius of convergence is at least as large as the distance from to the nearest singular point of the ODE.    In other words, the power series method works at regular points.     Find the general solution, as a power series in powers of , for the ODE .    The first thing we will do is make sure that the ODE actually has a power series solution at . To do this, we need to show that is a regular point of the ODE. So we need to find and and check that they (or their power series) make sense at . If we divide through the ODE by we obtain so . Since both of these exist at , it follows that is a regular point of the ODE. Therefore the ODE has a power series solution at (that is, in powers of ). Since and both have singular points at , it follows that the radius of convergence of the power series solution is at least .   Here, we're using the formula    We return to the original form of the ODE to solve it; if we didn't do so, we would need to expand and using their own power series, and this would greatly complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form , or just for short. Now we plug this into the ODE to get which simplifies to or just   Now we can collect like terms, and combine everything on the left hand side into one sum: For this sum to be each of the coefficients must be , so we must have We can solve this for to get a recurrence relation for these coefficients: so   We need to find a pattern for the coefficients. Since this is a two-step relation, we'll set up two columns: one column for even and one column for odd : . So it appears that .  Therefore the general solution of the ODE is        Solutions at Singular Points and Indicial Equations  We've seen several examples showing the effectiveness of the power series method at regular points, but the situation becomes more complicated at singular points. At these points, we may not be guaranteed a power series solution.    Attempt to solve the ODE .    We start, just as we did before, by assuming the solution is a power series: . If we plug this into the ODE and simplify somewhat, we get the equation So it follows that so the recurrence relation shows that so the solution would have to be . This is certainly a solution, but it can't be the general solution. What this tells us is that the general solution of this ODE cannot be written as a power series.    The reason we couldn't find a solution of the form was because is a singular point of the ODE. If we divide through by we get and it's obvious that the coefficients have a divide by problem at .  Our goal is to find a way of dealing with situations where is a singular point of the ODE We know, in general, that we won't be able to find a power series solution ; intuitively, a power series solution is too ``nice'' to be a solution of this ODE if is a singular point. To fix this, we change our guess for to or, equivalently, Here, can be any number (real or complex!), so in general  will not be a power series .  Recall that a power series, by definition, has only nonnegative whole number powers of .  We lose a little bit by no longer assuming that is a power series, but this expression may be flexible enough to lead to a solution of the ODE if is a singular point.  Our goal now is to find the value of based on the ODE and the coefficient functions and . To do so, we will plug into the ODE and attempt to get some conditions on . First, note that so when we plug these into the ODE we get Now combine everything into one sum to get So for this equation to be true, we need to have for every and every . Since we are trying to find , we'll pick values for and . In particular, if we assume that and exist at we can pick to get (we can assume that ). This equation tells us how to find .   Indicial Equation  indicial equation   Suppose that is a singular point of the ODE but that and have well-defined power series at (i.e. and make sense). The indicial equation is given by     What we've shown is that if is a solution of the ODE then must be a root of the indicial equation. In fact, we can say more.   Method of Frobenius  Method of Frobenius   Consider the ODE Let be (real) roots of the indicial equation .   There is a solution of the ODE of the form .    If is not equal to an integer, then there exists a second linearly independent solution of the form .    If , there exists a second linearly independent solution of the form .    If is a nonzero integer, there exists a second linearly independent solution of the form .        Using the Method of Frobenius   Find a series solution centered at of the ODE     If we divide through the ODE by we get a divide-by-zero problem at , so is a singular point. However, for this ODE we have so and both have power series representations centered at (namely, themselves!). This means we can use the method of Frobenius to find a solution of the form .  The first step is to set up and solve the indicial equation, which in this case is given by We solve this algebraically for to get the roots and . Since is an integer, we are guaranteed a solution based on and a second solution based on and the logarithm. So we make the guess Now we plug this into the ODE to get or just which simplifies to So the recurrence relation the coefficients need to satisfy is   The recurrence relation will tell us nothing about , so to see if there are any restrictions on we separate the and terms from the summation to get This equation places no restrictions at all on , but it does force since we need the term to disappear to make this equation true. This tells us that we can ignore the coefficients with odd index, since they will all disappear.  Now we'll try to find a pattern in the remaining coefficients: and in general So the solution of this ODE is given by which is actually just   Technically, this isn't the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from that the second solution must be of the form Plugging this into the original ODE (and using a computer algebra system such as Sage), we get after truncating the expansion up to the term. This allows us (theoretically) to solve for and the coefficients . In fact, we get and so Since the second series corresponds to a multiple of , we can safely set and get . Therefore the general solution of the ODE is      "
 },
 {
   "id": "definition-regular-points-and-singular-points",
@@ -1801,18 +1810,18 @@ var ptx_lunr_docs = [
   "body": " Bessel's Equation   As with Legendre's Equation , another important differential equation in applications is Bessel's equation : , where . By , this equation has a series solution at of the form where is a solution of the indicial equation , or just . In particular, there we're guaranteed a series solution by setting , since this is the larger root. Note that is actually a Bessel equation with parameter .  Let . Then we can plug this into to obtain , which gives . Since this only gives us data about , we should go back to to see if we can say anything about or . In fact, we get . Hence our series solution only contains even-indexed coefficients. Rewriting the recurrence to reflect this, we get     Bessel Functions for Integer  Now we consider what happens to solutions given by if is a nonnegative integer. To simplify matters (somewhat...), we add the restriction that . This allows us to write more simply as The resulting series is known as the Bessel function of the first kind of order .   Finding and   Find the zeroth order and first order Bessel functions of the first kind.    Using , we get .    These functions are important enough that they are built-in to most computer algebra systems. Using Sage, we get the following plots:   As we can see, these functions oscillate and tend towards . A useful (asymptotic) approximation is given by , as shown below.   Approximating a Bessel function.        Bessel Functions of the First Kind for Nonnegative Order  Now we try to find a formula for assuming . To do so, we need to make sense of expressions like . Thankfully, we can do so using the Gamma function .   Gamma Function  Gamma function   The Gamma function is the function given by .    An important property of the Gamma function is the following: . If we replace with an integer , we get . It turns out that we can replace in with , giving . Note that the asymptotic expansion in holds for noninteger as well.    General Solution of Bessel's Equation  Since is second-order, we need a second linearly independent solution to get the general solution. If is not an integer then we can find the second solution very quickly: . However, if is an integer then it turns out that , and so fails to be linearly independent from .  It turns out that a second, linearly independent solution is given as follows: .   "
 },
 {
-  "id": "p-550",
+  "id": "p-553",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-550",
+  "url": "section-bessel-s-equation.html#p-553",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "Bessel's equation "
 },
 {
-  "id": "p-552",
+  "id": "p-555",
   "level": "2",
-  "url": "section-bessel-s-equation.html#p-552",
+  "url": "section-bessel-s-equation.html#p-555",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1891,9 +1900,9 @@ var ptx_lunr_docs = [
   "body": " Computing the Laplace of   Compute the Laplace transform of .    We compute the Laplace transform using the definition: .   "
 },
 {
-  "id": "p-571",
+  "id": "p-574",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-571",
+  "url": "section-the-laplace-transform.html#p-574",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -1945,9 +1954,9 @@ var ptx_lunr_docs = [
   "body": " Inverse Laplace Transform   The inverse Laplace transform of a function , denoted , is a function such that .   "
 },
 {
-  "id": "p-584",
+  "id": "p-587",
   "level": "2",
-  "url": "section-the-laplace-transform.html#p-584",
+  "url": "section-the-laplace-transform.html#p-587",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2044,9 +2053,9 @@ var ptx_lunr_docs = [
   "body": " Unit Step Functions and Time Shifting  The unit step function or Heaviside function is the function defined by Note also that for any .  Recall that tells us how to deal with translation in the frequency domain: A similar result is true for -shifting.   Time Shifting of Laplace Transforms   Let denote a piecewise continuous function with Laplace transform . Let . Then , or equivalently .    To compute this we need to rely on the definition of the Laplace transform: .    The Heaviside function is useful for describing forces that turn on or off at specified times. In particular, we can now solve the IVP given at the start of this chapter in .   IVP with Discontinuous Forcing Function   A mass of 1 is attached to a spring that is held 1 to the right of its equilibrium position by a force of 4 . Beginning at time , a machine is turned on and applies an external force of to the mass. At time the machine is turned off and the external force disappears. Let be the displacement of the mass at time . What is an ODE that models the motion of the mass?    By Hooke's Law and Newton's Second Law, we have where is the external force at time . Since , and the motion of the mass satisfies the IVP We can rewrite as follows: So the IVP we need to solve is   If we take Laplace transforms, this becomes where . So If we solve this for , we get and if we simplify this using partial fractions this becomes   So the solution of the IVP is .    Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. Be careful to place matching brackets and parentheses as appropriate when using the piecewise command in Sage to construct a piecewise function.   "
 },
 {
-  "id": "p-604",
+  "id": "p-607",
   "level": "2",
-  "url": "section-unit-step-functions-and-time-shifting.html#p-604",
+  "url": "section-unit-step-functions-and-time-shifting.html#p-607",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2080,9 +2089,9 @@ var ptx_lunr_docs = [
   "body": " Dirac Delta Functions   Impulses  Forces that act over very short time intervals may be complicated to describe exactly, but it we can approximate such a force if we treat it as instantaneous. Our goal now is describe a meaningful mathematical interpretation of an instantaneous force.  To be specific, let be a force that acts only from to (and is otherwise ). Then the impulse of the force over the interval is given by We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses. And since the impulse is a number, all we really need to do is model an instantaneous unit impulse ; any other impulse we can get by multiplication by a constant.  So this is our goal: find some function that has an instantaneous unit impulse at the point . In other words, we want to find a function such that But this is impossible for any function, since However, we can approximate the idea of an instantaneous unit impulse by defining    Approximating the instantaneous unit impulse.   A plot of approximations to an instantaneous unit impulse.     As indicated in , this function is defined so that the area under the graph is regardless of the value of . Therefore for all . Although the instantaneous unit impulse we tried to define earlier can't actually be a function, is a completely valid function for all positive . Furthermore, if we send then it becomes a better and better approximation to an ideal instantaneous unit impulse. Despite the fact that this limit does not exist (at least in the usual sense), we use it as a definition.   The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation     The Dirac delta function is, of course, not an actual function, but it's still useful as a mathematical formulation of an instantaneous force with unit impulse at . And this expression is often perfectly valid to work with inside of integrals due to the sampling property discussed below.   The Dirac delta is actually an example of a generalized function , or tempered distribution .   We can also take translations of the Dirac delta, which we view as a function  defined piecewise by We can represent this graphically as an arrow (see ).   A plot of the Dirac delta function.   A plot of the Dirac delta function.     The most important property of the Dirac delta is that This property can be generalized to products involving the Dirac delta and continuous functions. Very roughly, if represents an arrow with an area of concentrated at , then represents an arrow with area concentrated at . This sampling property is stated more precisely as .   Sampling Property of the Dirac Delta  Dirac delta function sampling   Let be a continuous function and let . Then     We treat as a function and perform the above integration:     The above theorem gives us another interpretation of the Dirac delta: it's a sampling function. When integrated against another function over an interval containing , will pick out the value . We can use this to quickly find the Laplace transform of the Dirac delta.   Laplace Transform of the Dirac Delta Function   Compute , where .    We use the definition of the Laplace transform: . In particular, .      Dirac Delta Models  We will primarily use the Dirac delta to model instantaneous forces, such as sudden kicks or jolts. Although this is not strictly realistic since such forces are still imparted over some interval of time, treating the force as instantaneous often simplifies computations.   IVP with Impulse   An object of mass , at rest, is attached to a spring with spring constant . At time , the a hammer strikes the mass providing an impulse of and setting the mass in motion. What is the displacement ?    The displacement satisfies the ODE where is the external force. Since the hammer strikes quickly, we can model it as an instantaneous force of the form . And since it provides an impulse of , we can pick . As the mass is initially at rest, satisfies the IVP To solve this, we take the Laplace transform of the IVP to get or just So .    Note that the above solution does not appear to satisfy our initial conditions. However, since we assumed the impulse acted instantaneously at time , this is really the same as assuming that the mass had an initial velocity. Now we look at what happens if we delay the hammer strike.   Time-delayed Strike   Consider the spring-mass system above, but suppose now that the hammer hits the mass at time . What is the displacement ?    This time, the IVP we must solve is If we take Laplace transforms and solve for we get and so . This function is plotted in below. Note the clear appearance of the sine wave in the solution once the hammer strikes the mass at .   Displacement influenced by a time-delayed hammer strike.   A plot of the displacement of a spring-mass system with time-delayed hammer strike.        Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.        The Dirac delta function is also important mathematically in determining the behavior of certain systems. For example, consider the system determined by the IVP We can imagine that the ODE is a mathematical machine that converts the input into an output, or response, . Using Laplace transforms it's not difficult to determine : . So we see that the Laplace transform of the response is related to the Laplace transform of the input by . This function is the transfer function of the system and determines all possible responses.  Now here's the connection with the Dirac delta. If we replace with to get the system and take Laplace transforms, we get . In other words, the transfer function is just the Laplace transform of the solution of . We call the solution the impulse reponse of the system. In this case, the impulse response is . Since the corresponding transfer function determines the form of for all responses , the impulse reponse must determine the form of all responses in the time domain. We will see precisely how in the next section by introducing the concept of a convolution .  "
 },
 {
-  "id": "p-615",
+  "id": "p-618",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-615",
+  "url": "section-dirac-delta-functions.html#p-618",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2107,9 +2116,9 @@ var ptx_lunr_docs = [
   "body": " The Dirac Delta Function  Dirac delta function   The Dirac delta function , denoted by the symbol , is defined by the equation    "
 },
 {
-  "id": "p-620",
+  "id": "p-623",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-620",
+  "url": "section-dirac-delta-functions.html#p-623",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2125,9 +2134,9 @@ var ptx_lunr_docs = [
   "body": " A plot of the Dirac delta function.   A plot of the Dirac delta function.    "
 },
 {
-  "id": "p-622",
+  "id": "p-625",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-622",
+  "url": "section-dirac-delta-functions.html#p-625",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2179,18 +2188,18 @@ var ptx_lunr_docs = [
   "body": " Resonance with an Impulse Train   Once again we consider the spring-mass system used above in , but now we suppose that the mass is struck with the hammer once every seconds, starting at . Find .    The IVP we need to solve now is where . So once more we take Laplace transforms to get and so . The displacement is then given by . Each time the hammer strikes the mass, a factor of is added to the displacement. The repeated hammer strikes are in tune with the natural frequency of the mass, so they create resonance. This is clearly demonstrated in the figure below.   The displacement and resonance with the impulse train.   A plot of the displacement of a spring-mass system subject to an impulse train of Dirac delta functions.      "
 },
 {
-  "id": "p-636",
+  "id": "p-639",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-636",
+  "url": "section-dirac-delta-functions.html#p-639",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "transfer function "
 },
 {
-  "id": "p-637",
+  "id": "p-640",
   "level": "2",
-  "url": "section-dirac-delta-functions.html#p-637",
+  "url": "section-dirac-delta-functions.html#p-640",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2260,9 +2269,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series   The main idea behind Fourier series, and the field of harmonic analysis in general, is to represent more complicated objects in terms of simpler objects. A fundamental example of this idea comes from the field of linear algebra in the form of orthonormal bases . Knowing an orthonormal basis for a vector space can greatly simplify linear algebra in that vector space. In this section we'll do something similar with periodic functions , which are functions whose values repeat themselves.    Periodic Functions  Consider the function given by the following graph:   A periodic function.   The graph of a periodic function.      If we look at the graph, we see that it repeats itself if we wait long enough (approximately every six units). Functions that have this property are called periodic functions .   Periodic Functions  periodic functions   Let be a real function defined for all . We say that is a periodic function if there exists a positive number such that for all . In this case we say that is -periodic . The (fundamental) period of is the smallest positive value of for which is -periodic, assuming this value exists.     Constant functions are examples of periodic functions with no fundamental period.    Periods of Sine and Cosine  Let be any positive integer. Then the functions and are both -periodic which follows from the corresponding addition formulas . The period, in particular, is . The periodic nature of these functions can also be seen from their graphs:    Graphs of and .   An image showing the periodic nature of sine and cosine.      The graph in was produced by graphing In general, the (finite) sum of functions of the form where are integers is also -periodic. In particular, we have the following result.   Periods of Sums of Sinusoids   Let and where . Suppose that where represents the reduced fraction of . Then has period given by .     Finding Periods of Sums of Sinusoids   Find the periods of and .    For we have , which in lowest terms is . Therefore the period is . For , we have which is already in lowest terms. Therefore its period is .      Trigonometric Series and Fourier Series  One of the greatest accomplishments in mathematics was the realization that many other periodic functions can be written as a sum of sinusoids using trigonometric polynomials and trigonometric series .   Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .    Our primary goal in this section is to take a function of period and express it as a trigonometric series. To see how, we'll suppose that we have the trigonometric series we want, i.e. that and we'll look at what the coefficients of the series need to be to make this equation true. To do this, we'll need the so-called orthogonality relations for .   Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .    We can verify using a computer algebra system as below. Proving it is a little bit more work, but can be done using trigonometric identities or .    will be our primary tool for expressing a function as a trigonometric series. To see how, suppose that we have If this equation were true, then we should be able to integrate both sides of it and get another true equation. Since suggests that integrals involving simplify very nicely, we'll try to integrate both sides of the equation against from to for some . If we do this, we get This lets us solve for ! We have Similarly, The trigonometric series resulting from these coefficients is known as the Fourier series of . These formulas are useful enough that we'll place them together in a theorem.   Fourier Series Coefficients  Fourier series Coefficients   Let be a periodic function with period . Then the Fourier coefficients of are given by     Note that the formulas in tell us what the coefficients of a Fourier series representation of must be if such a representation existed, but as yet there is no guarantee that a function actually equals its Fourier series. Also, since is assumed to be -periodic we can also integrate over instead without changing the values of the coefficients.   The Fourier series of  Define for . To find its Fourier series, we can just use the previous formulas to find the values of the coefficients for . We know that As nasty as these are, the first two are actually very easy to compute. Here's why: and are both odd functions, and the integral of any odd function in an interval that is symmetric about is always (since the areas cancel out). So for all . The last term is a bit more complicated, but we can use integration by parts (and I definitely recommend using a computer here) to show that If we plug in the limits of integration and simplify (again, computers are handy for this!), we get So the Fourier series for is given by    A very good question at this point is, what relationship does the Fourier series that we found in the previous example have with the original function ? Are they actually equal? If we use the following code (adapted from here ) to compare the partial sums of the Fourier series with , then it looks like the partial sums get closer and closer if we choose larger values of .   In general, the question of whether or not a given Fourier series makes sense is a difficult one to answer. In fact, the convergence of Fourier series for what one might consider to be the more \"well-behaved\" functions in mathematics was an open question until the 1960s. See Carleson's Theorem . However, for many of the functions we care about in this course we have the following theorem.   Fourier Series of Piecewise Continuous Functions  Fourier series convergence   Let be a piecewise continuous function on the interval , and suppose that it's also periodic with period , and is differentiable everywhere that it's continuous. Then the Fourier series of converges to except at the points where is discontinuous.     "
 },
 {
-  "id": "p-654",
+  "id": "p-657",
   "level": "2",
-  "url": "section-fourier-series.html#p-654",
+  "url": "section-fourier-series.html#p-657",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2278,9 +2287,9 @@ var ptx_lunr_docs = [
   "body": " A periodic function.   The graph of a periodic function.     "
 },
 {
-  "id": "p-656",
+  "id": "p-659",
   "level": "2",
-  "url": "section-fourier-series.html#p-656",
+  "url": "section-fourier-series.html#p-659",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2332,9 +2341,9 @@ var ptx_lunr_docs = [
   "body": " Trigonometric Polynomials and Series  trigonometric polynomials and series   A trigonometric polynomial is a finite sum of the form for some natural number . A trigonometric series is a series of the form . For both sums the values are constants called the coefficients .   "
 },
 {
-  "id": "p-666",
+  "id": "p-669",
   "level": "2",
-  "url": "section-fourier-series.html#p-666",
+  "url": "section-fourier-series.html#p-669",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2350,9 +2359,9 @@ var ptx_lunr_docs = [
   "body": " Orthogonality Relations  Orthogonality relations   Let be whole numbers with . Then . Furthermore, and .   "
 },
 {
-  "id": "p-669",
+  "id": "p-672",
   "level": "2",
-  "url": "section-fourier-series.html#p-669",
+  "url": "section-fourier-series.html#p-672",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2413,9 +2422,9 @@ var ptx_lunr_docs = [
   "body": " Fourier Series of  Let for and have period . We can find its Fourier series using . If we do so, we get So the Fourier series of is given by .  "
 },
 {
-  "id": "p-681",
+  "id": "p-684",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-681",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-684",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2431,9 +2440,9 @@ var ptx_lunr_docs = [
   "body": " Even and Odd Functions  Even and odd functions   Let be a function. We say that is    "
 },
 {
-  "id": "p-684",
+  "id": "p-687",
   "level": "2",
-  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-684",
+  "url": "section-functions-of-arbitrary-period-even-and-odd-extensions.html#p-687",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2476,9 +2485,9 @@ var ptx_lunr_docs = [
   "body": " Complex Fourier Series and Parseval's Identity   Although we have a decent formula for Fourier series (see ), it's a little unwieldy due to the different expressions for and . We can fix this, perhaps surprisingly, by using complex exponentials and Euler's formula.    Complex Fourier Series  First, recall Euler's formula , which allows us to rewrite complex exponentials in terms of sine and cosine.  We can use to rewrite the Fourier series in . Our goal now is to find a complex Fourier series  for functions with period . We will also include the statement of in this new context.   Complex Fourier Series  Fourier series complex form   Let be a piecewise smooth function with period . Then the complex Fourier series of is given by where This Fourier series converges to wherever is continuous.    We need to use another orthogonality relation like we had in the real case, except now it will be written in terms of complex exponentials instead of sine and cosine. In particular, the relation we will use is the following: So if we set equal to a complex Fourier series and integrate both sides against for from to , we get where the last equality follows from the orthogonality relation we just proved. Therefore      Complex Fourier Series of Exponential Function  Let on and suppose that is periodic with period . We want to find the complex Fourier series for . We can do this by finding the correct coefficients : So we have for , since this is where has discontinuities.   Although the complex Fourier series can be easier to compute in some cases, there may be cases where we'd like to go back to the real Fourier series. The following formula lets us do so.   Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by     The real Fourier series corresponding to the complex Fourier series for from has coefficients Either way, we get the following Fourier series.     Parseval's Identity  One of the most important identities in mathematics is Parseval's identity , which we state next.   Parseval's Identity  Fourier series Parseval's identity   Let denote a piecewise-differentiable (real-valued) function on with real Fourier coefficients and complex Fourier coefficients . If exists and is finite, then     One of the great strengths of this identity is that it allows potentially complicated sums to be computed using integrals instead.   The Basel Problem  Basel problem  In the early century, one of the most renowned problems in mathematics was the Basel problem, which asked for the value of Euler was the first person to show that the sum is actually and it was this solution that made him famous Or at least math famous. in the first place. We can solve this by using Parseval's identity. To do so, let for . Then with a little bit of work we can find the (real) Fourier coefficients: By Parseval's identity, it then follows that which simplifies down to In other words,     "
 },
 {
-  "id": "p-691",
+  "id": "p-694",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-691",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-694",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2512,9 +2521,9 @@ var ptx_lunr_docs = [
   "body": " Real Fourier Series from Complex Fourier Series  Fourier series convert complex to real   Suppose has the complex Fourier series Then the corresponding coefficients and for the real Fourier series are given by    "
 },
 {
-  "id": "p-698",
+  "id": "p-701",
   "level": "2",
-  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-698",
+  "url": "section-complex-fourier-series-and-parsevals-identity.html#p-701",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2548,9 +2557,9 @@ var ptx_lunr_docs = [
   "body": " Approximation by Trigonometric Polynomials  If a function has a Fourier series and is equal to its Fourier series, i.e., , then the partial sums of the Fourier series should be good approximations of : . Such a sum is a trigonometric polynomial of degree .  We can also consider approximating with other trigonometric polynomials of degree , say . We'd like to know how good the approximation is. To do this, we need to define a measure of error.   Square Error   Given a function of period  and approximation , we define the square error to be , assuming these are real-valued functions.    It turns out that if we are approximating by trigonometric polynomials , then the square error takes a specific form.   Square Error Formula   Let be a function of period with Fourier coefficients and , and let be a degree trigonometric polynomial. Then . The error takes this minimum value if .     Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is     Since the square error is a positive value, it follows that . This is known as Bessel's inequality . states that this inequality becomes equality if we let .   Applying Bessel's Inequality   Let . Apply Bessel's inequality to this function. What does Parseval's Identity say?    If we find the Fourier coefficients of , we get . By Bessel's inequality, we know that for any . As , Parseval's gives the identity .    "
 },
 {
-  "id": "p-702",
+  "id": "p-705",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-702",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-705",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2584,9 +2593,9 @@ var ptx_lunr_docs = [
   "body": " Error from a Trigonometric Polynomial   Define for as in , and recall that the Fourier series is given by . Find the trigonometric polynomial of degree that best approximates and give the corresponding error.    The trigonometric polynomial of degree that best approximates is . The corresponding square error is    "
 },
 {
-  "id": "p-709",
+  "id": "p-712",
   "level": "2",
-  "url": "section-approximation-by-trigonometric-polynomials.html#p-709",
+  "url": "section-approximation-by-trigonometric-polynomials.html#p-712",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2611,9 +2620,9 @@ var ptx_lunr_docs = [
   "body": " The Fourier Transform  If is a periodic function with period , then we know how to find its Fourier series, both real and complex. But what do we do if our function is not periodic? Can we still get a similar representation?  Let be some piecewise-differentiable function, not necessarily periodic. Then we can't find it's Fourier series. However, we can truncate the graph of , and replace it with a periodic function that is equal to on some interval . Then we can find the Fourier series of this function, which by is given by where So we can write wherever is continuous on .  The idea now is that the larger that gets, this expression can be used to represent for more and more values of . So we want to see what happens to this as . First, we'll clean this up a little bit by writing and , so that . Then if is in and is continuous at , then we can say As awful as this looks, we can relate this to a Riemann sum! As  , we can replace with the new variable and this expression becomes This leads to the definition of the Fourier transform . But first we need another definition.   Absolutely Integrable Functions  Absolutely Integrable Functions   Let be a piecewise continuous function. Then is absolutely integrable if      The Fourier Transform  Fourier Transform definition   Let be an absolutely integrable piecewise continuous function. The Fourier transform of is the function defined by We often write to denote the Fourier transform as well.     Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is    As with the Laplace transform, the Fourier transform of a function is said to be in the frequency domain . In fact, the magnitude of represents the frequency content of the function (thought of as a signal) at the frequency . It's also a quick jump to get the inverse Fourier transform .   The Inverse Fourier Transform  Fourier Transform inverse transform   The inverse Fourier transform of is      Fourier Inversion Theorem  Fourier Transform inversion theorem   Let be an absolutely integrable, piecewise differentiable function. Then wherever is continuous.     Inverse Fourier transform of a step function  Define by Then we can find the inverse transform using :    The Fourier and inverse Fourier transforms are also linear like the Laplace transform: if are constants and are functions, then and The Fourier transform also works well with derivatives.   Fourier Transforms and Derivatives  Fourier Transform transforms fo derivatives   Let be differentiable with derivative . Suppose that both and are absolutely integrable. Then     Fourier transforms also behave well with another type of convolution.   Convolution Theorem  Fourier Transform convolution theorem   Suppose that are piecewise continuous, bounded and absolutely integrable. Define by Then     "
 },
 {
-  "id": "p-714",
+  "id": "p-717",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-714",
+  "url": "section-the-fourier-transform.html#p-717",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2647,9 +2656,9 @@ var ptx_lunr_docs = [
   "body": " Fourier transform of a piecewise exponential  Let for and otherwise. Then the Fourier transform of is   "
 },
 {
-  "id": "p-718",
+  "id": "p-721",
   "level": "2",
-  "url": "section-the-fourier-transform.html#p-718",
+  "url": "section-the-fourier-transform.html#p-721",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2710,9 +2719,9 @@ var ptx_lunr_docs = [
   "body": " Basic Concepts   Partial derivatives and PDEs  Given some quantity that depends solely on the variable , represents the rate of change of with respect to . More generally, given some quantity that depends on , we can attempt to find the rate of change of with respect to each of the variables . This idea leads to partial derivatives .   Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by     From here we can define higher order partial derivatives, such as or The order of each of these partial derivatives is and , respectively.   Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.    Just as ODEs in practice typically appear as initial value problems, PDEs can appear as boundary value problems . Boundary value problems involve conditions of the form These are examples of boundary conditions . In other words, boundary conditions can represent initial data at infinitely many points, as opposed to finitely many points like we had for our IVPs.    Linear homogeneous PDEs and the superposition principle  We will mostly be concerned with linear PDEs , which are PDEs where the only thing we're allowed to do to the function and its derivatives is multiply it by a constant. A linear PDE is homogeneous if every term contains the function or one of its derivatives. A solution of a PDE is a function that satisfies the PDE.   Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.    Just as with linear homogeneous ODEs, PDEs that are linear and homogeneous satisfy the superposition principle .   Superposition principle partial differential equations  Superposition principle   Let and denote arbitrary constants, and suppose that and are both solutions of the same linear homogeneous PDE. Then is also a solution of the same PDE.    The superposition principle is incredibly useful since it allows us to find general solutions of PDEs, which makes solving linear homogeneous PDEs somewhat tractable. If a PDE fails to be linear or homogeneous, the superposition principle is not guaranteed to hold.   Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.      Important PDEs  As mentioned in the introduction, PDEs are useful for modeling quantities that depend on multiple independent variables. We finish this section by listing several of the simplest and most studied PDEs.   where . This is called the heat or diffusion equation . This equation is used for modeling the spread of a quantity, such as how temperature diffuses along a rod.  where . This is called the wave equation , and is used for modeling vibrating motion, such as that along a plucked string.   In both PDEs above, the expression is an example of the Laplacian of . The Laplacian of a function at a point is a measure of how differs from the average value of at nearby . In particular, the Laplacian is positive at if tends to be less than nearby averages; the Laplacian is negative at if tends to be greater than nearby averages; and the Laplacian at is if is in equilibrium with its nearby averages.  With this viewpoint, we can assign physical reasoning to the heat and wave equations:   The heat equation states that the time rate of change of the temperature is proportional to the difference between the temperature at and the average values of nearby temperatures. If the nearby average temperature is greater (i.e., the Laplacian is positive), then the temperature will increase.    The wave equation states that the acceleration of the wave height is proportional to the difference between the height of the wave at and the average height at nearby points. If the nearby average height is greater (i.e., the Laplacian is positive), then the wave height will accelerate upwards.     Our goal in the next section will be to determine how to solve PDEs such as these.   "
 },
 {
-  "id": "p-729",
+  "id": "p-732",
   "level": "2",
-  "url": "section-basic-concepts.html#p-729",
+  "url": "section-basic-concepts.html#p-732",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2728,9 +2737,9 @@ var ptx_lunr_docs = [
   "body": " Partial derivatives  Partial derivatives   Let denote a function depending on the variables . Then the partial derivative of with respect to is found by differentiating while treating as a constant. The partial derivative of with respect to is denoted by The partial derivative of with respect to is found similarly, and is likewise denoted by    "
 },
 {
-  "id": "p-731",
+  "id": "p-734",
   "level": "2",
-  "url": "section-basic-concepts.html#p-731",
+  "url": "section-basic-concepts.html#p-734",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2746,18 +2755,18 @@ var ptx_lunr_docs = [
   "body": " Partial differential equations Definition  Partial differential equation   A partial differential equation (PDE) is an equation involving one or more (partial) derivatives of an unknown function that depends on two or more independent variables, usually thought of as time and position. The highest derivative appearing in a PDE is called the order of the PDE.   "
 },
 {
-  "id": "p-733",
+  "id": "p-736",
   "level": "2",
-  "url": "section-basic-concepts.html#p-733",
+  "url": "section-basic-concepts.html#p-736",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary value problems boundary conditions "
 },
 {
-  "id": "p-734",
+  "id": "p-737",
   "level": "2",
-  "url": "section-basic-concepts.html#p-734",
+  "url": "section-basic-concepts.html#p-737",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2773,9 +2782,9 @@ var ptx_lunr_docs = [
   "body": " Solution of the heat equation   Let . Show that this is a solution of the boundary value problem     To do so, we need to compute the partial derivatives of   . So we see that , which means that is a solution of . Now it remains to show that satisfies the boundary conditions, which we can do without too much trouble.   "
 },
 {
-  "id": "p-738",
+  "id": "p-741",
   "level": "2",
-  "url": "section-basic-concepts.html#p-738",
+  "url": "section-basic-concepts.html#p-741",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2800,9 +2809,9 @@ var ptx_lunr_docs = [
   "body": " Failure of the superposition principle   Consider the PDE given by This PDE fails to be linear because the second term involves multiplying with its derivative . However, it's not too hard to check that is a solution of the PDE, since if we plug this function into the PDE we get . However, the closely related function is not a solution of the same PDE, since So the superposition principle does not hold for this PDE.   "
 },
 {
-  "id": "p-743",
+  "id": "p-746",
   "level": "2",
-  "url": "section-basic-concepts.html#p-743",
+  "url": "section-basic-concepts.html#p-746",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2818,27 +2827,27 @@ var ptx_lunr_docs = [
   "body": " The Wave Equation and Separation of Variables  The main difficulty in solving PDEs (even linear ones) as compared with ODEs is that any solution of a PDE typically depends on more than one variable. Adding this extra degree of freedom into the problem greatly complicates matters. However, we can make this problem more reasonable by assuming that our solution depends on each variable separately . That is, we'll assume that the function we want to find, satisfies the constraint . This technique is known as separation of variables .  Consider a one-dimensional string of length that vibrates in the vertical direction. The vertical displacement of such a string depends on the horizontal position along the string, , and the time . So let denote the vertical displacement of the string at position and at time . If we assume that the string has constant density and that the force of gravity of the string is negligible, then satisfies the wave equation for some constant .  Suppose that the string is also subject to the boundary conditions   . In other words, the string is held fixed at both ends. We'll also suppose that we know the initial position of the string and the initial velocity of the string, represented by the initial conditions   . Our goal will be to find subject to these conditions. To start, assume that If we plug this into , then we get   If we assume that are both nonzero, then we can rewrite this to get This may not look that helpful, but it actually places some serious restrictions on and . The left hand side of this equation only depends on whereas the right hand side depends only on . So the only way for this equation to be true for all  is if both sides are constant: for some . This now gives us two separate ordinary differential equations for and :  . We can add a few more restrictions to these ODEs to help us solve them. Note that the boundary conditions force either or for all , which leads to . So to avoid this trivial solution, we'll set .  We'll solve first since we have extra information to use. So to start, suppose that and write for some nonzero . Then becomes and has solution given by   Now, forces , so we get . However, since as well, we get . But the only way to solve this is to set since only if . So in other words, if we assume that , then the only way to solve is to set , which also forces . Obviously, this isn't very useful. Similarly, if we assume that then we get the same problem. So let's assume that for some nonzero . Then becomes , which has solution   The condition forces , and the second boundary condition forces . We want to avoid setting equal to since this would give us again, so we'll set instead. This tells us that for some integer , or just . So nontrivial solutions of that satisfy the boundary conditions can occur only if where and . For each choice of (ignoring sign), we get the solution .  Now we move on to solving , but we still need to keep the condition for . If we do so, then becomes , which has solutions given by where .  So this means that every function of the form is a solution of subject to the boundary conditions . It also follows from the superposition principle that any (finite) linear combination of these functions will give another solution that satisfies the boundary conditions.  However, this does not guarantee that we can solve for the initial conditions in . To give ourselves as general a solution as possible, we will guess that the solution to the wave equation is actually a linear combination of all possible . That is, we'll say that   Now we'll use the initial conditions to actually determine . To start, note that we must have  This is a Fourier series , and in particular it's the Fourier series of the odd extension of with period . See . So it follows that   Similarly, we must have This is the Fourier series for the odd extension of with period . Therefore or just   We can put all of this together into the following theorem.   Wave equation solution  Solution of the Wave Equation   The solution of the wave equation with boundary conditions and initial conditions is given by where and for .     A string with fixed ends   A string at rest has unit length, and is fixed at both ends. Suppose that the string is now stretched into the triangular shape given by the graph of The string is then released at time . Given , find the function that models the vertical displacement of the string at position at time .    We can model as the solution of the wave equation with boundary conditions and initial conditions We can find from .  Using the Sage cell below, we get and since this forces as well. Hence the solution is      "
 },
 {
-  "id": "p-748",
+  "id": "p-751",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-748",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-751",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "separation of variables "
 },
 {
-  "id": "p-750",
+  "id": "p-753",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-750",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-753",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "boundary conditions "
 },
 {
-  "id": "p-751",
+  "id": "p-754",
   "level": "2",
-  "url": "section-wave-equation-and-separation-of-variables.html#p-751",
+  "url": "section-wave-equation-and-separation-of-variables.html#p-754",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -2917,18 +2926,18 @@ var ptx_lunr_docs = [
   "body": " The Heat Equation   The last equation we will look at is the heat equation , which models the temperature distribution of a thin bar of uniform density and constant cross-section placed along the -axis. We also assume that the bar is perfectly insulated on its surface, so that heat flows along the bar in the -direction only. With these assumptions, the temperature of the bar at position and time satisfies the PDE  . This is called the one-dimensional heat equation .    Bar with ends fixed at  We will start by solving the heat equation for the case where the bar has ends which are fixed at temperature . If we're given an initial temperature distribution , then is the solution of the boundary value problem  . We can solve this boundary value problem using separation of variables, much as we did in . So to start, we assume that . If we plug this into the heat equation , then we get   Now we have three separate cases to consider for : or . Just as with the wave equation, the only case that doesn't lead to trivial solutions is . In this case leads to the two ODEs given by  . The boundary conditions in force , and the only nontrivial solutions of occur when . So we get the solutions , just as with the wave equation.  For the second ODE, we readily solve it to obtain where as before. So every function is a solution of that satisfies the boundary equations . In order to satisfy the arbitrary initial condition , we take an infinite sum of the functions to get   Finally, if we plug in and use the initial condition , we get . This is just the Fourier series of the odd extension of , which lets us find . We summarize all of this in the following theorem.   Heat equation fixed ends  Solution of the Heat Equation with Fixed Temperature   The solution of the heat equation satisfying the boundary conditions and initial condition is given by where      Sinusoidal initial temperature   Consider a thin metal bar of length placed on the -axis, with one end at and the other at . Assuming that and that the initial temperature is for , find the temperature distribution using .    The temperature is the function given by where is the coefficient of the Fourier series of the odd extension of . The odd extension of is . Furthermore, the Fourier series of is clearly just .  So in other words, Hence      "
 },
 {
-  "id": "p-786",
+  "id": "p-789",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-786",
+  "url": "section-the-heat-equation.html#p-789",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "heat equation "
 },
 {
-  "id": "p-787",
+  "id": "p-790",
   "level": "2",
-  "url": "section-the-heat-equation.html#p-787",
+  "url": "section-the-heat-equation.html#p-790",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",

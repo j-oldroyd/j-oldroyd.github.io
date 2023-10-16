@@ -2,7 +2,7 @@
 
 <chapter xml:id="series-solutions" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Series Solutions of ODEs</title>
-
+  <shorttitle>Series Solutions</shorttitle>
   <introduction>
     <p>
       In <xref ref="linear-odes-constant-coefficients" text="type-global" /> we developed a general method for solving linear ODEs with constant coefficients.
@@ -11,19 +11,16 @@
       for some constants <m>a, b, c</m>.
       We saw that the solution of such ODEs looked like exponentials and then determined which exponentials would provide us with a general solution.
     </p>
-
     <p>
       Now we move on to more complicated (but still linear) ODEs of the form
       <men xml:id="equation-series-solutions-general-homogeneous">y'' + P(x)y^\prime + Q(x)y = 0</men>.
       Some extremely important ODEs of this form include <xref ref="equation-bessel" text="custom">Bessel's equation</xref>.
       However, the method of characteristic equations is not flexible enough to solve come ODEs of this form.
     </p>
-
     <p>
       To address this, we will change our choice of <em>ansatz</em> from exponential solutions <m>y = e^{rx}</m> to <em>power series solutions</em> <m>y = \sum_{k=0}^{\infty}a_k x^{k}</m>.
       This change will allow us more flexibility in finding solutions to equations of the form given in <xref ref="equation-series-solutions-general-homogeneous" text="type-global" />.
     </p>
-
     <aside>
       <p>
         Note that <m>e^{rx} = \sum_{k=0}^{\infty}\frac{r^k}{k!}x^k</m>, and so the exponential solutions found in <xref ref="linear-odes-constant-coefficients" text="type-global" /> were a special case of the more general series solution.
@@ -31,41 +28,33 @@
       </p>
     </aside>
   </introduction>
-
   <section xml:id="section-power-series-method">
     <title>Power Series Method</title>
-
     <introduction>
       <p>
         Since power series form the basis of our solution strategy in this chapter, we begin by reviewing some important concepts related to power series and their convergence.
       </p>
     </introduction>
-
     <subsection xml:id="subsection-review-of-power-series">
       <title>Review of Power Series</title>
-
       <p>
         In calculus, it's important to know how to differentiate and integrate functions.
         For some functions (say, <m>x-1,x^{2},3-x^{5}</m>) it can be very straightforward, but for others (such as <m>e^{-x^{2}}</m>) it can be impossible.
       </p>
-
       <aside>
         <p>
           At least, it can be impossible to integrate certain functions in terms of the <q>everyday</q>, or <em>elementary</em> functions that we're used to.
         </p>
       </aside>
-
       <p>
         Power series were introduced in calculus to allow us to write complicated functions <m>f(x)</m> in terms of simpler functions <m>1,x,x^{2},\dots</m>.
         In particular, our goal is to write <m>f(x)</m> in the form
         <men xml:id="series-solution-equation-power-series-at-zero">f(x) = c_{0}+c_{1}x+c_{2}x^{2}+c_{3}x^{3}+\dots = \sum_{k=0}^{\infty}c_{k}x^{k}</men>
         where the coefficients <m>c_{k}</m> are all constants.
       </p>
-
       <definition xml:id="series-solution-definition-power-series-centered-at-0">
         <title>Power series</title>
         <idx>power series</idx>
-
         <statement>
           <p>
             A <term>power series (centered at <m>0</m>)</term> is a series (that is, an infinite sum) of the form <m>\sum_{k=0}^{\infty}c_{k}x^{k}</m>.
@@ -73,20 +62,17 @@
           </p>
         </statement>
       </definition>
-
       <aside>
         <p>
           A power series doesn't have to start at <m>k=0</m>, but <em>it may not contain any negative powers of <m>x</m></em>.
         </p>
       </aside>
-
       <p>
         The question, now, is to determine the values of the coefficients <m>c_{k}</m> to make <xref ref="series-solution-equation-power-series-at-zero" text="type-global" /> true.
         If we look at the equation we see that we can solve for <m>c_{0}</m> very easily.
         All that we need to do is to set <m>x=0</m> in <xref ref="series-solution-equation-power-series-at-zero" text="type-global" /> to make all of the other terms disappear:
         <me>f(0) = c_{0} + c_{1}\cdot0+\dots = c_{0}</me>.
       </p>
-
       <p>
         We can use a similar approach to solve for <m>c_{1}</m> by plugging in <m>x=0</m>, but we need to get rid of the power of <m>x</m> attached to it.
         This is done by taking the derivative of <m>f(x)</m> and then setting <m>x = 0</m>:
@@ -107,21 +93,17 @@
         </md>
         and so <m>c_{3} = \frac{f^{(3)}(0)}{3\cdot2\cdot1}</m>.
       </p>
-
       <p>
         In general, to get the coefficient <m>c_{k}</m> of <m>x^{k}</m> in the power series of <m>f(x)</m>, we have the following equation:
         <men xml:id="equation-power-series-coefficients-at-zero">c_{k} = \frac{f^{(k)}(0)}{k\cdot(k-1)\cdot\dots\cdot2\cdot1} = \frac{f^{(k)}(0)}{k!}</men>.
       </p>
-
       <example xml:id="example-series-exponential">
-        <title>Power series for <m>e^x</m></title>
-
+        <title>Power series of <m>e^x</m></title>
         <statement>
           <p>
-            Find a power series for <m>e^{x}</m>.
+            Find a power series for the exponential function <m>e^{x}</m>.
           </p>
         </statement>
-
         <solution>
           <p>
             Any power series for <m>f(x) = e^{x}</m> looks like <m>\sum_{k=0}^{\infty}c_{k}x^{k}</m>, where
@@ -135,7 +117,6 @@
           </p>
         </solution>
       </example>
-
       <p>
         The above power series was written in terms of powers of <m>x</m>, but this doesn't have to be the case.
         We can also write power series in terms of powers of <m>x-a</m>, where <m>a</m> is some constant.
@@ -145,16 +126,13 @@
         For such a series, the formula for the <m>c_{k}</m> is given by
         <men xml:id="series-solutions-power-series-coeffs-at-a">c_{k} = \frac{f^{(k)}(a)}{k!}</men>.
       </p>
-
       <example xml:id="example-series-sin-pi-over-2">
-        <title>Power series for <m>\sin(t)</m> at <m>a = \frac{\pi}{2}</m></title>
-
+        <title>Power series of <m>\sin(t)</m> at <m>a = \frac{\pi}{2}</m></title>
         <statement>
           <p>
             Find the power series for <m>g(t) = \sin t</m> centered at <m>a = \frac{\pi}{2}</m>.
           </p>
         </statement>
-
         <solution>
           <p>
             A power series centered at <m>a = \frac{\pi}{2}</m> will look like
@@ -163,10 +141,10 @@
             <me>c_{k} = \frac{g^{(k)}(\frac{\pi}{2})}{k!}</me>.
             To find these values, we need to compute the derivatives of <m>g(t)</m> and evaluate them at <m>\frac{\pi}{2}</m>:
             <md>
-              <mrow>g^{(0)}(t) \amp= \sin t \amp\Rightarrow g^{(0)}(\frac{\pi}{2}) = 1</mrow>
-              <mrow>g^\prime(t) \amp= \cos t \amp\Rightarrow g^\prime(\frac{\pi}{2}) = 0</mrow>
-              <mrow>g''(t) \amp= -\sin t \amp\Rightarrow g''(\frac{\pi}{2}) = -1</mrow>
-              <mrow>g^{(3)}(t) \amp= -\cos t \amp\Rightarrow g^{(3)}(\frac{\pi}{2}) = 0</mrow>
+              <mrow>g^{(0)}(t) \amp= \sin t \amp\Rightarrow g^{(0)}\parens{\frac{\pi}{2}} \amp= 1</mrow>
+              <mrow>g^\prime(t) \amp= \cos t \amp\Rightarrow g^\prime\parens{\frac{\pi}{2}} \amp= 0</mrow>
+              <mrow>g''(t) \amp= -\sin t \amp\Rightarrow g''\parens{\frac{\pi}{2}} \amp= -1</mrow>
+              <mrow>g^{(3)}(t) \amp= -\cos t \amp\Rightarrow g^{(3)}\parnes{\frac{\pi}{2}} \amp= 0</mrow>
             </md>.
             So the power series centered at <m>\frac{\pi}{2}</m> is
             <me>
@@ -176,7 +154,6 @@
           </p>
         </solution>
       </example>
-
       <p>
         The following power series are used quite often:
         <md>
@@ -185,18 +162,15 @@
           <mrow>\sin x \amp= \sum_{n=0}^{\infty}(-1)^{n}\frac{x^{2n+1}}{(2n+1)!} \amp \amp= x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \cdots</mrow>
           <mrow>\cos x \amp= \sum_{n=0}^{\infty}(-1)^{n}\frac{x^{2n}}{(2n)!} \amp \amp= 1 - \frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \cdots</mrow>
         </md>
-        Viewing a function as a power series can be extremely beneficial; if you have a power series expression for some function, it is extremely easy to do calculus with it.
+        Viewing a function as a power series can be extremely beneficial; if you have a power series expression for some function, it (usually) makes the related calculus operations such as differentiation and integration trivial to perform.
       </p>
-
       <example xml:id="example-series-integral">
         <title>Integrating a series</title>
-
         <statement>
           <p>
             Find <m>\displaystyle\int_{0}^{1}e^{x^{2}}\dd{x}</m>.
           </p>
         </statement>
-
         <solution>
           <p>
             We can't integrate <m>e^{x^{2}}</m> using elementary functions but this is straightforward to integrate using power series:
@@ -206,7 +180,6 @@
               <mrow>\amp= \sum_{n=0}^{\infty}\frac{1}{(2n+1)n!}</mrow>
             </md>.
           </p>
-
           <aside>
             <p>
               We can also write the integral of <m>e^{x^2}</m> in terms of the <url href="https://en.wikipedia.org/wiki/Error_function" visual="en.wikipedia.org/wiki/Error_function">error function</url>:
@@ -215,16 +188,13 @@
           </aside>
         </solution>
       </example>
-
       <p>
         Calculations involving power series are only valid where the series converges.
         The following theorem can be used to determine when a power series converges.
       </p>
-
       <theorem xml:id="theorem-finding-radius-convergence">
         <idx><h>power series</h><h>radius of convergence</h></idx>
         <title>Finding the radius of convergence</title>
-
         <statement>
           <p>
             Given the power series <m>\sum_{n=0}^{\infty}c_{n}x^{n}</m>, define the number <m>\rho</m> by the limit
@@ -233,7 +203,6 @@
             Then <m>\rho</m> is the radius of converengence of the series: if <m>\rho\neq0</m> then the series converges for <m>|x|\lt\rho</m> and diverges for <m>|x|\gt\rho</m>.
             If <m>\rho=0</m> then the series converges only at <m>x=0</m>.
           </p>
-
           <aside>
             <p>
               If <m>0 \lt\rho\lt\infty</m> then convergence at the endpoints of the interval of convergence is not guaranteed and must be checked separately using some appropriate convergence test.
@@ -241,26 +210,41 @@
           </aside>
         </statement>
       </theorem>
+      <p>
+        It must be noted that convergence of the power series of some function <m>f(x)</m> does not guarantee that <m>f(x)</m> can be represented by its power series.
+        For instance, consider the function <m>f(x)</m> given by
+        <me>f(x) = \begin{cases}e^{-x^{-2}} \amp\text{if }x\neq0 \\ 0 \amp\text{if }x=0\end{cases}</me>.
+        This has the power series representation <m>0</m> at <m>x=0</m> since <m>f^{(k)(0)} = 0</m> for all integers <m>k</m> with <m>k\geq0</m>.
+        However, <m>f(x)\neq0</m> except at <m>x=0</m>, so this power series representation is not very useful for representing <m>f(x)</m> despite the fact that it converges for all <m>x</m>.
+      </p>
+      <p>
+        In general, if <m>f(x)</m> has the power series representation <m>\sum_{k=0}^{\infty}a_k(x-a)^k</m> <em>and</em> if this series converges to <m>f(x)</m> for all <m>x</m> in some interval centered at <m>x=a</m>, then we say that the function <m>f(x)</m> is <term>analytic</term> at <m>x=a</m>.
+        The previous paragraph shows that
+        <me>f(x) = \begin{cases}e^{-x^{-2}} \amp\text{if }x\neq0 \\ 0 \amp\text{if }x=0\end{cases}</me>
+        is not analytic at <m>x=0</m>.
+        Thankfully, most of the functions we'll consider are in fact analytic.
+      </p>
     </subsection>
-
     <subsection xml:id="subsection-solving-differential-equations-with-power-series">
       <title>Solving Differential Equations with Power Series</title>
-
       <p>
         We now turn to the main topic of this chapter: solving differential equations with power series.
-        This power series method is quite general and can theoretically be used whenever the functions involved are analytic, but we will primarily consider second-order linear ODEs that are homogeneous and have polynomial coefficients.
+        This power series method is quite general and can theoretically be used whenever the functions involved in the differential equation are analytic, but we will primarily consider second-order linear ODEs that are homogeneous and have polynomial coefficients.
       </p>
-
+      <aside>
+        <p>
+          Note that polynomials are automatically analytic since they're already power series.
+          Hence a polynomial is its <em>own</em> power series representation.
+        </p>
+      </aside>
       <example xml:id="example-series-solve-first-order-linear">
         <title>Solving a first-order differential equation with series</title>
-
         <statement>
           <p>
             Solve the ODE given by
             <me>\dv{y}{x} = 4y</me>.
           </p>
         </statement>
-
         <solution>
           <p>
             We could easily solve this using methods from <xref ref="intro-to-odes" text="type-global" />, but we'll use power series instead to see how this method works.
@@ -268,7 +252,6 @@
             <me>y = \sum_{n=0}^{\infty}c_{n}x^{n}</me>.
             See <xref ref="theorem-existence-of-series-solutions" text="type-global" /> for the justification behind this step.
           </p>
-
           <p>
             The next step is to plug the ansatz into the ODE.
             Since
@@ -279,7 +262,6 @@
             we get the equation
             <men xml:id="equation-series-solutions-first-order">\sum_{n=1}^{\infty}nc_{n}x^{n-1} = 4\sum_{n=0}^{\infty}c_{n}x^{n}</men>.
           </p>
-
           <p>
             We need to find the values of the coefficients <m>c_{n}</m>; we will do this by equating coefficients on both sides of <xref ref="equation-series-solutions-first-order" text="type-global" />.
             We want to write both series in terms of <m>x^{n}</m> so that we can equate coefficients, so we need to shift the summation on the left: we replace <m>n</m> with <m>n+1</m> inside the sum and decrease the limit of summation <m>n=1</m> to <m>n=0</m> to get
@@ -287,7 +269,6 @@
             Now we can equate coefficients: for <m>n\geq0</m>, we have
             <men xml:id="equation-series-solutions-first-order-recurrence">(n+1)c_{n+1} = 4c_{n}\qq{or} c_{n+1} = \frac{4}{n+1}c_{n}</men>.
           </p>
-
           <p>
             The equation <xref ref="equation-series-solutions-first-order-recurrence" text="type-global" /> is a <term>recurrence relation</term> for the coefficients <m>c_n</m>.
             It describes the coefficients in terms of the previous ones, and can be used to determine explicitly what each <m>c_{n}</m> looks like.
@@ -301,14 +282,12 @@
             <men xml:id="equation-series-solutions-first-order-explicit">c_{n} = \frac{4^{n}}{n!}c_{0}</men>
             for each <m>n</m>.
           </p>
-
           <aside>
             <p>
               We can't use either <xref ref="equation-series-solutions-first-order-recurrence" text="type-global" /> or <xref ref="equation-series-solutions-first-order-explicit" text="type-global" /> to find the initial constant <m>c_0</m>.
               This must be given by an initial condition of some kind.
             </p>
           </aside>
-
           <p>
             Now that we've determined the form of the coefficients <m>c_n</m>, we can write down the solution <m>y</m>:
             <md>
@@ -320,28 +299,25 @@
           </p>
         </solution>
       </example>
-
       <p>
-        To solve the above ODE we used the following steps:
+        The power series method generally works as we utilized it in <xref ref="example-series-solve-first-order-linear" text="type-global" />.
+        In general, the power series method to solve ODEs consists of the following procedure:
         <ol>
           <li>
             <p>
               Write <m>y = \sum_{n=0}^{\infty}c_{n}x^{n}</m>.
             </p>
           </li>
-
           <li>
             <p>
               Use the ODE to build a recurrence relation for the coefficients <m>c_{n}</m>.
             </p>
           </li>
-
           <li>
             <p>
               Find an explicit description of the coefficients.
             </p>
           </li>
-
           <li>
             <p>
               Identify <m>y</m> as the power series of some function.
@@ -349,16 +325,13 @@
           </li>
         </ol>
       </p>
-
       <example xml:id="example-series-solution-first-order-variable-coeffs">
         <title>Solving a first-order ODE with variable coefficients</title>
-
         <statement>
           <p>
             Use power series to solve the ODE <m>y^\prime+2xy=0</m>.
           </p>
         </statement>
-
         <solution>
           <p>
             We will solve this using the steps listed above.
@@ -366,28 +339,23 @@
             Now plug this guess for <m>y</m> into the ODE to get
             <me>\sum_{k=1}^{\infty}kc_{k}x^{k-1} = -\sum_{k=0}^{\infty}2c_{k}x^{k+1}</me>.
           </p>
-
           <p>
             As in <xref ref="example-series-solve-first-order-linear" text="type-global" /> we want to equate coefficients to build a recurrence relation, so we need to rewrite these sums so that the same power of <m>x</m> appears on both sides.
             We do this by shifting the sums, but we need to remember to shift the limits of each sum as well:
           </p>
-
           <table xml:id="table-series-solutions-change-of-summation-limits">
             <title>Changing limits of summation</title>
-
             <tabular top="major">
               <row bottom="major">
                 <cell>Sum</cell>
                 <cell>Index</cell>
                 <cell>Limit</cell>
               </row>
-
               <row>
                 <cell><m>\sum_{k=1}^{\infty}kc_{k}x^{k-1}</m></cell>
                 <cell><m>k-1\to n</m></cell>
                 <cell><m>k=1\to n=0</m></cell>
               </row>
-
               <row bottom="major">
                 <cell><m>-\sum_{k=0}^{\infty}2c_{k}x^{k+1}</m></cell>
                 <cell><m>k+1\to n</m></cell>
@@ -395,7 +363,6 @@
               </row>
             </tabular>
           </table>
-
           <p>
             So we get
             <men xml:id="equation-series-first-order-variable-coeffs">\sum_{n=0}^{\infty}(n+1)c_{n+1}x^{n} = \sum_{n=1}^{\infty}(-2)c_{n-1}x^{n} = 0</men>.
@@ -403,7 +370,6 @@
             <me>c_{n+1} = -\frac{2}{n+1}c_{n-1}</me>
             which is valid for <m>n\geq1</m>.
           </p>
-
           <p>
             Since this <term>two-step recurrence relation</term> is only valid for <m>n\geq1</m>, it places no restrictions on <m>c_0</m> or <m>c_1</m>.
             However, the original ODE was first-order!
@@ -413,7 +379,6 @@
             This tells us that <m>c_{1} = 0</m>.
             Again, we can't get this information from the recurrence relation!
           </p>
-
           <p>
             Now we try to find an explicit formula for <m>c_{n}</m>.
             Because this is a two-step recurrence, we will write out the coefficients in two columns, one for odd <m>n</m> and one for even <m>n</m>:
@@ -426,7 +391,6 @@
             <me>c_{2k} = \frac{(-1)^{k}}{k!}c_{0}\qq{and}c_{2k+1} = 0</me>
             for every <m>k</m>.
           </p>
-
           <p>
             Now we plug this into our power series for <m>y</m> to get
             <md>
@@ -439,25 +403,20 @@
           </p>
         </solution>
       </example>
-
       <p>
         Now that we have an idea of how to solve differential equations using power series, it can be useful to know when this method is actually valid, i.e., when power series solutions exist.
-        We will be particularly concerned with solutions of second-order linear ODEs.
+        We will be particularly concerned with solutions of second-order linear ODEs of the form <xref ref="equation-series-solutions-general-homogeneous" text="type-global" />.
       </p>
-
       <theorem xml:id="theorem-existence-of-series-solutions">
         <title>Existence of Series Solutions</title>
         <idx><h>power series</h><h>existence of series solution</h></idx>
-
         <statement>
           <p>
-            Consider the differential equation
-            <me>y'' + P(x)y^\prime + Q(x)y = R(x)</me>.
-            If <m>P(x), Q(x)</m> and <m>R(x)</m> are analytic at a point <m>x_{0}</m>, then every solution is also analytic at <m>x_{0}</m>.
+            Consider the differential equation given by <xref ref="equation-series-solutions-general-homogeneous" text="type-global" />.
+            If <m>P(x), Q(x)</m> and <m>R(x)</m> are analytic at a point <m>x_{0}</m>, then every solution of <xref ref="equation-series-solutions-general-homogeneous" text="type-global" /> is also analytic at <m>x_{0}</m>.
           </p>
         </statement>
       </theorem>
-
       <example xml:id="example-a-legendre-equation">
         <title>A Legendre Equation</title>
         <statement>
@@ -467,7 +426,6 @@
             has a series solution centered at <m>0</m> and then find the solution up to the coefficient of <m>x^{6}</m>.
           </p>
         </statement>
-
         <solution>
           <p>
             First, note that the equation can be rewritten
@@ -475,7 +433,6 @@
             so we are guaranteed a series solution centered at <m>x = 0</m>.
             Furthermore, this solution has radius of convergence at least <m>R = 1</m>.
           </p>
-
           <p>
             To find the solution, we return to the original equation and substitute <m>y = \sum_{n=0}^{\infty}c_{n}x^{n}</m> to get
             <me>\sum_{n\geq0}n(n-1)c_{n}x^{n-2} + \sum_{n\geq0}\brackets{-n(n-1) - 2n + 2}c_{n}x^{n} = 0</me>
@@ -485,14 +442,12 @@
             <me>c_{n+2} = \frac{n-1}{n+1}c_{n}</me>.
             This recurrence is valid for <m>n\geq0</m>.
           </p>
-
           <p>
             Now we can use the recurrence to list the first several terms of the solution:
             <me>y = c_{1}x + c_{0}(1 - x^{2} - \frac{1}{3}x^{4} - \frac{1}{5}x^{6} - \cdots)</me>
             In fact,
             <me>y = c_{1}x - \sum_{n\geq0}\frac{1}{2n - 1}c_{0}x^{2n} = c_1x + C_0x\ln\parens{\frac{1+x}{1-x}}</me>.
           </p>
-
           <aside>
             <p>
               In the last equation, <m>C_0</m> has been substituted for <m>-\frac{c_0}{2}</m>.
@@ -502,9 +457,9 @@
       </example>
     </subsection>
   </section>
-
   <section xml:id="section-legendre-s-equation-and-legendre-polynomials">
     <title>Legendre's Equation and Legendre Polynomials</title>
+    <shorttitle>Legendre's Equation</shorttitle>
     <introduction>
       <p>
         An important differential equation in applications is the <term>Legendre equation</term> given by
@@ -540,7 +495,7 @@
       <p>
         Our solution of <xref ref="equation-legendre-ode" text="type-global" /> simplifies greatly if <m>k</m> happens to be an integer.
         In particular, if <m>k</m> is a nonnegative integer then
-        <me>a_{k+2} = a_{k+4} = \cdots = 0</me>.
+        <me>c_{k+2} = c_{k+4} = \cdots = 0</me>.
         If <m>k</m> is even then the solution <m>y_{1}</m> given in <xref ref="equation-legendre-soln-y1" text="type-global" /> becomes a polynomial:
         <me>y_{1} = 1 - \frac{k(k+1)}{2!}x^{2} + \cdots + (-1)^{k/2}\frac{[k - (k-2)][k - (k-4)]\cdots[k + (k-3)][k + (k-1)]}{k!}x^{k}</me>.
         Likewise, if <m>k</m> is odd then <m>y_{2}</m> given in <xref ref="equation-legendre-soln-y2" text="type-global" /> becomes a polynomial instead:
@@ -563,7 +518,7 @@
         <me>\int_{-1}^{1}P_{m}(x)P_{n}(x)\,dx = \frac{2}{2n+1}</me>
         if <m>m = n</m>.
         This property allows us to express <em>any</em> polynomial as a finite sum of Legendre polynomials in a computationally efficient manner.
-        Furthermore, if we allow infinite series then we can use Legendre polynomials to express and continuous function on <m>[-1,1]</m>.
+        Furthermore, if we allow infinite series then we can use Legendre polynomials to express any continuous function defined on <m>[-1,1]</m>.
       </p>
       <p>
         For actually computing Legendre polynomials, instead of using <xref ref="equation-legendre-poly" text="type-global" /> we often use <em>Rodrigues' formula</em>
@@ -588,7 +543,7 @@
                   P0, P1 = P1, ((2*k + 1) / (k + 1)) * x * P1 - (k / (k + 1)) * P0
                   k += 1
 
-              pretty_print( P1.full_simplify() )
+              pretty_print(P1.full_simplify())
 
           n = 9
           rodrigues(n)
@@ -599,11 +554,13 @@
   </section>
   <section xml:id="section-frobenius-method">
     <title>Frobenius Method</title>
-    <aside>
+    <introduction>
       <p>
-        This section corresponds to Section 5.3 of the text.
+        The power series method is guaranteed to work if the coefficient functions in <xref ref="equation-series-solutions-general-homogeneous" text="type-global" /> are analytic.
+        However, there are important examples of ODEs where this property fails (see <xref ref="equation-bessel" text="type-global" />, which is used in the study of vibrating membranes).
+        To solve ODEs where analyticity fails, we can sometimes use the <em>method of Frobenius</em>.
       </p>
-    </aside>
+    </introduction>
     <subsection xml:id="subsection-regular-points-and-singular-points">
       <title>Regular Points and Singular Points</title>
       <p>
