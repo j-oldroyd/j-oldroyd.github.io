@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WVWC-CALC The Divergence, Integral and Comparison Tests</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="og:image" content="https://j-oldroyd.github.io/wvwc-calculus/output/html/external/./wvwc-logo.jpg">
+<meta property="book:title" content="Calculus Notes">
+<meta property="book:author" content="Jesse Oldroyd">
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script><script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math",
+    "renderActions": {
+      "findScript": [
+        10,
+        function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        },
+        ""
+      ]
+    }
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "https://pretextbook.org/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="https://pretextbook.org/js/0.32/pretext_search.js"></script><link href="https://pretextbook.org/css/0.82/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.32</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.32/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.32/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.32/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.82/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/colors_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.82/setcolors.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" target="_blank" href=""><img src="external/./wvwc-logo.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="wvwc-calculus.html"><span class="title">Calculus Notes:</span> <span class="subtitle">West Virginia Wesleyan College</span></a></h1>
+<p class="byline">Jesse Oldroyd</p>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><a class="index-button button" href="index-1.html" title="Index"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span><span class="name">Index</span></a><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="icon material-symbols-outlined" aria-hidden="true">&#xea5f;</span><span class="name">Calc</span></button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script></span><span class="treebuttons"><a class="previous-button button" href="section-series.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="series.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="section-other-convergence-tests.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\th}{\text{th}}
+\newcommand{\grad}{\nabla}
+\newcommand{\curl}{\nabla\times}
+\newcommand{\curlt}{\operatorname{curl}}
+\renewcommand{\div}{\nabla\cdot}
+\newcommand{\divt}{\operatorname{div}}
+\newcommand{\del}{\nabla}
+\newcommand{\vecm}[1]{\bm{#1}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\Sum}[2]{\sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\int_{#1}^{#2}}
+\newcommand{\limit}[2]{\lim_{#1\to#2}}
+\newcommand{\Laplace}[1]{\mathcal{L}\set*{#1}}
+\newcommand{\iLaplace}[1]{\mathcal{L}^{-1}\set*{#1}}
+\newcommand{\dv}[3][]{\dfrac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pdv}[3][]{\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\dd}[2][]{\, d^{#1} #2\ }
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\dotprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\qq}[1]{\quad\text{#1}\quad}
+\newcommand{\ivec}[1]{
+\renewcommand{\arraystretch}{.8}
+\begin{bmatrix}#1\end{bmatrix}
+}
+\newcommand{\proj}[2]{\operatorname{proj}_{#1} #2}
+\newcommand{\erf}[1]{\operatorname{erf} #1}
+\newcommand{\dr}{\cdot d\vb{r}}
+\newcommand{\dn}{\cdot\vb{n}\,ds}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 parts"><ul class="structural contains-active toc-item-list">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="front.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-biography"><div class="toc-title-box"><a href="author-bio-JEO.html" class="internal"><span class="title">Author Biography</span></a></div></li>
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-part">
+<div class="toc-title-box"><a href="part-differential.html" class="internal"><span class="codenumber">I</span> <span class="title">Differential Calculus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="functions.html" class="internal"><span class="codenumber">1</span> <span class="title">Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-function-review.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Function Review</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-types-of-functions.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Types of Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-types-of-functions.html#subsection-linear-functions" class="internal"><span class="title">Linear Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-types-of-functions.html#subsection-polynomial-functions" class="internal"><span class="title">Polynomial Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-types-of-functions.html#subsection-algebraic-functions" class="internal"><span class="title">Algebraic Functions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-trigonometric-functions.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Trigonometric Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-trigonometric-functions.html#subsection-angles-and-terminal-points" class="internal"><span class="title">Angles and Terminal Points</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-trigonometric-functions.html#subsection-the-trigonometric-functions" class="internal"><span class="title">The Trigonometric Functions</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="limits.html" class="internal"><span class="codenumber">2</span> <span class="title">Limits of Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-limit-of-a-function.html" class="internal"><span class="codenumber">2.1</span> <span class="title">The Limit of a Function</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-limit-of-a-function.html#subsection-motivating-limits" class="internal"><span class="title">Motivating Limits</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-computing-limits.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Computing Limits</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-computing-limits.html#subsection-the-limit-laws" class="internal"><span class="title">The Limit Laws</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-continuity.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Continuity</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-limits-involving-infinity.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Limits Involving Infinity</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-limits-involving-infinity.html#subsection-limits-involving-vertical-asymptotes" class="internal"><span class="title">Limits Involving Vertical Asymptotes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-limits-involving-infinity.html#subsection-limits-at-infinity" class="internal"><span class="title">Limits at Infinity</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="derivatives.html" class="internal"><span class="codenumber">3</span> <span class="title">Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-definition-of-the-derivative.html" class="internal"><span class="codenumber">3.1</span> <span class="title">The Definition of the Derivative</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-definition-of-the-derivative.html#subsection-tangent-lines" class="internal"><span class="title">Tangent Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-definition-of-the-derivative.html#subsection-the-derivative" class="internal"><span class="title">The Derivative</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-derivative-as-a-function.html" class="internal"><span class="codenumber">3.2</span> <span class="title">The Derivative as a Function</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-derivative-as-a-function.html#subsection-the-derivative-function" class="internal"><span class="title">The Derivative Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-derivative-as-a-function.html#subsection-higher-order-derivatives" class="internal"><span class="title">Higher Order Derivatives</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-differentiation-formulas.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Differentiation Formulas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differentiation-formulas.html#subsection-the-power-rule-and-trigonometric-derivatives" class="internal"><span class="title">The Power Rule and Trigonometric Derivatives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differentiation-formulas.html#subsection-derivatives-of-sums-and-constant-multiples" class="internal"><span class="title">Derivatives of Sums and Constant Multiples</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differentiation-formulas.html#subsection-product-rule-quotient-rule" class="internal"><span class="title">Product Rule and Quotient Rule</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differentiation-formulas.html#subsection-the-quotient-rule" class="internal"><span class="title">The Quotient Rule</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-the-chain-rule.html" class="internal"><span class="codenumber">3.4</span> <span class="title">The Chain Rule</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-implicit-differentiation.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Implicit Differentiation</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-related-rates.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Related Rates</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-linear-approximations.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Linear Approximations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="inverse-functions.html" class="internal"><span class="codenumber">4</span> <span class="title">Inverse Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-exponential-functions.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Exponential Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-logarithms.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Logarithms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-logarithms.html#subsection-inverse-function-review" class="internal"><span class="title">Inverse Function Review</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-logarithms.html#subsection-calculus-with-inverse-functions" class="internal"><span class="title">Calculus with Inverse Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-logarithms.html#subsection-logarithms" class="internal"><span class="title">Logarithms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Derivatives of Exponential and Logarithmic Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html#subsection-derivatives-of-exponentials" class="internal"><span class="title">Derivatives of Exponentials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-derivatives-of-exponential-and-logarithmic-functions.html#subsection-derivatives-of-logarithms" class="internal"><span class="title">Derivatives of Logarithms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-exponential-models.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Exponential Models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-exponential-models.html#subsection-exponential-growth" class="internal"><span class="title">Exponential Growth</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-exponential-models.html#subsection-exponential-decay" class="internal"><span class="title">Exponential Decay</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-inverse-trigonometric-functions.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Inverse Trigonometric Functions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="applications-differentiation.html" class="internal"><span class="codenumber">5</span> <span class="title">Applications of Differentiation</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-l-hospital-s-rule.html" class="internal"><span class="codenumber">5.1</span> <span class="title">L’Hospital’s Rule</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-extreme-values-of-functions.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Extreme Values of Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-mean-value-theorem.html" class="internal"><span class="codenumber">5.3</span> <span class="title">The Mean Value Theorem</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-mean-value-theorem.html#subsection-rolle-s-theorem" class="internal"><span class="title">Rolle’s Theorem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-mean-value-theorem.html#subsection-the-mean-value-theorem" class="internal"><span class="title">The Mean Value Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-derivatives-and-graphs.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Derivatives and Graphs</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-optimization-problems.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-newton-s-method.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Newton’s Method</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-antiderivatives.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Antiderivatives</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-part contains-active">
+<div class="toc-title-box"><a href="part-integral.html" class="internal"><span class="codenumber">II</span> <span class="title">Integral Calculus</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="integrals.html" class="internal"><span class="codenumber">6</span> <span class="title">Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-areas-under-curves.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Areas Under Curves</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-the-definite-integral.html" class="internal"><span class="codenumber">6.2</span> <span class="title">The Definite Integral</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-evaluating-integrals.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Evaluating Integrals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-the-fundamental-theorem-of-calculus.html" class="internal"><span class="codenumber">6.4</span> <span class="title">The Fundamental Theorem of Calculus</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-substitution.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Substitution</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="techniques-of-integration.html" class="internal"><span class="codenumber">7</span> <span class="title">Techniques of Integration</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-integration-by-parts.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Integration by Parts</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-trigonometric-integrals-and-substitution.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Trigonometric Integrals and Substitution</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-trigonometric-integrals-and-substitution.html#subsection-integrals-involving-powers-of-sine-and-cosine" class="internal"><span class="title">Integrals Involving Powers of Sine and Cosine</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-trigonometric-integrals-and-substitution.html#subsection-integrals-involving-powers-of-secant-and-tangent" class="internal"><span class="title">Integrals Involving Powers of Secant and Tangent</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-trigonometric-integrals-and-substitution.html#subsection-trigonometric-substitutions" class="internal"><span class="title">Trigonometric Substitutions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-partial-fractions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Partial Fractions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-improper-integrals.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Improper Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-improper-integrals.html#subsection-improper-integrals-over-infinite-intervals" class="internal"><span class="title">Improper Integrals over Infinite Intervals</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-improper-integrals.html#subsection-improper-integrals-with-discontinuous-integrands" class="internal"><span class="title">Improper Integrals with Discontinuous Integrands</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-improper-integrals.html#subsection-comparison-tests-for-improper-integrals" class="internal"><span class="title">Comparison Tests for Improper Integrals</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-numerical-integration.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Numerical Integration</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="applications-of-integration.html" class="internal"><span class="codenumber">8</span> <span class="title">Applications of Integration</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-areas-between-curves.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Areas Between Curves</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-volumes.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Volumes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-volumes-by-cylindrical-shells.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Volumes by Cylindrical Shells</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-arc-length.html" class="internal"><span class="codenumber">8.4</span> <span class="title">Arc Length</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-area-of-a-surface-of-revolution.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Area of a Surface of Revolution</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-applications-to-physics-and-engineering.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Applications to Physics and Engineering</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-applications-to-physics-and-engineering.html#subsection-work" class="internal"><span class="title">Work</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-applications-to-physics-and-engineering.html#subsection-moments-and-centers-of-mass" class="internal"><span class="title">Moments and Centers of Mass</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-differential-equations.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-basic-concepts" class="internal"><span class="title">Basic Concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-separable-equations" class="internal"><span class="title">Separable Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-population-equations" class="internal"><span class="title">Population Equations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-the-logistic-equation" class="internal"><span class="title">The Logistic Equation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-stability-of-solutions" class="internal"><span class="title">Stability of Solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-differential-equations.html#subsection-linear-stability-analysis" class="internal"><span class="title">Linear Stability Analysis</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="series.html" class="internal"><span class="codenumber">9</span> <span class="title">Series</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-sequences.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Sequences</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-series.html" class="internal"><span class="codenumber">9.2</span> <span class="title">Series</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-series.html#subsection-infinite-series" class="internal"><span class="title">Infinite Series</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-series.html#subsection-geometric-series" class="internal"><span class="title">Geometric Series</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-series.html#subsection-telescoping-series" class="internal"><span class="title">Telescoping Series</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section active">
+<div class="toc-title-box"><a href="section-the-divergence-integral-and-comparison-tests.html" class="internal"><span class="codenumber">9.3</span> <span class="title">The Divergence, Integral and Comparison Tests</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-divergence-integral-and-comparison-tests.html#subsection-the-divergence-test" class="internal"><span class="title">The Divergence Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-divergence-integral-and-comparison-tests.html#subsection-the-integral-test" class="internal"><span class="title">The Integral Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-divergence-integral-and-comparison-tests.html#subsection-comparison-tests" class="internal"><span class="title">Comparison Tests</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-other-convergence-tests.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Other Convergence Tests</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-other-convergence-tests.html#subsection-alternating-series" class="internal"><span class="title">Alternating Series</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-other-convergence-tests.html#subsection-ratio-test" class="internal"><span class="title">Ratio Test</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-other-convergence-tests.html#subsection-root-test" class="internal"><span class="title">Root Test</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-power-series.html" class="internal"><span class="codenumber">9.5</span> <span class="title">Power Series</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-representing-functions-as-power-series.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Representing Functions as Power Series</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-taylor-and-maclaurin-series.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Taylor and Maclaurin Series</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-part">
+<div class="toc-title-box"><a href="part-multivariable.html" class="internal"><span class="codenumber">III</span> <span class="title">Multivariable Calculus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="parametric-equations-polar-coordinates.html" class="internal"><span class="codenumber">10</span> <span class="title">Parametric Equations and Polar Coordinates</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-parametric-equations.html" class="internal"><span class="codenumber">10.1</span> <span class="title">Parametric Equations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-calculus-and-parametric-curves.html" class="internal"><span class="codenumber">10.2</span> <span class="title">Calculus and Parametric Curves</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-calculus-and-parametric-curves.html#subsection-tangent-lines-parametric-curves" class="internal"><span class="title">Tangent Lines to Parametric Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-calculus-and-parametric-curves.html#subsection-area-under-parametric-curves" class="internal"><span class="title">Area Under Parametric Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-calculus-and-parametric-curves.html#subsection-arc-length-parametric-curves" class="internal"><span class="title">Arc Length of Parametric Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-polar-coordinates.html" class="internal"><span class="codenumber">10.3</span> <span class="title">Polar Coordinates</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-polar-coordinates.html#subsection-introducing-polar-coordinates" class="internal"><span class="title">Introducing Polar Coordinates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-polar-coordinates.html#subsection-converting-coordinates" class="internal"><span class="title">Converting Coordinates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-polar-coordinates.html#subsection-polar-curves" class="internal"><span class="title">Polar Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-polar-coordinates.html#subsection-cartesian-to-polar-method" class="internal"><span class="title">Cartesian to Polar Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-calculus-and-polar-coordinates.html" class="internal"><span class="codenumber">10.4</span> <span class="title">Calculus and Polar Coordinates</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-calculus-and-polar-coordinates.html#subsection-areas-of-polar-curves" class="internal"><span class="title">Areas of Polar Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-calculus-and-polar-coordinates.html#subsection-arc-length-in-polar-coordinates" class="internal"><span class="title">Arc Length in Polar Coordinates</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="vectors-space-geometry.html" class="internal"><span class="codenumber">11</span> <span class="title">Vectors and Euclidean Space</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-coordinates-in-3-space.html" class="internal"><span class="codenumber">11.1</span> <span class="title">Coordinates in 3-Space</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-coordinates-in-3-space.html#xyz-coordinates" class="internal"><span class="title"><span class="process-math">\(xyz\)</span>-coordinates</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-coordinates-in-3-space.html#subsection-the-distance-formula" class="internal"><span class="title">The Distance Formula</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vectors.html" class="internal"><span class="codenumber">11.2</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vectors.html#subsection-addition-and-scalar-multiplication" class="internal"><span class="title">Addition and Scalar Multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vectors.html#subsection-vector-components" class="internal"><span class="title">Vector Components</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vectors.html#subsection-basis-vectors-and-unit-vectors" class="internal"><span class="title">Basis Vectors and Unit Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vectors.html#subsection-applications" class="internal"><span class="title">Applications</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-dot-product.html" class="internal"><span class="codenumber">11.3</span> <span class="title">The Dot Product</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-dot-product.html#subsection-definition-and-properties-of-the-dot-product" class="internal"><span class="title">Definition and Properties of the Dot Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-dot-product.html#subsection-projections" class="internal"><span class="title">Projections</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-cross-product.html" class="internal"><span class="codenumber">11.4</span> <span class="title">The Cross Product</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-cross-product.html#subsection-definition-and-properties-of-the-cross-product" class="internal"><span class="title">Definition and Properties of the Cross Product</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-cross-product.html#subsection-torque" class="internal"><span class="title">Torque</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-equations-of-lines-and-planes.html" class="internal"><span class="codenumber">11.5</span> <span class="title">Equations of Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-equations-of-lines-and-planes.html#subsection-equations-of-lines" class="internal"><span class="title">Equations of Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-equations-of-lines-and-planes.html#subsection-equations-of-planes" class="internal"><span class="title">Equations of Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-cylinders-and-quadric-surfaces.html" class="internal"><span class="codenumber">11.6</span> <span class="title">Cylinders and Quadric Surfaces</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-cylinders-and-quadric-surfaces.html#subsection-cylinders" class="internal"><span class="title">Cylinders</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-cylinders-and-quadric-surfaces.html#subsection-quadric-surfaces" class="internal"><span class="title">Quadric Surfaces</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vector-functions.html" class="internal"><span class="codenumber">11.7</span> <span class="title">Vector Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vector-functions.html#limits-with-space-curves" class="internal"><span class="title">Limits with Space Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vector-functions.html#subsection-derivatives-with-space-curves" class="internal"><span class="title">Derivatives with Space Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vector-functions.html#subsection-integrals-with-space-curves" class="internal"><span class="title">Integrals with Space Curves</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-arc-length-and-curvature.html" class="internal"><span class="codenumber">11.8</span> <span class="title">Arc Length and Curvature</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-arc-length-and-curvature.html#subsection-arc-length" class="internal"><span class="title">Arc Length</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-arc-length-and-curvature.html#subsection-curvature" class="internal"><span class="title">Curvature</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-arc-length-and-curvature.html#subsection-normal-and-binormal-vectors" class="internal"><span class="title">Normal and Binormal Vectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-motion-in-space.html" class="internal"><span class="codenumber">11.9</span> <span class="title">Motion in Space</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="partial-derivatives.html" class="internal"><span class="codenumber">12</span> <span class="title">Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-functions-of-several-independent-variables.html" class="internal"><span class="codenumber">12.1</span> <span class="title">Functions of Several Independent Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-of-several-independent-variables.html#subsection-functions-of-two-variables" class="internal"><span class="title">Functions of Two Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-of-several-independent-variables.html#subsection-contour-plots" class="internal"><span class="title">Contour Plots</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-limits-and-continuity.html" class="internal"><span class="codenumber">12.2</span> <span class="title">Limits and Continuity</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-limits-and-continuity.html#subsection-limits" class="internal"><span class="title">Limits</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-limits-and-continuity.html#subsection-continuous-functions" class="internal"><span class="title">Continuous Functions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-partial-derivatives.html" class="internal"><span class="codenumber">12.3</span> <span class="title">Partial Derivatives</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-tangent-planes-and-linear-approximations.html" class="internal"><span class="codenumber">12.4</span> <span class="title">Tangent Planes and Linear Approximations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-tangent-planes-and-linear-approximations.html#subsection-tangent-planes" class="internal"><span class="title">Tangent Planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-tangent-planes-and-linear-approximations.html#subsection-linear-approximations" class="internal"><span class="title">Linear Approximations</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-the-chain-rule-in-several-variables.html" class="internal"><span class="codenumber">12.5</span> <span class="title">The Chain Rule in Several Variables</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-directional-derivatives-and-gradients.html" class="internal"><span class="codenumber">12.6</span> <span class="title">Directional Derivatives and Gradients</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-directional-derivatives-and-gradients.html#subsection-the-directional-derivative" class="internal"><span class="title">The Directional Derivative</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-directional-derivatives-and-gradients.html#subsection-gradients" class="internal"><span class="title">Gradients</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-extreme-values.html" class="internal"><span class="codenumber">12.7</span> <span class="title">Extreme Values</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-extreme-values.html#subsection-local-maxima-and-minima" class="internal"><span class="title">Local Maxima and Minima</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-extreme-values.html#subsection-absolute-maxima-and-minima" class="internal"><span class="title">Absolute Maxima and Minima</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-lagrange-multipliers.html" class="internal"><span class="codenumber">12.8</span> <span class="title">Lagrange Multipliers</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="multiple-integrals.html" class="internal"><span class="codenumber">13</span> <span class="title">Multiple Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-double-integrals-over-rectangles.html" class="internal"><span class="codenumber">13.1</span> <span class="title">Double Integrals over Rectangles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-double-integrals-over-rectangles.html#subsection-riemann-sums" class="internal"><span class="title">Riemann Sums</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-double-integrals-over-rectangles.html#subsection-fubini-s-theorem" class="internal"><span class="title">Fubini’s Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-double-integrals-over-general-regions.html" class="internal"><span class="codenumber">13.2</span> <span class="title">Double Integrals over General Regions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-double-integrals-in-polar-coordinates.html" class="internal"><span class="codenumber">13.3</span> <span class="title">Double Integrals in Polar Coordinates</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-applications-of-double-integrals.html" class="internal"><span class="codenumber">13.4</span> <span class="title">Applications of Double Integrals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-applications-of-double-integrals.html#subsection-mass" class="internal"><span class="title">Mass</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-triple-integrals.html" class="internal"><span class="codenumber">13.5</span> <span class="title">Triple Integrals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-cylindrical-coordinates.html" class="internal"><span class="codenumber">13.6</span> <span class="title">Triple Integrals in Cylindrical Coordinates</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-triple-integrals-in-spherical-coordinates.html" class="internal"><span class="codenumber">13.7</span> <span class="title">Triple Integrals in Spherical Coordinates</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-change-of-variables.html" class="internal"><span class="codenumber">13.8</span> <span class="title">Change of Variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-change-of-variables.html#subsection-change-of-variables-in-double-integrals" class="internal"><span class="title">Change of Variables in Double Integrals</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-change-of-variables.html#subsection-change" class="internal"><span class="title">Change of Variables in Triple Integrals</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="vector-calculus.html" class="internal"><span class="codenumber">14</span> <span class="title">Vector Calculus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vector-fields.html" class="internal"><span class="codenumber">14.1</span> <span class="title">Vector Fields</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vector-fields.html#subsection-vector-fields-in--rr-2-m-and--rr-3-m-" class="internal"><span class="title">Vector Fields in <span class="process-math">\(\RR^{2}\)</span> and <span class="process-math">\(\RR^{3}\)</span></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-vector-fields.html#subsection-gradient-fields-and-potential-functions" class="internal"><span class="title">Gradient Fields and Potential Functions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-line-integrals.html" class="internal"><span class="codenumber">14.2</span> <span class="title">Line Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-line-integrals.html#subsection-scalar-line-integrals" class="internal"><span class="title">Scalar Line Integrals</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-line-integrals.html#subsection-vector-field-line-integrals" class="internal"><span class="title">Vector Field Line Integrals</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-line-integrals.html#subsection-flux-integrals" class="internal"><span class="title">Flux Integrals</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-the-fundamental-theorem-for-line-integrals.html" class="internal"><span class="codenumber">14.3</span> <span class="title">The Fundamental Theorem for Line Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-fundamental-theorem-for-line-integrals.html#subsection-path-independence" class="internal"><span class="title">Path Independence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-the-fundamental-theorem-for-line-integrals.html#subsection-conservative-vector-fields" class="internal"><span class="title">Conservative Vector Fields</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-green-s-theorem.html" class="internal"><span class="codenumber">14.4</span> <span class="title">Green’s Theorem</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-curl-and-divergence.html" class="internal"><span class="codenumber">14.5</span> <span class="title">Curl and Divergence</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-curl-and-divergence.html#subsection-curl" class="internal"><span class="title">Curl</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-curl-and-divergence.html#subsection-divergence" class="internal"><span class="title">Divergence</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-curl-and-divergence.html#subsection-laplacian" class="internal"><span class="title">Laplacian</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-parametric-surfaces-and-areas.html" class="internal"><span class="codenumber">14.6</span> <span class="title">Parametric Surfaces and Areas</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-parametric-surfaces-and-areas.html#subsection-parameterizing-surfaces" class="internal"><span class="title">Parameterizing Surfaces</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-parametric-surfaces-and-areas.html#subsection-tangent-planes-vectors" class="internal"><span class="title">Tangent Planes from Space Curves</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-parametric-surfaces-and-areas.html#subsection-surface-areas" class="internal"><span class="title">Surface Areas</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-surface-integrals.html" class="internal"><span class="codenumber">14.7</span> <span class="title">Surface Integrals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-stokes-theorem.html" class="internal"><span class="codenumber">14.8</span> <span class="title">Stokes’ Theorem</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="section-the-divergence-theorem.html" class="internal"><span class="codenumber">14.9</span> <span class="title">The Divergence Theorem</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">A</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li class="toc-item toc-index"><div class="toc-title-box"><a href="index-1.html" class="internal"><span class="title">Index</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-the-divergence-integral-and-comparison-tests"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">9.3</span><span class="space"> </span><span class="title">The Divergence, Integral and Comparison Tests</span>
+</h2>
+<section class="introduction" id="introduction-convergence-tests"><div class="para" id="p-956">The Divergence Test proven in <a href="" class="xref" data-knowl="./knowl/theorem-divergence-test.html" title="Theorem 9.3.1: Divergence Test">Theorem 9.3.1</a> is our first example of a <dfn class="terminology">convergence test</dfn>: a test that determines if a given series converges or diverges. In this section we’ll also introduce two more such tests. It’s important to remember that convergence tests <em class="emphasis">usually cannot be used to evaluate a series</em>. Their primary importance is to check if a given series converges.</div></section><section class="subsection" id="subsection-the-divergence-test"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The Divergence Test</span>
+</h3>
+<div class="para" id="p-957">A useful test for divergence of a series involves the long-term behavior of the terms of the series.</div>
+<article class="theorem theorem-like" id="theorem-divergence-test"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Divergence Test.</span>
+</h4>
+<div class="para" id="p-958">Consider the series <span class="process-math">\(\sum a_{k}\text{.}\)</span> If <span class="process-math">\(\lim_{k\to\infty}a_{k}\neq0\text{,}\)</span> then <span class="process-math">\(\sum a_{k}\)</span> diverges.</div></article><details id="proof-13" class="hiddenproof"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para" id="p-959">We’ll prove the <dfn class="terminology">contrapositive</dfn> of this statement. That is, we’ll show that if the series converges then the terms go to <span class="process-math">\(0\text{.}\)</span> So suppose <span class="process-math">\(\sum a_{k}\)</span> converges and let <span class="process-math">\(S_{n}\)</span> denote the sequence of partial sums. Then <span class="process-math">\(a_{n+1} = S_{n+1} - S_{n}\)</span> which must go to <span class="process-math">\(0\)</span> since the partial sums converge.</div></article></details><div class="para" id="p-960">Note that <a href="" class="xref" data-knowl="./knowl/theorem-divergence-test.html" title="Theorem 9.3.1: Divergence Test">Theorem 9.3.1</a> cannot be used to prove <em class="emphasis">convergence</em>, only divergence. For example, the terms of the harmonic series go to <span class="process-math">\(0\)</span> but the series itself diverges.</div>
+<article class="example example-like" id="example-using-the-divergence-test"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Divergence Test.</span>
+</h4>
+<div class="para" id="p-961">Determine if <span class="process-math">\(\sum_{n=1}^{\infty}\sin n\)</span> diverges.</div>
+<div class="solutions"><details id="solution-189" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para" id="p-962">Since <span class="process-math">\(\lim_{n\to\infty}\sin n\neq 0\)</span> (in fact, it doesn’t exist at all), the series must diverge.</div></div></details></div></article></section><section class="subsection" id="subsection-the-integral-test"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The Integral Test</span>
+</h3>
+<div class="para" id="p-963">The main idea behind the <dfn class="terminology">integral test</dfn> is to relate the value of a series to the value of a certain (improper) integral. This is useful since integrals are often easier to compute than series.</div>
+<article class="theorem theorem-like" id="theorem-integral-test"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Integral Test.</span>
+</h4>
+<div class="para logical" id="p-964">
+<div class="para">Suppose that <span class="process-math">\(f(x)\)</span> is a positive, decreasing function on <span class="process-math">\([1,\infty)\)</span> and let <span class="process-math">\(a_{n} = f(n)\text{.}\)</span> Then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\int_{1}^{\infty}f(x)\,dx\quad\text{and}\quad \sum_{n=1}^{\infty}a_{n}
+\end{equation*}
+</div>
+<div class="para">must both converge or both diverge.</div>
+</div></article><article class="remark remark-like" id="remark-1"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">9.3.4</span><span class="period">.</span>
+</h4>
+<div class="para" id="p-965">It is important to note that the Integral Test is <em class="emphasis">not</em> typically useful in finding the value of a series. It can only be used to determine convergence.</div></article><article class="example example-like" id="example-determining-convergence-using-the-integral-test"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Determining Convergence Using the Integral Test.</span>
+</h4>
+<div class="para" id="p-966">Determine if the series <span class="process-math">\(\sum_{k=0}^{\infty}\frac{1}{1 + k^{2}}\)</span> converges or diverges.</div>
+<div class="solutions"><details id="solution-190" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-967">
+<div class="para">We can use the Integral Test here since <span class="process-math">\(\frac{1}{1 + k^{2}}\)</span> is positive and decreasing. If we define <span class="process-math">\(f(x) = \frac{1}{1 + x^{2}}\text{,}\)</span> then <span class="process-math">\(\frac{1}{1 + k^{2}} = f(k)\text{.}\)</span> Now we’ll compute <span class="process-math">\(\int_{0}^{\infty}f(x)\,dx\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="md-124">
+\begin{align*}
+\int_{0}^{\infty}\frac{1}{1 + x^{2}}\,dx \amp = \lim_{b\to\infty}\int_{0}^{b}\frac{1}{1 + x^{2}}\,dx \\
+\amp = \lim_{b\to\infty}\tan^{-1}b \\
+\amp = \frac{\pi}{2} \text{.}
+\end{align*}
+</div>
+<div class="para">Since the integral converges, so does the series. In fact, the value of the series is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\frac{\pi\coth\pi + 1}{2}\text{.}
+\end{equation*}
+</div>
+</div></div></details></div></article><article class="example example-like" id="example-the-alternating-harmonic-series"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">The Alternating Harmonic Series.</span>
+</h4>
+<div class="para logical" id="p-968">
+<div class="para">Explain why <a href="" class="xref" data-knowl="./knowl/theorem-integral-test.html" title="Theorem 9.3.3: Integral Test">Theorem 9.3.3</a> cannot be applied to the <dfn class="terminology">alternating harmonic series</dfn>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-integral-test.html">
+\begin{equation*}
+\sum_{k=1}^{\infty}\frac{(-1)^{k + 1}}{k}\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="solution-191" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para" id="p-969">Since <span class="process-math">\(\frac{(-1)^{k+1}}{k}\)</span> is neither decreasing nor positive, the Integral Test doesn’t apply here.</div></div></details></div></article><div class="para" id="p-970">An important corollary to <a href="" class="xref" data-knowl="./knowl/theorem-integral-test.html" title="Theorem 9.3.3: Integral Test">Theorem 9.3.3</a> is that the integral <span class="process-math">\(p\)</span>-test from <a href="section-improper-integrals.html" class="internal" title="Section 7.4: Improper Integrals">Section 7.4</a> applies to series as well.</div>
+<article class="theorem theorem-like" id="theorem-series-p--test"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Series <span class="process-math">\(p\)</span>-Test.</span>
+</h4>
+<div class="para" id="p-971">The series <span class="process-math">\(\sum_{n=1}^{\infty}\frac{1}{n^{p}}\)</span> converges if and only if <span class="process-math">\(p \gt 1\text{.}\)</span>
+</div></article></section><section class="subsection" id="subsection-comparison-tests"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Comparison Tests</span>
+</h3>
+<div class="para" id="p-972">The next series is an important example of a divergent series. This is one of the earliest known examples of a divergent series in the history of mathematics and is particularly interesting since it diverges despite its terms getting arbitrarily small.</div>
+<article class="example example-like" id="example-the-harmonic-series"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">The harmonic series.</span>
+</h4>
+<div class="para logical" id="p-973">
+<div class="para">Show that the <dfn class="terminology">harmonic series</dfn>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{k=1}^{\infty}\frac{1}{k} = 1 + \frac{1}{2} + \cdots
+\end{equation*}
+</div>
+<div class="para">is divergent.</div>
+</div>
+<div class="solutions"><details id="solution-192" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
+<div class="para logical" id="p-974">
+<div class="para">The idea here is to compare this series with a simpler one that we know diverges. We’ll do so by looking at a specific set of partial sums:</div>
+<div class="displaymath process-math" id="md-125">
+\begin{align*}
+S_{1} \amp = 1 \\
+S_{2} \amp = 1 + \frac{1}{2} \\
+S_{4} \amp = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} \gt 1 + \frac{1}{2} + \frac{1}{2} \\
+S_{8} \amp \gt 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} 
+\end{align*}
+</div>
+<div class="para">and in general</div>
+<div class="displaymath process-math">
+\begin{equation*}
+S_{2^{n}} \gt 1 + \frac{n}{2}\text{.}
+\end{equation*}
+</div>
+</div> <div class="para logical" id="p-975">
+<div class="para">So it follows that</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\lim_{n\to\infty}S_{n} \geq \lim_{n\to\infty}\left(1 + \frac{n}{2}\right) = \infty\text{.}
+\end{equation*}
+</div>
+<div class="para">Hence the harmonic series is divergent.</div>
+</div>
+</div></details></div></article><article class="theorem theorem-like" id="theorem-direct-comparison-test-series"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Comparison Test.</span>
+</h4>
+<div class="para logical" id="p-976">
+<div class="para">Let <span class="process-math">\(\sum a_{k}\)</span> and <span class="process-math">\(\sum b_{k}\)</span> be series with <em class="emphasis">positive</em> terms. Then</div>
+<ol class="decimal">
+<li id="li-99"><div class="para" id="p-977">If <span class="process-math">\(a_{k}\leq b_{k}\)</span> and <span class="process-math">\(\sum b_{k}\)</span> converges, then so does <span class="process-math">\(\sum a_{k}\text{.}\)</span>
+</div></li>
+<li id="li-100"><div class="para" id="p-978">If <span class="process-math">\(a_{k} \geq b_{k}\)</span> and <span class="process-math">\(\sum b_{k}\)</span> diverges, then so does <span class="process-math">\(\sum a_{k}\text{.}\)</span>
+</div></li>
+</ol>
+</div></article><article class="example example-like" id="example-using-the-comparison-test"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Comparison Test.</span>
+</h4>
+<div class="para" id="p-979">Show that <span class="process-math">\(\sum_{k=1}^{\infty}\frac{k + 1}{k^{2}}\)</span> diverges.</div></article><div class="para" id="p-980">Sometimes using the Comparison Test requires a little ingenuity.</div>
+<article class="example example-like" id="example-a-little-ingenuity"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.11</span><span class="period">.</span><span class="space"> </span><span class="title">A Little Ingenuity.</span>
+</h4>
+<div class="para" id="p-981">Show that <span class="process-math">\(\sum_{k=1}^{\infty}\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}\)</span> converges.</div></article><div class="para" id="p-982">A test that is sometimes more straightforward is the <dfn class="terminology">Limit Comparison Test</dfn>.</div>
+<article class="theorem theorem-like" id="theorem-limit-comparison-test-series"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.3.12</span><span class="period">.</span><span class="space"> </span><span class="title">Limit Comparison Test.</span>
+</h4>
+<div class="para logical" id="p-983">
+<div class="para">Suppose that <span class="process-math">\(\sum a_{k}\)</span> and <span class="process-math">\(\sum b_{k}\)</span> are both series with positive terms, and suppose</div>
+<div class="displaymath process-math">
+\begin{equation*}
+L = \lim_{k\to\infty}\frac{a_{k}}{b_{k}}
+\end{equation*}
+</div>
+<div class="para">exists. Then</div>
+<ol class="decimal">
+<li id="li-101"><div class="para" id="p-984">if <span class="process-math">\(0 \lt L \lt \infty\text{,}\)</span> then either both series converge or both series diverge.</div></li>
+<li id="li-102"><div class="para" id="p-985">if <span class="process-math">\(L = 0\)</span> and <span class="process-math">\(\sum b_{k}\)</span> converges, then so does <span class="process-math">\(\sum a_{k}\text{.}\)</span>
+</div></li>
+<li id="li-103"><div class="para" id="p-986">if <span class="process-math">\(L = \infty\)</span> and <span class="process-math">\(\sum b_{k}\)</span> diverges, then so does <span class="process-math">\(\sum a_{k}\text{.}\)</span>
+</div></li>
+</ol>
+</div></article><div class="para" id="p-987">The quantity <span class="process-math">\(L\)</span> in <a href="" class="xref" data-knowl="./knowl/theorem-limit-comparison-test-series.html" title="Theorem 9.3.12: Limit Comparison Test">Theorem 9.3.12</a> can be thought of as the relative size of <span class="process-math">\(a_{k}\)</span> as compared to <span class="process-math">\(b_{k}\text{.}\)</span>
+</div>
+<article class="example example-like" id="example-a-little-less-ingenuity"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.13</span><span class="period">.</span><span class="space"> </span><span class="title">A Little Less Ingenuity.</span>
+</h4>
+<div class="para" id="p-988">Show that <span class="process-math">\(\sum_{k=1}^{\infty}\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}\)</span> converges.</div>
+<div class="solutions"><details id="solution-193" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-989">
+<div class="para">We saw previously that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-limit-comparison-test-series.html ./knowl/theorem-series-p--test.html">
+\begin{equation*}
+\frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3} \approx \frac{1}{k^{2}}\text{,}
+\end{equation*}
+</div>
+<div class="para">which suggests comparing the original series with the <span class="process-math">\(p\)</span>-series <span class="process-math">\(\sum\frac{1}{k^{2}}\text{.}\)</span> If we let <span class="process-math">\(a_{k} = \frac{k^{2} + k - 1}{k^{4} + 4k^{2} - 3}\)</span> and <span class="process-math">\(b_{k} = \frac{1}{k^{2}}\text{,}\)</span> then we see that</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-limit-comparison-test-series.html ./knowl/theorem-series-p--test.html">
+\begin{equation*}
+\frac{a_{k}}{b_{k}} \to 1\text{.}
+\end{equation*}
+</div>
+<div class="para">By <a href="" class="xref" data-knowl="./knowl/theorem-limit-comparison-test-series.html" title="Theorem 9.3.12: Limit Comparison Test">Theorem 9.3.12</a> and <a href="" class="xref" data-knowl="./knowl/theorem-series-p--test.html" title="Theorem 9.3.7: Series p-Test">Theorem 9.3.7</a>, the original series converges.</div>
+</div></div></details></div></article><div class="para" id="p-990">The Limit Comparison Test works very well with series containing terms given by a ratio of powers, in conjunction with the <span class="process-math">\(p\)</span>-series Test.</div>
+<article class="example example-like" id="example-radical-powers-of-k-"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.3.14</span><span class="period">.</span><span class="space"> </span><span class="title">Radical Powers of <span class="process-math">\(k\)</span>.</span>
+</h4>
+<div class="para logical" id="p-991">
+<div class="para">Does</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\sum_{k=55}^{\infty}\frac{k^{3} - 3\sqrt{k} + 1}{\sqrt[4]{k^{10}} + k^{2}}
+\end{equation*}
+</div>
+<div class="para">converge or diverge?</div>
+</div>
+<div class="solutions"><details id="solution-194" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para" id="p-992">The series diverges by comparison with <span class="process-math">\(\frac{1}{k^{1/3}}\text{.}\)</span>
+</div></div></details></div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="section-series.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="section-other-convergence-tests.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png"></a>
+</div>
+</body>
+</html>
