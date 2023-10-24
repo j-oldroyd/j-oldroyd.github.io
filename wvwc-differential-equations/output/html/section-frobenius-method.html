@@ -8,7 +8,7 @@
 <html lang="en-US" dir="ltr">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>WVWC-DE Frobenius Method</title>
+<title>WVWC-DE The Method of Frobenius</title>
 <meta name="Keywords" content="Authored in PreTeXt">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:type" content="book">
@@ -336,9 +336,9 @@ true);
 </ul>
 </li>
 <li class="toc-item toc-section active">
-<div class="toc-title-box"><a href="section-frobenius-method.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Frobenius Method</span></a></div>
+<div class="toc-title-box"><a href="section-frobenius-method.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Frobenius’ Method</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-frobenius-method.html#subsection-regular-points-and-singular-points" class="internal"><span class="title">Regular Points and Singular Points</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-frobenius-method.html#subsection-ordinary-points-and-singular-points" class="internal"><span class="title">Ordinary Points and Singular Points</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-frobenius-method.html#subsection-solutions-at-singular-points-and-indicial-equations" class="internal"><span class="title">Solutions at Singular Points and Indicial Equations</span></a></div></li>
 </ul>
 </li>
@@ -439,169 +439,185 @@ true);
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-frobenius-method"><h2 class="heading hide-type">
-<span class="type">Section</span><span class="space"> </span><span class="codenumber">5.3</span><span class="space"> </span><span class="title">Frobenius Method</span>
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">5.3</span><span class="space"> </span><span class="title">The Method of Frobenius</span>
 </h2>
-<section class="introduction" id="introduction-19"><div class="para" id="p-523">The power series method is guaranteed to work if the coefficient functions in <a href="" class="xref" data-knowl="./knowl/equation-series-solutions-general-homogeneous.html" title="Equation 5.1">(5.1)</a> are analytic. However, there are important examples of ODEs where this property fails (see <a href="" class="xref" data-knowl="./knowl/equation-bessel.html" title="Equation 5.15">(5.15)</a>, which is used in the study of vibrating membranes). To solve ODEs where analyticity fails, we can sometimes use the <em class="emphasis">method of Frobenius</em>.</div></section><section class="subsection" id="subsection-regular-points-and-singular-points"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Regular Points and Singular Points</span>
+<section class="introduction" id="introduction-19"><div class="para" id="p-528">The power series method is guaranteed to work if the coefficient functions in <a href="" class="xref" data-knowl="./knowl/equation-series-solutions-general.html" title="Equation 5.1">(5.1)</a> are analytic. However, there are important examples of ODEs where this property fails (see <a href="" class="xref" data-knowl="./knowl/equation-bessel.html" title="Equation 5.18">(5.18)</a>, which is used in the study of vibrating membranes). To solve ODEs where analyticity fails, we can sometimes use the <em class="emphasis">method of Frobenius</em>.</div> <div class="para logical" id="p-529">
+<div class="para">The main idea behind this method is to replace the ansatz <span class="process-math">\(y = \sum_{k=0}^{\infty}c_kx^k\)</span> with the modified guess</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/equation-series-solutions-general.html ./knowl/equation-frobenius-modified-ansatz.html ./knowl/equation-frobenius-modified-ansatz.html" id="equation-frobenius-modified-ansatz">
+\begin{equation}
+y = x^r\sum_{k=0}^{\infty}c_kx^k\text{.}\tag{5.15}
+\end{equation}
+</div>
+<div class="para">The value <span class="process-math">\(r\)</span> here is chosen in such a way so as to guarantee a solution of the ODE in <a href="" class="xref" data-knowl="./knowl/equation-series-solutions-general.html" title="Equation 5.1">(5.1)</a> of the form given in <a href="" class="xref" data-knowl="./knowl/equation-frobenius-modified-ansatz.html" title="Equation 5.15">(5.15)</a>. However, the value of <span class="process-math">\(r\)</span> used might not be a nonnegative whole number and could produce negative or fractional powers of <span class="process-math">\(x\)</span> in the solution. Therefore the resulting solution <a href="" class="xref" data-knowl="./knowl/equation-frobenius-modified-ansatz.html" title="Equation 5.15">(5.15)</a> is typically <em class="emphasis">not</em> a power series.</div>
+</div></section><section class="subsection" id="subsection-ordinary-points-and-singular-points"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Ordinary Points and Singular Points</span>
 </h3>
-<div class="para logical" id="p-524">
+<div class="para logical" id="p-530">
 <div class="para">Recall that a homogeneous, linear second order ODE has the form</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-power-series-method.html">
 \begin{equation*}
-A(x)y''+B(x)y^\prime+C(x)y = 0.
+A(x)y''+B(x)y^\prime+C(x)y = 0\text{.}
 \end{equation*}
 </div>
 <div class="para">We can rewrite this in the form</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/section-power-series-method.html">
 \begin{equation*}
-y''+P(x)y^\prime+Q(x)y = 0.
+y''+P(x)y^\prime+Q(x)y = 0\text{.}
 \end{equation*}
 </div>
-<div class="para">As we saw at the end of <a href="section-power-series-method.html" class="internal" title="Section 5.1: Power Series Method">Section 5.1</a>, the usefulness of the power series method depends on the behavior of <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> at the point we’re centering our series solution at.</div>
+<div class="para">As we saw at the end of <a href="section-power-series-method.html" class="internal" title="Section 5.1: Power Series Method">Section 5.1</a>, the efficacy of the power series method depends on the behavior of <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> at the point we’re centering our series solution at.</div>
 </div>
-<article class="definition definition-like" id="definition-regular-points-and-singular-points"><h4 class="heading">
-<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Regular Points and Singular Points.</span>
-</h4>  <div class="para" id="p-525">A point <span class="process-math">\(x=a\)</span> is called a <dfn class="terminology">regular point</dfn> if <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> both have power series expansions at <span class="process-math">\(x=a\text{.}\)</span> If <span class="process-math">\(x=a\)</span> is not a regular point we call it a <dfn class="terminology">singular point</dfn>.</div></article><div class="para" id="p-526">Regular points of an ODE are nice because of the following theorem:</div>
+<article class="definition definition-like" id="definition-ordinary-points-and-singular-points"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Ordinary Points and Singular Points.</span>
+</h4>  <div class="para" id="p-531">A point <span class="process-math">\(x=a\)</span> is called an <dfn class="terminology">ordinary point</dfn> of the homogeneous form of <a href="" class="xref" data-knowl="./knowl/equation-series-solutions-general.html" title="Equation 5.1">(5.1)</a> if <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> both have power series expansions at <span class="process-math">\(x=a\text{.}\)</span> If <span class="process-math">\(x=a\)</span> is not an ordinary point we call it a <dfn class="terminology">singular point</dfn>.</div></article><div class="para" id="p-532">Ordinary points of an ODE are precisely the points where the power series method is guaranteed to produce a valid solution.</div>
 <article class="theorem theorem-like" id="theorem-existence-of-series-solution"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Existence of Series Solution.</span>
 </h4>
-<div class="para logical" id="p-527">
-<div class="para">Suppose that <span class="process-math">\(a\)</span> is a regular point of the differential equation <span class="process-math">\(y''+P(x)y^\prime+Q(x)y=0\text{.}\)</span> Then the ODE has two linearly independent solutions of the form</div>
+<div class="para logical" id="p-533">
+<div class="para">Suppose that <span class="process-math">\(a\)</span> is an ordinary point of the differential equation <span class="process-math">\(y''+P(x)y^\prime+Q(x)y=0\text{.}\)</span> Then the ODE has two linearly independent solutions of the form</div>
 <div class="displaymath process-math">
 \begin{equation*}
-y(x) = \sum_{n=0}^{\infty}c_{n}(x-a)^{n}.
+y(x) = \sum_{n=0}^{\infty}c_{n}(x-a)^{n}\text{.}
 \end{equation*}
 </div>
-<div class="para">The radius of convergence is at least as large as the distance from <span class="process-math">\(a\)</span> to the nearest singular point of the ODE.</div>
-</div></article><div class="para" id="p-528">In other words, <em class="emphasis">the power series method works at regular points.</em>
-</div>
-<article class="example example-like" id="example-80"><h4 class="heading">
+<div class="para">The radius of convergence of the resulting solution is at least as large as the distance from <span class="process-math">\(a\)</span> to the nearest singular point of the ODE.</div>
+</div></article><article class="example example-like" id="example-frobenius-estimate-radius-series-solution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span>
 </h4>
-<div class="para" id="p-529">Find the general solution, as a power series in powers of <span class="process-math">\(x\text{,}\)</span> for the ODE <span class="process-math">\((x^{2}+2)y''+4xy^\prime+2y=0\text{.}\)</span>
-</div>
-<div class="solutions"><details id="solution-76" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
-<div class="para logical" id="p-530">
-<div class="para">The first thing we will do is make sure that the ODE actually has a power series solution at <span class="process-math">\(x=0\text{.}\)</span> To do this, we need to show that <span class="process-math">\(x=0\)</span> is a regular point of the ODE. So we need to find <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> and check that they (or their power series) make sense at <span class="process-math">\(x=0\text{.}\)</span> If we divide through the ODE by <span class="process-math">\(x^{2}+2\)</span> we obtain</div>
-<div class="displaymath process-math">
+<div class="para" id="p-534">Show that the ODE <span class="process-math">\((x^{2}+2)y''+4xy^\prime+2y=0\)</span> has a power series solution and estimate its radius of convergence. Then solve the ODE.</div>
+<div class="solutions"><details id="solution-77" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
+<div class="para logical" id="p-535">
+<div class="para">The first thing we will do is make sure that the ODE actually has a power series solution at <span class="process-math">\(x=0\text{.}\)</span> To do this, we need to show that <span class="process-math">\(x=0\)</span> is an ordinary point of the ODE, which requires finding the appropriate <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> from <a href="" class="xref" data-knowl="./knowl/theorem-existence-of-series-solution.html" title="Theorem 5.3.2: Existence of Series Solution">Theorem 5.3.2</a>. If we divide through the ODE by <span class="process-math">\(x^{2}+2\)</span> we obtain</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-existence-of-series-solution.html">
 \begin{equation*}
-y''+\frac{4x}{x^{2}+2}y^\prime+\frac{2}{x^{2}+2}y = 0
+y''+\frac{4x}{x^{2}+2}y^\prime+\frac{2}{x^{2}+2}y = 0\text{,}
 \end{equation*}
 </div>
-<div class="para">so</div>
-<div class="displaymath process-math" id="md-66">
+<div class="para">and so</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-existence-of-series-solution.html" id="md-66">
 \begin{align*}
-P(x) &amp;= \frac{4x}{x^{2}+2}\\
-Q(x) &amp;= \frac{2}{x^{2}+2}\text{.}
+P(x) \amp= \frac{4x}{x^{2}+2}\\
+Q(x) \amp= \frac{2}{x^{2}+2}\text{.}
 \end{align*}
 </div>
-<div class="para">Since both of these exist at <span class="process-math">\(x=0\text{,}\)</span> it follows that <span class="process-math">\(x=0\)</span> is a regular point of the ODE. Therefore the ODE has a power series solution at <span class="process-math">\(x=0\)</span> (that is, in powers of <span class="process-math">\(x\)</span>). Since <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> both have singular points at <span class="process-math">\(x=\pm i\text{,}\)</span> it follows that the radius of convergence of the power series solution is at least <span class="process-math">\(|i - 0| = 1\text{.}\)</span>
-</div>
-</div> <aside class="aside aside-like" id="aside-30"><div class="para" id="p-531">Here, we’re using the formula <span class="process-math">\(|a+bi| = sqrt{a^2 + b^2}.\)</span>
-</div></aside> <div class="para logical" id="p-532">
-<div class="para">We return to the original form of the ODE to solve it; if we didn’t do so, we would need to expand <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> using their own power series, and this would <em class="emphasis">greatly</em> complicate the algebra. Just as we did in Section 5.1, we assume the ODE has a series solution of the form <span class="process-math">\(y = \sum_{n=0}^{\infty}c_{n}x^{n}\text{,}\)</span> or just <span class="process-math">\(y=\sum_{n\geq0}c_{n}x^{n}\)</span> for short. Now we plug this into the ODE to get</div>
-<div class="displaymath process-math">
+</div> <div class="para" id="p-536">Since both of these functions are analytic at <span class="process-math">\(x=0\)</span> (i.e., they have power series representations centered at <span class="process-math">\(x=0\)</span>), it follows that <span class="process-math">\(x=0\)</span> is an ordinary point of the ODE. Therefore the ODE has a power series solution at <span class="process-math">\(x=0\text{.}\)</span> Since <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> both have singular points at <span class="process-math">\(x=\pm i\text{,}\)</span> it follows that the radius of convergence of the power series solution is at least <span class="process-math">\(|i - 0| = 1\text{.}\)</span>
+</div> <aside class="aside aside-like" id="aside-30"><div class="para" id="p-537">Here, we’re using the formula <span class="process-math">\(|a+bi| = \sqrt{a^2 + b^2}.\)</span> The radius of convergence can also be visualized in the complex plane as marking out a circle of radius <span class="process-math">\(1\)</span> centered at the origin.</div></aside> <div class="para logical" id="p-538">
+<div class="para">We can now find our solution just as we did in <a href="section-power-series-method.html" class="internal" title="Section 5.1: Power Series Method">Section 5.1</a>, we assume the ODE has a series solution of the form <span class="process-math">\(y = \sum_{k=0}^{\infty}c_{k}x^{k}\)</span> (which is justified by the above!). We want to return to the original form of the ODE to solve it; if we didn’t do so, we would need to expand <span class="process-math">\(P(x)\)</span> and <span class="process-math">\(Q(x)\)</span> using their own power series, and this would <em class="emphasis">greatly</em> complicate the algebra. So we will plug <span class="process-math">\(y = \sum_{k=0}^{\infty}c_kx^k\)</span> into</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/section-power-series-method.html">
 \begin{equation*}
-(x^{2}+2)\sum_{n\geq0}^{}n(n-1)c_{n}x^{n-2}+4x\sum_{n\geq0}^{}nc_{n}x^{n-1}+2\sum_{n\geq0}^{}c_{n}x^{n} = 0
+(x^2+2)y'' + 4xy^\prime + 2y = 0
 \end{equation*}
 </div>
-<div class="para">which simplifies to</div>
+<div class="para">and then equate coefficients to get a recurrence relation for <span class="process-math">\(c_k\text{.}\)</span> This can be done with a little help from Sage:</div>
+</div> <pre id="sage-14" class="ptx-sagecell sagecell-sage"><script type="text/x-sage"># Code cell demonstrating series calculations in Sage
+# We start by guessing y = sum(c_k * x^k), which requires
+# creating a list of variables c0, c1, ...,cn for the
+# coefficients ck.
+
+# Specify what term we want to stop at
+n = 5
+# Create a list c0, c1, ..., cn of our coefficients
+coeffs = var([f"c{k}" for k in srange(n+1)])
+# Set up the sum y = c0 + c1*x + c2*x^2 + ... + cn*x^n
+y = sum([coeffs[k]*x^k for k in srange(n+1)])
+
+# Now that we have set up our sum for y, we take this
+# and plug it into the differential equation.
+deqn = (x^2 + 2)*y.diff(x, 2) + 4*x*y.diff(x) + 2*y
+
+# The last step is to collect terms so that we can begin
+# equating coefficients. Note that the higher degree terms
+# should not be used to equate coefficients here!
+show(deqn.collect(x))
+</script></pre> <div class="para logical" id="p-539">
+<div class="para">After equating coefficients, our computations with Sage suggest that <span class="process-math">\(c_k + 2c_{k+2} = 0\text{,}\)</span> or more simply</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0}^{}n(n-1)c_{n}x^{n}+\sum_{n\geq2}^{}2n(n-1)c_{n}x^{n-2}+\sum_{n\geq0}^{}4nc_{n}x^{n}+\sum_{n\geq0}^{}2c_{n}x^{n} = 0
+c_{k+2} = -\frac{1}{2}c_{k}\text{ for }k\geq0\text{.}
 \end{equation*}
 </div>
-<div class="para">or just</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\sum_{n\geq0}^{}n(n-1)c_{n}x^{n}+\sum_{n\geq0}^{}2(n+2)(n+1)c_{n+2}x^{n}+\sum_{n\geq0}^{}4nc_{n}x^{n}+\sum_{n\geq0}^{}2c_{n}x^{n} = 0
-\end{equation*}
-</div>
-</div> <div class="para logical" id="p-533">
-<div class="para">Now we can collect like terms, and combine everything on the left hand side into one sum:</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\sum_{n\geq0}^{}\left[n(n-1)c_{n}+2(n+2)(n+1)c_{n+2}+4nc_{n}+2c_{n}\right]x^{n} = 0.
-\end{equation*}
-</div>
-<div class="para">For this sum to be <span class="process-math">\(0\)</span> each of the coefficients must be <span class="process-math">\(0\text{,}\)</span> so we must have</div>
-<div class="displaymath process-math">
-\begin{equation*}
-n(n-1)c_{n}+2(n+2)(n+1)c_{n+2}+4nc_{n}+2c_{n} = 0.
-\end{equation*}
-</div>
-<div class="para">We can solve this for <span class="process-math">\(c_{n+2}\)</span> to get a recurrence relation for these coefficients:</div>
-<div class="displaymath process-math">
-\begin{equation*}
-2(n+2)(n+1)c_{n+2} = -c_{n}[n(n-1)+4n+2] \qq{for }
-\end{equation*}
-</div>
-<div class="para">so</div>
-<div class="displaymath process-math">
-\begin{equation*}
-c_{n+2} = -\frac{1}{2}c_{n}\qq{for }.
-\end{equation*}
-</div>
-</div> <div class="para logical" id="p-534">
-<div class="para">We need to find a pattern for the coefficients. Since this is a two-step relation, we’ll set up two columns: one column for even <span class="process-math">\(n\)</span> and one column for odd <span class="process-math">\(n\text{:}\)</span>
+<div class="para">This can of course be verified algebraically as we’ve done several times already, but we’ll trust Sage for now.</div>
+</div> <div class="para logical" id="p-540">
+<div class="para">The next step now that we have a recurrence relation is to find a pattern for the coefficients. Since this is a two-step relation, we’ll set up two columns: one column for even <span class="process-math">\(k\)</span> and one column for odd <span class="process-math">\(k\text{:}\)</span>
 </div>
 <div class="displaymath process-math" id="md-67">
 \begin{align*}
-c_{2} &amp;= -\frac{1}{2}c_{0} &amp; c_{3} &amp;= -\frac{1}{2}c_{1}\\
-c_{4} &amp;= -\frac{1}{2}c_{2} = \frac{1}{2^{2}}c_{0} &amp; c_{5} &amp;= -\frac{1}{2}c_{3} = \frac{1}{2^{2}}c_{1}\text{.}
+c_{2} \amp= -\frac{1}{2}c_{0} \amp c_{3} \amp= -\frac{1}{2}c_{1}\\
+c_{4} \amp= -\frac{1}{2}c_{2} = \frac{1}{2^{2}}c_{0} \amp c_{5} \amp= -\frac{1}{2}c_{3} = \frac{1}{2^{2}}c_{1}\text{.}
 \end{align*}
 </div>
 <div class="para">So it appears that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-c_{2n} = (-1)^{n}\frac{1}{2^{n}}c_{0}\qq{and}c_{2n+1} = (-1)^{n}\frac{1}{2^{n}}c_{1}\text{.}
+c_{2k} = (-1)^{k}\frac{1}{2^{k}}c_{0}\qq{and}c_{2k+1} = (-1)^{k}\frac{1}{2^{k}}c_{1}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-535">
+</div> <div class="para logical" id="p-541">
 <div class="para">Therefore the general solution of the ODE is</div>
 <div class="displaymath process-math" id="md-68">
 \begin{align*}
-y &amp;= \sum_{n\geq0}^{}c_{n}x^{n}\\
-&amp;= \sum_{n\geq0}c_{2n}x^{2n} + \sum_{n\geq0}c_{2n+1}x^{2n+1}\\
-&amp;= c_{0}\sum_{n\geq0}^{}(-1)^{n}\frac{x^{2n}}{2^{n}}+c_{1}\sum_{n\geq0}^{}(-1)^{n}\frac{x^{2n+1}}{2^{n}}\\
-&amp;= c_{0}\sum_{n\geq0}^{}\left(-\frac{x^{2}}{2}\right)^{n}+c_{1}x\sum_{n\geq0}^{}\left(-\frac{x^{2}}{2}\right)^{n}\\
-&amp;= \frac{c_{0}}{1+\frac{x^{2}}{2}} + \frac{c_{1}x}{1+\frac{x^{2}}{2}}
+y \amp= \sum_{k\geq0}^{}c_{k}x^{k}\\
+\amp= \sum_{k\geq0}c_{2k}x^{2k} + \sum_{k\geq0}c_{2k+1}x^{2k+1}\\
+\amp= c_{0}\sum_{k\geq0}^{}(-1)^{k}\frac{x^{2k}}{2^{k}}+c_{1}\sum_{k\geq0}^{}(-1)^{k}\frac{x^{2k+1}}{2^{k}}\\
+\amp= c_{0}\sum_{k\geq0}^{}\left(-\frac{x^{2}}{2}\right)^{k}+c_{1}x\sum_{k\geq0}^{}\left(-\frac{x^{2}}{2}\right)^{k}\\
+\amp= \frac{c_{0}}{1+\frac{x^{2}}{2}} + \frac{c_{1}x}{1+\frac{x^{2}}{2}}
 \end{align*}
 </div>
 </div>
-</div></details></div></article><pre id="sage-14" class="ptx-sagecell sagecell-sage"><script type="text/x-sage"># code cell demonstrating series calculations in Sage
-# guess y = sum(c_k * x^k) for solution
-vars = var('c0 c1 c2 c3 c4 c5')
-y = sum([vars[k]*x^k for k in srange(0, 6)])
-
-# plug guess into ODE and simplify
-deqn = (x^2 + 2)*y.diff(x, 2) + 4*x*y.diff(x) + 2*y
-deqn.collect(x)
-</script></pre></section><section class="subsection" id="subsection-solutions-at-singular-points-and-indicial-equations"><h3 class="heading hide-type">
+</div></details></div></article></section><section class="subsection" id="subsection-solutions-at-singular-points-and-indicial-equations"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Solutions at Singular Points and Indicial Equations</span>
 </h3>
-<div class="para" id="p-536">We’ve seen several examples showing the effectiveness of the power series method at regular points, but the situation becomes more complicated at singular points. At these points, we may not be guaranteed a power series solution.</div>
-<article class="example example-like" id="example-81"><h4 class="heading">
+<div class="para" id="p-542">We’ve seen several examples showing the effectiveness of the power series method at ordinary points, but the situation becomes more complicated at singular points. At these points, we may not be guaranteed a power series solution.</div>
+<article class="example example-like" id="example-frobenius-no-power-series-solution"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.4</span><span class="period">.</span>
 </h4>
-<div class="para" id="p-537">Attempt to solve the ODE <span class="process-math">\(x^{2}y''+x^{2}y^\prime+y=0\text{.}\)</span>
+<div class="para" id="p-543">Attempt to solve the ODE <span class="process-math">\(x^{2}y''+x^{2}y^\prime+y=0\text{.}\)</span>
 </div>
-<div class="solutions"><details id="solution-77" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-538">
-<div class="para">We start, just as we did before, by assuming the solution is a power series: <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span> If we plug this into the ODE and simplify somewhat, we get the equation</div>
+<div class="solutions"><details id="solution-78" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
+<div class="para" id="p-544">We start, just as we did before, by assuming the solution is a power series: <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span> We will once again use Sage to handle the algebra for us:</div> <pre id="sage-15" class="ptx-sagecell sagecell-sage"><script type="text/x-sage"># Code cell demonstrating series calculations in Sage
+# We start by guessing y = sum(c_k * x^k), which requires
+# creating a list of variables c0, c1, ...,cn for the
+# coefficients ck.
+
+# Specify what term we want to stop at
+n = 5
+# Create a list c0, c1, ..., cn of our coefficients
+coeffs = var([f"c{k}" for k in srange(n+1)])
+# Set up the sum y = c0 + c1*x + c2*x^2 + ... + cn*x^n
+y = sum([coeffs[k]*x^k for k in srange(n+1)])
+
+# Now that we have set up our sum for y, we take this
+# and plug it into the differential equation.
+deqn = (x^2)*y.diff(x, 2) + x^2*y.diff(x) + y
+
+# The last step is to collect terms so that we can begin
+# equating coefficients. Note that the higher degree terms
+# should not be used to equate coefficients here!
+show(deqn.collect(x))
+</script></pre> <div class="para logical" id="p-545">
+<div class="para">Now let’s start equating coefficients. First, we immediately get that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-c_{0}+\sum_{n\geq2}^{}\left[n(n-1)c_{n}+(n-1)c_{n-1}+c_{n}\right]x^{n} = 0.
+c_0 = 0\text{ and }c_1 = 0\text{.}
 \end{equation*}
 </div>
-<div class="para">So it follows that</div>
-<div class="displaymath process-math" id="md-69">
-\begin{align*}
-c_{0} &amp;= 0\\
-c_{n} &amp;= -\frac{n-1}{n(n-1)+1}c_{n-1}
-\end{align*}
+<div class="para">However, this forces <span class="process-math">\(c_2 = 0\)</span> since <span class="process-math">\(c_1 + 3c_2 = 0\text{.}\)</span> And this in turn forces <span class="process-math">\(c_3 = 0\text{,}\)</span> and so on.</div>
+</div> <div class="para logical" id="p-546">
+<div class="para">Therefore our series solution is just</div>
+<div class="displaymath process-math">
+\begin{equation*}
+y = 0 + 0x + 0x^2 + \cdots = 0\text{.}
+\end{equation*}
 </div>
-<div class="para">so the recurrence relation shows that <span class="process-math">\(c_{1} = 0, c_{2} = 0,\ldots\)</span> so the solution would have to be <span class="process-math">\(y=0\text{.}\)</span> This is certainly a solution, but it can’t be the general solution. What this tells us is that the general solution of this ODE <em class="emphasis">cannot</em> be written as a power series.</div>
-</div></div></details></div></article><div class="para logical" id="p-539">
+<div class="para">This is indeed a solution of the original ODE, but it’s <em class="emphasis">not</em> a general solution. Our work in this example shows that the general solution of</div>
+<div class="displaymath process-math">
+\begin{equation*}
+x^2y'' + x^2y^\prime + y = 0
+\end{equation*}
+</div>
+<div class="para">cannot be written as a power series.</div>
+</div>
+</div></details></div></article><div class="para logical" id="p-547">
 <div class="para">The reason we couldn’t find a solution of the form <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n}\)</span> was because <span class="process-math">\(x=0\)</span> is a singular point of the ODE. If we divide through by <span class="process-math">\(x^{2}\)</span> we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -611,23 +627,26 @@ y''+\frac{1}{x}y^\prime+\frac{1}{x^{2}}y = 0
 <div class="para">and it’s obvious that the coefficients have a divide by <span class="process-math">\(0\)</span> problem at <span class="process-math">\(x=0\text{.}\)</span>
 </div>
 </div>
-<div class="para logical" id="p-540">
-<div class="para">Our goal is to find a way of dealing with situations where <span class="process-math">\(x=0\)</span> is a singular point of the ODE</div>
+<div class="para logical" id="p-548">
+<div class="para">Our goal is to find a way of dealing with situations where <span class="process-math">\(x=0\)</span> is a singular point of an ODE of the form</div>
+<div class="displaymath process-math" id="equation-frobenius-homogeneous">
+\begin{equation}
+x^{2}y''+xp(x)y^\prime+q(x)y=0\text{.}\tag{5.16}
+\end{equation}
+</div>
+<div class="para">We know, in general, that we won’t be able to find a power series solution <span class="process-math">\(\sum_{n\geq0}^{}c_{n}x^{n}\text{;}\)</span> intuitively, a power series solution is too “nice” to be a solution of this ODE if <span class="process-math">\(x=0\)</span> is a singular point.</div>
+</div>
+<div class="para logical" id="p-549">
+<div class="para">To fix this, we change our guess for <span class="process-math">\(y\)</span> to <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> or, equivalently,</div>
 <div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y^\prime+q(x)y=0.
+y = \sum_{n\geq0}^{}c_{n}x^{n+r}\text{.}
 \end{equation*}
 </div>
-<div class="para">We know, in general, that we won’t be able to find a power series solution <span class="process-math">\(\sum_{n\geq0}^{}c_{n}x^{n}\text{;}\)</span> intuitively, a power series solution is too ``nice’’ to be a solution of this ODE if <span class="process-math">\(x=0\)</span> is a singular point. To fix this, we change our guess for <span class="process-math">\(y\)</span> to <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> or, equivalently,</div>
-<div class="displaymath process-math">
-\begin{equation*}
-y = \sum_{n\geq0}^{}c_{n}x^{n+r}.
-\end{equation*}
+<div class="para">Here, <span class="process-math">\(r\)</span> can be any number (real or complex!), so in general the solution <span class="process-math">\(y\)</span> produced by this method <em class="emphasis">will not be a power series</em>. We lose a little bit by no longer assuming that <span class="process-math">\(y\)</span> is a power series, but this expression may be flexible enough to lead to a solution of the ODE at a singular point.</div>
 </div>
-<div class="para">Here, <span class="process-math">\(r\)</span> can be any number (real or complex!), so in general <span class="process-math">\(y\)</span> <em class="emphasis">will not be a power series</em>. <aside class="aside aside-like" id="aside-31"><div class="para" id="p-541">Recall that a power series, by definition, has only nonnegative whole number powers of <span class="process-math">\(x\text{.}\)</span>
-</div></aside> We lose a little bit by no longer assuming that <span class="process-math">\(y\)</span> is a power series, but this expression may be flexible enough to lead to a solution of the ODE if <span class="process-math">\(x=0\)</span> is a singular point.</div>
-</div>
-<div class="para logical" id="p-542">
+<aside class="aside aside-like" id="aside-31"><div class="para" id="p-550">Recall that a power series, by definition, has only nonnegative whole number powers of <span class="process-math">\(x\text{.}\)</span>
+</div></aside><div class="para logical" id="p-551">
 <div class="para">Our goal now is to find the value of <span class="process-math">\(r\)</span> based on the ODE and the coefficient functions <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\text{.}\)</span> To do so, we will plug <span class="process-math">\(y=\sum_{n\geq0}^{}c_{n}x^{n+r}\)</span> into the ODE</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -635,22 +654,24 @@ x^{2}y''+xp(x)y^\prime+q(x)y = 0
 \end{equation*}
 </div>
 <div class="para">and attempt to get some conditions on <span class="process-math">\(r\text{.}\)</span> First, note that</div>
-<div class="displaymath process-math" id="md-70">
+<div class="displaymath process-math" id="md-69">
 \begin{align*}
-y^\prime &amp;= \sum_{n\geq0}^{}(n+r)c_{n}x^{n+r-1}\\
-y'' &amp;= \sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r-2}
+y^\prime \amp= \sum_{n\geq0}^{}(n+r)c_{n}x^{n+r-1}\\
+y'' \amp= \sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r-2}
 \end{align*}
 </div>
 <div class="para">so when we plug these into the ODE we get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r}+\sum_{n\geq0}^{}p(x)(n+r)c_{n}x^{n+r}+\sum_{n\geq0}^{}q(x)c_{n}x^{n+r} = 0.
+\sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r}+\sum_{n\geq0}^{}p(x)(n+r)c_{n}x^{n+r}+\sum_{n\geq0}^{}q(x)c_{n}x^{n+r} = 0\text{.}
 \end{equation*}
 </div>
+</div>
+<div class="para logical" id="p-552">
 <div class="para">Now combine everything into one sum to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0}^{}\left[(n+r)(n+r-1)+p(x)(n+r)+q(x)\right]c_{n}x^{n+r} = 0.
+\sum_{n\geq0}^{}\left[(n+r)(n+r-1)+p(x)(n+r)+q(x)\right]c_{n}x^{n+r} = 0\text{.}
 \end{equation*}
 </div>
 <div class="para">So for this equation to be true, we need to have</div>
@@ -660,187 +681,194 @@ y'' &amp;= \sum_{n\geq0}^{}(n+r)(n+r-1)c_{n}x^{n+r-2}
 \end{equation*}
 </div>
 <div class="para">for every <span class="process-math">\(n\)</span> and every <span class="process-math">\(x\text{.}\)</span> Since we are trying to find <span class="process-math">\(r\text{,}\)</span> we’ll pick values for <span class="process-math">\(n\)</span> and <span class="process-math">\(x\text{.}\)</span> In particular, if we assume that <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> exist at <span class="process-math">\(x=0\)</span> we can pick <span class="process-math">\(n=x=0\)</span> to get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-r(r-1)+p(0)r+q(0) = 0
-\end{equation*}
+<div class="displaymath process-math" id="equation-frobenius-indicial">
+\begin{equation}
+r(r-1)+p(0)r+q(0) = 0\tag{5.17}
+\end{equation}
 </div>
 <div class="para">(we can assume that <span class="process-math">\(c_{0}\neq0\)</span>). This equation tells us how to find <span class="process-math">\(r\text{.}\)</span>
 </div>
 </div>
 <article class="definition definition-like" id="definition-indicial-equation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Indicial Equation.</span>
-</h4>  <div class="para logical" id="p-543">
-<div class="para">Suppose that <span class="process-math">\(x=0\)</span> is a singular point of the ODE</div>
-<div class="displaymath process-math">
-\begin{equation*}
-x^{2}y''+xp(x)y^\prime+q(x)y=0
-\end{equation*}
-</div>
-<div class="para">but that <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> have well-defined power series at <span class="process-math">\(x=0\)</span> (i.e. <span class="process-math">\(p(0)\)</span> and <span class="process-math">\(q(0)\)</span> make sense). The <dfn class="terminology">indicial equation</dfn> is given by</div>
-<div class="displaymath process-math">
-\begin{equation*}
-r(r-1)+p(0)r+q(0) = 0.
-\end{equation*}
-</div>
-</div></article><div class="para logical" id="p-544">
-<div class="para">What we’ve shown is that if <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> is a solution of the ODE</div>
-<div class="displaymath process-math">
-\begin{equation*}
-x^{2}y''+xp(x)y^\prime+q(x)y=0
-\end{equation*}
-</div>
-<div class="para">then <span class="process-math">\(r\)</span> must be a root of the indicial equation. In fact, we can say more.</div>
-</div>
+</h4>  <div class="para" id="p-553">Suppose that <span class="process-math">\(x=0\)</span> is a singular point of the ODE in <a href="" class="xref" data-knowl="./knowl/equation-frobenius-homogeneous.html" title="Equation 5.16">(5.16)</a> but that <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> have well-defined power series at <span class="process-math">\(x=0\)</span> (i.e., <span class="process-math">\(p(0)\)</span> and <span class="process-math">\(q(0)\)</span> make sense). Then <a href="" class="xref" data-knowl="./knowl/definition-indicial-equation.html" title="Definition 5.3.5: Indicial Equation">Definition 5.3.5</a> is called the <dfn class="terminology">indicial equation</dfn> of <a href="" class="xref" data-knowl="./knowl/equation-frobenius-homogeneous.html" title="Equation 5.16">(5.16)</a>.</div></article><div class="para" id="p-554">What we’ve shown is that if <span class="process-math">\(y=x^{r}\sum_{n\geq0}^{}c_{n}x^{n}\)</span> is a solution of <a href="" class="xref" data-knowl="./knowl/equation-frobenius-homogeneous.html" title="Equation 5.16">(5.16)</a>, then <span class="process-math">\(r\)</span> must be a root of the indicial equation. In fact, we can say more.</div>
 <article class="theorem theorem-like" id="theorem-method-of-frobenius"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.6</span><span class="period">.</span><span class="space"> </span><span class="title">Method of Frobenius.</span>
 </h4>
-<div class="para logical" id="p-545">
+<div class="para logical" id="p-555">
 <div class="para">Consider the ODE</div>
 <div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xp(x)y^\prime+q(x)y=0.
+x^{2}y''+xp(x)y^\prime+q(x)y=0\text{.}
 \end{equation*}
 </div>
-<div class="para">Let <span class="process-math">\(r_{1}\geq r_{2}\)</span> be (real) roots of the indicial equation <span class="process-math">\(r(r-1)+p(0)r+q(0)=0\text{.}\)</span>
-</div>
+<div class="para">Suppose that <span class="process-math">\(r_{1}\geq r_{2}\)</span> are (real) roots of the indicial equation <span class="process-math">\(r(r-1)+p(0)r+q(0)=0\text{.}\)</span> Then the following statements are true:</div>
 <ol class="decimal">
-<li id="li-31"><div class="para" id="p-546">There is a solution of the ODE of the form <span class="process-math">\(y_{1}(x) = x^{r_{1}}\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span>
+<li id="li-31"><div class="para" id="p-556">There is a solution of the ODE of the form <span class="process-math">\(y_{1}(x) = x^{r_{1}}\sum_{n\geq0}^{}c_{n}x^{n}\text{.}\)</span>
 </div></li>
-<li id="li-32"><div class="para" id="p-547">If <span class="process-math">\(r_{1}-r_{2}\)</span> is <em class="emphasis">not</em> equal to an integer, then there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = x^{r_{2}}\sum_{n\geq0}^{}d_{n}x^{n}\text{.}\)</span>
+<li id="li-32"><div class="para" id="p-557">If <span class="process-math">\(r_{1}-r_{2}\)</span> is <em class="emphasis">not</em> equal to an integer, then there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = x^{r_{2}}\sum_{n\geq0}^{}d_{n}x^{n}\text{.}\)</span>
 </div></li>
-<li id="li-33"><div class="para" id="p-548">If <span class="process-math">\(r_{1} = r_{2}\text{,}\)</span> there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = y_{1}(x)\ln x + x^{r_{1}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span>
+<li id="li-33"><div class="para" id="p-558">If <span class="process-math">\(r_{1} = r_{2}\text{,}\)</span> there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = y_{1}(x)\ln x + x^{r_{1}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span>
 </div></li>
-<li id="li-34"><div class="para" id="p-549">If <span class="process-math">\(r_{1} - r_{2}\)</span> is a nonzero integer, there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = ky_{1}(x)\ln x + x^{r_{2}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span>
+<li id="li-34"><div class="para" id="p-559">If <span class="process-math">\(r_{1} - r_{2}\)</span> is a nonzero integer, there exists a second linearly independent solution of the form <span class="process-math">\(y_{2}(x) = ky_{1}(x)\ln x + x^{r_{2}}(C_{0} + C_{1}x + \cdots )\text{.}\)</span>
 </div></li>
 </ol>
 </div></article><article class="example example-like" id="example-using-method-of-frobenius"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.7</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Method of Frobenius.</span>
 </h4>
-<div class="para logical" id="p-550">
+<div class="para logical" id="p-560">
 <div class="para">Find a series solution centered at <span class="process-math">\(0\)</span> of the ODE</div>
 <div class="displaymath process-math">
 \begin{equation*}
-x^{2}y''+xy^\prime+(x^{2}-\frac{1}{4})y=0.
+x^{2}y''+xy^\prime+\parens{x^{2}-\frac{1}{4}}y=0\text{.}
 \end{equation*}
 </div>
 </div>
-<div class="solutions"><details id="solution-78" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
-<div class="para logical" id="p-551">
-<div class="para">If we divide through the ODE by <span class="process-math">\(x^{2}\)</span> we get a divide-by-zero problem at <span class="process-math">\(x=0\text{,}\)</span> so <span class="process-math">\(x=0\)</span> is a singular point. However, for this ODE we have</div>
-<div class="displaymath process-math" id="md-71">
+<div class="solutions"><details id="solution-79" class="solution solution-like"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
+<div class="para" id="p-561">If we divide through the ODE by <span class="process-math">\(x^{2}\)</span> we get a divide-by-zero problem at <span class="process-math">\(x=0\text{,}\)</span> so <span class="process-math">\(x=0\)</span> is a singular point. Therefore we will use <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a> to determine the appropriate form of a series solution for this ODE.</div> <div class="para logical" id="p-562">
+<div class="para">We have</div>
+<div class="displaymath process-math" id="md-70">
 \begin{align*}
-p(x) &amp;= 1\\
-q(x) &amp;= x^{2}-\frac{1}{4}
+p(x) \amp= 1\\
+q(x) \amp= x^{2}-\frac{1}{4}\text{,}
 \end{align*}
 </div>
 <div class="para">so <span class="process-math">\(p(x)\)</span> and <span class="process-math">\(q(x)\)</span> both have power series representations centered at <span class="process-math">\(0\)</span> (namely, themselves!). This means we can use the method of Frobenius to find a solution of the form <span class="process-math">\(y = x^r\sum_{n=0}^{\infty}c_n x^n\text{.}\)</span>
 </div>
-</div> <div class="para logical" id="p-552">
+</div> <div class="para logical" id="p-563">
 <div class="para">The first step is to set up and solve the indicial equation, which in this case is given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
-r(r-1)+r-\frac{1}{4} = 0.
+r(r-1)+r-\frac{1}{4} = 0\text{.}
 \end{equation*}
 </div>
-<div class="para">We solve this algebraically for <span class="process-math">\(r\)</span> to get the roots <span class="process-math">\(r_{1}=\frac{1}{2}\)</span> and <span class="process-math">\(r_{2}=-\frac{1}{2}\text{.}\)</span> Since <span class="process-math">\(r_{1}-r_{2} = 1\)</span> is an integer, we are guaranteed a solution based on <span class="process-math">\(r_{1} = \frac{1}{2}\)</span> and a second solution based on <span class="process-math">\(r_{2} = -\frac{1}{2}\)</span> and the logarithm. So we make the guess</div>
+<div class="para">We solve this algebraically for <span class="process-math">\(r\)</span> to get the roots <span class="process-math">\(r_{1}=\frac{1}{2}\)</span> and <span class="process-math">\(r_{2}=-\frac{1}{2}\text{.}\)</span> Since <span class="process-math">\(r_{1}-r_{2} = 1\)</span> is an integer, we are guaranteed a solution based on <span class="process-math">\(r_{1} = \frac{1}{2}\)</span> and a second solution based on <span class="process-math">\(r_{2} = -\frac{1}{2}\)</span> and the natural logarithm.</div>
+</div> <div class="para logical" id="p-564">
+<div class="para">To continue, we make the guess</div>
 <div class="displaymath process-math">
 \begin{equation*}
-y = x^{\frac{1}{2}}\sum_{n\geq0}^{}c_{n}x^{n} = \sum_{n\geq0}^{}c_{n}x^{n+\frac{1}{2}}.
+y = x^{\frac{1}{2}}\sum_{n\geq0}^{}c_{n}x^{n} = \sum_{n\geq0}^{}c_{n}x^{n+\frac{1}{2}}\text{.}
 \end{equation*}
 </div>
 <div class="para">Now we plug this into the ODE to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0}c_{n}(n+\frac{1}{2})(n-\frac{1}{2})x^{n+\frac{1}{2}} + \sum_{n\geq0}c_{n}(n+\frac{1}{2})x^{n+\frac{1}{2}} 
+\sum_{n\geq0}c_{n}\parens{n+\frac{1}{2}}\parens{n-\frac{1}{2}}x^{n+\frac{1}{2}} + \sum_{n\geq0}c_{n}\parens{n+\frac{1}{2}}x^{n+\frac{1}{2}} 
 + \sum_{n\geq0}c_{n}x^{n+\frac{5}{2}} - \sum_{n\geq0}\frac{1}{4}c_{n}x^{n+\frac{1}{2}}
 \end{equation*}
 </div>
 <div class="para">or just</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0}^{}\left[(n+\frac{1}{2})(n-\frac{1}{2})+(n+\frac{1}{2})-\frac{1}{4}\right]c_{n}x^{n+\frac{1}{2}} 
-+\sum_{n\geq2}^{}c_{n-2}x^{n+\frac{1}{2}}=0.
+\sum_{n\geq0}^{}\left[\parens{n+\frac{1}{2}}\parens{n-\frac{1}{2}}+\parens{n+\frac{1}{2}}-\frac{1}{4}\right]c_{n}x^{n+\frac{1}{2}} 
++\sum_{n\geq2}^{}c_{n-2}x^{n+\frac{1}{2}}=0\text{.}
 \end{equation*}
 </div>
 <div class="para">which simplifies to</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\sum_{n\geq0} n(n+1)c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0.
+\sum_{n\geq0} n(n+1)c_{n}x^{n+\frac{1}{2}}+\sum_{n\geq2}c_{n-2}x^{n+\frac{1}{2}} = 0\text{.}
 \end{equation*}
 </div>
 <div class="para">So the recurrence relation the coefficients <span class="process-math">\(c_{n}\)</span> need to satisfy is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-c_{n} = -\frac{1}{n(n+1)}c_{n-2}\quad\text{for}\quad n\geq2.
+c_{n} = -\frac{1}{n(n+1)}c_{n-2}\quad\text{for}\quad n\geq2\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-553">
-<div class="para">The recurrence relation will tell us <em class="emphasis">nothing</em> about <span class="process-math">\(c_{0},c_{1}\text{,}\)</span> so to see if there are any restrictions on <span class="process-math">\(c_{0},c_{1}\)</span> we separate the <span class="process-math">\(n=0\)</span> and <span class="process-math">\(n=1\)</span> terms from the summation to get</div>
+</div> <div class="para logical" id="p-565">
+<div class="para">The recurrence relation will tell us <em class="emphasis">nothing</em> about <span class="process-math">\(c_{0}\)</span> and <span class="process-math">\(c_{1}\text{,}\)</span> so to see if there are any restrictions on these coefficients we separate the <span class="process-math">\(n=0\)</span> and <span class="process-math">\(n=1\)</span> terms from the summation to get</div>
 <div class="displaymath process-math">
 \begin{equation*}
-0c_{0}x^{\frac{1}{2}}+2c_{1}x^{\frac{3}{2}}+\sum_{n\geq2}^{}\left[n(n+1)c_{n}+c_{n-2}\right]x^{n+\frac{1}{2}}=0
+0c_{0}x^{\frac{1}{2}}+2c_{1}x^{\frac{3}{2}}+\sum_{n\geq2}^{}\left[n(n+1)c_{n}+c_{n-2}\right]x^{n+\frac{1}{2}}=0\text{.}
 \end{equation*}
 </div>
 <div class="para">This equation places no restrictions at all on <span class="process-math">\(c_{0}\text{,}\)</span> but it does force <span class="process-math">\(c_{1} = 0\)</span> since we need the <span class="process-math">\(x^{\frac{3}{2}}\)</span> term to disappear to make this equation true. This tells us that we can ignore the coefficients <span class="process-math">\(c_{n}\)</span> with odd index, since they will all disappear.</div>
-</div> <div class="para logical" id="p-554">
+</div> <div class="para logical" id="p-566">
 <div class="para">Now we’ll try to find a pattern in the remaining coefficients:</div>
-<div class="displaymath process-math" id="md-72">
+<div class="displaymath process-math" id="md-71">
 \begin{align*}
-c_{2} &amp;= -\frac{1}{2\cdot3}c_{0}\\
-c_{4} &amp;= -\frac{1}{4\cdot5}c_{2} = \frac{(-1)^{2}}{5!}c_{0}\\
-c_{6} &amp;= -\frac{1}{6\cdot7}c_{4} = \frac{(-1)^{3}}{7!}c_{0}
+c_{2} \amp= -\frac{1}{2\cdot3}c_{0}\\
+c_{4} \amp= -\frac{1}{4\cdot5}c_{2} = \frac{(-1)^{2}}{5!}c_{0}\\
+c_{6} \amp= -\frac{1}{6\cdot7}c_{4} = \frac{(-1)^{3}}{7!}c_{0}
 \end{align*}
 </div>
 <div class="para">and in general</div>
 <div class="displaymath process-math">
 \begin{equation*}
-c_{2n} = \frac{(-1)^{n}}{(2n+1)!}c_{0}.
+c_{2n} = \frac{(-1)^{n}}{(2n+1)!}c_{0}\text{.}
 \end{equation*}
 </div>
-<div class="para">So the solution of this ODE is given by</div>
+</div> <div class="para logical" id="p-567">
+<div class="para">Therefore a solution (but not the general solution!) of this ODE is given by</div>
 <div class="displaymath process-math">
 \begin{equation*}
-y = \sum_{n\geq0}c_{2n}x^{2n+\frac{1}{2}} = \sum_{n\geq0}\frac{(-1)^{n}}{(2n+1)!}c_{0}x^{2n+\frac{1}{2}},
+y = \sum_{n\geq0}c_{2n}x^{2n+\frac{1}{2}} = \sum_{n\geq0}\frac{(-1)^{n}}{(2n+1)!}c_{0}x^{2n+\frac{1}{2}}\text{,}
 \end{equation*}
 </div>
 <div class="para">which is actually just</div>
 <div class="displaymath process-math">
 \begin{equation*}
-y = c_{0}\frac{\sin x}{\sqrt{x}}
+y = c_{0}\frac{\sin x}{\sqrt{x}}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-555">
+</div> <div class="para logical" id="p-568">
 <div class="para">Technically, this isn’t the general solution of the ODE as we still need a second linearly independent solution to construct it. However, we know from <a href="" class="xref" data-knowl="./knowl/theorem-method-of-frobenius.html" title="Theorem 5.3.6: Method of Frobenius">Theorem 5.3.6</a> that the second solution must be of the form</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
 \begin{equation*}
 y_2 = k\frac{\sin(x)}{\sqrt{x}}\ln(x) + x^{-\frac{1}{2}}\sum_{n\geq0}C_n x^n.
 \end{equation*}
 </div>
+<div class="para">We can find appropriate values for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\)</span> by plugging this guess into the ODE and proceeding much as we did above. We will once again let Sage do the heavy lifting:</div>
+</div> <pre id="sage-16" class="ptx-sagecell sagecell-sage"><script type="text/x-sage"># Our guess for y2 will be based on y1 and r2
+y1 = sin(x)/sqrt(x)
+r2 = -1/2
+
+# Specify what term we want to stop at
+n = 5
+
+# Create coefficients for y2 guess
+var('k')
+coeffs = var([f"C{k}" for k in srange(n+1)])
+
+# Set up the sum y = k*y1*ln(x) + x^r2*sum(C_k * x^k)
+y = k*y1*ln(x) + x^r2*sum([coeffs[k]*x^k for k in srange(n+1)])
+
+# Now that we have set up our sum for y=y2, we take this
+# and plug it into the differential equation.
+deqn = (x^2)*y.diff(x, 2) + x*y.diff(x) + (x^2 - 1/4)*y
+
+# The last step is to collect terms so that we can begin
+# equating coefficients. Note that the higher degree terms
+# should not be used to equate coefficients here!
+show(deqn.collect(x))
+</script></pre> <div class="para logical" id="p-569">
 <div class="para">Plugging this into the original ODE (and using a computer algebra system such as Sage), we get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+<div class="displaymath process-math">
 \begin{equation*}
 {\left(C_{3} + 20 \, C_{5}\right)} x^{\frac{9}{2}} + {\left(C_{2} + 12 \, C_{4}\right)} x^{\frac{7}{2}} + {\left(C_{1} + 6 \, C_{3}\right)} x^{\frac{5}{2}} + {\left(C_{0} + 2 \, C_{2}\right)} x^{\frac{3}{2}} + 2 \, k \sqrt{x} \cos\left(x\right) - \frac{k \sin\left(x\right)}{\sqrt{x}} = 0
 \end{equation*}
 </div>
-<div class="para">after truncating the expansion up to the <span class="process-math">\(n=5\)</span> term. This allows us (theoretically) to solve for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\text{.}\)</span> In fact, we get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html" id="md-73">
+<div class="para">after truncating the expansion up to the <span class="process-math">\(n=5\)</span> term.</div>
+</div> <div class="para logical" id="p-570">
+<div class="para">This allows us (theoretically) to solve for <span class="process-math">\(k\)</span> and the coefficients <span class="process-math">\(C_n\text{.}\)</span> In fact, we get</div>
+<div class="displaymath process-math" id="md-72">
 \begin{align*}
-k &amp;= 0\\
-C_{2n} &amp;= \frac{(-1)^n}{(2n)!}C_0\\
-C_{2n+1} &amp;= \frac{(-1)^n}{(2n+1)!}C_1
+k \amp= 0\\
+C_{2n} \amp= \frac{(-1)^n}{(2n)!}C_0\\
+C_{2n+1} \amp= \frac{(-1)^n}{(2n+1)!}C_1
 \end{align*}
 </div>
 <div class="para">and so</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+<div class="displaymath process-math">
 \begin{equation*}
-y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right].
+y_2 = x^{-1/2}\left[C_0\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n} + C_1 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\right]\text{.}
 \end{equation*}
 </div>
 <div class="para">Since the second series corresponds to a multiple of <span class="process-math">\(y_1 = \frac{\sin(x)}{\sqrt{x}}\text{,}\)</span> we can safely set <span class="process-math">\(C_1 = 0\)</span> and get <span class="process-math">\(y_2 = C_0\frac{\cos(x)}{\sqrt{x}}\text{.}\)</span> Therefore the general solution of the ODE is</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/theorem-method-of-frobenius.html">
+<div class="displaymath process-math">
 \begin{equation*}
-y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}.
+y = A_1\frac{\sin(x)}{\sqrt{x}} + A_{2}\frac{\cos(x)}{\sqrt{x}}\text{.}
 \end{equation*}
 </div>
 </div>

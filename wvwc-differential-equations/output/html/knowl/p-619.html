@@ -11,8 +11,40 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="ignore-math">
-<h3 class="heading"><span class="type">Paragraph</span></h3>
-<div class="para">Although it’s important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <a href="" class="xref" data-knowl="./knowl/example-ivp-with-discontinuous-forcing-function.html" title="Example 6.3.2: IVP with Discontinuous Forcing Function">Example 6.3.2</a> are perhaps better left to computer systems. The code cell below demonstrates how Sage can compute such a transform. <em class="alert">Be careful to place matching brackets and parentheses as appropriate</em> when using the <code class="code-inline tex2jax_ignore">piecewise</code> command in Sage to construct a piecewise function.</div>
-<span class="incontext"><a class="internal" href="section-unit-step-functions-and-time-shifting.html#p-619">in-context</a></span>
+<h4 class="heading"><span class="type">Paragraph</span></h4>
+<div class="para logical">
+<div class="para">We begin by taking the Laplace transform of both sides to get</div>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}
+\end{equation*}
+</div>
+<div class="para">or just</div>
+<div class="displaymath process-math">
+\begin{equation*}
+s^{2}Y(s) + 9Y(s) = \frac{10}{s+1}.
+\end{equation*}
+</div>
+<div class="para">So</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Y(s) = \frac{10}{(s+1)(s^{2}+9)}.
+\end{equation*}
+</div>
+<div class="para">By partial fractions, this becomes</div>
+<div class="displaymath process-math">
+\begin{equation*}
+Y(s) = \frac{1-s}{s^{2}+9} + \frac{1}{s+1} = \frac{1}{s^{2}+9} - \frac{s}{s^{2}+9} + \frac{1}{s+1},
+\end{equation*}
+</div>
+<div class="para">so the solution of the ODE is</div>
+<div class="displaymath process-math">
+\begin{align*}
+y(t) &amp; = \iLaplace{Y(s)}\\
+&amp;= \frac{1}{3}\sin3t -\cos3t + e^{-t}\text{.}
+\end{align*}
+</div>
+</div>
+<span class="incontext"><a class="internal" href="section-transformation-of-initial-value-problems.html#p-619">in-context</a></span>
 </body>
 </html>
