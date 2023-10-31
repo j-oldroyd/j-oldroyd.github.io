@@ -4057,7 +4057,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "9.5",
   "title": "Power Series",
-  "body": " Power Series  A power series is a series of the form where is a variable. Note that for such a series, only nonnegative, integer powers of are permitted. The terms are called coefficients , and we'll see later that they determine all properties of the series.   Examples of Power Series   Determine which of the following are power series:               Power series can also be centered at other numbers. A power series centered about  is a series of the form .  An important concern about power series is for which values of the series will converge. These questions are usually answered using the root or ratio tests.   Convergence of a Power Series   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the test fails. So we need to use other methods to determine the convergence or the series at these points. At , the series becomes , which diverges by the comparison test. At , the series reduces to the alternating harmonic series which converges by .  Therefore this series converges for all in the interval and diverges otherwise.    In , the values of for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the interval of convergence of the series. The radius of this interval is called the radius of convergence . In general, we have the following.   Convergence of Power Series   Given a series , there exists such that the series converges on the interval . The largest such is the radius of convergence.    For most series we'll consider (i.e., those of the form ), we can find using the following formula: .   Interval and Radius of Convergence   Find the interval and radius of convergence of the series .    We'll find the radius of convergence first, which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .    We can also use the root test instead of the ratio test.   Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the root test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test.  Therefore the interval of convergence is .    "
+  "body": " Power Series   Definition and Examples  A power series (centered at ) is a series of the form where is a variable. Note that for such a series, only nonnegative, integer powers of are permitted. The terms are called coefficients , and they determine all properties of the series.   A series with negative integer powers for is called a Laurent series . While these series have important uses, we will not study them.    Examples of Power Series   Determine which of the following are power series:               Power series can also be centered at other numbers. A power series centered at is a series of the form . As before, only nonnegative integer powers are allowed in the series.    Convergence of Power Series  An important concern about power series is to determine the set of values of for which the series will converge. These questions are usually answered using the Ratio Test or the Root Test in combination with other convergence tests.   Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise.    In , the values of for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the interval of convergence of the series. The radius of this interval is called the radius of convergence . In general, we have the following.   The term radius might seem unusual for describing a one-dimensional interval, but there are circles involved here. Power series are best described using complex numbers, and in that setting the radius of convergence describes an actual circle in the complex plane containing complex values at which the series converges.    Convergence of Power Series   Given a series , there exists such that the series converges on the interval . The largest such is the radius of convergence.    For most series we'll consider (i.e., those of the form ), we can find using the formula . Note the similarity between and !   Interval and Radius of Convergence   Find the interval and radius of convergence of the series given by .    We'll find the radius of convergence first using , which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .     Interval of convergence for series of even powers   Find the interval of convergence for the series given by .    First, note that . We'll start by finding the radius of convergence of the series. We can use again, and we will, but we need to be careful since the series actually involves powers of instead of just .  To address this power mismatch, we'll make the substitution in our series to get , and now we can use with . This gives , and so the radius of convergence of the modified series is .  Now we convert back to the series that we started with. Since the radius of convergence of the modified series is , this means that it will converge as long as . In other words, our original series will converge if , or equivalently . Hence, the radius of convergence of is equal to .  Now that we have the radius of convergence, we (mostly) know the interval of convergence. In particular, the interval of convergence must have endpoints of and . We must check convergence at these endpoints individually as in . If we do so, we see that the series converges at both endpoints. Thus, the interval of convergence for this series is .    We will often use the Root Test instead of the Ratio Test for determining convergence of power series. This usually happens when the coefficients of the series do not involve factorials.   Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the Root Test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test. Therefore the interval of convergence is .     "
 },
 {
   "id": "p-1025",
@@ -4066,7 +4066,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "power series coefficients "
+  "body": "power series (centered at coefficients "
 },
 {
   "id": "example-examples-of-power-series",
@@ -4078,27 +4078,27 @@ var ptx_lunr_docs = [
   "body": " Examples of Power Series   Determine which of the following are power series:              "
 },
 {
-  "id": "p-1027",
+  "id": "p-1028",
   "level": "2",
-  "url": "section-power-series.html#p-1027",
+  "url": "section-power-series.html#p-1028",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "centered about "
+  "body": "centered at "
 },
 {
-  "id": "example-convergence-of-a-power-series",
+  "id": "example-convergence-of-a-power-series-ratio-test",
   "level": "2",
-  "url": "section-power-series.html#example-convergence-of-a-power-series",
+  "url": "section-power-series.html#example-convergence-of-a-power-series-ratio-test",
   "type": "Example",
   "number": "9.5.2",
-  "title": "Convergence of a Power Series.",
-  "body": " Convergence of a Power Series   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the test fails. So we need to use other methods to determine the convergence or the series at these points. At , the series becomes , which diverges by the comparison test. At , the series reduces to the alternating harmonic series which converges by .  Therefore this series converges for all in the interval and diverges otherwise.   "
+  "title": "Convergence of a power series using the Ratio Test.",
+  "body": " Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise.   "
 },
 {
-  "id": "p-1033",
+  "id": "p-1034",
   "level": "2",
-  "url": "section-power-series.html#p-1033",
+  "url": "section-power-series.html#p-1034",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4120,16 +4120,25 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "9.5.4",
   "title": "Interval and Radius of Convergence.",
-  "body": " Interval and Radius of Convergence   Find the interval and radius of convergence of the series .    We'll find the radius of convergence first, which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .   "
+  "body": " Interval and Radius of Convergence   Find the interval and radius of convergence of the series given by .    We'll find the radius of convergence first using , which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .   "
+},
+{
+  "id": "example-interval-of-convergence-for-a-series-even-powers",
+  "level": "2",
+  "url": "section-power-series.html#example-interval-of-convergence-for-a-series-even-powers",
+  "type": "Example",
+  "number": "9.5.5",
+  "title": "Interval of convergence for series of even powers.",
+  "body": " Interval of convergence for series of even powers   Find the interval of convergence for the series given by .    First, note that . We'll start by finding the radius of convergence of the series. We can use again, and we will, but we need to be careful since the series actually involves powers of instead of just .  To address this power mismatch, we'll make the substitution in our series to get , and now we can use with . This gives , and so the radius of convergence of the modified series is .  Now we convert back to the series that we started with. Since the radius of convergence of the modified series is , this means that it will converge as long as . In other words, our original series will converge if , or equivalently . Hence, the radius of convergence of is equal to .  Now that we have the radius of convergence, we (mostly) know the interval of convergence. In particular, the interval of convergence must have endpoints of and . We must check convergence at these endpoints individually as in . If we do so, we see that the series converges at both endpoints. Thus, the interval of convergence for this series is .   "
 },
 {
   "id": "example-interval-and-radius-of-convergence-from-root-test",
   "level": "2",
   "url": "section-power-series.html#example-interval-and-radius-of-convergence-from-root-test",
   "type": "Example",
-  "number": "9.5.5",
+  "number": "9.5.6",
   "title": "Interval and Radius of Convergence from Root Test.",
-  "body": " Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the root test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test.  Therefore the interval of convergence is .   "
+  "body": " Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the Root Test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test. Therefore the interval of convergence is .   "
 },
 {
   "id": "section-representing-functions-as-power-series",
@@ -4195,9 +4204,9 @@ var ptx_lunr_docs = [
   "body": " Taylor's Formula   If has a power series representation\/expansion at with positive radius of convergence , then where . This series is called the Taylor series of about .   "
 },
 {
-  "id": "p-1058",
+  "id": "p-1064",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1058",
+  "url": "section-taylor-and-maclaurin-series.html#p-1064",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4222,9 +4231,9 @@ var ptx_lunr_docs = [
   "body": " Taylor Series from the Exponential   Assuming that equals its Taylor series, find the Maclaurin series for . Also, find the derivative of at .    We could use to find the Maclaurin series for , but it's far, far easier to use the series for : .  It turns out that this lets us find derivatives at incredibly quickly. If we let , then it follows that is the coefficient of in the power series for . Therefore .   "
 },
 {
-  "id": "p-1065",
+  "id": "p-1071",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1065",
+  "url": "section-taylor-and-maclaurin-series.html#p-1071",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4258,9 +4267,9 @@ var ptx_lunr_docs = [
   "body": " Computing a Definite Integral   Use power series to find , and find an approximation within of the exact value.    Using the power series for from , we have . This is an alternating series, so by the alternating series test the partial sum is always within of the exact value. So if we want to get enough terms of the series to be within of the exact value, we need to pick so that , which occurs at . So . This is within about of the exact value.   "
 },
 {
-  "id": "p-1075",
+  "id": "p-1081",
   "level": "2",
-  "url": "section-taylor-and-maclaurin-series.html#p-1075",
+  "url": "section-taylor-and-maclaurin-series.html#p-1081",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4285,9 +4294,9 @@ var ptx_lunr_docs = [
   "body": " Parametric Equations  If a particle is moving in two dimensions (i.e., the -plane), then it makes sense to write the - and -coordinates of its trajectory in terms of time : . We can use parametric equations to describe the resulting parametric curves . For example, the parametric equations   produce the following parametric curve in the -plane.      The graph of for .   Note that the parametric curve above has a starting point and an ending point , determined by the interval of values for . When plotting parametric curves, we'll often specify a corresponding interval of values for . This curve can also be plotted relatively painlessly with SymPy, as below:   A set of parametric equations (along with a corresponding interval of values for ) can be viewed as defining a single function that assigns points in the -plane to real numbers . We'll introduce some notation that will come in handy later: let denote the set of real numbers (also known as scalars ), and let denote the -plane. Then a set of parametric equations describes a function from (specifically, an interval in ) to . We'll see more of this in the following chapters.  Plotting points and plugging them into parametric equations can be tedious. Another way to describe a parametric curve is to eliminate parameters.   Eliminating parameters   Rewrite the parametric equations  as a single Cartesian equation, i.e., eliminate the parameter .   First, solve for in the second equation to get . If we plug this into the first equation, we get an equation in and alone:   We can see from this equation that the original parametric equations should trace out a rightward opening parabola. Note however that this equation tells us nothing about which portion of the parabola is traced out.     Parameterizing a Line Segment   Give a set of parametric equations and a corresponding interval that trace out the line segment starting at and ending at .    First, we'll try to figure out what our equations should look like. We know that starts at and starts at on this segment, so a reasonable guess is for some unknown constants and . To find and , we'll specify the interval of values we want to range over. To make things easier, let's fix between and . Then at we need to have which gives and . Therefore the line segment is parameterized by .  We can also rewrite these equations in terms of the starting and ending values of and . In particular, we have . To see why this works, note that the second term in each equation vanishes at , leaving the starting value for each coordinate. Likewise, the first term in each equation vanishes at , leaving the terminal value for each coordinate. Expanding the equations gives the previous result. Note that this method only works if you select as your interval of values for .    Parametric equations are especially useful for tracing movement along a curve that is not the graph of a function, like a circle. In particular, a circle of radius centered at is traced out by the parametric equations over the interval .   Parametric Equations for Motion on a Circle   Find parametric equations and a corresponding interval of values for that describe a particle moving along a circle of radius centered at and starting at moving clockwise three times around the circle.    This problem has a lot to unpack, but we know the basic form of our equations will be . Since we want to start at , we can let be our starting value. And since we want to move around the circle times, we'll let vary from to . Finally, to get clockwise motion we need to replace with , getting for .     Parametric Equations for an Ellipse   Find parametric equations for the ellipse .    These equations will look much like the parametric equations for a circle: for .    "
 },
 {
-  "id": "p-1079",
+  "id": "p-1085",
   "level": "2",
-  "url": "section-parametric-equations.html#p-1079",
+  "url": "section-parametric-equations.html#p-1085",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4303,9 +4312,9 @@ var ptx_lunr_docs = [
   "body": "    The graph of for .  "
 },
 {
-  "id": "p-1082",
+  "id": "p-1088",
   "level": "2",
-  "url": "section-parametric-equations.html#p-1082",
+  "url": "section-parametric-equations.html#p-1088",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4393,9 +4402,9 @@ var ptx_lunr_docs = [
   "body": " Polar Coordinates   Introducing Polar Coordinates  We typically use Cartesian or rectangular coordinates to plot points. However, this can lead to issues if we have a graph that isn't rectangular. For example, the circle has a simple geometric description based on its center and radius, but in Cartesian coordinates it can be difficult to work with since every point on the (unit) circle takes the form . This square root makes integrals and derivatives complicated. The main problem lies in the fact that we are trying to describe a circle using a rectangular coordinate system. So our goal in this section is to find a more suitable coordinate system for circles.  A circle can be described as the set of all points some fixed distance from a given point, and we can specify any point on the circle by using an angle :      Using distance and angle to specify a point.   Any point on the circle can be described solely using the distance and the direction . This leads directly to the idea of polar coordinates. In polar coordinates, the -plane is replaced with an -plane, or polar plane . Each point in the polar plane has the form , where the radial coordinate  denotes the distance from the origin, or pole , and the angular coordinate  determines the angle the point makes with the horizontal polar axis . The polar axis replaces the positive -axis from Cartesian coordinates:      The polar plane.   In polar coordinates, positive correspond to counterclockwise direction, and negative correspond to clockwise direction. We also allow for to be negative: this just means go in the direction opposite of .   Plotting polar coordinates  Suppose we want to plot the points and We can do so in the polar plane by remembering that the first coordinate is distance from the pole, and the second coordinate is direction from the polar axis. If we plot these points, we see that and actually represent the same point. This is typical of polar coordinates: every point has, in general, infinitely many representations.       The plot from .     Converting Coordinates  If we want to use polar coordinates, then it'd be helpful to know how to convert between Cartesian (rectangular) coordinates and polar coordinates. The following diagram will help us to make these conversions.      Converting between Cartesian and polar coordinates.   So in terms of , we have   Going in the other direction, the Pythagorean theorem tells us that , while .   Converting polar to Cartesian  Suppose we want to convert the point in polar coordinates to Cartesian coordinates . Then we have   and so the Cartesian point is    Converting Cartesian to polar  Suppose we now want to convert the point in Cartesian coordinates to polar coordinates. Then finding is relatively straightforward:   Finding requires a bit more care. We know that has to satisfy . One choice that makes this work is . However, this is incorrect! Whatever is needs to be consistent with the fact that our point lies in the second quadrant. So we'll pick instead. Hence one way to write the point in polar coordinates is given by    Converting equations  Consider the polar equation . We can convert this into a Cartesian equation using the above formulas. In particular, we use and . So and the equation becomes      Polar Curves  Now we move on to graphing polar equations.   Graphs of constants in polar coordinates  In Cartesian coordinates, the graphs of and give horizontal and vertical lines, respectively. In polar coordinates, the graphs of and have simple descriptions as well. The graph of is just the set of all points units away from the pole, so it's just a circle of radius centered at the pole. Likewise, the graph of is the set of all points that make an angle of with the polar axis, so it's just a line through the pole.    Graphs from Cartesian equations  In some cases it's beneficial to convert a polar equation to a Cartesian equation. The Cartesian equation may have a recognizable form that helps us to identify the corresponding polar graph. For example, suppose we want to describe the graph of for some constant . Then we can convert it to a Cartesian equation, in particular   If we complete the square, we get , which describes a circle centered at (in the -plane) and with radius . In the polar plane, this is a circle of radius centered at Similarly, describes a circle of radius centered at .    Another circle  Suppose we want to graph . From the previous example, we know that this will be a circle of radius centered at . See the following figure.       The circle from .     Cartesian to Polar Method  Graphing polar equations can be tricky, because it's easy to miss aspects of the graph unless you're careful. A useful method for graphing polar equations involves treating them as Cartesian equations first to get a better sense of how the graph behaves.   Three leaf rose  Suppose we want to graph . We don't know what this looks like in the polar plane yet, but we have a pretty good idea of how it looks when treated as a Cartesian equation in the -plane (which we view as different from the polar plane!):      The graph of as a Cartesian equation.   So we see that at goes from to , decreases from to , hitting along the way at .      to .   Now, as goes from to  will go from to , hitting at :      to .   Continuing in this manner lets us complete the graph:      The graph of in the polar plane.    SUGGESTED PROBLEMS: 1, 3, 11, 23, 37   "
 },
 {
-  "id": "p-1105",
+  "id": "p-1111",
   "level": "2",
-  "url": "section-polar-coordinates.html#p-1105",
+  "url": "section-polar-coordinates.html#p-1111",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4411,9 +4420,9 @@ var ptx_lunr_docs = [
   "body": "    Using distance and angle to specify a point.  "
 },
 {
-  "id": "p-1107",
+  "id": "p-1113",
   "level": "2",
-  "url": "section-polar-coordinates.html#p-1107",
+  "url": "section-polar-coordinates.html#p-1113",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4609,27 +4618,27 @@ var ptx_lunr_docs = [
   "body": " Coordinates in 3-Space   -coordinates  We're used to Cartesian coordinates in the plane: each point in the plane can be represented by an -coordinate and a -coordinate. This representation is determined by the coordinate axes (the - and -axes). There's nothing preventing us from doing the same for three dimensions. We'll just need three coordinate axes: the -, - and -axes. We typically view the -plane as horizontal, and the -axis as vertical, but there's no mathematical preference either way.  Just as the - and -axes determined the -plane, we can also get the - and -planes. These planes divide space into eight octants . And just as any point in the -plane can be represented by measuring along the -axis and -axis to get a point , we can do the same in space to get a point . The set of all points like this is denoted by , and is the three-dimensional coordinate system .  Given any point in , we can find its projections onto any of the coordinate axes or coordinate planes without too much trouble. The projection onto a line or plane is the point on that line or plane that is closest to the original point .   Projection   Find the projection of the point onto the -plane.    Here's how we can find the projection of the point onto the -plane. Note that the -plane is just the set of all points with -coordinate equation to , so the projection of onto the -plane is the point .     Equations in space   Sketch in .    This is just the set of all points in of the form . This forms a plane in .      More equations in space   Sketch in .    We can do so as follows. First, sketch in the -plane, which will just be the line . Then the surface in represented by is actually the surface consisting of all points directly above and directly below the line in the -plane.     Intersection of a sphere and a plane   Describe the intersection of the sphere given by the equation with the -plane.    We can do this without too much trouble if we remember that the -plane is just the set of all points with -coordinate equal to . So the intersection of this sphere with the -plane traces out the curve in the -plane, which is just the point .     Intersection of the sphere with the -plane.      The Distance Formula  Recall that the distance between two points and in (the -plane) is given by   This is proved using the Pythagorean theorem. We can do the same exact thing in !   Distances in Space  distance formula three dimensions   Let and be two points in . Then the distance between these two points, , is given by      Computing distances   lets us find the distance between the points and as follows:    One important use of the distance formula in is that it lets us find equations of spheres. The equation of a sphere of radius and center is given by which is more commonly written as    Equation of a sphere  The equation represents a sphere in . To see how, we can rearrange the equation and complete the square to get   So this equation describes a sphere of radius centered at .    Spherical shells  We can also use inequalities to describe regions in addition to equalities. For example, describes the region contained between the sphere of radius and the sphere of radius , both centered at the origin.    The spherical shells .     "
 },
 {
-  "id": "p-1153",
+  "id": "p-1159",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1153",
+  "url": "section-coordinates-in-3-space.html#p-1159",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "coordinate axes "
 },
 {
-  "id": "p-1154",
+  "id": "p-1160",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1154",
+  "url": "section-coordinates-in-3-space.html#p-1160",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "octants three-dimensional coordinate system "
 },
 {
-  "id": "p-1155",
+  "id": "p-1161",
   "level": "2",
-  "url": "section-coordinates-in-3-space.html#p-1155",
+  "url": "section-coordinates-in-3-space.html#p-1161",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4735,9 +4744,9 @@ var ptx_lunr_docs = [
   "body": " Vectors   One of our goals in this chapter is to adequately describe motion in space. A useful way to do this uses the concept of vector , which we think of as a quantity that has both direction and magnitude\/length. A simple example would be velocity: velocity in space has a direction and also a magnitude (speed). We will typically denote vectors by using boldface letters such as or letters with a bar overhead such as . We represent vectors as arrows with an initial point and a terminal point :      A vector.   We say that two vectors are equivalent , or equal , if they have the same magnitude and direction. We write this as .    Addition and Scalar Multiplication  Given two vectors , we can add them to get the new vector   So the vector is obtained by moving the tail of to the tip of and then drawing a vector from the tail of to the tip of .      Vector addition.   The sum of vectors can be computed using either the triangle law , illustrated above in , or the similar parallelogram law . We can also scale vectors using scalar multiplication : if is a scalar In other words, a number. then is defined to be the vector that has the same direction as if and the opposite direction if , but the magnitude is rescaled by the factor .   Vector subtraction  Using the previous graph, we can compute . We just need to scale the vectors properly and then add to .     Vector Components  Although it isn't too hard to add and scale vectors visually, it'll be beneficial to do the same algebraically. We can do so by breaking a vector down into its components . Consider a vector in in , and suppose if we move it to the origin then the tip of the vector is at the point . Then the components of are and , and we write   Note the use of brackets here, since technically we are saying that the vector is distinct from the point , even though they are closely related. We say that the position vector of a point is the vector whose components are the same as the coordinates of the point. Geometrically, the position vector of a point is the vector with its tail at the origin and its tip at .  So any vector in can be represented using components by . Similarly, any vector in can be represented as . Once you represent a vector in component form, addition and scalar multiplication is straightforward.   Vector addition with components  Let and . Then    Finding magnitudes of vectors can also be done by applying the distance formula from to the components of the vectors. The magnitude of a vector is denoted by or . For example, the magnitude of from the previous example is   Given a vector     A vector equation  We can use vectors to describe curves and surfaces. For example, let and . Let . Then the set of all points that satisfy the equation has a very nice description: it's just the sphere of radius centered at .    Finding components of vectors  Consider the points and . We want to find the components of the vector . We can do this by translating to the origin, which is done by subtracting from each coordinate of the corresponding coordinate of . So the vector is given by    In general, given and the vector is given by    Properties of Vector Addition and Scalar Multiplication  vectors properties of vector addition and scalar multiplication   Let be vectors and let be scalars. Then the following are true:    .                .            Basis Vectors and Unit Vectors  Every vector in can be written using three components: Each component corresponds to a coordinate axis, and we can rewrite as a linear combination of three different vectors, with each vector corresponding to a coordinate axis:  These vectors are important enough that we'll give them a name: the standard basis vectors .  Standard Basis Vectors  vectors standard basis   The standard basis for is the set , where     As we've seen, every vector in can be expressed using only these three vectors. The standard basis has two important properties: it is perpendicular (also called orthogonal ) and every vector in the collection has magnitude . In other words,   These vectors are essentially designed to capture the \"coordinate directions\", and are plotted below.      The standard basis.   This also leads us to our next definition.   Unit Vectors  vectors unit vectors   A vector is a unit vector if .    Unit vectors are useful if we just need to indicate a direction, and we don't care about magnitude. Every nonzero vector can be rescaled to a unit vector: just divide the vector by its norm.   Direction from one point to another  Consider the points and . Then we can find the unit vector indicating the direction from to . First, set   Then the unit vector that gives the direction from to is given by     A vector equation for the unit sphere  Using the concept of a unit vector, we can very easily describe the unit sphere The sphere of radius centered at the origin. using a vector equation. If we set , then the unit sphere is just the set of all solutions of      Applications  Many physical quantities have both a direction and a magnitude, like velocity, acceleration and forces. Vectors are ideally suited to measure these quantities.   Weight of a chain  A still chain is fixed to two ends of a level divide. The tension of the chain at each fixed end can be represented by vectors pointing away from the chain. Call these tension forces and . Suppose we know that each force vector makes an angle of with the ground on either side of the chain's fixed ends, and that the magnitude of each tension is 43 . Then we can use vector addition to find the weight of the chain.  Let denote the weight of the chain considered as a vector (so that it's pointing down). Since the chain is still, its resultant The sum of all forces acting on the chain. must be . So we can say that   or in other words   What we need to find is , which we can do without too much trouble if we can rewrite the tension vectors in component form. In fact, we have   So it follows that   Therefore the chain weighs .   SUGGESTED PROBLEMS: 1--17 odd, 23, 25, 27   "
 },
 {
-  "id": "p-1172",
+  "id": "p-1178",
   "level": "2",
-  "url": "section-vectors.html#p-1172",
+  "url": "section-vectors.html#p-1178",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4753,9 +4762,9 @@ var ptx_lunr_docs = [
   "body": "    A vector.  "
 },
 {
-  "id": "p-1173",
+  "id": "p-1179",
   "level": "2",
-  "url": "section-vectors.html#p-1173",
+  "url": "section-vectors.html#p-1179",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4771,9 +4780,9 @@ var ptx_lunr_docs = [
   "body": "    Vector addition.  "
 },
 {
-  "id": "p-1176",
+  "id": "p-1182",
   "level": "2",
-  "url": "section-vectors.html#p-1176",
+  "url": "section-vectors.html#p-1182",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4789,18 +4798,18 @@ var ptx_lunr_docs = [
   "body": " Vector subtraction  Using the previous graph, we can compute . We just need to scale the vectors properly and then add to .  "
 },
 {
-  "id": "p-1178",
+  "id": "p-1184",
   "level": "2",
-  "url": "section-vectors.html#p-1178",
+  "url": "section-vectors.html#p-1184",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "components "
 },
 {
-  "id": "p-1179",
+  "id": "p-1185",
   "level": "2",
-  "url": "section-vectors.html#p-1179",
+  "url": "section-vectors.html#p-1185",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4843,9 +4852,9 @@ var ptx_lunr_docs = [
   "body": " Properties of Vector Addition and Scalar Multiplication  vectors properties of vector addition and scalar multiplication   Let be vectors and let be scalars. Then the following are true:    .                .         "
 },
 {
-  "id": "p-1196",
+  "id": "p-1202",
   "level": "2",
-  "url": "section-vectors.html#p-1196",
+  "url": "section-vectors.html#p-1202",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4861,9 +4870,9 @@ var ptx_lunr_docs = [
   "body": " Standard Basis Vectors  vectors standard basis   The standard basis for is the set , where    "
 },
 {
-  "id": "p-1198",
+  "id": "p-1204",
   "level": "2",
-  "url": "section-vectors.html#p-1198",
+  "url": "section-vectors.html#p-1204",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -4942,9 +4951,9 @@ var ptx_lunr_docs = [
   "body": " The Dot Product  dot product definition   Let and . The dot product of with , denoted is given by    "
 },
 {
-  "id": "p-1219",
+  "id": "p-1225",
   "level": "2",
-  "url": "section-the-dot-product.html#p-1219",
+  "url": "section-the-dot-product.html#p-1225",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5023,9 +5032,9 @@ var ptx_lunr_docs = [
   "body": "    The vectors and .  "
 },
 {
-  "id": "p-1243",
+  "id": "p-1249",
   "level": "2",
-  "url": "section-the-dot-product.html#p-1243",
+  "url": "section-the-dot-product.html#p-1249",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5077,9 +5086,9 @@ var ptx_lunr_docs = [
   "body": " The Cross Product   The dot product, and in particular , gives us a good way to tell if two vectors are perpendicular. However, it says nothing about how to construct perpendicular vectors. The next vector operation, the cross product , is the tool we'll use for that goal.    Definition and Properties of the Cross Product   cross product definition  The Cross Product   Let and . Then the cross product of with is the new vector given by      Cross product of basis vectors  Let's start by computing using the definition. If we do so, we have   On the other hand, we also have . This points out the very important fact that order matters for cross products .   This formula is a lot to remember, so it's beneficial to find another way to express it. One way is by using determinants . In particular, if and , then    Another cross product   is useful to use if you're dealing with vectors that aren't as simple as the basis vectors . For example, let and . Then    Remember that we said the cross product is our tool for finding perpendicular vectors. So it might be nice if we made sure it actually did that. As a quick check, we'll compute and , with these vectors coming from . If we do so, we obtain   Since these dot products are zero, this means that both and are perpendicular to the cross product . This is also true in general.   Orthogonality of the Cross Product  cross product orthogonality    is always orthogonal to both and .    So the cross product always produces orthogonal vectors. To determine the direction of the cross product , we use the right-hand rule : sweep your right hand from to and stick your thumb up. Then is parallel to your thumb.  We would also like to know the magnitude of the cross product. We can just compute it using and find the magnitude using our usual formula. If we do so, we obtain (after a lot of simplifying!)   which reduces to the following result.   Magnitude of the Cross Product  cross product magnitude   Let denote the acute angle between the vectors and , so that . Then     So in particular, two nonzero vectors and are parallel (i.e. have ) if and only if .   Testing collinearity  We say that three points and are collinear if they all lie on the same line. Suppose we want to check if the points and are collinear or not. How can we do so? If we start by defining   then we can say that all three points lie on the same line if and only if and are parallel to each other. So we'll compute their cross product to get . Since these vectors are parallel, then the three given points must lie on the same line.   Another important property of the magnitude of the cross product is the following: is exactly equal to the area of the parallelogram determined by and .   Area of a triangle  Suppose that we want the area of the triangle with vertices and . To start, we need to find vectors that determine the triangle. We can use   Now, the triangle determined by and is precisely half of the parallelogram determined by these same vectors, so the area of this triangle is equal to . We can use Sage as in the cell below to find the cross product of these vectors. Doing so, we get So the area of the triangle with vertices and is      Properties of the Cross Product  cross product properties   Let be vectors and a scalar. Then the following properties are true:           The last item above is an important relationship between the cross product and dot product called the scalar triple product . There is an important geometric significance to this new product.   scalar triple product  Geometry of the Scalar Triple Product   Let and be vectors in . Then is equal to the volume of the parallelepiped determined by and .     Testing if vectors are coplanar  We say that three vectors and are coplanar if they can all lie in a single plane. For example, and are coplanar since they lie in the -plane, but and are not coplanar. Suppose we're given and . These vectors are coplanar if and only if the parallelepiped determined by these vectors has zero volume (i.e. is flat). Since   these vectors are not coplanar.    Another way to compute cross products  Using and the facts that   gives us another way to compute cross products that doesn't involve determinants. As an example, let and Then      Torque  Consider a force acting on a rigid body at some position . This force applies a turning affect to the body, that we measure by torque .   Torque  torque   The torque of a force acting at a position is defined to be the vector     As one example of torque, consider a wrench applied to a bolt. The force is exerted at the end of the wrench, and the torque is a vector that's parallel to the axis of rotation of the bolt. The torque is greater if the force is applied at a direction perpendicular (or nearly so) to that of the wrench, and smaller if the force is nearly parallel to the direction of the wrench. As a quick check, the torque is if the force is exactly parallel to the direction of the wrench, which makes sense: if we're pushing or pulling the wrench, the bolt won't rotate at all.   Torque and hex keys  A hex key (Allen wrench) with a short arm of length 27 and a long arm length of 154 is applied to a screw, with the short arm attached to the screw. To turn the screw, a force of 0.5 is applied to the long arm of the hex key turning the screw clockwise, and is exactly perpendicular to both the short arm and long arm of the hex key. We want to find the torque of this force on the screw.  One way we can do this is to imagine the screw sitting at the origin, and the hex key is (initially) in the -plane. Note that once the force is applied, it will begin to rotate the hex key out of the -plane. Now, the torque is defined by   where is the vector from the screw to the point where the force is applied. We can find without too much trouble: it's . To find the force , note that it's perpendicular to both the long arm and short arm of the screw. So a starting guess would be   Such a force would turn the screw clockwise, but it has the wrong magnitude. So we need to adjust it a bit: . So the torque is given by      SUGGESTED PROBLEMS: 1-19 odd, 29, 41   "
 },
 {
-  "id": "p-1254",
+  "id": "p-1260",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1254",
+  "url": "section-the-cross-product.html#p-1260",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5104,9 +5113,9 @@ var ptx_lunr_docs = [
   "body": " Cross product of basis vectors  Let's start by computing using the definition. If we do so, we have   On the other hand, we also have . This points out the very important fact that order matters for cross products .  "
 },
 {
-  "id": "p-1258",
+  "id": "p-1264",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1258",
+  "url": "section-the-cross-product.html#p-1264",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5131,9 +5140,9 @@ var ptx_lunr_docs = [
   "body": " Orthogonality of the Cross Product  cross product orthogonality    is always orthogonal to both and .   "
 },
 {
-  "id": "p-1263",
+  "id": "p-1269",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1263",
+  "url": "section-the-cross-product.html#p-1269",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5176,9 +5185,9 @@ var ptx_lunr_docs = [
   "body": " Properties of the Cross Product  cross product properties   Let be vectors and a scalar. Then the following properties are true:          "
 },
 {
-  "id": "p-1274",
+  "id": "p-1280",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1274",
+  "url": "section-the-cross-product.html#p-1280",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5212,9 +5221,9 @@ var ptx_lunr_docs = [
   "body": " Another way to compute cross products  Using and the facts that   gives us another way to compute cross products that doesn't involve determinants. As an example, let and Then   "
 },
 {
-  "id": "p-1280",
+  "id": "p-1286",
   "level": "2",
-  "url": "section-the-cross-product.html#p-1280",
+  "url": "section-the-cross-product.html#p-1286",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5302,9 +5311,9 @@ var ptx_lunr_docs = [
   "body": " A plane in is uniquely determined by specifying a single point for it to pass through and a direction for it to face.  "
 },
 {
-  "id": "p-1306",
+  "id": "p-1312",
   "level": "2",
-  "url": "section-equations-of-lines-and-planes.html#p-1306",
+  "url": "section-equations-of-lines-and-planes.html#p-1312",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5356,9 +5365,9 @@ var ptx_lunr_docs = [
   "body": " Cylinders and Quadric Surfaces   Before we move on to doing calculus with vectors, we'll briefly take a look at more graphs in . In particular, we'll look at cylinders and quadric surfaces .    Cylinders   cylinders definition  Cylinders   A cylinder is the collection of all lines parallel to a given line and passing through some plane curve.    A basic example of a cylinder is the set of all lines passing through the unit circle in the -plane and parallel to the -axis. In , this is just the graph of . The graph of this cylinder is provided below.   The cylinder    For our purposes, equations that give a cylinder will often be missing a variable.   A sinusoidal cylinder  Consider the equation in . This equation is missing the variable , which suggests that the graph of this equation should be a cylinder. However, it's not going to look like the cylinders we may be used to at this point. In fact, this is just the set of all lines passing through the curve in the -plane and parallel to the -axis. It's graph is given below.     The cylinder     Another cylinder  Consider the cylinder given by the set of all lines passing through the plane curve in the -plane and parallel to the line in defined by the equation   What does this cylinder look like? Well, we can view it as essentially a \"sheet\" of lines cutting through the -plane at the line . If we try to imagine this, then this suggests that this cylinder should probably be a plane! In fact, this cylinder is exactly the plane containing the point and parallel to the line given above. As the line itself is parallel to the -plane, the resulting cylinder is just the -plane.     Quadric Surfaces  A quadric surface is any surface that is the graph of an equation of the form   A useful tool for graphing quadric surfaces (and others in ) is the concept of a trace , which is what the curve looks like in a plane parallel to the one the coordinate planes. This amounts to setting either, or equal to a constant and graphing the resulting equation.   An ellipsoid  Consider the equation   If we want to graph this, we can graph a few of it's traces to get an idea of what it looks like. Let's graph traces parallel the -plane to start. This means we'll set equal to different constants. For , we get the equation   which we rewrite as   This is an ellipse in the -plane, with minor axis and major axis . We can graph another trace, say in the -plane, we get   which is an ellipse with minor axis and major axis . Similarly, in the -plane we have an ellipse with minor axis and major axis . Putting these together gives us a rough idea of the shape of this surface, which we call an ellipsoid .    Region between surfaces  Suppose we want to sketch the region between the surface and the cylinder for . First, we can graph . If we look at the horizontal traces of this surface, we get circles of varying radii. As increases, the radii of these circles increase as well. This surface is just a cone! So we're describing the region of this cone bounded between and , and contained inside the cylinder .    The region contained between and     "
 },
 {
-  "id": "p-1322",
+  "id": "p-1328",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1322",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1328",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5410,18 +5419,18 @@ var ptx_lunr_docs = [
   "body": " Another cylinder  Consider the cylinder given by the set of all lines passing through the plane curve in the -plane and parallel to the line in defined by the equation   What does this cylinder look like? Well, we can view it as essentially a \"sheet\" of lines cutting through the -plane at the line . If we try to imagine this, then this suggests that this cylinder should probably be a plane! In fact, this cylinder is exactly the plane containing the point and parallel to the line given above. As the line itself is parallel to the -plane, the resulting cylinder is just the -plane.  "
 },
 {
-  "id": "p-1329",
+  "id": "p-1335",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1329",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1335",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "quadric surface "
 },
 {
-  "id": "p-1330",
+  "id": "p-1336",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#p-1330",
+  "url": "section-cylinders-and-quadric-surfaces.html#p-1336",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5464,9 +5473,9 @@ var ptx_lunr_docs = [
   "body": " Vector Functions   Recall from that the equation of a line can be written as This is our first example of a vector function . Vector functions are functions of the form and graphs of vector functions are called space curves . We call the component functions of . We're interested in how these curves change, which means we're interested in how to do calculus on space curves. Although these curves live in , there's still only one independent variable: . So much of what we learned in Calculus I applies to space curves.    Limits with Space Curves  We can take limits with vector functions just as we can with regular functions.  Let . Then   In other words, if you want to take the limit of a vector function you can just take the limits of the component functions.   Limit of a vector function  Let   Suppose we want to find . Then we just need to take the limit of each component. So    Just as in Calculus I, we say that a vector function is continuous at if . In general, a vector function is continuous wherever all of its components functions are continuous.   A horiztonal helix  Let , and suppose we want to sketch this function. One way to do so is to plug in values for and connect the resulting points with a curve, but we can also do the following to get an idea of what this looks like. First, note that we have and . So , which means that this looks like the unit circle in the -plane, traced clockwise . Since we also have , this curve moves farther along the -axis as increases. If we trace this out, we get a helix (see the below plot). We can also see from the graph that it has no jumps or gaps, so is continuous everywhere.     Finding vector functions  Consider the cylinder and the surface , and suppose we want to trace out there intersection with a vector function. Here's how we can do this. First, we'll come up with the and components of . Since , this suggests that we should take   So that's two down, one to go. To get , we just need to use the equation . So   So our vector function is   This is also plotted below.      Derivatives with Space Curves  Now that we know how to take limits with vector functions, we can take derivatives as well.   Derivatives of Vector Functions  vector functions derivatives   Let denote a vector function. The derivative of is the new vector function given by   assuming that the limit exists. If this limit exists, we say that is differentiable .    If then is differentiable if and only if are, and Just as in Calculus I, the derivative represents how quickly a space curve is changing at some value of . However, derivatives of vector functions also carry information about the direction a curve is moving. We call the tangent vector to . In particular, is parallel to the space curve at , and its magnitude represents how quickly the curve is changing at . If we only care about direction, then we can define the unit tangent  , which is given by   We also have the usual ideas from Calculus I and physics regarding motion: velocity is the derivative of position and acceleration is the derivative of velocity.   Velocity on a saddle  A particle moves counterclockwise along the \"saddle\" . We want its velocity at . First, find to get   At , we have the velocity vector   So at the point , the space curve is parallel to the vector . In other words, the particle is moving in this direction at .    Motion along the saddle traced by in     Tangents on a circle  A particle moves along the circle in the -plane, counterclockwise and with an angular frequency of 5\\pi . Then we can assume that its position is described by   Suppose we want to find the direction this particle is going at any given moment. Then we can just find the unit tangent vector :    We also have derivative rules for vector functions, based off of the familiar formulas from Calculus I.   Vector Derivative Rules  vector functions derivative rules   Let and be differentiable vector functions, be a scalar and let be a differentiable (scalar) function. Then the following formulas hold:              Integrals with Space Curves  We can also integrate vector functions without too much trouble. Just as taking the derivative of a vector function reduces down to differentiating each component, integrating a vector function reduces down to integrating each component. If then   SUGGESTED PROBLEMS: 1, 3, 5, 7, 17, 21, 23, 37, 41, 45, 59, 61   "
 },
 {
-  "id": "p-1337",
+  "id": "p-1343",
   "level": "2",
-  "url": "section-vector-functions.html#p-1337",
+  "url": "section-vector-functions.html#p-1343",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5482,9 +5491,9 @@ var ptx_lunr_docs = [
   "body": " Limit of a vector function  Let   Suppose we want to find . Then we just need to take the limit of each component. So   "
 },
 {
-  "id": "p-1343",
+  "id": "p-1349",
   "level": "2",
-  "url": "section-vector-functions.html#p-1343",
+  "url": "section-vector-functions.html#p-1349",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5518,9 +5527,9 @@ var ptx_lunr_docs = [
   "body": " Derivatives of Vector Functions  vector functions derivatives   Let denote a vector function. The derivative of is the new vector function given by   assuming that the limit exists. If this limit exists, we say that is differentiable .   "
 },
 {
-  "id": "p-1352",
+  "id": "p-1358",
   "level": "2",
-  "url": "section-vector-functions.html#p-1352",
+  "url": "section-vector-functions.html#p-1358",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5581,9 +5590,9 @@ var ptx_lunr_docs = [
   "body": " Arc length of a helix  Suppose we want to find the arc length of the helix from to . Then this is given by   "
 },
 {
-  "id": "p-1366",
+  "id": "p-1372",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1366",
+  "url": "section-arc-length-and-curvature.html#p-1372",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5599,9 +5608,9 @@ var ptx_lunr_docs = [
   "body": " Reparametrizing a space curve  Suppose we're given the space curve   which starts at , (so starts at ) and we want to find the point that is units along the curve in the positive direction. Then we can do this by reparametrizing the curve using arc length. Here's how. First, we find the arc length function :   Since , we get . So   reparametrizes the space curve in terms of arc length. So the point on the curve that is units along in the positive direction is given by   "
 },
 {
-  "id": "p-1372",
+  "id": "p-1378",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1372",
+  "url": "section-arc-length-and-curvature.html#p-1378",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5653,9 +5662,9 @@ var ptx_lunr_docs = [
   "body": " Using the alternative formula   Let . We'll make use of to find We have   and so    "
 },
 {
-  "id": "p-1385",
+  "id": "p-1391",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1385",
+  "url": "section-arc-length-and-curvature.html#p-1391",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5680,9 +5689,9 @@ var ptx_lunr_docs = [
   "body": " Unit normal on a circle   Find the unit normal vector of the curve given by .    If we think of a particle moving along , then this particle is just moving along the unit circle. So at every point along this path, the particle should be turning toward the origin in order to stay on the unit circle. So at all points of the curve, should point towards the origin. To prove this, we'll use the formula above to find the unit normal:   So . So at every point of the circle, the unit normal points in the opposite direction of the corresponding position vector, i.e. it points towards the origin.   "
 },
 {
-  "id": "p-1391",
+  "id": "p-1397",
   "level": "2",
-  "url": "section-arc-length-and-curvature.html#p-1391",
+  "url": "section-arc-length-and-curvature.html#p-1397",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5716,9 +5725,9 @@ var ptx_lunr_docs = [
   "body": " Motion of a projectile   A projectile is fired out of a cannon with an initial speed of 200 to the west and with an angle of elevation of . If the particle was fired from a raised platform that is 50 off level ground, where does the particle land?    First, we'll assume that points northward and points straight up. Let's assume that the platform is directly above the origin. If we let denote the position (in meters) of the particle at time (in seconds), then we can say that . We also have   We can integrate up to find the position :   where is an arbitrary constant vector. To find it, we'll use our initial condition on :   So . Integrating once more to get the position, we have  . So .  To find where the particle lands, we just set the third component equal to zero and solve for to get   We need to choose the positive value for , and if we do so we see that when the projectile hits ground it's at position So the projectile is a little over 3.5 to the west.   "
 },
 {
-  "id": "p-1403",
+  "id": "p-1409",
   "level": "2",
-  "url": "section-motion-in-space.html#p-1403",
+  "url": "section-motion-in-space.html#p-1409",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5815,9 +5824,9 @@ var ptx_lunr_docs = [
   "body": " functions of several variables two variables limits  Limit of a Function of Two Variables   Let be some function and let be a point arbitrarily close to the domain of . We say that if gets arbitrarily close to as gets arbitrarily close to .   "
 },
 {
-  "id": "example-294",
+  "id": "example-295",
   "level": "2",
-  "url": "section-limits-and-continuity.html#example-294",
+  "url": "section-limits-and-continuity.html#example-295",
   "type": "Example",
   "number": "12.2.2",
   "title": "",
@@ -5869,9 +5878,9 @@ var ptx_lunr_docs = [
   "body": " partial derivatives  Partial Derivatives   Let be a function of two variables. The partial derivative of with respect to is the function , assuming that this limit exists. Similarly, the partial derivative of with respect to is the function , assuming that this limit exists.   "
 },
 {
-  "id": "example-297",
+  "id": "example-298",
   "level": "2",
-  "url": "section-partial-derivatives.html#example-297",
+  "url": "section-partial-derivatives.html#example-298",
   "type": "Example",
   "number": "12.3.2",
   "title": "",
@@ -5887,9 +5896,9 @@ var ptx_lunr_docs = [
   "body": " Partial derivatives on the unit sphere   Let . Where is equal to ?    We can find this algebraically, but we'll try to answer this geometrically instead. First, note that is actually the top half of the unit sphere. If we're trying to find where is zero, then we need to find where this surface is \"flat\" when moving in the direction. If we think about this a bit, this should only occur when , i.e. along the -axis. At any other location on the unit sphere, moving in the -direction on the unit sphere requires going uphill or downhill, which means at these locations.   "
 },
 {
-  "id": "p-1448",
+  "id": "p-1454",
   "level": "2",
-  "url": "section-partial-derivatives.html#p-1448",
+  "url": "section-partial-derivatives.html#p-1454",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5914,9 +5923,9 @@ var ptx_lunr_docs = [
   "body": " Clairaut's Theorem   Suppose that is defined on a disk that contains the point . If and are both continuous on , then In other words, the mixed partials are equal to each other wherever they happen to be continuous.   "
 },
 {
-  "id": "p-1453",
+  "id": "p-1459",
   "level": "2",
-  "url": "section-partial-derivatives.html#p-1453",
+  "url": "section-partial-derivatives.html#p-1459",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5941,9 +5950,9 @@ var ptx_lunr_docs = [
   "body": " Tangent Planes and Linear Approximations   In Calculus I, derivatives are used to find linear approximations to functions of the form . We can use partial derivatives to do the same for functions with several independent variables.    Tangent Planes  Recall that if a curve is differentiable at a point , then it has a tangent line passing through The tangent line can be viewed as a linear approximation of the curve near the point . We can apply a similar ideas to surfaces . It turns out that if we have a surface and a point on the surface, then every tangent vector at this point is contained in a single plane called the tangent plane .  We'd like to find the equation of this plane. First, recall that every plane can be described by an equation of the form We can view and as given, so we just need to find . If we assume that , then we can rewrite this equation to obtain where and . If we set , then we have . This is the equation of a line tangent to the surface and parallel to the -axis, and so the slope of this line must be since the slope of a tangent line in the -direction gives the rate of change in the -direction. Similarly, Putting all of this together gives the following theorem.   Tangent Planes to Surfaces  tangent planes   Let be a surface and suppose that has continuous partial derivatives at the point . Then the tangent plane to the surface at the point is given by where .     Approximations by tangent planes   Find the tangent plane to at the point . Use this to approximate     The equation of the tangent plane is given by which we can rewrite as So at , we should have       Linear Approximations   shows that we can use tangent planes to approximate complicated functions. This leads us to the idea of a linear approximation, or linearization of a function of the form .   linearization  Linearization   Let be a function for which and are both continuous at a point . Then the linearization of at is the function given by     For well-behaved functions (i.e. functions that have continuous partial derivatives), if is close to the point .   Linearization of an exponential and a sinusoid   Let . Find the linearization of at the point .    By , the linearization is given by      can also be extended to functions with more than two variables.   Linearization in three variables   Let . Find the linearization at the point .    The formula we need to use now is       SUGGESTED PROBLEMS: 1, 15, 19   "
 },
 {
-  "id": "p-1458",
+  "id": "p-1464",
   "level": "2",
-  "url": "section-tangent-planes-and-linear-approximations.html#p-1458",
+  "url": "section-tangent-planes-and-linear-approximations.html#p-1464",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -5968,9 +5977,9 @@ var ptx_lunr_docs = [
   "body": " Approximations by tangent planes   Find the tangent plane to at the point . Use this to approximate     The equation of the tangent plane is given by which we can rewrite as So at , we should have    "
 },
 {
-  "id": "p-1463",
+  "id": "p-1469",
   "level": "2",
-  "url": "section-tangent-planes-and-linear-approximations.html#p-1463",
+  "url": "section-tangent-planes-and-linear-approximations.html#p-1469",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6112,9 +6121,9 @@ var ptx_lunr_docs = [
   "body": " Computing a directional derivative   Let . Find the directional derivative of in the direction of at the point .    We can use to find the directional derivative. However, there's something we need to watch out for here. Both and require using a unit vector , but our vector isn't a unit vector at all. So we need to normalize  to get a unit vector that is parallel to : Since we see that the directional derivative we need is given by    "
 },
 {
-  "id": "p-1492",
+  "id": "p-1498",
   "level": "2",
-  "url": "section-directional-derivatives-and-gradients.html#p-1492",
+  "url": "section-directional-derivatives-and-gradients.html#p-1498",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6193,9 +6202,9 @@ var ptx_lunr_docs = [
   "body": " Derivatives at a Local Maximum or Minimum   Suppose that is differentiable, and has a local maximum or minimum at . Then    "
 },
 {
-  "id": "p-1509",
+  "id": "p-1515",
   "level": "2",
-  "url": "section-extreme-values.html#p-1509",
+  "url": "section-extreme-values.html#p-1515",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6211,9 +6220,9 @@ var ptx_lunr_docs = [
   "body": " Critical points of an exponential   Let . Find its critical points.    Find the critical points by solving and . Since then forces . Similarly, since then forces or . So the only points that satisfy both  and are So these must be our critical points.   "
 },
 {
-  "id": "p-1512",
+  "id": "p-1518",
   "level": "2",
-  "url": "section-extreme-values.html#p-1512",
+  "url": "section-extreme-values.html#p-1518",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6292,9 +6301,9 @@ var ptx_lunr_docs = [
   "body": " Constrained Optimization Using Contours   Estimate the minimum and maximum values of subject to the constraint .    The constraint is represented as a contour plot of . We can compare this with contours of , and any point where there two contours intersect is a point for which the constraint is satisfied.   An interactive contour plot of and .    Using these contours, we see that the maximum value of subject to appears to be , while the minimum value of subject to appears to be .   "
 },
 {
-  "id": "p-1534",
+  "id": "p-1540",
   "level": "2",
-  "url": "section-lagrange-multipliers.html#p-1534",
+  "url": "section-lagrange-multipliers.html#p-1540",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6436,9 +6445,9 @@ var ptx_lunr_docs = [
   "body": " Double Integrals in Polar Coordinates  Recall that the double integral was defined by first setting up a rectangular grid. The reason we used a rectangular grid was because we were working in Cartesian coordinates, so this made the most sense. If we're dealing with a circular region of integration, then using Cartesian coordinates is very awkward. However, polar coordinates from work very nicely with circular regions. So we want to find out how to set up double integrals using polar coordinates.  If we're given a function , then it's not too hard to convert this to the polar form . Just replace with and with . The tricky part with setting up double integrals in polar coordinates is how to deal with the area element  , which in Cartesian coordinates is just or . To figure out what should be in polar coordinates, i.e. in terms of and , consider the following \"polar rectangle\":     A polar grid.    Let represent the area of one of these sectors. If we let denote the distance from the origin to one sector, the length of a sector and the angle spanned by a sector, then we can say that If we assume that and are both small (which means the polar grid in is very fine), then So . As and approach , this becomes more exact, and we get .   double integrals polar coordinates  Double Integrals in Polar Coordinates   Let be a continuous function. Then and limits are chosen using polar coordinates.     Integrating over a circular sector   Find     If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:     Polar coordinates may also be used, surprisingly, to evaluate the Gaussian integral  .   The Gaussian Integral   We have      First, let . We'll show that . We have Since , this gives     Volume of a sphere   Find the volume of a sphere of radius .    First, we can center the sphere at the origin without loss of generality. Such a sphere is given by . If we solve for , we get Let denote the disk of radius in the -plane centered at the origin. Then the volume of the sphere is     SUGGESTED PROBLEMS: 5, 13, 23  "
 },
 {
-  "id": "p-1579",
+  "id": "p-1585",
   "level": "2",
-  "url": "section-double-integrals-in-polar-coordinates.html#p-1579",
+  "url": "section-double-integrals-in-polar-coordinates.html#p-1585",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6463,9 +6472,9 @@ var ptx_lunr_docs = [
   "body": " Integrating over a circular sector   Find     If we sketch the region of integration, we see that it is the part of the unit circle in the third quadrant. So we'll switch to polar coordinates to solve this integral:    "
 },
 {
-  "id": "p-1584",
+  "id": "p-1590",
   "level": "2",
-  "url": "section-double-integrals-in-polar-coordinates.html#p-1584",
+  "url": "section-double-integrals-in-polar-coordinates.html#p-1590",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6517,9 +6526,9 @@ var ptx_lunr_docs = [
   "body": " Mass of a triangular plate   Find the mass of the plate contained in the triangular region bounded by lines and , given that the density is .    The mass is    "
 },
 {
-  "id": "p-1593",
+  "id": "p-1599",
   "level": "2",
-  "url": "section-applications-of-double-integrals.html#p-1593",
+  "url": "section-applications-of-double-integrals.html#p-1599",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6544,9 +6553,9 @@ var ptx_lunr_docs = [
   "body": " Triple Integrals  In , we have This represents the area under and over . Furthermore, gives the length of . In , we have This represents the volume under and above the region , where . Furthermore, gives the area of .  We can extend all of this to by introducing the concept of the triple integral .   triple integrals rectangular coordinates  Triple Integrals over a Rectangle   Let be defined on some region in . Then the triple integral of over is given by where . If the limit exists, we say that is integrable on .    For a double integral in rectangular coordinates, we have or . Similarly, for a triple integral in rectangular coordinates we have six different choices for :  Absolute values on the disk                Just as we can view as an infinitesimal length and as an infinitesimal area, represents an infinitesimal volume.  Our main use for will be to recognize a triple integral \"in the wild,\" but we won't actually use it to compute integrals. For this purpose, we still use Fubini's Theorem.   Fubini's Theorem triple integrals  Fubini's Theorem for Triple Integrals   Suppose is a continuous function on the closed and bounded region in . Then can be computed as an iterated integral, and the answer does not depend on the choice of .     A triple integral over a rectangular prism   Compute , where     We'll integrate using . Then we have     An unfortunate side effect of increasing the dimension for our integral is that we lose a little bit of geometric intuition. For instance, is indeed calculating a \"volume,\" but the volume in question is for a four dimensional region (the graph of over the rectangular prism). We can only really visualize the \"base\" of this region, which served as our region of integration in . Even so, the triple integral can still tell us important things about functions of three variables.   Finding an average value   Find the average value of the function over the region given in .    First, let denote the volume of . Then the average value of over is just     We can also compute triple integrals over more general regions.   Volume using triple integrals   Find the volume of the region bounded by the cylinder and the planes and .    If we let denote this region, then its volume is given by . The volume is then     When setting up limits for triple integrals, say using , then the limits on the innermost integral are typically functions of and , the limits on the middle integral are functions of and the limits on the outermost integral are constant. We can also change the order of integration to make an integral more tractable.   Changing the order of integration   Compute .    This looks awful to integrate with respect to first, so we'll try changing the order of integration. looks easiest, so let's try using instead. If we sketch the region, we see that the limits are actually the same, expect we just need to swap the middle and innermost integrals. So     SUGGESTED PROBLEMS: 5, 11, 13, 19, 25, 29  "
 },
 {
-  "id": "p-1598",
+  "id": "p-1604",
   "level": "2",
-  "url": "section-triple-integrals.html#p-1598",
+  "url": "section-triple-integrals.html#p-1604",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6625,9 +6634,9 @@ var ptx_lunr_docs = [
   "body": " Triple Integrals in Cylindrical Coordinates  In , we saw that introducing a new coordinate system made certain double integrals much easier to work with. The same idea works with triple integrals. The first such system we'll look at is cylindrical coordinates , which are useful for computing triple integrals over cylindrical regions. To convert Cartesian coordinates into cylindrical coordinates , simply replace with polar coordinates, and use . We leave alone.   Computing a triple integral over a cylinder   Let be the cylinder in with height and base given by the circle of radius centered at the origin, restricted to the first and second octants. Let . Compute .    Since we're dealing with a cylinder, we'll switch to cylindrical coordinates :      Cylindrical Volume   Find the volume of the region below the inverted cone and in the first and second octants.    First, let denote the region in question. Then . The graph of this region isn't too difficult to find, especially using resources such as CalcPlot3D , and is given by    However, this region is much easier to describe in cylindrical coorindates: . Hence the volume is .     Finding the Volume of the Unit Sphere   Find the volume of the unit sphere; that is, the sphere of radius centered at the origin.    The unit sphere is specified by the inequalities . It's much easier to describe this region using cylindrical coordinates: . By symmetry, the volume must be .    "
 },
 {
-  "id": "p-1614",
+  "id": "p-1620",
   "level": "2",
-  "url": "section-cylindrical-coordinates.html#p-1614",
+  "url": "section-cylindrical-coordinates.html#p-1620",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6670,9 +6679,9 @@ var ptx_lunr_docs = [
   "body": " Triple Integrals in Spherical Coordinates  Although cylindrical coordinates worked just fine in , it makes more sense to use a coordinate system based on spheres in this case. These situations call for spherical coordinates .  Just as any point in can be represented as a point in polar coordinates, we can represent any point in using the spherical coordinates . Here, is distance from the origin, is the angle the point makes with the -axis and is the angle the point makes with the -axis. In general, . corresponds to a point on the positive -axis, while corresponds to a point on the negative -axis.  Using triangles, we have the conversion formulas . Note that .  Just as constant limits in Cartesian coordinates correspond to rectangular regions of integration, constant limits in spherical coordinates give rise to spherical regions of integration.   Sketching a Spherical Region   Sketch the region determined by the spherical inequalities .    If we wish to compute integrals using spherical coordinates, then we must alter just as we did in . In particular, we use .   Volume of the Unit Sphere   Find the volume of the unit sphere .    The volume of can be found using the triple integral . Because of the spherical region of integration, this is best found using spherical coordinates. So .    The integrand can also suggest a transformation to spherical coordinates. In particular, integrands depending on are often made easier by converting to spherical.   Average Value Inside of the Unit Sphere   Let . Find the average value of over the unit sphere.    By definition, the average value of is given by . We'll follow the same strategy we used in to compute this integral. If we convert to spherical coordinates, we get .  So the average value of over is .    "
 },
 {
-  "id": "p-1621",
+  "id": "p-1627",
   "level": "2",
-  "url": "section-triple-integrals-in-spherical-coordinates.html#p-1621",
+  "url": "section-triple-integrals-in-spherical-coordinates.html#p-1627",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6823,9 +6832,9 @@ var ptx_lunr_docs = [
   "body": " A Vector Field in   Sketch .    An interactive sketch from CalcPlot3D is given below:  A vector field in -space.     The vector field rotates about the -axis in the counterclockwise direction, flowing upwards if and flowing downwards if .   "
 },
 {
-  "id": "p-1664",
+  "id": "p-1670",
   "level": "2",
-  "url": "section-vector-fields.html#p-1664",
+  "url": "section-vector-fields.html#p-1670",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6841,18 +6850,18 @@ var ptx_lunr_docs = [
   "body": " Particle Trapped in a Velocity Field   At time seconds, a particle is at position . The particle is within the velocity field . Estimate the particle's position at seconds.    Since the particle starts at , its velocity at time is given by . Hence the displacement of the particle from to seconds should be approximately , which gives the new position as roughly .   "
 },
 {
-  "id": "p-1667",
+  "id": "p-1673",
   "level": "2",
-  "url": "section-vector-fields.html#p-1667",
+  "url": "section-vector-fields.html#p-1673",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
   "body": "integral curve streamlines field lines "
 },
 {
-  "id": "p-1668",
+  "id": "p-1674",
   "level": "2",
-  "url": "section-vector-fields.html#p-1668",
+  "url": "section-vector-fields.html#p-1674",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6868,9 +6877,9 @@ var ptx_lunr_docs = [
   "body": " Gradient Field for Gravitational Potential   Find the gradient field associated to .    We can find the gradient field right away: .   "
 },
 {
-  "id": "p-1671",
+  "id": "p-1677",
   "level": "2",
-  "url": "section-vector-fields.html#p-1671",
+  "url": "section-vector-fields.html#p-1677",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6886,9 +6895,9 @@ var ptx_lunr_docs = [
   "body": " Line Integrals   In this section we move on to computing integrals over curves in and .    Scalar Line Integrals  Suppose we wish to find the mass of a wire given by a curve in the -plane. If the density is a constant then this is simple: the mass is just where denotes the length of the wire.  Now suppose that the density varies, and is now a function . Then we can estimate the mass of the wire by chopping the wire into smaller segments, each of length , choosing points from each segment, and then computing . If we send the approximation becomes exact, and defines the scalar line integral of along .   line integrals scalar  Scalar Line Integral   Suppose that is a smooth curve in and that the function is continuous on . The scalar line integral of along is the number defined to be .   An analogous definition holds for curves in . We can also replace the assumption that is smooth with the assumption that is rectifiable , which (roughly) means it has a well-defined length.     Geometrically, represents the area under and above .  If is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral. Note that can be viewed as representing an infinitesimal length along the curve . If is traced out by the parametric equations , then the length of from to is given by the arc length function  . See and . Thus , and we can write .  If we view as being traced out by a vector function , then we can write this formula even more compactly: .   Computing a Scalar Line Integral   Compute , where is the segment of the parabola from to .    The curve is traced out by the vector function for . Therefore     Line integrals along piecewise smooth curves can be found without too much trouble.   Integrating Along Line Segments   Find where denotes the line segment from to followed by the segment from to .    We find this by breaking down as the union of two smooth curves and , where Then .    We can also compute scalar line integrals in .   Average Value on a Circle   Let and let . Find the average value of on .    The average value of on is given by where and . Therefore has an average value of on .      Vector Field Line Integrals  Suppose we have a force field  in and some particle that is acted upon by the force. The particle has a trajectory given by a curve .  Trajectory in a force field.       We want to determine how the trajectory of the particle aligns with the forcefield . We can do this by picking an arbitrary point along , finding the unit tangent at this point, and then comparing the direction of and that of by computing the dot product . This is a measure of how and align at a specific point, and integrating this along should tell us how and align overall.   line integrals vector fields  Line Integral of a Vector Field   Let denote a smooth curve and let be a vector field continuous on . Then we define the line integral of over to be .   This integral is also sometimes called the circulation integral of along .     To find line integrals of vector fields, we proceed as follows. Suppose that . Then . We can also write this as , assuming that .  In addition to measuring how well and align, vector field line integrals can also represent work done.   Flow Along a Circle   Let denote the segment of the parabola traversed once from to , and let . Does tend to flow with or against ?    If we graph and , we get the following:  Flow over .        suggests that flows with , and we can verify this by computing : . Since the result is positive, this tells us that tends to flow with .     A Nonconservative Force   Let denote a force field. Is the force conservative?    Here we are using the physical definition of a conservative force, namely that the work done must be path independent . So we'll choose two paths between two points and find the work done on each path. Let the first path, , denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, , denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.  From , it appears as though , which suggests that the vector field is path dependent.  A rotating force field.     To verify this, we'll compute the appropriate line integrals.  For , the total circulation is . Likewise, the circulation of along is .  Since the work done by between the points and clearly depends on the path taken between the points, this means that is path dependent and, therefore, not conservative.    We can also compute vector field line integrals in with essentially the same formula.   Circulation in   Find the circulation of along .    We have . Since the circulation is positive, this also shows that tends to flow with .      Flux Integrals  The circulation integral in is useful for measuring how much a vector field flows along a given curve. Now, we want to measure how a vector field flows across a curve, at least in .  Given a smooth curve with unit tangent , recall that measures how well a vector field and align at a point on . By integrating this, we get a measure along the entire curve. So if we want to get a sense of how flows across , we can do so by looking at a single point and then integrating along the curve again.  To do this, let be the unit normal vector to , given in . Then determines how flows across at a specific point, and integrating provides a measure along the entire curve. But there's one slight issue: if is a closed curve then it's possible that points into the region enclosed by . We would like to measure how flows out of instead, so we'll replace with , the outward unit normal . This leads us to the flux integral .   line integrals flux integral  Flux Integral   Let denote a smooth curve and let be a vector field continuous on . Then we define the flux integral of across to be , where is the outward unit normal vector to .    At this point it may be helpful to introduce some new notation. If is a closed curve, then we often denote line integrals involving with instead of .   Flux Across the Unit Circle   Let and let denote the unit circle, traversed exactly once counterclockwise. What is ?    We should have .    In order to actually compute flux integrals, we need to write using . So suppose that is traced out by the vector function . Then must be perpendicular to the unit tangent or equivalently . Our primary tool for finding perpendicular vectors, the cross product, only applies in . So to find we'll (temporarily) move everything into . Now we need to find a vector orthogonal to that also lies in the -plane. This can be done by computing .  At this point we need to decide which direction we want our normal vector to go. We'll usually choose the first option if is traversed counterclockwise and the second option otherwise. Assuming counterclockwise orientation, we have . Now moving back down to , we can write the outward unit normal as .  Therefore .   Verifying the Flux   Compute the flux integral in .    We have .      SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.   "
 },
 {
-  "id": "p-1675",
+  "id": "p-1681",
   "level": "2",
-  "url": "section-line-integrals.html#p-1675",
+  "url": "section-line-integrals.html#p-1681",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -6976,9 +6985,9 @@ var ptx_lunr_docs = [
   "body": " Circulation in   Find the circulation of along .    We have . Since the circulation is positive, this also shows that tends to flow with .   "
 },
 {
-  "id": "p-1708",
+  "id": "p-1714",
   "level": "2",
-  "url": "section-line-integrals.html#p-1708",
+  "url": "section-line-integrals.html#p-1714",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7021,9 +7030,9 @@ var ptx_lunr_docs = [
   "body": " The Fundamental Theorem for Line Integrals   From , we know that integrals and derivatives are closely related: . We want to extend this result to line integrals of vector fields over curves. In particular, we want to prove a relationship of the form where and are the endpoints of the curve . This is the content of the main result in this section: .    Path Independence  Unless otherwise mentioned, we'll assume that we're always working with an open, simply connected domain  . This is a region that, roughly, does not contain its boundary and does not contain any holes. A curve contained in is closed if its initial and terminal points are the same. We'll denote the boundary of by .  Unless mentioned otherwise, we assume is traversed counterclockwise is is in the -plane.  We often denote line integrals over closed curves using the symbol .  The mathematical definition of a conservative vector field is that it's the gradient of some scalar function.   conservative vector field mathematical definition  Conservative Vector Fields (Mathematical Definition)   Let be a vector field. We say that is conservative on a domain if on for some scalar function .    However, we also have a physical definition! Which may be useful. This definition relies on the concept of path independence .   vector fields path independence  Path Independence   A vector field is path independent on a domain if for any piecewise smooth paths in with the same endpoints. Equivalently, is path independent if for any piecewise smooth closed curve in .     Conservative Vector Fields (Physical Definition)   Let denote a (vector) force field. We say that is conservative on a domain if is path independent on .    In physical terms, says that the work done by a conservative force on a particle moving along a path depends only on the initial and terminal points of the path. Equivalently, the work done on a closed path must always be .  These two definitions are related by .   line integrals Fundamental Theorem of Line Integrals  Fundamental Theorem of Line Integrals   Suppose that is a conservative vector field (in the sense of ) with continuous components on an open simply connected region . Then is path independent. Furthermore, if and is a curve in with initial point and terminal point , then .     An Awful Example   Let and let be the path in the -plane composed of the line segment from to followed by the circular arc from to followed by the logarithmic arc from to . Find .     is piecewise smooth and consists of the components . To find , we can find for and add the resulting values. So let's do that! . Similarly, and finally  . Putting this all together, we get .  Now let's compare this approach with using . Since , is conservative by definition. Hence applies, and (setting ) we get .     Using Potential to Find Work Done   Let be a force field and let denote the parabolic arc from to . Find the work done by along .    The work done is just . Note that , and so the work done is just by .      Conservative Vector Fields   shows that line integrals involving conservative vector fields are straightforward to evaluate if we know a corresponding potential function. So now we want to do two things:   Given a vector field , determine if it's conservative.      Given a conservative vector field , determine a potential function .     For the first, we can use our intuition that conservative vector fields shouldn't rotate. So let's assume that is a (differentiable) vector field on and let be a point in the plane. We can estimate the rotation, or circulation , of at by constructing a rectangle with length and height at and measuring how flows counterclockwise around the rectangle. If we do so, then we can estimate the circulation along each side as follows: . Therefore the total circulation near should be about . If we divide by to normalize, then we can say that the circulation is about .   Conservative Vector Fields are Irrotational   Let be a continuously differentiable vector field on an open simply connected region in . Then is conservative on this region if and only if .     Finding a Line Integral   Let and let denote the ellipse . Find .    We can parameterize and then compute as in , but we'll first check if is conservative. Since , it follows that is conservative. Hence .    The quantity in is called the (two-dimensional) curl of and is denoted by . This represents the tendency of to rotate counterclockwise around a given point. This can be extended to three dimensions using the following formula: where . The direction of provides the axis of rotation at a point, and its magnitude is the tendency of to rotate counterclockwise around this axis of rotation (viewed head on).   Testing a Vector Field in   Let . Determine if is conservative.   This is taken from Example 2 on page 1165 of Thomas' Calculus , edition.     We need to check if . So we compute this like a cross product, giving . Hence the vector field is irrotational and therefore conservative.    So now we have a good test for if a vector field is conservative. Next, we want to be able to find a corresponding potential function to a conservative vector field.  Consider the vector field from . We know this is conservative, so there must exist a corresponding potential function such that . To find this, we start by noting that whatever is, its partial derivatives must be the components of . In particular, . Now we look at to pin down : , and so . Finally, and so . Therefore a potential function for is .   Line Integral Along an Elliptical Arc   Compute , where .    First, we'll check if is conservative. If it is, we can use . Since , we see that is in fact conservative.  Now we need to find a potential function . Since , we can integrate with respect to to get . Now differentiate with respect to to get . Hence a potential function for is , and so .      SUGGESTED PROBLEMS:3-13 odd, 19, 21   "
 },
 {
-  "id": "p-1720",
+  "id": "p-1726",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1720",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1726",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7039,9 +7048,9 @@ var ptx_lunr_docs = [
   "body": " conservative vector field mathematical definition  Conservative Vector Fields (Mathematical Definition)   Let be a vector field. We say that is conservative on a domain if on for some scalar function .   "
 },
 {
-  "id": "p-1724",
+  "id": "p-1730",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1724",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1730",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7111,9 +7120,9 @@ var ptx_lunr_docs = [
   "body": " Finding a Line Integral   Let and let denote the ellipse . Find .    We can parameterize and then compute as in , but we'll first check if is conservative. Since , it follows that is conservative. Hence .   "
 },
 {
-  "id": "p-1742",
+  "id": "p-1748",
   "level": "2",
-  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1742",
+  "url": "section-the-fundamental-theorem-for-line-integrals.html#p-1748",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7192,9 +7201,9 @@ var ptx_lunr_docs = [
   "body": " Green's Theorem flux integrals  Green's Theorem for Flux Integrals   Let , and satisfy the same hypotheses as in . Then .   "
 },
 {
-  "id": "p-1761",
+  "id": "p-1767",
   "level": "2",
-  "url": "section-green-s-theorem.html#p-1761",
+  "url": "section-green-s-theorem.html#p-1767",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7219,9 +7228,9 @@ var ptx_lunr_docs = [
   "body": " Curl and Divergence   In this section we look at two different analogues of the derivative for vector fields. Once we have these versions of the derivative, we'll also be able to state a corresponding version of the , just as the corresponds to the gradient.    Curl  In we introduced the operator, which in is given by . In this class, has no meaning when by itself. However, it gains meaning when multiplied by a scalar function , leaving the gradient . We also used it to define the curl , which we repeat below.   vector fields curl in  Curl of a Vector Field in   Let be a vector field in with continuously differentiable components. The curl of is the vector .    We've already seen a couple nice properties of curls. First, the curl vector gives the axis of rotation about which tends to rotate counterclockwise when viewed head on, and is a measure of the amount of rotation. Second, the curl can be used to determine if a vector field is conservative or not.   Conservative Vector Fields in   Let denote a continuously differentiable vector field on an open set containing the simply connected region . Then is conservative if and only if .     Determining Rotation in a Vector Field   Suppose the vector field represents a swirling fluid. Within this fluid you place a small paddle wheel at the point . When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?    First we need to get a measure of the rotation of , so we compute the curl: , which is just at our point. This provides the axis around which the paddle wheel rotates counterclockwise. And since , the paddle wheel does not appear to rotate at all when viewed from above.      Divergence  Our second notion of derivative for vector fields is the divergence . If is a continuously differentiable vector field, then we define the divergence of to be the scalar function given by . The divergence of a vector field is a measure of outflow minus inflow . If , then we say that is incompressible or solenoidal (just as we say that is irrotational if ).   Divergence on a Rectangle   Let and let denote the unit circle, traversed counterclockwise once. Find the divergence of at and . Then find the net divergence of through the interior of .    At , . At this particular point, outflow is balanced with inflow. Likewise, at we can see that inflow is greater than outflow.  We can compute the net divergence as , where is the interior of the unit circle. This is equal to , which means the net flow throughout is . By , this is also equal to the net flux across .      Laplacian  From the divergence we get another useful form of (second) derivative for scalar functions. First, let be a differentiable scalar function. Then we can compute its gradient . This is a vector field that represents how changes. Now, since is a vector field we can also consider its curl and divergence. If is nice enough we know that , which is not particularly useful in this case. But if we take the divergence, we get .   Laplacian  Laplacian   Let be a twice differentiable scalar function on . The Laplacian of is the function given by .     extends to other dimensions in the obvious way. The Laplacian is useful since it provides a measure of how a function's value at a point differs from the average value at nearby points.   Laplacians and Average Values   Let and let . Let denote the unit circle traversed once counterclockwise. Find the average values of on , their specific values at and the Laplacians at .    If we compute the average values, we get . Furthermore, . We also have and .    To see how the Laplacian can arise, consider the following situation explained in Evans' Partial Differential Equations , edition. We have some density function ; this could be mass density, charge density, etc. Now we'll let denote the flux of . It's often reasonable to assume that the flux is proportional to the negative of the gradient of : where . This means that the quantity flows from regions of higher concentration to regions of lower concentration. If represents a quantity in equilibrium within some region , then the net flux across should be . In terms of , we have .  Now we'll make the argument that since the above should be true for arbitrary subregions of . But , which means that .  We say that a function is harmonic if its Laplacian is . The equation is known as Laplace's equation . Harmonic functions are extremely useful, as they represent quantities in a kind of equilibrium state. If represents chemical concentration, temperature or electrostatic potential, then Laplace's equation is Fick's law of diffusion, Fourier's law of heat conduction or Ohm's law of electrical conduction, respectively. See Evans text for more.  Laplacians also appear in certain integral identities.   Green's First Identity  Green's First Identity   Let denote a simply connected region with piecewise smooth boundary . Suppose that is continuously differentiable and is twice continuously differentiable on an open domain containing . Then .    Since the right hand side involves a flux integral, this suggests that may prove useful. Applying this to gives .  Now, recall that is a kind of derivative operator. For this reason, it also satisfies a version of the product rule: . Plugging this into the double integral and rearranging proves the result.      acts as a kind of integration by parts in higher dimensions.     SUGGESTED PROBLEMS: 1-9 odd, 10, 11-15 odd.   "
 },
 {
-  "id": "p-1765",
+  "id": "p-1771",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1765",
+  "url": "section-curl-and-divergence.html#p-1771",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7255,9 +7264,9 @@ var ptx_lunr_docs = [
   "body": " Determining Rotation in a Vector Field   Suppose the vector field represents a swirling fluid. Within this fluid you place a small paddle wheel at the point . When viewed from directly above, will the paddle wheel tend to rotate clockwise or counterclockwise?    First we need to get a measure of the rotation of , so we compute the curl: , which is just at our point. This provides the axis around which the paddle wheel rotates counterclockwise. And since , the paddle wheel does not appear to rotate at all when viewed from above.   "
 },
 {
-  "id": "p-1771",
+  "id": "p-1777",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1771",
+  "url": "section-curl-and-divergence.html#p-1777",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7291,9 +7300,9 @@ var ptx_lunr_docs = [
   "body": " Laplacians and Average Values   Let and let . Let denote the unit circle traversed once counterclockwise. Find the average values of on , their specific values at and the Laplacians at .    If we compute the average values, we get . Furthermore, . We also have and .   "
 },
 {
-  "id": "p-1782",
+  "id": "p-1788",
   "level": "2",
-  "url": "section-curl-and-divergence.html#p-1782",
+  "url": "section-curl-and-divergence.html#p-1788",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7336,9 +7345,9 @@ var ptx_lunr_docs = [
   "body": " Parameterizing a Cylinder   Find a vector function that traces out the portion of the cylinder contained in the seventh octant.    The presence of in the equation defining this surface suggests something like polar coordinates, except for the -plane instead of the -plane. So let and . Then on our surface, and we can parameterize it using . To place this in the correct octant, we must provide limits for and : .   "
 },
 {
-  "id": "p-1797",
+  "id": "p-1803",
   "level": "2",
-  "url": "section-parametric-surfaces-and-areas.html#p-1797",
+  "url": "section-parametric-surfaces-and-areas.html#p-1803",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7372,9 +7381,9 @@ var ptx_lunr_docs = [
   "body": " Area of a Cone   Find the area of the part of the cone bounded by and in the first octant.    First, we parameterize the cone using . This gives , and so the area of the conical segment is .   "
 },
 {
-  "id": "p-1805",
+  "id": "p-1811",
   "level": "2",
-  "url": "section-parametric-surfaces-and-areas.html#p-1805",
+  "url": "section-parametric-surfaces-and-areas.html#p-1811",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7390,9 +7399,9 @@ var ptx_lunr_docs = [
   "body": " Surface Integrals  A surface integral of a function over a surface in will be an integral of the form . This integral represents the net accumulation, or sum , of on the surface . We use to indicate an infinitesimal surface area on . Since we already know the surface area from , we can say that for some vector function that parameterizes . Hence where is a corresponding region in the -plane. When computing surface integrals, we want to make sure our surface is orientable .   Mass of a Surface   Find the mass of the hemisphere given by assuming that .    We need to compute the surface integral . First, we need to find a vector function that traces out the hemisphere. Using spherical coordinates for inspiration, we can use with Then Now we need to find the magnitude: . So the mass is .    If is given by the equation , then we can use to trace out . This gives .   Surface Integral on a Cone   Set up the surface integral that gives the average value of on the part of the cone that lies above the unit circle in the third octant.    Let denote the part of the cone in the third octant above the unit circle and let denote the portion of the unit circle directly under . The surface area of this part of the cone is , so the average value of on this part of the cone is     We can also talk about surface integrals of vector fields. These are higher dimensional versions of flux integrals.   Surface Integral of a Vector Field   Let be a continuous vector field on the piecewise smooth, oriented surface . Then the surface integral of over is the quantity where is chosen the unit normal vector to .    The surface integral above measures how flows across the surface in the direction of . However, we will always have two possible choices for . If is orientable, then we know we can specify a consistent choice of direction . We just need to make sure this is done before computing the integral.  If , we can replace with , which gives .   Flux Into a Sphere   Does tend to flow into the sphere ?    Stealing our work from , we can parameterize using which gives . However, this is not the normal vector we need to use here. Instead, we'll multiply by a negative to get the inward normal. So     SUGGESTED PROBLEMS: 7, 9, 23, 29.  "
 },
 {
-  "id": "p-1809",
+  "id": "p-1815",
   "level": "2",
-  "url": "section-surface-integrals.html#p-1809",
+  "url": "section-surface-integrals.html#p-1815",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7444,9 +7453,9 @@ var ptx_lunr_docs = [
   "body": " Stokes' Theorem  Suppose we want to find the circulation of a vector field on a surface . If lies in the plane, then we can use Green's Theorem to say that . If is a surface in , then we must take the dot product of with the unit normal to . The corresponding result is known as Stokes' Theorem .   Stokes' Theorem   Let denote a simple, closed, orientable surface with unit normal and let denote a continuously differentiable vector field on . Then , where is oriented counterclockwise with respect to .     Circulation Along a Triangle   Let denote the triangle formed by the boundary of the plane in the first octant, traversed counterclockwise when viewed from below. Let . Find .    By , we can write where is the surface contained by . To find we'll parameterize using . Then . Likewise, . So .    An easier way to find a normal vector in the last example would be to use our knowledge from . However, the following approach is more general. If is described by the equation , then is guaranteed to be normal to . This is especially useful if can be described by an equation of the form , as above. To see how, note that .   Circulation Along a Paraboloid   Let and let denote the paraboloid that lies inside the cylinder , oriented upwards. Use Stokes' Theorem to set up the surface integral equal to .    SUGGESTED PROBLEMS: 1, 3, 5, 7  "
 },
 {
-  "id": "p-1822",
+  "id": "p-1828",
   "level": "2",
-  "url": "section-stokes-theorem.html#p-1822",
+  "url": "section-stokes-theorem.html#p-1828",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
@@ -7489,9 +7498,9 @@ var ptx_lunr_docs = [
   "body": " The Divergence Theorem  So far we've considered several different versions of the . There is the which applies to the gradient operator , which applies to the two-dimensional curl, which applies to , and also which applies to the two-dimensional divergence. The only remaining generalization is the divergence theorem .   Divergence Theorem   Let be a simple solid region and let be the boundary surface of oriented outwards. Let denote a continuously differentiable vector field on . Then .     Flux across a spherical cap   Let denote the top half of the sphere of radius centered at the origin. Let . Determine if flows out of or into .    We need to calculate the flux integral , which is made easier using . If we let denote the interior of this region, we get      Flux across a cube   Let denote the surface of the unit cube with vertices at and and let . Find where is the inward unit normal to .    SUGGESTED PROBLEMS: 1, 3, 5, 19.  "
 },
 {
-  "id": "p-1829",
+  "id": "p-1835",
   "level": "2",
-  "url": "section-the-divergence-theorem.html#p-1829",
+  "url": "section-the-divergence-theorem.html#p-1835",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",

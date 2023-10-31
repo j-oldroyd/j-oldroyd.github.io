@@ -1354,138 +1354,197 @@
   </section>
   <section xml:id="section-power-series">
     <title>Power Series</title>
-    <p>
-      A <term>power series (centered at <m>\bm{0}</m></term>) is a series of the form
-      <me>\sum_{k=0}^{\infty}a_{k}x^{k} = c_0 + c_1x + c_2x^2 + \cdots</me>
-      where <m>x</m> is a variable.
-      Note that for such a series, only nonnegative, integer powers of <m>x</m> are permitted.
-      The terms <m>a_{k}</m> are called <term>coefficients</term>, and we'll see later that they determine all properties of the series.
-    </p>
-    <example xml:id="example-examples-of-power-series">
-      <title>Examples of Power Series</title>
-      <statement>
+    <subsection xml:id="subsection-definition-and-examples">
+      <title>Definition and Examples</title>
+      <p>
+        A <term>power series (centered at <m>\boldsymbol{0}</m></term>) is a series of the form
+        <me>\sum_{k=0}^{\infty}c_{k}x^{k} = c_0 + c_1x + c_2x^2 + \cdots</me>
+        where <m>x</m> is a variable.
+        Note that for such a series, only nonnegative, integer powers of <m>x</m> are permitted.
+        The terms <m>c_{k}</m> are called <term>coefficients</term>, and they determine all properties of the series.
+      </p>
+      <aside>
         <p>
-          Determine which of the following are power series:
-          <ol>
-            <li>
-              <m>\sum_{k=0}^{\infty}\frac{(-1)^{k}x^{k}}{k!}</m>
-            </li>
-            <li>
-              <m>x - \pi x^{4} + x^{6} + \frac{1}{10}x^{100} + \cdots</m>
-            </li>
-            <li>
-              <m>\frac{1}{x^{2}} + \frac{1}{x} + 1 + x + x^{2} + \cdots</m>
-            </li>
-          </ol>
+          A series with negative integer powers for <m>x</m> is called a <em>Laurent series</em>.
+          While these series have important uses, we will not study them.
         </p>
-      </statement>
-    </example>
-    <p>
-      Power series can also be <em>centered</em> at other numbers.
-      A power series <term>centered about</term> <m>\mathbf{a}</m> is a series of the form
-      <me>\sum_{k=0}^{\infty}a_{k}(x - a)^{k}</me>.
-    </p>
-    <p>
-      An important concern about power series is for which values of <m>x</m> the series will converge.
-      These questions are usually answered using the root or ratio tests.
-    </p>
-    <example xml:id="example-convergence-of-a-power-series">
-      <title>Convergence of a Power Series</title>
-      <statement>
-        <p>
-          For what values of <m>x</m> does the series
-          <me>\sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>
-          converge?
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We'll try the ratio test to check convergence of this series.
-          Doing so, we get
-          <me>r = \lim_{k\to\infty}|x|\frac{k+1}{k+2} = |x|</me>.
-          So the series converges if <m>|x| \lt 1</m> and diverges if <m>|x| > 1</m>.
-        </p>
-        <p>
-          When <m>r = |x| = 1</m>, or <m>x = \pm1</m>, the test fails.
-          So we need to use other methods to determine the convergence or the series at these points.
-          At <m>x = -1</m>, the series becomes
-          <me>\sum_{k=0}^{\infty}\frac{(-1)^{2k+1}}{k+1} = - \sum_{k=0}^{\infty}\frac{1}{k+1}</me>,
-          which diverges by the comparison test.
-          At <m>x = 1</m>, the series reduces to the alternating harmonic series which converges by <xref ref="example-alternating-harmonic-series" text="type-global" />.
-        </p>
-        <p>
-          Therefore this series converges for all <m>x</m> in the interval <m>(-1, 1]</m> and diverges otherwise.
-        </p>
-      </solution>
-    </example>
-    <p>
-      In <xref ref="example-convergence-of-a-power-series" text="type-global" />, the values of <m>x</m> for which the series converged was an interval.
-      It turns out that this will always be the case, and the resulting interval is known as the <term>interval of convergence</term> of the series.
-      The <q>radius</q> of this interval is called the <term>radius of convergence</term>.
-      In general, we have the following.
-    </p>
-    <theorem xml:id="theorem-convergence-of-power-series">
+      </aside>
+      <example xml:id="example-examples-of-power-series">
+        <title>Examples of Power Series</title>
+        <statement>
+          <p>
+            Determine which of the following are power series:
+            <ol>
+              <li>
+                <m>\sum_{k=0}^{\infty}\frac{(-1)^{k}x^{k}}{k!}</m>
+              </li>
+              <li>
+                <m>x - \pi x^{4} + x^{6} + \frac{1}{10}x^{100} + \cdots</m>
+              </li>
+              <li>
+                <m>\frac{1}{x^{2}} + \frac{1}{x} + 1 + x + x^{2} + \cdots</m>
+              </li>
+            </ol>
+          </p>
+        </statement>
+      </example>
+      <p>
+        Power series can also be centered at other numbers.
+        A power series <term>centered at <m>\boldsymbol{a}</m></term> is a series of the form
+        <me>\sum_{k=0}^{\infty}c_{k}(x - a)^{k} = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots</me>.
+        As before, only nonnegative integer powers are allowed in the series.
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-convergence-of-power-series">
       <title>Convergence of Power Series</title>
-      <statement>
+      <p>
+        An important concern about power series is to determine the set of values of <m>x</m> for which the series will converge.
+        These questions are usually answered using the <xref ref="theorem-ratio-test" text="custom">Ratio Test</xref> or the <xref ref="theorem-root-test" text="custom">Root Test</xref> in combination with other convergence tests.
+      </p>
+      <example xml:id="example-convergence-of-a-power-series-ratio-test">
+        <title>Convergence of a power series using the Ratio Test</title>
+        <statement>
+          <p>
+            For what values of <m>x</m> does the series
+            <me>\sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>
+            converge?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We'll try the ratio test to check convergence of this series.
+            Doing so, we get
+            <me>r = \lim_{k\to\infty}|x|\frac{k+1}{k+2} = |x|</me>.
+            So the series converges if <m>|x| \lt 1</m> and diverges if <m>|x| > 1</m>.
+          </p>
+          <p>
+            When <m>r = |x| = 1</m>, or <m>x = \pm1</m>, the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points.
+            We therefore consider convergence of the power series at these points on a case-by-case basis.
+          </p>
+          <p>
+            At <m>x = -1</m>, the series becomes
+            <me>\sum_{k=0}^{\infty}\frac{(-1)^{2k+1}}{k+1} = - \sum_{k=0}^{\infty}\frac{1}{k+1}</me>,
+            which diverges by the <xref ref="theorem-series-p--test" text="custom"><m>p</m>-series test</xref>.
+            At <m>x = 1</m>, the series reduces to the alternating harmonic series which converges by <xref ref="example-alternating-harmonic-series" text="type-global" />.
+            Therefore this series converges for all <m>x</m> in the interval <m>(-1, 1]</m> and diverges otherwise.
+          </p>
+        </solution>
+      </example>
+      <p>
+        In <xref ref="example-convergence-of-a-power-series-ratio-test" text="type-global" />, the values of <m>x</m> for which the series converged was an interval.
+        It turns out that this will always be the case, and the resulting interval is known as the <term>interval of convergence</term> of the series.
+        The <em>radius</em> of this interval is called the <term>radius of convergence</term>.
+        In general, we have the following.
+      </p>
+      <aside>
         <p>
-          Given a series <m>\sum_{k=0}^{\infty}a_{k}x^{k}</m>, there exists <m>R \geq 0</m> such that the series converges on the interval <m>(a - R, a + R)</m>.
-          The largest such <m>R</m> is the radius of convergence.
+          The term <q>radius</q> might seem unusual for describing a one-dimensional interval, but there are circles involved here.
+          Power series are best described using complex numbers, and in that setting the radius of convergence describes an actual circle in the complex plane containing complex values at which the series converges.
         </p>
-      </statement>
-    </theorem>
-    <p>
-      For most series we'll consider (i.e., those of the form <m>\sum a_{k}(x - a)^{k}</m>), we can find <m>R</m> using the following formula:
-      <me>R = \lim_{k\to\infty}\left|\frac{a_{k}}{a_{k+1}}\right|</me>.
-    </p>
-    <example xml:id="example-interval-and-radius-of-convergence">
-      <title>Interval and Radius of Convergence</title>
-      <statement>
-        <p>
-          Find the interval and radius of convergence of the series <m>\sum_{k = 0}^{\infty}\frac{(-1)^{2k}(x - \frac{\pi}{2})^{2k}}{(2k)!}</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We'll find the radius of convergence first, which is given by
-          <md>
-            <mrow>R \amp = \lim_{k\to\infty}\frac{(2k + 2)!}{(2k)!} </mrow>
-            <mrow> \amp = \lim_{k\to\infty} (2k + 2)(2k + 1) </mrow>
-            <mrow> \amp = \infty </mrow>
-          </md>.
-          So the radius of convergence is infinite, implying that the interval of convergence is <m>(-\infty,\infty)</m>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      We can also use the root test instead of the ratio test.
-    </p>
-    <example xml:id="example-interval-and-radius-of-convergence-from-root-test">
-      <title>Interval and Radius of Convergence from Root Test</title>
-      <statement>
-        <p>
-          Determine the interval and radius of convergence of
-          <me>\sum_{n = 1}^{\infty} \frac{(-2)^{n}}{\sqrt{n}}(4x + 3)^{n}</me>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          If we apply the root test to this series, we get
-          <me>r = \lim_{n\to\infty}\sqrt[n]{\frac{2^{n}|4x + 3|^{n}}{\sqrt{n}}} = \lim_{n\to\infty}\frac{2}{n^{1/2n}}|4x + 3| = 2|4x + 3|</me>.
-          We need this to be less than <m>1</m>, which gives
-          <me>2|4x + 3| \lt 1 \Rightarrow -\frac{7}{8} \lt x \lt -\frac{5}{8}</me>,
-          and so the series converges for all <m>x</m> in <m>(-\frac{7}{8}, -\frac{5}{8})</m>.
-          So the radius of convergence is <m>\frac{1}{8}</m>.
-        </p>
-        <p>
-          Now we need to check the endpoints.
-          At <m>x = -\frac{7}{8}</m>, the series becomes <m>\sum_{n = 1}^{\infty}\frac{1}{\sqrt{n}}</m>, which diverges by the <m>p</m>-series test.
-          At <m>x = -\frac{5}{8}</m>, the series becomes <m>\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}}</m> which converges by the alternating series test.
-        </p>
-        <p>
-          Therefore the interval of convergence is <m>(-\frac{7}{8}, -\frac{5}{8}]</m>.
-        </p>
-      </solution>
-    </example>
+      </aside>
+      <theorem xml:id="theorem-convergence-of-power-series">
+        <title>Convergence of Power Series</title>
+        <statement>
+          <p>
+            Given a series <m>\sum_{k=0}^{\infty}c_{k}(x-a)^{k}</m>, there exists <m>R \geq 0</m> such that the series converges on the interval <m>(a - R, a + R)</m>.
+            The largest such <m>R</m> is the radius of convergence.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        For most series we'll consider (i.e., those of the form <m>\sum c_{k}(x - a)^{k}</m>), we can find <m>R</m> using the formula
+        <men xml:id="series-equation-radius-convergence">R = \lim_{k\to\infty}\left|\frac{c_{k}}{c_{k+1}}\right|</men>.
+        Note the similarity between <xref ref="series-equation-radius-convergence" text="type-global" /> and <xref ref="theorem-ratio-test" text="type-global" />!
+      </p>
+      <example xml:id="example-interval-and-radius-of-convergence">
+        <title>Interval and Radius of Convergence</title>
+        <statement>
+          <p>
+            Find the interval and radius of convergence of the series given by <m>\sum_{k = 0}^{\infty}\frac{(-1)^{2k}(x - \frac{\pi}{2})^{k}}{(2k)!}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We'll find the radius of convergence first using <xref ref="series-equation-radius-convergence" text="type-global" />, which is given by
+            <md>
+              <mrow>R \amp = \lim_{k\to\infty}\frac{(2k + 2)!}{(2k)!} </mrow>
+              <mrow> \amp = \lim_{k\to\infty} (2k + 2)(2k + 1) </mrow>
+              <mrow> \amp = \infty </mrow>
+            </md>.
+            So the radius of convergence is infinite, implying that the interval of convergence is <m>(-\infty,\infty)</m>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-interval-of-convergence-for-a-series-even-powers">
+        <title>Interval of convergence for series of even powers</title>
+        <statement>
+          <p>
+            Find the interval of convergence for the series given by
+            <me>\sum_{k=1}^{\infty}\frac{1}{k}\parens{-\frac{x^2}{2}}^k</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, note that
+            <me>\sum_{k=1}^{\infty}\frac{1}{k}\parens{-\frac{x^2}{2}}^k = \sum_{k=1}^{\infty}\frac{(-1)^k}{k2^k}x^{2k}</me>.
+            We'll start by finding the radius of convergence of the series.
+            We can use <xref ref="series-equation-radius-convergence" text="type-global" /> again, and we will, but we need to be careful since the series actually involves powers of <m>x^{2k}</m> instead of just <m>x^k</m>.
+          </p>
+          <p>
+            To address this power mismatch, we'll make the substitution <m>u = x^2</m> in our series to get
+            <me>\sum_{k=1}^{\infty}\frac{(-1)^k}{k2^k}u^k</me>,
+            and now we can use <xref ref="series-equation-radius-convergence" text="type-global" /> with <m>c_k = \frac{(-1)^k}{k2^k}</m>.
+            This gives
+            <me>R = \lim_{k\to\infty}\abs{\frac{c_k}{c_{k+1}}} = 2</me>,
+            and so the radius of convergence of the modified series is <m>2</m>.
+          </p>
+          <p>
+            Now we convert back to the series that we started with.
+            Since the radius of convergence of the modified series is <m>2</m>, this means that it will converge as long as <m>\abs{u} \lt 2</m>.
+            In other words, our original series will converge if <m>\abs{x^2}\lt 2</m>, or equivalently <m>\abs{x}\lt\sqrt{2}</m>.
+            Hence, the radius of convergence of
+            <me>\sum_{k=1}^{\infty}\frac{1}{k}\parens{-\frac{x^2}{2}}^k</me>
+            is equal to <m>\sqrt{2}</m>.
+          </p>
+          <p>
+            Now that we have the radius of convergence, we (mostly) know the interval of convergence.
+            In particular, the interval of convergence must have endpoints of <m>-\sqrt{2}</m> and <m>\sqrt{2}</m>.
+            We must check convergence at these endpoints individually as in <xref ref="example-convergence-of-a-power-series-ratio-test" text="type-global" />.
+            If we do so, we see that the series converges at both endpoints.
+            Thus, the interval of convergence for this series is <m>[-\sqrt{2}, \sqrt{2}]</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We will often use the Root Test instead of the Ratio Test for determining convergence of power series.
+        This usually happens when the coefficients of the series do not involve factorials.
+      </p>
+      <example xml:id="example-interval-and-radius-of-convergence-from-root-test">
+        <title>Interval and Radius of Convergence from Root Test</title>
+        <statement>
+          <p>
+            Determine the interval and radius of convergence of
+            <me>\sum_{n = 1}^{\infty} \frac{(-2)^{n}}{\sqrt{n}}(4x + 3)^{n}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we apply the Root Test to this series, we get
+            <me>r = \lim_{n\to\infty}\sqrt[n]{\frac{2^{n}|4x + 3|^{n}}{\sqrt{n}}} = \lim_{n\to\infty}\frac{2}{n^{1/2n}}|4x + 3| = 2|4x + 3|</me>.
+            We need this to be less than <m>1</m>, which gives
+            <me>2|4x + 3| \lt 1 \Rightarrow -\frac{7}{8} \lt x \lt -\frac{5}{8}</me>,
+            and so the series converges for all <m>x</m> in <m>(-\frac{7}{8}, -\frac{5}{8})</m>.
+            So the radius of convergence is <m>\frac{1}{8}</m>.
+          </p>
+          <p>
+            Now we need to check the endpoints.
+            At <m>x = -\frac{7}{8}</m>, the series becomes <m>\sum_{n = 1}^{\infty}\frac{1}{\sqrt{n}}</m>, which diverges by the <m>p</m>-series test.
+            At <m>x = -\frac{5}{8}</m>, the series becomes <m>\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}}</m> which converges by the alternating series test.
+            Therefore the interval of convergence is <m>(-\frac{7}{8}, -\frac{5}{8}]</m>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
   </section>
   <section xml:id="section-representing-functions-as-power-series">
     <title>Representing Functions as Power Series</title>
@@ -1577,7 +1636,7 @@
             <mrow>\ln(1 + x) + C \amp = \int\sum_{k=0}^{\infty}(-1)^{k}x^{k}\,dx </mrow>
             <mrow> \amp = \sum_{k=0} (-1)^{k} \frac{x^{k+1}}{k+1}</mrow>
           </md>.
-          The series on the right has radius of convergence <m>R = 1</m> and interval of convergence <m>(-1, 1]</m> by <xref ref="example-convergence-of-a-power-series" text="type-global" />.
+          The series on the right has radius of convergence <m>R = 1</m> and interval of convergence <m>(-1, 1]</m> by <xref ref="example-convergence-of-a-power-series-ratio-test" text="type-global" />.
           To find <m>C</m>, we can substitute <m>x = 0</m> into the equation (which is valid!) to get
           <me>\ln1 + C = 0 - \frac{0^{2}}{2} + \cdots = 0</me>.
           So <m>C = 0</m>, and
