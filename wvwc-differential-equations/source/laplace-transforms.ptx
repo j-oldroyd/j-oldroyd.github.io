@@ -2,63 +2,99 @@
 
 <chapter xml:id="laplace-transforms" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Laplace Transforms</title>
+  <introduction>
+    <p>
+      The power series method introduced in <xref ref="chapter-series-solutions" text="type-global" /> is one example of a more general problem-solving strategy in mathematics.
+      We started with a problem in one domain, a differential equation to be solved, and transformed it via power series into a problem about recurrence relations.
+      This change of view was generally in our favor as the resulting algebra problems involved in solving recurrence relations was often easier than the calculus problem of solving the corresponding differential equation.
+    </p>
+    <p>
+      The <em>Laplace transform</em> is another instance of this same idea.
+      We will take a problem in one domain, our differential equation to be solved, and transform it into an equivalent problem that can be solved by algebraic methods.
+      This is similar to the techniques developed in <xref ref="section-homogeneous-odes-with-constant-coefficients" text="type-global" />, but the Laplace transform method is far more general.
+      We can even use it in certain problems where the power series method does not apply.
+    </p>
+  </introduction>
   <section xml:id="section-the-laplace-transform">
     <title>The Laplace Transform</title>
+    <introduction>
+      <p>
+        We start with an example motivating the need for the Laplace transform.
+      </p>
+    </introduction>
+    <example xml:id="example-motivating-laplace">
+      <title>Motivating the Laplace transform</title>
+      <statement>
+        <p>
+          A mass of <quantity><mag>1</mag><unit base="kilogram"/></quantity> is attached to a spring that is held <quantity><mag>1</mag><unit base="meter"/></quantity> to the right of its equilibrium position by a force of <quantity><mag>4</mag><unit base="newton"/></quantity>.
+          Beginning at time <m>t=0</m>, a machine is turned on and applies an external force of <m>\cos2t</m> to the mass.
+          At time <m>t=2\pi</m> the machine is turned off and the external force disappears.
+          Let <m>x(t)</m> be the displacement of the mass at time <m>t</m>.
+          What is an ODE that models the motion of the mass?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can set this model up as we did in <xref ref="section-forced-oscillations-and-resonance" text="type-global" />.
+          By Hooke's Law and Newton's Second Law, we have
+          <me>mx''+kx = F_{E}(t)</me>
+          where <m>F_{E}</m> is the external force at time <m>t</m>.
+          Since <m>m = 1</m>, <m>k = 4</m> and
+          <me>F_{E}(t) = \begin{cases} \cos2t \amp \text{if }0\leq t\lt 2\pi\\0 \amp\text{if } t\geq2\pi  \end{cases}</me>
+          the motion of the mass satisfies the ODE
+          <me>x''+4x = F_{E}(t).</me>
+        </p>
+      </solution>
+    </example>
+    <p>
+      For the above example we could try to solve the resulting equation by using techniques that we developed in <xref ref="chapter-linear-odes-constant-coefficients" text="type-global" />.
+      This approach requires finding the complementary solution <m>x_{c}</m> (which isn't a problem) and then by finding the particular solution <m>x_{p}</m> corresponding to <m>F_{E}</m>.
+      However, finding <m>x_{p}</m> will not be possible using our previous methods since the function <m>F_{E}</m> is not differentiable everywhere (nor continuous everywhere).
+      The power series method will not be as effective here for the same reason: that only works if we're dealing with analytic functions.
+    </p>
+    <p>
+      We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.
+      The approach that we'll take is to introduce a <q>smoothing operator</q> in the form of an integral.
+    </p>
+    <aside>
+      <p>
+        We will see in <xref ref="section-convolution-products" text="type-global" /> that integrals can be used to smooth out cusps and jumps in the graph of a function.
+        This is analogous to smoothing edges in an image by applying a blur filter.
+      </p>
+    </aside>
     <subsection xml:id="subsection-definition-and-basic-properties">
       <title>Definition and Basic Properties</title>
-      <example xml:id="example-motivating-laplace">
-        <title>
-          Motivating the Laplace Transform
-        </title>
-        <statement>
-          <p>
-            A mass of <quantity><mag>1</mag><unit base="kilogram"/></quantity> is attached to a spring that is held <quantity><mag>1</mag><unit base="meter"/></quantity> to the right of its equilibrium position by a force of <quantity><mag>4</mag><unit base="newton"/></quantity>.
-            Beginning at time <m>t=0</m>, a machine is turned on and applies an external force of <m>\cos2t</m> to the mass.
-            At time <m>t=2\pi</m> the machine is turned off and the external force disappears.
-            Let <m>x(t)</m> be the displacement of the mass at time <m>t</m>.
-            What is an ODE that models the motion of the mass?
-          </p>
-        </statement>
-        <solution>
-          <p>
-            We can set this up as we did in Chapter 3. By Hooke's Law and Newton's Second Law, we have
-            <me>mx''+kx = F_{E}(t)</me>
-            where <m>F_{E}</m> is the external force at time <m>t</m>. Since <m>m = 1</m>, <m>k = 4</m> and
-            <me>
-              F_{E}(t) = 
-              \begin{cases}
-              \cos2t \amp \text{if }0\leq t\lt 2\pi\\
-              0 \amp\text{if } t\geq2\pi  
-              \end{cases}
-            </me>
-            the motion of the mass satisfies the ODE
-            <me>x''+4x = F_{E}(t).</me>
-          </p>
-        </solution>
-      </example>
-      <p>
-        For the above example we could try to solve it as we did in Chapter 3: first by finding the complementary solution <m>x_{c}</m> (which isn't a problem) and then by finding the particular solution <m>x_{p}</m> corresponding to <m>F_{E}</m>.
-        However, finding <m>x_{p}</m> will not be possible using our previous methods since the function <m>F_{E}</m> is not differentiable everywhere (nor continuous everywhere).
-        We would like to develop a method that lets us solve ODEs that involve discontinuous quantities.
-      </p>
       <definition xml:id="definition-the-laplace-transform">
         <title>The Laplace Transform</title>
-        <idx><h>Laplace transforms</h></idx>
+        <idx><h>Laplace transform</h><h>definition</h></idx>
+        <notation>
+          <usage><m>\mathcal{L}\set{f(t)}, F(s)</m></usage>
+          <description>The Laplace transform of the function <m>f(t)</m></description>
+        </notation>
         <statement>
           <p>
-            Let <m>f(t)</m> be defined for <m>t\geq0</m>. The <term>Laplace transform</term> of <m>f</m> is a function <m>F(s)</m>, or <m>\mathcal{L}\left\{ f(t) \right\}</m>, defined by
+            Let <m>f(t)</m> be defined for <m>t\geq0</m>. The <term>Laplace transform</term> of <m>f</m> is the function <m>F(s)</m>, or <m>\mathcal{L}\left\{ f(t) \right\}</m>, defined by
             <me>F(s) = \mathcal{L}\left\{ f(t) \right\} = \int_{0}^{\infty}f(t)e^{-st}\,dt</me>
             for all values of <m>s</m> such that <m>F(s)</m> exists.
             We often say that <m>f(t)</m> is in the <term>time domain</term> while <m>F(s)</m> is in the <term>frequency domain</term>.
           </p>
         </statement>
       </definition>
+      <aside>
+        <p>
+          The time domain and frequency domain terminology employed in <xref ref="definition-the-laplace-transform" text="type-global" /> is a little unusual at the moment, but will hopefully make more sense in <xref ref="section-the-fourier-transform" text="type-global" />.
+          Essentially, if <m>s</m> is a complex parameter then the exponential that appears in the Laplace transform introduces sinusoidal waves by <xref ref="theorem-euler-s-formula" text="custom">Euler's formula</xref>.
+          The parameter <m>s</m> then determines the frequency of these waves.
+        </p>
+      </aside>
       <p>
-        One reason we care about the Laplace transform is that it lets us deal with solving linear ODEs involving discontinuous functions.
-        This is something we will begin to look at in the next section.
+        Derivatives of discontinuous functions are not as well behaved as integrals of discontinuous functions.
+        Therefore the Laplace transform should prove to be a useful tool in dealing with differential equations that have discontinuous terms.
+        This is something we will begin to look at in <xref ref="section-transformation-of-initial-value-problems" text="type-global" />.
+        For now, we just want to get some practice performing computations with this new formula in the next couple of examples.
       </p>
       <example xml:id="example-computing-a-laplace-transform">
-        <title>Computing a Laplace Transform</title>
+        <title>Computing a Laplace transform</title>
         <statement>
           <p>
             Compute <m>\mathcal{L}\left\{ 1 \right\}</m>.
@@ -66,7 +102,7 @@
         </statement>
       </example>
       <example xml:id="example-computing-the-laplace-of-t-">
-        <title>Computing the Laplace of <m>t</m></title>
+        <title>Computing the Laplace transform of <m>t</m></title>
         <statement>
           <p>
             Compute the Laplace transform of <m>f(t) = t</m>.
@@ -76,10 +112,10 @@
           <p>
             We compute the Laplace transform <m>F(s)</m> using the definition:
             <md>
-              <mrow>F(s) &amp;= \int_{0}^{\infty}te^{-st}\,dt</mrow>
-              <mrow>&amp;= \left[-\frac{t}{s}e^{-st}\right]_{0}^{\infty} + \frac{1}{s}\int_{0}^{\infty}e^{-st}\,dt &amp;\text{using integration by parts}</mrow>
-              <mrow>&amp;= -\frac{1}{s^{2}}\left[e^{-st}\right]_{0}^{\infty}</mrow>
-              <mrow>&amp;= \frac{1}{s^{2}}</mrow>
+              <mrow>F(s) \amp= \int_{0}^{\infty}te^{-st}\,dt</mrow>
+              <mrow>\amp= \left[-\frac{t}{s}e^{-st}\right]_{0}^{\infty} + \frac{1}{s}\int_{0}^{\infty}e^{-st}\,dt \amp\text{using integration by parts}</mrow>
+              <mrow>\amp= -\frac{1}{s^{2}}\left[e^{-st}\right]_{0}^{\infty}</mrow>
+              <mrow>\amp= \frac{1}{s^{2}}</mrow>
             </md>.
           </p>
         </solution>
@@ -91,10 +127,10 @@
       </p>
       <p>
         The Laplace transform is also an example of a <term>linear transformation</term>.
-        In particular, we have the following theorem.
+        In particular, we have the following useful theorem for simplifying certain transforms.
       </p>
       <theorem xml:id="theorem-linearity-of-the-laplace-transform">
-        <title>Linearity of the Laplace Transform</title>
+        <title>Linearity of the Laplace transform</title>
         <statement>
           <p>
             Let <m>a</m> and <m>b</m> be constants and suppose <m>f(t)</m> and <m>g(t)</m> are functions with respective Laplace transforms <m>F(s)</m> and <m>G(s)</m>. Then
@@ -102,8 +138,11 @@
           </p>
         </statement>
       </theorem>
+      <p>
+        In combination with the formula <m>\Laplace{t^n} = \frac{s^{n+1}}{(n+1)!}</m>, we can now compute the Laplace transform of any polynomial function with relative ease.
+      </p>
       <example xml:id="example-computing-the-transform-of-a-polynomial">
-        <title>Computing the Transform of a Polynomial</title>
+        <title>Computing the transform of a polynomial</title>
         <statement>
           <p>
             Compute <m>\Laplace{(t-1)^{3}}</m>.
@@ -111,68 +150,65 @@
         </statement>
         <solution>
           <p>
-            We could use the definition once again, but here's an easier way using the linearity of the Laplace transform. First, note that
-            <me>(t-1)^{3} = t^{3} - 3t^{2} +3t - 1</me>
-            so
+            We could use the definition once again, but here's an easier way using the linearity of the Laplace transform.
+            First, note that
+            <me>(t-1)^{3} = t^{3} - 3t^{2} +3t - 1</me>,
+            and so
             <md>
-              <mrow>\Laplace{(t-1)^{3}} &amp;= \Laplace{t^{3}-3t^{2}+3t-1}</mrow>
-              <mrow>&amp;= \Laplace{t^{3}} - 3\Laplace{t^{2}} +3\Laplace{t} - \Laplace{1}</mrow>
-              <mrow>&amp;= \frac{3!}{s^{4}} - 3\frac{2!}{s^{3}} + 3\frac{1!}{s^{2}} - \frac{0!}{s}</mrow>
-              <mrow>&amp;= \frac{6}{s^{4}} - \frac{6}{s^{3}} + \frac{3}{s^{2}} - \frac{1}{s}</mrow>
+              <mrow>\Laplace{(t-1)^{3}} \amp= \Laplace{t^{3}-3t^{2}+3t-1}</mrow>
+              <mrow>\amp= \Laplace{t^{3}} - 3\Laplace{t^{2}} +3\Laplace{t} - \Laplace{1}</mrow>
+              <mrow>\amp= \frac{3!}{s^{4}} - 3\frac{2!}{s^{3}} + 3\frac{1!}{s^{2}} - \frac{0!}{s}</mrow>
+              <mrow>\amp= \frac{6}{s^{4}} - \frac{6}{s^{3}} + \frac{3}{s^{2}} - \frac{1}{s}</mrow>
             </md>.
           </p>
         </solution>
       </example>
       <p>
-        Another benefit is that the Laplace transform works well with some discontinuous functions.
+        As mentioned previously, the Laplace transform works well with some discontinuous functions due to its definition as an integral.
+        The exponential <em>kernel</em> <m>e^{-st}</m> acts to smooth out discontinuities present in a function.
       </p>
       <example xml:id="example-the-unit-step-function">
         <title>The Unit Step Function</title>
         <statement>
           <p>
             Let <m>u(t)</m> be the <term>unit step function</term>, which is defined by
-            <me> u(t) = 
-              \begin{cases}
-              0 \amp\text{ if } t\lt 0\\
-              1 \amp\text{ if } t\geq0
-              \end{cases}
-            </me>.
+            <me> u(t) = \begin{cases}0 \amp\text{ if } t\lt 0\\1 \amp\text{ if } t\geq0\end{cases}</me>.
             Compute <m>\Laplace{u(t-3)}</m>.
           </p>
         </statement>
         <solution>
           <p>
             Note that we are computing a <em>translation</em> of the usual unit step function.
-            We still compute <m>\Laplace{u(t-3)}</m> using the definition of the Laplace transform:
+            Since we don't have a formula for the transform of a (translated) unit step, we will need to compute <m>\Laplace{u(t-3)}</m> using the definition of the Laplace transform:
             <md>
-              <mrow>\Laplace{u(t)} &amp;= \int_{0}^{\infty}u(t)e^{-st}\,dt</mrow>
-              <mrow>&amp;= \int_{3}^{\infty}e^{-st}\,dt &amp;\text{ since }u(t-3) \text{ is }0 \text{ for values of }t\lt3</mrow>
-              <mrow>&amp;= -\frac{1}{s}\left[e^{-st}\right]_{3}^{\infty}</mrow>
-              <mrow>&amp;= \frac{e^{-3s}}{s}</mrow>
+              <mrow>\Laplace{u(t)} \amp= \int_{0}^{\infty}u(t)e^{-st}\,dt</mrow>
+              <mrow>\amp= \int_{3}^{\infty}e^{-st}\,dt \amp\text{ since }u(t-3) \text{ is }0 \text{ for values of }t\lt3</mrow>
+              <mrow>\amp= -\frac{1}{s}\left[e^{-st}\right]_{3}^{\infty}</mrow>
+              <mrow>\amp= \frac{e^{-3s}}{s}</mrow>
             </md>.
           </p>
         </solution>
       </example>
       <p>
         We can verify the result of <xref ref="example-the-unit-step-function" text="type-global" /> using Sage as below:
-        <sage>
-          <input>
-            var('s, t')
-
-            # define function to take the Laplace transform of
-            f = piecewise([((-oo,3),0), ((3,oo),1)])
-
-            # take the Laplace transform, going from t domain to s domain
-            show(f.laplace(t,s))
-          </input>
-        </sage>
       </p>
+      <sage>
+        <input>
+          var('s, t')
+
+          # define function to take the Laplace transform of
+          f = piecewise([((-oo,3),0), ((3,oo),1)])
+
+          # take the Laplace transform, going from t domain to s domain
+          show(f.laplace(t,s))
+        </input>
+      </sage>
       <p>
         Some other important Laplace transforms are given below:
         <md>
-          <mrow>\Laplace{e^{at}} &amp;= \frac{1}{s-a}</mrow>
-          <mrow>\Laplace{\sin(\omega t)} &amp;= \frac{\omega}{s^{2}+\omega^{2}}</mrow>
-          <mrow>\Laplace{\cos(\omega t)} &amp;= \frac{s}{s^{2}+\omega^{2}}</mrow>
+          <mrow>\Laplace{e^{at}} \amp= \frac{1}{s-a}</mrow>
+          <mrow>\Laplace{\sin(\omega t)} \amp= \frac{\omega}{s^{2}+\omega^{2}}</mrow>
+          <mrow>\Laplace{\cos(\omega t)} \amp= \frac{s}{s^{2}+\omega^{2}}</mrow>
         </md>.
       </p>
     </subsection>
