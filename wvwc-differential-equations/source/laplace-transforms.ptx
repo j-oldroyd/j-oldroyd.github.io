@@ -68,8 +68,8 @@
         <title>The Laplace Transform</title>
         <idx><h>Laplace transform</h><h>definition</h></idx>
         <notation>
-          <usage><m>\mathcal{L}\set{f(t)}, F(s)</m></usage>
-          <description>The Laplace transform of the function <m>f(t)</m></description>
+          <usage><m>F(s) = \mathcal{L}\set{f(t)}</m></usage>
+          <description>Laplace transform of <m>f(t)</m></description>
         </notation>
         <statement>
           <p>
@@ -215,7 +215,9 @@
     <subsection xml:id="subsection-the-inverse-laplace-transform-m-s--shifting">
       <title>The Inverse Laplace Transform; <m>s</m>-shifting</title>
       <p>
-        An important theorem regarding Laplace transforms is the following:
+        The Laplace transform method that we will see in <xref ref="section-transformation-of-initial-value-problems" text="type-global" /> involves transforming a time domain problem into a frequency domain problem that can be solved with algebra.
+        The crucial next step is transforming the frequency domain solution of our problem back into the time domain.
+        The next result justifies this last step.
       </p>
       <theorem xml:id="theorem-uniqueness-of-inverse-laplace">
         <title>Uniqueness of Laplace Transforms</title>
@@ -227,21 +229,40 @@
         </statement>
       </theorem>
       <p>
-        The previous theorem says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms. This allows us to talk about taking inverse Laplace transforms.
+        <xref ref="theorem-uniqueness-of-inverse-laplace" text="type-global" /> says that the Laplace transform is unique for continuous functions: two different continuous functions will have two different Laplace transforms.
+        This allows us to talk about taking <em>inverse</em> Laplace transforms.
       </p>
       <definition xml:id="definition-inverse-laplace">
         <title>Inverse Laplace Transform</title>
+        <idx><h>Laplace transform</h><h>inverse transform</h></idx>
+        <notation>
+          <usage><m>f(t) = \iLaplace\set{F(s)}</m></usage>
+          <description>inverse Laplace transform of <m>F(s)</m></description>
+        </notation>
         <statement>
           <p>
             The <term>inverse Laplace transform</term> of a function <m>F(s)</m>, denoted <m>\mathcal{L}^{-1}\left\{F(s)\right\}</m>, is a function <m>f(t)</m> such that <m>\Laplace{f(t)} = F(s)</m>.
           </p>
+          <aside>
+            <p>
+              There is an integral formula for the inverse Laplace transform as well.
+              In particular,
+              <me>\iLaplace\set{F(s)} = \frac{1}{2\pi i}\int_{\gamma-i\infty}^{\gamma+i\infty}F(s)e^{st}\dd{t}</me>
+              where <m>\gamma</m> is a large enough real number.
+              We aren't quite equipped to deal integrals such as this, so we will focus on using a table of Laplace transforms as in <xref ref="table-laplace-transforms" text="type-global" /> to compute inverse transforms.
+            </p>
+          </aside>
         </statement>
       </definition>
       <p>
-        Just like the Laplace transform, the inverse Laplace transform is <term>linear</term>.
+        Simple inverse transforms can be found by reversing known transforms.
+        For example,
+        <me>\iLaplace\set{\frac{s^{n+1}}{(n+1)!}} = t^n</me>
+        for <m>n = 0, 1, 2, \ldots</m>.
+        The linearity of the inverse transform is also helpful in computing certain transformations.
       </p>
       <example xml:id="example-finding-inverse-laplace">
-        <title>Finding an Inverse Transform</title>
+        <title>Finding an inverse transform</title>
         <statement>
           <p>
             A continuous function <m>f(t)</m> has Laplace transform
@@ -253,14 +274,25 @@
           <p>
             We can find <m>f(t)</m> by taking the inverse Laplace transform of each term in <m>F(s)</m>:
             <md>
-              <mrow>\iLaplace{\frac{3s}{s^{2}+5}} &amp;= 3\iLaplace{\frac{s}{s^{2}+5}} = 3\cos(\sqrt{5}t)</mrow>
-              <mrow>\iLaplace{\frac{7}{s^{3}}} &amp;= \frac{7}{2!}\iLaplace{\frac{2!}{s^{3}}} = \frac{7}{2}t^{2}</mrow>
+              <mrow>\iLaplace{\frac{3s}{s^{2}+5}} \amp= 3\iLaplace{\frac{s}{s^{2}+5}} = 3\cos(\sqrt{5}t)</mrow>
+              <mrow>\iLaplace{\frac{7}{s^{3}}} \amp= \frac{7}{2!}\iLaplace{\frac{2!}{s^{3}}} = \frac{7}{2}t^{2}</mrow>
             </md>.
             So
-            <me>f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}.</me>
+            <me>f(t) = 3\cos(\sqrt{5}t)+\frac{7}{2}t^{2}</me>.
           </p>
+          <aside>
+            <p>
+              Technically, we can only say that we know <m>f(t)</m> for <m>t\geq0</m>.
+              We have no knowledge whatsoever about <m>f(t)</m> for <m>t \lt 0</m>.
+              However, this will cause no trouble for us.
+            </p>
+          </aside>
         </solution>
       </example>
+      <p>
+        Now we will move on to more general formulas for computing Laplace transformations and their inverses.
+        The first such formula shows a correspondence between <em>time scaling</em> and <em>frequency shifting</em>.
+      </p>
       <theorem xml:id="theorem--s--shifting">
         <title><m>s</m>-shifting</title>
         <statement>
@@ -272,19 +304,23 @@
           </p>
         </statement>
       </theorem>
+      <p>
+        <xref ref="theorem--s--shifting" text="type-global" /> allows to find a wide range of inverse transformations.
+        In combination with partial fractions, we can now (theoretically) find the inverse transform of any rational function of <m>s</m>.
+      </p>
       <example xml:id="example-inverse-laplace-with-frequency-shifting">
-        <title>Inverse Laplace with Frequency Shifting</title>
+        <title>Inverse Laplace with frequency shifting</title>
         <statement>
           <p>
             A function <m>f(t)</m> has Laplace transform
-            <me>F(s) = \frac{4}{s^{2}+2s+3}.</me>
+            <me>F(s) = \frac{4}{s^{2}+2s+3}</me>.
             Find <m>f(t)</m>.
           </p>
         </statement>
         <solution>
           <p>
             We'll start by completing the square on the denominator of <m>F(s)</m> to see if we can make it look like <m>(s-a)^{2}+\omega^{2}</m> for some <m>a,\omega</m>:
-            <me>F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}.</me>
+            <me>F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}</me>.
             This looks an <em>awful</em> lot like the transform of <m>\sin(\sqrt{2}t)</m>.
             Since we have <m>(s+1)^{2}</m> instead of <m>s^{2}</m>, this tells us that
             <me>f(t) = \frac{4}{\sqrt{2}}e^{-t}\sin(\sqrt{2}t).</me>
@@ -299,8 +335,16 @@
           var('s t') # specify variables
           show(inverse_laplace(4/(s^2 + 2*s + 3), s, t))
         </input>
+        <output>
+          2*sqrt(2)*e^(-t)*sin(sqrt(2)*t)
+        </output>
       </sage>
     </subsection>
+    <conclusion>
+      <p>
+        Now that we've had some practice in evaluating Laplace transforms, we'll move on to using them to solve differential equations.
+      </p>
+    </conclusion>
   </section>
   <section xml:id="section-transformation-of-initial-value-problems">
     <title>Transformation of Initial Value Problems</title>
