@@ -66,7 +66,7 @@
           <m>f(0) = g(0).</m>
         </li>
         <li>
-          <m>f'(0) = g'(0).</m>
+          <m>f^{\prime}(0) = g^{\prime}(0).</m>
         </li>
         <li>
           <m>f''(0) = g''(0).</m>
@@ -96,7 +96,7 @@
           <m>f(0) = h(0)</m>
         </li>
         <li>
-          <m>f'(0) = h'(0)</m>
+          <m>f^{\prime}(0) = h^{\prime}(0)</m>
         </li>
         <li>
           <m>f''(0)</m>
@@ -1434,22 +1434,22 @@
             <image xml:id="image-series-partial-sums-ln-1-plus-x" width="50%">
               <latex-image xml:id="latex-image-series-partial-sums-ln-1-plus-x">
                 \begin{tikzpicture}
-                  \begin{axis}[
-                    myaxis,
-                    xmin=-2,xmax=2,
-                    ymin=-2,ymax=2,
-                    legend style={at={(axis cs:1,-1)}, anchor={west}},
-                    ]
-                    \addplot+[myplot,dashed,-,domain=-2:2]{x};
-                    \addlegendentry{$S_1$};
-                    \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3};
-                    \addlegendentry{$S_3$};
-                    \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3-x^4/4+x^5/5};
-                    \addlegendentry{$S_5$};
-                    \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3-x^4/4+x^5/5-x^6/6+x^7/7};
-                    \addlegendentry{$S_7$};
-                    \addplot+[myplot,-,domain=-1:1]{ln(1+x)};
-                  \end{axis}
+                \begin{axis}[
+                myaxis,
+                xmin=-2,xmax=2,
+                ymin=-2,ymax=2,
+                legend style={at={(axis cs:1,-1)}, anchor={west}},
+                ]
+                \addplot+[myplot,dashed,-,domain=-2:2]{x};
+                \addlegendentry{$S_1$};
+                \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3};
+                \addlegendentry{$S_3$};
+                \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3-x^4/4+x^5/5};
+                \addlegendentry{$S_5$};
+                \addplot+[myplot,dashed,-,domain=-2:2]{x-x^2/2+x^3/3-x^4/4+x^5/5-x^6/6+x^7/7};
+                \addlegendentry{$S_7$};
+                \addplot+[myplot,-,domain=-1:1]{ln(1+x)};
+                \end{axis}
                 \end{tikzpicture}
               </latex-image>
             </image>
@@ -1575,103 +1575,168 @@
   <section xml:id="section-representing-functions-as-power-series">
     <title>Representing Functions as Power Series</title>
     <shorttitle>Functions as Power Series</shorttitle>
-    <p>
-      A power series can be viewed as a function with domain given by the interval of convergence.
-      One of our goals is to use power series to represent functions that can't be written in terms of <q>elementary functions</q>.
-      Our first example comes from the geometric series.
-    </p>
-    <example xml:id="example-power-series-from-geometric-series">
+    <introduction>
+      <p>
+        A power series can be viewed as a function with domain given by the interval of convergence.
+        One of our goals is to use power series to represent functions that can't be written in terms of <q>elementary functions</q>.
+        Such functions often arise in applications from evaluating integrals or solving differential equations.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-power-series-from-geometric-series">
       <title>Power Series from Geometric Series</title>
-      <statement>
-        <p>
-          Let
-          <me>f(x) = \sum_{k = 0}^{\infty} x^{k}</me>.
-          Then the domain of <m>f(x)</m> is <m>(-1,1)</m> and for <m>x</m> in this interval we have
-          <me>f(x) = \frac{1}{1 - x}</me>.
-        </p>
-      </statement>
-    </example>
-    <p>
-      Note that the equation
-      <me>\sum_{k=0}^{\infty}x^{k} = \frac{1}{1 - x}</me>
-      is only valid where the series on the left converges.
-      If we try to plug in <m>x = -1</m> into this equation and treat it as valid, we get
-      <me>\frac{1}{2} = 1 - 1 + 1 - 1 + \cdots</me>,
-      which is nonsense.
-    </p>
-    <p>
-      Now that we have a power series representation of <m>\frac{1}{1 - x}</m>, we can use it to find other power series representations.
-    </p>
-    <example xml:id="example-finding-a-power-series-representation">
-      <title>Finding a Power Series Representation</title>
-      <statement>
-        <p>
-          Find a power series representation for <m>\displaystyle\frac{x}{1 + 4x}</m> and state the interval over which it is valid.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We'll try to relate this to the series in <xref ref="example-power-series-from-geometric-series" text="type-global" />:
-          <md>
-            <mrow>\frac{x}{1 + 4x} \amp = x \frac{1}{1 + 4x} </mrow>
-            <mrow> \amp = x \frac{1}{1 - (-4x)} </mrow>
-            <mrow> \amp = x \sum_{k=0}^{\infty}(-4x)^{k} \quad\text{valid for }|4x| \lt 1 </mrow>
-            <mrow> \amp = \sum_{k=0}^{\infty} (-1)^{k}4^{k}x^{k+1} </mrow>
-          </md>.
-          This representation is valid for <m>|x| \lt \frac{1}{4}</m>, or for <m>x</m> in the interval <m>(-\frac{1}{4}, \frac{1}{4})</m>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      One of the most useful properties of power series is that the fundamental calculus operations, differentiation and integration, are valid for power series within their intervals of convergence.
-    </p>
-    <theorem xml:id="theorem-differentiation-and-integration-of-power-series">
-      <title>Differentiation and Integration of Power Series</title>
-      <statement>
-        <p>
-          Suppose the power series <m>\sum_{k = 0}^{\infty}a_{k}(x - a)^{k}</m> has radius of convergence <m>R \gt 0</m>, and let <m>f(x)</m> denote the series on the interval <m>(a - R, a + R)</m>.
-          Then <m>f(x)</m> is differentiable on <m>(a - R, a + R)</m> and
-          <md>
-            <mrow> f'(x) \amp = \dv{}{x}\left(a_{0} + a_{1}(x - a) + a_{2}(x - a)^{2} + a_{3}(x - a)^{3} + \cdots\right)</mrow>
-            <mrow> \amp a_{1} + 2a_{2}(x - a) + 3a_{3}(x - a)^{2} + \cdots </mrow>
+      <p>
+        In <xref ref="section-series" text="type-global" /> we found that the geometric series
+        <me>\sum_{k=0}^{\infty}ar^k</me>
+        sums to <m>\frac{a}{1-r}</m> as long as <m>\abs{r}\lt1</m>.
+        We now apply this formula to obtain an important power series.
+      </p>
+      <example xml:id="example-power-series-from-geometric-series">
+        <title>Power series from geometric series</title>
+        <statement>
+          <p>
+            Let
+            <me>f(x) = \sum_{k = 0}^{\infty} x^{k}</me>.
+            Then the domain of <m>f(x)</m> is <m>(-1,1)</m> and for <m>x</m> in this interval we have
+            <me>f(x) = \frac{1}{1 - x}</me>.
+          </p>
+        </statement>
+      </example>
+      <p>
+        Note that the equation
+        <men xml:id="series-equation-geometric-series">\sum_{k=0}^{\infty}x^{k} = \frac{1}{1 - x}</men>
+        is only valid where the series on the left converges.
+        If we try to plug in <m>x = -1</m> into this equation and treat it as valid, we get
+        <me>\frac{1}{2} = 1 - 1 + 1 - 1 + \cdots</me>,
+        which is nonsense.
+        That said, it is perfectly valid to replace <m>f(x) = \frac{1}{1-x}</m> with its power series representation in situations where <m>\abs{x}\lt1</m>.
+      </p>
+      <example xml:id="example-finding-a-power-series-representation">
+        <title>Finding a power series representation</title>
+        <statement>
+          <p>
+            Find a power series representation for <m>\displaystyle\frac{x}{1 + 4x}</m> and state the interval over which it is valid.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We'll try to relate this to the series in <xref ref="series-equation-geometric-series" text="type-global" />:
+            <md>
+              <mrow>\frac{x}{1 + 4x} \amp = x \frac{1}{1 + 4x} </mrow>
+              <mrow> \amp = x \frac{1}{1 - (-4x)} </mrow>
+              <mrow> \amp = x \sum_{k=0}^{\infty}(-4x)^{k} \quad\text{valid for }|4x| \lt 1 </mrow>
+              <mrow> \amp = \sum_{k=0}^{\infty} (-1)^{k}4^{k}x^{k+1} </mrow>
+            </md>.
+            This representation is valid for <m>|x| \lt \frac{1}{4}</m>, or for <m>x</m> in the interval <m>(-\frac{1}{4}, \frac{1}{4})</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can find power series for many other rational functions now by basing them on <xref ref="series-equation-geometric-series" text="type-global" />.
+        Partial fractions and completing the square are also helpful.
+      </p>
+      <example xml:id="example-finding-power-series-by-completing-the-square-and-partial-fractions">
+        <title>Finding power series by completing the square and partial fractions</title>
+        <statement>
+          <p>
+            Let
+            <me>g(t) = \frac{3}{t^2+2t-8}</me>.
+            Find a series representation for <m>g(t)</m> in two different ways: first by completing the square, and next by using partial fractions.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            If we complete the square in the denominator of <m>g(t)</m>, we get
+            <me>g(t) = \frac{3}{(t+1)^2-9} = -\frac{3}{9}\frac{1}{1 - \frac{(t+1)^2}{9}}</me>.
+            At this point we can make use of <xref ref="series-equation-geometric-series" text="type-global" /> to obtain
+            <me>g(t) = -\frac{1}{3}\sum_{k=0}^{\infty}\parens*{\frac{t+1}{3}}^{2k}</me>,
+            a power series representation of <m>g(t)</m> centered at <m>-1</m>.
+            This series converges as long as
+            <me>\abs{\frac{t+1}{3}}^2 \lt 1</me>
+            or just <m>-4\lt t\lt 2</m>.
+            This convergence is demonstrated in the figure below.
+          </p>
+          <figure xml:id="figure-geometric-series-from-completing-square">
+            <caption>Partial sums converging to <m>g(t)</m></caption>
+            <image xml:id="image-geoemtric-series-from-completing-square" width="50%">
+              <latex-image xml:id="latex-image-geometric-series-from-completing-square">
+                \begin{tikzpicture}
+                  \begin{axis}[
+                    myaxis,
+                    xlabel={$t$},
+                    xmin=-4,xmax=2,
+                    ymin=-4,ymax=1,
+                    domain=-4:2, restrict y to domain=-10:10,
+                    legend style={at={(axis cs:1,1)}, anchor={west}},
+                    ]
+                    \addplot+[myplot,dashed,-,]{-1/3};
+                    \addlegendentry{$S_0$};
+                    \addplot+[myplot,dashed,-,]{-1/3 - (x+1)^2/27 - (x+1)^4/243};
+                    \addlegendentry{$S_2$};
+                    \addplot+[myplot,dashed,-]{-1/19683*x^8 - 8/19683*x^7 - 37/19683*x^6 - 110/19683*x^5 - 286/19683*x^4 - 560/19683*x^3 - 1378/19683*x^2 - 1844/19683*x - 7381/19683};
+                    \addlegendentry{$S_4$};
+                    \addplot+[myplot,-,]{3/(x^2+2*x-8)};
+                    \addlegendentry{$g(t)$}
+                  \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-power-series-and-calculus">
+      <title>Power Series and Calculus</title>
+      <p>
+        One of the most useful properties of power series is that the fundamental calculus operations, differentiation and integration, are valid for power series within their intervals of convergence.
+      </p>
+      <theorem xml:id="theorem-differentiation-and-integration-of-power-series">
+        <title>Differentiation and Integration of Power Series</title>
+        <statement>
+          <p>
+            Suppose the power series <m>\sum_{k = 0}^{\infty}a_{k}(x - a)^{k}</m> has radius of convergence <m>R \gt 0</m>, and let <m>f(x)</m> denote the series on the interval <m>(a - R, a + R)</m>.
+            Then <m>f(x)</m> is differentiable on <m>(a - R, a + R)</m> and
+            <md>
+              <mrow> f^{\prime}(x) \amp = \dv{}{x}\left(a_{0} + a_{1}(x - a) + a_{2}(x - a)^{2} + a_{3}(x - a)^{3} + \cdots\right)</mrow>
+              <mrow> \amp a_{1} + 2a_{2}(x - a) + 3a_{3}(x - a)^{2} + \cdots </mrow>
             </md>
             or in other words
-            <me>f'(x) = \dv{}{x}\sum_{k=0}^{\infty}a_{k}x^{k} = \sum_{k=0}^{\infty} ka_{k}x^{k-1}</me>.
+            <me>f^{\prime}(x) = \dv{}{x}\sum_{k=0}^{\infty}a_{k}x^{k} = \sum_{k=0}^{\infty} ka_{k}x^{k-1}</me>.
             Similarly,
             <me>\int f(x)\,dx = \int \sum_{k = 0}^{\infty}a_{k}x^{k}\,dx = \sum_{k = 0}^{\infty} a_{k}\frac{x^{k + 1}}{k + 1} + C</me>.
             Both of these series have radius of convergence <m>R</m>.
-            </p>
-            </statement>
-            </theorem>
-            <p>
-            <xref ref="theorem-differentiation-and-integration-of-power-series" text="type-global" /> shows that integrating and differentiating power series is as easy as integrating or differentiating powers of <m>x</m>.
-            However, we do need to be careful at the endpoints.
-            </p>
-            <example xml:id="example-power-series-for-the-logarithm">
-            <title>Power Series for the Logarithm</title>
-            <statement>
-            <p>
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        <xref ref="theorem-differentiation-and-integration-of-power-series" text="type-global" /> shows that integrating and differentiating power series is as easy as integrating or differentiating powers of <m>x</m>.
+        However, we do need to be careful at the endpoints.
+      </p>
+      <example xml:id="example-power-series-for-the-logarithm">
+        <title>Power Series for the Logarithm</title>
+        <statement>
+          <p>
             Find a power series representation of <m>\ln(1 + x)</m> centered at <m>0</m> and its interval of convergence.
-            </p>
-            </statement>
-            <solution>
-            <p>
+          </p>
+        </statement>
+        <solution>
+          <p>
             Since <m>\dv{}{x}\ln(1 + x) = \frac{1}{1 + x}</m>, we can integrate the series for <m>\frac{1}{1 + x}</m> to get the series for the logarithm.
             Doing so, we get
             <md>
-            <mrow>\ln(1 + x) + C \amp = \int\sum_{k=0}^{\infty}(-1)^{k}x^{k}\,dx </mrow>
-            <mrow> \amp = \sum_{k=0} (-1)^{k} \frac{x^{k+1}}{k+1}</mrow>
-          </md>.
-          The series on the right has radius of convergence <m>R = 1</m> and interval of convergence <m>(-1, 1]</m> by <xref ref="example-convergence-of-a-power-series-ratio-test" text="type-global" />.
-          To find <m>C</m>, we can substitute <m>x = 0</m> into the equation (which is valid!) to get
-          <me>\ln1 + C = 0 - \frac{0^{2}}{2} + \cdots = 0</me>.
-          So <m>C = 0</m>, and
-          <me>\ln(1 + x) = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>.
-          Plugging in <m>x = 1</m>, we get the series
-          <me>\ln2 = 1 - \frac{1}{2} + \frac{1}{3} - \cdots</me>.
-        </p>
-      </solution>
-    </example>
+              <mrow>\ln(1 + x) + C \amp = \int\sum_{k=0}^{\infty}(-1)^{k}x^{k}\,dx </mrow>
+              <mrow> \amp = \sum_{k=0} (-1)^{k} \frac{x^{k+1}}{k+1}</mrow>
+            </md>.
+            The series on the right has radius of convergence <m>R = 1</m> and interval of convergence <m>(-1, 1]</m> by <xref ref="example-convergence-of-a-power-series-ratio-test" text="type-global" />.
+            To find <m>C</m>, we can substitute <m>x = 0</m> into the equation (which is valid!) to get
+            <me>\ln1 + C = 0 - \frac{0^{2}}{2} + \cdots = 0</me>.
+            So <m>C = 0</m>, and
+            <me>\ln(1 + x) = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>.
+            Plugging in <m>x = 1</m>, we get the series
+            <me>\ln2 = 1 - \frac{1}{2} + \frac{1}{3} - \cdots</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
   </section>
   <section xml:id="section-taylor-and-maclaurin-series">
     <title>Taylor and Maclaurin Series</title>
