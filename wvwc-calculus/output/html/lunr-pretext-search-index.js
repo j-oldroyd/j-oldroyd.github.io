@@ -4057,7 +4057,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "9.5",
   "title": "Power Series",
-  "body": " Power Series   Definition and Examples  A power series (centered at ) is a series of the form where is a variable. Note that for such a series, only nonnegative, integer powers of are permitted. The terms are called coefficients , and they determine all properties of the series.   A series with negative integer powers for is called a Laurent series . While these series have important uses, we will not study them.    Examples of Power Series   Determine which of the following are power series:               Power series can also be centered at other numbers. A power series centered at is a series of the form . As before, only nonnegative integer powers are allowed in the series.    Convergence of Power Series  An important concern about power series is to determine the set of values of for which the series will converge. These questions are usually answered using the Ratio Test or the Root Test in combination with other convergence tests.   Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise.    In , the values of for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the interval of convergence of the series. The radius of this interval is called the radius of convergence . In general, we have the following.   The term radius might seem unusual for describing a one-dimensional interval, but there are circles involved here. Power series are best described using complex numbers, and in that setting the radius of convergence describes an actual circle in the complex plane containing complex values at which the series converges.    Convergence of Power Series   Given a series , there exists such that the series converges on the interval . The largest such is the radius of convergence.    For most series we'll consider (i.e., those of the form ), we can find using the formula . Note the similarity between and !   Interval and Radius of Convergence   Find the interval and radius of convergence of the series given by .    We'll find the radius of convergence first using , which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .     Interval of convergence for series of even powers   Find the interval of convergence for the series given by .    First, note that . We'll start by finding the radius of convergence of the series. We can use again, and we will, but we need to be careful since the series actually involves powers of instead of just .  To address this power mismatch, we'll make the substitution in our series to get , and now we can use with . This gives , and so the radius of convergence of the modified series is .  Now we convert back to the series that we started with. Since the radius of convergence of the modified series is , this means that it will converge as long as . In other words, our original series will converge if , or equivalently . Hence, the radius of convergence of is equal to .  Now that we have the radius of convergence, we (mostly) know the interval of convergence. In particular, the interval of convergence must have endpoints of and . We must check convergence at these endpoints individually as in . If we do so, we see that the series converges at both endpoints. Thus, the interval of convergence for this series is .    We will often use the Root Test instead of the Ratio Test for determining convergence of power series. This usually happens when the coefficients of the series do not involve factorials.   Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the Root Test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test. Therefore the interval of convergence is .     "
+  "body": " Power Series   Definition and Examples  A power series (centered at ) is a series of the form where is a variable. Note that for such a series, only nonnegative, integer powers of are permitted. The terms are called coefficients , and they determine all properties of the series.   A series with negative integer powers for is called a Laurent series . While these series have important uses, we will not study them.    Examples of Power Series   Determine which of the following are power series:               Power series can also be centered at other numbers. A power series centered at is a series of the form . As before, only nonnegative integer powers are allowed in the series.    Convergence of Power Series  An important concern about power series is to determine the set of values of for which the series will converge. These questions are usually answered using the Ratio Test or the Root Test in combination with other convergence tests.   Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise. This is demonstrated in the figure below, which shows the partial sums for various values of along with the curve that these sums are converging to.   Convergence of on the interval        In , the values of for which the series converged was an interval. It turns out that this will always be the case, and the resulting interval is known as the interval of convergence of the series. The radius of this interval is called the radius of convergence . In general, we have the following.   The term radius might seem unusual for describing a one-dimensional interval, but there are circles involved here. Power series are best described using complex numbers, and in that setting the radius of convergence describes an actual circle in the complex plane containing complex values at which the series converges.    Convergence of Power Series   Given a series , there exists such that the series converges on the interval . The largest such is the radius of convergence.    For most series we'll consider (i.e., those of the form ), we can find using the formula . Note the similarity between and !   Interval and Radius of Convergence   Find the interval and radius of convergence of the series given by .    We'll find the radius of convergence first using , which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .     Interval of convergence for series of even powers   Find the interval of convergence for the series given by .    First, note that . We'll start by finding the radius of convergence of the series. We can use again, and we will, but we need to be careful since the series actually involves powers of instead of just .  To address this power mismatch, we'll make the substitution in our series to get , and now we can use with . This gives , and so the radius of convergence of the modified series is .  Now we convert back to the series that we started with. Since the radius of convergence of the modified series is , this means that it will converge as long as . In other words, our original series will converge if , or equivalently . Hence, the radius of convergence of is equal to .  Now that we have the radius of convergence, we (mostly) know the interval of convergence. In particular, the interval of convergence must have endpoints of and . We must check convergence at these endpoints individually as in . If we do so, we see that the series converges at both endpoints. Thus, the interval of convergence for this series is .    We will often use the Root Test instead of the Ratio Test for determining convergence of power series. This usually happens when the coefficients of the series do not involve factorials.   Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the Root Test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test. Therefore the interval of convergence is .     "
 },
 {
   "id": "p-1025",
@@ -4093,7 +4093,7 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "9.5.2",
   "title": "Convergence of a power series using the Ratio Test.",
-  "body": " Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise.   "
+  "body": " Convergence of a power series using the Ratio Test   For what values of does the series converge?    We'll try the ratio test to check convergence of this series. Doing so, we get . So the series converges if and diverges if .  When , or , the Ratio Test fails and we need to use other methods to determine the convergence or the series at these points. We therefore consider convergence of the power series at these points on a case-by-case basis.  At , the series becomes , which diverges by the -series test . At , the series reduces to the alternating harmonic series which converges by . Therefore this series converges for all in the interval and diverges otherwise. This is demonstrated in the figure below, which shows the partial sums for various values of along with the curve that these sums are converging to.   Convergence of on the interval       "
 },
 {
   "id": "p-1034",
@@ -4109,7 +4109,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-power-series.html#theorem-convergence-of-power-series",
   "type": "Theorem",
-  "number": "9.5.3",
+  "number": "9.5.4",
   "title": "Convergence of Power Series.",
   "body": " Convergence of Power Series   Given a series , there exists such that the series converges on the interval . The largest such is the radius of convergence.   "
 },
@@ -4118,7 +4118,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-power-series.html#example-interval-and-radius-of-convergence",
   "type": "Example",
-  "number": "9.5.4",
+  "number": "9.5.5",
   "title": "Interval and Radius of Convergence.",
   "body": " Interval and Radius of Convergence   Find the interval and radius of convergence of the series given by .    We'll find the radius of convergence first using , which is given by . So the radius of convergence is infinite, implying that the interval of convergence is .   "
 },
@@ -4127,7 +4127,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-power-series.html#example-interval-of-convergence-for-a-series-even-powers",
   "type": "Example",
-  "number": "9.5.5",
+  "number": "9.5.6",
   "title": "Interval of convergence for series of even powers.",
   "body": " Interval of convergence for series of even powers   Find the interval of convergence for the series given by .    First, note that . We'll start by finding the radius of convergence of the series. We can use again, and we will, but we need to be careful since the series actually involves powers of instead of just .  To address this power mismatch, we'll make the substitution in our series to get , and now we can use with . This gives , and so the radius of convergence of the modified series is .  Now we convert back to the series that we started with. Since the radius of convergence of the modified series is , this means that it will converge as long as . In other words, our original series will converge if , or equivalently . Hence, the radius of convergence of is equal to .  Now that we have the radius of convergence, we (mostly) know the interval of convergence. In particular, the interval of convergence must have endpoints of and . We must check convergence at these endpoints individually as in . If we do so, we see that the series converges at both endpoints. Thus, the interval of convergence for this series is .   "
 },
@@ -4136,7 +4136,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-power-series.html#example-interval-and-radius-of-convergence-from-root-test",
   "type": "Example",
-  "number": "9.5.6",
+  "number": "9.5.7",
   "title": "Interval and Radius of Convergence from Root Test.",
   "body": " Interval and Radius of Convergence from Root Test   Determine the interval and radius of convergence of .    If we apply the Root Test to this series, we get . We need this to be less than , which gives , and so the series converges for all in . So the radius of convergence is .  Now we need to check the endpoints. At , the series becomes , which diverges by the -series test. At , the series becomes which converges by the alternating series test. Therefore the interval of convergence is .   "
 },
@@ -5383,9 +5383,9 @@ var ptx_lunr_docs = [
   "body": " cylinders definition  Cylinders   A cylinder is the collection of all lines parallel to a given line and passing through some plane curve.   "
 },
 {
-  "id": "figure-62",
+  "id": "figure-63",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-62",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-63",
   "type": "Figure",
   "number": "11.6.2",
   "title": "",
@@ -5401,9 +5401,9 @@ var ptx_lunr_docs = [
   "body": " A sinusoidal cylinder  Consider the equation in . This equation is missing the variable , which suggests that the graph of this equation should be a cylinder. However, it's not going to look like the cylinders we may be used to at this point. In fact, this is just the set of all lines passing through the curve in the -plane and parallel to the -axis. It's graph is given below.  "
 },
 {
-  "id": "figure-63",
+  "id": "figure-64",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-63",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-64",
   "type": "Figure",
   "number": "11.6.4",
   "title": "",
@@ -5455,9 +5455,9 @@ var ptx_lunr_docs = [
   "body": " Region between surfaces  Suppose we want to sketch the region between the surface and the cylinder for . First, we can graph . If we look at the horizontal traces of this surface, we get circles of varying radii. As increases, the radii of these circles increase as well. This surface is just a cone! So we're describing the region of this cone bounded between and , and contained inside the cylinder .  "
 },
 {
-  "id": "figure-64",
+  "id": "figure-65",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-64",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-65",
   "type": "Figure",
   "number": "11.6.8",
   "title": "",
@@ -5545,9 +5545,9 @@ var ptx_lunr_docs = [
   "body": " Velocity on a saddle  A particle moves counterclockwise along the \"saddle\" . We want its velocity at . First, find to get   At , we have the velocity vector   So at the point , the space curve is parallel to the vector . In other words, the particle is moving in this direction at .  "
 },
 {
-  "id": "figure-65",
+  "id": "figure-66",
   "level": "2",
-  "url": "section-vector-functions.html#figure-65",
+  "url": "section-vector-functions.html#figure-66",
   "type": "Figure",
   "number": "11.7.6",
   "title": "",
