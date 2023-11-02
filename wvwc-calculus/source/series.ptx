@@ -1725,6 +1725,32 @@
           </figure>
         </solution>
       </example>
+      <p>
+        We will occasionally need to work backwards as well from a given power series to identify its corresponding function.
+        This is especially common when using power series to solve certain differential equations.
+      </p>
+      <example xml:id="example-finding-a-function-with-specified-power-series">
+        <title>Finding a function with specified power series</title>
+        <statement>
+          <p>
+            Find the function <m>f(x)</m> with power series given by
+            <me>\sum_{k=0}^{\infty}\frac{(-1)^k}{2^k}x^{2k+1}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We will once again use <xref ref="series-equation-geometric-series" text="type-global" />.
+            To do so, we need to rewrite the series into the form <m>\sum u^k</m>.
+            This is not too difficult to do if we combine exponents:
+            <me>\sum_{k=0}^{\infty}\frac{(-1)^k}{2^k}x^{2k+1} = x\sum_{k=0}^{\infty}\parens{-\frac{x^2}{2}}^{k}</me>.
+            This series is geometric and converges for <m>\abs{x}\lt\sqrt{2}</m>.
+            Using <xref ref="series-equation-geometric-series" text="type-global" />, we see that
+            <me>\sum_{k=0}^{\infty}\parens{-\frac{x^2}{2}}^{k} = \frac{1}{1+\frac{x^2}{2}}</me>.
+            Therefore the function we seek is
+            <me>f(x) = \frac{2x}{2+x^2}</me>.
+          </p>
+        </solution>
+      </example>
     </subsection>
     <subsection xml:id="subsection-power-series-and-calculus">
       <title>Power Series and Calculus</title>
@@ -1775,6 +1801,33 @@
             <me>\ln(1 + x) = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{k+1}}{k+1}</me>.
             Plugging in <m>x = 1</m>, we get the series
             <me>\ln2 = 1 - \frac{1}{2} + \frac{1}{3} - \cdots</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        We can also use integrals and derivatives to identify given power series in terms of some function <m>f(x)</m>.
+      </p>
+      <example xml:id="example-using-derivatives-to-evaluate-a-series">
+        <title>Using derivatives to evaluate a series</title>
+        <statement>
+          <p>
+            Find the function <m>f(x)</m> represented by
+            <me>\sum_{k=0}^{\infty}kx^k</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This power series looks very much like a geometric series except for the factor of <m>k</m> out front.
+            We can deal with this by viewing the sum as the derivative of a geometric series.
+            In particular,
+            <md>
+              <mrow>\sum_{k=0}^{\infty}kx^k \amp= x\sum_{k=0}^{\infty}kx^{k-1}</mrow>
+              <mrow> \amp = x\sum_{k=0}^{\infty}\dv{}{x}\parens{x^k} </mrow>
+              <mrow> \amp = x\dv{}{x}\parens{\frac{1}{1-x}} </mrow>
+            </md>
+            by <xref ref="series-equation-geometric-series" text="type-global" />.
+            So the function represented by this series must be
+            <me>f(x) = \frac{x}{(1-x)^2}</me>.
           </p>
         </solution>
       </example>
