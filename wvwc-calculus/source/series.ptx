@@ -1664,7 +1664,7 @@
                     myaxis,
                     xlabel={$t$},
                     xmin=-4,xmax=2,
-                    ymin=-4,ymax=1,
+                    ymin=-2,ymax=1,
                     domain=-4:2, restrict y to domain=-10:10,
                     legend style={at={(axis cs:1,1)}, anchor={west}},
                     ]
@@ -1695,7 +1695,34 @@
           <p>
             This representation is valid where both component series converge.
             Since the first series converges for <m>\abs{t}\lt4</m> and the second converges for <m>\abs{t}\lt2</m>, the entire representation converges for <m>\abs{t}\lt2</m>.
+            The figure below demonstrates the convergence of the corresponding partial sums to <m>g(t)</m>.
           </p>
+          <figure xml:id="figure-geometric-series-from-partial-fractions">
+            <caption>Partial sums converging to <m>g(t)</m></caption>
+            <image xml:id="image-geoemtric-series-from-partial-fractions" width="50%">
+              <latex-image xml:id="latex-image-geometric-series-from-partial-fractions">
+                \begin{tikzpicture}
+                  \begin{axis}[
+                    myaxis,
+                    xlabel={$t$},
+                    xmin=-4,xmax=2,
+                    ymin=-2,ymax=1,
+                    domain=-4:2, restrict y to domain=-10:10,
+                    legend style={at={(axis cs:1,1)}, anchor={west}},
+                    ]
+                    \addplot+[myplot,dashed,-]{-3/8};
+                    \addlegendentry{$S_0$};
+                    \addplot+[myplot,dashed,-]{-9/128*x^2 - 3/32*x - 3/8};
+                    \addlegendentry{$S_2$};
+                    \addplot+[myplot,dashed,-]{-33/2048*x^4 - 15/512*x^3 - 9/128*x^2 - 3/32*x - 3/8};
+                    \addlegendentry{$S_4$};
+                    \addplot+[myplot,-,]{3/(x^2+2*x-8)};
+                    \addlegendentry{$g(t)$}
+                  \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
         </solution>
       </example>
     </subsection>
