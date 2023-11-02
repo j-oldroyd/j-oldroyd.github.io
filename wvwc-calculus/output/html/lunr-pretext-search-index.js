@@ -4147,7 +4147,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "9.6",
   "title": "Representing Functions as Power Series",
-  "body": " Representing Functions as Power Series  Functions as Power Series   A power series can be viewed as a function with domain given by the interval of convergence. One of our goals is to use power series to represent functions that can't be written in terms of elementary functions . Such functions often arise in applications from evaluating integrals or solving differential equations.    Power Series from Geometric Series  In we found that the geometric series sums to as long as . We now apply this formula to obtain an important power series.   Power series from geometric series   Let . Then the domain of is and for in this interval we have .    Note that the equation is only valid where the series on the left converges. If we try to plug in into this equation and treat it as valid, we get , which is nonsense. That said, it is perfectly valid to replace with its power series representation in situations where .   Finding a power series representation   Find a power series representation for and state the interval over which it is valid.    We'll try to relate this to the series in : . This representation is valid for , or for in the interval .    We can find power series for many other rational functions now by basing them on . Partial fractions and completing the square are also helpful.   Finding power series by completing the square and partial fractions   Let . Find a series representation for in two different ways: first by completing the square, and next by using partial fractions.    If we complete the square in the denominator of , we get . At this point we can make use of to obtain , a power series representation of centered at . This series converges as long as or just . This convergence is demonstrated in the figure below.   Partial sums converging to      If we use partial fractions instead, we get a different result. First, we find the partial fraction decomposition of : . Next, we rewrite this into a form where we can apply :   This representation is valid where both component series converge. Since the first series converges for and the second converges for , the entire representation converges for .      Power Series and Calculus  One of the most useful properties of power series is that the fundamental calculus operations, differentiation and integration, are valid for power series within their intervals of convergence.   Differentiation and Integration of Power Series   Suppose the power series has radius of convergence , and let denote the series on the interval . Then is differentiable on and or in other words . Similarly, . Both of these series have radius of convergence .     shows that integrating and differentiating power series is as easy as integrating or differentiating powers of . However, we do need to be careful at the endpoints.   Power Series for the Logarithm   Find a power series representation of centered at and its interval of convergence.    Since , we can integrate the series for to get the series for the logarithm. Doing so, we get . The series on the right has radius of convergence and interval of convergence by . To find , we can substitute into the equation (which is valid!) to get . So , and . Plugging in , we get the series .     "
+  "body": " Representing Functions as Power Series  Functions as Power Series   A power series can be viewed as a function with domain given by the interval of convergence. One of our goals is to use power series to represent functions that can't be written in terms of elementary functions . Such functions often arise in applications from evaluating integrals or solving differential equations.    Power Series from Geometric Series  In we found that the geometric series sums to as long as . We now apply this formula to obtain an important power series.   Power series from geometric series   Let . Then the domain of is and for in this interval we have .    Note that the equation is only valid where the series on the left converges. If we try to plug in into this equation and treat it as valid, we get , which is nonsense. That said, it is perfectly valid to replace with its power series representation in situations where .   Finding a power series representation   Find a power series representation for and state the interval over which it is valid.    We'll try to relate this to the series in : . This representation is valid for , or for in the interval .    We can find power series for many other rational functions now by basing them on . Partial fractions and completing the square are also helpful.   Finding power series by completing the square and partial fractions   Let . Find a series representation for in two different ways: first by completing the square, and next by using partial fractions.    If we complete the square in the denominator of , we get . At this point we can make use of to obtain , a power series representation of centered at . This series converges as long as or just . This convergence is demonstrated in the figure below.   Partial sums converging to      If we use partial fractions instead, we get a different result. First, we find the partial fraction decomposition of : . Next, we rewrite this into a form where we can apply :   This representation is valid where both component series converge. Since the first series converges for and the second converges for , the entire representation converges for . The figure below demonstrates the convergence of the corresponding partial sums to .   Partial sums converging to          Power Series and Calculus  One of the most useful properties of power series is that the fundamental calculus operations, differentiation and integration, are valid for power series within their intervals of convergence.   Differentiation and Integration of Power Series   Suppose the power series has radius of convergence , and let denote the series on the interval . Then is differentiable on and or in other words . Similarly, . Both of these series have radius of convergence .     shows that integrating and differentiating power series is as easy as integrating or differentiating powers of . However, we do need to be careful at the endpoints.   Power Series for the Logarithm   Find a power series representation of centered at and its interval of convergence.    Since , we can integrate the series for to get the series for the logarithm. Doing so, we get . The series on the right has radius of convergence and interval of convergence by . To find , we can substitute into the equation (which is valid!) to get . So , and . Plugging in , we get the series .     "
 },
 {
   "id": "example-power-series-from-geometric-series",
@@ -4174,14 +4174,14 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "9.6.3",
   "title": "Finding power series by completing the square and partial fractions.",
-  "body": " Finding power series by completing the square and partial fractions   Let . Find a series representation for in two different ways: first by completing the square, and next by using partial fractions.    If we complete the square in the denominator of , we get . At this point we can make use of to obtain , a power series representation of centered at . This series converges as long as or just . This convergence is demonstrated in the figure below.   Partial sums converging to      If we use partial fractions instead, we get a different result. First, we find the partial fraction decomposition of : . Next, we rewrite this into a form where we can apply :   This representation is valid where both component series converge. Since the first series converges for and the second converges for , the entire representation converges for .   "
+  "body": " Finding power series by completing the square and partial fractions   Let . Find a series representation for in two different ways: first by completing the square, and next by using partial fractions.    If we complete the square in the denominator of , we get . At this point we can make use of to obtain , a power series representation of centered at . This series converges as long as or just . This convergence is demonstrated in the figure below.   Partial sums converging to      If we use partial fractions instead, we get a different result. First, we find the partial fraction decomposition of : . Next, we rewrite this into a form where we can apply :   This representation is valid where both component series converge. Since the first series converges for and the second converges for , the entire representation converges for . The figure below demonstrates the convergence of the corresponding partial sums to .   Partial sums converging to       "
 },
 {
   "id": "theorem-differentiation-and-integration-of-power-series",
   "level": "2",
   "url": "section-representing-functions-as-power-series.html#theorem-differentiation-and-integration-of-power-series",
   "type": "Theorem",
-  "number": "9.6.5",
+  "number": "9.6.6",
   "title": "Differentiation and Integration of Power Series.",
   "body": " Differentiation and Integration of Power Series   Suppose the power series has radius of convergence , and let denote the series on the interval . Then is differentiable on and or in other words . Similarly, . Both of these series have radius of convergence .   "
 },
@@ -4190,7 +4190,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "section-representing-functions-as-power-series.html#example-power-series-for-the-logarithm",
   "type": "Example",
-  "number": "9.6.6",
+  "number": "9.6.7",
   "title": "Power Series for the Logarithm.",
   "body": " Power Series for the Logarithm   Find a power series representation of centered at and its interval of convergence.    Since , we can integrate the series for to get the series for the logarithm. Doing so, we get . The series on the right has radius of convergence and interval of convergence by . To find , we can substitute into the equation (which is valid!) to get . So , and . Plugging in , we get the series .   "
 },
@@ -5392,9 +5392,9 @@ var ptx_lunr_docs = [
   "body": " cylinders definition  Cylinders   A cylinder is the collection of all lines parallel to a given line and passing through some plane curve.   "
 },
 {
-  "id": "figure-64",
+  "id": "figure-65",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-64",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-65",
   "type": "Figure",
   "number": "11.6.2",
   "title": "",
@@ -5410,9 +5410,9 @@ var ptx_lunr_docs = [
   "body": " A sinusoidal cylinder  Consider the equation in . This equation is missing the variable , which suggests that the graph of this equation should be a cylinder. However, it's not going to look like the cylinders we may be used to at this point. In fact, this is just the set of all lines passing through the curve in the -plane and parallel to the -axis. It's graph is given below.  "
 },
 {
-  "id": "figure-65",
+  "id": "figure-66",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-65",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-66",
   "type": "Figure",
   "number": "11.6.4",
   "title": "",
@@ -5464,9 +5464,9 @@ var ptx_lunr_docs = [
   "body": " Region between surfaces  Suppose we want to sketch the region between the surface and the cylinder for . First, we can graph . If we look at the horizontal traces of this surface, we get circles of varying radii. As increases, the radii of these circles increase as well. This surface is just a cone! So we're describing the region of this cone bounded between and , and contained inside the cylinder .  "
 },
 {
-  "id": "figure-66",
+  "id": "figure-67",
   "level": "2",
-  "url": "section-cylinders-and-quadric-surfaces.html#figure-66",
+  "url": "section-cylinders-and-quadric-surfaces.html#figure-67",
   "type": "Figure",
   "number": "11.6.8",
   "title": "",
@@ -5554,9 +5554,9 @@ var ptx_lunr_docs = [
   "body": " Velocity on a saddle  A particle moves counterclockwise along the \"saddle\" . We want its velocity at . First, find to get   At , we have the velocity vector   So at the point , the space curve is parallel to the vector . In other words, the particle is moving in this direction at .  "
 },
 {
-  "id": "figure-67",
+  "id": "figure-68",
   "level": "2",
-  "url": "section-vector-functions.html#figure-67",
+  "url": "section-vector-functions.html#figure-68",
   "type": "Figure",
   "number": "11.7.6",
   "title": "",
