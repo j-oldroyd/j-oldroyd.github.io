@@ -103,18 +103,27 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
     % my axis/plot settings; partially inspired by ORCCA calc manual
     \pgfplotsset{
-      cycle list/Set1,
+      % Use colorbrewer
+      colormap/Set1,
+      % Change cycle list to include above colors
+      MyCycleList cycle list/.style={
+        cycle multiindex* list={
+        linestyles*\nextlist
+        mark=none\nextlist
+        Set1%
+        },
+      },
       myplot/.style={% primary style for curves
         mark=none,
         line width=1pt,
         &lt;-&gt;,
-        solid,
+        % solid,
         smooth,
         samples=100,
         },
       myaxis/.style={% primary style for axes
         view={120}{30},
-        cycle list name=Set1,
+        MyCycleList cycle list,
         axis lines=center,
         axis line style={shorten &lt;=-10pt, shorten &gt;=-10pt, latex-latex},
         % axis line style = {latex-latex},
