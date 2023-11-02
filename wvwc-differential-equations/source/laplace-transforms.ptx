@@ -139,7 +139,7 @@
         </statement>
       </theorem>
       <p>
-        In combination with the formula <m>\Laplace{t^n} = \frac{s^{n+1}}{(n+1)!}</m>, we can now compute the Laplace transform of any polynomial function with relative ease.
+        In combination with the formula <m>\Laplace{t^n} = \frac{n!}{s^{n+1}}</m>, we can now compute the Laplace transform of any polynomial function with relative ease.
       </p>
       <example xml:id="example-computing-the-transform-of-a-polynomial">
         <title>Computing the transform of a polynomial</title>
@@ -207,10 +207,37 @@
         Some other important Laplace transforms are given below:
         <md>
           <mrow>\Laplace{e^{at}} \amp= \frac{1}{s-a}</mrow>
-          <mrow>\Laplace{\sin(\omega t)} \amp= \frac{\omega}{s^{2}+\omega^{2}}</mrow>
-          <mrow>\Laplace{\cos(\omega t)} \amp= \frac{s}{s^{2}+\omega^{2}}</mrow>
+          <mrow>\Laplace{\sin(k\,t)} \amp= \frac{k}{s^{2}+k^{2}}</mrow>
+          <mrow>\Laplace{\cos(k\,t)} \amp= \frac{s}{s^{2}+k^{2}}</mrow>
         </md>.
+        Formulas such as these can be proved using <xref ref="definition-the-laplace-transform" text="type-global" />, which often requires (repeated) applications of integration by parts.
+        A trickier way to prove some transform formulas makes use of power series.
       </p>
+      <example xml:id="example-laplace-finding-a-transform-using-power-series">
+        <title>Finding a transform using power series</title>
+        <statement>
+          <p>
+            Find <m>\Laplace{\sin(k\,t)}</m> where <m>k</m> is a constant.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The power series for <m>\sin(k\,t)</m> centered at <m>0</m> is
+            <me>\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}(k\,t)^{2n+1} = \sum_{n=0}^{\infty} \frac{(-1)^n k^{2n+1}}{(2n+1)!}t^{2n+1}</me>.
+            This power series converges everywhere and we can take its Laplace transform.
+            By linearity, we get
+            <md>
+              <mrow>\Laplace{\sin(kt)} \amp= \sum_{n=0}^{\infty}\frac{(-1)^nk^{2n+1}}{(2n+1)!}\Laplace{t^{2n+1}}</mrow>
+              <mrow> \amp = \sum_{n=0}^{\infty}\frac{(-1)^n k^{2n+1}}{s^{2n+2}} </mrow>
+              <mrow> \amp = \frac{k}{s^2}\sum_{n=0}^{\infty}\parens{-\frac{k^2}{s^2}} </mrow>
+              <mrow> \amp = \frac{k}{s^2+k^2} </mrow>
+            </md>.
+          </p>
+          <p>
+            Therefore <m>\Laplace{\sin(kt)} = \frac{k}{s^2+k^2}</m>.
+          </p>
+        </solution>
+      </example>
     </subsection>
     <subsection xml:id="subsection-the-inverse-laplace-transform-m-s--shifting">
       <title>The Inverse Laplace Transform; <m>s</m>-shifting</title>
@@ -257,7 +284,7 @@
       <p>
         Simple inverse transforms can be found by reversing known transforms.
         For example,
-        <me>\iLaplace{\frac{s^{n+1}}{(n+1)!}} = t^n</me>
+        <me>\iLaplace{\frac{{n!}{s^{n+1}}}} = t^n</me>
         for <m>n = 0, 1, 2, \ldots</m>.
         The linearity of the inverse transform is also helpful in computing certain transformations.
       </p>
