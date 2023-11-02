@@ -42,7 +42,7 @@
           Since <m>m = 1</m>, <m>k = 4</m> and
           <me>F_{E}(t) = \begin{cases} \cos2t \amp \text{if }0\leq t\lt 2\pi\\0 \amp\text{if } t\geq2\pi  \end{cases}</me>
           the motion of the mass satisfies the ODE
-          <me>x''+4x = F_{E}(t).</me>
+          <me>x''+4x = F_{E}(t)</me>.
         </p>
       </solution>
     </example>
@@ -134,7 +134,7 @@
         <statement>
           <p>
             Let <m>a</m> and <m>b</m> be constants and suppose <m>f(t)</m> and <m>g(t)</m> are functions with respective Laplace transforms <m>F(s)</m> and <m>G(s)</m>. Then
-            <me>\Laplace{af+bg} = aF(s)+bG(s).</me>
+            <me>\Laplace{af+bg} = aF(s)+bG(s)</me>.
           </p>
         </statement>
       </theorem>
@@ -293,7 +293,7 @@
         <statement>
           <p>
             A continuous function <m>f(t)</m> has Laplace transform
-            <me>F(s) = \frac{3s}{s^{2}+5} + \frac{7}{s^{3}}.</me>
+            <me>F(s) = \frac{3s}{s^{2}+5} + \frac{7}{s^{3}}</me>.
             Find <m>f(t)</m>.
           </p>
         </statement>
@@ -326,7 +326,7 @@
           <p>
             Suppose that <m>f(t)</m> has Laplace transform <m>F(s)</m>, defined for <m>s\gt k</m> for some <m>k</m>.
             Then
-            <me>\Laplace{e^{at}f(t)} = F(s-a)\qq{or equivalently} \iLaplace{F(s-a)} = e^{at}f(t).</me>
+            <me>\Laplace{e^{at}f(t)} = F(s-a)\qq{or equivalently} \iLaplace{F(s-a)} = e^{at}f(t)</me>.
             In other words, multiplication by an exponential <m>e^{at}</m> in the <em>time domain</em> corresponds to translation by <m>a</m> in the <em>frequency domain</em>.
           </p>
         </statement>
@@ -350,7 +350,7 @@
             <me>F(s) = \frac{4}{(s^{2}+2s+1)+3-1} = \frac{4}{(s+1)^{2}+2}</me>.
             This looks an <em>awful</em> lot like the transform of <m>\sin(\sqrt{2}t)</m>.
             Since we have <m>(s+1)^{2}</m> instead of <m>s^{2}</m>, this tells us that
-            <me>f(t) = \frac{4}{\sqrt{2}}e^{-t}\sin(\sqrt{2}t).</me>
+            <me>f(t) = \frac{4}{\sqrt{2}}e^{-t}\sin(\sqrt{2}t)</me>.
           </p>
         </solution>
       </example>
@@ -375,130 +375,169 @@
   </section>
   <section xml:id="section-transformation-of-initial-value-problems">
     <title>Transformation of Initial Value Problems</title>
-    <theorem xml:id="theorem-laplace-transforms-of-derivatives">
-      <title>Laplace Transforms of Derivatives</title>
-      <statement>
-        <p>
-          Suppose that the function <m>f(t)</m> is piecewise smooth and that <m>F(s) = \Laplace{f(t)}</m> exists.
-          Then <m>\Laplace{f'(t)}</m> exists and
-          <me>\Laplace{f'(t)} = s\Laplace{f(t)}-f(0) = sF(s)-f(0).</me>
-        </p>
-      </statement>
-    </theorem>
-    <p>
-      The above theorem says that differentiation in the <q>time domain</q> corresponds to multiplication by <m>s</m> in the <q>frequency domain.</q>
-      This will be the most useful property of the Laplace transform for us: it will turn differential equations in the time domain into algebraic equations in the frequency domain.
-    </p>
-    <example xml:id="example-laplace-transform-of-a-second-derivative">
-      <title>Laplace Transform of a Second Derivative</title>
-      <statement>
-        <p>
-          Let <m>f(t)</m> be piecewise smooth with Laplace transform <m>F(s)</m>.
-          Compute <m>\Laplace{f''(t)}</m> using <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" />.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          By <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> we know that
-          <me>\Laplace{f'(t)} = sF(s)-f(0).</me>
-          We can apply <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> to <m>f^\prime(t)</m> as well, since it must also be piecewise smooth:
-          <md>
-            <mrow>\Laplace{f''(t)} &amp;= s\Laplace{f^\prime(t)} - f^\prime(0)</mrow>
-            <mrow>&amp;= s(sF(s)-f(0)) - f^\prime(0)</mrow>
-            <mrow>&amp;= s^{2}F(s) - sf(0) - f^\prime(0)</mrow>
-          </md>.
-          This process can be continued indefinitely.
-          In general,
-          <me>\Laplace{f^{(n)}(t)} = s^{n}F(s) - s^{n-1}f(0) - s^{n-2}f^\prime(0) - \cdots -sf^{(n-2)}(0) - f^{(n-1)}(0).</me>
-          This gives us everything we need to start solving ODEs using Laplace transforms.
-        </p>
-      </solution>
-    </example>
-    <example xml:id="example-solving-ivps-with-laplace-transforms">
-      <title>Solving IVPs with Laplace Transforms</title>
-      <statement>
-        <p>
-          Solve the IVP
-          <me>x''+8x^\prime+15x = 0 \qq{} x(0) = 2, x^\prime(0) = -3</me>
-          where <m>x</m> is a function of <m>t</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We will solve this by using Laplace transforms.
-          If we set <m>X(s) = \Laplace{x(t)}</m>, then
-          <md>
-            <mrow>\Laplace{x'(t)} &amp;= sX(s) - 2</mrow>
-            <mrow>\Laplace{x''(t)} &amp;= s^{2}X(s) - 2s +3</mrow>
-          </md>.
-          So if we take the Laplace transform of the entire ODE, we get
-          <me>\underbrace{s^{2}X(s) - 2s + 3}_{\Laplace{x''}} + \underbrace{8sX(s) - 16}_{\Laplace{8x'}} + 15X(s) = 0</me>
-          which simplifies to
-          <me>s^{2}X(s)+8sX(s)+15X(s) = 2s+13.</me>
-          To solve the ODE we need to find <m>x(t) = \mathcal{L}^{-1}\{X(s)\}</m>, so we now solve the above for <m>X(s)</m> in order to find the inverse Laplace transform.
-          If we do so, we get
-          <me>X(s) = \frac{2s+13}{s^{2}+8s+15} = \frac{2s+13}{(s+3)(s+5)}.</me>
-          This doesn't look like the Laplace transform of anything we know at the moment, but we can simplify the right hand side using partial fractions.
-          If we do so, we get
-          <me>X(s) = \frac{\frac{7}{2}}{s+3} - \frac{\frac{3}{2}}{s+5}.</me>
-          So
-          <md>
-            <mrow>x(t) &amp;= \frac{7}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} - \frac{3}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+5}\right\}</mrow>
-            <mrow>&amp;= \frac{7}{2}e^{-3t} - \frac{3}{2}e^{-5t}</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-    <example xml:id="example-nonhomogeneous-ivps-with-laplace-transforms">
-      <title>Nonhomogeneous IVPs with Laplace Transforms</title>
-      <statement>
-        <p>
-          Solve the IVP given by
-          <me>y''+9y = 10e^{-t},\quad y(0) = y^\prime(0) = 0.</me>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We begin by taking the Laplace transform of both sides to get
-          <me>s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}</me>
-          or just
-          <me>s^{2}Y(s) + 9Y(s) = \frac{10}{s+1}.</me>
-          So
-          <me>Y(s) = \frac{10}{(s+1)(s^{2}+9)}.</me>
-          By partial fractions, this becomes
-          <me>Y(s) = \frac{1-s}{s^{2}+9} + \frac{1}{s+1} = \frac{1}{s^{2}+9} - \frac{s}{s^{2}+9} + \frac{1}{s+1},</me>
-          so the solution of the ODE is
-          <md>
-            <mrow>y(t) &amp; = \iLaplace{Y(s)}</mrow>
-            <mrow>&amp;= \frac{1}{3}\sin3t -\cos3t + e^{-t}</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-    <sage>
-      <input>
-        Y(s) = 10/((s+1) * (s^2+9))
-        show(Y(s).partial_fraction_decomposition())
-      </input>
-    </sage>
-    <p>
-      One restriction of the Laplace transform approach as we've developed it is that it requires initial conditions at <m>t=0</m>.
-      If initial conditions are instead given at some other <m>t=t_0</m>, then we need to adjust our approach in order to continue to use <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> and its counterpart for second derivatives.
-      We'll demonstrate this by example.
-    </p>
-    <example xml:id="example-solving-an-ivp-with-shifted-initial-conditions">
-        <title>Solving an IVP with Shifted Initial Conditions</title>
+    <shorttitle>Transformation of IVPs</shorttitle>
+    <introduction>
+      <p>
+        In this section we begin using the Laplace transform to solve initial value problems.
+        The basic outline of our approach is this:
+        <ol>
+          <li>Transform an IVP into a frequency domain equation.</li>
+          <li>Solve the transformed equation in the frequency domain to get a function <m>X(s)</m>.</li>
+          <li>Take the inverse transform of <m>X(s)</m> to get a time solution <m>x(t)</m> of the IVP.</li>
+        </ol>
+        The result that makes all of this work is <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> below.
+      </p>
+      <theorem xml:id="theorem-laplace-transforms-of-derivatives">
+        <title>Laplace Transforms of Derivatives</title>
         <statement>
           <p>
-            Solve the IVP given by
-            <me>y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17.</me>
+            Suppose that the function <m>f(t)</m> is piecewise smooth and that <m>F(s) = \Laplace{f(t)}</m> exists.
+            Then <m>\Laplace{f'(t)}</m> exists and
+            <me>\Laplace{f'(t)} = s\Laplace{f(t)}-f(0) = sF(s)-f(0)</me>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        The above theorem says that differentiation in the <q>time domain</q> corresponds to multiplication by <m>s</m> in the <q>frequency domain.</q>
+        This will be the most useful property of the Laplace transform for us: it will turn differential equations in the time domain into algebraic equations in the frequency domain.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-solving-ivps-with-the-laplace-transform">
+      <title>Solving IVPs with the Laplace Transform</title>
+      <p>
+        We will mostly deal with second-order ODEs, so it will be useful to find how the Laplace transform affects a second derivative.
+        This will be a quick application of <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" />.
+      </p>
+      <example xml:id="example-laplace-transform-of-a-second-derivative">
+        <title>Laplace Transform of a second derivative</title>
+        <statement>
+          <p>
+            Let <m>f(t)</m> be piecewise smooth with Laplace transform <m>F(s)</m>.
+            Compute <m>\Laplace{f''(t)}</m> using <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" />.
           </p>
         </statement>
         <solution>
           <p>
-            We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at <m>0</m> we can't do so right away. The trick here is to shift the initial conditions <em>back</em> to <m>0</m> as follows. First, we define a new function <m>\widetilde{y}</m> by
+            By <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> we know that
+            <me>\Laplace{f'(t)} = sF(s)-f(0)</me>.
+            We can apply <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> to <m>f^\prime(t)</m> as well, since it must also be piecewise smooth:
+            <md>
+              <mrow>\Laplace{f''(t)} \amp= s\Laplace{f^\prime(t)} - f^\prime(0)</mrow>
+              <mrow>\amp= s(sF(s)-f(0)) - f^\prime(0)</mrow>
+              <mrow>\amp= s^{2}F(s) - sf(0) - f^\prime(0)</mrow>
+            </md>.
+          </p>
+          <p>
+            This process can be continued indefinitely.
+            In general,
+            <me>\Laplace{f^{(n)}(t)} = s^{n}F(s) - s^{n-1}f(0) - s^{n-2}f^\prime(0) - \cdots -sf^{(n-2)}(0) - f^{(n-1)}(0)</me>.
+            This gives us everything we need to start solving ODEs using Laplace transforms.
+          </p>
+        </solution>
+      </example>
+      <p>
+        As seen in <xref ref="example-laplace-transform-of-a-second-derivative" text="type-global" />, the order of a differential equation in the time domain corresponds to a polynomial of matching degree in the frequency domain.
+        Hence, we are transforming a calculus problem into an algebraic one.
+        We will demonstrate the Laplace transform method with an example.
+      </p>
+      <example xml:id="example-solving-ivps-with-laplace-transforms">
+        <title>Solving a second-order IVP</title>
+        <statement>
+          <p>
+            Solve the IVP
+            <me>x''+8x^\prime+15x = 0 \qq{} x(0) = 2, x^\prime(0) = -3</me>
+            where <m>x</m> is a function of <m>t</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We will solve this by using Laplace transforms.
+            If we set <m>X(s) = \Laplace{x(t)}</m>, then
+            <md>
+              <mrow>\Laplace{x'(t)} \amp= sX(s) - 2</mrow>
+              <mrow>\Laplace{x''(t)} \amp= s^{2}X(s) - 2s +3</mrow>
+            </md>.
+            So if we take the Laplace transform of the entire ODE, we get
+            <me>\underbrace{s^{2}X(s) - 2s + 3}_{\Laplace{x''}} + \underbrace{8sX(s) - 16}_{\Laplace{8x'}} + 15X(s) = 0</me>
+            which simplifies to
+            <me>s^{2}X(s)+8sX(s)+15X(s) = 2s+13</me>,
+            and so
+            <me>X(s) = \frac{2s+13}{s^2+8s+15}</me>.
+          </p>
+          <p>
+            To solve the ODE we need to find <m>x(t) = \mathcal{L}^{-1}\{X(s)\}</m>.
+            Now, <m>X(s)</m> doesn't look like the Laplace transform of anything we know at the moment, but we can simplify the right hand side using partial fractions.
+            If we do so, we get
+            <me>X(s) = \frac{\frac{7}{2}}{s+3} - \frac{\frac{3}{2}}{s+5}</me>.
+            Therefore,
+            <md>
+              <mrow>x(t) \amp= \frac{7}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} - \frac{3}{2}\mathcal{L}^{-1}\left\{\frac{1}{s+5}\right\}</mrow>
+              <mrow>\amp= \frac{7}{2}e^{-3t} - \frac{3}{2}e^{-5t}</mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Note that we could have solved the ODE in <xref ref="example-solving-ivps-with-laplace-transforms" text="type-global" /> without resorting to Laplace transforms by using characteristic equations.
+        However, the Laplace transform method did make dealing with the initial conditions more straightforward.
+        Furthermore, the method remains the same even if applied to a linear nonhomogeneous IVP.
+      </p>
+      <example xml:id="example-nonhomogeneous-ivps-with-laplace-transforms">
+        <title>Nonhomogeneous IVPs with Laplace Transforms</title>
+        <statement>
+          <p>
+            Solve the IVP given by
+            <me>y''+9y = 10e^{-t},\quad y(0) = y^\prime(0) = 0</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We begin by taking the Laplace transform of both sides to get
+            <me>s^{2}Y(s) - sy(0) - y^\prime(0) + 9Y(s) = \frac{10}{s+1}</me>
+            or just
+            <me>s^{2}Y(s) + 9Y(s) = \frac{10}{s+1}</me>.
+            So
+            <me>Y(s) = \frac{10}{(s+1)(s^{2}+9)}</me>.
+          </p>
+          <p>
+            Now we use partial fractions to help us find <m>\iLaplace{Y(s)}</m>.
+            In particular,
+            <me>Y(s) = \frac{1-s}{s^{2}+9} + \frac{1}{s+1} = \frac{1}{s^{2}+9} - \frac{s}{s^{2}+9} + \frac{1}{s+1},</me>
+            so the solution of the ODE is
+            <md>
+              <mrow>y(t) \amp = \iLaplace{Y(s)}</mrow>
+              <mrow>\amp= \frac{1}{3}\sin3t -\cos3t + e^{-t}</mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <sage>
+        <input>
+          Y(s) = 10/((s+1) * (s^2+9))
+          show(Y(s).partial_fraction())
+        </input>
+      </sage>
+      <p>
+        One restriction of the Laplace transform approach as we've developed it is that it requires initial conditions at <m>t=0</m>.
+        If initial conditions are instead given at some other <m>t=t_0</m>, then we need to adjust our approach in order to continue to use <xref ref="theorem-laplace-transforms-of-derivatives" text="type-global" /> and its counterpart for second derivatives.
+        We'll demonstrate this by example.
+      </p>
+      <example xml:id="example-solving-an-ivp-with-shifted-initial-conditions">
+        <title>Solving an IVP with Shifted Initial Conditions</title>
+        <statement>
+          <p>
+            Solve the IVP given by
+            <me>y'' - 2y^\prime - 3y = 0\text{ where }y(4) = -3, y^\prime(4) = -17</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We would like to take the Laplace transform of both sides of this ODE, but since the initial conditions are not specified at <m>0</m> we can't do so right away.
+            The trick here is to shift the initial conditions <em>back</em> to <m>0</m> as follows.
+            First, we define a new function <m>\widetilde{y}</m> by
             <me>\widetilde{y}(t) = y(t+4)</me>
-            where <m>y(t)</m> is the solution we seek. Then it follows that
+            where <m>y(t)</m> is the solution we seek.
+            Then it follows that
             <me>\widetilde{y}'' - 2\widetilde{y}^\prime - 3\widetilde{y} = 0</me>
             and <m>\widetilde{y}(0) = y(4) = -3</m> and <m>\widetilde{y}^\prime(0) = y^\prime(4) = -17</m>.
             So the Laplace transform method applies to solving for <m>\widetilde{y}</m> in this modified IVP.
@@ -506,9 +545,9 @@
           <p>
             Now that we can take the Laplace transform of both sides of the modified IVP, we do so and obtain the Laplace transform <m>\widetilde{Y}(s)</m> of <m>\widetilde{y}(t)</m>.
             Using our initial conditions and a bit of algebra, we get
-            <me>\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}.</me>
+            <me>\widetilde{Y}(s) = \frac{-3s-11}{s^2-2s-3}</me>.
             At this point we can take the inverse Laplace transform (either using partial fractions or using technology) to get
-            <me>\widetilde{y}(t) = -5e^{3t} + 2e^{-t}.</me>
+            <me>\widetilde{y}(t) = -5e^{3t} + 2e^{-t}</me>.
           </p>
           <p>
             The final step is to convert our answer from <m>\widetilde{y}</m> to <m>y</m> by making the substitution <m>t\mapsto t-4</m> in <m>\widetilde{y}</m>.
@@ -517,33 +556,34 @@
             as the solution of our IVP.
           </p>
         </solution>
-    </example>
-    <sage>
-      <input>
-        var('s,t')
+      </example>
+      <sage>
+        <input>
+          var('s,t')
 
-        # modified Laplace transform from above example
-        Y(s) = (-3*s-11)/(s^2 - 2*s - 3)
+          # modified Laplace transform from above example
+          Y(s) = (-3*s-11)/(s^2 - 2*s - 3)
 
-        # solution of modified ODE
-        f(t) = inverse_laplace(Y(s), s, t)
+          # solution of modified ODE
+          f(t) = inverse_laplace(Y(s), s, t)
 
-        # translate to solution of original ODE
-        show(f(t-4))
-      </input>
-    </sage>
+          # translate to solution of original ODE
+          show(f(t-4))
+        </input>
+      </sage>
+    </subsection>
   </section>
   <section xml:id="section-unit-step-functions-and-time-shifting">
     <title>Unit Step Functions and Time Shifting</title>
     <p>
       The <term>unit step function</term> or <term>Heaviside function</term> is the function <m>u(t)</m> defined by
       <me>
-        u(t) = \begin{cases}
-        0, \amp\text{ if }t\lt 0\\
-        1 \amp\text{ if } t\geq0
-        \end{cases}.
-      </me>
-      Note also that
+      u(t) = \begin{cases}
+      0, \amp\text{ if }t\lt 0\\
+      1 \amp\text{ if } t\geq0
+      \end{cases}.
+    </me>
+    Note also that
       <me>
         u(t-a) = \begin{cases}
         0 \amp\text{ if }t\lt a\\
@@ -554,7 +594,7 @@
     </p>
     <p>
       Recall that <xref ref="theorem--s--shifting" text="type-global" /> tells us how to deal with translation in the frequency domain:
-      <me>\Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t).</me>
+      <me>\Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t)</me>.
       A similar result is true for <m>t</m>-shifting.
     </p>
     <theorem xml:id="theorem-time-shifting-of-laplace-transforms">
@@ -608,11 +648,11 @@
             \end{cases}
           </me>
           the motion of the mass satisfies the IVP
-          <me>x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0.</me>
+          <me>x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0</me>.
           We can rewrite <m>F_{E}(t)</m> as follows:
-          <me>F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t.</me>
+          <me>F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t</me>.
           So the IVP we need to solve is
-          <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0.</me>
+          <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0</me>.
         </p>
         <p>
           If we take Laplace transforms, this becomes
@@ -625,11 +665,11 @@
             <mrow>&amp;= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</mrow>
           </md>.
           So
-          <me>s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}.</me>
+          <me>s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</me>.
           If we solve this for <m>X(s)</m>, we get
           <me>X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},</me>
           and if we simplify this using partial fractions this becomes
-          <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}.</me>
+          <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}</me>.
         </p>
         <p>
           So the solution of the IVP is
@@ -674,7 +714,7 @@
       <p>
         To be specific, let <m>f(t)</m> be a force that acts only from <m>t=a</m> to <m>t=b</m> (and is otherwise <m>0</m>).
         Then the <term>impulse</term> of the force <m>f(t)</m> over the interval <m>[a,b]</m> is given by
-        <me>p = \int_{a}^{b}f(t)\dd{t}.</me>
+        <me>p = \int_{a}^{b}f(t)\dd{t}</me>.
         We view the impulse as essentially describing how the force acts over a short time interval, so we can switch from modeling instantaneous forces to instantaneous impulses.
         And since the impulse is a number, all we really need to do is model an instantaneous <em>unit impulse</em>; any other impulse we can get by multiplication by a constant.
       </p>
@@ -683,7 +723,7 @@
         In other words, we want to find a function <m>d(t)</m> such that
         <me>\int_{0}^{0}d(t)\,dt = 1</me>
         But this is impossible for any function, since
-        <me>\int_{0}^{0}d(t)\dd{t} = 0.</me>
+        <me>\int_{0}^{0}d(t)\dd{t} = 0</me>.
         However, we can approximate the <em>idea</em> of an instantaneous unit impulse by defining
         <me>
           d_{\varepsilon}(t) = 
@@ -749,7 +789,7 @@
         <statement>
           <p>
             The <term>Dirac delta function</term>, denoted by the symbol <m>\delta(t)</m>, is <q>defined</q> by the equation
-            <me>\delta(t) = \limit{\varepsilon}{0}d_{\varepsilon}(t).</me>
+            <me>\delta(t) = \limit{\varepsilon}{0}d_{\varepsilon}(t)</me>.
           </p>
         </statement>
       </definition>
@@ -866,11 +906,11 @@
             where <m>f(t)</m> is the external force.
             Since the hammer strikes quickly, we can model it as an instantaneous force of the form <m>c\delta(t)</m>. And since it provides an impulse of <m>3</m>, we can pick <m>f(t) = 3\delta(t)</m>.
             As the mass is initially at rest, <m>x</m> satisfies the IVP
-            <me>x''+9x = 3\delta(t)\qq{where}x(0) = x^{\prime}(0) = 0.</me>
+            <me>x''+9x = 3\delta(t)\qq{where}x(0) = x^{\prime}(0) = 0</me>.
             To solve this, we take the Laplace transform of the IVP to get
             <me>s^{2}X(s)+9X(s) = 3</me>
             or just
-            <me>X(s) = \frac{3}{s^{2}+9}.</me>
+            <me>X(s) = \frac{3}{s^{2}+9}</me>.
             So <m>x(t) = \sin3t</m>.
           </p>
         </solution>
@@ -891,7 +931,7 @@
         <solution>
           <p>
             This time, the IVP we must solve is
-            <me>x''+9x = 3\delta(t-4)\qq{where}x(0)=x^{\prime}(0)=0.</me>
+            <me>x''+9x = 3\delta(t-4)\qq{where}x(0)=x^{\prime}(0)=0</me>.
             If we take Laplace transforms and solve for <m>X(s)</m> we get
             <me>X(s) = \frac{3e^{-4s}}{s^{2}+9}</me>
             and so
@@ -987,7 +1027,7 @@
     <p>
       The Dirac delta function is also important mathematically in determining the behavior of certain systems.
       For example, consider the system determined by the IVP
-      <me>x'' + 9x = f(t)\text{ where }x(0) = x^{\prime}(0) = 0.</me>
+      <me>x'' + 9x = f(t)\text{ where }x(0) = x^{\prime}(0) = 0</me>.
       We can imagine that the ODE is a mathematical <q>machine</q> that converts the input <m>f(t)</m> into an output, or response, <m>x(t)</m>.
       Using Laplace transforms it's not difficult to determine <m>X(s)</m>:
       <me>X(s) = \frac{1}{s^2 + 9}F(s)</me>.
@@ -1009,11 +1049,11 @@
     <title>Convolution Products</title>
     <p>
       Consider the function <m>F(s)</m> in the frequency domain <m>s</m> defined by
-      <me>F(s) = \frac{1}{s(s^{2}+4)}.</me>
+      <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
       This does not match a Laplace transform on our table.
       If we wanted to find the inverse transform <m>f(t)</m>, we would have to use partial fractions to find it.
       However, <m>F(s)</m> is easily seen to be the <em>product</em> of two recognizable transforms:
-      <me>F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}.</me>
+      <me>F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}</me>.
       What we would like to do is find a way to determine inverse transforms of products of transforms.
       To do this, we need to define the <em>convolution</em> of two functions.
     </p>
@@ -1024,7 +1064,7 @@
         <p>
           Let <m>f</m> and <m>g</m> be piecewise continuous functions.
           The <term>convolution</term> of <m>f</m> and <m>g</m>, denoted by <m>(f\ast g)(t)</m>, <m>f(t)\ast g(t)</m> or just <m>f\ast g</m>, is defined for <m>t\geq0</m> by
-          <me>(f\ast g)(t) = \int_{0}^{t} f(\tau)g(t-\tau)\,d\tau.</me>
+          <me>(f\ast g)(t) = \int_{0}^{t} f(\tau)g(t-\tau)\,d\tau</me>.
           The variable <m>\tau</m> is a dummy variable.
         </p>
       </statement>
@@ -1084,7 +1124,7 @@
       <statement>
         <p>
           Let
-          <me>F(s) = \frac{1}{s(s^{2}+4)}.</me>
+          <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
           Find <m>f(t) = \iLaplace{F(s)}</m>.
         </p>
       </statement>
