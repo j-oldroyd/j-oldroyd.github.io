@@ -574,134 +574,200 @@
     </subsection>
   </section>
   <section xml:id="section-unit-step-functions-and-time-shifting">
-    <title>Unit Step Functions and Time Shifting</title>
-    <p>
-      The <term>unit step function</term> or <term>Heaviside function</term> is the function <m>u(t)</m> defined by
-      <me>
-      u(t) = \begin{cases}
-      0, \amp\text{ if }t\lt 0\\
-      1 \amp\text{ if } t\geq0
-      \end{cases}.
-    </me>
-    Note also that
-      <me>
-        u(t-a) = \begin{cases}
-        0 \amp\text{ if }t\lt a\\
-        1 \amp\text{ if } t\geq a
-        \end{cases}
-      </me>
-      for any <m>a</m>.
-    </p>
-    <p>
-      Recall that <xref ref="theorem--s--shifting" text="type-global" /> tells us how to deal with translation in the frequency domain:
-      <me>\Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t)</me>.
-      A similar result is true for <m>t</m>-shifting.
-    </p>
-    <theorem xml:id="theorem-time-shifting-of-laplace-transforms">
-      <title>Time Shifting of Laplace Transforms</title>
-      <statement>
-        <p>
-          Let <m>f(t)</m> denote a piecewise continuous function with Laplace transform <m>F(s)</m>.
-          Let <m>a\geq0</m>.
-          Then <m>\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)</m>, or equivalently <m>\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)</m>.
-        </p>
-      </statement>
-      <proof>
-        <p>
-          To compute this we need to rely on the definition of the Laplace transform:
-          <md>
-            <mrow>\Laplace{u(t-a)f(t-a)} &amp;= \int_{0}^{\infty}u(t-a)f(t-a)e^{-st}\,dt</mrow>
-            <mrow>&amp;= \int_{a}^{\infty}f(t-a)e^{-st}\,dt</mrow>
-            <mrow>&amp;= \int_{0}^{\infty}f(\tau)e^{-s(\tau+a)}\,d\tau</mrow>
-            <mrow>&amp;= e^{-sa}\int_{0}^{\infty}f(\tau)e^{-s\tau}\,d\tau</mrow>
-            <mrow>&amp;= e^{-as}F(s)</mrow>
-          </md>.
-        </p>
-      </proof>
-    </theorem>
-    <p>
-      The Heaviside function is useful for describing forces that turn on or off at specified times.
-      In particular, we can now solve the IVP given at the start of this chapter in <xref ref="example-motivating-laplace" text="type-global" />.
-    </p>
-    <example xml:id="example-ivp-with-discontinuous-forcing-function">
-      <title>IVP with Discontinuous Forcing Function</title>
-      <statement>
-        <p>
-          A mass of <quantity><mag>1</mag><unit base="kilogram"/></quantity> is attached to a spring that is held <quantity><mag>1</mag><unit base="meter"/></quantity> to the right of its equilibrium position by a force of <quantity><mag>4</mag><unit base="newton"/></quantity>.
-          Beginning at time <m>t=0</m>, a machine is turned on and applies an external force of <m>\cos2t</m> to the mass.
-          At time <m>t=2\pi</m> the machine is turned off and the external force disappears.
-          Let <m>x(t)</m> be the displacement of the mass at time <m>t</m>.
-          What is an ODE that models the motion of the mass?
-        </p>
-      </statement>
-      <solution>
-        <p>
-          By Hooke's Law and Newton's Second Law, we have
-          <me>mx''+kx = F_{E}(t)</me>
-          where <m>F_{E}</m> is the external force at time <m>t</m>.
-          Since <m>m = 1</m>, <m>k = 4</m> and
-          <me>
-            F_{E}(t) = 
-            \begin{cases}
-            \cos3t \amp\text{if }0\leq t\lt 2\pi\\
-            0 \amp\text{if }t\geq2\pi  
-            \end{cases}
-          </me>
-          the motion of the mass satisfies the IVP
-          <me>x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0</me>.
-          We can rewrite <m>F_{E}(t)</m> as follows:
-          <me>F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t</me>.
-          So the IVP we need to solve is
-          <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0</me>.
-        </p>
-        <p>
-          If we take Laplace transforms, this becomes
-          <me>s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},</me>
-          where
-          <md>
-            <mrow>\Laplace{F_{E}(t)} &amp;= \Laplace{u(t)\cos3t} - \Laplace{u(t-2\pi)\cos3t}</mrow>
-            <mrow>&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi)+6\pi)}</mrow>
-            <mrow>&amp;= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi))}</mrow>
-            <mrow>&amp;= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</mrow>
-          </md>.
-          So
-          <me>s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</me>.
-          If we solve this for <m>X(s)</m>, we get
-          <me>X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},</me>
-          and if we simplify this using partial fractions this becomes
-          <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}</me>.
-        </p>
-        <p>
-          So the solution of the IVP is
-          <md>
-            <mrow>x(t) &amp;= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}}</mrow>
-            <mrow>&amp;= \cos2t + \frac{1}{5}\left(\cos2t-\cos3t\right) - \frac{1}{5}\left(u(t-2\pi)\cos[2(t-2\pi)] - u(t-2\pi)\cos[3(t-2\pi)]\right)</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <xref ref="example-ivp-with-discontinuous-forcing-function" text="type-global" /> are perhaps better left to computer systems.
-      The code cell below demonstrates how Sage can compute such a transform.
-      <alert>Be careful to place matching brackets and parentheses as appropriate</alert> when using the <c>piecewise</c> command in Sage to construct a piecewise function.
-    </p>
-    <sage>
-      <input>
-        # declare meaningful variables for Laplace transform
-        var('s t')
+    <title>Unit Step Functions and <m>t</m>-Shifting</title>
+    <shorttitle><m>t</m>-shifting</shorttitle>
+    <introduction>
+      <p>
+        Recall that <xref ref="theorem--s--shifting" text="type-global" /> tells us how to deal with translation in the frequency domain:
+        <me>\Laplace{e^{at}f(t)} = F(s-a) \quad\text{or}\quad\iLaplace{F(s-a)} = e^{at}f(t)</me>.
+        A similar result is true for <m>t</m>-shifting, but we must examine another function first.
+      </p>
+      <p>
+        The <term>unit step function</term> or <term>Heaviside function</term> is the function <m>u(t)</m> defined by
+        <me>u(t) = \begin{cases}0, \amp\text{ if }t\lt 0\\1 \amp\text{ if } t\geq0\end{cases}</me>.
+        Note also that
+        <me>u(t-a) = \begin{cases}0 \amp\text{ if }t\lt a\\1 \amp\text{ if } t\geq a\end{cases}</me>
+        for any <m>a</m>.
+        We examined the Laplace transform of a specific translate in <xref ref="example-the-unit-step-function" text="type-global" />, and the work done in that example can be used to prove the following general formula:
+        <me>\Laplace{u(t-a)} = \frac{e^{-as}}{s}</me>.
+        This is the only transform equation we have up to this point that involves translation in the time domain.
+        This suggests that expressions involving translations in the time domain might involve exponential terms in the frequency domain.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-time-shifting">
+      <title>Time Shifting</title>
+      <p>
+        Our general formula for dealing with translated functions in the time domain is the next theorem.
+      </p>
+      <theorem xml:id="theorem-time-shifting-of-laplace-transforms">
+        <title>Time Shifting of Laplace Transforms</title>
+        <idx><h>Laplace transform</h><h><m>t</m>-shifting</h></idx>
+        <statement>
+          <p>
+            Let <m>f(t)</m> denote a piecewise continuous function with Laplace transform <m>F(s)</m>.
+            Let <m>a\geq0</m>.
+            Then
+            <me>\Laplace{u(t-a)f(t-a)} = e^{-as}F(s)</me>,
+            or equivalently
+            <me>\iLaplace{e^{-as}F(s)} = u(t-a)f(t-a)</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            To compute this we need to rely on the definition of the Laplace transform:
+            <md>
+              <mrow>\Laplace{u(t-a)f(t-a)} \amp= \int_{0}^{\infty}u(t-a)f(t-a)e^{-st}\,dt</mrow>
+              <mrow>\amp= \int_{a}^{\infty}f(t-a)e^{-st}\,dt</mrow>
+              <mrow>\amp= \int_{0}^{\infty}f(\tau)e^{-s(\tau+a)}\,d\tau</mrow>
+              <mrow>\amp= e^{-sa}\int_{0}^{\infty}f(\tau)e^{-s\tau}\,d\tau</mrow>
+              <mrow>\amp= e^{-as}F(s)</mrow>
+            </md>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        <xref ref="theorem-time-shifting-of-laplace-transforms" text="type-global" /> allows us to take transforms of time-shifted functions and inverse transforms of expressions involving exponentials.
+        This will become particularly important once we introduce the Dirac delta function in <xref ref="section-dirac-delta-functions" text="type-global" />.
+      </p>
+      <example xml:id="example-computing-the-transform-of-a-time-shifted-function">
+        <title>Computing the transform of time-shifted functions</title>
+        <statement>
+          <p>
+            Compute Laplace transforms of the following functions:
+            <ol>
+              <li><m>f(t) = u(t-4)\sin(t-4).</m></li>
+              <li><m>g(t) = u(t-2)t^2.</m></li>
+            </ol>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We will use <xref ref="theorem-time-shifting-of-laplace-transforms" text="type-global" /> to compute both of these transforms.
+            The first transform is relatively easy to find once we recognize that <m>a = 4</m>, and so
+            <me>F(s) = e^{-4s}\Laplace{\sin(t)}=e^{-4s}\frac{1}{s^2+1}</me>.
+          </p>
+          <p>
+            The next transform requires a bit more care since <m>u(t-2)t^2</m> must fit the form <m>u(t-a)h(t-a)</m> before we can use <xref ref="theorem-time-shifting-of-laplace-transforms" text="type-global" />.
+            In particular, we need
+            <me>h(t-2) = t^2</me>
+            which means that <m>h(t) = (t+2)^2</m>.
+            Therefore
+            <md>
+              <mrow>G(s) \amp = \Laplace{u(t-2)h(t-2)} </mrow>
+              <mrow> \amp = e^{-2s}\Laplace{h(t)}</mrow>
+              <mrow> \amp = e^{-2s}\parens{\frac{2}{s^3} + \frac{4}{s^2} + \frac{4}{s}} </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-inverse-transform-involving-an-exponential">
+        <title>Inverse transform involving an exponential</title>
+        <statement>
+          <p>
+            Compute the inverse Laplace transform of
+            <me>G(s) = \frac{e^{-7s}}{s^2+2s+1}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The exponential term <m>e^{-7s}</m> tells us that our inverse transform should involve the unit step <m>u(t-7)</m>.
+            To find the rest of our inverse transform, we must identify <m>f(t) = \iLaplace{\frac{1}{s^2+2s+1}}</m>.
+            By factoring, we get
+            <me>\iLaplace{\frac{1}{s^2+2s+1}} = \iLaplace{\frac{1}{(s+1)^2}}</me>.
+            This involves frequency shifting and so we apply <xref ref="theorem--s--shifting" text="type-global" /> to compute the inverse transform:
+            <me>\iLaplace{\frac{1}{(s+1)^2}} = e^{-t}\iLaplace{\frac{1}{s^2}} = te^{-t}</me>.
+          </p>
+          <p>
+            Therefore,
+            <md>
+              <mrow>g(t) \amp = \iLaplace{G(s)} </mrow>
+              <mrow> \amp = u(t-7)f(t-7) </mrow>
+              <mrow> \amp = u(t-7)(t-7)e^{-(t-7)} </mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-transforms-of-piecewise-functions">
+      <title>Transforms of Piecewise Functions</title>
+      <p>
+        The Heaviside function is useful for describing forces that turn on or off at specified times.
+        In particular, we can now solve the IVP given at the start of this chapter in <xref ref="example-motivating-laplace" text="type-global" />.
+      </p>
+      <example xml:id="example-ivp-with-discontinuous-forcing-function">
+        <title>IVP with Discontinuous Forcing Function</title>
+        <statement>
+          <p>
+            A mass of <quantity><mag>1</mag><unit base="kilogram"/></quantity> is attached to a spring that is held <quantity><mag>1</mag><unit base="meter"/></quantity> to the right of its equilibrium position by a force of <quantity><mag>4</mag><unit base="newton"/></quantity>.
+            Beginning at time <m>t=0</m>, a machine is turned on and applies an external force of <m>\cos2t</m> to the mass.
+            At time <m>t=2\pi</m> the machine is turned off and the external force disappears.
+            Let <m>x(t)</m> be the displacement of the mass at time <m>t</m>.
+            What is an ODE that models the motion of the mass?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By Hooke's Law and Newton's Second Law, we have
+            <me>mx''+kx = F_{E}(t)</me>
+            where <m>F_{E}</m> is the external force at time <m>t</m>.
+            Since <m>m = 1</m>, <m>k = 4</m> and
+            <me>F_{E}(t) = \begin{cases}\cos3t \amp\text{if }0\leq t\lt 2\pi\\0 \amp\text{if }t\geq2\pi \end{cases}</me>
+            the motion of the mass satisfies the IVP
+            <me>x''+4x = F_{E}(t), x(0) = 1, x^\prime(0) = 0</me>.
+            We can rewrite <m>F_{E}(t)</m> as follows:
+            <me>F_{E}(t) = [u(t-0)-u(t-2\pi)]\cos3t = u(t)\cos3t - u(t-2\pi)\cos3t</me>.
+            So the IVP we need to solve is
+            <me>x''+4x = u(t)\cos3t - u(t-2\pi)\cos3t, x(0) = 1, x^\prime(0) = 0</me>.
+          </p>
+          <p>
+            If we take Laplace transforms, this becomes
+            <me>s^{2}X(s) - s + 4X(s) = \Laplace{F_{E}(t)},</me>
+            where
+            <md>
+              <mrow>\Laplace{F_{E}(t)} \amp= \Laplace{u(t)\cos3t} - \Laplace{u(t-2\pi)\cos3t}</mrow>
+              <mrow>\amp= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi)+6\pi)}</mrow>
+              <mrow>\amp= \frac{s}{s^{2}+9} - \Laplace{u(t-2\pi)\cos(3(t-2\pi))}</mrow>
+              <mrow>\amp= \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</mrow>
+            </md>.
+            So
+            <me>s^{2}X(s) - s + 4X(s) = \frac{s}{s^{2}+9} - e^{-2\pi s}\frac{s}{s^{2}+9}</me>.
+            If we solve this for <m>X(s)</m>, we get
+            <me>X(s) = \frac{s}{s^{2}+4} + \frac{s}{(s^{2}+9)(s^{2}+4)} - e^{-2\pi s}\frac{s}{(s^{2}+9)(s^{2}+4)},</me>
+            and if we simplify this using partial fractions this becomes
+            <me>X(s) = \frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}</me>.
+          </p>
+          <p>
+            So the solution of the IVP is
+            <md>
+              <mrow>x(t) \amp= \iLaplace{\frac{s}{s^{2}+4} + \frac{1}{5}\left[\frac{s}{s^{2}+4} - \frac{s}{s^{2}+9}\right]\parens{1-e^{-2\pi s}}}</mrow>
+              <mrow>\amp= \cos2t + \frac{1}{5}\left(\cos2t-\cos3t\right) - \frac{1}{5}\left(u(t-2\pi)\cos[2(t-2\pi)] - u(t-2\pi)\cos[3(t-2\pi)]\right)</mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Although it's important to know how to deal with Laplace transforms of basic functions by hand, if only to understand the behavior of the transform itself in solving differential equations, computing transforms of more complicated functions or piecewise functions like the function in <xref ref="example-ivp-with-discontinuous-forcing-function" text="type-global" /> are perhaps better left to computer systems.
+        The code cell below demonstrates how Sage can compute such a transform.
+        <alert>Be careful to place matching brackets and parentheses as appropriate</alert> when using the <c>piecewise</c> command in Sage to construct a piecewise function.
+      </p>
+      <sage>
+        <input>
+          # declare meaningful variables for Laplace transform
+          var('s t')
 
-        # define piecewise function using piecewise()
-        # piecewise() command uses a list of cases separated by commas to construct its function
-        # add more cases if needed
-        case1 = ((0, 2*pi), cos(3*t))
-        case2 = ((2*pi, oo), 0)
-        F_E = piecewise([case1, case2])
+          # define piecewise function using piecewise()
+          # piecewise() command uses a list of cases separated by commas to construct its function
+          # add more cases if needed
+          case1 = ((0, 2*pi), cos(3*t))
+          case2 = ((2*pi, oo), 0)
+          F_E = piecewise([case1, case2])
 
-        # now we can compute the Laplace transform using the .laplace() method
-        # the arguments (t,s) tell Sage to change from t to s after computing the transform
-        F_E.laplace(t,s)
-      </input>
-    </sage>
+          # now we can compute the Laplace transform using the .laplace() method
+          # the arguments (t,s) tell Sage to change from t to s after computing the transform
+          F_E.laplace(t,s)
+        </input>
+      </sage>
+    </subsection>
   </section>
   <section xml:id="section-dirac-delta-functions">
     <title>Dirac Delta Functions</title>
