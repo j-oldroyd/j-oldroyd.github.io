@@ -42,11 +42,11 @@
           xtick={-3.14159, 3.14159},
           xticklabels={$-\pi$, $\pi$},
           ytick={-1, 1},
-          legend style={at={(axis cs:1,-1)}, anchor={west}}]
-          \addplot[thick, smooth, blue]{sin(deg(x))};
+          legend style={at={(0.5,-0.2)}, anchor={north},legend columns=-1},]
+          \addplot+[myplot,-]{sin(deg(x))};
           \addlegendentry{$\sin \theta$};
 
-          \addplot[thick, red, smooth]{x};
+          \addplot+[myplot,-]{x};
           \addlegendentry{$\theta$};
           \end{axis}
           \end{tikzpicture}
@@ -99,10 +99,10 @@
           <m>f^{\prime}(0) = h^{\prime}(0)</m>
         </li>
         <li>
-          <m>f''(0)</m>
+          <m>f''(0) = h''(0)</m>
         </li>
         <li>
-          <m>f'''(0) = g'''(0)</m>
+          <m>f'''(0) = h'''(0)</m>
         </li>
       </ul>
     </p>
@@ -138,14 +138,14 @@
           xtick={-3.14159, 3.14159},
           xticklabels={$-\pi$, $\pi$},
           ytick={-1, 1},
-          legend style={at={(axis cs:1,-1)}, anchor={west}}]
-          \addplot[thick, smooth, blue]{sin(deg(x))};
+          legend style={at={(0.5,-0.2)}, anchor={north},legend columns=-1},]
+          \addplot+[myplot,-]{sin(deg(x))};
           \addlegendentry{$\sin \theta$};
 
-          \addplot[thick, red, smooth]{x};
+          \addplot+[myplot,-]{x};
           \addlegendentry{$\theta$};
 
-          \addplot[thick,teal,smooth]{x - (x^3)/6};
+          \addplot+[myplot,-]{x - (x^3)/6};
           \addlegendentry{$\theta - \frac{1}{6}\theta^{3}$};
           \end{axis}
           \end{tikzpicture}
@@ -1838,9 +1838,198 @@
   <section xml:id="section-taylor-and-maclaurin-series">
     <title>Taylor and Maclaurin Series</title>
     <shorttitle>Taylor Series</shorttitle>
-    <p>
-      In <xref ref="section-representing-functions-as-power-series" text="type-global" /> we found how to obtain power series using the geometric series.
-      What we'll do in this section is determine how to find more general power series.
+    <introduction>
+      <p>
+        In <xref ref="section-representing-functions-as-power-series" text="type-global" /> we found how to obtain power series using the geometric series.
+        In this section we will determine how to find more general power series by means of <em>Taylor polynomials</em> and <em>Taylor series</em>.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-taylor-polynomials">
+      <title>Taylor Polynomials</title>
+      <p>
+        Suppose that we are given a function <m>f(x)</m> that we want to approximate with a polynomial of degree <m>n</m>, say <m>T_{n}(x)</m>, centered at some point <m>a</m>.
+        If <m>f(x)</m> is differentiable, then a natural condition to put on our polynomial approximation is for the derivatives to match up to the <m>n</m>th-order derivative:
+        <me>f^{(k)}(x) = T^{(k)}_{n}(x)\text{ for }0\leq k\leq n</me>.
+      </p>
+      <aside>
+        <p>
+          This process of finding a polynomial that best approximates a function near a given point generalizes the concept of a linear approximation introduced in <xref ref="section-linear-approximations" text="type-global" />.
+        </p>
+      </aside>
+      <p>
+        If we write
+        <me>T_n(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots + c_n(x-a)^n</me>,
+        then we want to choose the coefficients <m>c_k</m> in order to make the following system of equations true:
+        <md>
+          <mrow>f(a) \amp = T_n(a) \amp = c_0 </mrow>
+          <mrow>f^\prime(a) \amp = T_n^\prime(a) \amp = c_1 </mrow>
+          <mrow>f''(a) \amp = T_n''(a) \amp = 2c_2 </mrow>
+          <mrow> \amp \vdots \amp </mrow>
+          <mrow>f^{(n)}(a) \amp = T_n^{(n)}(a) \amp = n!c_n </mrow>
+        </md>.
+        In other words, the coefficients of our polynomial must be given by
+        <me>c_k = \frac{f^{(k)}(a)}{k!}</me>
+        for <m>k = 0, 1, \ldots, n</m> if we want the corresponding derivatives to match.
+        This gives us the <em>Taylor polynomial of order <m>n</m></em>.
+      </p>
+      <definition xml:id="definition-taylor-polynomial-of-order-n-">
+        <title>Taylor Polynomial of Order <m>n</m></title>
+        <idx>Taylor polynomial of order <m>n</m></idx>
+        <notation>
+          <usage><m>T_n(x)</m></usage>
+          <description>Taylor polynomial of order <m>n</m></description>
+        </notation>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function that is <m>n</m>-times differentiable at <m>x=a</m> (so that <m>f(a), f^\prime(a),\ldots,f^{(n)}(a)</m> all exist).
+            The corresponding <term>Taylor polynomial of order <m>n</m></term> centered at <m>x=a</m> is given by
+            <me>T_n(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k</me>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Taylor polynomials are typically very good approximations to a given differentiable function near their center.
+        However, the approximation usually gets worse as <m>x</m> gets farther away from the center.
+      </p>
+      <example xml:id="example-taylor-polynomial-of-e-x-">
+        <title>Taylor polynomial of <m>e^x</m></title>
+        <statement>
+          <p>
+            Compute <m>T_3(x)</m> for <m>f(x)=e^x</m> centered at <m>0</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Using <xref ref="definition-taylor-polynomial-of-order-n-" text="type-global" />, we need to find
+            <me>T_3(x) = \sum_{k=0}^3\frac{f^{(k)}(0)}{k!}x^k</me>.
+            This is straightforward to find since <m>f^{(k)}(0) = 1</m> for all <m>k</m>, and so
+            <me>T_3(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}</me>.
+          </p>
+          <p>
+            The figure below compares <m>f(x)</m> with its Taylor polynomials of order <m>0,1,2</m> and <m>3</m>.
+            As expected, the Taylor polynomials of higher order produce a better approximation to <m>e^x</m>, at least near <m>0</m>.
+          </p>
+          <figure xml:id="figure-taylor-polynomials-e-x">
+            <caption>Taylor polynomials of <m>e^x</m></caption>
+            <image xml:id="image-taylor-polynomials-e-x" width="50%">
+              <latex-image xml:id="latex-image-taylor-polynomials-e-x">
+                \begin{tikzpicture}
+                \begin{axis}[
+                myaxis,
+                xmin=-2,xmax=2,
+                ymin=-1,ymax=4,
+                % legend style={at={(axis cs:1,-1)}, anchor={west}},
+                legend style={at={(0.5,-0.2)}, anchor={north},legend columns=-1},
+                ]
+                \addplot+[myplot,-,domain=-2:2]{exp(x)};
+                \addlegendentry{$e^x$}
+                \addplot+[myplot,-,domain=-2:2]{1};
+                \addlegendentry{$T_0(x)$};
+                \addplot+[myplot,-,domain=-2:2]{1+x};
+                \addlegendentry{$T_1(x)$};
+                \addplot+[myplot,-,domain=-2:2]{1+x+x^2/2};
+                \addlegendentry{$T_2(x)$};
+                \addplot+[myplot,-,domain=-2:2]{1+x+x^2/2+x^3/6};
+                \addlegendentry{$T_3(x)$};
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
+        </solution>
+      </example>
+      <p>
+        We will often choose the center of a Taylor polynomial to be <m>0</m>, but as mentioned above (and evidenced in <xref ref="figure-taylor-polynomials-e-x" text="type-global" />) the resulting polynomials become worse approximations as we move away from the center.
+        Therefore it is occasionally desirable to choose the center to be some other value, particularly if we are trying to compute an estimate of a function.
+      </p>
+      <example xml:id="example-using-a-taylor-polynomial-for-a-numerical-estimate">
+        <title>Using a Taylor polynomial for a numerical estimate</title>
+        <statement>
+          <p>
+            Estimate <m>\sqrt{9.02}</m> by setting up an appropriate Taylor polynomial.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We need to estimate <m>f(x) = \sqrt{x}</m> at <m>x=9.02</m>.
+            Therefore, we will use a Taylor polynomial of order <m>2</m> centered at <m>x=9</m>.
+          </p>
+          <p>
+            To find <m>T_2(x)</m> for this function, we need to choose our coefficients based on the derivatives.
+            Since
+            <md>
+              <mrow>f(9) \amp = 3 </mrow>
+              <mrow>f^\prime(9) \amp = \frac{1}{6} </mrow>
+              <mrow>f''(9) \amp = -\frac{1}{108} </mrow>
+            </md>,
+            it follows that our Taylor polynomial is
+            <me>T_2(x) = 3 + \frac{1}{6}(x-9) - \frac{1}{216}(x-9)^2</me>.
+          </p>
+          <p>
+            As shown in <xref ref="figure-taylor-polynomial-sqrt-x" text="type-global" /> below, this Taylor polynomial is a very good fit for the graph of <m>f(x)=\sqrt{x}</m> near <m>x=9</m>.
+            Therefore,
+            <me>\sqrt{9.02}\approx T_2(9.02) = 3 + \frac{.02}{6} - \frac{.0004}{216}</me>.
+            In fact, the approximation produced by this Taylor polynomial is within three <em>billionths</em> of the true value of <m>\sqrt{9.02}</m>.
+          </p>
+          <figure xml:id="figure-taylor-polynomial-sqrt-x">
+            <caption>Taylor polynomial of <m>\sqrt{x}</m></caption>
+            <image xml:id="image-taylor-polynomial-sqrt-x" width="50%">
+              <latex-image xml:id="latex-image-taylor-polynomial-sqrt-x">
+                \begin{tikzpicture}
+                \begin{axis}[
+                myaxis,
+                xmin=0,xmax=10,
+                ymin=-1,ymax=4,
+                % legend style={at={(axis cs:1,-1)}, anchor={west}},
+                legend style={at={(0.5,-0.2)}, anchor={north},legend columns=-1},
+                ]
+                \addplot+[myplot,-,domain=0:10]{sqrt(x)};
+                \addlegendentry{$\sqrt{x}$}
+                \addplot+[myplot,-,domain=0:10]{-1/216*(x - 9)^2 + 1/6*x + 3/2};
+                \addlegendentry{$T_2(x)$};
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
+        </solution>
+      </example>
+      <p>
+        Taylor polynomials are also sometimes useful for rewriting polynomials.
+        This is demonstrated in the next example.
+      </p>
+      <example xml:id="example-partial-fractions-with-taylor-polynomials">
+        <title>Partial fractions with Taylor polynomials</title>
+        <statement>
+          <p>
+            Find the partial fraction decomposition of
+            <me>G(s) = \frac{3s^2+2s+1}{(s-1)^3}</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The partial fraction decomposition of <m>G(s)</m> will take the form
+            <me>\frac{A}{s-1} + \frac{B}{(s-1)^2} + \frac{C}{(s-1)^3}</me>.
+            We could find this using the methods discussed in <xref ref="section-partial-fractions" text="type-global" />, but this would be tedious.
+            Instead, we'll use an appropriate Taylor polynomial to rewrite <m>3s^2+2s+1</m> as a polynomial centered at <m>s=1</m>.
+            In particular, we'll compute <m>T_2(s)</m> for the numerator.
+          </p>
+          <p>
+            Let <m>g(s) = 3s^2+2s+1</m>.
+            Then
+            <me>g(1) = 6, g^\prime(1)=8\text{ and }g''(1)=6</me>.
+            Therefore,
+            <me>g(s) = 6 + 8(s-1) + 3(s-1)^2</me>.
+          </p>
+          <p>
+            Now that we've expanded the numerator <m>g(s)</m> in terms of <m>(s-1)</m> it's straightforward to get our partial fraction decomposition.
+            We simply have
+            <me>G(s) = \frac{6}{(s-1)^3} + \frac{8}{(s-1)^2} + \frac{3}{(s-1)}</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+      <p>
       To start, suppose we can represent <m>f(x)</m> as a power series centered at some number <m>a</m>:
       <me>f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k} = c_{0} + c_{1}(x - a) + c_{2}(x - a)^{2} + c_{3}(x - a)^{3} + \cdots</me>
       Then this representation is valid on some interval <m>(a - R, a + R)</m>.
