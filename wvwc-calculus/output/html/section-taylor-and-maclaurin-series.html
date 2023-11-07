@@ -426,7 +426,10 @@ true);
 </li>
 <li class="toc-item toc-section active">
 <div class="toc-title-box"><a href="section-taylor-and-maclaurin-series.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Taylor Series</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-taylor-and-maclaurin-series.html#subsection-taylor-polynomials" class="internal"><span class="title">Taylor Polynomials</span></a></div></li></ul>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-taylor-and-maclaurin-series.html#subsection-taylor-polynomials" class="internal"><span class="title">Taylor Polynomials</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-taylor-and-maclaurin-series.html#subsection-taylors-theorem-taylor-series" class="internal"><span class="title">Taylor’s Theorem and Taylor Series</span></a></div></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -806,162 +809,101 @@ G(s) = \frac{6}{(s-1)^3} + \frac{8}{(s-1)^2} + \frac{3}{(s-1)}\text{.}
 \end{equation*}
 </div>
 </div>
-</div></details></div></article></section><div class="para logical" id="p-1090">
-<div class="para">To start, suppose we can represent <span class="process-math">\(f(x)\)</span> as a power series centered at some number <span class="process-math">\(a\text{:}\)</span>
-</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k} = c_{0} + c_{1}(x - a) + c_{2}(x - a)^{2} + c_{3}(x - a)^{3} + \cdots
-\end{equation*}
-</div>
-<div class="para">Then this representation is valid on some interval <span class="process-math">\((a - R, a + R)\text{.}\)</span> Our goal is to find what the coefficients <span class="process-math">\(c_{k}\)</span> are.</div>
-</div>
-<div class="para logical" id="p-1091">
-<div class="para">We’ll start with the first coefficient <span class="process-math">\(c_{0}\text{.}\)</span> We can find it very easily by setting <span class="process-math">\(x = a\)</span> to get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f(a) = c_{0}\text{.}
-\end{equation*}
-</div>
-<div class="para">So the first coefficient <em class="emphasis">must</em> be equal to <span class="process-math">\(f(a)\text{.}\)</span> Now we’ll try to find <span class="process-math">\(c_{1}\text{,}\)</span> which we can do by differentiating:</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f^\prime(x) = c_{1} + 2c_{2}(x - a) + 3c_{3}(x - a)^{2} + \cdots\text{,}
-\end{equation*}
-</div>
-<div class="para">which is still valid for <span class="process-math">\((a - R, a + R)\text{.}\)</span> Now set <span class="process-math">\(x = a\)</span> again to obtain</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f^\prime(a) = c_{1}\text{.}
-\end{equation*}
-</div>
-</div>
-<div class="para logical" id="p-1092">
-<div class="para">Now differentiate again to get</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f''(x) = 2a_{2} + 3\cdot2(x - a) + \cdots
-\end{equation*}
-</div>
-<div class="para">which gives</div>
-<div class="displaymath process-math">
-\begin{equation*}
-a_{2} = \frac{f''(a)}{2}\text{.}
-\end{equation*}
-</div>
-<div class="para">Similarly,</div>
-<div class="displaymath process-math">
-\begin{equation*}
-a_{3} = \frac{f'''(a)}{3!}\text{.}
-\end{equation*}
-</div>
-<div class="para">We can continue this process in general to get the following theorem.</div>
-</div>
-<article class="theorem theorem-like" id="theorem-taylor-s-formula"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.7.7</span><span class="period">.</span><span class="space"> </span><span class="title">Taylor’s Formula.</span>
+</div></details></div></article></section><section class="subsection" id="subsection-taylors-theorem-taylor-series"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Taylor’s Theorem and Taylor Series</span>
 </h3>
-<div class="para logical" id="p-1093">
-<div class="para">If <span class="process-math">\(f(x)\)</span> has a power series representation/expansion at <span class="process-math">\(a\)</span> with positive radius of convergence <span class="process-math">\(R\text{,}\)</span> then</div>
+<div class="para" id="p-1090">So far, we’ve seen that Taylor polynomials can provide good approximations to functions near their center. Furthermore, these approximations seem to improve as the order of the Taylor polynomial increases. It’s natural to ask if the approximation becomes exact as we let the order go to <span class="process-math">\(\infty\text{.}\)</span> Doing so transforms the Taylor polynomial into a <em class="emphasis">Taylor series</em>.</div>
+<article class="definition definition-like" id="definition-taylor-series"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">9.7.7</span><span class="period">.</span><span class="space"> </span><span class="title">Taylor Series.</span>
+</h4>  <div class="para logical" id="p-1091">
+<div class="para">Let <span class="process-math">\(f(x)\)</span> be a function that is infinitely differentiable at <span class="process-math">\(x=a\text{.}\)</span> The <dfn class="terminology">Taylor series</dfn> of <span class="process-math">\(f(x)\)</span> centered at <span class="process-math">\(x=a\)</span> is</div>
 <div class="displaymath process-math">
 \begin{equation*}
-f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k}
+\sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k\text{.}
 \end{equation*}
 </div>
-<div class="para">where</div>
-<div class="displaymath process-math">
+<div class="para">If <span class="process-math">\(a=0\text{,}\)</span> we often call the resulting series the <dfn class="terminology">Maclaurin series</dfn> of <span class="process-math">\(f(x)\text{.}\)</span>
+</div>
+</div></article><div class="para" id="p-1092">Note that if <span class="process-math">\(T_n(x)\)</span> is the order <span class="process-math">\(n\)</span> Taylor polynomial of some infinitely differentiable function <span class="process-math">\(f(x)\text{,}\)</span> then the Taylor series is given by <span class="process-math">\(\lim_{n\to\infty}T_n(x)\)</span> (assuming this limit exists).</div>
+<article class="example example-like" id="example-maclaurin-series-for-the-exponential"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.8</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin series for the exponential.</span>
+</h4>
+<div class="para" id="p-1093">Find the Maclaurin series for <span class="process-math">\(e^{x}\text{.}\)</span>
+</div>
+<div class="solutions"><details id="solution-212" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-1094">
+<div class="para">Let <span class="process-math">\(f(x) = e^x\text{.}\)</span> As mentioned in <a href="" class="xref" data-knowl="./knowl/xref/example-taylor-polynomial-of-e-x-.html" title="Example 9.7.2: Taylor polynomial of e^x">Example 9.7.2</a>, all of the derivatives of <span class="process-math">\(f\)</span> at <span class="process-math">\(0\)</span> are <span class="process-math">\(1\text{.}\)</span> Therefore the Maclaurin series is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-polynomial-of-e-x-.html">
 \begin{equation*}
-c_{k} = \frac{f^{(k)}(a)}{k!}\text{.}
+\sum_{k=0}^{\infty}\frac{1}{k!}x^k\text{.}
 \end{equation*}
 </div>
-<div class="para">This series is called the <dfn class="terminology">Taylor series</dfn> of <span class="process-math">\(f\)</span> about <span class="process-math">\(a\text{.}\)</span>
-</div>
-</div></article><div class="para" id="p-1094">A Taylor series about <span class="process-math">\(0\)</span> is also known as a <dfn class="terminology">Maclaurin series</dfn>.</div>
-<article class="example example-like" id="example-maclaurin-series-for-the-exponential"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.8</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin Series for the Exponential.</span>
-</h3>
-<div class="para" id="p-1095">Find the Maclaurin series for <span class="process-math">\(e^{x}\text{.}\)</span>
-</div>
-<div class="solutions"><details id="solution-212" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-1096">
-<div class="para">If we let <span class="process-math">\(f(x) = e^{x}\text{,}\)</span> then the Maclaurin series is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}
-\end{equation*}
-</div>
-<div class="para">where</div>
-<div class="displaymath process-math">
-\begin{equation*}
-f^{(k)}(0) = e^{0} = 1\text{.}
-\end{equation*}
-</div>
-<div class="para">So the Maclaurin series is</div>
-<div class="displaymath process-math">
-\begin{equation*}
-\sum_{k=0}^{\infty}\frac{1}{k!}x^{k} = 1 + x + \frac{1}{2}x^{2} + \frac{1}{3!}x^{3} + \cdots\text{.}
-\end{equation*}
-</div>
-</div></div></details></div></article><div class="para" id="p-1097">
-<a href="" class="xref" data-knowl="./knowl/xref/example-maclaurin-series-for-the-exponential.html" title="Example 9.7.8: Maclaurin Series for the Exponential">Example 9.7.8</a> gives us the Taylor series about <span class="process-math">\(0\)</span> for <span class="process-math">\(e^{x}\text{,}\)</span> but at the moment we don’t know if it actually equals <span class="process-math">\(e^{x}\text{.}\)</span> However, if we differentiate the series we get the same series back. In other words, the Taylor series of <span class="process-math">\(e^{x}\)</span> <em class="emphasis">is its own derivative</em>, which is a promising sign.</div>
-<article class="example example-like" id="example-taylor-series-from-the-exponential"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.9</span><span class="period">.</span><span class="space"> </span><span class="title">Taylor Series from the Exponential.</span>
-</h3>
-<div class="para" id="p-1098">Assuming that <span class="process-math">\(e^{x}\)</span> equals its Taylor series, find the Maclaurin series for <span class="process-math">\(e^{-x^{2}}\text{.}\)</span> Also, find the <span class="process-math">\(70^{\text{th}}\)</span> derivative of <span class="process-math">\(e^{-x^{2}}\)</span> at <span class="process-math">\(x = 0\text{.}\)</span>
+</div></div></details></div></article><div class="para" id="p-1095">
+<a href="" class="xref" data-knowl="./knowl/xref/example-maclaurin-series-for-the-exponential.html" title="Example 9.7.8: Maclaurin series for the exponential">Example 9.7.8</a> gives us the Taylor series about <span class="process-math">\(0\)</span> for <span class="process-math">\(e^{x}\text{,}\)</span> but at the moment we don’t know if it actually equals <span class="process-math">\(e^{x}\text{.}\)</span> However, if we differentiate the series we get the same series back. In other words, the Taylor series of <span class="process-math">\(e^{x}\)</span> <em class="emphasis">is its own derivative</em>, which is a promising sign.</div>
+<article class="example example-like" id="example-taylor-series-for-e-x-2"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.9</span><span class="period">.</span><span class="space"> </span><span class="title">Taylor series for <span class="process-math">\(e^{-x^2}\)</span>.</span>
+</h4>
+<div class="para" id="p-1096">Assuming that <span class="process-math">\(e^{x}\)</span> equals its Taylor series, find the Maclaurin series for <span class="process-math">\(e^{-x^{2}}\text{.}\)</span> Also, find the <span class="process-math">\(70^{\text{th}}\)</span> derivative of <span class="process-math">\(e^{-x^{2}}\)</span> at <span class="process-math">\(x = 0\text{.}\)</span>
 </div>
 <div class="solutions"><details id="solution-213" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
-<div class="para logical" id="p-1099">
-<div class="para">We could use <a href="" class="xref" data-knowl="./knowl/xref/theorem-taylor-s-formula.html" title="Theorem 9.7.7: Taylor’s Formula">Theorem 9.7.7</a> to find the Maclaurin series for <span class="process-math">\(e^{-x^{2}}\text{,}\)</span> but it’s far, far easier to use the series for <span class="process-math">\(e^{x}\text{:}\)</span>
+<div class="para logical" id="p-1097">
+<div class="para">We could use <a href="" class="xref" data-knowl="./knowl/xref/definition-taylor-series.html" title="Definition 9.7.7: Taylor Series">Definition 9.7.7</a> to find the Maclaurin series for <span class="process-math">\(e^{-x^{2}}\text{,}\)</span> but it’s far, far easier to use the series for <span class="process-math">\(e^{x}\text{:}\)</span>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-formula.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/definition-taylor-series.html">
 \begin{equation*}
 e^{-x^{2}} = \sum_{k=0}^{\infty}\frac{(-x^{2})^{k}}{k!} = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{2k}}{k!}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-1100">
-<div class="para">It turns out that this lets us find derivatives at <span class="process-math">\(0\)</span> incredibly quickly. If we let <span class="process-math">\(f(x) = e^{-x^{2}}\text{,}\)</span> then it follows that <span class="process-math">\(\frac{f^{(k)}(0)}{k!}\)</span> is the coefficient of <span class="process-math">\(x^{k}\)</span> in the power series for <span class="process-math">\(f(x)\text{.}\)</span> Therefore</div>
+</div> <div class="para logical" id="p-1098">
+<div class="para">It turns out that this also lets us find derivatives at <span class="process-math">\(0\)</span> incredibly quickly. If we let <span class="process-math">\(f(x) = e^{-x^{2}}\text{,}\)</span> then it follows that <span class="process-math">\(\frac{f^{(k)}(0)}{k!}\)</span> is the coefficient of <span class="process-math">\(x^{k}\)</span> in the power series for <span class="process-math">\(f(x)\text{.}\)</span> Therefore</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \frac{f^{(70)}(0)}{70!} = \frac{(-1)^{35}}{35!} \Rightarrow f^{(70)}(0) = -\frac{70!}{35!}\text{.}
 \end{equation*}
 </div>
 </div>
-</div></details></div></article><div class="para logical" id="p-1101">
-<div class="para">Showing that a function equals its power series requires the <dfn class="terminology">Lagrange remainder formula</dfn> for Taylor series, which states the following: if <span class="process-math">\(f(x)\)</span> is differentiable <span class="process-math">\(N+1\)</span> times on an interval containing <span class="process-math">\(a\text{,}\)</span> then for each <span class="process-math">\(x\)</span> in <span class="process-math">\(I\)</span> there exists <span class="process-math">\(z\)</span> in <span class="process-math">\(I\)</span> such that</div>
+</div></details></div></article><div class="para logical" id="p-1099">
+<div class="para">Not every function with a Taylor series can be represented by its Taylor series. The typical example of this poor behavior is the piecewise function</div>
 <div class="displaymath process-math">
 \begin{equation*}
-R_{N}(x) = f(x) - \sum_{k=0}^{N}\frac{f^{(k)}(a)}{k!}(x - a)^{k}
+f(x) = \begin{cases}e^{-1/x} \amp\text{ if }x\neq0 \\ 0 \amp\text{ if }x=0\end{cases}\text{.}
 \end{equation*}
 </div>
-<div class="para">is equal to</div>
+<div class="para">It can be shown that <span class="process-math">\(f^{(k)}(0) = 0\)</span> for all <span class="process-math">\(k\)</span> and so the Maclaurin series of <span class="process-math">\(f(x)\)</span> must be</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\frac{f^{(N+1)}(z)}{(N+1)!}(x - a)^{N+1}\text{.}
+0 + 0x + 0x^2 + \cdots = 0\text{.}
 \end{equation*}
 </div>
-<div class="para">A useful fact when using this is that</div>
+<div class="para">However, this series cannot equal <span class="process-math">\(f(x)\)</span> except at <span class="process-math">\(x = 0\text{.}\)</span>
+</div>
+</div>
+<div class="para" id="p-1100">If we want to use Taylor series, then we need to know exactly when a function is equal to its Taylor series. This can be determined with <em class="emphasis">Taylor’s Theorem</em>.</div>
+<article class="theorem theorem-like" id="theorem-taylor-s-theorem-lagrange"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.7.10</span><span class="period">.</span><span class="space"> </span><span class="title">Taylor’s Theorem (Lagrange’s form).</span>
+</h4>
+<div class="para logical" id="p-1101">
+<div class="para">Let <span class="process-math">\(f(x)\)</span> be a function that is <span class="process-math">\((n+1)\)</span>-times differentiable. Let <span class="process-math">\(T_n(x)\)</span> denote the corresponding Taylor polynomial of order <span class="process-math">\(n\)</span> centered at <span class="process-math">\(a\text{.}\)</span> Then there exists <span class="process-math">\(z\)</span> between <span class="process-math">\(a\)</span> and <span class="process-math">\(x\)</span> such that</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\frac{x^{N}}{N!}\to0
+f(x) = T_n(x) + \frac{f^{(k+1)}(z)}{(k+1)!}(x-a)^{k+1}\text{.}
 \end{equation*}
 </div>
-<div class="para">as <span class="process-math">\(N\to\infty\)</span> for all <span class="process-math">\(x\text{.}\)</span>
-</div>
-</div>
-<article class="example example-like" id="example-maclaurin-series-for-cosine"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.10</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin Series for Cosine.</span>
-</h3>
+</div></article><article class="example example-like" id="example-maclaurin-series-for-cosine"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.11</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin Series for Cosine.</span>
+</h4>
 <div class="para" id="p-1102">Find the Maclaurin series for <span class="process-math">\(\cos x\)</span> and show that <span class="process-math">\(\cos x\)</span> equals its Maclaurin series for all <span class="process-math">\(x\text{.}\)</span>
 </div>
 <div class="solutions"><details id="solution-214" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
 <div class="para logical" id="p-1103">
-<div class="para">Using <a href="" class="xref" data-knowl="./knowl/xref/theorem-taylor-s-formula.html" title="Theorem 9.7.7: Taylor’s Formula">Theorem 9.7.7</a>, the Taylor series for <span class="process-math">\(f(x) = \cos x\)</span> at <span class="process-math">\(a = 0\)</span> is given by</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-formula.html">
+<div class="para">Using <a href="" class="xref" data-knowl="./knowl/xref/definition-taylor-series.html" title="Definition 9.7.7: Taylor Series">Definition 9.7.7</a>, the Taylor series for <span class="process-math">\(f(x) = \cos x\)</span> at <span class="process-math">\(a = 0\)</span> is given by</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/definition-taylor-series.html">
 \begin{equation*}
 \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}\text{.}
 \end{equation*}
 </div>
 <div class="para">So to find this series we need to find the derivatives of cosine at <span class="process-math">\(0\text{:}\)</span>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-formula.html" id="md-135">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/definition-taylor-series.html" id="md-135">
 \begin{align*}
 f(0) \amp = 1 \\
 f^\prime(0) \amp = 0 \\
@@ -970,76 +912,77 @@ f^{(3)}(0) \amp = 0
 \end{align*}
 </div>
 <div class="para">and so on. So the Maclaurin series for <span class="process-math">\(\cos x\)</span> is given by</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-formula.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/definition-taylor-series.html">
 \begin{equation*}
 1 - \frac{1}{2!}x^{2} + \frac{1}{4!}x^{4} - \frac{1}{6!}x^{6} + \cdots\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-1104">
-<div class="para">To express this using sigma notation, note that this series has only even powers of <span class="process-math">\(x\text{.}\)</span> Hence the sum should look like <span class="process-math">\(\sum_{k=0}^{\infty}c_{k}x^{2k}\text{.}\)</span> Looking at the pattern of the coefficients here, we can rewrite this as</div>
-<div class="displaymath process-math">
+<div class="para">In sigma notation, this is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/definition-taylor-series.html">
 \begin{equation*}
 \sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k)!}x^{2k}\text{.}
 \end{equation*}
 </div>
-<div class="para">Using the ratio test, we can also show that this series converges for all <span class="process-math">\(x\text{.}\)</span> To show that this series actually equals <span class="process-math">\(\cos x\text{,}\)</span> we need to consider the remainder term</div>
-<div class="displaymath process-math">
+<div class="para">Using the ratio test, we can also show that this series converges for all <span class="process-math">\(x\text{.}\)</span>
+</div>
+</div> <div class="para logical" id="p-1104">
+<div class="para">To show that this series actually equals <span class="process-math">\(\cos x\text{,}\)</span> we need to consider the remainder term</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-theorem-lagrange.html">
 \begin{equation*}
 R_{N}(x) = \frac{f^{(N+1)}(z)}{(N+1)!}x^{N+1}\text{.}
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-1105">
-<div class="para">We don’t know what exactly <span class="process-math">\(z\)</span> is, except that it’s in some interval around <span class="process-math">\(0\text{.}\)</span> However, we do know that <span class="process-math">\(\|f^{(N+1)}(z)\|\leq 1\text{,}\)</span> which means that the remainder satisfies</div>
-<div class="displaymath process-math">
+<div class="para">from <a href="" class="xref" data-knowl="./knowl/xref/theorem-taylor-s-theorem-lagrange.html" title="Theorem 9.7.10: Taylor’s Theorem (Lagrange’s form)">Theorem 9.7.10</a> We don’t know what exactly <span class="process-math">\(z\)</span> is, except that it’s between <span class="process-math">\(0\)</span> and <span class="process-math">\(x\text{.}\)</span> However, we do know that <span class="process-math">\(\|f^{(N+1)}(z)\|\leq 1\text{,}\)</span> which means that the remainder satisfies</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-taylor-s-theorem-lagrange.html">
 \begin{equation*}
-\|R_{N}(x)\| \leq \frac{|x|^{N+1}}{(N+1)!}\to0\text{.}
+|R_{N}(x)| \leq \frac{|x|^{N+1}}{(N+1)!}\to0\text{.}
 \end{equation*}
 </div>
 <div class="para">Therefore <span class="process-math">\(\cos x\)</span> equals its Maclaurin series.</div>
 </div>
-</div></details></div></article><div class="para" id="p-1106">Now that we know how to express <span class="process-math">\(\cos x\)</span> as a power series, we can do the same for <span class="process-math">\(\sin x\text{.}\)</span>
+</div></details></div></article><div class="para" id="p-1105">Now that we know how to express <span class="process-math">\(\cos x\)</span> as a power series, we can do the same for <span class="process-math">\(\sin x\text{.}\)</span>
 </div>
-<article class="example example-like" id="example-maclaurin-series-for-sine"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.11</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin Series for Sine.</span>
-</h3>
-<div class="para" id="p-1107">Find the Maclaurin series for <span class="process-math">\(\sin x\text{.}\)</span>
-</div></article><div class="para" id="p-1108">Knowing a power series representation for a function makes calculus with that function extremely straightforward, at least if you’re willing to use series.</div>
-<article class="example example-like" id="example-computing-a-definite-integral"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.12</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Definite Integral.</span>
-</h3>
-<div class="para" id="p-1109">Use power series to find <span class="process-math">\(\displaystyle\int_{0}^{1}e^{-x^{2}}\,dx\text{,}\)</span> and find an approximation within <span class="process-math">\(.01\)</span> of the exact value.</div>
-<div class="solutions"><details id="solution-215" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-1110">
-<div class="para">Using the power series for <span class="process-math">\(e^{-x^{2}}\)</span> from <a href="" class="xref" data-knowl="./knowl/xref/example-taylor-series-from-the-exponential.html" title="Example 9.7.9: Taylor Series from the Exponential">Example 9.7.9</a>, we have</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-from-the-exponential.html">
+<article class="example example-like" id="example-maclaurin-series-for-sine"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.12</span><span class="period">.</span><span class="space"> </span><span class="title">Maclaurin Series for Sine.</span>
+</h4>
+<div class="para" id="p-1106">Find the Maclaurin series for <span class="process-math">\(\sin x\text{.}\)</span>
+</div></article><div class="para" id="p-1107">Knowing a power series representation for a function makes calculus with that function extremely straightforward, at least if you’re willing to use series.</div>
+<article class="example example-like" id="example-computing-a-definite-integral"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">9.7.13</span><span class="period">.</span><span class="space"> </span><span class="title">Computing a Definite Integral.</span>
+</h4>
+<div class="para" id="p-1108">Use power series to find <span class="process-math">\(\displaystyle\int_{0}^{1}e^{-x^{2}}\,dx\text{,}\)</span> and find an approximation within <span class="process-math">\(.01\)</span> of the exact value.</div>
+<div class="solutions"><details id="solution-215" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-1109">
+<div class="para">Using the power series for <span class="process-math">\(e^{-x^{2}}\)</span> from <a href="" class="xref" data-knowl="./knowl/xref/example-taylor-series-for-e-x-2.html" title="Example 9.7.9: Taylor series for e^{-x^2}">Example 9.7.9</a>, we have</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-for-e-x-2.html">
 \begin{equation*}
 \int_{0}^{1}e^{-x^{2}}\,dx = \sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k+1)k!}\text{.}
 \end{equation*}
 </div>
 <div class="para">This is an alternating series, so by the alternating series test the partial sum <span class="process-math">\(\displaystyle\sum_{k=0}^{N}\frac{(-1)^{k}}{(2k+1)k!}\)</span> is always within</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-from-the-exponential.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-for-e-x-2.html">
 \begin{equation*}
 \frac{1}{(2(N+1)+1)(N+1)!}
 \end{equation*}
 </div>
 <div class="para">of the exact value. So if we want to get enough terms of the series to be within <span class="process-math">\(.01\)</span> of the exact value, we need to pick <span class="process-math">\(N\)</span> so that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-from-the-exponential.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-for-e-x-2.html">
 \begin{equation*}
 \frac{1}{(2(N+1)+1)(N+1)!} \lt .01\text{,}
 \end{equation*}
 </div>
 <div class="para">which occurs at <span class="process-math">\(N = 3\text{.}\)</span> So</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-from-the-exponential.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-taylor-series-for-e-x-2.html">
 \begin{equation*}
 \int_{0}^{1}e^{-x^{2}}\,dx \approx 1 - \frac{1}{3} + \frac{1}{10} - \frac{1}{42} = 0.742...\text{.}
 \end{equation*}
 </div>
 <div class="para">This is within about <span class="process-math">\(.004\)</span> of the exact value.</div>
-</div></div></details></div></article><div class="para" id="p-1111">One extremely useful application of power series in mathematics and its applications is in deriving <dfn class="terminology">Euler’s Formula</dfn>.</div>
-<article class="theorem theorem-like" id="theorem-euler-s-formula"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.7.13</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Formula.</span>
-</h3>
-<div class="para" id="p-1112">Let <span class="process-math">\(i = \sqrt{-1}\text{.}\)</span> Then <span class="process-math">\(e^{ix} = \cos x + i\sin x\text{.}\)</span>
-</div></article><details id="proof-14" class="hiddenproof born-hidden-knowl"><summary><h3 class="heading"><span class="type">Proof<span class="period">.</span></span></h3></summary><article class="hiddenproof"><div class="para logical" id="p-1113">
+</div></div></details></div></article><div class="para" id="p-1110">One extremely useful application of power series in mathematics and its applications is in deriving <dfn class="terminology">Euler’s Formula</dfn>.</div>
+<article class="theorem theorem-like" id="theorem-euler-s-formula"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">9.7.14</span><span class="period">.</span><span class="space"> </span><span class="title">Euler’s Formula.</span>
+</h4>
+<div class="para" id="p-1111">Let <span class="process-math">\(i = \sqrt{-1}\text{.}\)</span> Then <span class="process-math">\(e^{ix} = \cos x + i\sin x\text{.}\)</span>
+</div></article><details id="proof-14" class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para logical" id="p-1112">
 <div class="para">We can try to use power series to make sense of <span class="process-math">\(e^{ix}\text{.}\)</span> Our idea is that since the power series for <span class="process-math">\(e^{x}\)</span> is valid for all <span class="process-math">\(x\text{,}\)</span> it should be valid for all <span class="process-math">\(ix\)</span> as well, giving</div>
 <div class="displaymath process-math" id="md-136">
 \begin{align*}
@@ -1053,7 +996,7 @@ e^{ix} \amp 1 + (ix) + \frac{(ix)^{2}}{2!} + \frac{(ix)^{3}}{3!} + \frac{(ix)^{4
 e^{i\pi} = -1\text{.}
 \end{equation*}
 </div>
-</div></article></details></section></div>
+</div></article></details></section></section></div>
 <div class="ptx-content-footer">
 <a class="previous-button button" href="section-representing-functions-as-power-series.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="part-multivariable.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

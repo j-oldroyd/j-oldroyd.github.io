@@ -2029,199 +2029,191 @@
         </solution>
       </example>
     </subsection>
+    <subsection xml:id="subsection-taylors-theorem-taylor-series">
+      <title>Taylor's Theorem and Taylor Series</title>
       <p>
-      To start, suppose we can represent <m>f(x)</m> as a power series centered at some number <m>a</m>:
-      <me>f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k} = c_{0} + c_{1}(x - a) + c_{2}(x - a)^{2} + c_{3}(x - a)^{3} + \cdots</me>
-      Then this representation is valid on some interval <m>(a - R, a + R)</m>.
-      Our goal is to find what the coefficients <m>c_{k}</m> are.
-    </p>
-    <p>
-      We'll start with the first coefficient <m>c_{0}</m>.
-      We can find it very easily by setting <m>x = a</m> to get
-      <me>f(a) = c_{0}</me>.
-      So the first coefficient <em>must</em> be equal to <m>f(a)</m>.
-      Now we'll try to find <m>c_{1}</m>, which we can do by differentiating:
-      <me>f^\prime(x) = c_{1} + 2c_{2}(x - a) + 3c_{3}(x - a)^{2} + \cdots</me>,
-      which is still valid for <m>(a - R, a + R)</m>.
-      Now set <m>x = a</m> again to obtain
-      <me>f^\prime(a) = c_{1}</me>.
-    </p>
-    <p>
-      Now differentiate again to get
-      <me>f''(x) = 2a_{2} + 3\cdot2(x - a) + \cdots</me>
-      which gives
-      <me>a_{2} = \frac{f''(a)}{2}</me>.
-      Similarly,
-      <me>a_{3} = \frac{f'''(a)}{3!}</me>.
-      We can continue this process in general to get the following theorem.
-    </p>
-    <theorem xml:id="theorem-taylor-s-formula">
-      <title>Taylor's Formula</title>
-      <statement>
-        <p>
-          If <m>f(x)</m> has a power series representation/expansion at <m>a</m> with positive radius of convergence <m>R</m>, then
-          <me>f(x) = \sum_{k=0}^{\infty}c_{k}(x - a)^{k}</me>
-          where
-          <me>c_{k} = \frac{f^{(k)}(a)}{k!}</me>.
-          This series is called the <term>Taylor series</term> of <m>f</m> about <m>a</m>.
-        </p>
-      </statement>
-    </theorem>
-    <p>
-      A Taylor series about <m>0</m> is also known as a <term>Maclaurin series</term>.
-    </p>
-    <example xml:id="example-maclaurin-series-for-the-exponential">
-      <title>Maclaurin Series for the Exponential</title>
-      <statement>
-        <p>
-          Find the Maclaurin series for <m>e^{x}</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          If we let <m>f(x) = e^{x}</m>, then the Maclaurin series is
-          <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}</me>
-          where
-          <me>f^{(k)}(0) = e^{0} = 1</me>.
-          So the Maclaurin series is
-          <me>\sum_{k=0}^{\infty}\frac{1}{k!}x^{k} = 1 + x + \frac{1}{2}x^{2} + \frac{1}{3!}x^{3} + \cdots</me>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      <xref ref="example-maclaurin-series-for-the-exponential" text="type-global" /> gives us the Taylor series about <m>0</m> for <m>e^{x}</m>, but at the moment we don't know if it actually equals <m>e^{x}</m>.
-      However, if we differentiate the series we get the same series back.
-      In other words, the Taylor series of <m>e^{x}</m> <em>is its own derivative</em>, which is a promising sign.
-    </p>
-    <example xml:id="example-taylor-series-from-the-exponential">
-      <title>Taylor Series from the Exponential</title>
-      <statement>
-        <p>
-          Assuming that <m>e^{x}</m> equals its Taylor series, find the Maclaurin series for <m>e^{-x^{2}}</m>.
-          Also, find the <m>70^{\text{th}}</m> derivative of <m>e^{-x^{2}}</m> at <m>x = 0</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We could use <xref ref="theorem-taylor-s-formula" text="type-global" /> to find the Maclaurin series for <m>e^{-x^{2}}</m>, but it's far, far easier to use the series for <m>e^{x}</m>:
-          <me>e^{-x^{2}} = \sum_{k=0}^{\infty}\frac{(-x^{2})^{k}}{k!} = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{2k}}{k!}</me>.
-        </p>
-        <p>
-          It turns out that this lets us find derivatives at <m>0</m> incredibly quickly.
-          If we let <m>f(x) = e^{-x^{2}}</m>, then it follows that <m>\frac{f^{(k)}(0)}{k!}</m> is the coefficient of <m>x^{k}</m> in the power series for <m>f(x)</m>.
-          Therefore
-          <me>\frac{f^{(70)}(0)}{70!} = \frac{(-1)^{35}}{35!} \Rightarrow f^{(70)}(0) = -\frac{70!}{35!}</me>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      Showing that a function equals its power series requires the <term>Lagrange remainder formula</term> for Taylor series, which states the following: if <m>f(x)</m> is differentiable <m>N+1</m> times on an interval containing <m>a</m>, then for each <m>x</m> in <m>I</m> there exists <m>z</m> in <m>I</m> such that
-      <me>R_{N}(x) = f(x) - \sum_{k=0}^{N}\frac{f^{(k)}(a)}{k!}(x - a)^{k}</me>
-      is equal to
-      <me>\frac{f^{(N+1)}(z)}{(N+1)!}(x - a)^{N+1}</me>.
-      A useful fact when using this is that
-      <me>\frac{x^{N}}{N!}\to0</me>
-      as <m>N\to\infty</m> for all <m>x</m>.
-    </p>
-    <example xml:id="example-maclaurin-series-for-cosine">
-      <title>Maclaurin Series for Cosine</title>
-      <statement>
-        <p>
-          Find the Maclaurin series for <m>\cos x</m> and show that <m>\cos x</m> equals its Maclaurin series for all <m>x</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Using <xref ref="theorem-taylor-s-formula" text="type-global" />, the Taylor series for <m>f(x) = \cos x</m> at <m>a = 0</m> is given by
-          <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}</me>.
-          So to find this series we need to find the derivatives of cosine at <m>0</m>:
-          <md>
-            <mrow>f(0) \amp = 1 </mrow>
-            <mrow>f^\prime(0) \amp = 0 </mrow>
-            <mrow>f''(0) \amp = -1 </mrow>
-            <mrow>f^{(3)}(0) \amp = 0 </mrow>
-          </md>
-          and so on.
-          So the Maclaurin series for <m>\cos x</m> is given by
-          <me>1 - \frac{1}{2!}x^{2} + \frac{1}{4!}x^{4} - \frac{1}{6!}x^{6} + \cdots</me>.
-        </p>
-        <p>
-          To express this using sigma notation, note that this series has only even powers of <m>x</m>.
-          Hence the sum should look like <m>\sum_{k=0}^{\infty}c_{k}x^{2k}</m>.
-          Looking at the pattern of the coefficients here, we can rewrite this as
-          <me>\sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k)!}x^{2k}</me>.
-          Using the ratio test, we can also show that this series converges for all <m>x</m>.
-          To show that this series actually equals <m>\cos x</m>, we need to consider the remainder term
-          <me>R_{N}(x) = \frac{f^{(N+1)}(z)}{(N+1)!}x^{N+1}</me>.
-        </p>
-        <p>
-          We don't know what exactly <m>z</m> is, except that it's in some interval around <m>0</m>.
-          However, we do know that <m>\|f^{(N+1)}(z)\|\leq 1</m>, which means that the remainder satisfies
-          <me>\|R_{N}(x)\| \leq \frac{|x|^{N+1}}{(N+1)!}\to0</me>.
-          Therefore <m>\cos x</m> equals its Maclaurin series.
-        </p>
-      </solution>
-    </example>
-    <p>
-      Now that we know how to express <m>\cos x</m> as a power series, we can do the same for <m>\sin x</m>.
-    </p>
-    <example xml:id="example-maclaurin-series-for-sine">
-      <title>Maclaurin Series for Sine</title>
-      <statement>
-        <p>
-          Find the Maclaurin series for <m>\sin x</m>.
-        </p>
-      </statement>
-    </example>
-    <p>
-      Knowing a power series representation for a function makes calculus with that function extremely straightforward, at least if you're willing to use series.
-    </p>
-    <example xml:id="example-computing-a-definite-integral">
-      <title>Computing a Definite Integral</title>
-      <statement>
-        <p>
-          Use power series to find <m>\displaystyle\int_{0}^{1}e^{-x^{2}}\,dx</m>, and find an approximation within <m>.01</m> of the exact value.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Using the power series for <m>e^{-x^{2}}</m> from <xref ref="example-taylor-series-from-the-exponential" text="type-global" />, we have
-          <me>\int_{0}^{1}e^{-x^{2}}\,dx = \sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k+1)k!}</me>.
-          This is an alternating series, so by the alternating series test the partial sum <m>\displaystyle\sum_{k=0}^{N}\frac{(-1)^{k}}{(2k+1)k!}</m> is always within
-          <me>\frac{1}{(2(N+1)+1)(N+1)!}</me>
-          of the exact value.
-          So if we want to get enough terms of the series to be within <m>.01</m> of the exact value, we need to pick <m>N</m> so that
-          <me>\frac{1}{(2(N+1)+1)(N+1)!} \lt .01</me>,
-          which occurs at <m>N = 3</m>.
-          So
-          <me>\int_{0}^{1}e^{-x^{2}}\,dx \approx 1 - \frac{1}{3} + \frac{1}{10} - \frac{1}{42} = 0.742...</me>.
-          This is within about <m>.004</m> of the exact value.
-        </p>
-      </solution>
-    </example>
-    <p>
-      One extremely useful application of power series in mathematics and its applications is in deriving <term>Euler's Formula</term>.
-    </p>
-    <theorem xml:id="theorem-euler-s-formula">
-      <title>Euler's Formula</title>
-      <statement>
-        <p>
-          Let <m>i = \sqrt{-1}</m>.
-          Then <m>e^{ix} = \cos x + i\sin x</m>.
-        </p>
-      </statement>
-      <proof>
-        <p>
-          We can try to use power series to make sense of <m>e^{ix}</m>.
-          Our idea is that since the power series for <m>e^{x}</m> is valid for all <m>x</m>, it should be valid for all <m>ix</m> as well, giving
-          <md>
-            <mrow>e^{ix} \amp 1 + (ix) + \frac{(ix)^{2}}{2!} + \frac{(ix)^{3}}{3!} + \frac{(ix)^{4}}{4!} + \cdots </mrow>
-            <mrow> \amp = \cos x + i\sin x </mrow>
-          </md>.
-          In particular,
-          <me>e^{i\pi} = -1</me>.
-        </p>
-      </proof>
-    </theorem>
+        So far, we've seen that Taylor polynomials can provide good approximations to functions near their center.
+        Furthermore, these approximations seem to improve as the order of the Taylor polynomial increases.
+        It's natural to ask if the approximation becomes exact as we let the order go to <m>\infty</m>.
+        Doing so transforms the Taylor polynomial into a <em>Taylor series</em>.
+      </p>
+      <definition xml:id="definition-taylor-series">
+        <title>Taylor Series</title>
+        <idx>Taylor series</idx>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function that is infinitely differentiable at <m>x=a</m>.
+            The <term>Taylor series</term> of <m>f(x)</m> centered at <m>x=a</m> is
+            <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k</me>.
+            If <m>a=0</m>, we often call the resulting series the <term>Maclaurin series</term> of <m>f(x)</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Note that if <m>T_n(x)</m> is the order <m>n</m> Taylor polynomial of some infinitely differentiable function <m>f(x)</m>, then the Taylor series is given by <m>\lim_{n\to\infty}T_n(x)</m> (assuming this limit exists).
+      </p>
+      <example xml:id="example-maclaurin-series-for-the-exponential">
+        <title>Maclaurin series for the exponential</title>
+        <statement>
+          <p>
+            Find the Maclaurin series for <m>e^{x}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Let <m>f(x) = e^x</m>.
+            As mentioned in <xref ref="example-taylor-polynomial-of-e-x-" text="type-global" />, all of the derivatives of <m>f</m> at <m>0</m> are <m>1</m>.
+            Therefore the Maclaurin series is
+            <me>\sum_{k=0}^{\infty}\frac{1}{k!}x^k</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        <xref ref="example-maclaurin-series-for-the-exponential" text="type-global" /> gives us the Taylor series about <m>0</m> for <m>e^{x}</m>, but at the moment we don't know if it actually equals <m>e^{x}</m>.
+        However, if we differentiate the series we get the same series back.
+        In other words, the Taylor series of <m>e^{x}</m> <em>is its own derivative</em>, which is a promising sign.
+      </p>
+      <example xml:id="example-taylor-series-for-e-x-2">
+        <title>Taylor series for <m>e^{-x^2}</m></title>
+        <statement>
+          <p>
+            Assuming that <m>e^{x}</m> equals its Taylor series, find the Maclaurin series for <m>e^{-x^{2}}</m>.
+            Also, find the <m>70^{\text{th}}</m> derivative of <m>e^{-x^{2}}</m> at <m>x = 0</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We could use <xref ref="definition-taylor-series" text="type-global" /> to find the Maclaurin series for <m>e^{-x^{2}}</m>, but it's far, far easier to use the series for <m>e^{x}</m>:
+            <me>e^{-x^{2}} = \sum_{k=0}^{\infty}\frac{(-x^{2})^{k}}{k!} = \sum_{k=0}^{\infty}(-1)^{k}\frac{x^{2k}}{k!}</me>.
+          </p>
+          <p>
+            It turns out that this also lets us find derivatives at <m>0</m> incredibly quickly.
+            If we let <m>f(x) = e^{-x^{2}}</m>, then it follows that <m>\frac{f^{(k)}(0)}{k!}</m> is the coefficient of <m>x^{k}</m> in the power series for <m>f(x)</m>.
+            Therefore
+            <me>\frac{f^{(70)}(0)}{70!} = \frac{(-1)^{35}}{35!} \Rightarrow f^{(70)}(0) = -\frac{70!}{35!}</me>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Not every function with a Taylor series can be represented by its Taylor series.
+        The typical example of this poor behavior is the piecewise function
+        <me>f(x) = \begin{cases}e^{-1/x} \amp\text{ if }x\neq0 \\ 0 \amp\text{ if }x=0\end{cases}</me>.
+        It can be shown that <m>f^{(k)}(0) = 0</m> for all <m>k</m> and so the Maclaurin series of <m>f(x)</m> must be
+        <me>0 + 0x + 0x^2 + \cdots = 0</me>.
+        However, this series cannot equal <m>f(x)</m> except at <m>x = 0</m>.
+      </p>
+      <p>
+        If we want to use Taylor series, then we need to know exactly when a function is equal to its Taylor series.
+        This can be determined with <em>Taylor's Theorem</em>.
+      </p>
+      <theorem xml:id="theorem-taylor-s-theorem-lagrange">
+        <title>Taylor's Theorem (Lagrange's form)</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function that is <m>(n+1)</m>-times differentiable.
+            Let <m>T_n(x)</m> denote the corresponding Taylor polynomial of order <m>n</m> centered at <m>a</m>.
+            Then there exists <m>z</m> between <m>a</m> and <m>x</m> such that
+            <me>f(x) = T_n(x) + \frac{f^{(k+1)}(z)}{(k+1)!}(x-a)^{k+1}</me>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-maclaurin-series-for-cosine">
+        <title>Maclaurin Series for Cosine</title>
+        <statement>
+          <p>
+            Find the Maclaurin series for <m>\cos x</m> and show that <m>\cos x</m> equals its Maclaurin series for all <m>x</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Using <xref ref="definition-taylor-series" text="type-global" />, the Taylor series for <m>f(x) = \cos x</m> at <m>a = 0</m> is given by
+            <me>\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}</me>.
+            So to find this series we need to find the derivatives of cosine at <m>0</m>:
+            <md>
+              <mrow>f(0) \amp = 1 </mrow>
+              <mrow>f^\prime(0) \amp = 0 </mrow>
+              <mrow>f''(0) \amp = -1 </mrow>
+              <mrow>f^{(3)}(0) \amp = 0 </mrow>
+            </md>
+            and so on.
+            So the Maclaurin series for <m>\cos x</m> is given by
+            <me>1 - \frac{1}{2!}x^{2} + \frac{1}{4!}x^{4} - \frac{1}{6!}x^{6} + \cdots</me>.
+            In sigma notation, this is
+            <me>\sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k)!}x^{2k}</me>.
+            Using the ratio test, we can also show that this series converges for all <m>x</m>.
+          </p>
+          <p>
+            To show that this series actually equals <m>\cos x</m>, we need to consider the remainder term
+            <me>R_{N}(x) = \frac{f^{(N+1)}(z)}{(N+1)!}x^{N+1}</me>.
+            from <xref ref="theorem-taylor-s-theorem-lagrange" text="type-global" />
+            We don't know what exactly <m>z</m> is, except that it's between <m>0</m> and <m>x</m>.
+            However, we do know that <m>\|f^{(N+1)}(z)\|\leq 1</m>, which means that the remainder satisfies
+            <me>|R_{N}(x)| \leq \frac{|x|^{N+1}}{(N+1)!}\to0</me>.
+            Therefore <m>\cos x</m> equals its Maclaurin series.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Now that we know how to express <m>\cos x</m> as a power series, we can do the same for <m>\sin x</m>.
+      </p>
+      <example xml:id="example-maclaurin-series-for-sine">
+        <title>Maclaurin Series for Sine</title>
+        <statement>
+          <p>
+            Find the Maclaurin series for <m>\sin x</m>.
+          </p>
+        </statement>
+      </example>
+      <p>
+        Knowing a power series representation for a function makes calculus with that function extremely straightforward, at least if you're willing to use series.
+      </p>
+      <example xml:id="example-computing-a-definite-integral">
+        <title>Computing a Definite Integral</title>
+        <statement>
+          <p>
+            Use power series to find <m>\displaystyle\int_{0}^{1}e^{-x^{2}}\,dx</m>, and find an approximation within <m>.01</m> of the exact value.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Using the power series for <m>e^{-x^{2}}</m> from <xref ref="example-taylor-series-for-e-x-2" text="type-global" />, we have
+            <me>\int_{0}^{1}e^{-x^{2}}\,dx = \sum_{k=0}^{\infty}\frac{(-1)^{k}}{(2k+1)k!}</me>.
+            This is an alternating series, so by the alternating series test the partial sum <m>\displaystyle\sum_{k=0}^{N}\frac{(-1)^{k}}{(2k+1)k!}</m> is always within
+            <me>\frac{1}{(2(N+1)+1)(N+1)!}</me>
+            of the exact value.
+            So if we want to get enough terms of the series to be within <m>.01</m> of the exact value, we need to pick <m>N</m> so that
+            <me>\frac{1}{(2(N+1)+1)(N+1)!} \lt .01</me>,
+            which occurs at <m>N = 3</m>.
+            So
+            <me>\int_{0}^{1}e^{-x^{2}}\,dx \approx 1 - \frac{1}{3} + \frac{1}{10} - \frac{1}{42} = 0.742...</me>.
+            This is within about <m>.004</m> of the exact value.
+          </p>
+        </solution>
+      </example>
+      <p>
+        One extremely useful application of power series in mathematics and its applications is in deriving <term>Euler's Formula</term>.
+      </p>
+      <theorem xml:id="theorem-euler-s-formula">
+        <title>Euler's Formula</title>
+        <statement>
+          <p>
+            Let <m>i = \sqrt{-1}</m>.
+            Then <m>e^{ix} = \cos x + i\sin x</m>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            We can try to use power series to make sense of <m>e^{ix}</m>.
+            Our idea is that since the power series for <m>e^{x}</m> is valid for all <m>x</m>, it should be valid for all <m>ix</m> as well, giving
+            <md>
+              <mrow>e^{ix} \amp 1 + (ix) + \frac{(ix)^{2}}{2!} + \frac{(ix)^{3}}{3!} + \frac{(ix)^{4}}{4!} + \cdots </mrow>
+              <mrow> \amp = \cos x + i\sin x </mrow>
+            </md>.
+            In particular,
+            <me>e^{i\pi} = -1</me>.
+          </p>
+        </proof>
+      </theorem>
+    </subsection>
   </section>
 </chapter>
