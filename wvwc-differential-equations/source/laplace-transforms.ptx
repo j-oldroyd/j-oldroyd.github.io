@@ -1058,7 +1058,6 @@
           </figure>
         </solution>
       </example>
-
       <example xml:id="example-resonance-with-an-impulse-train">
         <title>Resonance with an Impulse Train</title>
         <statement>
@@ -1140,159 +1139,182 @@
   </section>
   <section xml:id="section-convolution-products">
     <title>Convolution Products</title>
-    <p>
-      Consider the function <m>F(s)</m> in the frequency domain <m>s</m> defined by
-      <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
-      This does not match a Laplace transform on our table.
-      If we wanted to find the inverse transform <m>f(t)</m>, we would have to use partial fractions to find it.
-      However, <m>F(s)</m> is easily seen to be the <em>product</em> of two recognizable transforms:
-      <me>F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}</me>.
-      What we would like to do is find a way to determine inverse transforms of products of transforms.
-      To do this, we need to define the <em>convolution</em> of two functions.
-    </p>
-    <definition xml:id="definition-convolution-of-functions">
-      <title>Convolution of Functions</title>
-      <idx><h>convolutions</h></idx>
-      <statement>
+    <introduction>
+      <p>
+        Consider the function <m>F(s)</m> in the frequency domain <m>s</m> defined by
+        <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
+        This does not match a Laplace transform on our table.
+        If we wanted to find the inverse transform <m>f(t)</m>, we would have to use partial fractions to find it.
+        This is certainly feasible, but more than a little tedious.
+      </p>
+      <p>
+        However, <m>F(s)</m> is easily seen to be the <em>product</em> of two recognizable transforms:
+        <me>F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}</me>.
+        What we would like to do is find a way to determine inverse transforms of products of transforms.
+        To do this, we need to define the <em>convolution</em> of two functions, which is the time domain operation that corresponds to multiplication in the frequency domain.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-convolutions">
+      <title>Convolutions</title>
+      <definition xml:id="definition-convolution-of-functions">
+        <title>Convolution of Functions</title>
+        <idx><h>convolutions</h></idx>
+        <notation>
+          <usage><m>f\ast g</m></usage>
+          <description>convolution of <m>f(t)</m> and <m>g(t)</m></description>
+        </notation>
+        <statement>
+          <p>
+            Let <m>f</m> and <m>g</m> be piecewise continuous functions.
+            The <term>convolution</term> of <m>f</m> and <m>g</m>, denoted by <m>(f\ast g)(t)</m>, <m>f(t)\ast g(t)</m> or just <m>f\ast g</m>, is defined for <m>t\geq0</m> by
+            <me>(f\ast g)(t) = \int_{0}^{t} f(\tau)g(t-\tau)\,d\tau</me>.
+          </p>
+        </statement>
+      </definition>
+      <aside>
         <p>
-          Let <m>f</m> and <m>g</m> be piecewise continuous functions.
-          The <term>convolution</term> of <m>f</m> and <m>g</m>, denoted by <m>(f\ast g)(t)</m>, <m>f(t)\ast g(t)</m> or just <m>f\ast g</m>, is defined for <m>t\geq0</m> by
-          <me>(f\ast g)(t) = \int_{0}^{t} f(\tau)g(t-\tau)\,d\tau</me>.
-          The variable <m>\tau</m> is a dummy variable.
+          Note that <m>f\ast g</m> lies in the time domain instead of the frequency domain.
+          In general, we will only take convolutions of functions in the time domain.
         </p>
-      </statement>
-    </definition>
-    <p>
-      Note that <m>f\ast g</m> lies in the time domain instead of the frequency domain.
-      In general, we will only take convolutions of functions in the time domain.
-    </p>
-    <p>
-      It's difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as <q>smoothing operators</q>.
-      If you have a <q>rough</q> (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation.
-      We will see another interpretation of the convolution at the end of this section.
-    </p>
-    <example xml:id="example-convolution-with-unit-step">
-      <title>Convolution with Unit Step</title>
-      <statement>
-        <p>
-          Compute <m>u\ast t</m>, where <m>u(t)</m> is the unit step function.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          By definition,
-          <md>
-            <mrow>u(t)\ast t &amp;= \int_{0}^{t}u(\tau)(t-\tau)\,d\tau </mrow>
-            <mrow>&amp;= \int_{0}^{t}(t-\tau)\,d\tau </mrow>
-            <mrow>&amp;= \left[t\tau-\frac{\tau^{2}}{2}\right]_{\tau=0}^{\tau=t} </mrow>
-            <mrow>&amp;= \frac{t^{2}}{2}</mrow>
-          </md>
-        </p>
-      </solution>
-    </example>
-    <p>
-      One important property of convolutions is that they are <em>commutative</em>: that is, <m>f\ast g = g\ast f</m> for any piecewise continuous functions <m>f</m> and <m>g</m>.
-      Another important property of convolutions is that they tend to work well with integral transforms.
-      In particular, we have the following theorem.
-    </p>
-    <theorem xml:id="theorem-convolution-transform">
-      <title>Convolution Theorem</title>
-      <idx><h>Laplace transforms</h><h>Convolution Theorem</h></idx>
-      <statement>
-        <p>
-          The Laplace transform distributes over convolution.
-          In other words, if <m>f</m> and <m>g</m> are piecewise continuous functions, then
-          <me>\Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}</me>.
-          Equivalently, if we write <m>F(s) = \Laplace{f(t)}</m> and <m>G(s) = \Laplace{g(t)}</m>, then
-          <me>\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)</me>.
-        </p>
-      </statement>
-    </theorem>
-    <p>
-      One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain.
-      Let's return to the example we started with.
-    </p>
-    <example xml:id="example-using-the-convolution-theorem">
-      <title>Using the Convolution Theorem</title>
-      <statement>
-        <p>
-          Let
-          <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
-          Find <m>f(t) = \iLaplace{F(s)}</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We will use <xref ref="theorem-convolution-transform" text="type-global" /> to express the inverse transform:
-          <md>
-            <mrow>f(t) &amp;= \iLaplace{F(s)}</mrow>
-            <mrow>&amp;= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}</mrow>
-            <mrow>&amp;= 1\ast \frac{1}{2}\sin2t</mrow>
-            <mrow>&amp;= \frac{1}{2}\int_{0}^{t}\sin2\tau\,d\tau</mrow>
-            <mrow>&amp;= -\frac{1}{4}\left[\cos2\tau\right]_{\tau=0}^{\tau=t}</mrow>
-            <mrow>&amp;= \frac{1-\cos2t}{4}</mrow>
-          </md>
-        </p>
-      </solution>
-    </example>
-    <example xml:id="example-solving-ivps-with-the-convolution-theorem">
-      <title>Solving IVPs with the Convolution Theorem</title>
-      <statement>
-        <p>
-          Let <m>x</m> be a function of <m>t</m>.
-          Solve the IVP
-          <me>x''+4x^{\prime}+13x = f(t)\qq{where}x(0) = x^{\prime}(0) = 0</me>
-          for <m>x(t)</m> in terms of the function <m>f(t)</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We're trying to find the solution <m>x(t)</m> for arbitrary <m>f(t)</m>, which is something we definitely would not have been able to do in Chapter 3.
-          We will do so using Laplace transforms and <xref ref="theorem-convolution-transform" text="type-global" />.
-          So we start by taking the Laplace transform of the ODE to get
-          <me>s^{2}X(s) +4sX(s) + 13X(s) = F(s)</me>
-          where <m>X(s) = \Laplace{x(t)}</m> and <m>F(s) = \Laplace{f(t)}</m>.
-          Now we solve for <m>X(s)</m> to get
-          <me>X(s) = \frac{F(s)}{s^{2}+4s+13} = F(s)G(s)</me>
-          where
-          <me>G(s) = \frac{1}{s^{2}+4s+13}</me>
-          <xref ref="theorem-convolution-transform" text="type-global" /> tells us then that
-          <me>x(t) = \iLaplace{F(s)G(s)} = f(t)*g(t)</me>
-          where
-          <md>
-            <mrow>g(t) &amp;= \iLaplace{G(s)}</mrow>
-            <mrow>&amp;= \iLaplace{\frac{1}{s^{2}+4s+13}} </mrow>
-            <mrow>&amp;= \iLaplace{\frac{1}{(s+2)^{2}+9}} &amp; \text{complete the square}</mrow>
-            <mrow>&amp;= \frac{1}{3}e^{-2t}\sin3t &amp; \text{use a translation formula}</mrow>
-          </md>
-          Therefore the solution of the ODE in terms of the function <m>f(t)</m> is given by
-          <md>
-            <mrow>x(t) &amp;= f(t)\ast g(t)</mrow>
-            <mrow>&amp;= \int_{0}^{t}f(\tau)g(t-\tau)\,d\tau</mrow>
-            <mrow>&amp;= \int_{0}^{t}f(\tau)\frac{e^{-2(t-\tau)}\sin[3(t-\tau)]}{3}\,d\tau</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-    <p>
-      There are a couple of interesting things happening in the last example.
-      In particular, we were able to write the solution <m>x(t)</m> in terms of <m>f(t)</m> as
-      <me>x(t) = g(t)\ast f(t)</me>.
-      In these terms, we can recognize <m>g(t)</m> as the impulse response of the system discussed at the end of <xref ref="section-dirac-delta-functions" text="type-global" />.
-      Therefore the response of this system to the input <m>f(t)</m> is related to the impulse response by a convolution:
-      <me>x(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{\tau}</me>.
-      Essentially, this convolution integral tells us how to construct the response <m>x(t)</m> using only information about the input <m>f(t)</m> and the impulse response <m>g(t)</m> from the <q>past and present.</q>
-      Recall that this relationship is even easier to write in the frequency domain: the frequency input <m>F(s)</m> is turned into the frequency output <m>X(s)</m> by means of the transfer function <m>G(s) = \Laplace{g(t)}</m>:
-      <me>X(s) = G(s)F(s)</me>.
-    </p>
-    <p>
-      There are multiple ways to find the transfer function, assuming that all initial conditions are <m>0</m>.
-      First, if <m>F(s)</m> is the input and <m>X(s)</m> is some measured output (once again, in the frequency domain), then the transfer function <m>G(s)</m> satisfies
-      <me>G(s) = \frac{X(s)}{F(s)}</me>,
-      and this quantity is independent of the particular choice of <m>F(s)</m>.
-      We can also replace the time domain input <m>f(t)</m> with <m>\delta(t)</m> as discussed in <xref ref="section-dirac-delta-functions" text="type-global" /> to determine the impulse response directly.
-      In this case, the corresponding output in the frequency domain is
-      <me>X(s) = G(s)\Laplace{\delta(t)} = G(s)</me>.
-    </p>
+      </aside>
+      <p>
+        It's difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as <q>smoothing operators</q>.
+        If you have a <q>rough</q> (i.e. non-differentiable) function, then taking the convolution of it with a properly chosen smooth function may give you a smooth approximation.
+        We will see another interpretation of the convolution at the end of this section.
+      </p>
+      <example xml:id="example-convolution-with-unit-step">
+        <title>Convolution with unit step</title>
+        <statement>
+          <p>
+            Compute <m>u\ast t</m>, where <m>u(t)</m> is the unit step function.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By definition,
+            <md>
+              <mrow>u(t)\ast t \amp= \int_{0}^{t}u(\tau)(t-\tau)\,d\tau </mrow>
+              <mrow>\amp= \int_{0}^{t}(t-\tau)\,d\tau </mrow>
+              <mrow>\amp= \left[t\tau-\frac{\tau^{2}}{2}\right]_{\tau=0}^{\tau=t} </mrow>
+              <mrow>\amp= \frac{t^{2}}{2}</mrow>
+            </md>
+          </p>
+        </solution>
+      </example>
+      <p>
+        Convolutions can be thought of as a peculiar kind of multiplication for functions.
+        They are <em>commutative</em>, that is, <m>f\ast g = g\ast f</m> for any piecewise continuous functions <m>f</m> and <m>g</m>.
+        They are also <em>distributive</em>:
+        <me>f\ast(g+h) = f\ast g + f\ast h</me>.
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-convolutions-and-transform-problems">
+      <title>Convolutions and Transform Problems</title>
+      <p>
+        An important property of convolutions is that they tend to work well with integral transforms.
+        In particular, we have the following theorem.
+      </p>
+      <theorem xml:id="theorem-convolution-transform">
+        <title>Convolution Theorem</title>
+        <idx><h>Laplace transforms</h><h>Convolution Theorem</h></idx>
+        <statement>
+          <p>
+            The Laplace transform distributes over convolution.
+            In other words, if <m>f</m> and <m>g</m> are piecewise continuous functions, then
+            <me>\Laplace{f(t)\ast g(t)} = \Laplace{f(t)}\Laplace{g(t)}</me>.
+            Equivalently, if we write <m>F(s) = \Laplace{f(t)}</m> and <m>G(s) = \Laplace{g(t)}</m>, then
+            <me>\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{t}</me>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain.
+        Let's return to the example we started with.
+      </p>
+      <example xml:id="example-using-the-convolution-theorem">
+        <title>Using the Convolution Theorem</title>
+        <statement>
+          <p>
+            Let
+            <me>F(s) = \frac{1}{s(s^{2}+4)}</me>.
+            Find <m>f(t) = \iLaplace{F(s)}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We will use <xref ref="theorem-convolution-transform" text="type-global" /> to express the inverse transform:
+            <md>
+              <mrow>f(t) \amp= \iLaplace{F(s)}</mrow>
+              <mrow>\amp= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}</mrow>
+              <mrow>\amp= 1\ast \frac{1}{2}\sin2t</mrow>
+              <mrow>\amp= \frac{1}{2}\int_{0}^{t}\sin2\tau\,d\tau</mrow>
+              <mrow>\amp= -\frac{1}{4}\left[\cos2\tau\right]_{\tau=0}^{\tau=t}</mrow>
+              <mrow>\amp= \frac{1-\cos2t}{4}</mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <example xml:id="example-solving-ivps-with-the-convolution-theorem">
+        <title>Solving IVPs with the Convolution Theorem</title>
+        <statement>
+          <p>
+            Let <m>x</m> be a function of <m>t</m>.
+            Solve the IVP
+            <me>x''+4x^{\prime}+13x = f(t)\qq{where}x(0) = x^{\prime}(0) = 0</me>
+            for <m>x(t)</m> in terms of the function <m>f(t)</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We're trying to find the solution <m>x(t)</m> for arbitrary <m>f(t)</m>, which is something we definitely would not have been able to do in Chapter 3.
+            We will do so using Laplace transforms and <xref ref="theorem-convolution-transform" text="type-global" />.
+          </p>
+          <p>
+            We start by taking the Laplace transform of the ODE to get
+            <me>s^{2}X(s) +4sX(s) + 13X(s) = F(s)</me>
+            where <m>X(s) = \Laplace{x(t)}</m> and <m>F(s) = \Laplace{f(t)}</m>.
+            Now we solve for <m>X(s)</m> to get
+            <me>X(s) = \frac{F(s)}{s^{2}+4s+13} = F(s)G(s)</me>
+            where
+            <me>G(s) = \frac{1}{s^{2}+4s+13}</me>
+            <xref ref="theorem-convolution-transform" text="type-global" /> tells us then that
+            <me>x(t) = \iLaplace{F(s)G(s)} = f(t)*g(t)</me>
+            where
+            <md>
+              <mrow>g(t) &amp;= \iLaplace{G(s)}</mrow>
+              <mrow>&amp;= \iLaplace{\frac{1}{s^{2}+4s+13}} </mrow>
+              <mrow>&amp;= \iLaplace{\frac{1}{(s+2)^{2}+9}} &amp; \text{complete the square}</mrow>
+              <mrow>&amp;= \frac{1}{3}e^{-2t}\sin3t &amp; \text{use a translation formula}</mrow>
+            </md>
+            Therefore the solution of the ODE in terms of the function <m>f(t)</m> is given by
+            <md>
+              <mrow>x(t) &amp;= f(t)\ast g(t)</mrow>
+              <mrow>&amp;= \int_{0}^{t}f(\tau)g(t-\tau)\,d\tau</mrow>
+              <mrow>&amp;= \int_{0}^{t}f(\tau)\frac{e^{-2(t-\tau)}\sin[3(t-\tau)]}{3}\,d\tau</mrow>
+            </md>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        There are a couple of interesting things happening in the last example.
+        In particular, we were able to write the solution <m>x(t)</m> in terms of <m>f(t)</m> as
+        <me>x(t) = g(t)\ast f(t)</me>.
+        In these terms, we can recognize <m>g(t)</m> as the impulse response of the system discussed at the end of <xref ref="section-dirac-delta-functions" text="type-global" />.
+        Therefore the response of this system to the input <m>f(t)</m> is related to the impulse response by a convolution:
+        <me>x(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{\tau}</me>.
+        Essentially, this convolution integral tells us how to construct the response <m>x(t)</m> using only information about the input <m>f(t)</m> and the impulse response <m>g(t)</m> from the <q>past and present.</q>
+        Recall that this relationship is even easier to write in the frequency domain: the frequency input <m>F(s)</m> is turned into the frequency output <m>X(s)</m> by means of the transfer function <m>G(s) = \Laplace{g(t)}</m>:
+        <me>X(s) = G(s)F(s)</me>.
+      </p>
+      <p>
+        There are multiple ways to find the transfer function, assuming that all initial conditions are <m>0</m>.
+        First, if <m>F(s)</m> is the input and <m>X(s)</m> is some measured output (once again, in the frequency domain), then the transfer function <m>G(s)</m> satisfies
+        <me>G(s) = \frac{X(s)}{F(s)}</me>,
+        and this quantity is independent of the particular choice of <m>F(s)</m>.
+        We can also replace the time domain input <m>f(t)</m> with <m>\delta(t)</m> as discussed in <xref ref="section-dirac-delta-functions" text="type-global" /> to determine the impulse response directly.
+        In this case, the corresponding output in the frequency domain is
+        <me>X(s) = G(s)\Laplace{\delta(t)} = G(s)</me>.
+      </p>
+    </subsection>
   </section>
 </chapter>
