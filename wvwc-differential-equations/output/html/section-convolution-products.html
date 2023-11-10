@@ -368,7 +368,13 @@ true);
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-dirac-delta-functions.html#subsection-dirac-delta-models" class="internal"><span class="title">Dirac Delta Models</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="section-convolution-products.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Convolution Products</span></a></div></li>
+<li class="toc-item toc-section active">
+<div class="toc-title-box"><a href="section-convolution-products.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Convolution Products</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-convolution-products.html#subsection-convolutions" class="internal"><span class="title">Convolutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-convolution-products.html#subsection-convolutions-and-transform-problems" class="internal"><span class="title">Convolutions and Transform Problems</span></a></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -439,52 +445,64 @@ true);
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-convolution-products"><h2 class="heading hide-type">
 <span class="type">Section</span><span class="space"> </span><span class="codenumber">6.5</span><span class="space"> </span><span class="title">Convolution Products</span>
 </h2>
-<div class="para logical" id="p-692">
+<section class="introduction" id="introduction-25"><div class="para logical" id="p-692">
 <div class="para">Consider the function <span class="process-math">\(F(s)\)</span> in the frequency domain <span class="process-math">\(s\)</span> defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 F(s) = \frac{1}{s(s^{2}+4)}\text{.}
 \end{equation*}
 </div>
-<div class="para">This does not match a Laplace transform on our table. If we wanted to find the inverse transform <span class="process-math">\(f(t)\text{,}\)</span> we would have to use partial fractions to find it. However, <span class="process-math">\(F(s)\)</span> is easily seen to be the <em class="emphasis">product</em> of two recognizable transforms:</div>
+<div class="para">This does not match a Laplace transform on our table. If we wanted to find the inverse transform <span class="process-math">\(f(t)\text{,}\)</span> we would have to use partial fractions to find it. This is certainly feasible, but more than a little tedious.</div>
+</div> <div class="para logical" id="p-693">
+<div class="para">However, <span class="process-math">\(F(s)\)</span> is easily seen to be the <em class="emphasis">product</em> of two recognizable transforms:</div>
 <div class="displaymath process-math">
 \begin{equation*}
 F(s) = \frac{1}{s} \frac{1}{s^{2}+4} = \frac{1}{2}\Laplace{1}\Laplace{\sin2t}\text{.}
 \end{equation*}
 </div>
-<div class="para">What we would like to do is find a way to determine inverse transforms of products of transforms. To do this, we need to define the <em class="emphasis">convolution</em> of two functions.</div>
-</div>
-<article class="definition definition-like" id="definition-convolution-of-functions"><h3 class="heading">
+<div class="para">What we would like to do is find a way to determine inverse transforms of products of transforms. To do this, we need to define the <em class="emphasis">convolution</em> of two functions, which is the time domain operation that corresponds to multiplication in the frequency domain.</div>
+</div></section><section class="subsection" id="subsection-convolutions"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Convolutions</span>
+</h3>
+<article class="definition definition-like" id="definition-convolution-of-functions"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">6.5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution of Functions.</span>
-</h3>  <div class="para logical" id="p-693">
+</h4>  <div class="para logical" id="p-694">
 <div class="para">Let <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> be piecewise continuous functions. The <dfn class="terminology">convolution</dfn> of <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> denoted by <span class="process-math">\((f\ast g)(t)\text{,}\)</span> <span class="process-math">\(f(t)\ast g(t)\)</span> or just <span class="process-math">\(f\ast g\text{,}\)</span> is defined for <span class="process-math">\(t\geq0\)</span> by</div>
 <div class="displaymath process-math">
 \begin{equation*}
 (f\ast g)(t) = \int_{0}^{t} f(\tau)g(t-\tau)\,d\tau\text{.}
 \end{equation*}
 </div>
-<div class="para">The variable <span class="process-math">\(\tau\)</span> is a dummy variable.</div>
-</div></article><div class="para" id="p-694">Note that <span class="process-math">\(f\ast g\)</span> lies in the time domain instead of the frequency domain. In general, we will only take convolutions of functions in the time domain.</div>
-<div class="para" id="p-695">It’s difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as “smoothing operators”. If you have a “rough” (i.e. non-differentiable) function, then convolving it with a properly chosen smooth function may give you a smooth approximation. We will see another interpretation of the convolution at the end of this section.</div>
-<article class="example example-like" id="example-convolution-with-unit-step"><h3 class="heading">
-<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution with Unit Step.</span>
-</h3>
-<div class="para" id="p-696">Compute <span class="process-math">\(u\ast t\text{,}\)</span> where <span class="process-math">\(u(t)\)</span> is the unit step function.</div>
-<div class="solutions"><details id="solution-99" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-697">
+</div></article><aside class="aside aside-like" id="aside-37"><div class="para" id="p-695">Note that <span class="process-math">\(f\ast g\)</span> lies in the time domain instead of the frequency domain. In general, we will only take convolutions of functions in the time domain.</div></aside><div class="para" id="p-696">It’s difficult to build intuition for precisely what convolutions do based on the formula alone, but one reason that convolutions are important is because they act as “smoothing operators”. If you have a “rough” (i.e. non-differentiable) function, then taking the convolution of it with a properly chosen smooth function may give you a smooth approximation. We will see another interpretation of the convolution at the end of this section.</div>
+<article class="example example-like" id="example-convolution-with-unit-step"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution with unit step.</span>
+</h4>
+<div class="para" id="p-697">Compute <span class="process-math">\(u\ast t\text{,}\)</span> where <span class="process-math">\(u(t)\)</span> is the unit step function.</div>
+<div class="solutions"><details id="solution-99" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-698">
 <div class="para">By definition,</div>
 <div class="displaymath process-math" id="md-93">
 \begin{align*}
-u(t)\ast t &amp;= \int_{0}^{t}u(\tau)(t-\tau)\,d\tau \\
-&amp;= \int_{0}^{t}(t-\tau)\,d\tau \\
-&amp;= \left[t\tau-\frac{\tau^{2}}{2}\right]_{\tau=0}^{\tau=t} \\
-&amp;= \frac{t^{2}}{2}
+u(t)\ast t \amp= \int_{0}^{t}u(\tau)(t-\tau)\,d\tau \\
+\amp= \int_{0}^{t}(t-\tau)\,d\tau \\
+\amp= \left[t\tau-\frac{\tau^{2}}{2}\right]_{\tau=0}^{\tau=t} \\
+\amp= \frac{t^{2}}{2}
 \end{align*}
 </div>
-</div></div></details></div></article><div class="para" id="p-698">One important property of convolutions is that they are <em class="emphasis">commutative</em>: that is, <span class="process-math">\(f\ast g = g\ast f\)</span> for any piecewise continuous functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{.}\)</span> Another important property of convolutions is that they tend to work well with integral transforms. In particular, we have the following theorem.</div>
-<article class="theorem theorem-like" id="theorem-convolution-transform"><h3 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution Theorem.</span>
+</div></div></details></div></article><div class="para logical" id="p-699">
+<div class="para">Convolutions can be thought of as a peculiar kind of multiplication for functions. They are <em class="emphasis">commutative</em>, that is, <span class="process-math">\(f\ast g = g\ast f\)</span> for any piecewise continuous functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{.}\)</span> They are also <em class="emphasis">distributive</em>:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f\ast(g+h) = f\ast g + f\ast h\text{.}
+\end{equation*}
+</div>
+</div></section><section class="subsection" id="subsection-convolutions-and-transform-problems"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Convolutions and Transform Problems</span>
 </h3>
-<div class="para logical" id="p-699">
+<div class="para" id="p-700">An important property of convolutions is that they tend to work well with integral transforms. In particular, we have the following theorem.</div>
+<article class="theorem theorem-like" id="theorem-convolution-transform"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">6.5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Convolution Theorem.</span>
+</h4>
+<div class="para logical" id="p-701">
 <div class="para">The Laplace transform distributes over convolution. In other words, if <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> are piecewise continuous functions, then</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -494,14 +512,14 @@ u(t)\ast t &amp;= \int_{0}^{t}u(\tau)(t-\tau)\,d\tau \\
 <div class="para">Equivalently, if we write <span class="process-math">\(F(s) = \Laplace{f(t)}\)</span> and <span class="process-math">\(G(s) = \Laplace{g(t)}\text{,}\)</span> then</div>
 <div class="displaymath process-math">
 \begin{equation*}
-\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)\text{.}
+\iLaplace{F(s)G(s)} = f(t)\ast g(t) = \int_{0}^{t}f(\tau)g(t-\tau)\dd{t}\text{.}
 \end{equation*}
 </div>
-</div></article><div class="para" id="p-700">One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain. Let’s return to the example we started with.</div>
-<article class="example example-like" id="example-using-the-convolution-theorem"><h3 class="heading">
+</div></article><div class="para" id="p-702">One way to phrase the above result is that Laplace transforms turns convolution in the time domain into multiplication in the frequency domain. Let’s return to the example we started with.</div>
+<article class="example example-like" id="example-using-the-convolution-theorem"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Using the Convolution Theorem.</span>
-</h3>
-<div class="para logical" id="p-701">
+</h4>
+<div class="para logical" id="p-703">
 <div class="para">Let</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -511,22 +529,22 @@ F(s) = \frac{1}{s(s^{2}+4)}\text{.}
 <div class="para">Find <span class="process-math">\(f(t) = \iLaplace{F(s)}\text{.}\)</span>
 </div>
 </div>
-<div class="solutions"><details id="solution-100" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-702">
+<div class="solutions"><details id="solution-100" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-704">
 <div class="para">We will use <a href="" class="xref" data-knowl="./knowl/xref/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> to express the inverse transform:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html" id="md-94">
 \begin{align*}
-f(t) &amp;= \iLaplace{F(s)}\\
-&amp;= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}\\
-&amp;= 1\ast \frac{1}{2}\sin2t\\
-&amp;= \frac{1}{2}\int_{0}^{t}\sin2\tau\,d\tau\\
-&amp;= -\frac{1}{4}\left[\cos2\tau\right]_{\tau=0}^{\tau=t}\\
-&amp;= \frac{1-\cos2t}{4}
+f(t) \amp= \iLaplace{F(s)}\\
+\amp= \iLaplace{\frac{1}{s}\cdot\frac{1}{s^{2}+4}}\\
+\amp= 1\ast \frac{1}{2}\sin2t\\
+\amp= \frac{1}{2}\int_{0}^{t}\sin2\tau\,d\tau\\
+\amp= -\frac{1}{4}\left[\cos2\tau\right]_{\tau=0}^{\tau=t}\\
+\amp= \frac{1-\cos2t}{4}\text{.}
 \end{align*}
 </div>
-</div></div></details></div></article><article class="example example-like" id="example-solving-ivps-with-the-convolution-theorem"><h3 class="heading">
+</div></div></details></div></article><article class="example example-like" id="example-solving-ivps-with-the-convolution-theorem"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.5.5</span><span class="period">.</span><span class="space"> </span><span class="title">Solving IVPs with the Convolution Theorem.</span>
-</h3>
-<div class="para logical" id="p-703">
+</h4>
+<div class="para logical" id="p-705">
 <div class="para">Let <span class="process-math">\(x\)</span> be a function of <span class="process-math">\(t\text{.}\)</span> Solve the IVP</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -536,50 +554,52 @@ x''+4x^{\prime}+13x = f(t)\qq{where}x(0) = x^{\prime}(0) = 0
 <div class="para">for <span class="process-math">\(x(t)\)</span> in terms of the function <span class="process-math">\(f(t)\text{.}\)</span>
 </div>
 </div>
-<div class="solutions"><details id="solution-101" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="p-704">
-<div class="para">We’re trying to find the solution <span class="process-math">\(x(t)\)</span> for arbitrary <span class="process-math">\(f(t)\text{,}\)</span> which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and <a href="" class="xref" data-knowl="./knowl/xref/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a>. So we start by taking the Laplace transform of the ODE to get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html">
+<div class="solutions"><details id="solution-101" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like">
+<div class="para" id="p-706">We’re trying to find the solution <span class="process-math">\(x(t)\)</span> for arbitrary <span class="process-math">\(f(t)\text{,}\)</span> which is something we definitely would not have been able to do in Chapter 3. We will do so using Laplace transforms and <a href="" class="xref" data-knowl="./knowl/xref/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a>.</div> <div class="para logical" id="p-707">
+<div class="para">We start by taking the Laplace transform of the ODE to get</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html">
 \begin{equation*}
 s^{2}X(s) +4sX(s) + 13X(s) = F(s)
 \end{equation*}
 </div>
 <div class="para">where <span class="process-math">\(X(s) = \Laplace{x(t)}\)</span> and <span class="process-math">\(F(s) = \Laplace{f(t)}\text{.}\)</span> Now we solve for <span class="process-math">\(X(s)\)</span> to get</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html">
 \begin{equation*}
 X(s) = \frac{F(s)}{s^{2}+4s+13} = F(s)G(s)
 \end{equation*}
 </div>
 <div class="para">where</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html">
 \begin{equation*}
-G(s) = \frac{1}{s^{2}+4s+13}
+G(s) = \frac{1}{s^{2}+4s+13}\text{.}
 \end{equation*}
 </div>
 <div class="para">
 <a href="" class="xref" data-knowl="./knowl/xref/theorem-convolution-transform.html" title="Theorem 6.5.3: Convolution Theorem">Theorem 6.5.3</a> tells us then that</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html">
 \begin{equation*}
 x(t) = \iLaplace{F(s)G(s)} = f(t)*g(t)
 \end{equation*}
 </div>
 <div class="para">where</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html" id="md-95">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html" id="md-95">
 \begin{align*}
-g(t) &amp;= \iLaplace{G(s)}\\
-&amp;= \iLaplace{\frac{1}{s^{2}+4s+13}} \\
-&amp;= \iLaplace{\frac{1}{(s+2)^{2}+9}} &amp; \text{complete the square}\\
-&amp;= \frac{1}{3}e^{-2t}\sin3t &amp; \text{use a translation formula}
+g(t) \amp= \iLaplace{G(s)}\\
+\amp= \iLaplace{\frac{1}{s^{2}+4s+13}} \\
+\amp= \iLaplace{\frac{1}{(s+2)^{2}+9}} \amp \text{complete the square}\\
+\amp= \frac{1}{3}e^{-2t}\sin3t \amp \text{use a translation formula}
 \end{align*}
 </div>
 <div class="para">Therefore the solution of the ODE in terms of the function <span class="process-math">\(f(t)\)</span> is given by</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html ./knowl/xref/theorem-convolution-transform.html" id="md-96">
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/theorem-convolution-transform.html" id="md-96">
 \begin{align*}
 x(t) &amp;= f(t)\ast g(t)\\
 &amp;= \int_{0}^{t}f(\tau)g(t-\tau)\,d\tau\\
 &amp;= \int_{0}^{t}f(\tau)\frac{e^{-2(t-\tau)}\sin[3(t-\tau)]}{3}\,d\tau\text{.}
 \end{align*}
 </div>
-</div></div></details></div></article><div class="para logical" id="p-705">
+</div>
+</div></details></div></article><div class="para logical" id="p-708">
 <div class="para">There are a couple of interesting things happening in the last example. In particular, we were able to write the solution <span class="process-math">\(x(t)\)</span> in terms of <span class="process-math">\(f(t)\)</span> as</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/section-dirac-delta-functions.html">
 \begin{equation*}
@@ -600,7 +620,7 @@ X(s) = G(s)F(s)\text{.}
 \end{equation*}
 </div>
 </div>
-<div class="para logical" id="p-706">
+<div class="para logical" id="p-709">
 <div class="para">There are multiple ways to find the transfer function, assuming that all initial conditions are <span class="process-math">\(0\text{.}\)</span> First, if <span class="process-math">\(F(s)\)</span> is the input and <span class="process-math">\(X(s)\)</span> is some measured output (once again, in the frequency domain), then the transfer function <span class="process-math">\(G(s)\)</span> satisfies</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/section-dirac-delta-functions.html">
 \begin{equation*}
@@ -613,7 +633,7 @@ G(s) = \frac{X(s)}{F(s)}\text{,}
 X(s) = G(s)\Laplace{\delta(t)} = G(s)\text{.}
 \end{equation*}
 </div>
-</div></section></div>
+</div></section></section></div>
 <div class="ptx-content-footer">
 <a class="previous-button button" href="section-dirac-delta-functions.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="part-pdes.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
