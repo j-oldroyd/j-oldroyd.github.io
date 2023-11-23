@@ -14,8 +14,9 @@
   <title>Parametric Equations and Polar Coordinates</title>
   <introduction>
     <p>
-      Up to this chapter we've represented curves in the <m>xy</m>-plane using Cartesian (i.e. <m>xy</m>) coordinates.
-      What we'll do now is introduce a new method of describing curves in the plane by way of parametric equations.
+      Equations of the form <m>y=f(x)</m> are well-suited for describing one-dimensional relationships between quantities but lose their effectiveness in higher dimensions.
+      However, higher dimensional problems (such as describing motion through space) require more complicated models.
+      We will therefore focus on extending the calculus concepts we've already developed for one-dimensional problems to two- and three-dimensional models.
     </p>
   </introduction>
   <section xml:id="section-parametric-equations">
@@ -28,49 +29,50 @@
       </md>.
       We can use <term>parametric equations</term> to describe the resulting <term>parametric curves</term>.
       For example, the parametric equations
-    </p>
-    <md>
-      <mrow>x \amp = 2t^{2}-1 </mrow>
-      <mrow>y \amp = t+1 </mrow>
-      <mrow>-2 \amp \leq t\leq 2 </mrow>
-    </md>
-    <p>
+      <md>
+        <mrow>x \amp = 2t^{2}-1 </mrow>
+        <mrow>y \amp = t+1 </mrow>
+        <mrow>-2 \amp \leq t\leq 2 </mrow>
+      </md>
       produce the following parametric curve in the <m>xy</m>-plane.
     </p>
     <figure xml:id="figure-parametric-parabola">
-      <image xml:id="image-parametric-parabola">
-        <latex-image><![CDATA[
+      <image xml:id="image-parametric-parabola" width="50%">
+        <latex-image xml:id="latex-image-parametric-parabola">
           \begin{tikzpicture}
-          \draw[->] (-3cm,0cm) -- (8cm,0cm) node[right,fill=white] {$x$};     % Creates x and
-          \draw[->] (0cm,-2cm) -- (0cm,4cm) node[above,fill=white] {$y$};     % y axes.
+            \begin{axis}[
+            myaxis,
+            scale only axis,
+            scale=1.5,
+            xmin=-2, xmax=8,
+            ymin=-2, ymax=4,
+            legend style={at={(0.5,-0.2)}, anchor={north},legend columns=-1},
+            clip=false,
+            ]
+            \addplot+[myplot,variable=\t,domain=-2:2,-] ({2*t^2-1}, {t+1});
+            \addlegendentry{$x = 2t^2-1, y=t+1$};
 
-          % Draw thin grid lines with color 40% gray + 60% white
-          \draw [step=1,thin,gray!40] (-3,-2) grid (8,4);
+            \def\NORM{sqrt((2*t^2-1)^2 + (t+1)^2)}
+            \addplot[thick, red,-stealth,samples=5,variable=\t, domain=-2:2, quiver={
+                u=4*t/\NORM, v=1/\NORM,
+                scale arrows=0.01,
+            }]
+            ({2*t^2-1}, {t+1});
 
-          % plot points
-          \coordinate (A) at (7,-1);
-          \fill [blue] (A) circle [radius=2pt];
-          \draw (A) node[below right]{$t=-2$};
+            \coordinate (A) at (axis cs:7,-1);
+            \coordinate (B) at (axis cs:1,0);
+            \coordinate (C) at (axis cs:-1,1);
+            \coordinate (D) at (axis cs:1,2);
+            \coordinate (E) at (axis cs:7,3);
 
-          \coordinate (B) at (1,0);
-          \fill [blue] (B) circle [radius=2pt];
-          \draw (B) node[below right]{$t=-1$};
 
-          \coordinate (C) at (-1,1);
-          \fill [blue] (C) circle [radius=2pt];
-          \draw (C) node[below left]{$t=0$};
-
-          \coordinate (D) at (1,2);
-          \fill [blue] (D) circle [radius=2pt];
-          \draw (D) node[above left]{$t=1$};
-
-          \coordinate (E) at (7,3);
-          \fill [blue] (E) circle [radius=2pt];
-          \draw (E) node[above left]{$t=2$};
-
-          % connect points
-          \draw [red] plot [smooth] coordinates {(A)(B)(C)(D)(E)};
-          \end{tikzpicture}]]>
+            \node[below] at (A) {$t=-2$};
+            \node[above right, xshift=-2.5pt] at (B) {$t=-1$};
+            \node[left] at (C) {$t=0$};
+            \node[above right, yshift=2.5pt, xshift=-3pt] at (D) {$t=1$};
+            \node[above] at (E) {$t=2$};
+            \end{axis}
+          \end{tikzpicture}
         </latex-image>
       </image>
       <caption>The graph of <m>x = 2t^2-1, y=t+1</m> for <m>-2\leq t\leq 2</m>.</caption>
