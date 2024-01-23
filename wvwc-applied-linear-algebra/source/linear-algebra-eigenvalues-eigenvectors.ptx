@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-linear-eigenvalues-eigenvectors" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Eigenvalues and Eigenvectors</title>
+  <section xml:id="section-finding-eigenvalues-and-eigenvectors">
+    <title>Finding Eigenvalues and Eigenvectors</title>
+    <p>
+      Many applications call for computing matrix-vector products like <m>A\vb{x}</m>, and in such cases it often happens that <m>A</m> is a square matrix.
+      If many such products need to be computed, it'd be nice to know if there was a way to simplify these calculations.
+      One possible way to approach this is by using <em>eigenvectors and eigenvalues</em>.
+    </p>
+    <definition xml:id="definition-eigenvalues-and-eigenvectors">
+      <title>Eigenvalues and Eigenvectors</title>
+      <idx>eigenvalues and eigenvectors</idx>
+      <statement>
+        <p>
+          An <term>eigenvector</term> of an <m>n\times n</m> matrix <m>A</m> is a <em>nonzero vector</em> <m>\vb{x}</m> such that <m>A\vb{x} = \lambda\vb{x}</m> for some scalar <m>\lambda</m>.
+          A scalar <m>\lambda</m> is called an <term>eigenvalue</term> of <m>A</m> if there is a <em>nonzero</em> solution of the equation <m>A\vb{x} = \lambda\vb{x}</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      Note that the zero vector is not allowed to be an eigenvector, but zero is allowed to be an eigenvalue.
+    </p>
+    <example xml:id="example-verifying-eigenvectors">
+      <title>Verifying Eigenvectors</title>
+      <statement>
+        <p>
+          Let
+          <me>A = \mqty[5 &amp; 2 \\ 3 &amp; 6],\qq{}\vb{v}_{1} = \mqty[1 \\ -1],\qq{}\vb{v}_{2} = \mqty[2 \\ 1]\qq{and}\vb{v}_{3} = \vb{0}.</me>
+          Which of the vectors, if any, is an eigenvector of <m>A</m>? What is one eigenvalue of <m>A</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First, note that <m>\vb{v}_{3} = \vb{0}</m> is not an eigenvector since it is the zero vector. So we'll check if the other two vectors are eigenvectors:
+          <me>A\vb{v}_{1} = \mqty[3 \\ -3] = 3\mqty[1 \\ -1]</me>
+          and
+          <me>A\vb{v}_{2} = \mqty[11 \\ 12].</me>
+          So <m>\vb{v}_{1}</m> is an eigenvector of <m>A</m> (with eigenvalue <m>3</m>), but <m>\vb{v}_{2}</m> is not an eigenvector since there is no scalar we can multiply <m>\vb{v}_{2}</m> by to get <m>A\vb{v}_{2}</m>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      It's a little harder to verify if a given number is an eigenvalue of a matrix <m>A</m>.
+    </p>
+    <example xml:id="example-verifying-eigenvalues">
+      <title>Verifying Eigenvalues</title>
+      <statement>
+        <p>
+          Is <m>-2</m> an eigenvalue of the matrix
+          <me>Q = \mqty[0 &amp; -1 &amp; -1 \\ -1 &amp; 0 &amp; -1 \\ -1 &amp; -1 &amp; 0]?</me>
+          If it is, find a corresponding eigenvector.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>-2</m> is an eigenvalue of <m>Q</m> if and only if the equation <m>Q\vb{x} = -2\vb{x}</m> has a <em>nonzero</em> solution. Rearranging this equation, we can say that <m>-2</m> is an eigenvalue of <m>Q</m> if and only if <m>(Q+2I)\vb{x} = \vb{0}</m> has a nontrivial solution. So we'll row reduce the augmented matrix <m>\mqty[Q+2I &amp; \vb{0}]</m> to see if the system has free variables:
+          <md>
+            <mrow>\mqty[2 &amp; -1 &amp; -1 &amp; 0 \\ -1 &amp; 2 &amp; -1 &amp; 0 \\ -1 &amp; -1 &amp; 2 &amp; 0] &amp;\sim\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 2 &amp; -1 &amp; -1 &amp; 0 \\ -1 &amp; -1 &amp; 2 &amp; 0]</mrow>
+            <mrow>&amp;\rowop[2R_{1}+R_{2}]{-R_{1}+R_{3}}\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 3 &amp; -3 &amp; 0 \\ 0 &amp; -3 &amp; 3 &amp; 0]</mrow>
+            <mrow>&amp;\sim\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]</mrow>
+          </md>
+          so there are free variables and it follows that <m>-2</m> is indeed an eigenvalue of <m>Q</m>.
+        </p>
+        <p>
+          To find an eigenvector, we just need to find a nontrivial solution of <m>(Q+2I)\vb{x} = \vb{0}</m>---equivalently, a nonzero vector in <m>\nul(Q+2I)</m>---so we'll continue row reducing:
+          <md>
+            <mrow>\mqty[-1 &amp; 2 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0] &amp;\rowop{-2R_{2}+R_{1}}\mqty[-1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]</mrow>
+            <mrow>&amp;\sim\mqty[1 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]</mrow>
+          </md>
+          So
+          <me>\nul(Q+2I) = \spn{\mqty[1 \\ 1 \\ 1]}</me>
+          and a single eigenvector of <m>Q</m> is given by
+          <me>\mqty[1 \\ 1 \\ 1].</me>
+        </p>
+      </solution>
+    </example>
+    <subsection xml:id="subsection-computing-eigenvalues-and-eigenvectors">
+      <title>Computing Eigenvalues and Eigenvectors</title>
+      <p>
+        There are two things we can note from <xref ref="example-verifying-eigenvalues" text="type-global" />.
+        First, any nonzero vector in <m>\nul(Q+2I)</m> is an eigenvector of <m>Q</m> with eigenvalue <m>-2</m>.
+        This leads to the following definition.
+      </p>
+      <definition xml:id="definition-eigenspaces">
+        <title>Eigenspaces</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>eigenspaces</h></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>\lambda</m> is an eigenvalue of <m>A</m>.
+            The <term>eigenspace</term> of <m>A</m> corresponding to <m>\lambda</m> is the subspace of <m>\RR^{n}</m> containing all of the eigenvectors corresponding to <m>\lambda</m> in addition to the zero vector.
+            In other words, the eigenspace of <m>A</m> corresponding to <m>\lambda</m> is the set <m>\nul(A-\lambda I)</m>.
+            This set is often denoted <m>E_{\lambda}</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        The second item we note is that <m>-2</m> was an eigenvalue precisely because the equation <m>(Q+2I)\vb{x} = \vb{0}</m> had nontrivial solutions.
+        In other words, <m>Q+2I</m> <em>was not invertible</em>.
+        In general, the polynomial <m>\det(A-\lambda I)</m> and equation <m>\det(A-\lambda I) = 0</m> are important enough that they deserve their own names.
+      </p>
+      <definition xml:id="definition-characteristic-polynomial-and-characteristic-equation">
+        <title>Characteristic Polynomial and Characteristic Equation</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>characteristic polynomial and equation</h></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> matrix.
+            The <term>characteristic polynomial</term> of <m>A</m> is the <m>n^\th</m> degree polynomial <m>\det(A-\lambda I)</m>.
+            The equation <m>\det(A-\lambda I) = 0</m> is the <term>characteristic equation</term>.
+          </p>
+        </statement>
+      </definition>
+      <theorem xml:id="theorem-eigenvalues-and-the-characteristic-equation">
+        <title>Eigenvalues and the Characteristic Equation</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a square matrix.
+            Then the eigenvalues of <m>A</m> are the solutions of the characteristic equation <m>\det(A - \lambda I) = 0</m>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-finding-eigenvalues">
+        <title>Finding Eigenvalues</title>
+        <statement>
+          <p>
+            Find the eigenvalues of the matrix
+            <me>A = \mqty[4 &amp; -2 &amp; 3 \\ 0 &amp; -1 &amp; 3 \\ -1 &amp; 2 &amp; -2].</me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            We need to compute the characteristic polynomial <m>\det(A-\lambda I)</m>. Now,
+            <me>A - \lambda I = \mqty[4 - \lambda &amp; -2 &amp; 3 \\ 0 &amp; -1-\lambda &amp; 3 \\ -1 &amp; 2 &amp; -2 - \lambda],</me>
+            so
+            <md>
+              <mrow>\det(A-\lambda I) &amp;= (4-\lambda)\mqty|-1-\lambda &amp; 3 \\ 2 &amp; -2-\lambda| - \mqty|-2 &amp; 3 \\ -1-\lambda &amp; 3|</mrow>
+              <mrow>&amp;= (4-\lambda)\qty[(-1-\lambda)(-2-\lambda)-6] - \qty[-6-(-3-3\lambda)]</mrow>
+              <mrow>&amp;= (4-\lambda)(-4+3\lambda+\lambda^{2}) - (-3+3\lambda)</mrow>
+              <mrow>&amp;= (4-\lambda)(\lambda+4)(\lambda-1)+3(1-\lambda)</mrow>
+              <mrow>&amp;= (\lambda-1)\qty[(4-\lambda)(\lambda+4)-3]</mrow>
+              <mrow>&amp;= (\lambda-1)(13-\lambda^{2})</mrow>
+            </md>
+            The solutions of the characteristic equation
+            <me>(\lambda-1)(13-\lambda^{2}) = 0</me>
+            are given by <m>\lambda = 1,\pm\sqrt{13}</m>. So the eigenvalues of <m>A</m> are <m>1,-\sqrt{13}</m> and <m>\sqrt{3}</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        Computer systems such as Sage and Octave can, naturally, find eigenvalues and eigenvectors as well.
+        In Octave this is done with the <c>eig</c> command.
+        If no output is specified then the command produces an array of eigenvalues, while if two outputs are specified the command produces two matrices: the first matrix is a matrix of eigenvector columns of <m>A</m> and the second matrix is a diagonal matrix of eigenvalues of <m>A</m>.
+        See the code cell below.
+      </p>
+      <sage language="octave">
+        <input>
+          format short
+          A = [4, -2, 3; 0, -1, 3; -1, 2, -2];
+          [U,D] = eig(A)
+        </input>
+      </sage>
+      <p>
+        Matters are simplified greatly when finding eigenvalues of triangular matrices (see <xref ref="theorem-determinants-of-triangular-matrices" text="type-global" />).
+      </p>
+      <example xml:id="example-eigenvalues-of-a-triangular-matrix">
+        <title>Eigenvalues of a Triangular Matrix</title>
+        <statement>
+          <p>
+            Find the eigenvalues of the matrix
+            <me>B = \mqty[1 &amp; 0 &amp; 0 &amp; 0 \\ 5 &amp; 0 &amp; 0 &amp; 0 \\ -1 &amp; -3 &amp; -3 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; -10].</me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            To find the eigenvalues, we need to first find <m>\det(B-\lambda I)</m>. Since
+            <me>B-\lambda I = \mqty[1-\lambda &amp; 0 &amp; 0 &amp; 0 \\ -1 &amp; \lambda &amp; 0 &amp; 0 \\ -1 &amp; -3 &amp; -3-\lambda &amp; 0 \\ 0 &amp; 0 &amp; -1 &amp; -10-\lambda]</me>
+            is triangular (just as <m>B</m> is triangular), it follows that
+            <me>\det(B - \lambda I) = (1-\lambda)\lambda(-3-\lambda)(-10-\lambda).</me>
+            The solutions of the characteristic equation, and thus the eigenvalues of <m>B</m>, are given by <m>\lambda = 1, 0, -3, -10</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        <xref ref="example-eigenvalues-of-a-triangular-matrix" text="type-global" /> suggests the following theorem.
+      </p>
+      <theorem xml:id="theorem-eigenvalues-of-a-triangular-matrix">
+        <title>Eigenvalues of a Triangular Matrix</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a square triangular matrix.
+            Then the eigenvalues of <m>A</m> are just the diagonal entries of <m>A</m>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        So now we have a good idea of how to find eigenvalues of a square matrix <m>A</m>: just solve the characteristic equation <m>\det(A-\lambda I) = 0</m>.
+        To find the corresponding eigenvectors, we need to solve the related equation <m>A\vb{v} = \vb{0}</m>, which reduces to solving <m>(A-\lambda I)\vb{v} = \vb{0}</m>.
+      </p>
+      <example xml:id="example-finding-eigenvalues-and-eigenvectors">
+        <title>Finding Eigenvalues and Eigenvectors</title>
+        <statement>
+          <p>
+            Find the eigenvalues and eigenvectors of
+            <me>A = \mqty[2 &amp; 0 &amp; -1 \\ 0 &amp; \frac{1}{2} &amp; 0 \\ 1 &amp; 0 &amp; 4].</me>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, we need to find the eigenvalues.
+            Since
+            <me>\det(A-\lambda I) = \mqty|2-\lambda &amp; 0 &amp; -1 \\ 0 &amp; \frac{1}{2}-\lambda &amp; 0 \\ 1 &amp; 0 &amp; 4-\lambda| = (2-\lambda)\qty(\frac{1}{2}-\lambda)(4-\lambda) + \frac{1}{2}-\lambda </me>
+            which simplifies to
+            <me>\det(A-\lambda I) = \qty(\frac{1}{2}-\lambda)\left[(2-\lambda)(4-\lambda)+1\right] = \qty(\frac{1}{2}-\lambda)[\lambda^{2}-6\lambda+9],</me>
+            we see that the eigenvalues of <m>A</m> are given by <m>\lambda=\frac{1}{2},3</m>.
+          </p>
+          <p>
+            Now we can start trying to find eigenvectors.
+            First, we'll row reduce <m>\mqty[A-\frac{1}{2}I &amp; 0]</m> to find an eigenvector corresponding to <m>\lambda=\frac{1}{2}</m>:
+            <md>
+              <mrow>\mqty[\frac{3}{2} &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; \frac{7}{2} &amp; 0] &amp;\rowop[2R_{3}]{2R_{1}}\mqty[3 &amp; 0 &amp; -2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 2 &amp; 0 &amp; 7 &amp; 0]</mrow>
+              <mrow>&amp;\rowop{2R_{3}+R_{1}}\mqty[1 &amp; 0 &amp; -9 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 2 &amp; 0 &amp; 7 &amp; 0]</mrow>
+              <mrow>&amp;\rowop{-2R_{1}+R_{3}}\mqty[1 &amp; 0 &amp; -9 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 25 &amp; 0]</mrow>
+              <mrow>&amp;\sim\mqty[1 &amp; 0 &amp; -9 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0]</mrow>
+              <mrow>&amp;\rowop{9R_{3}+R_{1}}\mqty[1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0].</mrow>
+            </md>
+          </p>
+          <p>
+            Here's what this is saying: if <m>\vb{v} = \mqty[\xmat*{v}{1}{3}]^{T}</m> is an eigenvector of <m>A</m> corresponding to <m>\lambda=\frac{1}{2}</m>, or in other words a nontrivial solution of <m>(A-\frac{1}{2}I)\vb{v} = \vb{0}</m>, then we must have <m>v_{1} = v_{3} = 0</m> and <m>v_{2}</m> free.
+            So one nonzero eigenvector corresponding to <m>\lambda=\frac{1}{2}</m> is given by
+            <me>\vb{v}_{1} = \mqty[0\\1\\0].</me>
+            Therefore <m>\smqty[0\\1\\0]</m> forms a basis of the eigenspace <m>E_{\frac{1}{2}}</m> of <m>A</m>.
+          </p>
+          <p>
+            To find an eigenvector corresponding to <m>\lambda = 3</m>, we'll now row reduce <m>\mqty[A - 3I &amp; \vb{0}]</m>:
+            <me>\mqty[-1 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 1 &amp; 0]\sim\mqty[0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 1 &amp; 0].</me>
+            So if <m>\vb{v}</m> is an eigenvector corresponding to the eigenvalue <m>\lambda=3</m>, then we need <m>v_{1} = -v_{3}</m>, and <m>v_{2} = 0</m>.
+            Which means that
+            <me>\vb{v} = \mqty[\xmat*{v}{3}{1}] = \mqty[-v_{3} \\ 0 \\ v_{3}] = v_{3}\mqty[-1\\0\\1].</me>
+            The vector <m>\smqty[-1\\0\\1]</m> therefore forms a basis of the eigenspace <m>E_3</m> of <m>A</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        As mentioned above, the computations in <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" /> can also be carried out using technology.
+        In Octave, the computation proceeds using <c>eig</c>:
+      </p>
+      <sage language="octave">
+        <input>
+          format short
+          A = [2, 0, -1; 0, 1/2, 0; 1, 0, 4];
+          [U,D] = eig(A)
+        </input>
+      </sage>
+      <p>
+        Octave by design will give eigenvectors that have unit norm (i.e., magnitude of <m>1</m>).
+        In the above cell the first two columns of <m>U</m> are eigenvectors in <m>E_3</m>, while the last column is an eigenvector in <m>E_{\frac{1}{2}}</m>.
+        In <xref ref="subsection-algebraic-and-geometric-multiplicities-of-eigenvalues" text="type-global" />, we examine the reason why <m>3</m> shows up twice in the matrix <m>D</m> of eigenvalues (and why a column of <m>U</m> is repeated here).
+      </p>
+      <p>
+        As Octave is designed for numerical work, it's a little awkward to try to get it to produce symbolic answers.
+        For symbolic mathematics, a system such as Sage (or another CAS) is more appropriate.
+        In Sage, eigenvalues can be found like so:
+        <aside><p><c>A.eigenvectors_right()</c> finds vectors <m>\vb{x}</m> satisfying <m>A\vb{x} = \lambda \vb{x}</m>. <c>A.eigenvectors_left()</c> finds vectors <m>\vb{y}</m> satisfying <m>\vb{y}^{T}A = \lambda\vb{y}^{T}</m>.</p></aside>
+      </p>
+      <sage>
+        <input>
+          A = Matrix([[2, 0, -1], [0, 1/2, 0], [1, 0, 4]])
+          A.eigenvectors_right()
+        </input>
+      </sage>
+      <p>
+        Octave-like output can also be produced using the <c>eigenmatrix_right()</c> method:
+      </p>
+      <sage>
+        <input>
+          # run the previous cell first so A is defined!
+          D,U = A.eigenmatrix_right()
+          D,U
+        </input>
+      </sage>
+    </subsection>
+    <subsection xml:id="subsection-algebraic-and-geometric-multiplicities-of-eigenvalues">
+      <title>Algebraic and Geometric Multiplicities of Eigenvalues</title>
+      <p>
+        There are a couple of interesting things we can note about the <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />.
+        First, each eigenvalue had <em>at least</em> one corresponding eigenvector.
+        Second, <m>\lambda=3</m> was basically a <q>repeated</q> eigenvalue, since it showed up as a double root in the characteristic equation <m>\det(A-\lambda I)=0</m>.
+        This leads us to some terminology.
+      </p>
+      <definition xml:id="definition-algebraic-and-geometric-multiplicity">
+        <title>Algebraic and Geometric Multiplicity</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>algebraic and geometric multiplicity</h></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> matrix and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
+            The <term>algebraic multiplicity</term> of <m>\lambda</m> is defined to be the multiplicity of <m>\lambda</m> as a root of the characteristic equation.
+            The <term>geometric multiplicity</term> of <m>\lambda</m> is defined to be the number of linearly independent eigenvectors corresponding to <m>\lambda</m>.
+            Equivalently, the geometric multiplicity is exactly the dimension of the eigenspace corresponding to <m>\lambda</m>: <m>\dim E_{\lambda}</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        In <xref ref="example-finding-eigenvalues-and-eigenvectors" text="type-global" />, <m>\lambda = 3</m> had an algebraic multiplicity of <m>2</m>.
+        This could also be seen in the Octave and Sage results following the example, since <m>3</m> showed up twice in the diagonal matrix of eigenvalues.
+        This was also given after using <c>eigenvectors_right()</c> immediately after the given eigenvector for <m>\lambda  = 3</m>.
+        On the other hand, the geometric multiplicity of <m>\lambda = 3</m> was <m>\dim E_{3} = 1</m>.
+        This was represented in the repeated eigenvector in <m>U</m> in the Octave result and the single nonzero vector corresponding to <m>\lambda = 3</m> in the Sage result.
+        In this case, we say that <m>A</m> is <em>defective</em>.
+      </p>
+      <definition xml:id="definition-defective-matrices">
+        <title>Defective Matrices</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>defective matrix</h></idx><idx><h>eigenvalues and eigenvectors</h><h>defective matrix</h><seealso>algebraic and geometric multiplicity</seealso></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be a square matrix.
+            If the sum of the geometric multiplicities of the eigenvalues of <m>A</m> is less than the sum of algebraic multiplicities of eigenvalues of <m>A</m>, then we say that <m>A</m> is <term>defective</term>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        The following result gives some basic estimates for algebraic and geometric multiplicities of eigenvalues.
+      </p>
+      <theorem xml:id="theorem-bounds-on-algebraic-and-geometric-multiplicities">
+        <title>Bounds on Algebraic and Geometric Multiplicities</title>
+        <statement>
+          <p>
+            If <m>A</m> is an <m>n\times n</m> matrix, then <m>A</m> has exactly <m>n</m> (not necessarily distinct!) eigenvalues, counting multiplicities.
+            Furthermore, if <m>\lambda</m> is an eigenvalue of <m>A</m>, then the geometric multiplicity is always less than or equal to the algebraic multiplicity.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        From <xref ref="theorem-bounds-on-algebraic-and-geometric-multiplicities" text="type-global" />, an <m>n\times n</m> square matrix <m>A</m> is defective if and only if it has at most <m>n-1</m> linearly independent eigenvectors.
+        Equivalently, the eigenvectors of <m>A</m> are not enough to form a basis (also known as an <em>eigenbasis</em>) of <m>\RR^n</m>.
+        This leads to difficulties in computations involving <m>A</m>.
+      </p>
+      <definition xml:id="definition-eigenbases">
+        <title>Eigenbases</title>
+        <idx><h>eigenvalues and eigenvectors</h><h>eigenbases</h></idx>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> square matrix that is not defective.
+            A set <m>\qty{\vb{v}_1, \ldots, \vb{v}_n}</m> is called an <term>eigenbasis</term> for <m>\RR^n</m> if each vector in the set is an eigenvector of <m>A</m> and if the set also forms a basis of <m>\RR^n</m>.
+          </p>
+        </statement>
+      </definition>
+      <example xml:id="example-multiplicities-and-eigenspaces">
+        <title>Multiplicities and Eigenspaces</title>
+        <statement>
+          <p>
+            Graph the eigenspaces of the matrix
+            <me>A = \mqty[1 &amp; 3 \\ 0 &amp; 0].</me>
+            What are the algebraic and geometric multiplicities of each eigenvalue?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Since <m>A</m> is triangular, its eigenvalues are <m>0</m> and <m>1</m>.
+            We also know at this point that <m>A</m> can't be defective.
+            In particular, we can form a basis of <m>\RR^2</m> entirely from eigenvectors of <m>A</m>.
+            To actually find the eigenvectors, we need to find the corresponding eigenspaces <m>E_{0} = \nul(A-0I) = \nul A</m> and <m>E_{1} = \nul(A-I)</m>.
+          </p>
+          <p>
+            By inspection,
+            <me>\nul A = \spn{\mqty[-3 \\ 1]}.</me>
+            The eigenspace associated with <m>1</m> is <m>\nul(A-I)</m>.
+            Since
+            <me>A- I - \mqty[0 &amp; 3 \\ 0 &amp; -1]</me>
+            we see that
+            <me>\nul(A-I) = \spn{\mqty[1\\0]}.</me>
+            So the graph of the eigenspaces is given by
+          </p>
+          <figure>
+            <caption>Eigenspaces of <m>A</m></caption>
+            <image xml:id="image-eigenspaces-of-2x2-matrix" width="100%">
+              <description>A plot of the eigenspaces of a matrix</description>
+              <latex-image>
+                \begin{tikzpicture}[scale = 0.7]
+                \begin{axis}[
+                enlargelimits=false,
+                legend cell align=left,
+                axis x line = middle,
+                xlabel = $x_{1}$,
+                axis y line = center,
+                ylabel = $x_{2}$,
+                grid=both
+                ]
+                \addplot[domain=-3:3,samples=200,blue]{(-1/3)*x};
+                \addlegendentry{$\nul A$}
+                \addplot[domain=-3:3,thick,samples=200,blue,dashed]{0};
+                \addlegendentry{$\nul(A-I)$}
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </figure>
+          <p>
+            A corresponding eigenbasis from <m>A</m> would be the set <m>\qty{\smqty[-3\\1], \smqty[1\\0]}</m>.
+          </p>
+        </solution>
+      </example>
+      <p>
+        The importance of an eigenbasis is demonstrated in the next example.
+      </p>
+      <example xml:id="example-matrix-multiplication-and-eigenvectors">
+        <title>Matrix Multiplication and Eigenvectors</title>
+        <statement>
+          <p>
+            Let
+            <me>\mathcal{B} = \qty{\vb{b}_{1},\vb{b}_{2}} = \qty{\mqty[-3 \\ 1], \mqty[1 \\ 0]}</me>
+            and let <m>A</m> be as in the previous example.
+            Suppose that <m>\vb{v}</m> is a vector in <m>\RR^{2}</m> such that
+            <me>\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}.</me>
+            Compute <m>A\vb{v}</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This computation will be quite easy.
+            Since <m>\vb{v} = 4\vb{b}_{1}+3\vb{b}_{2}</m>, we have
+            <me>A\vb{v} = 4A\vb{b}_{1}+3A\vb{b}_{2} = 3\vb{b}_{2} = \mqty[3 \\ 0].</me>
+          </p>
+        </solution>
+      </example>
+    </subsection>
+  </section>
+  <section xml:id="section-eigenvalue-problems">
+    <title>Eigenvalue Problems</title>
+    <p>
+      Many important problems in mathematics and its applications reduce to statements of the form <m>A\vb{x} = \lambda\vb{x}</m>.
+      Naturally, eigenvalues and eigenvectors are useful tools for tackling these problems.
+      As a first example, we'll again consider a Markov process.
+    </p>
+    <example xml:id="example-long-term-behavior-of-markov-processes">
+      <title>Long-term Behavior of Markov Processes</title>
+      <statement>
+        <p>
+          Recall that a Markov process describes the evolution of one state <m>\vb{x}_{n}</m> into a future state <m>\vb{x}_{n+1}</m> using the matrix equation <m>A\vb{x}_n = \vb{x}_{n+1}</m>.
+          In such a process, the matrix <m>A</m> is a square matrix with non-negative entries whose columns sum to <m>1</m>.
+          Starting from an initial state <m>\vb{x}_0</m>, we are often interested in whether the long-term evolution approaches a specific state vector <m>\vb{x}</m>.
+          In symbols, we want to determine if <m>A^n\vb{x}_0 \to \vb{x}</m> as <m>n\to\infty</m>.
+        </p>
+        <p>
+          For such a vector, we should have <m>A\vb{x} = \lim_{n\to\infty}A(A^n\vb{x}) = \vb{x}</m>.
+          In other words, <m>\vb{x}</m> is an <em>eigenvector of <m>A</m> with eigenvalue <m>1</m></em>.
+          We call this vector a <term>steady-state vector</term> of the Markov process.
+        </p>
+        <p>
+          Now let's suppose we model the weather with a Markov process with transition matrix
+          <me>A = \mqty[0.33 &amp; 0.25 &amp; 0.40 \\ 0.52 &amp; 0.42 &amp; 0.40 \\ 0.15 &amp; 0.33 &amp; 0.20],</me>
+          corresponding states <m>S, C</m> and <m>R</m> (i.e., "sunny", "cloudy" and "rainy") and we use an initial state vector of <m>\vb{x}_0 = \smqty[0 &amp; 1 &amp; 0]^T</m>.
+          To figure out the long-term probability that it will be a cloudy day, we can try computing <m>A^n\vb{x}_0</m> for large values of <m>n</m>.
+          See the Octave cell below.
+          If we do so, it appears that the long-term probability of a cloudy day settles in around <m>44.6\%</m>.
+        </p>
+        <p>
+          We can make this analysis more precise by looking for the steady state vector using <c>eig</c>.
+          If we take this approach, then we see that <m>A</m> has <m>1</m> as an eigenvalue and corresponding eigenvector <m>\smqty[0.52 &amp; 0.74 &amp; 0.41]^{T}</m>.
+          This is <em>not</em> a state vector since the values do not add to <m>1</m> and therefore can't be probabilities.
+          However, we can convert this into a state vector by dividing each entry by the sum <m>0.52+0.74+0.41 = 1.678</m> which in turn gives the eigenvector
+          <me>\vb{x} = \mqty[0.3113 \\ 0.4463 \\ 0.2425]</me>
+          confirming our earlier guess.
+          We can also see the long-term probabilities of sunny and rainy days from this steady-state vector as well.
+        </p>
+      </statement>
+    </example>
+    <sage language="octave">
+      <input>
+        % Code for Markov example
+        format short
+        A = [0.33, 0.25, 0.40; 0.52, 0.42, 0.40; 0.15, 0.33, 0.20]
+        [U,D] = eig(A)
+      </input>
+    </sage>
+    <example xml:id="example-singular-values-and-the-condition-number">
+      <title>Singular Values and the Condition Number</title>
+      <statement>
+        <p>
+          In numerical linear algebra, the <term>condition number</term> of an invertible matrix <m>A</m> gives an estimate of how solutions of <m>A\vb{x} = \vb{b}</m> can change in the presence of error.
+          More precisely, the condition number measures the response of the solution <m>\vb{x}</m> if <m>\vb{b}</m> is perturbed by an error term.
+          If the condition number is small then we expect a small change in <m>\vb{x}</m> if the error in <m>\vb{b}</m> is small.
+          If the condition is large, however, small changes in <m>\vb{b}</m> can have significant effects on <m>\vb{x}</m>.
+        </p>
+        <p>
+          The condition number itself is denoted <m>\kappa(A)</m>.
+          If we let <m>A\vb{x} = \vb{b}</m> denote the unperturbed system and <m>A\hat{\vb{x}} = \hat{\vb{b}}</m> denote the corresponding perturbed system, then the relative error between <m>\hat{\vb{x}}</m> and <m>\vb{x}</m> is at most equal to <m>\kappa(A)</m> times the relative error between <m>\hat{\vb{b}}</m> and <m>\vb{b}</m>.
+        </p>
+        <p>
+          The condition number <m>\kappa(A)</m> itself can be calculated from the eigenvalues of <m>A^{T}A</m> as follows:
+          <me>\kappa(A) = \frac{\sqrt{\lambda_{\text{max}}(A^{T}A)}}{\sqrt{\lambda_{\text{min}}(A^{T}A)}}.</me>
+          Using this, find the <m>\kappa(A)</m> for
+          <me>A = \mqty[1 &amp; 3 &amp; -2 \\ 0 &amp; 2 &amp; 4 \\ -3 &amp; 2 &amp; 3]</me>
+        </p>
+      </statement>
+    </example>
+    <sage language="octave">
+      <input>
+        % code cell for condition number example
+      </input>
+    </sage>
+  </section>
+  <section xml:id="section-orthogonal-transformations">
+    <title>Orthogonal Transformations</title>
+    <p>
+      Two fundamental concepts in vector geometry are the <em>magnitude</em> and the <em>inner product</em>.
+      In <m>\RR^n</m> these topics are related as given by the following definition.
+    </p>
+    <definition xml:id="definition-inner-product-and-magnitude">
+      <title>Inner Product and Magnitude</title>
+      <idx>inner product</idx><idx>magnitude</idx>
+      <statement>
+        <p>
+          Let <m>\vb{x}</m> and <m>\vb{y}</m> be vectors in <m>\RR^n</m>.
+          The <term>inner product</term> of <m>\vb{x}</m> and <m>\vb{y}</m> is the real scalar <m>\dotprod{\vb{x},\vb{y}}</m> given by
+          <me>\dotprod{\vb{x},\vb{y}} = \vb{y}^{T}\vb{x}.</me>
+          The <term>magnitude</term> of <m>\vb{x}</m> is the nonnegative real number <m>\norm{\vb{x}}</m> given by
+          <me>\norm{\vb{x}} = \sqrt{\dotprod{\vb{x},\vb{x}}}.</me>
+        </p>
+      </statement>
+    </definition>
+    <p>
+      If you've taken Calculus III, then some of the following properties will be familiar with their analogues for the dot product (see <url href="https://j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html" visual="j-oldroyd.github.io/wvwc-calculus/section-the-dot-product.html">here</url>).
+    </p>
+    <theorem xml:id="theorem-properties-of-the-inner-product">
+      <title>Properties of the Inner Product</title>
+      <statement>
+        <p>
+          Let <m>\vb{x}, \vb{y}</m> and <m>\vb{z}</m> be vectors in <m>\RR^n</m> and let <m>\alpha</m> and <m>\beta</m> be real scalars.
+          Then the inner product satisfies the following properties:
+          <ol>
+            <li><m>\dotprod{\vb{x},\vb{y}} = \dotprod{\vb{y},\vb{x}}</m></li>
+            <li><m>\dotprod{\vb{x}, \vb{y}+\vb{z}} = \dotprod{\vb{x},\vb{y}} + \dotprod{\vb{x},\vb{z}}</m></li>
+            <li><m>\dotprod{\alpha\vb{x},\vb{y}} = \alpha\dotprod{\vb{x},\vb{y}}</m> and <m>\dotprod{\vb{x},\beta\vb{y}} = \beta\dotprod{\vb{x},\vb{y}}</m></li>
+            <li><m>\dotprod{\vb{x},\vb{y}} = \norm{\vb{x}}\norm{\vb{y}}\cos\theta</m> where <m>\theta</m> denotes the angle between <m>\vb{x}</m> and <m>\vb{y}</m> where <m>0\leq\theta\leq \pi</m>.</li>
+            <li><m>\dotprod{A\vb{x},\vb{y}} = \dotprod{\vb{x},A^{T}\vb{y}}</m> for any <m>n\times n</m> matrix <m>A</m>.</li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      The last property in <xref ref="theorem-properties-of-the-inner-product" text="type-global" /> is particularly important and can be taken as the definition of <m>A^{T}</m>.
+      We also have the following very important inequalities involving inner products and magnitudes.
+    </p>
+    <theorem xml:id="theorem-cauchy-schwarz-inequality">
+      <title>Cauchy-Schwarz Inequality</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m>.
+          Then
+          <me>\abs{\dotprod{\vb{x},\vb{y}}}\leq\norm{\vb{x}}\norm{\vb{y}}.</me>
+        </p>
+      </statement>
+    </theorem>
+    <theorem xml:id="theorem-triangle-inequality">
+      <idx>Triangle Inequality</idx>
+      <title>Triangle Inequality</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m>.
+          Then
+          <me>\norm{\vb{x} + \vb{y}}\leq\norm{\vb{x}} + \norm{\vb{y}}.</me>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      As the magnitude and inner product are both fundamental concepts in vector geometry, any transformation (i.e., any matrix) that preserves both of these quantities are particularly useful to work with.
+      Such matrices are called <em>orthogonal transformations</em>.
+    </p>
+    <definition xml:id="definition-orthogonal-transformation">
+      <idx>orthogonal matrix</idx>
+      <title>Orthogonal Transformation</title>
+      <statement>
+        <p>
+          Let <m>U</m> be a real <m>n\times n</m> matrix.
+          We say that <m>U</m> is <term>orthogonal</term> if
+          <me>UU^{T} = U^{T}U = I.</me>
+          The set of all orthogonal <m>n\times n</m> matrices is denoted by <m>O(n)</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      Geometrically, the action of an orthogonal matrix on vectors preserves angles between vectors as measured by the inner product.
+    </p>
+    <theorem xml:id="theorem-orthogonal-transformations-and-inner-products">
+      <title>Orthogonal Transformations and Inner Products</title>
+      <statement>
+        <p>
+          Let <m>\vb{x},\vb{y}\in\RR^n</m> and let <m>U</m> be an <m>n\times n</m> orthogonal matrix.
+          Then
+          <me>\dotprod{\vb{x},\vb{y}} = \dotprod{U\vb{x},U\vb{y}}.</me>
+          Furthermore, <m>\norm{\vb{x}} = \norm{U\vb{x}}</m>.
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      As orthogonal matrices are invertible, it follows that their columns form a basis.
+      Such as basis has some very useful characteristics.
+      To be precise, let <m>U = \smqty[\vb{u}_1 &amp; \ldots &amp; \vb{u}_{n}]</m> denote an <m>n\times n</m> orthogonal matrix.
+      Then the fact that <m>U^{T}U = I</m> implies that
+      <me>\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 &amp;\text{ if }i=j \\ 0 &amp;\text{ if }i\neq j\end{cases}.</me>
+      This leads to the following definition.
+    </p>
+    <definition xml:id="definition-orthonormal-basis">
+      <title>Orthonormal Basis</title>
+      <idx><h>basis</h><h>orthonormal</h></idx>
+      <statement>
+        <p>
+          Let <m>\qty{\vb{u}_{i}}_{i=1}^{n}</m> denote a collection of vectors in <m>\RR^n</m>.
+          This collection is an <term>orthonormal basis (ONB)</term> if
+          <me>\dotprod{\vb{u}_{i},\vb{u}_{j}} = \begin{cases} 1 &amp;\text{ if }i=j \\ 0 &amp;\text{ if }i\neq j\end{cases}.</me>
+        </p>
+      </statement>
+    </definition>
+    <p>
+      Geometrically, an ONB in <m>\RR^n</m> is a collection of <m>n</m> orthogonal unit vectors.
+      These can be viewed as a generalization of the typical coordinate axes.
+    </p>
+  </section>
+  <section xml:id="section-diagonalization-of-matrices">
+    <title>Diagonalization of Matrices</title>
+    <introduction>
+      <p>
+        In this section we consider bases of <m>\mathbb{R}^n</m> that are associated with eigenvectors a square matrix <m>A</m> known as eigenbases (see <xref ref="definition-eigenbases" text="type-global" />).
+        The benefit to looking at such a basis instead of using the standard basis of <m>\RR^n</m> is that the eigenbasis will make products involving <m>A</m> much simpler through a process known as <em>diagonalization</em>.
+      </p>
+    </introduction>
+    <subsection xml:id="subsection-eigenbases">
+      <title>Eigenbases</title>
+      <p>
+        Recall that a basis of <m>\RR^n</m> is a linearly independent collection of <m>n</m> vectors in <m>\RR^n</m> (see also <xref ref="definition-basis-of--rr-n-" text="type-global" />).
+        The defining characteristic of a basis is this: if <m>\qty{\vb{b}_1,\ldots,\vb{b}_n}</m> is a basis of <m>\RR^n</m> and if <m>\vb{x}\in\RR^n</m>, then there exists a unique set of scalars <m>c_1,\ldots,c_n</m> such that
+        <me>\xx = \sum_{i=1}^{n}c_i\vb{b}_i</me>.
+        This makes it possible to use the basis as a coordinate system in <m>\RR^n</m>.
+        Therefore we may view an eigenbasis (<xref ref="definition-eigenbases" text="type-global" />) of a matrix <m>A</m> as a particular coordinate system that is well-suited to calculations involving <m>A</m>, an idea which we make precise below.
+      </p>
+      <example xml:id="example-using-an-eigenbasis-to-compute-a-matrix-product">
+        <title>Using an Eigenbasis to Compute a Matrix Product</title>
+        <statement>
+          <p>
+            Let
+            <me>A = \mqty[-2 &amp; 3 \\ -4 &amp; 5]\text{ and }\vb{b} = \mqty[-2 \\ 10]</me>.
+            Given that
+            <me>\vv_1 = \mqty[1\\1]\text{ and }\vv_2 = \mqty[3\\4]</me>
+            are eigenvectors of <m>A</m> with corresponding eigenvalues <m>\lambda_1 = 1</m> and <m>\lambda_2 = 2</m>, find <m>A^{100}\bb</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            First, note that <m>\qty{\vv_1,\vv_2}</m> is a basis of <m>\RR^2</m>.
+            Therefore it's an eigenbasis since each vector is an eigenvector of <m>A</m>.
+            <aside>
+              <title>Bases in <m>\RR^2</m></title>
+              <p>
+                One way to see that <m>\qty{\vv_1,\vv_2}</m> must be a basis of <m>\RR^2</m> is to observe that <m>\vv_2</m> is not a scalar multiple of <m>\vv_1</m> and so the two vectors are linearly independent.
+                Then <m>\qty{\vv_1,\vv_2}</m> is a set of two linearly independent vectors in the two-dimensional vector space <m>\RR^2</m>, and so this set must be a basis of <m>\RR^2</m>.
+              </p>
+            </aside>
+          </p>
+          <p>
+            Since <m>\qty{\vv_1,\vv_2}</m> is a basis of <m>\RR^2</m> then there exist scalars <m>c_1,c_2</m> such that <m>\bb = c_1\vv_1 + c_2\vv_2</m>.
+            We can find these scalars by row reduction of the augmented matrix <m>\mqty[\vv_1 &amp; \vv_2 &amp; \bb]</m>.
+            This reduces to
+            <me>\mqty[1 &amp; 0 &amp; -38 \\ 0 &amp; 1 &amp; 12]</me>,
+            and so <m>c_1 = -38, c_2 = 12</m> and
+            <me>\bb = -38\vv_1 + 12\vv_2</me>.
+          </p>
+          <p>
+            Now that we've written <m>\bb</m> in terms of the eigenbasis <m>\qty{\vv_1,\vv_2}</m>, the computation of <m>A^{100}\bb</m> becomes almost trivial:
+            <md>
+              <mrow>A^{100}\bb &amp; = A^{100}(-38\vv_1 + 12\vv_2) </mrow>
+              <mrow> &amp; = -38 A^{100}\vv_1 + 12 A^{100}\vv_2 </mrow>
+              <mrow> &amp; = -38 \vv_1 + 12\cdot 2^{100}\vv_2 </mrow>
+              <mrow> &amp; = \mqty[-38 + 36(2^{100}) \\ -38 + 48(2^{100})] </mrow>
+            </md>.
+            <aside>
+              <p>
+                The second to last line of this computation makes use of the fact that
+                <me>A^n\xx = \lambda^n\xx</me>
+                for any eigenvector <m>\xx</m> of <m>A</m> with eigenvalue <m>\lambda</m>.
+              </p>
+            </aside>
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          format short
+          A = [1, 3, -2; 1, 4, 10]
+          rref(A) # reduces to find c_1, c_2
+        </input>
+      </sage>
+      <p>
+        <xref ref="example-using-an-eigenbasis-to-compute-a-matrix-product" text="type-global" /> shows that the existence of an eigenbasis can greatly simplify certain computations.
+        Unfortunately, not every matrix has a corresponding eigenbasis (see <xref ref="definition-defective-matrices" text="type-global" />).
+        However, the following theorem gives a simple condition that can be used to guarantee the existence of an eigenbasis.
+      </p>
+      <theorem xml:id="theorem-distinct-eigenvalues-and-eigenbases">
+          <title>Distinct Eigenvalues and Eigenbases</title>
+          <statement>
+            <p>
+              Let <m>A</m> be an <m>n\times n</m> matrix and suppose that <m>A</m> has <m>n</m> distinct eigenvalues (equivalently, no eigenvalue is repeated).
+              Then <m>A</m> has an eigenbasis.
+            </p>
+          </statement>
+          <proof>
+            <p>
+              The proof of this statement follows from the fact that eigenvectors corresponding to distinct eigenvalues must be linearly independent, so we'll prove this first.
+              So let <m>\qty{\lambda_i}_{i=1}^n</m> denote the eigenvalues of <m>A</m> and let <m>\xx_i</m> denote an eigenvector of <m>A</m> corresponding to <m>\lambda_i</m>.
+              We'll show that <m>\qty{\xx_i}_{i=1}^n</m> is a linearly independent set.
+              As this will then be a set of <m>n</m> linearly independent vectors in <m>\RR^n</m>, this is enough to show that it's a basis as well.
+            </p>
+            <p>
+              Suppose that we have scalars <m>\qty{c_i}</m> such that <m>\sum_{i=1}^n c_i\xx_i = \vb{0}</m>.
+              We need to show that <m>c_1=\ldots=c_n=0</m>.
+              Now, since each <m>\xx_i</m> is an eigenvector of <m>A</m> with eigenvalue <m>\lambda_i</m>, it follows that
+              <me>A\qty(\sum_{i=1}^n c_i\xx_i) = \sum_{i=1}^n c_i A\xx_i = \sum_{i=1}^n c_i\lambda_i\xx_i</me>.
+              Since <m>A\vb{0} = \vb{0}</m> as well, we have
+              <me>\sum_{i=1}^n c_i\lambda_i\xx_i = \vb{0}</me>.
+              We can also multiply the original equation <m>\sum_{i=1}^{n}c_i\xx_i = \vb{0}</m> by <m>\lambda_1</m> to get
+              <me>\sum_{i=1}^{n}\lambda_1 c_i\xx_i = \vb{0}</me>.
+            </p>
+            <p>
+              Subtracting the previous two equations allows us to write
+              <me>\vb{0} = \sum_{i=1}^n c_i (\lambda_i - \lambda_1)\xx_i = \sum_{i=2}^n c_i(\lambda_i-\lambda_1)\xx_i = \sum_{i=2}^{n}d_i \xx_i</me>
+              where <m>d_i = c_i(\lambda_i-\lambda_1)</m>.
+              Now we can repeat the above process and write
+              <me>\sum_{i=2}^n d_i\lambda_i\xx_i = \vb{0} = \sum_{i=2}^n d_i\lambda_2\xx_i</me>
+              which gives (after subtracting)
+              <me>\vb{0} = \sum_{i=2}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n d_i (\lambda_i-\lambda_2)\xx_i = \sum_{i=3}^n e_i\xx_i</me>
+              where <m>e_i = (\lambda_i-\lambda_2)d_i = (\lambda_i-\lambda_2)(\lambda_i-\lambda_1)c_i</m>.
+              Continuing this process, we are left with the equation
+              <me>\vb{0} = (\lambda_n-\lambda_{n-1})(\lambda_n-\lambda_{n-2})\cdots(\lambda_n-\lambda_1)c_n\xx_n</me>,
+              which forces <m>c_n = 0</m>.
+            </p>
+            <p>
+              Now we are left with
+              <me>\sum_{i=1}^{n-1}c_{i}\xx_i = \vb{0}</me>
+              since we can safely disregard <m>c_n\xx_n</m>.
+              But there's nothing stopping us from applying the previous trick to this new sum, which will eventually show that <m>c_{n-1} = 0</m>, and then <m>c_{n-2} = 0</m>, and so on.
+              Therefore
+              <me>c_1=\ldots = c_n = 0</me>
+              and the set <m>\qty{\xx_i}_{i=1}^n</m> must be linearly independent, which was what we needed to prove.
+            </p>
+          </proof>
+      </theorem>
+    </subsection>
+    <subsection xml:id="subsection-diagonalization">
+      <title>Diagonalization</title>
+      <p>
+        Now we'll take a closer look at just what we did in <xref ref="example-using-an-eigenbasis-to-compute-a-matrix-product" text="type-global" /> to compute <m>A^{100}\bb</m> (or, more simply, <m>A\bb</m>).
+        First, we found <m>c_1,c_2</m> such that <m>\bb = c_1\vv_1 + c_2\vv_2</m>.
+        If we let <m>P = \smqty[\vv_1&amp;\vv_2]</m> then this is equivalent to solving the matrix equation
+        <me>P\mqty[c_1 \\ c_2] = \bb\implies \mqty[c_1 \\ c_2] = P^{-1}\bb</me>.
+        We therefore view <m>P^{-1}\bb</m> as the coordinates of <m>\bb</m> with respect to the eigenbasis <m>\qty{\vv_1,\vv_2}</m>.
+        Once we had the coordinates of <m>\bb</m> with respect to the eigenbasis, then finding <m>A\bb</m> amounted to multiplying <m>c_1</m> and <m>c_2</m> by <m>\lambda_1</m> and <m>\lambda_2</m> respectively.
+        In matrix notation, this is equivalent to computing
+        <me>D\mqty[c_1 \\ c_2]\text{ where } D = \mqty[\lambda_1 &amp; 0 \\ 0 &amp; \lambda_2]</me>.
+        Finally, we used the weights <m>\lambda_1 c_1, \lambda_2 c_2</m> to reconstruct <m>A\bb</m> from <m>\vv_1,\vv_2</m>:
+        <me>A\bb = \lambda_1 c_1\vv_1 + \lambda_2 c_2\vv_2</me>.
+        Therefore
+        <md>
+          <mrow>A\bb &amp; = \lambda_1 c_1\vv_1 + \lambda_2 c_2\vv_2</mrow>
+          <mrow> &amp; = P\mqty[\lambda_1c_1 \\ \lambda_2c_2] </mrow>
+          <mrow> &amp; = PD\mqty[c_1 \\ c_2] </mrow>
+          <mrow> &amp; = PDP^{-1}\bb </mrow>
+        </md>.
+        Since this equation is true for any <m>\bb\in\RR^2</m>, it follows that <m>A = PDP^{-1}</m>.
+      </p>
+      <p>
+        The process outlined above and in <xref ref="example-using-an-eigenbasis-to-compute-a-matrix-product" text="type-global" /> is known as <em>diagonalization</em>.
+        This is only possible when <m>A</m> has an eigenbasis to work with, but can lead to vastly more efficient computations involving <m>A</m> by making use of the formula
+        <me>A^n = PD^nP^{-1}</me>
+        since raising diagonal matrices to a power is much simpler than raising general matrices to a power.
+        Finding <m>A^{100}\bb</m> in <xref ref="example-using-an-eigenbasis-to-compute-a-matrix-product" text="type-global" /> was equivalent to the following computations:
+        <md>
+          <mrow>A^{100}\bb &amp; = PD^{100}P^{-1}\bb </mrow>
+          <mrow> &amp; = \mqty[1 &amp; 3 \\ 1 &amp; 4]\mqty[1^{100} &amp; 0 \\ 0 &amp; 2^{100}]\mqty[4 &amp; -3 \\ -1 &amp; 1]\mqty[-2 \\ 10] </mrow>
+          <mrow> &amp; = \mqty[1 &amp; 3 \\ 1 &amp; 4]\mqty[1 &amp; 0 \\ 0 &amp; 2^{100}]\mqty[-38 \\ 12] </mrow>
+          <mrow> &amp; = \mqty[1 &amp; 3 \\ 1 &amp; 4]\mqty[-38 \\ 12(2^{100})] </mrow>
+          <mrow> &amp; = \mqty[-38 + 36(2^{100}) \\ -38 + 48(2^{100})] </mrow>
+        </md>.
+      </p>
+      <definition xml:id="definition-diagonalization">
+        <title>Diagonalization</title>
+        <statement>
+          <p>
+            A matrix <m>A</m> is <term>diagonalizable</term> if there exists a matrix <m>P</m> and a diagonal matrix <m>D</m> such that
+            <me>A = PDP^{-1}</me>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        As mentioned above, a matrix <m>A</m> is diagonalizable if and only if <m>A</m> has an eigenbasis.
+      </p>
+      <theorem xml:id="theorem-diagonalization-and-eigenbases">
+        <title>Diagonalization and Eigenbases</title>
+        <statement>
+          <p>
+            Let <m>A</m> be an <m>n\times n</m> matrix.
+            Then <m>A</m> is diagonalizable if and only if <m>A</m> has a corresponding eigenbasis <m>\qty{\vv_i}_{i=1}^n</m>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            First, assume that <m>A</m> is diagonalizble.
+            Then there exist matrices <m>P</m> and <m>D</m>, say
+            <me>P = \mqty[\vv_1&amp;\ldots&amp;\vv_n]\text{ and }D = \mqty[\lambda_1 &amp; 0 &amp; \ldots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \ldots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \ldots &amp; \lambda_n]</me>
+            such that <m>P</m> is invertible and <m>A = PDP^{-1}</m>.
+          </p>
+          <p>
+            We want to show that <m>A</m> must have an eigenbasis.
+            We'll do this by showing that each column <m>\vv_i</m> of <m>P</m> must be an eigenvector of <m>A</m> with eigenvalue <m>\lambda_i</m>.
+            Now, since <m>\vv_i = 0\vv_1 + 0\vv_2 + \cdots + 1\vv_i + \cdots + 0\vv_n</m> it follows that <m>P^{-1}\vv_i</m> must be the vector with a single <m>1</m> in the <m>i^\th</m> entry and <m>0</m>s elsewhere.
+            Therefore
+            <md>
+              <mrow>A\vv_i &amp; = PDP^{-1}\vv_i </mrow>
+              <mrow> &amp; = PD\mqty[0\\0\\\vdots\\1\\\vdots\\0] </mrow>
+              <mrow> &amp; = P\mqty[0\\0\\\vdots\\\lambda_i\\\vdots\\0] </mrow>
+              <mrow> &amp; = \lambda_i\vv_i </mrow>
+            </md>
+            and so <m>\vv_i</m> must be an eigenvector of <m>A</m> with eigenvalue <m>\lambda_i</m> for each <m>i</m> from <m>1</m> to <m>n</m>.
+            Since each column of <m>P</m> is an eigenvector of <m>A</m> and since <m>P</m> is invertible, it follows that the columns must be a basis and, hence, an eigenbasis for <m>A</m>.
+          </p>
+          <p>
+            Now we prove the reverse direction.
+            So assume that <m>A</m> has an eigenbasis <m>\qty{\vv_i}_{i=1}^n</m> with corresponding eigenvalues <m>\qty{\lambda_i}_{i=1}^n</m>.
+            We will show that <m>A</m> is diagonalized by
+            <me>P = \mqty[\vv_1&amp;\ldots&amp;\vv_n]\text{ and }D = \mqty[\lambda_1 &amp; 0 &amp; \ldots &amp; 0 \\ 0 &amp; \lambda_2 &amp; \ldots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \ldots &amp; \lambda_n]</me>.
+            Let <m>\xx\in\RR^n</m>.
+            Then we can find the coordinates of <m>\xx</m> with respect to the eigenbasis <m>\qty{\vv_i}</m> by computing <m>P^{-1}\xx</m>.
+            <aside><p>Note that <m>P</m> is invertible since its columns form a basis!</p></aside>
+            It follows that applying <m>A</m> to <m>\xx</m> is equivalent to applying <m>PD</m> to <m>P^{-1}\xx</m>: <m>DP^{-1}\xx</m> will multiply the coordinates of <m>\xx</m> with respect to the eigenbasis by the corresponding eigenvalues, and <m>PDP^{-1}\xx</m> reconstructs <m>A\xx</m> using the weights <m>DP^{-1}\xx</m> to form a linear combination of the columns of <m>P</m>.
+            Therefore <m>A\xx=PDP^{-1}\xx</m> and so <m>A = PDP^{-1}</m>.
+          </p>
+        </proof>
+      </theorem>
+      <example xml:id="example-diagonalizing-a-matrix">
+        <title>Diagonalizing a Matrix</title>
+        <statement>
+          <p>
+            Find matrices <m>P</m> and <m>D</m> (if possible) that diagonalize
+            <me>A = \mqty[2 &amp; -1 &amp; -1 \\ -1 &amp; 2 &amp; -1 \\ -1 &amp; -1 &amp; 2]</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By <xref ref="theorem-diagonalization-and-eigenbases" text="type-global" />, <m>A</m> is diagonalizble if and only if <m>A</m> has an eigenbasis.
+            Using Octave we quickly see that the eigenvalues of <m>A</m> are <m>\lambda_1 = 0, \lambda_2 = \lambda_3 = 3</m>.
+            Now we need to <m>\smqty[A - 0I &amp; \vb{0}]</m> and <m>\smqty[A - 3I &amp; \vb{0}]</m>:
+            <me>\mqty[A&amp;\vb{0}] \sim \mqty[1 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 1 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]\text{ and }\mqty[A-3I &amp; \vb{0}] \sim \mqty[1 &amp; 1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0]</me>.
+            Therefore
+            <me>\nul(A) = \spn{\qty{\mqty[1\\1\\1]}}\text{ and }\nul(A-3I) = \spn{\left\{\mqty[-1\\1\\0],\mqty[-1\\0\\1]\right\}}</me>.
+          </p>
+          <p>
+            Now we have everything we need to diagonalize <m>A</m>.
+            Define
+            <me>P = \mqty[1 &amp; -1 &amp; -1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1]\text{ and }D = \mqty[0 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 3]</me>.
+            Then <m>A = PDP^{-1}</m>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          # code cell to use for previous example
+          A = [2, -1, -1; -1, 2, -1; -1, -1, 2]
+          eig(A)
+        </input>
+      </sage>
+    </subsection>
+    <subsection xml:id="subsection-diagonalizations-of-symmetric-and-hermitian-matrices">
+      <title>Diagonalizations of Symmetric and Hermitian Matrices</title>
+      <p>
+        Symmetric matrices have particularly nice diagonalizations.
+        First, their eigenvalues must be limited to real numbers.
+      </p>
+      <theorem xml:id="theorem-eigenvalues-of-symmetric-matrices">
+        <title>Eigenvalues of Symmetric Matrices</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a symmetric matrix with real entries and let <m>\lambda</m> be an eigenvalue of <m>A</m>.
+            Then <m>\lambda</m> must be a real number.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        The proof of <xref ref="theorem-eigenvalues-of-symmetric-matrices" text="type-global" /> is relatively simple but requires us to expand our terminology and notation a bit.
+        First, we redefine the inner product so that it also applies to complex vectors in <m>\CC^n</m>.
+      </p>
+      <definition xml:id="definition-complex-inner-product">
+        <title>Complex Inner Product</title>
+        <statement>
+          <p>
+            Let <m>\xx,\yy\in\CC^n</m>.
+            The <term>(complex) inner product</term> of <m>\xx</m> and <m>\yy</m> is the (complex) scalar
+            <me>\langle\xx,\yy\rangle = \yy^{*}\xx</me>
+            where <m>\yy^*</m> denotes the <term>conjugate transpose</term> of <m>\yy</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        Now we expand our definition of symmetric matrices to include the complex case as well.
+      </p>
+      <definition xml:id="definition-hermitian-matrices">
+        <title>Hermitian Matrices</title>
+        <statement>
+          <p>
+            Let <m>A</m> denote a square matrix.
+            Then <m>A</m> is <term>Hermitian</term> if <m>A = A^{*}</m>.
+          </p>
+        </statement>
+      </definition>
+      <p>
+        <xref ref="definition-hermitian-matrices" text="type-global" /> generalizes the definition of a real symmetric matrix since <m>A^* = A^T</m> if <m>A</m> only has real entries.
+        The conjugate transpose and inner product also share many properties, including the following.
+      </p>
+      <proposition xml:id="proposition-conjugate-transpose-and-inner-product">
+        <title>Conjugate Transpose and Inner Product</title>
+        <statement>
+          <p>
+            Let <m>\xx,\yy\in\CC^n</m> and let <m>A</m> be a square matrix with complex entries.
+            Then
+            <me>\langle A\xx,\yy\rangle = \dotprod{\xx,A^*\yy}</me>.
+          </p>
+        </statement>
+      </proposition>
+      <p>
+        Now we can prove that real symmetric matrices, and more generally Hermitian matrices, always have real eigenvalues.
+      </p>
+      <theorem xml:id="theorem-eigenvalues-of-a-hermitian-matrix">
+        <title>Eigenvalues of a Hermitian Matrix</title>
+        <statement>
+          <p>
+            Let <m>A</m> denote a Hermitian matrix.
+            Then <m>A</m> has real eigenvalues.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            Let <m>\xx</m> denote an eigenvector of <m>A</m> with eigenvalue <m>\lambda</m>.
+            Then
+            <md>
+              <mrow>\lambda\dotprod{\xx,\xx} &amp; = \dotprod{\lambda\xx,\xx} </mrow>
+              <mrow> &amp; = \dotprod{A\xx,\xx} </mrow>
+              <mrow> &amp; = \dotprod{\xx, A^*\xx} </mrow>
+              <mrow> &amp; = \dotprod{\xx, A\xx} </mrow>
+              <mrow> &amp; = \dotprod{\xx, \lambda \xx} </mrow>
+              <mrow> &amp; = \overline{\lambda}\dotprod{\xx, \xx} </mrow>
+            </md>
+            Since <m>\dotprod{\xx,\xx} = \norm{\xx}^2\neq0</m>, it follows that <m>\lambda = \overline{\lambda}</m>.
+            Therefore <m>\lambda\in\RR</m>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        The eigenvectors of a Hermitian matrix also have nice geometric properties.
+      </p>
+      <theorem xml:id="theorem-eigenvectors-of-a-hermitian-matrix">
+        <title>Eigenvectors of a Hermitian Matrix</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a Hermitian matrix.
+            Suppose that <m>\xx</m> and <m>\yy</m> are eigenvectors for two distinct eigenvalues of <m>A</m>, say <m>\lambda_i</m> and <m>\lambda_j</m>.
+            Then <m>\xx</m> and <m>\yy</m> are orthogonal.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            We need to show that <m>\dotprod{\xx,\yy} = 0</m>.
+            Now,
+            <me>\lambda_i\dotprod{\xx,\yy} = \dotprod{A\xx,\yy} = \dotprod{\xx,A\yy} = \lambda_j\dotprod{\xx,\yy}</me>
+            or just <m>(\lambda_i-\lambda_j)\dotprod{\xx,\yy} = 0</m>.
+            Since <m>\lambda_i\neq \lambda_j</m>, it follows that <m>\dotprod{\xx,\yy} = 0</m>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        <xref ref="theorem-eigenvectors-of-a-hermitian-matrix" text="type-global" /> leads to an extremely useful fact about real symmetric matrices: they can always be <em>orthogonally diagonalized</em>.
+        This means that we can choose an eigenbasis that is also an orthonormal basis.
+        As an example, consider the eigenbasis found in <xref ref="example-diagonalizing-a-matrix" text="type-global" />, replicated here as columns of the matrix <m>P</m>:
+        <me>P = \mqty[1 &amp; -1 &amp; -1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1]</me>.
+        Note that the first column is orthogonal to the other two which is guaranteed by <xref ref="theorem-eigenvectors-of-a-hermitian-matrix" text="type-global" /> since these vectors correspond to different eigenvalues.
+      </p>
+      <p>
+        Although the last two columns are not orthogonal, they can be <em>orthogonalized</em>.
+        One way of doing so is to replace them with the vectors
+        <me>\mqty[-1\\1\\0]\text{ and }\mqty[-\frac{1}{2} \\ -\frac{1}{2} \\ 1] = \mqty[-1\\0\\1]-\frac{1}{2}\mqty[-1\\1\\0]</me>.
+        Both vectors are still eigenvectors with eigenvalue <m>0</m> and the two of them, together with <m>\smqty[1\\1\\1]</m>, still form an eigenbasis of <m>\RR^3</m>.
+        However, this new basis is orthogonal.
+      </p>
+      <p>
+        If we go one step further and normalize the vectors in this eigenbasis we then get the orthonormal eigenbasis
+        <me>\qty{\mqty[\frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}} \\ \frac{1}{\sqrt{3}}], \mqty[-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0], \mqty[-\frac{1}{\sqrt{6}} \\ -\frac{1}{\sqrt{6}} \\ \sqrt{\frac{2}{3}}]}</me>.
+        This provides the orthogonal diagonalization
+        <me>U = \mqty[\frac{1}{\sqrt{3}} &amp; -\frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} &amp; \frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} &amp; 0 &amp; \sqrt{\frac{2}{3}}]\text{ and }D = \mqty[0 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 3]</me>
+        which gives
+        <me>A = UDU^{-1} = UDU^T</me>.
+        Such a diagonalization is always possible for real symmetric and Hermitian matrices, a result known as the <em>Spectral Theorem</em>.
+      </p>
+      <theorem xml:id="theorem-spectral-theorem">
+        <title>Spectral Theorem</title>
+        <idx>Spectral Theorem</idx>
+        <statement>
+          <p>
+            Let <m>A</m> be a (real) symmetric matrix.
+            Then there exists an orthogonal matrix <m>U</m> and a diagonal matrix <m>D</m> such that
+            <me>A = UDU^T</me>.
+            Equivalently, if <m>\qty{\uu_i}_{i=1}^n</m> is an orthonormal eigenbasis of <m>A</m> with corresponding eigenvalues <m>\qty{\lambda_i}_{i=1}^n</m>, then
+            <me>A = \sum_{i=1}^n \lambda_i \uu_i\uu_i^T</me>.
+          </p>
+        </statement>
+      </theorem>
+      <example xml:id="example-a-signal-processing-application">
+        <title>A Signal Processing Application</title>
+        <statement>
+          <p>
+            In the mathematics of signal processing, signals are often represented as particular vectors in <m>\RR^n</m>.
+            The problem of signal transmission then reduces to sending a list of numbers <m>c_1,\ldots, c_m</m> such that the receiver can use these to reconstruct a signal <m>\xx</m>.
+            Such a scheme can be implemented by choosing an appropriate <m>n\times m</m> matrix <m>F = \smqty[\vb{f}_1 &amp; \ldots &amp; \vb{f}_m]</m> and then computing and transmitting the coordinates of
+            <me>F^T\xx = \mqty[\langle \xx,\vb{f}_i\rangle]_{1\leq i\leq m}</me>.
+            The important properties of the columns of <m>F</m> can then be encoded in the <em>Gram matrix</em> <m>G = F^TF = \mqty[\dotprod{\vb{f}_i,\vb{f}_j}]</m>.
+            Find a <m>3\times 4</m> matrix <m>F</m> for which that Gram matrix is
+            <me>G = \mqty[1 &amp; -\frac{1}{3} &amp; -\frac{1}{3} &amp; -\frac{1}{3} \\ -\frac{1}{3} &amp; 1 &amp; -\frac{1}{3} &amp; -\frac{1}{3} \\ -\frac{1}{3} &amp; -\frac{1}{3} &amp; 1 &amp; -\frac{1}{3} \\ -\frac{1}{3} &amp; -\frac{1}{3} &amp; -\frac{1}{3} &amp; 1]</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This problem can be solved by diagonalizing <m>G</m>: if <m>G = UDU^T</m> then we can define <m>F</m> by using the rows of <m>U\sqrt{D}</m>.
+            <aside>
+              <p>
+                If <m>D</m> is diagonal with nonnegative entries, then we can define <m>\sqrt{D}</m> to be the matrix obtained by taking the square root of each entry of <m>D</m>.
+                It's not obvious, but it turns out that Gram matrices always have nonnegative eigenvalues.
+                If we diagonalize <m>G</m> and find it has negative eigenvalues, then it cannot be a Gram matrix.
+              </p>
+            </aside>
+            So we'll diagonalize <m>G</m> with the help of the Octave cell below.
+            Doing so, we see that the eigenvalues of <m>G</m> are in fact nonnegative and so <m>U\sqrt{D}</m> will only contain real values.
+            Furthermore, <m>U</m> only has <m>3</m> nonzero columns since <m>G</m> only has three nonzero eigenvalues.
+            By removing the zero column from <m>U\sqrt{D}</m>, we obtain a <m>4\times3</m> matrix which we define to be <m>F^T</m>.
+            Then <m>F^TF = G</m>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          # diagonalizing a Gram matrix
+          format short
+          G = (4/3)*eye(4) - (1/3)*ones(4) # tricky way to define G
+        </input>
+      </sage>
+      <p>
+        Symmetric matrices are also useful in analyzing <em>quadratic forms</em>, which are expressions of the form
+        <me>\sum_{i,j}c_{ij} x_ix_j</me>
+        where the <m>x_i</m> are variables and the <m>c_{ij}</m> are the coefficients.
+        Such an expression can be rewritten as <m>\xx^T A\xx</m> where <m>A</m> is a symmetric matrix determined from the coefficients.
+      </p>
+      <example xml:id="example-analyzing-a-quadratic-form">
+        <title>Analyzing a Quadratic Form</title>
+        <statement>
+          <p>
+            Describe the curve given by
+            <me>9x^2 + 6xy + y^2 = 10</me>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The left hand side is a quadratic form with variables <m>x_1 = x,x_2 = y</m> and coefficients
+            <me>c_{11} = 9, c_{12} = c_{21} = \frac{6}{2}=3\text{ and }c_{22} = 1</me>.
+            Therefore we can write <m>9x^2 + 6xy + y^2 = \xx^T A\xx</m> where
+            <me>\xx = \mqty[x\\y]\text{ and }A = \mqty[9 &amp; 3 \\ 3 &amp; 1]</me>.
+            To help us describe the curve we will <q>disentangle</q> the variables <m>x</m> and <m>y</m> by diagonalizing <m>A</m>.
+          </p>
+          <p>
+            Since <m>A</m> is symmetric, we know that <m>A</m> can be orthogonally diagonalized.
+            One such diagonalization is given by <m>A = UDU^T</m> where
+            <me>U = \mqty[\frac{1}{\sqrt{10}} &amp; \frac{3}{\sqrt{10}} \\ -\frac{3}{\sqrt{10}} &amp; \frac{1}{\sqrt{10}}]\text{ and } D = \mqty[0 &amp; 0 \\ 0 &amp; 10]</me>.
+            The quadratic form <m>\xx^T A\xx</m> then becomes
+            <me>\xx^T UDU^T\xx = (U^T\xx)^T D (U^T \xx)</me>.
+          </p>
+          <p>
+            Now we define <m>\yy = U^T\xx</m> as a change-of-variables.
+            In particular,
+            <me>\yy = \mqty[X\\Y] = \mqty[\frac{1}{\sqrt{10}}x - \frac{3}{\sqrt{10}}y \\ \frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y]</me>.
+            Our quadratic form is now
+            <me>\yy^T D\yy = 0X^2 + 10Y^2 = 10Y^2</me>
+            and our original equation becomes <m>10Y^2 = 10</m> or just <m>Y = \pm1</m>.
+            Therefore the original equation describes the two different lines
+            <me>\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = -1\text{ and }\frac{3}{\sqrt{10}}x + \frac{1}{\sqrt{10}}y = 1</me>.
+          </p>
+        </solution>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-analytic-functions-of-matrices">
+      <title>Analytic Functions of Matrices</title>
+      <p>
+        A function <m>f(x)</m> is <em>analytic</em> at <m>x = a</m> if it has a power series representation on some interval centered around <m>a</m>:
+        <me>f(x) = \sum_{k=0}^\infty c_k(x-a)^k = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\text{ for }x\approx a</me>.
+        If <m>A</m> denotes a square matrix, and if <m>f(x)</m> is analytic at <m>a=0</m>, then we can try to make sense of the expression <m>f(A)</m> by using the power series for <m>f(x)</m>:
+        <me>f(A) = \sum_{k=0}^{\infty}c_k A^k = c_0I + c_1A + c_2A^2 + \cdots</me>,
+        assuming this sum actually exists.
+      </p>
+      <example xml:id="example-exponential-of-a-matrix">
+        <title>Exponential of a Matrix</title>
+        <statement>
+          <p>
+            Let
+            <me>A = \mqty[0 &amp; 2 &amp; 3 \\ 0 &amp; 0 &amp; 2 \\ 0 &amp; 0 &amp; 0]</me>.
+            Find <m>e^A</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            By definition,
+            <me>e^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots</me>,
+            so we can find <m>e^A</m> by looking at the powers of <m>A</m>.
+            In this case,
+            <me>A^2 = \mqty[0 &amp; 0 &amp; 4 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0]\text{ and }A^3 = A^4 = \ldots = \mqty[0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0]</me>.
+            Therefore
+            <me>e^A = I + A + \frac{1}{2}A^2 = \mqty[1 &amp; 2 &amp; 5 \\ 0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 1]</me>.
+            This can be verified using the command <c>expm</c> in Octave as below.
+            <aside>
+              <p>
+                You want to be careful to use <c>expm(A)</c> to compute <m>e^A</m> in Octave, as this actually finds the matrix exponential.
+                If you instead use <c>exp(A)</c>, this just computes the matrix obtained by raising <m>e</m> to each entry of <m>A</m>, which in general is <em>not</em> equal to <m>e^A</m>.
+              </p>
+            </aside>
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          format short
+          A = [0, 2, 3; 0, 0, 2; 0, 0, 0]
+          expm(A) # don't use exp(A)! that just exponentiates each entry of A
+        </input>
+      </sage>
+      <example xml:id="example-function-of-a-diagonal-matrix">
+        <title>Function of a Diagonal Matrix</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function analytic at <m>0</m>.
+            Let <m>D</m> be a diagonal matrix whose diagonal entries are within the interval of convergence of the power series for <m>f(x)</m> centered at <m>0</m>.
+            Find <m>f(D)</m>.
+          </p>
+        </statement>
+      </example>
+      <p>
+        The last example shows that if <m>f(x)</m> is analytic at <m>0</m> then it is relatively straightforward to find <m>f(D)</m>, assuming that the diagonal entries of <m>D</m> are within the interval of convergence for the series representation of <m>f(x)</m> at <m>0</m>.
+        Therefore we can find functions of diagonalizable matrices as well.
+      </p>
+      <theorem xml:id="theorem-analytic-functions-of-diagonalizable-matrices">
+        <title>Analytic Functions of Diagonalizable Matrices</title>
+        <statement>
+          <p>
+            Let <m>f(x)</m> be a function that is analytic at <m>0</m> and whose series representation at <m>0</m> has interval of convergence <m>I</m>.
+            Let <m>A</m> be a diagonalizable matrix diagonalized by <m>P</m> and <m>D</m> with eigenvalues contained in <m>I</m>.
+            Then
+            <me>f(A) = Pf(D)P^{-1}</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            Let <m>f(x) = \sum_{k=0}^{\infty}c_k x^k</m> and recall that <m>A^k = PD^kP^{-1}</m>.
+            Then
+            <me>f(A) = \sum_{k=0}^{\infty}c_kA^k = P\qty(\sum_{k=0}^{\infty}c_k D^k)P^{-1} = Pf(D)P^{-1}</me>.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        <xref ref="theorem-analytic-functions-of-diagonalizable-matrices" text="type-global" /> allows for straightforward computations of matrix exponentials of diagonalizable matrices.
+        This is useful in differential equations when solving linear systems of ODEs (see <url href="https://j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html" visual="j-oldroyd.github.io/wvwc-differential-equations/systems-of-odes.html">here</url>).
+      </p>
+      <theorem xml:id="theorem-exponential-solutions-of-linear-systems-of-odes">
+        <title>Exponential Solutions of Linear Systems of ODEs</title>
+        <statement>
+          <p>
+            Let <m>A</m> be a (constant) square matrix and consider the first-order system <m>\xx^\prime = A\xx</m> with initial condition <m>\xx(0) = \xx_0</m>.
+            Then the solution of this initial value problem is
+            <me>\xx(t) = e^{At}\xx_0</me>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            The proof follows quickly from the fact that <m>\dv{}{t}(e^{At}) = Ae^{At}</m>.
+            Using this, we differentiate <m>\xx(t) = e^{At}\xx_0</m> to get
+            <me>\dv{\xx}{t} = Ae^{At}\xx_0 = A\xx</me>.
+            Furthermore, <m>\xx(0) = e^{\vb{0}}\xx_0 = \xx_0</m>.
+            Therefore <m>\xx(t) = e^{At}\xx_0</m> is a solution of the initial value problem.
+          </p>
+        </proof>
+      </theorem>
+      <p>
+        Theorems <xref ref="theorem-analytic-functions-of-diagonalizable-matrices" text="global" /> and <xref ref="theorem-exponential-solutions-of-linear-systems-of-odes" text="global" /> allow us to find solutions of linear systems that involve diagonalizable matrices in terms of the matrix exponential.
+      </p>
+      <example xml:id="example-solving-a-first-order-system">
+        <title>Solving a First-Order System</title>
+        <statement>
+          <p>
+            Solve
+            <me>x^\prime = 3x - 4y \text{ and } y^\prime = -4x + 3y</me>
+            with initial condition <m>x(0) = 2</m> and <m>y(0) = -1</m>.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            This can be solved very easily using the matrix exponential and diagonalization.
+            If we let
+            <me>\xx = \mqty[x \\ y]\text{ and }A = \mqty[3 &amp; -4 \\ -4 &amp; 3]</me>
+            then the system can be written as the matrix ODE <m>\xx^\prime = A\xx</m> with initial condition <m>\xx_0 = \smqty[2 \\ 1]</m>.
+            <m>A</m> is symmetric and can be orthogonally diagonalized by
+            <me>U = \mqty[\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} &amp; -\frac{\sqrt{2}}{2}]\text{ and } D = \mqty[-1 &amp; 0 \\ 0 &amp; 7]</me>
+            as seen in the code cell below this example.
+            Therefore <m>A = UDU^T</m>, <m>e^{At} = Ue^{Dt}U^T</m> and the solution of the system must be
+            <me>\xx = \mqty[\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} &amp; -\frac{\sqrt{2}}{2}]\mqty[e^{-t} &amp; 0 \\ 0 &amp; e^{7t}]\mqty[\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} &amp; -\frac{\sqrt{2}}{2}]\mqty[2 \\ -1]</me>.
+          </p>
+        </solution>
+      </example>
+      <sage language="octave">
+        <input>
+          format short
+          A = [3, -4; -4, 3]
+          [U,D] = eig(A)
+        </input>
+      </sage>
+    </subsection>
+  </section>
+</chapter>

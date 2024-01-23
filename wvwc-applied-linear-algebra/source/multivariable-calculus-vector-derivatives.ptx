@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-multivariable-calculus-vector-derivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Vector Derivatives</title>
+
+    <introduction>
+        <p>
+            In this chapter we review important concepts relating to vector functions and their derivatives.
+            As in introductory calculus, the derivative may be seen as giving the rate of change of a particular quantity.
+            However, the move to higher dimensions involved with vector functions allows for multiple interpretations of the rate of change of a vector function, and therefore several different notions of the derivative.
+            These interpretations are based on combining the following three concepts:
+            <ul>
+                <li>The <em>gradient</em> of a scalar-valued function.</li>
+                <li>The inner product (see <xref ref="definition-inner-product-and-magnitude" text="type-global" />).</li>
+                <li>The <em>cross product</em>.</li>
+            </ul>
+            We will begin by examining the inner and cross products.
+        </p>
+    </introduction>
+
+    <section xml:id="section-inner-products-and-cross-products">
+        <title>Inner Products and Cross Products</title>
+
+        <introduction>
+            <p>
+                Inner products (also known as dot products) and cross products are two important examples of <q>vector multiplication</q>.
+                The inner product is a <em>scalar product</em> meaning that the resulting quantity is a scalar value.
+                Likewise, the cross product is a <em>vector product</em> and the resulting quantity is a vector.
+                Both products are extremely important in describing vector geometry.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-inner-products">
+            <title>Inner Products</title>
+
+            <p>
+                Recall from <xref ref="definition-inner-product-and-magnitude" text="type-global" /> that the inner product of two vectors <m>\xx</m> and <m>\yy</m> in <m>\RR^n</m> is the scalar quantity
+                <me>\dotprod{\xx,\yy} = \yy^{T}\xx</me>.
+                This product has several nice properties (see <xref ref="theorem-properties-of-the-inner-product" text="type-global" />), but for now we'll consider the property
+                <me>\dotprod{\xx,\yy} = \norm{\xx}\norm{\yy}\cos\theta</me>
+                where <m>\theta</m> denotes the angle between the vectors <m>\xx</m> and <m>\yy</m> satisfying <m>0\leq\theta\leq\pi</m>.
+                An important interpretation of this property is that the inner product, and particularly <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}</m>, is a measure of the <em>correlation</em> between <m>\xx</m> and <m>\yy</m>.
+            </p>
+
+            <example xml:id="example-computing-an-inner-product">
+                <title>Computing an Inner Product</title>
+
+                <statement>
+                    <p>
+                        Let <m>\xx = \mqty[3 &amp; -4]^{T}</m> and <m>\yy = \mqty[12 &amp; -5]^{T}</m>.
+                        Are these vectors pointed in the same direction?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We can approach this problem as a correlation problem.
+                        We'll estimate the correlation between <m>\xx</m> and <m>\yy</m> as follows:
+                        <me>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}} = \frac{56}{5\cdot13} = \frac{56}{65}</me>.
+                        Since this quantity is close to <m>1</m>, these vectors appear to be correlated and therefore point in roughly the same direction.
+                        <aside>
+                            <p>
+                                For any nonzero <m>\xx,\yy\in\RR^n</m>, it follows that <m>\frac{\dotprod{\xx,\yy}}{\norm{\xx}\norm{\yy}}\in[-1,1]</m>.
+                                Values of this quotient close to <m>1</m> imply that the vectors are correlated whereas values close to <m>-1</m> imply that the vectors are <em>anticorrelated</em>.
+                                Values close to <m>0</m> imply that the vectors are nearly perpendicular.
+                            </p>
+                        </aside>
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Inner products are also useful when computing vector <em>projections</em>.
+                Intuitively, the projection of one vector <m>\xx</m> onto another vector <m>\yy</m> represents the vector parallel to <m>\yy</m> that is as close as possible to <m>\xx</m>.
+                Equivalently, the projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+            </p>
+
+            <theorem xml:id="theorem-vector-projections">
+                <title>Vector Projections</title>
+
+                <idx>vector projection</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\xx,\yy\in\RR^n</m> with <m>\yy\neq\vb{0}</m>.
+                        The <term>projection of <m>\xx</m> onto <m>\yy</m></term> is the vector <m>\proj{\yy}{\xx}</m> given by
+                        <me>\proj{\yy}{\xx} = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+                    </p>
+                </statement>
+
+                <proof>
+                    <p>
+                        The projection should be the point in <m>\spn{\yy}</m> that is as close as possible to <m>\xx</m>.
+                        Therefore we need to minimize <m>\norm{\xx-\alpha\yy}</m> over <m>\alpha</m>, which is equivalent to minimizing <m>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy}</m>.
+                        If we expand this inner product, we get
+                        <me>\dotprod{\xx-\alpha\yy,\xx-\alpha\yy} = \norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2</me>.
+                        This expression is quadratic in <m>\alpha</m> and can be simplified by completing the square in <m>\alpha</m>:
+                        <md>
+                            <mrow>\norm{\xx}^2 - 2\alpha\dotprod{\xx,\yy} + \alpha^2\norm{\yy}^2 &amp; = \norm{\yy}^2\left(\alpha^2 - \frac{2\alpha}{\norm{\yy}^2}\dotprod{\xx,\yy}\right) + \norm{\xx}^2 </mrow>
+                            <mrow> &amp; = \norm{\yy}^2\left(\alpha - \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}\right)^2 - \frac{\dotprod{\xx,\yy}^2}{\norm{\yy}^2} + \norm{\xx}^2 </mrow>
+                        </md>
+                        Therefore the value of <m>\alpha</m> that makes this quantity as small as possible must be <m>\alpha = \frac{\dotprod{\xx,\yy}}{\norm{\yy}^2}</m>, which means that
+                        <me>\proj{\yy}{\xx} = \alpha\yy = \frac{\dotprod{\xx,\yy}}{\dotprod{\yy,\yy}}\yy</me>.
+                    </p>
+                </proof>
+            </theorem>
+
+            <example xml:id="example-projecting-onto-a-line">
+                <title>Projecting onto a Line</title>
+
+                <statement>
+                    <p>
+                        Let <m>\vv = \mqty[3 &amp; -2]^{T}</m> let <m>\uu = \mqty[-2 &amp; 2]</m>.
+                        Find the projection of <m>\vv</m> onto <m>\uu</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The projection is given by
+                        <me>\frac{-10}{8}\mqty[-2 \\ 2] = -\frac{5}{2}\mqty[-1 \\ 1]</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                The formula in <xref ref="theorem-vector-projections" text="type-global" /> can be generalized to subspaces of <m>\RR^n</m>.
+                In particular, if <m>S</m> is a subspace of <m>\RR^n</m> with a basis given by columns of a matrix <m>A</m>, then the projection of <m>\xx</m> onto <m>S</m>, <m>\proj{\xx}{S}</m>, is the vector
+                <me>\proj{S}{\xx} = A(A^{T}A)^{-1}A^{T}\xx</me>.
+                Note that this formula reduces to the formula in <xref ref="theorem-vector-projections" text="type-global" /> in the case that <m>A = [\yy]</m>.
+            </p>
+
+            <p>
+                Inner products are also connected to the physical concept of work.
+                In particular, if a force <m>\mathbf{F}</m> acts on a particle over a displacement <m>\mathbf{d}</m>, then the work done is given by <m>W = \langle\mathbf{F},\mathbf{d}\rangle</m>.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-cross-products">
+            <title>Cross Products</title>
+
+            <p>
+                Now we move to the other important example of vector multiplication in this course, the cross product.
+            </p>
+
+            <definition xml:id="definition-cross-product">
+                <title>Cross Product</title>
+
+                <idx>cross product</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\uu,\vv\in\RR^3</m>.
+                        The <term>cross product</term> of <m>\uu</m> and <m>\vv</m> is the unique vector <m>\uu\times\vv</m> satisfying
+                        <ol>
+                            <li><m>\uu\times\vv</m> is perpendicular to both <m>\uu</m> and <m>\vv</m> and has its direction determined by the <em>right-hand rule</em>.</li>
+                            <li>The magnitude of <m>\uu\times\vv</m> is given by <m>\norm{\uu\times\vv} = \norm{\uu}\norm{\vv}\sin(\theta)</m> where <m>\theta</m> is the angle between <m>\uu</m> and <m>\vv</m>.</li>
+                        </ol>
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                <xref ref="definition-cross-product" text="type-global" /> is useful for understanding what the cross product gives, but is less useful for actually determining cross products.
+                To compute cross products, we use the following computational formula.
+            </p>
+
+            <theorem xml:id="theorem-computing-cross-products">
+                <title>Computing Cross Products</title>
+
+                <statement>
+                    <p>
+                        Let <m>\uu = \smqty[u_1 &amp; u_2 &amp; u_3]^T, \vv = \smqty[v_1 &amp; v_2 &amp; v_3]^T\in\RR^3</m> and let <m>\{\ii,\jj,\kk\}</m> denote the standard basis vectors of <m>\RR^3</m>.
+                        Then
+                        <me>\uu\times\vv = \mqty| \ii &amp; \jj &amp; \kk \\ u_1 &amp; u_2 &amp; u_3 \\ v_1 &amp; v_2 &amp; v_3|</me>.
+                    </p>
+                </statement>
+            </theorem>
+        </subsection>
+
+        <subsection xml:id="subsection-computing-inner-and-cross-products-using-technology">
+            <title>Computing Inner and Cross Products Using Technology</title>
+
+            <p>
+                Both Octave and Sage allow for quick computations of inner and cross products.
+                In Octave, these computations are done using the <c>dot</c> and <c>cross</c> commands:
+            </p>
+
+            <sage language="octave">
+                <input>
+                    u = [1, -2, 3]
+                    v = [4, 0, -1]
+                    dot(u, v) % inner/dot product
+                    cross(u, v) % cross product
+                </input>
+            </sage>
+
+            <p>
+                Since we will also be considering inner and cross products of vectors with symbolic components, it's also useful to use Sage for computations involving inner products and cross products.
+                This is accomplished using the <c>dot_product</c> and <c>cross_product</c> methods.
+                <aside>
+                    <p>
+                        In object-oriented programming languages like Sage and Python, methods are functions or procedures assigned to certain objects.
+                        Sage has a variety of methods associated with vector objects.
+                    </p>
+                </aside>
+            </p>
+
+            <sage>
+                <input>
+                    var('x, y, z')
+                    u = vector([x, 3*y, z^2])
+                    v = vector([0, 1, x - y - sin(z)])
+
+                    # without display only output from last line is shown
+                    display(u.dot_product(v)) # inner product of u and v
+
+                    u.cross_product(v) # cross product of u and v
+                </input>
+            </sage>
+
+            <p>
+                Sage and Octave cells are provided below for further computations.
+            </p>
+
+            <sage>
+                <input>
+                    # code cell for Sage computations
+                </input>
+            </sage>
+
+            <sage language="octave">
+                <input>
+                    % code cell for Octave computations
+                </input>
+            </sage>
+        </subsection>
+    </section>
+
+    <section xml:id="section-vector-functions">
+        <title>Vector Functions</title>
+
+        <introduction>
+            <p>
+                In this section we will review the concept of a <em>vector-valued function</em>, or more simply a <em>vector function</em>.
+                These differ from <em>scalar functions</em> as the output of a vector function is a vector in <m>\RR^n</m> (where <m>n \gt 2</m>).
+                We will typically denote vector functions using boldface letters or arrows like so: <m>\vb{f}</m> and <m>\vec{f}</m>.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-visualizing-vector-functions">
+            <title>Visualizing Vector Functions</title>
+
+            <p>
+                Let <m>\vb{f}:\RR^n\to\RR^n</m> be a vector function and assume <m>n=2</m> or <m>n=3</m>.
+                Then <m>\vb{f}</m> may be visualized by using a <em>vector field</em>.
+                We sketch the vector field by attaching the vector <m>\vb{f}(P)</m> to the point <m>P</m>.
+                This is best done using technology.
+            </p>
+
+            <example xml:id="example-sketching-a-vector-field">
+                <title>Sketching a Vector Field</title>
+
+                <statement>
+                    <p>
+                        Sketch the vector field for <m>\vb{f}(x,y) = -y\vb{i} + x\vb{j}</m> in <m>\RR^2</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        This can be done using the <c>plot_vector_field</c> command in Sage:
+                    </p>
+
+                    <sage>
+                        <input>
+                            # x is a variable by default
+                            # can't hurt to make sure it's a variable here
+                            var('x, y')
+
+                            # define f = -y*i + x*j
+                            f(x,y) = (-y, x)
+
+                            # plot the vector field over the given ranges using blue arrows
+                            plot_vector_field(f(x,y), (x,-2,2), (y, -2, 2), color="blue")
+                        </input>
+                    </sage>
+                </solution>
+            </example>
+
+            <p>
+                Sage can also create plots of vector fields in <m>\RR^3</m> using <c>plot_vector_field3d</c>:
+            </p>
+
+            <sage>
+                <input>
+                    var('x y z')
+
+                    f(x, y, z) = (y*z, x*z, x*y)
+
+                    plot_vector_field3d(f(x,y,z), (x, -2, 2), (y, -2, 2), (z, -2, 2))
+                </input>
+            </sage>
+
+            <p>
+                You can interact with the plot above by zooming and rotating.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-vector-functions-and-motion">
+            <title>Vector Functions and Motion</title>
+
+            <p>
+                Vector functions of the form <m>\vb{r}:\RR\to\RR^n</m> (where <m>n = 2</m> or <m>n = 3</m>) are often useful in representing motion.
+                The single indepent variable is taken to be time <m>t</m>, and the dependent variables are position variables.
+                Furthermore, it's straightforward to differentiate and integrate such functions.
+                For example, if <m>\vb{r}(t) = \smqty[x(t) &amp; y(t)]</m>, then
+                <md>
+                    <mrow>\vb{r}^\prime(t) &amp; = \mqty[x^\prime(t) &amp; y^\prime(t)] </mrow>
+                    <mrow>\int_a^b\vb{r}(t)\dd{t} &amp; = \mqty[\int_a^b x(t)\dd{t} &amp; \int_a^b y(t)\dd{t}] </mrow>
+                </md>
+                The usual relations from Calculus I between motion and derivatives and integrals apply here as well.
+                In particular, the derivative of a position vector is a velocity vector and the derivative of a velocity vector is an acceleration vector.
+                We also have the important notion of a <em>unit tangent vector</em>.
+            </p>
+
+            <definition xml:id="definition-unit-tangent-vectors">
+                <title>Unit Tangent Vectors</title>
+
+                <idx>unit tangent</idx>
+
+                <statement>
+                    <p>
+                        Let <m>\vb{r}(t)</m> be a smooth vector function.
+                        <aside>
+                            <p>
+                                A vector function is <em>smooth</em> on an interval <m>I</m> if it's continuously differentiable on <m>I</m> and <m>\vb{r}^\prime\neq\vb{0}</m> on <m>I</m>.
+                                The graph would be a <em>space curve</em> with no cusps.
+                            </p>
+                        </aside>
+                        The <term>unit tangent</term> to <m>\vb{r}(t)</m> is the vector function
+                        <me>\vb{T}(t) = \frac{\vb{r}^\prime(t)}{\norm{\vb{r}^\prime(t)}}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <example xml:id="example-finding-a-velocity-vector">
+                <title>Finding a Velocity Vector</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t) = \smqty[\cos(t) &amp; -3\sin(t) &amp; t]</m> denote the position of some particle at time <m>t</m>.
+                        Find the velocity and the unit tangent at <m>t = \frac{\pi}{4}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The velocity is just
+                        <me>\rrp(t) = \mqty[-\sin(t) &amp; -3\cos(t) &amp; 1]</me>
+                        which at <m>t = \frac{\pi}{4}</m> is <m>\rrp(\frac{\pi}{4}) = \smqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</m>.
+                        The unit tangent at <m>t = \frac{\pi}{4}</m> is
+                        <me>\TT(t) = \frac{1}{\sqrt{6}}\mqty[-\frac{\sqrt{2}}{2} &amp; -\frac{3\sqrt{2}}{2} &amp; 1]</me>
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Space curves (vector functions of the form <m>\rr:\RR\to\RR^n</m>) are easy to visualize in two and three dimensions, and can be graphed using Sage with <c>parametric_plot</c> (for space curves in <m>\RR^2</m>) or <c>parametric_plot3d</c> (for space curves in <m>\RR^3</m>):
+            </p>
+
+            <sage>
+                <input>
+                    var('t')
+
+                    r(t) = (cos(t), -3*sin(t), t)
+
+                    parametric_plot3d(r(t), (t, 0, pi))
+                </input>
+            </sage>
+        </subsection>
+
+        <subsection xml:id="subsection-derivatives-of-vector-products">
+            <title>Derivatives of Vector Products</title>
+
+            <p>
+                Derivative formulas involving inner products and cross products look very similar to the product rule from calculus.
+                In particular, if <m>\uu</m> and <m>\vv</m> are differentiable space curves then the following formulas hold:
+                <ol>
+                    <li><m>\dv{t}(\uu\cdot\vv) = \uup\cdot\vv + \uu\cdot\vvp</m></li>
+                    <li><m>\dv{t}(\uu\times\vv) = \uup\times\vv + \uu\times\vvp</m></li>
+                </ol>
+            </p>
+
+            <example xml:id="example-space-curves-of-constant-magnitude-are-orthogonal-to-derivatives">
+                <title>Space Curves of Constant Magnitude Are Orthogonal to Derivatives</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> denote a smooth space curve with constant magnitude.
+                        Then <m>\rr</m> and <m>\rrp</m> are orthogonal.
+                    </p>
+                </statement>
+            </example>
+        </subsection>
+    </section>
+
+    <section xml:id="section-arc-length-and-components-of-acceleration">
+        <title>Arc Length and Components of Acceleration</title>
+
+        <introduction>
+            <p>
+                In this section we review the concepts of arc length and components of acceration, two important quantities in the description of motion in higher dimensions.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-arc-length">
+            <title>Arc Length</title>
+
+            <p>
+                Given a smooth space curve over some interval <m>I</m> (see <xref ref="definition-unit-tangent-vectors" text="type-global" />), we can find the corresponding arc length over <m>I</m>.
+            </p>
+
+            <definition xml:id="definition-arc-length">
+                <title>Arc Length</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> be a smooth space curve defined over the interval <m>I</m> and let <m>a,b\in I</m>.
+                        The <term>arc length</term> of <m>\rr(t)</m> from <m>t = a</m> to <m>t = b</m> is the integral
+                        <me>s = \int_a^b \norm{\rrp(t)}\dd{t}</me>.
+                    </p>
+
+                    <aside>
+                        <p>
+                            The arc length formula is a generalization of the simple <m>d = st</m> formula from introductory physics.
+                            Here, the speed <m>s</m> is replaced with <m>\norm{\rrp(t)}</m> and the time <m>t</m> is replaced with <m>\dd{t}</m>.
+                            The integral can be viewed as a <q>continuous sum</q> of the possible products of speed and time over the interval <m>[a,b]</m>, and therefore gives the length or total distance traveled along the curve.
+                        </p>
+                    </aside>
+                </statement>
+            </definition>
+
+            <example xml:id="example-arc-length-of-a-parabolic-segment">
+                <title>Arc Length of a Parabolic Segment</title>
+
+                <statement>
+                    <p>
+                        Find the integral that gives the length of the parabolic segment <m>y = x^2</m> from <m>x = 0</m> to <m>x = 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        <em>Hint</em>: set <m>\rr(t) = \mqty[t &amp; t^2]</m> and use <xref ref="definition-arc-length" text="type-global" />.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Another application of the arc length integral is in the parameterization of curves with respect to arc length.
+                In particular, if <m>\rr(t)</m> is smooth over <m>I = [a, b]</m> and <m>t\in I</m>, then we can define an <em>arc length function</em> <m>s(t)</m> by
+                <me>s(t) = \int_a^b\norm{\rrp(t)}\dd{t}</me>.
+                This function is one-to-one and therefore invertible on <m>I</m> and so has an inverse function <m>t(s)</m>.
+                The arc length parameterization of the space curve <m>\rr(t)</m> is then defined to be <me>\rr(t(s))</me>.
+                In terms of motion, the arc length parameterization corresponds to moving along the curve <m>\rr</m> at unit velocity at all times.
+                This is because
+                <me>\dv{\rr}{s} = \dv{\rr}{t}\dd{t}{s} = \TT(t)</me>.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-components-of-acceleration">
+            <title>Components of Acceleration</title>
+
+            <p>
+                If a space curve <m>\rr(t)</m> is twice-differentiable then its acceleration is given by <m>\vb{a}(t) = \rr''(t)</m>.
+                If the space curve is also smooth then we can find how much of the acceleration is parallel to the velocity.
+            </p>
+
+            <definition xml:id="definition-tangential-component-of-acceleration">
+                <title>Tangential Component of Acceleration</title>
+
+                <statement>
+                    <p>
+                        Let <m>\rr(t)</m> denote a smooth, twice-differentiable space curve with corresponding acceleration vector <m>\vb{a}(t) = \rr''(t)</m> and unit tangent vector <m>\TT(t)</m>.
+                        The <term>tangential component</term> of acceleration is defined to be the vector <m>\vb{a}_{\text{tan}}</m> given by
+                        <me>\vb{a}_{\text{tan}} = (\vb{a}\cdot\TT)\TT</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                We can also define the <em>normal component</em> of acceleration to be the vector <m>\vb{a}_{\text{norm}}</m> given by
+                <me>\vb{a}_{\text{norm}} = \vb{a} - \vb{a}_{\text{tan}}</me>.
+                This vector is orthogonal to <m>\TT</m> (and therefore <m>\vb{a}_{\text{tan}}</m>), and the normal and tangential components of acceleration always sum to <m>\vb{a}</m>.
+                This is related to the <em>unit normal vector</em> <m>\vb{N}(t) = \frac{\TT^\prime(t)}{\norm{\TT^\prime(t)}}</m> by
+                <me>\vb{a}_{\text{norm}} = (\vb{a}\cdot\vb{N})\vb{N}</me>.
+            </p>
+        </subsection>
+    </section>
+
+    <section xml:id="section-gradients-and-potentials">
+        <title>Gradients and Potentials</title>
+
+        <introduction>
+            <p>
+                In this section we review the concept of the gradient of a scalar function and its relationship to potential functions.
+                The gradient is one of our key notions of derivatives in higher dimensions, and potentials are analogous to antiderivatives in this setting.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-gradients">
+            <title>Gradients</title>
+
+            <p>
+                Recall that a function of several variables, say <m>f(x,y,z)</m>, has <em>partial derivatives</em> corresponding to its variables.
+                These partial derivatives are computed by treating the other variables as constants.
+                The gradient of <m>f</m> is then the vector of partial derivatives.
+            </p>
+
+            <definition xml:id="definition-gradient-of-a-scalar-field">
+                <title>Gradient of a Scalar Field</title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z)</m> be a differentiable function (so its partial derivatives exist and are continuous).
+                        The <term>gradient</term> of <m>f(x,y,z)</m> is the vector field <m>\grad f(x,y,z)</m> defined by the equation
+                        <me>\grad f(x,y,z) = \mqty[\pdv{f}{x} &amp; \pdv{f}{y} &amp; \pdv{f}{z}]</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The gradient can also be written in terms of the <em>del</em> operator <m>\grad</m>, which is defined to be
+                <me>\grad = \mqty[\pdv{x} &amp; \pdv{y} &amp; \pdv{z}]</me>
+                in the case of scalar fields on <m>\RR^3</m>.
+                The gradient vector <m>\grad f</m> is then obtained as the scalar product of the <q>vector</q> <m>\grad</m> with the scalar field <m>f</m>.
+            </p>
+
+            <example xml:id="example-computing-a-gradient-in--rr-3-">
+                <title>Computing a Gradient in <m>\RR^3</m></title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z) = xze^{x-y^2}</m>.
+                        Find <m>\grad f</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        The gradient is the vector of partial derivatives:
+                        <me>\grad f = \mqty[z(1+x)e^{x-y^2} &amp; -2xyze^{x-y^2} &amp; xe^{x-y^2}]</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Sage can also compute gradients of scalar fields using the <c>.gradient()</c> method.
+                When using Sage, be careful to define any relevant variables.
+                Remember that Sage will default to recognizing <c>x</c> as a variable if its value hasn't been otherwise assigned.
+            </p>
+
+            <sage>
+                <input>
+                    var('x, y, z')
+
+                    f(x, y, z) = x*z*exp(x - y^2)
+
+                    f(x, y, z).gradient() # computes the gradient
+                </input>
+            </sage>
+
+            <p>
+                The gradient is a useful tool for finding directional derivatives.
+            </p>
+
+            <theorem xml:id="theorem-gradients-and-directional-derivatives">
+                <title>Gradients and Directional Derivatives</title>
+
+                <statement>
+                    <p>
+                        Let <m>f(x,y,z)</m> be a continuously differentiable scalar field and let <m>\vv\in\RR^3</m> be a nonzero vector.
+                        The directional derivative of <m>f</m> in the direction of <m>\vv</m> is
+                        <me>D_{\vv}f = \grad f \cdot \frac{\vv}{\norm{\vv}}</me>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <example xml:id="example-computing-a-directional-derivative">
+                <title>Computing a Directional Derivative</title>
+
+                <statement>
+                    <p>
+                        Determine if <m>f(x, y, z) = z^2 - xy</m> is increasing or decreasing at the point <m>(0, 2, 0)</m> and in the direction of <m>\vv = \smqty[-1 &amp; 1 &amp; 0]</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Since <m>\grad f = \smqty[-y &amp; -x &amp; 2z]</m>, it follows that
+                        <md>
+                            <mrow>D_{\vv}f(0,2,0) &amp; = \grad f(0, 2, 0) \cdot \frac{\vv}{\norm{\vv}} </mrow>
+                            <mrow> &amp; = \mqty[-2 &amp; 0 &amp; 0] \cdot \mqty[-\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0] </mrow>
+                            <mrow> &amp; = \frac{2}{\sqrt{2}}</mrow>
+                        </md>
+                        Since this is positive, the function <m>f</m> is increasing at <m>(0, 2, 0)</m> in the direction of <m>\vv</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                The relationship between gradients and directional derivatives gives the following very important property of the gradient.
+            </p>
+
+            <theorem xml:id="theorem-gradients-and-maximum-rates-of-change">
+                <title>Gradients and Maximum Rates of Change</title>
+
+                <statement>
+                    <p>
+                        Let <m>f</m> be a continuously differentiable scalar field and suppose that <m>\grad f\neq\vb{0}</m> (so that <m>\grad f</m> is smooth).
+                        Then <m>\grad f</m> is parallel to the direction of greatest increase of <m>f</m>, and the corresponding rate of increase is <m>\norm{\grad{f}}</m>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <example xml:id="example-finding-a-heat-flow">
+                <title>Finding a Heat Flow</title>
+
+                <statement>
+                    <p>
+                        Let <m>T(x,y) = 3x^2 - 2y^2</m>.
+                        Find the direction and magnitude of the heat flow at the point <m>(3, 4)</m>.
+                    </p>
+                </statement>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-potential-functions">
+            <title>Potential Functions</title>
+
+            <p>
+                Given a continuous one-dimensional force <m>f(x)</m> defined on some interval <m>[a, b]</m>, we can define a corresponding potential function <m>U(x)</m> by
+                <me>U(x) = -\int_{x_0}^x f(t)\dd{t}</me>,
+                where <m>x_0\in[a,b]</m> is some previously chosen initial value.
+                With this definition, the work done by <m>f</m> in moving a particle from <m>x = x_1</m> to <m>x = x_2</m> can be written
+                <me>-\Delta U = -(U(x_2) - U(x_1))</me>.
+                In particular, the work done by <m>f</m> depends only on the initial point <m>x_1</m> and the terminal point <m>x_2</m> and the work done is <em>path independent</em>.
+            </p>
+
+            <p>
+                Now let's move to a higher dimensional setting.
+                Say we have the force <m>\ff(x,y) = \mqty[0 &amp; x]</m> and we wish to find the work done as a particle moves from <m>(0, 0)</m> to <m>(1,0)</m>.
+                If we plot this force field we see that the vectors increase in magnitude as we move to the right.
+            </p>
+
+            <figure xml:id="figure-sageplot-nonconservative-vector-field">
+                <caption>A plot of <m>\ff(x,y) = \mqty[0 &amp; x]</m>.</caption>
+
+                <image xml:id="image-sageplot-nonconservative-vector-field" width="50%">
+                    <description>A plot of <m>\ff(x,y) = \mqty[0 &amp; x]</m>.</description>
+
+                    <sageplot>
+                        var('x, y')
+
+                        f(x, y) = (0, x)
+
+                        plot_vector_field(f(x, y), (x, 0, 1.1), (y, -2, 2), color="blue")
+                    </sageplot>
+                </image>
+            </figure>
+
+            <p>
+                In the force field above, the work done is now <em>path dependent</em>.
+                To see why, consider two paths from <m>(0,0)</m> to <m>(1,0)</m>: <m>C_1</m> given by the top half of the circle <m>(x-\frac{1}{2})^2 + y^2 = \frac{1}{4}</m> traversed clockwise and <m>C_2</m> given by the bottom half of the same circle traversed counterclockwise.
+                On <m>C_1</m> the work done will be negative since the path tends to go against <m>\ff</m> more than with <m>\ff</m>.
+                Likewise, the work will be positive on <m>C_2</m> since this path flows with <m>\ff</m> more than it flows against it.
+                Since the work depends on the path taken between <m>(0,0)</m> and <m>(1,0)</m>, the work is path dependent.
+            </p>
+
+            <p>
+                The issue here is that the force field <m>\ff(x,y) = \mqty[0 &amp; x]</m> has no corresponding potential function.
+                This is made more precise in the following definition.
+            </p>
+
+            <definition xml:id="definition-conservative-vector-fields-and-potentials">
+                <title>Conservative Vector Fields and Potentials</title>
+
+                <idx><h>conservative vector fields</h></idx>
+
+                <idx><h>potentials</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\vb{F}</m> denote a vector field.
+                        If there exists a scalar field <m>f</m> such that <m>\grad f = \vb{F}</m>, then we say that <m>\vb{F}</m> is a <term>conservative vector field</term> and that <m>f</m> is a <term>potential function</term> for <m>\vb{F}</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The vector field <m>\ff</m> seen in <xref ref="figure-sageplot-nonconservative-vector-field" text="type-global" /> above is not conservative.
+                If it were, then it would have a potential function <m>\varphi(x,y)</m> such that <m>\grad\varphi = \ff</m>, which would then imply that <m>\varphi_x = 0</m> and <m>\varphi_y = x</m>.
+                Then
+                <me>\varphi(x, y) = \int\varphi_y\dd{y} = xy + g(x) \implies \varphi_x = y + \dv{g}{x}</me>.
+                This contradicts the condition <m>\varphi_x = 0</m>, so <m>\ff</m> cannot have a potential.
+            </p>
+
+            <p>
+                A necessary condition for a vector field <m>\ff = \mqty[P &amp; Q]</m> to be conservative is for <m>Q_x - P_y</m> to be <m>0</m>.
+                Equivalently, <m>P_y = Q_x</m> in a conservative vector field.
+                The quantity <m>Q_x - P_y</m> is also known as the <em>two-dimensional curl</em> of the vector field <m>\ff</m> and represents the tendency of <m>\ff</m> to rotate counterclockwise.
+                Therefore two-dimensional conservative vector fields are also <em>irrotational</em>.
+            </p>
+
+            <example xml:id="example-finding-a-potential-function">
+                <title>Finding a Potential Function</title>
+
+                <statement>
+                    <p>
+                        Let <m>\ff = \mqty[x &amp; y]</m>.
+                        Is <m>\ff</m> conservative?
+                    </p>
+                </statement>
+            </example>
+        </subsection>
+    </section>
+    <section xml:id="section-divergence-and-curl-of-vector-fields">
+        <title>Divergence and Curl of Vector Fields</title>
+
+        <introduction>
+            <p>
+                In <xref ref="section-gradients-and-potentials" text="type-global" /> we reviewed the gradient of scalar field along with the del operator <m>\grad</m>.
+                The gradient, and the del operator in particular, is the tool we use to make sense of how scalar fields <m>f(x, y, z)</m> change.
+                On the other hand, <m>\grad</m> cannot be applied directly to vector fields since we haven't defined how to multiply vectors.
+                However, we do have the notions of dot products and cross products that will allow us to combine <m>\del</m> with vector fields <m>\FF</m>.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-divergence">
+            <title>Divergence</title>
+
+            <p>
+                Let <m>\FF(x, y) = \mqty[P(x, y) &amp; Q(x, y)]</m> denote a vector field in <m>\RR^2</m> and suppose it measures some changing quantity like fluid flow.
+                We would like to measure how the fluid flow is changing at a given point.
+                This can be done using the <em>divergence</em> of the vector field.
+            </p>
+
+            <definition xml:id="definition-divergence">
+                <title>Divergence</title>
+
+                <idx><h>vector fields</h><h>divergence</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF(x, y) = \mqty[P(x, y) &amp; Q(x, y)]</m> be a vector field in <m>\RR^2</m> and suppose that its component functions <m>P</m> and <m>Q</m> are continuously differentiable.
+                        The <term>divergence</term> of <m>\FF</m> is the scalar quantity
+                        <me>\divt\FF = \div\FF = \pdv{P}{x} + \pdv{Q}{y}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The divergence of a vector field provides a measure of how the <q>flow density</q> of the field changes at a certain point.
+                In particular, if <m>\div\FF</m> corresponds to the difference between the outflow and the inflow.
+                If the divergence is positive then the vector field tends to flow out of the given point, and if the divergence is negative the vector field tends to flow into the given point.
+                Any point at which the divergence is positive is called a <em>source</em>, and any point at which the divergence is negative is called a <em>sink</em>.
+            </p>
+
+            <example xml:id="example-estimating-divergence-from-a-graph">
+                <title>Estimating Divergence From a Graph</title>
+
+                <statement>
+                    <p>
+                        Estimate the divergence of the vector field <m>\FF</m> at the point <m>(-1, 0)</m> in the figure below.
+                    </p>
+
+                    <figure xml:id="figure-sage-divergence-estimate">
+                        <caption>A vector field <m>\FF</m>.</caption>
+
+                        <image xml:id="image-sage-divergence-estimate" width="50%">
+                            <description>A vector field <m>\FF</m>.</description>
+
+                            <sageplot>
+                                var('x, y')
+                                F(x, y) = (1, x-y)
+
+                                P = plot_vector_field(F(x, y), (x, -2, 2), (y, -2, 2), color="blue")
+                                P += point((-1, 0), color="black")
+                                P
+                            </sageplot>
+                        </image>
+                    </figure>
+                </statement>
+            </example>
+
+            <example xml:id="example-computing-the-divergence">
+                <title>Computing the Divergence</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.
+                        Find <m>\div\FF</m> and any sources and sinks of <m>\FF</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        By <xref ref="definition-divergence" text="type-global" />,
+                        <me>\div\FF = y</me>.
+                        Therefore any point above the <m>x</m>-axis is a source in the vector field and any point below the <m>x</m>-axis is a sink.
+                    </p>
+
+                    <figure xml:id="figure-sage-source-sink-2d-plot">
+                        <caption>The vector field <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.</caption>
+
+                        <image xml:id="image-sage-source-sink-2d" width="50%">
+                            <description>The vector field <m>\FF = \mqty[xy &amp; -\sin(x^2)]</m>.</description>
+
+                            <sageplot>
+                                var('x, y')
+                                F(x, y) = (x*y, -sin(x^2))
+                                plot_vector_field(F(x, y), (x, 0, 2), (y, -1, 1), color="blue")
+                            </sageplot>
+                        </image>
+                    </figure>
+                </solution>
+            </example>
+
+            <p>
+                A vector field <m>\FF</m> is said to be <em>incompressible</em>, <em>solenoidal</em> or <em>divergence-free</em> if its divergence is <m>0</m> at all points.
+                This assumption can often be made about slow moving fluid flows.
+            </p>
+
+            <example xml:id="example-determining-if-a-vector-field-is-incompressible">
+                <title>Determining if a Vector Field Is Incompressible</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[y &amp; -x]</m>.
+                        Is <m>\FF</m> an incompressible flow?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We just need to take the divergence of <m>\FF</m>, which is easily seen to be <m>0</m>.
+                        Therefore the flow is incompressible.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Although the previous examples only computed divergences in <m>\RR^2</m>, the formula <m>\divt\FF = \div\FF</m> also works in <m>\RR^3</m>.
+            </p>
+
+            <example xml:id="example-finding-a-divergence-in--rr-3-">
+                <title>Finding a Divergence in <m>\RR^3</m></title>
+
+                <statement>
+                    <p>
+                        Find the divergence of <m>\FF = x\ii - z\jj + e^{xy}\kk</m>.
+                    </p>
+                </statement>
+                <solution>
+                    <p>
+                        The divergence is
+                        <me>\div\FF = \pdv{x}(x) + \pdv{y}(-z) + \pdv{z}(e^{xy}) = 1</me>.
+                        Note that since the divergence is positive, <em>every</em> point in <m>\RR^3</m> is a source in this field.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Sage can also handle simple computations involving divergence using the <c>.div()</c> method.
+                When using this method, the order of the variables that are being differentiated must be specified.
+                For us, this is usually done by calling <c>.div([x, y])</c> in the two-dimensional case and <c>.div([x, y, z])</c> in the three-dimensional case.
+                As an example, the Sage cell below computes the divergence of <m>\FF = \mqty[xe^{xyz} &amp; 2x^2 + y &amp; z^2 - \frac{1}{zx^2 - \cos(z)}]</m>.
+            </p>
+
+            <sage>
+                <input>
+                    f(x, y, z) = (x*exp(x*y*z), 2*x^2 + y, z^2 - 1/((z*x^2) - cos(z)))
+                    f(x, y, z).div([x, y, z])
+                </input>
+
+                <output>
+                    x*y*z*e^(x*y*z) + 2*z + (x^2 + sin(z))/(x^2*z - cos(z))^2 + e^(x*y*z) + 1
+                </output>
+            </sage>
+        </subsection>
+
+        <subsection xml:id="subsection-curl">
+            <title>Curl</title>
+
+            <p>
+                Just as the divergence of a vector field was defined using <m>\del</m> and the dot product, we can define another type of derivative known as the <em>curl</em> by combining <m>\del</m> with the cross product.
+                Since the cross product only exists in <m>\RR^3</m> it follows that the curl of a vector field only exists for three-dimensional fields, though there is a two-dimensional analogue that can be useful (see the comment before <xref ref="example-finding-a-potential-function" text="type-global" /> at the end of <xref ref="section-gradients-and-potentials" text="type-global" />).
+                This is in stark contrast to the divergence, which is defined in any <m>\RR^n</m>.
+            </p>
+
+            <definition xml:id="definition-curl-of-a-vector-field">
+                <title>Curl of a Vector Field</title>
+
+                <idx><h>vector fields</h><h>curl</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF(x, y, z) = \mqty[P(x, y, z) &amp; Q(x, y, z) &amp; R(x, y, z)]</m> be a vector field in <m>\RR^3</m> with continuously differentiable component functions <m>P, Q</m> and <m>R</m>.
+                        The <term>curl</term> of <m>\FF</m> is the vector field <m>\curlt\FF</m>, or <m>\curl\FF</m>, given by
+                        <me>\curlt\FF = \curl\FF = \mqty[\pdv{R}{y} - \pdv{Q}{z} &amp; \pdv{P}{z} - \pdv{R}{x} &amp; \pdv{Q}{x} - \pdv{P}{y}]</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The quantity <m>\curl\FF</m> that appears in <xref ref="definition-curl-of-a-vector-field" text="type-global" /> can also be computed by setting up an appropriate <m>3\times3</m> determinant:
+                <me>\curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ P &amp; Q &amp; R|</me>.
+                Despite the abuse of notation, this approach is usually preferable to memorizing the formula in the definition.
+            </p>
+
+            <example xml:id="example-computing-a-curl">
+                <title>Computing a Curl</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy \amp 3 + 2z \amp z]</m>.
+                        Find <m>\curlt\FF</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Using the determinant formulation of the curl, we get
+                        <me>\curlt\FF = \curl\FF = \mqty|\ii &amp; \jj &amp; \kk \\ \pdv{x} &amp; \pdv{y} &amp; \pdv{z} \\ xy &amp; 3 + 2z &amp; z|</me>
+                        which simplifies to <m>\curlt\FF = \mqty[-2 &amp; 0 &amp; -x]</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Just as the divergence of a vector field can be interpreted as a measure of the flow <em>through</em> or <em>across</em> a point in a vector field, the curl can be interpreted as a measure of the flow <em>around</em> a point in a vector field.
+                In particular, if <m>\FF</m> is a vector field in <m>\RR^3</m> then <m>\curl\FF</m> gives the axis of rotation around which <m>\FF</m> tends to flow counterclockwise when viewed from above.
+                The magnitude <m>\norm{\curlt\FF}</m> measures the amount of rotation.
+            </p>
+
+            <p>
+                For example, consider the vector field <m>\FF = \mqty[xy &amp; 3 + 2z &amp; z]</m> from <xref ref="example-computing-a-curl" text="type-global" />.
+                At <m>(0, 0, -1)</m> its corresponding curl is <m>\mqty[-2 &amp; 0 &amp; 0]</m>.
+                Therefore the vector field <m>\FF</m> tends to rotate counterclockwise around the point <m>(0, 0, -1)</m> when viewed head-on from the direction of <m>\mqty[-2 &amp; 0 &amp; 0]</m>, i.e., from the direction of the negative <m>x</m>-axis.
+                See the figure below produced using Sage.
+                Be sure to rotate the figure so that you're viewing it from the direction of the negative <m>x</m>-axis!
+            </p>
+
+            <sage>
+                <input>
+                    var('x, y, z')
+
+                    F(x, y, z) = (x*y, 3 + 2*z, z)
+
+                    plot_vector_field3d(F(x, y, z), (x, -1, 1), (y, -1, 1), (z, -2, 0))
+                </input>
+            </sage>
+
+        </subsection>
+
+        <p>
+            Sage is also capable of computing curls and divergences of arbitrary vector fields using the <c>function</c> command.
+            This tells Sage to treat a variable as a function of specified variables.
+        </p>
+
+        <example xml:id="example-computing-the-divergence-of-curl">
+            <title>Computing the Divergence of a Curl</title>
+
+            <statement>
+                <p>
+                    Let <m>\FF = \mqty[P \amp Q \amp R]</m> and assume that its component functions are continuously differentiable.
+                    Compute <m>\div(\curl\FF)</m> by completing the code cell below.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        P = function('P')(x, y, z)
+                        Q = function('Q')(x, y, z)
+                        R = function('R')(x, y, z)
+                    </input>
+                </sage>
+            </statement>
+        </example>
+    </section>
+
+    <section xml:id="section-sage-examples">
+        <title>Sage Examples</title>
+
+        <p>
+            This section is focused on applying tools provided by Sage to the concepts learned in this chapter.
+            In particular, Sage allows us to avoid tedious algebraic computations in proving general formulas involving the gradient, divergence and curl.
+            The relevant Sage commands are as follows (assuming we are working with fields in <m>\RR^3</m>):
+        </p>
+
+        <listing xml:id="listing-sage-commands-fields-RR3">
+            <caption>Sage commands for scalar and vector fields in <m>\RR^3</m>.</caption>
+
+            <program language="sage">
+                <input>
+                    # declare variables
+                    var('x, y, z')
+
+                    # define an arbitrary scalar field f(x, y, z)
+                    f = function('f')(x, y, z)
+
+                    # define components of an arbitrary vector field F(x, y, z)
+                    P = function('P')(x, y, z)
+                    Q = function('Q')(x, y, z)
+                    R = function('R')(x, y, z)
+
+                    # define an arbitrary vector field
+                    F(x, y, z) = (P, Q, R)
+
+                    # compute gradient of f
+                    f.gradient()
+
+                    # compute div and curl of F
+                    F(x, y, z).div([x, y, z])
+                    F(x, y, z).curl([x, y, z])
+                </input>
+            </program>
+        </listing>
+
+        <p>
+            You can also make use of the <c>pretty_print()</c> command to provide more readable output.
+        </p>
+
+        <example xml:id="example-proving-the-product-rule-for-gradients">
+            <title>Proving the Product Rule for Gradients</title>
+
+            <statement>
+                <p>
+                    Let <m>f(x,y,z)</m> and <m>g(x, y, z)</m> be differentiable scalar fields in <m>\RR^3</m>.
+                    Prove that <m>\del(fg) = f(\del g) + (\del f) g</m>.
+                </p>
+            </statement>
+
+            <solution>
+                <p>
+                    To prove this using Sage, you can complete the code cell below by filling in the variables <c>lhs</c> and <c>rhs</c> to represent the left hand and right hand sides of the equation
+                    <me>\del(fg) = f(\del g) + (\del f) g</me>.
+                    The final line of code, <c>lhs == rhs</c>, then checks if the two quantities are equal by returning <c>True</c> or <c>False</c>.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        f = function('f')(x, y, z)
+                        g = function('g')(x, y, z)
+
+                        lhs = 1     # replace 1 with ∇(fg)
+                        rhs = 1     # replace 1 with f(∇g) + (∇f)g
+
+                        lhs == rhs
+                    </input>
+                </sage>
+            </solution>
+        </example>
+
+        <example xml:id="example-computing-a-laplacian">
+            <title>Computing a Laplacian</title>
+
+            <statement>
+                <p>
+                    The <term>Laplacian</term> of a scalar field <m>f(x, y, z)</m> is the scalar field <m>\del^2 f</m> where <m>\del^2 = \div\del</m>.
+                    In other words,
+                    <me>\del^2 f = \divt(\del f)</me>.
+                    Use the Sage cell below to find formulas for both <m>\del^2 f</m> and <m>\del^2 (fg)</m>.
+                </p>
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                    </input>
+                </sage>
+            </statement>
+        </example>
+
+        <example xml:id="example-checking-if-a-vector-field-is-conservative">
+            <title>Checking if a Vector Field is Conservative</title>
+
+            <statement>
+                <p>
+                    Recall that a differentiable vector field <m>\FF</m> is conservative if <m>\curl\FF = \vb{0}</m>.
+                    With this in mind, determine if the vector field given by
+                    <me>\FF = xyz\mqty[xy \amp yz \amp zx]</me>
+                    is conservative using the Sage cell below.
+                </p>
+
+                <sage>
+                    <input>
+                        var('x, y, z')
+
+                        # define the vector field F
+                        F = x*y*z*vector([x*y, y*z, z*x])
+                    </input>
+                </sage>
+            </statement>
+        </example>
+
+        <example xml:id="example-computing-a-vector-laplacian">
+            <title>Computing a Vector Laplacian</title>
+
+            <statement>
+                <p>
+                    The <term>vector Laplacian</term> of a vector field <m>\FF</m> in <m>\RR^3</m> is the vector field <m>\del^2\FF</m> defined by
+                    <me>\del^2\FF = \del(\div\FF) - \curl(\curl\FF)</me>.
+                    Let <m>\FF = (x^2 + y^2 + z^2)^{-\frac{1}{2}}\mqty[x \amp y\amp z]</m>.
+                    Find <m>\del^2\FF</m> using the Sage cell below.
+                </p>
+
+                <sage>
+                    <input>
+                    </input>
+                </sage>
+            </statement>
+
+            <solution>
+                <p>
+                    The vector Laplacian of <m>\FF</m> is
+                    <me>\del^2\FF = -2(x^2+y^2+z^2)^{-\frac{3}{2}}\mqty[x \amp y \amp z]</me>,
+                    after some simplifying.
+                </p>
+            </solution>
+        </example>
+    </section>
+</chapter>

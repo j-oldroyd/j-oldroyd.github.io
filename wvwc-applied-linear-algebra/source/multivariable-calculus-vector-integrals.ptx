@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-multivariable-calculus-vector-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Vector Integrals</title>
+
+    <introduction>
+        <p>
+            Now that we have several useful ways to describe the rate of change of a vector function, we want to go in the opposite direction and determine how best to measure the <em>accumulation</em> of a vector function.
+            Different notions of accumulation will be associated to the different derivatives we have access to, but each connected to one concept: the integral.
+        </p>
+    </introduction>
+
+    <section xml:id="section-line-integrals">
+        <title>Line Integrals</title>
+
+        <introduction>
+            <p>
+                An integral is fundamentally determined by two objects: the integrand and the domain of integration.
+                In this section, we study integrals that involve one-dimensional domains of integration.
+                Such integrals are known as <em>line integrals</em>.
+                We will have a different type of line integral depending on whether our integrand is a scalar field or a vector field.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-scalar-line-integrals">
+            <title>Scalar Line Integrals</title>
+
+            <p>
+                Consider the problem of finding the mass of a wire that follows a path <m>C</m> in either <m>\RR^2</m> or <m>\RR^3</m> given a density function <m>\rho</m>.
+                As seen in calculus, the mass can be found by integrating the density.
+                This leads to integrals of the form <m>\int_C \rho\dd{s}</m> which are known as <em>(scalar) line integrals</em>.
+                The fundamental domain of integration for a line integral is a <em>smooth curve</em>.
+            </p>
+
+            <definition xml:id="definition-smooth-curves">
+                <title>Smooth Curves</title>
+
+                <idx><h>space curves</h><h>smooth</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> denote a curve in <m>\RR^n</m> parameterized by a vector function <m>\rr(t)</m> defined on an interval <m>I</m>.
+                        We say that <m>C</m> is <term>smooth</term> if <m>\rr(t)</m> is differentiable and <m>\rrp(t)\neq\vb{0}</m> anywhere on <m>I</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                We can rephrase <xref ref="definition-smooth-curves" text="type-global" /> as follows: <m>C</m> is smooth if and only if it has a smooth parameterization <m>\rr(t)</m>.
+                With this in mind, we can now define line integrals over smooth curves.
+            </p>
+
+            <definition xml:id="definition-scalar-line-integrals">
+                <title>Scalar Line Integrals</title>
+
+                <idx><h>line integrals</h><h>scalar fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> be a smooth curve in <m>\RR^2</m>.
+                        Let <m>f(x, y)</m> denote a function that is continuous on some open set containing <m>C</m>.
+                        The <term>scalar line integral</term> of <m>f</m> over <m>C</m> is given by the limit
+                        <me>\int_C f(x, y)\dd{s} = \lim_{\Delta s\to0}\sum_{k=1}^{n}f(x_k, y_k)\Delta s</me>
+                        where the points <m>(x_k, y_k)</m> are lie on <m>C</m>, and <m>\Delta s</m> gives the length of the line segment from one such point to the next.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Geometrically, we view the line integral <m>\int_C f(x, y)\dd{s}</m> as giving the area between the curve <m>C</m> in the <m>xy</m>-plane and the surface <m>z = f(x, y)</m>.
+                Although <xref ref="definition-scalar-line-integrals" text="type-global" /> assumes that <m>C</m> lies in <m>\RR^2</m>, the definition can be extended to higher dimensions.
+            </p>
+
+            <p>
+                The definition given in <xref ref="definition-scalar-line-integrals" text="type-global" />, while important, will not typically be used for computing line integrals.
+                Instead, we will take another approach using arc length.
+                The differential <m>\dd{s}</m> in the line integral formula corresponds to the arc length function along <m>C</m>.
+                Therefore we may write
+                <me>\dd{s} = \norm{\rrp(t)}\dd{t}</me>
+                and
+                <men xml:id="equation-scalar-line-computational">\int_C f(x, y)\dd{s} = \int_a^b f(\rr(t))\norm{\rrp(t)}\dd{t}</men>
+                for some suitable smooth parameterization <m>\rr(t), a\leq t\leq b</m> of <m>C</m>.
+            </p>
+
+            <example xml:id="example-computing-a-scalar-line-integral">
+                <title>Computing a Scalar Line Integral</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\int_C (xy)^{\frac{1}{3}}\dd{s}</m> where <m>C</m> is the parabolic segment <m>y = x^2</m> from <m>x = 0</m> to <m>x = 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, we need to parameterize <m>C</m>.
+                        This can be done using <m>\rr(t) = \mqty[t \amp t^2]</m> for <m>0\leq t\leq 1</m>.
+                        <xref ref="equation-scalar-line-computational" text="type-global" /> then gives
+                        <md>
+                            <mrow>\int_C (xy)^{\frac{1}{3}}\dd{s} \amp = \int_0^1 t\sqrt{1 + 4t^2}\dd{t} </mrow>
+                            <mrow> \amp = \int_1^5\frac{1}{8}\sqrt{u}\dd{u} </mrow>
+                            <mrow> \amp = \frac{5^{\frac{3}{2}} - 1}{12} </mrow>
+                        </md>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Recall that <xref ref="definition-scalar-line-integrals" text="type-global" /> defines scalar line integrals over smooth curves only.
+                If a curve <m>C</m> is <em>piecewise smooth</em>, which means that it can be written as the union of finitely many smooth curves <m>C_1</m> through <m>C_n</m>, then we can extend <xref ref="definition-scalar-line-integrals" text="type-global" /> to <m>C</m> as well.
+                All we need to do is compute the line integral along the smooth components <m>C_i</m> and add them up:
+                <me>\int_C f(x, y)\dd{s} = \sum_{i=1}^n \int_{C_i} f(x, y)\dd{s}</me>.
+            </p>
+
+            <example xml:id="example-computing-a-line-integral-along-a-piecewise-smooth-curve">
+                <title>Computing a Line Integral Along a Piecewise Smooth Curve</title>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> denote the curve consisting of the line segment from <m>(-1, 0)</m> to <m>(0, 1)</m> followed by the line segment from <m>(0, 1)</m> to <m>(1,0)</m>.
+                        Find <m>\int_C (2x - 3y)\dd{s}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We need to decompose <m>C</m> into smooth components.
+                        The natural choice is to pick <m>C_1</m> to be the first segment and <m>C_2</m> to be the second segment.
+                        These curves are smooth and have the following smooth parameterizations:
+                        <md>
+                            <mrow>C_1 : \rr_1(t) \amp = \mqty[t - 1 \amp t], 0\leq t\leq 1 </mrow>
+                            <mrow>C_2 : \rr_2(t) \amp = \mqty[t \amp 1-t], 0\leq t\leq 1 </mrow>
+                        </md>.
+                        Now we can compute the resulting line integrals:
+                        <md>
+                            <mrow>\int_{C_1} (2x - 3y)\dd{s} \amp = \int_0^1 [2(t-1) - 3t]\sqrt{2}\dd{t} </mrow>
+                            <mrow> \amp = \int_0^1 (-2 - t)\sqrt{2}\dd{t} </mrow>
+                            <mrow> \amp = -\frac{5}{2}\sqrt{2} </mrow>
+                        </md>.
+                        Likewise,
+                        <me>\int_{C_1} (2x - 3y)\dd{s} = \int_0^1 (5t - 3)\sqrt{2}\dd{t} = -\frac{1}{2}\sqrt{2}</me>.
+                        Adding these integrals together, we get
+                        <me>\int_C (2x - 3y)\dd{s} = -3\sqrt{2}</me>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-line-integrals-of-vector-fields">
+            <title>Line Integrals of Vector Fields</title>
+
+            <p>
+                Using the scalar line integral in <xref ref="definition-scalar-line-integrals" text="type-global" />, we can also define line integrals of vector fields along smooth and piecewise-smooth curves.
+            </p>
+
+            <definition xml:id="definition-vector-line-integrals">
+                <title>Vector Line Integrals</title>
+
+                <idx><h>line integrals</h><h>vector fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>C</m> be a (piecewise) smooth curve and let <m>\FF</m> be a vector field that is continuous on <m>C</m>.
+                        The <term>vector line integral</term> of <m>\FF</m> over <m>C</m> is defined to be
+                        <me>\int_{C}\FF\cdot\TT\dd{s}</me>,
+                        where <m>\TT</m> denotes the unit tangent to <m>C</m> with respect to a previously chosen (piecwise) smooth parameterization of <m>C</m>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                We interpret the vector line integral as measuring how well the vector field <m>\FF</m> and the curve <m>C</m> align.
+                We also call it the <em>circulation</em> of <m>\FF</m> along <m>C</m>.
+                In physics, <xref ref="definition-vector-line-integrals" text="type-global" /> can also be used to find the work done by a force field <m>\FF</m> on a particle that moves along the curve <m>C</m>.
+            </p>
+
+            <p>
+                The formula in <xref ref="definition-vector-line-integrals" text="type-global" /> can be simplified in much the same way as the original definition of a scalar line integral was in <xref ref="equation-scalar-line-computational" text="type-global" />.
+                First, suppose that <m>C</m> is parameterized by the smooth vector function <m>\rr(t):[a,b]\to\RR^n</m>.
+                Then
+                <md>
+                    <mrow>\FF\cdot\TT\dd{s} \amp = \FF(\rr(t))\cdot\frac{\rrp(t)}{\norm{\rrp(t)}}\norm{\rrp(t)}\dd{t} </mrow>
+                    <mrow> \amp = \FF(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                    <mrow> \amp = \FF\cdot\dd{\rr} </mrow>
+                </md>.
+                Therefore
+                <men xml:id="equation-vector-line-computational">\int_C\FF\cdot\TT\dd{s} = \int_a^b\FF\cdot\dd{\rr}</men>.
+            </p>
+
+            <example xml:id="example-computing-a-circulation">
+                <title>Computing a Circulation</title>
+
+                <statement>
+                    <p>
+                        Find the circulation of <m>\FF = (x^2+y^2)^{-1}\mqty[x \amp y]</m> along the curve <m>C:\rr(t) = \mqty[t \amp 4t], 1\leq t\leq 10</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, note that <m>C</m> is a smooth curve on which <m>\FF</m> is continuous and the line integral of <m>\FF</m> along <m>C</m> is therefore defined.
+                        By <xref ref="equation-vector-line-computational" text="type-global" />, it follows that
+                        <me>\int_C\FF\cdot\TT\dd{s} = \int_1^{10}\FF\cdot\dd{\rr}</me>
+                        where
+                        <md>
+                            <mrow>\FF \amp = \FF(\rr(t)) = \frac{1}{17t^2}\mqty[t \amp 4t] </mrow>
+                            <mrow>\dd{\rr} \amp = \rrp(t)\dd{t} = \mqty[1 \amp 4]\dd{t} </mrow>
+                        </md>.
+                        Therefore
+                        <md>
+                            <mrow>\int_1^{10}\FF\cdot\dd{\rr} \amp = \int_1^{10}\frac{1}{17t^2}(t + 16t)\dd{t} </mrow>
+                            <mrow> \amp = \int_1^{10}\frac{1}{t}\dd{t} </mrow>
+                            <mrow> \amp = \ln(10) </mrow>
+                        </md>.
+                        Note that this is greater than <m>0</m>, which indicates that the vector field <m>\FF</m> and the curve <m>C</m> tend to be aligned.
+                        This can be verified using the following plot produced by Sage:
+                    </p>
+
+                    <figure xml:id="figure-sage-vector-field-over-line">
+                        <caption>The vector field <m>\FF = (x^2+y^2)^{-1}\mqty[x\amp y]</m> over <m>C</m>.</caption>
+
+                        <image xml:id="image-sage-vector-field-over-line" width="50%">
+                            <description>The vector field <m>\FF</m> over <m>C</m>.</description>
+
+                            <sageplot>
+                                var('x y')
+
+                                F = (x^2 + y^2)^(-1)*vector([x, y])
+
+                                P1 = plot_vector_field(F, (x, 1, 10), (y, 4, 40), color="blue")
+                                P2 = parametric_plot([x, 4*x], (x, 1, 10), color="black", aspect_ratio="automatic")
+
+                                P = P1 + P2
+                                P
+                            </sageplot>
+                        </image>
+                    </figure>
+                </solution>
+            </example>
+
+            <p>
+                Curves that <q>follow</q> vector fields precisely are known as <em>flow lines</em> or <em>streamlines</em>.
+                The curve <m>C</m> in <xref ref="example-computing-a-circulation" text="type-global" /> is an example of a streamline of the vector field <m>\FF</m> in the same example, as can be seen from <xref ref="figure-sage-vector-field-over-line" text="type-global" />.
+                It can be shown that all other streamlines of <m>\FF</m> are curves of the form <m>y = cx</m> for some constant <m>c</m>.
+            </p>
+        </subsection>
+    </section>
+
+    <section xml:id="section-path-independence-and-the-fundamental-theorem-of-line-integrals">
+        <title>Path Independence and the Fundamental Theorem of Line Integrals</title>
+
+        <introduction>
+            <p>
+                Given a continuous vector field <m>\FF</m> defined over a smooth curve <m>C:\rr(t), a\leq t\leq b</m>, we can find the corresponding vector line integral using the formula
+                <me>\int_C\FF\cdot\TT\dd{s} = \int_a^b\FF\cdot\dd{\rr}</me>.
+                If <m>F(t)</m> is an antiderivative of <m>\FF\cdot\rrp</m>, then the Fundamental Theorem of Calculus implies that
+                <me>\int_C\FF\cdot\TT\dd{s} = F(b) - F(a)</me>,
+                which suggests that the line integral only depends on the endpoints of the curve.
+                Unfortunately this is not guaranteed as line integrals of vector fields are generally <em>path dependent</em>.
+                Our primary goal in this section is to determine the vector fields <m>\FF</m> for which our intuition does hold.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-path-independence">
+            <title>Path Independence</title>
+
+            <p>
+                Consider the vector field <m>\FF = \mqty[y \amp -x]</m> and the curves
+                <md>
+                    <mrow>C_1: \amp \rr_1(t) = \mqty[1-t \amp t], 0\leq t\leq 1 </mrow>
+                    <mrow>C_2: \amp \rr_2(t) = \mqty[\cos(t) \amp \sin(t)], 0\leq t\leq\frac{\pi}{2} </mrow>
+                </md>
+                Note that both curves have the same initial and terminal points, however the corresponding line integrals are different:
+                <md>
+                    <mrow>\int_{C_1}\FF\cdot\TT\dd{s} \amp = -1 </mrow>
+                    <mrow>\int_{C_2}\FF\cdot\TT\dd{s} \amp = -\frac{\pi}{2} </mrow>
+                </md>
+                This is an example of <em>path dependence</em>.
+            </p>
+
+            <definition xml:id="definition-path-dependence-and-path-independence">
+                <title>Path Dependence and Path Independence</title>
+
+                <idx><h>line integrals</h><h>path independence</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a continuous vector field defined on an open set <m>U</m>.
+                        We say that the line integral <m>\int_C\FF\cdot\TT\dd{s}</m> is <term>path independent</term> on <m>U</m> if for any pair of points <m>A,B</m> in <m>U</m> and any pair of piecewise smooth curves <m>C_1, C_2</m> from <m>A</m> to <m>B</m> contained entirely within <m>U</m> we have
+                        <me>\int_{C_1}\FF\cdot\TT\dd{s} = \int_{C_2}\FF\cdot\TT\dd{s}</me>.
+                        In other words, any line integral of <m>\FF</m> along any piecewise smooth path contained within <m>U</m> depends only on the endpoints of the curve <m>C</m>.
+                        Otherwise, we say that <m>\int_C\FF\cdot\TT\dd{s}</m> is <term>path dependent</term>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Graphically, we can see very quickly that line integrals of <m>\FF = \mqty[y \amp -x]</m> above should be path dependent.
+                For instance, consider the following plot of <m>\FF</m> over the unit square <m>[0,1]\times[0,1]</m>:
+            </p>
+            <figure xml:id="figure-sage-path-dependent-field">
+                <caption><m>\FF = \mqty[y \amp -x]</m>.</caption>
+
+                <image xml:id="image-sage-path-dependent-field" width="50%">
+                    <description>A plot of the vector field [y, -x].</description>
+
+                    <sageplot>
+                        var('x y')
+
+                        F = vector([y, -x])
+
+                        plot_vector_field(F, (x, 0, 1), (y, 0, 1), color="blue")
+                    </sageplot>
+                </image>
+            </figure>
+
+            <p>
+                Let <m>C_1</m> denote the circular arc from <m>(0,1)</m> to <m>(1,0)</m> and let <m>C_2</m> denote the path piecewise linear path from <m>(0,1)</m> to <m>(1,0)</m> determined by following the axes.
+                Then <m>\int_{C_1}\FF\cdot\dd{\rr} > 0</m> and <m>\int_{C_2}\FF\cdot\dd{\rr} = 0</m>.
+                Therefore <m>\FF</m> must be path-dependent.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-fundamental-theorem-of-line-integrals">
+            <title>Fundamental Theorem of Line Integrals</title>
+
+            <p>
+                The argument above also gives us some intuition about precisely which vector fields should be path independent.
+                In particular, it took advantage of the fact that <m>\FF</m> rotates (<m>\FF</m> always rotates clockwise, but what matters is that it rotates at all) to come up with a line integral that is guaranteed to be positive and another line integral that isn't.
+                This suggests that the path independent vector fields should be related to irrotational fields, i.e., fields with zero curl.
+                Such vector fields are also <xref ref="definition-conservative-vector-fields-and-potentials" text="custom">conservative vector fields</xref> if they are defined over a <q>simply connection domain</q>.
+                This statement is made precise using the <em>Fundamental Theorem of Line Integrals</em>.
+            </p>
+
+            <theorem xml:id="theorem-fundamental-theorem-of-line-integrals">
+                <title>Fundamental Theorem of Line Integrals</title>
+
+                <idx><h>Fundamental Theorem of Line Integrals</h><see>conservative vector fields</see></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a conservative vector field that is continuous over a piecewise smooth curve <m>C:\rr(t),a\leq t\leq b</m>.
+                        Then
+                        <me>\int_{C}\FF\cdot\dd{\rr} = f(\rr(b)) - f(\rr(a))</me>
+                        where <m>f</m> denotes a potential function of <m>\FF</m>.
+                    </p>
+                </statement>
+
+                <proof>
+                    <p>
+                        The proof is essentially just applying the Fundamental Theorem of Calculus to <m>\int_C\FF\cdot\dd{\rr}</m>:
+                        <md>
+                            <mrow>\int_C\FF\cdot\dd{\rr} \amp = \int_a^b \FF(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                            <mrow> \amp = \int_a^b \del f(\rr(t))\cdot\rrp(t)\dd{t} </mrow>
+                            <mrow> \amp = \int_a^b \dv{t} [f(\rr(t))]\dd{t} </mrow>
+                            <mrow> \amp = f(\rr(b)) - f(\rr(a)) </mrow>
+                        </md>
+                    </p>
+                </proof>
+            </theorem>
+
+            <p>
+                The Fundamental Theorem of Line Integrals shows that conservative vector fields are always path-independent.
+                The converse is also (almost) true: if <m>\FF</m> is a path-independent vector field over some simply connected domain, then <m>\FF</m> is conservative within that domain.
+            </p>
+
+            <aside>
+                <p>
+                    Roughly speaking, a region <m>U</m> in <m>\RR^n</m> is <em>simply connected</em> if it has no holes.
+                    A simple example of a region that is not simply connected is the <q>punctured plane</q>, which is just <m>\RR^2</m> with the origin removed.
+                </p>
+            </aside>
+
+            <example xml:id="example-using-the-fundamental-theorem-of-line-integrals">
+                <title>Using the Fundamental Theorem of Line Integrals</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[-y \amp -x]</m> and let <m>C:\rr(t), 0\leq t\leq 2\pi</m> where
+                        <me>\rr(t) = \mqty[\sin(t) \amp \cos(t/2)]</me>.
+                        Find <m>\int_C\FF\cdot\dd{\rr}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We could use the computational formula given in Equation <xref ref="equation-vector-line-computational" text="type-global" />, but we'll instead make use of <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" />.
+                        To do so, we need to prove that <m>\FF</m> is conservative and then find a corresponding potential function.
+                    </p>
+
+                    <p>
+                        To prove that <m>\FF</m> is conservative, note that its curl is <me>\pdv{Q}{x} - \pdv{P}{y} = 0</me>.
+                        Since <m>\FF</m> is also continuous everywhere, this is enough to guarantee that it's conservative.
+                        Now we know that <m>\FF</m> must have a potential function <m>f</m> such that <m>\del f = \FF</m>.
+                        One such possibility is <m>f(x, y) = -xy</m>.
+                        Therefore
+                        <me>\int_C\FF\cdot\dd{\rr} = f(0, -1) - f(0, 1) = 0</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                The <xref ref="theorem-fundamental-theorem-of-line-integrals" text="title" /> has another important consequence.
+                If <m>C</m> is a piecewise smooth closed curve (so its initial and terminal points are the same) and <m>\FF</m> is conservative in a region containing <m>C</m>, then <m>\int_C\FF\cdot\dd{\rr} = 0</m>.
+                This also has a nice physical interpretation.
+                Recall that circulation integrals can also be viewed as work integrals, and so the result that line integrals of conservative fields over closed curves are always <m>0</m> corresponds to the physical law that the work done by conservative forces along closed curves is <m>0</m> as well.
+            </p>
+        </subsection>
+    </section>
+
+    <section xml:id="section-green-s-theorem">
+        <title>Green's Theorem</title>
+
+        <introduction>
+            <p>
+                In this section we cover the relationship between line integrals and double integrals.
+                This can be viewed as a generalization of the Fundamental Theorem of Calculus, which relates integrals <m>\int_a^b f^\prime(x)\dd{x}</m> to values of <m>f(x)</m> at the boundary points <m>x = a</m> and <m>x = b</m>.
+                The main result of this section, <em>Green's Theorem</em>, relates double integrals of simple, closed and bounded regions <m>R</m> in the plane to line integrals along their boundaries <m>\partial R</m>.
+                This is done for two types of line integrals: the circulation integral and the <em>flux integral</em>.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-green-s-theorem-for-circulation-integrals">
+            <title>Green's Theorem for Circulation Integrals</title>
+
+            <p>
+                Given a continuous vector field <m>\FF = \mqty[P \amp Q]</m> in <m>\RR^2</m>, we defined its circulation along a piecewise smooth curve <m>C</m> as
+                <me>\int_C \FF\cdot\TT\dd{s} = \int_{C}\FF\cdot\dd{\rr}</me>.
+                If we write <m>\rr = \mqty[x \amp y]</m>, <m>\dd{x} = x^\prime\dd{t}</m> and <m>\dd{y} = y^\prime\dd{t}</m>, then this formula becomes
+                <me>\int_C\FF\cdot\TT\dd{s} = \int_C P\dd{x} + Q\dd{y}</me>.
+                If <m>C</m> is also a closed curve, then we often replace <m>\int_C</m> with <m>\oint_C</m> to indicate such.
+                Now we can state Green's Theorem.
+            </p>
+
+            <theorem xml:id="theorem-green-s-theorem-for-circulation-integrals">
+                <title>Green's Theorem for Circulation Integrals</title>
+
+                <idx><h>Green's Theorem</h><h>circulation integrals</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>R</m> denote a simple, closed and bounded region of the plane with piecewise smooth boundary <m>\partial R</m>, oriented counterclockwise.
+                        Let <m>\FF = \mqty[P \amp Q]</m> denote a vector field that is continuous over an open set containing <m>R</m>.
+                        Then
+                        <me>\oint_{\partial R} P\dd{x} + Q\dd{y} = \iint_{R}\left(\pdv{Q}{x} - \pdv{P}{y}\right)\dd{A}</me>.
+                    </p>
+                    <aside>
+                        <p>
+                            A region <m>R</m> is <em>closed</em> if it contains its boundary.
+                            It is <em>simple</em> if it contains no holes.
+                        </p>
+                    </aside>
+                </statement>
+            </theorem>
+
+            <p>
+                Green's Theorem has a very nice geometric interpretation.
+                Recall that the integral <m>\int_{\partial R} P\dd{x} + Q\dd{y}</m> is the circulation of <m>\FF</m> along <m>\partial R</m>.
+                On the right hand side of the identity in Green's Theorem, the quantity <m>\pdv{Q}{x} - \pdv{P}{y}</m> is the two-dimensional curl of <m>\FF</m>, and so <m>\iint_R (Q_x - P_y)\dd{A}</m> is a measure of the <q>net (counterclockwise) rotation</q> of <m>\FF</m> within the region <m>R</m>.
+                Therefore Green's Theorem implies that the net rotation of <m>\FF</m> inside the region <m>R</m> is exactly equal to the circulation of <m>\FF</m> along the boundary <m>\partial R</m>.
+            </p>
+
+            <p>
+                Beyond its geometric interpretation, <xref ref="theorem-green-s-theorem-for-circulation-integrals" text="custom">Green's Theorem</xref> is also useful as a generalization of the <xref ref="theorem-fundamental-theorem-of-line-integrals" text="custom">Fundamental Theorem of Line Integrals</xref> for non-conservative vector fields in the plane, as the double integral that appears in the theorem is often easier to evaluate than the line integral it's equal to.
+            </p>
+
+            <example xml:id="example-using-green-s-theorem-to-compute-a-circulation-integral">
+                <title>Using Green's Theorem to Compute a Circulation Integral</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\oint_{C}\FF\cdot\dd{\rr}</m> where <m>\FF = \mqty[-3y \amp 3x]</m> and <m>C</m> is the triangle in <m>\RR^2</m> with vertices <m>(0,0), (1,0)</m> and <m>(0,2)</m> traversed exactly once counterclockwise.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First we'll check to see if <m>\FF</m> is conservative as this would greatly simplify our calculations.
+                        Since its curl is <m>6</m>, we see quickly that <m>\FF</m> is not conservative, and so <xref ref="theorem-fundamental-theorem-of-line-integrals" text="type-global" /> and its related consequences do not apply to <m>\FF</m>.
+                        We could resort to computing <m>\oint_C -3y\dd{x} + 3x\dd{y}</m> using Equation <xref ref="equation-vector-line-computational" text="type-global" />, but this would require setting up <em>three</em> separate line integrals since <m>C</m> is piecewise smooth with three smooth components.
+                    </p>
+
+                    <p>
+                        To avoid this, we'll make use of Green's Theorem.
+                        Let <m>R</m> denote the triangle contained with the curve <m>C</m>.
+                        Then
+                        <me>\oint_C -3y\dd{x} + 3x\dd{y} = \iint_{R}6\dd{A} = 6</me>,
+                        where we have used the fact that <me>\iint_{R}\dd{A}</me> is always equal to the area of <m>R</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Green's Theorem can also be applied to clockwise-oriented curves, as long as you take care to multiply your integral by a negative.
+            </p>
+
+            <example xml:id="example-green-s-theorem-and-clockwise-curves">
+                <title>Green's Theorem and Clockwise Curves</title>
+
+                <statement>
+                    <p>
+                        Find <m>\oint_C xy^2\dd{x} + x^3\dd{y}</m> where <m>C</m> is the rectangle with vertices <m>(0,0), (1,0), (0, 3)</m> and <m>(1,3)</m> traversed exactly once <em>clockwise</em>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To use Green's Theorem here, we multiply our integral by a negative.
+                        This has the effect of reversing the orientation of the curve <m>C</m> from clockwise to counterclockwise, allowing us to apply <xref ref="theorem-green-s-theorem-for-circulation-integrals" text="type-global" />:
+                        <me>\oint_C xy^2\dd{x} + x^3\dd{y} = -\int_0^1\int_0^3 (3x^2 - 2xy)\dd{y}\dd{x}</me>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                An interesting use of Green's Theorem is in the computation of areas.
+                Since the area of a region <m>R</m> is equal to <m>\iint_R\dd{A}</m>, then the area of <m>R</m> can be founded by computing the circulation integral <m>\oint_{\partial R}P\dd{x} + Q\dd{y}</m> of any vector field <m>\FF</m> with a curl exactly equal to <m>1</m>.
+                An easy choice for this is <m>\FF = \frac{1}{2}\mqty[-y \amp x]</m>, which implies that the area of <m>R</m> can be found by computing
+                <me>\frac{1}{2}\oint_{C} x\dd{y} - y\dd{x}</me>.
+            </p>
+
+            <example xml:id="example-area-using-green-s-theorem">
+                <title>Area Using Green's Theorem</title>
+
+                <statement>
+                    <p>
+                        Find the area of an ellipse with major axis <m>4</m> and minor axis <m>2</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Such an ellipse can be given by the parameterization <m>\rr(t) = \mqty[4\cos(t)\amp 2\sin(t)], 0\leq t\leq 2\pi</m>.
+                        This gives
+                        <me>\frac{1}{2}\oint_C x\dd{y} - y\dd{x} = \frac{1}{2}\int_0^{2\pi} (8\cos^2(t) + 8\sin^2(t))\dd{t} = 16\pi</me>
+                        for the area contained within the ellipse.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-green-s-theorem-for-flux-integrals">
+            <title>Green's Theorem for Flux Integrals</title>
+
+            <p>
+                Circulation integrals of the form <m>\int_C P\dd{x} + Q\dd{y}</m> are useful for measuring the flow of a vector field <m>\FF = \mqty[P\amp Q]</m> <em>along</em> a curve <m>C</m>, but to measure the flow across or over <m>C</m> we instead make use of a <em>flux integral</em>.
+            </p>
+
+            <definition xml:id="definition-flux-integral">
+                <title>Flux Integral</title>
+
+                <idx><h>flux integral</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[P \amp Q]</m> be a continuous vector field defined over a piecewise smooth curve <m>C</m> with outward facing normal vector <m>\mathbf{N}</m>.
+                        The <term>flux</term> of <m>\FF</m> over <m>C</m> is defined to be
+                        <me>\int_C\FF\cdot\mathbf{N}\dd{s} = \int_C P\dd{y} - Q\dd{x}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <example xml:id="example-computing-a-flux-integral">
+                <title>Computing a Flux Integral</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[x \amp y]</m> and let <m>C</m> denote the line segment from <m>(0,1)</m> to <m>(1,0)</m>.
+                        Find the flux of <m>\FF</m> across <m>C</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To build some intuition, we'll begin by graphing both <m>\FF</m> and <m>C</m>.
+                    </p>
+
+                    <figure xml:id="figure-sage-flux-line-segment">
+                        <caption>The vector field <m>\FF = \mqty[x \amp y]</m> and the line segment <m>C</m>.</caption>
+
+                        <image xml:id="image-sage-flux-line-segment">
+                            <description>The vector field F = [x, y] over the line segment C from (0,1) to (1,0).</description>
+
+                            <sageplot>
+                                var('x y')
+
+                                F = vector([x, y])
+
+                                P1 = plot_vector_field(F, (x, -.5, 1.5), (y, -.5, 1.5), color="blue")
+                                P2 = parametric_plot([x, 1-x], (x, 0, 1), color="black", aspect_ratio="automatic")
+
+                                P = P1 + P2
+                                P
+                            </sageplot>
+                        </image>
+                    </figure>
+
+                    <p>
+                        Since <m>\FF</m> appears to be flowing across <m>C</m> instead of along <m>C</m>, we expect that the flux will be nonzero.
+                        Furthermore, we'll see that the flux should be negative since <m>\FF</m> tends to flow to the left across <m>C</m> relative to the direction of <m>C</m>, whereas the outward normal <m>\mathbf{N}</m> points to the right.
+                    </p>
+
+                    <p>
+                        Now we'll compute the flux using <xref ref="definition-flux-integral" text="type-global" />.
+                        We first need to parameterize <m>C</m>, which we can do using <m>\rr(t) = \mqty[t \amp 1-t], 0\leq t\leq 1</m>. The flux is then
+                        <md>
+                            <mrow>\int_C P\dd{y} - Q\dd{x} \amp = \int_0^1[t(-1) - (1-t)]\dd{t} </mrow>
+                            <mrow> \amp = -1 </mrow>
+                        </md>
+                        Therefore <m>\FF</m> flows <q>into</q> <m>C</m>, relative to its orientation.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                If <m>R</m> is a simple, closed and bounded region in the plane, then the normal vector <m>\mathbf{N}</m> in <xref ref="definition-flux-integral" text="type-global" /> is always defined to be the outward normal.
+                In particular, if <m>\partial R</m> is oreiented counterclockwise then has unit tangent <m>\TT</m>, then the region <m>R</m> will always lie to the left of <m>\TT</m> and the normal <m>\mathbf{N}</m> will always point to the right of <m>\TT</m>.
+                This convention makes the flux integral a measure of flow <em>outside</em> of the region <m>R</m>.
+                As net outflow is also measured by the <xref ref="definition-divergence" text="custom">divergence</xref> of a vector field, this suggests the following modification of Green's Theorem.
+            </p>
+
+            <theorem xml:id="theorem-green-s-theorem-for-flux-integrals">
+                <title>Green's Theorem for Flux Integrals</title>
+
+                <idx><h>Green's Theorem</h><h>flux integrals</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>R</m> denote a simple, closed and bounded region of the plane with piecewise smooth boundary <m>\partial R</m>, oriented counterclockwise.
+                        Let <m>\FF = \mqty[P \amp Q]</m> denote a vector field that is continuous over an open set containing <m>R</m>.
+                        Then
+                        <me>\oint_{\partial R} P\dd{y} - Q\dd{x} = \iint_{R}\left(\pdv{P}{x} + \pdv{Q}{y}\right)\dd{A}</me>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <example xml:id="example-measuring-flux-within-a-region">
+                <title>Measuring Flux Within a Region</title>
+
+                <statement>
+                    <p>
+                        A meteorologist determines that the wind patterns in a certain region are well-represented by the vector field <m>\FF = \mqty[x - 2 \amp x + 1]</m>.
+                        She wants to determine if the boundary of a rectangular plot of land within this region, represented by
+                        <me>R = \{(x, y) : -1\leq x\leq 2, -2 \leq y\leq 2\}</me>,
+                        is suitable for the placement of wind turbines.
+                        How could she make this determination?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        One approach is to see if the flux of <m>\FF</m> over this region is nonzero, which by <xref ref="theorem-green-s-theorem-for-flux-integrals" text="type-global" /> must be equal to the flux of <m>\FF</m> across the boundary.
+                        The flux across the boundary is therefore
+                        <md>
+                            <mrow>\int_{\partial R} \FF\cdot\mathbf{N}\dd{s} \amp = \int_{-1}^{2}\int_{-2}^{2} \dd{y}\dd{x} </mrow>
+                            <mrow> \amp = 12 </mrow>
+                        </md>.
+                        As the flux across the boundary is nonzero, we conclude that it's not unreasonable to place turbines on the boundary of this region.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+
+    <section xml:id="section-surface-integrals">
+        <title>Surface Integrals</title>
+
+        <introduction>
+            <p>
+                In <xref ref="section-line-integrals" text="type-global" /> we computed line integrals in <m>\RR^2</m> and <m>\RR^3</m> by first parameterizing a curve <m>C</m> with a vector function <m>\rr(t)</m> and then using this parameterization to replace the line integral with an integral of the form <m>\int_C f(t)\dd{t}</m>.
+                In this section we will take a similar approach to define and compute <em>surface integrals</em>.
+                We will primarily deal with surface integrals of vector functions which we interpret as flux integrals.
+                Before we can start defining surface integrals, we need to discuss the parameterization of surfaces.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-surfaces-in--rr-3-">
+            <title>Surfaces in <m>\RR^3</m></title>
+
+            <p>
+                A typical surface in <m>\RR^3</m> can be parameterized by a vector function of the form
+                <me>\rr(u, v) = \mqty[x(u, v) \amp y(u, v) \amp z(u, v)]</me>,
+                where <m>(u,v)\in R</m> and <m>R</m> is some region of the <m>uv</m>-plane.
+                If a surface <m>D</m> is parameterized by <m>\rr(u, v), (u,v)\in R</m>, we will usually indicate such by writing <m>D : \rr(u, v)</m>.
+            </p>
+
+            <example xml:id="example-parameterizing-a-surface-in-RR3">
+                <title>Parameterizing a Surface in <m>\RR^3</m></title>
+
+                <statement>
+                    <p>
+                        What surface in <m>\RR^3</m> is represented by
+                        <me>\rr(u, v) = \mqty[\cos(u)\sin(v) \amp \sin(u)\sin(v) \amp \cos(v)]</me>
+                        where <m>0\leq u\leq2\pi</m> and <m>0\leq v\leq \pi</m>?
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        If we let
+                        <md>
+                            <mrow>x(u, v) \amp = \cos(u)\sin(v) </mrow>
+                            <mrow>y(u, v) \amp = \sin(u)\sin(v) </mrow>
+                            <mrow>z(u, v) \amp = \cos(v) </mrow>
+                        </md>,
+                        then we see that <m>x^2 + y^2 + z^2 = 1</m>.
+                        This suggests that the surface <m>D:\rr(u, v)</m> is contained within the unit sphere in <m>\RR^3</m>.
+                        In fact, it is the entire unit sphere!
+                        We can verify this using Sage:
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v')
+
+                            x(u, v) = cos(u)*sin(v)
+                            y(u, v) = sin(u)*sin(v)
+                            z(u, v) = cos(v)
+
+                            parametric_plot3d((x(u, v), y(u, v), z(u, v)), (u, 0, 2*pi), (v, 0, pi))
+                        </input>
+                    </sage>
+                </solution>
+            </example>
+
+            <p>
+                We will primarily be interested in using surface integrals to represent and calculate the flux of a vector field <m>\FF</m> over a surface <m>D:\rr(u, v)</m>.
+                As part of this process, we will need to find normal vectors to surfaces (just as we did when finding <xref ref="definition-flux-integral" text="custom">flux integrals across curves</xref>).
+                If <m>D</m> is a smooth surface, or equivalently if <m>\rr(u, v)</m> is differentiable, then finding the normal vector is just a matter of computing <m>\mathbf{n} = \rr_u\times\rr_v</m>.
+                This is because both <m>\rr_u</m> and <m>\rr_v</m> are tangent to the surface <m>D</m>.
+            </p>
+
+            <example xml:id="example-finding-a-normal-vector">
+                <title>Finding a Normal Vector</title>
+
+                <statement>
+                    <p>
+                        Find a normal vector to the surface <m>y = x^2</m> at the point <m>(2, 4, -3)</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        First, we parameterize our surface by using
+                        <me>\rr(u, v) = \mqty[u \amp u^2 \amp v]</me>.
+                        Then
+                        <me>\rr_u = \mqty[1 \amp 2u \amp 0]\text{ and }\rr_v = \mqty[0 \amp 0 \amp 1]</me>.
+                        Now we can find the normal vector by computing the cross product of these two vectors, either by hand or by using Sage as below:
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v')
+
+                            r_u = vector([1, 2*u, 0])
+                            r_v = vector([0, 0, 1])
+
+                            show(r_u.cross_product(r_v))
+                        </input>
+                    </sage>
+
+                    <p>
+                        Either way, we get the normal vector <m>\mathbf{n}(u, v) = \mqty[2u \amp -1 \amp 0]</m>.
+                        At the point <m>(2, 4, -3)</m>, this becomes <m>\mqty[4 \amp -1 \amp 0]</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                If a surface is given by a Cartesian equation of the form <m>F(x, y, z) = 0</m> as in the last example, then we can also find normal vectors by computing gradients.
+                To see why, suppose that <m>\rr(t)</m> traces out a curve on the surface <m>D : F(x, y, z) = 0</m>.
+                Then <m>F(\rr(t)) = 0</m>.
+                However, by the chain rule we then get
+                <me>0 = \dv{t}(F(\rr(t))) = \del F(\rr(t))\cdot \rrp(t)</me>.
+                Since <m>\rrp</m> is tangent to <m>D</m>, this shows that <m>\del F</m> must be perpendicular to <m>D</m>.
+            </p>
+
+            <p>
+                In the last example, we could choose <m>F(x, y, z) = y - x^2 = 0</m> giving the gradient
+                <me>\del F = \mqty[-2x \amp 1 \amp 0]</me>.
+                At <m>(2, 4, -3)</m>, this becomes <m>\mqty[-4 \amp 1 \amp 0]</m>.
+                Note that this is the <em>negative</em> of the answer we obtained in <xref ref="example-finding-a-normal-vector" text="type-global" />.
+                We will always have two choices for the direction of our normal vector, so going forward we will need to specify which direction we will take.
+            </p>
+        </subsection>
+
+        <subsection xml:id="subsection-surface-integrals">
+            <title>Surface Integrals</title>
+
+            <p>
+                Now we are ready to define surface integrals of vector fields.
+                In all that follows, we will assume that <m>D:\rr(u, v), (u,v)\in R</m> is a piecewise-smooth surface (i.e., a surface with finitely many cusps or edges).
+                Unless specifically mentioned otherwise, we will assume that our corresponding normal vector is <m>\mathbf{n}(u, v) = \rr_u\times\rr_v</m>.
+            </p>
+
+            <definition xml:id="definition-surface-integrals-of-vector-fields">
+                <title>Surface Integrals of Vector Fields</title>
+
+                <idx><h>surface integrals</h><h>vector fields</h></idx>
+
+                <statement>
+                    <p>
+                        Let <m>\FF</m> be a continuous vector field defined over <m>D</m>.
+                        The <term>(flux) surface integral</term> of <m>\FF</m> over <m>D</m> is the quantity <m>\iint_D \FF\cdot\dd{\SS}</m> given by
+                        <me>\iint_D \FF\cdot\dd{\SS} = \iint_{R} \FF(\rr(u, v))\cdot\nn(u, v)\dd{A}</me>.
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                The flux integral <m>\iint_D\FF\cdot\dd{\SS}</m> represents the flow of <m>\FF</m> across the surface <m>D</m> parallel to the normal vector <m>\nn</m>.
+                We will often pick <m>\nn</m> to be the <q>outward</q> direction relative to <m>D</m>, and so the flux integral will measure the flux of <m>\FF</m> out of <m>D</m>.
+            </p>
+
+            <example xml:id="example-computing-a-surface-integral">
+                <title>Computing a Surface Integral</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = e^y\ii + e^x\jj + \kk</m> and let <m>D</m> denote the part of the plane <m>x + y + z = 1</m> restricted to the first octant.
+                        Find <m>\iint_D\FF\cdot\dd{\SS}</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        We can use Sage to produce a quick plot of <m>x + y + z = 1</m> as below.
+                        However, we must remember that we're only considering the part of this plane in the first octant, and therefore must restrict <m>x, y</m> and <m>z</m> to be nonnegative.
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('x, y')
+                            plot3d(1 - x - y, (x, 0, 1), (y, 0, 1))
+                        </input>
+                    </sage>
+
+                    <p>
+                        We can parameterize this surface using
+                        <md>
+                            <mrow>\rr(u, v) \amp =  \mqty[u \amp v \amp 1 - u - v] </mrow>
+                            <mrow>0 \amp \leq v\leq 1 - u </mrow>
+                            <mrow>0 \amp \leq u\leq 1 </mrow>
+                        </md>.
+                        This gives us the corresponding normal vector <m>\nn(u, v) = \mqty[1 \amp 1\amp 1]</m>, and so
+                        <md>
+                            <mrow>\iint_D\FF\cdot\dd{\SS} \amp = \int_0^1\int_0^{1-u}\mqty[e^v \amp e^y \amp 1]\cdot\mqty[1 \amp 1\amp 1]\dd{v}\dd{u} </mrow>
+                            <mrow> \amp = \int_0^1\int_0^{1-u}(e^v + e^u + 1)\dd{v}\dd{u} </mrow>
+                            <mrow> \amp = \int_0^1 (e^{1-u} + (1 - u)e^u - u)\dd{u} </mrow>
+                            <mrow> \amp = 2e - \frac{7}{2} </mrow>
+                        </md>.
+                        As this is positive, we view the vector field <m>\FF</m> as flowing <em>out</em> of <m>D</m> relative to the normal vector <m>\nn</m>.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                In <xref ref="example-computing-a-surface-integral" text="type-global" />, we could have set up the surface integral by using the gradient to find our normal vector instead.
+                One possibility is to choose <m>F(x, y, z) = 1 - x - y - z = 0</m> to give our surface, which produces <m>\nn = \mqty[-1 \amp -1 \amp -1]</m>.
+                Therefore we would have
+                <me>\iint_{D}\FF\cdot\dd{\SS} = \int_0^1\int_0^{1-x}(-e^y - e^x - 1)\dd{y}\dd{x} = \frac{7}{2} - 2e</me>.
+                What's happened is that we've inadvertently chosen the opposite direction for our normal vector <m>\nn</m> which flips the sign of our result from the example.
+                Mathematically, there's no reason to prefer <m>\mqty[1 \amp 1\amp 1]</m> over <m>-\mqty[1 \amp 1\amp 1]</m>.
+                This is why it's important to specify an <em>orientation</em> of our surface by choosing the direction of the normal vector.
+            </p>
+
+            <p>
+                In general, we say that a surface is <em>orientable</em> if it has a well-defined <q>inside</q> and <q>outside</q> as determined by selecting some consistent direction for its normal vectors.
+                To illustrate this concept, it's helpful to consider a surface that fails to be orientable.
+                The fundamental example here is the Möbius strip, which is parameterized by
+                <me>\rr(u,v) = \mqty[(1 + u\cos(\frac{v}{2}))\cos(v) \amp (1 + u\cos(\frac{v}{2}))\sin(v) \amp u\sin(\frac{v}{2})]</me>
+                for <m>-\frac{1}{2}\leq u\leq \frac{1}{2}, 0\leq v\leq 2\pi</m>.
+            </p>
+
+            <aside>
+                <p>
+                    This parameterization is adapted from <url href="https://mathworld.wolfram.com/MoebiusStrip.html" visual="mathworld.wolfram.com">MathWorld</url>.
+                </p>
+            </aside>
+
+            <sage>
+                <input>
+                    var('u v')
+
+                    x = cos(v)*(1 + u*cos(v/2))
+                    y = sin(v)*(1 + u*cos(v/2))
+                    z = u*sin(v/2)
+
+                    parametric_plot3d((x, y, z), (u, -1/2, 1/2), (v, 0, 2*pi))
+                </input>
+            </sage>
+
+            <p>
+                The Möbius strip is non-orientable because we can't choose an unambiguous orientation for normal vectors to this surface.
+                This is because any normal vector on the surface can be moved around over the surface in a continuous fashion until it's back at the same position it started but is now in the opposite direction.
+                To see this more precisely, consider the point <m>\rr(0,0) = \mqty[1 \amp 0 \amp 0]</m> on the strip.
+                Then the normal vector can be found by computing <m>\nn(u, v) = \rr_u\times\rr_v</m>, and it can be checked that <m>\nn(0,0) = \mqty[0 \amp 0\amp 1]</m>.
+                On the other hand, it's also true that <m>\rr(0,0) = \rr(0, 2\pi)</m>.
+                However, <m>\nn(0,2\pi) = \mqty[0 \amp 0\amp -1]</m>.
+                Therefore it's impossible for us to select a consistent orientation for this surface.
+            </p>
+
+            <p>
+                We can also compute surface integrals of scalar fields.
+                To do so, we replace <m>\nn(u, v)</m> in the integral with <m>\norm{\nn(u,v)}</m>:
+                <me>\iint_D G(x, y, z)\dd{S} = \iint_{R} G(\rr(u, v))\norm{\rr_u\times\rr_v}\dd{A}</me>.
+                If <m>D: z = f(x, y)</m>, then this expression simplifies down a bit since we can choose <m>\rr(u, v) = \mqty[u \amp v\amp f(u, v)]</m> and therefore
+                <me>\nn(u, v) = \mqty[-\pdv{f}{u} \amp -\pdv{f}{v} \amp 1]</me>.
+                Hence
+                <me>\iint_D G(x, y, z)\dd{S} = \iint_{D} G(x, y, f(x, y)) \sqrt{1 + (f_x)^2 + (f_y)^2}\dd{A}</me>.
+            </p>
+
+            <example xml:id="example-computing-a-scalar-surface-integral">
+                <title>Computing a Scalar Surface Integral</title>
+
+                <statement>
+                    <p>
+                        Find the mass of a thin hemisphere <m>D</m> centered above the origin in <m>\RR^3</m> of radius <m>1</m> and density <m>\rho(x, y, z) = z</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Since mass is just the integral of density, we can compute the mass by finding <m>\iint_D \rho(x, y, z)\dd{S}</m>.
+                        The surface itself is given by the equation <m>z = \sqrt{1 - x^2 - y^2}</m>, and so
+                        <md>
+                            <mrow>\iint_D z\dd{S} \amp = \iint_{D}\sqrt{1 - x^2 - y^2} \sqrt{1 + \frac{x}{1 - x^2 - y^2} + \frac{y^2}{1 - x^2 - y^2}}\dd{A} </mrow>
+                            <mrow> \amp = \iint_D \sqrt{1 - x^2 - y^2 + x^2 + y^2}\dd{A} </mrow>
+                            <mrow> \amp = \iint_D \dd{A} </mrow>
+                            <mrow> \amp = 2\pi </mrow>
+                        </md>.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+    </section>
+
+    <section xml:id="section-the-divergence-theorem-and-applications">
+        <title>The Divergence Theorem and Its Applications</title>
+
+        <introduction>
+            <p>
+                In <xref ref="section-green-s-theorem" text="type-global" />, we discussed <xref ref="theorem-green-s-theorem-for-flux-integrals" text="custom">Green's Theorem for flux integrals</xref>.
+                This result allows us to relate the flux integral of a vector field <m>\FF</m> along the boundary <m>\partial R</m> of a simple, closed and bounded region <m>R</m> in the plane with the double integral of the divergence.
+                We can do something similar in <m>\RR^3</m> by replacing the flux integral with the surface (flux) integral.
+                We will see later that this can be viewed as a kind of <q>integration by parts</q> formula in higher dimensions.
+            </p>
+        </introduction>
+
+        <subsection xml:id="subsection-the-divergence-theorem">
+            <title>The Divergence Theorem</title>
+
+            <p>
+                We begin by stating the Divergence Theorem in <m>\RR^3</m>.
+                Unless we mention otherwise, all surface normal vectors will be assumed to be outward-pointing relative to the region enclosed by the surface.
+            </p>
+
+            <theorem xml:id="theorem-divergence-theorem">
+                <title>Divergence Theorem</title>
+
+                <idx>Divergence Theorem</idx>
+
+                <statement>
+                    <p>
+                        Let <m>T</m> denote a simple, closed and bounded region in <m>\RR^3</m> with piecewise-smooth boundary <m>\partial T</m>.
+                        Let <m>\FF</m> denote a continuously differentiable vector field defined on some open set containing <m>T</m>.
+                        Then
+                        <me>\iint_{\partial T}\FF\cdot\dd{\SS} = \iiint_{T}\div\FF\dd{V}</me>.
+                    </p>
+                </statement>
+            </theorem>
+
+            <p>
+                The triple integral that appears in the Divergence Theorem can be viewed as the <q>net outflow</q> of <m>\FF</m> over the points of <m>T</m>.
+                From this viewpoint, the Divergence Theorem states that this net outflow is exactly equal to the flux of <m>\FF</m> out of the boundary of <m>T</m>.
+            </p>
+
+            <example xml:id="example-flux-out-of-a-hemisphere">
+                <title>Flux Out of a Hemisphere</title>
+
+                <statement>
+                    <p>
+                        Compute <m>\iint_D \FF\cdot\dd{\SS}</m> where
+                        <me>\FF = \mqty[x^3 - y^3 \amp y^3 - z^3 \amp z^3 - x^3]</me>
+                        and <m>D</m> denotes the upper hemisphere of the sphere of radius <m>5</m> centered at the origin.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        Using methods from <xref ref="section-surface-integrals" text="type-global" />, we would need to split the piecewise smooth surface <m>D</m> into two smooth components <m>D_1</m> and <m>D_2</m> representing the spherical cap and the base of <m>D</m> respectively.
+                        See the plot produced below.
+                        Note that the plot also indicates that our surface integral should be positive.
+                    </p>
+
+                    <sage>
+                        <input>
+                            var('u, v, x, y, z')
+
+                            F = vector([x^3 - y^3, y^3 - z^3, z^3 - x^3])
+
+                            # spherical cap of D
+                            P = parametric_plot3d((5*cos(u)*sin(v), 5*sin(u)*sin(v), 5*cos(v)), (u, 0, 2*pi), (v, 0, pi/2))
+
+                            # base of D
+                            P += parametric_plot3d((u*cos(v), u*sin(v), 0), (u, 0, 5), (v, 0, 2*pi), color="red")
+
+                            P += plot_vector_field3d(F, (x, -5, 5), (y, -5, 5), (z, 0, 5))
+
+                            P.show()
+                        </input>
+                    </sage>
+
+                    <p>
+                        This is manageable but tedious, so we instead use <xref ref="theorem-divergence-theorem" text="type-global" /> to rewrite the surface integral as a single triple integral,
+                        <me>\iint_D\FF\cdot\dd{\SS} = \iiint_T 3(x^2 + y^2 + z^2)\dd{V}</me>,
+                        where <m>T</m> denotes the region enclosed within the hemisphere.
+                        To evaluate this integral we convert to spherical coordinates:
+                        <md>
+                            <mrow>\iiint_T 3(x^2+y^2+z^2)\dd{V} \amp = 3\int_0^{2\pi}\int_0^{\frac{\pi}{2}}\int_0^5\rho^4\sin(\varphi)\dd{\rho}\dd{\varphi}\dd{\theta} </mrow>
+                            <mrow> \amp =  3750\pi</mrow>
+                        </md>.
+                        Our answer is positive, which is consistent with the graph produced above.
+                    </p>
+                </solution>
+            </example>
+
+            <example xml:id="example-flux-into-a-cube">
+                <title>Flux Into a Cube</title>
+
+                <statement>
+                    <p>
+                        Let <m>\FF = \mqty[xy \amp y^2 z \amp z^3] </m>.
+                        Find the flux of <m>\FF</m> <em>into</em> the unit cube <m>T: 0\leq x, y, z\leq 1</m>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        If we try to compute this without using the Divergence Theorem then we would need to compute <em>six</em> separate surface integrals, one for each face of the cube.
+                        If we make use of the Divergence Theorem, this problem becomes much more tractable.
+                        So let <m>T</m> denote the unit cube and the region it encloses.
+                        Then
+                        <md>
+                            <mrow>-\iint_{\partial T} \FF\cdot\dd{\SS} \amp = -\int_0^1\int_0^1\int_0^1 (y + 2yz + 3z^2)\dd{z}\dd{y}\dd{x}</mrow>
+                            <mrow> \amp = -2 </mrow>
+                        </md>.
+                        Therefore <m>\FF</m> tends to flow <em>out</em> of the cube.
+                    </p>
+                </solution>
+            </example>
+        </subsection>
+
+        <subsection xml:id="subsection-applications-of-the-divergence-theorem">
+            <title>Applications of the Divergence Theorem</title>
+
+            <p>
+                <xref ref="theorem-divergence-theorem" text="type-global" /> leads to several other integral formulas that can be useful in higher dimensions.
+                For our first example, we'll consider what happens if <m>\FF</m> is conservative.
+                If this is the case, then there exists a potential function <m>f</m> for <m>\FF</m>: <m>\del{f} = \FF</m>.
+                Then
+                <md>
+                    <mrow>\div\FF \amp = \div\del{f} = \Delta f</mrow>
+                    <mrow>\FF\cdot\dd{\SS} \amp = \del{f}\cdot\nn\dd{S} </mrow>
+                </md>
+                where <m>\Delta f = f_{xx} + f_{yy}</m> is the Laplacian of <m>f</m> and <m>\del{f}\cdot\nn</m> is the <em>normal derivative</em> of <m>f</m>, often denoted by <m>\pdv{f}{n}</m>.
+            </p>
+
+            <example xml:id="example-green-s-first-identity">
+                <title>Green's First Identity</title>
+
+                <statement>
+                    <p>
+                        Let <m>T</m> satisfy the conditions of <xref ref="theorem-divergence-theorem" text="type-global" /> and let <m>f(x, y, z)</m> and <m>g(x, y, z)</m> be twice continuously differentiable functions.
+                        Then
+                        <me>\iiint_T(f\Delta g + \del{f}\cdot\del{g})\dd{V} = \iint_{\partial T} f\pdv{g}{n}\dd{S}</me>.
+                    </p>
+                </statement>
+
+                <solution>
+                    <p>
+                        To prove this we'll set <m>\FF = f\del{g}</m>.
+                        Then
+                        <me>\div\FF = \del{f}\cdot\del{g} + f\Delta g</me>
+                        and
+                        <me>\FF\cdot\nn = f(\del{g}\cdot\nn) = f\pdv{g}{n}</me>,
+                        and the Divergence Theorem then implies the result.
+                    </p>
+                </solution>
+            </example>
+
+            <p>
+                Green's First Identity is particularly important for proving a result about <em>harmonic functions</em>, which are scalar functions <m>f</m> such that <m>\Delta f = 0</m>.
+                If we set <m>f = g</m> in the identity where <m>f</m> is harmonic then we get
+                <me>\iiint_T \norm{\del f}^2\dd{V} = \iint_{\partial T}f\pdv{f}{n}\dd{S}</me>.
+                If we also know that <m>f = 0</m> everywhere on <m>\partial T</m>, then this forces <m>\del{f} = \mathbf{0}</m> and furthermore <m>f = 0</m>.
+                This gives us the following result.
+            </p>
+
+            <theorem xml:id="theorem-harmonic-functions-defined-on-boundaries">
+                <title>Harmonic Functions Defined on Boundaries</title>
+
+                <statement>
+                    <p>
+                        Let <m>f</m> and <m>g</m> be two harmonic functions defined on an open set containing the simple, closed and bounded region <m>T</m> with piecewise smooth boundary <m>\partial T</m>.
+                        If <m>f = g</m> on <m>\partial T</m>, then <m>f = g</m> everywhere inside of <m>T</m> as well.
+                    </p>
+                </statement>
+
+                <proof>
+                    Set <m>h = f - g</m> and note that <m>h</m> is harmonic on <m>T</m> and that <m>h = 0</m> on <m>\partial T</m>.
+                    Therefore <m>h = 0</m> inside of <m>T</m> as well, which implies that <m>f = g</m> inside of <m>T</m>.
+                </proof>
+            </theorem>
+
+
+        </subsection>
+    </section>
+</chapter>
