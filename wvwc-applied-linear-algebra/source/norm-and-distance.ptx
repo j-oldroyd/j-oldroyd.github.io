@@ -80,5 +80,55 @@
         </input>
       </sage>
     </example>
+    <example xml:id="example-return-and-risk-of-an-investment">
+      <title>Return and risk of an investment</title>
+      <statement>
+        <p>
+          Suppose that <m>\xx</m> is a vector whose entries represent a <em>time series</em> of returns from an investment over different periods.
+          The mean return is <m>\mu = 5\%</m> and the standard deviation (or <em>risk</em>) is <m>\sigma = 2\%</m>.
+          What is the largest possible fraction of periods that resulted in a loss?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A loss is represented by any entry of <m>\xx</m> that is negative: <m>x_i \lt 0</m>.
+          Since <m>\mu = 5\%</m>, this happens only if <m>\abs{x_i - \mu} > 5\%</m>.
+        </p>
+        <p>
+          Here's how we can use Chebyshev's inequality to estimate the fraction of periods resulting in a loss.
+          Recall that the fraction of entries of <m>\xx</m> such that <m>\abs{x_i-\mu} > a</m> satisfies
+          <me>\frac{k}{n} \leq \parens{\frac{\sigma}{a}}^2</me>.
+          In our case,
+          <me>a = \mu = \frac{\mu}{\sigma}\sigma</me>
+          and so
+          <me>\frac{k}{n} \leq \parens{\frac{\sigma}{\mu}}^2 = \frac{4}{25}</me>.
+        </p>
+      </solution>
+    </example>
+    <p>
+      The standard deviation satisfies the following properties:
+      <me>\sigma(\xx+a\ones) = \sigma(\xx)</me>
+      and
+      <me>\sigma(a\xx) = \abs{a}\sigma(\xx)</me>.
+    </p>
+    <p>
+      It's occasionally useful to <term>standardize</term> a vector <m>\xx</m> by replacing it with a vector <m>\zz</m> with mean <m>0</m> and standard deviation <m>1</m> by the following formula:
+      <me>\zz = \frac{1}{\sigma}\parens{\xx - \mu\ones}</me>.
+    </p>
+    <example xml:id="example-standardizing-a-vector">
+      <title>Standardizing a vector</title>
+      <statement>
+        <p>
+          Standardize the vector
+          <me>\xx = \mqty[1 \\ 2 \\ 8 \\ -5 \\ 10 \\ 8]</me>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We have <m>\mu = 4, \sigma = 5.1962</m> and so
+          <me>\zz = \mqty[-0.5774 \\ -0.3849 \\ 0.7698 \\ -1.7321 \\  1.1547 \\  0.7698]</me>.
+        </p>
+      </solution>
+    </example>
   </section>
 </chapter>
