@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-norm-and-distance" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Norm and Distance</title>
+
+  <section xml:id="section-norm">
+    <title>Norm</title>
+  </section>
+
+  <section xml:id="section-distance">
+    <title>Distance</title>
+  </section>
+
+  <section xml:id="section-standard-deviation">
+    <title>Standard Deviation</title>
+    <p>
+      Given a vector <m>\xx</m>, we define the <term>de-meaned</term> vector <m>\tilde{\xx}</m> by
+      <me>\tilde{\xx} = \xx - \mu\ones</me>
+      where
+      <me>\mu = \frac{1}{n}\ones^T\xx = \frac{1}{n}\sum_i x_i</me>.
+      We then define the <term>standard deviation</term> of the entries of <m>\xx</m> by
+      <me>\sigma(\xx) = \frac{\norm{\tilde{\xx}}}{\sqrt{n}}</me>.
+    </p>
+    <p>
+      The standard deviation is a measure of the spread of the entries of <m>\xx</m> from the mean of the entries.
+      The closer the standard deviation is to <m>0</m>, the less the entries differ from the mean.
+    </p>
+    <example xml:id="example-computing-standard-deviations">
+      <title>Computing standard deviations</title>
+      <statement>
+        <p>
+          Compute the standard deviations for each of the following vectors:
+          <me>\xx_1 = \mqty[1 \\ 1 \\ 1], \xx_2 = \mqty[-1 \\ 1 \\ -1], \xx_3 = \mqty[2 \\ 1 \\ 0 \\ 4]</me>.
+        </p>
+      </statement>
+      <p>
+        The mean <m>\mu</m> and standard deviation <m>\sigma</m> of a vector satisfy the following formula:
+        <me>\frac{\norm{\xx}^2}{n} = \mu^2 + \sigma^2</me>.
+        The standard deviation also satisfies the following inequality.
+      </p>
+      <theorem xml:id="theorem-chebyshev-s-inequality">
+        <title>Chebyshev's Inequality</title>
+        <statement>
+          <p>
+            Suppose that <m>k</m> entries of <m>\xx</m> satisfy
+            <me>\abs{x_i - \mu} > a</me>.
+            Then
+            <me>\frac{k}{n} \leq (\sigma/a)^2</me>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        This inequality can be rearranged to get
+        <me>1 - \frac{k}{n} \geq 1 - \frac{\sigma^2}{a^2}</me>.
+        The quantity on the left is the ratio of entries of <m>\xx</m> that are within <m>a</m> units of <m>\mu</m>.
+        If we write <m>a = \alpha\sigma</m>, the inequality becomes
+        <me>1 - \frac{k}{n} \geq 1 - \frac{1}{\alpha^2}</me>.
+        For instance, this inequality tells us that the fraction of entries of <m>\xx</m> within two standard deviations (so <m>a = 2\sigma</m>) of the mean <m>\mu</m> is at least
+        <me>1 - \frac{1}{2^2} = \frac{3}{4}</me>,
+        or at least <m>75\%</m>.
+        Conversely, at most <m>25\%</m> of entries are more than two standard deviations away from the mean.
+      </p>
+      <p>
+        Octave can compute the standard deviation as follows using the <c>std()</c> command.
+      </p>
+      <sage language="octave">
+        <input>
+          x = randn(1,100); # random vector of 100 entries
+          std(x, 1) # we need the second argument to normalizr correctly
+        </input>
+      </sage>
+    </example>
+  </section>
+</chapter>
