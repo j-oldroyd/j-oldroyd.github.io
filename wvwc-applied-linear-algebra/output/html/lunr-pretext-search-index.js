@@ -100,6 +100,51 @@ var ptx_lunr_docs = [
   "body": " Standardizing a vector   Standardize the vector .    We have and so .   "
 },
 {
+  "id": "section-angle",
+  "level": "1",
+  "url": "section-angle.html",
+  "type": "Section",
+  "number": "1.4",
+  "title": "Angle",
+  "body": " Angle  The inner product is closely related to the notion of the angle between two vectors. This is sometimes taken as the definition of the dot product in two and three dimensions, but more generally follows from the Cauchy-Schwarz inequality .   Cauchy-Schwarz Inequality    .    Note that .    We have equality in if and only if the vectors are scalar multiples of each other. Furthermore, if both vectors are nonzero then , which falls inside the range of the cosine function.  We can now define the angle between two vectors using the inner product: . This measures how aligned the vectors and are.   Alignment of vectors   Determine the alignment of the following vectors: .    We have , which corresponds to an angle between and . Hence the vectors meet at an obtuse angle.    When considering only unit vectors, the angle takes on another important interpretation: it represents distances between vectors.   Distances on the unit circle   Compute pairwise distances between .    An important concept in statistics is the correlation coefficient . Given two vectors with de-meaned representatives , their correlation coefficient is defined to be .  "
+},
+{
+  "id": "theorem-cauchy-schwarz-inequality",
+  "level": "2",
+  "url": "section-angle.html#theorem-cauchy-schwarz-inequality",
+  "type": "Theorem",
+  "number": "1.4.1",
+  "title": "Cauchy-Schwarz Inequality.",
+  "body": " Cauchy-Schwarz Inequality    .    Note that .   "
+},
+{
+  "id": "section-angle-5",
+  "level": "2",
+  "url": "section-angle.html#section-angle-5",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "angle "
+},
+{
+  "id": "example-alignment-of-vectors",
+  "level": "2",
+  "url": "section-angle.html#example-alignment-of-vectors",
+  "type": "Example",
+  "number": "1.4.2",
+  "title": "Alignment of vectors.",
+  "body": " Alignment of vectors   Determine the alignment of the following vectors: .    We have , which corresponds to an angle between and . Hence the vectors meet at an obtuse angle.   "
+},
+{
+  "id": "example-distances-on-the-unit-circle",
+  "level": "2",
+  "url": "section-angle.html#example-distances-on-the-unit-circle",
+  "type": "Example",
+  "number": "1.4.3",
+  "title": "Distances on the unit circle.",
+  "body": " Distances on the unit circle   Compute pairwise distances between .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
