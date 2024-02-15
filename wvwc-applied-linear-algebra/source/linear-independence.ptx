@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-linear-independence" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Linear Independence</title>
+
+  <section xml:id="section-linear-independence-dependence">
+    <title>Linear Independence and Dependence</title>
+    <p>
+      One of the fundamental concepts in linear algebra is that of a <em>linear combination</em> of several vectors.
+      Given a collection <m>\set{\vecm{x}_i}</m>, a linear combination of these vectors is a sum of the form
+      <me>\sum c_i \vecm{x}_i</me>.
+    </p>
+    <example xml:id="example-finding-linear-combinations">
+      <title>Finding linear combinations</title>
+      <statement>
+        <p>
+          Let
+          <me>\vecm{x}_1 = \mqty[1 \amp 2]^{T}, \vecm{x}_2 = \mqty[-1 \amp 1]^{T}\text{ and }\vecm{x}_3 = \mqty[0 \amp 1]^{T}</me>.
+          Compute
+          <me>2\vecm{x}_1 - \vecm{x}_2 + 2 \vecm{x}_3, 4\vecm{x}_3 - \vecm{x}_2</me>.
+        </p>
+      </statement>
+    </example>
+    <p>
+      In the last example, we saw that <m>\vecm{x}_1</m> itself can be written as a linear combination of the other two vectors.
+      Equivalently,
+      <me>-\vecm{x}_1 - \vecm{x}_2 + 4\vecm{x}_3 = \vecm{0}</me>.
+      This is an example of <term>linear dependence</term>.
+      If a set of vectors is not linearly dependent, we say that it is <term>linearly independent</term>.
+    </p>
+    <example xml:id="example-linearly-independent-set">
+      <title>Linearly independent set</title>
+      <statement>
+        <p>
+          Determine if <m>\smqty[2\\0], \smqty[1\\1]\in\RR^2</m> forms a linearly independent collection of vectors.
+        </p>
+      </statement>
+    </example>
+    <p>
+      Linearly independent collections have the useful property that linear combinations of vectors in the collection are unique.
+      On the other hand, any vector that can be written as the linear combination of linearly dependent vectors can be written as infinitely many linear combinations of those same vectors.
+      This property makes linearly independent sets useful for coordinate systems.
+    </p>
+    <p>
+      Determining whether or not a collection of vectors is linearly independent can be done in several ways, but the most fundamental method is <em>row reduction</em>.
+      This involves placing the vectors as columns of a single matrix and then reducing the matrix into an echelon form.
+      Columns in the echelon form that have a leading <m>1</m> correspond to a linearly independent subset of the vectors.
+      If we go a step further and find the reduced echelon form, we can also read off how to write vectors in the collection as a linear combination of the others.
+    </p>
+    <example xml:id="example-echelon-forms-and-linear-independence">
+      <title>Echelon forms and linear independence</title>
+      <statement>
+        <p>
+          Let
+          <me>\vecm{x}_1 = \mqty[1 \\ -2 \\ 3], \vecm{x}_2 = \mqty[0 \\ 1 \\ 0], \vecm{x}_3 = \mqty[2 \\ -1 \\ 6], \vecm{x}_4 = \mqty[-1 \\ -2 \\ 0]</me>.
+          To determine if these vectors are linearly independent and what linear dependence relations exist among these vectors, we use Octave to compute the reduced row echelon form with the <c>rref</c> command.
+        </p>
+        <sage language="octave">
+          <input>
+            % create vectors
+            x1 = [1; -2; 3];
+            x2 = [0; 1; 0];
+            x3 = [2; -1; 6];
+            x4 = [-1; -2; 0];
+
+            % stack vectors into single matrix
+            A = [x1, x2, x3, x4];
+
+            % compute RREF of A
+            rref(A)
+          </input>
+          <output>
+            ans =
+
+                 1     0     2     0
+                 0     1     3     0
+                 0     0     0     1
+           </output>
+         </sage>
+         <p>
+          The RREF of our matrix shows that the first, second and fourth vectors form a linearly independent set.
+          Furthermore, <m>\vecm{x}_3 = 2\vecm{x}_1 + 3\vecm{x}_2.</m>
+          Hence, the first three vectors form a dependent set.
+        </p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="section-basis">
+    <title>Basis</title>
+    <p>
+      The size of a linearly independent set is limited by the dimension of a space.
+      In particular, any linearly independent set of <m>n</m>-vectors has at most <m>n</m> vectors.
+      Conversely, any collection of <m>n</m>-vectors with more than <m>n</m> vectors in the set must be linearly dependent.
+    </p>
+    <p>
+      Linearly independent sets that are as large as possible are special in linear algebra and are called <term>bases</term>.
+      The defining characteristic of a basis is the following <em>expansion property</em>: if <m>\vecm{x}\in\RR^n</m> and if <m>\mathcal{B} = \set{\vecm{b}_i}</m> is a basis for <m>\RR^n</m>, then there exists exactly one linear combination of the basis vectors that equals <m>\vecm{x}</m>.
+    </p>
+    <example xml:id="example-bases-in-">
+      <title>Bases in <m>\RR^3</m></title>
+      <statement>
+        <p>
+          One example of a basis in <m>\RR^3</m> is the standard basis.
+          Another example is the collection <m>\vecm{x}_1, \vecm{x}_2, \vecm{x}_4</m> from <xref ref="example-echelon-forms-and-linear-independence" text="type-global" />.
+        </p>
+      </statement>
+    </example>
+    <p>
+      A basis is essentially a coordinate system to work with.
+      We will usually work with the coordinate system determined by the standard basis, but other coordinate systems are useful as well.
+      In particular, it is often worthwhile to choose a basis that leads to <em>sparse coordinates</em>.
+    </p>
+    <example xml:id="example-images-and-bases">
+      <title>Images and bases</title>
+      <statement>
+        <p>
+          Consider the problem of representing a <m>3\times 3</m> grayscale image using vectors.
+          This can be done using <m>9</m>-vectors whose entries run from <m>0</m> (black) to <m>1</m> (white).
+          Let's also suppose that the images we are representing are known to have a consistent cross pattern through the middle.
+          The color of the cross varies, but it always appears in our images.
+          In this case a useful basis for representing these images might be
+          <me>\vecm{b}_1 = \mqty[0\\1\\0\\1\\1\\1\\0\\1\\0], \vecm{b}_2 = \mqty[1\\0\\0\\0\\0\\0\\0\\0\\0], \vecm{b}_3 = \mqty[0\\0\\1\\0\\0\\0\\0\\0\\0], \vecm{b}_4 = \mqty[0\\0\\0\\0\\0\\0\\1\\0\\0], \vecm{b}_5 = \mqty[0\\0\\0\\0\\0\\0\\0\\0\\1],</me>
+        </p>
+        <p>
+          For example, consider the following image <m>A</m> rendered using Octave:
+        </p>
+        <sage language="octave">
+          <input>
+            A = [0.2, 0.76, 0.4, 0.76, 0.76, 0.76, 0.1, 0.76, 0.2];
+            imshow(reshape(A, [3,3]))
+          </input>
+        </sage>
+        <p>
+          This image has nine pixels and would therefore seem to require nine separate values to transmit correctly.
+          However, if we use our basis vectors to express <m>A</m> then we get
+          <me>A = 0.76\vecm{b}_1 + 0.2\vecm{b}_2 + 0.4\vecm{b}_3 + 0.1\vecm{b}_4 + 0.2\vecm{b}_5</me>.
+        </p>
+      </statement>
+    </example>
+    <conclusion>
+      <p>
+        SUGGESTED PROBLEMS: 5.2
+      </p>
+    </conclusion>
+  </section>
+</chapter>

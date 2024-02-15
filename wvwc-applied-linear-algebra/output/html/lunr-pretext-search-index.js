@@ -145,6 +145,87 @@ var ptx_lunr_docs = [
   "body": " Distances on the unit circle   Compute pairwise distances between .   "
 },
 {
+  "id": "section-linear-independence-dependence",
+  "level": "1",
+  "url": "section-linear-independence-dependence.html",
+  "type": "Section",
+  "number": "2.1",
+  "title": "Linear Independence and Dependence",
+  "body": " Linear Independence and Dependence  One of the fundamental concepts in linear algebra is that of a linear combination of several vectors. Given a collection , a linear combination of these vectors is a sum of the form .   Finding linear combinations   Let . Compute .    In the last example, we saw that itself can be written as a linear combination of the other two vectors. Equivalently, . This is an example of linear dependence . If a set of vectors is not linearly dependent, we say that it is linearly independent .   Linearly independent set   Determine if forms a linearly independent collection of vectors.    Linearly independent collections have the useful property that linear combinations of vectors in the collection are unique. On the other hand, any vector that can be written as the linear combination of linearly dependent vectors can be written as infinitely many linear combinations of those same vectors. This property makes linearly independent sets useful for coordinate systems.  Determining whether or not a collection of vectors is linearly independent can be done in several ways, but the most fundamental method is row reduction . This involves placing the vectors as columns of a single matrix and then reducing the matrix into an echelon form. Columns in the echelon form that have a leading correspond to a linearly independent subset of the vectors. If we go a step further and find the reduced echelon form, we can also read off how to write vectors in the collection as a linear combination of the others.   Echelon forms and linear independence   Let . To determine if these vectors are linearly independent and what linear dependence relations exist among these vectors, we use Octave to compute the reduced row echelon form with the rref command.   The RREF of our matrix shows that the first, second and fourth vectors form a linearly independent set. Furthermore, Hence, the first three vectors form a dependent set.    "
+},
+{
+  "id": "example-finding-linear-combinations",
+  "level": "2",
+  "url": "section-linear-independence-dependence.html#example-finding-linear-combinations",
+  "type": "Example",
+  "number": "2.1.1",
+  "title": "Finding linear combinations.",
+  "body": " Finding linear combinations   Let . Compute .   "
+},
+{
+  "id": "section-linear-independence-dependence-4",
+  "level": "2",
+  "url": "section-linear-independence-dependence.html#section-linear-independence-dependence-4",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "linear dependence linearly independent "
+},
+{
+  "id": "example-linearly-independent-set",
+  "level": "2",
+  "url": "section-linear-independence-dependence.html#example-linearly-independent-set",
+  "type": "Example",
+  "number": "2.1.2",
+  "title": "Linearly independent set.",
+  "body": " Linearly independent set   Determine if forms a linearly independent collection of vectors.   "
+},
+{
+  "id": "example-echelon-forms-and-linear-independence",
+  "level": "2",
+  "url": "section-linear-independence-dependence.html#example-echelon-forms-and-linear-independence",
+  "type": "Example",
+  "number": "2.1.3",
+  "title": "Echelon forms and linear independence.",
+  "body": " Echelon forms and linear independence   Let . To determine if these vectors are linearly independent and what linear dependence relations exist among these vectors, we use Octave to compute the reduced row echelon form with the rref command.   The RREF of our matrix shows that the first, second and fourth vectors form a linearly independent set. Furthermore, Hence, the first three vectors form a dependent set.   "
+},
+{
+  "id": "section-basis",
+  "level": "1",
+  "url": "section-basis.html",
+  "type": "Section",
+  "number": "2.2",
+  "title": "Basis",
+  "body": " Basis  The size of a linearly independent set is limited by the dimension of a space. In particular, any linearly independent set of -vectors has at most vectors. Conversely, any collection of -vectors with more than vectors in the set must be linearly dependent.  Linearly independent sets that are as large as possible are special in linear algebra and are called bases . The defining characteristic of a basis is the following expansion property : if and if is a basis for , then there exists exactly one linear combination of the basis vectors that equals .   Bases in   One example of a basis in is the standard basis. Another example is the collection from .    A basis is essentially a coordinate system to work with. We will usually work with the coordinate system determined by the standard basis, but other coordinate systems are useful as well. In particular, it is often worthwhile to choose a basis that leads to sparse coordinates .   Images and bases   Consider the problem of representing a grayscale image using vectors. This can be done using -vectors whose entries run from (black) to (white). Let's also suppose that the images we are representing are known to have a consistent cross pattern through the middle. The color of the cross varies, but it always appears in our images. In this case a useful basis for representing these images might be   For example, consider the following image rendered using Octave:   This image has nine pixels and would therefore seem to require nine separate values to transmit correctly. However, if we use our basis vectors to express then we get .     SUGGESTED PROBLEMS: 5.2   "
+},
+{
+  "id": "section-basis-3",
+  "level": "2",
+  "url": "section-basis.html#section-basis-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "bases "
+},
+{
+  "id": "example-bases-in-",
+  "level": "2",
+  "url": "section-basis.html#example-bases-in-",
+  "type": "Example",
+  "number": "2.2.1",
+  "title": "Bases in <span class=\"process-math\">\\(\\RR^3\\)<\/span>.",
+  "body": " Bases in   One example of a basis in is the standard basis. Another example is the collection from .   "
+},
+{
+  "id": "example-images-and-bases",
+  "level": "2",
+  "url": "section-basis.html#example-images-and-bases",
+  "type": "Example",
+  "number": "2.2.2",
+  "title": "Images and bases.",
+  "body": " Images and bases   Consider the problem of representing a grayscale image using vectors. This can be done using -vectors whose entries run from (black) to (white). Let's also suppose that the images we are representing are known to have a consistent cross pattern through the middle. The color of the cross varies, but it always appears in our images. In this case a useful basis for representing these images might be   For example, consider the following image rendered using Octave:   This image has nine pixels and would therefore seem to require nine separate values to transmit correctly. However, if we use our basis vectors to express then we get .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
