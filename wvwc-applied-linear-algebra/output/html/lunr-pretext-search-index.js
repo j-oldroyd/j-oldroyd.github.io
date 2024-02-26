@@ -226,6 +226,60 @@ var ptx_lunr_docs = [
   "body": " Images and bases   Consider the problem of representing a grayscale image using vectors. This can be done using -vectors whose entries run from (black) to (white). Let's also suppose that the images we are representing are known to have a consistent cross pattern through the middle. The color of the cross varies, but it always appears in our images. In this case a useful basis for representing these images might be   For example, consider the following image rendered using Octave:   This image has nine pixels and would therefore seem to require nine separate values to transmit correctly. However, if we use our basis vectors to express then we get .   "
 },
 {
+  "id": "section-orthonormal-vectors",
+  "level": "1",
+  "url": "section-orthonormal-vectors.html",
+  "type": "Section",
+  "number": "2.3",
+  "title": "Orthonormal Vectors",
+  "body": " Orthonormal Vectors  A collection of vectors is orthonormal if it is both orthogonal and unit-normed. The usual example of an orthonormal set is the collection of coordinate unit vectors in  , but these are not the only ones.   Testing orthonormality   Determine if the given vectors are orthonormal.        Orthogonal collections of nonzero vectors are always linearly independent: if for orthogonal vectors, then taking the inner product of this sum with the vector gives .  Bases that are also orthonormal (ONBs) have special importance in linear algebra: if for orthonormal vectors, then . Since a basis can be used to express any vector in our space, the previous equation makes it simple to find the corresponding coefficients to expand an arbitrary vector in terms of an ONB.   Expansion in terms of an ONB           "
+},
+{
+  "id": "section-orthonormal-vectors-2",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#section-orthonormal-vectors-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "orthonormal "
+},
+{
+  "id": "example-testing-orthonormality",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#example-testing-orthonormality",
+  "type": "Example",
+  "number": "2.3.1",
+  "title": "Testing orthonormality.",
+  "body": " Testing orthonormality   Determine if the given vectors are orthonormal.       "
+},
+{
+  "id": "example-expansion-in-terms-of-an-onb",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#example-expansion-in-terms-of-an-onb",
+  "type": "Example",
+  "number": "2.3.2",
+  "title": "Expansion in terms of an ONB.",
+  "body": " Expansion in terms of an ONB          "
+},
+{
+  "id": "section-gram-schmidt-orthogonalization",
+  "level": "1",
+  "url": "section-gram-schmidt-orthogonalization.html",
+  "type": "Section",
+  "number": "2.4",
+  "title": "Gram-Schmidt Orthogonalization",
+  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : .    "
+},
+{
+  "id": "example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
+  "type": "Example",
+  "number": "2.4.1",
+  "title": "Using the Gram-Schmidt algorithm to construct an ONB.",
+  "body": " Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
