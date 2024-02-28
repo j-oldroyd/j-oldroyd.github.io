@@ -233,7 +233,10 @@ true);
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="section-linear-independence-dependence.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Linear Independence and Dependence</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="section-basis.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Basis</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="section-orthonormal-vectors.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Orthonormal Vectors</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="section-gram-schmidt-orthogonalization.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Gram-Schmidt Orthogonalization</span></a></div></li>
+<li class="toc-item toc-section active">
+<div class="toc-title-box"><a href="section-gram-schmidt-orthogonalization.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Gram-Schmidt Orthogonalization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-gram-schmidt-orthogonalization.html#subsection-modified-gram-schmidt-algorithm" class="internal"><span class="title">The modified Gram-Schmidt algorithm</span></a></div></li></ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -279,29 +282,82 @@ true);
 </div>
 </div>
 <div class="solutions"><details id="example-using-the-gram-schmidt-algorithm-to-construct-an-onb-3" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="example-using-the-gram-schmidt-algorithm-to-construct-an-onb-3-1">
-<div class="para">We start by setting <span class="process-math">\(\vecm{u}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}\text{:}\)</span>
+<div class="para">We start by setting <span class="process-math">\(\vecm{q}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}\text{:}\)</span>
 </div>
 <div class="displaymath process-math">
 \begin{equation*}
-\vecm{u}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]\text{.}
+\vecm{q}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]\text{.}
 \end{equation*}
 </div>
-<div class="para">Now we orthogonalize the set <span class="process-math">\(\{\vecm{u}_1, \vecm{v}_2\}\)</span> by replacing <span class="process-math">\(\vecm{v}_2\)</span> with <span class="process-math">\(\vecm{v}_2 - (\vecm{u}_1^{T}\vecm{v}_2)\vecm{u}_2\)</span> and then normalizing the result:</div>
+<div class="para">Now we orthogonalize the set <span class="process-math">\(\{\vecm{q}_1, \vecm{v}_2\}\)</span> by replacing <span class="process-math">\(\vecm{v}_2\)</span> with <span class="process-math">\(\vecm{\tilde{q}}_2=\vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{u}_2\)</span> and then normalizing the result:</div>
 <div class="displaymath process-math" id="example-using-the-gram-schmidt-algorithm-to-construct-an-onb-3-1-6">
 \begin{align*}
-\vecm{v}_2 - (\vecm{u}_1^{T}\vecm{v}_2)\vecm{u}_2 \amp = \vecm{0} \\
-\vecm{u}_2 \amp = \mqty[0\\0\\1] \text{.}
+\vecm{\tilde{q}}_2 = \vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{q}_1 \amp = \mqty[0\\0\\1] \\
+\vecm{q}_2 \amp = \mqty[0\\0\\1] \text{.}
 \end{align*}
 </div>
-<div class="para">Finally, we orthogonalize the set <span class="process-math">\(\{\vecm{u}_1, \vecm{u}_2, \vecm{v}_3\}\text{:}\)</span>
+<div class="para">Finally, we orthogonalize the set <span class="process-math">\(\{\vecm{q}_1, \vecm{q}_2, \vecm{v}_3\}\text{:}\)</span>
 </div>
 <div class="displaymath process-math" id="example-using-the-gram-schmidt-algorithm-to-construct-an-onb-3-1-8">
 \begin{align*}
-\vecm{v}_3 - (\vecm{u}_1^{T}\vecm{v}_3)\vecm{u}_1 - (\vecm{u}_2^{T}\vecm{v}_3)\vecm{u}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]\\
-\vecm{u}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] \text{.}
+\vecm{\tilde{q}}_3 = \vecm{v}_3 - (\vecm{q}_1^{T}\vecm{v}_3)\vecm{q}_1 - (\vecm{q}_2^{T}\vecm{v}_3)\vecm{q}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]\\
+\vecm{q}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] \text{.}
 \end{align*}
 </div>
-</div></div></details></div></article></section></div>
+<div class="para">The resulting set <span class="process-math">\(\{\vecm{q}_1, \vecm{q}_2, \vecm{q}_3\}\)</span> is an orthonormal set (in fact, an ONB) in <span class="process-math">\(\RR^3\text{.}\)</span>
+</div>
+</div></div></details></div></article><article class="example example-like" id="example-gram-schmidt-and-linear-dependence"><h3 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Gram-Schmidt and linear dependence.</span>
+</h3>
+<div class="para logical" id="example-gram-schmidt-and-linear-dependence-2-1">
+<div class="para">Apply the Gram-Schmidt algorithm to the vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mqty[1 \\ -1 \\ 0], \mqty[0\\0\\1], \mqty[2\\-2\\1], \mqty[1\\0\\2]\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="example-gram-schmidt-and-linear-dependence-3" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para" id="example-gram-schmidt-and-linear-dependence-3-1">If we apply the Gram-Schmidt process to this collection of vectors we will eventually get <span class="process-math">\(\vecm{v}_3 = \vecm{0}\text{.}\)</span> This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove <span class="process-math">\(\vecm{b}_3\)</span> from our collection.</div></div></details></div></article><section class="subsection" id="subsection-modified-gram-schmidt-algorithm"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">The modified Gram-Schmidt algorithm</span>
+</h3>
+<div class="para" id="subsection-modified-gram-schmidt-algorithm-2">Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set. In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal. To combat this, the <em class="emphasis">modified Gram-Schmidt algorithm</em> (MGS) can be used. The MGS process differs from the typical Gram-Schmidt process as follows: once the vector <span class="process-math">\(\vecm{q}_j\)</span> is produced in step <span class="process-math">\(j\)</span> of the algorithm, all subsequent vectors <span class="process-math">\(\vecm{v}_k, j+1\leq k\leq n\)</span> are replaced with <span class="process-math">\(\vecm{v}_k - (\vecm{q}_j^{T}\vecm{v}_k)\vecm{q}_j\text{.}\)</span> That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.</div>
+<article class="example example-like" id="example-using-the-mgs-algorithm-to-construct-an-onb"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Using the modified Gram-Schmidt algorithm to construct an ONB.</span>
+</h4>
+<div class="para logical" id="example-using-the-mgs-algorithm-to-construct-an-onb-2-1">
+<div class="para">Apply the modified Gram-Schmidt algorithm to the vectors</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\vecm{v}_1 = \mqty[1\\-1\\0], \vecm{v}_2 = \mqty[0 \\ 0 \\ 2],\vecm{v}_3 = \mqty[1\\0\\1]\text{.}
+\end{equation*}
+</div>
+</div>
+<div class="solutions"><details id="example-using-the-mgs-algorithm-to-construct-an-onb-3" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para logical" id="example-using-the-mgs-algorithm-to-construct-an-onb-3-1">
+<div class="para">As before, we start by setting <span class="process-math">\(\vecm{q}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\vecm{q}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]\text{.}
+\end{equation*}
+</div>
+<div class="para">Now we orthogonalize the set <span class="process-math">\(\{\vecm{q}_1, \vecm{v}_2, \vecm{v}_3\}\)</span> with respect to <span class="process-math">\(\vecm{q}_1\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="example-using-the-mgs-algorithm-to-construct-an-onb-3-1-5">
+\begin{align*}
+\vecm{\tilde{q}}_2 = \vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{q}_1 \amp = \mqty[0\\0\\1] \\
+\vecm{\tilde{v}}_3 = \vecm{v}_3 - (\vecm{q}_1^{T}\vecm{v}_3)\vecm{q}_2 \amp = \mqty[\frac{1}{2}\\\frac{1}{2}\\1] \text{.}
+\end{align*}
+</div>
+<div class="para">This produces <span class="process-math">\(\vecm{q}_2 = \smqty[0\\0\\1]\)</span> as before, but now <span class="process-math">\(\vecm{v}_3\)</span> has been replaced with a vector that is also orthogonal to <span class="process-math">\(\vecm{q}_1\text{.}\)</span> The final step is to orthogonalize the set <span class="process-math">\(\{\vecm{q}_1, \vecm{q}_2, \vecm{\tilde{v}}_3\}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="example-using-the-mgs-algorithm-to-construct-an-onb-3-1-10">
+\begin{align*}
+\vecm{\tilde{q}}_3 = \vecm{\tilde{v}}_3 - (\vecm{q}_2^{T}\vecm{\tilde{v}}_3)\vecm{q}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]\\
+\vecm{q}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] \text{.}
+\end{align*}
+</div>
+<div class="para">Therefore, we have once again obtained an ONB from the MGS algorithm.</div>
+</div></div></details></div></article></section></section></div>
 <div class="ptx-content-footer">
 <a class="previous-button button" href="section-orthonormal-vectors.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="part-multivariable-calculus.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

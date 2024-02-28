@@ -268,7 +268,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.4",
   "title": "Gram-Schmidt Orthogonalization",
-  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : .    "
+  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .     Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.     The modified Gram-Schmidt algorithm  Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set. In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal. To combat this, the modified Gram-Schmidt algorithm (MGS) can be used. The MGS process differs from the typical Gram-Schmidt process as follows: once the vector is produced in step of the algorithm, all subsequent vectors are replaced with . That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.   Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.     "
 },
 {
   "id": "example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
@@ -277,7 +277,25 @@ var ptx_lunr_docs = [
   "type": "Example",
   "number": "2.4.1",
   "title": "Using the Gram-Schmidt algorithm to construct an ONB.",
-  "body": " Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : .   "
+  "body": " Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .   "
+},
+{
+  "id": "example-gram-schmidt-and-linear-dependence",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-gram-schmidt-and-linear-dependence",
+  "type": "Example",
+  "number": "2.4.2",
+  "title": "Gram-Schmidt and linear dependence.",
+  "body": " Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.   "
+},
+{
+  "id": "example-using-the-mgs-algorithm-to-construct-an-onb",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-using-the-mgs-algorithm-to-construct-an-onb",
+  "type": "Example",
+  "number": "2.4.3",
+  "title": "Using the modified Gram-Schmidt algorithm to construct an ONB.",
+  "body": " Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.   "
 },
 {
   "id": "part-multivariable-calculus",

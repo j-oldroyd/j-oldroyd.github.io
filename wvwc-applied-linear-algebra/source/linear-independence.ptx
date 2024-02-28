@@ -222,20 +222,75 @@
       </statement>
       <solution>
         <p>
-          We start by setting <m>\vecm{u}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}</m>:
-          <me>\vecm{u}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]</me>.
-          Now we orthogonalize the set <m>\{\vecm{u}_1, \vecm{v}_2\}</m> by replacing <m>\vecm{v}_2</m> with <m>\vecm{v}_2 - (\vecm{u}_1^{T}\vecm{v}_2)\vecm{u}_2</m> and then normalizing the result:
+          We start by setting <m>\vecm{q}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}</m>:
+          <me>\vecm{q}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]</me>.
+          Now we orthogonalize the set <m>\{\vecm{q}_1, \vecm{v}_2\}</m> by replacing <m>\vecm{v}_2</m> with <m>\vecm{\tilde{q}}_2=\vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{u}_2</m> and then normalizing the result:
           <md>
-            <mrow>\vecm{v}_2 - (\vecm{u}_1^{T}\vecm{v}_2)\vecm{u}_2 \amp = \vecm{0} </mrow>
-            <mrow>\vecm{u}_2 \amp = \mqty[0\\0\\1] </mrow>
+            <mrow>\vecm{\tilde{q}}_2 = \vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{q}_1 \amp = \mqty[0\\0\\1] </mrow>
+            <mrow>\vecm{q}_2 \amp = \mqty[0\\0\\1] </mrow>
           </md>.
-          Finally, we orthogonalize the set <m>\{\vecm{u}_1, \vecm{u}_2, \vecm{v}_3\}</m>:
+          Finally, we orthogonalize the set <m>\{\vecm{q}_1, \vecm{q}_2, \vecm{v}_3\}</m>:
           <md>
-            <mrow>\vecm{v}_3 - (\vecm{u}_1^{T}\vecm{v}_3)\vecm{u}_1 - (\vecm{u}_2^{T}\vecm{v}_3)\vecm{u}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]</mrow>
-            <mrow>\vecm{u}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] </mrow>
+            <mrow>\vecm{\tilde{q}}_3 = \vecm{v}_3 - (\vecm{q}_1^{T}\vecm{v}_3)\vecm{q}_1 - (\vecm{q}_2^{T}\vecm{v}_3)\vecm{q}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]</mrow>
+            <mrow>\vecm{q}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] </mrow>
           </md>.
+          The resulting set <m>\{\vecm{q}_1, \vecm{q}_2, \vecm{q}_3\}</m> is an orthonormal set (in fact, an ONB) in <m>\RR^3</m>.
         </p>
       </solution>
     </example>
+    <example xml:id="example-gram-schmidt-and-linear-dependence">
+      <title>Gram-Schmidt and linear dependence</title>
+      <statement>
+        <p>
+          Apply the Gram-Schmidt algorithm to the vectors
+          <me>\mqty[1 \\ -1 \\ 0], \mqty[0\\0\\1], \mqty[2\\-2\\1], \mqty[1\\0\\2]</me>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If we apply the Gram-Schmidt process to this collection of vectors we will eventually get <m>\vecm{v}_3 = \vecm{0}</m>.
+          This is because the first three vectors in our collection are linearly dependent.
+          At this point the Gram-Schmidt produces no more useful results.
+          If we want to obtain a linearly independent orthonormal set, we will need to remove <m>\vecm{b}_3</m> from our collection.
+        </p>
+      </solution>
+    </example>
+    <subsection xml:id="subsection-modified-gram-schmidt-algorithm">
+        <title>The modified Gram-Schmidt algorithm</title>
+        <p>
+          Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set.
+          In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal.
+          To combat this, the <em>modified Gram-Schmidt algorithm</em> (MGS) can be used.
+          The MGS process differs from the typical Gram-Schmidt process as follows: once the vector <m>\vecm{q}_j</m> is produced in step <m>j</m> of the algorithm, all subsequent vectors <m>\vecm{v}_k, j+1\leq k\leq n</m> are replaced with <m>\vecm{v}_k - (\vecm{q}_j^{T}\vecm{v}_k)\vecm{q}_j</m>.
+          That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.
+        </p>
+        <example xml:id="example-using-the-mgs-algorithm-to-construct-an-onb">
+          <title>Using the modified Gram-Schmidt algorithm to construct an ONB</title>
+          <statement>
+            <p>
+              Apply the modified Gram-Schmidt algorithm to the vectors
+              <me>\vecm{v}_1 = \mqty[1\\-1\\0], \vecm{v}_2 = \mqty[0 \\ 0 \\ 2],\vecm{v}_3 = \mqty[1\\0\\1]</me>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              As before, we start by setting <m>\vecm{q}_1 = \frac{\vecm{v}_1}{\norm{\vecm{v}_1}}</m>:
+              <me>\vecm{q}_1 = \frac{1}{\sqrt{2}}\mqty[1\\-1\\0]</me>.
+              Now we orthogonalize the set <m>\{\vecm{q}_1, \vecm{v}_2, \vecm{v}_3\}</m> with respect to <m>\vecm{q}_1</m>:
+              <md>
+                <mrow>\vecm{\tilde{q}}_2 = \vecm{v}_2 - (\vecm{q}_1^{T}\vecm{v}_2)\vecm{q}_1 \amp = \mqty[0\\0\\1] </mrow>
+                <mrow>\vecm{\tilde{v}}_3 = \vecm{v}_3 - (\vecm{q}_1^{T}\vecm{v}_3)\vecm{q}_2 \amp = \mqty[\frac{1}{2}\\\frac{1}{2}\\1] </mrow>
+              </md>.
+              This produces <m>\vecm{q}_2 = \smqty[0\\0\\1]</m> as before, but now <m>\vecm{v}_3</m> has been replaced with a vector that is also orthogonal to <m>\vecm{q}_1</m>.
+              The final step is to orthogonalize the set <m>\{\vecm{q}_1, \vecm{q}_2, \vecm{\tilde{v}}_3\}</m>:
+              <md>
+                <mrow>\vecm{\tilde{q}}_3 = \vecm{\tilde{v}}_3 - (\vecm{q}_2^{T}\vecm{\tilde{v}}_3)\vecm{q}_2 \amp =  \mqty[\frac{1}{2} \\ \frac{1}{2} \\ 0]</mrow>
+                <mrow>\vecm{q}_3 \amp = \frac{1}{\sqrt{2}}\mqty[1 \\ 1 \\ 0] </mrow>
+              </md>.
+              Therefore, we have once again obtained an ONB from the MGS algorithm.
+            </p>
+          </solution>
+        </example>
+    </subsection>
   </section>
 </chapter>
