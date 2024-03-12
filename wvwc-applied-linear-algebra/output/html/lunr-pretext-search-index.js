@@ -268,7 +268,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.4",
   "title": "Gram-Schmidt Orthogonalization",
-  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .     Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.     The modified Gram-Schmidt algorithm  Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set. In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal. To combat this, the modified Gram-Schmidt algorithm (MGS) can be used. The MGS process differs from the typical Gram-Schmidt process as follows: once the vector is produced in step of the algorithm, all subsequent vectors are replaced with . That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.   Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.     "
+  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .     Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.     The modified Gram-Schmidt algorithm.  Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set. In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal. To combat this, the modified Gram-Schmidt algorithm (MGS) can be used. The MGS process differs from the typical Gram-Schmidt process as follows: once the vector is produced in step of the algorithm, all subsequent vectors are replaced with . That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.   Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.     Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms   Apply the different Gram-Schmidt algorithms to the collection using the approximation to simulate what happens if these algorithms are applied with finite precision arithmetic.          "
 },
 {
   "id": "example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
@@ -296,6 +296,96 @@ var ptx_lunr_docs = [
   "number": "2.4.3",
   "title": "Using the modified Gram-Schmidt algorithm to construct an ONB.",
   "body": " Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.   "
+},
+{
+  "id": "example-comparing-classical-gram-schmidt-and-modified-gram-schmidt-algorithms",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-comparing-classical-gram-schmidt-and-modified-gram-schmidt-algorithms",
+  "type": "Example",
+  "number": "2.4.4",
+  "title": "Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms.",
+  "body": " Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms   Apply the different Gram-Schmidt algorithms to the collection using the approximation to simulate what happens if these algorithms are applied with finite precision arithmetic.        "
+},
+{
+  "id": "section-matrices",
+  "level": "1",
+  "url": "section-matrices.html",
+  "type": "Section",
+  "number": "3.1",
+  "title": "Matrices",
+  "body": " Matrices  The primary objects of study in the field of linear algebra and its applications are linear transformations between vector spaces. These linear transformations are often represented using matrices .   Matrix   matrices  definition    A matrix is a rectangular array of numbers. If this array has rows and columns, we say the matrix is an matrix.    The following are examples of matrices: The first is and the second is .  More generally, an matrix can be represented by its entries as follows: for and . We will also find it useful to write matrices as collections of column or row vectors, or as block matrices . We have already used this idea in in order to determine if a given collection of vectors is linearly independent.  We say that a matrix is a square matrix if it has the same number of rows as columns. , The diagonal entries are and these form the main diagonal of the matrix.  In the code cell below Octave is used to define the square matrix above and get its diagonal entries. Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.    Applications.  Matrices have found use in a wide variety of fields. They are particularly useful for representing data that depends on two parameters, such as images or data that has both a positional and time component. Matrices are also useful for describing more abstract mathematical objects such as networks. Here, we view the network as a data set determined by vertices and edges . Such matrices are called adjacency matrices.   Representing graphs using matrices   Represent an undirected graph using an appropriate matrix. Then do the same for a directed graph.     "
+},
+{
+  "id": "definition-matrix",
+  "level": "2",
+  "url": "section-matrices.html#definition-matrix",
+  "type": "Definition",
+  "number": "3.1.1",
+  "title": "Matrix.",
+  "body": " Matrix   matrices  definition    A matrix is a rectangular array of numbers. If this array has rows and columns, we say the matrix is an matrix.   "
+},
+{
+  "id": "section-matrices-6",
+  "level": "2",
+  "url": "section-matrices.html#section-matrices-6",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "square matrix diagonal entries main diagonal "
+},
+{
+  "id": "example-representing-graphs-using-matrices",
+  "level": "2",
+  "url": "section-matrices.html#example-representing-graphs-using-matrices",
+  "type": "Example",
+  "number": "3.1.2",
+  "title": "Representing graphs using matrices.",
+  "body": " Representing graphs using matrices   Represent an undirected graph using an appropriate matrix. Then do the same for a directed graph.   "
+},
+{
+  "id": "section-special-matrices",
+  "level": "1",
+  "url": "section-special-matrices.html",
+  "type": "Section",
+  "number": "3.2",
+  "title": "Special matrices",
+  "body": " Special matrices   Zero and identity matrices.  The zero matrix is the matrix whose entries are all . The identity matrix is the square matrix with diagonal entries equal to and off-diagonal entries equal to . These are denoted, respectively, by and , or just and if the size of each matrix can be inferred from context (as is often the case).    Diagonal matrices and triangular matrices.  A diagonal matrix is... A triangular matrix is a matrix that is either lower or upper triangular.   "
+},
+{
+  "id": "section-transpose-addition-and-norm",
+  "level": "1",
+  "url": "section-transpose-addition-and-norm.html",
+  "type": "Section",
+  "number": "3.3",
+  "title": "Transpose, addition and norm",
+  "body": " Transpose, addition and norm   Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.     Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .      "
+},
+{
+  "id": "definition-matrix-addition-and-scalar-multiplication",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#definition-matrix-addition-and-scalar-multiplication",
+  "type": "Definition",
+  "number": "3.3.1",
+  "title": "Matrix Addition and Scalar Multiplication.",
+  "body": " Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.   "
+},
+{
+  "id": "theorem-properties-of-matrix-addition-and-scalar-multiplication",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#theorem-properties-of-matrix-addition-and-scalar-multiplication",
+  "type": "Theorem",
+  "number": "3.3.2",
+  "title": "Properties of Matrix Addition and Scalar Multiplication.",
+  "body": " Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .     "
+},
+{
+  "id": "section-matrix-vector-multiplication",
+  "level": "1",
+  "url": "section-matrix-vector-multiplication.html",
+  "type": "Section",
+  "number": "3.4",
+  "title": "Matrix-vector multiplication",
+  "body": " Matrix-vector multiplication  "
 },
 {
   "id": "part-multivariable-calculus",
