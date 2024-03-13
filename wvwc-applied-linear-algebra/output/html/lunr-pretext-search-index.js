@@ -358,7 +358,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.3",
   "title": "Transpose, addition and norm",
-  "body": " Transpose, addition and norm   Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.     Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .      "
+  "body": " Transpose, addition and norm   Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.     Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .      The norm of a matrix is defined similarly to the norm of a vector: . This is also known as the Frobenius norm of a matrix and shares many of the useful properties of the Euclidean norm of a vector. Note that and the squared norm of is equal to the sum of the squared norms of the rows (or columns).   Finding the distance between images   Find the distance between two  -bit grayscale pictures.    "
 },
 {
   "id": "definition-matrix-addition-and-scalar-multiplication",
@@ -379,13 +379,40 @@ var ptx_lunr_docs = [
   "body": " Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .     "
 },
 {
+  "id": "section-transpose-addition-and-norm-4",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#section-transpose-addition-and-norm-4",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "norm "
+},
+{
+  "id": "example-finding-the-distance-between-images",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#example-finding-the-distance-between-images",
+  "type": "Example",
+  "number": "3.3.3",
+  "title": "Finding the distance between images.",
+  "body": " Finding the distance between images   Find the distance between two  -bit grayscale pictures.   "
+},
+{
   "id": "section-matrix-vector-multiplication",
   "level": "1",
   "url": "section-matrix-vector-multiplication.html",
   "type": "Section",
   "number": "3.4",
   "title": "Matrix-vector multiplication",
-  "body": " Matrix-vector multiplication  "
+  "body": " Matrix-vector multiplication  The product of an matrix with an -vector can be defined in multiple equivalent ways: . In all cases, turns the -vector into the -vector .   Matrix-vector products   Compute a matrix-vector product, then find a matrix that turns -vectors into -vectors.    In general, .  "
+},
+{
+  "id": "example-matrix-vector-products",
+  "level": "2",
+  "url": "section-matrix-vector-multiplication.html#example-matrix-vector-products",
+  "type": "Example",
+  "number": "3.4.1",
+  "title": "Matrix-vector products.",
+  "body": " Matrix-vector products   Compute a matrix-vector product, then find a matrix that turns -vectors into -vectors.   "
 },
 {
   "id": "part-multivariable-calculus",
