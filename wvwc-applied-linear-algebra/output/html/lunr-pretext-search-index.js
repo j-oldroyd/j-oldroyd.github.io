@@ -415,6 +415,150 @@ var ptx_lunr_docs = [
   "body": " Matrix-vector products   Compute a matrix-vector product, then find a matrix that turns -vectors into -vectors.   "
 },
 {
+  "id": "section-linear-and-affine-functions",
+  "level": "1",
+  "url": "section-linear-and-affine-functions.html",
+  "type": "Section",
+  "number": "4.1",
+  "title": "Linear and affine functions",
+  "body": " Linear and affine functions  A function is linear if . Linear functions are always determined by a choice of basis, giving a matrix representation of the function. We will typically use the standard basis to write our matrix representations, but this is not a requirement.   Finding a matrix representation   Let be given by . Find a matrix such that .    In general, given a basis of , a matrix representation of is given by .   Matrix representation with respect to a basis   Find the matrix representation of from using the basis in .    Since , it follows that .     Matrix representation of the cross product   Let be fixed and define by . Find a matrix representation of .    Using the standard basis, we have .     Sum of linear functions   Let be linear. Then their sum is linear as well.     Affine functions  An affine function is a function of the form . Note that is a linear function, and so the matrix is equal to .   "
+},
+{
+  "id": "section-linear-and-affine-functions-2",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#section-linear-and-affine-functions-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "linear "
+},
+{
+  "id": "example-finding-a-matrix-representation",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-finding-a-matrix-representation",
+  "type": "Example",
+  "number": "4.1.1",
+  "title": "Finding a matrix representation.",
+  "body": " Finding a matrix representation   Let be given by . Find a matrix such that .   "
+},
+{
+  "id": "example-matrix-representation-with-respect-to-a-basis",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-matrix-representation-with-respect-to-a-basis",
+  "type": "Example",
+  "number": "4.1.2",
+  "title": "Matrix representation with respect to a basis.",
+  "body": " Matrix representation with respect to a basis   Find the matrix representation of from using the basis in .    Since , it follows that .   "
+},
+{
+  "id": "example-matrix-representation-of-the-cross-product",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-matrix-representation-of-the-cross-product",
+  "type": "Example",
+  "number": "4.1.3",
+  "title": "Matrix representation of the cross product.",
+  "body": " Matrix representation of the cross product   Let be fixed and define by . Find a matrix representation of .    Using the standard basis, we have .   "
+},
+{
+  "id": "theorem-sum-of-linear-functions",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#theorem-sum-of-linear-functions",
+  "type": "Theorem",
+  "number": "4.1.4",
+  "title": "Sum of linear functions.",
+  "body": " Sum of linear functions   Let be linear. Then their sum is linear as well.   "
+},
+{
+  "id": "subsection-affine-functions-2",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#subsection-affine-functions-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "affine function "
+},
+{
+  "id": "section-linear-function-models",
+  "level": "1",
+  "url": "section-linear-function-models.html",
+  "type": "Section",
+  "number": "4.2",
+  "title": "Linear function models",
+  "body": " Linear function models   Taylor approximation  Let be differentiable, exists for . The first-order Taylor approximation of near is . This can also be expressed in the form where is the Jacobian of .   Finding a Taylor approximation   Find the first-order Taylor approximation of given by at the point .      Regression models  Given a collection of objects\/samples with feature vectors , we can define regression models . We can combine these models into the single matrix equation where . The error in the prediction is given by .   "
+},
+{
+  "id": "subsection-taylor-approximation-2",
+  "level": "2",
+  "url": "section-linear-function-models.html#subsection-taylor-approximation-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "Jacobian "
+},
+{
+  "id": "example-finding-a-taylor-approximation",
+  "level": "2",
+  "url": "section-linear-function-models.html#example-finding-a-taylor-approximation",
+  "type": "Example",
+  "number": "4.2.1",
+  "title": "Finding a Taylor approximation.",
+  "body": " Finding a Taylor approximation   Find the first-order Taylor approximation of given by at the point .   "
+},
+{
+  "id": "section-systems-of-linear-equations",
+  "level": "1",
+  "url": "section-systems-of-linear-equations.html",
+  "type": "Section",
+  "number": "4.3",
+  "title": "Systems of linear equations",
+  "body": " Systems of linear equations  Consider a rectangular plate that has been heated, with heat sensors placed in a grid fashion as below:   Heat sensors placed on a rectangular plate.   A figure of heat sensors placed along a rectangular plate.     We wish to estimate the temperature of the plate at the points indicated by and using information from the surrounding sensors. It's reasonable to approximate the temperature at these points by taking an average of the surrounding temperatures. This gives us the system of equations Both equations are relatively simple since we're not doing anything overly complicated to our unknowns and . In fact, each equation determines a line in . This suggests the following terminology.   Linear Equations and Linear Systems  linear systems   A linear equation in the variables is an equation of the form , where are constants. A system of linear equations , or a linear system , is a system of equations in which each equation is a linear equation. A solution of a linear system is a point whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables . The set of all solutions of a linear system is the solution set . A system is inconsistent if its solution set is empty and consistent if its solution set contains at least one point. A system is homogeneous if it contains no nonzero constant terms, otherwise it is non-homogeneous . A homogeneous system always has as a solution (called the trivial solution ), and is therefore always consistent.    The solution set of a linear system in two variables can be viewed as the intersection of a system of lines in the -plane. In higher dimensions, we replace lines with planes and hyperplanes .   Determining if a System Is Consistent   Is the system consistent?    We can try graphing each equation to see if they correspond to intersecting lines. If we do so, we obtain the following plot:   Graphing a linear system.      Since these lines intersect, the system has a solution. A solution can also be found algebraically by using the method of elimination.    When using elimination to solve a linear system, the variables themselves aren't particularly important. Instead it is the coefficients that determine any solutions. We therefore introduce the use of matrices to express and solve linear systems. In particular, any linear system can be rewritten as the matrix equation , where is the coefficient matrix . The solution process then amount to simplifying the so-called augmented matrix  using a series of row operations .   Elementary Row Operations  elementary row operations   Let be a matrix. The elementary row operations are defined as follows:  Row replacement: replace one row of by the sum of itself and a scalar multiple of another row of .  Interchange: swap two rows.  Scaling: multiply a single row by a nonzero scalar.  If we can obtain the matrix from by performing a series of elementary row operations, we say that is row equivalent to and write .    If the augmented matrices of two linear systems are row equivalent, then the systems have the same solution set. This observation will be fundamental primary tool for solving linear systems.   Solving a System by Row Reduction   Solve the system     First we set up the augmented matrix: . Now we reduce this matrix using a sequence of elementary row operations. This is easily handled using Octave's rref command as shown below.   The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system . The solution of the original system is therefore .    "
+},
+{
+  "id": "figure-tikz-plate-sensors",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#figure-tikz-plate-sensors",
+  "type": "Figure",
+  "number": "4.3.1",
+  "title": "",
+  "body": " Heat sensors placed on a rectangular plate.   A figure of heat sensors placed along a rectangular plate.    "
+},
+{
+  "id": "definition-linear-equations-and-linear-systems",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#definition-linear-equations-and-linear-systems",
+  "type": "Definition",
+  "number": "4.3.2",
+  "title": "Linear Equations and Linear Systems.",
+  "body": " Linear Equations and Linear Systems  linear systems   A linear equation in the variables is an equation of the form , where are constants. A system of linear equations , or a linear system , is a system of equations in which each equation is a linear equation. A solution of a linear system is a point whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables . The set of all solutions of a linear system is the solution set . A system is inconsistent if its solution set is empty and consistent if its solution set contains at least one point. A system is homogeneous if it contains no nonzero constant terms, otherwise it is non-homogeneous . A homogeneous system always has as a solution (called the trivial solution ), and is therefore always consistent.   "
+},
+{
+  "id": "example-determining-if-a-system-is-consistent",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#example-determining-if-a-system-is-consistent",
+  "type": "Example",
+  "number": "4.3.3",
+  "title": "Determining if a System Is Consistent.",
+  "body": " Determining if a System Is Consistent   Is the system consistent?    We can try graphing each equation to see if they correspond to intersecting lines. If we do so, we obtain the following plot:   Graphing a linear system.      Since these lines intersect, the system has a solution. A solution can also be found algebraically by using the method of elimination.   "
+},
+{
+  "id": "definition-elementary-row-operations",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#definition-elementary-row-operations",
+  "type": "Definition",
+  "number": "4.3.5",
+  "title": "Elementary Row Operations.",
+  "body": " Elementary Row Operations  elementary row operations   Let be a matrix. The elementary row operations are defined as follows:  Row replacement: replace one row of by the sum of itself and a scalar multiple of another row of .  Interchange: swap two rows.  Scaling: multiply a single row by a nonzero scalar.  If we can obtain the matrix from by performing a series of elementary row operations, we say that is row equivalent to and write .   "
+},
+{
+  "id": "example-solving-a-system-by-row-reduction",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#example-solving-a-system-by-row-reduction",
+  "type": "Example",
+  "number": "4.3.6",
+  "title": "Solving a System by Row Reduction.",
+  "body": " Solving a System by Row Reduction   Solve the system     First we set up the augmented matrix: . Now we reduce this matrix using a sequence of elementary row operations. This is easily handled using Octave's rref command as shown below.   The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system . The solution of the original system is therefore .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",

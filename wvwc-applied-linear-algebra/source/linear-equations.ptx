@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-linear-equations" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Linear Equations</title>
+  <section xml:id="section-linear-and-affine-functions">
+    <title>Linear and affine functions</title>
+    <p>
+      A function <m>f:\RR^n\to\RR^m</m> is <term>linear</term> if
+      <me>f(a\xx+b\yy) = af(\xx)+bf(\yy)</me>.
+      Linear functions are always determined by a choice of basis, giving a <em>matrix representation</em> of the function.
+      We will typically use the standard basis to write our matrix representations, but this is not a requirement.
+    </p>
+    <example xml:id="example-finding-a-matrix-representation">
+      <title>Finding a matrix representation</title>
+      <statement>
+        <p>
+          Let <m>f:\RR^2\to\RR^3</m> be given by
+          <me>f(x, y) = \mqty[2x - 3y \\ x + y \\ 3y]</me>.
+          Find a matrix <m>A</m> such that <m>f(\xx) = A\xx</m>.
+        </p>
+      </statement>
+    </example>
+    <p>
+      In general, given a basis <m>\set{\vb{b}_i}</m> of <m>\RR^n</m>, a matrix representation of <m>f:\RR^n\to\RR^m</m> is given by
+      <me>\mqty[f(\vb{b}_1) \amp \ldots \amp f(\vb{b}_n)]</me>.
+    </p>
+    <example xml:id="example-matrix-representation-with-respect-to-a-basis">
+      <title>Matrix representation with respect to a basis</title>
+      <statement>
+        <p>
+          Find the matrix representation of <m>f</m> from <xref ref="example-finding-a-matrix-representation" text="type-global" /> using the basis <m>\mathcal{B} = \set{\smqty[1\\1], \smqty[1\\-1]}</m> in <m>\RR^2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Since
+          <me>\mqty[x\\y] = \frac{x+y}{2}\mqty[1\\1] + \frac{x-y}{2}\mqty[1\\-1]</me>,
+          it follows that
+          <me>f(x,y) = \mqty[-1 \amp 5 \\ 2 \amp 0 \\ 3 \amp-3]\mqty[\frac{x+y}{2} \\ \frac{x-y}{2}]</me>.
+        </p>
+      </solution>
+    </example>
+    <example xml:id="example-matrix-representation-of-the-cross-product">
+        <title>Matrix representation of the cross product</title>
+        <statement>
+            <p>
+                Let <m>\uu\in\RR^3</m> be fixed and define <m>f:\RR^3\to\RR^3</m> by <m>f(\xx) = \uu\times\xx</m>.
+                Find a matrix representation of <m>f</m>.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                Using the standard basis, we have
+                <me>[f] = A = \mqty[0 \amp -u_3 \amp u_2 \\ u_3 \amp 0 \amp -u_1 \\ -u_2 \amp u_1 \amp 0] </me>.
+            </p>
+        </solution>
+    </example>
+    <theorem xml:id="theorem-sum-of-linear-functions">
+        <title>Sum of linear functions</title>
+        <statement>
+          <p>
+            Let <m>f,g:\RR^n\to\RR^m</m> be linear.
+            Then their sum is linear as well.
+          </p>
+        </statement>
+    </theorem>
+    <subsection xml:id="subsection-affine-functions">
+      <title>Affine functions</title>
+      <p>
+        An <term>affine function</term> is a function of the form <m>f(\xx) = A\xx+\vec{b}</m>.
+        Note that <m>g(\xx) = f(\xx)-\vec{b}</m> is a linear function, and so the matrix <m>A</m> is equal to
+        <me>\mqty[g(\ee_k)] = \mqty[f(\xx_k)-\bb]</me>.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="section-linear-function-models">
+    <title>Linear function models</title>
+    <subsection xml:id="subsection-taylor-approximation">
+      <title>Taylor approximation</title>
+      <p>
+        Let <m>f:\RR^n\to\RR^m</m> be differentiable, <m>\pdv{f_i}{x_j}</m>exists for <m>1\leq i\leq m, 1\leq j\leq n</m>.
+        The first-order Taylor approximation of <m>f</m> near <m>\vec{a}</m> is
+        <me>\hat{f}_i(\vb{x}) = f_i(\vb{a}) + \del f(\vb{a})^{T}(\xx-\vb{a})</me>.
+        This can also be expressed in the form
+        <me>\hat{f}(\xx) = f(\vb{a}) + Df(\vb{a})(\xx-\vb{a})</me>
+        where
+        <me>Df = [\pdv{f_i}{x_j}]</me>
+        is the <term>Jacobian</term> of <m>f</m>.
+      </p>
+      <example xml:id="example-finding-a-taylor-approximation">
+        <title>Finding a Taylor approximation</title>
+        <statement>
+          <p>
+            Find the first-order Taylor approximation of <m>f:\RR^3\to\RR^2</m> given by
+            <me>f(\xx) = \mqty[x - yz \\ x^2y + \sin(z)]</me>
+            at the point <m>\vb{a} = \smqty[1 \\ 1 \\ 0]</m>.
+          </p>
+        </statement>
+      </example>
+    </subsection>
+    <subsection xml:id="subsection-regression-models">
+      <title>Regression models</title>
+      <p>
+        Given a collection of <m>N</m> objects/samples with feature vectors <m>\xx^{(i)}, 1\leq i\leq N</m>, we can define <m>N</m> regression models
+        <me>\hat{y}^{(i)} = (\xx^{(i)})^{T}\vecm{\beta}+v</me>.
+        We can combine these <m>N</m> models into the single matrix equation
+        <me>\hat{\yy} = X^{T}\vecm{\beta}+v\vecm{1} = \mqty[\vecm{1} \amp X^T]\mqty[v \\ \vecm{\beta}]</me>
+        where
+        <me>X = [\xx^{(i)}]</me>.
+        The error in the prediction is given by <m>\norm{\yy-\hat{\yy}}</m>.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="section-systems-of-linear-equations">
+    <title>Systems of linear equations</title>
+    <p>
+      Consider a rectangular plate that has been heated, with heat sensors placed in a grid fashion as below:
+    </p>
+    <figure xml:id="figure-tikz-plate-sensors">
+      <caption>Heat sensors placed on a rectangular plate.</caption>
+      <image xml:id="image-tikz-plate-sensors">
+        <description>A figure of heat sensors placed along a rectangular plate.</description>
+        <latex-image xml:id="latex-image-tikz-plate-sensors">
+          \begin{tikzpicture}
+          \draw[fill=blue!40] (0,0) grid (3,2) rectangle (0,0);
+          \fill (1,1) circle [radius=2pt] node[above right]{$T_{1}$};
+          \fill (2,1) circle [radius=2pt] node[above right]{$T_{2}$};
+
+          \fill (0,1) circle [radius=2pt] node[left]{\SI{35}{\celsius}};
+          \fill (3,1) circle [radius=2pt] node[right]{\SI{30}{\celsius}};
+          \fill (1,0) circle [radius=2pt] node[below]{\SI{30}{\celsius}};
+          \fill (2,0) circle [radius=2pt] node[below]{\SI{40}{\celsius}};
+          \fill (1,2) circle [radius=2pt] node[above]{\SI{10}{\celsius}};
+          \fill (2,2) circle [radius=2pt] node[above]{\SI{25}{\celsius}};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      We wish to estimate the temperature of the plate at the points indicated by <m>T_1</m> and <m>T_2</m> using information from the surrounding sensors.
+      It's reasonable to approximate the temperature at these points by taking an average of the surrounding temperatures.
+      This gives us the <em>system</em> of equations
+      <md>
+        <mrow>T_1 \amp = \frac{10 + 35 + 30 + T_2}{4} </mrow>
+        <mrow>T_2 \amp = \frac{25 + T_1 + 40 + 30}{4} </mrow>
+      </md>
+      Both equations are relatively simple since we're not doing anything overly complicated to our unknowns <m>T_1</m> and <m>T_2</m>.
+      In fact, each equation determines a line in <m>\RR^2</m>.
+      This suggests the following terminology.
+    </p>
+    <definition xml:id="definition-linear-equations-and-linear-systems">
+      <title>Linear Equations and Linear Systems</title>
+      <idx><h>linear systems</h></idx>
+      <statement>
+        <p>
+          A <term>linear equation</term> in the variables <m>x_1, x_2, \ldots, x_n</m> is an equation of the form
+          <me>\sum_{i=1}^n a_i x_i = b</me>,
+          where <m>a_1, \ldots, a_n, b\in\RR</m> are constants.
+          A <term>system of linear equations</term>, or a <term>linear system</term>, is a system of equations in which each equation is a linear equation.
+          A <term>solution</term> of a linear system is a point <m>(s_1, s_2, \ldots, s_n)</m> whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables <m>x_1, x_2,\ldots, x_n</m>.
+          The set of all solutions of a linear system is the <term>solution set</term>.
+          A system is <term>inconsistent</term> if its solution set is empty and <term>consistent</term> if its solution set contains at least one point.
+          A system is <term>homogeneous</term> if it contains no nonzero constant terms, otherwise it is <term>non-homogeneous</term>.
+          A homogeneous system always has <m>\mathbf{0}</m> as a solution (called the <term>trivial solution</term>), and is therefore always consistent.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      The solution set of a linear system in two variables can be viewed as the intersection of a system of lines in the <m>xy</m>-plane.
+      In higher dimensions, we replace lines with planes and <q>hyperplanes</q>.
+    </p>
+    <example xml:id="example-determining-if-a-system-is-consistent">
+      <title>Determining if a System Is Consistent</title>
+      <statement>
+        <p>
+          Is the system
+          <md>
+            <mrow>3x_1 + 6x_2 \amp = -3 </mrow>
+            <mrow>5x_1 + 7x_2 \amp = 10 </mrow>
+          </md>
+          consistent?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can try graphing each equation to see if they correspond to intersecting lines.
+          If we do so, we obtain the following plot:
+        </p>
+        <figure xml:id="figure-tikz-graph-linear-system">
+          <caption>Graphing a linear system.</caption>
+          <image xml:id="image-tikz-graph-linear-system">
+            <latex-image xml:id="latex-image-tikz-graph-linear-system">
+              \begin{tikzpicture}
+              \begin{axis}[mystyle, xlabel=$x_1$, ylabel=$x_2$]
+              \addplot[blue, smooth, thick, domain=-10:10]{-.5 - .5*x};
+              \addlegendentry{$3x_1 + 6x_2 = -3$};
+              \addplot[red, smooth, thick, domain=-10:10]{(10/7) - (5/7)*x};
+              \addlegendentry{$5x_1 + 7x_2 = 10$};
+              \addplot[mark=*] coordinates {(9, -5)};
+              \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+        <p>
+          Since these lines intersect, the system has a solution.
+          A solution can also be found algebraically by using the method of elimination.
+        </p>
+      </solution>
+    </example>
+    <p>
+      When using elimination to solve a linear system, the variables themselves aren't particularly important.
+      Instead it is the coefficients that determine any solutions.
+      We therefore introduce the use of matrices to express and solve linear systems.
+      In particular, any linear system can be rewritten as the matrix equation <m>A\xx = \bb</m>, where <m>A</m> is the <em>coefficient matrix</em>.
+      The solution process then amount to simplifying the so-called <em>augmented matrix</em> <m>\mqty[A \amp \bb]</m> using a series of <em>row operations</em>.
+    </p>
+    <definition xml:id="definition-elementary-row-operations">
+      <title>Elementary Row Operations</title>
+      <idx><h>elementary row operations</h></idx>
+      <statement>
+        <p>
+          Let <m>A</m> be a matrix.
+          The <term>elementary row operations</term> are defined as follows:
+          <ol>
+            <li>Row replacement: replace one row of <m>A</m> by the sum of itself and a scalar multiple of another row of <m>A</m>.</li>
+            <li>Interchange: swap two rows.</li>
+            <li>Scaling: multiply a single row by a nonzero scalar.</li>
+          </ol>
+          If we can obtain the matrix <m>B</m> from <m>A</m> by performing a series of elementary row operations, we say that <m>B</m> is <term>row equivalent</term> to <m>A</m> and write <m>A\sim B</m>.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      If the augmented matrices of two linear systems are row equivalent, then the systems have the same solution set.
+      This observation will be fundamental primary tool for solving linear systems.
+    </p>
+    <example xml:id="example-solving-a-system-by-row-reduction">
+      <title>Solving a System by Row Reduction</title>
+      <statement>
+        <p>
+          Solve the system
+          <md>
+            <mrow>2x_1  -  6x_3 \amp = -8 </mrow>
+            <mrow>  x_2  + 2x_3 \amp = 3 </mrow>
+            <mrow>3x_1  + 6x_2  - 2x_3 \amp = -4 </mrow>
+          </md>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First we set up the augmented matrix:
+          <me>A = \mqty[2 \amp 0 \amp -6 \amp -8 \\ 0 \amp 1 \amp 2 \amp 3 \\ 3 \amp 6 \amp -2 \amp -4]</me>.
+          Now we reduce this matrix using a sequence of elementary row operations.
+          This is easily handled using Octave's <c>rref</c> command as shown below.
+        </p>
+        <sage language="octave">
+          <input>
+            A = [2, 0, -6, -8; 0, 1, 2, 3; 3, 6, -2, -4]
+            rref(A)
+          </input>
+        </sage>
+        <p>
+          The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system
+          <md>
+            <mrow>x_1 \amp = 2 </mrow>
+            <mrow>x_2 \amp = -1 </mrow>
+            <mrow>x_3 \amp = 2 </mrow>
+          </md>.
+          The solution of the original system is therefore <m>(2, -1, 2)</m>.
+        </p>
+      </solution>
+    </example>
+  </section>
+</chapter>
