@@ -226,6 +226,339 @@ var ptx_lunr_docs = [
   "body": " Images and bases   Consider the problem of representing a grayscale image using vectors. This can be done using -vectors whose entries run from (black) to (white). Let's also suppose that the images we are representing are known to have a consistent cross pattern through the middle. The color of the cross varies, but it always appears in our images. In this case a useful basis for representing these images might be   For example, consider the following image rendered using Octave:   This image has nine pixels and would therefore seem to require nine separate values to transmit correctly. However, if we use our basis vectors to express then we get .   "
 },
 {
+  "id": "section-orthonormal-vectors",
+  "level": "1",
+  "url": "section-orthonormal-vectors.html",
+  "type": "Section",
+  "number": "2.3",
+  "title": "Orthonormal Vectors",
+  "body": " Orthonormal Vectors  A collection of vectors is orthonormal if it is both orthogonal and unit-normed. The usual example of an orthonormal set is the collection of coordinate unit vectors in  , but these are not the only ones.   Testing orthonormality   Determine if the given vectors are orthonormal.        Orthogonal collections of nonzero vectors are always linearly independent: if for orthogonal vectors, then taking the inner product of this sum with the vector gives .  Bases that are also orthonormal (ONBs) have special importance in linear algebra: if for orthonormal vectors, then . Since a basis can be used to express any vector in our space, the previous equation makes it simple to find the corresponding coefficients to expand an arbitrary vector in terms of an ONB.   Expansion in terms of an ONB           "
+},
+{
+  "id": "section-orthonormal-vectors-2",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#section-orthonormal-vectors-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "orthonormal "
+},
+{
+  "id": "example-testing-orthonormality",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#example-testing-orthonormality",
+  "type": "Example",
+  "number": "2.3.1",
+  "title": "Testing orthonormality.",
+  "body": " Testing orthonormality   Determine if the given vectors are orthonormal.       "
+},
+{
+  "id": "example-expansion-in-terms-of-an-onb",
+  "level": "2",
+  "url": "section-orthonormal-vectors.html#example-expansion-in-terms-of-an-onb",
+  "type": "Example",
+  "number": "2.3.2",
+  "title": "Expansion in terms of an ONB.",
+  "body": " Expansion in terms of an ONB          "
+},
+{
+  "id": "section-gram-schmidt-orthogonalization",
+  "level": "1",
+  "url": "section-gram-schmidt-orthogonalization.html",
+  "type": "Section",
+  "number": "2.4",
+  "title": "Gram-Schmidt Orthogonalization",
+  "body": " Gram-Schmidt Orthogonalization  Given a linearly independent set , we often want to orthogonalize it to make certain computations easier to perform. This can be done (at least theoretically) by using the Gram-Schmidt Algorithm. The algorithm works be successively subtracting out parallel components of vectors and normalizing what remains to produce an orthonormal set. The parallel components are themselves determined by the inner product: given two nonzero vectors in , we can always write where .  Given vectors , the algorithm will either produce nonzero orthogonal vectors or it will terminate before the th step and produce the zero vector as one of its outputs. This second option occurs precisely when the original collection is linearly dependent. Hence, the Gram-Schmidt algorithm will always turn a collection of linearly independent vectors into an orthogonal (and therefore linearly independent) collection of the same size. In particular, the algorithm converts bases into ONBs.   Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .     Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.     The modified Gram-Schmidt algorithm.  Theoretically, the Gram-Schmidt algorithm is guaranteed to produce an orthonormal set as long as the input is a linearly independent set. In practice, however, roundoff errors in computer computations can produce vectors that are no longer orthogonal. To combat this, the modified Gram-Schmidt algorithm (MGS) can be used. The MGS process differs from the typical Gram-Schmidt process as follows: once the vector is produced in step of the algorithm, all subsequent vectors are replaced with . That is, we continually update the remaining vectors in our collection to be orthogonal to our current collection of orthonormal vectors.   Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.     Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms   Apply the different Gram-Schmidt algorithms to the collection using the approximation to simulate what happens if these algorithms are applied with finite precision arithmetic.          "
+},
+{
+  "id": "example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-using-the-gram-schmidt-algorithm-to-construct-an-onb",
+  "type": "Example",
+  "number": "2.4.1",
+  "title": "Using the Gram-Schmidt algorithm to construct an ONB.",
+  "body": " Using the Gram-Schmidt algorithm to construct an ONB   Apply the Gram-Schmidt algorithm to the vectors .    We start by setting : . Now we orthogonalize the set by replacing with and then normalizing the result: . Finally, we orthogonalize the set : . The resulting set is an orthonormal set (in fact, an ONB) in .   "
+},
+{
+  "id": "example-gram-schmidt-and-linear-dependence",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-gram-schmidt-and-linear-dependence",
+  "type": "Example",
+  "number": "2.4.2",
+  "title": "Gram-Schmidt and linear dependence.",
+  "body": " Gram-Schmidt and linear dependence   Apply the Gram-Schmidt algorithm to the vectors .    If we apply the Gram-Schmidt process to this collection of vectors we will eventually get . This is because the first three vectors in our collection are linearly dependent. At this point the Gram-Schmidt produces no more useful results. If we want to obtain a linearly independent orthonormal set, we will need to remove from our collection.   "
+},
+{
+  "id": "example-using-the-mgs-algorithm-to-construct-an-onb",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-using-the-mgs-algorithm-to-construct-an-onb",
+  "type": "Example",
+  "number": "2.4.3",
+  "title": "Using the modified Gram-Schmidt algorithm to construct an ONB.",
+  "body": " Using the modified Gram-Schmidt algorithm to construct an ONB   Apply the modified Gram-Schmidt algorithm to the vectors .    As before, we start by setting : . Now we orthogonalize the set with respect to : . This produces as before, but now has been replaced with a vector that is also orthogonal to . The final step is to orthogonalize the set : . Therefore, we have once again obtained an ONB from the MGS algorithm.   "
+},
+{
+  "id": "example-comparing-classical-gram-schmidt-and-modified-gram-schmidt-algorithms",
+  "level": "2",
+  "url": "section-gram-schmidt-orthogonalization.html#example-comparing-classical-gram-schmidt-and-modified-gram-schmidt-algorithms",
+  "type": "Example",
+  "number": "2.4.4",
+  "title": "Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms.",
+  "body": " Comparing the classical Gram-Schmidt and modified Gram-Schmidt algorithms   Apply the different Gram-Schmidt algorithms to the collection using the approximation to simulate what happens if these algorithms are applied with finite precision arithmetic.        "
+},
+{
+  "id": "section-matrices",
+  "level": "1",
+  "url": "section-matrices.html",
+  "type": "Section",
+  "number": "3.1",
+  "title": "Matrices",
+  "body": " Matrices  The primary objects of study in the field of linear algebra and its applications are linear transformations between vector spaces. These linear transformations are often represented using matrices .   Matrix   matrices  definition    A matrix is a rectangular array of numbers. If this array has rows and columns, we say the matrix is an matrix.    The following are examples of matrices: The first is and the second is .  More generally, an matrix can be represented by its entries as follows: for and . We will also find it useful to write matrices as collections of column or row vectors, or as block matrices . We have already used this idea in in order to determine if a given collection of vectors is linearly independent.  We say that a matrix is a square matrix if it has the same number of rows as columns. , The diagonal entries are and these form the main diagonal of the matrix.  In the code cell below Octave is used to define the square matrix above and get its diagonal entries. Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.    Applications.  Matrices have found use in a wide variety of fields. They are particularly useful for representing data that depends on two parameters, such as images or data that has both a positional and time component. Matrices are also useful for describing more abstract mathematical objects such as networks. Here, we view the network as a data set determined by vertices and edges . Such matrices are called adjacency matrices.   Representing graphs using matrices   Represent an undirected graph using an appropriate matrix. Then do the same for a directed graph.     "
+},
+{
+  "id": "definition-matrix",
+  "level": "2",
+  "url": "section-matrices.html#definition-matrix",
+  "type": "Definition",
+  "number": "3.1.1",
+  "title": "Matrix.",
+  "body": " Matrix   matrices  definition    A matrix is a rectangular array of numbers. If this array has rows and columns, we say the matrix is an matrix.   "
+},
+{
+  "id": "section-matrices-6",
+  "level": "2",
+  "url": "section-matrices.html#section-matrices-6",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "square matrix diagonal entries main diagonal "
+},
+{
+  "id": "example-representing-graphs-using-matrices",
+  "level": "2",
+  "url": "section-matrices.html#example-representing-graphs-using-matrices",
+  "type": "Example",
+  "number": "3.1.2",
+  "title": "Representing graphs using matrices.",
+  "body": " Representing graphs using matrices   Represent an undirected graph using an appropriate matrix. Then do the same for a directed graph.   "
+},
+{
+  "id": "section-special-matrices",
+  "level": "1",
+  "url": "section-special-matrices.html",
+  "type": "Section",
+  "number": "3.2",
+  "title": "Special matrices",
+  "body": " Special matrices   Zero and identity matrices.  The zero matrix is the matrix whose entries are all . The identity matrix is the square matrix with diagonal entries equal to and off-diagonal entries equal to . These are denoted, respectively, by and , or just and if the size of each matrix can be inferred from context (as is often the case).    Diagonal matrices and triangular matrices.  A diagonal matrix is... A triangular matrix is a matrix that is either lower or upper triangular.   "
+},
+{
+  "id": "section-transpose-addition-and-norm",
+  "level": "1",
+  "url": "section-transpose-addition-and-norm.html",
+  "type": "Section",
+  "number": "3.3",
+  "title": "Transpose, addition and norm",
+  "body": " Transpose, addition and norm   Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.     Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .      The norm of a matrix is defined similarly to the norm of a vector: . This is also known as the Frobenius norm of a matrix and shares many of the useful properties of the Euclidean norm of a vector. Note that and the squared norm of is equal to the sum of the squared norms of the rows (or columns).   Finding the distance between images   Find the distance between two  -bit grayscale pictures.    "
+},
+{
+  "id": "definition-matrix-addition-and-scalar-multiplication",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#definition-matrix-addition-and-scalar-multiplication",
+  "type": "Definition",
+  "number": "3.3.1",
+  "title": "Matrix Addition and Scalar Multiplication.",
+  "body": " Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then is the matrix obtained by adding the entries of and componentwise. Likewise, is the matrix obtained by multiplying the entries of by componentwise.   "
+},
+{
+  "id": "theorem-properties-of-matrix-addition-and-scalar-multiplication",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#theorem-properties-of-matrix-addition-and-scalar-multiplication",
+  "type": "Theorem",
+  "number": "3.3.2",
+  "title": "Properties of Matrix Addition and Scalar Multiplication.",
+  "body": " Properties of Matrix Addition and Scalar Multiplication   Let and denote matrices of the same size and let . Then  .  .  where denotes the zero matrix.  .  .  .  .  .     "
+},
+{
+  "id": "section-transpose-addition-and-norm-4",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#section-transpose-addition-and-norm-4",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "norm "
+},
+{
+  "id": "example-finding-the-distance-between-images",
+  "level": "2",
+  "url": "section-transpose-addition-and-norm.html#example-finding-the-distance-between-images",
+  "type": "Example",
+  "number": "3.3.3",
+  "title": "Finding the distance between images.",
+  "body": " Finding the distance between images   Find the distance between two  -bit grayscale pictures.   "
+},
+{
+  "id": "section-matrix-vector-multiplication",
+  "level": "1",
+  "url": "section-matrix-vector-multiplication.html",
+  "type": "Section",
+  "number": "3.4",
+  "title": "Matrix-vector multiplication",
+  "body": " Matrix-vector multiplication  The product of an matrix with an -vector can be defined in multiple equivalent ways: . In all cases, turns the -vector into the -vector .   Matrix-vector products   Compute a matrix-vector product, then find a matrix that turns -vectors into -vectors.    In general, .  "
+},
+{
+  "id": "example-matrix-vector-products",
+  "level": "2",
+  "url": "section-matrix-vector-multiplication.html#example-matrix-vector-products",
+  "type": "Example",
+  "number": "3.4.1",
+  "title": "Matrix-vector products.",
+  "body": " Matrix-vector products   Compute a matrix-vector product, then find a matrix that turns -vectors into -vectors.   "
+},
+{
+  "id": "section-linear-and-affine-functions",
+  "level": "1",
+  "url": "section-linear-and-affine-functions.html",
+  "type": "Section",
+  "number": "4.1",
+  "title": "Linear and affine functions",
+  "body": " Linear and affine functions  A function is linear if . Linear functions are always determined by a choice of basis, giving a matrix representation of the function. We will typically use the standard basis to write our matrix representations, but this is not a requirement.   Finding a matrix representation   Let be given by . Find a matrix such that .    In general, given a basis of , a matrix representation of is given by .   Matrix representation with respect to a basis   Find the matrix representation of from using the basis in .    Since , it follows that .     Matrix representation of the cross product   Let be fixed and define by . Find a matrix representation of .    Using the standard basis, we have .     Sum of linear functions   Let be linear. Then their sum is linear as well.     Affine functions  An affine function is a function of the form . Note that is a linear function, and so the matrix is equal to .   "
+},
+{
+  "id": "section-linear-and-affine-functions-2",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#section-linear-and-affine-functions-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "linear "
+},
+{
+  "id": "example-finding-a-matrix-representation",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-finding-a-matrix-representation",
+  "type": "Example",
+  "number": "4.1.1",
+  "title": "Finding a matrix representation.",
+  "body": " Finding a matrix representation   Let be given by . Find a matrix such that .   "
+},
+{
+  "id": "example-matrix-representation-with-respect-to-a-basis",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-matrix-representation-with-respect-to-a-basis",
+  "type": "Example",
+  "number": "4.1.2",
+  "title": "Matrix representation with respect to a basis.",
+  "body": " Matrix representation with respect to a basis   Find the matrix representation of from using the basis in .    Since , it follows that .   "
+},
+{
+  "id": "example-matrix-representation-of-the-cross-product",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#example-matrix-representation-of-the-cross-product",
+  "type": "Example",
+  "number": "4.1.3",
+  "title": "Matrix representation of the cross product.",
+  "body": " Matrix representation of the cross product   Let be fixed and define by . Find a matrix representation of .    Using the standard basis, we have .   "
+},
+{
+  "id": "theorem-sum-of-linear-functions",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#theorem-sum-of-linear-functions",
+  "type": "Theorem",
+  "number": "4.1.4",
+  "title": "Sum of linear functions.",
+  "body": " Sum of linear functions   Let be linear. Then their sum is linear as well.   "
+},
+{
+  "id": "subsection-affine-functions-2",
+  "level": "2",
+  "url": "section-linear-and-affine-functions.html#subsection-affine-functions-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "affine function "
+},
+{
+  "id": "section-linear-function-models",
+  "level": "1",
+  "url": "section-linear-function-models.html",
+  "type": "Section",
+  "number": "4.2",
+  "title": "Linear function models",
+  "body": " Linear function models   Taylor approximation  Let be differentiable, exists for . The first-order Taylor approximation of near is . This can also be expressed in the form where is the Jacobian of .   Finding a Taylor approximation   Find the first-order Taylor approximation of given by at the point .      Regression models  Given a collection of objects\/samples with feature vectors , we can define regression models . We can combine these models into the single matrix equation where . The error in the prediction is given by .   "
+},
+{
+  "id": "subsection-taylor-approximation-2",
+  "level": "2",
+  "url": "section-linear-function-models.html#subsection-taylor-approximation-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "Jacobian "
+},
+{
+  "id": "example-finding-a-taylor-approximation",
+  "level": "2",
+  "url": "section-linear-function-models.html#example-finding-a-taylor-approximation",
+  "type": "Example",
+  "number": "4.2.1",
+  "title": "Finding a Taylor approximation.",
+  "body": " Finding a Taylor approximation   Find the first-order Taylor approximation of given by at the point .   "
+},
+{
+  "id": "section-systems-of-linear-equations",
+  "level": "1",
+  "url": "section-systems-of-linear-equations.html",
+  "type": "Section",
+  "number": "4.3",
+  "title": "Systems of linear equations",
+  "body": " Systems of linear equations  Consider a rectangular plate that has been heated, with heat sensors placed in a grid fashion as below:   Heat sensors placed on a rectangular plate.   A figure of heat sensors placed along a rectangular plate.     We wish to estimate the temperature of the plate at the points indicated by and using information from the surrounding sensors. It's reasonable to approximate the temperature at these points by taking an average of the surrounding temperatures. This gives us the system of equations Both equations are relatively simple since we're not doing anything overly complicated to our unknowns and . In fact, each equation determines a line in . This suggests the following terminology.   Linear Equations and Linear Systems  linear systems   A linear equation in the variables is an equation of the form , where are constants. A system of linear equations , or a linear system , is a system of equations in which each equation is a linear equation. A solution of a linear system is a point whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables . The set of all solutions of a linear system is the solution set . A system is inconsistent if its solution set is empty and consistent if its solution set contains at least one point. A system is homogeneous if it contains no nonzero constant terms, otherwise it is non-homogeneous . A homogeneous system always has as a solution (called the trivial solution ), and is therefore always consistent.    The solution set of a linear system in two variables can be viewed as the intersection of a system of lines in the -plane. In higher dimensions, we replace lines with planes and hyperplanes .   Determining if a System Is Consistent   Is the system consistent?    We can try graphing each equation to see if they correspond to intersecting lines. If we do so, we obtain the following plot:   Graphing a linear system.      Since these lines intersect, the system has a solution. A solution can also be found algebraically by using the method of elimination.    When using elimination to solve a linear system, the variables themselves aren't particularly important. Instead it is the coefficients that determine any solutions. We therefore introduce the use of matrices to express and solve linear systems. In particular, any linear system can be rewritten as the matrix equation , where is the coefficient matrix . The solution process then amount to simplifying the so-called augmented matrix  using a series of row operations .   Elementary Row Operations  elementary row operations   Let be a matrix. The elementary row operations are defined as follows:  Row replacement: replace one row of by the sum of itself and a scalar multiple of another row of .  Interchange: swap two rows.  Scaling: multiply a single row by a nonzero scalar.  If we can obtain the matrix from by performing a series of elementary row operations, we say that is row equivalent to and write .    If the augmented matrices of two linear systems are row equivalent, then the systems have the same solution set. This observation will be fundamental primary tool for solving linear systems.   Solving a System by Row Reduction   Solve the system     First we set up the augmented matrix: . Now we reduce this matrix using a sequence of elementary row operations. This is easily handled using Octave's rref command as shown below.   The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system . The solution of the original system is therefore .    "
+},
+{
+  "id": "figure-tikz-plate-sensors",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#figure-tikz-plate-sensors",
+  "type": "Figure",
+  "number": "4.3.1",
+  "title": "",
+  "body": " Heat sensors placed on a rectangular plate.   A figure of heat sensors placed along a rectangular plate.    "
+},
+{
+  "id": "definition-linear-equations-and-linear-systems",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#definition-linear-equations-and-linear-systems",
+  "type": "Definition",
+  "number": "4.3.2",
+  "title": "Linear Equations and Linear Systems.",
+  "body": " Linear Equations and Linear Systems  linear systems   A linear equation in the variables is an equation of the form , where are constants. A system of linear equations , or a linear system , is a system of equations in which each equation is a linear equation. A solution of a linear system is a point whose coordinates satisfy each equation in the system if they are substituted into the corresponding variables . The set of all solutions of a linear system is the solution set . A system is inconsistent if its solution set is empty and consistent if its solution set contains at least one point. A system is homogeneous if it contains no nonzero constant terms, otherwise it is non-homogeneous . A homogeneous system always has as a solution (called the trivial solution ), and is therefore always consistent.   "
+},
+{
+  "id": "example-determining-if-a-system-is-consistent",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#example-determining-if-a-system-is-consistent",
+  "type": "Example",
+  "number": "4.3.3",
+  "title": "Determining if a System Is Consistent.",
+  "body": " Determining if a System Is Consistent   Is the system consistent?    We can try graphing each equation to see if they correspond to intersecting lines. If we do so, we obtain the following plot:   Graphing a linear system.      Since these lines intersect, the system has a solution. A solution can also be found algebraically by using the method of elimination.   "
+},
+{
+  "id": "definition-elementary-row-operations",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#definition-elementary-row-operations",
+  "type": "Definition",
+  "number": "4.3.5",
+  "title": "Elementary Row Operations.",
+  "body": " Elementary Row Operations  elementary row operations   Let be a matrix. The elementary row operations are defined as follows:  Row replacement: replace one row of by the sum of itself and a scalar multiple of another row of .  Interchange: swap two rows.  Scaling: multiply a single row by a nonzero scalar.  If we can obtain the matrix from by performing a series of elementary row operations, we say that is row equivalent to and write .   "
+},
+{
+  "id": "example-solving-a-system-by-row-reduction",
+  "level": "2",
+  "url": "section-systems-of-linear-equations.html#example-solving-a-system-by-row-reduction",
+  "type": "Example",
+  "number": "4.3.6",
+  "title": "Solving a System by Row Reduction.",
+  "body": " Solving a System by Row Reduction   Solve the system     First we set up the augmented matrix: . Now we reduce this matrix using a sequence of elementary row operations. This is easily handled using Octave's rref command as shown below.   The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system . The solution of the original system is therefore .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",

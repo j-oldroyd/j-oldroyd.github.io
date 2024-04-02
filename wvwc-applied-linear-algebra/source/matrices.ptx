@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--********************************************************************
+
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+
+<chapter xml:id="chapter-matrices" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Matrices</title>
+  <section xml:id="section-matrices">
+    <title>Matrices</title>
+    <p>
+      The primary objects of study in the field of linear algebra and its applications are linear transformations between vector spaces.
+      These linear transformations are often represented using <em>matrices</em>.
+    </p>
+    <definition xml:id="definition-matrix">
+      <title>Matrix</title>
+      <idx>
+        <h>matrices</h>
+        <h>definition</h>
+      </idx>
+      <statement>
+        <p>
+          A <term>matrix</term> is a rectangular array of numbers.
+          If this array has <m>m</m> rows and <m>n</m> columns, we say the matrix is an <m>m\times n</m> matrix.
+        </p>
+      </statement>
+    </definition>
+    <p>
+      The following are examples of matrices:
+      <me>\begin{bmatrix} 1 \amp 2 \\ -3 \amp 4 \end{bmatrix}\text{ and }\begin{bmatrix}1 \amp -2 \amp 0 \\ 3 \amp -21 \amp 2\end{bmatrix}</me>
+      The first is <m>2\times2</m> and the second is <m>2\times3</m>.
+    </p>
+    <p>
+      More generally, an <m>m\times n</m> matrix <m>A</m> can be represented by its entries <m>a_{ij}</m> as follows: <m>A = [a_{ij}]</m> for <m>1\leq i\leq m</m> and <m>1\leq j\leq n</m>.
+      We will also find it useful to write matrices as collections of column or row vectors, or as <em>block matrices</em>.
+      We have already used this idea in <xref ref="chapter-linear-independence" text="type-global" /> in order to determine if a given collection of vectors is linearly independent.
+    </p>
+    <p>
+      We say that a matrix is a <term>square matrix</term> if it has the same number of rows as columns.
+      <me>A = [a_{ij}] = \begin{bmatrix}
+      a_{11} \amp a_{12} \amp \dots \amp a_{1n} \\
+      a_{21} \amp a_{22} \amp \dots \amp a_{2n} \\
+      \vdots \amp \vdots \amp \ddots \amp \vdots \\
+      a_{n1} \amp a_{n2} \amp \dots \amp a_{nn}
+      \end{bmatrix}</me>,
+      The <term>diagonal entries</term> are <m>a_{ii},1\leq i\leq n</m> and these form the <term>main diagonal</term> of the matrix.
+    </p>
+    <p>
+      In the code cell below Octave is used to define the square matrix above and get its diagonal entries.
+      Note that brackets must be used to contain the entries of the matrix, entries in the same row must be separated by commas (or spaces) and rows are separated by semicolons.
+    </p>
+    <sage language="octave">
+      <input>
+        A = [1, 2; -3, 4]
+        diag(A)
+      </input>
+    </sage>
+    <subsection xml:id="subsection-applications-">
+      <title>Applications.</title>
+      <p>
+        Matrices have found use in a wide variety of fields.
+        They are particularly useful for representing data that depends on two parameters, such as images or data that has both a positional and time component.
+        Matrices are also useful for describing more abstract mathematical objects such as networks.
+        Here, we view the network as a data set determined by <em>vertices</em> and <em>edges</em>.
+        Such matrices are called adjacency matrices.
+      </p>
+      <example xml:id="example-representing-graphs-using-matrices">
+        <title>Representing graphs using matrices</title>
+        <statement>
+          <p>
+            Represent an undirected graph using an appropriate matrix.
+            Then do the same for a directed graph.
+          </p>
+        </statement>
+      </example>
+    </subsection>
+  </section>
+  <section xml:id="section-special-matrices">
+    <title>Special matrices</title>
+    <subsection xml:id="subsection-zero-and-identity-matrices-">
+      <title>Zero and identity matrices.</title>
+      <p>
+        The <em>zero matrix</em> is the matrix whose entries are all <m>0</m>.
+        The <em>identity matrix</em> is the square matrix with diagonal entries equal to <m>1</m> and off-diagonal entries equal to <m>0</m>.
+        These are denoted, respectively, by <m>\vecm{0}_{m\times n}</m> and <m>I_{m\times n}</m>, or just <m>\vecm{0}</m> and <m>I</m> if the size of each matrix can be inferred from context (as is often the case).
+      </p>
+    </subsection>
+    <subsection xml:id="subsection-diagonal-matrices-and-triangular-matrices-">
+      <title>Diagonal matrices and triangular matrices.</title>
+      <p>
+        A <em>diagonal matrix</em> is...
+        A <em>triangular matrix</em> is a matrix that is either lower or upper triangular.
+      </p>
+    </subsection>
+  </section>
+  <section xml:id="section-transpose-addition-and-norm">
+    <title>Transpose, addition and norm</title>
+    <definition xml:id="definition-matrix-addition-and-scalar-multiplication">
+      <title>Matrix Addition and Scalar Multiplication</title>
+      <statement>
+        <p>
+          Let <m>A</m> and <m>B</m> denote matrices of the same size and let <m>c\in\RR</m>.
+          Then <m>A+B</m> is the matrix obtained by adding the entries of <m>A</m> and <m>B</m> componentwise.
+          Likewise, <m>cA</m> is the matrix obtained by multiplying the entries of <m>A</m> by <m>c</m> componentwise.
+        </p>
+      </statement>
+    </definition>
+    <theorem xml:id="theorem-properties-of-matrix-addition-and-scalar-multiplication">
+      <title>Properties of Matrix Addition and Scalar Multiplication</title>
+      <statement>
+        <p>
+          Let <m>A, B</m> and <m>C</m> denote matrices of the same size and let <m>r,s\in\RR</m>.
+          Then
+          <ol>
+            <li><m>A+B = B+A</m>.</li>
+            <li><m>(A+B)+C = A+(B+C)</m>.</li>
+            <li><m>A+\mathbf{0} = A</m> where <m>\mathbf{0}</m> denotes the zero matrix.</li>
+            <li><m>r(A+B) = rA + rB</m>.</li>
+            <li><m>(r+s)A = rA + sA</m>.</li>
+            <li><m>r(sA) = (rs)A</m>.</li>
+            <li><m>1A = A</m>.</li>
+            <li><m>0A = \mathbf{0}</m>.</li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+    <p>
+      The <term>norm</term> of a matrix <m>A = [a_{ij}]</m> is defined similarly to the norm of a vector:
+      <me>\norm{A} = \sqrt{\sum_i\sum_j a_{ij}^2}</me>.
+      This is also known as the Frobenius norm of a matrix and shares many of the useful properties of the Euclidean norm of a vector.
+      Note that <m>\norm{A} = \norm{A^T}</m> and the squared norm of <m>A</m> is equal to the sum of the squared norms of the rows (or columns).
+    </p>
+    <example xml:id="example-finding-the-distance-between-images">
+      <title>Finding the distance between images</title>
+      <statement>
+        <p>
+          Find the distance between two <m>2\times2</m> <m>8</m>-bit grayscale pictures.
+        </p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="section-matrix-vector-multiplication">
+    <title>Matrix-vector multiplication</title>
+    <p>
+      The product of an <m>m\times n</m> matrix <m>A</m> with an <m>n</m>-vector <m>\vec{x}</m> can be defined in multiple equivalent ways:
+      <me>A\vec{x} = [\vec{a}_i^T\vec{x}] = [\sum_{j=1}^n a_{ij}x_j] = \sum_{j=1}^n x_j\vec{a}_j</me>.
+      In all cases, <m>A</m> turns the <m>n</m>-vector <m>\vec{x}</m> into the <m>m</m>-vector <m>A\vec{x}</m>.
+    </p>
+    <example xml:id="example-matrix-vector-products">
+      <title>Matrix-vector products</title>
+      <statement>
+        <p>
+          Compute a matrix-vector product, then find a matrix that turns <m>2</m>-vectors into <m>2</m>-vectors.
+        </p>
+      </statement>
+    </example>
+    <p>
+      In general,
+      <md>
+        <mrow>I\vec{x} \amp = \vec{x} </mrow>
+        <mrow>A\vec{e}_i \amp = i\text{th column}</mrow>
+        <mrow>A^T\vec{e}_i \amp = i\text{th row}</mrow>
+      </md>.
+    </p>
+  </section>
+</chapter>
