@@ -559,6 +559,15 @@ var ptx_lunr_docs = [
   "body": " Solving a System by Row Reduction   Solve the system     First we set up the augmented matrix: . Now we reduce this matrix using a sequence of elementary row operations. This is easily handled using Octave's rref command as shown below.   The resulting matrix is row equivalent to the original augmented matrix but now corresponds to the system . The solution of the original system is therefore .   "
 },
 {
+  "id": "section-linear-dynamical-systems",
+  "level": "1",
+  "url": "section-linear-dynamical-systems.html",
+  "type": "Section",
+  "number": "5.1",
+  "title": "Linear dynamical systems",
+  "body": " Linear dynamical systems  A quantity that evolves over time in discrete steps can often be represented or approximated using linear models: . One important example is the Markov model . If is the initial configuration of the system, then after steps the system will have configuration .   Markov models  A Markov model is a probabilistic model for how a system evolves over time. In such a model we can be in one of several given states at any step . The transition matrix  describes the likelihood of the system evolving from one state to another.  For instance, suppose we wish to model the weather in Buckhannon in June. Reasonable states for the weather are sunny , cloudy and rainy . Suppose that . We also know that on June 1 there is a chance of sunshine and a chance of cloudy weather. The probability that it will be sunny on June 2 is given by . Likewise, the probabilities that it will be cloudy or rainy are given by .  We can rewrite these computations as the matrix equation where and .   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
