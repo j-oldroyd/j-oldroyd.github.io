@@ -568,8 +568,6 @@ var ptx_lunr_docs = [
   "body": " Linear dynamical systems  A quantity that evolves over time in discrete steps can often be represented or approximated using linear models: . One important example is the Markov model . If is the initial configuration of the system, then after steps the system will have configuration .   Markov models  A Markov model is a probabilistic model for how a system evolves over time. In such a model we can be in one of several given states at any step . The transition matrix  describes the likelihood of the system evolving from one state to another.  For instance, suppose we wish to model the weather in Buckhannon in June. Reasonable states for the weather are sunny , cloudy and rainy . Suppose that . We also know that on June 1 there is a chance of sunshine and a chance of cloudy weather. The probability that it will be sunny on June 2 is given by . Likewise, the probabilities that it will be cloudy or rainy are given by .  We can rewrite these computations as the matrix equation where and .   "
 },
 {
-<<<<<<< HEAD
-=======
   "id": "section-matrix-matrix-multiplication",
   "level": "1",
   "url": "section-matrix-matrix-multiplication.html",
@@ -633,7 +631,6 @@ var ptx_lunr_docs = [
   "body": " Matrix representation of composition   Let denote counterclockwise rotation by and let be given by . Find the matrix representation of .   "
 },
 {
->>>>>>> origin/master
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
