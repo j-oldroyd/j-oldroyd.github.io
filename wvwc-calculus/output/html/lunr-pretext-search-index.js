@@ -6945,8 +6945,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html",
   "type": "Section",
   "number": "14.2",
-  "title": "Line Integrals",
-  "body": " Line Integrals   In this section we move on to computing integrals over curves in and .    Scalar Line Integrals  Suppose we wish to find the mass of a wire given by a curve in the -plane. If the density is a constant then this is simple: the mass is just where denotes the length of the wire.  Now suppose that the density varies, and is now a function . Then we can estimate the mass of the wire by chopping the wire into smaller segments, each of length , choosing points from each segment, and then computing . If we send the approximation becomes exact, and defines the scalar line integral of along .   line integrals scalar  Scalar Line Integral   Suppose that is a smooth curve in and that the function is continuous on . The scalar line integral of along is the number defined to be .   An analogous definition holds for curves in . We can also replace the assumption that is smooth with the assumption that is rectifiable , which (roughly) means it has a well-defined length.     Geometrically, represents the area under and above .  If is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral. Note that can be viewed as representing an infinitesimal length along the curve . If is traced out by the parametric equations , then the length of from to is given by the arc length function  . See and . Thus , and we can write .  If we view as being traced out by a vector function , then we can write this formula even more compactly: .   Computing a Scalar Line Integral   Compute , where is the segment of the parabola from to .    The curve is traced out by the vector function for . Therefore     Line integrals along piecewise smooth curves can be found without too much trouble.   Integrating Along Line Segments   Find where denotes the line segment from to followed by the segment from to .    We find this by breaking down as the union of two smooth curves and , where Then .    We can also compute scalar line integrals in .   Average Value on a Circle   Let and let . Find the average value of on .    The average value of on is given by where and . Therefore has an average value of on .      Vector Field Line Integrals  Suppose we have a force field  in and some particle that is acted upon by the force. The particle has a trajectory given by a curve .  Trajectory in a force field.       We want to determine how the trajectory of the particle aligns with the forcefield . We can do this by picking an arbitrary point along , finding the unit tangent at this point, and then comparing the direction of and that of by computing the dot product . This is a measure of how and align at a specific point, and integrating this along should tell us how and align overall.   line integrals vector fields  Line Integral of a Vector Field   Let denote a smooth curve and let be a vector field continuous on . Then we define the line integral of over to be .   This integral is also sometimes called the circulation integral of along .     To find line integrals of vector fields, we proceed as follows. Suppose that . Then . We can also write this as , assuming that .  In addition to measuring how well and align, vector field line integrals can also represent work done.   Flow Along a Circle   Let denote the segment of the parabola traversed once from to , and let . Does tend to flow with or against ?    If we graph and , we get the following:  Flow over .        suggests that flows with , and we can verify this by computing : . Since the result is positive, this tells us that tends to flow with .     A Nonconservative Force   Let denote a force field. Is the force conservative?    Here we are using the physical definition of a conservative force, namely that the work done must be path independent . So we'll choose two paths between two points and find the work done on each path. Let the first path, , denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, , denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.  From , it appears as though , which suggests that the vector field is path dependent.  A rotating force field.     To verify this, we'll compute the appropriate line integrals.  For , the total circulation is . Likewise, the circulation of along is .  Since the work done by between the points and clearly depends on the path taken between the points, this means that is path dependent and, therefore, not conservative.    We can also compute vector field line integrals in with essentially the same formula.   Circulation in   Find the circulation of along .    We have . Since the circulation is positive, this also shows that tends to flow with .      Flux Integrals  The circulation integral in is useful for measuring how much a vector field flows along a given curve. Now, we want to measure how a vector field flows across a curve, at least in .  Given a smooth curve with unit tangent , recall that measures how well a vector field and align at a point on . By integrating this, we get a measure along the entire curve. So if we want to get a sense of how flows across , we can do so by looking at a single point and then integrating along the curve again.  To do this, let be the unit normal vector to , given in . Then determines how flows across at a specific point, and integrating provides a measure along the entire curve. But there's one slight issue: if is a closed curve then it's possible that points into the region enclosed by . We would like to measure how flows out of instead, so we'll replace with , the outward unit normal . This leads us to the flux integral .   line integrals flux integral  Flux Integral   Let denote a smooth curve and let be a vector field continuous on . Then we define the flux integral of across to be , where is the outward unit normal vector to .    At this point it may be helpful to introduce some new notation. If is a closed curve, then we often denote line integrals involving with instead of .   Flux Across the Unit Circle   Let and let denote the unit circle, traversed exactly once counterclockwise. What is ?    We should have .    In order to actually compute flux integrals, we need to write using . So suppose that is traced out by the vector function . Then must be perpendicular to the unit tangent or equivalently . Our primary tool for finding perpendicular vectors, the cross product, only applies in . So to find we'll (temporarily) move everything into . Now we need to find a vector orthogonal to that also lies in the -plane. This can be done by computing .  At this point we need to decide which direction we want our normal vector to go. We'll usually choose the first option if is traversed counterclockwise and the second option otherwise. Assuming counterclockwise orientation, we have . Now moving back down to , we can write the outward unit normal as .  Therefore .   Verifying the Flux   Compute the flux integral in .    We have .      SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.   "
+  "title": "Line integrals",
+  "body": " Line integrals   In this section we move on to computing integrals over curves in and .    Scalar line lntegrals  Suppose we wish to find the mass of a wire given by a curve in the -plane. If the density is a constant then this is simple: the mass is just where denotes the length of the wire.  Now suppose that the density varies, and is now a function . Then we can estimate the mass of the wire by chopping the wire into smaller segments, each of length , choosing points from each segment, and then computing . If we send the approximation becomes exact, and defines the scalar line integral of along .   line integrals scalar  Scalar line lntegral    scalar line integral of over    Suppose that is a smooth curve in and that the function is continuous on . The scalar line integral of along is the number defined to be .   An analogous definition holds for curves in . We can also replace the assumption that is smooth with the assumption that is rectifiable , which (roughly) means it has a well-defined length.     Geometrically, represents the area under and above .  If is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral. Note that can be viewed as representing an infinitesimal length along the curve . If is traced out by the parametric equations , then the length of from to is given by the arc length function  . See and . Thus , and we can write .  If we view as being traced out by a vector function , then we can write this formula even more compactly: .   Computing a scalar line integral   Compute , where is the segment of the parabola from to .    The curve is traced out by the vector function for . Therefore     Line integrals along piecewise smooth curves can be found without too much trouble.   Integrating along line segments   Find where denotes the line segment from to followed by the segment from to .    We find this by breaking down as the union of two smooth curves and , where Then .    We can also compute scalar line integrals in .   Average value on a circle   Let and let . Find the average value of on .    The average value of on is given by where and . Therefore has an average value of on .      Vector field line integrals  Suppose we have a force field  in and some particle that is acted upon by the force. The particle has a trajectory given by a curve .  Trajectory in a force field.       We want to determine how the trajectory of the particle aligns with the forcefield . We can do this by picking an arbitrary point along , finding the unit tangent at this point, and then comparing the direction of and that of by computing the dot product . This is a measure of how and align at a specific point, and integrating this along should tell us how and align overall.   line integrals vector fields  Line integral of a vector field    vector line integral of over    Let denote a smooth curve and let be a vector field continuous on . Then we define the line integral of over to be .   This integral is also sometimes called the circulation integral of along .     To find line integrals of vector fields, we proceed as follows. Suppose that . Then . We can also write this as , assuming that .  In addition to measuring how well and align, vector field line integrals can also represent work done.   Flow along a circle   Let denote the segment of the parabola traversed once from to , and let . Does tend to flow with or against ?    If we graph and , we get the following:  Flow over .        suggests that flows with , and we can verify this by computing : . Since the result is positive, this tells us that tends to flow with .     A nonconservative force   Let denote a force field. Is the force conservative?    Here we are using the physical definition of a conservative force, namely that the work done must be path independent . So we'll choose two paths between two points and find the work done on each path. Let the first path, , denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, , denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.  From , it appears as though , which suggests that the vector field is path dependent.  A rotating force field.     To verify this, we'll compute the appropriate line integrals.  For , the total circulation is . Likewise, the circulation of along is .  Since the work done by between the points and clearly depends on the path taken between the points, this means that is path dependent and, therefore, not conservative.    We can also compute vector field line integrals in with essentially the same formula.   Circulation in   Find the circulation of along .    We have . Since the circulation is positive, this also shows that tends to flow with .      Flux integrals  The circulation integral in is useful for measuring how much a vector field flows along a given curve. Now, we want to measure how a vector field flows across a curve, at least in .  Given a smooth curve with unit tangent , recall that measures how well a vector field and align at a point on . By integrating this, we get a measure along the entire curve. So if we want to get a sense of how flows across , we can do so by looking at a single point and then integrating along the curve again.  To do this, let be the unit normal vector to , given in . Then determines how flows across at a specific point, and integrating provides a measure along the entire curve. But there's one slight issue: if is a closed curve then it's possible that points into the region enclosed by . We would like to measure how flows out of instead, so we'll replace with , the outward unit normal . This leads us to the flux integral .   line integrals flux integral  Flux integral    flux of over    Let denote a smooth curve and let be a vector field continuous on . Then we define the flux integral of across to be , where is the outward unit normal vector to .    At this point it may be helpful to introduce some new notation. If is a closed curve, then we often denote line integrals involving with instead of .   Flux across the unit circle   Let and let denote the unit circle, traversed exactly once counterclockwise. What is ?    We should have .    In order to actually compute flux integrals, we need to write using . So suppose that is traced out by the vector function . Then must be perpendicular to the unit tangent or equivalently . Our primary tool for finding perpendicular vectors, the cross product, only applies in . So to find we'll (temporarily) move everything into . Now we need to find a vector orthogonal to that also lies in the -plane. This can be done by computing .  At this point we need to decide which direction we want our normal vector to go. We'll usually choose the first option if is traversed counterclockwise and the second option otherwise. Assuming counterclockwise orientation, we have . Now moving back down to , we can write the outward unit normal as .  Therefore .   Verifying the flux   Compute the flux integral in .    We have .     "
 },
 {
   "id": "subsection-scalar-line-integrals-3",
@@ -6963,8 +6963,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#definition-scalar-line-integral",
   "type": "Definition",
   "number": "14.2.1",
-  "title": "Scalar Line Integral.",
-  "body": " line integrals scalar  Scalar Line Integral   Suppose that is a smooth curve in and that the function is continuous on . The scalar line integral of along is the number defined to be .   An analogous definition holds for curves in . We can also replace the assumption that is smooth with the assumption that is rectifiable , which (roughly) means it has a well-defined length.    "
+  "title": "Scalar line lntegral.",
+  "body": " line integrals scalar  Scalar line lntegral    scalar line integral of over    Suppose that is a smooth curve in and that the function is continuous on . The scalar line integral of along is the number defined to be .   An analogous definition holds for curves in . We can also replace the assumption that is smooth with the assumption that is rectifiable , which (roughly) means it has a well-defined length.    "
 },
 {
   "id": "example-computing-a-scalar-line-integral",
@@ -6972,8 +6972,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-computing-a-scalar-line-integral",
   "type": "Example",
   "number": "14.2.2",
-  "title": "Computing a Scalar Line Integral.",
-  "body": " Computing a Scalar Line Integral   Compute , where is the segment of the parabola from to .    The curve is traced out by the vector function for . Therefore    "
+  "title": "Computing a scalar line integral.",
+  "body": " Computing a scalar line integral   Compute , where is the segment of the parabola from to .    The curve is traced out by the vector function for . Therefore    "
 },
 {
   "id": "example-integrating-along-line-segments",
@@ -6981,8 +6981,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-integrating-along-line-segments",
   "type": "Example",
   "number": "14.2.3",
-  "title": "Integrating Along Line Segments.",
-  "body": " Integrating Along Line Segments   Find where denotes the line segment from to followed by the segment from to .    We find this by breaking down as the union of two smooth curves and , where Then .   "
+  "title": "Integrating along line segments.",
+  "body": " Integrating along line segments   Find where denotes the line segment from to followed by the segment from to .    We find this by breaking down as the union of two smooth curves and , where Then .   "
 },
 {
   "id": "example-average-value-on-a-circle",
@@ -6990,8 +6990,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-average-value-on-a-circle",
   "type": "Example",
   "number": "14.2.4",
-  "title": "Average Value on a Circle.",
-  "body": " Average Value on a Circle   Let and let . Find the average value of on .    The average value of on is given by where and . Therefore has an average value of on .   "
+  "title": "Average value on a circle.",
+  "body": " Average value on a circle   Let and let . Find the average value of on .    The average value of on is given by where and . Therefore has an average value of on .   "
 },
 {
   "id": "figure-trajectory-in-a-force-field",
@@ -7008,8 +7008,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#definition-line-integral-of-a-vector-field",
   "type": "Definition",
   "number": "14.2.6",
-  "title": "Line Integral of a Vector Field.",
-  "body": " line integrals vector fields  Line Integral of a Vector Field   Let denote a smooth curve and let be a vector field continuous on . Then we define the line integral of over to be .   This integral is also sometimes called the circulation integral of along .    "
+  "title": "Line integral of a vector field.",
+  "body": " line integrals vector fields  Line integral of a vector field    vector line integral of over    Let denote a smooth curve and let be a vector field continuous on . Then we define the line integral of over to be .   This integral is also sometimes called the circulation integral of along .    "
 },
 {
   "id": "example-flow-along-a-circle",
@@ -7017,8 +7017,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-flow-along-a-circle",
   "type": "Example",
   "number": "14.2.7",
-  "title": "Flow Along a Circle.",
-  "body": " Flow Along a Circle   Let denote the segment of the parabola traversed once from to , and let . Does tend to flow with or against ?    If we graph and , we get the following:  Flow over .        suggests that flows with , and we can verify this by computing : . Since the result is positive, this tells us that tends to flow with .   "
+  "title": "Flow along a circle.",
+  "body": " Flow along a circle   Let denote the segment of the parabola traversed once from to , and let . Does tend to flow with or against ?    If we graph and , we get the following:  Flow over .        suggests that flows with , and we can verify this by computing : . Since the result is positive, this tells us that tends to flow with .   "
 },
 {
   "id": "example-a-nonconservative-force",
@@ -7026,8 +7026,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-a-nonconservative-force",
   "type": "Example",
   "number": "14.2.9",
-  "title": "A Nonconservative Force.",
-  "body": " A Nonconservative Force   Let denote a force field. Is the force conservative?    Here we are using the physical definition of a conservative force, namely that the work done must be path independent . So we'll choose two paths between two points and find the work done on each path. Let the first path, , denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, , denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.  From , it appears as though , which suggests that the vector field is path dependent.  A rotating force field.     To verify this, we'll compute the appropriate line integrals.  For , the total circulation is . Likewise, the circulation of along is .  Since the work done by between the points and clearly depends on the path taken between the points, this means that is path dependent and, therefore, not conservative.   "
+  "title": "A nonconservative force.",
+  "body": " A nonconservative force   Let denote a force field. Is the force conservative?    Here we are using the physical definition of a conservative force, namely that the work done must be path independent . So we'll choose two paths between two points and find the work done on each path. Let the first path, , denote the top half of the unit circle traversed counterclockwise. Similarly, let the second path, , denote the bottom half of the unit circle traversed clockwise. Then both paths have the same initial and terminal points.  From , it appears as though , which suggests that the vector field is path dependent.  A rotating force field.     To verify this, we'll compute the appropriate line integrals.  For , the total circulation is . Likewise, the circulation of along is .  Since the work done by between the points and clearly depends on the path taken between the points, this means that is path dependent and, therefore, not conservative.   "
 },
 {
   "id": "example-circulation-in-R3",
@@ -7053,8 +7053,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#definition-line-integral-flux-integral",
   "type": "Definition",
   "number": "14.2.12",
-  "title": "Flux Integral.",
-  "body": " line integrals flux integral  Flux Integral   Let denote a smooth curve and let be a vector field continuous on . Then we define the flux integral of across to be , where is the outward unit normal vector to .   "
+  "title": "Flux integral.",
+  "body": " line integrals flux integral  Flux integral    flux of over    Let denote a smooth curve and let be a vector field continuous on . Then we define the flux integral of across to be , where is the outward unit normal vector to .   "
 },
 {
   "id": "example-flux-across-the-unit-circle",
@@ -7062,8 +7062,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-flux-across-the-unit-circle",
   "type": "Example",
   "number": "14.2.13",
-  "title": "Flux Across the Unit Circle.",
-  "body": " Flux Across the Unit Circle   Let and let denote the unit circle, traversed exactly once counterclockwise. What is ?    We should have .   "
+  "title": "Flux across the unit circle.",
+  "body": " Flux across the unit circle   Let and let denote the unit circle, traversed exactly once counterclockwise. What is ?    We should have .   "
 },
 {
   "id": "example-verifying-the-flux",
@@ -7071,8 +7071,8 @@ var ptx_lunr_docs = [
   "url": "section-line-integrals.html#example-verifying-the-flux",
   "type": "Example",
   "number": "14.2.14",
-  "title": "Verifying the Flux.",
-  "body": " Verifying the Flux   Compute the flux integral in .    We have .   "
+  "title": "Verifying the flux.",
+  "body": " Verifying the flux   Compute the flux integral in .    We have .   "
 },
 {
   "id": "section-the-fundamental-theorem-for-line-integrals",

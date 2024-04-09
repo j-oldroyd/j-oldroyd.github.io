@@ -253,15 +253,15 @@
       </p>
     </conclusion>
   </section>
-  <section xml:id="section-line-integrals">
-    <title>Line Integrals</title>
+  <section xml:id="section-line-integrals" label="section-line-integrals">
+    <title>Line integrals</title>
     <introduction>
       <p>
         In this section we move on to computing integrals over curves in <m>\RR^{2}</m> and <m>\RR^{3}</m>.
       </p>
     </introduction>
-    <subsection xml:id="subsection-scalar-line-integrals">
-      <title>Scalar Line Integrals</title>
+    <subsection xml:id="subsection-scalar-line-integrals" label="subsection-scalar-line-integrals">
+      <title>Scalar line integrals</title>
       <p>
         Suppose we wish to find the mass of a wire given by a curve <m>C</m> in the <m>xy</m>-plane.
         If the density is a constant <m>\rho</m> then this is simple: the mass is just <m>\rho L</m> where <m>L</m> denotes the length of the wire.
@@ -272,25 +272,29 @@
         <me>\sum_{j=1}^{k}\rho(x_{j}, y_{j})\Delta s</me>.
         If we send <m>\Delta s\to 0</m>the approximation becomes exact, and defines the <term>scalar line integral</term> of <m>\rho</m> along <m>C</m>.
       </p>
-      <definition xml:id="definition-scalar-line-integral">
-          <idx><h>line integrals</h><h>scalar</h></idx>
-          <title>Scalar Line Integral</title>
-          <statement>
+      <definition xml:id="definition-scalar-line-integral" label="definition-scalar-line-integral">
+        <idx><h>line integrals</h><h>scalar</h></idx>
+        <title>Scalar line lntegral</title>
+        <notation>
+          <usage><m>\int_C f(x,y)\dd{s}</m></usage>
+          <description>scalar line integral of <m>f(x,y)</m> over <m>C</m></description>
+        </notation>
+        <statement>
+          <p>
+            Suppose that <m>C</m> is a smooth curve in <m>\RR^{2}</m> and that the function <m>f(x,y)</m> is continuous on <m>C</m>.
+            The scalar line integral of <m>f</m> along <m>C</m> is the number <m>\int_{C}f(x,y)\dd{s}</m> defined to be
+            <me>\int_{C}f(x,y)\dd{s} = \lim_{\Delta s\to 0}\sum_{j=1}^{k}f(x_{j},y_{j})\Delta s</me>.
+          </p>
+          <aside>
             <p>
-              Suppose that <m>C</m> is a smooth curve in <m>\RR^{2}</m> and that the function <m>f(x,y)</m> is continuous on <m>C</m>.
-              The scalar line integral of <m>f</m> along <m>C</m> is the number <m>\int_{C}f(x,y)\,ds</m> defined to be
-              <me>\int_{C}f(x,y)\,ds = \lim_{\Delta s\to 0}\sum_{j=1}^{k}f(x_{j},y_{j})\Delta s</me>.
+              An analogous definition holds for curves in <m>\RR^{3}</m>.
+              We can also replace the assumption that <m>C</m> is smooth with the assumption that <m>C</m> is <em>rectifiable</em>, which (roughly) means it has a well-defined length.
             </p>
-            <aside>
-              <p>
-                An analogous definition holds for curves in <m>\RR^{3}</m>.
-                We can also replace the assumption that <m>C</m> is smooth with the assumption that <m>C</m> is <em>rectifiable</em>, which (roughly) means it has a well-defined length.
-              </p>
-            </aside>
-          </statement>
+          </aside>
+        </statement>
       </definition>
       <p>
-        Geometrically, <m>\int_{C}f(x,y)\,ds</m> represents the area under <m>z = f(x,y)</m> and above <m>C</m>.
+        Geometrically, <m>\int_{C}f(x,y)\dd{s}</m> represents the area under <m>z = f(x,y)</m> and above <m>C</m>.
       </p>
       <p>
         If <m>C</m> is nice enough (i.e., piecewise smooth), we can avoid using Riemann sums to compute the scalar line integral.
@@ -307,17 +311,17 @@
         Thus
         <me>\dv{s}{t} = \sqrt{x'(t)^{2} + y'(t)^{2}}</me>,
         and we can write
-        <me>\int_{C}f(x,y)\,ds = \int_{a}^{b}f(x(t),y(t))\sqrt{x'(t)^{2} + y'(t)^{2}}\,dt</me>.
+        <me>\int_{C}f(x,y)\dd{s} = \int_{a}^{b}f(x(t),y(t))\sqrt{x'(t)^{2} + y'(t)^{2}}\,dt</me>.
       </p>
       <p>
         If we view <m>C</m> as being traced out by a vector function <m>\vb{r}(t), a\leq t\leq b</m>, then we can write this formula even more compactly:
-        <me>\int_{C}f(x,y)\,ds = \int_{a}^{b}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt</me>.
+        <me>\int_{C}f(x,y)\dd{s} = \int_{a}^{b}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt</me>.
       </p>
-      <example xml:id="example-computing-a-scalar-line-integral">
-        <title>Computing a Scalar Line Integral</title>
+      <example xml:id="example-computing-a-scalar-line-integral" label="example-computing-a-scalar-line-integral">
+        <title>Computing a scalar line integral</title>
         <statement>
           <p>
-            Compute <m>\int_{C}(xy)^{1/3}\,ds</m>, where <m>C</m> is the segment of the parabola <m>y = x^{2}</m> from <m>x = 0</m> to <m>x = 1</m>.
+            Compute <m>\int_{C}(xy)^{1/3}\dd{s}</m>, where <m>C</m> is the segment of the parabola <m>y = x^{2}</m> from <m>x = 0</m> to <m>x = 1</m>.
           </p>
         </statement>
         <solution>
@@ -325,7 +329,7 @@
             The curve <m>C</m> is traced out by the vector function <m>\vb{r}(t) = \dotprod{t,t^{2}}</m> for <m>0\leq t\leq 1</m>.
             Therefore
             <md>
-              <mrow>\int_{C}(xy)^{1/3}\,ds \amp = \int_{0}^{1} t\sqrt{1 + 4t^{2}}\,dt </mrow>
+              <mrow>\int_{C}(xy)^{1/3}\dd{s} \amp = \int_{0}^{1} t\sqrt{1 + 4t^{2}}\,dt </mrow>
               <mrow> \amp = \frac{1}{8}\int_{1}^{5}\sqrt{u}\,du </mrow>
               <mrow> \amp = \frac{5^{3/2} - 1}{12} </mrow>
             </md>
@@ -335,11 +339,11 @@
       <p>
         Line integrals along piecewise smooth curves can be found without too much trouble.
       </p>
-      <example xml:id="example-integrating-along-line-segments">
-        <title>Integrating Along Line Segments</title>
+      <example xml:id="example-integrating-along-line-segments" label="example-integrating-along-line-segments">
+        <title>Integrating along line segments</title>
         <statement>
           <p>
-            Find <m>\int_{C}(3x - 3y)\,ds</m> where <m>C</m> denotes the line segment from <m>(-1,0)</m> to <m>(0,1)</m> followed by the segment from <m>(0,1)</m> to <m>(1,0)</m>.
+            Find <m>\int_{C}(3x - 3y)\dd{s}</m> where <m>C</m> denotes the line segment from <m>(-1,0)</m> to <m>(0,1)</m> followed by the segment from <m>(0,1)</m> to <m>(1,0)</m>.
           </p>
         </statement>
         <solution>
@@ -351,7 +355,7 @@
             </md>
             Then
             <md>
-              <mrow>\int_{C}(2x - 3y)\,ds \amp = \int_{C_{1}}(2x - 3y)\,ds + \int_{C_{2}}(2x - 3y)\,ds </mrow>
+              <mrow>\int_{C}(2x - 3y)\dd{s} \amp = \int_{C_{1}}(2x - 3y)\dd{s} + \int_{C_{2}}(2x - 3y)\dd{s} </mrow>
               <mrow> \amp = \int_{0}^{1}\left[(2t - 2 - 3t) + (2t - 3 + 3t)\right]\sqrt{2}\,dt </mrow>
             </md>.
           </p>
@@ -360,8 +364,8 @@
       <p>
         We can also compute scalar line integrals in <m>\RR^{3}</m>.
       </p>
-      <example xml:id="example-average-value-on-a-circle">
-        <title>Average Value on a Circle</title>
+      <example xml:id="example-average-value-on-a-circle" label="example-average-value-on-a-circle">
+        <title>Average value on a circle</title>
         <statement>
           <p>
             Let <m>f(x,y,z) = x^{2} + y^{2} - 2z^{2}</m> and let
@@ -372,15 +376,15 @@
         <solution>
           <p>
             The average value of <m>f</m> on <m>C</m> is given by
-            <me>\frac{1}{\operatorname{length}(C)}\int_{C}f(x,y,z)\,ds</me>
+            <me>\frac{1}{\operatorname{length}(C)}\int_{C}f(x,y,z)\dd{s}</me>
             where
             <md>
-              <mrow>\operatorname{length}(C) \amp = \int_{C}\,ds </mrow>
+              <mrow>\operatorname{length}(C) \amp = \int_{C}\dd{s} </mrow>
               <mrow> \amp = 10\pi </mrow>
             </md>
             and
             <md>
-              <mrow>\int_{C}f(x,y,z)\,ds \amp = \int_{0}^{2\pi}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt </mrow>
+              <mrow>\int_{C}f(x,y,z)\dd{s} \amp = \int_{0}^{2\pi}f(\vb{r}(t))\norm{\vb{r}'(t)}\,dt </mrow>
               <mrow> \amp = 5\int_{0}^{2\pi}(25\sin^{2}t + 9\cos^{2}t - 32\cos^{2}t)\,dt </mrow>
               <mrow> \amp = 5\int_{0}^{2\pi}(25 - 48\cos^{2}t)\,dt</mrow>
               <mrow> \amp = 10\pi </mrow>
@@ -390,14 +394,14 @@
         </solution>
       </example>
     </subsection>
-    <subsection xml:id="subsection-vector-field-line-integrals">
-      <title>Vector Field Line Integrals</title>
+    <subsection xml:id="subsection-vector-field-line-integrals" label="subsection-vector-field-line-integrals">
+      <title>Vector field line integrals</title>
       <p>
         Suppose we have a <em>force field</em> <m>\vb{F}</m> in <m>\RR^{2}</m> and some particle that is acted upon by the force.
         The particle has a trajectory given by a curve <m>C: \vb{r}(t), 0\leq t\leq 1</m>.
-        <figure xml:id="figure-trajectory-in-a-force-field">
+        <figure xml:id="figure-trajectory-in-a-force-field" label="figure-trajectory-in-a-force-field">
           <caption>Trajectory in a force field.</caption>
-          <image xml:id="image-trajectory-in-a-force-field">
+          <image label="image-trajectory-in-a-force-field">
             <asymptote>
               import graph;
               import fontsize;
@@ -451,13 +455,17 @@
         We can do this by picking an arbitrary point along <m>C</m>, finding the unit tangent <m>\vb{T}</m> at this point, and then comparing the direction of <m>\vb{T}</m> and that of <m>\vb{F}</m> by computing the dot product <m>\vb{F}\cdot\vb{T}</m>.
         This is a measure of how <m>\vb{F}</m> and <m>C</m> align at a specific point, and integrating this along <m>C</m> should tell us how <m>C</m> and <m>\vb{F}</m> align overall.
       </p>
-      <definition xml:id="definition-line-integral-of-a-vector-field">
+      <definition xml:id="definition-line-integral-of-a-vector-field" label="definition-line-integral-of-a-vector-field">
         <idx><h>line integrals</h><h>vector fields</h></idx>
-        <title>Line Integral of a Vector Field</title>
+        <title>Line integral of a vector field</title>
+        <notation>
+          <usage><m>\int_C\vv{F}\cdot\vv{T}\dd{s}</m></usage>
+          <description>vector line integral of <m>\vv{F}</m> over <m>C</m></description>
+        </notation>
         <statement>
           <p>
             Let <m>C</m> denote a smooth curve and let <m>\vb{F}</m> be a vector field continuous on <m>C</m>.
-            Then we define the <term>line integral of <m>\vb{F}</m> over <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+            Then we define the <term>line integral of <m>\vb{F}</m> over <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{T}\dd{s}</m>.
           </p>
           <aside>
             <p>
@@ -471,7 +479,7 @@
         Suppose that <m>C:\vb{r}(t), a\leq t\leq b</m>.
         Then
         <md>
-          <mrow>\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\frac{\vb{r}'(t)}{\norm{\vb{r}'(t)}}\norm{\vb{r}'(t)}\,dt </mrow>
+          <mrow>\int_{C}\vb{F}\cdot\vb{T}\dd{s} \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\frac{\vb{r}'(t)}{\norm{\vb{r}'(t)}}\norm{\vb{r}'(t)}\,dt </mrow>
           <mrow> \amp = \int_{a}^{b}\vb{F}(\vb{r}(t))\cdot\vb{r}^{\prime}(t)\,dt </mrow>
         </md>.
         We can also write this as
@@ -481,8 +489,8 @@
       <p>
         In addition to measuring how well <m>C</m> and <m>\vb{F}</m> align, vector field line integrals can also represent work done.
       </p>
-      <example xml:id="example-flow-along-a-circle">
-        <title>Flow Along a Circle</title>
+      <example xml:id="example-flow-along-a-circle" label="example-flow-along-a-circle">
+        <title>Flow along a circle</title>
         <statement>
           <p>
             Let <m>C</m> denote the segment of the parabola <m>y = \cos x</m> traversed once from <m>x = -\frac{\pi}{2}</m> to <m>x = \frac{\pi}{2}</m>, and let
@@ -493,9 +501,9 @@
         <solution>
           <p>
             If we graph <m>\vb{F}</m> and <m>C</m>, we get the following:
-            <figure xml:id="figure-flow-over-cosine-">
+            <figure xml:id="figure-flow-over-cosine-" label="figure-flow-over-cosine-">
               <caption>Flow over <m>y = \cos x</m>.</caption>
-              <image xml:id="image-flow-over-cosine-">
+              <image label="image-flow-over-cosine-">
                 <asymptote>
                   import graph;
                   import fontsize;
@@ -549,8 +557,8 @@
           </p>
         </solution>
       </example>
-      <example xml:id="example-a-nonconservative-force">
-        <title>A Nonconservative Force</title>
+      <example xml:id="example-a-nonconservative-force" label="example-a-nonconservative-force">
+        <title>A nonconservative force</title>
         <statement>
           <p>
             Let <m>\vb{F} = \dotprod{-y, x}</m> denote a force field.
@@ -567,9 +575,9 @@
           </p>
           <p>
             From <xref ref="figure-a-rotating-force-field-" text="type-global" />, it appears as though <m>\int_{C_{2}}\vb{F}\cdot d\vb{r} \lt 0 \lt \int_{C_{1}}\vb{F}\cdot d\vb{r}</m>, which suggests that the vector field is path dependent.
-            <figure xml:id="figure-a-rotating-force-field-">
+            <figure xml:id="figure-a-rotating-force-field-" label="figure-a-rotating-force-field-">
               <caption>A rotating force field.</caption>
-              <image xml:id="image-a-rotating-force-field-">
+              <image label="image-a-rotating-force-field-">
                 <asymptote>
                   import graph;
                   import fontsize;
@@ -619,12 +627,12 @@
           <p>
             For <m>C_{1}:\vb{r}_{1}(t) = \dotprod{\cos t,\sin t}, 0\leq t\leq \pi</m>, the total circulation is
             <md>
-              <mrow>\int_{C_{1}}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{\pi}P\,dx + Q\,dy</mrow>
+              <mrow>\int_{C_{1}}\vb{F}\cdot\vb{T}\dd{s} \amp = \int_{0}^{\pi}P\,dx + Q\,dy</mrow>
               <mrow> \amp = \int_{0}^{\pi}\,dt </mrow>
               <mrow> \amp = \pi </mrow>
             </md>.
             Likewise, the circulation of <m>\vb{F}</m> along <m>C_{2}</m> is
-            <me>\int_{C_{2}}\vb{F}\cdot\vb{T}\,ds = -\pi</me>.
+            <me>\int_{C_{2}}\vb{F}\cdot\vb{T}\dd{s} = -\pi</me>.
           </p>
           <p>
             Since the work done by <m>\vb{F}</m> between the points <m>(1,0)</m> and <m>(-1,0)</m> clearly depends on the path taken between the points, this means that <m>\vb{F}</m> is path dependent and, therefore, not conservative.
@@ -634,7 +642,7 @@
       <p>
         We can also compute vector field line integrals in <m>\RR^{3}</m> with essentially the same formula.
       </p>
-      <example xml:id="example-circulation-in-R3">
+      <example xml:id="example-circulation-in-R3" label="example-circulation-in-R3">
         <title>Circulation in <m>\RR^{3}</m></title>
         <statement>
           <p>
@@ -646,7 +654,7 @@
           <p>
             We have
             <md>
-              <mrow>\int_{C}\vb{F}\cdot\vb{T}\,ds \amp = \int_{0}^{2} P\,dx + Q\,dy + R\,dz </mrow>
+              <mrow>\int_{C}\vb{F}\cdot\vb{T}\dd{s} \amp = \int_{0}^{2} P\,dx + Q\,dy + R\,dz </mrow>
               <mrow> \amp = \int_{0}^{2}\brackets{9t^{2}(3) + 0 + 0}\,dt </mrow>
               <mrow> \amp = 72 </mrow>
             </md>.
@@ -655,8 +663,8 @@
         </solution>
       </example>
     </subsection>
-    <subsection xml:id="subsection-flux-integrals">
-      <title>Flux Integrals</title>
+    <subsection xml:id="subsection-flux-integrals" label="subsection-flux-integrals">
+      <title>Flux integrals</title>
       <p>
         The circulation integral in <xref ref="definition-line-integral-of-a-vector-field" text="type-global" /> is useful for measuring how much a vector field flows along a given curve.
         Now, we want to measure how a vector field flows <em>across</em> a curve, at least in <m>\RR^{2}</m>.
@@ -673,13 +681,17 @@
         We would like to measure how <m>\vb{F}</m> flows out of <m>C</m> instead, so we'll replace <m>\vb{N}</m> with <m>\vb{n}</m>, the <term>outward unit normal</term>.
         This leads us to the <term>flux integral</term>.
       </p>
-      <definition xml:id="definition-line-integral-flux-integral">
+      <definition xml:id="definition-line-integral-flux-integral" label="definition-line-integral-flux-integral">
         <idx><h>line integrals</h><h>flux integral</h></idx>
-        <title>Flux Integral</title>
+        <title>Flux integral</title>
+        <notation>
+          <usage><m>\int_C \vv{F}\cdot\vv{n}\dd{s}</m></usage>
+          <description>flux of <m>\vv{F}</m> over <m>C</m></description>
+        </notation>
         <statement>
           <p>
             Let <m>C</m> denote a smooth curve and let <m>\vb{F}</m> be a vector field continuous on <m>C</m>.
-            Then we define the <term>flux integral of <m>\vb{F}</m> across <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{n}\,ds</m>, where <m>\vb{n}</m> is the outward unit normal vector to <m>C</m>.
+            Then we define the <term>flux integral of <m>\vb{F}</m> across <m>C</m></term> to be <m>\int_{C}\vb{F}\cdot\vb{n}\dd{s}</m>, where <m>\vb{n}</m> is the outward unit normal vector to <m>C</m>.
           </p>
         </statement>
       </definition>
@@ -687,17 +699,17 @@
         At this point it may be helpful to introduce some new notation.
         If <m>C</m> is a closed curve, then we often denote line integrals involving <m>C</m> with <m>\oint_{C}</m> instead of <m>\int_{C}</m>.
       </p>
-      <example xml:id="example-flux-across-the-unit-circle">
-        <title>Flux Across the Unit Circle</title>
+      <example xml:id="example-flux-across-the-unit-circle" label="example-flux-across-the-unit-circle">
+        <title>Flux across the unit circle</title>
         <statement>
           <p>
             Let <m>\vb{F} = \dotprod{-y, x}</m> and let <m>C</m> denote the unit circle, traversed exactly once counterclockwise.
-            What is <m>\oint_{C}\vb{F}\cdot\vb{n}\,ds</m>?
+            What is <m>\oint_{C}\vb{F}\cdot\vb{n}\dd{s}</m>?
           </p>
         </statement>
         <solution>
           <p>
-            We should have <m>\oint_{C}\vb{F}\cdot\vb{n}\,ds = 0</m>.
+            We should have <m>\oint_{C}\vb{F}\cdot\vb{n}\dd{s} = 0</m>.
           </p>
         </solution>
       </example>
@@ -724,12 +736,12 @@
       <p>
         Therefore
         <md>
-          <mrow>\int_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{C}\vb{F}\cdot\dotprod{y', -x'}\,dt</mrow>
+          <mrow>\int_{C}\vb{F}\cdot\vb{n}\dd{s} \amp = \int_{C}\vb{F}\cdot\dotprod{y', -x'}\,dt</mrow>
           <mrow> \amp = \int_{C} P\,dy - Q\,dx </mrow>
         </md>.
       </p>
-      <example xml:id="example-verifying-the-flux">
-        <title>Verifying the Flux</title>
+      <example xml:id="example-verifying-the-flux" label="example-verifying-the-flux">
+        <title>Verifying the flux</title>
         <statement>
           <p>
             Compute the flux integral in <xref ref="example-flux-across-the-unit-circle" text="type-global" />.
@@ -739,7 +751,7 @@
           <p>
             We have
             <md>
-              <mrow>\oint_{C}\vb{F}\cdot\vb{n}\,ds \amp = \int_{0}^{2\pi}P\,dy - Q\,dx </mrow>
+              <mrow>\oint_{C}\vb{F}\cdot\vb{n}\dd{s} \amp = \int_{0}^{2\pi}P\,dy - Q\,dx </mrow>
               <mrow> \amp = \int_{0}^{2}\brackets{-\sin t\cos t - \cos t(-\sin t)}\,dt </mrow>
               <mrow> \amp = 0 </mrow>
             </md>.
@@ -747,11 +759,6 @@
         </solution>
       </example>
     </subsection>
-    <conclusion>
-      <p>
-        SUGGESTED PROBLEMS: 1, 7, 13, 17, 19, 39.
-      </p>
-    </conclusion>
   </section>
   <section xml:id="section-the-fundamental-theorem-for-line-integrals">
     <title>The Fundamental Theorem for Line Integrals</title>
@@ -845,7 +852,7 @@
         <statement>
           <p>
             Let <m>\vb{F} = \grad(x^{2}y^{3})</m> and let <m>C</m> be the path in the <m>xy</m>-plane composed of the line segment from <m>(-1,1)</m> to <m>(0,1)</m> followed by the circular arc from <m>(0,1)</m> to <m>(1,0)</m> followed by the logarithmic arc <m>y = \ln x</m> from <m>(1,0)</m> to <m>(e,1)</m>.
-            Find <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+            Find <m>\int_{C}\vb{F}\cdot\vb{T}\dd{s}</m>.
           </p>
         </statement>
         <solution>
@@ -856,7 +863,7 @@
               <mrow>C_{2} \amp : \vb{r}_{2}(t) = \dotprod{\sin t, \cos t}, 0\leq t\leq \frac{\pi}{2} </mrow>
               <mrow>C_{3} \amp : \vb{r}_{3}(t) = \dotprod{t, \ln t}, 1\leq t\leq e </mrow>
             </md>.
-            To find <m>\int_{C}\vb{F}\cdot\vb{T}\,ds</m>, we can find <m>\int_{C_{i}}\vb{F}\cdot\vb{T}\,ds</m> for <m>1\leq i\leq 3</m> and add the resulting values.
+            To find <m>\int_{C}\vb{F}\cdot\vb{T}\dd{s}</m>, we can find <m>\int_{C_{i}}\vb{F}\cdot\vb{T}\dd{s}</m> for <m>1\leq i\leq 3</m> and add the resulting values.
             So let's do that!
             <md>
               <mrow>\int_{C_{1}}\vb{F}\cdot d\vb{r} \amp = \int_{C_{1}} \dotprod{2xy^{3}, 3x^{2}y^{2}}\dr</mrow>
@@ -951,7 +958,7 @@
           <p>
             Let <m>\vb{F} = (3x^{2} + 2y^{2})\vb{i} + (4xy - e^{-y^{2}})\vb{j}</m> and let <m>C</m> denote the ellipse
             <me>\frac{(x-1)^{2}}{9} + \frac{(3y + 2)^{2}}{10} = 5</me>.
-            Find <m>\oint_{C}\vb{F}\cdot\vb{T}\,ds</m>.
+            Find <m>\oint_{C}\vb{F}\cdot\vb{T}\dd{s}</m>.
           </p>
         </statement>
         <solution>
@@ -1044,7 +1051,7 @@
   <section xml:id="section-green-s-theorem">
     <title>Green's Theorem</title>
     <p>
-      Recall that <m>\int_{C}\vb{F}\cdot\vb{T}\,ds = \int_{C} P\,dx + Q\,dy</m> is the <xref ref="definition-line-integral-of-a-vector-field" text="custom">circulation</xref> of <m>\vb{F}</m> along <m>C</m>.
+      Recall that <m>\int_{C}\vb{F}\cdot\vb{T}\dd{s} = \int_{C} P\,dx + Q\,dy</m> is the <xref ref="definition-line-integral-of-a-vector-field" text="custom">circulation</xref> of <m>\vb{F}</m> along <m>C</m>.
       Likewise, <m>Q_{x} - P_{y}</m> is a measure of how <m>\vb{F}</m> rotates counterclockwise.
       These two quantities are tied together by Green's Theorem.
     </p>
@@ -1056,7 +1063,7 @@
           Let <m>C</m> be a positively oriented, piecewise smooth, simple closed curve in the plane containing some region <m>D</m>.
           Let <m>\vb{F} = \dotprod{P,Q}</m> denote a vector field that is continuously differentiable on an open, simply connected domain containing <m>C</m>.
           Then
-          <me>\oint_{C}\vb{F}\cdot\vb{T}\,ds = \iint_{D}\brackets{\pdv{Q}{x} - \pdv{P}{y}}\,dA</me>.
+          <me>\oint_{C}\vb{F}\cdot\vb{T}\dd{s} = \iint_{D}\brackets{\pdv{Q}{x} - \pdv{P}{y}}\,dA</me>.
         </p>
       </statement>
     </theorem>
@@ -1107,7 +1114,7 @@
         <p>
           Let <m>\vb{F}</m>, <m>C</m> and <m>D</m> satisfy the same hypotheses as in <xref ref="theorem-green-s-theorem" text="type-global" />.
           Then
-          <me>\oint_{C}\vb{F}\cdot\vb{n}\,ds = \iint_{D}\brackets{\pdv{P}{x} + \pdv{Q}{y}}\,dA</me>.
+          <me>\oint_{C}\vb{F}\cdot\vb{n}\dd{s} = \iint_{D}\brackets{\pdv{P}{x} + \pdv{Q}{y}}\,dA</me>.
         </p>
       </statement>
     </theorem>
@@ -1261,8 +1268,8 @@
           <p>
             If we compute the average values, we get
             <md>
-              <mrow>\frac{1}{2\pi}\oint_{C}f_{1}(x,y)\,ds \amp = 1 </mrow>
-              <mrow>\frac{1}{2\pi}\oint_{C}f_{2}(x,y)\,ds \amp = 0 </mrow>
+              <mrow>\frac{1}{2\pi}\oint_{C}f_{1}(x,y)\dd{s} \amp = 1 </mrow>
+              <mrow>\frac{1}{2\pi}\oint_{C}f_{2}(x,y)\dd{s} \amp = 0 </mrow>
             </md>.
             Furthermore, <m>f_{1}(0,0) = 0 = f_{2}(0,0)</m>.
             We also have <m>\Delta f_{1} = 4</m> and <m>\Delta f_{2} = 0</m>.
@@ -1277,7 +1284,7 @@
         This means that the quantity flows from regions of higher concentration to regions of lower concentration.
         If <m>f</m> represents a quantity in equilibrium within some region <m>D</m>, then the net flux across <m>D</m> should be <m>0</m>.
         In terms of <xref ref="theorem-green-s-theorem-for-flux-integrals" text="type-global" />, we have
-        <me>\iint_{D}\div\vb{F}\,dA = \oint_{\partial D}\vb{F}\cdot\vb{n}\,ds = 0</me>.
+        <me>\iint_{D}\div\vb{F}\,dA = \oint_{\partial D}\vb{F}\cdot\vb{n}\dd{s} = 0</me>.
       </p>
       <p>
         Now we'll make the argument that <m>\div\vb{F} = 0</m> since the above should be true for arbitrary subregions of <m>D</m>.
@@ -1642,7 +1649,7 @@
     <p>
       Suppose we want to find the circulation of a vector field <m>\vb{F}</m> on a surface <m>S</m>.
       If <m>S</m> lies in the plane, then we can use Green's Theorem to say that
-      <me>\iint_{S}\curlt{\vb{F}}\,dA = \oint_{\partial S}\vb{F}\cdot\vb{T}\,ds</me>.
+      <me>\iint_{S}\curlt{\vb{F}}\,dA = \oint_{\partial S}\vb{F}\cdot\vb{T}\dd{s}</me>.
       If <m>S</m> is a surface in <m>\RR^{3}</m>, then we must take the dot product of <m>\curlt\vb{F}</m> with the unit normal to <m>S</m>.
       The corresponding result is known as <term>Stokes' Theorem</term>.
     </p>
@@ -1652,7 +1659,7 @@
         <p>
           Let <m>S</m> denote a simple, closed, orientable surface with unit normal <m>\vb{n}</m> and let <m>\vb{F}</m> denote a continuously differentiable vector field on <m>S</m>.
           Then
-          <me>\oint_{\partial S}\vb{F}\cdot\vb{T}\,ds = \iint_{S}\curl\vb{F}\,d\vb{S}</me>,
+          <me>\oint_{\partial S}\vb{F}\cdot\vb{T}\dd{s} = \iint_{S}\curl\vb{F}\,d\vb{S}</me>,
           where <m>\partial S</m> is oriented counterclockwise with respect to <m>\vb{n}</m>.
         </p>
       </statement>
