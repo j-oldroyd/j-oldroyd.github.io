@@ -631,6 +631,51 @@ var ptx_lunr_docs = [
   "body": " Matrix representation of composition   Let denote counterclockwise rotation by and let be given by . Find the matrix representation of .   "
 },
 {
+  "id": "section-left-and-right-inverses",
+  "level": "1",
+  "url": "section-left-and-right-inverses.html",
+  "type": "Section",
+  "number": "7.1",
+  "title": "Left and right inverses",
+  "body": " Left and right inverses  A left inverse of is a matrix such that . If is , then will be and so is .   Left inverses   Let . Is either a left inverse of ?    A matrix is left-invertible only if its columns are linearly independent: . The converse is also true.   Determining if a matrix is left-invertible   Let . Is left-invertible?    If is a left inverse of , then has a solution only if . If this is not a solution, then the system is inconsistent.  A right-inverse of is a matrix such that . A matrix is right invertible only if its rows are linearly independent, equivalently, only if is left-invertible.  "
+},
+{
+  "id": "section-left-and-right-inverses-2",
+  "level": "2",
+  "url": "section-left-and-right-inverses.html#section-left-and-right-inverses-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "left inverse "
+},
+{
+  "id": "example-left-inverses",
+  "level": "2",
+  "url": "section-left-and-right-inverses.html#example-left-inverses",
+  "type": "Example",
+  "number": "7.1.1",
+  "title": "Left inverses.",
+  "body": " Left inverses   Let . Is either a left inverse of ?   "
+},
+{
+  "id": "example-determining-if-a-matrix-is-left-invertible",
+  "level": "2",
+  "url": "section-left-and-right-inverses.html#example-determining-if-a-matrix-is-left-invertible",
+  "type": "Example",
+  "number": "7.1.2",
+  "title": "Determining if a matrix is left-invertible.",
+  "body": " Determining if a matrix is left-invertible   Let . Is left-invertible?   "
+},
+{
+  "id": "section-left-and-right-inverses-7",
+  "level": "2",
+  "url": "section-left-and-right-inverses.html#section-left-and-right-inverses-7",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "right-inverse "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
