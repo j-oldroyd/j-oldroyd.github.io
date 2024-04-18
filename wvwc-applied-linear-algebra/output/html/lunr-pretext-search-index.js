@@ -676,6 +676,141 @@ var ptx_lunr_docs = [
   "body": "right-inverse "
 },
 {
+  "id": "section-matrix-inverses",
+  "level": "1",
+  "url": "section-matrix-inverses.html",
+  "type": "Section",
+  "number": "7.2",
+  "title": "Matrix inverses",
+  "body": " Matrix inverses  Consider the equation . We can solve this quite easily for by dividing both sides by , or equivalently, multiplying both sides of the equation by . is the multiplicative inverse of the number , and so when multiplied to it we are left with only the number . We want to do the same with the matrix equation ; that is, we want to find an inverse matrix  that, when multiplied to , leaves only the identity matrix.   Invertible matrices  matrices invertible   An matrix is said to be invertible (or nonsingular ) if there exists a matrix such that . We call the inverse of . If a matrix is not invertible, then we say that it is singular .    Note that if is a square matrix and is another square matrix such that either or , then .   Confirming a matrix inverse   Let    Show that the matrix is the inverse of .  Let Solve .      All we need to do is to show that . This can be done quickly using Octave as in the code cell below.  The solution is . Given that we now know , we can solve this quickly.       Inverse of an orthogonal matrix   Let be an orthogonal matrix. What is ?     . So it is very easy to find the inverse of an orthogonal matrix.    An important property about determinants is that they say precisely when a matrix is invertible. If is an matrix, then has an inverse if and only if .   Invertibility and solutions of systems   linear systems  invertibility    Let be an invertible matrix. Then for each , the matrix equation has exactly one solution: .    To prove this statement we must show two things:   is a solution.    is the only solution.     We start with the first item. To check that is a solution of , we just plug it in for and simplify: Hence this is a solution.  To show that this is the only solution, suppose that is some other solution of . We must show that . Since is assumed to be a solution, we have Hence is the only solution.     Computing the inverse of a matrix  For matrices, we have a simple formula for the inverse.   Inverse of matrices   Let If , then     The quantity in can also be recognized as the determinant of the matrix . See .    Show that the system is consistent and then find the solution.    We can rewrite this as the matrix equation , where We can show that the system is consistent by computing : since , exists. And since exists, the system must be solvable.  To solve it, we use the above formula to compute : So the (unique) solution is       Let and be invertible matrices.      is invertible, and .    is invertible, and .         The invertible matrix algorithm  We can now find the inverse of a matrix; we need to determine how to find the inverse of a larger matrix. To do this, we will use elementary matrices .   Elementary matrices   An elementary matrix is a matrix obtained by performing a single elementary row operation on the identity matrix.      The matrices are elementary matrices. The first corresponds to scaling the first row by ; the second corresponds to adding five times the second row to the first row; and the third corresponds to switching rows one and three.    The important fact about elementary matrices is that multiplying them to any matrix has the same effect as performing the corresponding elementary row operation on the matrix.    Let Use elementary matrices to perform the following row operations:   Add two times row three to row two.    Scale row three by .    Swap row two with row one and then add five times row three to row one.       For each case, we only need to determine the elementary matrix corresponding to each row operation. The elementary matrix for the first operation is To perform this operation on , we just multiply and : which matches with the matrix we would have obtained just using a row operation.  The elementary matrix we need for the next operation is and so   Finally, we have two elementary row operations here, so we can't just use a single elementary matrix. We'll need to use two; one for each row operation: So     So row operations on a matrix can be viewed as multiplications by elementary matrices. And since row operations are invertible, elementary matrices are invertible as well. To find the inverse of an elementary matrix , just write down the elementary matrix corresponding to the row operation that transforms back into .   Inverse of an elementary matrix   Let and be as above. Find the inverse of each matrix.    We have      Invertible matrix algorithm   matrices  invertible  algorithm    Let be an matrix. If , then is invertible.    Suppose that is row equivalent to the identity matrix . Then we can find elementary matrices such that Since elementary matrices are invertible, their product must be as well. So we can write Since is the inverse of an invertible matrix, it must itself be invertible and furthermore     The above theorem tells us that the sequence of row operations that reduces to also turns into . This gives us an algorithm for finding the inverse of a matrix. We show this with an example.    Let Compute .    We set up the augmented matrix . The algorithm works by finding the reduced echelon form; the resulting augmented matrix is then .   So       A square matrix of size . Suppose that has rank . Is invertible?    No! This is because does not have a pivot in each row (since , only has pivots). Therefore we can't row reduce to get . Since is not row equivalent to the identity matrix, cannot be invertible.     "
+},
+{
+  "id": "definition-invertible-matrices",
+  "level": "2",
+  "url": "section-matrix-inverses.html#definition-invertible-matrices",
+  "type": "Definition",
+  "number": "7.2.1",
+  "title": "Invertible matrices.",
+  "body": " Invertible matrices  matrices invertible   An matrix is said to be invertible (or nonsingular ) if there exists a matrix such that . We call the inverse of . If a matrix is not invertible, then we say that it is singular .   "
+},
+{
+  "id": "example-confirming-a-matrix-inverse",
+  "level": "2",
+  "url": "section-matrix-inverses.html#example-confirming-a-matrix-inverse",
+  "type": "Example",
+  "number": "7.2.2",
+  "title": "Confirming a matrix inverse.",
+  "body": " Confirming a matrix inverse   Let    Show that the matrix is the inverse of .  Let Solve .      All we need to do is to show that . This can be done quickly using Octave as in the code cell below.  The solution is . Given that we now know , we can solve this quickly.    "
+},
+{
+  "id": "section-matrix-inverses-7",
+  "level": "2",
+  "url": "section-matrix-inverses.html#section-matrix-inverses-7",
+  "type": "Example",
+  "number": "7.2.3",
+  "title": "Inverse of an orthogonal matrix.",
+  "body": " Inverse of an orthogonal matrix   Let be an orthogonal matrix. What is ?     . So it is very easy to find the inverse of an orthogonal matrix.   "
+},
+{
+  "id": "theorem-invertibility-and-solutions",
+  "level": "2",
+  "url": "section-matrix-inverses.html#theorem-invertibility-and-solutions",
+  "type": "Theorem",
+  "number": "7.2.4",
+  "title": "Invertibility and solutions of systems.",
+  "body": " Invertibility and solutions of systems   linear systems  invertibility    Let be an invertible matrix. Then for each , the matrix equation has exactly one solution: .    To prove this statement we must show two things:   is a solution.    is the only solution.     We start with the first item. To check that is a solution of , we just plug it in for and simplify: Hence this is a solution.  To show that this is the only solution, suppose that is some other solution of . We must show that . Since is assumed to be a solution, we have Hence is the only solution.   "
+},
+{
+  "id": "theorem-inverse-of-2-times2--matrices",
+  "level": "2",
+  "url": "section-matrix-inverses.html#theorem-inverse-of-2-times2--matrices",
+  "type": "Theorem",
+  "number": "7.2.5",
+  "title": "Inverse of <span class=\"process-math\">\\(2\\times2\\)<\/span> matrices.",
+  "body": " Inverse of matrices   Let If , then    "
+},
+{
+  "id": "subsection-computing-the-inverse-of-a-matrix-5",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-computing-the-inverse-of-a-matrix-5",
+  "type": "Example",
+  "number": "7.2.6",
+  "title": "",
+  "body": "  Show that the system is consistent and then find the solution.    We can rewrite this as the matrix equation , where We can show that the system is consistent by computing : since , exists. And since exists, the system must be solvable.  To solve it, we use the above formula to compute : So the (unique) solution is    "
+},
+{
+  "id": "subsection-computing-the-inverse-of-a-matrix-6",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-computing-the-inverse-of-a-matrix-6",
+  "type": "Theorem",
+  "number": "7.2.7",
+  "title": "",
+  "body": "  Let and be invertible matrices.      is invertible, and .    is invertible, and .      "
+},
+{
+  "id": "definition-elementary-matrices",
+  "level": "2",
+  "url": "section-matrix-inverses.html#definition-elementary-matrices",
+  "type": "Definition",
+  "number": "7.2.8",
+  "title": "Elementary matrices.",
+  "body": " Elementary matrices   An elementary matrix is a matrix obtained by performing a single elementary row operation on the identity matrix.   "
+},
+{
+  "id": "subsection-invertible-matrix-algorithm-4",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-invertible-matrix-algorithm-4",
+  "type": "Example",
+  "number": "7.2.9",
+  "title": "",
+  "body": "  The matrices are elementary matrices. The first corresponds to scaling the first row by ; the second corresponds to adding five times the second row to the first row; and the third corresponds to switching rows one and three.   "
+},
+{
+  "id": "subsection-invertible-matrix-algorithm-6",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-invertible-matrix-algorithm-6",
+  "type": "Example",
+  "number": "7.2.10",
+  "title": "",
+  "body": "  Let Use elementary matrices to perform the following row operations:   Add two times row three to row two.    Scale row three by .    Swap row two with row one and then add five times row three to row one.       For each case, we only need to determine the elementary matrix corresponding to each row operation. The elementary matrix for the first operation is To perform this operation on , we just multiply and : which matches with the matrix we would have obtained just using a row operation.  The elementary matrix we need for the next operation is and so   Finally, we have two elementary row operations here, so we can't just use a single elementary matrix. We'll need to use two; one for each row operation: So    "
+},
+{
+  "id": "subsection-invertible-matrix-algorithm-8",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-invertible-matrix-algorithm-8",
+  "type": "Example",
+  "number": "7.2.11",
+  "title": "Inverse of an elementary matrix.",
+  "body": " Inverse of an elementary matrix   Let and be as above. Find the inverse of each matrix.    We have    "
+},
+{
+  "id": "theorem-invertible-matrix-algorithm",
+  "level": "2",
+  "url": "section-matrix-inverses.html#theorem-invertible-matrix-algorithm",
+  "type": "Theorem",
+  "number": "7.2.12",
+  "title": "Invertible matrix algorithm.",
+  "body": " Invertible matrix algorithm   matrices  invertible  algorithm    Let be an matrix. If , then is invertible.    Suppose that is row equivalent to the identity matrix . Then we can find elementary matrices such that Since elementary matrices are invertible, their product must be as well. So we can write Since is the inverse of an invertible matrix, it must itself be invertible and furthermore    "
+},
+{
+  "id": "subsection-invertible-matrix-algorithm-11",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-invertible-matrix-algorithm-11",
+  "type": "Example",
+  "number": "7.2.13",
+  "title": "",
+  "body": "  Let Compute .    We set up the augmented matrix . The algorithm works by finding the reduced echelon form; the resulting augmented matrix is then .   So    "
+},
+{
+  "id": "subsection-invertible-matrix-algorithm-12",
+  "level": "2",
+  "url": "section-matrix-inverses.html#subsection-invertible-matrix-algorithm-12",
+  "type": "Example",
+  "number": "7.2.14",
+  "title": "",
+  "body": "  A square matrix of size . Suppose that has rank . Is invertible?    No! This is because does not have a pivot in each row (since , only has pivots). Therefore we can't row reduce to get . Since is not row equivalent to the identity matrix, cannot be invertible.   "
+},
+{
   "id": "part-multivariable-calculus",
   "level": "1",
   "url": "part-multivariable-calculus.html",
